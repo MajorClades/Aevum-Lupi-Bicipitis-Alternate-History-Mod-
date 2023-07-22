@@ -1,0 +1,79 @@
+
+
+valtea_event_action = {
+	category = covert
+
+	is_visible = {
+		has_reform = valtea_spy_reform
+    }
+
+	is_allowed = {
+		FROM = {
+			has_spy_network_from = {
+				who = ROOT
+				value = 25
+			}
+			ROOT = {
+				NOT = {
+					tech_difference = 2
+				}
+			}
+			NOT = {
+				has_country_modifier = valtea_defense
+			}
+		}
+    }
+	on_accept = {
+		ROOT = {
+			add_spy_network_in = {
+				who = FROM
+				value = -25
+			}
+			country_event = {
+				id = valt.1
+			}
+		}	
+		FROM = {
+			add_country_modifier = {
+				name = valtea_defense
+				duration =  7300
+			}
+		}
+    }
+
+	ai_will_do = {
+        always = yes
+    }
+}
+
+friendship_action = {
+	category = influence
+
+	is_visible = {
+		ROOT = {
+			has_country_flag = ellan_easy_expansion
+		}
+    }
+
+	is_allowed = {
+		is_at_war = no
+		FROM = {
+			primary_culture = wallonian
+			is_at_war = no
+			has_opinion = {
+				who = ROOT
+				value = 180
+			}
+		}
+    }
+	on_accept = {
+		ROOT = {
+			add_treasury = -50
+			vassalize = FROM
+		}
+    }
+
+	ai_will_do = {
+        always = no
+    }
+}

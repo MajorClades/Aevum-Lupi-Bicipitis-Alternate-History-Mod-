@@ -1,0 +1,184 @@
+namespace = kolm
+
+country_event = {
+	id = kolm.1
+	title = kolm.1.test
+	desc = kolm.1.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	trigger = {
+		tag = KO0
+		is_at_war = no
+		AE0 = {
+			exists = no
+		}
+		AF6 = {
+			is_at_war = yes
+		}
+		RU0 = {
+			is_at_war = yes
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	fire_only_once = yes
+	option = {
+		name = kolm.1a
+		ai_chance = {
+			factor = 80
+		}
+		if = {
+			limit = {
+				manpower = 8
+			}
+			add_manpower = -8
+		}else = {
+			add_treasury = -1000
+		}
+		
+		151 = {
+			spawn_rebels = {
+				size = 3
+				type = kolm_assualt_rebels
+				friend = KO0
+			}
+		}
+	}
+	option = {
+		name = kolm.1b
+		ai_chance = {
+			factor = 20
+		}
+		add_stability = 1
+	}
+}
+
+country_event = {
+	id = kolm.2
+	title = kolm.2.test
+	desc = kolm.2.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = kolm.2a
+		151 = {
+			add_base_manpower = -2
+			add_base_production = -2
+			add_base_tax = -2
+			add_province_modifier = {
+				name = raided_constant
+				duration = -1
+			}
+		}
+		150 = {
+			add_base_manpower = 3
+			add_base_production = 3
+			add_base_tax = 3
+		}
+		white_peace = RU0
+	}
+}
+
+country_event = {
+	id = kolm.6
+	title = kolm.6.test
+	desc = kolm.6.desc
+	picture = ANGRY_MOB_eventPicture
+	hidden = yes
+	trigger = {
+		has_country_flag = kolm_good_men
+		any_owned_province = {
+			OR = {
+				has_building = barracks
+				has_building = training_fields
+			}
+			OR = {
+				has_building = regimental_camp
+				has_building = conscription_center
+			}
+			NOT = {
+				has_province_modifier = kolm_god_men
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	option = {
+		name = kolm.3a
+		every_owned_province = {
+			limit = {
+				OR = {
+					has_building = barracks
+					has_building = training_fields
+				}
+				OR = {
+					has_building = regimental_camp
+					has_building = conscription_center
+				}
+			}
+			add_province_modifier = {
+				name = kolm_god_men
+				duration = -1
+			}
+		}
+	}
+}
+
+country_event = {
+	id = kolm.200
+	title = kolm.200.test
+	desc = kolm.200.desc
+	picture = ANGRY_MOB_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = kolm.200a
+		disband_rebels = kolm_assualt_rebels
+		add_trust = {
+			who = KO0
+			value = -30
+		}
+	}
+}
+
+country_event = {
+	id = kolm.201
+	title = kolm.201.test
+	desc = kolm.201.desc
+	picture = ANGRY_MOB_eventPicture
+	trigger = {
+		tag = RU0 
+		151 = {
+			has_province_modifier = raided_constant
+		}
+		150 = {
+			OR = {
+				owned_by = ROOT
+				controlled_by = ROOT
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	fire_only_once = yes
+	option = {
+		name = kolm.201a
+		151 = {
+			add_base_manpower = 2
+			add_base_production = 2
+			add_base_tax = 2
+			remove_province_modifier = raided_constant
+		}
+		150 = {
+			add_base_manpower = -3
+			add_base_production = -3
+			add_base_tax = -3
+			add_devastation = 30
+		}
+	}
+}

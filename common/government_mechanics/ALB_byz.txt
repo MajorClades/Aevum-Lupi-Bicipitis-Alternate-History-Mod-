@@ -1,0 +1,137 @@
+byz_muslim_mechanic = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 1
+	available = {
+		
+	}
+	
+	powers = {
+		byz_adm_power = {
+			max = 150
+			monarch_power = ADM
+			base_monthly_growth = 0.25
+		}
+		byz_dip_power = {
+			max = 150
+			monarch_power = DIP
+			base_monthly_growth = 0.25
+		}
+		byz_mil_power = {
+			max = 150
+			monarch_power = MIL
+			base_monthly_growth = 0.25
+		}
+	}
+	
+	interactions = {
+		BYZ_FAITH_RULE = {
+			gui = russian_mechanics_interaction_gui
+			icon = GFX_russian_ability_ADM
+			cost_type = byz_adm_power
+			cost = 100
+			trigger = {
+				any_owned_province = {
+					NOT = {
+						religion = ROOT
+					}
+				}
+			}
+			effect = {
+				custom_tooltip = BYZ_ABILITY_ADM
+				random_owned_province = {
+					limit = {
+						NOT = {
+							religion = ROOT
+						}
+					}
+					add_province_modifier = {
+						name = rhomania_fast_clergy
+						duration = 3650
+					}
+				}
+				hidden_effect = {
+					every_owned_province = {
+						limit = {
+							NOT = {
+								religion = ROOT
+							}
+						}
+						add_province_modifier = {
+							name = rhomania_fast_clergy
+							duration = 3650
+						}
+					}
+				}
+			}
+			cooldown_years = 0
+			ai_chance = {
+				factor = 10
+				modifier = {
+					factor = 100
+					religious_unity = 0.95
+				}
+				modifier = {
+					factor = 100
+					religious_unity = 0.85
+				}
+			}
+		}
+		BYZ_PEOPLE_RULE = {
+			gui = russian_mechanics_interaction_gui
+			icon = GFX_russian_ability_DIP
+			cost_type = byz_dip_power
+			cost = 100
+			trigger = { 
+				average_unrest = 2
+			}
+			effect = { 
+				add_country_modifier = {
+					name = rhomania_little_faith
+					duration = 7300
+				}
+			}
+			cooldown_years = 0
+			ai_chance = {
+				factor = 10
+				modifier = {
+					factor = 100
+					average_unrest = 3
+				}
+				modifier = {
+					factor = 100
+					average_unrest = 5
+				}
+			}
+		}
+		BYZ_EMPEROR_RULE = {
+			gui = russian_mechanics_interaction_gui
+			icon = GFX_russian_ability_MIL
+			cost_type = byz_mil_power
+			cost = 100
+			trigger = {
+				
+			}
+			effect = { 
+				custom_tooltip = BYZ_ABILITY_MIL
+				hidden_effect = {
+					every_owned_province = {
+						add_local_autonomy = -10
+					}
+				}
+				add_war_exhaustion = -2
+			}
+			cooldown_years = 0
+			ai_chance = {
+				factor = 10
+				modifier = {
+					factor = 100
+					is_in_important_war = yes
+				}
+				modifier = {
+					factor = 100
+					is_at_war = yes
+				}
+			}
+		}
+	}
+}

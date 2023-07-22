@@ -1,0 +1,52 @@
+country_decisions = {
+
+	latin_empire_restored_dec = {
+		major = yes
+		potential = {
+			owns = 151
+			NOT = {
+				religion_group = muslim
+			}
+			religion_group = christian
+			tag = DA1
+			NOT = {
+				has_country_flag = trazia_flag
+			}
+		}
+		provinces_to_highlight = {
+			province_id = 151
+		}
+		allow = {
+			owns = 151
+		}
+		effect = {
+			override_country_name = TRAZIA_LATIN_EMPIRE
+			remove_non_electors_emperors_from_empire_effect = yes
+			if = {
+				limit = { NOT = { government_rank = 2 } }
+				set_government_rank = 3
+			}
+			if = {
+				limit = {
+					has_custom_ideas = no
+				}
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+
+			set_country_flag = has_overriden_color_flag
+			anatolia_region = {
+				add_permanent_claim = IB0
+			}
+			balkan_region = {
+				add_permanent_claim = IB0
+			}
+			set_country_flag = trazia_flag
+			add_prestige = 25
+			change_country_color = { 245 10 10 }
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+}

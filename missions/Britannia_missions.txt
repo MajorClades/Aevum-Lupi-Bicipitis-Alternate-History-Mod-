@@ -1,0 +1,633 @@
+Britannia_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = BR0 } 
+
+	1_brit_bryt = {
+		icon = mission_rb_nova_scotia
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			OR = {
+				SC0 = {
+					OR = {
+						is_rival = ROOT
+						exists = no
+					}
+				}
+				is_rival = SC0
+			}
+		}
+
+		effect = {
+			4366 = {
+				add_province_modifier = {
+					name = "naval_buildup"
+					duration = 10950
+				}
+			}
+			242 = { add_permanent_claim = ROOT } 
+			4365 = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	1_rebryt = {
+		icon = mission_rb_conquer_ulster
+		position = 2
+		required_missions = { 1_brit_bryt } 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 242
+				province_id = 4365
+			}
+		}
+
+		trigger = {
+			owns = 242
+			owns = 4365
+		}
+
+		effect = {
+			ulster_area = { add_permanent_claim = ROOT } 
+			leinster_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	1_scotia = {
+		icon = mission_rb_conquer_the_highlands
+		position = 4
+		required_missions = {
+			1_rebryt
+			2_scotia_push
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = ulster_area
+				area = leinster_area
+			}
+		}
+
+		trigger = {
+			ulster_area = {
+				type = all
+				owned_by = ROOT
+			}
+			leinster_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			add_dip_power = 150
+			connacht_area = { add_permanent_claim = ROOT } 
+			munster_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	1_isle_of_scotia = {
+		icon = mission_rb_conquer_ireland
+		position = 5
+		required_missions = { 1_scotia } 
+		provinces_to_highlight = {
+			OR = {
+				area = ulster_area
+				area = leinster_area
+				area = connacht_area
+				area = munster_area
+			}
+		}
+
+		trigger = {
+			ulster_area = {
+				type = all
+				owned_by = ROOT
+			}
+			leinster_area = {
+				type = all
+				owned_by = ROOT
+			}
+			connacht_area = {
+				type = all
+				owned_by = ROOT
+			}
+			munster_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = { country_event = { id = swe2.2 }  } 
+	}
+
+	1_britannia_navy = {
+		icon = the_london_steelyard
+		position = 8
+		required_missions = { 2_londinium_port } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_port = yes
+		}
+
+		trigger = {
+			navy_size_percentage = 0.8
+			num_of_owned_provinces_with = {
+				value = 10
+				OR = {
+					has_building = dock
+					has_building = drydock
+				}
+			}
+		}
+
+		effect = {
+			add_sailors = 3000
+			add_country_modifier = {
+				name = "brit_admirals"
+				duration = 10950
+			}
+		}
+	}
+
+	1_britannia_rules = {
+		icon = mission_establish_high_seas_navy
+		position = 9
+		required_missions = { 1_britannia_navy } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				NOT = { continent = europe } 
+			}
+			navy_size_percentage = 1
+			num_of_heavy_ship = 20
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "britannia_rules_the_waves"
+				duration = -1
+			}
+		}
+	}
+}
+Britannia_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = BR0 } 
+
+	2_scotia_push = {
+		icon = mission_rb_rein_in_the_highland_clans
+		position = 3
+		required_missions = { 3_core_back } 
+		provinces_to_highlight = { area = scottish_marches_area } 
+
+		trigger = {
+			scottish_marches_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			add_prestige = 10
+			yorkshire_area = { add_permanent_claim = ROOT } 
+			lowlands_area = { add_permanent_claim = ROOT } 
+			highlands_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	2_londinium_port = {
+		icon = mission_control_the_channel
+		position = 7
+		required_missions = { 3_londinium } 
+		provinces_to_highlight = { province_id = 236 } 
+
+		trigger = {
+			236 = {
+				province_has_center_of_trade_of_level = 3
+				OR = {
+					has_building = marketplace
+					has_building = trade_depot
+					has_building = stock_exchange
+				}
+			}
+			owns_or_subject_of = 238
+			owns_or_subject_of = 235
+		}
+
+		effect = {
+			238 = {
+				add_permanent_province_modifier = {
+					name = "londinium_trade_up"
+					duration = -1
+				}
+			}
+			235 = {
+				add_permanent_province_modifier = {
+					name = "londinium_trade_up"
+					duration = -1
+				}
+			}
+		}
+	}
+}
+Britannia_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = BR0 } 
+
+	3_core_back = {
+		icon = mission_conquer_50_development
+		position = 2
+		required_missions = { 4_brit_resistance } 
+		provinces_to_highlight = { province_id = 4375 } 
+
+		trigger = { owns = 4375 } 
+
+		effect = {
+			4375 = { change_religion = ROOT } 
+			scottish_marches_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	3_ganden_union = {
+		icon = mission_swe_union
+		position = 4
+		required_missions = { 2_scotia_push } 
+		provinces_to_highlight = {
+			OR = {
+				area = lowlands_area
+				area = highlands_area
+			}
+		}
+
+		trigger = {
+			lowlands_area = {
+				type = all
+				owned_by = ROOT
+			}
+			highlands_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "asatru_not_true"
+				duration = 10950
+			}
+		}
+	}
+
+	3_londinium = {
+		icon = mission_rb_scottish_conquer_london
+		position = 6
+		provinces_to_highlight = { province_id = 236 } 
+
+		trigger = {
+			owns_or_subject_of = 236
+			236 = { development = 25 } 
+		}
+
+		effect = {
+			set_capital = 236
+			236 = {
+				change_culture = english
+				cede_province = ROOT
+				add_core = ROOT
+			}
+		}
+	}
+
+	3_euts = {
+		icon = adjust_the_general_means
+		position = 8
+		required_missions = {
+			2_londinium_port
+			3_londinium
+			4_londinium_school
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = home_counties_area
+				area = east_anglia_area
+				area = east_midlands_area
+			}
+		}
+
+		trigger = {
+			home_counties_area = {
+				type = all
+				owned_by = ROOT
+			}
+			east_anglia_area = {
+				type = all
+				owned_by = ROOT
+			}
+			east_midlands_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			if = {
+				limit = { accepted_culture = juts } 
+				add_accepted_culture = jutlander
+			}
+			home_counties_area = {
+				limit = { culture = juts } 
+				change_culture = jutlander
+			}
+			east_anglia_area = {
+				limit = { culture = juts } 
+				change_culture = jutlander
+			}
+			east_midlands_area = {
+				limit = { culture = juts } 
+				change_culture = jutlander
+			}
+			1861 = { change_culture = english } 
+			4785 = { change_culture = english } 
+		}
+	}
+
+	3_united_kingdom = {
+		icon = a_real_roman_empire
+		position = 9
+		required_missions = { 3_euts } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			total_development = 300
+			is_great_power = yes
+		}
+
+		effect = {
+			add_adm_power = 100
+			add_country_modifier = {
+				name = "adm_brit"
+				duration = 10950
+			}
+		}
+	}
+
+	3_united_empire = {
+		icon = mission_empire
+		position = 10
+		required_missions = { 3_united_kingdom } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			is_great_power = yes
+			british_isles_region = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			set_government_rank = 3
+			british_isles_region = {
+				add_province_modifier = {
+					name = "united_isles"
+					duration = 10950
+				}
+			}
+		}
+	}
+
+	3_strongest = {
+		icon = mission_crown_of_norway
+		position = 11
+		required_missions = { 3_united_empire } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			total_development = 1000
+			NOT = { great_power_rank = 3 } 
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "imperium_britannum"
+				duration = -1
+			}
+		}
+	}
+}
+Britannia_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = BR0 } 
+
+	4_brit_resistance = {
+		icon = mission_assemble_an_army
+		position = 1
+		provinces_to_highlight = { is_capital_of = SW2 } 
+
+		trigger = {
+			OR = {
+				army_size_percentage = 1
+				SW2 = { is_rival = ROOT } 
+				is_rival = SW2
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "resist_sweden"
+				duration = 10950
+			}
+		}
+	}
+
+	4_core_back = {
+		icon = mission_italian_condottiere
+		position = 2
+		required_missions = { 4_brit_resistance } 
+		provinces_to_highlight = { province_id = 240 } 
+
+		trigger = { owns = 240 } 
+
+		effect = {
+			4372 = {
+				change_culture = english
+				add_core = ROOT
+			}
+		}
+	}
+
+	4_britannia_returns = {
+		icon = a_show_of_strength
+		position = 3
+		required_missions = {
+			3_core_back
+			4_core_back
+			5_core_back
+		}
+		provinces_to_highlight = { is_core = ROOT } 
+
+		trigger = {owns = 239 owns = 240 owns = 4375 stability = 1 } 
+
+		effect = {
+			add_yearly_manpower = 2
+			add_years_of_income = 2
+		}
+	}
+
+	4_brittania_home = {
+		icon = mission_rb_into_england
+		position = 4
+		required_missions = { 4_britannia_returns } 
+		provinces_to_highlight = { is_capital_of = SW2 } 
+
+		trigger = {
+			SW2 = {
+				OR = {
+					NOT = {
+						army_strength = {
+							who = ROOT
+							value = 1
+						}
+					}
+					exists = no
+				}
+			}
+		}
+
+		effect = {
+			add_prestige = 15
+			east_midlands_area = { add_permanent_claim = ROOT } 
+			east_anglia_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	4_last_push = {
+		icon = mission_invade_england
+		position = 5
+		required_missions = { 4_brittania_home } 
+		provinces_to_highlight = { is_capital_of = SW2 } 
+
+		trigger = {
+			SW2 = { exists = no } 
+			num_of_owned_provinces_with = {
+				value = 15
+				region = british_isles_region
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "brittania_reconstruction"
+				duration = 10950
+			}
+		}
+	}
+
+	4_londinium_school = {
+		icon = bibliotheca_corviana
+		position = 7
+		required_missions = { 3_londinium } 
+		provinces_to_highlight = { province_id = 237 } 
+
+		trigger = {
+			has_institution = renaissance
+			OR = {
+				innovativeness = 20
+				237 = { development = 20 } 
+			}
+		}
+
+		effect = {
+			237 = {
+				change_culture = english
+				add_building = university
+				add_permanent_province_modifier = {
+					name = "great_oxford_school"
+					duration = -1
+				}
+			}
+		}
+	}
+}
+Britannia_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = BR0 } 
+
+	5_core_back = {
+		icon = mission_pol_develop_countryside
+		position = 2
+		required_missions = { 4_brit_resistance } 
+		provinces_to_highlight = { province_id = 239 } 
+
+		trigger = { owns = 239 } 
+
+		effect = {
+			241 = {
+				add_base_tax = 1
+				add_base_manpower = 1
+			}
+			wessex_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	5_sweden = {
+		icon = mission_swedish_peasantry
+		position = 8
+		required_missions = { 4_londinium_school } 
+		provinces_to_highlight = { culture = swedish } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 8
+				culture = swedish
+				NOT = { unrest = 1 } 
+			}
+		}
+
+		effect = {
+			if = {
+				limit = { accepted_culture = swedish } 
+				add_accepted_culture = svevish
+			}
+			every_owned_province = {
+				limit = { culture = swedish } 
+				change_culture = svevish
+			}
+		}
+	}
+
+	5_curriculum = {
+		icon = a_roman_empire
+		position = 9
+		required_missions = { 5_sweden } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			monthly_dip = 12
+			has_dip_advisor_3 = yes
+			dip_power = 200
+		}
+
+		effect = {
+			add_dip_power = -200
+			country_event = { id = britt.5 } 
+		}
+	}
+}

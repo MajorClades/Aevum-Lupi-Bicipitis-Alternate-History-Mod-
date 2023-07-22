@@ -1,0 +1,267 @@
+namespace = hun
+
+country_event = {
+	id = hun.1
+	title = hun.1.test
+	desc = hun.1.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = hun.1a
+		ai_chance = {
+			factor = 60
+		}
+		change_primary_culture = hunnic_ger
+		set_ruler_culture = hunnic_ger
+		set_heir_culture = hunnic_ger
+		every_owned_province = {
+			limit = {
+				culture = hunnic
+			}
+			change_culture = hunnic_ger
+		}
+		hidden_effect = {
+			swap_non_generic_missions = yes
+		}
+	}
+	option = {
+		name = hun.1b
+		ai_chance = {
+			factor = 40
+		}
+		change_primary_culture = hunnic_fra
+		set_ruler_culture = hunnic_fra
+		set_heir_culture = hunnic_fra
+		every_owned_province = {
+			limit = {
+				culture = hunnic
+			}
+			change_culture = hunnic_fra
+		}
+		hidden_effect = {
+			swap_non_generic_missions = yes
+		}
+	}
+	option = {
+		name = hun.1c
+		ai_chance = {
+			factor = 0
+		}
+		set_country_flag = hun_attila_son
+		custom_tooltip = SONSOFATTILA
+		hidden_effect = {
+			swap_non_generic_missions = yes
+		}
+	}
+}
+
+country_event = {
+	id = hun.2
+	title = hun.2.test
+	desc = hun.2.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = hun.2a
+		trigger = {
+			has_country_flag = hun_attila_son
+		}
+		118 = {
+			set_base_tax = 1
+			set_base_production = 1
+			set_base_manpower = 1
+			change_province_name = "Lazio"
+		}
+		capital_scope = {
+			add_base_tax = 5
+			add_base_production = 5
+			add_base_manpower = 5
+		}
+		every_country = {
+			limit = {
+				OR = {
+					culture_group = latin
+					culture_group = french
+					culture_group = iberian
+					culture_group = maghrebi
+					tag = RU0
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 25
+				apply_calc = no
+			}
+		}
+	}
+	option = {
+		name = hun.2b
+		trigger = {
+			has_country_flag = hun_attila_son
+		}
+		118 = {
+			set_base_tax = 0
+			set_base_production = 0
+			set_base_manpower = 0
+			cede_province = Z99
+			change_province_name = "Lazio"
+		}
+		capital_scope = {
+			add_base_tax = 5
+			add_base_production = 5
+			add_base_manpower = 5
+		}
+		every_country = {
+			limit = {
+				OR = {
+					culture_group = latin
+					culture_group = french
+					culture_group = iberian
+					culture_group = maghrebi
+					tag = RU0
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 35
+				apply_calc = no
+			}
+		}
+	}
+	option = {
+		name = hun.2c
+		trigger = {
+			NOT = {
+				has_country_flag = hun_attila_son
+			}
+		}
+		118 = {
+			add_base_tax = -4
+			add_base_production = -4
+			add_base_manpower = -4
+		}
+		capital_scope = {
+			add_base_tax = 4
+			add_base_production = 4
+			add_base_manpower = 4
+		}
+		every_country = {
+			limit = {
+				OR = {
+					culture_group = latin
+					culture_group = french
+					culture_group = iberian
+					culture_group = maghrebi
+					tag = RU0
+				}
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 5
+				apply_calc = no
+			}
+		}
+	}
+}
+
+country_event = {
+	id = hun.3
+	title = hun.3.test
+	desc = hun.3.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = hun.3a
+		trigger = {
+			NOT = {
+				has_country_flag = hun_attila_son
+			}
+		}
+		186 = {
+			add_core = ROOT
+			change_culture = ROOT
+			add_base_manpower = -2
+		}
+		set_capital = 186
+	}
+	option = {
+		name = hun.3b
+		trigger = {
+			NOT = {
+				has_country_flag = hun_attila_son
+			}
+		}
+		186 = {
+			add_base_tax = -2
+			add_base_production = -2
+			add_base_manpower = -2
+		}
+		capital_scope = {
+			add_base_tax = 2
+			add_base_production = 2
+			add_base_manpower = 2
+		}
+	}
+	option = {
+		name = hun.3c
+		trigger = {
+			has_country_flag = hun_attila_son
+		}
+		186 = {
+			add_base_tax = -4
+			add_base_production = -4
+			add_base_manpower = -4
+		}
+		capital_scope = {
+			add_base_tax = 4
+			add_base_production = 4
+			add_base_manpower = 4
+		}
+	}
+	option = {
+		name = hun.3d
+		trigger = {
+			has_country_flag = hun_attila_son
+		}
+		champagne_area = {
+			add_core = ROOT
+			change_culture = ROOT
+			add_base_manpower = -2
+		}
+		set_capital = 186
+	}
+}
+
+
+country_event = {
+	id = hun.100
+	title = hun.100.test
+	desc = hun.100.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	fire_only_once = yes
+	trigger = {
+		tag = HU0
+	}
+	mean_time_to_happen = {
+		days = 33
+	}
+
+	option = {
+		name = hun.100a
+		capital_scope = {
+			infantry = PREV
+			infantry = PREV
+			infantry = PREV
+			infantry = PREV
+			cavalry = PREV
+		}
+	}
+
+}

@@ -1,0 +1,875 @@
+
+Belgia_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	potential = {	tag = BE0	}
+	has_country_shield = yes
+
+	bel_blood_unpaid = {
+		icon = mission_rb_control_state_religion
+		required_missions = { }
+		position = 1
+		
+		trigger = { 
+			army_size_percentage = 1		
+		}
+		
+		effect = {
+			add_prestige = 10
+			munster_area = {
+				add_permanent_claim = ROOT
+			}
+			4377 = {
+				add_permanent_claim = ROOT
+			}
+			
+		}
+	}
+	bel_scot_land = {
+		icon = mission_rb_unite_the_clans
+		required_missions = {bel_blood_unpaid }
+		position = 2
+		
+		provinces_to_highlight = {
+			OR = {
+				province_id = 375
+				province_id = 4377
+				province_id = 374
+			}
+		}
+		trigger = { 
+			OR = {
+				375 = {
+					owned_by = ROOT
+				}
+				4377 = {
+					owned_by = ROOT
+				}
+				374 = {
+					owned_by = ROOT
+				}
+			}		
+		}
+		
+		effect = {
+			add_prestige = 10
+			add_adm_power = 50
+		}
+	}
+	bel_scot_land_a = {
+		icon = mission_assemble_an_army
+		required_missions = {bel_scot_land }
+		position = 3
+		
+		trigger = { 
+				SC0 = {
+					OR = {
+						exists = no
+						NOT = {
+							army_strength = {
+								who = ROOT
+								value = 0.8
+							}
+						}
+					}					
+				}					
+		}
+		
+		effect = {
+			capital_scope = {
+				add_base_manpower = 2
+			}
+			leinster_area = {
+				add_permanent_claim = ROOT
+			}
+			connacht_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	bel_scot_land_b = {
+		icon = mission_crusade_for_varna
+		required_missions = {bel_scot_land_a }
+		position = 4
+		
+		provinces_to_highlight = {
+			OR = {
+				area = leinster_area
+				area = connacht_area
+			}
+		}
+		trigger = { 
+			OR = {
+				leinster_area = {
+					type = all
+					owned_by = ROOT
+				}
+				connacht_area = {
+					type = all
+					owned_by = ROOT
+				}
+			}
+		}
+		
+		effect = {
+			4997 = {
+				add_center_of_trade_level = 1
+			}
+			ulster_area = {
+				add_permanent_claim = ROOT
+			}
+			
+		}
+	}
+	bel_belgia = {
+		icon = mission_rb_conquer_ireland
+		required_missions = {bel_scot_land_b }
+		position = 7
+		
+		provinces_to_highlight = {
+			OR = {
+				area = leinster_area
+				area = connacht_area
+				area = munster_area
+				area = ulster_area
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		trigger = { 
+			munster_area = {
+				type = all
+				owned_by = ROOT
+			}
+			leinster_area = {
+				type = all
+				owned_by = ROOT
+			}
+			connacht_area = {
+				type = all
+				owned_by = ROOT
+			}
+			ulster_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		
+		effect = {
+			munster_area = {
+				change_culture = flemish
+				add_province_modifier = {
+					name = bel_culture
+					duration = 7300
+				}
+			}
+			connacht_area = {
+				add_province_modifier = {
+					name = bel_conquest
+					duration = 7300
+				}
+			}
+			leinster_area = {
+				add_province_modifier = {
+					name = bel_conquest
+					duration = 7300
+				}
+			}
+			ulster_area = {
+				add_province_modifier = {
+					name = bel_conquest
+					duration = 7300
+				}
+			}
+			add_country_modifier = {
+				name = belgian_ireland
+				duration = -1
+			}
+		}
+	}
+	bel_biorno_achieved = {
+		icon = defeat_the_english
+		required_missions = {bel_biorno bel_belgia }
+		position = 9
+		provinces_to_highlight = {
+			region = british_isles_region
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		trigger = { 
+			is_at_war = no
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				region = british_isles_region
+				value = 50
+				owned_by = ROOT
+			}
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = belgian_united_biorno
+				duration = -1
+			}	
+		}
+	}
+}
+
+Belgia_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential = {	tag = BE0	}
+	has_country_shield = yes
+
+	bel_sea_lions = {
+		icon = mission_corsairs_of_the_north_sea
+		required_missions = {bel_blood_unpaid bel_queens_navy}
+		position = 2
+		
+		trigger = { 
+			num_of_marines = 3	
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = belgian_sea_lions
+				duration = 10950
+			}
+		}
+	}
+	bel_sea_lions_a = {
+		icon = mission_arts_and_letters
+		required_missions = { bel_sea_lions }
+		position = 3
+		
+		trigger = { 
+			num_of_marines = 25	
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = belgian_sea_lions
+				duration = -1
+			}
+		}
+	}
+	bel_main_island = {
+		icon = army_reforms
+		required_missions = {bel_scot_land_b }
+		position = 5
+		
+		provinces_to_highlight = {
+			OR = {
+				province_id = 373
+				province_id = 374
+			}
+		}
+		trigger = { 
+			OR = {
+				373 = {
+					OR = {
+						has_building = marketplace
+						base_production = 5
+					}
+				}
+				374 = {
+					OR = {
+						has_building = marketplace
+						base_production = 5
+					}
+				}
+			}
+		}
+		
+		effect = {
+			4365 = {
+				add_permanent_claim = ROOT
+			}
+			
+		}
+	}
+	bel_main_island_a = {
+		icon = je_maintiendrai
+		required_missions = {bel_main_island }
+		position = 6
+		
+		provinces_to_highlight = {
+			province_id = 4365
+		}
+		trigger = { 
+			4365 = {
+				owned_by = ROOT
+			}
+		}
+		
+		effect = {
+			kingdom_of_the_isles_area = {
+				add_permanent_claim = ROOT
+			}
+			wales_area = {
+				limit = {
+					has_port = yes
+				}
+				add_permanent_claim = ROOT
+			}
+			252 = {
+				add_permanent_claim = ROOT
+			}
+			4363 = {
+				add_permanent_claim = ROOT
+			}
+			4362 = {
+				add_permanent_claim = ROOT
+			}
+			249 = {
+				add_permanent_claim = ROOT
+			}
+			247 = {
+				add_permanent_claim = ROOT
+			}
+			244 = {
+				add_permanent_claim = ROOT
+			}
+			4375 = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	bel_ganden_attack = {
+		icon = a_show_of_strength
+		required_missions = {bel_main_island_a }
+		position = 7
+		
+		provinces_to_highlight = {
+			OR = {
+				area = kingdom_of_the_isles_area
+				province_id = 249
+			}
+		}
+		trigger = { 
+			OR = {
+				kingdom_of_the_isles_area = {
+					type = all
+					owned_by = ROOT
+				}
+				249 = {
+					owned_by = ROOT
+					is_core = ROOT
+				}
+			}
+			
+		}
+		
+		effect = {
+			add_army_tradition = 15
+			highlands_area = {
+				add_permanent_claim = ROOT
+			}
+			lowlands_area = {
+				add_permanent_claim = ROOT
+			}		
+		}
+	}
+	bel_biorno = {
+		icon = mission_rb_rule_britannia_scottish_version
+		required_missions = {bel_wales_attack bel_ganden_attack }
+		position = 8
+		
+		trigger = { 
+			OR = {
+				total_development = 300
+				is_great_power = yes
+				army_strength = {
+					who = SW2
+					value = 0.9
+				}
+			}
+		}
+		
+		effect = {
+			british_isles_region = {
+				add_permanent_claim = ROOT
+			}	
+		}
+	}
+	
+}
+
+Belgia_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential = {	tag = BE0	}
+	has_country_shield = yes
+
+	bel_queens_navy = {
+		icon = mission_establish_high_seas_navy
+		required_missions = { }
+		position = 1
+		
+		trigger = { 
+			navy_size_percentage = 1		
+		}
+		
+		effect = {
+			add_prestige = 10
+			add_country_modifier = {
+				name = bel_queen_navy
+				duration = 7300
+			}
+		}
+	}
+	bel_grand_navy = {
+		icon = mission_raid_christian_trade
+		required_missions = {bel_queens_navy }
+		position = 2
+		
+		trigger = { 
+			num_of_light_ship = 20		
+		}
+		
+		effect = {
+			add_sailors = 3000
+			add_navy_tradition = 20
+		}
+	}
+	bel_grand_navy_a = {
+		icon = mission_aragonese_navy
+		required_missions = {bel_grand_navy }
+		position = 4
+		
+		trigger = { 
+			naval_forcelimit = 30	
+			has_flagship = yes
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = belgia_waves
+				duration = 18250
+			}
+		}
+	}
+	bel_grand_navy_b = {
+		icon = mission_spanish_armada
+		required_missions = {bel_grand_navy_a }
+		position = 5
+		
+		trigger = { 
+			num_of_total_ports = 20
+			naval_forcelimit = 100	
+		}
+		
+		effect = {
+			add_navy_tradition = 20
+			add_country_modifier = {
+				name = belgia_waves_true
+				duration = -1
+			}
+		}
+	}
+	bel_wales_attack = {
+		icon = assert_our_sovereignty
+		required_missions = {bel_main_island_a }
+		position = 7
+		
+		provinces_to_highlight = {
+			area = wales_area
+		}
+		trigger = { 
+			241 = {
+				owned_by = ROOT
+			}
+			242 = {
+				owned_by = ROOT
+			}
+			4369 = {
+				owned_by = ROOT
+			}
+		}
+		
+		effect = {
+			add_army_tradition = 15
+			wessex_area = {
+				add_permanent_claim = ROOT
+			}
+			west_midlands_area = {
+				add_permanent_claim = ROOT
+			}		
+		}
+	}
+	bel_colonial_affairs_a = {
+		icon = mission_rb_settle_the_north
+		required_missions = {bel_colonial_affairs }
+		position = 9
+		
+		trigger = { 
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 5
+				colonial_region = colonial_canada
+				is_city = yes
+			}
+		}
+		
+		effect = {		
+			every_province = {
+				limit = {
+					colonial_region = colonial_canada
+					owner = {
+						is_subject_of = ROOT
+					}
+				}
+				add_base_manpower = 1
+				add_base_production = 1
+				add_base_tax = 1
+			}
+		}
+	}
+}
+
+Belgia_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	potential = {	tag = BE0	}
+	has_country_shield = yes
+
+	bel_markets = {
+		icon = mission_trade_company_region_abroad
+		required_missions = {bel_queen_regent }
+		position = 2
+		
+		trigger = { 
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 3
+				has_port = yes
+				has_building = marketplace
+			}
+		}
+		
+		effect = {
+			add_dip_power = 100
+			add_treasury = 300
+		}
+	}
+	bel_domestic_deals = {
+		icon = mission_conquer_50_development
+		required_missions = {bel_markets }
+		position = 3
+		
+		trigger = { 
+			num_of_owned_provinces_with = {
+				value = 5
+				OR = {
+					has_building = workshop
+					has_building = counting_house
+				}
+			}
+		}
+		
+		effect = {		
+			add_mercantilism = 10
+		}
+	}
+	bel_dutch_trades = {
+		icon = mission_rb_colonise_spice_islands
+		required_missions = {bel_domestic_deals }
+		position = 5
+		
+		trigger = { 
+			num_of_owned_provinces_with = {
+				value = 5
+				OR = {
+					has_building = marketplace
+					has_building = trade_depot
+					has_building = stock_exchange
+				}
+				base_production = 7
+			}
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = bel_trade_power
+				duration = 10950
+			}
+		}
+	}
+	bel_domestic_deals_a = {
+		icon = mission_asian_trader
+		required_missions = {bel_dutch_trades }
+		position = 6
+		
+		trigger = { 
+			mercantilism = 25
+			num_of_owned_provinces_with = {
+				value = 5
+				base_production = 10	
+			}
+			num_of_owned_provinces_with = {
+				value = 25
+				OR = {
+					has_building = workshop
+					has_building = counting_house
+				}
+			}
+		}
+		
+		effect = {		
+			every_owned_province = {
+				limit = {
+					OR = {
+						base_production = 10
+						OR = {
+							has_building = workshop
+							has_building = counting_house
+						}
+					}
+				}
+				add_scaled_local_adm_power = 1
+				add_scaled_local_dip_power = 1
+				add_scaled_local_mil_power = 1
+			}
+		}
+	}
+	bel_colonial_affairs = {
+		icon = mission_colonial
+		required_missions = { }
+		position = 8
+		
+		trigger = { 
+			num_of_colonists = 1
+			OR = {
+				ICE = {
+					has_opinion = {
+						who = ROOT
+						value = 100
+					}
+				}
+				BT0 = {
+					has_opinion = {
+						who = ROOT
+						value = 100
+					}
+				}
+				RK0 = {
+					has_opinion = {
+						who = ROOT
+						value = 100
+					}
+				}
+			}
+		}
+		
+		effect = {		
+			add_country_modifier = {
+				name = bel_friendly_colonists
+				duration = 10950
+			}
+		}
+	}
+	bel_colonial_affairs_b = {
+		icon = mission_rb_the_thirteen_colonies
+		required_missions = {bel_colonial_affairs }
+		position = 9
+		
+		trigger = { 
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 5
+				colonial_region = colonial_eastern_america
+				is_city = yes
+			}
+		}
+		
+		effect = {		
+			every_province = {
+				limit = {
+					colonial_region = colonial_eastern_america
+					owner = {
+						is_subject_of = ROOT
+					}
+				}
+				add_base_manpower = 1
+				add_base_production = 1
+				add_base_tax = 1
+			}
+		}
+	}
+}
+
+Belgia_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	potential = {	tag = BE0	}
+	has_country_shield = yes
+
+	bel_queen_regent = {
+		icon = mission_empire
+		required_missions = { }
+		position = 1
+		
+		trigger = { 
+			OR = {
+				AND = {
+					has_ruler = "Kathrijne"
+					adm = 4
+					dip = 2
+				}
+				NOT = {
+					has_ruler = "Kathrijne"
+				}
+			}
+			mil_power = 100		
+		}
+		
+		effect = {
+			add_mil_power = -100
+			if = {
+				limit = {
+					has_ruler = "Kathrijne"
+				}
+				country_event = {
+					id = belgia.1
+				} 
+			} else = {
+				add_republican_tradition = 15
+			}
+			
+		}
+	}
+	bel_queen_missive = {
+		icon = mission_empire
+		required_missions = { bel_queen_regent}
+		position = 2
+		
+		trigger = { 
+			OR = {
+				diplomat = 3
+				spymaster = 3
+				statesman = 3
+			}	
+			dip_power = 100
+		}
+		
+		effect = {
+			add_dip_power = -100
+			
+			if = {
+				limit = {
+					has_reform = pirate_republic_reform
+				}
+				add_country_modifier = {
+					name = bel_pirate_letter
+					duration = 7300
+				}
+			} else = {
+				add_country_modifier = {
+					name = bel_queen_letter
+					duration = 7300
+				}
+			}
+		}
+	}
+	bel_belgian_postal_service = {
+		icon = mission_court_education
+		required_missions = { bel_queen_missive}
+		position = 4
+		
+		trigger = { 
+			monthly_dip = 10
+			years_of_income = 2
+		}
+		
+		effect = {
+			add_years_of_income = -2
+			add_country_modifier = {
+				name = bel_delivery
+				duration = -1
+			}
+		}
+	}
+	bel_mail_rider = {
+		icon = mission_vedic_education
+		required_missions = { bel_belgian_postal_service}
+		position = 5
+		
+		trigger = { 
+			OR = {
+				diplomat = 5
+				spymaster = 5
+				statesman = 5
+			}	
+			capital_scope = {
+				development = 30
+				OR = {
+					has_building = courthouse
+					has_building = town_hall
+				}
+			}
+
+		}
+		
+		effect = {		
+			capital_scope = {
+				add_permanent_province_modifier = {
+					name = bel_mail_delivery
+					duration = -1
+				}
+			}
+		}
+	}
+	bel_mailmen = {
+		icon = mission_impaled_soldies
+		required_missions = { bel_mail_rider}
+		position = 7
+		
+		trigger = { 
+			government_rank = 3
+			NOT = {
+				great_power_rank = 5
+			}
+			num_of_owned_provinces_with = {
+				value = 15
+				has_building = university
+			}
+		}
+		
+		effect = {		
+			add_country_modifier = {
+				name = bel_bloody_mailmen
+				duration = -1
+			}
+		}
+	}
+	bel_colonial_affairs_c = {
+		icon = mission_the_triangle_trade
+		required_missions = {bel_colonial_affairs }
+		position = 9
+		
+		trigger = { 
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 5
+				colonial_region = colonial_the_carribean
+				is_city = yes
+			}
+		}
+		
+		effect = {		
+			every_province = {
+				limit = {
+					colonial_region = colonial_the_carribean
+					owner = {
+						is_subject_of = ROOT
+					}
+				}
+				add_base_manpower = 1
+				add_base_production = 1
+				add_base_tax = 1
+			}
+		}
+	}
+}

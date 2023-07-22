@@ -1,0 +1,155 @@
+
+Mex_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	potential = {	tag = MX0	}
+	has_country_shield = yes
+
+	1_mex_recover = {
+		icon = mission_invade_island
+		required_missions = { }
+		position = 1
+		provinces_to_highlight = {
+			province_id = 893
+		}
+		trigger = { 
+			893 = {
+				development = 13
+			}
+		}
+		
+		effect = {
+			893 = {
+				add_devastation = -50
+				add_building = fort_15th
+			}
+		}
+	}
+	
+}
+
+Mex_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential = {	tag = MX0	}
+	has_country_shield = yes
+
+
+
+}
+
+Mex_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential = {	tag = MX0	}
+	has_country_shield = yes
+
+	3_mex_army = {
+		icon = mission_invade_island
+		required_missions = { }
+		position = 1
+
+		trigger = { 
+			army_size_percentage = 0.85
+		}
+		
+		effect = {
+			mississippi_plain_area = {
+				add_permanent_claim = ROOT
+			}
+			mississippi_area = {
+				add_permanent_claim = ROOT
+			}
+			lower_louisiana_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+}
+
+Mex_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	potential = {	tag = MX0	}
+	has_country_shield = yes
+
+	5_mex_land = {
+		icon = mission_invade_island
+		required_missions = {3_mex_army 5_mex_army}
+		position = 2
+		provinces_to_highlight = {
+			OR = {
+				province_id = 2516
+				province_id = 921
+			}
+		}
+		trigger = { 
+			owns = 2516
+			2516 = {
+				is_city = yes
+			}
+			owns = 921
+			921 = {
+				is_city = yes
+			}
+			treasury = 200
+		}
+		
+		effect = {
+			add_treasury = -200
+			add_country_modifier = {
+				name = mexican_expansion
+				duration = -1
+			}
+		}
+	}
+	
+}
+
+Mex_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	potential = {	tag = MX0	}
+	has_country_shield = yes
+
+
+	5_mex_army = {
+		icon = mission_invade_island
+		required_missions = { }
+		position = 1
+
+		trigger = { 
+			treasury = 100
+		}
+		
+		effect = {
+			add_treasury = -100
+			2516 = {
+				if = {
+					limit = {
+						is_empty = yes
+					}
+					add_siberian_construction = 500
+				}else = {
+					add_core = ROOT
+				}
+			}
+			921 = {
+				if = {
+					limit = {
+						is_empty = yes
+					}
+					add_siberian_construction = 500
+				}else = {
+					add_core = ROOT
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,100 @@
+sox_empire_mechanic = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 1
+	available = {
+		
+	}
+	
+	powers = {
+		sox_adm_power = {
+			max = 150
+			monarch_power = ADM
+			base_monthly_growth = 0.35
+		}
+		sox_dip_power = {
+			max = 150
+			monarch_power = DIP
+			base_monthly_growth = 0.35
+		}
+		sox_mil_power = {
+			max = 150
+			monarch_power = MIL
+			base_monthly_growth = 0.35
+		}
+	}
+	
+	interactions = {
+		SOX_FIRST = {
+			gui = russian_mechanics_interaction_gui
+			icon = GFX_russian_ability_ADM
+			cost_type = sox_adm_power
+			cost = 75
+			trigger = {
+				inflation = 2
+			}
+			effect = {
+				add_inflation = -2
+			}
+			cooldown_years = 0
+			ai_chance = {
+				factor = 10
+				modifier = {
+					factor = 100
+					inflation = 4
+				}
+				modifier = {
+					factor = 100
+					inflation = 6
+				}
+			}
+		}
+		SOX_SECOND = {
+			gui = russian_mechanics_interaction_gui
+			icon = GFX_russian_ability_DIP
+			cost_type = sox_dip_power
+			cost = 75
+			trigger = { 
+				corruption = 2
+			}
+			effect = { 
+				add_corruption = -2
+			}
+			cooldown_years = 0
+			ai_chance = {
+				factor = 10
+				modifier = {
+					factor = 100
+					corruption = 4
+				}
+				modifier = {
+					factor = 100
+					corruption = 6
+				}
+			}
+		}
+		SOX_THIRD = {
+			gui = russian_mechanics_interaction_gui
+			icon = GFX_russian_ability_MIL
+			cost_type = sox_mil_power
+			cost = 75
+			trigger = {
+				war_exhaustion = 1
+			}
+			effect = { 
+				add_war_exhaustion = -2
+			}
+			cooldown_years = 0
+			ai_chance = {
+				factor = 10
+				modifier = {
+					factor = 100
+					war_exhaustion = 2
+				}
+				modifier = {
+					factor = 100
+					war_exhaustion = 4
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,177 @@
+namespace = saxo
+
+country_event = {
+	id = saxo.1
+	title = saxo.1.test
+	desc = saxo.1.desc
+	picture = COMET_SIGHTED_eventPicture
+
+	trigger = {
+		tag = SX0
+		owns_or_subject_of = 280
+	}
+
+	mean_time_to_happen = {
+		months = 2
+	}
+
+	fire_only_once = yes
+
+	option = {
+		name = saxo.1a
+		ai_chance = {
+			factor = 80
+		}
+		280 = {
+			remove_core = ROOT
+			add_core = SI0
+			cede_province = SI0
+		}
+		create_subject = {
+			subject_type = siesheng_vassal
+			subject = SI0
+		}
+		custom_tooltip = VAS_SIE_TIP
+		add_country_modifier = {
+			name = siescheng_vassalage
+			duration = -1
+		}
+		hidden_effect = {
+			set_country_flag = siescheng_vassal_flag
+			SI0 = {
+				change_government = republic
+				change_primary_culture = chitans
+				change_religion = confucianism
+				add_government_reform = walled_city_reform
+				define_ruler = {
+					name = "Master's Council"
+					adm = 4
+					dip = 4
+					mil = 4
+				}
+				add_ruler_personality = immortal_personality
+				add_ruler_personality = calm_personality
+				add_ruler_personality = incorruptible_personality
+			}
+		}
+	}
+	option = {
+		name = saxo.1b
+		ai_chance = {
+			factor = 10
+		}
+		280 = {
+			add_core = ROOT
+		}
+		inherit = SI0
+		set_capital = 280
+	}
+}
+
+country_event = {
+	id = saxo.2
+	title = saxo.2.test
+	desc = saxo.2.desc
+	picture = COMET_SIGHTED_eventPicture
+
+	trigger = {
+		has_country_flag = siescheng_vassal_flag
+		SIO = {
+			NOT = {
+				is_subject_of = ROOT
+			}
+		}
+	}
+	hidden = yes
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	option = {
+		name = saxo.1a
+		remove_country_modifier = siescheng_vassalage
+		clr_country_flag = siescheng_vassal_flag
+	}
+}
+country_event = {
+	id = saxo.3
+	title = saxo.3.test
+	desc = saxo.3.desc
+	picture = COMET_SIGHTED_eventPicture
+
+	trigger = {
+		has_country_flag = siescheng_vassal_flag
+		SIO = {
+			is_subject_of = ROOT
+			any_owned_province = {
+				NOT = {
+					province_id = 280
+				} 
+			}
+		}
+	}
+	hidden = yes
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	option = {
+		name = saxo.1a
+		SI0 = {
+			every_owned_province = {
+				limit = {
+					NOT = {
+						province_id = 280
+					}
+				}
+				cede_province = ROOT
+			}
+		}
+	}
+}
+country_event = {
+	id = saxo.4
+	title = saxo.4.test
+	desc = saxo.4.desc
+	picture = COMET_SIGHTED_eventPicture
+
+	trigger = {
+		has_country_flag = VALTEA_SAXONY_UNION
+		LT0 = {
+			exists = yes
+			junior_union_with = ROOT
+			any_owned_province = {
+				NOT = {
+					OR = {
+						region = baltic_region
+						region = scandinavia_region
+						region = russia_region
+					}
+				}
+			}
+		}
+	}
+	hidden = yes
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	option = {
+		name = saxo.1a
+		LT0 = {
+			every_owned_province = {
+				limit = {
+					NOT = {
+						OR = {
+							region = baltic_region
+							region = scandinavia_region
+							region = russia_region
+						}
+					}
+				}
+				cede_province = ROOT
+				add_core = ROOT
+			}
+		}
+	}
+}

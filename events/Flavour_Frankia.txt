@@ -1,0 +1,230 @@
+namespace = frankia
+
+country_event = {
+	id = frankia.1
+	title = frankia.1.test
+	desc = frankia.1.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	trigger = {
+		is_institution_enabled = printing_press
+		any_owned_province = {
+			region = low_countries_region
+			culture_group = frankish
+		}
+		NOT = {
+			tag = VR0
+		}
+		FR9 = {
+			exists = no
+		}
+		NOT = {
+			is_year = 1600
+		}
+	}
+	mean_time_to_happen = {
+		months = 2
+	}
+	fire_only_once = yes
+	option = {
+		name = frankia.1a
+		low_countries_region = {
+			limit = {
+				culture_group = frankish
+			}
+			add_core = FR9
+		}
+		set_global_flag = frankia_rebellion
+	}
+}
+
+country_event = {
+	id = frankia.2
+	title = frankia.2.test
+	desc = frankia.2.desc
+	picture = ANGRY_MOB_eventPicture
+	hidden = yes
+	trigger = {
+		has_global_flag = frankia_rebellion
+		any_owned_province = {
+			region = low_countries_region
+			culture_group = frankish
+		}
+		NOT = {
+			tag = VR0
+		}
+		FR9 = {
+			exists = no
+		}
+	}
+	mean_time_to_happen = {
+		months = 2
+	}
+	fire_only_once = yes
+	option = {
+		name = frankia.2a
+		if = {
+			limit = {
+				any_country = {
+					ai = no
+					culture_group = frankish
+					NOT = {
+						tag = VR0
+					}
+				}
+			}
+			every_country = {
+				limit = {
+					ai = no
+					culture_group = frankish
+					NOT = {
+						tag = VR0
+					}
+				}
+				country_event = {
+					id = frankia.3
+				}
+			}
+		}else = {
+			if = {
+				limit = {
+					culture_group = frankish
+				}
+				change_tag = FR9
+			}else = {
+				every_country = {
+					limit = {
+						ai = yes
+						culture_group = frankish
+						NOT = {
+							tag = VR0
+						}
+					}
+					change_tag = FR9
+				}
+			}	
+		}	
+		FR9 = {
+			add_country_modifier = {
+				name = frankish_fury
+				duration = 10950
+			}
+		}
+	}
+}
+
+country_event = {
+	id = frankia.3
+	title = frankia.3.test
+	desc = frankia.3.desc
+	picture = ANGRY_MOB_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = frankia.3a
+		change_tag = FR9
+		FR9 = {
+			add_country_modifier = {
+				name = frankish_fury
+				duration = 10950
+			}
+		}
+	}
+}
+country_event = {
+	id = frankia.4
+	title = frankia.4.test
+	desc = frankia.4.desc
+	picture = ANGRY_MOB_eventPicture
+
+	trigger = {
+		has_global_flag = frankia_rebellion
+		FR9 = {
+			exists = yes
+		}
+		NOT = {
+			tag = FR9
+		}
+		any_owned_province = {
+			region = low_countries_region
+			culture_group = frankish
+		}
+		NOT = {
+			is_year = 1600
+		}
+	}
+	mean_time_to_happen = {
+		months = 12
+	}
+	option = {
+		name = frankia.4a
+		if = { 
+			limit = {
+				culture_group = frankish
+				ai = yes
+			}
+			every_owned_province = {
+				cede_province = FR9
+			}
+		}else = {
+			random_owned_province = {
+				limit = {
+					culture_group = frankish
+				}
+				spawn_rebels = {
+					type = nationalist_rebels
+					size = 2
+					friend = FR9
+				}
+			}
+		}	
+	}
+}
+
+country_event = {
+	id = frankia.5
+	title = frankia.5.test
+	desc = frankia.5.desc
+	picture = ANGRY_MOB_eventPicture
+	fire_only_once = yes
+	trigger = {
+		has_global_flag = frankia_rebellion
+		tag = FR9
+		owns_all_provinces = {
+			region = low_countries_region
+			culture_group = frankish
+		}
+	}
+	mean_time_to_happen = {
+		months = 12
+	}
+	option = {
+		name = frankia.5a
+		clr_global_flag = frankia_rebellion
+	}
+}
+
+country_event = {
+	id = frankia.6
+	title = frankia.6.test
+	desc = frankia.6.desc
+	picture = ANGRY_MOB_eventPicture
+	fire_only_once = yes
+	trigger = {
+		any_owned_province = {
+			region = low_countries_region
+		}
+		is_year = 1600
+		FR9 = {
+			exists = no
+		}
+	}
+	mean_time_to_happen = {
+		months = 12
+	}
+	option = {
+		name = frankia.6a
+		clr_global_flag = frankia_rebellion
+	}
+}
+

@@ -1,0 +1,184 @@
+
+convert_asatru_action = {
+	category = relation
+
+	is_visible = {
+		OR = {
+			has_reform = bards_of_baldr_reform
+			has_reform = allfatherrealm_reform
+		}
+    }
+
+	is_allowed = {
+		has_government_power = {
+			mechanic_type = baldrlight_mechanic
+			power_type = lightness_power
+			value = 10
+		}
+		is_at_war = no
+		FROM = {
+			is_at_war = no
+			NOT = {
+				religion = norse_ragnaroked
+			}
+		}
+    }
+	on_accept = {
+		FROM = {
+			random_owned_province = {
+				limit = {
+					same_continent = FROM
+				}
+				change_religion = norse_ragnaroked
+			}
+		}
+		ROOT = {
+			add_government_power = {
+				mechanic_type = baldrlight_mechanic
+				power_type = lightness_power
+				value = -10
+			}
+		}
+    }
+
+	ai_will_do = {
+		always = no
+    }
+}
+
+convert_big_asatru_action = {
+	category = relation
+
+	is_visible = {
+		OR = {
+			has_reform = bards_of_baldr_reform
+			has_reform = allfatherrealm_reform
+		}
+    }
+
+	is_allowed = {
+		has_government_power = {
+			mechanic_type = baldrlight_mechanic
+			power_type = lightness_power
+			value = 30
+		}
+		is_at_war = no
+		FROM = {
+			is_at_war = no
+			NOT = {
+				religion = norse_ragnaroked
+			}
+		}
+    }
+	on_accept = {
+		FROM = {
+			random_area_province = {
+				limit = {
+					same_continent = FROM
+				}
+				change_religion = norse_ragnaroked
+			}
+		}
+		ROOT = {
+			add_government_power = {
+				mechanic_type = baldrlight_mechanic
+				power_type = lightness_power
+				value = -30
+			}
+		}
+    }
+
+	ai_will_do = {
+		always = no
+    }
+}
+
+convert_true_asatru_action = {
+	category = relation
+
+	is_visible = {
+		OR = {
+			has_reform = bards_of_baldr_reform
+			has_reform = allfatherrealm_reform
+		}
+    }
+
+	is_allowed = {
+		has_government_power = {
+			mechanic_type = baldrlight_mechanic
+			power_type = lightness_power
+			value = 100
+		}
+		is_at_war = no
+		FROM = {
+			num_of_religion = {
+				religion = norse_ragnaroked
+				value = 0.5
+			}
+			is_at_war = no
+			NOT = {
+				religion = norse_ragnaroked
+			}
+		}
+    }
+	on_accept = {
+		FROM = {
+			change_religion = norse_ragnaroked
+		}
+		ROOT = {
+			add_government_power = {
+				mechanic_type = baldrlight_mechanic
+				power_type = lightness_power
+				value = -100
+			}
+		}
+    }
+
+	ai_will_do = {
+		always = no
+    }
+}
+
+vassalize_true_asatru_action = {
+	category = relation
+
+	is_visible = {
+		OR = {
+			has_reform = bards_of_baldr_reform
+			has_reform = allfatherrealm_reform
+		}
+    }
+
+	is_allowed = {
+		has_government_power = {
+			mechanic_type = baldrlight_mechanic
+			power_type = lightness_power
+			value = 100
+		}
+		is_at_war = no
+		FROM = {
+			is_at_war = no
+			religion = norse_ragnaroked
+			alliance_with = ROOT
+			NOT = {
+				total_development = ROOT
+			}
+		}
+    }
+	on_accept = {
+		ROOT = {
+			vassalize = FROM
+		}
+		ROOT = {
+			add_government_power = {
+				mechanic_type = baldrlight_mechanic
+				power_type = lightness_power
+				value = -100
+			}
+		}
+    }
+
+	ai_will_do = {
+		always = no
+    }
+}

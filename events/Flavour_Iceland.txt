@@ -1,0 +1,195 @@
+namespace = icel
+
+country_event = {
+	id = icel.1
+	title = icel.1.test
+	desc = icel.1.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = icel.1a
+		ICE = {
+			country_event = {
+				id = icel.3
+			}
+		}
+		FJ0 = {
+			vassalize = ICE
+		}
+	}
+}
+
+country_event = {
+	id = icel.2
+	title = icel.2.test
+	desc = icel.2.desc
+	picture = SHIP_SAILING_eventPicture
+	
+	is_triggered_only = yes
+	option = {
+		name = icel.2a
+		ai_chance = {
+			factor = 1
+		}
+		europe = {
+			discover_country = FJ0
+		}
+		vassalize = FJ0
+	}
+	option = {
+		name = icel.2b
+		ai_chance = {
+			factor = 0
+		}
+		europe = {
+			discover_country = FJ0
+		}
+		vassalize = FJ0
+		switch_tag = FJ0
+	}
+}
+
+country_event = {
+	id = icel.3
+	title = icel.3.test
+	desc = icel.3.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	is_triggered_only = yes
+	option = {
+		name = icel.3a
+		ai_chance = {
+			factor = 1
+		}
+		FJ0 = {
+			inherit = ICE
+		}
+	}
+	option = {
+		name = icel.3b
+		ai_chance = {
+			factor = 0
+		}
+		declare_war_with_cb = {
+			casus_belli = cb_independence_war
+			who = FJ0
+		}
+	}
+}
+
+country_event = {
+	id = icel.100
+	title = icel.100.test
+	desc = icel.100.desc
+	picture = ANGRY_MOB_eventPicture
+	hidden = yes
+	
+	trigger = {
+		tag = ICE
+		FJ0 = {
+			is_subject_of = ICE
+		}
+		num_of_owned_provinces_with = {
+			value = 1
+			colonial_region = colonial_canada
+			is_city = yes
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	immediate = {
+		every_owned_province = {
+			limit = {
+				colonial_region = colonial_canada
+				is_city = yes
+			}
+			if = {
+				limit = {
+					is_core = ICE
+				}
+				remove_core = ICE
+				add_core = FJ0
+			}
+			cede_province = FJ0
+		}
+	}
+	option = {
+		name = icel.2a
+	}
+}
+country_event = {
+	id = icel.101
+	title = icel.101.test
+	desc = icel.101.desc
+	picture = ANGRY_MOB_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = ICE
+		FJ0 = {
+			is_subject_of = ICE
+		}
+		num_of_owned_provinces_with = {
+			value = 1
+			colonial_region = colonial_canada
+			is_city = yes
+		}
+	}
+	option = {
+		name = icel.101a
+		
+	}
+}
+country_event = {
+	id = icel.200
+	title = icel.200.test
+	desc = icel.200.desc
+	picture = ANGRY_MOB_eventPicture
+	hidden = yes
+	fire_only_once = yes
+	trigger = {
+		tag = FJ0
+		FJ0 = {
+			has_country_modifier = iceland_direct_control
+			NOT = {
+				is_subject_of = ICE
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	immediate = {
+		remove_country_modifier = iceland_direct_control
+	}
+	option = {
+		name = icel.2a
+	}
+}
+
+country_event = {
+	id = icel.300
+	title = icel.300.test
+	desc = icel.300.desc
+	picture = ANGRY_MOB_eventPicture
+	hidden = yes
+	fire_only_once = yes
+	trigger = {
+		tag = ICE
+		ai = yes
+		is_year = 1455
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	option = {
+		name = icel.3a
+		capital_scope = {
+			light_ship = ROOT
+			light_ship = ROOT
+			light_ship = ROOT
+		}
+	}
+}

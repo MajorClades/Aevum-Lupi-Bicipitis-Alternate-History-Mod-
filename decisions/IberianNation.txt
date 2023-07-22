@@ -1,0 +1,119 @@
+country_decisions = {
+
+	iberia_nation = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			was_never_end_game_tag_trigger = yes
+			NOT = { has_country_flag = formed_iberia_flag }
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			OR = {
+				is_free_or_tributary_trigger = yes
+				ai = no
+			}
+			NOT = { tag = IB0 }
+			NOT = { tag = SPA }
+			NOT = { tag = PAP }
+			NOT = { tag = HLR }
+			NOT = { tag = FRA }		# Basque is a valid culture for both FRA and SPA
+			NOT = { tag = KNI }		# Maltese is part of iberian culture group
+			NOT = { tag = ADU }
+			NOT = { religion_group = muslim }
+			OR = {
+				culture_group = iberian
+				primary_culture = basque
+				tag = AF1
+				tag = VR0
+			}
+			is_colonial_nation = no
+			OR = {
+				is_former_colonial_nation = no
+				AND = {
+					is_former_colonial_nation = yes
+					ai = no
+				}
+			}
+		}
+		provinces_to_highlight = {
+			region = iberia_region
+			OR = {
+				NOT = { owned_by = ROOT }
+				NOT = { is_core = ROOT }
+			}
+		}
+		allow = {
+			NOT = { exists = IB0 }
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			is_at_war = no
+			num_of_owned_provinces_with = {
+				value = 60
+				region = iberia_region
+			}
+		}
+		effect = {
+			change_tag = IB0
+			restore_country_name = yes
+			remove_non_electors_emperors_from_empire_effect = yes
+			if = {
+				limit = { NOT = { government_rank = 2 } }
+				set_government_rank = 2
+			}
+			if = {
+				limit = {
+					has_custom_ideas = no
+				}
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			iberia_region = {
+				add_permanent_claim = IB0
+			}
+			
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			set_country_flag = formed_iberia_flag
+			set_country_flag = iberia_mission_flag
+			add_prestige = 25
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				tag = CAS
+				NOT = { is_enemy = ARA }
+				NOT = { is_rival = ARA }
+			}
+			modifier = {
+				factor = 0
+				tag = ARA
+				NOT = { is_enemy = CAS }
+				NOT = { is_rival = CAS }
+			}
+		}
+		ai_importance = 400
+	}
+	iberia_mission_dec = {
+		major = yes
+		potential = {
+			tag = IB0
+			has_country_flag = iberia_mission_flag
+		}
+		allow = {
+		 
+		}
+		effect = {
+			clr_country_flag = iberia_mission_flag
+			swap_non_generic_missions = yes
+		}
+		ai_will_do = {
+			factor = 1
+			
+		}
+		ai_importance = 400
+	}
+}

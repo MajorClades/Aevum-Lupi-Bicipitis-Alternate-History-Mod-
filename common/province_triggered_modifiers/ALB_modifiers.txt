@@ -1,0 +1,324 @@
+# Province Triggered modifiers are here.
+# These are added to provinces through the add_province_triggered_modifier effect
+#
+# Effects are fully scriptable here.
+
+
+###########################################
+# Just random test modifier
+###########################################
+german_regional_capital = {
+	potential = {
+		owner = {
+			OR = {
+				tag = GR0
+				tag = PU0
+				}
+		}
+	}
+	trigger = {
+		owner = {
+			accepted_culture = saxangles
+			accepted_culture = lower_saxangles
+		}
+	}
+	num_accepted_cultures = 2
+	local_manpower_modifier = 0.25
+	prestige = 0.5
+	local_tax_modifier = 0.33
+}
+
+german_regional_capital_s = {
+	potential = {
+		owner = {
+						OR = {
+				tag = GR0
+				tag = PU0
+				}
+		}
+	}
+	trigger = {
+		owner = {
+			accepted_culture = saxon
+			accepted_culture = baltic_german
+		}
+	}
+	num_accepted_cultures = 2
+	local_manpower_modifier = 0.25
+	prestige = 0.5
+	local_tax_modifier = 0.33
+}
+
+ger_man_relig = {
+	potential = {
+		owner = {
+						OR = {
+				tag = GR0
+				tag = PU0
+				}
+		}
+	}
+	trigger = {
+		OR ={
+			has_building = temple
+			has_building = cathedral
+		}
+	}
+	local_tax_modifier = 0.4
+	supply_limit_modifier = 0.25
+	local_religious_unity_contribution = -0.25
+}
+
+karibba_capital = {
+	potential = {
+		owner = {
+			tag = A01
+			OR = {
+				is_subject_of = AF1
+				is_subject_of = HR0
+				is_subject_of = AF0
+				is_subject_of = ROM
+				is_subject_of = IB0
+			}
+		}
+	}
+	trigger = {
+		owner = {
+			tag = A01
+			OR = {
+				is_subject_of = AF1
+				is_subject_of = HR0
+				is_subject_of = AF0
+				is_subject_of = ROM
+				is_subject_of = IB0
+			}
+		}
+	}
+	local_tax_modifier = 0.5
+	supply_limit_modifier = 0.25
+	local_production_efficiency = 0.15
+	land_forcelimit = 15
+	liberty_desire = -15
+}
+
+the_rock_ceuta_1 = {
+	potential = {
+		owner = {
+			owns = 226
+		}
+		NOT = {
+			226 = {
+				has_great_project = {
+					type = the_rock
+					tier = 2
+				}
+			}
+		}
+		NOT = {
+			226 = {
+				has_great_project = {
+					type = the_rock
+					tier = 3
+				}
+			}
+		}
+	}
+	trigger = {
+		owner = {
+			owns = 226
+			226 = {
+				has_great_project = {
+					type = the_rock
+					tier = 1
+				}
+			}
+		}
+	}
+	local_defensiveness = 0.25
+	local_garrison_size = 0.25
+}
+the_rock_ceuta_2 = {
+	potential = {
+		owner = {
+			owns = 226
+		}
+		NOT = {
+			226 = {
+				has_great_project = {
+					type = the_rock
+					tier = 1
+				}
+			}
+		}
+		NOT = {
+			226 = {
+				has_great_project = {
+					type = the_rock
+					tier = 3
+				}
+			}
+		}
+	}
+	trigger = {
+		owner = {
+			owns = 226
+			226 = {
+				has_great_project = {
+					type = the_rock
+					tier = 2
+				}
+			}
+		}
+	}
+	local_defensiveness = 0.25
+	local_garrison_size = 0.25
+	local_development_cost_modifier = -0.15
+}
+the_rock_ceuta_3 = {
+	potential = {
+		owner = {
+			owns = 226
+		}
+		NOT = {
+			226 = {
+				has_great_project = {
+					type = the_rock
+					tier = 1
+				}
+			}
+		}
+		NOT = {
+			226 = {
+				has_great_project = {
+					type = the_rock
+					tier = 2
+				}
+			}
+		}
+	}
+	trigger = {
+		owner = {
+			owns = 226
+			226 = {
+				has_great_project = {
+					type = the_rock
+					tier = 3
+				}
+			}
+		}
+	}
+	local_defensiveness = 0.5
+	local_garrison_size = 0.5
+	local_development_cost_modifier = -0.25
+}
+
+the_toll_rock_1 = {
+	potential = {
+		owner = {
+			owns = 1751
+		}
+		NOT = {
+			1751 = {
+				has_great_project = {
+					type = the_great_toll	
+					tier = 2
+				}
+			}
+		}
+		NOT = {
+			1751 = {
+				has_great_project = {
+					type = the_great_toll	
+					tier = 3
+				}
+			}
+		}
+	}
+	trigger = {
+		owner = {
+			owns = 1751
+			1751 = {
+				has_great_project = {
+					type = the_great_toll
+					tier = 1
+				}
+			}
+		}
+	}
+	local_tax_modifier = 0.25
+	province_trade_power_value = 15
+}
+
+the_toll_rock_2 = {
+	potential = {
+		owner = {
+			owns = 1751
+		}
+		NOT = {
+			1751 = {
+				has_great_project = {
+					type = the_great_toll	
+					tier = 1
+				}
+			}
+		}
+		NOT = {
+			1751 = {
+				has_great_project = {
+					type = the_great_toll	
+					tier = 3
+				}
+			}
+		}
+	}
+	trigger = {
+		owner = {
+			owns = 1751
+			1751 = {
+				has_great_project = {
+					type = the_great_toll
+					tier = 2
+				}
+			}
+		}
+	}
+	local_tax_modifier = 0.5
+	province_trade_power_value = 33
+}
+
+the_toll_rock_3 = {
+	potential = {
+		owner = {
+			owns = 1751
+			NOT = {
+				1751 = {
+					has_great_project = {
+						type = the_great_toll	
+						tier = 1
+					}
+				}
+			}
+			NOT = {
+				1751 = {
+					has_great_project = {
+						type = the_great_toll	
+						tier = 2
+					}
+				}
+			}
+		}
+	}
+	trigger = {
+		owner = {
+			owns = 1751
+			1751 = {
+				has_great_project = {
+					type = the_great_toll	
+					tier = 3
+				}
+			}
+		}
+	}
+	local_tax_modifier = 1
+	province_trade_power_value = 50
+}

@@ -1,0 +1,112 @@
+######################################################################
+# Revolutionary rebels. Civil War factions.
+######################################################################
+kolm_assualt_rebels = {
+
+	color = { 140 185 110 }
+
+	area = nation 					# Stays within the nation
+	government = monarchy			
+	defection = none				# Does not defect
+	independence = none				# Does not strive for independence
+	unit_transfer = no
+	gfx_type = culture_province	
+	will_relocate = yes	
+	
+	resilient = no
+	reinforcing = yes
+	general = yes
+	smart = no
+	
+	artillery = 0.15
+	infantry = 0.7
+	cavalry = 0.15
+	
+	morale = 1.5
+	
+	# Possible handle actions
+	handle_action_negotiate = no
+	handle_action_stability = yes
+	handle_action_build_core = no
+	handle_action_send_missionary = no		
+	
+	# The rebel type with the highest modifier for this province gets picked
+	spawn_chance = {
+		factor = 0
+	}
+ 
+ 	# This is checked for EACH province in the Area of Operations
+	movement_evaluation = {
+		factor = 1
+		modifier = {
+			factor = 0.1
+			units_in_province = 1
+		}
+		modifier = {
+			factor = 0.001
+			controlled_by = REB
+		}
+		modifier = {
+			factor = 10
+			is_capital = yes
+		}
+		modifier = {
+			factor = 1.5
+			unrest = 2
+		}
+		modifier = {
+			factor = 1.5
+			unrest = 4
+		}
+		modifier = {
+			factor = 1.5
+			unrest = 6
+		}
+	}
+ 
+ 	# Province Scope
+ 	siege_won_trigger = {
+		province_id = 151
+ 	}
+	siege_won_effect = {
+		KO0 = {
+			country_event = {
+				id = kolm.2
+			}
+		}
+		RU0 = {
+			country_event = {
+				id = kolm.200
+				days = 1
+			}
+		}
+	}
+	
+	# Country scope
+	can_negotiate_trigger = {
+		always = no
+	}
+	
+	# Country scope
+	can_enforce_trigger = {
+		always = yes
+	}
+	
+	# Localisation for their demands
+	demands_description = "kolm_demand"
+	
+	# Country Scope	
+	demands_enforced_effect = {
+		KO0 = {
+			country_event = {
+				id = kolm.2
+			}
+		}
+		RU0 = {
+			country_event = {
+				id = kolm.200
+				days = 1
+			}
+		}
+	}
+}

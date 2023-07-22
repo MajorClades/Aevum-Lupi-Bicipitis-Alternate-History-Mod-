@@ -1,0 +1,242 @@
+namespace = dajb
+
+country_event = {
+	id = dajb.1
+	title = dajb.1.test
+	desc = dajb.1.desc
+	picture = ANGRY_MOB_eventPicture
+
+	fire_only_once = yes
+	trigger = {
+		tag = ZL6
+	}
+	mean_time_to_happen = {
+		months = 3
+	}
+	option = {
+		name = dajb.1a
+		ai_chance = {
+			factor = 70
+			modifier = {
+				factor = 0
+				ZL6 = {
+					alliance_with = ZL5
+				}
+			}
+			modifier = {
+				factor = 2
+				ZL6 = {
+					is_rival = ZL5
+				}
+			}
+			modifier = {
+				factor = 2
+				ZL5 = {
+					is_rival = ZL6
+				}
+			}
+		}
+		4 = {
+			add_claim = ROOT
+		}
+		1985 = {
+			add_claim = ROOT
+		}
+	}
+	option = {
+		name = dajb.1b
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 5
+				ZL6 = {
+					alliance_with = ZL5
+				}
+			}
+		}
+		ZL5 = {
+			add_treasury = 25
+			add_trust = {
+				who = ZL6
+				value = 10
+			}
+		}
+	}
+}
+
+country_event = {
+	id = dajb.2
+	title = dajb.2.test
+	desc = dajb.2.desc
+	picture = ANGRY_MOB_eventPicture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	option = {
+		name = dajb.2a
+		set_country_flag = dajb_faith
+		custom_tooltip = DAJB_FAITH_CT
+		add_estate_loyalty = {
+			estate = estate_burghers
+			loyalty = -50
+		}
+		capital_scope = {
+			spawn_rebels = {
+				type = particularist_rebels
+				size = 4
+				estate = estate_burghers
+			}
+		}
+	}
+	option = {
+		name = dajb.2b
+		set_country_flag = dajb_money
+		custom_tooltip = DAJB_MONEY_CT
+		add_estate_loyalty = {
+			estate = estate_church
+			loyalty = -50
+		}
+		capital_scope = {
+			spawn_rebels = {
+				type = particularist_rebels
+				size = 4
+				estate = estate_church
+			}
+		}
+	}
+	option = {
+		name = dajb.2c
+		custom_tooltip = DAJB_PEOPLE_CT
+		set_country_flag = dajb_people
+		add_estate_loyalty = {
+			estate = estate_burghers
+			loyalty = -50
+		}
+		add_estate_loyalty = {
+			estate = estate_church
+			loyalty = -50
+		}
+		add_government_reform = commowealth_peasant_republic
+		custom_tooltip = RISKCALCULATED
+		hidden_effect = {
+			country_event = {
+				id = dajb.3
+				days = 12
+			}
+		}
+	}
+}
+
+country_event = {
+	id = dajb.3
+	title = dajb.3.test
+	desc = dajb.3.desc
+	picture = ANGRY_MOB_eventPicture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	hidden = yes
+	
+	option = {
+		name = dajb.3c
+		random_owned_province = {
+			limit = {
+				culture_group = ROOT
+			}
+			spawn_rebels = {
+				type = particularist_rebels
+				size = 3
+				estate = estate_church
+			}
+		}
+		random_owned_province = {
+			limit = {
+				culture_group = ROOT
+			}
+			spawn_rebels = {
+				type = particularist_rebels
+				size = 3
+				estate = estate_church
+			}
+		}
+		random_owned_province = {
+			limit = {
+				culture_group = ROOT
+			}
+			spawn_rebels = {
+				type = particularist_rebels
+				size = 3
+				estate = estate_burghers
+			}
+		}
+		random_owned_province = {
+			limit = {
+				culture_group = ROOT
+			}
+			spawn_rebels = {
+				type = particularist_rebels
+				size = 3
+				estate = estate_burghers
+			}
+		}
+		country_event = {
+			id = dajb.4
+			days = 3
+		}
+	}
+}
+country_event = {
+	id = dajb.4
+	title = dajb.4.test
+	desc = dajb.4.desc
+	picture = ANGRY_MOB_eventPicture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	hidden = yes
+	
+	option = {
+		name = dajb.4c
+		random_owned_province = {
+			limit = {
+				culture_group = ROOT
+			}
+			spawn_rebels = {
+				type = particularist_rebels
+				size = 3
+				estate = estate_church
+			}
+		}
+		random_owned_province = {
+			limit = {
+				culture_group = ROOT
+			}
+			spawn_rebels = {
+				type = particularist_rebels
+				size = 3
+				estate = estate_church
+			}
+		}
+		random_owned_province = {
+			limit = {
+				culture_group = ROOT
+			}
+			spawn_rebels = {
+				type = particularist_rebels
+				size = 3
+				estate = estate_burghers
+			}
+		}
+		random_owned_province = {
+			limit = {
+				culture_group = ROOT
+			}
+			spawn_rebels = {
+				type = particularist_rebels
+				size = 3
+				estate = estate_burghers
+			}
+		}
+		
+	}
+}

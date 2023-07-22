@@ -1,0 +1,111 @@
+namespace = arabs
+
+country_event = {
+	id = arabs.1
+	title = arabs.1.test
+	desc = arabs.1.desc
+	picture = COMET_SIGHTED_eventPicture
+
+	trigger = {
+		tag = AB0
+		owns = 385
+	}
+
+	mean_time_to_happen = {
+		months = 2
+	}
+
+	fire_only_once = yes
+
+	option = {
+		name = arabs.1a
+		ai_chance = {
+			factor = 80
+		}
+		add_stability_or_adm_power = yes
+	}
+	option = {
+		name = arabs.1b
+		ai_chance = {
+			factor = 10
+		}
+		385 = {
+			add_province_modifier = {
+				name = tolled_entry_sacred_city
+				duration = -1
+			}
+		}
+		every_country = {
+			limit = {
+				religion_group = muslim
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 1
+				apply_calc = no
+			}
+		}
+	}
+	option = {
+		name = arabs.1c
+		ai_chance = {
+			factor = 10
+		}
+		385 = {
+			destroy_great_project = {
+				type = kaaba
+			}
+			change_religion = ROOT
+		}
+		every_country = {
+			limit = {
+				religion_group = muslim
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 40
+				apply_calc = no
+			}
+		}
+	}
+}
+
+country_event = {
+	id = arabs.100
+	title = arabs.100.test
+	desc = arabs.100.desc
+	picture = ANGRY_MOB_eventPicture
+	hidden = yes
+	trigger = {
+		has_country_flag = arab_desert_power
+		any_owned_province = {
+			OR = {
+				has_terrain = desert
+				has_terrain = coastal_desert
+			}
+			NOT = {
+				has_province_modifier = arabia_good_desert
+			}
+		}
+	}
+
+	mean_time_to_happen = {
+		months = 2
+	}
+
+	option = {
+		name = arabs.1a
+		every_owned_province = {
+			limit = {
+				OR = {
+					has_terrain = desert
+					has_terrain = coastal_desert
+				}
+			}
+			add_province_modifier = {
+				name = arabia_good_desert
+				duration = -1
+			}
+		}
+	}
+}

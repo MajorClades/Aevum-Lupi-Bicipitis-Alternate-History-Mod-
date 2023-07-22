@@ -1,0 +1,95 @@
+country_decisions = {
+
+	africa_nation = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			was_never_end_game_tag_trigger = yes
+			NOT = { has_country_flag = formed_africa_flag }
+			NOT = { tag = AE0}
+			NOT = { tag = HR0}
+			NOT = { tag = IB0}
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			OR = {
+				is_free_or_tributary_trigger = yes
+				ai = no
+			}
+			religion = indictian
+			culture_group = maghrebi
+
+			is_colonial_nation = no
+			OR = {
+				is_former_colonial_nation = no
+				AND = {
+					is_former_colonial_nation = yes
+					ai = no
+				}
+			}
+		}
+		provinces_to_highlight = {
+			region = maghreb_region
+			OR = {
+				NOT = { owned_by = ROOT }
+				NOT = { is_core = ROOT }
+			}
+		}
+		allow = {
+			NOT = { exists = AF0 }
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			is_at_war = no
+			num_of_owned_provinces_with = {
+				value = 30
+				region = maghreb_region
+			}
+		}
+		effect = {
+			change_tag = AF0
+			restore_country_name = yes
+			if = {
+				limit = {
+					NOT = {
+						was_tag = AF2
+					}
+				}
+				swap_non_generic_missions = yes
+			}
+			remove_non_electors_emperors_from_empire_effect = yes
+			if = {
+				limit = { NOT = { government_rank = 2 } }
+				set_government_rank = 2
+				}
+			if = {
+				limit = {
+					has_custom_ideas = no
+				}
+				country_event = { id = ideagroups.1 } #Swap Ideas
+				}
+			maghreb_region = {
+					add_permanent_claim = AF0
+				}
+			
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			set_country_flag = formed_africa_flag
+			add_prestige = 25
+			hidden_effect = {
+				complete_mission = ald_list
+				complete_mission = ald_fix_it
+				complete_mission = ald_good_advice
+				complete_mission = ald_fort
+				complete_mission = ald_new_fort
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+
+}

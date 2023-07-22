@@ -1,0 +1,295 @@
+namespace = britt
+
+country_event = {
+	id = britt.1
+	title = britt.1.test
+	desc = britt.1.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	trigger = {
+		tag = BR0
+		is_year = 1445
+		BR0 = {
+			is_at_war = no
+			alliance_with = JU0
+		}
+		JU0 = {
+			is_at_war = no
+		}
+	}
+	mean_time_to_happen = {
+		months = 2
+	}
+	fire_only_once = yes
+	option = {
+		name = britt.1a
+		ai_chance = {
+			factor = 90
+		}
+		JU0 = {
+			country_event = {
+				id = britt.2
+			}
+		}
+	}
+	option = {
+		name = britt.1b
+		ai_chance = {
+			factor = 10
+		}
+		add_stability = 1
+	}
+}
+
+country_event = {
+	id = britt.2
+	title = britt.2.test
+	desc = britt.2.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = britt.2a
+		ai_chance = {
+			factor = 80
+		}
+		if = {
+			limit = {
+				BR0 = {
+					ai = yes
+				}
+			}
+			if = {
+				limit = {
+					JU0 = {
+						ai = yes
+					}
+				}
+				BR0 = {
+					create_union = JU0
+				}
+			}else = {
+				JU0 = {
+					create_union = BR0
+				}
+			}
+		}else = {
+			BR0 = {
+				create_union = JU0
+			}
+		}
+		SW2 = {
+			country_event = {
+				id = britt.3
+			}
+		}
+	}
+	option = {
+		name = britt.2b
+		ai_chance = {
+			factor = 20
+		}
+		add_stability = 1
+	}
+}
+country_event = {
+	id = britt.3
+	title = britt.3.test
+	desc = britt.3.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = britt.3a
+		ai_chance = {
+			factor = 80
+			modifier = {
+				factor = 0
+				SW2 = {
+					is_at_war = yes
+				}
+			}
+			modifier = {
+				factor = 0
+				SW2 = {
+					truce_with = BR0
+				}
+			}
+			modifier = {
+				factor = 0
+				SW2 = {
+					truce_with = JU0
+				}
+			}
+		}
+		define_general = {
+			shock = 4
+			fire = 3
+			manuever = 4
+			siege = 2
+		}
+		declare_war_with_cb = {
+			casus_belli = cb_imperial
+			who = BR0
+		}
+	}
+	option = {
+		name = britt.3b
+		ai_chance = {
+			factor = 20
+		}
+		add_stability = 1
+	}
+}
+
+country_event = {
+	id = britt.4
+	title = britt.4.test
+	desc = britt.4.desc
+	picture = COLONIZATION_eventPicture
+	
+	trigger = {
+		owns = 242
+		tag = BR0
+		492 = {
+			is_core = BR0
+		}
+	}
+	mean_time_to_happen = {
+		months = 2
+	}
+	fire_only_once = yes
+	option = {
+		name = britt.4a
+		ai_chance = {
+			factor = 80
+		}
+		242 = {
+			change_culture = ROOT
+		}
+	}
+	option = {
+		name = britt.4b
+		ai_chance = {
+			factor = 20
+		}
+		242 = {
+			add_province_modifier = {
+				name = respected_ancestry
+				duration = -1
+			}
+		}
+	}
+}
+
+country_event = {
+	id = britt.5
+	title = britt.5.test
+	desc = britt.5.desc
+	picture = COLONIZATION_eventPicture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = britt.5a
+		ai_chance = {
+			factor = 80
+		}
+		add_country_modifier = {
+			name = culture_brit_1
+			duration = -1
+		}
+	}
+	option = {
+		name = britt.5b
+		ai_chance = {
+			factor = 20
+		}
+		add_country_modifier = {
+			name = culture_brit_2
+			duration = -1
+		}
+	}
+}
+
+country_event = {
+	id = britt.100
+	title = britt.100.test
+	desc = britt.100.desc
+	picture = COLONIZATION_eventPicture
+	
+	trigger = {
+		owns = 492
+		492 = {
+			is_city = no
+		}
+	}
+	mean_time_to_happen = {
+		months = 2
+	}
+	fire_only_once = yes
+	option = {
+		name = britt.100a
+		ai_chance = {
+			factor = 50
+		}
+		492 = {
+			add_colonysize = 900
+			change_culture = english
+			change_province_name = "Richport"
+		}
+	}
+	option = {
+		name = britt.100b
+		ai_chance = {
+			factor = 50
+		}
+		492 = {
+			add_colonysize = 200
+		}
+	}
+}
+
+country_event = {
+	id = britt.101
+	title = britt.101.test
+	desc = britt.101.desc
+	picture = COLONIZATION_eventPicture
+	
+	trigger = {
+		tag = BR0
+		owns_or_subject_of = 236
+		ai = yes
+		236 = {
+			NOT = {
+				development = 25
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 4
+	}
+	hidden = yes
+	option = {
+		name = britt.100a
+		random_list = {
+			33 = {
+				236 = {
+					add_base_tax = 1
+				}
+			}
+			33 = {
+				236 = {
+					add_base_production = 1
+				}
+			}
+			33 = {
+				236 = {
+					add_base_manpower = 1
+				}
+			}
+		}
+	}
+}

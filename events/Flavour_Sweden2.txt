@@ -1,0 +1,185 @@
+namespace = swe2
+
+country_event = {
+	id = swe2.1
+	title = swe2.1.test
+	desc = swe2.1.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = swe2.1a
+		ai_chance = { factor = 75 }
+		if = {
+			limit = {
+				SW2 = {
+					ai = yes
+				}
+				GA0 = {
+					ai = no
+				}
+			}
+			GA0 = {
+				create_union = SW2
+			}
+		}else = {
+			SW2 = {
+				create_union = GA0
+			}
+		}
+	}
+	option = {
+		name = swe2.1b
+		ai_chance = {factor = 25 modifier = {	factor = 0	GA0 = {	ai = no	}}}
+		GA0 = {
+			add_stability = -1
+			add_historical_rival = SW2
+		}
+		lowlands_area = {
+			add_permanent_claim = SW2
+		}
+		highlands_area = {
+			add_permanent_claim = SW2
+		}
+	}
+}
+
+country_event = {
+	id = swe2.2
+	title = swe2.2.test
+	desc = swe2.2.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = swe2.2a
+		ai_chance = { factor = 33 }
+		add_accepted_culture = scottish
+		add_accepted_culture = irish
+		every_owned_province = {
+			limit = {
+				culture = flemish
+			}
+			owner = {
+				add_dip_power = -50
+			}
+			change_culture = scottish
+		}
+	}
+	option = {
+		name = swe2.2b
+		ai_chance = { factor = 33 }
+		add_accepted_culture = flemish
+		add_accepted_culture = irish
+		every_owned_province = {
+			limit = {
+				culture = scottish
+			}
+			owner = {
+				add_dip_power = -50
+			}
+			change_culture = flemish
+		}
+	}
+	option = {
+		name = swe2.2c
+		ai_chance = { factor = 33 }
+		add_dip_power = 150
+		hidden_effect = {
+			ulster_area = {
+				remove_core = TRY
+				remove_core = ULS
+				remove_core = TYR
+				remove_core = SC0
+				remove_core = BE0
+				remove_core = CNN
+				add_core = IRE
+				change_culture = irish
+			}
+			connacht_area = {
+				remove_core = TRY
+				remove_core = ULS
+				remove_core = TYR
+				remove_core = SC0
+				remove_core = BE0
+				remove_core = CNN
+				add_core = IRE
+				change_culture = irish
+			}
+			munster_area = {
+				remove_core = TRY
+				remove_core = ULS
+				remove_core = TYR
+				remove_core = SC0
+				remove_core = CNN
+				add_core = BE0
+				change_culture = flemish
+			}
+			leinster_area = {
+				remove_core = TRY
+				remove_core = ULS
+				remove_core = TYR
+				remove_core = CNN
+				add_core = SC0
+				change_culture = scottish
+			}
+		}
+	}
+}
+
+
+country_event = {
+	id = swe2.3
+	title = swe2.3.test
+	desc = swe2.3.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	trigger = {
+		num_of_owned_provinces_with = {
+			value = 1
+			culture = zladian
+		}
+		num_of_owned_provinces_with = {
+			value = 1
+			culture_group = zladinian
+		}
+	}
+	mean_time_to_happen = {
+		months = 12
+	}
+	option = {
+		name = swe2.3a
+		random_owned_province = {
+			limit = {
+				culture_group = zladinian
+			}
+			add_unrest = 10
+			change_culture = zladian
+		}
+		random_owned_province = {
+			limit = {
+				culture_group = zladinian
+			}
+			add_unrest = 10
+			change_culture = zladian
+		}
+		random_owned_province = {
+			limit = {
+				culture_group = zladinian
+			}
+			add_unrest = 10
+			change_culture = zladian
+		}
+	}
+	option = {
+		name = swe2.3b
+		random_owned_province = {
+			limit = {
+				culture_group = zladinian
+			}
+			change_culture = zladian
+		}
+	}
+}

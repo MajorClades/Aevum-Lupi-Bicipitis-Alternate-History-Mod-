@@ -1,0 +1,489 @@
+namespace = padan
+
+
+country_event = {
+	id = padan.1
+	title = padan.1.t
+	desc = padan.1.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = PD0
+		OR = {
+			mission_completed = 1_north_italy
+			has_institution = manufactories
+		}
+		is_incident_active = no
+		hre_size = 2
+	}
+	
+	mean_time_to_happen = {
+		months = 6
+	}
+	
+	option = {
+		name = padan.1a
+		set_imperial_incident = incident_italian_republic
+	}
+}
+
+# Mock imperial incident
+country_event = {
+	id = padan.2
+	title = padan.2.t
+	desc = padan.2.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	
+	is_triggered_only = yes
+	major = yes
+	
+	option = { # elevate prussia to an hre kingdom
+		name = padan.2a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 100
+				alliance_with = PD0
+			}
+			modifier = {
+				factor = 100
+				tag = PD0
+			}
+			modifier = {
+				factor = 5
+				has_opinion = {
+					who = PD0
+					value = 150
+				}
+			}
+		}
+		custom_tooltip = PAD_1_TT
+		italy_region = {
+			add_core = PD0
+		}
+		PD0 = {
+			country_event = {
+				id = padan.3
+			}
+		}
+	}
+	option = { # reject
+		name = padan.2b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 100
+				is_rival = PD0
+			}
+			modifier = {
+				factor = 5
+				has_opinion = {
+					who = emperor
+					value = 150
+				}
+			}
+			modifier = {
+				factor = 100
+				is_emperor = yes
+			}
+		}
+		custom_tooltip = PAD_2_TT
+		italy_region = {
+			add_core = emperor
+		}
+		PD0 = {
+			country_event = {
+				id = padan.3
+			}
+		}
+	}
+}
+
+country_event = {
+	id = padan.3
+	title = padan.3.t
+	desc = padan.3.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = { 
+		name = padan.3a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 100
+				tag = PD0
+			}
+		}
+		declare_war_with_cb = {
+			casus_belli = cb_annex
+			who = emperor
+		}
+		set_country_flag = italian_war_pad_emp
+		emperor = {
+			set_country_flag = italian_war_pad_emp
+		}
+		custom_tooltip = PAD_3_TT
+		hidden_effect = {
+			every_country = {
+				limit = {
+					is_part_of_hre = yes
+					NOT = {
+						is_emperor = yes
+					}
+					NOT = {
+						tag = PD0
+					}
+					is_subject = no
+				}
+				country_event = {
+					id = padan.4
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = padan.4
+	title = padan.4.t
+	desc = padan.4.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = { 
+		name = padan.4a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 100
+				alliance_with = PD0
+			}
+			modifier = {
+				factor = 2
+				has_opinion = {
+					who = PD0
+					value = 100
+				}
+			}
+			modifier = {
+				factor = 2
+				has_opinion = {
+					who = PD0
+					value = 150
+				}
+			}
+			modifier = {
+				factor = 5
+				has_opinion = {
+					who = PD0
+					value = 200
+				}
+			}
+		}
+		join_all_offensive_wars_of = PD0
+		set_country_flag = Pad_align
+	}
+	option = { # reject
+		name = padan.4b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 100
+				is_rival = PD0
+			}
+			modifier = {
+				factor = 2
+				has_opinion = {
+					who = emperor
+					value = 150
+				}
+			}
+			modifier = {
+				factor = 2
+				has_opinion = {
+					who = emperor
+					value = 150
+				}
+			}
+			modifier = {
+				factor = 5
+				has_opinion = {
+					who = emperor
+					value = 200
+				}
+			}
+		}
+		set_country_flag = Emp_align
+		join_all_defensive_wars_of = emperor
+	}
+}
+
+country_event = {
+	id = padan.5
+	title = padan.5.t
+	desc = padan.5.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = PD0
+		is_at_war = no
+		has_country_flag = italian_war_pad_emp_won
+	}
+	
+	mean_time_to_happen = {
+		months = 1
+	}
+	
+	option = {
+		name = padan.5a
+		inherit = emperor
+		every_country = {
+			limit = {
+				has_country_flag = Pad_align
+			}
+			every_owned_province = {
+				limit = {
+					region = italy_region
+				}
+				cede_province = PD0
+			}
+		}
+		dismantle_hre = yes
+	}
+}
+
+country_event = {
+	id = padan.6
+	title = padan.6.t
+	desc = padan.6.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	
+	fire_only_once = yes
+	
+	trigger = {
+		is_emperor = yes
+		is_at_war = no
+		has_country_flag = italian_war_pad_emp_won
+	}
+	
+	mean_time_to_happen = {
+		months = 1
+	}
+	
+	option = {
+		name = padan.6a
+		inherit = PD0
+		add_imperial_influence = 100
+		every_country = {
+			limit = {
+				has_country_flag = Emp_align
+			}
+			every_owned_province = {
+				limit = {
+					region = italy_region
+				}
+				cede_province = emperor
+			}
+		}
+	}
+}
+
+country_event = {
+	id = padan.7
+	title = padan.7.t
+	desc = padan.7.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = { 
+		name = padan.7a
+		ai_chance = {
+			factor = 1
+		}
+		custom_tooltip = unlock_rep_army
+		set_country_flag = padania_merc_special
+		add_country_modifier = {
+			name = merc_focus_pad
+			duration = -1
+		}
+	}
+	option = { 
+		name = padan.7b
+		ai_chance = {
+			factor = 1
+		}
+		add_country_modifier = {
+			name = army_focus_pad
+			duration = -1
+		}
+	}
+}
+
+
+###ITA
+
+country_event = {
+	id = padan.8
+	title = padan.8.t
+	desc = padan.8.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = { 
+		name = padan.8a
+		ai_chance = {
+			factor = 1
+		}
+		add_country_modifier = {
+			name = vote_power_estate
+			duration = -1
+		}
+	}
+	option = { 
+		name = padan.8b
+		ai_chance = {
+			factor = 1
+		}
+		add_country_modifier = {
+			name = vote_power_people
+			duration = -1
+		}
+	}
+	option = { 
+		name = padan.8c
+		ai_chance = {
+			factor = 1
+		}
+		add_country_modifier = {
+			name = vote_power_consul
+			duration = -1
+		}
+	}
+}
+
+country_event = {
+	id = padan.9
+	title = padan.9.t
+	desc = padan.9.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = { 
+		name = padan.9a
+		ai_chance = {
+			factor = 1
+		}
+		custom_tooltip = LAST_POWERUP_1
+		hidden_effect = {
+			every_owned_province = {
+				add_base_tax = 1
+				add_base_production = 1
+				add_base_manpower = 1
+			}
+		}
+	}
+	option = { 
+		name = padan.9b
+		ai_chance = {
+			factor = 1
+		}
+		custom_tooltip = LAST_POWERUP_2
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						has_seat_in_parliament = yes
+					}
+					add_base_tax = 5
+					add_base_production = 5
+					add_base_manpower = 5
+				}
+			}
+	}
+	option = { 
+		name = padan.9c
+		ai_chance = {
+			factor = 1
+		}
+		add_country_modifier = {
+			name = roman_republic_reborn
+			duration = -1
+		}
+	}
+}
+country_event = {
+	id = padan.100
+	title = padan.100.t
+	desc = padan.100.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	
+	hidden = yes
+	mean_time_to_happen = {
+		days = 10
+	}
+	trigger = {
+		any_owned_province = {
+			NOT = {
+				has_province_modifier = seat_of_power
+			}
+			has_seat_in_parliament = yes
+		}
+	}
+	
+	option = { 
+		name = padan.100a
+		every_owned_province = {
+			limit = {
+				has_seat_in_parliament = yes
+				NOT = {
+					has_province_modifier = seat_of_power
+				}
+			}
+			add_province_modifier = {
+				name = seat_of_power
+				duration = -1
+			}
+		}
+		every_owned_province = {
+			limit = {
+				has_seat_in_parliament = no
+				has_province_modifier = seat_of_power
+			}
+			remove_province_modifier = seat_of_power
+		}
+	}
+
+}
+
+country_event = {
+	id = padan.844
+	title = padan.844.t
+	desc = padan.844.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = { 
+		name = padan.8a
+		ai_chance = {
+			factor = 1
+		}
+		italy_region = {
+			cede_province = ROOT
+		}
+		complete_mission = 1_empire_republic
+		complete_mission = 3_padania_houses
+		complete_mission = 5_padania_doge_army
+		complete_mission = 4_golden_winds
+	}
+
+}

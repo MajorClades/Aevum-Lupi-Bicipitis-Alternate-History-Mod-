@@ -1,0 +1,393 @@
+namespace = soxony
+
+country_event = {
+	id = soxony.1
+	title = soxony.1.test
+	desc = soxony.1.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	trigger = {
+		culture_group = french
+		NOT = {
+			is_year = 1445
+		}
+		NOT = {
+			has_country_flag = sox_civil_war
+		}
+		NOT = {
+			tag = SO4
+		}
+		NOT = {
+			tag = IT1
+		}
+	}
+
+	option = {
+		name = soxony.1a
+		trigger = {
+				tag = SO0
+		}
+		add_country_modifier = {
+			name = soxon_instability
+			duration = -1
+		}
+		if = {
+			limit = {
+				SO0 = {
+					ai = yes
+				}
+			}
+			add_country_modifier = {
+				name = CHAOS
+				duration = 500
+			}
+		}
+		country_event = {
+			id = soxony.2
+			days = 77
+		}
+		set_country_flag = sox_civil_war
+	}
+	option = {
+		name = soxony.1b
+		trigger = {
+			NOT = {
+				tag = SO0
+			}
+		}
+		add_treasury = 50
+		add_manpower = 5
+		set_country_flag = sox_civil_war
+	}
+}
+
+country_event = {
+	id = soxony.2
+	title = soxony.2.test
+	desc = soxony.2.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		remove_country_modifier = soxon_instability
+	}
+
+	option = {
+		name = soxony.2a
+		ai_chance = { factor = 40 }
+		FC0 = {
+			grant_independence = yes
+		}
+		SO2 = {
+			grant_independence = yes
+		}
+		SO3 = {
+			grant_independence = yes
+		}
+		SO0 = {
+			declare_war_with_cb = {
+				who = SO1
+				casus_belli = cb_restore_personal_union
+			}
+		}
+		SO2 = {
+			join_all_defensive_wars_of = SO1
+		}
+		SO3 = {
+			join_all_defensive_wars_of = SO1
+		}
+		hidden_effect = {
+			every_province = {
+				limit = {
+					OR = {
+						owned_by = SO1
+						owned_by = SO2
+						owned_by = SO3
+						owned_by = SO4
+					}
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+		clr_country_flag = sox_civil_war
+	}
+	option = {
+		name = soxony.2b
+		ai_chance = { factor = 30 }
+		SO1 = {
+			grant_independence = yes
+		}
+		SO2 = {
+			grant_independence = yes
+		}
+		SO3 = {
+			grant_independence = yes
+		}
+		SO0 = {
+			declare_war_with_cb = {
+				who = FC0
+				casus_belli = cb_annex
+			}
+		}
+		hidden_effect = {
+			every_province = {
+				limit = {
+					OR = {
+						owned_by = SO1
+						owned_by = SO2
+						owned_by = SO3
+						owned_by = SO4
+					}
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+		clr_country_flag = sox_civil_war
+	}
+	option = {
+		name = soxony.2c
+		ai_chance = { factor = 15 }
+		inherit = SO4
+		release_all_subjects = yes
+		add_stability = 2
+		hidden_effect = {
+			every_province = {
+				limit = {
+					OR = {
+						owned_by = SO1
+						owned_by = SO2
+						owned_by = SO3
+						owned_by = SO4
+					}
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+		clr_country_flag = sox_civil_war
+	}
+	option = {
+		name = soxony.2d
+		ai_chance = { factor = 15 }
+		inherit = SO4
+		SO2 = {
+			grant_independence = yes
+		}
+		SO3 = {
+			grant_independence = yes
+			define_general = {
+				shock = 5
+				fire = 5
+				manuever = 4
+				siege = 3
+			}
+		}
+		SO0 = {
+			declare_war_with_cb = {
+				who = SO1
+				casus_belli = cb_restore_personal_union
+			}
+		}
+		SO2 = {
+			join_all_defensive_wars_of = SO1
+		}
+		SO3 = {
+			join_all_defensive_wars_of = SO1
+		}
+		SO0 = {
+			declare_war_with_cb = {
+				who = FC0
+				casus_belli = cb_vassalize_mission
+			}
+		}
+		hidden_effect = {
+			every_province = {
+				limit = {
+					OR = {
+						owned_by = SO1
+						owned_by = SO2
+						owned_by = SO3
+						owned_by = SO4
+					}
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+		clr_country_flag = sox_civil_war
+	}
+}
+
+country_event = {
+	id = soxony.3
+	title = soxony.3.test
+	desc = soxony.3.desc
+	picture = KING_SICK_IN_BED_eventPicture
+	
+	trigger = {
+		tag = SO0
+		is_year = 1445
+		NOT = {
+			has_country_flag = sox_civil_war
+		}
+		NOT = {
+			is_at_war = yes
+		}
+	}
+	fire_only_once = yes
+	option = {
+		name = soxony.3a
+		define_heir = {
+			dynasty = ROOT
+			age = 37
+			adm = 5
+			dip = 6
+			mil = 3
+			claim = 50
+			male = yes
+			no_consort_with_heir = yes
+		}
+	}
+	option = {
+		name = soxony.3b
+		define_heir = {
+			dynasty = ROOT
+			age = 26
+			adm = 5
+			dip = 4
+			mil = 3
+			claim = 70
+			male = yes
+			no_consort_with_heir = yes
+		}
+	}
+	option = {
+		name = soxony.3c
+		inherit = SO4
+		define_heir = {
+			age = 33
+			name = "Carolus"
+			dynasty = "Capetingorum"
+			adm = 2
+			dip = 5
+			mil = 6
+			claim = 30
+			male = yes
+			no_consort_with_heir = yes
+		}
+		custom_tooltip = GAIN_GENERAL_CAROLUS
+		define_heir_to_general = {
+			fire = 5
+			shock = 3
+			manuever = 4
+			siege = 3
+		}
+	}
+}
+
+country_event = {
+	id = soxony.4
+	title = soxony.4.test
+	desc = soxony.4.desc
+	picture = GOOD_WITH_MONARCH_eventPicture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+
+	option = {
+		name = soxony.4a
+		set_capital = 118
+		118 = {
+			add_permanent_province_modifier = {
+				name = sox_west_rome_capital
+				duration = -1
+			}
+		}
+	}
+	option = {
+		name = soxony.4b
+		capital_scope = {
+			add_permanent_province_modifier = {
+				name = sox_west_rome_capital
+				duration = -1
+			}
+		}
+	}
+}
+country_event = {
+	id = soxony.5
+	title = soxony.5.test
+	desc = soxony.5.desc
+	picture = LIBERUM_VETO_eventPicture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+
+	option = {
+		name = soxony.5a
+		add_country_modifier = {
+			name = sox_vassal_play
+			duration = -1
+		}
+	}
+	option = {
+		name = soxony.5b
+		add_country_modifier = {
+			name = sox_empire_wide
+			duration = -1
+		}
+	}
+}
+
+country_event = {
+	id = soxony.6
+	title = soxony.6.test
+	desc = soxony.6.desc
+	picture = REFORM_eventPicture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+
+	option = {
+		name = soxony.6a
+		add_country_modifier = {
+			name = sox_vassal_play_s
+			duration = -1
+		}
+	}
+	option = {
+		name = soxony.6b
+		add_country_modifier = {
+			name = sox_empire_wide_s
+			duration = -1
+		}
+	}
+}
+
+country_event = {
+	id = soxony.7
+	title = soxony.7.test
+	desc = soxony.7.desc
+	picture = COMET_SIGHTED_eventPicture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+
+	option = {
+		name = soxony.7a
+		add_country_modifier = {
+			name = sox_vassal_play_t
+			duration = -1
+		}
+	}
+	option = {
+		name = soxony.7b
+		add_country_modifier = {
+			name = sox_empire_wide_t
+			duration = -1
+		}
+	}
+}

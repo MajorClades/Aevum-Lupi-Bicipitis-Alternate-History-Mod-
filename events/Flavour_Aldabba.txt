@@ -1,0 +1,149 @@
+namespace = aldab
+
+country_event = {
+	id = aldab.1
+	title = aldab.1.test
+	desc = aldab.1.desc
+	picture = ICONS_IN_CHURCH_eventPicture
+	
+	trigger = {
+		1748 = {
+			NOT = {
+				religion = jewish
+			}
+		}
+		336 = {
+			owned_by = ROOT
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	fire_only_once = yes
+	option = {
+		name = aldab.1a
+		336 = {
+			add_permanent_province_modifier = {
+				name = ald_jew_free
+				duration = -1
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = aldab.2
+				days = 3650
+			}
+		}
+	}
+	option = {
+		name = aldab.1b
+		336 = {
+			add_permanent_province_modifier = {
+				name = ald_jew_district
+				duration = -1
+			}
+		}
+	}
+}
+
+country_event = {
+	id = aldab.2
+	title = aldab.2.test
+	desc = aldab.2.desc
+	picture = ICONS_IN_CHURCH_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = aldab.2a
+		random_owned_province = {
+			limit = {
+				has_province_modifier = ald_jew_free
+			}
+			add_base_tax = 1
+			random_list = {
+				85 = {
+					add_base_tax = 1
+				}
+				15 = {
+					change_religion = jewish
+				}
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = aldab.3
+				days = 7300
+			}
+		}
+	}
+}
+
+country_event = {
+	id = aldab.3
+	title = aldab.3.test
+	desc = aldab.3.desc
+	picture = ICONS_IN_CHURCH_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = aldab.3a
+		random_owned_province = {
+			limit = {
+				has_province_modifier = ald_jew_free
+			}
+			add_permanent_province_modifier = {
+				name = ald_jew_capital
+				duration = -1
+			}
+			random_list = {
+				75 = {
+					add_base_tax = 1
+				}
+				25 = {
+					change_religion = jewish
+				}
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = aldab.4
+				days = 10950
+			}
+		}
+	}
+}
+
+country_event = {
+	id = aldab.4
+	title = aldab.4.test
+	desc = aldab.4.desc
+	picture = ICONS_IN_CHURCH_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = aldab.4a
+		random_owned_province = {
+			limit = {
+				has_province_modifier = ald_jew_capital
+			}
+			add_permanent_province_modifier = {
+				name = ald_jew_land
+				duration = -1
+			}
+			remove_province_modifier = ald_jew_free
+			remove_province_modifier = ald_jew_capital
+			random_list = {
+				65 = {
+					add_base_tax = 1
+				}
+				35 = {
+					change_religion = jewish
+				}
+			}
+		}
+		
+	}
+}

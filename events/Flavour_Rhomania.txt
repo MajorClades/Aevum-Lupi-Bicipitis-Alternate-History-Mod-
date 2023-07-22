@@ -1,0 +1,395 @@
+namespace = rhom
+
+country_event = {
+	id = rhom.1
+	title = rhom.1.test
+	desc = rhom.1.desc
+	picture = BYZ_BAD_WITH_MONARCH_eventPicture
+	
+	trigger = {
+		tag = RU0
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	fire_only_once = yes
+	option = {
+		name = rhom.1a
+		add_country_modifier = {
+			name = rho_army_bad
+			duration = -1
+		}
+	}
+}
+
+country_event = {
+	id = rhom.2
+	title = rhom.2.test
+	desc = rhom.2.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	is_triggered_only = yes
+	option = {
+		name = rhom.2a
+		remove_country_modifier = rho_army_bad
+	}
+}
+
+country_event = {
+	id = rhom.3
+	title = rhom.3.test
+	desc = rhom.3.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	trigger = {
+		tag = RU0
+		aleppo_area = {
+			type = all
+			owned_by = RU0
+		}
+		syria_area = {
+			type = all
+			owned_by = RU0
+		}
+		NOT = {
+			stability = -1
+		}
+		is_year = 1500
+	}
+	mean_time_to_happen = {
+		months = 12
+	}
+	fire_only_once = yes
+	option = {
+		name = rhom.3a
+		aleppo_area = {
+			add_core = PM0
+			cede_province = PM0
+		}
+		syria_area = {
+			add_core = PM0
+			cede_province = PM0
+		}
+		PM0 = {
+			country_event = {
+				id = rhom.4
+			}
+		}
+		hidden_effect = {
+			PM0 = {
+				add_legitimacy = -50
+				define_ruler = {
+					name = "Hakimos"
+					dynasty = "Palmyrene"
+					adm = 1
+					dip = 1
+					mil = 5
+					age = 47
+				}
+				define_ruler_to_general = {
+					fire = 5
+					shock = 4
+					manuever = 3
+					siege = 4
+				}
+			}
+			aleppo_area = {
+				infantry = PM0
+				infantry = PM0
+				infantry = PM0
+				infantry = PM0
+			}
+			syria_area = {
+				artillery = PM0
+			}
+		}
+	}
+	option = {
+		name = rhom.3b
+		
+		aleppo_area = {
+			add_core = PM0
+			cede_province = PM0
+		}
+		syria_area = {
+			add_core = PM0
+			cede_province = PM0
+		}
+		switch_tag = PM0
+		PM0 = {
+			country_event = {
+				id = rhom.4
+				days = 1
+			}
+		}
+		hidden_effect = {
+			mashriq_region = {
+				discover_country = PM0
+			}
+			anatolia_region = {
+				discover_country = PM0
+			}
+			PM0 = {
+				add_legitimacy = -50
+				define_ruler = {
+					name = "Hakimos"
+					dynasty = "Palmyrene"
+					adm = 1
+					dip = 1
+					mil = 5
+					age = 47
+				}
+				define_ruler_to_general = {
+					fire = 5
+					shock = 4
+					manuever = 3
+					siege = 4
+				}
+			}
+			aleppo_area = {
+				infantry = PM0
+				infantry = PM0
+				infantry = PM0
+				infantry = PM0
+			}
+			syria_area = {
+				artillery = PM0
+			}
+		}
+	}
+}
+
+country_event = {
+	id = rhom.4
+	title = rhom.4.test
+	desc = rhom.4.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	is_triggered_only = yes
+	option = {
+		name = rhom.4a
+		declare_war_with_cb = {
+			casus_belli = cb_imperial
+			who = RU0
+		}
+		add_treasury = 2000
+		add_manpower = 20
+		RU0 = {
+			random_owned_province = {
+				limit = {
+					is_core = SYR
+				}
+				infantry = PM0
+				infantry = PM0
+				infantry = PM0
+				infantry = PM0
+			}
+			random_owned_province = {
+				limit = {
+					is_core = SYR
+				}
+				cavalry = PM0
+				cavalry = PM0
+			}
+			random_owned_province = {
+				limit = {
+					is_core = SYR
+				}
+				cavalry = PM0
+				cavalry = PM0
+			}
+		}
+		hidden_effect = {
+			PM0 = {
+				every_owned_province = {
+					set_local_autonomy = 0
+				}
+			}
+			syrian_desert_area = {
+				add_permanent_claim = PM0
+			}
+			dulkadir_area = {
+				add_permanent_claim = PM0
+			}
+			cukurova_area = {
+				add_permanent_claim = PM0
+			}
+			palestine_area = {
+				add_permanent_claim = PM0
+			}
+			trans_jordan_area = {
+				add_permanent_claim = PM0
+			}
+		}
+	}
+}
+
+country_event = {
+	id = rhom.5
+	title = rhom.5.test
+	desc = rhom.5.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	trigger = {
+		tag = PM0
+		PM0 = {
+			NOT = {
+				general_with_name = "Hakimos"
+			}
+		}
+		war_with = RU0
+		NOT = {
+			has_won_war_against = {
+				who = RU0
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 2
+	}
+	fire_only_once = yes
+	option = {
+		name = rhom.5a
+		every_owned_province = {
+			cede_province = RU0
+		}
+	}
+}
+
+country_event = {
+	id = rhom.6
+	title = rhom.6.test
+	desc = rhom.6.desc
+	picture = ANGRY_MOB_eventPicture
+	hidden = yes
+	fire_only_once = yes
+	trigger = {
+		is_colonial_nation_of = RU0
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	fire_only_once = yes
+	option = {
+		name = rhom.5a
+		change_tag = RX0
+		RX0 = {
+			set_capital = 4022
+			change_primary_culture = austro_greek
+		}
+		4020 = {
+			remove_core = RU0
+			cede_province = RX0
+		}
+	}
+}
+
+country_event = {
+	id = rhom.100
+	title = rhom.100.test
+	desc = rhom.100.desc
+	picture = BYZ_BAD_WITH_MONARCH_eventPicture
+	
+	trigger = {
+		tag = RU0
+		RU0 = {
+			ai = yes
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	fire_only_once = yes
+	option = {
+		name = rhom.1a
+		add_country_modifier = {
+			name = rho_no_war
+			duration = 1000
+		}
+	}
+}
+
+country_event = {
+	id = rhom.1000
+	title = rhom.1000.test
+	desc = rhom.1000.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	trigger = {
+		tag = RU0
+		exists = CY0
+		CY0 = {
+			has_reform = pirate_republic_reform
+		}
+		NOT = {
+			truce_with = CY0
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	option = {
+		name = rhom.1000a
+		ai_chance = {
+			factor = 90
+		}
+		CY0 = {
+			country_event = {
+				id = rhom.1001
+			}
+		}
+	}
+	option = {
+		name = rhom.1000b
+		ai_chance = {
+			factor = 10
+		}
+		CY0 = {
+			every_owned_province = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+}
+country_event = {
+	id = rhom.1001
+	title = rhom.1001.test
+	desc = rhom.1001.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	is_triggered_only = yes
+	option = {
+		name = rhom.1001a
+		ai_chance = {
+			factor = 90
+		}
+		add_truce_with = RU0
+		add_treasury = -100
+		RU0 = {
+			add_treasury = 100
+			every_owned_province = {
+				limit = {
+					has_port = yes
+					devastation = 10
+					OR = {
+						continent = europe
+						region = egypt_region
+						region = mashriq_region
+					}
+				}
+				add_devastation = -25
+			}
+			
+		}
+	}
+	option = {
+		name = rhom.1001b
+		ai_chance = {
+			factor = 10
+		}
+		add_trust = {
+			who = RU0
+			value = -100
+		}
+	}
+}

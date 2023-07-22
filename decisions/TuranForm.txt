@@ -1,0 +1,68 @@
+country_decisions = {
+
+	turan_nation = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			was_never_end_game_tag_trigger = yes
+			NOT = { has_country_flag = formed_turan_flag }
+			OR = {
+				tag = GJ0
+				tag = GJ1
+				tag = GJ2
+				tag = GJ3
+				tag = GJ4
+				tag = GJ5
+				tag = AT0
+				tag = SV0
+				tag = SK0
+			}
+		}
+		allow = {
+			NOT = { exists = AT1 }
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			is_at_war = no
+			OR = {
+				AND = {
+					is_great_power = yes
+					NOT = {
+						tag = GJ0
+					}
+					NOT = {
+						tag = AT0
+					}
+				}
+				AND = {
+					tag = GJ0
+					AT0 = {
+						exists = no
+					}
+				}
+				AND = {
+					tag = AT0
+					GJ0 = {
+						exists = no
+					}
+				}
+			}
+		}
+		effect = {
+			change_tag = AT1
+			restore_country_name = yes
+			remove_non_electors_emperors_from_empire_effect = yes
+			set_government_rank = 3			
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			set_country_flag = formed_turan_flag
+			add_prestige = 25
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+
+}

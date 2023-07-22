@@ -1,0 +1,80 @@
+country_decisions = {
+
+	marnesia_petetion_dec = {
+		major = yes
+		potential = {
+			tag = IT1
+			NOT = {
+				has_country_flag = avi_imp_petetion
+			}
+			hre_size = 1
+			is_part_of_hre = no
+			is_incident_active = no
+		}
+		allow = {
+			is_incident_active = no
+			OR = {
+				any_core_province = {
+					NOT = {
+						owned_by = ROOT
+					}
+				}
+				emperor = {
+					has_opinion = {
+						who = ROOT
+						value = 100
+					}
+				}
+			}
+		}
+		effect = {
+			set_imperial_incident = incident_avignon_petetion
+			set_country_flag = avi_imp_petetion
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+
+	turkey_petetion_dec = {
+		major = yes
+		potential = {
+			tag = TR0
+			NOT = {
+				has_country_flag = tur_imp_petetion
+			}
+			is_part_of_hre = no
+			hre_size = 1
+			is_incident_active = no
+		}
+		allow = {
+			is_incident_active = no
+			OR = {
+				AND = {
+					is_threat = RU0
+					is_year = 1445
+				}
+				any_core_province = {
+					NOT = {
+						owned_by = ROOT
+					}
+				}
+				emperor = {
+					has_opinion = {
+						who = ROOT
+						value = 100
+					}
+				}
+			}
+		}
+		effect = {
+			set_imperial_incident = incident_turkey_petetion
+			set_country_flag = tur_imp_petetion
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+}

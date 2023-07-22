@@ -1,0 +1,843 @@
+namespace = gaj
+
+country_event = {
+	id = gaj.1
+	title = gaj.1.test
+	desc = gaj.1.desc
+	picture = CORRUPTION_eventPicture
+	
+	trigger = {
+		tag = GJ0
+		ZL8 = {
+			exists = yes
+			NOT = {
+				war_with = GJ0
+			}
+		}
+		33 = {
+			owned_by = GJ0
+			NOT = {
+				has_province_modifier = silesian_trade_pact_1
+			}
+			NOT = {
+				has_province_modifier = silesian_trade_pact_2
+			}
+			NOT = {
+				has_province_modifier = silesian_trade_pact_3
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	option = {
+		name = gaj.1a
+		ai_chance = {
+			factor = 50
+		}
+		add_truce_with = ZL8
+		33 = {
+			add_province_modifier = {
+				name = silesian_trade_pact_1
+				duration = 1825
+			}
+		}
+	}
+	option = {
+		name = gaj.1b
+		ai_chance = {
+			factor = 40
+		}
+		add_truce_with = ZL8
+		33 = {
+			add_province_modifier = {
+				name = silesian_trade_pact_2
+				duration = 1825
+			}
+		}
+	}
+	option = {
+		name = gaj.1c
+		ai_chance = {
+			factor = 10
+		}
+		33 = {
+			add_province_modifier = {
+				name = silesian_trade_pact_3
+				duration = -1
+			}
+		}
+		add_trust = {
+			who = ZL8
+			value = -50
+			mutual = yes
+		}
+	}
+}
+
+country_event = {
+	id = gaj.2
+	title = gaj.2.test
+	desc = gaj.2.desc
+	picture = COMET_SIGHTED_eventPicture
+	
+	trigger = {
+		tag = GJ0
+		ZL4 = {
+			is_subject = no
+			war_with = GJ0
+		}
+		is_in_war = {
+			defenders = ZL4
+			war_score = 25
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	fire_only_once = yes
+	option = {
+		name = gaj.2a
+		ai_chance = {
+			factor = 80
+		}
+		white_peace = ZL4
+		add_mil_power = 150
+		add_prestige = 25
+		add_manpower = 2
+	}
+	option = {
+		name = gaj.2b
+		ai_chance = {
+			factor = 20
+		}
+		laponia_area = {
+			add_province_modifier = {
+				name = red_snow
+				duration = 1825
+			}
+		}
+		norrland_area = {
+			add_province_modifier = {
+				name = red_snow
+				duration = 1825
+			}
+		}
+	}
+}
+
+country_event = {
+	id = gaj.3
+	title = gaj.3.test
+	desc = gaj.3.desc
+	picture = FORT_eventPicture
+	
+	trigger = {
+		owns = 306
+		mil_tech = 14
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	fire_only_once = yes
+	option = {
+		name = gaj.3a
+		306 = {
+			if = {
+				limit = {
+					OR = {
+						owned_by = AT0
+						owned_by = GJ0
+						owned_by = AT1
+					}
+				}
+				add_base_tax = 1
+				add_base_manpower = 2
+			}
+			add_province_modifier = {
+				name = unbroken_myth
+				duration = -1
+			}
+		}
+	}
+}
+
+country_event = {
+	id = gaj.4
+	title = gaj.4.test
+	desc = gaj.4.desc
+	picture = FEAST_eventPicture
+	
+	trigger = {
+		owns = 298
+		mil_tech = 17
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	fire_only_once = yes
+	option = {
+		name = gaj.4a
+		298 = {
+			if = {
+				limit = {
+					OR = {
+						owned_by = SV0
+						owned_by = GJ0
+						owned_by = AT1
+					}
+				}
+				add_base_tax = 1
+				add_base_manpower = 2
+			}
+			add_province_modifier = {
+				name = supply_run_1000
+				duration = -1
+			}
+		}
+	}
+}
+
+country_event = {
+	id = gaj.5
+	title = gaj.5.test
+	desc = gaj.5.desc
+	picture = FAMINE_eventPicture
+	
+	trigger = {
+		OR = {
+			tag = GJ0
+			tag = AT1
+		}
+		grown_by_development = 200
+
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	fire_only_once = yes
+	option = {
+		name = gaj.5a
+		add_manpower = -0.001
+		set_country_flag = time_of_fear
+	}
+}
+
+country_event = {
+	id = gaj.6
+	title = gaj.6.test
+	desc = gaj.6.desc
+	picture = FAMINE_eventPicture
+	
+	trigger = {
+		has_country_flag = time_of_fear
+	}
+	mean_time_to_happen = {
+		months = 2
+	}
+	fire_only_once = yes
+	option = {
+		name = gaj.6a
+		add_legitimacy = -20
+		random_owned_province = {
+			limit = {
+				culture = ROOT
+			}
+			spawn_rebels = {
+				size = 2
+				type = noble_rebels
+			}
+		}
+		random_owned_area = {
+			limit = {
+				culture = ROOT
+			}
+			add_unrest = 10
+		}
+		random_owned_area = {
+			limit = {
+				culture_group = ROOT
+			}
+			add_unrest = 10
+		}
+		hidden_effect = {
+			country_event = {
+				id = gaj.7
+				days = 60
+			}
+		}
+	}
+}
+country_event = {
+	id = gaj.7
+	title = gaj.7.test
+	desc = gaj.7.desc
+	picture = FAMINE_eventPicture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = gaj.7a
+		random_owned_province = {
+			limit = {
+				culture = ROOT
+			}
+			spawn_rebels = {
+				size = 2
+				type = noble_rebels
+			}
+		}
+		random_owned_area = {
+			limit = {
+				culture = ROOT
+			}
+			spawn_rebels = {
+				size = 1
+				type = leadered_peasant_rebels
+			}
+		}
+		random_owned_area = {
+			limit = {
+				culture_group = ROOT
+			}
+			spawn_rebels = {
+				size = 1
+				type = leadered_peasant_rebels
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = gaj.8
+				days = 90
+			}
+		}
+	}
+}
+country_event = {
+	id = gaj.8
+	title = gaj.8.test
+	desc = gaj.8.desc
+	picture = FAMINE_eventPicture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = gaj.8a
+		random_owned_province = {
+			limit = {
+				region = russia_region
+			}
+			spawn_rebels = {
+				size = 4
+				type = suleiman_rebels
+				leader = "Suleiman"
+				leader_dynasty = "Osmanoglu"
+			}
+		}
+		random_owned_area = {
+			limit = {
+				culture = ROOT
+			}
+			spawn_rebels = {
+				size = 1
+				type = leadered_peasant_rebels
+			}
+		}
+		random_owned_area = {
+			limit = {
+				culture = ROOT
+			}
+			spawn_rebels = {
+				size = 1
+				type = leadered_peasant_rebels
+			}
+		}
+		random_owned_area = {
+			limit = {
+				culture_group = ROOT
+			}
+			spawn_rebels = {
+				size = 1
+				type = leadered_peasant_rebels
+			}
+		}
+		clr_country_flag = time_of_fear
+	}
+}
+country_event = {
+	id = gaj.9
+	title = gaj.9.test
+	desc = gaj.9.desc
+	picture = TRADEGOODS_eventPicture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = gaj.9a
+		add_country_modifier = {
+			name = gj_work_1
+			duration = -1
+		}
+		country_event = {
+			id = gaj.10
+			days = 7
+		}
+	}
+	option = {
+		name = gaj.9b
+		add_country_modifier = {
+			name = gj_work_2
+			duration = -1
+		}
+		country_event = {
+			id = gaj.10
+			days = 7
+		}
+	}
+	option = {
+		name = gaj.9c
+		add_country_modifier = {
+			name = gj_work_3
+			duration = -1
+		}
+		country_event = {
+			id = gaj.10
+			days = 7
+		}
+	}
+}
+
+country_event = {
+	id = gaj.10
+	title = gaj.10.test
+	desc = gaj.10.desc
+	picture = PRAYING_eventPicture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = gaj.10a
+		add_country_modifier = {
+			name = gj_faith_1
+			duration = -1
+		}
+		country_event = {
+			id = gaj.11
+			days = 7
+		}
+	}
+	option = {
+		name = gaj.10b
+		add_country_modifier = {
+			name = gj_faith_2
+			duration = -1
+		}
+		country_event = {
+			id = gaj.11
+			days = 7
+		}
+	}
+	option = {
+		name = gaj.10c
+		add_country_modifier = {
+			name = gj_faith_3
+			duration = -1
+		}
+		country_event = {
+			id = gaj.11
+			days = 7
+		}
+	}
+}
+
+country_event = {
+	id = gaj.11
+	title = gaj.11.test
+	desc = gaj.11.desc
+	picture = FAMINE_eventPicture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = gaj.11a
+		add_country_modifier = {
+			name = gj_noble_1
+			duration = -1
+		}
+		country_event = {
+			id = gaj.12
+			days = 7
+		}
+	}
+	option = {
+		name = gaj.11b
+		add_country_modifier = {
+			name = gj_noble_2
+			duration = -1
+		}
+		country_event = {
+			id = gaj.12
+			days = 7
+		}
+	}
+	option = {
+		name = gaj.11c
+		add_country_modifier = {
+			name = gj_noble_3
+			duration = -1
+		}
+		country_event = {
+			id = gaj.12
+			days = 7
+		}
+	}
+}
+
+country_event = {
+	id = gaj.12
+	title = gaj.12.test
+	desc = gaj.12.desc
+	picture = CARAVAN_EVENT_Picture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = gaj.12a
+		if = {
+			limit = {
+				has_country_modifier = gj_work_1
+				has_country_modifier = gj_faith_1
+				has_country_modifier = gj_noble_1
+			}
+			remove_country_modifier = gj_work_1
+			remove_country_modifier = gj_faith_1
+			remove_country_modifier = gj_noble_1
+			add_country_modifier = {
+				name = gj_111
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				has_country_modifier = gj_work_1
+				has_country_modifier = gj_faith_1
+				has_country_modifier = gj_noble_2
+			}
+			remove_country_modifier = gj_work_1
+			remove_country_modifier = gj_faith_1
+			remove_country_modifier = gj_noble_2
+			add_country_modifier = {
+				name = gj_112
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				has_country_modifier = gj_work_1
+				has_country_modifier = gj_faith_1
+				has_country_modifier = gj_noble_3
+			}
+			remove_country_modifier = gj_work_1
+			remove_country_modifier = gj_faith_1
+			remove_country_modifier = gj_noble_3
+			add_country_modifier = {
+				name = gj_113
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				has_country_modifier = gj_work_1
+				has_country_modifier = gj_faith_2
+				has_country_modifier = gj_noble_1
+			}
+			remove_country_modifier = gj_work_1
+			remove_country_modifier = gj_faith_2
+			remove_country_modifier = gj_noble_1
+			add_country_modifier = {
+				name = gj_121
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				has_country_modifier = gj_work_1
+				has_country_modifier = gj_faith_2
+				has_country_modifier = gj_noble_2
+			}
+			remove_country_modifier = gj_work_1
+			remove_country_modifier = gj_faith_2
+			remove_country_modifier = gj_noble_2
+			add_country_modifier = {
+				name = gj_122
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				has_country_modifier = gj_work_1
+				has_country_modifier = gj_faith_2
+				has_country_modifier = gj_noble_3
+			}
+			remove_country_modifier = gj_work_1
+			remove_country_modifier = gj_faith_2
+			remove_country_modifier = gj_noble_3
+			add_country_modifier = {
+				name = gj_123
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				has_country_modifier = gj_work_2
+				has_country_modifier = gj_faith_1
+				has_country_modifier = gj_noble_1
+			}
+			remove_country_modifier = gj_work_2
+			remove_country_modifier = gj_faith_1
+			remove_country_modifier = gj_noble_1
+			add_country_modifier = {
+				name = gj_211
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				has_country_modifier = gj_work_2
+				has_country_modifier = gj_faith_1
+				has_country_modifier = gj_noble_2
+			}
+			remove_country_modifier = gj_work_2
+			remove_country_modifier = gj_faith_1
+			remove_country_modifier = gj_noble_2
+			add_country_modifier = {
+				name = gj_212
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				has_country_modifier = gj_work_2
+				has_country_modifier = gj_faith_1
+				has_country_modifier = gj_noble_3
+			}
+			remove_country_modifier = gj_work_2
+			remove_country_modifier = gj_faith_1
+			remove_country_modifier = gj_noble_3
+			add_country_modifier = {
+				name = gj_213
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				has_country_modifier = gj_work_2
+				has_country_modifier = gj_faith_2
+				has_country_modifier = gj_noble_1
+			}
+			remove_country_modifier = gj_work_2
+			remove_country_modifier = gj_faith_2
+			remove_country_modifier = gj_noble_1
+			add_country_modifier = {
+				name = gj_221
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				has_country_modifier = gj_work_2
+				has_country_modifier = gj_faith_2
+				has_country_modifier = gj_noble_2
+			}
+			remove_country_modifier = gj_work_2
+			remove_country_modifier = gj_faith_2
+			remove_country_modifier = gj_noble_2
+			add_country_modifier = {
+				name = gj_222
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				has_country_modifier = gj_work_2
+				has_country_modifier = gj_faith_2
+				has_country_modifier = gj_noble_3
+			}
+			remove_country_modifier = gj_work_2
+			remove_country_modifier = gj_faith_2
+			remove_country_modifier = gj_noble_3
+			add_country_modifier = {
+				name = gj_223
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				has_country_modifier = gj_work_3
+				has_country_modifier = gj_faith_1
+				has_country_modifier = gj_noble_1
+			}
+			remove_country_modifier = gj_work_3
+			remove_country_modifier = gj_faith_1
+			remove_country_modifier = gj_noble_1
+			add_country_modifier = {
+				name = gj_311
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				has_country_modifier = gj_work_3
+				has_country_modifier = gj_faith_1
+				has_country_modifier = gj_noble_2
+			}
+			remove_country_modifier = gj_work_3
+			remove_country_modifier = gj_faith_1
+			remove_country_modifier = gj_noble_2
+			add_country_modifier = {
+				name = gj_312
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				has_country_modifier = gj_work_3
+				has_country_modifier = gj_faith_1
+				has_country_modifier = gj_noble_3
+			}
+			remove_country_modifier = gj_work_3
+			remove_country_modifier = gj_faith_1
+			remove_country_modifier = gj_noble_3
+			add_country_modifier = {
+				name = gj_313
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				has_country_modifier = gj_work_3
+				has_country_modifier = gj_faith_2
+				has_country_modifier = gj_noble_1
+			}
+			remove_country_modifier = gj_work_3
+			remove_country_modifier = gj_faith_2
+			remove_country_modifier = gj_noble_1
+			add_country_modifier = {
+				name = gj_321
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				has_country_modifier = gj_work_3
+				has_country_modifier = gj_faith_2
+				has_country_modifier = gj_noble_2
+			}
+			remove_country_modifier = gj_work_3
+			remove_country_modifier = gj_faith_2
+			remove_country_modifier = gj_noble_2
+			add_country_modifier = {
+				name = gj_322
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				has_country_modifier = gj_work_3
+				has_country_modifier = gj_faith_2
+				has_country_modifier = gj_noble_3
+			}
+			remove_country_modifier = gj_work_3 
+			remove_country_modifier = gj_faith_2
+			remove_country_modifier = gj_noble_3
+			add_country_modifier = {
+				name = gj_323
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				has_country_modifier = gj_work_1
+				has_country_modifier = gj_faith_3
+				has_country_modifier = gj_noble_3
+			}
+			remove_country_modifier = gj_work_1
+			remove_country_modifier = gj_faith_3
+			remove_country_modifier = gj_noble_3
+			add_country_modifier = {
+				name = gj_133
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				has_country_modifier = gj_work_2
+				has_country_modifier = gj_faith_3
+				has_country_modifier = gj_noble_3
+			}
+			remove_country_modifier = gj_work_2
+			remove_country_modifier = gj_faith_3
+			remove_country_modifier = gj_noble_3
+			add_country_modifier = {
+				name = gj_233
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				has_country_modifier = gj_work_3
+				has_country_modifier = gj_faith_3
+				has_country_modifier = gj_noble_3
+			}
+			remove_country_modifier = gj_work_3 
+			remove_country_modifier = gj_faith_3
+			remove_country_modifier = gj_noble_3
+			add_country_modifier = {
+				name = gj_333
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				has_country_modifier = gj_work_1
+				has_country_modifier = gj_faith_3
+				has_country_modifier = gj_noble_2
+			}
+			remove_country_modifier = gj_work_1
+			remove_country_modifier = gj_faith_3
+			remove_country_modifier = gj_noble_2
+			add_country_modifier = {
+				name = gj_132
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				has_country_modifier = gj_work_2
+				has_country_modifier = gj_faith_3
+				has_country_modifier = gj_noble_2
+			}
+			remove_country_modifier = gj_work_2
+			remove_country_modifier = gj_faith_3
+			remove_country_modifier = gj_noble_2
+			add_country_modifier = {
+				name = gj_232
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				has_country_modifier = gj_work_3
+				has_country_modifier = gj_faith_3
+				has_country_modifier = gj_noble_2
+			}
+			remove_country_modifier = gj_work_3 
+			remove_country_modifier = gj_faith_3
+			remove_country_modifier = gj_noble_2
+			add_country_modifier = {
+				name = gj_332
+				duration = -1
+			}
+		}
+	}
+}

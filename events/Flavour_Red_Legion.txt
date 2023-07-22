@@ -1,0 +1,594 @@
+namespace = redleg
+
+country_event = {
+	id = redleg.1
+	title = redleg.1.test
+	desc = redleg.1.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = redleg.1a
+		add_country_modifier = {
+			name = redleg_prepare_for_crusade
+			duration = -1
+		}
+		if = {
+			limit = {
+				ai = yes
+				RU0 = {
+					ai = yes
+				}
+			}
+			add_country_modifier = {
+				name = redleg_ai_helpings
+				duration = 7300
+			}
+		}
+	}
+}
+
+country_event = {
+	id = redleg.2
+	title = redleg.2.test
+	desc = redleg.2.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = redleg.2a
+		379 = {
+			owner = {
+				AF6 = {
+					declare_war_with_cb = {
+						who = PREV
+						casus_belli = cb_world_crusade
+					}
+				}
+			}
+			add_permanent_claim = AF6
+		}
+		RU0 = {
+			country_event = {
+				id = redleg.7
+			}
+		}
+	}
+}
+
+
+country_event = {
+	id = redleg.4
+	title = redleg.4.test
+	desc = redleg.4.desc
+	picture = ANGRY_MOB_eventPicture
+	major = yes
+	fire_only_once = yes
+	trigger = {
+		tag = AF6
+		is_at_war = yes
+		has_country_modifier = redleg_prepare_for_crusade
+		358 = {
+			controlled_by = AF6
+		}
+		361 = {
+			controlled_by = AF6
+		}
+		OR = {
+			379 = {
+				controlled_by = AF6
+			}
+			AND = {
+				bahari_area = {
+					type = all
+					controlled_by = AF6
+				}
+				said_area = {
+					type = all
+					controlled_by = AF6
+				}
+			}
+		}
+	}
+
+	option = {
+		name = redleg.4a
+		ai_chance = { factor = 80 }
+		white_peace = RU0
+		RU0 = {
+			country_event = {
+				id = rhom.2
+			}
+		}
+		remove_country_modifier = redleg_prepare_for_crusade
+		set_capital = 358
+		364 = {
+			cede_province = ROOT
+		}
+		379 = {
+			cede_province = ROOT
+		}
+		egypt_region = {
+			limit = {
+				owned_by = RU0
+			}
+			cede_province = ROOT
+		}
+		hidden_effect = {
+			change_tag = AE0
+			379 = {
+				change_province_name = "Jerusalem"
+			}
+			swap_non_generic_missions = yes
+			AE0 = {
+				change_primary_culture = al_misr_arabic
+				add_accepted_culture = libyan
+			}
+			egypt_region = {
+				limit = {
+					is_core = RU0
+				}
+				remove_core = RU0
+				add_core = ROOT
+			}
+			horn_of_africa_region = {
+				limit = {
+					owned_by = RU0
+				}
+				if = {
+					limit = {
+						NBI = {
+							exists = yes
+						}
+					}
+					remove_core = RU0
+					cede_province = NBI
+				}
+				if = {
+					limit = {
+						MAK = {
+							exists = yes
+						}
+					}
+					remove_core = RU0
+					cede_province = MAK
+				}
+			}
+			if = {
+				limit = {
+					ai = yes
+				}
+				add_treasury = 1500
+				disband_all_regiments = yes
+			}
+		}
+	}
+	option = {
+		name = redleg.4b
+		ai_chance = { factor = 20 }
+		RU0 = {
+			country_event = {
+				id = rhom.2
+			}
+		}
+		remove_country_modifier = redleg_prepare_for_crusade
+		set_capital = 358
+		364 = {
+			cede_province = ROOT
+		}
+		379 = {
+			cede_province = ROOT
+		}
+		egypt_region = {
+			limit = {
+				owned_by = RU0
+			}
+			cede_province = ROOT
+		}
+
+		hidden_effect = {
+			379 = {
+				change_province_name = "Jerusalem"
+			}
+			if = {
+				limit = {
+					ai = yes
+				}
+				add_treasury = 1500
+			}
+			change_tag = AE0
+			swap_non_generic_missions = yes
+			AE0 = {
+				change_primary_culture = al_misr_arabic
+				add_accepted_culture = libyan
+			}
+			egypt_region = {
+				limit = {
+					is_core = RU0
+				}
+				remove_core = RU0
+				add_core = ROOT
+			}
+			horn_of_africa_region = {
+				limit = {
+					owned_by = RU0
+				}
+				if = {
+					limit = {
+						NBI = {
+							exists = yes
+						}
+					}
+					remove_core = RU0
+					cede_province = NBI
+				}
+				if = {
+					limit = {
+						MAK = {
+							exists = yes
+						}
+					}
+					remove_core = RU0
+					cede_province = MAK
+				}
+			}
+		}
+	}
+}
+country_event = {
+	id = redleg.5
+	title = redleg.5.test
+	desc = redleg.5.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	fire_only_once = yes
+	trigger = {
+		tag = RU0
+		war_with = AF6
+		AF6 = {
+			has_country_modifier = redleg_prepare_for_crusade
+			NOT = {
+				army_size_percentage = 0.1
+			}		
+		}
+	}
+
+	option = {
+		name = redleg.5a
+		ai_chance = { factor = 80 }
+		AF6 = {
+			remove_country_modifier = redleg_prepare_for_crusade
+		}	
+	}
+	option = {
+		name = redleg.5b
+		ai_chance = { factor = 20 }
+		white_peace = AF6
+		AF6 = {
+			remove_country_modifier = redleg_prepare_for_crusade
+		}
+	}
+}
+
+country_event = {
+	id = redleg.6
+	title = redleg.6.test
+	desc = redleg.6.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			tag = AF6
+			tag = AE0
+		}
+		is_at_war = no
+		358 = {
+			is_capital_of = AF6
+		}
+		num_of_owned_provinces_with = {
+			value = 10
+			region = egypt_region
+			religion = coptic
+		}
+	}
+	mean_time_to_happen = {
+		days = 15
+	}
+	option = {
+		name = redleg.6a
+		ai_chance = { factor = 90 }
+		add_government_reform = red_legions_reform 
+		set_government_rank = 2
+		hidden_effect = {
+			add_government_reform = red_legions_reform 
+		}
+		egypt_region = {
+			limit = {
+				owned_by = ROOT
+				religion = coptic
+			}
+			add_province_modifier = {
+				name = red_tolerance_egypt
+				duration = 7300
+			}
+		}
+	}
+	option = {
+		name = redleg.6b
+		ai_chance = { factor = 10 }
+		add_government_reform = red_legions_reform 
+		set_government_rank = 2
+		hidden_effect = {
+			add_government_reform = red_legions_reform 
+		}
+		egypt_region = {
+			limit = {
+				owned_by = ROOT
+			}
+			add_province_modifier = {
+				name = red_intolerance_egypt
+				duration = 7300
+			}
+		}
+	}
+}
+country_event = {
+	id = redleg.7
+	title = redleg.7.test
+	desc = redleg.7.desc
+	picture = ANGRY_MOB_eventPicture
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = redleg.7a
+	}
+}
+country_event = { #CHOOse Governemet
+	id = redleg.8
+	title = redleg.8.test
+	desc = redleg.8.desc
+	picture = ANGRY_MOB_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = redleg.8a
+		change_estate_land_share = {
+			estate = estate_church
+			share = -25
+		}
+		change_estate_land_share = {
+			estate = estate_nobles
+			share = 15
+		}
+		add_country_modifier = {
+			name = faithless_lead
+			duration = -1
+		}
+	}
+	option = {
+		name = redleg.8b
+		add_stability = -1
+	}
+}
+
+country_event = {
+	id = redleg.9
+	title = redleg.9.test
+	desc = redleg.9.desc
+	picture = ANGRY_MOB_eventPicture
+	fire_only_once = yes
+	trigger = {
+		PD0 = {
+			exists = yes
+		}
+		AE0 = {
+			owns = 363
+		}
+		tag = AE0
+	}
+	mean_time_to_happen = {
+		months = 12
+	}
+
+	option = {
+		name = redleg.9a
+		ai_chance = { factor = 80 }
+		add_treasury = 1000
+		363 = {
+			change_religion = coptic
+			cede_province = PD0
+		}
+		add_truce_with = PD0
+	}
+	option = {
+		name = redleg.9b
+		ai_chance = { factor = 20 }
+		add_stability_or_adm_power = yes
+	}
+}
+
+country_event = {
+	id = redleg.10
+	title = redleg.10.test
+	desc = redleg.10.desc
+	picture = ANGRY_MOB_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = redleg.9a
+		ai_chance = { factor = 80 }
+		358 = {
+			add_trade_modifier = {
+				who = ROOT
+				duration = 7300
+				power = 25
+				key = PADANIA_TRADE_EGYPT
+			}
+		}
+		363 = {
+			cede_province = AE0
+		}
+		add_truce_with = AE0
+	}
+	option = {
+		name = redleg.9b
+		ai_chance = { factor = 20 }
+		add_stability_or_adm_power = yes
+	}
+}
+country_event = { #second govermente
+	id = redleg.11
+	title = redleg.11.test
+	desc = redleg.11.desc
+	picture = ADVISOR_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = AE0
+		has_country_modifier = faithless_lead
+	}
+	mean_time_to_happen = {
+		days = 15
+	}
+	option = {
+		name = redleg.11a
+		hidden_effect = {
+			country_event = {
+				id = redleg.12
+				days = 35
+			}
+		}
+	}
+	option = {
+		name = redleg.11b
+		hidden_effect = {
+			country_event = {
+				id = redleg.13
+				days = 35
+			}
+		}
+	}
+}
+country_event = { 
+	id = redleg.12
+	title = redleg.12.test
+	desc = redleg.12.desc
+	picture = DEBATE_REPUBLICAN_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = redleg.12a
+		change_government_to_republic = yes
+		add_government_reform = oligarchy_reform
+		remove_country_modifier = faithless_lead
+	}
+	option = {
+		name = redleg.12b
+		change_government_to_republic = yes
+		add_government_reform = merchant_republic
+		remove_country_modifier = faithless_lead
+	}
+}
+country_event = {
+	id = redleg.13
+	title = redleg.13.test
+	desc = redleg.13.desc
+	picture = COURT_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = redleg.13a
+		change_government_to_monarchy = yes
+		add_government_reform = indictian_monarchy_reform
+		remove_country_modifier = faithless_lead
+	}
+	option = {
+		name = redleg.13b
+		change_government_to_monarchy = yes
+		add_government_reform = plutocratic_reform
+		remove_country_modifier = faithless_lead
+	}
+}
+country_event = {
+	id = redleg.100
+	title = redleg.100.test
+	desc = redleg.100.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			tag = AF6
+			tag = AE0
+		}
+		OR = {
+			AF6 = {
+				ai = yes
+			}
+			AE0 = {
+				ai = yes
+			}
+		}
+		is_at_war = no
+		is_year = 1450
+	}
+	hidden = yes
+	option = {
+		name = redleg.100a
+		remove_country_modifier = redleg_prepare_for_crusade
+	}
+	
+}
+country_event = { #lose 4th crusade
+	id = redleg.101
+	title = redleg.101.test
+	desc = redleg.101.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	fire_only_once = yes
+	trigger = {
+		tag = AE0
+		NOT = {
+			num_of_owned_provinces_with = {
+				value = 3
+			}
+		}
+	}
+	option = {
+		name = redleg.100a
+		remove_country_modifier = redleg_prepare_for_crusade
+	}
+	
+}
+
+country_event = { #lose 4th crusade
+	id = redleg.102
+	title = redleg.102.test
+	desc = redleg.102.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	fire_only_once = yes
+	hidden = yes
+	trigger = {
+		tag = AE0
+		AE0 = {
+			ai = yes
+		}
+		379 = {
+			owned_by = AE0
+		}
+	}
+	mean_time_to_happen = {
+		days = 33
+	}
+	option = {
+		name = redleg.100a
+		379 = {
+			add_building = fort_15th
+		}
+	}
+	
+}

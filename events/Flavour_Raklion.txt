@@ -1,0 +1,240 @@
+namespace = rakl
+
+country_event = {
+	id = rakl.1
+	title = rakl.1.test
+	desc = rakl.1.desc
+	picture = COLONIZATION_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = rakl.1a
+		ai_chance = {
+			factor = 50
+		}
+		add_treasury = -300
+		if = {
+			limit = {
+				4620 = {
+					is_empty = yes
+				}
+			}
+			4620 = {
+				cede_province = ROOT
+				change_culture = raklen
+				change_religion = catholic
+			}
+		}
+		if = {
+			limit = {
+				4620 = {
+					is_city = yes
+					owned_by = ROOT
+				}
+			}
+			4620 = {
+				add_base_production = 2
+				change_culture = raklen
+				change_religion = catholic
+			}
+		}
+		if = {
+			limit = {
+				4620 = {
+					is_city = yes
+					NOT = {
+						owned_by = ROOT
+					}
+				}
+			}
+			4620 = {
+				add_territorial_core = ROOT
+			}
+		}
+	}
+	option = {
+		name = rakl.1b
+		ai_chance = {
+			factor = 50
+		}
+		add_treasury = -500
+		if = {
+			limit = {
+				4620 = {
+					is_empty = yes
+				}
+			}
+			4620 = {
+				cede_province = ROOT
+				change_culture = raklen
+				change_religion = catholic
+			}
+		}
+		if = {
+			limit = {
+				4620 = {
+					is_city = yes
+					owned_by = ROOT
+				}
+			}
+			4620 = {
+				add_base_production = 2
+				change_culture = raklen
+				change_religion = catholic
+			}
+		}
+		if = {
+			limit = {
+				4620 = {
+					is_city = yes
+					NOT = {
+						owned_by = ROOT
+					}
+				}
+			}
+			4620 = {
+				add_territorial_core = ROOT
+			}
+		}
+		if = {
+			limit = {
+				492 = {
+					is_empty = yes
+				}
+			}
+			492 = {
+				cede_province = ROOT
+				change_culture = raklen
+				change_religion = catholic
+			}
+		}
+		if = {
+			limit = {
+				492 = {
+					is_city = yes
+					owned_by = ROOT
+				}
+			}
+			492 = {
+				add_base_production = 2
+				change_culture = raklen
+				change_religion = catholic
+			}
+		}
+		if = {
+			limit = {
+				492 = {
+					is_city = yes
+					NOT = {
+						owned_by = ROOT
+					}
+				}
+			}
+			492 = {
+				add_territorial_core = ROOT
+			}
+		}
+	}
+}
+
+country_event = {
+	id = rakl.2
+	title = rakl.2.test
+	desc = rakl.2.desc
+	picture = ANGRY_MOB_eventPicture
+	hidden = yes
+	fire_only_once = yes
+	trigger = {
+		RK0 = {
+			is_at_war = no
+			ai = yes
+			NOT = {
+				num_of_owned_provinces_with = {
+					value = 1
+					continent = europe
+				}
+			}
+			NOT = {
+				num_of_owned_provinces_with = {
+					value = 5
+					continent = africa
+				}
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	option = {
+		name = rakl.2a
+		trigger = {
+			SP0 = {
+				is_at_war = no
+				ai = yes
+				exists = yes
+			}
+		}
+		ai_chance = {
+			factor = 50
+		}
+		SP0 = {
+			inherit = RK0
+		}
+	}
+	option = {
+		name = rakl.2a
+		trigger = {
+			BT0 = {
+				is_at_war = no
+				ai = yes
+				exists = yes
+			}
+		}
+		ai_chance = {
+			factor = 10
+		}
+		BT0 = {
+			inherit = RK0
+		}
+	}
+	option = {
+		name = rakl.2a
+		trigger = {
+			BU0 = {
+				is_at_war = no
+				ai = yes
+				exists = yes
+			}
+		}
+		ai_chance = {
+			factor = 10
+		}
+		BU0 = {
+			inherit = RK0
+		}
+	}
+	option = {
+		name = rakl.2a
+		trigger = {
+			WE0 = {
+				is_at_war = no
+				ai = yes
+				exists = yes
+			}
+		}
+		ai_chance = {
+			factor = 10
+		}
+		WE0 = {
+			inherit = RK0
+		}
+	}
+	option = {
+		name = rakl.2a
+		ai_chance = {
+			factor = 10
+		}
+	}
+}

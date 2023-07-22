@@ -1,0 +1,753 @@
+Mauria_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = AF1 } 
+
+	1_south_mauria = {
+		icon = mission_moroccan_ports
+		position = 2
+		required_missions = { 2_mauria_stands } 
+		provinces_to_highlight = { area = southern_morocco_area } 
+
+		trigger = {
+			southern_morocco_area = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+		}
+
+		effect = {
+			2470 = {
+				random_list = {
+					50 = { change_culture = moroccan } 
+					50 = { owner = { add_dip_power = 50 }  } 
+				}
+			}
+			1110 = {
+				random_list = {
+					50 = { change_culture = moroccan } 
+					50 = { owner = { add_dip_power = 50 }  } 
+				}
+			}
+			347 = {
+				random_list = {
+					50 = { change_culture = moroccan } 
+					50 = { owner = { add_dip_power = 50 }  } 
+				}
+			}
+		}
+	}
+
+	1_tunis = {
+		icon = mission_conquer_tunisia
+		position = 5
+		required_missions = { 2_aldabba_gone } 
+		provinces_to_highlight = { area = tunisia_area } 
+
+		trigger = {
+			tunisia_area = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+		}
+
+		effect = {
+			add_adm_power = 100
+			italy_region = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	1_ahoy = {
+		icon = mission_colonize_the_west
+		position = 7
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			num_of_light_ship = 5
+			has_dip_advisor = yes
+		}
+
+		effect = {
+			define_explorer = {
+				shock = 2
+				fire = 1
+				manuever = 4
+			}
+		}
+	}
+
+	1_ahead = {
+		icon = explore_caribbean
+		position = 9
+		required_missions = { 2_ahoy } 
+		provinces_to_highlight = { province_id = 501 } 
+
+		trigger = {
+			A02 = { exists = yes } 
+			owns_or_subject_of = 501
+		}
+
+		effect = {
+			501 = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+			}
+		}
+	}
+}
+Mauria_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = AF1 } 
+
+	2_mauria_stands = {
+		icon = mission_reclaim_morocco
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = { army_size_percentage = 0.85 } 
+
+		effect = {
+			southern_morocco_area = { add_permanent_claim = ROOT } 
+			sus_area = { add_permanent_claim = ROOT } 
+			tafilalt_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	2_south_mauria = {
+		icon = alpine_defenses
+		position = 2
+		required_missions = { 2_mauria_stands } 
+		provinces_to_highlight = { area = sus_area } 
+
+		trigger = {
+			sus_area = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+		}
+
+		effect = { marrekesh_area = { add_base_manpower = 1 }  } 
+	}
+
+	2_unite_mauria = {
+		icon = mission_the_sultan_of_morocco
+		position = 3
+		required_missions = {
+			1_south_mauria
+			2_south_mauria
+			3_south_mauria
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = southern_morocco_area
+				area = tafilalt_area
+				area = sus_area
+			}
+		}
+
+		trigger = {
+			southern_morocco_area = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+			tafilalt_area = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+			sus_area = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+		}
+
+		effect = {
+			add_prestige = 25
+			hautes_plaines_area = { add_permanent_claim = ROOT } 
+			algiers_area = { add_permanent_claim = ROOT } 
+			barbary_coast_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	2_aldabba_gone = {
+		icon = mission_conquer_algiers
+		position = 4
+		required_missions = { 2_unite_mauria } 
+		provinces_to_highlight = {
+			OR = {
+				area = hautes_plaines_area
+				area = algiers_area
+				area = barbary_coast_area
+			}
+		}
+
+		trigger = {
+			hautes_plaines_area = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+			algiers_area = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+			barbary_coast_area = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "african_lords"
+				duration = 10950
+			}
+		}
+	}
+
+	2_africa_lord = {
+		icon = mission_west_african_ports
+		position = 5
+		required_missions = { 2_aldabba_gone } 
+		provinces_to_highlight = { is_capital_of = AF2 } 
+
+		trigger = {
+			AF2 = {
+				OR = {
+					exists = no
+					is_subject_of = ROOT
+				}
+			}
+		}
+
+		effect = {
+			add_mil_power = 100
+			maghreb_region = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	2_new_lords = {
+		icon = mission_construct_a_corsair_fleet
+		position = 6
+		required_missions = {
+			1_tunis
+			2_africa_lord
+			3_bipoli
+		}
+		provinces_to_highlight = { region = maghreb_region } 
+
+		trigger = {
+			maghreb_region = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "african_lords"
+				duration = -1
+			}
+		}
+	}
+
+	2_ahoy = {
+		icon = mission_caribbean_cn
+		position = 8
+		required_missions = { 1_ahoy } 
+		provinces_to_highlight = {
+			colonial_region = colonial_the_carribean
+			has_discovered = ROOT
+		}
+
+		trigger = {
+			years_of_income = 0.85
+			dip_power = 100
+			any_province = {
+				colonial_region = colonial_the_carribean
+				has_discovered = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "mauria_first_colonist"
+				duration = 7300
+			}
+		}
+	}
+
+	2_colonies = {
+		icon = mission_african_gold
+		position = 10
+		required_missions = { 2_ahoy } 
+		provinces_to_highlight = {
+			owner = {
+				is_subject_of = ROOT
+				capital_scope = {
+					OR = {
+						continent = north_america
+						continent = south_america
+					}
+				}
+			}
+		}
+
+		trigger = {
+			any_subject_country = {
+				num_of_owned_provinces_with = { value = 10 } 
+				capital_scope = {
+					OR = {
+						continent = north_america
+						continent = south_america
+					}
+				}
+			}
+		}
+
+		effect = {
+			add_dip_power = 100
+			add_years_of_income = 1.33
+			random_subject_country = {
+				limit = {
+					num_of_owned_provinces_with = { value = 10 } 
+					is_colonial_nation_of = ROOT
+				}
+				add_years_of_income = 2
+			}
+		}
+	}
+}
+Mauria_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = AF1 } 
+
+	3_south_mauria = {
+		icon = mission_conquer_air
+		position = 2
+		required_missions = { 2_mauria_stands } 
+		provinces_to_highlight = { area = tafilalt_area } 
+
+		trigger = {
+			tafilalt_area = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+		}
+
+		effect = { add_years_of_income = 2 } 
+	}
+
+	3_bipoli = {
+		icon = mission_conquer_alexandria
+		position = 5
+		required_missions = { 2_aldabba_gone } 
+		provinces_to_highlight = { area = tripolitania_area } 
+
+		trigger = {
+			tripolitania_area = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+		}
+
+		effect = {
+			add_dip_power = 100
+			egypt_region = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	3_ahead = {
+		icon = mission_colonise_brazil
+		position = 9
+		required_missions = {
+			2_ahoy
+			4_ahead
+		}
+		provinces_to_highlight = { province_id = 741 } 
+
+		trigger = {
+			A01 = { exists = yes } 
+			owns_or_subject_of = 741
+		}
+
+		effect = {
+			741 = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+			}
+		}
+	}
+
+	3_colonies = {
+		icon = colonize_brazil
+		position = 11
+		required_missions = {
+			4_colonies
+			2_colonies
+		}
+		provinces_to_highlight = { is_capital_of = A01 } 
+
+		trigger = {
+			owns_or_subject_of = 741
+			is_great_power = yes
+			741 = {
+				num_of_buildings_in_province = 4
+				development = 25
+			}
+		}
+
+		effect = {
+			741 = {
+				add_center_of_trade_level = 1
+				add_province_triggered_modifier = karibba_capital
+			}
+		}
+	}
+}
+Mauria_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = AF1 } 
+
+	4_marines = {
+		icon = mission_pirate_fleet
+		position = 4
+		required_missions = { 5_raklion } 
+		provinces_to_highlight = {
+			has_port = yes
+			owned_by = ROOT
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				OR = {
+					has_building = dock
+					has_building = drydock
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "maurian_marine"
+				duration = -1
+			}
+		}
+	}
+
+	4_ahoy = {
+		icon = mission_look_west
+		position = 7
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			OR = {
+				full_idea_group = exploration_ideas
+				full_idea_group = expansion_ideas
+				AND = {
+					adm_tech = 7
+					dip_power = 500
+				}
+			}
+		}
+
+		effect = {
+			if = {
+				limit = {
+					NOT = {
+						OR = {
+							full_idea_group = exploration_ideas
+							full_idea_group = expansion_ideas
+						}
+					}
+				}
+				add_dip_power = -500
+			}
+			add_country_modifier = {
+				name = "mauria_better_sea_maps"
+				duration = 10950
+			}
+		}
+	}
+
+	4_ahead = {
+		icon = mission_colonize_the_caribbean
+		position = 8
+		required_missions = { 4_ahoy } 
+		provinces_to_highlight = {
+			has_discovered = ROOT
+			OR = {
+				continent = north_america
+				continent = south_america
+			}
+		}
+
+		trigger = {
+			grown_by_development = 50
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 5
+				OR = {
+					continent = north_america
+					continent = south_america
+				}
+			}
+		}
+
+		effect = {
+			define_conquistador = {
+				shock = 5
+				fire = 4
+				manuever = 4
+				siege = 3
+			}
+		}
+	}
+
+	4_colonies = {
+		icon = mission_colonial
+		position = 10
+		required_missions = { 3_ahead } 
+		provinces_to_highlight = { is_capital_of = A01 } 
+
+		trigger = {
+			colonial_karibba = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+		}
+
+		effect = {
+			741 = {
+				add_permanent_province_modifier = {
+					name = "mauria_karibba_capital"
+					duration = -1
+				}
+			}
+		}
+	}
+}
+Mauria_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = AF1 } 
+
+	5_mauria_stands = {
+		icon = mission_corsairs_of_the_north_sea
+		position = 2
+		provinces_to_highlight = {  } 
+
+		trigger = { navy_size_percentage = 0.85 } 
+
+		effect = {
+			macaronesia_area = { add_permanent_claim = ROOT } 
+			northern_morocco_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	5_raklion = {
+		icon = mission_invade_island
+		position = 3
+		required_missions = { 5_mauria_stands } 
+		provinces_to_highlight = { area = northern_morocco_area } 
+
+		trigger = {
+			northern_morocco_area = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+		}
+
+		effect = {
+			add_prestige = 10
+			add_adm_power = 50
+			lower_andalucia_area = { add_permanent_claim = ROOT } 
+			upper_andalucia_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	5_atlatis = {
+		icon = hispaniae
+		position = 5
+		required_missions = { 5_raklion } 
+		provinces_to_highlight = {
+			OR = {
+				area = lower_andalucia_area
+				area = upper_andalucia_area
+			}
+		}
+
+		trigger = {
+			lower_andalucia_area = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+			upper_andalucia_area = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+		}
+
+		effect = {
+			1293 = { add_trade_node_income = 3 } 
+			alentejo_area = { add_permanent_claim = ROOT } 
+			extremadura_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	5_herkulia = {
+		icon = mission_plus_ultra
+		position = 5
+		required_missions = { 5_atlatis } 
+		provinces_to_highlight = { province_group = herkulia_region } 
+
+		trigger = {
+			NOT = { tag = AF0 } 
+			NOT = { tag = IB0 } 
+			herkulia_region = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "maurian_marine_strong"
+				duration = -1
+			}
+			if = {
+				limit = { has_custom_ideas = no } 
+				country_event = { id = ideagroups.1 } 
+			}
+			every_owned_province = {
+				limit = {
+					OR = {
+						culture = raklen
+						culture = moroccan
+						culture = bettian
+					}
+				}
+				change_culture = herkul_2
+			}
+			change_tag = HR0
+			change_primary_culture = herkul_2
+			hidden_effect = {
+				1751 = {
+					add_province_triggered_modifier = the_rock_ceuta_1
+					add_province_triggered_modifier = the_rock_ceuta_2
+					add_province_triggered_modifier = the_rock_ceuta_3
+				}
+				226 = {
+					add_province_triggered_modifier = the_toll_rock_1
+					add_province_triggered_modifier = the_toll_rock_2
+					add_province_triggered_modifier = the_toll_rock_3
+				}
+			}
+		}
+	}
+
+	5_golden_gods = {
+		icon = mission_zambezi_gold
+		position = 9
+		required_missions = { 4_ahead } 
+		provinces_to_highlight = {
+			OR = {
+				has_province_modifier = el_dorado_mod
+				has_province_modifier = sce_life_water
+				has_province_modifier = sce_cibola_silver
+			}
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 1
+				OR = {
+					has_province_modifier = el_dorado_mod
+					has_province_modifier = sce_life_water
+					has_province_modifier = sce_cibola_silver
+				}
+			}
+		}
+
+		effect = {
+			add_adm_power = 150
+			add_dip_power = 150
+			add_mil_power = 150
+			random_province = {
+				limit = {
+					OR = {
+						owned_by = ROOT
+						owned_by_subject_of = ROOT
+					}
+					OR = {
+						has_province_modifier = el_dorado_mod
+						has_province_modifier = sce_life_water
+						has_province_modifier = sce_cibola_silver
+					}
+				}
+				owner = { capital_scope = { add_base_manpower = 5 }  } 
+			}
+		}
+	}
+}

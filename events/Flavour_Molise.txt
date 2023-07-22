@@ -1,0 +1,135 @@
+namespace = molis
+
+country_event = {
+	id = molis.1
+	title = molis.1.test
+	desc = molis.1.desc
+	picture = TRADE_GOODS_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = molis.1a
+		ai_chance = {
+			factor = 80
+		}
+		if = {
+			limit = {
+				RAG = {
+					is_subject_of = ROOT
+				}
+			}
+			RAG = {
+				add_country_modifier = {
+					name = imperial_trade
+					duration = -1
+				}
+			}
+		}
+		if = {
+			limit = {
+				RAG = {
+					exists = no
+				}
+			}
+			137 = {
+				add_core = RAG
+				cede_province = RAG
+			}
+			vassalize = RAG
+			RAG = {
+				add_country_modifier = {
+					name = imperial_trade
+					duration = -1
+				}
+			}
+		}
+	}
+	option = {
+		name = molis.1b
+		ai_chance = {
+			factor = 20
+		}
+		add_treasury = 333
+		137 = {
+			add_base_production = 2
+		}
+	}
+}
+
+country_event = {
+	id = molis.2
+	title = molis.2.test
+	desc = molis.2.desc
+	picture = TRADE_GOODS_eventPicture
+	
+	hidden = yes
+	fire_only_once = yes
+
+	trigger = {
+		tag = MO0
+		is_emperor = yes
+		prestige = 5
+	}
+	mean_time_to_happen = {
+		days = 5
+	}
+	option = {
+		name = molis.2b
+		add_prestige = 33
+	}
+}
+
+country_event = {
+	id = molis.3
+	title = molis.3.test
+	desc = molis.3.desc
+	picture = TRADE_GOODS_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = molis.3a
+		emperor = {
+			add_imperial_influence = 10
+		}
+		IT1 = {
+			add_stability = 1
+			set_in_empire = yes
+		}
+	}
+	option = {
+		name = molis.3b
+		provence_area = {
+			add_permanent_claim = TU0
+		}
+	}
+}
+country_event = {
+	id = molis.4
+	title = molis.4.test
+	desc = molis.4.desc
+	picture = TRADE_GOODS_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = molis.4a
+		emperor = {
+			add_imperial_influence = 10
+		}
+		TR0 = {
+			add_stability = 1
+			set_in_empire = yes
+		}
+	}
+	option = {
+		name = molis.4b
+		albania_area = {
+			add_permanent_claim = PD1
+		}
+		northern_greece_area = {
+			add_permanent_claim = SA9
+		}
+	}
+}

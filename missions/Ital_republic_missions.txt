@@ -1,0 +1,586 @@
+Ital_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = IT0 } 
+
+	1_italian_quality = {
+		icon = mission_rule_italy
+		position = 2
+		required_missions = { 3_fatta_italia_2 }
+		provinces_to_highlight = { region = italy_region } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 15
+				region = italy_region
+				development = 20
+			}
+		}
+
+		effect = {
+			add_adm_power = 200
+			add_country_modifier = {
+				name = more_trading_ita
+				duration = 10950
+			}
+		}
+	}
+	1_italian_goods = {
+		icon = mission_rule_italy
+		position = 4
+		required_missions = { 1_italian_quality }
+		provinces_to_highlight = { region = italy_region } 
+
+		trigger = {
+			italy_region = {
+				type = all
+				owned_by = ROOT
+			}
+			num_of_owned_provinces_with = {
+				value = 20
+				region = italy_region
+				has_manufactory_trigger = yes
+			}
+		}
+
+		effect = {
+			add_years_of_income = 4
+		}
+	}
+	1_money_too = {
+		icon = mission_rule_italy
+		position = 6
+		required_missions = { 1_italian_goods }
+		provinces_to_highlight = { owned_by = ROOT
+			NOT = {
+				region = italy_region
+			}
+		} 
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 20
+				NOT = {
+					region = italy_region
+				}
+				development = 20
+				has_manufactory_trigger = yes
+			}
+		}
+
+		effect = {
+			italy_region = {
+				add_province_modifier = {
+					name = hegemoncoins
+					duration = 36500
+				}
+			}
+		}
+	}
+}
+Ital_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = IT0 } 
+
+
+	2_italian_quality = {
+		icon = mission_rule_italy
+		position = 3
+		required_missions = { 1_italian_quality 3_italian_senate}
+		provinces_to_highlight = { owned_by = ROOT } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 50
+				region = italy_region
+				has_trade_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_dip_power = 200
+			add_country_modifier = {
+				name = even_more_trade
+				duration = 10950
+			}
+		}
+	}
+	2_italian_goods = {
+		icon = mission_rule_italy
+		position = 5
+		required_missions = { 2_italian_quality}
+		provinces_to_highlight = { province_id = 1298 } 
+		trigger = {
+			treasury = 1000
+			1298 = {
+				highest_value_trade_node = yes
+			}
+		}
+
+		effect = {
+			add_treasury = -1000
+			trade_company_genua = {
+				limit = {
+					owned_by = ROOT
+				}
+				add_base_production = 1
+			}
+			trade_company_venice = {
+				limit = {
+					owned_by = ROOT
+				}
+				add_base_production = 1
+			}
+		}
+	}
+	2_money_too = {
+		icon = mission_rule_italy
+		position = 7
+		required_missions = { 1_money_too 2_italian_goods}
+
+		trigger = {
+			treasury = 5000
+		}
+
+		effect = {
+			add_treasury = -5000
+			custom_tooltip = TWO_DEV_ABILITY
+		}
+	}
+	# 2_italian_claims = {
+	# 	icon = mission_rule_italy
+	# 	position = 3
+	# 	required_missions = { 3_italian_senate }
+	# 	provinces_to_highlight = {
+	# 		OR = {
+	# 			area = provence_area
+	# 			area = piedmont_area
+	# 		}
+	# 	}
+	# 	trigger = {
+	# 		provence_area = {
+	# 			type = all
+	# 			OR = {
+	# 				owned_by = ROOT
+	# 				owned_by_subject_of = ROOT
+	# 			}
+	# 		}
+	# 		piedmont_area = {
+	# 			type = all
+	# 			OR = {
+	# 				owned_by = ROOT
+	# 				owned_by_subject_of = ROOT
+	# 			}
+	# 		}
+	# 	}
+
+	# 	effect = {
+	# 		france_region = {
+	# 			add_permanent_claim = ROOT
+	# 		}
+	# 	}
+	# }
+}
+Ital_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = IT0 } 
+
+	3_fatta_italia_2 = {
+		icon = mission_rule_italy
+		position = 1
+		required_missions = {
+			1_empire_republic
+			3_padania_houses
+			5_padania_doge_army
+		}
+		provinces_to_highlight = { region = italy_region } 
+
+		trigger = {
+			mission_completed = 4_golden_winds
+			num_of_owned_provinces_with = {
+				value = 60
+				region = italy_region
+			}
+		}
+
+		effect = {
+			change_tag = IT0
+			if = {
+				limit = { has_custom_ideas = no } 
+				country_event = { id = ideagroups.1 } 
+			}
+			add_government_reform = italian_merchants_reform
+			swap_non_generic_missions = yes
+			set_country_flag = formed_italy_flag
+		}
+	}
+	3_italian_senate = {
+		icon = mission_rule_italy
+		position = 2
+		required_missions = { 3_fatta_italia_2 }
+		provinces_to_highlight = { owned_by = ROOT NOT = {has_seat_in_parliament = yes}} 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				custom_trigger_tooltip = {
+					tooltip = SEAT_IN_SENATE
+					has_seat_in_parliament = yes
+				}
+				development = 20
+			}
+		}
+
+		effect = {
+			country_event = {
+				id = padan.8
+			}
+			custom_tooltip = SEAT_POWER_1
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						has_seat_in_parliament = yes
+					}
+					add_province_modifier = {
+						name = seat_of_power
+						duration = 10950
+					}
+				}
+			}
+		}
+	}
+	3_senate_palaces = {
+		icon = mission_rule_italy
+		position = 4
+		required_missions = {2_italian_quality 4_italian_quality  }
+		provinces_to_highlight = { owned_by = ROOT has_seat_in_parliament = yes} 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				custom_trigger_tooltip = {
+					tooltip = SEAT_IN_SENATE
+					has_seat_in_parliament = yes
+				}
+				development = 30
+				num_of_buildings_in_province = 5
+			}
+		}
+
+		effect = {
+			custom_tooltip = SEAT_POWER_2
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						has_seat_in_parliament = yes
+					}
+					add_province_modifier = {
+						name = seat_of_power
+						duration = -1
+					}
+				}
+			}
+		}
+	}
+	3_senate_expanded = {
+		icon = mission_rule_italy
+		position = 5
+		required_missions = {3_senate_palaces }
+		provinces_to_highlight = { owned_by = ROOT has_seat_in_parliament = yes} 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 30
+				custom_trigger_tooltip = {
+					tooltip = SEAT_IN_SENATE
+					has_seat_in_parliament = yes
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = low_unrest
+				duration = 10950
+			}
+			add_country_modifier = {
+				name = expanded_senate
+				duration = -1
+			}
+		}
+	}
+	3_consulate = {
+		icon = mission_rule_italy
+		position = 6
+		required_missions = {3_senate_expanded }
+		provinces_to_highlight = { owned_by = ROOT has_seat_in_parliament = yes} 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				custom_trigger_tooltip = {
+					tooltip = SEAT_IN_SENATE
+					has_seat_in_parliament = yes
+				}
+				num_of_buildings_in_province = 5
+				has_building = university
+			}
+		}
+
+		effect = {
+			add_corruption = -10
+			add_country_modifier = {
+				name = consular_helps
+				duration = -1
+			}
+		}
+	}
+	3_republica_aeterna = {
+		icon = mission_rule_italy
+		position = 8
+		required_missions = {3_consulate } 
+		provinces_to_highlight = { province_id = 118} 
+
+		trigger = {
+			total_development = 2000
+			is_hegemon = yes
+			NOT = {
+				great_power_rank = 2
+			}
+		}
+
+		effect = {
+			country_event = {
+				id = padan.9
+			}
+		}
+	}
+}
+Ital_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = IT0 } 
+
+	4_italian_quality = {
+		icon = mission_rule_italy
+		position = 3
+		required_missions = { 5_italian_armies 3_italian_senate}
+		provinces_to_highlight = { region = italy_region } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 50
+				region = italy_region
+				has_manpower_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_mil_power = 200
+			add_country_modifier = {
+				name = land_worth_fighting
+				duration = 10950
+			}
+		}
+	}
+	4_legions_of_italy = {
+		icon = mission_rule_italy
+		position = 5
+		required_missions = { 4_italian_quality }
+		provinces_to_highlight = { province_id = 118} 
+
+		trigger = {
+			mil_power = 200
+			owns = 118
+			118 = {
+				development = 30
+				infantry_in_province = 30
+			}
+		}
+
+		effect = {
+			add_mil_power = -200
+			118 = {
+				kill_units = {
+					who = ROOT
+					type = infantry
+					amount = 30
+				}
+				add_province_modifier = {
+					name = italy_legions
+					duration = -1
+				}
+			}
+		}
+	}
+	5_cannons = {
+		icon = mission_rule_italy
+		position = 7
+		required_missions = {4_legions_of_italy 5_legions_of_italy }
+		provinces_to_highlight = { province_id = 2986 } 
+
+		trigger = {
+			mil_power = 200
+			owns = 2986
+			2986 = {
+				development = 30
+				artillery_in_province = 30
+			}
+		}
+
+		effect = {
+			add_mil_power = -200
+			2986 = {
+				kill_units = {
+					who = ROOT
+					type = artillery
+					amount = 20
+				}
+				add_province_modifier = {
+					name = italy_artillery
+					duration = -1
+				}
+			}
+		}
+	}
+	# 4_italian_claims = {
+	# 	icon = mission_rule_italy
+	# 	position = 3
+	# 	required_missions = { 3_italian_senate }
+	# 	provinces_to_highlight = {
+	# 		OR = {
+	# 			area = east_adriatic_coast_area
+	# 			area = croatia_area
+	# 		}
+	# 	}
+	# 	trigger = {
+	# 		east_adriatic_coast_area = {
+	# 			type = all
+	# 			OR = {
+	# 				owned_by = ROOT
+	# 				owned_by_subject_of = ROOT
+	# 			}
+	# 		}
+	# 		croatia_area = {
+	# 			type = all
+	# 			OR = {
+	# 				owned_by = ROOT
+	# 				owned_by_subject_of = ROOT
+	# 			}
+	# 		}
+	# 	}
+
+	# 	effect = {
+	# 		balkan_region = {
+	# 			add_permanent_claim = ROOT
+	# 		}
+	# 	}
+	# }
+}
+Ital_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = IT0 } 
+
+	5_italian_armies = {
+		icon = mission_rule_italy
+		position = 2
+		required_missions = { 3_fatta_italia_2 }
+
+		trigger = {
+			army_size = 80
+			has_mil_advisor_3 = yes
+		}
+
+		effect = {
+			if = {
+				limit = {
+					has_country_modifier = merc_focus_pad
+				}
+				remove_country_modifier = merc_focus_pad
+				add_country_modifier = {
+					name = merc_focus_ita
+					duration = -1
+				}
+			}
+			if = {
+				limit = {
+					has_country_modifier = army_focus_pad
+				}
+				remove_country_modifier = army_focus_pad
+				add_country_modifier = {
+					name = army_focus_ita
+					duration = -1
+				}
+			}
+		}
+	}
+	5_special_forces = {
+		icon = mission_rule_italy
+		position = 4
+		required_missions = { 5_italian_armies }
+		provinces_to_highlight = {region = italy_region } 
+
+		trigger = {
+			italy_region = {
+				type = all
+				owned_by = ROOT
+			}
+			num_of_owned_provinces_with = {
+				value = 20
+				region = italy_region
+				base_manpower = 8
+			}
+		}
+
+		effect = {
+			italy_region = {
+				add_province_modifier = {
+					name = defendhome
+					duration = -1
+				}
+			}
+		}
+	}
+	5_legions_of_italy = {
+		icon = mission_rule_italy
+		position = 6
+		required_missions = { 5_special_forces }
+		provinces_to_highlight = { province_id = 113 } 
+
+		trigger = {
+			mil_power = 200
+			owns = 113
+			113 = {
+				development = 30
+				cavalry_in_province = 30
+			}
+		}
+
+		effect = {
+			add_mil_power = -200
+			113 = {
+				kill_units = {
+					who = ROOT
+					type = cavalry
+					amount = 30
+				}
+				add_province_modifier = {
+					name = italy_equestria
+					duration = -1
+				}
+			}
+		}
+	}
+}

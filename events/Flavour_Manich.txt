@@ -1,0 +1,187 @@
+namespace = manichs
+
+country_event = {
+	id = manichs.1
+	title = manichs.1.test
+	desc = manichs.1.desc
+	picture = ICONS_IN_CHURCH_eventPicture
+	
+	trigger = {
+		NOT = { has_ruler_flag = had_manich_choice }
+		religion = manich
+		OR = {
+			AND = {
+				OR = {
+					secondary_religion = catholic 
+					secondary_religion = orthodox
+					secondary_religion = hussite  
+					secondary_religion = protestant 
+					secondary_religion = reformed
+					secondary_religion = goth_christ
+					secondary_religion = impotian
+					secondary_religion = indictian
+				}
+				NOT = { has_personal_deity = teachingofjesus }
+			}
+			AND = {
+				OR = {
+					secondary_religion = sunni
+					secondary_religion = shiite
+					secondary_religion = ibadi  
+				}
+				NOT = { has_personal_deity = teachingofmuhammad }
+			}
+			AND = {
+				OR = {
+					secondary_religion = vajrayana 
+					secondary_religion = mahayana
+					secondary_religion = theravada
+				}
+				NOT = { has_personal_deity = teachingofbuddha }
+			}
+			AND = {
+				secondary_religion = jewish 
+				NOT = { has_personal_deity = teachingofmoses }
+			}
+			AND = {
+				secondary_religion = zoroastrian 
+				NOT = { has_personal_deity = teachingofzoroaster }
+			}
+			AND = {
+				NOT = {
+					secondary_religion = zoroastrian
+					secondary_religion = jewish
+					secondary_religion = vajrayana 
+					secondary_religion = mahayana
+					secondary_religion = theravada
+					secondary_religion = catholic 
+					secondary_religion = orthodox
+					secondary_religion = hussite  
+					secondary_religion = protestant 
+					secondary_religion = reformed
+					secondary_religion = goth_christ
+					secondary_religion = impotian
+					secondary_religion = indictian
+					secondary_religion = ibadi
+					secondary_religion = shiite
+					secondary_religion = sunni
+					has_secondary_religion = yes
+				}
+				NOT = { has_personal_deity = teachingoflocalgods }
+			}
+			AND = {
+				NOT = { has_secondary_religion = yes }
+				NOT = { has_personal_deity = teachingofmani }
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	option = {
+		name = manichs.1a
+		trigger = {
+			has_secondary_religion = no
+		}
+		change_personal_deity = teachingofmani
+		set_ruler_flag = had_manich_choice
+		
+	}
+	option = {
+		name = manichs.1b
+		trigger = {
+			OR = { 
+				secondary_religion = ibadi
+				secondary_religion = shiite
+				secondary_religion = sunni
+			}
+		}
+		change_personal_deity = teachingofmuhammad
+
+		set_ruler_flag = had_manich_choice
+	}
+	option = {
+		name = manichs.1c
+		trigger = {
+			OR = { 
+				secondary_religion = catholic 
+				secondary_religion = orthodox
+				secondary_religion = hussite  
+				secondary_religion = protestant 
+				secondary_religion = reformed
+				secondary_religion = goth_christ
+				secondary_religion = impotian
+				secondary_religion = indictian
+			}
+		}
+		change_personal_deity = teachingofjesus
+		set_ruler_flag = had_manich_choice
+		
+	}
+	option = {
+		name = manichs.1d
+		trigger = {
+			OR = { 
+				secondary_religion = vajrayana 
+				secondary_religion = mahayana
+				secondary_religion = theravada
+			}
+		}
+		change_personal_deity = teachingofbuddha
+		set_ruler_flag = had_manich_choice
+		
+	}
+	option = {
+		name = manichs.1e
+		trigger = {
+			secondary_religion = jewish
+		}
+		change_personal_deity = teachingofmoses
+
+		set_ruler_flag = had_manich_choice
+	}
+	option = {
+		name = manichs.1f
+		trigger = {
+			secondary_religion = zoroastrian
+		}
+		change_personal_deity = teachingofzoroaster
+
+		set_ruler_flag = had_manich_choice
+	}
+	option = {
+		name = manichs.1g
+		trigger = {
+			NOT = {
+				secondary_religion = zoroastrian
+				secondary_religion = jewish
+				secondary_religion = vajrayana 
+				secondary_religion = mahayana
+				secondary_religion = theravada
+				secondary_religion = catholic 
+				secondary_religion = orthodox
+				secondary_religion = hussite  
+				secondary_religion = protestant 
+				secondary_religion = reformed
+				secondary_religion = goth_christ
+				secondary_religion = impotian
+				secondary_religion = indictian
+				secondary_religion = ibadi
+				secondary_religion = shiite
+				secondary_religion = sunni
+				}
+			has_secondary_religion = yes
+			}
+		change_personal_deity = teachingoflocalgods
+
+		set_ruler_flag = had_manich_choice
+	}
+	option = {
+		name = manichs.1h
+		add_prestige = 1
+		ai_chance = { 
+			factor = 0
+		}
+		set_ruler_flag = had_manich_choice
+	}
+}
