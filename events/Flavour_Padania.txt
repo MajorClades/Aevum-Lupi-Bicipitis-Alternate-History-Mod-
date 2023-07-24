@@ -383,12 +383,17 @@ country_event = {
 		ai_chance = {
 			factor = 1
 		}
+		change_primary_culture = roman
+		italy_region = {
+			change_culture = roman
+		}
 		custom_tooltip = LAST_POWERUP_1
 		hidden_effect = {
 			every_owned_province = {
 				add_base_tax = 1
 				add_base_production = 1
 				add_base_manpower = 1
+				change_culture = roman
 			}
 		}
 	}
@@ -396,6 +401,10 @@ country_event = {
 		name = padan.9b
 		ai_chance = {
 			factor = 1
+		}
+		change_primary_culture = roman
+		italy_region = {
+			change_culture = roman
 		}
 		custom_tooltip = LAST_POWERUP_2
 			hidden_effect = {
@@ -406,6 +415,7 @@ country_event = {
 					add_base_tax = 5
 					add_base_production = 5
 					add_base_manpower = 5
+					change_culture = roman
 				}
 			}
 	}
@@ -414,10 +424,43 @@ country_event = {
 		ai_chance = {
 			factor = 1
 		}
+		change_primary_culture = roman
+		italy_region = {
+			change_culture = roman
+		}
 		add_country_modifier = {
 			name = roman_republic_reborn
 			duration = -1
 		}
+	}
+}
+
+country_event = {
+	id = padan.10
+	title = padan.10.test
+	desc = padan.10.desc
+	picture = ANGRY_MOB_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = padan.10a
+		ai_chance = { factor = 80 }
+		add_treasury = -300
+		363 = {
+			change_religion = coptic
+			cede_province = PD0
+			add_core = PD0
+		}
+		AE0 = {
+			add_treasury = 600
+		}
+		add_truce_with = AE0
+	}
+	option = {
+		name = padan.10b
+		ai_chance = { factor = 20 }
+		add_stability_or_adm_power = yes
 	}
 }
 country_event = {
@@ -464,26 +507,3 @@ country_event = {
 
 }
 
-country_event = {
-	id = padan.844
-	title = padan.844.t
-	desc = padan.844.d
-	picture = GOOD_WITH_MONARCH_eventPicture
-	
-	is_triggered_only = yes
-	
-	option = { 
-		name = padan.8a
-		ai_chance = {
-			factor = 1
-		}
-		italy_region = {
-			cede_province = ROOT
-		}
-		complete_mission = 1_empire_republic
-		complete_mission = 3_padania_houses
-		complete_mission = 5_padania_doge_army
-		complete_mission = 4_golden_winds
-	}
-
-}
