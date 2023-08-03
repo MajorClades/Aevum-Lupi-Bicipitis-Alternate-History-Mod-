@@ -8,6 +8,7 @@ country_decisions = {
 			NOT = { has_country_flag = formed_africa_flag }
 			NOT = { tag = AE0}
 			NOT = { tag = HR0}
+			NOT = { tag = CR0}
 			NOT = { tag = IB0}
 			OR = {
 				ai = no
@@ -91,5 +92,67 @@ country_decisions = {
 		}
 		ai_importance = 400
 	}
-
+	revive_elephants_nation = {
+		
+		potential = {
+			NOT = {
+				is_year = 1500
+			}
+			NOT = {
+				has_global_flag = revived_elephant
+			}
+			OR = {
+				culture_group = maghrebi
+				government_rank = 3	
+			}
+			OR = {
+				owns = 4568
+				owns = 336
+				owns = 4566
+			}
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 4568
+				province_id = 336
+				province_id = 4566
+			}
+		}
+		allow = {
+			NOT = {
+				is_year = 1500
+			}
+			treasury = 500
+			has_adm_advisor_3 = yes
+			owns = 4568
+			owns = 336
+			owns = 4566
+		}
+		effect = {
+			add_treasury = -500
+			336 = {
+				add_permanent_province_modifier = {
+					name = hannibal_elephant
+					duration = -1
+				}
+			}
+			4566 = {
+				add_permanent_province_modifier = {
+					name = hannibal_elephant
+					duration = -1
+				}
+			}
+			4568 = {
+				add_permanent_province_modifier = {
+					name = hannibal_elephant
+					duration = -1
+				}
+			}
+			set_global_flag = revived_elephant
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
 }

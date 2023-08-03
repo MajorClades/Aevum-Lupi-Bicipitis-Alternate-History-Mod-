@@ -1,0 +1,203 @@
+namespace = carto
+
+country_event = {
+	id = carto.1
+	title = carto.1.test
+	desc = carto.1.desc
+	picture = GREAT_FIRE_eventPicture
+	
+	trigger = {
+		is_year = 1445
+		owns = 341
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	option = {
+		name = carto.1a
+		ai_chance = {
+			factor = 34
+		}
+		341 = {
+			add_devastation = 15
+		}
+		random_owned_province = {
+			limit = {
+				religion = indictian
+			}
+			add_unrest = 10
+		}
+		country_event = {
+			id = carto.2
+			days = 30
+		}
+	}
+	option = {
+		name = carto.1b
+		ai_chance = {
+			factor = 33
+		}
+		341 = {
+			add_devastation = 15
+		}
+		add_estate_influence_modifier = {
+			estate = estate_nobles
+			influence = 10
+			duration = 356
+		}
+		country_event = {
+			id = carto.2
+			days = 30
+		}
+	}
+	option = {
+		name = carto.1c
+		ai_chance = {
+			factor = 33
+		}
+		341 = {
+			add_devastation = 15
+		}
+		add_treasury = -30
+		country_event = {
+			id = carto.2
+			days = 30
+		}
+	}
+}
+country_event = {
+	id = carto.2
+	title = carto.2.test
+	desc = carto.2.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = carto.2a
+		ai_chance = {
+			factor = 50
+		}
+		every_owned_province = {
+			limit = {
+				religion = indictian
+			}
+			add_unrest = 10
+		}
+		every_owned_province = {
+			limit = {
+				NOT = {
+					religion = indictian
+				}
+			}
+			add_devastation = 15
+		}
+		country_event = {
+			id = carto.3
+			days = 30
+		}
+	}
+	option = {
+		name = carto.2b
+		ai_chance = {
+			factor = 50
+		}
+		every_owned_province = {
+			limit = {
+				religion = indictian
+			}
+			add_unrest = -5
+		}
+		country_event = {
+			id = carto.4
+			days = 30
+		}
+		country_event = {
+			id = carto.5
+			days = 30
+		}
+	}
+}
+
+country_event = {
+	id = carto.3
+	title = carto.3.test
+	desc = carto.3.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = carto.3a
+		341 = {
+			add_base_manpower = -1
+		}
+		every_owned_province = {
+			limit = {
+				religion = indictian
+			}
+			add_base_manpower = -1
+			change_religion = ROOT
+		}
+		set_country_flag = tun_cart_ita
+	}
+	option = {
+		name = carto.3b
+		ai_chance = {
+			factor = 50
+		}
+		add_stability = 1
+		add_legitimacy = -50
+		set_country_flag = tun_cart_ita
+	}
+}
+
+country_event = {
+	id = carto.4
+	title = carto.4.test
+	desc = carto.4.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = carto.4a
+		change_tag = CR0
+		change_religion = indictian
+		change_primary_culture = tunisian
+		hidden_effect = {
+			every_province = {
+				limit = {
+					culture = cartaroma
+				}
+				change_culture = tunisian
+			}
+		}
+		country_event = { id = ideagroups.1 } #Swap Ideas
+		capital_scope = {
+			spawn_rebels = {
+				size = 3
+				type = noble_rebels
+			}
+		}
+	}
+}
+
+country_event = {
+	id = carto.5
+	title = carto.5.test
+	desc = carto.5.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = carto.5a
+		change_government = republic
+		add_government_reform = newcarthage_republic
+		kill_ruler = yes
+		kill_heir = { allow_new_heir = no }		
+		add_stability = -1
+		set_country_flag = tun_cart_no_ita
+	}
+}

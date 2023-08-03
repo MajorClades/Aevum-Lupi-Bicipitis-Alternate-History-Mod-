@@ -1,0 +1,660 @@
+tunis_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = CR1 } 
+
+	1_naval_boom = {
+		icon = mission_european_church
+		position = 2
+		required_missions = {2_carthage  } 
+
+		trigger = {
+			num_of_admirals = 2
+			dip_power = 50
+		}
+
+		effect = {
+			add_dip_power = -50
+			define_advisor = {
+				type = naval_reformer
+				skill = 2
+				discount = yes
+			}
+			add_country_modifier = {
+				name = navy_power_cart
+				duration = 10950
+			}
+		}
+	}
+	1_cothon_expansion = {
+		icon = mission_european_church
+		position = 3
+		required_missions = {1_naval_boom  } 
+
+		trigger = {
+			treasury = 100
+			monthly_dip = 10
+		}
+
+		effect = {
+			341 = {
+				add_great_project_tier = {
+					type = tun_cothon
+					tier = 1
+				}
+			}
+		}
+	}
+	1_old_sardine = {
+		icon = mission_european_church
+		position = 5
+		required_missions = {2_navybaby  } 
+		provinces_to_highlight = { 
+			area = sardinia_area
+		} 
+
+		trigger = {
+			sardinia_area = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+		}
+
+		effect = {
+			corsica_sardinia_area = {
+				add_permanent_claim = ROOT
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = tun_cart_no_ita
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_country_flag = tun_cart_ita
+						}
+					}
+					custom_tooltip = FORTUNISIA
+				}
+				2986 = {
+					change_culture = cartaroma
+					add_unrest = -5
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = tun_cart_ita
+					}
+				}
+				if = {
+					limit = {
+						tag = CR1
+					}
+					custom_tooltip = FORCARTAGINE
+				}
+				2986 = {
+					change_culture = tunisian
+					change_religion = indictian
+				}
+			}
+		}
+	}
+}
+tunis_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = CR1 } 
+
+	2_carthage = {
+		icon = mission_european_church
+		position = 1
+		provinces_to_highlight = { province_id = 341 } 
+
+		trigger = {
+			341 = {
+				development = 15
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = tunis_start
+				duration = 10950
+			}
+		}
+	}
+	2_navybaby = {
+		icon = mission_european_church
+		position = 4
+		required_missions = {1_cothon_expansion 3_choices  } 
+
+
+		trigger = {
+			navy_size = 25
+		}
+
+		effect = {
+			sardinia_area = {
+				add_permanent_claim = ROOT
+			}
+			western_sicily_area = {
+				add_permanent_claim = ROOT
+			}
+			sicily_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	2_jewel_of_sicily = {
+		icon = mission_european_church
+		position = 6
+		required_missions = {2_navybaby  } 
+		provinces_to_highlight = { 
+			area = sicily_area
+		} 
+
+		trigger = {
+			sicily_area = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+			
+		}
+
+		effect = {
+			calabria_area = {
+				add_permanent_claim = ROOT
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = tun_cart_no_ita
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_country_flag = tun_cart_ita
+						}
+					}
+					custom_tooltip = FORTUNISIA
+				}
+				add_accepted_culture = sicilian
+				add_dip_power = 100
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = tun_cart_ita
+					}
+				}
+				if = {
+					limit = {
+						tag = CR1
+					}
+					custom_tooltip = FORCARTAGINE
+				}
+				4736 = {
+					change_culture = tunisian
+					add_unrest = -5
+				}
+				4737 = {
+					change_culture = tunisian
+					add_unrest = -5
+				}
+			}
+		}
+	}
+}
+
+tunis_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = CR1 } 
+
+
+	3_homesweethome = {
+		icon = mission_european_church
+		position = 2
+		required_missions = {2_carthage  4_tunis_faith} 
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = CARTAGINEVSTUNISIA
+				OR = {
+					has_country_flag = tun_cart_ita
+					has_country_flag = tun_cart_no_ita
+				}
+			}
+		}
+
+		effect = {
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = tun_cart_no_ita
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_country_flag = tun_cart_ita
+						}
+					}
+					custom_tooltip = FORTUNISIA
+				}
+				
+				add_prestige = 25
+				add_legitimacy = 20
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = tun_cart_ita
+					}
+				}
+				if = {
+					limit = {
+						tag = CR1
+					}
+					custom_tooltip = FORCARTAGINE
+				}
+				add_mil_power = 100
+				add_mercantilism = 5
+			}
+		}
+	}
+	3_choices = {
+		icon = mission_european_church
+		position = 3
+		required_missions = {3_homesweethome  } 
+		provinces_to_highlight = { province_id = 341 } 
+
+		trigger = {
+			341 = {
+				development = 20
+				has_tax_building_trigger = yes
+			}
+		}
+
+		effect = {
+			kabylia_area = {
+				add_permanent_claim = ROOT
+			}
+			djerba_area = {
+				add_permanent_claim = ROOT
+			}
+			ouled_nail_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+}
+
+tunis_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = CR1 } 
+
+	4_tunis_faith = {
+		icon = mission_european_church
+		position = 1
+		provinces_to_highlight = { owned_by = ROOT NOT = {religion = ROOT}} 
+
+		trigger = {
+			all_owned_province = {
+				religion = ROOT
+			}
+		}
+
+		effect = {
+			add_stability_or_adm_power = yes
+		}
+	}
+	4_african_expansion = {
+		icon = mission_european_church
+		position = 4
+		required_missions = {3_choices 5_tunisian_cavalry } 
+		provinces_to_highlight = { 
+			OR = {
+				area = kabylia_area
+				area = djerba_area
+				area = ouled_nail_area
+			}
+		} 
+
+		trigger = {
+			kabylia_area = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+			djerba_area = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+			ouled_nail_area = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+		}
+
+		effect = {
+			maghreb_region = {
+				add_permanent_claim = ROOT
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = tun_cart_no_ita
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_country_flag = tun_cart_ita
+						}
+					}
+					custom_tooltip = FORTUNISIA
+				}
+				339 = {
+					change_culture = cartaroma
+				}
+				353 = {
+					change_culture = cartaroma
+				}
+				341 = {
+					add_base_tax = 2
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = tun_cart_ita
+					}
+				}
+				if = {
+					limit = {
+						tag = CR1
+					}
+					custom_tooltip = FORCARTAGINE
+				}
+				add_army_tradition = 15
+				add_navy_tradition = 15
+				add_country_modifier = {
+					name = carthage_star
+					duration = 10950
+				}
+			}
+		}
+	}
+	4_iberian_claims = {
+		icon = mission_european_church
+		position = 6
+		required_missions = {4_african_expansion  } 
+		provinces_to_highlight = { 
+			area = northern_morocco_area 
+		} 
+
+		trigger = {
+			northern_morocco_area = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+		}
+
+		effect = {
+			upper_andalucia_area = {
+				add_permanent_claim = ROOT
+			}
+			lower_andalucia_area = {
+				add_permanent_claim = ROOT
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = tun_cart_no_ita
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_country_flag = tun_cart_ita
+						}
+					}
+					custom_tooltip = FORTUNISIA
+				}
+				1751 = {
+					change_culture = cartaroma
+					add_base_production = 2
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = tun_cart_ita
+					}
+				}
+				if = {
+					limit = {
+						tag = CR1
+					}
+					custom_tooltip = FORCARTAGINE
+				}
+				1751 = {
+					add_base_production = 2
+					add_base_manpower = 2
+				}
+			}
+		}
+	}
+}
+
+tunis_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = CR1 } 
+
+	5_army_boom = {
+		icon = mission_european_church
+		position = 2
+		required_missions = {4_tunis_faith  } 
+
+		trigger = {
+			army_size_percentage = 0.9
+		}
+
+		effect = {
+			add_army_tradition = 10
+			add_country_modifier = {
+				name = army_power_cart
+				duration = 10950
+			}
+		}
+	}
+	5_tunisian_cavalry = {
+		icon = mission_european_church
+		position = 3
+		required_missions = {5_army_boom  } 
+
+		trigger = {
+			has_leader_with = {
+				total_pips = 8
+			}
+			num_of_cavalry = 6
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = cav_power_cart
+				duration = 10950
+			}
+		}
+	}
+	5_egyptian_grains = {
+		icon = mission_european_church
+		position = 5
+		required_missions = {4_african_expansion  } 
+		provinces_to_highlight = { 
+			area = tripolitania_area 
+		} 
+
+		trigger = {
+			tripolitania_area = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+		}
+
+		effect = {
+			cyrenaica_area = {
+				add_permanent_claim = ROOT
+			}
+			delta_area = {
+				add_permanent_claim = ROOT
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = tun_cart_no_ita
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_country_flag = tun_cart_ita
+						}
+					}
+					custom_tooltip = FORTUNISIA
+				}
+				354 = {
+					change_culture = cartaroma
+					change_religion = catholic
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = tun_cart_ita
+					}
+				}
+				if = {
+					limit = {
+						tag = CR1
+					}
+					custom_tooltip = FORCARTAGINE
+				}
+				add_adm_power = 100
+				define_general = {
+					shock = 4
+					fire = 3
+					manuever = 5
+					siege = 2
+				}
+			}
+		}
+	}
+	5_egyptian_victory = {
+		icon = mission_european_church
+		position = 7
+		required_missions = {5_egyptian_grains  } 
+		provinces_to_highlight = { 
+			OR = {
+				area = cyrenaica_area 
+				area = delta_area 
+			}
+		} 
+
+		trigger = {
+			cyrenaica_area = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+			delta_area = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+		}
+
+		effect = {
+			egypt_region = {
+				add_permanent_claim = ROOT
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = tun_cart_no_ita
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_country_flag = tun_cart_ita
+						}
+					}
+					custom_tooltip = FORTUNISIA
+				}
+				358 = {
+					change_culture = cartaroma
+					change_religion = catholic
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = tun_cart_ita
+					}
+				}
+				if = {
+					limit = {
+						tag = CR1
+					}
+					custom_tooltip = FORCARTAGINE
+				}
+				358 = {
+					change_culture = tunisian
+					change_religion = indictian
+				}
+			}
+		}
+	}
+}
