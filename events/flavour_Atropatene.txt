@@ -40,7 +40,7 @@ country_event = {
 	id = atro.2
 	title = atro.2.test
 	desc = atro.2.desc
-	picture = ANGRY_MOB_eventPicture
+	picture = DISCIPLINED_SOLDIERS_eventPicture
 	
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -49,13 +49,70 @@ country_event = {
 		ai_chance = {
 			factor = 90
 		}
-		add_opinion = {
-			who = RU0
-			modifier = atr_defy_rhomania
+		every_country = {
+			limit = {
+				OR = {
+					primary_culture = pontic_greek
+					primary_culture = greek
+				}
+				NOT = { tag = RU0 } 
+				NOT = { tag = HE0 } 
+			}
+			add_opinion = {
+				who = RU0
+				modifier = atr_defy_rhomania
+			}
+			add_opinion = {
+				who = HE0
+				modifier = atr_hellenic_leader
+			}
 		}
-		add_opinion = {
-			who = HE0
-			modifier = atr_hellenic_leader
+	}
+}
+
+country_event = {
+	id = atro.3
+	title = atro.3.test
+	desc = atro.3.desc
+	picture = 13_Maratha_Estate_eventPicture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = atro.3a
+		ai_chance = {
+			factor = 90
+		}
+		add_stability = 1
+		add_ruler_modifier = {
+			name = alexandros_rule
+		}
+		set_country_flag = had_event_atro3_flag
+	}
+}
+
+country_event = {
+	id = atro.4
+	title = atro.4.test
+	desc = atro.4.desc
+	picture = indiangfx_LAND_MILITARY_eventPicture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = atro.4a
+		ai_chance = {
+			factor = 90
+		}
+		custom_tooltip = "seleucia_capture_tooltip"
+		410 = {
+			add_devastation = 50
+			set_base_manpower = 1
+			set_base_tax = 2
+			set_base_production = 2
+			change_culture = ROOT
+			change_religion = ROOT
+			change_province_name = "Seleucia"
 		}
 	}
 }
