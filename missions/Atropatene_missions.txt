@@ -1,0 +1,680 @@
+Atro_branch1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = HE0
+			tag = SL1
+		}
+	}
+
+	push_south = {
+		icon = mission_persian_soldiers
+		position = 2
+		required_missions = { destroy_albania } 
+		provinces_to_highlight = {
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+			NOT = { owned_by = HE1 } 
+			OR = {
+				area = luristan_area
+				area = shahrizor_area
+				area = tabriz_area
+			}
+		}
+
+		trigger = {
+			luristan_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			shahrizor_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			tabriz_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			khuzestan_area = { add_permanent_claim = ROOT } 
+			basra_area = { add_permanent_claim = ROOT } 
+			iraq_arabi_area = { add_permanent_claim = ROOT } 
+			al_jazira_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	kill_sasan = {
+		icon = mission_cradle_of_civilization
+		position = 3
+		required_missions = { push_south } 
+		provinces_to_highlight = { all_province = { owned_by = SH0 }  } 
+
+		trigger = {
+			SH0 = { exists = no } 
+			owns = 410
+		}
+
+		effect = {
+			country_event = {
+				id = atro.4
+			}
+		}
+	}
+
+	mesopotamia_hegemony = {
+		icon = mission_conquer_kannauj
+		position = 4
+		required_missions = {
+			kill_sasan
+			gulf_trade
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = basra_area
+				area = iraq_arabi_area
+				area = al_jazira_area
+			}
+		}
+
+		trigger = {
+			basra_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			iraq_arabi_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			al_jazira_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						area = basra_area
+						area = iraq_arabi_area
+						area = al_jazira_area
+					}
+				}
+				add_province_modifier = {
+					name = "he0_rule_in_mesopotamia"
+					duration = 10950
+				}
+				add_local_autonomy = -30
+			}
+		}
+	}
+}
+Atro_branch2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = HE0
+			tag = SL1
+		}
+	}
+
+	destroy_albania = {
+		icon = pacify_the_albanian_lands
+		position = 1
+		provinces_to_highlight = {
+			OR = {
+				province_id = 421
+				province_id = 4999
+				province_id = 426
+				province_id = 4341
+			}
+		}
+
+		trigger = {
+			owns_all_provinces = { owned_by = AL9 } 
+			AL9 = { exists = no } 
+		}
+
+		effect = {
+			shirvan_area = { add_permanent_claim = ROOT } 
+			luristan_area = { add_permanent_claim = ROOT } 
+			tabriz_area = { add_permanent_claim = ROOT } 
+			shahrizor_area = { add_permanent_claim = ROOT } 
+			iraq_e_ajam_area = { add_permanent_claim = ROOT } 
+			tabarestan_area = { add_permanent_claim = ROOT } 
+			isfahan_area = { add_permanent_claim = ROOT } 
+			armenia_area = { add_permanent_claim = ROOT } 
+			kartli_kakheti_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	push_east = {
+		icon = mission_reclaim_lost_territory
+		position = 2
+		required_missions = { destroy_albania } 
+		provinces_to_highlight = {
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+			OR = {
+				area = iraq_e_ajam_area
+				area = isfahan_area
+				area = tabarestan_area
+			}
+		}
+
+		trigger = {
+			AND = {
+				iraq_e_ajam_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				isfahan_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				tabarestan_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+			}
+		}
+
+		effect = { PR0 = { every_owned_province = { add_permanent_claim = ROOT }  }  } 
+	}
+
+	gulf_trade = {
+		icon = support_the_bulk_trades
+		position = 3
+		required_missions = { push_south } 
+		provinces_to_highlight = {
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+			OR = {
+				area = basra_area
+				area = khuzestan_area
+			}
+		}
+
+		trigger = {
+			basra_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			khuzestan_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			408 = { has_trade_building_trigger = yes } 
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "gulf_masters"
+				duration = 10950
+			}
+			408 = { add_permanent_province_modifier = { name = "he0_major_gulf_port" }  } 
+		}
+	}
+}
+Atro_branch3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = HE0
+			tag = SL1
+		}
+	}
+
+	parthian_war = {
+		icon = mission_spoils_of_war
+		position = 3
+		required_missions = { push_east } 
+		provinces_to_highlight = {
+			owned_by = PR0
+			province_id = 4326
+		}
+
+		trigger = {
+			PR0 = { exists = no } 
+			owns = 4326
+		}
+
+		effect = { persia_region = { add_permanent_claim = ROOT }  } 
+	}
+
+	iranian_rule = {
+		icon = mission_conquer_persia
+		position = 4
+		required_missions = {
+			parthian_war
+			gulf_trade
+		}
+		provinces_to_highlight = { region = persia_region } 
+
+		trigger = {
+			persia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			every_owned_province = {
+				limit = { region = persia_region } 
+				add_province_modifier = {
+					name = "he0_rule_in_persia"
+					duration = 10950
+				}
+				add_local_autonomy = -30
+			}
+		}
+	}
+
+	seleucid_legacy = {
+		icon = mission_crown_of_denmark
+		position = 6
+		required_missions = {
+			iranian_rule
+			titan_clash
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = { prestige = 50 } 
+
+		effect = {
+			custom_tooltip = seleucid_legacy_tooltip
+			set_country_flag = seleucid_legacy_flag
+		}
+	}
+}
+Atro_branch4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = HE0
+			tag = SL1
+		}
+	}
+
+	false_conversion = {
+		icon = mission_rb_control_state_religion
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = has_had_atro1_event_tooltip
+				has_country_flag = had_event_atro1_flag
+			}
+		}
+
+		effect = {
+			add_prestige = 15
+			add_country_modifier = {
+				name = "anti_muslim_conversion"
+				duration = 3650
+			}
+		}
+	}
+
+	defy_rhomania = {
+		icon = mission_empire
+		position = 2
+		required_missions = { false_conversion } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			RU0 = {
+				has_been_insulted_by_root = yes
+				is_rival = root
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "defied_rhomania"
+				duration = 3650
+			}
+		}
+	}
+
+	not_so_roman = {
+		icon = a_real_roman_empire
+		position = 3
+		required_missions = { defy_rhomania } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			dip_power = 200
+			any_ally = {
+				primary_culture = greek
+				has_opinion = {
+					who = root
+					value = 150
+				}
+			}
+		}
+
+		effect = {
+			change_primary_culture = greek
+			every_owned_province = {
+				limit = { culture = pontic_greek } 
+				change_culture = greek
+			}
+			add_dip_power = -200
+			country_event = { id = atro.2 } 
+		}
+	}
+
+	titan_clash = {
+		icon = mission_defy_the_dragon
+		position = 5
+		required_missions = {
+			mesopotamia_hegemony
+			iranian_rule
+			not_so_roman
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			is_in_war = {
+				defender_leader = RU0
+				war_score = 25
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "clash_of_titans"
+				duration = 1825
+			}
+		}
+	}
+}
+Atro_branch5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = HE0
+			tag = SL1
+		}
+	}
+
+	accept_religions = {
+		icon = mission_patronize_art_and_religion
+		position = 2
+		required_missions = { false_conversion } 
+		provinces_to_highlight = {  
+
+		} 
+
+		trigger = {  
+			num_of_owned_provinces_with = {
+				value = 25
+				has_owner_religion = no
+			}
+			has_estate_privilege = estate_burghers_enforced_interfaith_dialogue
+		} 
+
+		effect = {  
+			add_country_modifier = {
+				name = atro_religious_tolerance
+				duration = -1
+			}
+		} 
+	}
+
+	greek_settlements = {
+		icon = defend_the_city
+		position = 4
+		required_missions = {
+			not_so_roman
+			accept_religions
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			ROOT = {
+				capital_scope = {
+					development = 20
+					culture = ROOT
+				}
+			}
+			dip_power = 250
+		} 
+
+		effect = {  
+			random_owned_province = {
+				change_culture = ROOT
+				add_random_development = 1
+			}
+			random_owned_province = {
+				change_culture = ROOT
+				add_random_development = 1
+			}
+			add_country_modifier = {
+				name = settling_greeks
+				duration = 3650
+			}
+		}
+	}
+}
+Seleucids_branch5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = SL1 } 
+
+	hellenic_zoroastrianism = {
+		icon = mission_religious
+		position = 5
+		required_missions = { greek_settlements } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	companion_cavalry_revival = {
+		icon = mission_non-western_cavalry_raid
+		position = 10
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = { add_mil_power = 100 } 
+	}
+
+	greek_mil_towns = {
+		icon = mission_pf_soldier
+		position = 11
+		required_missions = { companion_cavalry_revival } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+}
+Seleucids_branch4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = SL1 } 
+
+	into_syria = {
+		icon = jerusalem
+		position = 7
+		required_missions = { seleucid_legacy } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	anatolian_push = {
+		icon = anatolian_frontier
+		position = 8
+		required_missions = { into_syria } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+}
+Seleucids_branch3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = SL1 } 
+
+	crush_mani_followers = {
+		icon = mission_fire_of_london
+		position = 7
+		required_missions = { seleucid_legacy } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	egyptian_conquest = {
+		icon = mission_egyptian_mamluk_soldier
+		position = 1
+		required_missions = { into_syria } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	alexander_legacy = {
+		icon = mission_empire
+		position = 9
+		required_missions = {
+			anatolian_push
+			egyptian_conquest
+			into_india
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+}
+Seleucids_branch2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = SL1 } 
+
+	bactrian_advance = {
+		icon = mission_central_asian_city
+		position = 7
+		required_missions = { seleucid_legacy } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	into_india = {
+		icon = mission_indian_empire
+		position = 8
+		required_missions = { crush_mani_followers } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+}
+Seleucids_branch1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = SL1 } 
+
+	crush_bolghars = {
+		icon = push_on_to_bulgaria
+		position = 7
+		required_missions = { seleucid_legacy } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	silk_road_overlords = {
+		icon = mission_market_place_with_asian_traders
+		position = 8
+		required_missions = {
+			crush_bolghars
+			bactrian_advance
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	restore_seleucia = {
+		icon = mission_found_the_city_of_agra
+		position = 10
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	develop_mesopotamia = {
+		icon = prosperity_for_all
+		position = 11
+		required_missions = { restore_seleucia } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	early_industry = {
+		icon = mission_industrialize_bengal
+		position = 12
+		required_missions = { develop_mesopotamia } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+}
