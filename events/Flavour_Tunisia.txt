@@ -201,3 +201,92 @@ country_event = {
 		set_country_flag = tun_cart_no_ita
 	}
 }
+
+country_event = {
+	id = carto.6
+	title = carto.6.test
+	desc = carto.6.desc
+	picture = ANGRY_MOB_eventPicture
+
+	fire_only_once = yes
+	trigger = {
+		118 = {
+			OR = {
+				controlled_by = ROOT
+				owned_by = ROOT
+			}
+		}
+		OR = {
+			has_country_flag = tun_cart_no_ita
+			has_country_flag = tun_cart_ita
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	option = {
+		name = carto.6a
+		trigger = {
+			tag = CR1
+		}
+		341 = {
+			add_base_tax = 3
+			add_base_production = 3
+			add_base_manpower = 3
+		}
+		118 = {
+			add_devastation = 30
+			add_base_tax = -3
+			add_base_production = -3
+			add_base_manpower = -3
+		}
+	}
+
+	option = {
+		name = carto.6b
+		trigger = {
+			tag = CR0
+		}
+		341 = {
+			add_base_tax = 4
+			add_base_production = 4
+			add_base_manpower = 4
+		}
+		118 = {
+			add_devastation = 80
+			add_base_tax = -5
+			add_base_production = -5
+			add_base_manpower = -5
+		}
+		every_country = {
+			limit = {
+				OR = {
+					culture_group = latin
+					tag = SO0
+					tag = RU0
+					tag = AE0
+					tag = SP0
+					tag = BR0
+				}
+			}
+			reverse_add_aggressive_expansion = {
+				who = ROOT
+				value = 20
+				apply_calc = no
+			}
+		}
+	}
+	option = {
+		name = carto.6c
+		341 = {
+			add_base_tax = 1
+			add_base_production = 1
+			add_base_manpower = 1
+		}
+		118 = {
+			add_base_tax = -1
+			add_base_production = -1
+			add_base_manpower = -1
+		}
+	}
+}
