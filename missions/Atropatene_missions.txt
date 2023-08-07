@@ -11,7 +11,7 @@ Atro_branch1 = {
 	}
 
 	push_south = {
-		icon = NSE_mission
+		icon = mission_persian_soldiers
 		position = 2
 		required_missions = { destroy_albania } 
 		provinces_to_highlight = {
@@ -48,7 +48,7 @@ Atro_branch1 = {
 	}
 
 	kill_sasan = {
-		icon = NSE_mission
+		icon = mission_into_persia_1
 		position = 3
 		required_missions = { push_south } 
 		provinces_to_highlight = { all_province = { owned_by = SH0 }  } 
@@ -67,7 +67,7 @@ Atro_branch1 = {
 	}
 
 	mesopotamia_hegemony = {
-		icon = NSE_mission
+		icon = mission_conquer_kannauj
 		position = 4
 		required_missions = {
 			kill_sasan
@@ -97,7 +97,6 @@ Atro_branch1 = {
 		}
 
 		effect = {
-			
 			every_owned_province = {
 				limit = {
 					OR = {
@@ -112,7 +111,6 @@ Atro_branch1 = {
 				}
 				add_local_autonomy = -30
 			}
-			
 		}
 	}
 }
@@ -129,7 +127,7 @@ Atro_branch2 = {
 	}
 
 	destroy_albania = {
-		icon = NSE_mission
+		icon = pacify_the_albanian_lands
 		position = 1
 		provinces_to_highlight = {
 			OR = {
@@ -159,7 +157,7 @@ Atro_branch2 = {
 	}
 
 	push_east = {
-		icon = NSE_mission
+		icon = mission_reclaim_lost_territory
 		position = 2
 		required_missions = { destroy_albania } 
 		provinces_to_highlight = {
@@ -192,7 +190,7 @@ Atro_branch2 = {
 	}
 
 	gulf_trade = {
-		icon = NSE_mission
+		icon = support_the_bulk_trades
 		position = 3
 		required_missions = { push_south } 
 		provinces_to_highlight = {
@@ -220,11 +218,7 @@ Atro_branch2 = {
 				name = "gulf_masters"
 				duration = 10950
 			}
-			408 = {
-				add_permanent_province_modifier = {
-					name = "he0_major_gulf_port"
-				}
-			}
+			408 = { add_permanent_province_modifier = { name = "he0_major_gulf_port" }  } 
 		}
 	}
 }
@@ -241,7 +235,7 @@ Atro_branch3 = {
 	}
 
 	parthian_war = {
-		icon = NSE_mission
+		icon = mission_spoils_of_war
 		position = 3
 		required_missions = { push_east } 
 		provinces_to_highlight = {
@@ -258,7 +252,7 @@ Atro_branch3 = {
 	}
 
 	iranian_rule = {
-		icon = NSE_mission
+		icon = mission_conquer_persia
 		position = 4
 		required_missions = {
 			parthian_war
@@ -274,20 +268,19 @@ Atro_branch3 = {
 		}
 
 		effect = {
-			
 			every_owned_province = {
 				limit = { region = persia_region } 
 				add_province_modifier = {
 					name = "he0_rule_in_persia"
 					duration = 10950
 				}
-				add_local_autonomy = -30	
+				add_local_autonomy = -30
 			}
 		}
 	}
 
 	seleucid_legacy = {
-		icon = NSE_mission
+		icon = mission_crown_of_denmark
 		position = 6
 		required_missions = {
 			iranian_rule
@@ -316,50 +309,87 @@ Atro_branch4 = {
 	}
 
 	false_conversion = {
-		icon = NSE_mission
+		icon = mission_rb_control_state_religion
 		position = 1
 		provinces_to_highlight = {  } 
 
-		trigger = {  
+		trigger = {
 			custom_trigger_tooltip = {
 				tooltip = has_had_atro1_event_tooltip
 				has_country_flag = had_event_atro1_flag
 			}
-		} 
+		}
 
-		effect = {  
+		effect = {
 			add_prestige = 15
 			add_country_modifier = {
-				name = anti_muslim_conversion
+				name = "anti_muslim_conversion"
 				duration = 3650
 			}
-		} 
+		}
 	}
 
 	defy_rhomania = {
-		icon = NSE_mission
+		icon = mission_empire
 		position = 2
 		required_missions = { false_conversion } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {
+			RU0 = {
+				has_been_insulted_by_root = yes
+				is_rival = root
+			}
+		}
 
-		effect = {  } 
+		effect = {
+			add_country_modifier = {
+				name = "defied_rhomania"
+				duration = 3650
+			}
+		}
 	}
 
 	not_so_roman = {
-		icon = NSE_mission
+		icon = a_real_roman_empire
 		position = 3
 		required_missions = { defy_rhomania } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {
+			dip_power = 200
+			any_ally = {
+				primary_culture = greek
+				has_opinion = {
+					who = root
+					value = 150
+				}
+			}
+		}
 
-		effect = {  } 
+		effect = {
+			change_primary_culture = greek
+			every_owned_province = {
+				limit = { culture = pontic_greek } 
+				change_culture = greek
+			}
+			add_dip_power = -200
+			every_country = {
+				limit = {
+					OR = {
+						primary_culture = pontic_greek
+						primary_culture = greek
+					}
+					NOT = { tag = RU0 } 
+					NOT = { tag = ROOT } 
+				}
+				country_event = { id = atro.2 } 
+			}
+		}
 	}
 
 	titan_clash = {
-		icon = NSE_mission
+		icon = mission_defy_the_dragon
 		position = 5
 		required_missions = {
 			mesopotamia_hegemony
@@ -368,9 +398,19 @@ Atro_branch4 = {
 		}
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {
+			is_in_war = {
+				defender_leader = RU0
+				war_score = 25
+			}
+		}
 
-		effect = {  } 
+		effect = {
+			add_country_modifier = {
+				name = "clash_of_titans"
+				duration = 1725
+			}
+		}
 	}
 }
 Atro_branch5 = {
@@ -386,7 +426,7 @@ Atro_branch5 = {
 	}
 
 	accept_religions = {
-		icon = NSE_mission
+		icon = mission_patronize_art_and_religion
 		position = 2
 		required_missions = { false_conversion } 
 		provinces_to_highlight = {  } 
@@ -397,7 +437,7 @@ Atro_branch5 = {
 	}
 
 	greek_settlements = {
-		icon = NSE_mission
+		icon = defend_the_city
 		position = 4
 		required_missions = {
 			not_so_roman
@@ -415,10 +455,7 @@ Seleucids_branch5 = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = {
-		tag = SL1
-		
-	}
+	potential = { tag = SL1 } 
 
 	hellenic_zoroastrianism = {
 		icon = NSE_mission
@@ -457,10 +494,7 @@ Seleucids_branch4 = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = {
-		tag = SL1
-		
-	}
+	potential = { tag = SL1 } 
 
 	into_syria = {
 		icon = NSE_mission
@@ -489,10 +523,7 @@ Seleucids_branch3 = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = {
-		tag = SL1
-		
-	}
+	potential = { tag = SL1 } 
 
 	crush_mani_followers = {
 		icon = NSE_mission
@@ -536,10 +567,7 @@ Seleucids_branch2 = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = {
-		tag = SL1
-		
-	}
+	potential = { tag = SL1 } 
 
 	bactrian_advance = {
 		icon = NSE_mission
@@ -568,12 +596,7 @@ Seleucids_branch1 = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = {
-		tag = SL1
-		
-	}
-
-	
+	potential = { tag = SL1 } 
 
 	crush_bolghars = {
 		icon = NSE_mission
