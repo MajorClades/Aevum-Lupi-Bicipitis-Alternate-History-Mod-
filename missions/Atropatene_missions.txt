@@ -48,7 +48,7 @@ Atro_branch1 = {
 	}
 
 	kill_sasan = {
-		icon = mission_into_persia_1
+		icon = mission_cradle_of_civilization
 		position = 3
 		required_missions = { push_south } 
 		provinces_to_highlight = { all_province = { owned_by = SH0 }  } 
@@ -429,11 +429,24 @@ Atro_branch5 = {
 		icon = mission_patronize_art_and_religion
 		position = 2
 		required_missions = { false_conversion } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
 
-		trigger = {  } 
+		} 
 
-		effect = {  } 
+		trigger = {  
+			num_of_owned_provinces_with = {
+				value = 10
+				has_owner_religion = no
+			}
+			has_estate_privilege = estate_burghers_enforced_interfaith_dialogue
+		} 
+
+		effect = {  
+			add_country_modifier = {
+				name = atro_religious_tolerance
+				duration = -1
+			}
+		} 
 	}
 
 	greek_settlements = {
@@ -443,11 +456,35 @@ Atro_branch5 = {
 			not_so_roman
 			accept_religions
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
 
-		trigger = {  } 
+		} 
 
-		effect = {  } 
+		trigger = {  
+			ROOT = {
+				capital = {
+					development = 20
+					culture = ROOT
+				}
+			}
+			dip_power = 250
+		} 
+
+		effect = {  
+			random_owned_province = {
+				change_culture = ROOT
+				add_random_development = 1
+			}
+			random_owned_province = {
+				change_culture = ROOT
+				add_random_development = 1
+			}
+			random_owned_province = {
+				change_culture = ROOT
+				add_random_development = 1
+			}
+		}
+
 	}
 }
 Seleucids_branch5 = {
@@ -458,7 +495,7 @@ Seleucids_branch5 = {
 	potential = { tag = SL1 } 
 
 	hellenic_zoroastrianism = {
-		icon = NSE_mission
+		icon = mission_religious
 		position = 5
 		required_missions = { greek_settlements } 
 		provinces_to_highlight = {  } 
@@ -469,7 +506,7 @@ Seleucids_branch5 = {
 	}
 
 	companion_cavalry_revival = {
-		icon = NSE_mission
+		icon = mission_non-western_cavalry_raid
 		position = 10
 		provinces_to_highlight = {  } 
 
@@ -479,7 +516,7 @@ Seleucids_branch5 = {
 	}
 
 	greek_mil_towns = {
-		icon = NSE_mission
+		icon = mission_pf_soldier
 		position = 11
 		required_missions = { companion_cavalry_revival } 
 		provinces_to_highlight = {  } 
@@ -497,7 +534,7 @@ Seleucids_branch4 = {
 	potential = { tag = SL1 } 
 
 	into_syria = {
-		icon = NSE_mission
+		icon = jerusalem
 		position = 7
 		required_missions = { seleucid_legacy } 
 		provinces_to_highlight = {  } 
@@ -508,7 +545,7 @@ Seleucids_branch4 = {
 	}
 
 	anatolian_push = {
-		icon = NSE_mission
+		icon = anatolian_frontier
 		position = 8
 		required_missions = { into_syria } 
 		provinces_to_highlight = {  } 
@@ -526,7 +563,7 @@ Seleucids_branch3 = {
 	potential = { tag = SL1 } 
 
 	crush_mani_followers = {
-		icon = NSE_mission
+		icon = mission_fire_of_london
 		position = 7
 		required_missions = { seleucid_legacy } 
 		provinces_to_highlight = {  } 
@@ -537,7 +574,7 @@ Seleucids_branch3 = {
 	}
 
 	egyptian_conquest = {
-		icon = NSE_mission
+		icon = mission_egyptian_mamluk_soldier
 		position = 1
 		required_missions = { into_syria } 
 		provinces_to_highlight = {  } 
@@ -548,7 +585,7 @@ Seleucids_branch3 = {
 	}
 
 	alexander_legacy = {
-		icon = NSE_mission
+		icon = mission_empire
 		position = 9
 		required_missions = {
 			anatolian_push
@@ -570,7 +607,7 @@ Seleucids_branch2 = {
 	potential = { tag = SL1 } 
 
 	bactrian_advance = {
-		icon = NSE_mission
+		icon = mission_central_asian_city
 		position = 7
 		required_missions = { seleucid_legacy } 
 		provinces_to_highlight = {  } 
@@ -581,7 +618,7 @@ Seleucids_branch2 = {
 	}
 
 	into_india = {
-		icon = NSE_mission
+		icon = mission_indian_empire
 		position = 8
 		required_missions = { crush_mani_followers } 
 		provinces_to_highlight = {  } 
@@ -599,7 +636,7 @@ Seleucids_branch1 = {
 	potential = { tag = SL1 } 
 
 	crush_bolghars = {
-		icon = NSE_mission
+		icon = push_on_to_bulgaria
 		position = 7
 		required_missions = { seleucid_legacy } 
 		provinces_to_highlight = {  } 
@@ -610,7 +647,7 @@ Seleucids_branch1 = {
 	}
 
 	silk_road_overlords = {
-		icon = NSE_mission
+		icon = mission_market_place_with_asian_traders
 		position = 8
 		required_missions = {
 			crush_bolghars
@@ -624,7 +661,7 @@ Seleucids_branch1 = {
 	}
 
 	restore_seleucia = {
-		icon = NSE_mission
+		icon = mission_found_the_city_of_agra
 		position = 10
 		provinces_to_highlight = {  } 
 
@@ -634,7 +671,7 @@ Seleucids_branch1 = {
 	}
 
 	develop_mesopotamia = {
-		icon = NSE_mission
+		icon = prosperity_for_all
 		position = 11
 		required_missions = { restore_seleucia } 
 		provinces_to_highlight = {  } 
@@ -645,7 +682,7 @@ Seleucids_branch1 = {
 	}
 
 	early_industry = {
-		icon = NSE_mission
+		icon = mission_industrialize_bengal
 		position = 12
 		required_missions = { develop_mesopotamia } 
 		provinces_to_highlight = {  } 
