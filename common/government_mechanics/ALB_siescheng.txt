@@ -1,0 +1,103 @@
+sie_council_mechanic = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 1
+	available = {
+		
+	}
+	
+	powers = {
+		sie_single_power = {
+			max = 100
+			base_monthly_growth = -0.25
+			scaled_modifier = {
+				trigger = {
+					
+				}
+				modifier = {
+					country_admin_power = 5
+					country_diplomatic_power = 5
+					country_military_power = 5
+					stability_cost_modifier = -1
+					monthly_splendor = 10
+				}
+			}
+			on_max_reached = {
+				add_stability = 1
+			}
+		}
+	}
+	
+	interactions = {
+		SIE_uno = {
+			gui = russian_mechanics_interaction_gui
+			icon = GFX_russian_ability_ADM
+			cost_type = sie_single_power
+			cost = -5
+			trigger = {
+				owns = 280
+			}
+			effect = {
+				if = {
+					limit = {
+						ai = no
+					}
+					280 = {
+						add_base_tax = -1
+						add_base_production = -1
+						add_base_manpower = -1
+					}
+				}
+			}
+			cooldown_years = 1
+			ai_chance = {
+				factor = 10
+			}
+		}
+		SIE_due= {
+			gui = russian_mechanics_interaction_gui
+			icon = GFX_russian_ability_DIP
+			cost_type = sie_single_power
+			cost = -5
+			trigger = { 
+				num_of_subjects = 1
+			}
+			effect = { 
+				random_subject_country = {
+					random_owned_province = {
+						limit = {
+							base_tax = 2
+							base_production = 2
+							base_manpower = 2
+						}
+						add_base_tax = -1
+						add_base_production = -1
+						add_base_manpower = -1
+					}
+					add_liberty_desire = 15
+				}
+			}
+			cooldown_years = 1
+			ai_chance = {
+				factor = 0
+			}
+		}
+		SIE_tre = {
+			gui = russian_mechanics_interaction_gui
+			icon = GFX_russian_ability_MIL
+			cost_type = sie_single_power
+			cost = -5
+			trigger = {
+				years_of_manpower = 1
+				years_of_income = 1
+			}
+			effect = { 
+				add_yearly_manpower = -1
+				add_years_of_income = -1
+			}
+			cooldown_years = 1
+			ai_chance = {
+				factor = 0
+			}
+		}
+	}
+}
