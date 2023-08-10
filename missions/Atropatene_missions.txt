@@ -16,7 +16,7 @@ Atro_branch1 = {
 		required_missions = { destroy_albania } 
 		provinces_to_highlight = {
 			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
-			NOT = { owned_by = HE1 } 
+			
 			OR = {
 				area = luristan_area
 				area = shahrizor_area
@@ -51,7 +51,7 @@ Atro_branch1 = {
 		icon = mission_cradle_of_civilization
 		position = 3
 		required_missions = { push_south } 
-		provinces_to_highlight = { all_province = { owned_by = SH0 }  } 
+		provinces_to_highlight = { all_province = { owned_by = SH0 } NOT = { country_or_non_sovereign_subject_holds = ROOT } } 
 
 		trigger = {
 			SH0 = { exists = no } 
@@ -77,6 +77,7 @@ Atro_branch1 = {
 				area = basra_area
 				area = iraq_arabi_area
 				area = al_jazira_area
+				NOT = { country_or_non_sovereign_subject_holds = ROOT }
 			}
 		}
 
@@ -129,11 +130,13 @@ Atro_branch2 = {
 		icon = pacify_the_albanian_lands
 		position = 1
 		provinces_to_highlight = {
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 			OR = {
 				province_id = 421
 				province_id = 4999
 				province_id = 426
 				province_id = 4341
+   				
 			}
 		}
 
@@ -238,6 +241,7 @@ Atro_branch3 = {
 		position = 3
 		required_missions = { push_east } 
 		provinces_to_highlight = {
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 			owned_by = PR0
 			province_id = 4326
 		}
@@ -257,7 +261,7 @@ Atro_branch3 = {
 			parthian_war
 			gulf_trade
 		}
-		provinces_to_highlight = { region = persia_region } 
+		provinces_to_highlight = { region = persia_region NOT = { country_or_non_sovereign_subject_holds = ROOT } } 
 
 		trigger = {
 			persia_region = {
@@ -337,7 +341,6 @@ Atro_branch4 = {
 		trigger = {
 			RU0 = {
 				has_been_insulted_by_root = yes
-				is_rival = root
 			}
 		}
 
@@ -363,6 +366,9 @@ Atro_branch4 = {
 					who = root
 					value = 150
 				}
+			}
+			RU0 = {
+				is_rival = ROOT
 			}
 		}
 
@@ -424,7 +430,7 @@ Atro_branch5 = {
 
 		trigger = {  
 			num_of_owned_provinces_with = {
-				value = 25
+				value = 15
 				has_owner_religion = no
 			}
 			has_estate_privilege = estate_burghers_enforced_interfaith_dialogue
