@@ -16,7 +16,6 @@ Atro_branch1 = {
 		required_missions = { destroy_albania } 
 		provinces_to_highlight = {
 			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
-			
 			OR = {
 				area = luristan_area
 				area = shahrizor_area
@@ -51,18 +50,17 @@ Atro_branch1 = {
 		icon = mission_cradle_of_civilization
 		position = 3
 		required_missions = { push_south } 
-		provinces_to_highlight = { all_province = { owned_by = SH0 } NOT = { country_or_non_sovereign_subject_holds = ROOT } } 
+		provinces_to_highlight = {
+			all_province = { owned_by = SH0 } 
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
 
 		trigger = {
 			SH0 = { exists = no } 
 			owns = 410
 		}
 
-		effect = {
-			country_event = {
-				id = atro.4
-			}
-		}
+		effect = { country_event = { id = atro.4 }  } 
 	}
 }
 Atro_branch2 = {
@@ -81,13 +79,12 @@ Atro_branch2 = {
 		icon = pacify_the_albanian_lands
 		position = 1
 		provinces_to_highlight = {
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 			OR = {
 				province_id = 421
 				province_id = 4999
 				province_id = 426
 				province_id = 4341
-   				
 			}
 		}
 
@@ -183,12 +180,11 @@ Atro_branch2 = {
 			gulf_trade
 		}
 		provinces_to_highlight = {
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 			OR = {
 				area = basra_area
 				area = iraq_arabi_area
 				area = al_jazira_area
-				
 			}
 		}
 
@@ -242,7 +238,7 @@ Atro_branch3 = {
 		position = 3
 		required_missions = { push_east } 
 		provinces_to_highlight = {
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 			owned_by = PR0
 			province_id = 4326
 		}
@@ -262,7 +258,10 @@ Atro_branch3 = {
 			parthian_war
 			gulf_trade
 		}
-		provinces_to_highlight = { region = persia_region NOT = { country_or_non_sovereign_subject_holds = ROOT } } 
+		provinces_to_highlight = {
+			region = persia_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
 
 		trigger = {
 			persia_region = {
@@ -340,11 +339,7 @@ Atro_branch4 = {
 		required_missions = { false_conversion } 
 		provinces_to_highlight = {  } 
 
-		trigger = {
-			RU0 = {
-				has_been_insulted_by_root = yes
-			}
-		}
+		trigger = { RU0 = { has_been_insulted_by_root = yes }  } 
 
 		effect = {
 			add_country_modifier = {
@@ -369,9 +364,7 @@ Atro_branch4 = {
 					value = 150
 				}
 			}
-			ROOT = {
-				is_rival = RU0
-			}
+			ROOT = { is_rival = RU0 } 
 		}
 
 		effect = {
@@ -388,9 +381,7 @@ Atro_branch4 = {
 	titan_clash = {
 		icon = mission_defy_the_dragon
 		position = 4
-		required_missions = {
-			not_so_roman
-		}
+		required_missions = { not_so_roman } 
 		provinces_to_highlight = {  } 
 
 		trigger = {
@@ -424,24 +415,22 @@ Atro_branch5 = {
 		icon = mission_patronize_art_and_religion
 		position = 2
 		required_missions = { false_conversion } 
-		provinces_to_highlight = {  
+		provinces_to_highlight = {  } 
 
-		} 
-
-		trigger = {  
+		trigger = {
 			num_of_owned_provinces_with = {
 				value = 15
 				has_owner_religion = no
 			}
 			has_estate_privilege = estate_burghers_enforced_interfaith_dialogue
-		} 
+		}
 
-		effect = {  
+		effect = {
 			add_country_modifier = {
-				name = atro_religious_tolerance
+				name = "atro_religious_tolerance"
 				duration = -1
 			}
-		} 
+		}
 	}
 
 	greek_settlements = {
@@ -453,7 +442,7 @@ Atro_branch5 = {
 		}
 		provinces_to_highlight = {  } 
 
-		trigger = {  
+		trigger = {
 			ROOT = {
 				capital_scope = {
 					development = 20
@@ -461,9 +450,9 @@ Atro_branch5 = {
 				}
 			}
 			dip_power = 250
-		} 
+		}
 
-		effect = {  
+		effect = {
 			random_owned_province = {
 				change_culture = ROOT
 				add_random_development = 1
@@ -473,7 +462,7 @@ Atro_branch5 = {
 				add_random_development = 1
 			}
 			add_country_modifier = {
-				name = settling_greeks
+				name = "settling_greeks"
 				duration = 3650
 			}
 		}
@@ -485,17 +474,6 @@ Seleucids_branch5 = {
 	ai = yes
 	has_country_shield = yes
 	potential = { tag = SL1 } 
-
-	hellenic_zoroastrianism = {
-		icon = mission_religious
-		position = 5
-		required_missions = { greek_settlements } 
-		provinces_to_highlight = {  } 
-
-		trigger = {  } 
-
-		effect = {  } 
-	}
 
 	companion_cavalry_revival = {
 		icon = mission_non-western_cavalry_raid
@@ -517,6 +495,38 @@ Seleucids_branch5 = {
 
 		effect = {  } 
 	}
+
+	new_pharoahs = {
+		icon = mission_egyptian_mamluk_soldier
+		position = 7
+		required_missions = { into_syria } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	curtail_estates = {
+		icon = appease_the_estates
+		position = 8
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	seleucid_absolutism = {
+		icon = enlightened_absolutism
+		position = 9
+		required_missions = { curtail_estates } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
 }
 Seleucids_branch4 = {
 	slot = 4
@@ -527,7 +537,7 @@ Seleucids_branch4 = {
 
 	into_syria = {
 		icon = jerusalem
-		position = 7
+		position = 6
 		required_missions = { seleucid_legacy } 
 		provinces_to_highlight = {  } 
 
@@ -538,8 +548,33 @@ Seleucids_branch4 = {
 
 	anatolian_push = {
 		icon = anatolian_frontier
-		position = 8
+		position = 7
 		required_missions = { into_syria } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	train_auxiliaries = {
+		icon = mission_modern_ottoman_soldiers
+		position = 11
+		required_missions = { companion_cavalry_revival } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	professional_army = {
+		icon = mission_modern_knight_army
+		position = 12
+		required_missions = {
+			train_auxiliaries
+			greek_mil_towns
+		}
 		provinces_to_highlight = {  } 
 
 		trigger = {  } 
@@ -556,18 +591,23 @@ Seleucids_branch3 = {
 
 	crush_mani_followers = {
 		icon = mission_fire_of_london
-		position = 7
+		position = 6
 		required_missions = { seleucid_legacy } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = { capital = { all_country = { religion = manich }  }  } 
 
-		trigger = {  } 
+		trigger = {
+			khorasan_region = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
 
 		effect = {  } 
 	}
 
-	egyptian_conquest = {
-		icon = mission_egyptian_mamluk_soldier
-		position = 1
+	ancient_homeland = {
+		icon = mission_unite_home_region
+		position = 7
 		required_missions = { into_syria } 
 		provinces_to_highlight = {  } 
 
@@ -578,12 +618,34 @@ Seleucids_branch3 = {
 
 	alexander_legacy = {
 		icon = mission_empire
-		position = 9
+		position = 8
 		required_missions = {
+			ancient_homeland
 			anatolian_push
-			egyptian_conquest
+			new_pharoahs
 			into_india
 		}
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	persian_textiles = {
+		icon = mission_expand_textile_industry
+		position = 10
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	silk_road_end = {
+		icon = take_constantinople
+		position = 11
+		required_missions = { persian_textiles } 
 		provinces_to_highlight = {  } 
 
 		trigger = {  } 
@@ -600,7 +662,7 @@ Seleucids_branch2 = {
 
 	bactrian_advance = {
 		icon = mission_central_asian_city
-		position = 7
+		position = 6
 		required_missions = { seleucid_legacy } 
 		provinces_to_highlight = {  } 
 
@@ -611,8 +673,36 @@ Seleucids_branch2 = {
 
 	into_india = {
 		icon = mission_indian_empire
-		position = 8
-		required_missions = { crush_mani_followers } 
+		position = 7
+		required_missions = {
+			crush_mani_followers
+			bactrian_advance
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	egyptian_granaries = {
+		icon = mission_se_along_the_river
+		position = 10
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	prosperous_empire = {
+		icon = mng_heavens_will
+		position = 12
+		required_missions = {
+			develop_mesopotamia
+			egyptian_granaries
+			silk_road_end
+		}
 		provinces_to_highlight = {  } 
 
 		trigger = {  } 
@@ -629,7 +719,7 @@ Seleucids_branch1 = {
 
 	crush_bolghars = {
 		icon = push_on_to_bulgaria
-		position = 7
+		position = 6
 		required_missions = { seleucid_legacy } 
 		provinces_to_highlight = {  } 
 
@@ -640,7 +730,7 @@ Seleucids_branch1 = {
 
 	silk_road_overlords = {
 		icon = mission_market_place_with_asian_traders
-		position = 8
+		position = 7
 		required_missions = {
 			crush_bolghars
 			bactrian_advance
@@ -677,6 +767,17 @@ Seleucids_branch1 = {
 		icon = mission_industrialize_bengal
 		position = 12
 		required_missions = { develop_mesopotamia } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	spread_greek_culture = {
+		icon = mission_dominate_home_trade_node
+		position = 8
+		required_missions = { silk_road_overlords } 
 		provinces_to_highlight = {  } 
 
 		trigger = {  } 
