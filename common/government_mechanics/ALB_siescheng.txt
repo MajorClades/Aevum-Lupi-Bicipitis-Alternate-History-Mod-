@@ -41,10 +41,38 @@ sie_council_mechanic = {
 					limit = {
 						ai = no
 					}
-					280 = {
-						add_base_tax = -1
-						add_base_production = -1
-						add_base_manpower = -1
+					if = {
+						limit = {
+							NOT = {
+								has_country_flag = sie_less_dev_down
+							}
+						}
+						280 = {
+							add_base_tax = -1
+							add_base_production = -1
+							add_base_manpower = -1
+						}
+					}else = {
+						280 = {
+							random_list = {
+								50 = {
+									add_base_tax = -1
+								}
+								50 = {}
+							}
+							random_list = {
+								50 = {
+									add_base_production = -1
+								}
+								50 = {}
+							}
+							random_list = {
+								50 = {
+									add_base_manpower = -1
+								}
+								50 = {}
+							}
+						}
 					}
 				}
 			}
@@ -91,8 +119,19 @@ sie_council_mechanic = {
 				years_of_income = 1
 			}
 			effect = { 
-				add_yearly_manpower = -1
-				add_years_of_income = -1
+
+				if = {
+					limit = {
+						NOT = {
+							has_country_flag = sie_less_man_down
+						}
+					}
+					add_yearly_manpower = -1
+					add_years_of_income = -1
+				}else = {
+					add_yearly_manpower = -0.5
+					add_years_of_income = -0.5
+				}
 			}
 			cooldown_years = 1
 			ai_chance = {
