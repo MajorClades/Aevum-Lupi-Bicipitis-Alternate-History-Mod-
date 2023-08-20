@@ -113,6 +113,156 @@ country_event = {
 			change_culture = ROOT
 			change_religion = ROOT
 			change_province_name = "Seleucia"
+			rename_capital = "Seleucia"
+		}
+	}
+}
+
+country_event = {
+	id = atro.5
+	title = atro.5.test
+	desc = atro.5.desc
+	picture = indiangfx_LAND_MILITARY_eventPicture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = atro.5a
+		ai_chance = {
+			factor = 50
+		}
+		thrace_area = {
+			change_culture = greek
+		}
+		morea_area = {
+			change_culture = greek
+		}
+		northern_greece_area = {
+			change_culture = greek
+		}
+		macedonia_area = {
+			change_culture = greek
+		}
+	}
+	option = {
+		name = atro.5b
+		ai_chance = {
+			factor = 50
+		}
+		add_prestige = 20
+		thrace_area = {
+			add_province_modifier = {
+				name = respected_local_culture
+				duration = 18250 
+			}
+		}
+		morea_area = {
+			add_province_modifier = {
+				name = respected_local_culture
+				duration = 18250 
+			}
+		}
+		northern_greece_area = {
+			add_province_modifier = {
+				name = respected_local_culture
+				duration = 18250 
+			}
+		}
+		macedonia_area = {
+			add_province_modifier = {
+				name = respected_local_culture
+				duration = 18250 
+			}
+		}
+	}
+}
+
+country_event = {
+	id = atro.6
+	title = atro.6.test
+	desc = atro.6.desc
+	picture = indiangfx_LAND_MILITARY_eventPicture
+	trigger = {
+		tag = SL1
+		AND = {
+			mission_completed = greek_settlements
+			mission_completed = crush_mani_followers
+			mission_completed = bactrian_advance
+			mission_completed = into_syria
+			mission_completed = anatolian_push
+		}
+		has_institution = enlightenment
+	}
+	mean_time_to_happen = {
+		months = 10
+	}
+	fire_only_once = yes
+	option = {
+		name = atro.6a
+		ai_chance = {
+			factor = 50
+		}
+		custom_tooltip = "atro_yunani_tooltip"
+		set_country_flag = had_atro6_flag
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						region = khorasan_region
+						region = persia_region
+						region = mashriq_region
+						region = caucasia_region
+						region = anatolia_region
+					}
+					culture_group = byzantine
+				}
+				change_culture = yunani
+			}
+		}
+		change_primary_culture = yunani
+	}
+	option = {
+		name = atro.6b
+		ai_chance = {
+			factor = 50
+		}
+		custom_tooltip = "atro_parsike_tooltip"
+		set_country_flag = had_atro6_flag
+		hidden_effect = {
+		every_owned_province = {
+			limit = {
+				OR = {
+					culture = persian
+					culture = luri
+					culture = baluchi
+					culture = kurdish
+					culture = mazandarani
+					culture = azerbaijani
+					culture = yunani
+				}
+				NOT = { culture = aramaic }
+			}
+			change_culture = koine
+		}
+		every_owned_province = {
+			limit = {
+				OR = {
+					culture = sogdian
+					culture = tocharian
+					culture = khorasani
+					culture = afghani
+				}
+			}
+			change_culture = bactrian
+		}
+		every_owned_province = {
+			limit = {
+				OR = {
+					culture = aramaic
+				}
+			}
+			change_culture = hellenic_aramaic
+		}
 		}
 	}
 }
