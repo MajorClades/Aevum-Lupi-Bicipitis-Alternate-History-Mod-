@@ -1,90 +1,913 @@
-
 Sie_1_slot = {
 	slot = 1
 	generic = no
 	ai = yes
-	potential = {	tag = SI0	}
 	has_country_shield = yes
+	potential = { tag = SI0 } 
 
-
-	
-}
-
-Sie_2_slot = {
-	slot = 2
-	generic = no
-	ai = yes
-	potential = {	tag = SI0	}
-	has_country_shield = yes
-
-	2_grand_council = {
-		icon = mission_invade_island
-		required_missions = { 3_grand_council}
+	1_grand_council = {
+		icon = qng_north_china
 		position = 2
-		
-		trigger = { 
+		required_missions = { 3_grand_council } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			stability = 3
+			republican_tradition = 100
+		}
+
+		effect = {
+			add_prestige = 30
+			add_corruption = -10
+			add_harmonization_progress = 50
+		}
+	}
+
+	1_expansion = {
+		icon = mission_asian_city
+		position = 4
+		required_missions = { 2_expansion } 
+		provinces_to_highlight = { province_id = 280 } 
+
+		trigger = {
+			280 = {
+				has_building = temple
+				base_tax = 5
+			}
+			has_government_power = {
+				mechanic_type = sie_council_mechanic
+				power_type = sie_single_power
+				value = 5
+			}
+		}
+
+		effect = {
+			280 = {
+				custom_tooltip = SIE_TEMPLE_2
+				remove_building = temple
+				remove_province_modifier = temple_district_sie
+				add_permanent_province_modifier = {
+					name = "temple_district_sie_2"
+					duration = -1
+				}
+			}
+		}
+	}
+
+	1_temple_district = {
+		icon = victor_for_the_true_faith
+		position = 6
+		required_missions = { 1_expansion } 
+		provinces_to_highlight = { province_id = 280 } 
+
+		trigger = {
+			280 = {
+				has_building = temple
+				base_tax = 10
+			}
 			has_government_power = {
 				mechanic_type = sie_council_mechanic
 				power_type = sie_single_power
 				value = 10
 			}
 		}
-		
+
 		effect = {
-			add_stability = 1
+			280 = {
+				custom_tooltip = SIE_TEMPLE_3
+				remove_province_modifier = temple_district_sie_2
+				add_permanent_province_modifier = {
+					name = "temple_district_sie_3"
+					duration = -1
+				}
+			}
 		}
 	}
 
-}
+	2_market_power = {
+		icon = mission_war_chest
+		position = 8
+		required_missions = { 2_market_goods } 
+		provinces_to_highlight = { province_id = 280 } 
 
+		trigger = {
+			280 = {
+				has_building = stock_exchange
+				base_production = 20
+			}
+			has_government_power = {
+				mechanic_type = sie_council_mechanic
+				power_type = sie_single_power
+				value = 20
+			}
+		}
+
+		effect = {
+			add_government_power = {
+				mechanic_type = sie_council_mechanic
+				power_type = sie_single_power
+				value = -20
+			}
+			280 = {
+				custom_tooltip = SIE_MARKET_3
+				remove_building = stock_exchange
+				remove_province_modifier = market_district_sie_3
+				add_permanent_province_modifier = {
+					name = "market_district_sie_4"
+					duration = -1
+				}
+			}
+		}
+	}
+}
+Sie_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = SI0 } 
+
+	2_grand_council = {
+		icon = jap_conquer_north_china
+		position = 2
+		required_missions = { 3_grand_council } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			has_government_power = {
+				mechanic_type = sie_council_mechanic
+				power_type = sie_single_power
+				value = 10
+			}
+		}
+
+		effect = { add_stability = 1 } 
+	}
+
+	2_expansion = {
+		icon = mission_to_china
+		position = 3
+		required_missions = { 2_grand_council } 
+		provinces_to_highlight = { province_id = 280 } 
+
+		trigger = { 280 = { has_building = temple }  } 
+
+		effect = {
+			280 = {
+				custom_tooltip = SIE_TEMPLE
+				remove_building = temple
+				add_permanent_province_modifier = {
+					name = "temple_district_sie"
+					duration = -1
+				}
+			}
+		}
+	}
+
+	2_market_share = {
+		icon = mission_asian_trader
+		position = 4
+		required_missions = { 2_expansion } 
+		provinces_to_highlight = { province_id = 280 } 
+
+		trigger = {
+			280 = { has_building = marketplace } 
+			has_government_power = {
+				mechanic_type = sie_council_mechanic
+				power_type = sie_single_power
+				value = 5
+			}
+		}
+
+		effect = {
+			add_government_power = {
+				mechanic_type = sie_council_mechanic
+				power_type = sie_single_power
+				value = -5
+			}
+			280 = {
+				custom_tooltip = SIE_MARKET
+				remove_building = marketplace
+				add_permanent_province_modifier = {
+					name = "market_district_sie"
+					duration = -1
+				}
+			}
+		}
+	}
+
+	2_marketer_sharer = {
+		icon = mission_market_place_with_asian_traders
+		position = 5
+		required_missions = { 2_market_share } 
+		provinces_to_highlight = { province_id = 280 } 
+
+		trigger = {
+			280 = {
+				has_building = marketplace
+				base_production = 10
+			}
+			has_government_power = {
+				mechanic_type = sie_council_mechanic
+				power_type = sie_single_power
+				value = 10
+			}
+		}
+
+		effect = {
+			add_government_power = {
+				mechanic_type = sie_council_mechanic
+				power_type = sie_single_power
+				value = -10
+			}
+			280 = {
+				custom_tooltip = SIE_MARKET
+				remove_building = marketplace
+				remove_province_modifier = market_district_sie
+				add_permanent_province_modifier = {
+					name = "market_district_sie_2"
+					duration = -1
+				}
+			}
+		}
+	}
+
+	2_market_goods = {
+		icon = mission_rb_colonise_spice_islands
+		position = 7
+		required_missions = { 2_marketer_sharer } 
+		provinces_to_highlight = { province_id = 280 } 
+
+		trigger = {
+			280 = {
+				has_building = trade_depot
+				base_production = 15
+			}
+			has_government_power = {
+				mechanic_type = sie_council_mechanic
+				power_type = sie_single_power
+				value = 10
+			}
+		}
+
+		effect = {
+			add_government_power = {
+				mechanic_type = sie_council_mechanic
+				power_type = sie_single_power
+				value = -10
+			}
+			280 = {
+				custom_tooltip = SIE_MARKET_2
+				remove_building = trade_depot
+				remove_province_modifier = market_district_sie_2
+				add_permanent_province_modifier = {
+					name = "market_district_sie_3"
+					duration = -1
+				}
+			}
+		}
+	}
+
+	2_workshops = {
+		icon = mission_colonial
+		position = 9
+		provinces_to_highlight = { province_id = 280 } 
+
+		trigger = {
+			280 = {
+				has_building = workshop
+				base_production = 10
+			}
+			has_government_power = {
+				mechanic_type = sie_council_mechanic
+				power_type = sie_single_power
+				value = 5
+			}
+		}
+
+		effect = {
+			add_government_power = {
+				mechanic_type = sie_council_mechanic
+				power_type = sie_single_power
+				value = -5
+			}
+			280 = {
+				custom_tooltip = SIE_WORK
+				remove_building = workshop
+				add_permanent_province_modifier = {
+					name = "work_district_sie"
+					duration = -1
+				}
+			}
+		}
+	}
+
+	2_work_sharer = {
+		icon = mission_castle_construction
+		position = 10
+		required_missions = { 2_workshops } 
+		provinces_to_highlight = { province_id = 280 } 
+
+		trigger = {
+			280 = {
+				has_building = workshop
+				base_production = 10
+				has_manufactory_trigger = yes
+			}
+			has_government_power = {
+				mechanic_type = sie_council_mechanic
+				power_type = sie_single_power
+				value = 10
+			}
+		}
+
+		effect = {
+			add_government_power = {
+				mechanic_type = sie_council_mechanic
+				power_type = sie_single_power
+				value = -10
+			}
+			280 = {
+				custom_tooltip = SIE_WORK
+				remove_building = workshop
+				remove_province_modifier = work_district_sie
+				add_permanent_province_modifier = {
+					name = "work_district_sie_2"
+					duration = -1
+				}
+			}
+		}
+	}
+
+	2_work_goods = {
+		icon = mission_riches_of_golconda
+		position = 11
+		required_missions = { 2_work_sharer } 
+		provinces_to_highlight = { province_id = 280 } 
+
+		trigger = {
+			280 = {
+				has_building = counting_house
+				base_production = 15
+				has_great_project = {
+					type = sie_dip_quarter
+					tier = 3
+				}
+			}
+		}
+
+		effect = {
+			280 = {
+				custom_tooltip = SIE_WORK_2
+				remove_building = workshop
+				remove_province_modifier = work_district_sie_2
+				add_permanent_province_modifier = {
+					name = "work_district_sie_3"
+					duration = -1
+				}
+			}
+		}
+	}
+}
 Sie_3_slot = {
 	slot = 3
 	generic = no
 	ai = yes
-	potential = {	tag = SI0	}
 	has_country_shield = yes
+	potential = { tag = SI0 } 
 
 	3_grand_council = {
-		icon = mission_invade_island
-		required_missions = { }
+		icon = mission_defy_the_dragon
 		position = 1
-		provinces_to_highlight = {
-			province_id = 280
-		}
-		trigger = { 
-			280 = {
-				development = 30
-			}
-		}
-		
+		provinces_to_highlight = { province_id = 280 } 
+
+		trigger = { 280 = { development = 30 }  } 
+
 		effect = {
 			280 = {
 				add_permanent_province_modifier = {
-					name = sie_small_dev
+					name = "sie_small_dev"
 					duration = 7300
 				}
 			}
 		}
 	}
 
+	3_expand_the_city = {
+		icon = mission_golden_century
+		position = 3
+		required_missions = { 3_grand_council } 
+		provinces_to_highlight = { province_id = 280 } 
+
+		trigger = {
+			280 = { development = 40 } 
+			has_government_power = {
+				mechanic_type = sie_council_mechanic
+				power_type = sie_single_power
+				value = 20
+			}
+		}
+
+		effect = {
+			set_country_flag = sie_less_dev_down
+			custom_tooltip = SIE_MECHANIC_EASIER
+		}
+	}
+
+	3_expand_the_metropole = {
+		icon = mission_african_gold
+		position = 5
+		required_missions = { 3_expand_the_city } 
+		provinces_to_highlight = { province_id = 280 } 
+
+		trigger = {
+			280 = { development = 50 } 
+			has_government_power = {
+				mechanic_type = sie_council_mechanic
+				power_type = sie_single_power
+				value = 40
+			}
+		}
+
+		effect = {
+			set_country_flag = sie_less_man_down
+			custom_tooltip = SIE_MECHANIC_EASIER_2
+		}
+	}
+
+	3_expand_the_empire = {
+		icon = deal_with_the_illuminati
+		position = 6
+		required_missions = { 3_expand_the_metropole } 
+		provinces_to_highlight = {
+			OR = {
+				is_capital_of = SI1
+				is_capital_of = SI2
+				is_capital_of = SI3
+				is_capital_of = SI4
+			}
+		}
+
+		trigger = {
+			SI1 = { total_development = 100 } 
+			SI2 = { total_development = 100 } 
+			SI3 = { total_development = 100 } 
+			SI4 = { total_development = 100 } 
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "direct_control_sie"
+				duration = -1
+			}
+		}
+	}
+
+	3_real_empire = {
+		icon = mission_seize_the_dragon_throne
+		position = 8
+		required_missions = { 3_expand_the_empire } 
+		provinces_to_highlight = {
+			OR = {
+				is_capital_of = SI1
+				is_capital_of = SI2
+				is_capital_of = SI3
+				is_capital_of = SI4
+			}
+		}
+
+		trigger = {
+			OR = {
+				any_subject_country = { total_development = 500 } 
+				OR = {
+					SI1 = { total_development = 500 } 
+					SI2 = { total_development = 500 } 
+					SI3 = { total_development = 500 } 
+					SI4 = { total_development = 500 } 
+				}
+			}
+		}
+
+		effect = { set_government_rank = 3 } 
+	}
 }
 Sie_4_slot = {
 	slot = 4
 	generic = no
 	ai = yes
-	potential = {	tag = SI0	}
 	has_country_shield = yes
+	potential = { tag = SI0 } 
 
+	4_grand_council = {
+		icon = mission_mal_subjugate_zaf
+		position = 2
+		required_missions = { 3_grand_council } 
+		provinces_to_highlight = {  } 
 
+		trigger = { army_size_percentage = 0.9 } 
 
+		effect = { pripyat_area = { add_permanent_claim = ROOT }  } 
+	}
+
+	4_expanded = {
+		icon = mission_gwalior_and_rathambore
+		position = 3
+		required_missions = { 4_grand_council } 
+		provinces_to_highlight = { area = pripyat_area } 
+
+		trigger = {
+			pripyat_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			pripyat_area = {
+				change_culture = chitans
+				add_core = ROOT
+			}
+			1941 = { change_province_name = "Nanmen" } 
+			278 = { change_province_name = "Beimen" } 
+			4982 = { change_province_name = "Ximen" } 
+			4545 = { change_province_name = "Dongmen" } 
+		}
+	}
+
+	4_barracks = {
+		icon = mission_mosque
+		position = 4
+		required_missions = { 4_expanded } 
+		provinces_to_highlight = { province_id = 280 } 
+
+		trigger = { 280 = { has_building = barracks }  } 
+
+		effect = {
+			280 = {
+				custom_tooltip = SIE_BARRACK
+				remove_building = barracks
+				add_permanent_province_modifier = {
+					name = "barrack_sie"
+					duration = -1
+				}
+			}
+		}
+	}
+
+	4_barrack_men = {
+		icon = mission_guilds_of_barcelona
+		position = 5
+		required_missions = { 4_barracks } 
+		provinces_to_highlight = { province_id = 280 } 
+
+		trigger = {
+			280 = {
+				has_building = barracks
+				base_manpower = 10
+			}
+		}
+
+		effect = {
+			280 = {
+				custom_tooltip = SIE_BARRACK
+				remove_building = barracks
+				remove_province_modifier = barrack_sie
+				add_permanent_province_modifier = {
+					name = "barrack_sie_2"
+					duration = -1
+				}
+			}
+		}
+	}
+
+	4_field_of_men = {
+		icon = mission_steppe_warriors
+		position = 7
+		required_missions = { 4_barrack_men } 
+		provinces_to_highlight = { province_id = 280 } 
+
+		trigger = {
+			280 = {
+				has_building = training_fields
+				base_manpower = 10
+			}
+			has_government_power = {
+				mechanic_type = sie_council_mechanic
+				power_type = sie_single_power
+				value = 10
+			}
+		}
+
+		effect = {
+			add_government_power = {
+				mechanic_type = sie_council_mechanic
+				power_type = sie_single_power
+				value = -10
+			}
+			280 = {
+				custom_tooltip = SIE_BARRACK_2
+				remove_building = training_fields
+				remove_province_modifier = barrack_sie_2
+				add_permanent_province_modifier = {
+					name = "barrack_sie_3"
+					duration = -1
+				}
+			}
+		}
+	}
+
+	4_town_hall = {
+		icon = mission_court_education
+		position = 9
+		provinces_to_highlight = { province_id = 280 } 
+
+		trigger = {
+			280 = {
+				has_building = courthouse
+				has_building = regimental_camp
+			}
+			has_government_power = {
+				mechanic_type = sie_council_mechanic
+				power_type = sie_single_power
+				value = 5
+			}
+		}
+
+		effect = {
+			add_government_power = {
+				mechanic_type = sie_council_mechanic
+				power_type = sie_single_power
+				value = -5
+			}
+			280 = {
+				custom_tooltip = SIE_POPULATION
+				remove_building = courthouse
+				remove_building = regimental_camp
+				add_permanent_province_modifier = {
+					name = "camp_district_sie"
+					duration = -1
+				}
+			}
+		}
+	}
+
+	4_control_pop = {
+		icon = mission_invade_island
+		position = 10
+		required_missions = { 4_town_hall } 
+		provinces_to_highlight = { province_id = 280 } 
+
+		trigger = {
+			280 = {
+				has_building = courthouse
+				has_building = regimental_camp
+				base_tax = 10
+			}
+			has_government_power = {
+				mechanic_type = sie_council_mechanic
+				power_type = sie_single_power
+				value = 10
+			}
+		}
+
+		effect = {
+			add_government_power = {
+				mechanic_type = sie_council_mechanic
+				power_type = sie_single_power
+				value = -10
+			}
+			280 = {
+				custom_tooltip = SIE_POPULATION
+				remove_building = courthouse
+				remove_building = regimental_camp
+				remove_province_modifier = camp_district_sie
+				add_permanent_province_modifier = {
+					name = "camp_district_sie_2"
+					duration = -1
+				}
+			}
+		}
+	}
+
+	4_grand_administration = {
+		icon = mission_rb_trinity_college_dublin
+		position = 11
+		required_missions = { 4_control_pop } 
+		provinces_to_highlight = { province_id = 280 } 
+
+		trigger = {
+			280 = {
+				has_building = town_hall
+				has_building = conscription_center
+				base_tax = 15
+				has_great_project = {
+					type = sie_adm_quarter
+					tier = 3
+				}
+			}
+		}
+
+		effect = {
+			280 = {
+				custom_tooltip = SIE_POPULATION_2
+				remove_building = town_hall
+				remove_building = regimental_camp
+				remove_province_modifier = camp_district_sie_2
+				add_permanent_province_modifier = {
+					name = "camp_district_sie_3"
+					duration = -1
+				}
+			}
+		}
+	}
 }
 Sie_5_slot = {
 	slot = 5
 	generic = no
 	ai = yes
-	potential = {	tag = SI0	}
 	has_country_shield = yes
+	potential = { tag = SI0 } 
 
+	5_grand_council = {
+		icon = mission_noble_council
+		position = 2
+		required_missions = { 3_grand_council } 
+		provinces_to_highlight = {  } 
 
+		trigger = {
+			has_adm_advisor_2 = yes
+			has_dip_advisor_2 = yes
+			has_mil_advisor_2 = yes
+		}
 
+		effect = {
+			add_government_power = {
+				mechanic_type = sie_council_mechanic
+				power_type = sie_single_power
+				value = 10
+			}
+		}
+	}
+
+	5_more_land = {
+		icon = mission_pol_develop_countryside
+		position = 4
+		required_missions = { 4_expanded } 
+		provinces_to_highlight = { area = pripyat_area } 
+
+		trigger = {
+			pripyat_area = {
+				type = all
+				owned_by = ROOT
+				fort_level = 2
+			}
+		}
+
+		effect = {
+			custom_tooltip = SIE_DEFENSEINDEPTH
+			278 = {
+				remove_building = fort_15th
+				remove_building = fort_16th
+				remove_building = fort_17th
+				remove_building = fort_18th
+				add_permanent_province_modifier = {
+					name = "sie_swamp_defense"
+					duration = -1
+				}
+			}
+			4545 = {
+				remove_building = fort_15th
+				remove_building = fort_16th
+				remove_building = fort_17th
+				remove_building = fort_18th
+				add_permanent_province_modifier = {
+					name = "sie_swamp_defense"
+					duration = -1
+				}
+			}
+			1941 = {
+				remove_building = fort_15th
+				remove_building = fort_16th
+				remove_building = fort_17th
+				remove_building = fort_18th
+				add_permanent_province_modifier = {
+					name = "sie_swamp_defense"
+					duration = -1
+				}
+			}
+			4982 = {
+				remove_building = fort_15th
+				remove_building = fort_16th
+				remove_building = fort_17th
+				remove_building = fort_18th
+				add_permanent_province_modifier = {
+					name = "sie_swamp_defense"
+					duration = -1
+				}
+			}
+		}
+	}
+
+	5_more_fort = {
+		icon = mission_expand_great_wall
+		position = 6
+		required_missions = { 5_more_land } 
+		provinces_to_highlight = { area = pripyat_area } 
+
+		trigger = {
+			pripyat_area = {
+				type = all
+				owned_by = ROOT
+				fort_level = 4
+			}
+			has_government_power = {
+				mechanic_type = sie_council_mechanic
+				power_type = sie_single_power
+				value = 10
+			}
+		}
+
+		effect = {
+			add_government_power = {
+				mechanic_type = sie_council_mechanic
+				power_type = sie_single_power
+				value = -10
+			}
+			custom_tooltip = SIE_DEFENSEINDEPTH_2
+			278 = {
+				remove_building = fort_15th
+				remove_building = fort_16th
+				remove_building = fort_17th
+				remove_building = fort_18th
+				add_permanent_province_modifier = {
+					name = "sie_dragon_walls"
+					duration = -1
+				}
+			}
+			4545 = {
+				remove_building = fort_15th
+				remove_building = fort_16th
+				remove_building = fort_17th
+				remove_building = fort_18th
+				add_permanent_province_modifier = {
+					name = "sie_dragon_walls"
+					duration = -1
+				}
+			}
+			1941 = {
+				remove_building = fort_15th
+				remove_building = fort_16th
+				remove_building = fort_17th
+				remove_building = fort_18th
+				add_permanent_province_modifier = {
+					name = "sie_dragon_walls"
+					duration = -1
+				}
+			}
+			4982 = {
+				remove_building = fort_15th
+				remove_building = fort_16th
+				remove_building = fort_17th
+				remove_building = fort_18th
+				add_permanent_province_modifier = {
+					name = "sie_dragon_walls"
+					duration = -1
+				}
+			}
+		}
+	}
+
+	5_field_of_wall = {
+		icon = mission_great_wall
+		position = 8
+		required_missions = {
+			4_field_of_men
+			5_more_fort
+		}
+		provinces_to_highlight = { province_id = 280 } 
+
+		trigger = {
+			280 = {
+				fort_level = 8
+				base_manpower = 20
+				has_great_project = {
+					type = sie_mil_quarter
+					tier = 3
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "wall_of_dragons"
+				duration = 10950
+			}
+			define_general = {
+				shock = 5
+				fire = 5
+				manuever = 5
+				siege = 5
+			}
+		}
+	}
 }

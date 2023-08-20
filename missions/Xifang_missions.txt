@@ -1,0 +1,192 @@
+Xif_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = SI1 } 
+
+}
+
+Xif_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = SI1 } 
+
+	2_xi_conquest = {
+		icon = mission_luther_theses
+		position = 3
+		required_missions = { 3_xi_conquest } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				has_tax_building_trigger = yes
+			} 
+		}
+
+		effect = {
+			capital_scope = {
+				add_base_tax = 1
+				add_base_production = 1
+				add_base_manpower = 1
+			}
+			overlord = {
+				capital_scope = {
+					add_base_tax = 1
+					add_base_production = 1
+					add_base_manpower = 1
+				}
+			}
+		}
+	}
+}
+
+Xif_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = SI1 } 
+
+	3_existence = {
+		icon = mission_swedish_peasantry
+		position = 1
+
+		trigger = { 
+			num_of_owned_provinces_with = {
+				value = 1
+			} 
+		} 
+
+		effect = {
+			add_country_modifier = {
+				name = xifang_manpower
+				duration = 10950
+			}
+		}
+	}
+
+	3_xi_conquest = {
+		icon = mission_luther_theses
+		position = 2
+		required_missions = { 3_existence } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+			} 
+		}
+
+		effect = {
+			poland_region = {
+				add_permanent_claim = ROOT
+			}
+			capital_scope = {
+				add_base_tax = 1
+				add_base_production = 1
+				add_base_manpower = 1
+			}
+		}
+	}
+	3_more_conquests = {
+		icon = mission_luther_theses
+		position = 4
+		required_missions = { 2_xi_conquest 4_xi_conquest } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				OR = {
+					has_tax_building_trigger = yes
+					base_tax = 7
+				}
+			} 
+		}
+
+		effect = {
+			add_treasury = 500
+			overlord = {
+				add_treasury = 500
+			}
+		}
+	}
+	3_saxony_sie = {
+		icon = mission_luther_theses
+		position = 5
+		required_missions = { 3_more_conquests } 
+		provinces_to_highlight = { region = poland_region} 
+
+		trigger = {
+			poland_region = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			north_german_region = {
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name = saxonic_overlord
+				duration = -1
+			}
+			overlord = {
+				add_country_modifier = {
+					name = saxonic_overlord_2
+					duration = -1
+				}
+			}
+		}
+	}
+}
+
+Xif_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = SI1 } 
+
+	4_xi_conquest = {
+		icon = mission_luther_theses
+		position = 3
+		required_missions = { 3_xi_conquest } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				fort_level = 1
+			} 
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = xifang_defense
+				duration = 10950
+			}
+			overlord = {
+				add_country_modifier = {
+					name = wealth_from_outside
+					duration = 7300
+				}
+			}
+		}
+	}
+}
+
+Xif_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = SI1 } 
+
+
+}

@@ -1,0 +1,150 @@
+country_decisions = {
+
+	sie_saxony_vassal = {
+		major = yes
+		potential = {
+			NOT = {
+				has_country_flag = sax_sie_1
+			}
+			tag = SI0
+			is_subject_of = SX0
+			ai = no
+		}
+		provinces_to_highlight = { area = pripyat_area  }
+		allow = {
+			SX0 = {
+				any_owned_province = {
+					area = pripyat_area 
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					pripyat_area = {
+						type = all
+						owned_by = SI0
+					}
+				}
+				set_country_flag = sax_sie_1
+			}
+			SX0 = {
+				country_event = {
+					id = siec.12
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	sie_saxony_vassal_2 = {
+		major = yes
+		potential = {
+			NOT = {
+				has_country_flag = sax_sie_2
+			}
+			tag = SI0
+			is_subject_of = SX0
+			ai = no
+		}
+		allow = {
+			treasury = 500
+			adm_power = 200
+		}
+		effect = {
+			set_country_flag = sax_sie_2
+			add_treasury = -500
+			add_adm_power = -200
+			set_bankruptcy = SX0
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		ai_importance = 400
+	}
+	sie_saxony_vassal_3 = {
+		major = yes
+		potential = {
+			NOT = {
+				has_country_flag = sax_sie_3
+			}
+			tag = SI0
+			is_subject_of = SX0
+			ai = no
+		}
+		allow = {
+			treasury = 500
+			mil_power = 200
+		}
+		effect = {
+			set_country_flag = sax_sie_3
+			add_treasury = -500
+			add_mil_power = -200
+			SX0 = {
+				random_owned_province = {
+					spawn_rebels = {
+						size = 3
+						type = leadered_peasant_rebels
+					}
+				}
+				random_owned_province = {
+					spawn_rebels = {
+						size = 3
+						type = leadered_peasant_rebels
+					}
+				}
+				random_owned_province = {
+					spawn_rebels = {
+						size = 3
+						type = leadered_peasant_rebels
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		ai_importance = 400
+	}
+	sie_saxony_vassal_4 = {
+		major = yes
+		potential = {
+			NOT = {
+				has_country_flag = sax_sie_4
+			}
+			tag = SI0
+			is_subject_of = SX0
+			ai = no
+		}
+		allow = {
+			treasury = 500
+			dip_power = 200
+		}
+		effect = {
+			set_country_flag = sax_sie_4
+			add_treasury = -500
+			add_dip_power = -200
+			every_known_country = {
+				limit = {
+					OR = {
+						is_rival = SX0
+						tag = GJ0
+						tag = PU0
+						tag = RU0
+					}
+				}
+				add_aggressive_expansion = {
+					who = SX0
+					value = 25
+					apply_calc = no
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		ai_importance = 400
+	}
+}

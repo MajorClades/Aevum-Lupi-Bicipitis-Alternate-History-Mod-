@@ -8,26 +8,26 @@ country_event = {
 	fire_only_once = yes
 	trigger = {
 		tag = SI0
-		any_owned_province = {
-			NOT = {
-				province_id = 280
+		OR = {
+			any_owned_province = {
+				NOT = {
+					area = pripyat_area 
+				}
+				OR = {
+					region = ruthenia_region
+					region = russia_region
+				}
 			}
-			NOT = {
-				province_id = 278
-			}
-			NOT = {
-				province_id = 4982
-			}
-			NOT = {
-				province_id = 1941
-			}
-			NOT = {
-				province_id = 4545
-			}
-			OR = {
-				region = ruthenia_region
-				region = russia_region
-				region = crimea_region
+			any_subject_country = {
+				any_owned_province = {
+					NOT = {
+						area = pripyat_area 
+					}
+					OR = {
+						region = ruthenia_region
+						region = russia_region
+					}
+				}
 			}
 		}
 		NOT = {
@@ -43,27 +43,28 @@ country_event = {
 		every_owned_province = {
 			limit = {
 				NOT = {
-					province_id = 280
-				}
-				NOT = {
-					province_id = 278
-				}
-				NOT = {
-					province_id = 4982
-				}
-				NOT = {
-					province_id = 1941
-				}
-				NOT = {
-					province_id = 4545
+					area = pripyat_area 
 				}
 				OR = {
 					region = ruthenia_region
 					region = russia_region
-					region = crimea_region
 				}
 			}
 			cede_province = SI2
+		}
+		every_subject_country = {
+			every_owned_province = {
+				limit = {
+					NOT = {
+						area = pripyat_area 
+					}
+					OR = {
+						region = ruthenia_region
+						region = russia_region
+					}
+				}
+				cede_province = SI2
+			}
 		}
 		create_subject = {
 			subject_type = outside_sie_vassal
@@ -82,26 +83,26 @@ country_event = {
 	trigger = {
 		tag = SI0
 		exists = SI2
-		any_owned_province = {
-			NOT = {
-				province_id = 280
+		OR = {
+			any_owned_province = {
+				NOT = {
+					area = pripyat_area 
+				}
+				OR = {
+					region = ruthenia_region
+					region = russia_region
+				}
 			}
-			NOT = {
-				province_id = 278
-			}
-			NOT = {
-				province_id = 4982
-			}
-			NOT = {
-				province_id = 1941
-			}
-			NOT = {
-				province_id = 4545
-			}
-			OR = {
-				region = ruthenia_region
-				region = russia_region
-				region = crimea_region
+			any_subject_country = {
+				any_owned_province = {
+					NOT = {
+						area = pripyat_area 
+					}
+					OR = {
+						region = ruthenia_region
+						region = russia_region
+					}
+				}
 			}
 		}
 	}
@@ -114,27 +115,28 @@ country_event = {
 		every_owned_province = {
 			limit = {
 				NOT = {
-					province_id = 280
-				}
-				NOT = {
-					province_id = 278
-				}
-				NOT = {
-					province_id = 4982
-				}
-				NOT = {
-					province_id = 1941
-				}
-				NOT = {
-					province_id = 4545
+					area = pripyat_area 
 				}
 				OR = {
 					region = ruthenia_region
 					region = russia_region
-					region = crimea_region
 				}
 			}
 			cede_province = SI2
+		}
+		every_subject_country = {
+			every_owned_province = {
+				limit = {
+					NOT = {
+						area = pripyat_area 
+					}
+					OR = {
+						region = ruthenia_region
+						region = russia_region
+					}
+				}
+				cede_province = SI2
+			}
 		}
 	}
 }
@@ -147,26 +149,20 @@ country_event = {
 	fire_only_once = yes
 	trigger = {
 		tag = SI0
-		any_owned_province = {
-			NOT = {
-				province_id = 280
+		OR = {
+			any_owned_province = {
+				OR = {
+					region = north_german_region
+					region = poland_region
+				}
 			}
-			NOT = {
-				province_id = 278
-			}
-			NOT = {
-				province_id = 4982
-			}
-			NOT = {
-				province_id = 1941
-			}
-			NOT = {
-				province_id = 4545
-			}
-			OR = {
-				region = baltic_region
-				region = poland_region
-				region = carpathia_region
+			any_subject_country = {
+				any_owned_province = {
+					OR = {
+						region = north_german_region
+						region = poland_region
+					}
+				}
 			}
 		}
 		NOT = {
@@ -181,29 +177,23 @@ country_event = {
 
 		every_owned_province = {
 			limit = {
-				NOT = {
-					province_id = 280
-				}
-				NOT = {
-					province_id = 278
-				}
-				NOT = {
-					province_id = 4982
-				}
-				NOT = {
-					province_id = 1941
-				}
-				NOT = {
-					province_id = 4545
-				}
 				OR = {
-					region = baltic_region
+					region = north_german_region
 					region = poland_region
-					region = carpathia_region
 				}
 			}
 			cede_province = SI1
-			
+		}
+		every_subject_country = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						region = north_german_region
+						region = poland_region
+					}
+				}
+				cede_province = SI1
+			}
 		}
 		create_subject = {
 			subject_type = outside_sie_vassal
@@ -222,26 +212,20 @@ country_event = {
 	trigger = {
 		tag = SI0
 		exists = SI1
-		any_owned_province = {
-			NOT = {
-				province_id = 280
+		OR = {
+			any_owned_province = {
+				OR = {
+					region = north_german_region
+					region = poland_region
+				}
 			}
-			NOT = {
-				province_id = 278
-			}
-			NOT = {
-				province_id = 4982
-			}
-			NOT = {
-				province_id = 1941
-			}
-			NOT = {
-				province_id = 4545
-			}
-			OR = {
-				region = baltic_region
-				region = poland_region
-				region = carpathia_region
+			any_subject_country = {
+				any_owned_province = {
+					OR = {
+						region = north_german_region
+						region = poland_region
+					}
+				}
 			}
 		}
 	}
@@ -253,28 +237,1081 @@ country_event = {
 
 		every_owned_province = {
 			limit = {
-				NOT = {
-					province_id = 280
-				}
-				NOT = {
-					province_id = 278
-				}
-				NOT = {
-					province_id = 4982
-				}
-				NOT = {
-					province_id = 1941
-				}
-				NOT = {
-					province_id = 4545
-				}
 				OR = {
-					region = baltic_region
+					region = north_german_region
 					region = poland_region
-					region = carpathia_region
 				}
 			}
 			cede_province = SI1
+		}
+		every_subject_country = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						region = north_german_region
+						region = poland_region
+					}
+				}
+				cede_province = SI1
+			}
+		}
+	}
+}
+##MASTER COUNCIL
+country_event = {
+	id = siec.5
+	title = siec.5.test
+	desc = siec.5.desc
+	picture = ADVISOR_eventPicture
+	trigger = {
+		tag = SI0
+		has_ruler = "Master's Council"
+		NOT = {
+			has_ruler_modifier = tax_master_sie
+		}
+	}
+	option = {
+		name = siec.5a
+		if = {
+			limit = {
+				adm = 6
+			}
+			random_list = {
+				20 = { }
+				80 = { change_adm = -1}
+			}
+		}else = {
+			if = {
+				limit = {
+					adm = 5
+					NOT = {		adm = 6		}
+				}
+				random_list = {
+					20 = { change_adm = 1}
+					80 = { change_adm = -1}
+				}
+			}else = {
+				if = {
+					limit = {
+						adm = 4
+						NOT = {		adm = 5		}
+					}
+					random_list = {
+						40 = { change_adm = 1}
+						60 = { change_adm = -1}
+					}
+				}else = {
+					if = {
+						limit = {
+							adm = 3
+							NOT = {		adm = 4		}
+						}
+						random_list = {
+							50 = { change_adm = 1}
+							50 = { change_adm = -1}
+						}
+					}else = {
+						if = {
+							limit = {
+								adm = 2
+								NOT = {		adm = 3	}
+							}
+							random_list = {
+								60 = { change_adm = 1}
+								40 = { change_adm = -1}
+							}
+						}else = {
+							if = {
+								limit = {
+									adm = 1
+									NOT = {		adm = 2		}
+								}
+								random_list = {
+									80 = { change_adm = 1}
+									20 = { change_adm = -1}
+								}
+							}else = {
+								if = {
+									limit = {
+										adm = 0
+										NOT = {		adm = 1		}
+									}
+									change_adm = 1
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		random_list = {
+			20 = {
+				add_ruler_modifier = {
+					name = tax_master_sie
+					duration = 12410
+				}
+			}
+			20 = {
+				add_ruler_modifier = {
+					name = tax_master_sie
+					duration = 13870
+				}
+			}
+			20 = {
+				add_ruler_modifier = {
+					name = tax_master_sie
+					duration = 16060
+				}
+			}
+			20 = {
+				add_ruler_modifier = {
+					name = tax_master_sie
+					duration = 16790
+				}
+			}
+			20 = {
+				add_ruler_modifier = {
+					name = tax_master_sie
+					duration = 17885
+				}
+			}
+		}
+	}
+	option = {
+		name = siec.5b
+		add_adm_power = -100
+	}
+}
+country_event = {
+	id = siec.6
+	title = siec.6.test
+	desc = siec.6.desc
+	picture = ADVISOR_eventPicture
+	trigger = {
+		tag = SI0
+		has_ruler = "Master's Council"
+		NOT = {
+			has_ruler_modifier = paper_master_sie
+		}
+	}
+	option = {
+		name = siec.6a
+		if = {
+			limit = {
+				adm = 6
+			}
+			random_list = {
+				20 = { }
+				80 = { change_adm = -1}
+			}
+		}else = {
+			if = {
+				limit = {
+					adm = 5
+					NOT = {		adm = 6		}
+				}
+				random_list = {
+					20 = { change_adm = 1}
+					80 = { change_adm = -1}
+				}
+			}else = {
+				if = {
+					limit = {
+						adm = 4
+						NOT = {		adm = 5		}
+					}
+					random_list = {
+						40 = { change_adm = 1}
+						60 = { change_adm = -1}
+					}
+				}else = {
+					if = {
+						limit = {
+							adm = 3
+							NOT = {		adm = 4		}
+						}
+						random_list = {
+							50 = { change_adm = 1}
+							50 = { change_adm = -1}
+						}
+					}else = {
+						if = {
+							limit = {
+								adm = 2
+								NOT = {		adm = 3	}
+							}
+							random_list = {
+								60 = { change_adm = 1}
+								40 = { change_adm = -1}
+							}
+						}else = {
+							if = {
+								limit = {
+									adm = 1
+									NOT = {		adm = 2		}
+								}
+								random_list = {
+									80 = { change_adm = 1}
+									20 = { change_adm = -1}
+								}
+							}else = {
+								if = {
+									limit = {
+										adm = 0
+										NOT = {		adm = 1		}
+									}
+									change_adm = 1
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		random_list = {
+			20 = {
+				add_ruler_modifier = {
+					name = paper_master_sie
+					duration = 12410
+				}
+			}
+			20 = {
+				add_ruler_modifier = {
+					name = paper_master_sie
+					duration = 13870
+				}
+			}
+			20 = {
+				add_ruler_modifier = {
+					name = paper_master_sie
+					duration = 16060
+				}
+			}
+			20 = {
+				add_ruler_modifier = {
+					name = paper_master_sie
+					duration = 16790
+				}
+			}
+			20 = {
+				add_ruler_modifier = {
+					name = paper_master_sie
+					duration = 17885
+				}
+			}
+		}
+	}
+	option = {
+		name = siec.5b
+		add_adm_power = -100
+	}
+}
+country_event = {
+	id = siec.7
+	title = siec.7.test
+	desc = siec.7.desc
+	picture = ADVISOR_eventPicture
+	trigger = {
+		tag = SI0
+		has_ruler = "Master's Council"
+		NOT = {
+			has_ruler_modifier = market_master_sie
+		}
+	}
+	option = {
+		name = siec.7a
+		if = {
+			limit = {
+				dip = 6
+			}
+			random_list = {
+				20 = { }
+				80 = { change_dip = -1}
+			}
+		}else = {
+			if = {
+				limit = {
+					dip = 5
+					NOT = {		dip = 6		}
+				}
+				random_list = {
+					20 = { change_dip = 1}
+					80 = { change_dip = -1}
+				}
+			}else = {
+				if = {
+					limit = {
+						dip = 4
+						NOT = {		dip = 5		}
+					}
+					random_list = {
+						40 = { change_dip = 1}
+						60 = { change_dip = -1}
+					}
+				}else = {
+					if = {
+						limit = {
+							dip = 3
+							NOT = {		dip = 4		}
+						}
+						random_list = {
+							50 = { change_dip = 1}
+							50 = { change_dip = -1}
+						}
+					}else = {
+						if = {
+							limit = {
+								dip = 2
+								NOT = {		dip = 3	}
+							}
+							random_list = {
+								60 = { change_dip = 1}
+								40 = { change_dip = -1}
+							}
+						}else = {
+							if = {
+								limit = {
+									dip = 1
+									NOT = {		dip = 2		}
+								}
+								random_list = {
+									80 = { change_dip = 1}
+									20 = { change_dip = -1}
+								}
+							}else = {
+								if = {
+									limit = {
+										dip = 0
+										NOT = {		dip = 1		}
+									}
+									change_dip = 1
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		random_list = {
+			20 = {
+				add_ruler_modifier = {
+					name = market_master_sie
+					duration = 12410
+				}
+			}
+			20 = {
+				add_ruler_modifier = {
+					name = market_master_sie
+					duration = 13870
+				}
+			}
+			20 = {
+				add_ruler_modifier = {
+					name = market_master_sie
+					duration = 16060
+				}
+			}
+			20 = {
+				add_ruler_modifier = {
+					name = market_master_sie
+					duration = 16790
+				}
+			}
+			20 = {
+				add_ruler_modifier = {
+					name = market_master_sie
+					duration = 17885
+				}
+			}
+		}
+	}
+	option = {
+		name = siec.5b
+		add_dip_power = -100
+	}
+}
+country_event = {
+	id = siec.8
+	title = siec.8.test
+	desc = siec.8.desc
+	picture = ADVISOR_eventPicture
+	trigger = {
+		tag = SI0
+		has_ruler = "Master's Council"
+		NOT = {
+			has_ruler_modifier = festival_master_sie
+		}
+	}
+	option = {
+		name = siec.8a
+		if = {
+			limit = {
+				dip = 6
+			}
+			random_list = {
+				20 = { }
+				80 = { change_dip = -1}
+			}
+		}else = {
+			if = {
+				limit = {
+					dip = 5
+					NOT = {		dip = 6		}
+				}
+				random_list = {
+					20 = { change_dip = 1}
+					80 = { change_dip = -1}
+				}
+			}else = {
+				if = {
+					limit = {
+						dip = 4
+						NOT = {		dip = 5		}
+					}
+					random_list = {
+						40 = { change_dip = 1}
+						60 = { change_dip = -1}
+					}
+				}else = {
+					if = {
+						limit = {
+							dip = 3
+							NOT = {		dip = 4		}
+						}
+						random_list = {
+							50 = { change_dip = 1}
+							50 = { change_dip = -1}
+						}
+					}else = {
+						if = {
+							limit = {
+								dip = 2
+								NOT = {		dip = 3	}
+							}
+							random_list = {
+								60 = { change_dip = 1}
+								40 = { change_dip = -1}
+							}
+						}else = {
+							if = {
+								limit = {
+									dip = 1
+									NOT = {		dip = 2		}
+								}
+								random_list = {
+									80 = { change_dip = 1}
+									20 = { change_dip = -1}
+								}
+							}else = {
+								if = {
+									limit = {
+										dip = 0
+										NOT = {		dip = 1		}
+									}
+									change_dip = 1
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		random_list = {
+			20 = {
+				add_ruler_modifier = {
+					name = festival_master_sie
+					duration = 12410
+				}
+			}
+			20 = {
+				add_ruler_modifier = {
+					name = festival_master_sie
+					duration = 13870
+				}
+			}
+			20 = {
+				add_ruler_modifier = {
+					name = festival_master_sie
+					duration = 16060
+				}
+			}
+			20 = {
+				add_ruler_modifier = {
+					name = festival_master_sie
+					duration = 16790
+				}
+			}
+			20 = {
+				add_ruler_modifier = {
+					name = festival_master_sie
+					duration = 17885
+				}
+			}
+		}
+	}
+	option = {
+		name = siec.5b
+		add_dip_power = -100
+	}
+}
+country_event = {
+	id = siec.9
+	title = siec.9.test
+	desc = siec.9.desc
+	picture = ADVISOR_eventPicture
+	trigger = {
+		tag = SI0
+		has_ruler = "Master's Council"
+		NOT = {
+			has_ruler_modifier = war_master_sie
+		}
+	}
+	option = {
+		name = siec.9a
+		if = {
+			limit = {
+				mil = 6
+			}
+			random_list = {
+				20 = { }
+				80 = { change_mil = -1}
+			}
+		}else = {
+			if = {
+				limit = {
+					mil = 5
+					NOT = {		mil = 6		}
+				}
+				random_list = {
+					20 = { change_mil = 1}
+					80 = { change_mil = -1}
+				}
+			}else = {
+				if = {
+					limit = {
+						mil = 4
+						NOT = {		mil = 5		}
+					}
+					random_list = {
+						40 = { change_mil = 1}
+						60 = { change_mil = -1}
+					}
+				}else = {
+					if = {
+						limit = {
+							mil = 3
+							NOT = {		mil = 4		}
+						}
+						random_list = {
+							50 = { change_mil = 1}
+							50 = { change_mil = -1}
+						}
+					}else = {
+						if = {
+							limit = {
+								mil = 2
+								NOT = {		mil = 3	}
+							}
+							random_list = {
+								60 = { change_mil = 1}
+								40 = { change_mil = -1}
+							}
+						}else = {
+							if = {
+								limit = {
+									mil = 1
+									NOT = {		mil = 2		}
+								}
+								random_list = {
+									80 = { change_mil = 1}
+									20 = { change_mil = -1}
+								}
+							}else = {
+								if = {
+									limit = {
+										mil = 0
+										NOT = {		mil = 1		}
+									}
+									change_mil = 1
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		random_list = {
+			20 = {
+				add_ruler_modifier = {
+					name = war_master_sie
+					duration = 12410
+				}
+			}
+			20 = {
+				add_ruler_modifier = {
+					name = war_master_sie
+					duration = 13870
+				}
+			}
+			20 = {
+				add_ruler_modifier = {
+					name = war_master_sie
+					duration = 16060
+				}
+			}
+			20 = {
+				add_ruler_modifier = {
+					name = war_master_sie
+					duration = 16790
+				}
+			}
+			20 = {
+				add_ruler_modifier = {
+					name = war_master_sie
+					duration = 17885
+				}
+			}
+		}
+	}
+	option = {
+		name = siec.5b
+		add_mil_power = -100
+	}
+}
+country_event = {
+	id = siec.10
+	title = siec.10.test
+	desc = siec.10.desc
+	picture = ADVISOR_eventPicture
+	trigger = {
+		tag = SI0
+		has_ruler = "Master's Council"
+		NOT = {
+			has_ruler_modifier = wall_master_sie
+		}
+	}
+	option = {
+		name = siec.10a
+		if = {
+			limit = {
+				mil = 6
+			}
+			random_list = {
+				20 = { }
+				80 = { change_mil = -1}
+			}
+		}else = {
+			if = {
+				limit = {
+					mil = 5
+					NOT = {		mil = 6		}
+				}
+				random_list = {
+					20 = { change_mil = 1}
+					80 = { change_mil = -1}
+				}
+			}else = {
+				if = {
+					limit = {
+						mil = 4
+						NOT = {		mil = 5		}
+					}
+					random_list = {
+						40 = { change_mil = 1}
+						60 = { change_mil = -1}
+					}
+				}else = {
+					if = {
+						limit = {
+							mil = 3
+							NOT = {		mil = 4		}
+						}
+						random_list = {
+							50 = { change_mil = 1}
+							50 = { change_mil = -1}
+						}
+					}else = {
+						if = {
+							limit = {
+								mil = 2
+								NOT = {		mil = 3	}
+							}
+							random_list = {
+								60 = { change_mil = 1}
+								40 = { change_mil = -1}
+							}
+						}else = {
+							if = {
+								limit = {
+									mil = 1
+									NOT = {		mil = 2		}
+								}
+								random_list = {
+									80 = { change_mil = 1}
+									20 = { change_mil = -1}
+								}
+							}else = {
+								if = {
+									limit = {
+										mil = 0
+										NOT = {		mil = 1		}
+									}
+									change_mil = 1
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		random_list = {
+			20 = {
+				add_ruler_modifier = {
+					name = wall_master_sie
+					duration = 12410
+				}
+			}
+			20 = {
+				add_ruler_modifier = {
+					name = wall_master_sie
+					duration = 13870
+				}
+			}
+			20 = {
+				add_ruler_modifier = {
+					name = wall_master_sie
+					duration = 16060
+				}
+			}
+			20 = {
+				add_ruler_modifier = {
+					name = wall_master_sie
+					duration = 16790
+				}
+			}
+			20 = {
+				add_ruler_modifier = {
+					name = wall_master_sie
+					duration = 17885
+				}
+			}
+		}
+	}
+	option = {
+		name = siec.5b
+		add_mil_power = -100
+	}
+}
+#SaXONY
+country_event = {
+	id = siec.11
+	title = siec.11.test
+	desc = siec.11.desc
+	picture = FAT_WARRIORS_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = SI0
+		war_with = SX0
+		NOT = {
+			army_strength = {
+				who = SX0
+				value = 0.8
+			}
+		}
+	}
+	option = {
+		name = siec.11a
+		ai_chance = {
+			factor = 0
+		}
+		SX0 = {
+			create_subject = {
+				subject_type = siesheng_vassal
+				who = ROOT
+			}
+		}
+	}
+	option = {
+		name = siec.11b
+		ai_chance = {
+			factor = 50
+		}
+		define_general = {
+			shock = 4
+			fire = 4
+			manuever = 5
+			siege = 0
+		}
+	}
+}
+
+country_event = {
+	id = siec.12
+	title = siec.12.test
+	desc = siec.12.desc
+	picture = FAT_WARRIORS_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = siec.12a
+		ai_chance = {
+			factor = 50
+		}
+		every_owned_province = {
+			limit = {
+				area = pripyat_area 
+			}
+			cede_province = SI0
+			owner = {
+				add_treasury = 50
+			}
+			SI0 = {
+				add_treasury = -50
+			}
+		}
+	}
+	option = {
+		name = siec.12b
+		ai_chance = {
+			factor = 0
+		}
+		SI0 = {
+			add_liberty_desire = 10
+		}
+	}
+}
+
+##OUTSIDE THE WALLS
+
+country_event = {
+	id = siec.13
+	title = siec.13.test
+	desc = siec.13.desc
+	picture = GREAT_FIRE_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = SI0
+		OR = {
+			any_owned_province = {
+				OR = {
+					region = baltic_region
+					region = scandinavia_region
+				}
+			}
+			any_subject_country = {
+				any_owned_province = {
+					OR = {
+						region = baltic_region
+						region = scandinavia_region
+					}
+				}
+			}
+		}
+		NOT = {
+			exists = SI3
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	option = {
+		name = siec.13a
+
+		every_owned_province = {
+			limit = {
+				OR = {
+					region = baltic_region
+					region = scandinavia_region
+				}
+			}
+			cede_province = SI3
+		}
+		every_subject_country = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						region = baltic_region
+						region = scandinavia_region
+					}
+				}
+				cede_province = SI3
+			}
+		}
+		create_subject = {
+			subject_type = outside_sie_vassal
+			subject = SI3
+		}
+	}
+
+}
+
+country_event = {
+	id = siec.14
+	title = siec.14.test
+	desc = siec.14.desc
+	picture = GREAT_FIRE_eventPicture
+	hidden = yes
+	trigger = {
+		tag = SI0
+		exists = SI3
+		OR = {
+			any_owned_province = {
+				OR = {
+					region = baltic_region
+					region = scandinavia_region
+				}
+			}
+			any_subject_country = {
+				any_owned_province = {
+					OR = {
+						region = baltic_region
+						region = scandinavia_region
+					}
+				}
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	option = {
+		name = siec.13a
+
+		every_owned_province = {
+			limit = {
+				OR = {
+					region = baltic_region
+					region = scandinavia_region
+				}
+			}
+			cede_province = SI3
+		}
+		every_subject_country = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						region = baltic_region
+						region = scandinavia_region
+					}
+				}
+				cede_province = SI3
+			}
+		}
+	}
+}
+
+country_event = {
+	id = siec.15
+	title = siec.15.test
+	desc = siec.15.desc
+	picture = GREAT_FIRE_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = SI0
+		OR = {
+			any_owned_province = {
+				OR = {
+					region = crimea_region
+					region = carpathia_region
+				}
+			}
+			any_subject_country = {
+				any_owned_province = {
+					OR = {
+						region = crimea_region
+						region = carpathia_region
+					}
+				}
+			}
+		}
+		NOT = {
+			exists = SI4
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	option = {
+		name = siec.15a
+
+		every_owned_province = {
+			limit = {
+				OR = {
+					region = crimea_region
+					region = carpathia_region
+				}
+			}
+			cede_province = SI4
+		}
+		every_subject_country = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						region = crimea_region
+					region = carpathia_region
+					}
+				}
+				cede_province = SI4
+			}
+		}
+		create_subject = {
+			subject_type = outside_sie_vassal
+			subject = SI4
+		}
+	}
+
+}
+
+country_event = {
+	id = siec.16
+	title = siec.16.test
+	desc = siec.16.desc
+	picture = GREAT_FIRE_eventPicture
+	hidden = yes
+	trigger = {
+		tag = SI0
+		exists = SI4
+		OR = {
+			any_owned_province = {
+				OR = {
+					region = crimea_region
+					region = carpathia_region
+				}
+			}
+			any_subject_country = {
+				any_owned_province = {
+					OR = {
+						region = crimea_region
+						region = carpathia_region
+					}
+				}
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	option = {
+		name = siec.13a
+
+		every_owned_province = {
+			limit = {
+				OR = {
+					region = crimea_region
+					region = carpathia_region
+				}
+			}
+			cede_province = SI4
+		}
+		every_subject_country = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						region = crimea_region
+						region = carpathia_region
+					}
+				}
+				cede_province = SI4
+			}
 		}
 	}
 }
