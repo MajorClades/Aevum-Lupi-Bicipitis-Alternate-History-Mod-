@@ -1,0 +1,50 @@
+country_decisions = {
+
+	biorno_nation = {
+		major = yes
+		potential = {
+			NOT = { has_country_flag = biorno_flag }
+			religion = norse_ragnaroked
+			culture_group = scandinavian
+			capital_scope = {
+				region = british_isles_region
+			}
+			NOT = { tag = SW0 }
+		}
+		provinces_to_highlight = {
+			region = british_isles_region
+			OR = {
+				NOT = { owned_by = ROOT }
+				NOT = { is_core = ROOT }
+			}
+		}
+		allow = {
+			NOT = { exists = SW0 }
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			is_at_war = no
+			num_of_owned_provinces_with = {
+				value = 33
+				region = british_isles_region
+			}
+		}
+		effect = {
+			change_tag = SW0
+			restore_country_name = yes
+			remove_non_electors_emperors_from_empire_effect = yes
+			british_isles_region = {
+					add_permanent_claim = SW0
+			}
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			set_country_flag = biorno_flag
+			add_prestige = 25
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+}
