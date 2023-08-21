@@ -16,7 +16,6 @@ Atro_branch1 = {
 		required_missions = { destroy_albania } 
 		provinces_to_highlight = {
 			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
-			
 			OR = {
 				area = luristan_area
 				area = shahrizor_area
@@ -51,18 +50,17 @@ Atro_branch1 = {
 		icon = mission_cradle_of_civilization
 		position = 3
 		required_missions = { push_south } 
-		provinces_to_highlight = { all_province = { owned_by = SH0 } NOT = { country_or_non_sovereign_subject_holds = ROOT } } 
+		provinces_to_highlight = {
+			all_province = { owned_by = SH0 } 
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
 
 		trigger = {
 			SH0 = { exists = no } 
 			owns = 410
 		}
 
-		effect = {
-			country_event = {
-				id = atro.4
-			}
-		}
+		effect = { country_event = { id = atro.4 }  } 
 	}
 }
 Atro_branch2 = {
@@ -81,13 +79,12 @@ Atro_branch2 = {
 		icon = pacify_the_albanian_lands
 		position = 1
 		provinces_to_highlight = {
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 			OR = {
 				province_id = 421
 				province_id = 4999
 				province_id = 426
 				province_id = 4341
-   				
 			}
 		}
 
@@ -172,7 +169,9 @@ Atro_branch2 = {
 				duration = 10950
 			}
 			408 = { add_permanent_province_modifier = { name = "he0_major_gulf_port" }  } 
+			add_years_of_income = 2
 		}
+		
 	}
 
 	mesopotamia_hegemony = {
@@ -183,12 +182,11 @@ Atro_branch2 = {
 			gulf_trade
 		}
 		provinces_to_highlight = {
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 			OR = {
 				area = basra_area
 				area = iraq_arabi_area
 				area = al_jazira_area
-				
 			}
 		}
 
@@ -208,14 +206,21 @@ Atro_branch2 = {
 		}
 
 		effect = {
-			every_owned_province = {
-				limit = {
-					OR = {
-						area = basra_area
-						area = iraq_arabi_area
-						area = al_jazira_area
-					}
+			basra_area = {
+				add_province_modifier = {
+					name = "he0_rule_in_mesopotamia"
+					duration = 10950
 				}
+				add_local_autonomy = -30
+			}
+			iraq_arabi_area = {
+				add_province_modifier = {
+					name = "he0_rule_in_mesopotamia"
+					duration = 10950
+				}
+				add_local_autonomy = -30
+			}
+			al_jazira_area = {
 				add_province_modifier = {
 					name = "he0_rule_in_mesopotamia"
 					duration = 10950
@@ -242,7 +247,7 @@ Atro_branch3 = {
 		position = 3
 		required_missions = { push_east } 
 		provinces_to_highlight = {
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 			owned_by = PR0
 			province_id = 4326
 		}
@@ -262,7 +267,10 @@ Atro_branch3 = {
 			parthian_war
 			gulf_trade
 		}
-		provinces_to_highlight = { region = persia_region NOT = { country_or_non_sovereign_subject_holds = ROOT } } 
+		provinces_to_highlight = {
+			region = persia_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
 
 		trigger = {
 			persia_region = {
@@ -272,14 +280,15 @@ Atro_branch3 = {
 		}
 
 		effect = {
-			every_owned_province = {
-				limit = { region = persia_region } 
-				add_province_modifier = {
-					name = "he0_rule_in_persia"
-					duration = 10950
+			
+				persia_region = {
+					add_province_modifier = {
+						name = "he0_rule_in_persia"
+						duration = 10950
+					}
+					add_local_autonomy = -30
 				}
-				add_local_autonomy = -30
-			}
+			
 		}
 	}
 
@@ -340,11 +349,7 @@ Atro_branch4 = {
 		required_missions = { false_conversion } 
 		provinces_to_highlight = {  } 
 
-		trigger = {
-			RU0 = {
-				has_been_insulted_by_root = yes
-			}
-		}
+		trigger = { RU0 = { has_been_insulted_by_root = yes }  } 
 
 		effect = {
 			add_country_modifier = {
@@ -369,9 +374,7 @@ Atro_branch4 = {
 					value = 150
 				}
 			}
-			ROOT = {
-				is_rival = RU0
-			}
+			ROOT = { is_rival = RU0 } 
 		}
 
 		effect = {
@@ -388,9 +391,7 @@ Atro_branch4 = {
 	titan_clash = {
 		icon = mission_defy_the_dragon
 		position = 4
-		required_missions = {
-			not_so_roman
-		}
+		required_missions = { not_so_roman } 
 		provinces_to_highlight = {  } 
 
 		trigger = {
@@ -424,24 +425,22 @@ Atro_branch5 = {
 		icon = mission_patronize_art_and_religion
 		position = 2
 		required_missions = { false_conversion } 
-		provinces_to_highlight = {  
+		provinces_to_highlight = {  } 
 
-		} 
-
-		trigger = {  
+		trigger = {
 			num_of_owned_provinces_with = {
 				value = 15
 				has_owner_religion = no
 			}
 			has_estate_privilege = estate_burghers_enforced_interfaith_dialogue
-		} 
+		}
 
-		effect = {  
+		effect = {
 			add_country_modifier = {
-				name = atro_religious_tolerance
+				name = "atro_religious_tolerance"
 				duration = -1
 			}
-		} 
+		}
 	}
 
 	greek_settlements = {
@@ -453,7 +452,7 @@ Atro_branch5 = {
 		}
 		provinces_to_highlight = {  } 
 
-		trigger = {  
+		trigger = {
 			ROOT = {
 				capital_scope = {
 					development = 20
@@ -461,9 +460,9 @@ Atro_branch5 = {
 				}
 			}
 			dip_power = 250
-		} 
+		}
 
-		effect = {  
+		effect = {
 			random_owned_province = {
 				change_culture = ROOT
 				add_random_development = 1
@@ -473,7 +472,7 @@ Atro_branch5 = {
 				add_random_development = 1
 			}
 			add_country_modifier = {
-				name = settling_greeks
+				name = "settling_greeks"
 				duration = 3650
 			}
 		}
@@ -486,15 +485,92 @@ Seleucids_branch5 = {
 	has_country_shield = yes
 	potential = { tag = SL1 } 
 
-	hellenic_zoroastrianism = {
-		icon = mission_religious
-		position = 5
-		required_missions = { greek_settlements } 
+	new_pharoahs = {
+		icon = mission_egyptian_mamluk_soldier
+		position = 7
+		required_missions = { into_syria } 
+		provinces_to_highlight = {
+			region = egypt_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			egypt_region = {
+				country_or_non_sovereign_subject_holds = root
+				type = all
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "new_pharoahs"
+				duration = -1
+			}
+		}
+	}
+
+	curtail_estates = {
+		icon = appease_the_estates
+		position = 8
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			AND = {
+				estate_loyalty = {
+					estate = estate_burghers
+					loyalty = 60
+				}
+				estate_loyalty = {
+					estate = estate_church
+					loyalty = 60
+				}
+				estate_loyalty = {
+					estate = estate_nobles
+					loyalty = 60
+				}
+				NOT = { 
+					AND = {
+						estate_influence = {
+							estate = estate_nobles
+							influence = 40
+						}
+						estate_influence = {
+							estate = estate_burghers
+							influence = 40
+						}
+						estate_influence = {
+							estate = estate_church
+							influence = 40
+						}
+					}
+				}
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_country_modifier = {
+				name = atro_curtailed_estates
+				duration = 10950
+			}
+		} 
+	}
+
+	seleucid_absolutism = {
+		icon = enlightened_absolutism
+		position = 9
+		required_missions = { curtail_estates } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			absolutism = 90
+			NOT = {
+				average_autonomy = 10
+			}
+		} 
+
+		effect = {  
+			add_government_reform = seleucid_absolute_rule_reform
+		} 
 	}
 
 	companion_cavalry_revival = {
@@ -502,9 +578,15 @@ Seleucids_branch5 = {
 		position = 10
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_cavalry = 30
+			mil_power = 100
+		} 
 
-		effect = { add_mil_power = 100 } 
+		effect = { 
+			add_mil_power = -100 
+			add_government_reform = companion_cavalry_reform
+		} 
 	}
 
 	greek_mil_towns = {
@@ -513,9 +595,43 @@ Seleucids_branch5 = {
 		required_missions = { companion_cavalry_revival } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_owned_provinces_with = {
+				value = 10
+				OR = {
+					culture_group = byzantine
+					culture = yunani
+				}
+				OR = {
+					region = khorasan_region
+					region = persia_region
+					region = mashriq_region
+				}
+				NOT = { culture = al_suryah_arabic }
+				NOT = { province_id = 410 }
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			every_owned_province = {
+				limit = {
+					OR = {
+						culture_group = byzantine
+						culture = yunani
+					}
+					OR = {
+						region = khorasan_region
+						region = persia_region
+						region = mashriq_region
+					}
+					NOT = { culture = al_suryah_arabic }
+					NOT = { province_id = 410 }
+				}
+				add_permanent_province_modifier = {
+					name = greek_military_town
+				}
+			}
+		} 
 	}
 }
 Seleucids_branch4 = {
@@ -527,24 +643,126 @@ Seleucids_branch4 = {
 
 	into_syria = {
 		icon = jerusalem
-		position = 7
+		position = 6
 		required_missions = { seleucid_legacy } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {
+			region = mashriq_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
 
-		trigger = {  } 
+		trigger = {
+			mashriq_region = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			2313 = {
+				is_core = ROOT
+				development = 20
+			}
+		}
 
-		effect = {  } 
+		effect = {
+			2313 = {
+				rename_capital = "Seleucia Piera"
+				change_province_name = "Seleucia Piera"
+			}
+			anatolia_region = { add_permanent_claim = ROOT } 
+			egypt_region = { add_permanent_claim = ROOT } 
+			macedonia_area = { add_permanent_claim = ROOT } 
+			thrace_area = { add_permanent_claim = ROOT } 
+			morea_area = { add_permanent_claim = ROOT } 
+			northern_greece_area = { add_permanent_claim = ROOT } 
+			crete_area = { add_permanent_claim = ROOT } 
+		}
 	}
 
 	anatolian_push = {
 		icon = anatolian_frontier
-		position = 8
+		position = 7
 		required_missions = { into_syria } 
+		provinces_to_highlight = {
+			region = anatolia_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			anatolia_region = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+
+		effect = {
+			custom_tooltip = rhomania_lose_cores_tooltip
+			hidden_effect = { every_owned_province = { remove_core = RU0 }  } 
+		}
+	}
+
+	train_auxiliaries = {
+		icon = mission_modern_ottoman_soldiers
+		position = 11
+		required_missions = { companion_cavalry_revival } 
+		provinces_to_highlight = {  
+			owned_by = ROOT
+			NOT = {
+				culture = ROOT
+			}
+			NOT = {
+				base_manpower = 10
+			}
+		} 
+
+		trigger = {  
+			num_of_owned_provinces_with = {
+				value = 20
+				OR = {
+					NOT = {
+						culture = ROOT
+					}
+					culture = bactrian
+					culture = koine
+				}
+				base_manpower = 10
+			}
+			employed_advisor = {
+				type = recruitmaster
+			}
+		} 
+
+		effect = {  
+			add_country_modifier = {
+				name = multicultural_army
+				duration = -1
+			}
+		} 
+	}
+
+	professional_army = {
+		icon = mission_modern_knight_army
+		position = 12
+		required_missions = {
+			train_auxiliaries
+			greek_mil_towns
+		}
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			army_professionalism = 0.75
+			custom_trigger_tooltip = {
+				tooltip = has_at_least_10_discipline_tooltip
+				has_global_modifier_value = {
+					which = discipline
+					value = 0.1
+				}
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_country_modifier = {
+				name = atro_modern_army
+				duration = -1
+			}
+		} 
 	}
 }
 Seleucids_branch3 = {
@@ -556,41 +774,263 @@ Seleucids_branch3 = {
 
 	crush_mani_followers = {
 		icon = mission_fire_of_london
-		position = 7
+		position = 6
 		required_missions = { seleucid_legacy } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			region = khorasan_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			khorasan_region = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+				NOT = { religion = manich }
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			northern_sindh_area = {
+				add_permanent_claim = ROOT
+			}
+			sindh_area = {
+				add_permanent_claim = ROOT
+			}
+			lahore_area = {
+				add_permanent_claim = ROOT
+			}
+			kashmir_area = {
+				add_permanent_claim = ROOT
+			}
+			multan_area = {
+				add_permanent_claim = ROOT
+			}
+			sind_sagar_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
-	egyptian_conquest = {
-		icon = mission_egyptian_mamluk_soldier
-		position = 1
+	ancient_homeland = {
+		icon = mission_unite_home_region
+		position = 7
 		required_missions = { into_syria } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {
+			OR = {
+				area = northern_greece_area
+				area = morea_area
+				area = macedonia_area
+				area = thrace_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
 
-		trigger = {  } 
+		trigger = {
+			macedonia_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			morea_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			thrace_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			northern_greece_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
 
-		effect = {  } 
+		effect = { 
+			country_event = { id = atro.5 }  
+			custom_tooltip = claim_culture_group_atro
+			hidden_effect = {
+				every_province = {
+					limit = {
+						culture_group = byzantine
+					}
+					add_permanent_claim = ROOT
+				}
+			}
+		} 
 	}
 
 	alexander_legacy = {
 		icon = mission_empire
-		position = 9
+		position = 8
 		required_missions = {
+			ancient_homeland
 			anatolian_push
-			egyptian_conquest
+			new_pharoahs
 			into_india
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+			culture_group = byzantine
+		} 
 
-		trigger = {  } 
+		trigger = {
+			total_development = 2000
+			is_hegemon = yes
+			owns_all_provinces = { AND ={ culture_group = byzantine NOT = { region = east_africa_region } } } 
+		}
 
-		effect = {  } 
+		effect = {
+			override_country_name = "HELLENIC_EMPIRE"
+			if = {
+				limit = { in_golden_age = yes } 
+				extend_golden_age = 50
+			}
+			else = { reset_golden_age = yes } 
+		}
+	}
+
+	persian_textiles = {
+		icon = mission_expand_textile_industry
+		position = 10
+		provinces_to_highlight = {  
+			owned_by = ROOT
+			region = persia_region
+			OR = {
+				trade_goods = silk
+				trade_goods = cloth
+			}
+			NOT = {
+				AND = {
+					base_production = 8
+					has_production_building_trigger = yes
+				}
+			}
+		} 
+
+		trigger = {  
+			calc_true_if = {
+				all_owned_province = {
+					region = persia_region
+					base_production = 8
+					has_production_building_trigger = yes
+					OR = {
+						trade_goods = silk
+						trade_goods = cloth
+					}
+				}
+				amount = 10
+			}
+		} 
+
+		effect = {  
+			random_owned_province = {
+				limit = {
+					region = persia_region
+					NOT = { 
+						OR = { 
+						trade_goods = cloth 
+						trade_goods = silk 
+						} 
+					}
+				}
+				random_list = {
+					60 = {
+						change_trade_goods = cloth
+					}
+					40 = {
+						change_trade_goods = silk
+					}
+				}
+				add_base_production = 2
+			}
+			random_owned_province = {
+				limit = {
+					region = persia_region
+					NOT = { 
+						OR = { 
+						trade_goods = cloth 
+						trade_goods = silk 
+						} 
+					}
+				}
+				random_list = {
+					60 = {
+						change_trade_goods = cloth
+					}
+					40 = {
+						change_trade_goods = silk
+					}
+				}
+				add_base_production = 2
+			}
+			random_owned_province = {
+				limit = {
+					region = persia_region
+					NOT = { 
+						OR = { 
+						trade_goods = cloth 
+						trade_goods = silk 
+						} 
+					}
+				}
+				random_list = {
+					60 = {
+						change_trade_goods = cloth
+					}
+					40 = {
+						change_trade_goods = silk
+					}
+				}
+				add_base_production = 2
+			}
+			change_price = {
+				trade_goods = silk
+				key = persian_textile_boom
+				value = 0.25
+				duration = -1
+			}
+		} 
+	}
+
+	silk_road_end = {
+		icon = take_constantinople
+		position = 11
+		required_missions = { persian_textiles } 
+		provinces_to_highlight = {  
+			province_id = 151
+		} 
+
+		trigger = {  
+			151 = {
+				has_trade_building_trigger = yes
+				has_production_building_trigger = yes
+				development = 30
+				is_strongest_trade_power = root
+			}
+			calc_true_if = {
+				amount = 20
+				all_owned_province = {
+					region = persia_region
+					has_trade_building_trigger = yes
+				}
+			}
+			
+		} 
+
+		effect = {  
+			151 = {
+				add_permanent_province_modifier = {
+					name = major_silk_road_city
+				}
+			}
+			persia_region = {
+				add_permanent_province_modifier = {
+					name = he0_rule_in_persia
+				}
+			}
+		} 
 	}
 }
+
 Seleucids_branch2 = {
 	slot = 2
 	generic = no
@@ -600,24 +1040,204 @@ Seleucids_branch2 = {
 
 	bactrian_advance = {
 		icon = mission_central_asian_city
-		position = 7
+		position = 6
 		required_missions = { seleucid_legacy } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+			OR = {
+				area = transoxiana_area
+				area = ferghana_area
+				province_id = 1968
+				province_id = 4344
+				province_id = 4343
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			transoxiana_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			ferghana_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			1968 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			4343 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			4344 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			random_owned_province = {
+				limit = {
+					area = ferghana_area
+				}
+				change_culture = bactrian
+			}
+			random_owned_province = {
+				limit = {
+					area = transoxiana_area
+				}
+				change_culture = bactrian
+			}
+			central_asia_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	into_india = {
 		icon = mission_indian_empire
-		position = 8
-		required_missions = { crush_mani_followers } 
-		provinces_to_highlight = {  } 
+		position = 7
+		required_missions = {
+			crush_mani_followers
+			bactrian_advance
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = northern_sindh_area
+				area = sindh_area
+				area = multan_area
+				area = lahore_area
+				area = sind_sagar_area
+				area = kashmir_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
 
-		trigger = {  } 
+		trigger = {
+			northern_sindh_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			sindh_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			lahore_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			kashmir_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			multan_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			sind_sagar_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
 
-		effect = {  } 
+		effect = {  
+			hindusthan_region = {
+				add_permanent_claim = ROOT
+			}
+			west_india_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	egyptian_granaries = {
+		icon = mission_se_along_the_river
+		position = 10
+		provinces_to_highlight = {  
+			NOT = {
+				OR = {
+					has_terrain = desert
+					has_terrain = coastal_desert
+					province_id = 365
+				}
+			}
+			region = egypt_region
+			NOT = {
+				AND = {
+					development = 15
+					has_production_building_trigger = yes
+				}
+			}
+		} 
+
+		trigger = {  
+			mission_completed = new_pharoahs
+			egypt_region = {
+				NOT = {
+					OR = {
+						has_terrain = desert
+						has_terrain = coastal_desert
+						hidden_trigger = {
+							province_id = 365
+						}
+					}
+				}
+				AND = {
+					development = 15
+					has_production_building_trigger = yes
+				}
+				type = all
+			}
+		} 
+
+		effect = {  
+			add_country_modifier = {
+				name = atro_full_bellies
+				duration = -1
+			}
+		} 
+	}
+
+	prosperous_empire = {
+		icon = mng_heavens_will
+		position = 12
+		required_missions = {
+			develop_mesopotamia
+			egyptian_granaries
+			silk_road_end
+		}
+		provinces_to_highlight = {  
+			owned_by = ROOT
+			NOT = {
+				is_prosperous = yes
+			}
+		} 
+
+		trigger = {  
+			NOT = {
+				average_unrest = 1
+			}
+			if = {
+				limit = {
+					all_owned_province = {
+						is_prosperous = yes
+					}
+					custom_trigger_tooltip = {
+						tooltip = atro_prosperity_yes
+					}
+				}
+			}
+			else = {
+				custom_trigger_tooltip = {
+					tooltip = atro_prosperity_no
+				}
+			}
+		} 
+
+		effect = {  
+			add_country_modifier = {
+				name = atro_prosperous_empire
+				duration = -1
+			}
+		} 
 	}
 }
 Seleucids_branch1 = {
@@ -629,48 +1249,218 @@ Seleucids_branch1 = {
 
 	crush_bolghars = {
 		icon = push_on_to_bulgaria
-		position = 7
+		position = 6
 		required_missions = { seleucid_legacy } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = { 
+			OR = { 
+				culture = bulgarian
+				province_id = 441
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			owns_all_provinces = {
+				culture = bulgarian
+			}
+			owns = 441
+		} 
 
-		effect = {  } 
+		effect = {  
+			every_province = {
+				limit = {
+					culture = bulgarian
+				}
+				add_province_modifier = {
+					name = convert_bolghars
+					duration = 7300
+				}
+			}
+			441 = {
+				add_center_of_trade_level = 1
+			}
+		} 
 	}
 
 	silk_road_overlords = {
 		icon = mission_market_place_with_asian_traders
-		position = 8
+		position = 7
 		required_missions = {
 			crush_bolghars
 			bactrian_advance
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				province_id = 454
+				province_id = 442
+				province_id = 441
+				province_id = 458
+				province_id = 739
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			454	= {
+				has_trade_building_trigger = yes
+				development = 15
+				OR = {
+					has_building = workshop
+					has_building = counting_house
+				}
+			}
+			442	= {
+				has_trade_building_trigger = yes
+				development = 15
+				OR = {
+					has_building = workshop
+					has_building = counting_house
+				}
+			}
+			441	= {
+				has_trade_building_trigger = yes
+				development = 15
+				OR = {
+					has_building = workshop
+					has_building = counting_house
+				}
+			}
+			458	= {
+				has_trade_building_trigger = yes
+				development = 15
+				OR = {
+					has_building = workshop
+					has_building = counting_house
+				}
+			}
+			739	= {
+				has_trade_building_trigger = yes
+				development = 15
+				OR = {
+					has_building = workshop
+					has_building = counting_house
+				}
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_country_modifier = {
+				name = silk_road_trade_connections
+				duration = -1
+			}
+			739 = {
+				add_permanent_province_modifier = {
+					name = major_silk_road_city
+				}
+			}
+			458 = {
+				add_permanent_province_modifier = {
+					name = major_silk_road_city
+				}
+			}
+			441 = {
+				add_permanent_province_modifier = {
+					name = major_silk_road_city
+				}
+			}
+			442 ={
+				add_permanent_province_modifier = {
+					name = major_silk_road_city
+				}
+			}
+			454 = {
+				add_permanent_province_modifier = {
+					name = major_silk_road_city
+				}
+			}
+			add_years_of_income = 5
+		} 
 	}
 
 	restore_seleucia = {
 		icon = mission_found_the_city_of_agra
-		position = 10
-		provinces_to_highlight = {  } 
+		position = 9
+		provinces_to_highlight = {  
+			province_id = 410
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			410 = {
+				development = 30
+				has_trade_building_trigger = yes
+				has_production_building_trigger = yes
+				has_tax_building_trigger = yes
+				has_manufactory_trigger = yes
+				NOT = { devastation = 0 }
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			410 = {
+				add_permanent_province_modifier = {
+					name = seleucia_imperial_capital
+				}
+			}
+		} 
 	}
 
 	develop_mesopotamia = {
 		icon = prosperity_for_all
 		position = 11
 		required_missions = { restore_seleucia } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			owned_by = root
+			OR = {
+				area = al_jazira_area
+				area = iraq_arabi_area
+				area = basra_area
+			}
+			NOT = {
+				AND = {
+					development = 10
+					has_tax_building_trigger = yes
+					has_production_building_trigger = yes
+				}
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			all_owned_province = {
+				OR = {
+					area = al_jazira_area
+					area = iraq_arabi_area
+					area = basra_area
+				}
+				AND = {
+					development = 10
+					has_tax_building_trigger = yes
+					has_production_building_trigger = yes
+				}
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			al_jazira_area = {
+				add_province_modifier = {
+					name = he0_rule_in_mesopotamia
+					duration = -1
+				}
+				add_prosperity = 100
+			}
+			iraq_arabi_area = {
+				add_province_modifier = {
+					name = he0_rule_in_mesopotamia
+					duration = -1
+				}
+				add_prosperity = 100
+			}
+			basra_area = {
+				add_province_modifier = {
+					name = he0_rule_in_mesopotamia
+					duration = -1
+				}
+				add_prosperity = 100
+			}
+		} 
 	}
 
 	early_industry = {
@@ -679,8 +1469,25 @@ Seleucids_branch1 = {
 		required_missions = { develop_mesopotamia } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			calc_true_if = {
+				all_owned_province = {
+					has_manufactory_trigger = yes
+				}
+				amount = 30
+			}
+		} 
 
-		effect = {  } 
+		effect = { 
+			custom_tooltip = atro_indust_tooltip
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						has_manufactory_trigger = yes
+					}
+					add_base_production = 2
+				}
+			} 
+		} 
 	}
 }
