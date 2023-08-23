@@ -464,7 +464,7 @@ Sie_3_slot = {
 	}
 
 	3_real_empire = {
-		icon = mission_seize_the_dragon_throne
+		icon = give_him_back_his_legions
 		position = 8
 		required_missions = { 3_expand_the_empire } 
 		provinces_to_highlight = {
@@ -489,6 +489,34 @@ Sie_3_slot = {
 		}
 
 		effect = { set_government_rank = 3 } 
+	}
+
+	3_imperial_city = {
+		icon = mission_seize_the_dragon_throne
+		position = 10
+		required_missions = { 3_real_empire } 
+		provinces_to_highlight = {
+			OR = {
+				is_capital_of = SI1
+				is_capital_of = SI2
+				is_capital_of = SI3
+				is_capital_of = SI4
+			}
+		}
+
+		trigger = {
+			SI1 = { mission_completed = 3_germany_sie } 
+			SI2 = { mission_completed = 3_russia_sie  } 
+			SI3 = { mission_completed = 3_zlandia_sie } 
+			SI4 = { mission_completed = 3_carpa_sie } 
+		}
+
+		effect = { 
+			country_event = {
+				id = siec.1000
+			}
+
+		} 
 	}
 }
 Sie_4_slot = {
