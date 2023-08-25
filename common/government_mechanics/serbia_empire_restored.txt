@@ -1,0 +1,129 @@
+serbian_mech_mechanic = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 8
+	available = {
+	
+	}
+	
+	interactions = {
+		defense_focus = {
+			icon = GFX_inward_focus_button
+			trigger = {
+				custom_trigger_tooltip = {
+					tooltip = SERBIA_DEF_FOCUS 
+					is_in_war = {
+						defenders = ROOT
+					}
+				}
+			}
+			effect = {
+				hidden_effect = {
+					remove_country_modifier = serbia_defense_focus
+					remove_country_modifier = serbia_defense_focus_lv2
+					remove_country_modifier = serbia_neutral_focus
+					remove_country_modifier = serbia_neutral_focus_lv2
+					remove_country_modifier = serbia_offense_focus
+					remove_country_modifier = serbia_offense_focus_lv2
+				}
+				if = {
+					limit = {
+						has_country_flag = lv2_serbia_def
+					}
+					add_country_modifier = {
+						name = serbia_defense_focus_lv2
+						duration = -1
+						desc = until_different_focus_tt
+					}
+				}else = {
+					add_country_modifier = {
+						name = serbia_defense_focus
+						duration = -1
+						desc = until_different_focus_tt
+					}
+				}
+			}
+			ai_chance = {
+				factor = 0
+			}
+		}
+		neutral_focus = {
+			icon = GFX_outward_focus_button
+			trigger = { 
+				is_at_war = no
+				NOT = {
+					has_country_modifier = serbia_neutral_focus
+				}
+			}
+			effect = { 
+				hidden_effect = {
+					remove_country_modifier = serbia_defense_focus
+					remove_country_modifier = serbia_defense_focus_lv2
+					remove_country_modifier = serbia_neutral_focus
+					remove_country_modifier = serbia_neutral_focus_lv2
+					remove_country_modifier = serbia_offense_focus
+					remove_country_modifier = serbia_offense_focus_lv2
+				}
+				if = {
+					limit = {
+						has_country_flag = lv2_serbia_neut
+					}
+					add_country_modifier = {
+						name = serbia_neutral_focus_lv2
+						duration = -1
+						desc = until_different_focus_tt
+					}
+				}else = {
+					add_country_modifier = {
+						name = serbia_neutral_focus
+						duration = -1
+						desc = until_different_focus_tt
+					}
+				}
+			}
+			ai_chance = {
+				factor = 0
+			}
+		}
+		offense_focus = {
+			icon = GFX_expansion_focus_button
+			trigger = {
+				custom_trigger_tooltip = {
+					tooltip = SERBIA_ATK_FOCUS 
+					is_in_war = {
+						attackers = ROOT
+					}
+				}
+			}
+			effect = { 
+				hidden_effect = {
+					remove_country_modifier = serbia_defense_focus
+					remove_country_modifier = serbia_defense_focus_lv2
+					remove_country_modifier = serbia_neutral_focus
+					remove_country_modifier = serbia_neutral_focus_lv2
+					remove_country_modifier = serbia_offense_focus
+					remove_country_modifier = serbia_offense_focus_lv2
+				}
+				if = {
+					limit = {
+						has_country_flag = lv2_serbia_atk
+					}
+					add_country_modifier = {
+						name = serbia_offense_focus_lv2
+						duration = -1
+						desc = until_different_focus_tt
+					}
+				}else = {
+					add_country_modifier = {
+						name = serbia_offense_focus
+						duration = -1
+						desc = until_different_focus_tt
+					}
+				}
+				
+			}
+			ai_chance = {
+				factor = 0
+			}
+		}
+	}
+}

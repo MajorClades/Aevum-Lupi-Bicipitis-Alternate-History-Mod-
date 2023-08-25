@@ -258,4 +258,57 @@ country_decisions = {
 			remove_country_modifier = ger_prus_discipline
 		}
 	}
+	deutsland_nation = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			was_never_end_game_tag_trigger = yes
+			NOT = { has_country_flag = formed_deut_flag }
+			NOT = { tag = GR0 }
+			NOT = { tag = PU0 }
+			NOT = { tag = HLR }
+			NOT = { tag = ROM }
+			culture = teutonic
+			is_colonial_nation = no
+		}
+		provinces_to_highlight = {
+			region = south_german_region
+			OR = {
+				NOT = { owned_by = ROOT }
+				NOT = { is_core = ROOT }
+			}
+		}
+		allow = {
+			adm_tech = 7
+			NOT = { exists = GR6 }
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			is_at_war = no
+			num_of_owned_provinces_with = {
+				is_core = ROOT
+				region = south_german_region
+				value = 15
+			}
+		}
+		effect = {
+			change_tag = GR6
+			restore_country_name_effect = yes
+			GR6 = { set_government_rank = 2 }
+			south_german_region = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = GR6
+			}			
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			add_prestige = 25
+			set_country_flag = formed_deut_flag
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
 }
