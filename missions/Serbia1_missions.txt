@@ -23,7 +23,6 @@ Serbia_1_slot = {
 			}
 		}
 	}
-
 	1_serbia_defense_2 = {
 		icon = mission_luther_theses
 		position = 2
@@ -56,80 +55,124 @@ Serbia_1_slot = {
 			}
 		}
 	}
-
-	1_serbia_defense_3 = {
+	1_serbia_serica = {
 		icon = mission_luther_theses
-		position = 2
-		required_missions = { 1_serbia_defense_2 2_serbia_defense_2 } 
-
+		position = 3
+		required_missions = { 1_serbia_defense_2 } 
+		provinces_to_highlight = {
+			OR = {
+				area = bashkiria_area
+				area = lower_yik_area
+			}
+		}
 		trigger = { 
-			has_mil_advisor_2 = yes
-			stability = 1
-			any_owned_province = {
-				base_manpower = 8
+			bashkiria_area = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+			lower_yik_area = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
 			}
 		} 
 
 		effect = {
-			set_country_flag = lv2_serbia_def
-			custom_tooltip = SERBIA_UP_DEF_2
-			add_country_modifier = {
-				name = serbia_defense_focus_lv2
-				duration = -1
+			add_army_tradition = 10
+			define_advisor = {
+				type = army_organiser
+				skill = 2
+				discount = yes
 			}
-			hidden_effect = {
-				remove_country_modifier = serbia_defense_focus
-				remove_country_modifier = serbia_defense_focus_lv2
-				remove_country_modifier = serbia_neutral_focus
-				remove_country_modifier = serbia_neutral_focus_lv2
-				remove_country_modifier = serbia_offense_focus
-				remove_country_modifier = serbia_offense_focus_lv2
+			ural_region = {
+				add_permanent_claim = ROOT
 			}
 		}
 	}
-	1_serbia_peace = {
+	1_serbia_serica_2 = {
 		icon = mission_luther_theses
-		position = 4
-		required_missions = { 1_serbia_defense_3  } 
-
+		position = 5
+		required_missions = { 1_serbia_serica } 
+		provinces_to_highlight = {
+			is_capital_of = AT0
+		}
 		trigger = { 
-			has_adm_advisor_2 = yes
-			has_dip_advisor_2 = yes
-			stability = 2
+			NOT = {
+				exists = AT0
+			}
 		} 
 
 		effect = {
-			set_country_flag = lv2_serbia_neut
-			custom_tooltip = SERBIA_UP_NEUT_2
 			add_country_modifier = {
-				name = serbia_neutral_focus_lv2
-				duration = -1
+				name = war_on_guohong
+				duration = 10950
 			}
-			hidden_effect = {
-				remove_country_modifier = serbia_defense_focus
-				remove_country_modifier = serbia_defense_focus_lv2
-				remove_country_modifier = serbia_neutral_focus
-				remove_country_modifier = serbia_neutral_focus_lv2
-				remove_country_modifier = serbia_offense_focus
-				remove_country_modifier = serbia_offense_focus_lv2
+			russia_region = {
+				add_permanent_claim = ROOT
+			}
+			crimea_region = {
+				add_permanent_claim = ROOT
 			}
 		}
 	}
 	1_serbia_empire = {
 		icon = mission_luther_theses
-		position = 5
-		required_missions = { 1_serbia_peace  } 
-
+		position = 7
+		required_missions = { 1_serbia_defense_2 } 
+		provinces_to_highlight = {
+			OR = {
+				region = russia_region
+				region = crimea_region
+			}
+		}
 		trigger = { 
-			has_adm_advisor_2 = yes
-			has_mil_advisor_2 = yes
-			has_dip_advisor_2 = yes
-			stability = 3
-			total_development = 500
+			OR = {
+				russia_region = {
+					type = all
+					OR = {
+						owned_by = ROOT
+						owned_by_subject_of = ROOT
+					}
+				}
+				crimea_region = {
+					type = all
+					OR = {
+						owned_by = ROOT
+						owned_by_subject_of = ROOT
+					}
+				}
+			}
 		} 
 
 		effect = {
-			set_government_rank = 3
+			if = {
+				limit = {
+					num_of_owned_provinces_with = {
+						value = 30
+						region = russia_region
+					}
+				}
+				define_general = {
+					shock = 5
+					fire = 5
+					manuever = 6
+					siege = 3
+				}
+			}else = {
+				custom_tooltip = SERB_RUSSIA_BONUS
+			}
+			add_country_modifier = {
+				name = serb_left_empire
+				duration = -1
+			}
+			ruthenia_region = {
+				add_permanent_claim = ROOT
+			}
 		}
 	}
 }
@@ -176,7 +219,86 @@ Serbia_2_slot = {
 			}
 		}
 	}
+	1_serbia_defense_3 = {
+		icon = mission_luther_theses
+		position = 4
+		required_missions = {   } 
 
+		trigger = { 
+			has_mil_advisor_2 = yes
+			stability = 1
+			any_owned_province = {
+				base_manpower = 8
+			}
+		} 
+
+		effect = {
+			set_country_flag = lv2_serbia_def
+			custom_tooltip = SERBIA_UP_DEF_2
+			add_country_modifier = {
+				name = serbia_defense_focus_lv2
+				duration = -1
+			}
+			hidden_effect = {
+				remove_country_modifier = serbia_defense_focus
+				remove_country_modifier = serbia_defense_focus_lv2
+				remove_country_modifier = serbia_neutral_focus
+				remove_country_modifier = serbia_neutral_focus_lv2
+				remove_country_modifier = serbia_offense_focus
+				remove_country_modifier = serbia_offense_focus_lv2
+			}
+		}
+	}
+	1_serbia_peace = {
+		icon = mission_luther_theses
+		position = 6
+		required_missions = { 1_serbia_defense_3  } 
+
+		trigger = { 
+			has_adm_advisor_2 = yes
+			has_dip_advisor_2 = yes
+			stability = 2
+		} 
+
+		effect = {
+			set_country_flag = lv2_serbia_neut
+			custom_tooltip = SERBIA_UP_NEUT_2
+			add_country_modifier = {
+				name = serbia_neutral_focus_lv2
+				duration = -1
+			}
+			hidden_effect = {
+				remove_country_modifier = serbia_defense_focus
+				remove_country_modifier = serbia_defense_focus_lv2
+				remove_country_modifier = serbia_neutral_focus
+				remove_country_modifier = serbia_neutral_focus_lv2
+				remove_country_modifier = serbia_offense_focus
+				remove_country_modifier = serbia_offense_focus_lv2
+			}
+		}
+	}
+	1_serbia_titan = {
+		icon = mission_luther_theses
+		position = 8
+		required_missions = {1_serbia_empire 1_serbia_peace  3_serbia_empire} 
+
+		trigger = { 
+			has_adm_advisor_2 = yes
+			has_mil_advisor_2 = yes
+			has_dip_advisor_2 = yes
+			stability = 3
+			government_rank = 3
+		} 
+
+		effect = {
+			remove_country_modifier = serb_left_empire
+			remove_country_modifier = serb_right_empire
+			add_country_modifier = {
+				name = serb_titan_empire
+				duration = -1
+			}
+		}
+	}
 }
 
 Serbia_3_slot = {
@@ -207,6 +329,124 @@ Serbia_3_slot = {
 				}
 				add_dip_power = 100
 				add_prestige = 10
+			}
+		}
+	}
+	2_serbia_oirat = {
+		icon = mission_luther_theses
+		position = 3
+		required_missions = { 2_serbia_defense_2 } 
+		provinces_to_highlight = {
+			OR = {
+				area = north_zungaria
+				area = yrtesh_area
+			}
+		}
+		trigger = { 
+			north_zungaria = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+			yrtesh_area = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+		} 
+
+		effect = {
+			add_manpower = 5
+			define_advisor = {
+				type = army_reformer
+				skill = 2
+				discount = yes
+			}
+			mongolia_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	2_serbia_oirat_2 = {
+		icon = mission_luther_theses
+		position = 5
+		required_missions = { 2_serbia_oirat } 
+		provinces_to_highlight = {
+			is_capital_of = OIR
+		}
+		trigger = { 
+			NOT = {
+				exists = OIR
+			}
+		} 
+
+		effect = {
+			add_country_modifier = {
+				name = no_other_guohong
+				duration = 10950
+			}
+			manchuria_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	3_serbia_empire = {
+		icon = mission_luther_theses
+		position = 7
+		required_missions = { 2_serbia_oirat_2 } 
+		provinces_to_highlight = {
+			OR = {
+				region = manchuria_region
+				region = mongolia_region
+			}
+		}
+		trigger = { 
+			OR = {
+				manchuria_region = {
+					type = all
+					OR = {
+						owned_by = ROOT
+						owned_by_subject_of = ROOT
+					}
+				}
+				mongolia_region = {
+					type = all
+					OR = {
+						owned_by = ROOT
+						owned_by_subject_of = ROOT
+					}
+				}
+			}
+		} 
+
+		effect = {
+			if = {
+				limit = {
+					num_of_owned_provinces_with = {
+						value = 20
+						region = manchuria_region
+					}
+				}
+				define_general = {
+					shock = 6
+					fire = 4
+					manuever = 4
+					siege = 6
+				}
+			}
+			add_country_modifier = {
+				name = serb_right_empire
+				duration = -1
+			}
+			korea_region = {
+				add_permanent_claim = ROOT
+			}
+			north_china_region = {
+				add_permanent_claim = ROOT
 			}
 		}
 	}
@@ -354,4 +594,99 @@ Serbia_5_slot = {
 		}
 	}
 
+	3_serbia_metal = {
+		icon = mission_luther_theses
+		position = 3
+		provinces_to_highlight = {
+			OR = {
+				province_id = 2369
+				province_id = 2354
+				province_id = 4692
+				province_id = 2420
+			}
+		}
+		trigger = { 
+			2369 = {
+				base_production = 3
+			}
+			2354 = {
+				base_production = 3
+			}
+			2420 = {
+				base_production = 3
+			}
+			4692 = {
+				base_production = 3
+			}
+		} 
+
+		effect = {
+			add_years_of_owned_provinces_production_income = {
+				years = 2
+				trigger = {
+					trade_goods = iron
+				}
+				custom_tooltip = MONOPOLY_INCOME_IRON_DESC
+			}
+		}
+	}
+	3_serbia_metal_2 = {
+		icon = mission_luther_theses
+		position = 5
+		required_missions = {3_serbia_metal  } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			OR = {
+				trade_goods = iron
+				trade_goods = copper
+			}
+		}
+		trigger = { 
+			num_of_owned_provinces_with = {
+				value = 5
+				OR = {
+					trade_goods = iron
+					trade_goods = copper
+				}
+				base_production = 5
+			}
+		} 
+
+		effect = {
+			set_country_flag = lv2_serbia_atk
+			custom_tooltip = SERBIA_UP_ATK_2
+			add_country_modifier = {
+				name = serbia_offense_focus_lv2
+				duration = -1
+			}
+			hidden_effect = {
+				remove_country_modifier = serbia_defense_focus
+				remove_country_modifier = serbia_defense_focus_lv2
+				remove_country_modifier = serbia_neutral_focus
+				remove_country_modifier = serbia_neutral_focus_lv2
+				remove_country_modifier = serbia_offense_focus
+				remove_country_modifier = serbia_offense_focus_lv2
+			}
+		}
+	}
+	3_serbia_gold = {
+		icon = mission_luther_theses
+		position = 6
+		required_missions = {3_serbia_metal_2  } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			trade_goods = gold
+		}
+		trigger = { 
+			num_of_owned_provinces_with = {
+				value = 1
+				trade_goods = gold
+				base_production = 10
+			}
+		} 
+
+		effect = {
+			add_years_of_income = 2
+		}
+	}
 }
