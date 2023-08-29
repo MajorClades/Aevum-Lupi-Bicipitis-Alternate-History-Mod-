@@ -1,0 +1,190 @@
+country_decisions = {
+
+	western_illness_help = {
+		major = yes
+		potential = {
+			NOT = {
+				has_country_flag = cured_mexico
+			}
+			tag = MX0
+			any_owned_province = {
+				has_province_modifier = bad_time_mex
+			}
+		}
+		provinces_to_highlight = {
+			has_province_modifier = bad_time_mex
+		}
+		allow = {
+			treasury = 1000
+			any_ally = {
+				OR= {
+					full_idea_group = exploration_ideas
+					tag = FJ0
+				}
+				has_opinion = {
+					who = ROOT
+					value = 150
+				}
+			}
+		}
+		effect = {
+			add_treasury = -1000
+			random_ally = {
+				limit = {
+					full_idea_group = exploration_ideas
+					has_opinion = {
+						who = ROOT
+						value = 150
+					}
+				}
+				add_historical_friend = ROOT
+				add_truce_with = ROOT
+				add_country_modifier = {
+					name = helped_mex
+					duration = 10950
+				}
+			}
+			every_owned_province = {
+				limit = {
+					has_province_modifier = bad_time_mex
+				}
+				remove_province_modifier = bad_time_mex
+			}
+			set_country_flag = cured_mexico
+			set_country_flag = europe_help
+		}
+		ai_will_do = {
+			factor = 100
+
+		}
+	}
+	western_illness_unhelp = {
+		major = yes
+		potential = {
+			NOT = {
+				has_country_flag = cured_mexico
+			}
+			tag = MX0
+			any_owned_province = {
+				has_province_modifier = bad_time_mex
+			}
+		}
+		provinces_to_highlight = {
+			has_province_modifier = bad_time_mex
+		}
+		allow = {
+			treasury = 1000
+			adm_power = 500
+			dip_power = 500
+			mil_power = 500
+
+		}
+		effect = {
+			add_treasury = -1000
+			add_adm_power = -500
+			add_dip_power = -500
+			add_mil_power = -500
+			every_owned_province = {
+				limit = {
+					has_province_modifier = bad_time_mex
+				}
+				remove_province_modifier = bad_time_mex
+			}
+			set_country_flag = cured_mexico
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	vinland_mexica_alliance = {
+		major = yes
+		potential = {
+			tag = MX0
+			exists = FJ0
+		}
+		provinces_to_highlight = {
+			is_capital_of = FJ0
+		}
+		allow = {
+			alliance_with = FJ0
+			trust = {
+				who = FJ0
+				value = 90
+			}
+		}
+		effect = {
+			custom_tooltip = MV_TREATY
+			FJ0 = {
+				country_event = {
+					id = mexic.15
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	treaty_land_mexica = {
+		major = yes
+		potential = {
+			has_country_flag = mexican_vinland_treaty
+		}
+		provinces_to_highlight = {
+			OR = {
+				region = great_plains_region 
+				region = mississippi_region 
+				region = southeast_america_region 
+				region = california_region  
+				region = rio_grande_region  
+				region = mexico_region  
+				region = central_america_region  
+				area = maryland_area
+				area = ohio_country_area
+				area = illinois_country_area
+				area = southern_illinois_area
+				area = miami_river_area
+			}
+		}
+		allow = {
+			always = no
+		}
+		effect = {
+
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	treaty_land_vinland = {
+		major = yes
+		potential = {
+			has_country_flag = mexican_vinland_treaty
+		}
+		provinces_to_highlight = {
+			NOT = {
+				area = maryland_area
+			}
+			OR = {
+				region = hudson_bay_region 
+				region = canada_region 
+				region = cascadia_region 
+				region = northeast_america_region  			
+				region = scandinavia_region  
+				region = british_isles_region  
+				area = lake_superior_area
+				area = michigan_area
+				area = wisconsin_area
+			}
+		}
+		allow = {
+			always = no
+		}
+		effect = {
+
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+}

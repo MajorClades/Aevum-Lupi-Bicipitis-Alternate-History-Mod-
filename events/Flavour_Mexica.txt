@@ -92,3 +92,894 @@ country_event = {
 	}
 
 }
+
+country_event = {
+	id = mexic.3
+	title = mexic.3.test
+	desc = mexic.3.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = mexic.3a
+		ai_chance = {
+			factor = 30
+		}
+		add_mil_power = 100
+		947 = {
+			if = {
+				limit = {
+					is_empty = yes
+				}
+				add_siberian_construction = 500
+			}else = {
+				add_core = ROOT
+			}
+		}
+	}
+	option = {
+		name = mexic.3b
+		ai_chance = {
+			factor = 30
+		}
+		add_mil_power = 100
+		4887 = {
+			if = {
+				limit = {
+					is_empty = yes
+				}
+				add_siberian_construction = 500
+			}else = {
+				add_core = ROOT
+			}
+		}
+	}
+	option = {
+		name = mexic.3c
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 500
+				is_at_war = yes
+			}
+		}
+		define_general = {
+			shock = 5
+			fire = 5
+			manuever = 2
+			siege = 1
+		}
+		capital_scope = {
+			infantry = ROOT
+			infantry = ROOT
+			infantry = ROOT
+			infantry = ROOT
+			infantry = ROOT
+		}
+	}
+}
+
+country_event = {
+	id = mexic.4
+	title = mexic.4.test
+	desc = mexic.4.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	trigger = {
+		is_year = 1445
+		tag = MX0
+	}
+	mean_time_to_happen = {
+		days = 50
+	}
+	fire_only_once = yes
+	option = {
+		name = mexic.4a
+		ai_chance = {
+			factor = 50
+		}
+		capital_scope = {
+			add_institution_embracement = {
+				which = feudalism
+				value = 40
+			}
+		}
+		964 = {
+			discover_country = FJ0
+		}
+		add_trust = {
+			who = FJ0
+			value = 20
+			mutual = yes
+		}
+	}
+	option = {
+		name = mexic.4b
+		ai_chance = {
+			factor = 50
+		}
+		946 = {
+			add_base_production = 2
+		}
+		ohio_country_area = {
+			add_permanent_claim = ROOT
+		}
+		miami_river_area = {
+			add_permanent_claim = ROOT
+		}
+		michigan_area = {
+			add_permanent_claim = ROOT
+		}
+	}
+}
+
+country_event = {
+	id = mexic.5
+	title = mexic.5.test
+	desc = mexic.5.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	trigger = {
+		is_year = 1445
+		treasury = 100
+		mil_power = 200
+		NOT = {
+			is_year = 1450
+		}
+		OR = {
+			exists = HNI
+			exists = NTZ
+		}
+		tag = MX0
+	}
+	mean_time_to_happen = {
+		days = 50
+	}
+	fire_only_once = yes
+	option = {
+		name = mexic.5a
+		trigger = {
+			exists = HNI
+		}
+		ai_chance = {
+			factor = 50
+		}
+		set_country_flag = friend_left_river
+		add_treasury = -100
+		add_mil_power = -200
+		vassalize = HNI
+		HNI = {
+			add_treasury = 100
+			add_mil_power = 200
+		}
+	}
+	option = {
+		name = mexic.5b
+		trigger = {
+			exists = NTZ
+		}
+		ai_chance = {
+			factor = 40
+		}
+		set_country_flag = friend_right_river
+		add_treasury = -100
+		add_mil_power = -200
+		vassalize = NTZ
+		NTZ = {
+			add_treasury = 100
+			add_mil_power = 200
+		}
+	}
+	option = {
+		name = mexic.5b
+		ai_chance = {
+			factor = 10
+		}
+		define_advisor = {
+			type = army_organiser
+			skill = 3
+			discount = yes
+		}
+	}
+}
+
+country_event = {
+	id = mexic.6
+	title = mexic.6.test
+	desc = mexic.6.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	trigger = {
+		any_owned_province = {
+			OR = {
+				culture_group = caddoan
+				culture = yoron
+			}
+		}
+		has_country_flag = friend_left_river
+	}
+	mean_time_to_happen = {
+		days = 3
+	}
+	option = {
+		name = mexic.6a
+		custom_tooltip = MEX_FRIENDS_L
+		every_owned_province = {
+			limit = {
+				OR = {
+					culture_group = caddoan
+					culture = yoron
+				}
+			}
+			change_culture = icniuh
+		}
+	}
+}
+
+country_event = {
+	id = mexic.7
+	title = mexic.7.test
+	desc = mexic.7.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	trigger = {
+		any_owned_province = {
+			culture_group = muskogean
+			NOT = {
+				culture = yoron
+			}
+		}
+		has_country_flag = friend_right_river
+	}
+	mean_time_to_happen = {
+		days = 3
+	}
+
+	option = {
+		name = mexic.7a
+		custom_tooltip = MEX_FRIENDS_R
+		every_owned_province = {
+			limit = {
+				culture_group = muskogean
+				NOT = {
+					culture = yoron
+				}
+			}
+			change_culture = icniuh
+		}
+	}
+}
+###funky time
+country_event = {
+	id = mexic.8
+	title = mexic.8.test
+	desc = mexic.8.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	trigger = {
+		tag = MX0
+		NOT = {
+			has_country_flag = cured_mexico
+		}
+		any_country = {
+			full_idea_group = exploration_ideas
+			any_owned_province = {
+				continent = north_america
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 12
+	}
+
+	option = {
+		name = mexic.8a
+		random_owned_province = {
+			limit = {
+				NOT = {
+					has_province_modifier = bad_time_mex
+				}
+				NOT = {
+					has_province_modifier = mex_secure_city
+				}
+			}
+			if = {
+				limit = {
+					province_id = 893
+				}
+				add_great_project_tier = {
+					type = tenochtitlan
+					tier = -2
+				}
+			}
+			add_province_modifier = {
+				name = bad_time_mex
+				duration = -1
+			}
+		}
+	}
+}
+
+country_event = {
+	id = mexic.9
+	title = mexic.9.test
+	desc = mexic.9.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	trigger = {
+		tag = MX0
+		NOT = {
+			has_country_flag = cured_mexico
+		}
+		num_of_owned_provinces_with = {
+			value = 5
+			has_province_modifier = bad_time_mex
+		}
+	}
+	mean_time_to_happen = {
+		months = 12
+	}
+
+	option = {
+		name = mexic.9a
+		random_owned_province = {
+			limit = {
+				has_province_modifier = bad_time_mex
+			}
+			add_base_manpower = -1
+			}
+	}
+	option = {
+		name = mexic.9b
+		add_treasury = -50
+	}
+}
+
+country_event = {
+	id = mexic.10
+	title = mexic.10.test
+	desc = mexic.10.desc
+	picture = ANGRY_MOB_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = MX0
+		has_country_flag = europe_help
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	option = {
+		name = mexic.10a
+		trigger = {
+			any_country = {
+				has_country_modifier = helped_mex
+				religion = norse_ragnaroked
+			}
+		}
+		change_religion = norse_ragnaroked
+		hidden_effect = {
+			random_owned_area = {
+				change_religion = norse_ragnaroked
+			}
+			random_owned_area = {
+				change_religion = norse_ragnaroked
+			}
+			random_owned_area = {
+				change_religion = norse_ragnaroked
+			}
+		}
+	}
+	option = {
+		name = mexic.10b
+		trigger = {
+			any_country = {
+				has_country_modifier = helped_mex
+				religion = catholic
+			}
+		}
+		change_religion = catholic
+		hidden_effect = {
+			random_owned_area = {
+				change_religion = catholic
+			}
+			random_owned_area = {
+				change_religion = catholic
+			}
+			random_owned_area = {
+				change_religion = catholic
+			}
+		}
+	}
+	option = {
+		name = mexic.10c
+		trigger = {
+			any_country = {
+				has_country_modifier = helped_mex
+				religion = indictian
+			}
+		}
+		change_religion = indictian
+		hidden_effect = {
+			random_owned_area = {
+				change_religion = indictian
+			}
+			random_owned_area = {
+				change_religion = indictian
+			}
+			random_owned_area = {
+				change_religion = indictian
+			}
+		}
+	}
+	option = {
+		name = mexic.10d
+		add_stability = 1
+	}
+}
+
+country_event = {
+	id = mexic.11
+	title = mexic.11.test
+	desc = mexic.11.desc
+	picture = ANGRY_MOB_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = MX0
+		NOT = {
+			has_country_flag = europe_help
+		}
+		has_country_flag = cured_mexico
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	option = {
+		name = mexic.11a
+		add_stability = 1
+		every_country = {
+			limit = {
+				full_idea_group = exploration_ideas
+				any_owned_province = {
+					continent = north_america
+				}
+			}
+			every_owned_province = {
+				limit = {
+					continent = north_america
+				}
+				MX0 = {
+					add_manpower = 1
+				}
+			}
+		}
+	}
+	option = {
+		name = mexic.11b
+		add_country_modifier = {
+			name = mex_own_help
+			duration = -1
+		}
+	}
+}
+###end of the funk
+###slavery ain't cool
+country_event = {
+	id = mexic.12
+	title = mexic.12.test
+	desc = mexic.12.desc
+	picture = ANGRY_MOB_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = MX0
+		is_year = 1550
+		num_of_owned_provinces_with = {
+			value = 10
+			trade_goods = cotton
+		}
+		num_of_owned_provinces_with = {
+			value = 10
+			has_port = yes
+			colonial_region = colonial_north_south
+		}
+	}
+	mean_time_to_happen = {
+		months = 12
+	}
+
+	option = {
+		name = mexic.12a
+		every_owned_province = {
+			limit = {
+				trade_goods = cotton
+			}
+			add_province_modifier = {
+				name = mex_slave_plantations
+				duration = -1
+			}
+		}
+	}
+	option = {
+		name = mexic.12b
+		trigger = {
+			full_idea_group = humanist_ideas
+		}
+		add_stability = 1
+	}
+}
+
+country_event = {
+	id = mexic.13
+	title = mexic.13.test
+	desc = mexic.13.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	trigger = {
+		tag = MX0
+		is_year = 1700
+		any_owned_province = {
+			has_province_modifier = mex_slave_plantations
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	option = {
+		name = mexic.13a
+		every_owned_province = {
+			limit = {
+				has_province_modifier = mex_slave_plantations
+			}
+			remove_province_modifier = mex_slave_plantations
+			add_province_modifier = {
+				name = mex_indentured_plantations
+				duration = -1
+			}
+		}
+	}
+}
+
+
+country_event = {
+	id = mexic.14
+	title = mexic.14.test
+	desc = mexic.14.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	trigger = {
+		tag = MX0
+		any_owned_province = {
+			has_province_modifier = mex_slave_plantations
+		}
+	}
+	mean_time_to_happen = {
+		months = 36
+	}
+
+	option = {
+		name = mexic.14a
+		random_owned_province = {
+			limit = {
+				has_province_modifier = mex_slave_plantations
+			}
+			add_unrest = 20
+		}
+	}
+	option = {
+		name = mexic.14b
+		random_owned_province = {
+			limit = {
+				has_province_modifier = mex_slave_plantations
+			}
+			add_unrest = 10
+			owner = {
+				add_manpower = -1
+			}
+		}
+	}
+	option = {
+		name = mexic.14c
+		trigger = {
+			full_idea_group = humanist_ideas
+		}
+		random_owned_province = {
+			limit = {
+				has_province_modifier = mex_slave_plantations
+			}
+			remove_province_modifier = mex_slave_plantations
+			add_province_modifier = {
+				name = mex_indentured_plantations
+				duration = -1
+			}
+		}
+	}
+	option = {
+		name = mexic.14d
+		trigger = {
+			ruler_has_personality = cruel_personality
+		}
+		random_owned_province = {
+			limit = {
+				has_province_modifier = mex_slave_plantations
+			}
+			add_unrest = -10
+			owner = {
+				add_manpower = -1
+			}
+		}
+	}
+	option = {
+		name = mexic.14e
+		trigger = {
+			ruler_has_personality = reformist_personality
+		}
+		random_owned_province = {
+			limit = {
+				has_province_modifier = mex_slave_plantations
+			}
+			remove_province_modifier = mex_slave_plantations
+			add_province_modifier = {
+				name = mex_indentured_plantations
+				duration = -1
+			}
+		}
+	}
+}
+###slavery ain't cool
+###Mexiland saga
+country_event = {
+	id = mexic.15
+	title = mexic.15.test
+	desc = mexic.15.desc
+	picture = ADVISOR_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = mexic.15a
+		ai_chance = {
+			factor = 100
+		}
+		custom_tooltip = MV_TREATY
+		set_country_flag = mexican_vinland_treaty
+		MX0 = {
+			set_country_flag = mexican_vinland_treaty
+		}
+	}
+	option = {
+		name = mexic.15b
+		remove_historical_friend = MX0
+	}
+}
+
+country_event = {
+	id = mexic.16
+	title = mexic.16.test
+	desc = mexic.16.desc
+	picture = ADVISOR_eventPicture
+	hidden = yes
+	trigger = {
+		has_country_flag = mexican_vinland_treaty
+		tag = MX0
+		any_owned_province = {
+			NOT = {
+				area = maryland_area
+			}
+			OR = {
+				region = hudson_bay_region 
+				region = canada_region 
+				region = cascadia_region 
+				region = northeast_america_region  			
+				region = scandinavia_region  
+				region = british_isles_region  
+				area = lake_superior_area
+				area = michigan_area
+				area = wisconsin_area
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	option = {
+		name = mexic.16a
+		add_trust = {
+			who = FJ0
+			value = 20
+		}
+		add_truce_with = FJ0
+		every_owned_province = {
+			limit = {
+				region = hudson_bay_region 
+			}
+			cede_province = FJ0
+			add_unrest = -5
+		}
+		every_owned_province = {
+			limit = {
+				region = canada_region 
+			}
+			cede_province = FJ0
+			add_unrest = -5
+		}
+		every_owned_province = {
+			limit = {
+				region = cascadia_region 
+			}
+			cede_province = FJ0
+			add_unrest = -5
+		}
+		every_owned_province = {
+			limit = {
+				region = northeast_america_region  
+				NOT = {
+					area = maryland_area
+				}
+			}
+			cede_province = FJ0
+			add_unrest = -5
+		}
+		every_owned_province = {
+			limit = {
+				region = scandinavia_region  
+			}
+			cede_province = FJ0
+			add_unrest = -5
+		}
+		every_owned_province = {
+			limit = {
+				region = british_isles_region  
+			}
+			cede_province = FJ0
+			add_unrest = -5
+		} 
+		every_owned_province = {
+			limit = {
+				OR = {
+					area = lake_superior_area
+					area = michigan_area
+					area = wisconsin_area
+				}
+			}
+			cede_province = MX0
+			add_unrest = -5
+		}
+
+	}
+
+}
+country_event = {
+	id = mexic.17
+	title = mexic.17.test
+	desc = mexic.17.desc
+	picture = ADVISOR_eventPicture
+	hidden = yes
+	trigger = {
+		has_country_flag = mexican_vinland_treaty
+		tag = FJ0
+		any_owned_province = {
+			OR = {
+				region = great_plains_region 
+				region = mississippi_region 
+				region = southeast_america_region 
+				region = california_region  
+				region = rio_grande_region  
+				region = mexico_region  
+				region = central_america_region  
+				area = maryland_area
+				area = ohio_country_area
+				area = illinois_country_area
+				area = southern_illinois_area
+				area = miami_river_area
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	option = {
+		name = mexic.17a
+		add_trust = {
+			who = MX0
+			value = 20
+		}
+		add_truce_with = MX0
+		every_owned_province = {
+			limit = {
+				region = great_plains_region 
+			}
+			cede_province = MX0
+			add_unrest = -5
+		}
+		every_owned_province = {
+			limit = {
+				region = mississippi_region 
+			}
+			cede_province = MX0
+			add_unrest = -5
+		}
+		every_owned_province = {
+			limit = {
+				region = southeast_america_region 
+			}
+			cede_province = MX0
+			add_unrest = -5
+		}
+		every_owned_province = {
+			limit = {
+				region = california_region  
+			}
+			cede_province = MX0
+			add_unrest = -5
+		}
+		every_owned_province = {
+			limit = {
+				region = rio_grande_region  
+			}
+			cede_province = MX0
+			add_unrest = -5
+		}
+		every_owned_province = {
+			limit = {
+				region = mexico_region  
+			}
+			cede_province = MX0
+			add_unrest = -5
+		} 
+		every_owned_province = {
+			limit = {
+				region = central_america_region  
+			}
+			cede_province = MX0
+			add_unrest = -5
+		} 
+		every_owned_province = {
+			limit = {
+				OR = {
+					area = maryland_area
+					area = ohio_country_area
+					area = illinois_country_area
+					area = southern_illinois_area
+					area = miami_river_area
+				}
+			}
+			cede_province = MX0
+			add_unrest = -5
+		}
+	}
+
+}
+
+country_event = {
+	id = mexic.18
+	title = mexic.18.test
+	desc = mexic.18.desc
+	picture = ADVISOR_eventPicture
+	hidden = yes
+	trigger = {
+		has_country_flag = mexican_vinland_treaty
+		tag = FJ0
+		NOT = {
+			truce_with = MX0
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	option = {
+		name = mexic.18a
+		add_trust = {
+			who = MX0
+			value = 80
+			mutual = yes
+		}
+		add_truce_with = MX0
+	}
+
+}
