@@ -53,7 +53,7 @@ country_event = {
 			}
 			add_permanent_province_modifier = {
 				name = mex_viking
-				duration = -1
+				duration = 35600
 			}
 		}
 		
@@ -112,7 +112,7 @@ country_event = {
 				limit = {
 					is_empty = yes
 				}
-				add_siberian_construction = 500
+				add_siberian_construction = 700
 			}else = {
 				add_core = ROOT
 			}
@@ -129,7 +129,7 @@ country_event = {
 				limit = {
 					is_empty = yes
 				}
-				add_siberian_construction = 500
+				add_siberian_construction = 700
 			}else = {
 				add_core = ROOT
 			}
@@ -151,11 +151,11 @@ country_event = {
 			siege = 1
 		}
 		capital_scope = {
-			infantry = ROOT
-			infantry = ROOT
-			infantry = ROOT
-			infantry = ROOT
-			infantry = ROOT
+			samurai_infantry = ROOT
+			samurai_infantry = ROOT
+			samurai_infantry = ROOT
+			samurai_infantry = ROOT
+			samurai_infantry = ROOT
 		}
 	}
 }
@@ -305,7 +305,25 @@ country_event = {
 	option = {
 		name = mexic.6a
 		custom_tooltip = MEX_FRIENDS_L
-		every_owned_province = {
+		random_owned_province = {
+			limit = {
+				OR = {
+					culture_group = caddoan
+					culture = yoron
+				}
+			}
+			change_culture = icniuh
+		}
+		random_owned_province = {
+			limit = {
+				OR = {
+					culture_group = caddoan
+					culture = yoron
+				}
+			}
+			change_culture = icniuh
+		}
+		random_owned_province = {
 			limit = {
 				OR = {
 					culture_group = caddoan
@@ -339,10 +357,28 @@ country_event = {
 	option = {
 		name = mexic.7a
 		custom_tooltip = MEX_FRIENDS_R
-		every_owned_province = {
+		random_owned_province = {
 			limit = {
 				culture_group = muskogean
 				NOT = {
+					culture = yoron
+				}
+			}
+			change_culture = icniuh
+		}
+		random_owned_province = {
+			limit = {
+				OR = {
+					culture_group = caddoan
+					culture = yoron
+				}
+			}
+			change_culture = icniuh
+		}
+		random_owned_province = {
+			limit = {
+				OR = {
+					culture_group = caddoan
 					culture = yoron
 				}
 			}
@@ -954,7 +990,6 @@ country_event = {
 	}
 
 }
-
 country_event = {
 	id = mexic.18
 	title = mexic.18.test
@@ -983,3 +1018,310 @@ country_event = {
 	}
 
 }
+
+##aztek_autocracy_reform
+
+country_event = {
+	id = mexic.19
+	title = mexic.19.test
+	desc = mexic.19.desc
+	picture = ADVISOR_eventPicture
+	fire_only_once = yes
+	trigger = {	
+		tag = MX0
+		has_reform = mexica_fed_reform
+		NOT = {
+			republican_tradition = 40
+		}
+		NOT = {
+			has_country_flag = aztek_takeover
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	option = {
+		name = mexic.19a
+		custom_tooltip = AZTECA_TAKEOVER
+		set_country_flag = aztek_takeover
+	}
+}
+
+country_event = {
+	id = mexic.20
+	title = mexic.20.test
+	desc = mexic.20.desc
+	picture = ADVISOR_eventPicture
+	trigger = {	
+		tag = MX0
+		NOT = {
+			republican_tradition = 30
+		}
+		NOT = {
+			stability = 0
+		}
+		has_country_flag = aztek_takeover
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	option = {
+		name = mexic.20a
+		change_government = monarchy
+		add_government_reform = aztek_autocracy_reform
+		add_legitimacy = 30
+		kill_ruler = yes
+		add_stability = 1
+		capital_scope = {
+			add_unrest = 30
+		}
+		
+	}
+	option = {
+		name = mexic.20b
+		add_republican_tradition = 30
+		add_adm_power = -100
+		add_dip_power = -100
+		add_mil_power = -100
+	}
+}
+###CULTURAL INTEGRATIONS
+country_event = {
+	id = mexic.21
+	title = mexic.21.test
+	desc = mexic.21.desc
+	picture = ADVISOR_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = mexic.21a
+		add_stability_or_adm_power = yes
+		change_government_reform_progress = 50
+		add_years_of_income = -1
+	}
+	option = {
+		name = mexic.21b
+		custom_tooltip = MEX_NC_CT
+		set_country_flag = mex_norse_culture
+		change_government_reform_progress = 50
+		add_years_of_income = -1.5
+	}
+	option = {
+		name = mexic.21c
+		custom_tooltip = MEX_IC_CT
+		set_country_flag = mex_iberia_culture
+		change_government_reform_progress = 50
+		add_years_of_income = -1.5
+	}
+	option = {
+		name = mexic.21d
+		custom_tooltip = MEX_BOTH_CT
+		set_country_flag = mex_both_culture
+		change_government_reform_progress = 50
+		add_years_of_income = -2
+	}
+}
+
+country_event = {
+	id = mexic.22
+	title = mexic.22.test
+	desc = mexic.22.desc
+	picture = ADVISOR_eventPicture
+	trigger = {	
+		tag = MX0
+		any_owned_province = {
+			culture_group = scandinavian
+			continent = north_america
+		}
+	}
+	mean_time_to_happen = {
+		months = 36
+	}
+
+	option = {
+		name = mexic.22a
+		random_owned_province = {
+			limit = {
+				culture_group = scandinavian
+				continent = north_america
+			}
+			change_culture = tlahuitlaca
+		}
+		random_owned_province = {
+			limit = {
+				culture_group = scandinavian
+				continent = north_america
+			}
+			change_culture = tlahuitlaca
+		}
+		if = {
+			limit = {
+				OR = {
+					has_country_flag = mex_norse_culture
+					has_country_flag = mex_both_culture
+				}
+			}
+			random_owned_province = {
+				limit = {
+					culture_group = scandinavian
+					continent = north_america
+				}
+				change_culture = tlahuitlaca
+			}
+			random_owned_province = {
+				limit = {
+					culture_group = scandinavian
+					continent = north_america
+				}
+				change_culture = tlahuitlaca
+			}
+		}
+	}
+}
+
+country_event = {
+	id = mexic.23
+	title = mexic.23.test
+	desc = mexic.23.desc
+	picture = ADVISOR_eventPicture
+	trigger = {	
+		tag = MX0
+		any_owned_province = {
+			culture_group = iberian
+			continent = north_america
+		}
+	}
+	mean_time_to_happen = {
+		months = 36
+	}
+
+	option = {
+		name = mexic.23a
+		random_owned_province = {
+			limit = {
+				culture_group = iberian
+				continent = north_america
+			}
+			change_culture = raklentlaca
+		}
+		random_owned_province = {
+			limit = {
+				culture_group = iberian
+				continent = north_america
+			}
+			change_culture = raklentlaca
+		}
+		if = {
+			limit = {
+				OR = {
+					has_country_flag = mex_iberia_culture
+					has_country_flag = mex_both_culture
+				}
+			}
+			random_owned_province = {
+				limit = {
+					culture_group = iberian
+					continent = north_america
+				}
+				change_culture = raklentlaca
+			}
+			random_owned_province = {
+				limit = {
+					culture_group = iberian
+					continent = north_america
+				}
+				change_culture = raklentlaca
+			}
+		}
+	}
+}
+
+country_event = {
+	id = mexic.24
+	title = mexic.24.test
+	desc = mexic.24.desc
+	picture = ADVISOR_eventPicture
+	trigger = {	
+		tag = MX0
+		adm_tech = 7
+		any_owned_province = {
+			culture_group = central_algonquian
+			region = great_lakes_region
+		}
+	}
+	mean_time_to_happen = {
+		months = 36
+	}
+
+	option = {
+		name = mexic.24a
+		random_owned_province = {
+			limit = {
+				culture_group = central_algonquian
+				region = great_lakes_region
+			}
+			change_culture = axotlaca
+		}
+		random_owned_province = {
+			limit = {
+				culture_group = central_algonquian
+				region = great_lakes_region
+			}
+			change_culture = axotlaca
+		}
+	}
+}
+
+country_event = {
+	id = mexic.25
+	title = mexic.25.test
+	desc = mexic.25.desc
+	picture = ADVISOR_eventPicture
+	hidden = yes
+	trigger = {	
+		tag = MX0
+		has_country_flag = formed_aztlan
+		any_owned_province = {
+			culture_group = alt_mexican
+			NOT = {
+				culture = aztlan
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 12
+	}
+
+	option = {
+		name = mexic.25a
+		random_owned_province = {
+			limit = {
+				culture_group = alt_mexican
+				NOT = {
+					culture = aztlan
+				}
+			}
+			change_culture = aztlan
+		}
+		random_owned_province = {
+			limit = {
+				culture_group = alt_mexican
+				NOT = {
+					culture = aztlan
+				}
+			}
+			change_culture = aztlan
+		}
+		random_owned_province = {
+			limit = {
+				culture_group = alt_mexican
+				NOT = {
+					culture = aztlan
+				}
+			}
+			change_culture = aztlan
+		}
+	}
+}
+

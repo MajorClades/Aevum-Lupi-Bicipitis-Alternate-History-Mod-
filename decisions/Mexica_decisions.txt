@@ -187,4 +187,84 @@ country_decisions = {
 			factor = 100
 		}
 	}
+	form_aztlan = {
+		major = yes
+		potential = {
+			tag = MX0
+			government_rank = 3
+		}
+
+		allow = {
+			government_rank = 3
+			is_great_power = yes
+			development_in_provinces = {
+				value = 1000
+				same_continent = ROOT
+			}
+		}
+		effect = {
+			override_country_name = AZTLAN_TAG
+			change_primary_culture = aztlan
+			custom_tooltip = AZTLAN_STRONK
+			set_country_flag = formed_aztlan
+			hidden_effect = {
+				every_province = {
+					limit = {
+						culture_group = alt_mexican
+					}
+					change_culture = aztlan
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	form_rausulia = {
+		major = yes
+		potential = {
+			OR = {
+				tag = MX0
+				tag = FJ0
+			}
+			ai = no
+			has_country_flag = mexican_vinland_treaty
+		}
+
+		allow = {
+			OR = {
+				alliance_with = MX0
+				alliance_with = FJ0
+			}
+			custom_trigger_tooltip = {
+				tooltip = ALLIANCE_MEX_VIN
+				had_country_flag = {
+					flag = mexican_vinland_treaty
+					days = 54750
+				}
+			}
+		}
+		effect = {
+			change_tag = RL0
+			if = {
+				limit = {
+					tag = MXO
+				}
+				inherit = FJ0
+			}
+			if = {
+				limit = {
+					tag = FJ0
+				}
+				inherit = MXO
+			}
+			add_country_modifier = {
+				name = rausulian_tolerance
+				duration = -1
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
 }
