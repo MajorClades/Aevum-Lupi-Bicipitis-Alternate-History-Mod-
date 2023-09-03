@@ -1,0 +1,103 @@
+expedition_mechanic = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 2
+	available = {
+        has_country_flag = undergoing_archeology_flag
+	}
+	powers = {
+		expedition_progress = {
+			max = 100
+			min = 0
+			base_monthly_growth = 0.5
+			on_max_reached = {
+				clr_country_flag = undergoing_archeology_flag
+				country_event = {
+					id = australia.4
+				}
+			}
+			scaled_modifier = {
+				modifier = {
+					innovativeness_gain = 0.5
+				}
+			}
+		}
+		expedition_investment = {
+			gui = russian_modernization_gov_mech
+			max = 3
+			min = 0
+			is_good = yes
+		}
+	}
+	interactions = {
+		send_additional_resources = {
+			icon = GFX_system_of_councils_adm_button
+			cost = 1
+			trigger = {
+				manpower = 5
+				treasury = 250
+			}
+			effect = {
+				add_manpower = -5
+				add_treasury = -250
+				add_government_power = {
+					mechanic_type = expedition_mechanic
+					power_type = expedition_investment
+					value = 1
+				}
+			}
+			cooldown_years = 2
+		}
+		hurry_up = {
+			icon = GFX_system_of_councils_dip_button
+			cost_type = expedition_investment
+			cost = 1
+			trigger = {
+				has_government_power = {
+					mechanic_type = expedition_mechanic
+					power_type = expedition_investment
+					value = 1
+				}
+			}
+			effect = {
+				add_government_power = {
+					mechanic_type = expedition_mechanic
+					power_type = expedition_progress
+					value = 10
+				}
+			}
+			cooldown_years = 2
+		}
+		sell_found_treasures = {
+			icon = GFX_system_of_councils_mil_button
+			cost_type = expedition_investment
+			cost = 1
+			trigger = {
+				has_government_power = {
+					mechanic_type = expedition_mechanic
+					power_type = expedition_investment
+					value = 1
+				}
+				has_government_power = {
+					mechanic_type = expedition_mechanic
+					power_type = expedition_progress
+					value = 5
+				}
+			}
+			effect = {
+				add_government_power = {
+					mechanic_type = expedition_mechanic
+					power_type = expedition_progress
+					value = -5
+				}
+				add_treasury = 200
+				add_mil_power = 30
+				add_dip_power = 30
+				add_adm_power = 30
+				add_prestige = 10
+			}
+			cooldown_years = 2
+		}
+		
+	}
+	
+}
