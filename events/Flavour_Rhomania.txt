@@ -264,19 +264,23 @@ country_event = {
 	hidden = yes
 	fire_only_once = yes
 	trigger = {
-		tag = C00
+		tag = RX0
 	}
 
 	option = {
 		name = rhom.5a
-		change_tag = RX0
-		RX0 = {
-			set_capital = 4022
-			change_primary_culture = austro_greek
-		}
-		4020 = {
-			remove_core = RU0
-			cede_province = RX0
+		free_vassal = RX0
+		if = {
+			limit = {
+				has_dlc = "Conquest of Paradise"
+			}
+			RU0 = {
+				create_subject = {
+					who = RX0
+					subject_type = crown_colony
+				}
+			}
+			add_government_reform = crown_colony_government
 		}
 	}
 }
