@@ -1,76 +1,55 @@
-
 Mex_1_slot = {
 	slot = 1
 	generic = no
 	ai = yes
-	potential = {	tag = MX0	}
 	has_country_shield = yes
+	potential = { tag = MX0 } 
 
 	mex_recover = {
-		icon = mission_invade_island
-		required_missions = { }
+		icon = mission_steppe_warriors
 		position = 1
-		provinces_to_highlight = {
-			province_id = 893
-		}
-		trigger = { 
-			893 = {
-				NOT = {devastation = 10}
-			}
-		}
-		
-		effect = {
-			893 = {
-				add_building = fort_15th
-			}
-		}
+		provinces_to_highlight = { province_id = 893 } 
+
+		trigger = { 893 = { NOT = { devastation = 10 }  }  } 
+
+		effect = { 893 = { add_building = fort_15th }  } 
 	}
+
 	mex_recovery = {
-		icon = mission_invade_island
-		required_missions = {mex_recover mex_more_homes }
+		icon = mission_have_two_subjects
 		position = 3
-		provinces_to_highlight = {
-			province_id = 893
+		required_missions = {
+			mex_recover
+			mex_more_homes
 		}
-		trigger = { 
-			893 = {
-				development = 13
-			}
-		}
-		
-		effect = {
-			893 = {
-				samurai_infantry = ROOT
-			}
-		}
+		provinces_to_highlight = { province_id = 893 } 
+
+		trigger = { 893 = { development = 13 }  } 
+
+		effect = { 893 = { samurai_infantry = ROOT }  } 
 	}
+
 	mex_new_quarter = {
-		icon = mission_invade_island
-		required_missions = {mex_recovery}
+		icon = mission_european_church
 		position = 4
-		provinces_to_highlight = {
-			province_id = 893
-		}
-		trigger = { 
-			893 = {
-				has_tax_building_trigger = yes
-			}
-		}
-		
-		effect = {
-			893 = {
-				add_base_tax = 3
-			}
-		}
+		required_missions = { mex_recovery } 
+		provinces_to_highlight = { province_id = 893 } 
+
+		trigger = { 893 = { has_tax_building_trigger = yes }  } 
+
+		effect = { 893 = { add_base_tax = 3 }  } 
 	}
+
 	mex_foreigns = {
-		icon = mission_invade_island
-		required_missions = {mex_new_quarter mex_trading_south}
+		icon = mission_settlers_north_america
 		position = 5
-		provinces_to_highlight = {
-			province_id = 893
+		required_missions = {
+			mex_new_quarter
+			mex_trading_south
 		}
-		trigger = { 
+		provinces_to_highlight = { province_id = 893 } 
+
+		trigger = {
 			any_ally = {
 				technology_group = western
 				has_opinion = {
@@ -78,28 +57,26 @@ Mex_1_slot = {
 					value = 100
 				}
 			}
-			893 = {
-				development = 20
-			}
+			893 = { development = 20 } 
 		}
-		
+
 		effect = {
 			893 = {
 				add_permanent_province_modifier = {
-					name = mex_secure_city
+					name = "mex_secure_city"
 					duration = -1
 				}
 			}
 		}
 	}
+
 	mex_great_city = {
-		icon = mission_invade_island
-		required_missions = {mex_foreigns }
+		icon = mission_native_dev_capital
 		position = 6
-		provinces_to_highlight = {
-			province_id = 893
-		}
-		trigger = { 
+		required_missions = { mex_foreigns } 
+		provinces_to_highlight = { province_id = 893 } 
+
+		trigger = {
 			893 = {
 				has_great_project = {
 					type = tenochtitlan
@@ -107,12 +84,12 @@ Mex_1_slot = {
 				}
 			}
 		}
-		
+
 		effect = {
 			893 = {
 				remove_province_modifier = mex_secure_city
 				add_permanent_province_modifier = {
-					name = mex_metropolitan_city
+					name = "mex_metropolitan_city"
 					duration = -1
 				}
 				add_base_tax = 2
@@ -121,9 +98,9 @@ Mex_1_slot = {
 			}
 		}
 	}
+
 	mex_paper = {
-		icon = mission_invade_island
-		required_missions = { }
+		icon = mission_asian_trader
 		position = 8
 		provinces_to_highlight = {
 			OR = {
@@ -131,7 +108,8 @@ Mex_1_slot = {
 				region = rio_grande_region
 			}
 		}
-		trigger = { 
+
+		trigger = {
 			years_of_income = 1.5
 			num_of_owned_provinces_with = {
 				value = 10
@@ -141,57 +119,54 @@ Mex_1_slot = {
 				}
 			}
 		}
-		
+
 		effect = {
 			add_years_of_income = -1.5
-			893 = {
-				change_trade_goods = paper
-			}
+			893 = { change_trade_goods = paper } 
 		}
 	}
+
 	mex_codex = {
-		icon = mission_invade_island
-		required_missions = {mex_paper }
+		icon = bibliotheca_corviana
 		position = 9
+		required_missions = { mex_paper } 
 		provinces_to_highlight = {
 			owned_by = ROOT
 			trade_goods = paper
 		}
-		trigger = { 
+
+		trigger = {
 			has_institution = renaissance
 			any_owned_province = {
 				trade_goods = paper
 				base_production = 10
 			}
 		}
-		
+
 		effect = {
 			add_country_modifier = {
-				name = codify_language
+				name = "codify_language"
 				duration = 10950
 			}
 		}
 	}
-	mex_printing_press = {
-		icon = mission_invade_island
-		required_missions = {mex_codex_2 }
-		position = 11
-		provinces_to_highlight = {
-			province_id = 2499
-		}
 
-		trigger = { 
+	mex_printing_press = {
+		icon = aldine_press
+		position = 11
+		required_missions = { mex_codex_2 } 
+		provinces_to_highlight = { province_id = 2499 } 
+
+		trigger = {
 			has_institution = printing_press
 			has_adm_advisor_3 = yes
 			owns = 2499
 		}
-		
+
 		effect = {
 			2499 = {
 				if = {
-					limit = {
-						trade_goods = gold
-					}
+					limit = { trade_goods = gold } 
 					add_base_tax = 1
 					add_base_production = 1
 					add_base_manpower = 1
@@ -203,10 +178,11 @@ Mex_1_slot = {
 			}
 		}
 	}
+
 	mex_global_trade_2 = {
-		icon = mission_invade_island
-		required_missions = {mex_global_trade}
+		icon = mission_wine_monopolies
 		position = 13
+		required_missions = { mex_global_trade } 
 		provinces_to_highlight = {
 			OR = {
 				province_id = 886
@@ -214,7 +190,8 @@ Mex_1_slot = {
 				province_id = 896
 			}
 		}
-		trigger = { 
+
+		trigger = {
 			has_institution = global_trade
 			years_of_income = 1
 			886 = {
@@ -230,58 +207,50 @@ Mex_1_slot = {
 				has_production_building_trigger = yes
 			}
 		}
-		
+
 		effect = {
 			add_years_of_income = -1
-			886 = {
-				change_trade_goods = wine
-			}
-			887 = {
-				change_trade_goods = wine
-			}
-			896 = {
-				change_trade_goods = wine
-			}
+			886 = { change_trade_goods = wine } 
+			887 = { change_trade_goods = wine } 
+			896 = { change_trade_goods = wine } 
 		}
 	}
 }
-
 Mex_2_slot = {
 	slot = 2
 	generic = no
 	ai = yes
-	potential = {	tag = MX0	}
 	has_country_shield = yes
-
+	potential = { tag = MX0 } 
 
 	mex_more_homes = {
-		icon = mission_invade_island
-		required_missions = { }
+		icon = mission_conquer_50_development
 		position = 2
-		provinces_to_highlight = {
-			province_id = 893
-		}
-		trigger = { 
+		provinces_to_highlight = { province_id = 893 } 
+
+		trigger = {
 			has_adm_advisor = yes
 			adm_power = 100
 		}
-		
+
 		effect = {
 			add_adm_power = -100
 			893 = {
 				add_permanent_province_modifier = {
-					name = mex_easy_dev
+					name = "mex_easy_dev"
 					duration = 7300
 				}
 			}
 		}
 	}
-	mex_trading_south = {
-		icon = mission_invade_island
-		required_missions = {mex_city}
-		position = 4
 
-		trigger = { 
+	mex_trading_south = {
+		icon = mission_have_two_subjects
+		position = 4
+		required_missions = { mex_city } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
 			has_institution = feudalism
 			OR = {
 				adm_tech = 4
@@ -289,16 +258,16 @@ Mex_2_slot = {
 				mil_tech = 4
 			}
 		}
-		
+
 		effect = {
 			add_adm_power = 150
 			add_dip_power = 150
 			add_mil_power = 150
 		}
 	}
+
 	mex_trade_europe = {
-		icon = mission_invade_island
-		required_missions = { }
+		icon = mission_control_fur_trade
 		position = 7
 		provinces_to_highlight = {
 			OR = {
@@ -307,7 +276,8 @@ Mex_2_slot = {
 			}
 			same_continent = ROOT
 		}
-		trigger = { 
+
+		trigger = {
 			num_of_owned_provinces_with = {
 				value = 10
 				OR = {
@@ -316,7 +286,7 @@ Mex_2_slot = {
 				}
 			}
 		}
-		
+
 		effect = {
 			add_years_of_owned_provinces_production_income = {
 				years = 8
@@ -330,15 +300,20 @@ Mex_2_slot = {
 			}
 		}
 	}
+
 	mex_codex_2 = {
-		icon = mission_invade_island
-		required_missions = {mex_codex mex_trade_europe}
+		icon = mission_vedic_education
 		position = 10
+		required_missions = {
+			mex_codex
+			mex_trade_europe
+		}
 		provinces_to_highlight = {
 			owned_by = ROOT
 			trade_goods = paper
 		}
-		trigger = { 
+
+		trigger = {
 			has_institution = new_world_i
 			years_of_income = 2
 			any_owned_province = {
@@ -346,47 +321,49 @@ Mex_2_slot = {
 				base_production = 15
 			}
 		}
-		
+
 		effect = {
-			country_event = {
-				id = mexic.21
-			}
+			country_event = { id = mexic.21 } 
 			add_country_modifier = {
-				name = codify_language_2
+				name = "codify_language_2"
 				duration = -1
 			}
 		}
 	}
+
 	mex_global_trade = {
-		icon = mission_invade_island
-		required_missions = {mex_navy mex_codex_2}
+		icon = mission_trade_company_region_abroad
 		position = 12
-		provinces_to_highlight = {
-			province_id = 895
+		required_missions = {
+			mex_navy
+			mex_codex_2
 		}
-		trigger = { 
+		provinces_to_highlight = { province_id = 895 } 
+
+		trigger = {
 			years_of_income = 1
 			895 = {
 				owned_by = ROOT
 				has_production_building_trigger = yes
 			}
 		}
-		
+
 		effect = {
 			add_years_of_income = -1
-			895 = {
-				change_trade_goods = cloth
-			}
+			895 = { change_trade_goods = cloth } 
 		}
 	}
+
 	mex_global_trade_4 = {
-		icon = mission_invade_island
-		required_missions = { mex_global_trade_3 mex_global_trade_2}
+		icon = bohemian_crystal
 		position = 14
-		provinces_to_highlight = {
-			province_id = 2507
+		required_missions = {
+			mex_global_trade_3
+			mex_global_trade_2
 		}
-		trigger = { 
+		provinces_to_highlight = { province_id = 2507 } 
+
+		trigger = {
 			has_institution = manufactories
 			years_of_income = 1
 			2507 = {
@@ -394,7 +371,7 @@ Mex_2_slot = {
 				has_production_building_trigger = yes
 			}
 		}
-		
+
 		effect = {
 			add_years_of_income = -1
 			2507 = {
@@ -406,42 +383,34 @@ Mex_2_slot = {
 		}
 	}
 }
-
 Mex_3_slot = {
 	slot = 3
 	generic = no
 	ai = yes
-	potential = {	tag = MX0	}
 	has_country_shield = yes
+	potential = { tag = MX0 } 
 
 	mex_army = {
-		icon = mission_invade_island
-		required_missions = { }
+		icon = mission_mayan_conquest
 		position = 1
+		provinces_to_highlight = {  } 
 
-		trigger = { 
-			has_leader_with = {
-				total_pips = 6
-			}
+		trigger = {
+			has_leader_with = { total_pips = 6 } 
 			army_size = 9
 		}
-		
+
 		effect = {
-			mississippi_plain_area = {
-				add_permanent_claim = ROOT
-			}
-			mississippi_area = {
-				add_permanent_claim = ROOT
-			}
-			lower_louisiana_area = {
-				add_permanent_claim = ROOT
-			}
+			mississippi_plain_area = { add_permanent_claim = ROOT } 
+			mississippi_area = { add_permanent_claim = ROOT } 
+			lower_louisiana_area = { add_permanent_claim = ROOT } 
 		}
 	}
+
 	mex_city = {
-		icon = mission_invade_island
-		required_missions = {mex_more_homes }
+		icon = mission_rice_field
 		position = 3
+		required_missions = { mex_more_homes } 
 		provinces_to_highlight = {
 			OR = {
 				trade_goods = grain
@@ -451,7 +420,8 @@ Mex_3_slot = {
 			}
 			same_continent = ROOT
 		}
-		trigger = { 
+
+		trigger = {
 			num_of_owned_provinces_with = {
 				value = 10
 				OR = {
@@ -462,51 +432,41 @@ Mex_3_slot = {
 				}
 			}
 		}
-		
-		effect = {
-			lower_louisiana_area = {
-				add_base_manpower = 1
-			}
-		}
-	}
-	mex_all_power = {
-		icon = mission_invade_island
-		required_missions = {mex_river}
-		position = 5
 
-		trigger = { 
-			army_size = 40
-		}
-		
+		effect = { lower_louisiana_area = { add_base_manpower = 1 }  } 
+	}
+
+	mex_all_power = {
+		icon = mission_iroquois_warriors
+		position = 5
+		required_missions = { mex_river } 
+		provinces_to_highlight = {  } 
+
+		trigger = { army_size = 40 } 
+
 		effect = {
 			add_prestige = 30
-			mississippi_region = {
-				add_permanent_claim = ROOT
-			}
-			great_lakes_region = {
-				add_permanent_claim = ROOT
-			}
-			great_plains_region = {
-				add_permanent_claim = ROOT
-			}
-			rio_grande_region = {
-				add_permanent_claim = ROOT
-			}
+			mississippi_region = { add_permanent_claim = ROOT } 
+			great_lakes_region = { add_permanent_claim = ROOT } 
+			great_plains_region = { add_permanent_claim = ROOT } 
+			rio_grande_region = { add_permanent_claim = ROOT } 
 		}
 	}
-	mex_great_power = {
-		icon = mission_invade_island
-		required_missions = {mex_all_power}
-		position = 6
 
-		trigger = { 
+	mex_great_power = {
+		icon = mission_empire
+		position = 6
+		required_missions = { mex_all_power } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
 			total_development = 500
 			num_of_owned_provinces_with = {
 				value = 50
 				is_core = ROOT
 			}
 		}
-		
+
 		effect = {
 			change_adm = 1
 			change_dip = 1
@@ -514,49 +474,53 @@ Mex_3_slot = {
 			set_government_rank = 3
 		}
 	}
+
 	mex_maize_potato = {
-		icon = mission_invade_island
-		required_missions = {mex_trade_europe mex_trade_europe_2}
+		icon = mission_mal_riches_of_trade
 		position = 8
+		required_missions = {
+			mex_trade_europe
+			mex_trade_europe_2
+		}
 		provinces_to_highlight = {
 			trade_goods = grain
 			owned_by = ROOT
 		}
-		trigger = { 
+
+		trigger = {
 			num_of_owned_provinces_with = {
 				value = 10
 				trade_goods = grain
 				has_production_building_trigger = yes
 			}
 		}
-		
+
 		effect = {
 			custom_tooltip = AMERICAN_CROPS_MEX
 			hidden_effect = {
 				every_owned_province = {
-					limit = {
-						trade_goods = grain
-					}
+					limit = { trade_goods = grain } 
 					add_permanent_province_modifier = {
-						name = maize_potatos
+						name = "maize_potatos"
 						duration = -1
 					}
 				}
 			}
 		}
 	}
-	mex_navy = {
-		icon = mission_invade_island
-		required_missions = { }
-		position = 11
 
-		trigger = { 
+	mex_navy = {
+		icon = mission_establish_high_seas_navy
+		position = 11
+		provinces_to_highlight = {  } 
+
+		trigger = {
 			num_of_owned_provinces_with = {
 				value = 10
 				has_port = yes
 			}
 		}
-		
+
 		effect = {
 			define_admiral = {
 				shock = 4
@@ -565,17 +529,22 @@ Mex_3_slot = {
 			}
 		}
 	}
+
 	mex_global_trade_3 = {
-		icon = mission_invade_island
-		required_missions = { mex_global_trade mex_coast}
+		icon = mission_rb_colonise_spice_islands
 		position = 13
+		required_missions = {
+			mex_global_trade
+			mex_coast
+		}
 		provinces_to_highlight = {
 			OR = {
 				province_id = 2516
 				province_id = 921
 			}
 		}
-		trigger = { 
+
+		trigger = {
 			years_of_income = 2
 			2516 = {
 				owned_by = ROOT
@@ -586,7 +555,7 @@ Mex_3_slot = {
 				has_production_building_trigger = yes
 			}
 		}
-		
+
 		effect = {
 			add_years_of_income = -2
 			2516 = {
@@ -602,60 +571,59 @@ Mex_3_slot = {
 		}
 	}
 }
-
 Mex_4_slot = {
 	slot = 4
 	generic = no
 	ai = yes
-	potential = {	tag = MX0	}
 	has_country_shield = yes
+	potential = { tag = MX0 } 
 
 	mex_land = {
-		icon = mission_invade_island
-		required_missions = {mex_army mex_gold}
+		icon = mission_colonial
 		position = 2
+		required_missions = {
+			mex_army
+			mex_gold
+		}
 		provinces_to_highlight = {
 			OR = {
 				province_id = 2516
 				province_id = 921
 			}
 		}
-		trigger = { 
+
+		trigger = {
 			owns = 2516
-			2516 = {
-				is_city = yes
-			}
+			2516 = { is_city = yes } 
 			owns = 921
-			921 = {
-				is_city = yes
-			}
+			921 = { is_city = yes } 
 			treasury = 200
 		}
-		
+
 		effect = {
 			add_treasury = -200
 			add_country_modifier = {
-				name = mexican_expansion
+				name = "mexican_expansion"
 				duration = 35600
 			}
 		}
 	}
-	mex_river = {
-		icon = mission_invade_island
-		required_missions = {mex_land}
-		position = 4
 
-		trigger = { 
+	mex_river = {
+		icon = mission_se_along_the_river
+		position = 4
+		required_missions = { mex_land } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
 			OR = {
 				grown_by_development = 15
 				is_at_war = yes
 			}
 		}
-		
+
 		effect = {
-			country_event = {
-				id = mexic.3
-			}
+			country_event = { id = mexic.3 } 
 			capital_scope = {
 				add_institution_embracement = {
 					which = feudalism
@@ -664,15 +632,16 @@ Mex_4_slot = {
 			}
 		}
 	}
+
 	mex_trade_europe_2 = {
-		icon = mission_invade_island
-		required_missions = { }
+		icon = trade_with_the_natives
 		position = 7
 		provinces_to_highlight = {
 			trade_goods = tobacco
 			same_continent = ROOT
 		}
-		trigger = { 
+
+		trigger = {
 			num_of_owned_provinces_with = {
 				value = 3
 				trade_goods = tobacco
@@ -691,21 +660,20 @@ Mex_4_slot = {
 				}
 			}
 		}
-		
-		effect = {
-			home_trade_node_effect_scope = {
-				add_trade_node_income = 12
-			}
-		}
+
+		effect = { home_trade_node_effect_scope = { add_trade_node_income = 12 }  } 
 	}
+
 	mex_big_army = {
-		icon = mission_invade_island
-		required_missions = {mex_maize_potato mex_better_elites}
+		icon = army_reforms
 		position = 9
-		provinces_to_highlight = {
-			owned_by = ROOT
+		required_missions = {
+			mex_maize_potato
+			mex_better_elites
 		}
-		trigger = { 
+		provinces_to_highlight = { owned_by = ROOT } 
+
+		trigger = {
 			num_of_owned_provinces_with = {
 				value = 15
 				OR = {
@@ -721,27 +689,29 @@ Mex_4_slot = {
 						has_manpower_building_trigger = yes
 						base_manpower = 8
 					}
-				}		
+				}
 			}
 		}
-		
+
 		effect = {
 			add_army_tradition = 20
 			add_country_modifier = {
-				name = continental_army_mex
+				name = "continental_army_mex"
 				duration = -1
 			}
 		}
 	}
+
 	mex_great_army = {
-		icon = mission_invade_island
-		required_missions = {mex_big_army }
+		icon = mission_modern_knight_army
 		position = 10
+		required_missions = { mex_big_army } 
 		provinces_to_highlight = {
 			is_capital = yes
 			same_continent = ROOT
 		}
-		trigger = { 
+
+		trigger = {
 			custom_trigger_tooltip = {
 				tooltip = MEX_GREATARMY
 				all_country = {
@@ -755,108 +725,92 @@ Mex_4_slot = {
 				}
 			}
 		}
-		
+
 		effect = {
 			add_power_projection = {
 				type = 10_permanent_power_projection
 				amount = 50
 			}
 			if = {
-				limit = {
-					has_country_flag = formed_aztlan
-				}
+				limit = { has_country_flag = formed_aztlan } 
 				custom_tooltip = MEX_AMERICA_2
-			}else = {
-				custom_tooltip = MEX_AMERICA
 			}
+			else = { custom_tooltip = MEX_AMERICA } 
 			hidden_effect = {
-				north_america = {
-					add_permanent_claim = ROOT
-				}
-				south_america = {
-					add_permanent_claim = ROOT
-				}
+				north_america = { add_permanent_claim = ROOT } 
+				south_america = { add_permanent_claim = ROOT } 
 			}
 		}
 	}
+
 	mex_coast = {
-		icon = mission_invade_island
-		required_missions = {mex_navy }
+		icon = mission_junk_boat
 		position = 12
+		required_missions = { mex_navy } 
 		provinces_to_highlight = {
 			owned_by = ROOT
 			has_port = yes
 		}
-		trigger = { 
+
+		trigger = {
 			navy_size = 20
 			num_of_owned_provinces_with = {
 				value = 15
 				has_port = yes
 			}
 		}
-		
+
 		effect = {
-			cuba_area = {
-				add_permanent_claim = ROOT
-			}
+			cuba_area = { add_permanent_claim = ROOT } 
 			add_country_modifier = {
-				name = first_sail_of_mex
+				name = "first_sail_of_mex"
 				duration = 10950
 			}
 		}
 	}
 }
-
 Mex_5_slot = {
 	slot = 5
 	generic = no
 	ai = yes
-	potential = {	tag = MX0	}
 	has_country_shield = yes
-
+	potential = { tag = MX0 } 
 
 	mex_gold = {
-		icon = mission_invade_island
-		required_missions = { }
+		icon = mission_high_income
 		position = 1
+		provinces_to_highlight = {  } 
 
-		trigger = { 
-			treasury = 100
-		}
-		
+		trigger = { treasury = 100 } 
+
 		effect = {
 			add_treasury = -100
 			2516 = {
 				if = {
-					limit = {
-						is_empty = yes
-					}
+					limit = { is_empty = yes } 
 					add_siberian_construction = 500
-				}else = {
-					add_core = ROOT
 				}
+				else = { add_core = ROOT } 
 			}
 			921 = {
 				if = {
-					limit = {
-						is_empty = yes
-					}
+					limit = { is_empty = yes } 
 					add_siberian_construction = 500
-				}else = {
-					add_core = ROOT
 				}
+				else = { add_core = ROOT } 
 			}
 		}
 	}
+
 	mex_more_gold = {
-		icon = mission_invade_island
-		required_missions = {}
+		icon = mission_war_chest
 		position = 3
 		provinces_to_highlight = {
 			same_continent = ROOT
 			trade_goods = gold
 		}
-		trigger = { 
+
+		trigger = {
 			OR = {
 				any_country = {
 					has_opinion = {
@@ -874,34 +828,35 @@ Mex_5_slot = {
 				trade_goods = gold
 			}
 		}
-		
-		effect = {
-			add_treasury = 500
-		}
-	}
-	mex_elite = {
-		icon = mission_invade_island
-		required_missions = {mex_river mex_more_gold}
-		position = 5
 
-		trigger = { 
+		effect = { add_treasury = 500 } 
+	}
+
+	mex_elite = {
+		icon = mission_native_build_army_mission
+		position = 5
+		required_missions = {
+			mex_river
+			mex_more_gold
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {
 			treasury = 1000
 			num_of_infantry = 15
 		}
-		
+
 		effect = {
 			add_country_modifier = {
-				name = aztec_elites
+				name = "aztec_elites"
 				duration = -1
 			}
 			custom_tooltip = AZTEK_EXPANSION
 			hidden_effect = {
 				every_owned_province = {
-					limit = {
-						culture = mexica
-					}
+					limit = { culture = mexica } 
 					add_province_modifier = {
-						name = aztec_local_elite
+						name = "aztec_local_elite"
 						duration = -1
 						hidden = yes
 					}
@@ -909,34 +864,34 @@ Mex_5_slot = {
 			}
 		}
 	}
+
 	mex_elite_2 = {
-		icon = mission_invade_island
-		required_missions = {mex_elite}
+		icon = mission_assemble_an_army
 		position = 6
+		required_missions = { mex_elite } 
 		provinces_to_highlight = {
 			owned_by = ROOT
 			can_build = barracks
 		}
-		trigger = { 
+
+		trigger = {
 			num_of_owned_provinces_with = {
 				value = 10
 				has_manpower_building_trigger = yes
 			}
 		}
-		
+
 		effect = {
 			add_country_modifier = {
-				name = easy_elite_mex
+				name = "easy_elite_mex"
 				duration = -1
 			}
 			custom_tooltip = AZTEK_EXPANSION_2
 			hidden_effect = {
 				every_owned_province = {
-					limit = {
-						culture_group = alt_mexican
-					}
+					limit = { culture_group = alt_mexican } 
 					add_province_modifier = {
-						name = aztec_local_elite
+						name = "aztec_local_elite"
 						duration = -1
 						hidden = yes
 					}
@@ -944,15 +899,20 @@ Mex_5_slot = {
 			}
 		}
 	}
+
 	mex_better_elites = {
-		icon = mission_invade_island
-		required_missions = {mex_trade_europe_2 mex_elite_2}
+		icon = plague_doctor_training
 		position = 8
+		required_missions = {
+			mex_trade_europe_2
+			mex_elite_2
+		}
 		provinces_to_highlight = {
 			trade_goods = tobacco
 			same_continent = ROOT
 		}
-		trigger = { 
+
+		trigger = {
 			num_of_owned_provinces_with = {
 				value = 10
 				trade_goods = tobacco
@@ -960,20 +920,18 @@ Mex_5_slot = {
 				has_manpower_building_trigger = yes
 			}
 		}
-		
+
 		effect = {
 			add_country_modifier = {
-				name = op_elite_mex
+				name = "op_elite_mex"
 				duration = -1
 			}
 			custom_tooltip = AZTEK_EXPANSION_2
 			hidden_effect = {
 				every_owned_province = {
-					limit = {
-						culture_group = alt_mexican
-					}
+					limit = { culture_group = alt_mexican } 
 					add_province_modifier = {
-						name = aztec_local_elite
+						name = "aztec_local_elite"
 						duration = -1
 						hidden = yes
 					}
@@ -981,40 +939,42 @@ Mex_5_slot = {
 			}
 		}
 	}
-	mex_power_of_sea = {
-		icon = mission_invade_island
-		required_missions = {mex_coast }
-		position = 13
 
-		trigger = { 
-			navy_size = 50
-		}
-		
+	mex_power_of_sea = {
+		icon = renaissance_city
+		position = 13
+		required_missions = { mex_coast } 
+		provinces_to_highlight = {  } 
+
+		trigger = { navy_size = 50 } 
+
 		effect = {
 			add_navy_tradition = 30
 			add_country_modifier = {
-				name = mexican_navy
+				name = "mexican_navy"
 				duration = 10950
 			}
 		}
 	}
-	mex_doctrine= {
-		icon = mission_invade_island
-		required_missions = {mex_power_of_sea }
-		position = 14
 
-		trigger = { 
+	mex_doctrine = {
+		icon = mission_spanish_armada
+		position = 14
+		required_missions = { mex_power_of_sea } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
 			navy_size = 200
 			num_of_owned_provinces_with = {
 				value = 50
 				has_port = yes
 			}
 		}
-		
+
 		effect = {
 			add_navy_tradition = 30
 			add_country_modifier = {
-				name = mexican_navy_2
+				name = "mexican_navy_2"
 				duration = -1
 			}
 		}
