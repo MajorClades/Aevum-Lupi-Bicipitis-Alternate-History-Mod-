@@ -46,130 +46,6 @@ on_startup = {
 	}
 	initialize_schools_effect = yes #This is only used here but is used for readability of on_action file.
 
-	if = {
-		limit = {
-			NOT = { has_country_flag = new_flavour_bav_13_has_been_triggered }
-			OR = {
-				tag = UBV
-				tag = LBV
-				tag = ING
-			}
-		}
-		set_country_flag = new_flavour_bav_13_has_been_triggered
-		country_event = { id = new_flavour_bav.13 days = 90 } #better not to allow almost instant DOWs
-	}
-	if = {
-		limit = {
-			tag = FRA
-			started_in = 1789.7.14
-			NOT = { is_year = 1790 }
-			NOT = { has_disaster = french_revolution }
-		}
-		add_disaster_progress = {
-			value = 100
-			disaster = french_revolution
-		}
-	}
-	if = {
-		limit = {
-			exists = SUK
-		}
-		SUK = {
-			set_ruler_flag = suk_monarch_flag
-		}
-		AYU = {
-			set_country_flag = ayu_monarch_flag
-		}
-	}
-	#if = {
-	#	limit = {
-	#		OR = {
-	#			primary_culture = norse
-	#			AND = {
-	#				culture_group = scandinavian
-	#				religion = norse_pagan_reformed
-	#			}
-	#		}
-	#		NOT = { has_idea_group = norse_ideas }
-	#		is_playing_custom_nation = no
-	#	}
-	#	country_event = { id = ideagroups.1 } #Swap Ideas
-	#}
-
-	if = {
-		limit = { 
-			has_dlc = "Domination" 
-			tag = FRA 
-			NOT = { is_year = 1445 } 
-		}
-		country_event = { id = flavor_fra.206 }
-	}
-	if = {
-		limit = {
-			NOT = { has_global_flag = end_of_the_tatar_yoke }
-			owns = 466
-			is_year = 1480
-		}
-		set_global_flag = end_of_the_tatar_yoke
-	}
-	if = {
-		limit = {
-			OR = {
-				has_country_modifier = rise_of_the_ottomans
-				has_country_modifier = zenith_of_the_ottomans
-				has_country_modifier = twilight_of_the_ottomans
-				has_country_modifier = decline_of_the_ottomans
-			}
-		}
-		remove_country_modifier = rise_of_the_ottomans
-		remove_country_modifier = zenith_of_the_ottomans
-		remove_country_modifier = twilight_of_the_ottomans
-		remove_country_modifier = decline_of_the_ottomans
-	}
-	if = {
-		limit = {
-			has_government_mechanic = ottoman_decadence_mechanic
-			current_age = age_of_discovery
-		}
-		add_country_modifier = {
-			name = rise_of_the_ottomans
-			duration = -1
-			desc = until_end_of_age_desc
-		}
-	}
-	if = {
-		limit = {
-			has_government_mechanic = ottoman_decadence_mechanic
-			current_age = age_of_reformation
-		}
-		add_country_modifier = {
-			name = zenith_of_the_ottomans
-			duration = -1
-			desc = until_end_of_age_desc
-		}
-	}
-	if = {
-		limit = {
-			has_government_mechanic = ottoman_decadence_mechanic
-			current_age = age_of_absolutism
-		}
-		add_country_modifier = {
-			name = twilight_of_the_ottomans
-			duration = -1
-			desc = until_end_of_age_desc
-		}
-	}
-	if = {
-		limit = {
-			has_government_mechanic = ottoman_decadence_mechanic
-			current_age = age_of_revolutions
-		}
-		add_country_modifier = {
-			name = decline_of_the_ottomans
-			duration = -1
-			desc = until_end_of_age_desc
-		}
-	}
 }
 
 # country
@@ -5798,64 +5674,7 @@ on_new_age = {
 	events = {
 	}
 	remove_all_age_timed_modifiers = yes
-	if = {
-		limit = {
-			OR = {
-				has_country_modifier = rise_of_the_ottomans
-				has_country_modifier = zenith_of_the_ottomans
-				has_country_modifier = twilight_of_the_ottomans
-				has_country_modifier = decline_of_the_ottomans
-			}
-		}
-		remove_country_modifier = rise_of_the_ottomans
-		remove_country_modifier = zenith_of_the_ottomans
-		remove_country_modifier = twilight_of_the_ottomans
-		remove_country_modifier = decline_of_the_ottomans
-	}
-	if = {
-		limit = {
-			has_government_mechanic = ottoman_decadence_mechanic
-			current_age = age_of_discovery
-		}
-		add_country_modifier = {
-			name = rise_of_the_ottomans
-			duration = -1
-			desc = until_end_of_age_desc
-		}
-	}
-	if = {
-		limit = {
-			has_government_mechanic = ottoman_decadence_mechanic
-			current_age = age_of_reformation
-		}
-		add_country_modifier = {
-			name = zenith_of_the_ottomans
-			duration = -1
-			desc = until_end_of_age_desc
-		}
-	}
-	if = {
-		limit = {
-			has_government_mechanic = ottoman_decadence_mechanic
-			current_age = age_of_absolutism
-		}
-		add_country_modifier = {
-			name = twilight_of_the_ottomans
-			duration = -1
-			desc = until_end_of_age_desc
-		}
-	}
-	if = {
-		limit = {
-			has_government_mechanic = ottoman_decadence_mechanic
-			current_age = age_of_revolutions
-		}
-		add_country_modifier = {
-			name = decline_of_the_ottomans
-			duration = -1
-			desc = until_end_of_age_desc
-		}
-	}
+
 }
 
 #ROOT = province
@@ -5959,7 +5778,7 @@ on_naval_barrage = { #ROOT - barraging country, FROM - barraged province
 
 }
 
-on_scorch_earth  = { #ROOT - scorching country, FROM - scorched province
+on_scorch_earth = { #ROOT - scorching country, FROM - scorched province
 
 }
 
