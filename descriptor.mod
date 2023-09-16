@@ -10,3 +10,5 @@ name="Aevum Lupi Bicipitis [Alternate History Mod]"
 picture="thumbnail.png"
 supported_version="1.35.6"
 remote_file_id="2889431768"
+
+replace_path="history/diplomacy"
