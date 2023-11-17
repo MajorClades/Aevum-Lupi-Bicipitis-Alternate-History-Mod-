@@ -6,7 +6,7 @@ tags={
 	"National Ideas"
 	"New Nations"
 }
-name="Aevum Lupi Bicipitis [Alternate History Mod]"
+name="Aevum Lupi Bicipitis - Rework"
 picture="thumbnail.png"
-supported_version="1.35.6"
+supported_version="1.36.*"
 remote_file_id="2889431768"
