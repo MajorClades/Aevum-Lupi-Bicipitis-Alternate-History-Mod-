@@ -1,0 +1,196 @@
+on_startup = {	
+	events = {
+		soxony.1
+		mexic.1
+		thetruth.1
+		fjal.302
+		rhom.6
+	}
+}
+
+on_war_won = {
+
+	if = {
+		limit = {
+			has_country_flag = italian_war_pad_emp
+		}
+		ROOT = {
+			clr_country_flag = italian_war_pad_emp
+			set_country_flag = italian_war_pad_emp_won
+		}
+	}
+}
+	
+on_battle_won_country = {
+	#on_battle_ended_effect = yes
+	on_battle_won_country_effect = yes
+	if = {
+		limit = {
+			ROOT = {
+				has_reform = saxony_order
+			}
+		}
+		add_government_power = {
+			mechanic_type = saxony_knight_lodge
+			power_type = knight_influence
+			value = 1
+		}
+	}
+}
+
+on_main_war_won = {
+	if = {
+		limit = {
+			ROOT = {
+				has_reform = saxony_order
+			}
+		}
+		ROOT = {
+		add_government_power = {
+			mechanic_type = saxony_knight_lodge
+			power_type = knight_influence
+			value = 10
+		}
+		}
+	}
+}
+
+on_monarch_death = {
+
+	if = {
+		limit = { tag = HE0 }
+		country_event = { id = atro.1 }
+		country_event = { id = atro.3 days = 1}
+	}
+}
+
+on_adm_development = {
+
+	if = { 
+		limit = { 
+			owner = { has_country_flag = double_dev_ability }
+		}
+		owner = {
+			add_treasury = -100
+		}
+		add_base_tax = 1
+	}
+
+}
+
+on_dip_development = {
+
+	if = { 
+		limit = { 
+			owner = { has_country_modifier = pru_victory_lower_saxony_modifier }
+			OR = { 
+				culture = saxon
+				culture = lower_saxon
+			}
+		}
+		add_nationalism = -3
+		add_local_autonomy = -5
+		add_prosperity = 1
+	}
+	if = {
+		limit = { 
+			owner = { has_country_modifier = doublowinedip }
+			trade_goods = wine
+		}
+		add_base_production = 1 
+	}
+	if = {
+		limit = { 
+			owner = { 
+				OR = {
+					tag = CO1
+					tag = CO2
+					tag = CO3
+				}
+			}
+			trade_goods = wine
+		}
+		add_base_production = 1 
+	}
+	if = { 
+		limit = { 
+			owner = { has_country_flag = double_dev_ability }
+		}
+		owner = {
+			add_treasury = -100
+		}
+		add_base_production = 1
+	}
+}
+
+on_mil_development = {
+
+	if = { 
+		limit = { 
+			owner = { has_country_modifier = saxonic_order }
+		}
+		if = {
+			limit = {
+				NOT = {
+					culture = saxon
+				}
+			}
+			random_list = {
+				25 = {
+					change_culture = saxon
+					change_religion = hussite
+				}
+				75 = {
+					
+				}
+			}
+		}
+	}
+	if = { 
+		limit = { 
+			owner = { has_country_flag = double_dev_ability }
+		}
+		owner = {
+			add_treasury = -100
+		}
+		add_base_manpower = 1
+	}
+}
+
+on_thri_yearly_pulse_2 = {
+	random_events = {
+
+
+		#Archeology Events
+		200 = australia.3
+		200 = australia.6
+		200 = australia.7
+		200 = australia.8
+		200 = australia.9
+		200 = 0
+		200 = 0
+		200 = 0
+	
+		2000 = 0
+	}
+}
+
+
+on_province_religion_converted = {
+
+	if = {
+		limit = {
+			owner = {
+			OR = {
+				has_reform = bards_of_baldr_reform
+				has_reform = allfatherrealm_reform
+			}
+		}
+		}
+		add_government_power = {
+			mechanic_type = baldrlight_mechanic
+			power_type = lightness_power
+			value = 5
+		}
+	}
+}
