@@ -1,13 +1,13 @@
 ######################################################################
 # Impotian rebels. Disgruntled fanatics.
 ######################################################################
-mexicos_rebels = {
+alevilik_rebels = {
 
 	color = { 230 175 175 }
 
 	area = nation 					# Sticks to provinces of their nation
 	government = theocracy 			# Desires Theocracy
-	religion = mexicos
+	religion = alevilik
 	defection = none				# Will not defect
 	defect_delay = 120				# Held provinces will auto-defect after 18 months, regardless of accept/enforce demands.
 	independence = none				# Does not strive for independence
@@ -45,7 +45,7 @@ mexicos_rebels = {
 		}
 		modifier = {
 			factor = 0.0
-			NOT = { religion = mexicos }
+			NOT = { religion = alevilik }
 		}
 		modifier = {
 			factor = 0.001
@@ -90,21 +90,21 @@ mexicos_rebels = {
 		}
 		modifier = {
 			factor = 0.0
-			religion = mexicos
-			owner = { religion = mexicos }
+			religion = alevilik
+			owner = { religion = alevilik }
 		}
 		modifier = {
 			factor = 2.0
-			NOT = { religion = mexicos }
+			NOT = { religion = alevilik }
 			any_neighbor_province = {
-	 			religion = mexicos
+	 			religion = alevilik
 	 			NOT = { has_province_modifier = "forced_conversion" }
 	 		}
 	 	}
 		modifier = {
 			factor = 5
 			has_missionary = yes
-			religion = mexicos
+			religion = alevilik
 		}
 		modifier = {
 			factor = 1.5
@@ -135,9 +135,9 @@ mexicos_rebels = {
 			if = {
 				limit = {
 					OR = {
-						religion = mexicos
+						religion = alevilik
 						is_reformation_center = yes
-						owner = { religion = mexicos }
+						owner = { religion = alevilik }
 					}
 				}
 				add_province_modifier = {
@@ -147,11 +147,11 @@ mexicos_rebels = {
 			}
 			if = {
 				limit = {
-					NOT = { religion = mexicos }
+					NOT = { religion = alevilik }
 					is_reformation_center = no
-					NOT = { owner = { religion = mexicos } }
+					NOT = { owner = { religion = alevilik } }
 				}
-				change_religion = mexicos
+				change_religion = alevilik
 				add_province_modifier = {
 					name = "forced_conversion"
 					duration = 730
@@ -171,7 +171,7 @@ mexicos_rebels = {
 	can_negotiate_trigger = {
 		OR = {
 			religion_group = christian
-			dominant_religion = mexicos
+			dominant_religion = alevilik
 		}
 	}
 	
@@ -181,7 +181,7 @@ mexicos_rebels = {
 	}
 	
 	# Localisation for their demands
-	demands_description = "mexicos_rebels_demand"
+	demands_description = "alevilik_rebels_demand"
 	
 	# Country Scope	
 	demands_enforced_effect = {
@@ -212,7 +212,7 @@ mexicos_rebels = {
 		}
 		else_if = {
 			limit = {
-				religion = mexicos
+				religion = alevilik
 			}
 			add_country_modifier = {
 				name = "religious_intolerance_enforced"
@@ -221,16 +221,16 @@ mexicos_rebels = {
 		}
 		else_if = {
 			limit = {
-				NOT = { religion = mexicos }
-				dominant_religion = mexicos
+				NOT = { religion = alevilik }
+				dominant_religion = alevilik
 			}
-			change_religion = mexicos
+			change_religion = alevilik
 			force_converted = yes
 		}
 		else_if = {
 			limit = {
-				NOT = { religion = mexicos }
-				NOT = { dominant_religion = mexicos }
+				NOT = { religion = alevilik }
+				NOT = { dominant_religion = alevilik }
 				religion_group = christian
 				NOT = { has_country_modifier = heretic_tolerance }
 			}
@@ -243,7 +243,7 @@ mexicos_rebels = {
 		else = { add_stability = -1 } #Should probably never get here
 		if = {
 			limit = {
-				religion = mexicos
+				religion = alevilik
 				has_estate = estate_church
 				NOT = {
 					has_estate_influence_modifier = {
