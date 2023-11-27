@@ -316,10 +316,6 @@ christian = {
 	protestant = {
 		color = { 0 0 178 }
 		icon = 2
-		allowed_conversion = {
-			reformed
-			catholic
-		}
 		allowed_center_conversion = {
 			catholic
 		}
@@ -333,116 +329,11 @@ christian = {
 			idea_cost = -0.1
 		}
 		
-		uses_church_power = yes				# Uses church power/aspect mechanics
-		aspects = {
-			organised_through_bishops_aspect
-			priests_may_marry_aspect
-			adult_baptism_aspect
-			holy_sacraments_aspect
-			saints_accept_prayers_aspect
-			icons_images_aspect
-			legalised_divorces_aspect
-			heretics_deported_aspect
-			parish_registers_aspect
-			individual_creeds_aspect
-			allow_usury_aspect
-			translated_bibles_aspect
-			justified_religious_war_aspect
-			war_preaches_aspect
-			head_of_the_church_aspect
-		}
-		aspects_name = PROTESTANT_ASPECTS
-		
-		hre_heretic_religion = yes
 		
 		will_get_center = { #Refered to even for initial CoR Spawn
 			any_owned_province = {
 				can_have_center_of_reformation_trigger = {
 					RELIGION = protestant
-				}
-			}
-		}
-		on_convert = {
-			change_religion = protestant
-			add_prestige = -100
-			remove_country_modifier = counter_reformation
-			remove_country_modifier = the_statue_in_restraint_of_appeals
-			remove_country_modifier = revocation_of_restraint_of_appeals
-			remove_country_modifier = bavarian_jesuits
-			remove_country_modifier = the_societas_jesu
-			remove_country_modifier = the_declaration_of_indulgence
-			remove_country_modifier = de_heretico_comburendo
-			remove_country_modifier = the_conventicle_act
-	
-			if = {
-				limit = {
-					has_country_flag = reformation_money
-					NOT = {
-						calc_true_if = {
-							all_province = {
-								religion = protestant
-								is_reformation_center = yes
-							}
-							amount = 3
-						}
-					}
-				}
-				hidden_effect = {
-					random_owned_province = {
-						limit = {
-							can_have_center_of_reformation_trigger = {
-								RELIGION = protestant
-							}
-						}
-						change_religion = protestant
-						add_reform_center = protestant
-					}
-				}
-				custom_tooltip = CENTER_OF_REFORMATION_POSSIBLE
-			}
-			if = {
-				limit = {
-					NOT = { has_country_flag = reformation_money }
-					NOT = {
-						calc_true_if = {
-							all_province = {
-								religion = protestant
-								is_reformation_center = yes
-							}
-							amount = 3
-						}
-					}
-				}
-				add_years_of_income = 1.0
-				hidden_effect = {
-					random_owned_province = {
-						limit = {
-							can_have_center_of_reformation_trigger = {
-								RELIGION = protestant
-							}
-						}
-						change_religion = protestant
-						add_reform_center = protestant
-					}
-				}
-				custom_tooltip = CENTER_OF_REFORMATION_POSSIBLE
-			}
-			
-			add_country_modifier = {
-				name = "conversion_zeal"
-				duration = 3650
-			}			
-			set_country_flag = reformation_money
-			every_known_country = {
-				limit = {
-					reverse_has_opinion_modifier = {
-						who = ROOT
-						modifier = opinion_demote_pope
-					}
-				}
-				reverse_remove_opinion = {
-					who = ROOT
-					modifier = opinion_demote_pope
 				}
 			}
 		}
@@ -454,10 +345,6 @@ christian = {
 	reformed = {
 		color = { 76 76 229 }
 		icon = 3
-		allowed_conversion = {
-			protestant
-			catholic
-		}
 		allowed_center_conversion = {
 			catholic
 		}
@@ -470,97 +357,7 @@ christian = {
 			global_unrest = -1
 			advisor_cost = -0.1
 		}
-		will_get_center = { #Refered to even for initial CoR Spawn
-			any_owned_province = {
-				can_have_center_of_reformation_trigger = {
-					RELIGION = reformed
-				}
-			}
-		}
-		
-		on_convert = {
-			change_religion = reformed
-			add_prestige = -100
-			remove_country_modifier = counter_reformation
-			remove_country_modifier = the_statue_in_restraint_of_appeals
-			remove_country_modifier = revocation_of_restraint_of_appeals
-			remove_country_modifier = bavarian_jesuits
-			remove_country_modifier = the_societas_jesu
-			remove_country_modifier = the_declaration_of_indulgence
-			remove_country_modifier = de_heretico_comburendo
-			remove_country_modifier = the_conventicle_act
-			
-			if = {
-				limit = {
-					has_country_flag = reformation_money
-					NOT = {
-						calc_true_if = {
-							all_province = {
-								religion = reformed
-								is_reformation_center = yes
-							}
-							amount = 3
-						}
-					}
-				}
-				hidden_effect = {
-					random_owned_province = {
-						limit = {
-							can_have_center_of_reformation_trigger = {
-								RELIGION = reformed
-							}
-						}
-						change_religion = reformed
-						add_reform_center = reformed
-					}
-				}
-				custom_tooltip = CENTER_OF_REFORMATION_POSSIBLE
-			}
-			if = {
-				limit = {
-					NOT = { has_country_flag = reformation_money }
-					NOT = {
-						calc_true_if = {
-							all_province = {
-								religion = reformed
-								is_reformation_center = yes
-							}
-							amount = 3
-						}
-					}
-				}
-				add_years_of_income = 1.0
-				hidden_effect = {
-					random_owned_province = {
-						limit = {
-							can_have_center_of_reformation_trigger = {
-								RELIGION = reformed
-							}
-						}
-						change_religion = reformed
-						add_reform_center = reformed
-					}
-				}
-				custom_tooltip = CENTER_OF_REFORMATION_POSSIBLE
-			}
-			add_country_modifier = {
-				name = "conversion_zeal"
-				duration = 3650
-			}
-			set_country_flag = "reformation_money"
-			every_known_country = {
-				limit = {
-					reverse_has_opinion_modifier = {
-						who = ROOT
-						modifier = opinion_demote_pope
-					}
-				}
-				reverse_remove_opinion = {
-					who = ROOT
-					modifier = opinion_demote_pope
-				}
-			}
-		}
+	
 		
 		heretic = { METHODIST BAPTIST QUAKER }
 		
@@ -1057,13 +854,6 @@ muslim = {
 				}
 				if = {
 					limit = {
-						NOT = { religion = sunni }
-						NOT = { religion = ibadi }
-					}
-					NOT = { piety = -0.5 }
-				}
-				if = {
-					limit = {
 						NOT = { has_country_flag = can_always_invite_hanafi_school }
 						NOT = { has_country_flag = privilege_can_always_invite_hanafi_school }
 					}
@@ -1127,13 +917,6 @@ muslim = {
 						NOT = { has_country_flag = no_scholar_adm_cost }
 					}
 					adm_power_cost = 50
-				}
-				if = {
-					limit = {
-						NOT = { religion = sunni }
-						NOT = { religion = ibadi }
-					}
-					NOT = { piety = -0.5 }
 				}
 				if = {
 					limit = {
@@ -1202,13 +985,6 @@ muslim = {
 				}
 				if = {
 					limit = {
-						NOT = { religion = sunni }
-						NOT = { religion = ibadi }
-					}
-					NOT = { piety = -0.5 }
-				}
-				if = {
-					limit = {
 						NOT = { has_country_flag = can_always_invite_maliki_school }
 						NOT = { has_country_flag = privilege_can_always_invite_maliki_school }
 					}
@@ -1271,13 +1047,6 @@ muslim = {
 						NOT = { has_country_flag = no_scholar_adm_cost }
 					}
 					adm_power_cost = 50
-				}
-				if = {
-					limit = {
-						NOT = { religion = sunni }
-						NOT = { religion = ibadi }
-					}
-					NOT = { piety = -0.5 }
 				}
 				if = {
 					limit = {
@@ -1344,13 +1113,6 @@ muslim = {
 						NOT = { has_country_flag = no_scholar_adm_cost }
 					}
 					adm_power_cost = 50
-				}
-				if = {
-					limit = {
-						NOT = { religion = shiite }
-						NOT = { religion = ibadi }
-					}
-					NOT = { piety = -0.5 }
 				}
 				if = {
 					limit = {
@@ -1422,13 +1184,6 @@ muslim = {
 				}
 				if = {
 					limit = {
-						NOT = { religion = shiite }
-						NOT = { religion = ibadi }
-					}
-					NOT = { piety = -0.5 }
-				}
-				if = {
-					limit = {
 						NOT = { has_country_flag = can_always_invite_jafari_school }
 						NOT = { has_country_flag = privilege_can_always_invite_jafari_school }
 					}
@@ -1494,13 +1249,6 @@ muslim = {
 				}
 				if = {
 					limit = {
-						NOT = { religion = shiite }
-						NOT = { religion = ibadi }
-					}
-					NOT = { piety = -0.5 }
-				}
-				if = {
-					limit = {
 						NOT = { has_country_flag = can_always_invite_zaidi_school }
 						NOT = { has_country_flag = privilege_can_always_invite_zaidi_school }
 					}
@@ -1549,6 +1297,73 @@ muslim = {
 		}
 		
 	}
+
+	islam = {
+		color = { 0 153 0 }
+		icon = 5
+		allowed_center_conversion = {
+			rashidi
+			alevilik
+		}
+		country = {
+			stability_cost_modifier = -0.1
+			heir_chance = 1.0
+		}
+		country_as_secondary = {
+			trade_efficiency = 0.1
+			heir_chance = 1.0
+		}
+		province = {
+			local_missionary_strength = -0.02
+		}
+		
+		heretic = { BEKTASHI AHMADI ZIKRI YAZIDI }
+		
+	}
+
+	rashidi = {
+		color = { 0 204 0 }
+		icon = 6
+		allowed_center_conversion = {
+			alevilik
+			islam
+		}
+		country = {
+			heir_chance = 1.0
+			land_morale = 0.05
+		}
+		country_as_secondary = {
+			land_morale = 0.05
+			advisor_cost = -0.1
+		}
+		province = {
+			local_missionary_strength = -0.02
+		}
+		
+		heretic = { DRUZE HURUFI ZAIDI }
+	}
+
+	alevilik = {
+		color = { 0 102 0 }
+		icon = 16	
+		allowed_center_conversion = {
+			sunni
+			shiite
+		}
+		country = {
+			heir_chance = 1.0
+			global_trade_goods_size_modifier = 0.1
+		}
+		country_as_secondary = {
+			global_ship_cost = -0.1
+			advisor_cost = -0.1
+		}
+		province = {
+			local_missionary_strength = -0.02
+		}
+		
+		heretic = { HARURI SUFRI NAJADAT AZRAQI }
+	}
 	
 	sunni = {
 		color = { 0 153 0 }
@@ -1577,7 +1392,6 @@ muslim = {
 	shiite = {
 		color = { 0 204 0 }
 		icon = 6
-		icon = 6	
 		allowed_center_conversion = {
 			sunni
 			ibadi
@@ -1601,7 +1415,6 @@ muslim = {
 	
 	ibadi = {
 		color = { 0 102 0 }
-		icon = 16
 		icon = 16	
 		allowed_center_conversion = {
 			sunni
