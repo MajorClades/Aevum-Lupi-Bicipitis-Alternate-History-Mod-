@@ -1,0 +1,149 @@
+country_decisions = {
+
+	veneto_nation = {
+		major = yes
+		potential = {
+			NOT = { has_country_flag = veneto_flag }
+			is_nomad = no
+			was_never_end_game_tag_trigger = yes
+			is_random_new_world = no
+			NOT = { tag = PD0 }
+			primary_culture = venetian
+			capital_scope = {
+				OR = {
+					area = venetia_area
+					area = veneto_area
+				}
+			}
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = venetia_area
+				area = veneto_area
+			}
+		}
+		allow = {
+			is_free_or_tributary_trigger = yes
+			is_at_war = no
+			capital_scope = {
+				OR = {
+					area = venetia_area
+					area = veneto_area
+				}
+			}
+			num_of_owned_provinces_with = {
+				value = 8
+				OR = {
+					area = venetia_area
+					area = veneto_area
+				}
+			}
+			NOT = { exists = VE0 }
+		}
+		effect = {
+			set_country_flag = veneto_flag
+			change_tag = VE0
+			if = {
+				limit = {
+					NOT = { government_rank = 2 }
+				}
+				set_government_rank = 2
+			}		
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			add_prestige_or_monarch_power = {
+				amount = 25
+			}
+			if = {
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			#can't have more than one elective monarchy in the game
+			if = {
+				limit = {
+					has_reform = elective_monarchy
+				}
+				change_government = monarchy
+				add_government_reform = feudalism_reform
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	tirrenia_nation = {
+		major = yes
+		potential = {
+			NOT = { has_country_flag = tirrenia_flag }
+			is_nomad = no
+			was_never_end_game_tag_trigger = yes
+			is_random_new_world = no
+			NOT = { tag = PD0 }
+			primary_culture = sardinian
+			capital_scope = {
+				OR = {
+					area = sardinia_area
+					area = corsica_sardinia_area
+				}
+			}
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = sardinia_area
+				area = corsica_sardinia_area
+			}
+		}
+		allow = {
+			is_free_or_tributary_trigger = yes
+			is_at_war = no
+			capital_scope = {
+				OR = {
+					area = sardinia_area
+					area = corsica_sardinia_area
+				}
+			}
+			num_of_owned_provinces_with = {
+				value = 8
+				OR = {
+					area = sardinia_area
+					area = corsica_sardinia_area
+				}
+			}
+			NOT = { exists = MO2 }
+		}
+		effect = {
+			set_country_flag = tirrenia_flag
+			change_tag = MO2
+			if = {
+				limit = {
+					NOT = { government_rank = 2 }
+				}
+				set_government_rank = 2
+			}		
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			add_prestige_or_monarch_power = {
+				amount = 25
+			}
+			if = {
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			#can't have more than one elective monarchy in the game
+			if = {
+				limit = {
+					has_reform = elective_monarchy
+				}
+				change_government = monarchy
+				add_government_reform = feudalism_reform
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}

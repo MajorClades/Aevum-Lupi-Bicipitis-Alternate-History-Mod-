@@ -135,3 +135,67 @@ country_event = {
 		}
 	}
 }
+
+country_event = {
+	id = molis.5
+	title = molis.5.test
+	desc = molis.5.desc
+	picture = TRADE_GOODS_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = molis.5a
+		MO0 = {
+			create_union = ROOT
+		}
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 2
+				has_opinion = {
+					who = MO0
+					value = 130
+				}
+			}
+			modifier = {
+				factor = 2
+				has_opinion = {
+					who = MO0
+					value = 170
+				}
+			}
+		}
+	}
+	option = {
+		name = molis.5b
+		break_alliance = MO0
+		MO0 = {
+			add_prestige = 10
+			central_italy_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 2
+				NOT = {
+					has_opinion = {
+						who = MO0
+						value = 50
+					}
+				}
+			}
+			modifier = {
+				factor = 2
+				NOT = {
+					has_opinion = {
+						who = MO0
+						value = 0
+					}
+				}
+			}
+		}
+	}
+}
