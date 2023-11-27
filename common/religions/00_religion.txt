@@ -835,12 +835,12 @@ muslim = {
 	ai_will_propagate_through_trade = yes
 
 	religious_schools = {
-		hanafi_school = {
+		syncretist_school = {
 			potential_invite_scholar = {
 				OR = {
 					knows_of_scholar_country_capital_trigger = yes
-					has_country_flag = can_always_invite_hanafi_school
-					has_country_flag = privilege_can_always_invite_hanafi_school
+					has_country_flag = can_always_invite_syncretist_school
+					has_country_flag = privilege_can_always_invite_syncretist_school
 				}
 			}
 
@@ -854,8 +854,8 @@ muslim = {
 				}
 				if = {
 					limit = {
-						NOT = { has_country_flag = can_always_invite_hanafi_school }
-						NOT = { has_country_flag = privilege_can_always_invite_hanafi_school }
+						NOT = { has_country_flag = can_always_invite_syncretist_school }
+						NOT = { has_country_flag = privilege_can_always_invite_syncretist_school }
 					}
 					reverse_has_opinion = { who = FROM value = 150 }
 					OR = {
@@ -871,7 +871,7 @@ muslim = {
 					}
 					NOT = { has_country_modifier = has_invited_scholar_recently }
 				}
-				NOT = { has_country_modifier = hanafi_scholar_modifier }
+				NOT = { has_country_modifier = syncretist_school_modifier }
 			}
 
 			# THIS = Nation wanting to invite the scholar, FORM = Nation that sends scholar
@@ -884,7 +884,7 @@ muslim = {
 				}
 				clear_religious_scholar_modifiers_effect = yes
 				custom_tooltip = INVITE_SCHOLAR_COUNTRY_TEXT
-				add_country_modifier = { name = hanafi_scholar_modifier duration = 7300 }
+				add_country_modifier = { name = syncretist_school_modifier duration = 7300 }
 				if = {	#Ensures that the AI doesn't waste all of their ADM power on inviting scholars should they be able to invite them baseline
 					limit = {
 						ai = yes
@@ -894,19 +894,19 @@ muslim = {
 			}
 
 			# If you don't set this it will expand on_invite_scholar effect which might be super big
-			invite_scholar_modifier_display = hanafi_scholar_modifier
+			invite_scholar_modifier_display = syncretist_school_modifier
 
 			picture = "GFX_icon_muslim_school_hanafi"
 
 			# religion_sub_modifier = no is possible, will hide icon in religious screen
-			adm_tech_cost_modifier = -0.05
+			tolerance_heathen = 1
 		}
-		hanbali_school = {
+		osmani_school = {
 			potential_invite_scholar = {
 				OR = {
 					knows_of_scholar_country_capital_trigger = yes
-					has_country_flag = can_always_invite_hanbali_school
-					has_country_flag = privilege_can_always_invite_hanbali_school
+					has_country_flag = can_always_invite_osmani_school
+					has_country_flag = privilege_can_always_invite_osmani_school
 				}
 			}
 
@@ -920,8 +920,8 @@ muslim = {
 				}
 				if = {
 					limit = {
-						NOT = { has_country_flag = can_always_invite_hanbali_school }
-						NOT = { has_country_flag = privilege_can_always_invite_hanbali_school }
+						NOT = { has_country_flag = can_always_invite_osmani_school }
+						NOT = { has_country_flag = privilege_can_always_invite_osmani_school }
 					}
 					reverse_has_opinion = { who = FROM value = 150 }
 					OR = {
@@ -937,7 +937,7 @@ muslim = {
 					}
 					NOT = { has_country_modifier = has_invited_scholar_recently }
 				}
-				NOT = { has_country_modifier = hanbali_scholar_modifier }
+				NOT = { has_country_modifier = osmani_school_modifier }
 			}
 
 			# THIS = Nation wanting to invite the scholar, FORM = Nation that sends scholar
@@ -950,7 +950,7 @@ muslim = {
 				}
 				clear_religious_scholar_modifiers_effect = yes
 				custom_tooltip = INVITE_SCHOLAR_COUNTRY_TEXT
-				add_country_modifier = { name = hanbali_scholar_modifier duration = 7300 }
+				add_country_modifier = { name = osmani_school_modifier duration = 7300 }
 				if = {	#Ensures that the AI doesn't waste all of their ADM power on inviting scholars should they be able to invite them baseline
 					limit = {
 						ai = yes
@@ -960,18 +960,18 @@ muslim = {
 			}
 
 			# If you don't set this it will expand on_invite_scholar effect which might be super big
-			invite_scholar_modifier_display = hanbali_scholar_modifier
+			invite_scholar_modifier_display = osmani_school_modifier
 
 			picture = "GFX_icon_muslim_school_hanbali"
 
-			ae_impact = -0.1
+			core_creation = -0.05
 		}
-		maliki_school = {
+		athenisian_school = {
 			potential_invite_scholar = {
 				OR = {
 					knows_of_scholar_country_capital_trigger = yes
-					has_country_flag = can_always_invite_maliki_school
-					has_country_flag = privilege_can_always_invite_maliki_school
+					has_country_flag = can_always_invite_athenisian_school
+					has_country_flag = privilege_can_always_invite_athenisian_school
 				}
 			}
 
@@ -985,8 +985,8 @@ muslim = {
 				}
 				if = {
 					limit = {
-						NOT = { has_country_flag = can_always_invite_maliki_school }
-						NOT = { has_country_flag = privilege_can_always_invite_maliki_school }
+						NOT = { has_country_flag = can_always_invite_athenisian_school }
+						NOT = { has_country_flag = privilege_can_always_invite_athenisian_school }
 					}
 					reverse_has_opinion = { who = FROM value = 150 }
 					OR = {
@@ -1002,7 +1002,7 @@ muslim = {
 					}
 					NOT = { has_country_modifier = has_invited_scholar_recently }
 				}
-				NOT = { has_country_modifier = maliki_scholar_modifier }
+				NOT = { has_country_modifier = athenisian_scholar_modifier }
 			}
 
 			# THIS = Nation wanting to invite the scholar, FORM = Nation that sends scholar
@@ -1015,7 +1015,7 @@ muslim = {
 				}
 				clear_religious_scholar_modifiers_effect = yes
 				custom_tooltip = INVITE_SCHOLAR_COUNTRY_TEXT
-				add_country_modifier = { name = maliki_scholar_modifier duration = 7300 }
+				add_country_modifier = { name = athenisian_scholar_modifier duration = 7300 }
 				if = {	#Ensures that the AI doesn't waste all of their ADM power on inviting scholars should they be able to invite them baseline
 					limit = {
 						ai = yes
@@ -1025,18 +1025,18 @@ muslim = {
 			}
 
 			# If you don't set this it will expand on_invite_scholar effect which might be super big
-			invite_scholar_modifier_display = maliki_scholar_modifier
+			invite_scholar_modifier_display = athenisian_scholar_modifier
 
-			picture = "GFX_icon_muslim_school_maliki"
+			picture = "GFX_icon_muslim_school_hanbali"
 
-			development_cost = -0.1
+			idea_cost = -0.1
 		}
-		shafii_school = {
+		ioannite_school = {
 			potential_invite_scholar = {
 				OR = {
 					knows_of_scholar_country_capital_trigger = yes
-					has_country_flag = can_always_invite_shafii_school
-					has_country_flag = privilege_can_always_invite_shafii_school
+					has_country_flag = can_always_invite_ioannite_school
+					has_country_flag = privilege_can_always_invite_ioannite_school
 				}
 			}
 
@@ -1050,8 +1050,8 @@ muslim = {
 				}
 				if = {
 					limit = {
-						NOT = { has_country_flag = can_always_invite_shafii_school }
-						NOT = { has_country_flag = privilege_can_always_invite_shafii_school }
+						NOT = { has_country_flag = can_always_invite_ioannite_school }
+						NOT = { has_country_flag = privilege_can_always_invite_ioannite_school }
 					}
 					reverse_has_opinion = { who = FROM value = 150 }
 					OR = {
@@ -1067,7 +1067,7 @@ muslim = {
 					}
 					NOT = { has_country_modifier = has_invited_scholar_recently }
 				}
-				NOT = { has_country_modifier = shafii_scholar_modifier }
+				NOT = { has_country_modifier = ioannite_scholar_modifier }
 			}
 
 			# THIS = Nation wanting to invite the scholar, FORM = Nation that sends scholar
@@ -1080,7 +1080,7 @@ muslim = {
 				}
 				clear_religious_scholar_modifiers_effect = yes
 				custom_tooltip = INVITE_SCHOLAR_COUNTRY_TEXT
-				add_country_modifier = { name = shafii_scholar_modifier duration = 7300 }
+				add_country_modifier = { name = ioannite_scholar_modifier duration = 7300 }
 				if = {	#Ensures that the AI doesn't waste all of their ADM power on inviting scholars should they be able to invite them baseline
 					limit = {
 						ai = yes
@@ -1090,19 +1090,19 @@ muslim = {
 			}
 
 			# If you don't set this it will expand on_invite_scholar effect which might be super big
-			invite_scholar_modifier_display = shafii_scholar_modifier
+			invite_scholar_modifier_display = ioannite_scholar_modifier
 
-			picture = "GFX_icon_muslim_school_shafii"
+			picture = "GFX_icon_muslim_school_hanbali"
 
-			merchants = 1
+			advisor_cost = -0.1
 		}
 		#Shias
-		ismaili_school = {
+		aliyyan_school = {
 			potential_invite_scholar = {
 				OR = {
 					knows_of_scholar_country_capital_trigger = yes
-					has_country_flag = can_always_invite_ismaili_school
-					has_country_flag = privilege_can_always_invite_ismaili_school
+					has_country_flag = can_always_invite_aliyyan_school
+					has_country_flag = privilege_can_always_invite_aliyyan_school
 				}
 			}
 
@@ -1116,8 +1116,8 @@ muslim = {
 				}
 				if = {
 					limit = {
-						NOT = { has_country_flag = can_always_invite_ismaili_school }
-						NOT = { has_country_flag = privilege_can_always_invite_ismaili_school }
+						NOT = { has_country_flag = can_always_invite_aliyyan_school }
+						NOT = { has_country_flag = privilege_can_always_invite_aliyyan_school }
 					}
 					reverse_has_opinion = { who = FROM value = 150 }
 					OR = {
@@ -1133,7 +1133,7 @@ muslim = {
 					}
 					NOT = { has_country_modifier = has_invited_scholar_recently }
 				}
-				NOT = { has_country_modifier = ismaili_scholar_modifier }
+				NOT = { has_country_modifier = aliyyan_scholar_modifier }
 			}
 
 			# THIS = Nation wanting to invite the scholar, FORM = Nation that sends scholar
@@ -1146,7 +1146,7 @@ muslim = {
 				}
 				clear_religious_scholar_modifiers_effect = yes
 				custom_tooltip = INVITE_SCHOLAR_COUNTRY_TEXT
-				add_country_modifier = { name = ismaili_scholar_modifier duration = 7300 }
+				add_country_modifier = { name = aliyyan_scholar_modifier duration = 7300 }
 				if = {	#Ensures that the AI doesn't waste all of their ADM power on inviting scholars should they be able to invite them baseline
 					limit = {
 						ai = yes
@@ -1156,144 +1156,144 @@ muslim = {
 			}
 			
 			# If you don't set this it will expand on_invite_scholar effect which might be super big
-			invite_scholar_modifier_display = ismaili_scholar_modifier
+			invite_scholar_modifier_display = aliyyan_scholar_modifier
 
-			picture = "GFX_icon_muslim_school_ismaili"
+			picture = "GFX_icon_muslim_school_hanbali"
+
+			stability_cost_modifier = -0.1
+		}
+		rashidi_school = {
+			potential_invite_scholar = {
+				OR = {
+					knows_of_scholar_country_capital_trigger = yes
+					has_country_flag = can_always_invite_rashidi_school
+					has_country_flag = privilege_can_always_invite_rashidi_school
+				}
+			}
+
+			# THIS = Nation wanting to invite the scholar, FROM = Nation that follows that school
+			can_invite_scholar = {
+				if = {
+					limit = {
+						NOT = { has_country_flag = no_scholar_adm_cost }
+					}
+					adm_power_cost = 50
+				}
+				if = {
+					limit = {
+						NOT = { has_country_flag = can_always_invite_rashidi_school }
+						NOT = { has_country_flag = privilege_can_always_invite_rashidi_school }
+					}
+					reverse_has_opinion = { who = FROM value = 150 }
+					OR = {
+						alliance_with = FROM
+						is_subject_of = FROM
+						overlord_of = FROM
+					}
+					hidden_progressive_opinion_for_scholar_trigger = yes
+				}
+				if = {
+					limit = {
+						ai = yes
+					}
+					NOT = { has_country_modifier = has_invited_scholar_recently }
+				}
+				NOT = { has_country_modifier = rashidi_scholar_modifier }
+			}
+
+			# THIS = Nation wanting to invite the scholar, FORM = Nation that sends scholar
+			on_invite_scholar = {
+				if = {
+					limit = {
+						NOT = { has_country_flag = no_scholar_adm_cost }
+					}
+					adm_power_cost = 50
+				}
+				clear_religious_scholar_modifiers_effect = yes
+				custom_tooltip = INVITE_SCHOLAR_COUNTRY_TEXT
+				add_country_modifier = { name = rashidi_scholar_modifier duration = 7300 }
+				if = {	#Ensures that the AI doesn't waste all of their ADM power on inviting scholars should they be able to invite them baseline
+					limit = {
+						ai = yes
+					}
+					add_country_modifier = { name = has_invited_scholar_recently duration = 7300 hidden = yes }
+				}
+			}
+			
+			# If you don't set this it will expand on_invite_scholar effect which might be super big
+			invite_scholar_modifier_display = rashidi_scholar_modifier
+
+			picture = "GFX_icon_muslim_school_hanbali"
+
+			shock_damage = 0.1
+		}
+		alexite_school = {
+			potential_invite_scholar = {
+				OR = {
+					knows_of_scholar_country_capital_trigger = yes
+					has_country_flag = can_always_invite_alexite_school
+					has_country_flag = privilege_can_always_invite_alexite_school
+				}
+			}
+
+			# THIS = Nation wanting to invite the scholar, FROM = Nation that follows that school
+			can_invite_scholar = {
+				if = {
+					limit = {
+						NOT = { has_country_flag = no_scholar_adm_cost }
+					}
+					adm_power_cost = 50
+				}
+				if = {
+					limit = {
+						NOT = { has_country_flag = can_always_invite_alexite_school }
+						NOT = { has_country_flag = privilege_can_always_invite_alexite_school }
+					}
+					reverse_has_opinion = { who = FROM value = 150 }
+					OR = {
+						alliance_with = FROM
+						is_subject_of = FROM
+						overlord_of = FROM
+					}
+					hidden_progressive_opinion_for_scholar_trigger = yes
+				}
+				if = {
+					limit = {
+						ai = yes
+					}
+					NOT = { has_country_modifier = has_invited_scholar_recently }
+				}
+				NOT = { has_country_modifier = alexite_scholar_modifier }
+			}
+
+			# THIS = Nation wanting to invite the scholar, FORM = Nation that sends scholar
+			on_invite_scholar = {
+				if = {
+					limit = {
+						NOT = { has_country_flag = no_scholar_adm_cost }
+					}
+					adm_power_cost = 50
+				}
+				clear_religious_scholar_modifiers_effect = yes
+				custom_tooltip = INVITE_SCHOLAR_COUNTRY_TEXT
+				add_country_modifier = { name = alexite_scholar_modifier duration = 7300 }
+				if = {	#Ensures that the AI doesn't waste all of their ADM power on inviting scholars should they be able to invite them baseline
+					limit = {
+						ai = yes
+					}
+					add_country_modifier = { name = has_invited_scholar_recently duration = 7300 hidden = yes }
+				}
+			}
+			
+			# If you don't set this it will expand on_invite_scholar effect which might be super big
+			invite_scholar_modifier_display = alexite_scholar_modifier
+
+			picture = "GFX_icon_muslim_school_hanbali"
 
 			horde_unity = 1
 			legitimacy = 1
 			republican_tradition = 0.2
 			devotion = 1
-		}
-		jafari_school = {
-			potential_invite_scholar = {
-				OR = {
-					knows_of_scholar_country_capital_trigger = yes
-					has_country_flag = can_always_invite_jafari_school
-					has_country_flag = privilege_can_always_invite_jafari_school
-				}
-			}
-
-			# THIS = Nation wanting to invite the scholar, FROM = Nation that follows that school
-			can_invite_scholar = {
-				if = {
-					limit = {
-						NOT = { has_country_flag = no_scholar_adm_cost }
-					}
-					adm_power_cost = 50
-				}
-				if = {
-					limit = {
-						NOT = { has_country_flag = can_always_invite_jafari_school }
-						NOT = { has_country_flag = privilege_can_always_invite_jafari_school }
-					}
-					reverse_has_opinion = { who = FROM value = 150 }
-					OR = {
-						alliance_with = FROM
-						is_subject_of = FROM
-						overlord_of = FROM
-					}
-					hidden_progressive_opinion_for_scholar_trigger = yes
-				}
-				if = {
-					limit = {
-						ai = yes
-					}
-					NOT = { has_country_modifier = has_invited_scholar_recently }
-				}
-				NOT = { has_country_modifier = jafari_scholar_modifier }
-			}
-
-			# THIS = Nation wanting to invite the scholar, FORM = Nation that sends scholar
-			on_invite_scholar = {
-				if = {
-					limit = {
-						NOT = { has_country_flag = no_scholar_adm_cost }
-					}
-					adm_power_cost = 50
-				}
-				clear_religious_scholar_modifiers_effect = yes
-				custom_tooltip = INVITE_SCHOLAR_COUNTRY_TEXT
-				add_country_modifier = { name = jafari_scholar_modifier duration = 7300 }
-				if = {	#Ensures that the AI doesn't waste all of their ADM power on inviting scholars should they be able to invite them baseline
-					limit = {
-						ai = yes
-					}
-					add_country_modifier = { name = has_invited_scholar_recently duration = 7300 hidden = yes }
-				}
-			}
-			
-			# If you don't set this it will expand on_invite_scholar effect which might be super big
-			invite_scholar_modifier_display = jafari_scholar_modifier
-
-			picture = "GFX_icon_muslim_school_jafari"
-
-			shock_damage = 0.1
-		}
-		zaidi_school = {
-			potential_invite_scholar = {
-				OR = {
-					knows_of_scholar_country_capital_trigger = yes
-					has_country_flag = can_always_invite_zaidi_school
-					has_country_flag = privilege_can_always_invite_zaidi_school
-				}
-			}
-
-			# THIS = Nation wanting to invite the scholar, FROM = Nation that follows that school
-			can_invite_scholar = {
-				if = {
-					limit = {
-						NOT = { has_country_flag = no_scholar_adm_cost }
-					}
-					adm_power_cost = 50
-				}
-				if = {
-					limit = {
-						NOT = { has_country_flag = can_always_invite_zaidi_school }
-						NOT = { has_country_flag = privilege_can_always_invite_zaidi_school }
-					}
-					reverse_has_opinion = { who = FROM value = 150 }
-					OR = {
-						alliance_with = FROM
-						is_subject_of = FROM
-						overlord_of = FROM
-					}
-					hidden_progressive_opinion_for_scholar_trigger = yes
-				}
-				if = {
-					limit = {
-						ai = yes
-					}
-					NOT = { has_country_modifier = has_invited_scholar_recently }
-				}
-				NOT = { has_country_modifier = zaidi_scholar_modifier }
-			}
-
-			# THIS = Nation wanting to invite the scholar, FORM = Nation that sends scholar
-			on_invite_scholar = {
-				if = {
-					limit = {
-						NOT = { has_country_flag = no_scholar_adm_cost }
-					}
-					adm_power_cost = 50
-				}
-				clear_religious_scholar_modifiers_effect = yes
-				custom_tooltip = INVITE_SCHOLAR_COUNTRY_TEXT
-				add_country_modifier = { name = zaidi_scholar_modifier duration = 7300 }
-				if = {	#Ensures that the AI doesn't waste all of their ADM power on inviting scholars should they be able to invite them baseline
-					limit = {
-						ai = yes
-					}
-					add_country_modifier = { name = has_invited_scholar_recently duration = 7300 hidden = yes }
-				}
-			}
-			
-			# If you don't set this it will expand on_invite_scholar effect which might be super big
-			invite_scholar_modifier_display = zaidi_scholar_modifier
-
-			picture = "GFX_icon_muslim_school_zaidi"
-
-			shock_damage_received = -0.1
 		}
 		
 	}
