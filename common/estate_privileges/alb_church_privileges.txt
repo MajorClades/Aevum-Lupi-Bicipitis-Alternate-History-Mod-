@@ -1,0 +1,96 @@
+alb_kolmejary_edict_of_zetulii = {
+	icon = privilege_grant_autonomy
+	max_absolutism = -5
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	loyalty = -0.1
+	influence = 0.15
+	is_valid = {
+		tag = KO0
+		any_owned_province = {
+			religion = suomi_pagan
+		}
+	}
+	can_revoke = {
+		always = no
+	}
+	on_granted = {
+		custom_tooltip = kolmejar_on_granted_suomi_provinces
+	}
+	on_granted_province = {
+		if = {
+			limit = {
+				religion = suomi_pagan
+			}
+			add_province_modifier = {
+				name = edict_of_zetulii
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = {
+				has_province_modifier = edict_of_zetulii
+			}
+			remove_province_modifier = edict_of_zetulii
+		}
+	}
+	on_revoked = {
+		custom_tooltip = kolmejar_on_removed_suomi_provinces
+	}
+	on_revoked_province = {
+		if = {
+			limit = {
+				has_province_modifier = estate_dhimmi_guaranteed_autonomy_mod
+			}
+			remove_province_modifier = estate_dhimmi_guaranteed_autonomy_mod
+		}
+	}
+	on_invalid = {
+		custom_tooltip = kolmejar_on_removed_suomi_provinces
+	}
+	on_invalid_province = {
+		if = {
+			limit = {
+				has_province_modifier = edict_of_zetulii
+			}
+			remove_province_modifier = edict_of_zetulii
+		}
+	}
+	penalties = {
+		yearly_corruption = 0.1
+		tolerance_own = -3
+	}
+	benefits = {
+		tolerance_heathen = 2
+	}
+	conditional_modifier = {
+		trigger = { has_government_mechanic = russian_modernization_mechanic }
+		modifier = { monthly_russian_modernization = -0.03 }
+	}
+	#conditional_modifier = {
+	#	trigger = { has_government_mechanic = ottoman_decadence_mechanic }
+	#	modifier = { monthly_ottoman_decadence = 0.02 }
+	#}
+	ai_will_do = {
+		factor = 1000
+		modifier = {
+			factor = 0
+			NOT = {
+				any_owned_province = {
+					religion = suomi_pagan
+				}
+			}
+		}
+		modifier = {
+			factor = 0
+			is_subject = yes
+			overlord = {
+				religion = ROOT
+				has_idea_group = religious_ideas
+			}
+		}
+		modifier = {
+			factor = 0
+			religion = suomi_pagan
+		}
+	}
+}
