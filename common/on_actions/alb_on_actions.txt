@@ -37,6 +37,27 @@ on_battle_won_country = {
 			value = 1
 		}
 	}
+
+}
+
+on_battle_won_unit = {
+	if = {
+		limit = {
+			OR = {
+				tag = MO0
+				was_tag = MO0
+			}
+			NOT = {
+				has_country_flag = mol_iron_fist
+			}
+			is_monarch_leader = yes
+			is_ruler_commanding_unit = yes
+		}
+		country_event = {
+			id = molis.100
+		}
+		set_country_flag = mol_iron_fist
+	}
 }
 
 on_main_war_won = {
