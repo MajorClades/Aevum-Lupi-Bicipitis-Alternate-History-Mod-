@@ -1,0 +1,129 @@
+po_hie_victory = {
+	category = 6
+	power_projection = humiliated_rival
+	power_cost_base = 1.0
+	prestige_base = 1.0 # Base factor for prestige gain and loss. Scales with war score cost.
+	ae_base = 0.4
+	warscore_cost = {
+		# Which of the giver's provinces' war score costs are included and by how much. All entries default to 0. Any combination of entries can be used. Try negative values at your own risk.
+		all_provinces = 0.75 # All the giver's provinces
+		no_provinces = 0.0 # This is just a constant. Equivalent to a single province with with war score cost 1
+		owner_keeps = 0.0 # The provinces that are not of any of the types below
+		conquered = 0.0 # Provinces that are selected by a Demand Province treaty
+		returned_core = 0.0 # Provinces that are selected by a Return Core treaty
+		released_nation = 0.0 # Provinces that will become a part of a selected released-to-be nation
+		cancelled_subject = 0.0 # This one should not be relevant here since Giver can't be a cancelled subject. Including anyway for completeness
+		concede_colonial_region = 0.0 # Ditto
+	}
+	
+	warscore_cap = 100 # Warscore cost will never go above this value. Only enabled if non-negative. This value defaults to -1.
+	is_make_subject = yes # This will make the treaty mutually exclusive with other treaties that makes the giver a subject, or that explicitly frees the giver from their current overlord.
+	requires_is_allowed = yes # If set to "yes", treaty will only be visible when explicitly allowed by casus belli. If not, it will be available but cost diplomatic power.
+	
+	is_visible = { # Defaults to equivalent of "always = yes"
+		always = yes
+	}
+	is_allowed = { # Defaults to equivalent of "always = yes"
+		
+	}
+	effect = { # Defaults to empty effect (which makes error log entry but is safe)
+		FROM = {
+			change_tag = RU8
+			every_owned_province = {
+				limit = {
+					region = balkan_region
+				}
+				cede_province = ROOT
+			}
+			every_owned_province = {
+				limit = {
+					region = carpathia_region
+				}
+				cede_province = DA0
+			}
+			every_owned_province = {
+				limit = {
+					region = crimea_region
+				}
+				cede_province = ML1
+			}
+			every_owned_province = {
+				limit = {
+					OR = {
+						area = aydin_area
+						area = aegean_archipelago_area
+						area = germiyan_area
+						area = hudavendigar_area
+						area = cukurova_area
+					}
+				}
+				add_core = RU6
+				cede_province = RU6
+			}
+			every_owned_province = {
+				limit = {
+					region = mashriq_region
+				}
+				add_core = RU7
+				cede_province = RU7
+			}
+			every_owned_province = {
+				limit = {
+					region = egypt_region
+					culture = hell_egypt
+				}
+				add_core = RU9
+				cede_province = RU9
+			}
+			every_owned_province = {
+				limit = {
+					region = egypt_region
+					culture = kemetic
+				}
+				add_core = EGY
+				cede_province = EGY
+			}
+			every_owned_province = {
+				limit = {
+					region = arabia_region
+				}
+				add_core = AB1
+				cede_province = AB1
+			}
+			every_owned_province = {
+				limit = {
+					region = horn_of_africa_region
+				}
+				add_core = NUB
+				cede_province = NUB
+			}
+			every_owned_province = {
+				limit = {
+					region = caucasia_region
+				}
+				add_core = ARM
+				cede_province = ARM
+			}
+			# every_owned_province = {
+			# 	limit = {
+			# 		region = mesopotamia_region
+			# 	}
+			# 	cede_province = SL1
+			# } 
+			# every_owned_province = {
+			# 	limit = {
+			# 		region = persia_region
+			# 	}
+			# 	cede_province = SL1
+			# } 
+			set_government_rank = 2
+			add_stability = -3
+		}
+	}
+	ai_weight = { # Defaults to always evaluate to 0
+		export_to_variable = {
+			variable_name = ai_value # Mandatory to have entry called "ai_value". Its value at the end of the ai_weight scope is what will be used
+			value = 1000
+		}
+	}
+}
