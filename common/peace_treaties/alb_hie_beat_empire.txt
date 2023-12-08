@@ -3,10 +3,10 @@ po_hie_victory = {
 	power_projection = humiliated_rival
 	power_cost_base = 1.0
 	prestige_base = 1.0 # Base factor for prestige gain and loss. Scales with war score cost.
-	ae_base = 0.4
+	ae_base = 0.5
 	warscore_cost = {
 		# Which of the giver's provinces' war score costs are included and by how much. All entries default to 0. Any combination of entries can be used. Try negative values at your own risk.
-		all_provinces = 0.75 # All the giver's provinces
+		all_provinces = 1 # All the giver's provinces
 		no_provinces = 0.0 # This is just a constant. Equivalent to a single province with with war score cost 1
 		owner_keeps = 0.0 # The provinces that are not of any of the types below
 		conquered = 0.0 # Provinces that are selected by a Demand Province treaty
@@ -39,13 +39,19 @@ po_hie_victory = {
 				limit = {
 					region = carpathia_region
 				}
-				cede_province = DA0
+				
+					add_core = DA0
+					cede_province = DA0
+				
 			}
 			every_owned_province = {
 				limit = {
 					region = crimea_region
 				}
+				
+					add_core = ML1
 				cede_province = ML1
+				
 			}
 			every_owned_province = {
 				limit = {
@@ -57,65 +63,78 @@ po_hie_victory = {
 						area = cukurova_area
 					}
 				}
-				add_core = RU6
-				cede_province = RU6
+				
+					add_core = RU6
+					cede_province = RU6
+				
 			}
 			every_owned_province = {
 				limit = {
 					region = mashriq_region
 				}
-				add_core = RU7
-				cede_province = RU7
+				
+					add_core = RU7
+					cede_province = RU7
+				
 			}
 			every_owned_province = {
 				limit = {
 					region = egypt_region
 					culture = hell_egypt
 				}
-				add_core = RU9
-				cede_province = RU9
+				
+					add_core = RU9
+					cede_province = RU9
+				
 			}
 			every_owned_province = {
 				limit = {
 					region = egypt_region
 					culture = kemetic
 				}
-				add_core = EGY
-				cede_province = EGY
+				
+					add_core = EGY
+					cede_province = EGY
+				
 			}
 			every_owned_province = {
 				limit = {
 					region = arabia_region
 				}
-				add_core = AB1
-				cede_province = AB1
+				
+					add_core = AB1
+					cede_province = AB1
+				
 			}
 			every_owned_province = {
 				limit = {
 					region = horn_of_africa_region
 				}
-				add_core = NUB
-				cede_province = NUB
+				
+					add_core = NUB
+					cede_province = NUB
+				
 			}
 			every_owned_province = {
 				limit = {
 					region = caucasia_region
 				}
-				add_core = ARM
+					add_core = ARM
 				cede_province = ARM
+				
 			}
-			# every_owned_province = {
-			# 	limit = {
-			# 		region = mesopotamia_region
-			# 	}
-			# 	cede_province = SL1
-			# } 
-			# every_owned_province = {
-			# 	limit = {
-			# 		region = persia_region
-			# 	}
-			# 	cede_province = SL1
-			# } 
+			every_owned_province = {
+			 	limit = {
+					OR = {
+						region = mesopotamia_region
+						region = persia_region
+					}
+			 	}
+			
+					add_core = SL1
+					cede_province = SL1
+				
+			} 
 			set_government_rank = 2
 			add_stability = -3
 		}
