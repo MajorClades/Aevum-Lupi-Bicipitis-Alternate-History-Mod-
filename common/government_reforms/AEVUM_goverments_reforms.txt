@@ -171,6 +171,9 @@ serican_principality = {
 				culture_group = west_serican
 				culture_group = turkic
 			}
+			NOT = {
+				culture = bolgar
+			}
 			AND = {
 				is_playing_custom_nation = yes
 				have_had_reform = serican_principality
@@ -180,13 +183,7 @@ serican_principality = {
 	valid_for_nation_designer = yes
 	nation_designer_cost = 5
 	nation_designer_trigger = {
-		OR = {
-			culture_group = west_serican
-			culture_group = turkic
-			NOT = {
-				culture = bolgar
-			}
-		}
+		is_serican_trigger = yes
 		religion_group = muslim
 	}
 	modifiers = {
@@ -195,12 +192,8 @@ serican_principality = {
 		global_regiment_recruit_speed = 0.1
 		governing_capacity = 100
 	}
-
-	conditional = {
-		allow = { has_dlc = "Third Rome" }
-		government_abilities = {
-			russian_mechanic
-		}
+	government_abilities = {
+		russian_mechanic
 	}
 }
 serican_tsardom = {
@@ -210,29 +203,17 @@ serican_tsardom = {
 		OR = {
 			tag = TH1
 			AND = {
-				OR = {
-			culture_group = west_serican
-			culture_group = turkic
-			NOT = {
-				culture = bolgar
-			}
-		}
+				is_serican_trigger = yes
 				have_had_reform = serican_tsardom
 			}
-			}
+		}
 	}
 	fixed_rank = 3
 	valid_for_nation_designer = yes
 	nation_designer_cost = 40
 
 	nation_designer_trigger = {
-		OR = {
-			culture_group = west_serican
-			culture_group = turkic
-			NOT = {
-				culture = bolgar
-			}
-		}
+		is_serican_trigger = yes
 	}
 
 	modifiers = {
@@ -440,6 +421,9 @@ light_empire_government = {
 		}
 		western_aryan = {
 			trade_efficiency = 0.05
+		}
+		aramaic_group = {
+			free_land_leader_pool = 1
 		}
 	}
 }
