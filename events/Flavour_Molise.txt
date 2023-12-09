@@ -218,10 +218,59 @@ country_event = {
 			value = -50
 			mutual = yes
 		}
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 1.5
+				NOT = {
+					has_opinion = {
+						who = MO0
+						value = 180
+					}
+				}
+			}
+			modifier = {
+				factor = 1.5
+				total_development = 25
+			}
+			modifier = {
+				factor = 1.25
+				military_strength = {
+					who = MO0
+					value = 0.25
+				}
+				
+			}
+		}
 	}
 	option = {
 		name = molis.6c
 		change_tag = SIC
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 1.5
+				has_opinion = {
+					who = MO0
+					value = 190
+				}
+			}
+			modifier = {
+				factor = 1.5
+				NOT = {
+					total_development = 25
+				}
+			}
+			modifier = {
+				factor = 1.25
+				NOT = {
+					military_strength = {
+						who = MO0
+						value = 0.25
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -346,29 +395,27 @@ country_event = {
 		}
 	}
 }
-country_event = {
-	id = molis.102
-	title = molis.102.test
-	desc = molis.102.desc
-	picture = TRADE_GOODS_eventPicture
-	
-	trigger = {
-		mission_completed = mol_war_never
-		NOT = {
-			has_country_modifier = mol_writing_book
-		}
-		NOT = {
-			has_country_modifier = mol_art_of_war
-		}
-	}
-	mean_time_to_happen = {
-		days = 10
-	}
-	option = {
-		name = molis.102a
-		add_country_modifier = {
-			name = mol_art_of_war
-			duration = 10950
-		}
-	}
-}
+#country_event = {
+#	id = molis.102
+#	title = molis.102.test
+#	desc = molis.102.desc
+#	picture = TRADE_GOODS_eventPicture
+#	
+##		mission_completed = mol_war_never
+#		NOT = {
+#			has_country_modifier = mol_writing_book
+#		}
+#		NOT = {
+#			has_country_modifier = mol_art_of_war
+#		}
+#	}
+#	mean_time_to_happen = {
+#		days = 10
+#	}
+#	option = {
+#		name = molis.102a
+#		add_country_modifier = {
+#			duration = 10950
+#		}
+#	}
+#}
