@@ -19,10 +19,6 @@ christian = {
 	catholic = {
 		color = { 204 204 0 }
 		icon = 1
-		allowed_conversion = {
-			reformed
-			protestant
-		}
 		country = {
 			tolerance_own = 1
 			global_heathen_missionary_strength = 0.01
@@ -311,59 +307,6 @@ christian = {
 				}
 			}
 		}
-	}
-
-	protestant = {
-		color = { 0 0 178 }
-		icon = 2
-		allowed_center_conversion = {
-			catholic
-		}
-		country = {
-			global_tax_modifier = 0.1
-			improve_relation_modifier = 0.15
-			church_loyalty_modifier = 0.1
-		}
-		
-		country_as_secondary = {
-			idea_cost = -0.1
-		}
-		
-		
-		will_get_center = { #Refered to even for initial CoR Spawn
-			any_owned_province = {
-				can_have_center_of_reformation_trigger = {
-					RELIGION = protestant
-				}
-			}
-		}
-		
-		heretic = { PENTECOSTAL PURITAN CONGREGATIONALIST }
-		
-		date = 1517.10.31
-	}
-	reformed = {
-		color = { 76 76 229 }
-		icon = 3
-		allowed_center_conversion = {
-			catholic
-		}
-		country = {
-			tolerance_heretic = 2
-			advisor_pool = 1
-		}
-		
-		country_as_secondary = {
-			global_unrest = -1
-			advisor_cost = -0.1
-		}
-	
-		
-		heretic = { METHODIST BAPTIST QUAKER }
-		
-		date = 1536.5.1
-		
-		fervor = yes
 	}
 	orthodox = {
 		color = { 178 127 0 }
@@ -1316,6 +1259,14 @@ muslim = {
 		province = {
 			local_missionary_strength = -0.02
 		}
+		on_convert = {
+			change_religion = islam
+			add_prestige = -100
+			add_country_modifier = {
+				name = "conversion_zeal"
+				duration = 3650
+			}			
+		}
 		
 		heretic = { BEKTASHI AHMADI ZIKRI YAZIDI }
 		
@@ -1339,7 +1290,21 @@ muslim = {
 		province = {
 			local_missionary_strength = -0.02
 		}
-		
+		will_get_center = { #Refered to even for initial CoR Spawn
+			any_owned_province = {
+				can_have_center_of_reformation_trigger = {
+					RELIGION = rashidi
+				}
+			}
+		}
+		on_convert = {
+			change_religion = rashidi
+			add_prestige = -100
+			add_country_modifier = {
+				name = "conversion_zeal"
+				duration = 3650
+			}			
+		}
 		heretic = { DRUZE HURUFI ZAIDI }
 	}
 
