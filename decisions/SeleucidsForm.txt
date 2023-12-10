@@ -6,20 +6,42 @@ country_decisions = {
 			normal_or_historical_nations = yes
 			was_never_end_game_tag_trigger = yes
 			NOT = { has_country_flag = "formed_seleucids_flag" }
-			has_country_flag = "seleucid_legacy_flag"
 			is_playing_custom_nation = no
 			is_free_or_tributary_trigger = yes
-			tag = HE0
 			is_colonial_nation = no
+			capital_scope = {
+				OR = {
+					region = persia_region
+					region = mesopotamia_region
+				}
+			}
+			culture_group = hellenic_group
+			NOT = {
+				OR = {
+					culture = turk_greek
+					culture = salbanian
+					culture = koine
+					culture = bactrian
+					culture = assyrian
+				}
+			}
 		}
-		provinces_to_highlight = { province_id = 410 }
+		provinces_to_highlight = { 
+			region = mesopotamia_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
 		allow = {
 			owns = 410
+			num_of_owned_provinces_with = {
+				value = 30
+				region = mesopotamia_region
+			}
 			NOT = { exists = SL1 }
 			is_free_or_tributary_trigger = yes
 			is_nomad = no
 			is_at_war = no
-			has_country_flag = "seleucid_legacy_flag"
 		}
 		effect = {
 			change_tag = SL1
@@ -28,8 +50,8 @@ country_decisions = {
 				remove_non_electors_emperors_from_empire_effect = yes
 			}
 			if = {
-				limit = { NOT = { government_rank = 3 } }
-				set_government_rank = 3
+				limit = { NOT = { government_rank = 2 } }
+				set_government_rank = 2
 				}
 			if = {
 				limit = {
