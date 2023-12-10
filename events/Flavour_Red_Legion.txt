@@ -23,7 +23,7 @@ country_event = {
 			}
 			add_country_modifier = {
 				name = redleg_ai_helpings
-				duration = 7300
+				duration = 3650
 			}
 		}
 	}
@@ -272,6 +272,10 @@ country_event = {
 		white_peace = AF6
 		AF6 = {
 			remove_country_modifier = redleg_prepare_for_crusade
+			country_event = {
+				id = redleg.103
+				days = 7
+			}
 		}
 	}
 }
@@ -569,7 +573,7 @@ country_event = { #lose 4th crusade
 	
 }
 
-country_event = { #lose 4th crusade
+country_event = { #creat fort stupid AI
 	id = redleg.102
 	title = redleg.102.test
 	desc = redleg.102.desc
@@ -596,4 +600,33 @@ country_event = { #lose 4th crusade
 		}
 	}
 	
+}
+
+country_event = { #lose 4th crusade
+	id = redleg.103
+	title = redleg.103.test
+	desc = redleg.103.desc
+	picture = DEATH_OF_HEIR_eventPicture
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = redleg.103a
+		change_religion = nothing #it should be nothing dont worry
+		add_government_reform = mars_legions_reform 
+		hidden_effect = {
+			add_government_reform = mars_legions_reform 
+		}
+		define_advisor = {
+			type = army_organiser
+			name = "Clades Major"
+			skill = 3
+			cost_multiplier = -0.1
+		}
+	}
+	option = {
+		name = redleg.103b
+		add_stability_or_adm_power = yes
+	}
 }
