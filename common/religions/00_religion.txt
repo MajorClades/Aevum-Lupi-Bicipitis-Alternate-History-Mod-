@@ -23,7 +23,12 @@ christian = {
 			tolerance_own = 1
 			global_heathen_missionary_strength = 0.01
 		}
-		
+		allowed_conversion = {
+			wycliffian
+		}
+		allowed_center_conversion = {
+			wycliffian
+		}
 		country_as_secondary = {
 			diplomatic_reputation = 1
 			advisor_pool = 1
@@ -465,6 +470,9 @@ christian = {
 		allowed_center_conversion = {
 			catholic
 		}
+		allowed_conversion = {
+			catholic
+		}
 		country = {
 			shock_damage_received = -0.05
 			global_heretic_missionary_strength = 0.02
@@ -475,7 +483,7 @@ christian = {
 		}
 		
 		uses_hussite_power = yes				# Uses church power/aspect mechanics
-		
+		date = 1520.1.1
 		aspects = {
 			clerical_poverty_aspect
 			bread_and_wine_aspect
@@ -489,6 +497,91 @@ christian = {
 			freedom_to_preach_aspect
 		}
 		aspects_name = PROTESTANT_ASPECTS
+		on_convert = {
+			change_religion = wycliffian
+			add_prestige = -100
+			remove_country_modifier = counter_reformation
+			remove_country_modifier = the_statue_in_restraint_of_appeals
+			remove_country_modifier = revocation_of_restraint_of_appeals
+			remove_country_modifier = bavarian_jesuits
+			remove_country_modifier = the_societas_jesu
+			remove_country_modifier = the_declaration_of_indulgence
+			remove_country_modifier = de_heretico_comburendo
+			remove_country_modifier = the_conventicle_act
+	
+			if = {
+				limit = {
+					has_country_flag = reformation_money
+					NOT = {
+						calc_true_if = {
+							all_province = {
+								religion = wycliffian
+								is_reformation_center = yes
+							}
+							amount = 3
+						}
+					}
+				}
+				hidden_effect = {
+					random_owned_province = {
+						limit = {
+							can_have_center_of_reformation_trigger = {
+								RELIGION = wycliffian
+							}
+						}
+						change_religion = wycliffian
+						add_reform_center = wycliffian
+					}
+				}
+				custom_tooltip = CENTER_OF_REFORMATION_POSSIBLE
+			}
+			if = {
+				limit = {
+					NOT = { has_country_flag = reformation_money }
+					NOT = {
+						calc_true_if = {
+							all_province = {
+								religion = wycliffian
+								is_reformation_center = yes
+							}
+							amount = 3
+						}
+					}
+				}
+				add_years_of_income = 1.0
+				hidden_effect = {
+					random_owned_province = {
+						limit = {
+							can_have_center_of_reformation_trigger = {
+								RELIGION = wycliffian
+							}
+						}
+						change_religion = wycliffian
+						add_reform_center = wycliffian
+					}
+				}
+				custom_tooltip = CENTER_OF_REFORMATION_POSSIBLE
+			}
+			
+			add_country_modifier = {
+				name = "conversion_zeal"
+				duration = 3650
+			}			
+			set_country_flag = reformation_money
+			every_known_country = {
+				limit = {
+					reverse_has_opinion_modifier = {
+						who = ROOT
+						modifier = opinion_demote_pope
+					}
+				}
+				reverse_remove_opinion = {
+					who = ROOT
+					modifier = opinion_demote_pope
+				}
+			}
+		}
+		
 		
 		heretic = { TABORITE UTRAQUIST ORPHAN }
 	}
