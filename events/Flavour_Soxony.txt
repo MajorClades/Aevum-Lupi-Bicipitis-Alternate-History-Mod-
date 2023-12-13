@@ -5,29 +5,22 @@ country_event = {
 	title = soxony.1.test
 	desc = soxony.1.desc
 	picture = ANGRY_MOB_eventPicture
-	
+	is_triggered_only = yes
 	trigger = {
-		culture_group = gallic
+		OR = {
+			tag = SO0
+			is_subject_of = SO0
+		}
+		NOT = {
+			is_month = 11
+		}
 		NOT = {
 			is_year = 1445
 		}
 		NOT = {
 			has_country_flag = sox_civil_war
 		}
-		NOT = {
-			tag = SO4
-		}
-		NOT = {
-			tag = RE0
-		}
-		NOT = {
-			tag = RE1
-		}
-		NOT = {
-			tag = IT1
-		}
 	}
-
 	option = {
 		name = soxony.1a
 		trigger = {
@@ -60,9 +53,25 @@ country_event = {
 			NOT = {
 				tag = SO0
 			}
+			NOT = {
+				tag = SO4
+			}
+			NOT = {
+				tag = SO6
+			}
 		}
 		add_treasury = 50
 		add_manpower = 5
+	}
+	option = {
+		name = soxony.1c
+		trigger = {
+			OR = {
+				tag = SO4
+				tag = SO6
+			}
+		}
+		add_stability_or_adm_power = yes
 	}
 }
 
@@ -76,6 +85,21 @@ country_event = {
 	fire_only_once = yes
 	immediate = {
 		remove_country_modifier = soxon_instability
+		hidden_effect = {
+			every_province = {
+				limit = {
+					OR = {
+						owned_by = SO1
+						owned_by = SO2
+						owned_by = SO3
+						owned_by = SO4
+						owned_by = SO5
+						owned_by = SO6
+					}
+				}
+				add_permanent_claim = ROOT
+			}
+		}
 	}
 
 	option = {
@@ -90,6 +114,9 @@ country_event = {
 		SO3 = {
 			grant_independence = yes
 		}
+		SO5 = {
+			grant_independence = yes
+		}
 		SO0 = {
 			declare_war_with_cb = {
 				who = SO1
@@ -102,18 +129,8 @@ country_event = {
 		SO3 = {
 			join_all_defensive_wars_of = SO1
 		}
-		hidden_effect = {
-			every_province = {
-				limit = {
-					OR = {
-						owned_by = SO1
-						owned_by = SO2
-						owned_by = SO3
-						owned_by = SO4
-					}
-				}
-				add_permanent_claim = ROOT
-			}
+		SO5 = {
+			join_all_defensive_wars_of = SO1
 		}
 		clr_country_flag = sox_civil_war
 	}
@@ -129,24 +146,12 @@ country_event = {
 		SO3 = {
 			grant_independence = yes
 		}
-		SO0 = {
-			declare_war_with_cb = {
-				who = FC0
-				casus_belli = cb_annex
-			}
+		SO5 = {
+			grant_independence = yes
 		}
-		hidden_effect = {
-			every_province = {
-				limit = {
-					OR = {
-						owned_by = SO1
-						owned_by = SO2
-						owned_by = SO3
-						owned_by = SO4
-					}
-				}
-				add_permanent_claim = ROOT
-			}
+		declare_war_with_cb = {
+			who = FC0
+			casus_belli = cb_annex
 		}
 		clr_country_flag = sox_civil_war
 	}
@@ -154,27 +159,19 @@ country_event = {
 		name = soxony.2c
 		ai_chance = { factor = 15 }
 		inherit = SO4
+		inherit = SO6
 		release_all_subjects = yes
 		add_stability = 2
-		hidden_effect = {
-			every_province = {
-				limit = {
-					OR = {
-						owned_by = SO1
-						owned_by = SO2
-						owned_by = SO3
-						owned_by = SO4
-					}
-				}
-				add_permanent_claim = ROOT
-			}
-		}
+		
 		clr_country_flag = sox_civil_war
 	}
 	option = {
 		name = soxony.2d
 		ai_chance = { factor = 15 }
 		inherit = SO4
+		SO1 = {
+			grant_independence = yes
+		}
 		SO2 = {
 			grant_independence = yes
 		}
@@ -187,11 +184,12 @@ country_event = {
 				siege = 3
 			}
 		}
-		SO0 = {
-			declare_war_with_cb = {
-				who = SO1
-				casus_belli = cb_restore_personal_union
-			}
+		SO5 = {
+			grant_independence = yes
+		}
+		declare_war_with_cb = {
+			who = SO1
+			casus_belli = cb_restore_personal_union
 		}
 		SO2 = {
 			join_all_defensive_wars_of = SO1
@@ -199,24 +197,12 @@ country_event = {
 		SO3 = {
 			join_all_defensive_wars_of = SO1
 		}
-		SO0 = {
-			declare_war_with_cb = {
-				who = FC0
-				casus_belli = cb_vassalize_mission
-			}
+		SO5 = {
+			join_all_defensive_wars_of = SO1
 		}
-		hidden_effect = {
-			every_province = {
-				limit = {
-					OR = {
-						owned_by = SO1
-						owned_by = SO2
-						owned_by = SO3
-						owned_by = SO4
-					}
-				}
-				add_permanent_claim = ROOT
-			}
+		declare_war_with_cb = {
+			who = FC0
+			casus_belli = cb_vassalize_mission
 		}
 		clr_country_flag = sox_civil_war
 	}

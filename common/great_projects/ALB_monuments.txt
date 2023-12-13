@@ -1510,7 +1510,7 @@ giant_windmills = {
 	start = 2754
 	
 	# date built in real life (so anything built during game time will be there if you start a game after that date)
-	date = 1777.02.21
+	date = 1233.02.21
 	
 	#time to build
 	time = {
@@ -1554,7 +1554,7 @@ giant_windmills = {
 
 	#can our country use it?
 	can_use_modifiers_trigger = {
-		infantry_in_province = 25
+		
 	}
 
 	#can our country upgrade it?
@@ -1565,7 +1565,7 @@ giant_windmills = {
 	#can our country keep it or is it destroyed when we get hold of it?
 	keep_trigger = {
 	}
-
+	
 	#tier data
 	tier_0 = {
 		#time to upgrade to this level (0 for tier 0)
@@ -1590,7 +1590,7 @@ giant_windmills = {
 		#what modifiers are added to the country when we have this project here on this tier
 		country_modifiers = {
 		}
-
+		
 		#what effects happen when this tier is achieved
 		on_upgraded = {
 		}
@@ -1601,30 +1601,24 @@ giant_windmills = {
 		upgrade_time = {
 			months = 120
 		}
-
-		#cost to upgrade to this level (0 for tier 0)
 		cost_to_upgrade = {
 			factor = 1000
 		}
-
-		#what modifiers are added to the province when we have this project here on this tier
 		province_modifiers = {
 			regiment_recruit_speed = -0.25
 			local_regiment_cost = -0.1
 		}
-
-		#what modifiers are added to the provinces in the map area when we have this project here on this tier
 		area_modifier = {
 			
 		}
-
-		#what modifiers are added to the country when we have this project here on this tier
 		country_modifiers = {
 			drill_gain_modifier = 0.25
 			drill_decay_modifier = -0.25
 		}
-
-		#what effects happen when this tier is achieved
+		conditional_modifier = {
+			trigger = {infantry_in_province = 25 }
+			modifier = { supply_limit_modifier = 20 }
+		}
 		on_upgraded = {
 			add_base_manpower = 1
 		}
@@ -1657,7 +1651,10 @@ giant_windmills = {
 			drill_gain_modifier = 0.5
 			drill_decay_modifier = -0.5
 		}
-
+		conditional_modifier = {
+			trigger = {infantry_in_province = 35 }
+			modifier = { supply_limit_modifier = 20 yearly_army_professionalism = 0.005}
+		}
 		#what effects happen when this tier is achieved
 		on_upgraded = {
 			add_base_manpower = 2
@@ -1690,9 +1687,12 @@ giant_windmills = {
 		country_modifiers = {
 			drill_gain_modifier = 0.75
 			drill_decay_modifier = -1
-			yearly_army_professionalism = 0.01
-		}
 
+		}
+		conditional_modifier = {
+			trigger = {infantry_in_province = 50 }
+			modifier = { supply_limit_modifier = 20 yearly_army_professionalism = 0.01}
+		}
 		#what effects happen when this tier is achieved
 		on_upgraded = {
 			add_base_manpower = 3
