@@ -215,13 +215,16 @@ age_of_discovery = {
 				factor = 100
 			}
 		}
-		ab_hie_empire_trade = {
+		ab_redleg_crusading = {
 		
 			allow = {
-				is_emperor = yes
+				OR = {
+					tag = AF6
+					tag = AE0
+				}
 			}
 			modifier = {
-				reasons_to_elect = 100
+				morale_damage = 0.1
 			}
 			ai_will_do = {
 				factor = 100
@@ -376,9 +379,9 @@ age_of_reformation = {
 			}
 		}
 
-		ab_spain_shock_tactics = {
+		ab_frankish_tactics = {
 			allow = {
-				tag = SPA
+				culture_group = frankish
 			}
 			modifier = {
 				leader_land_shock = 1
@@ -387,50 +390,42 @@ age_of_reformation = {
 				factor = 100
 			}
 		}
-		ab_mughal_artillery = {
+		ab_cavalry_serica = {
 			allow = {
-				tag = MUG
+				is_serican_trigger = yes
 			}
 			modifier = {
-				artillery_power = 0.15
+				cavalry_power = 0.15
 			}
 			ai_will_do = {
 				factor = 100
 			}
 		}
 		
-		ab_polish_legitimacy = {
+		ab_saxonic_fury = {
 			allow = {
-				OR = {
-					tag = PLC
-					tag = POL
-					custom_trigger_tooltip = {
-						tooltip = enable_this_ability_tt
-						has_country_flag = unlock_polish_ability_flag
-					}
-				}
+				tag = SX0
 			}
 			modifier = {
-				global_trade_goods_size_modifier = 0.33
+				global_missionary_strength = 0.03
 			}
 			ai_will_do = {
 				factor = 100
 			}
 		}
-		
-		ab_persia_development = {
+
+		ab_persia_reborn = {
 			allow = {
-				OR = {
-					custom_trigger_tooltip = {
-						tooltip = unlocked_this_ab_tt
-						has_country_flag = enable_persian_age_ability_flag
+				capital_scope = {
+					OR = {
+						region = persia_region
+						region = khorasan_region
 					}
-					tag = PER
-					tag = ERS
 				}
+				government_rank = 2
 			}
 			modifier = {
-				development_cost = -0.2
+				governing_capacity_modifier = 0.2
 			}
 			ai_will_do = {
 				factor = 100
@@ -571,20 +566,20 @@ age_of_absolutism = {
 		}
 	
 	
-		ab_french_absolutism = {
+		ab_soxon_absolutism = {
 			allow = {
-				tag = FRA
+				tag = SO0
 			}
 			modifier = {
-				max_absolutism_effect = 0.3
+				max_absolutism_effect = 0.25
 			}
 			ai_will_do = {
 				factor = 100
 			}
 		}
-		ab_dutch_trade = {
+		ab_swedish_empire = {
 			allow = {
-				tag = NED
+				tag = SW2
 			}
 			modifier = {
 				trade_steering = 0.33
@@ -593,12 +588,9 @@ age_of_absolutism = {
 				factor = 100
 			}
 		}	
-		ab_sweden_manpower = {
+		ab_zladinian_power = {
 			allow = {
-				OR = {
-					tag = SWE
-					tag = SCA
-				}
+				culture_group = zladinian
 			}
 			modifier = {
 				manpower_recovery_speed = 0.35
@@ -608,25 +600,15 @@ age_of_absolutism = {
 			}
 		}
 
-		ab_manchu_banner = {
+		ab_jongwa = {
 			allow = {
-				OR = {
-					tag = MCH
-					tag = QNG
-				}
+				is_emperor_of_china = yes
 			}
 			effect = {
-				if = {
-					limit = {
-						NOT = { primary_culture = manchu }
-						NOT = { primary_culture = manchu_new }
-						NOT = { has_government_attribute = allow_banners }
-					}
-					custom_tooltip = ab_manchu_banner_tt
-				}
+				add_mandate = 20
 			}
 			modifier = {
-				amount_of_banners = 0.5
+				global_prosperity_growth = 0.1
 			}
 			ai_will_do = {
 				factor = 100
@@ -782,12 +764,9 @@ age_of_revolutions = {
 				}
 			}
 		}
-		ab_pru_military = {
+		ab_germanic_military = {
 			allow = {
-				OR = {
-					tag = PRU
-					tag = GER
-				}
+				culture_group = central_germanic
 			}
 			modifier = {
 				fire_damage_received = -0.2
@@ -796,11 +775,11 @@ age_of_revolutions = {
 				factor = 100
 			}
 		}
-		ab_gbr_fleet = {
+		ab_new_world_power = {
 			allow = {
 				OR = {
-					tag = AVE
-					tag = GBR
+					tag = FJ0
+					tag = MX0
 				}
 			}
 			modifier = {
@@ -810,9 +789,9 @@ age_of_revolutions = {
 				factor = 100
 			}
 		}
-		ab_russia_boost = {
+		ab_turan_control = {
 			allow = {
-				tag = RUS
+				tag = AT1
 			}
 			modifier = {
 				min_autonomy_in_territories = -0.1
@@ -821,15 +800,12 @@ age_of_revolutions = {
 				factor = 100
 			}
 		}
-		ab_austrian_morale = {
+		ab_manich_morale = {
 			allow = {
-				OR = {
-					tag = HAB
-					tag = HLR
-				}
+				religion = manich
 			}
 			modifier = {
-				morale_damage_received = -0.2
+				morale_damage_received = -0.15
 			}
 			ai_will_do = {
 				factor = 100
