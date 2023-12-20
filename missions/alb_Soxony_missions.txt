@@ -627,4 +627,34 @@ Soxon_5_slot = {
 			}
 		}
 	}
+	sox_armerica = {
+		icon = mission_assemble_an_army
+		required_missions = {sox_navy }
+		position = 6
+		provinces_to_highlight = {
+			area = brittany_area 
+		}
+		
+		trigger = { 
+			mission_completed = sox_troubles
+			brittany_area = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+		}
+		
+		effect = { 
+			add_country_modifier = {
+				name = sox_early_explo
+				duration = 10950
+			}
+			brittany_area = {
+				add_core = ROOT
+				set_local_autonomy = 0
+			}
+		}
+	}
 }

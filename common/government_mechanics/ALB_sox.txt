@@ -29,13 +29,32 @@ sox_empire_mechanic = {
 			icon = GFX_russian_ability_ADM
 			cost_type = sox_adm_power
 			cost = 75
-			trigger = {
-				inflation = 2
-			}
+			trigger = {			}
 			effect = {
-				add_inflation = -2
+				random_owned_province = {
+					add_base_tax = 1
+					custom_tooltip = SOX_ADM_TT
+					add_province_modifier = {
+						name = sox_adm_ability_mod
+						duration = 3650
+					}
+				}
+				hidden_effect = {
+					every_province = {
+						limit = {
+							owner = {
+								religion = impotian
+							}
+							religion = impotian					
+						}
+						add_province_modifier = {
+							name = sox_adm_ability_mod
+							duration = 3650
+						}
+					}
+				}
 			}
-			cooldown_years = 0
+			cooldown_years = 10
 			ai_chance = {
 				factor = 10
 				modifier = {
@@ -53,13 +72,33 @@ sox_empire_mechanic = {
 			icon = GFX_russian_ability_DIP
 			cost_type = sox_dip_power
 			cost = 75
-			trigger = { 
-				corruption = 2
-			}
+			trigger = { 		}
 			effect = { 
 				add_corruption = -2
+				random_owned_province = {
+					add_base_production = 1
+					add_province_modifier = {
+						name = sox_dip_sponsored_church
+						duration = 3650
+					}
+				}
+				random_province = {
+					limit = {
+						owner = {
+							NOT = {
+								tag = ROOT
+							}
+							religion = impotian
+						}
+						religion = impotian					
+					}
+					add_province_modifier = {
+						name = sox_dip_sponsored_church
+						duration = 3650
+					}
+				}
 			}
-			cooldown_years = 0
+			cooldown_years = 10
 			ai_chance = {
 				factor = 10
 				modifier = {
@@ -77,13 +116,27 @@ sox_empire_mechanic = {
 			icon = GFX_russian_ability_MIL
 			cost_type = sox_mil_power
 			cost = 75
-			trigger = {
-				war_exhaustion = 1
-			}
+			trigger = {			}
 			effect = { 
-				add_war_exhaustion = -2
+				random_owned_province = {
+					add_base_manpower = 1
+				}
+				every_country = {
+					limit = {
+						religion = impotian
+						NOT = {
+							any_war_enemy_country = {
+								tag = ROOT
+							}
+						}
+					}
+					add_country_modifier = {
+						name = sox_impotian_crusade
+						duration = 3650
+					}
+				}
 			}
-			cooldown_years = 0
+			cooldown_years = 10
 			ai_chance = {
 				factor = 10
 				modifier = {
