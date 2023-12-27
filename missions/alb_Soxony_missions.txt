@@ -67,6 +67,178 @@ Soxon_1_slot = {
 			}
 		}
 	}
+	sox_franconia = {
+		icon = mission_assemble_an_army
+		required_missions = {sox_gallia }
+		position = 6
+		provinces_to_highlight = {
+			OR = {
+				area = flanders_area 
+				area = wallonia_area 
+				area = lorraine_area 
+			}
+		}
+		
+		trigger = { 
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 10
+				OR = {
+					area = flanders_area 
+					area = wallonia_area 
+					area = lorraine_area 
+				}
+			}
+		}
+		
+		effect = { 
+			add_accepted_culture_or_dip_power = {
+				culture = franken
+			}
+			lower_rhineland_area = {
+				add_permanent_claim = ROOT
+			}
+			brabant_area = {
+				add_permanent_claim = ROOT
+			}
+			holland_area = {
+				add_permanent_claim = ROOT
+			}
+			north_brabant_area = {
+				add_permanent_claim = ROOT
+			} 
+			north_rhine_area = {
+				add_permanent_claim = ROOT
+			}  
+		}
+	}
+	sox_frankish_tour = {
+		icon = mission_assemble_an_army
+		required_missions = {sox_franconia }
+		position = 7
+		provinces_to_highlight = {
+			OR = {
+				area = lower_rhineland_area 
+				area = brabant_area 
+				area = holland_area 
+				area = north_brabant_area 
+				area = north_rhine_area 
+			}
+		}
+		
+		trigger = { 
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 15
+				OR = {
+					area = lower_rhineland_area 
+					area = brabant_area 
+					area = holland_area 
+					area = north_brabant_area 
+					area = north_rhine_area 
+				}
+			}
+		}
+		
+		effect = { 
+			add_country_modifier = {
+				name = sox_frankish_push
+				duration = 10950
+			}
+			low_countries_region = {
+				add_permanent_claim = ROOT
+			} 
+		}
+	}
+	sox_defender_impotian = {
+		icon = mission_assemble_an_army
+		required_missions = { }
+		position = 9
+		
+		trigger = { 
+			is_defender_of_faith = yes
+		}
+		
+		effect = { 
+			add_treasury = 200
+			add_patriarch_authority = 0.1
+		}
+	}
+	sox_defender_2 = {
+		icon = mission_assemble_an_army
+		required_missions = { sox_defender_impotian}
+		position = 11
+		
+		trigger = { 
+			OR = {
+				is_defender_of_faith_of_tier = 5
+				calc_true_if = {
+					amount = 250
+					all_province = {
+						religion = impotian
+					}
+				}
+			}
+		}
+		
+		effect = { 
+			custom_tooltip = SOX_TT_5
+			set_global_flag = sox_holy_moly_orders
+		}
+	}
+}
+
+Soxon_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential = {	tag = SO0	}
+	has_country_shield = yes
+
+	sox_barracks_boy = {
+		icon = mission_assemble_an_army
+		required_missions = { sox_troubles}
+		position = 2
+		provinces_to_highlight = {
+			owned_by = ROOT
+			can_build = barracks
+		}
+		
+		trigger = { 
+			num_of_owned_provinces_with = {
+				value = 5
+				has_manpower_building_trigger = yes
+			}
+		}
+		
+		effect = { 
+			add_yearly_manpower = 1
+		}
+	}
+	sox_manpower_hour = {
+		icon = mission_assemble_an_army
+		required_missions = { sox_barracks_boy}
+		position = 3
+		provinces_to_highlight = {
+			owned_by = ROOT
+			can_build = barracks
+		}
+		
+		trigger = { 
+			num_of_owned_provinces_with = {
+				value = 15
+				OR = {
+					development = 20
+					base_manpower = 7
+				}
+				has_manpower_building_trigger = yes
+			}
+		}
+		
+		effect = { 
+			add_yearly_manpower = 1
+			custom_tooltip = SOX_TT_1
+			set_country_flag = sox_more_manpower
+		}
+	}
 	sox_britannia = {
 		icon = mission_assemble_an_army
 		required_missions = {sox_gallia }
@@ -169,140 +341,99 @@ Soxon_1_slot = {
 			}
 		}
 	}
-}
-
-Soxon_2_slot = {
-	slot = 2
-	generic = no
-	ai = yes
-	potential = {	tag = SO0	}
-	has_country_shield = yes
-
-	sox_barracks_boy = {
+	sox_francia = {
 		icon = mission_assemble_an_army
-		required_missions = { sox_troubles}
-		position = 2
+		required_missions = {sox_frankish_tour }
+		position = 8
 		provinces_to_highlight = {
-			owned_by = ROOT
-			can_build = barracks
-		}
-		
-		trigger = { 
-			num_of_owned_provinces_with = {
-				value = 5
-				has_manpower_building_trigger = yes
-			}
-		}
-		
-		effect = { 
-			add_yearly_manpower = 1
-		}
-	}
-	sox_manpower_hour = {
-		icon = mission_assemble_an_army
-		required_missions = { sox_barracks_boy}
-		position = 3
-		provinces_to_highlight = {
-			owned_by = ROOT
-			can_build = barracks
-		}
-		
-		trigger = { 
-			num_of_owned_provinces_with = {
-				value = 15
-				OR = {
-					development = 20
-					base_manpower = 7
-				}
-				has_manpower_building_trigger = yes
-			}
-		}
-		
-		effect = { 
-			add_yearly_manpower = 1
-			custom_tooltip = SOX_TT_1
-			set_country_flag = sox_more_manpower
-		}
-	}
-	sox_franconia = {
-		icon = mission_assemble_an_army
-		required_missions = {sox_gallia }
-		position = 6
-		provinces_to_highlight = {
-			OR = {
-				area = flanders_area 
-				area = wallonia_area 
-				area = lorraine_area 
-			}
+			region = low_countries_region
 		}
 		
 		trigger = { 
 			num_of_provinces_owned_or_owned_by_subjects_with = {
-				value = 10
-				OR = {
-					area = flanders_area 
-					area = wallonia_area 
-					area = lorraine_area 
-				}
+				value = 40
+				region = low_countries_region
 			}
 		}
 		
 		effect = { 
-			add_accepted_culture_or_dip_power = {
-				culture = franken
+			set_country_flag = sox_frankly_franks
+			tooltip = {
+				set_estate_privilege = alb_frankish_trades
 			}
-			lower_rhineland_area = {
-				add_permanent_claim = ROOT
-			}
-			brabant_area = {
-				add_permanent_claim = ROOT
-			}
-			holland_area = {
-				add_permanent_claim = ROOT
-			}
-			north_brabant_area = {
-				add_permanent_claim = ROOT
-			} 
-			north_rhine_area = {
-				add_permanent_claim = ROOT
-			}  
-		}
-	}
-	sox_frankish_tour = {
-		icon = mission_assemble_an_army
-		required_missions = {sox_franconia }
-		position = 7
-		provinces_to_highlight = {
-			OR = {
-				area = lower_rhineland_area 
-				area = brabant_area 
-				area = holland_area 
-				area = north_brabant_area 
-				area = north_rhine_area 
-			}
-		}
-		
-		trigger = { 
-			num_of_provinces_owned_or_owned_by_subjects_with = {
-				value = 15
-				OR = {
-					area = lower_rhineland_area 
-					area = brabant_area 
-					area = holland_area 
-					area = north_brabant_area 
-					area = north_rhine_area 
-				}
-			}
-		}
-		
-		effect = { 
 			add_country_modifier = {
-				name = sox_frankish_push
-				duration = 10950
+				name = sox_lord_of_francia
+				duration = -1
 			}
-			low_countries_region = {
-				add_permanent_claim = ROOT
-			} 
+		}
+	}
+	sox_cathedrals = {
+		icon = mission_assemble_an_army
+		required_missions = {sox_defender_impotian }
+		position = 10
+		provinces_to_highlight = {
+			owned_by = ROOT
+			can_build = temple
+		}
+		
+		trigger = { 
+			capital_scope = {
+				has_tax_building_trigger = yes
+				religion = impotian
+			}
+			num_of_owned_provinces_with = {
+				value = 15
+				has_tax_building_trigger = yes
+				religion = impotian
+			}
+		}
+		
+		effect = { 
+			183 = {
+				add_permanent_province_modifier = {
+					name = sox_more_church
+					duration = 18250
+				}
+			}
+			capital_scope = {
+				upgrade_tax_building = yes
+			}
+			add_stability_or_adm_power = yes
+		}
+	}
+	sox_west_imperium = {
+		icon = mission_assemble_an_army
+		required_missions = {sox_italian_rex}
+		position = 12
+		provinces_to_highlight = {
+			OR = {
+				region = italy_region
+				region = iberia_region
+				region = france_region
+				region = british_isles_region
+			}
+		}
+		
+		trigger = { 
+			num_of_owned_provinces_with = {
+				value = 100
+				OR = {
+					region = italy_region
+					region = iberia_region
+					region = france_region
+					region = british_isles_region
+				}
+			}
+		}
+		
+		effect = { 
+			change_tag = WR0
+			country_event = {
+				id = soxony.7
+			}
+			country_event = {
+				id = soxony.8
+			}
 		}
 	}
 }
@@ -462,6 +593,172 @@ Soxon_3_slot = {
 			}
 		}
 	}
+	sox_market_dominance = {
+		icon = mission_assemble_an_army
+		required_missions = {sox_port_dominance }
+		position = 7
+		provinces_to_highlight = {
+			owned_by = ROOT
+			can_build = marketplace
+		}
+		
+		trigger = { 
+			num_of_owned_provinces_with = {
+				value = 10
+				has_trade_building_trigger = yes
+				base_production = 6
+			}
+		}
+		
+		effect = { 
+			add_years_of_income = 3
+		}
+	}
+	sox_channel = {
+		icon = mission_assemble_an_army
+		required_missions = {sox_market_dominance }
+		position = 8
+		provinces_to_highlight = {
+			province_id = 1269
+		}
+		
+		trigger = { 
+			1269 = {
+				trade_share = {
+					country = ROOT
+					share = 50
+				}
+			}
+		}
+		
+		effect = { 
+			british_isles_region = {
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name = sox_stronger_goverment
+				duration = -1
+			}
+		}
+	}
+	sox_true_empire = {
+		icon = mission_assemble_an_army
+		required_missions = {sox_gallia_soxona }
+		position = 10
+		
+		trigger = { 
+			NOT = {
+				hre_size = 1
+			}
+		}
+		
+		effect = { 
+			italy_region = {
+				add_permanent_claim = ROOT
+			}
+			every_country = {
+				limit = {
+					NOT = {
+						religion = impotian
+					}
+					religion = catholic
+					capital_scope = {
+						same_continent = ROOT
+					}
+				}
+				country_event = {
+					id = soxony.6
+				}
+			}
+		}
+	}
+	sox_italian_rex = {
+		icon = mission_assemble_an_army
+		required_missions = {sox_true_empire sox_cathedrals}
+		position = 11
+		provinces_to_highlight = {
+			region = italy_region
+		}
+		
+		trigger = { 
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 15
+				region = italy_region
+				religion = impotian
+			}
+		}
+		
+		effect = { 
+			add_country_modifier = {
+				name = sox_more_missionary
+				duration = 10950
+			}
+			118 = {
+				add_core = ROOT
+			}
+		}
+	}
+	sox_romonia = {
+		icon = mission_assemble_an_army
+		required_missions = {sox_west_imperium sox_italian_imperium}
+		position = 13
+		provinces_to_highlight = {
+			OR = {
+				region = italy_region
+				region = iberia_region
+				region = france_region
+			}
+		}
+		
+		trigger = { 
+			italy_region = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+			france_region = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+			iberia_region = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+		}
+		
+		effect = { 
+			if = {
+				limit = {
+					has_country_modifier = sox_empire_vassals_1
+				}
+				remove_country_modifier = sox_empire_vassals_1
+				add_country_modifier = {
+					name = sox_empire_vassals_2
+					duration = -1
+				}
+			}else = {
+				remove_country_modifier = sox_empire_conquest_1
+				add_country_modifier = {
+					name = sox_empire_conquest_2
+					duration = -1
+				}
+			}
+			maghreb_region = {
+				add_permanent_claim = ROOT
+			}
+			balkan_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
 }
 
 Soxon_4_slot = {
@@ -523,7 +820,7 @@ Soxon_4_slot = {
 			}
 		}
 	}
-	sox_naval_dominance = {
+	sox_port_dominance = {
 		icon = mission_assemble_an_army
 		required_missions = {sox_navy }
 		position = 6
@@ -533,6 +830,7 @@ Soxon_4_slot = {
 		}
 		
 		trigger = { 
+			owns = 167
 			num_of_owned_provinces_with = {
 				value = 10
 				has_port = yes
@@ -541,32 +839,68 @@ Soxon_4_slot = {
 		}
 		
 		effect = { 
-			random_owned_province = {
-				limit = {
-					has_port = yes
-				}
+			167 = {
+				add_base_tax = 1
+				add_base_production = 1
+				add_base_manpower = 1
 				add_province_modifier = {
 					name = sox_grand_port
-					duration = 10950
+					duration = -1
 				}
 			}
-			random_owned_province = {
-				limit = {
-					has_port = yes
-				}
-				add_province_modifier = {
-					name = sox_grand_port
-					duration = 10950
-				}
+		}
+	}
+	sox_gallia_soxona = {
+		icon = mission_assemble_an_army
+		required_missions = {sox_gothia }
+		position = 9
+		provinces_to_highlight = {
+			region = france_region
+		}
+		
+		trigger = { 
+			france_region = {
+				type = all
+				owned_by = ROOT
+				is_core = ROOT
 			}
-			random_owned_province = {
-				limit = {
-					has_port = yes
-				}
-				add_province_modifier = {
-					name = sox_grand_port
-					duration = 10950
-				}
+		}
+		
+		effect = { 
+			basque_country = {
+				add_permanent_claim = ROOT
+			}
+			catalonia_area = {
+				add_permanent_claim = ROOT
+			}
+			add_casus_belli = {
+				type = cb_hie_soxony_war
+				target = emperor
+			}
+		}
+	}
+	sox_italian_imperium = {
+		icon = mission_assemble_an_army
+		required_missions = {sox_italian_rex}
+		position = 12
+		provinces_to_highlight = {
+			region = italy_region
+		}
+		
+		trigger = { 
+			italy_region = {
+				type = all
+				religion = impotian
+			}
+		}
+		
+		effect = { 
+			add_country_modifier = {
+				name = sox_italia_rex
+				duration = -1
+			}
+			balkan_region = {
+				add_permanent_claim = ROOT
 			}
 		}
 	}
@@ -701,6 +1035,142 @@ Soxon_5_slot = {
 			brittany_area = {
 				add_core = ROOT
 				set_local_autonomy = 0
+			}
+		}
+	}
+	sox_occitania = {
+		icon = mission_assemble_an_army
+		required_missions = { }
+		position = 7
+		provinces_to_highlight = {
+			OR = {
+				area = west_burgundy_area 
+				area = bourgogne_area
+			}
+		}
+		
+		trigger = { 
+			mission_completed = sox_troubles
+			west_burgundy_area = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+			bourgogne_area = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+		}
+		
+		effect = { 
+			add_prestige_or_monarch_power = {
+				value = 20
+			}
+			add_legitimacy_or_mil_power = {
+				value = 20
+			}
+			france_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	sox_gothia = {
+		icon = mission_assemble_an_army
+		required_missions = {sox_occitania }
+		position = 8
+		provinces_to_highlight = {
+			OR = {
+				area = languedoc_area
+				area = guyenne_area
+				area = massif_central_area
+				area = pyrenees_area
+			}
+		}
+		
+		trigger = { 
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 18
+				OR = {
+					area = languedoc_area
+					area = guyenne_area
+					area = massif_central_area
+					area = pyrenees_area
+				}
+			}
+		}
+		
+		effect = { 
+			country_event = {
+				id = soxony.5
+			}
+		}
+	}
+	sox_iberian_campaign = {
+		icon = mission_assemble_an_army
+		required_missions = {sox_gallia_soxona }
+		position = 10
+		provinces_to_highlight = {
+			OR = {
+				area = basque_country 
+				area = catalonia_area 
+			}
+		}
+		
+		trigger = { 
+			basque_country = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+			catalonia_area = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+		}
+		
+		effect = { 
+			iberia_region = {
+				add_permanent_claim = ROOT
+			}
+			add_casus_belli = {
+				type = cb_restore_personal_union
+				target = SP0
+				months = -1
+			}
+		}
+	}
+	sox_iberia = {
+		icon = mission_assemble_an_army
+		required_missions = {sox_iberian_campaign }
+		position = 11
+		provinces_to_highlight = {
+			region = iberia_region
+		}
+		
+		trigger = { 
+			iberia_region = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+		}
+		
+		effect = { 
+			add_country_modifier = {
+				name = sox_iberia_rex
+				duration = -1
 			}
 		}
 	}
