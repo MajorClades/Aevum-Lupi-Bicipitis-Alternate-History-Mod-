@@ -31,7 +31,6 @@ Soxon_1_slot = {
 			}
 		}
 	}
-
 	sox_gallia = {
 		icon = mission_assemble_an_army
 		required_missions = { }
@@ -182,6 +181,98 @@ Soxon_1_slot = {
 		effect = { 
 			custom_tooltip = SOX_TT_5
 			set_global_flag = sox_holy_moly_orders
+		}
+	}
+	sox_iberian_province = {
+		icon = mission_assemble_an_army
+		required_missions = {sox_romonia }
+		position = 14
+		provinces_to_highlight = {
+			region = iberia_region
+		}
+		
+		trigger = { 
+			num_of_owned_provinces_with = {
+				value = 5
+				region = iberia_region
+				development = 20
+			}
+			iberia_region = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+		}
+		
+		effect = { 
+			add_accepted_culture = romano_iberic
+			iberia_region = {
+				add_unrest = -5
+				change_culture = romano_iberic
+			}
+		}
+	}
+	sox_far_out = {
+		icon = mission_assemble_an_army
+		required_missions = { }
+		position = 15
+		
+		trigger = { 
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 5
+				OR = {
+					continent = north_america
+					continent = south_america
+				}
+			}
+		}
+		
+		effect = { 
+			add_dip_power = 100
+			add_treasury = 100
+		}
+	}
+	sox_fiorita = {
+		icon = mission_assemble_an_army
+		required_missions = {sox_far_out }
+		position = 16
+		provinces_to_highlight = {
+			region = carribeans_region
+		}
+		
+		trigger = { 
+			calc_true_if = {
+				amount = 1
+				all_subject_country = {
+					is_colonial_nation_of = ROOT
+					capital_scope = {
+						colonial_region = colonial_north_south
+					}
+				}
+			}
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 1
+				colonial_region = colonial_north_south
+				development = 15
+			}
+		}
+		
+		effect = { 
+			add_treasury = 500
+			random_subject_country = {
+				limit = {
+					is_colonial_nation_of = ROOT
+					capital_scope = {
+						colonial_region = colonial_north_south
+					}
+				}
+				add_country_modifier = {
+					name = sox_colonial_power
+					duration = -1
+				}
+			}
 		}
 	}
 }
@@ -433,6 +524,78 @@ Soxon_2_slot = {
 			}
 			country_event = {
 				id = soxony.8
+			}
+			hidden_effect = {
+				complete_mission = sox_west_imperium
+			}
+		}
+	}
+	sox_britannia_province = {
+		icon = mission_assemble_an_army
+		required_missions = {sox_romonia }
+		position = 14
+		provinces_to_highlight = {
+			region = british_isles_region
+		}
+		
+		trigger = { 
+			num_of_owned_provinces_with = {
+				value = 5
+				region = british_isles_region
+				development = 20
+			}
+			british_isles_region = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+		}
+		
+		effect = { 
+			add_accepted_culture = romano_britannic
+			british_isles_region = {
+				add_unrest = -5
+				change_culture = romano_britannic
+			}
+		}
+	}
+	sox_caribs = {
+		icon = mission_assemble_an_army
+		required_missions = {sox_far_out }
+		position = 16
+		provinces_to_highlight = {
+			region = carribeans_region
+		}
+		
+		trigger = { 
+			calc_true_if = {
+				amount = 1
+				all_subject_country = {
+					is_colonial_nation_of = ROOT
+					capital_scope = {
+						region = carribeans_region
+					}
+				}
+			}
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 3
+				region = carribeans_region
+				development = 15
+			}
+		}
+		
+		effect = { 
+			add_treasury = 500
+			random_subject_country = {
+				limit = {
+					is_colonial_nation_of = ROOT
+					capital_scope = {
+						region = carribeans_region
+					}
+				}
+				add_treasury = 1000
 			}
 		}
 	}
@@ -735,6 +898,7 @@ Soxon_3_slot = {
 		}
 		
 		effect = { 
+			custom_tooltip = SOX_TT_6
 			if = {
 				limit = {
 					has_country_modifier = sox_empire_vassals_1
@@ -744,18 +908,91 @@ Soxon_3_slot = {
 					name = sox_empire_vassals_2
 					duration = -1
 				}
-			}else = {
+			}
+			if = {
+				limit = {
+					has_country_modifier = sox_empire_conquest_1
+				}
 				remove_country_modifier = sox_empire_conquest_1
 				add_country_modifier = {
 					name = sox_empire_conquest_2
 					duration = -1
 				}
-			}
+			}	
+			change_primary_culture = romano_gallic
+			france_region = {
+				change_culture = romano_gallic
+			}		
 			maghreb_region = {
 				add_permanent_claim = ROOT
 			}
 			balkan_region = {
 				add_permanent_claim = ROOT
+			}
+		}
+	}
+	sox_italia_province = {
+		icon = mission_assemble_an_army
+		required_missions = {sox_romonia }
+		position = 14
+		provinces_to_highlight = {
+			region = italy_region
+		}
+		
+		trigger = { 
+			num_of_owned_provinces_with = {
+				value = 5
+				region = italy_region
+				development = 20
+			}
+			italy_region = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+		}
+		
+		effect = { 
+			add_accepted_culture = romano_italic
+			italy_region = {
+				add_unrest = -5
+				change_culture = romano_italic
+			}
+			carpathia_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	sox_dacia_pannonia_province = {
+		icon = mission_assemble_an_army
+		required_missions = {sox_italia_province }
+		position = 15
+		provinces_to_highlight = {
+			region = carpathia_region
+		}
+		
+		trigger = { 
+			num_of_owned_provinces_with = {
+				value = 5
+				region = carpathia_region
+				development = 20
+			}
+			carpathia_region = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+		}
+		
+		effect = { 
+			add_accepted_culture = romano_pannonic
+			carpathia_region = {
+				add_unrest = -5
+				change_culture = romano_pannonic
 			}
 		}
 	}
@@ -900,6 +1137,70 @@ Soxon_4_slot = {
 				duration = -1
 			}
 			balkan_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	sox_illyria_province = {
+		icon = mission_assemble_an_army
+		required_missions = {sox_romonia }
+		position = 14
+		provinces_to_highlight = {
+			region = balkan_region
+		}
+		
+		trigger = { 
+			num_of_owned_provinces_with = {
+				value = 5
+				region = balkan_region
+				development = 20
+			}
+			balkan_region = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+		}
+		
+		effect = { 
+			add_accepted_culture = romano_illyric
+			balkan_region = {
+				add_unrest = -5
+				change_culture = romano_illyric
+			}
+			anatolia_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	sox_anatolia_province = {
+		icon = mission_assemble_an_army
+		required_missions = {sox_illyria_province }
+		position = 16
+		provinces_to_highlight = {
+			region = anatolia_region
+		}
+		
+		trigger = { 
+			anatolia_region = {
+				type = all
+				religion = impotian
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+		}
+		
+		effect = { 
+			add_accepted_culture = romano_anatolic
+			anatolia_region = {
+				add_unrest = -5
+				change_culture = romano_anatolic
+			}
+			mashriq_region = {
 				add_permanent_claim = ROOT
 			}
 		}
@@ -1171,6 +1472,97 @@ Soxon_5_slot = {
 			add_country_modifier = {
 				name = sox_iberia_rex
 				duration = -1
+			}
+		}
+	}
+	sox_africa_province = {
+		icon = mission_assemble_an_army
+		required_missions = {sox_romonia }
+		position = 14
+		provinces_to_highlight = {
+			region = maghreb_region
+		}
+		
+		trigger = { 
+			num_of_owned_provinces_with = {
+				value = 5
+				region = maghreb_region
+				development = 20
+			}
+			maghreb_region = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+		}
+		
+		effect = { 
+			add_accepted_culture = romano_afric
+			maghreb_region = {
+				add_unrest = -5
+				change_culture = romano_afric
+			}
+			egypt_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	sox_egypt_province = {
+		icon = mission_assemble_an_army
+		required_missions = {sox_africa_province }
+		position = 15
+		provinces_to_highlight = {
+			region = egypt_region
+		}
+		
+		trigger = { 
+			egypt_region = {
+				type = all
+				religion = impotian
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+		}
+		
+		effect = { 
+			add_accepted_culture = romano_kemetic
+			egypt_region = {
+				add_unrest = -5
+				change_culture = romano_kemetic
+			}
+			mashriq_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	sox_syria_province = {
+		icon = mission_assemble_an_army
+		required_missions = { }
+		position = 16
+		provinces_to_highlight = {
+			region = mashriq_region
+		}
+		
+		trigger = { 
+			mashriq_region = {
+				type = all
+				religion = impotian
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
+			}
+		}
+		
+		effect = { 
+			add_accepted_culture = romano_syric
+			mashriq_region = {
+				add_unrest = -5
+				change_culture = romano_syric
 			}
 		}
 	}
