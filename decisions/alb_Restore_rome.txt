@@ -1,0 +1,227 @@
+country_decisions = {
+
+	alb_restore_rome = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			NOT = { has_country_flag = restored_rome_flag }
+			OR = {
+				owns = 118
+				is_emperor = yes
+				tag = WR0
+				tag = RU0
+				tag = SO0
+				tag = IB0
+				tag = BR0
+			}
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			OR = {
+				is_free_or_tributary_trigger = yes
+				ai = no
+			}
+			NOT = { tag = IT9 }
+			NOT = { tag = ROM }
+			NOT = { tag = PAP }
+			NOT = { exists = ROM }
+			OR = {
+				religion_group = christian
+				religion_group = pagan
+				religion_group = muslim
+			}
+		}
+		provinces_to_highlight = {
+			BYZ_roman_empire_decision_trigger = yes
+			NOT = { owned_by = ROOT }
+		}
+		allow = {
+			num_of_owned_provinces_with = {
+				custom_trigger_tooltip = {
+					tooltip = BYZ_highlighted_by_decision
+					BYZ_roman_empire_decision_trigger = yes
+				}
+				value = 400
+			}
+			is_at_war = no
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			118 = {
+				is_state = yes
+			}
+		}
+		effect = {
+			118 = {
+				move_capital_effect = yes
+			}
+			restore_country_name = yes
+			change_tag = ROM
+			on_change_tag_effect = yes
+			if = {
+				limit = {
+					capital_scope = {
+						region = british_isles_region
+					}
+				}
+				change_primary_culture = romano_britannic
+			}
+			else_if = {
+				limit = { 
+					capital_scope = {
+						region = france_region
+					}
+				}
+				change_primary_culture = romano_gallic
+			}
+			else_if = {
+				limit = { 
+					capital_scope = {
+						region = iberia_region
+					}
+				}
+				change_primary_culture = romano_iberic
+			}
+			else_if = {
+				limit = { 
+					capital_scope = {
+						region = italy_region
+					}
+				}
+				change_primary_culture = romano_italic
+			}
+			else_if = {
+				limit = { 
+					capital_scope = {
+						region = maghreb_region
+					}
+				}
+				change_primary_culture = romano_afric
+			}
+			else_if = {
+				limit = { 
+					capital_scope = {
+						region = egypt_region
+					}
+				}
+				change_primary_culture = romano_kemetic
+			}
+			else_if = {
+				limit = { 
+					capital_scope = {
+						region = mashriq_region
+					}
+				}
+				change_primary_culture = romano_syric
+			}
+			else_if = {
+				limit = { 
+					capital_scope = {
+						region = anatolia_region
+					}
+				}
+				change_primary_culture = romano_anatolic
+			}
+			else_if = {
+				limit = { 
+					capital_scope = {
+						region = balkan_region
+					}
+				}
+				change_primary_culture = romano_illyric
+			}
+			else_if = {
+				limit = { 
+					capital_scope = {
+						region = carpathia_region
+					}
+				}
+				change_primary_culture = romano_pannonic
+			}
+			else = {
+				change_primary_culture = romano_italic
+			}
+			custom_tooltip = restore_roman_empire_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						is_part_of_hre = yes
+					}
+					set_in_empire = no
+				}
+			}
+			set_government_rank = 3
+			add_prestige_or_monarch_power = { amount = 50 }
+			if = {
+				limit = {
+					has_dlc = "Domination"
+				}
+				if = {
+					limit = {
+						government = monarchy
+						is_revolutionary = no
+						NOT = { has_reform = celestial_empire }
+					}
+					hidden_effect = {
+						unlock_government_reform = {
+							government_reform = roman_empire_reform
+						}
+						unlock_government_reform = {
+							government_reform = roman_republic_government
+						}
+					}
+					add_government_reform = roman_empire_reform
+				}
+				else_if = {
+					limit = {
+						government = republic
+						is_revolutionary = no
+					}
+					hidden_effect = {
+						unlock_government_reform = {
+							government_reform = roman_empire_reform
+						}
+						unlock_government_reform = {
+							government_reform = roman_republic_government
+						}
+					}
+					add_government_reform = roman_republic_government
+				}
+				else = {
+					unlock_government_reform = {
+						government_reform = roman_empire_reform
+					}
+					unlock_government_reform = {
+						government_reform = roman_republic_government
+					}
+				}
+			}
+			add_core = 118 # Rome
+			#if = {
+			#	limit = {
+			#		is_part_of_hre = yes
+			#		is_elector = no
+			#	}
+			#	every_owned_province = {
+			#		limit = {
+			#			is_part_of_hre = yes
+			#		}
+			#		set_in_empire = no
+			#	}
+			#}
+			if = {
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			set_country_flag = restored_rome_flag
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+}
