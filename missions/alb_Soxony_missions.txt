@@ -214,74 +214,7 @@ Soxon_1_slot = {
 			}
 		}
 	}
-	sox_far_out = {
-		icon = mission_assemble_an_army
-		required_missions = { }
-		position = 15
-		
-		trigger = { 
-			num_of_provinces_owned_or_owned_by_subjects_with = {
-				value = 5
-				OR = {
-					continent = north_america
-					continent = south_america
-				}
-			}
-		}
-		
-		effect = { 
-			add_dip_power = 100
-			add_treasury = 100
-		}
-	}
-	sox_fiorita = {
-		icon = mission_assemble_an_army
-		required_missions = {sox_far_out }
-		position = 16
-		provinces_to_highlight = {
-			region = carribeans_region
-		}
-		
-		trigger = { 
-			calc_true_if = {
-				amount = 1
-				all_subject_country = {
-					is_colonial_nation_of = ROOT
-					capital_scope = {
-						colonial_region = colonial_north_south
-					}
-				}
-			}
-			num_of_provinces_owned_or_owned_by_subjects_with = {
-				value = 1
-				colonial_region = colonial_north_south
-				development = 15
-			}
-		}
-		
-		effect = { 
-			add_treasury = 500
-			custom_tooltip = SOX_TT_19
-			tooltip = {
-				add_country_modifier = {
-					name = sox_colonial_power
-					duration = -1
-				}
-			}
-			random_subject_country = {
-				limit = {
-					is_colonial_nation_of = ROOT
-					capital_scope = {
-						colonial_region = colonial_north_south
-					}
-				}
-				add_country_modifier = {
-					name = sox_colonial_power
-					duration = -1
-				}
-			}
-		}
-	}
+
 }
 
 Soxon_2_slot = {
@@ -568,42 +501,34 @@ Soxon_2_slot = {
 			}
 		}
 	}
-	sox_caribs = {
+	sox_dacia_pannonia_province = {
 		icon = mission_assemble_an_army
-		required_missions = {sox_far_out }
-		position = 16
+		required_missions = {sox_italia_province }
+		position = 15
 		provinces_to_highlight = {
-			region = carribeans_region
+			region = carpathia_region
 		}
 		
 		trigger = { 
-			calc_true_if = {
-				amount = 1
-				all_subject_country = {
-					is_colonial_nation_of = ROOT
-					capital_scope = {
-						region = carribeans_region
-					}
-				}
+			num_of_owned_provinces_with = {
+				value = 5
+				region = carpathia_region
+				development = 20
 			}
-			num_of_provinces_owned_or_owned_by_subjects_with = {
-				value = 3
-				region = carribeans_region
-				development = 15
+			carpathia_region = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owned_by_subject_of = ROOT
+				}
 			}
 		}
 		
 		effect = { 
-			add_treasury = 500
-			custom_tooltip = SOX_TT_20
-			random_subject_country = {
-				limit = {
-					is_colonial_nation_of = ROOT
-					capital_scope = {
-						region = carribeans_region
-					}
-				}
-				add_treasury = 1000
+			add_accepted_culture = romano_pannonic
+			carpathia_region = {
+				add_unrest = -5
+				change_culture = romano_pannonic
 			}
 		}
 	}
@@ -973,35 +898,41 @@ Soxon_3_slot = {
 			}
 		}
 	}
-	sox_dacia_pannonia_province = {
+	sox_roma_aeterna = {
 		icon = mission_assemble_an_army
 		required_missions = {sox_italia_province }
-		position = 15
+		position = 16
 		provinces_to_highlight = {
-			region = carpathia_region
+			is_capital_of = ROOT
 		}
 		
 		trigger = { 
-			num_of_owned_provinces_with = {
-				value = 5
-				region = carpathia_region
-				development = 20
-			}
-			carpathia_region = {
-				type = all
-				OR = {
-					owned_by = ROOT
-					owned_by_subject_of = ROOT
-				}
+			118 = {
+				is_capital_of = ROOT
+				development = 50
 			}
 		}
 		
 		effect = { 
-			add_accepted_culture = romano_pannonic
-			carpathia_region = {
-				add_unrest = -5
-				change_culture = romano_pannonic
+			118 = {
+				add_permanent_province_modifier = {
+					name = sox_roman_eternal
+					duration = -1
+				}
 			}
+		}
+	}
+	sox_roman_empire = {
+		icon = mission_assemble_an_army
+		required_missions = {sox_roma_aeterna }
+		position = 17
+		
+		trigger = { 
+			tag = ROM
+		}
+		
+		effect = { 
+			add_government_reform = roman_legitimacy_reform
 		}
 	}
 }
@@ -1305,7 +1236,8 @@ Soxon_5_slot = {
 				limit = { ai = yes}
 				num_of_admirals = 1
 			}else = {
-				navy_size_percentage = 1
+				num_of_admirals = 1
+				navy_size_percentage = 0.9
 			}
 		}
 		
@@ -1550,7 +1482,7 @@ Soxon_5_slot = {
 	sox_syria_province = {
 		icon = mission_assemble_an_army
 		required_missions = { 
-			sox_anatolia_province
+			sox_anatolia_province sox_egypt_province
 		}
 		position = 16
 		provinces_to_highlight = {
@@ -1560,7 +1492,6 @@ Soxon_5_slot = {
 		trigger = { 
 			mashriq_region = {
 				type = all
-				religion = impotian
 				OR = {
 					owned_by = ROOT
 					owned_by_subject_of = ROOT
@@ -1573,6 +1504,9 @@ Soxon_5_slot = {
 			mashriq_region = {
 				add_unrest = -5
 				change_culture = romano_syric
+			}
+			country_event = {
+				id = soxony.9
 			}
 		}
 	}

@@ -421,7 +421,7 @@ country_event = {
 	}
 }
 
-country_event = { #some modifier here
+country_event = { 
 	id = soxony.8
 	title = soxony.8.test
 	desc = soxony.8.desc
@@ -441,6 +441,102 @@ country_event = { #some modifier here
 		add_country_modifier = {
 			name = sox_empire_conquest_1
 			duration = -1
+		}
+	}
+}
+
+country_event = { 
+	id = soxony.9
+	title = soxony.9.test
+	desc = soxony.9.desc
+	picture = ANGRY_MOB_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = soxony.9a
+		every_owned_province = {
+			limit = {
+				religion = jewish
+			}
+			change_religion = ROOT
+		}
+		every_owned_province = {
+			limit = {
+				culture = hebrew
+			}
+			change_culture = ROOT
+		}
+		palestine_area = {
+			cede_province = ISR
+			change_culture = hebrew
+		}
+		hidden_effect = {
+			ISR = {
+				change_primary_culture = hebrew
+				change_religion = jewish
+			}
+		}
+		vassalize = ISR
+	}
+	option = {
+		name = soxony.9b
+		palestine_area = {
+			change_religion = ROOT
+		}
+	}
+}
+
+country_event = { 
+	id = soxony.10
+	title = soxony.10.test
+	desc = soxony.10.desc
+	picture = ANGRY_MOB_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = soxony.10a
+		add_treasury = 500
+		add_manpower = 5
+	}
+	option = {
+		name = soxony.10b
+		every_subject_country = {
+			limit = {
+				is_colonial_nation_of = ROOT
+			}
+			add_treasury = 100
+			add_manpower = 1
+		}
+	}
+}
+
+country_event = { 
+	id = soxony.11
+	title = soxony.11.test
+	desc = soxony.11.desc
+	picture = ANGRY_MOB_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = soxony.10a
+		add_treasury = 500
+		add_stability_or_adm_power = yes
+		A33 = {
+			change_religion = goth_christ
+			every_owned_province = {
+				limit = {
+					religion = impotian
+				}
+				change_religion = goth_christ
+			}
+		}
+	}
+	option = {
+		name = soxony.10b
+		add_manpower = -1
+		A33 = {
+			add_stability = -1
 		}
 	}
 }

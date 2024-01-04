@@ -1,4 +1,4 @@
-sox_vas_1_slot = {
+sox_arm_1_slot = {
 	slot = 1
 	generic = no
 	ai = yes
@@ -37,7 +37,6 @@ sox_vas_1_slot = {
 			}
 		}
 	}
-
 	arm_sox_exploring = {
 		icon = explore_caribbean
 		position = 2
@@ -56,7 +55,6 @@ sox_vas_1_slot = {
 			add_dip_power = 100
 		}
 	}
-
 	arm_sox_colonizing = {
 		icon = colonize_australia
 		position = 3
@@ -84,6 +82,344 @@ sox_vas_1_slot = {
 			}
 		}
 	}
+}
 
+sox_gal_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = SO3 } 
 
+	gal_sox_gallic_fury = {
+		icon = mission_educated_people
+		position = 1
+		required_missions = {  } 
+
+		trigger = {
+			is_at_war = yes
+		}
+
+		effect = {
+			define_general = {
+				shock = 5
+				fire = 4
+				manuever = 2
+				siege = 4
+			}
+		}
+	}
+
+	gal_sox_gallic_revival = {
+		icon = centralize_france
+		position = 2
+		required_missions = { gal_sox_gallic_fury } 
+
+		trigger = {
+			is_subject = no
+			has_institution = renaissance
+		}
+
+		effect = {
+			add_manpower = 5
+			change_primary_culture = gallic
+			picardy_area = {
+				change_culture = gallic
+			}
+		}
+	}
+
+	gal_sox_gallic_revival_2 = {
+		icon = mission_war_for_the_crown
+		position = 3
+		required_missions = { gal_sox_gallic_revival } 
+		provinces_to_highlight = { region = france_region } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 30
+				region = france_region
+			}
+		}
+
+		effect = {
+			every_province = {
+				limit = {
+					region = france_region
+				}
+				change_culture = gallic
+			}
+		}
+	}
+}
+sox_occ_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = SO1 } 
+
+	occ_sox_war_power = {
+		icon = mission_colonial
+		position = 1
+		required_missions = {  } 
+
+		trigger = {
+			is_at_war = yes
+		}
+
+		effect = {
+			capital_scope = {
+				add_province_modifier = {
+					name = sox_occ_defenses
+					duration = 10950
+				}
+			}
+		}
+	}
+
+	occ_sox_indipendent = {
+		icon = explore_caribbean
+		position = 2
+		required_missions = { occ_sox_war_power } 
+
+		trigger = {
+			is_subject = no
+			army_size_percentage = 0.5
+		}
+
+		effect = {
+			france_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	occ_sox_gallic_supreme = {
+		icon = colonize_australia
+		position = 3
+		required_missions = { gal_sox_gallic_revival } 
+		provinces_to_highlight = { region = france_region } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 30
+				region = france_region
+			}
+		}
+
+		effect = {
+			set_government_rank = 3
+			add_stability = 3
+		}
+	}
+}
+
+sox_colonial_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { OR = {	tag = A30 tag = A31 tag = A32	}} 
+
+	colonial_sox_starting = {
+		icon = mission_colonial
+		position = 1
+		required_missions = {  } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+			}
+		}
+
+		effect = {
+			capital_scope = {
+				add_base_tax = 2
+				add_province_modifier = {
+					name = sox_occ_defenses
+					duration = 10950
+				}
+			}
+		}
+	}
+
+	colonial_sox_temple = {
+		icon = mission_colonial
+		position = 2
+		required_missions = {colonial_sox_starting  } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 3
+				has_tax_building_trigger = yes
+			}
+		}
+
+		effect = {
+			overlord = {
+				country_event = {
+					id = soxony.10
+				}
+			}
+			capital_scope = {
+				add_base_production = 2
+			}
+		}
+	}
+
+	colonial_sox_power = {
+		icon = colonize_australia
+		position = 3
+		required_missions = { colonial_sox_temple } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 20
+			}
+		}
+
+		effect = {
+			add_stability = 1
+			capital_scope = {
+				add_base_manpower = 2
+			}
+		}
+	}
+	colonial_sox_powerhouse = {
+		icon = colonize_australia
+		position = 4
+		required_missions = { colonial_sox_power } 
+
+		trigger = {
+			capital_scope = {
+				development = 20
+			}
+			num_of_owned_provinces_with = {
+				value = 30
+			}
+		}
+
+		effect = {
+			add_stability = 1
+			capital_scope = {
+				add_permanent_province_modifier = {
+					name = new_world_capital_colony
+					duration = -1
+				}
+			}
+		}
+	}
+}
+
+sox_cot_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = A33 } 
+
+	cot_sox_adventure = {
+		icon = mission_colonial
+		position = 1
+		required_missions = {  } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+			}
+		}
+
+		effect = {
+			capital_scope = {
+				add_base_tax = 3
+			}
+		}
+	}
+
+	cot_sox_secret = {
+		icon = mission_colonial
+		position = 2
+		required_missions = {cot_sox_adventure  } 
+
+		trigger = {
+			overlord = {
+				num_of_owned_provinces_with = {
+					value = 10
+					OR = {
+						culture = goth_p
+						culture = soxon_goths
+					}
+				}
+			}
+			num_of_owned_provinces_with = {
+				value = 2
+				has_tax_building_trigger = yes
+			}
+		}
+
+		effect = {
+			overlord = {
+				country_event = {
+					id = soxony.11
+				}
+			}
+			capital_scope = {
+				add_base_production = 3
+			}
+		}
+	}
+
+	cot_sox_secret_power = {
+		icon = colonize_australia
+		position = 3
+		required_missions = { cot_sox_secret } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 15
+				religion = goth_christ
+			}
+		}
+
+		effect = {
+			add_stability = 1
+			add_manpower = 5
+			capital_scope = {
+				add_base_manpower = 3
+			}
+		}
+	}
+	cot_sox_secret_powerhouse = {
+		icon = colonize_australia
+		position = 4
+		required_missions = { cot_sox_secret_power } 
+
+		trigger = {
+			is_at_war = no
+			army_size = 25
+		}
+
+		effect = {
+			add_liberty_desire = 50
+		}
+	}
+
+	cot_sox_gothic_rebellion = {
+		icon = colonize_australia
+		position = 5
+		required_missions = { cot_sox_secret_powerhouse } 
+
+		trigger = {
+			is_at_war = no
+			liberty_desire = 75
+		}
+
+		effect = {
+			declare_war_with_cb = {
+				casus_belli = cb_independence_war
+				who = overlord
+			}
+		}
+	}
 }
