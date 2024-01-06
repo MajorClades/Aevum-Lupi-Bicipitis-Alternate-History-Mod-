@@ -1,4 +1,4 @@
-CRUSADE_1_slot = {
+CRUSADE_AE0_slot = {
 	slot = 1
 	generic = no
 	ai = yes
@@ -70,7 +70,7 @@ RED_1_slot = {
 	has_country_shield = yes
 	potential = { tag = AE0 } 
 
-	1_indictian_rule = {
+	AE0_indictian_rule = {
 		icon = chivalry_is_not_dead
 		position = 1
 		provinces_to_highlight = { region = egypt_region } 
@@ -89,13 +89,10 @@ RED_1_slot = {
 		}
 	}
 
-	1_indictian_power = {
+	AE0_indictian_power = {
 		icon = mission_rb_trinity_college_dublin
 		position = 2
-		required_missions = {
-			1_indictian_rule
-			2_indictian_rules
-		}
+		required_missions = { AE0_indictian_rule } 
 		provinces_to_highlight = {  } 
 
 		trigger = {
@@ -120,33 +117,42 @@ RED_1_slot = {
 		}
 	}
 
-	1_egypt_prosperity = {
-		icon = mission_rb_seize_alexandria
-		position = 4
-		required_missions = { 2_alexandria } 
-		provinces_to_highlight = { region = egypt_region } 
+	AE0_jerusalem__econ = {
+		icon = jerusalem
+		position = 3
+		required_missions = {
+			AE0_alexandria
+			AE0_indictian_power
+		}
+		provinces_to_highlight = { province_id = 379 } 
 
 		trigger = {
-			development_in_provinces = {
-				value = 250
-				region = egypt_region
+			owns = 379
+			379 = {
+				development = 20
+				religion = ROOT
 			}
 		}
 
 		effect = {
-			add_country_modifier = {
-				name = "egypt_red_economy"
-				duration = 10950
+			add_accepted_culture = sirian
+			377 = {
+				add_trade_modifier = {
+					who = ROOT
+					duration = 7300
+					power = 25
+					key = RED_TRADE_EGYPT
+				}
 			}
 		}
 	}
 
-	1_empire_nascent = {
+	AE0_empire_nascent = {
 		icon = ark_of_the_covenant
-		position = 5
+		position = 4
 		required_missions = {
-			1_egypt_prosperity
-			2_jerusalem__econ
+			AE0_egypt_prosperity
+			AE0_jerusalem__econ
 		}
 		provinces_to_highlight = {  } 
 
@@ -175,10 +181,10 @@ RED_1_slot = {
 		}
 	}
 
-	1_tunisia = {
+	AE0_tunisia = {
 		icon = africa_proconsulare
 		position = 7
-		required_missions = { 2_desert_warriors } 
+		required_missions = { AE0_desert_warriors } 
 		provinces_to_highlight = {  } 
 
 		trigger = {  } 
@@ -193,9 +199,9 @@ RED_2_slot = {
 	has_country_shield = yes
 	potential = { tag = AE0 } 
 
-	2_alexandria = {
+	AE0_alexandria = {
 		icon = mission_conquer_alexandria
-		position = 3
+		position = 2
 		provinces_to_highlight = { province_id = 358 } 
 
 		trigger = {
@@ -216,37 +222,31 @@ RED_2_slot = {
 		}
 	}
 
-	2_jerusalem__econ = {
-		icon = jerusalem
-		position = 4
-		required_missions = { 2_alexandria } 
-		provinces_to_highlight = { province_id = 379 } 
+	AE0_egypt_prosperity = {
+		icon = mission_rb_seize_alexandria
+		position = 3
+		required_missions = { AE0_alexandria } 
+		provinces_to_highlight = { region = egypt_region } 
 
 		trigger = {
-			owns = 379
-			379 = {
-				development = 20
-				religion = ROOT
+			development_in_provinces = {
+				value = 250
+				region = egypt_region
 			}
 		}
 
 		effect = {
-			add_accepted_culture = sirian
-			377 = {
-				add_trade_modifier = {
-					who = ROOT
-					duration = 7300
-					power = 25
-					key = RED_TRADE_EGYPT
-				}
+			add_country_modifier = {
+				name = "egypt_red_economy"
+				duration = 10950
 			}
 		}
 	}
 
-	2_desert_warriors = {
+	AE0_desert_warriors = {
 		icon = mission_sw_against_the_desert
 		position = 6
-		required_missions = { 2_tripolitania } 
+		required_missions = { AE0_tripolitania } 
 		provinces_to_highlight = {  } 
 
 		trigger = {  } 
@@ -254,10 +254,10 @@ RED_2_slot = {
 		effect = {  } 
 	}
 
-	2_aldabba = {
+	AE0_aldabba = {
 		icon = per_muslim_integration
 		position = 7
-		required_missions = { 2_desert_warriors } 
+		required_missions = { AE0_desert_warriors } 
 		provinces_to_highlight = {  } 
 
 		trigger = {  } 
@@ -265,12 +265,12 @@ RED_2_slot = {
 		effect = {  } 
 	}
 
-	2_african_hegemon = {
+	AE0_african_hegemon = {
 		icon = mission_placeholder
 		position = 8
 		required_missions = {
-			1_tunisia
-			2_aldabba
+			AE0_aldabba
+			AE0_tunisia
 		}
 		provinces_to_highlight = {  } 
 
@@ -286,7 +286,7 @@ RED_3_slot = {
 	has_country_shield = yes
 	potential = { tag = AE0 } 
 
-	3_victory = {
+	AE0_victory = {
 		icon = mission_asian_trader
 		position = 1
 		provinces_to_highlight = {  } 
@@ -305,10 +305,10 @@ RED_3_slot = {
 		}
 	}
 
-	2_tripolitania = {
-		icon = mission_control_the_barbary_coast
-		position = 5
-		required_missions = { 4_financial_stability } 
+	AE0_beacon_of_learning = {
+		icon = mission_early_modern_university
+		position = 3
+		required_missions = { AE0_alexandria } 
 		provinces_to_highlight = {  } 
 
 		trigger = {  } 
@@ -316,10 +316,65 @@ RED_3_slot = {
 		effect = {  } 
 	}
 
-	5_ethiopia = {
+	AE0_world_granary = {
+		icon = prosperity_for_all
+		position = 4
+		required_missions = { AE0_egypt_prosperity } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	AE0_tripolitania = {
+		icon = mission_control_the_barbary_coast
+		position = 5
+		required_missions = { AE0_financial_stability } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	AE0_horn = {
+		icon = mission_envoy_to_ethiopia
+		position = 6
+		required_missions = { AE0_expansions } 
+		provinces_to_highlight = {
+			OR = {
+				area = lower_nubia_area
+				area = red_sea_coast_area
+				area = dongola_area
+			}
+		}
+
+		trigger = {
+			lower_nubia_area = {
+				type = all
+				owned_by = ROOT
+			}
+			red_sea_coast_area = {
+				type = all
+				owned_by = ROOT
+			}
+			dongola_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			add_army_tradition = 15
+			horn_of_africa_region = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	AE0_ethiopia = {
 		icon = befriend_ethiopia
 		position = 7
-		required_missions = { 5_horn } 
+		required_missions = { AE0_horn } 
 		provinces_to_highlight = { region = horn_of_africa_region } 
 
 		trigger = {
@@ -337,10 +392,10 @@ RED_3_slot = {
 		}
 	}
 
-	3_sounding_horn = {
+	AE0_sounding_horn = {
 		icon = hornofafrica
 		position = 8
-		required_missions = { 5_ethiopia } 
+		required_missions = { AE0_ethiopia } 
 		provinces_to_highlight = {  } 
 
 		trigger = {  } 
@@ -348,12 +403,14 @@ RED_3_slot = {
 		effect = {  } 
 	}
 
-	2_africa = {
+	AE0_empire = {
 		icon = mission_west_african_ports
 		position = 9
 		required_missions = {
-			3_sounding_horn
-			2_african_hegemon
+			AE0_sounding_horn
+			AE0_african_hegemon
+			AE0_red_trade
+			AE0_constantine_city
 		}
 		provinces_to_highlight = { region = maghreb_region } 
 
@@ -381,12 +438,12 @@ RED_4_slot = {
 	has_country_shield = yes
 	potential = { tag = AE0 } 
 
-	4_money = {
+	AE0_money = {
 		icon = mission_hands_praying
 		position = 2
 		required_missions = {
-			3_victory
-			5_jerusalem_defense
+			AE0_victory
+			AE0_jerusalem_defense
 		}
 		provinces_to_highlight = {  } 
 
@@ -406,10 +463,10 @@ RED_4_slot = {
 		}
 	}
 
-	4_egypt = {
+	AE0_egypt = {
 		icon = mission_egyptian_mamluk_soldier
 		position = 3
-		required_missions = { 4_money } 
+		required_missions = { AE0_money } 
 		provinces_to_highlight = {  } 
 
 		trigger = {
@@ -420,10 +477,10 @@ RED_4_slot = {
 		effect = { country_event = { id = redleg.8 }  } 
 	}
 
-	4_financial_stability = {
+	AE0_financial_stability = {
 		icon = mission_diplomatic_relation
 		position = 4
-		required_missions = { 4_egypt } 
+		required_missions = { AE0_egypt } 
 		provinces_to_highlight = {  } 
 
 		trigger = {
@@ -496,10 +553,10 @@ RED_4_slot = {
 		}
 	}
 
-	5_expansions = {
+	AE0_expansions = {
 		icon = mission_establish_the_black_guard
 		position = 5
-		required_missions = { 4_financial_stability } 
+		required_missions = { AE0_financial_stability } 
 		provinces_to_highlight = {  } 
 
 		trigger = { has_mil_advisor_2 = yes } 
@@ -511,37 +568,37 @@ RED_4_slot = {
 		}
 	}
 
-	5_horn = {
-		icon = mission_envoy_to_ethiopia
+	AE0_conquer_syria = {
+		icon = mam_yemen
 		position = 6
-		required_missions = { 5_expansions } 
-		provinces_to_highlight = {
-			OR = {
-				area = lower_nubia_area
-				area = red_sea_coast_area
-				area = dongola_area
-			}
-		}
+		required_missions = { AE0_secure_surroundings } 
+		provinces_to_highlight = {  } 
 
-		trigger = {
-			lower_nubia_area = {
-				type = all
-				owned_by = ROOT
-			}
-			red_sea_coast_area = {
-				type = all
-				owned_by = ROOT
-			}
-			dongola_area = {
-				type = all
-				owned_by = ROOT
-			}
-		}
+		trigger = {  } 
 
-		effect = {
-			add_army_tradition = 15
-			horn_of_africa_region = { add_permanent_claim = ROOT } 
-		}
+		effect = {  } 
+	}
+
+	AE0_break_rhomania = {
+		icon = mission_dismantle_hre
+		position = 7
+		required_missions = { AE0_conquer_syria } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	AE0_constantine_city = {
+		icon = take_constantinople
+		position = 8
+		required_missions = { AE0_break_rhomania } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
 	}
 }
 RED_5_slot = {
@@ -551,7 +608,7 @@ RED_5_slot = {
 	has_country_shield = yes
 	potential = { tag = AE0 } 
 
-	5_jerusalem_defense = {
+	AE0_jerusalem_defense = {
 		icon = jerusalem
 		position = 1
 		provinces_to_highlight = { province_id = 379 } 
@@ -570,5 +627,49 @@ RED_5_slot = {
 				}
 			}
 		}
+	}
+
+	AE0_secure_surroundings = {
+		icon = mam_basrah
+		position = 5
+		required_missions = { AE0_financial_stability } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	AE0_hedjaz_conquest = {
+		icon = kok_mam_holy_cities
+		position = 6
+		required_missions = { AE0_secure_surroundings } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	AE0_arabian_nights = {
+		icon = mam_arabia
+		position = 7
+		required_missions = { AE0_hedjaz_conquest } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	AE0_red_trade = {
+		icon = mission_dharma_mission_arabian_trade
+		position = 8
+		required_missions = { AE0_arabian_nights } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
 	}
 }

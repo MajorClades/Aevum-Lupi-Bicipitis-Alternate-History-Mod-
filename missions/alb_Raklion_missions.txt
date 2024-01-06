@@ -14,10 +14,7 @@ Raklion_1_slot = {
 		trigger = {
 			upper_andalucia_area = {
 				type = all
-				OR = {
-					owned_by = ROOT
-					owned_by_subject_of = ROOT
-				}
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 
@@ -97,10 +94,7 @@ Raklion_1_slot = {
 			NOT = { tag = IB0 } 
 			herkulia_region = {
 				type = all
-				OR = {
-					owned_by = ROOT
-					owned_by_subject_of = ROOT
-				}
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 
@@ -150,18 +144,12 @@ Raklion_1_slot = {
 		trigger = {
 			dominica_area = {
 				type = all
-				OR = {
-					owned_by = ROOT
-					owned_by_subject_of = ROOT
-				}
+				country_or_non_sovereign_subject_holds = ROOT
 				base_production = 5
 			}
 			hispaniola_area = {
 				type = all
-				OR = {
-					owned_by = ROOT
-					owned_by_subject_of = ROOT
-				}
+				country_or_non_sovereign_subject_holds = ROOT
 				base_production = 5
 			}
 		}
@@ -198,10 +186,7 @@ Raklion_2_slot = {
 		trigger = {
 			western_morocco_area = {
 				type = all
-				OR = {
-					owned_by = ROOT
-					owned_by_subject_of = ROOT
-				}
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 
@@ -219,7 +204,7 @@ Raklion_2_slot = {
 		provinces_to_highlight = { province_id = 488 } 
 
 		trigger = {
-			owns_or_subject_of = 488
+			owns_or_non_sovereign_subject_of = 488
 			488 = {
 				base_production = 5
 				num_of_buildings_in_province = 4
@@ -487,17 +472,11 @@ Raklion_4_slot = {
 		trigger = {
 			alentejo_area = {
 				type = all
-				OR = {
-					owned_by = ROOT
-					owned_by_subject_of = ROOT
-				}
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			extremadura_area = {
 				type = all
-				OR = {
-					owned_by = ROOT
-					owned_by_subject_of = ROOT
-				}
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 
@@ -522,8 +501,8 @@ Raklion_4_slot = {
 		}
 
 		trigger = {
-			owns_or_subject_of = 487
-			owns_or_subject_of = 486
+			owns_or_non_sovereign_subject_of = 487
+			owns_or_non_sovereign_subject_of = 486
 			487 = {
 				base_production = 5
 				base_manpower = 5
@@ -586,10 +565,7 @@ Raklion_5_slot = {
 		trigger = {
 			lower_andalucia_area = {
 				type = all
-				OR = {
-					owned_by = ROOT
-					owned_by_subject_of = ROOT
-				}
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 
@@ -610,10 +586,7 @@ Raklion_5_slot = {
 		trigger = {
 			toledo_area = {
 				type = all
-				OR = {
-					owned_by = ROOT
-					owned_by_subject_of = ROOT
-				}
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 
@@ -655,10 +628,7 @@ Raklion_5_slot = {
 		trigger = {
 			iberia_region = {
 				type = all
-				OR = {
-					owned_by = ROOT
-					owned_by_subject_of = ROOT
-				}
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 
@@ -678,7 +648,12 @@ Raklion_5_slot = {
 
 		trigger = {
 			is_great_power = yes
-			num_of_provinces_owned_or_owned_by_subjects_with = { value = 300 } 
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 200
+				NOT = {
+					same_continent = ROOT
+				}
+			}
 		}
 
 		effect = {
