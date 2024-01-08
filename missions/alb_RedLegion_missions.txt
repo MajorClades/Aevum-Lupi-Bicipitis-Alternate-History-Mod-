@@ -152,25 +152,20 @@ RED_1_slot = {
 		provinces_to_highlight = {  } 
 
 		trigger = {
-			government_rank = 2
-			prestige = 90
-			RU0 = {
-				OR = {
-					exists = no
-					NOT = {
-						army_strength = {
-							who = ROOT
-							value = 1
-						}
-					}
-				}
+			prestige = 99
+			estate_loyalty = {
+				estate = estate_church
+				loyalty = 60
+			}
+			num_of_owned_provinces_with = {
+				value = 30
+				has_tax_building_trigger = yes
 			}
 		}
 
 		effect = {
-			set_government_rank = 3
 			add_country_modifier = {
-				name = "egypt_empire"
+				name = af6_world_crusader
 				duration = -1
 			}
 		}
@@ -221,7 +216,24 @@ RED_2_slot = {
 		icon = mission_rb_seize_alexandria
 		position = 3
 		required_missions = { AE0_alexandria } 
-		provinces_to_highlight = { region = egypt_region } 
+		provinces_to_highlight = { 
+			OR = {
+				province_id = 2316
+				province_id = 361
+				province_id = 359
+				area = vostani_area
+				area = said_area
+				area = delta_area
+			}
+			owned_by = ROOT
+			NOT = {
+				OR = {
+					is_prosperous = no 
+					NOT = { num_of_times_improved = 1 }
+					NOT = { num_of_buildings_in_province = 1 }
+				}
+			}
+		} 
 
 		trigger = {
 			custom_trigger_tooltip = {
@@ -281,6 +293,23 @@ RED_2_slot = {
 		}
 
 		effect = {
+			custom_tooltip = ae0_every_province_across_nile_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						OR = {
+							province_id = 2316
+							province_id = 361
+							province_id = 359
+							area = vostani_area
+							area = said_area
+							area = delta_area
+						}
+					}
+					add_base_production = 1
+				}
+			}
+			custom_tooltip = empty_line_tt
 			add_country_modifier = {
 				name = "egypt_red_economy"
 				duration = 10950
@@ -365,7 +394,11 @@ RED_3_slot = {
 		} 
 
 		effect = {  
-			
+			custom_tooltip = ae0_gain_better_ideas_tt
+			set_country_flag = ae0_get_better_ideas_flag
+			hidden_effect = {
+				swap_free_idea_group = yes
+			}
 		} 
 	}
 
@@ -570,6 +603,10 @@ RED_4_slot = {
 				name = "af6_place_for_the_faithful"
 				duration = 7300
 			}
+			custom_tooltip = empty_line_tt
+			country_event = {
+				id = redleg.6
+			}
 		}
 	}
 
@@ -594,71 +631,39 @@ RED_4_slot = {
 		provinces_to_highlight = {  } 
 
 		trigger = {
+			NOT = {
+				unrest = 0
+			}
 			stability = 3
-			treasury = 1000
+
 		}
 
 		effect = {
-			set_country_flag = NO_REWARDS
-			if = {
-				limit = { government = monarchy } 
-				custom_tooltip = EGY_MON_YES
-			}
-			else = { custom_tooltip = EGY_MON_NO } 
-			if = {
-				limit = { NOT = { has_country_flag = NO_REWARDS }  } 
-				add_country_modifier = {
-					name = "egypt_monarchy_stability"
-					duration = 10950
-				}
-			}
-			if = {
-				limit = { government = republic } 
-				custom_tooltip = EGY_REP_YES
-			}
-			else = { custom_tooltip = EGY_REP_NO } 
-			if = {
-				limit = { NOT = { has_country_flag = NO_REWARDS }  } 
-				add_country_modifier = {
-					name = "egypt_republic_stability"
-					duration = 10950
-				}
-			}
-			if = {
-				limit = { government = theocracy } 
-				custom_tooltip = EGY_TEO_YES
-			}
-			else = { custom_tooltip = EGY_TEO_NO } 
-			if = {
-				limit = { NOT = { has_country_flag = NO_REWARDS }  } 
-				add_country_modifier = {
-					name = "egypt_theocracy_stability"
-					duration = 10950
-				}
-			}
-			clr_country_flag = NO_REWARDS
-			hidden_effect = {
-				if = {
-					limit = { government = monarchy } 
+			complex_dynamic_effect = {
+				first_custom_tooltip = EGY_MON_TT
+				first_limit = "government = monarchy"
+				first_effect = "
 					add_country_modifier = {
-						name = "egypt_monarchy_stability"
+						name = egypt_monarchy_stability
 						duration = 10950
 					}
-				}
-				if = {
-					limit = { government = republic } 
+				"
+				second_custom_tooltip = EGY_REP_TT
+				second_limit = "government = republic"
+				second_effect = "
 					add_country_modifier = {
-						name = "egypt_republic_stability"
+						name = egypt_republic_stability
 						duration = 10950
 					}
-				}
-				if = {
-					limit = { government = theocracy } 
+				"
+				third_custom_tooltip = EGY_TEO_TT
+				third_limit = "government = theocracy"
+				third_effect = "
 					add_country_modifier = {
-						name = "egypt_theocracy_stability"
+						name = egypt_theocracy_stability
 						duration = 10950
 					}
-				}
+				"
 			}
 		}
 	}
