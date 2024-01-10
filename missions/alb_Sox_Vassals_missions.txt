@@ -158,7 +158,7 @@ sox_occ_1_slot = {
 	potential = { tag = SO1 } 
 
 	occ_sox_war_power = {
-		icon = mission_colonial
+		icon = mission_conquer_50_development
 		position = 1
 		required_missions = {  } 
 
@@ -177,7 +177,7 @@ sox_occ_1_slot = {
 	}
 
 	occ_sox_indipendent = {
-		icon = explore_caribbean
+		icon = mission_build_up_to_force_limit
 		position = 2
 		required_missions = { occ_sox_war_power } 
 
@@ -194,9 +194,9 @@ sox_occ_1_slot = {
 	}
 
 	occ_sox_gallic_supreme = {
-		icon = colonize_australia
+		icon = mission_empire
 		position = 3
-		required_missions = { gal_sox_gallic_revival } 
+		required_missions = { occ_sox_indipendent } 
 		provinces_to_highlight = { region = france_region } 
 
 		trigger = {
@@ -218,7 +218,7 @@ sox_colonial_1_slot = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { OR = {	tag = A30 tag = A31 tag = A32	}} 
+	potential = { OR = {	tag = A30 tag = A31 tag = A32 tag = A34 tag = A35 tag = A36 tag = A37 tag = A38 tag = A39	}} 
 
 	colonial_sox_starting = {
 		icon = mission_colonial
@@ -241,9 +241,8 @@ sox_colonial_1_slot = {
 			}
 		}
 	}
-
 	colonial_sox_temple = {
-		icon = mission_colonial
+		icon = mission_european_church
 		position = 2
 		required_missions = {colonial_sox_starting  } 
 
@@ -265,9 +264,8 @@ sox_colonial_1_slot = {
 			}
 		}
 	}
-
 	colonial_sox_power = {
-		icon = colonize_australia
+		icon = mission_iberian_conquistador
 		position = 3
 		required_missions = { colonial_sox_temple } 
 
@@ -285,7 +283,7 @@ sox_colonial_1_slot = {
 		}
 	}
 	colonial_sox_powerhouse = {
-		icon = colonize_australia
+		icon = mission_assemble_an_army
 		position = 4
 		required_missions = { colonial_sox_power } 
 
@@ -318,7 +316,7 @@ sox_cot_1_slot = {
 	potential = { tag = A33 } 
 
 	cot_sox_adventure = {
-		icon = mission_colonial
+		icon = mission_iberian_conquistador
 		position = 1
 		required_missions = {  } 
 
@@ -334,9 +332,8 @@ sox_cot_1_slot = {
 			}
 		}
 	}
-
 	cot_sox_secret = {
-		icon = mission_colonial
+		icon = mission_european_church
 		position = 2
 		required_missions = {cot_sox_adventure  } 
 
@@ -367,9 +364,8 @@ sox_cot_1_slot = {
 			}
 		}
 	}
-
 	cot_sox_secret_power = {
-		icon = colonize_australia
+		icon = mission_mosque
 		position = 3
 		required_missions = { cot_sox_secret } 
 
@@ -389,7 +385,7 @@ sox_cot_1_slot = {
 		}
 	}
 	cot_sox_secret_powerhouse = {
-		icon = colonize_australia
+		icon = mission_japanese_samurai
 		position = 4
 		required_missions = { cot_sox_secret_power } 
 
@@ -399,12 +395,14 @@ sox_cot_1_slot = {
 		}
 
 		effect = {
+			capital_scope = {
+				change_trade_goods = wine
+			}
 			add_liberty_desire = 50
 		}
 	}
-
 	cot_sox_gothic_rebellion = {
-		icon = colonize_australia
+		icon = mission_unite_home_region
 		position = 5
 		required_missions = { cot_sox_secret_powerhouse } 
 
@@ -414,6 +412,13 @@ sox_cot_1_slot = {
 		}
 
 		effect = {
+			define_general = {
+				name = "Georgios"
+				shock = 5
+				fire = 5
+				manuever = 5
+				siege = 1
+			}
 			declare_war_with_cb = {
 				casus_belli = cb_independence_war
 				who = overlord

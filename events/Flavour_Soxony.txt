@@ -281,7 +281,7 @@ country_event = {
 	id = soxony.4
 	title = soxony.4.test
 	desc = soxony.4.desc
-	picture = ANGRY_MOB_eventPicture
+	picture = FORT_eventPicture
 	fire_only_once = yes
 	is_triggered_only = yes
 
@@ -312,7 +312,7 @@ country_event = {
 	id = soxony.5
 	title = soxony.5.test
 	desc = soxony.5.desc
-	picture = ANGRY_MOB_eventPicture
+	picture = HRE_eventPicture
 	fire_only_once = yes
 	is_triggered_only = yes
 
@@ -349,7 +349,7 @@ country_event = {
 	id = soxony.6
 	title = soxony.6.test
 	desc = soxony.6.desc
-	picture = ANGRY_MOB_eventPicture
+	picture = RELIGION_eventPicture
 	fire_only_once = yes
 	is_triggered_only = yes
 
@@ -381,7 +381,7 @@ country_event = {
 	id = soxony.7
 	title = soxony.7.test
 	desc = soxony.7.desc
-	picture = ANGRY_MOB_eventPicture
+	picture = DIET_eventPicture
 	fire_only_once = yes
 	is_triggered_only = yes
 
@@ -425,7 +425,7 @@ country_event = {
 	id = soxony.8
 	title = soxony.8.test
 	desc = soxony.8.desc
-	picture = ANGRY_MOB_eventPicture
+	picture = SIEGE_eventPicture
 	fire_only_once = yes
 	is_triggered_only = yes
 
@@ -449,7 +449,7 @@ country_event = {
 	id = soxony.9
 	title = soxony.9.test
 	desc = soxony.9.desc
-	picture = ANGRY_MOB_eventPicture
+	picture = JESUIT_eventPicture
 	fire_only_once = yes
 	is_triggered_only = yes
 
@@ -468,6 +468,7 @@ country_event = {
 			change_culture = ROOT
 		}
 		palestine_area = {
+			add_base_manpower = 1
 			cede_province = ISR
 			change_culture = hebrew
 		}
@@ -491,7 +492,7 @@ country_event = {
 	id = soxony.10
 	title = soxony.10.test
 	desc = soxony.10.desc
-	picture = ANGRY_MOB_eventPicture
+	picture = ECONOMY_eventPicture
 	is_triggered_only = yes
 
 	option = {
@@ -515,11 +516,11 @@ country_event = {
 	id = soxony.11
 	title = soxony.11.test
 	desc = soxony.11.desc
-	picture = ANGRY_MOB_eventPicture
+	picture = ECONOMY_eventPicture
 	is_triggered_only = yes
 
 	option = {
-		name = soxony.10a
+		name = soxony.11a
 		add_treasury = 500
 		add_stability_or_adm_power = yes
 		A33 = {
@@ -533,10 +534,130 @@ country_event = {
 		}
 	}
 	option = {
-		name = soxony.10b
+		name = soxony.11b
 		add_manpower = -1
 		A33 = {
 			add_stability = -1
+		}
+	}
+}
+
+country_event = { 
+	id = soxony.12
+	title = soxony.12.test
+	desc = soxony.12.desc
+	picture = ECONOMY_eventPicture
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			tag = SO0
+			tag = WR0
+		}
+		owns = 201
+	}
+
+	option = {
+		name = soxony.12a
+		201 = {
+			set_center_level_3_center_of_trade = yes
+		}
+	}
+	option = {
+		name = soxony.12b
+		add_stability_or_adm_power = yes
+	}
+}
+
+country_event = { 
+	id = soxony.13
+	title = soxony.13.test
+	desc = soxony.13.desc
+	picture = HABSBURG_eventPicture
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			tag = SO0
+			tag = WR0
+		}
+		SP0 = {
+			years_in_union_under = {
+				who = ROOT
+				years = 30
+			}
+		}
+	}
+
+	option = {
+		name = soxony.13a
+		inherit = SP0
+	}
+}
+
+country_event = { 
+	id = soxony.14
+	title = soxony.14.test
+	desc = soxony.14.desc
+	picture = ECONOMY_eventPicture
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			tag = SO0
+			tag = WR0
+		}
+		has_regency = no
+		NOT = {
+			ruler_has_personality = greedy_personality
+		}
+		is_female = no
+		is_year = 1550
+	}
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = soxony.15
+				days = 25
+			}
+		}
+	}
+	option = {
+		name = soxony.14a
+		add_years_of_income = -0.1
+	}
+	option = {
+		name = soxony.14b
+		add_years_of_income = -0.15
+		add_adm_power = 150
+	}
+	option = {
+		name = soxony.14c
+		add_years_of_income = -0.15
+		add_dip_power = 150
+	}
+	option = {
+		name = soxony.14d
+		add_years_of_income = -0.15
+		add_mil_power = 150
+	}
+}
+
+country_event = { 
+	id = soxony.15
+	title = soxony.15.test
+	desc = soxony.15.desc
+	picture = ECONOMY_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+	option = {
+		name = soxony.15a
+		add_years_of_income = -0.5
+	}
+	option = {
+		name = soxony.15b
+		ile_de_france_area = {
+			add_province_modifier = {
+				name = sox_expensive_feast
+				duration = 3560
+			}
 		}
 	}
 }
