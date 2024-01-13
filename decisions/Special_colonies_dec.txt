@@ -1,7 +1,9 @@
 country_decisions = {
 
 	decision_special_colonies = {
-		major = yes
+		color = {
+			190 90 30
+		}
 		potential = {
 			ai = no
 			NOT = {
@@ -9,6 +11,9 @@ country_decisions = {
 			}
 			NOT = {
 				has_country_flag = yes_special_colonies
+			}
+			NOT = {
+				is_year = 1446
 			}
 		}
 		allow = {
@@ -19,8 +24,30 @@ country_decisions = {
 				id = colonial_s.100
 			}
 		}
-		ai_will_do = {
-			factor = 100
+	}
+
+	decision_change_colony_colors = {
+		color = {
+			190 90 30
+		}
+		potential = {
+			ai = no
+			any_subject_country = {
+				is_special_colony_tag_trigger = yes
+			}
+		}
+		allow = {
+			
+		}
+		effect = {
+			every_subject_country = {
+				limit = {
+					is_special_colony_tag_trigger = yes
+				}
+				change_country_color = {
+					country = ROOT
+				}
+			}
 		}
 	}
 }
