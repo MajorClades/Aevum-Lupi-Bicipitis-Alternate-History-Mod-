@@ -60,6 +60,9 @@ Soxon_1_slot = {
 		position = 6
 		required_missions = { sox_gallia } 
 		provinces_to_highlight = {
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
 			OR = {
 				area = flanders_area
 				area = wallonia_area
@@ -93,6 +96,9 @@ Soxon_1_slot = {
 		position = 7
 		required_missions = { sox_franconia } 
 		provinces_to_highlight = {
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
 			OR = {
 				area = lower_rhineland_area
 				area = brabant_area
@@ -179,7 +185,7 @@ Soxon_1_slot = {
 		icon = fra_peninsular_war
 		position = 14
 		required_missions = { sox_romonia } 
-		provinces_to_highlight = { region = iberia_region } 
+		provinces_to_highlight = { NOT = { owned_by = ROOT } region = iberia_region } 
 
 		trigger = {
 			num_of_owned_provinces_with = {
@@ -189,7 +195,7 @@ Soxon_1_slot = {
 			}
 			iberia_region = {
 				type = all
-				country_or_non_sovereign_subject_holds = ROOT
+				owned_by = ROOT
 			}
 		}
 
@@ -335,7 +341,11 @@ Soxon_2_slot = {
 		icon = king_of_the_franks
 		position = 8
 		required_missions = { sox_frankish_tour } 
-		provinces_to_highlight = { region = low_countries_region } 
+		provinces_to_highlight = {
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			region = low_countries_region } 
 
 		trigger = {
 			num_of_provinces_owned_or_owned_by_subjects_with = {
@@ -424,7 +434,11 @@ Soxon_2_slot = {
 		icon = defeat_the_english
 		position = 14
 		required_missions = { sox_romonia } 
-		provinces_to_highlight = { region = british_isles_region } 
+		provinces_to_highlight = { 
+			NOT = {
+				owned_by = ROOT
+			}
+			region = british_isles_region } 
 
 		trigger = {
 			num_of_owned_provinces_with = {
@@ -434,7 +448,7 @@ Soxon_2_slot = {
 			}
 			british_isles_region = {
 				type = all
-				country_or_non_sovereign_subject_holds = ROOT
+				owned_by = ROOT
 			}
 		}
 
@@ -451,7 +465,11 @@ Soxon_2_slot = {
 		icon = mission_impaled_soldies
 		position = 15
 		required_missions = { sox_italia_province } 
-		provinces_to_highlight = { region = carpathia_region } 
+		provinces_to_highlight = {
+			NOT = {
+				owned_by = ROOT
+			} 
+			region = carpathia_region } 
 
 		trigger = {
 			num_of_owned_provinces_with = {
@@ -461,7 +479,7 @@ Soxon_2_slot = {
 			}
 			carpathia_region = {
 				type = all
-				country_or_non_sovereign_subject_holds = ROOT
+				owned_by = ROOT
 			}
 		}
 
@@ -702,7 +720,9 @@ Soxon_3_slot = {
 			sox_true_empire
 			sox_cathedrals
 		}
-		provinces_to_highlight = { region = italy_region } 
+		provinces_to_highlight = { region = italy_region NOT = {
+			country_or_non_sovereign_subject_holds = ROOT
+		}} 
 
 		trigger = {
 			num_of_provinces_owned_or_owned_by_subjects_with = {
@@ -734,6 +754,9 @@ Soxon_3_slot = {
 				region = iberia_region
 				region = france_region
 			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
 		}
 
 		trigger = {
@@ -743,7 +766,7 @@ Soxon_3_slot = {
 			}
 			france_region = {
 				type = all
-				country_or_non_sovereign_subject_holds = ROOT
+				owned_by = ROOT
 			}
 			iberia_region = {
 				type = all
@@ -780,7 +803,9 @@ Soxon_3_slot = {
 		icon = la_latinocrazia
 		position = 14
 		required_missions = { sox_romonia } 
-		provinces_to_highlight = { region = italy_region } 
+		provinces_to_highlight = { region = italy_region NOT = {
+			owned_by = ROOT
+		}} 
 
 		trigger = {
 			num_of_owned_provinces_with = {
@@ -790,7 +815,7 @@ Soxon_3_slot = {
 			}
 			italy_region = {
 				type = all
-				country_or_non_sovereign_subject_holds = ROOT
+				owned_by = ROOT
 			}
 		}
 
@@ -808,7 +833,7 @@ Soxon_3_slot = {
 		icon = answer_the_roman_question
 		position = 16
 		required_missions = { sox_italia_province } 
-		provinces_to_highlight = { is_capital_of = ROOT } 
+		provinces_to_highlight = { province_id = 118 } 
 
 		trigger = {
 			118 = {
@@ -852,27 +877,45 @@ Soxon_4_slot = {
 		provinces_to_highlight = {  } 
 
 		trigger = {
-			estate_loyalty = {
-				estate = estate_nobles
-				loyalty = 60
+			OR = {
+				estate_loyalty = {
+					estate = estate_nobles
+					loyalty = 60
+				}
+				mission_completed = sox_army_recovery
 			}
 		}
 
 		effect = {
-			if = {
-				limit = { mission_completed = sox_army_recovery } 
+			tooltip = {
+				custom_tooltip = SOX_MANPOWER
+				add_manpower = 10.5
+				add_estate_loyalty = {
+					estate = estate_nobles
+					loyalty = -15
+				}
+				custom_tooltip = SOX_MANPOWER_NO
 				add_army_tradition = 10
 				add_estate_loyalty = {
 					estate = estate_nobles
 					loyalty = 15
 				}
 			}
-			else = {
-				custom_tooltip = SOX_MANPOWER
-				add_manpower = 10.5
-				add_estate_loyalty = {
-					estate = estate_nobles
-					loyalty = -15
+			hidden_effect = {
+				if = {
+					limit = { mission_completed = sox_army_recovery } 
+					add_army_tradition = 10
+					add_estate_loyalty = {
+						estate = estate_nobles
+						loyalty = 15
+					}
+				}
+				else = {
+					add_manpower = 10.5
+					add_estate_loyalty = {
+						estate = estate_nobles
+						loyalty = -15
+					}
 				}
 			}
 		}
@@ -957,7 +1000,7 @@ Soxon_4_slot = {
 		icon = westphalian_conquest
 		position = 12
 		required_missions = { sox_italian_rex } 
-		provinces_to_highlight = { region = italy_region } 
+		provinces_to_highlight = { region = italy_region NOT = {religion = impotian}} 
 
 		trigger = {
 			italy_region = {
@@ -979,7 +1022,7 @@ Soxon_4_slot = {
 		icon = illyria_mission
 		position = 14
 		required_missions = { sox_romonia } 
-		provinces_to_highlight = { region = balkan_region } 
+		provinces_to_highlight = { region = balkan_region NOT = {owned_by = ROOT}} 
 
 		trigger = {
 			num_of_owned_provinces_with = {
@@ -989,7 +1032,7 @@ Soxon_4_slot = {
 			}
 			balkan_region = {
 				type = all
-				country_or_non_sovereign_subject_holds = ROOT
+				owned_by = ROOT
 			}
 		}
 
@@ -1007,13 +1050,13 @@ Soxon_4_slot = {
 		icon = mission_fall_of_third_rome
 		position = 15
 		required_missions = { sox_illyria_province } 
-		provinces_to_highlight = { region = anatolia_region } 
+		provinces_to_highlight = { region = anatolia_region NOT = {owned_by = ROOT}} 
 
 		trigger = {
 			anatolia_region = {
 				type = all
 				religion = impotian
-				country_or_non_sovereign_subject_holds = ROOT
+				owned_by = ROOT 
 			}
 		}
 
@@ -1175,6 +1218,9 @@ Soxon_5_slot = {
 				area = west_burgundy_area
 				area = bourgogne_area
 			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
 		}
 
 		trigger = {
@@ -1207,6 +1253,9 @@ Soxon_5_slot = {
 				area = massif_central_area
 				area = pyrenees_area
 			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
 		}
 
 		trigger = {
@@ -1232,6 +1281,9 @@ Soxon_5_slot = {
 			OR = {
 				area = basque_country
 				area = catalonia_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 
@@ -1260,12 +1312,12 @@ Soxon_5_slot = {
 		icon = hispaniae
 		position = 11
 		required_missions = { sox_iberian_campaign } 
-		provinces_to_highlight = { region = iberia_region } 
+		provinces_to_highlight = { region = iberia_region NOT = {owned_by = ROOT}} 
 
 		trigger = {
 			iberia_region = {
 				type = all
-				country_or_non_sovereign_subject_holds = ROOT
+				owned_by = ROOT
 			}
 		}
 
@@ -1281,7 +1333,7 @@ Soxon_5_slot = {
 		icon = africa_proconsulare
 		position = 14
 		required_missions = { sox_romonia } 
-		provinces_to_highlight = { region = maghreb_region } 
+		provinces_to_highlight = { region = maghreb_region NOT = {owned_by = ROOT}} 
 
 		trigger = {
 			num_of_owned_provinces_with = {
@@ -1291,7 +1343,7 @@ Soxon_5_slot = {
 			}
 			maghreb_region = {
 				type = all
-				country_or_non_sovereign_subject_holds = ROOT
+				owned_by = ROOT
 			}
 		}
 
@@ -1309,13 +1361,13 @@ Soxon_5_slot = {
 		icon = mission_egyptian_mamluk_soldier
 		position = 15
 		required_missions = { sox_africa_province } 
-		provinces_to_highlight = { region = egypt_region } 
+		provinces_to_highlight = { region = egypt_region NOT = {owned_by = ROOT}} 
 
 		trigger = {
 			egypt_region = {
 				type = all
 				religion = impotian
-				country_or_non_sovereign_subject_holds = ROOT
+				owned_by = ROOT
 			}
 		}
 
@@ -1336,12 +1388,12 @@ Soxon_5_slot = {
 			sox_anatolia_province
 			sox_egypt_province
 		}
-		provinces_to_highlight = { region = mashriq_region } 
+		provinces_to_highlight = { region = mashriq_region NOT = {owned_by = ROOT}} 
 
 		trigger = {
 			mashriq_region = {
 				type = all
-				country_or_non_sovereign_subject_holds = ROOT
+				owned_by = ROOT
 			}
 		}
 
