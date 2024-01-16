@@ -1,0 +1,64 @@
+custom_button = {
+	name = legionnary_button
+	potential = {
+		owner = {
+			has_country_modifier = sox_legion_primer
+		}
+	}
+	trigger = {
+		owner = {
+			adm_power = 100
+			treasury = 300
+		}
+		owner = {
+			NOT = {
+				check_variable = {
+					which = legion_recruiting_number_provinces_variable
+					value = 11
+				}
+			}
+		}
+		NOT = {
+			has_province_modifier = sox_allow_legionnary
+		}
+	}
+	effect = {
+		owner = {
+			add_mil_power = -100
+			add_treasury = -300
+		}
+		add_province_modifier = {
+			name = sox_allow_legionnary
+			duration = -1
+		}
+		hidden_effect = {
+			change_variable = {
+				which = legion_recruiting_number_provinces_variable
+				value = 1
+			}
+		}
+		#play_sound = get_war_declare
+	}
+	frame = {	
+		# on
+	    number = 2 #Which frame to use. Check dds files with multiple icons like icon_religion.dds
+	    trigger = {
+			owner = {
+				mil_power = 100
+				treasury = 300
+			}
+			owner = {
+				NOT = {
+					check_variable = {
+						which = legion_recruiting_number_provinces_variable
+						value = 11
+					}
+				}
+			}
+			NOT = {
+				has_province_modifier = sox_allow_legionnary
+			}
+		} #First matched frame clause will be used.
+	}
+	tooltip = legionnary_button_tt
+}

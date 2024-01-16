@@ -226,6 +226,9 @@ country_event = {
 			is_at_war = yes
 		}
 	}
+	mean_time_to_happen = {
+		months = 5
+	}
 	fire_only_once = yes
 	option = {
 		name = soxony.3a
@@ -556,10 +559,15 @@ country_event = {
 			tag = WR0
 		}
 		owns = 201
+		is_core = 201
+	}
+	mean_time_to_happen = {
+		months = 6
 	}
 
 	option = {
 		name = soxony.12a
+		add_treasury = -500
 		201 = {
 			set_center_level_3_center_of_trade = yes
 		}
@@ -613,7 +621,15 @@ country_event = {
 		is_female = no
 		is_year = 1550
 	}
-	immediate = {
+	option = {
+		name = soxony.14a
+		add_years_of_income = -0.1
+		add_prestige = 10
+	}
+	option = {
+		name = soxony.14b
+		add_years_of_income = -0.15
+		add_adm_power = 150
 		hidden_effect = {
 			country_event = {
 				id = soxony.15
@@ -622,23 +638,30 @@ country_event = {
 		}
 	}
 	option = {
-		name = soxony.14a
-		add_years_of_income = -0.1
-	}
-	option = {
-		name = soxony.14b
-		add_years_of_income = -0.15
-		add_adm_power = 150
-	}
-	option = {
 		name = soxony.14c
 		add_years_of_income = -0.15
 		add_dip_power = 150
+		hidden_effect = {
+			country_event = {
+				id = soxony.15
+				days = 25
+			}
+		}
 	}
 	option = {
 		name = soxony.14d
 		add_years_of_income = -0.15
 		add_mil_power = 150
+		hidden_effect = {
+			country_event = {
+				id = soxony.15
+				days = 25
+			}
+		}
+	}
+	option = {
+		name = soxony.14e
+		add_prestige = -20
 	}
 }
 
@@ -660,6 +683,49 @@ country_event = {
 				name = sox_expensive_feast
 				duration = 3560
 			}
+		}
+	}
+}
+
+country_event = { 
+	id = soxony.15
+	title = soxony.15.test
+	desc = soxony.15.desc
+	picture = ECONOMY_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+	option = {
+		name = soxony.15a
+		add_years_of_income = -0.5
+	}
+	option = {
+		name = soxony.15b
+		ile_de_france_area = {
+			add_province_modifier = {
+				name = sox_expensive_feast
+				duration = 3560
+			}
+		}
+	}
+}
+
+country_event = { 
+	id = soxony.16
+	title = soxony.16.test
+	desc = soxony.16.desc
+	picture = ECONOMY_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+	option = {
+		name = soxony.16a
+		unlock_estate_privilege = {
+			estate_privilege = alb_noble_academies
+		}
+	}
+	option = {
+		name = soxony.16b
+		unlock_estate_privilege = {
+			estate_privilege = alb_legion_academies
 		}
 	}
 }
