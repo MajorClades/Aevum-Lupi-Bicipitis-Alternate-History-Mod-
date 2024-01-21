@@ -1,0 +1,80 @@
+country_decisions = {
+
+	rhom_metole_return = {
+		major = yes
+		potential = {
+			tag = RU0
+			ML1 = {
+				exists = yes
+				is_free_or_tributary_trigger = yes
+			}
+		}
+		provinces_to_highlight = {
+			is_capital_of = ML1
+		}
+		allow = {
+			is_at_war = no
+			treasury = 500
+			ML1 = {
+				is_free_or_tributary_trigger = yes
+				is_at_war = no
+				has_opinion = {
+					who = ROOT
+					value = 150
+				}
+			}
+		}
+		effect = {
+			add_treasury = -500
+			ML1 = {
+				country_event = {
+					id = rhom.8
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	rhom_suomeya = {
+		major = yes
+		potential = {
+			tag = RU0
+			SM0 = {
+				exists = yes
+				is_free_or_tributary_trigger = yes
+			}
+		}
+		provinces_to_highlight = {
+			is_capital_of = SM0
+		}
+		allow = {
+			is_at_war = no
+			NOT = {
+				has_government_power = {
+					mechanic_type = rhoman_decadence_mechanic
+					power_type = rhoman_decadence
+					value = 10
+				}
+			}
+			SM0 = {
+				is_free_or_tributary_trigger = yes
+				is_at_war = no
+				has_opinion = {
+					who = ROOT
+					value = 170
+				}
+			}
+		}
+		effect = {
+			country_event = {
+				id = rhom.9
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+}

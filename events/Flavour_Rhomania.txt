@@ -15,6 +15,11 @@ country_event = {
 	fire_only_once = yes
 	option = {
 		name = rhom.1a
+		add_government_power = {
+			mechanic_type = rhoman_decadence_mechanic
+			power_type = rhoman_decadence
+			value = 5
+		}
 	}
 }
 
@@ -53,10 +58,11 @@ country_event = {
 			type = all
 			owned_by = RU0
 		}
-		NOT = {
-			stability = -1
+		has_government_power = {
+			mechanic_type = rhoman_decadence_mechanic
+			power_type = rhoman_decadence
+			value = 50
 		}
-		is_year = 1500
 	}
 	mean_time_to_happen = {
 		months = 12
@@ -108,7 +114,11 @@ country_event = {
 	}
 	option = {
 		name = rhom.3b
-		
+		add_government_power = {
+			mechanic_type = rhoman_decadence_mechanic
+			power_type = rhoman_decadence
+			value = 5
+		}
 		aleppo_area = {
 			add_core = PM0
 			cede_province = PM0
@@ -286,6 +296,174 @@ country_event = {
 		}
 	}
 }
+
+country_event = {
+	id = rhom.7
+	title = rhom.7.test
+	desc = rhom.7.desc
+	picture = ANGRY_MOB_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = RU0
+		has_won_war_against = {
+			who = AF6
+		}
+	}
+
+	option = {
+		name = rhom.7a
+		add_government_power = {
+			mechanic_type = rhoman_decadence_mechanic
+			power_type = rhoman_decadence
+			value = -15
+		}
+		361 = {
+			add_province_modifier = {
+				name = rho_ruler_egypt
+				duration = 7300
+			}
+		}
+	}
+}
+
+country_event = {
+	id = rhom.8
+	title = rhom.8.test
+	desc = rhom.8.desc
+	picture = ANGRY_MOB_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = rhom.8a
+		ai_chance = {
+			factor = 99
+		}
+		add_treasury = 500
+		RU0 = {
+			vassalize = ROOT
+		}
+	}
+	option = {
+		name = rhom.8b
+		ai_chance = {
+			factor = 1
+		}
+		add_stability = 1
+		RU0 = {
+			add_treasury = 500
+		}
+	}
+}
+
+country_event = {
+	id = rhom.9
+	title = rhom.9.test
+	desc = rhom.9.desc
+	picture = ANGRY_MOB_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = rhom.9a
+		ai_chance = {
+			factor = 80
+		}
+		custom_tooltip = SOX_OLIKORKIAN_GUARD
+		SM0 = {
+			country_event = {
+				id = rhom.10
+			}
+		}
+	}
+	option = {
+		name = rhom.9b
+		ai_chance = {
+			factor = 20
+		}
+		custom_tooltip = SOX_OLIKORKIAN_GUARD2
+		SM0 = {
+			set_country_flag = rhom_demanding_faith
+			country_event = {
+				id = rhom.10
+			}
+		}
+	}
+}
+
+country_event = {
+	id = rhom.10
+	title = rhom.10.test
+	desc = rhom.10.desc
+	picture = ANGRY_MOB_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = rhom.10a
+		ai_chance = {
+			factor = 80
+			modifier = {
+				factor = 2.5
+				has_opinion = {
+					who = RU0
+					value = 180
+				}
+			}
+		}
+		trigger = {
+			NOT = {
+				has_country_flag = rhom_demanding_faith
+			}
+		}
+		RU0 = {
+			create_march = ROOT
+		}
+		add_trust = {
+			who = RU0
+			value = 30
+			mutual = yes
+		}
+	}
+	option = {
+		name = rhom.10b
+		ai_chance = {
+			factor = 20
+			modifier = {
+				factor = 2.5
+				alliance_with = RU0
+			}
+			modifier = {
+				factor = 2.5
+				has_opinion = {
+					who = RU0
+					value = 180
+				}
+			}
+		}
+		trigger = {
+			has_country_flag = rhom_demanding_faith
+		}
+		clr_country_flag = rhom_demanding_faith
+		change_religion = islam
+		RU0 = {
+			create_march = ROOT
+		}
+	}
+	option = {
+		name = rhom.10c
+		ai_chance = {
+			factor = 20
+		}
+		add_stability = 1
+		add_trust = {
+			who = RU0
+			value = -10
+			mutual = yes
+		}
+	}
+}
+
 
 country_event = {
 	id = rhom.100
