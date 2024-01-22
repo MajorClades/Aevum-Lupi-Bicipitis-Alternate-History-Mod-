@@ -225,7 +225,7 @@ RED_2_slot = {
 				area = said_area
 				area = delta_area
 			}
-			owned_by = ROOT
+			country_or_non_sovereign_subject_holds = ROOT
 			NOT = {
 				OR = {
 					is_prosperous = no 
@@ -239,7 +239,7 @@ RED_2_slot = {
 			custom_trigger_tooltip = {
 				tooltip = ae0_every_nile_province_tt
 				2316 = {
-					owned_by = ROOT
+					country_or_non_sovereign_subject_holds = ROOT
 					OR = {
 						num_of_buildings_in_province = 1
 						num_of_times_improved = 1
@@ -247,7 +247,7 @@ RED_2_slot = {
 					}
 				}
 				361 = {
-					owned_by = ROOT
+					country_or_non_sovereign_subject_holds = ROOT
 					OR = {
 						num_of_buildings_in_province = 1
 						num_of_times_improved = 1
@@ -255,7 +255,7 @@ RED_2_slot = {
 					}
 				}
 				359 = {
-					owned_by = ROOT
+					country_or_non_sovereign_subject_holds = ROOT
 					OR = {
 						num_of_buildings_in_province = 1
 						num_of_times_improved = 1
@@ -263,7 +263,7 @@ RED_2_slot = {
 					}
 				}
 				vostani_area = {
-					owned_by = ROOT
+					country_or_non_sovereign_subject_holds = ROOT
 					type = all 
 					OR = {
 						num_of_buildings_in_province = 1
@@ -272,7 +272,7 @@ RED_2_slot = {
 					}
 				}
 				said_area = {
-					owned_by = ROOT
+					country_or_non_sovereign_subject_holds = ROOT
 					type = all
 					OR = {
 						num_of_buildings_in_province = 1
@@ -281,7 +281,7 @@ RED_2_slot = {
 					}
 				}
 				delta_area = {
-					owned_by = ROOT
+					country_or_non_sovereign_subject_holds = ROOT
 					type = all
 					OR = {
 						num_of_buildings_in_province = 1
@@ -414,7 +414,7 @@ RED_3_slot = {
 				province_id = 2316 
 			}
 			OR = {
-				NOT = { owned_by = ROOT }
+				NOT = { country_or_non_sovereign_subject_holds = ROOT }
 				NOT = { num_of_times_improved = 4 }
 				is_prosperous = no
 			}
@@ -426,28 +426,28 @@ RED_3_slot = {
 					is_prosperous = yes 
 					num_of_times_improved = 4
 				}
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			2316 = {
 				OR = {
 					is_prosperous = yes 
 					num_of_times_improved = 4
 				}
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			363 = {
 				OR = {
 					is_prosperous = yes 
 					num_of_times_improved = 4
 				}
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			4316 = {
 				OR = {
 					is_prosperous = yes 
 					num_of_times_improved = 4
 				}
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		} 
 
@@ -489,27 +489,56 @@ RED_3_slot = {
 				area = lower_nubia_area
 				area = red_sea_coast_area
 				area = dongola_area
+				area = upper_nubia_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 
 		trigger = {
 			lower_nubia_area = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			red_sea_coast_area = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			dongola_area = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			upper_nubia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 
 		effect = {
 			add_army_tradition = 15
-			horn_of_africa_region = { add_permanent_claim = ROOT } 
+			custom_tooltip = empty_line_tt
+			tigray_area = {
+				add_permanent_claim = ROOT
+			}
+			central_ethiopia_area = {
+				add_permanent_claim = ROOT
+			}
+			damot_area = {
+				add_permanent_claim = ROOT
+			}
+			shewa_area = {
+				add_permanent_claim = ROOT
+			}
+			hadiya_area = {
+				add_permanent_claim = ROOT
+			}
+			southern_ethiopia_area = {
+				add_permanent_claim = ROOT
+			}
+			aussa_area = {
+				add_permanent_claim = ROOT
+			}
 		}
 	}
 
@@ -517,19 +546,60 @@ RED_3_slot = {
 		icon = befriend_ethiopia
 		position = 7
 		required_missions = { AE0_horn } 
-		provinces_to_highlight = { region = horn_of_africa_region } 
+		provinces_to_highlight = { 
+			OR = {
+				area = tigray_area					
+				area = central_ethiopia_area					
+				area = damot_area				
+				area = shewa_area					
+				area = hadiya_area					
+				area = southern_ethiopia_area 					
+				area = aussa_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
 		trigger = {
-			horn_of_africa_region = {
+			tigray_area = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			central_ethiopia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			damot_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			shewa_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			hadiya_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			southern_ethiopia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			aussa_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 
 		effect = {
-			add_country_modifier = {
-				name = "egypt_horn"
-				duration = -1
+			custom_tooltip = AE0_allow_rock_churches_access_tt
+			1217 = {
+				create_colony_mission_reward_province = yes
+			}
+			custom_tooltip = empty_line_tt
+			horn_of_africa_region = {
+				add_permanent_claim = ROOT
 			}
 		}
 	}
@@ -538,11 +608,27 @@ RED_3_slot = {
 		icon = hornofafrica
 		position = 8
 		required_missions = { AE0_ethiopia } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			region = horn_of_africa_region
+			is_city = yes
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			horn_of_africa_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT	
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_country_modifier = {
+				name = "egypt_horn"
+				duration = -1
+			}
+		} 
 	}
 
 	AE0_empire = {
@@ -618,6 +704,7 @@ RED_4_slot = {
 
 		trigger = {
 			is_at_war = no
+			legitimacy_equivalent = 90
 			stability = 2
 		}
 
@@ -674,12 +761,17 @@ RED_4_slot = {
 		required_missions = { AE0_financial_stability } 
 		provinces_to_highlight = {  } 
 
-		trigger = { has_mil_advisor_2 = yes } 
+		trigger = { 
+			has_mil_advisor_2 = yes 
+		} 
 
 		effect = {
 			lower_nubia_area = { add_permanent_claim = ROOT } 
 			red_sea_coast_area = { add_permanent_claim = ROOT } 
 			dongola_area = { add_permanent_claim = ROOT } 
+			upper_nubia_area = {
+				add_permanent_claim = ROOT
+			}
 		}
 	}
 
