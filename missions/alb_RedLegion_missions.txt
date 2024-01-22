@@ -175,11 +175,46 @@ RED_1_slot = {
 		icon = africa_proconsulare
 		position = 7
 		required_missions = { AE0_desert_warriors } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = tunisia_area
+				area = djerba_area
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			tunisia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			djerba_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			custom_tooltip = ae0_change_cartaroma_culture_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						culture = cartaroma
+					}
+					change_culture = carthaginian
+				}
+			}
+			custom_tooltip = empty_line_tt
+			tunisia_area = {
+				change_religion = ROOT
+			}
+			djerba_area = {
+				change_religion = ROOT
+			}
+			custom_tooltip = empty_line_tt
+			341 = {
+				add_or_upgrade_trade_building = yes
+			}
+		} 
 	}
 }
 RED_2_slot = {
@@ -321,22 +356,86 @@ RED_2_slot = {
 		icon = mission_sw_against_the_desert
 		position = 6
 		required_missions = { AE0_tripolitania } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = north_saharan_area
+				area = ouled_nail_area
+				area = kabylia_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			north_saharan_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			ouled_nail_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			kabylia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			djerba_area = {
+				add_permanent_claim = ROOT
+			}
+			tunisia_area = {
+				add_permanent_claim = ROOT
+			}
+			hautes_plaines_area = {
+				add_permanent_claim = ROOT
+			}
+			barbary_coast_area = {
+				add_permanent_claim = ROOT
+			}
+			algiers_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	AE0_aldabba = {
 		icon = per_muslim_integration
 		position = 7
 		required_missions = { AE0_desert_warriors } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			or = {
+				area = hautes_plaines_area 
+				area = barbary_coast_area
+				area = algiers_area 
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			hautes_plaines_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			barbary_coast_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			algiers_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			maghreb_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	AE0_african_hegemon = {
@@ -346,11 +445,26 @@ RED_2_slot = {
 			AE0_aldabba
 			AE0_tunisia
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			region = maghreb_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 45
+				region = maghreb_region
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_country_modifier = {
+				name = af6_insertname_africanus
+				duration = -1
+			}
+		} 
 	}
 }
 RED_3_slot = {
@@ -473,11 +587,41 @@ RED_3_slot = {
 		icon = mission_control_the_barbary_coast
 		position = 5
 		required_missions = { AE0_financial_stability } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			area = tripolitania_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			tripolitania_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			354 = {
+				development = 10
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			354 = {
+				add_base_production = 1
+				add_base_tax = 1
+				add_base_manpower = 1
+				add_or_upgrade_tax_building = yes
+			}
+			custom_tooltip = empty_line_tt
+			north_saharan_area = {
+				add_permanent_claim = ROOT
+			}
+			ouled_nail_area = {
+				add_permanent_claim = ROOT
+			}
+			kabylia_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	AE0_horn = {
@@ -751,6 +895,16 @@ RED_4_slot = {
 						duration = 10950
 					}
 				"
+			}
+			custom_tooltip = empty_line_tt
+			tripolitania_area = {
+				add_permanent_claim = ROOT
+			}
+			trans_jordan_area = {
+				add_permanent_claim = ROOT
+			}
+			palestine_area = {
+				add_permanent_claim = ROOT
 			}
 		}
 	}
