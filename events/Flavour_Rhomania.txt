@@ -464,6 +464,109 @@ country_event = {
 	}
 }
 
+country_event = {
+	id = rhom.11
+	title = rhom.11.test
+	desc = rhom.11.desc
+	picture = BYZ_BAD_WITH_MONARCH_eventPicture
+	
+	trigger = {
+		tag = RU0
+		AF6 = {
+			war_with = RU0
+			OR = {
+				has_country_modifier = redleg_prepare_for_crusade
+				has_country_modifier = redleg_prepare_for_crusade_AI
+			}
+		}
+		war_score_against = {
+			who = AF6
+			value = -10
+		}
+	}
+	mean_time_to_happen = {
+		months = 2
+	}
+	fire_only_once = yes
+	option = {
+		name = rhom.11a
+		ai_chance = {
+			factor = 20
+		}
+		define_heir_to_general = {
+			fire = 6
+			shock = 5
+			manuever = 4
+			siege = 5		
+		}
+	}
+	option = {
+		name = rhom.11b
+		ai_chance = {
+			factor = 50
+		}
+		define_general = {
+			name = "Demetrios Thylakas"
+			fire = 4
+			shock = 3
+			manuever = 3
+			siege = 3
+			trait = glory_seeker_personality
+		}
+		add_government_power = {
+			mechanic_type = rhoman_decadence_mechanic
+			power_type = rhoman_decadence
+			value = 5
+		}
+	}
+	option = {
+		name = rhom.11c
+		ai_chance = {
+			factor = 30
+		}
+		add_government_power = {
+			mechanic_type = rhoman_decadence_mechanic
+			power_type = rhoman_decadence
+			value = 15
+		}
+	}
+}
+
+country_event = { #old ideas bad
+	id = rhom.12
+	title = rhom.12.test
+	desc = rhom.12.desc
+	picture = BYZ_BAD_WITH_MONARCH_eventPicture
+	
+	trigger = {
+		tag = RU0
+		has_institution = renaissance
+	}
+	mean_time_to_happen = {
+		months = 120
+	}
+	fire_only_once = yes
+	option = {
+		name = rhom.11a
+		ai_chance = {
+			factor = 60
+		}
+		add_adm_power = -50
+		add_dip_power = -50
+		add_mil_power = -50
+	}
+	option = {
+		name = rhom.11b
+		ai_chance = {
+			factor = 40
+		}
+		add_government_power = {
+			mechanic_type = rhoman_decadence_mechanic
+			power_type = rhoman_decadence
+			value = 10
+		}
+	}
+}
 
 country_event = {
 	id = rhom.100
@@ -504,6 +607,11 @@ country_event = {
 		}
 		NOT = {
 			truce_with = CY0
+		}
+		CY0 = {
+			NOT = {
+				total_development = 50
+			}
 		}
 	}
 	mean_time_to_happen = {
