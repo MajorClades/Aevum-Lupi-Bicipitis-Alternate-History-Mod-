@@ -260,7 +260,6 @@ RED_2_slot = {
 				area = said_area
 				area = delta_area
 			}
-			country_or_non_sovereign_subject_holds = ROOT
 			NOT = {
 				OR = {
 					is_prosperous = no 
@@ -784,20 +783,38 @@ RED_3_slot = {
 			AE0_red_trade
 			AE0_constantine_city
 		}
-		provinces_to_highlight = { region = maghreb_region } 
+		provinces_to_highlight = {
+
+		} 
 
 		trigger = {
-			num_of_owned_provinces_with = {
-				value = 30
-				region = maghreb_region
+			development_in_provinces = {
+				value = 1000
 			}
+			great_power_rank = 5
 		}
 
 		effect = {
-			remove_country_modifier = egypt_empire
-			override_country_name = "RED_AFRICA"
+			complex_dynamic_effect = {
+				first_custom_tooltip = EGY_MON_TT
+				first_limit = "government = monarchy"
+				first_effect = "
+					override_country_name = AE0_AEGYPTIAN_EMPIRE
+				"
+				second_custom_tooltip = EGY_REP_TT
+				second_limit = "government = republic"
+				second_effect = "
+					override_country_name = AE0_NILE_FEDERATION
+				"
+				third_custom_tooltip = EGY_TEO_TT
+				third_limit = "government = theocracy"
+				third_effect = "
+					override_country_name = AE0_KINGDOM_OF_HEAVEN
+				"
+			}
+			custom_tooltip = empty_line_tt
 			add_country_modifier = {
-				name = "egy_true_empire"
+				name = af6_empire_in_red
 				duration = -1
 			}
 		}
@@ -933,33 +950,96 @@ RED_4_slot = {
 		icon = mam_yemen
 		position = 6
 		required_missions = { AE0_secure_surroundings } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			region = mashriq_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			mashriq_region = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			cukurova_area = {
+				add_permanent_claim = ROOT
+			}
+			aydin_area = {
+				add_permanent_claim = ROOT
+			}
+			hudavendigar_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	AE0_break_rhomania = {
 		icon = mission_dismantle_hre
 		position = 7
 		required_missions = { AE0_conquer_syria } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = hudavendigar_area
+				area = aydin_area
+				area = cukurova_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			cukurova_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			aydin_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			hudavendigar_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			anatolia_region = {
+				add_permanent_claim = ROOT
+			}
+			151 = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	AE0_constantine_city = {
 		icon = take_constantinople
 		position = 8
 		required_missions = { AE0_break_rhomania } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			province_id = 151
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			owns = 151
+			151 = {
+				development = 30
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			151 = {
+				upgrade_trade_building = yes
+			}
+		} 
 	}
 }
 RED_5_slot = {
@@ -994,33 +1074,115 @@ RED_5_slot = {
 		icon = mam_basrah
 		position = 5
 		required_missions = { AE0_financial_stability } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = palestine_area
+				area = trans_jordan_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			palestine_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			trans_jordan_area ={
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			mashriq_region = {
+				add_permanent_claim = ROOT
+			}
+			tabuk_area = {
+				add_permanent_claim = ROOT
+			}
+			medina_area = {
+				add_permanent_claim = ROOT
+			}
+			mecca_area = {
+				add_permanent_claim = ROOT
+			}
+		}
 	}
 
 	AE0_hedjaz_conquest = {
 		icon = kok_mam_holy_cities
 		position = 6
 		required_missions = { AE0_secure_surroundings } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = tabuk_area
+				area = medina_area
+				area = mecca_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {
+			tabuk_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			medina_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			mecca_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			385 = {
+				destroy_great_project = {
+					type = kaaba
+				}
+				add_devastation = 50
+				remove_loot = {
+					who = ROOT
+					amount = 50
+				}
+			}
+			custom_tooltip = empty_line_tt
+			arabia_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	AE0_arabian_nights = {
 		icon = mam_arabia
 		position = 7
 		required_missions = { AE0_hedjaz_conquest } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {
+			region = arabia_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 40
+				region = arabia_region
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_country_modifier = {
+				name = af6_arabian_trade
+				duration = -1
+			}
+		} 
 	}
 
 	AE0_red_trade = {
@@ -1029,8 +1191,32 @@ RED_5_slot = {
 		required_missions = { AE0_arabian_nights } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_owned_provinces_with = {
+				value = 5
+				trade_goods = coffee
+				region = arabia_region
+				has_production_building_trigger = yes
+				base_production = 5
+			}
+			4346 = {
+				is_strongest_trade_power = ROOT
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_years_of_owned_provinces_production_income = {
+				years = 15
+				trigger = {
+					trade_goods = coffee
+				}
+				custom_tooltip = AE0_coffee_trade_money
+			}
+			custom_tooltip = empty_line_tt
+			387 = {
+				add_base_production = 2
+				add_or_upgrade_production_building = yes
+			}
+		} 
 	}
 }
