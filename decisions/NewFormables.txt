@@ -172,13 +172,39 @@ country_decisions = {
 			}
 		}
 		provinces_to_highlight = {
-			culture_group = romon
-			same_continent = ROOT
+			if = {
+				limit = {
+					ROOT = {
+					
+						AND = {
+							owns_core_province = 182
+							owns_core_province = 183
+							owns_core_province = 167
+						}
+					
+					}
+				}
+				culture = soxon
+				same_continent = ROOT
+			}
+			else = {
+				OR = {
+					province_id = 182
+					province_id = 183
+					province_id = 167
+				}
+			}
+			NOT = {
+				owned_by = ROOT
+			}
 		}
 		allow = {
 			NOT = {
 				exists = SO0
 			}
+			owns_core_province = 182
+			owns_core_province = 183
+			owns_core_province = 167
 			owns_all_provinces = {
 				culture = soxon
 				same_continent = ROOT
