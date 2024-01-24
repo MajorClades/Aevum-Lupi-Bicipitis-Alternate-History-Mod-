@@ -6,19 +6,22 @@ Rhomania_1_slot = {
 	potential = {	tag = RU0	}
 	has_country_shield = yes
 
-	ro_army = {
+	rho_loyal_nobles = {
 		icon = mission_assemble_an_army
-		required_missions = {ro_trace }
+		required_missions = {rho_recover_old_glory }
 		position = 2
 
 		trigger = { 
 			OR = {
-				has_estate_privilege = alb_rhoman_bad_nobles
+				AND = {
+					army_tradition = 30
+					has_estate_privilege = alb_rhoman_bad_nobles
+				}
 				NOT = {
 					has_estate_privilege = alb_rhoman_bad_nobles
 				}
 			}
-			army_tradition = 30
+
 		}
 		
 		effect = {
@@ -27,9 +30,9 @@ Rhomania_1_slot = {
 					has_estate_privilege = alb_rhoman_bad_nobles
 				}
 				custom_tooltip = RHO_TT_1
+				add_army_tradition = -5
 				clr_country_flag = rhoman_nobles_flag
 			}
-			add_army_tradition = -5
 			add_army_professionalism = 0.05
 		}
 	}
@@ -54,7 +57,7 @@ Rhomania_3_slot = {
 	potential = {	tag = RU0	}
 	has_country_shield = yes
 
-	ro_trace = {
+	rho_recover_old_glory = {
 		icon = mission_pf_soldier
 		required_missions = { }
 		position = 1
@@ -72,6 +75,24 @@ Rhomania_3_slot = {
 			}
 		}
 	}
+	rho_law_honor = {
+		icon = mission_assemble_an_army
+		required_missions = {rho_recover_old_glory }
+		position = 2
+
+		trigger = { 
+			stability = 2
+			crown_land_share = 35
+			NOT = {
+				num_of_rebel_armies = 1
+			}
+		}
+		
+		effect = {
+			custom_tooltip = RHO_PRIV_1
+			add_yearly_manpower = 2
+		}
+	}
 }
 
 Rhomania_4_slot = {
@@ -81,7 +102,26 @@ Rhomania_4_slot = {
 	potential = {	tag = RU0	}
 	has_country_shield = yes
 
-	
+	rho_ensure_no_corruption = {
+		icon = mission_assemble_an_army
+		required_missions = {rho_god_and_country rho_law_honor }
+		position = 3
+
+		trigger = { 
+			NOT = {
+				corruption = 1
+			}
+			has_adm_advisor_2 = yes
+			has_institution = renaissance
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = rho_less_corruption
+				duration = 10950
+			}
+		}
+	}
 }
 
 Rhomania_5_slot = {
@@ -91,5 +131,23 @@ Rhomania_5_slot = {
 	potential = {	tag = RU0	}
 	has_country_shield = yes
 
+	rho_god_and_country = {
+		icon = mission_assemble_an_army
+		required_missions = {rho_recover_old_glory }
+		position = 2
 
+		trigger = { 
+			OR = {
+				religious_unity = 0.9
+				theologian = 1
+			}
+		}
+		
+		effect = {
+			add_country_modifier_for_age = {
+				name = rho_islam_war
+				age = age_of_discovery
+			}
+		}
+	}
 }
