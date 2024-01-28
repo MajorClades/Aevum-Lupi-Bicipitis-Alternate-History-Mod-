@@ -680,7 +680,6 @@ country_event = {
 				}
 				add_devastation = -25
 			}
-			
 		}
 	}
 	option = {
@@ -691,6 +690,41 @@ country_event = {
 		add_trust = {
 			who = RU0
 			value = -100
+		}
+	}
+}
+
+country_event = { #Slavery is banned, idiot!
+	id = rhom.1002
+	title = rhom.1002.test
+	desc = rhom.1002.desc
+	picture = ANGRY_MOB_eventPicture
+	trigger = {
+		OR = {
+			tag = RU0
+			overlord = {
+				tag = RU0
+			}
+		}
+		any_owned_province = {
+			trade_goods = slaves
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	option = {
+		name = rhom.1002a
+		every_owned_province = {
+			limit = {
+				trade_goods = slaves
+			}
+			change_trade_goods = unknown
+			remove_building = tradecompany
+			if = {
+				limit = { has_province_modifier = slave_entrepot }
+				remove_province_modifier = slave_entrepot
+			}
 		}
 	}
 }

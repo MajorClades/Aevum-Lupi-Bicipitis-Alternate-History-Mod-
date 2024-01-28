@@ -21,7 +21,16 @@ Austrho_1_slot = {
 		}
 		
 		effect = {
-			colonial_madagascar = {
+			madagascar_highlands_area = {
+				add_permanent_claim = ROOT
+			}
+			southern_madagascar = {
+				add_permanent_claim = ROOT
+			}
+			betsimasaraka_area = {
+				add_permanent_claim = ROOT
+			}
+			sakalava_area = {
 				add_permanent_claim = ROOT
 			}
 		}
@@ -39,6 +48,132 @@ Austrho_1_slot = {
 			add_adm_tech = 1
 			overlord = {
 				add_treasury = 300
+			}
+		}
+	}
+}
+
+Austrho_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential = {	tag = RX0	}
+	has_country_shield = yes
+
+	aust_colonial_expansion = {
+		icon = mission_assemble_an_army
+		required_missions = {aust_capital_power }
+		position = 2
+		provinces_to_highlight = {
+			OR = {
+				area = madagascar_highlands_area
+				area = southern_madagascar
+				area = betsimasaraka_area
+				area = sakalava_area
+			}
+		}
+
+		trigger = { 
+			num_of_owned_provinces_with = {
+				value = 15
+				OR = {
+					area = madagascar_highlands_area
+					area = southern_madagascar
+					area = betsimasaraka_area
+					area = sakalava_area
+				}
+			}
+		}
+		
+		effect = {
+			madagascar_highlands_area = {
+				change_culture = austro_greek
+			}
+			southern_madagascar = {
+				change_culture = austro_greek
+			}
+			betsimasaraka_area = {
+				change_culture = austro_greek
+			}
+			sakalava_area = {
+				change_culture = austro_greek
+			}
+		}
+	}
+}
+
+Austrho_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential = {	tag = RX0	}
+	has_country_shield = yes
+
+	aust_marittime_expand = {
+		icon = mission_assemble_an_army
+		required_missions = {aust_armies }
+		position = 2
+
+		trigger = { 
+			navy_size = 13
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = rho_australian_colonists
+				duration = 10950
+			}
+		}
+	}
+}
+
+Austrho_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	potential = {	tag = RX0	}
+	has_country_shield = yes
+
+	aust_armies = {
+		icon = mission_assemble_an_army
+		required_missions = { }
+		position = 1
+
+		trigger = { 
+			army_size = 10
+		}
+		
+		effect = {
+			define_conquistador = {
+				shock = 4
+				fire = 2
+				manuever = 2
+				siege = 1
+			}
+		}
+	}
+}
+
+Austrho_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	potential = {	tag = RX0	}
+	has_country_shield = yes
+
+	aust_grand_armies = {
+		icon = mission_assemble_an_army
+		required_missions = {aust_armies }
+		position = 2
+
+		trigger = { 
+			army_size = 20
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = rho_islam_war
+				duration = 10950
 			}
 		}
 	}
