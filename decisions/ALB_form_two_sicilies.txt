@@ -1,0 +1,69 @@
+country_decisions = {
+alb_form_two_sicilies = {
+	major = yes
+	potential = {
+		normal_or_historical_nations = yes
+		was_never_end_game_tag_trigger = yes
+		NOT = { has_country_flag = formed_two_sicilies_flag }
+		NOT = { exists = ITA }
+		culture = sicilian
+		is_colonial_nation = no
+	}
+	provinces_to_highlight = {
+		OR = {
+			area = western_sicily_area
+			area = sicily_area
+		}
+		OR = {
+			NOT = { owned_by = ROOT }
+			NOT = { is_core = ROOT }
+		}
+	}
+	allow = {
+		adm_tech = 10
+		is_free_or_tributary_trigger = yes
+		is_at_war = no
+		western_sicily_area = {
+			type = all
+			owned_by = ROOT
+			is_core = ROOT
+		}
+		sicily_area = {
+			type = all
+			owned_by = ROOT
+			is_core = ROOT
+		}
+	}
+	effect = {
+		if = {
+			limit = {
+				NOT = { government_rank = 2 }
+			}
+			set_government_rank = 2
+		}
+		change_tag = TTS
+		add_country_modifier = {
+			name = centralization_modifier
+			duration = 7300
+		}
+		add_prestige_or_monarch_power = {
+			amount = 50
+		}
+		custom_tooltip = empty_line_tt
+		if = {
+			limit = { has_custom_ideas = no }
+			country_event = { id = ideagroups.1 }
+		}
+		custom_tooltip = empty_line_tt
+		swap_non_generic_missions = yes
+		set_country_flag = formed_two_sicilies_flag
+	}
+	ai_will_do = {
+		factor = 400
+		modifier = {
+			factor = 0
+			NOT = { adm_tech = 8 }
+		}
+	}
+}
+}
