@@ -45,10 +45,29 @@ Austrho_1_slot = {
 		}
 		
 		effect = {
-			add_adm_tech = 1
+			capital_scope = {
+				add_institution_embracement = {
+					which = renaissance
+					value = 100
+				}
+			}
 			overlord = {
 				add_treasury = 300
 			}
+		}
+	}
+	aust_rebirth = {
+		icon = mission_assemble_an_army
+		required_missions = {aust_growth }
+		position = 3
+
+		trigger = { 
+			has_adm_advisor_2 = yes
+			has_institution = renaissance
+		}
+		
+		effect = {
+			add_adm_tech = 1
 		}
 	}
 }
@@ -122,6 +141,33 @@ Austrho_3_slot = {
 			add_country_modifier = {
 				name = rho_australian_colonists
 				duration = 10950
+			}
+		}
+	}
+	aust_more_island = {
+		icon = mission_assemble_an_army
+		required_missions = {aust_marittime_expand aust_colonial_expansion}
+		position = 3
+		provinces_to_highlight = {
+			OR = {
+				area = mascarenes_area
+				province_id = 4020
+			}
+		}
+
+		trigger = { 
+			num_of_owned_provinces_with = {
+				value = 4
+				OR = {
+					area = mascarenes_area
+					province_id = 4020
+				}
+			}
+		}
+		
+		effect = {
+			sakalava_area = {
+				add_base_manpower = 1
 			}
 		}
 	}

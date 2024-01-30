@@ -58,6 +58,73 @@ Rhomania_1_slot = {
 			custom_tooltip = RHO_PRIV_2
 		}
 	}
+	rho_soldier = {
+		icon = mission_assemble_an_army
+		required_missions = { }
+		position = 5
+		provinces_to_highlight = {
+			owned_by = ROOT
+			OR = {
+				NOT = {
+					base_manpower = 7
+				}
+				can_build = barracks
+			}
+		}
+		trigger = { 
+			num_of_owned_provinces_with = {
+				value = 10
+				base_manpower = 7
+				has_manpower_building_trigger = yes
+			}
+		}
+		
+		effect = {
+			add_yearly_manpower = 0.5
+			151 = {
+				add_base_manpower = 2
+				add_or_upgrade_forcelimit_building = yes
+			}
+		}
+	}
+	rho_more_soldier = {
+		icon = mission_assemble_an_army
+		required_missions = {rho_soldier }
+		position = 6
+		trigger = { 
+			has_leader_with = {
+				total_pips = 12
+			}
+			num_of_artillery = 10
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = rho_use_that_fire
+				duration = 10950
+			}
+		}
+	}
+	rho_more_soldier = {
+		icon = mission_assemble_an_army
+		required_missions = {rho_soldier }
+		position = 8
+		trigger = { 
+			has_leader_with = {
+				total_pips = 18
+			}
+			OR = {
+				army_tradition = 70
+				num_of_completed_idea_groups_mil = {
+					value = 2
+				}
+			}
+		}
+		
+		effect = {
+			#event choose some cool modifier based on idea chosen
+		}
+	}
 }
 
 Rhomania_2_slot = {
@@ -86,6 +153,23 @@ Rhomania_2_slot = {
 				loyalty = -10
 			}
 			custom_tooltip = RHO_PRIV_3
+		}
+	}
+	rho_more_fire = {
+		icon = mission_assemble_an_army
+		required_missions = {rho_more_soldier }
+		position = 7
+		
+		trigger = { 
+			is_at_war = yes
+			num_of_artillery = 20
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = rho_use_that_fire_2
+				duration = 10950
+			}
 		}
 	}
 }
@@ -168,6 +252,35 @@ Rhomania_3_slot = {
 			}
 		}
 	}
+	rho_better_goverment = {
+		icon = mission_assemble_an_army
+		required_missions = {rho_islamic_faith }
+		position = 5
+
+		trigger = { 
+			stability = 3
+			OR = {
+				NOT = {
+					has_government_mechanic = rhoman_decadence_mechanic
+				}
+				NOT = {
+					has_government_power = {
+						mechanic_type = rhoman_decadence_mechanic
+						power_type = rhoman_decadence
+						value = 1
+					}
+				}
+			}
+			num_of_owned_provinces_with = {
+				value = 50
+				has_courthouse_building_trigger = yes
+			}
+		}
+		
+		effect = {
+			add_government_reform = byz_no_decadence_government
+		}
+	}
 }
 
 Rhomania_4_slot = {
@@ -243,6 +356,19 @@ Rhomania_5_slot = {
 				name = rho_islam_war_1
 				age = age_of_reformation
 			}
+		}
+	}
+	rho_reclaim_caliphate = {
+		icon = mission_assemble_an_army
+		required_missions = {rho_caliphate }
+		position = 6
+
+		trigger = { 
+			#this is for when the rashids stuff is done, the mission wil require to have beaten them or at least survived big enough
+		}
+		
+		effect = {
+			#a cool modifier with some missionaries
 		}
 	}
 }
