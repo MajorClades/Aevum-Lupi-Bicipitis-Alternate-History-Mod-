@@ -1,0 +1,84 @@
+country_decisions = {
+
+	expel_rashidis_dec = {
+		potential = {
+			any_owned_province = {
+				OR = {
+					has_province_modifier = rashidi_community_in_province
+					has_province_modifier = jafar_al_rashidi_activity
+				}
+			}
+		}
+		allow = {
+			mil_power = 200
+			custom_trigger_tooltip = {
+				tooltip = alb_can_only_expel_every_ten_years_tt
+				NOT = {
+					has_country_modifier = rashidi_expel_10_year_cooldown
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					any_owned_province = {
+						has_province_modifier = jafar_al_rashidi_activity
+					}
+				}
+				custom_tooltip = jafar_al_rashid_flees_nation_tt
+			}
+			custom_tooltip = alb_all_provinces_lose_rashidi_modifier_tt
+			tooltip = {
+				add_province_modifier = {
+					name = expelled_rashidis
+					duration = 3650
+				}
+			}
+			hidden_effect = {
+				every_province = {
+					limit = {
+						OR = {
+							has_province_modifier = jafar_al_rashidi_activity
+							has_province_modifier = rashidi_community_in_province
+						}
+					}
+					remove_province_modifier = jafar_al_rashidi_activity
+					remove_province_modifier = rashidi_community_in_province
+					add_province_modifier = {
+						name = expelled_rashidis
+						duration = 3650
+					}
+					add_devastation = 30
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				OR = {
+					has_country_modifier = accepting_to_rashidis_modifier
+					ruler_has_personality = sinner_personality	
+				}
+			}
+			modifier = {
+				factor = 0.1
+				NOT = {
+					OR = {
+						ruler_has_personality = zealot_personality
+						has_idea_group = religious_ideas
+					}
+				}
+			}
+			modifier = {
+				factor = 10
+				NOT = {
+					OR = {
+						ruler_has_personality = zealot_personality
+						has_idea_group = religious_ideas
+					}
+				}
+			}
+		}
+	}
+}
