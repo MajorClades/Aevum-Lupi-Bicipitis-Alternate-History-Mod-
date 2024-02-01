@@ -1,0 +1,250 @@
+namespace = orthodox_flavor
+
+#The Non-Possessor Movement (Impotian)
+country_event = {
+	id = orthodox_flavor.1
+	title = orthodox_flavor.1.t
+	desc = ALB_orthodox_flavor.1.d
+	picture = ORTHODOX_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		religion = impotian
+	}
+	
+	mean_time_to_happen = {
+		days = 1 # Is triggered by a 3 year pulse from vanilla
+		modifier = {
+			factor = 0.5
+			NOT = { inflation = 1 } #(I don't think any modifier here matters since the MTTH is at 1 day anyways)
+		}
+	}
+	
+	option = {
+		name = ALB_orthodox_flavor.1.a
+		add_patriarch_authority = 0.05 
+		reduce_estate_church_loyalty_effect = yes 
+		add_estate_influence_modifier = {
+			influence = -0.1
+			duration = 1825 #5 Years
+		}
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0.25
+				NOT = {
+					estate_loyalty = { # AI should not choose -10% loyalty if their church is already disloyal
+						estate = estate_church
+						loyalty = 30
+					}
+				}
+			}
+		}
+	}
+	option = {
+		name = ALB_orthodox_flavor.1.b
+		add_patriarch_authority = -0.05
+		add_estate_church_loyalty_effect = yes
+		add_estate_influence_modifier = {
+			influence = 0.05
+			duration = 1825 #5 Years
+		}
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0.25
+				estate_influence = { # AI should avoid giving Church too much influence to avoid being couped
+					estate = estate_church
+					influence = 85
+				}
+			}
+		}
+	}
+}
+
+#A Great Synod (Impotian, it could also be applied to the other Christian denominations but let's keep with the Impotian =?= Orthodox theme)
+country_event = {
+	id = orthodox_flavor.2
+	title =  ALB_orthodox_flavor.2.t #
+	desc = ALB_orthodox_flavor.2.d
+	picture = ORTHODOX_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		religion = impotian
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+		modifier = {
+			factor = 0.5
+			NOT = { patriarch_authority = 0.05 }
+		}
+	}
+	
+	option = {
+		name = orthodox_flavor.2.a
+		add_patriarch_authority = 0.05
+		add_estate_church_loyalty_effect = yes
+		ai_chance = {
+			factor = 1
+		}
+	}
+	option = {
+		name = orthodox_flavor.2.b
+		add_patriarch_authority = -0.05
+		add_stability_or_adm_power = yes
+		reduce_estate_church_loyalty_effect = yes
+		ai_chance = {
+			factor = 0.5
+			modifier = {
+				stability = 3 # AI don't need stability or 50 adm if they're already at 3 stab
+				factor = 0
+			}
+		}
+	}
+}
+
+# Liturgical Reform
+country_event = {
+	id = orthodox_flavor.3
+	title = orthodox_flavor.3.t
+	desc = ALB_orthodox_flavor.3.d
+	picture = REFORM_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		religion = impotian
+		is_lesser_in_union = no
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = {
+		name = orthodox_flavor.3.a
+		add_patriarch_authority = 0.05
+		reduce_estate_church_loyalty_effect = yes
+		custom_tooltip = ALB_orthodox_flavor.3.tt
+		hidden_effect = { #To avoid clutter
+			every_neighbor_country = { # Mends relations with all neighbour non-ROOT christian religions religions
+				limit = {
+					religion_group = christian
+					NOT = {
+						religion = ROOT
+					}
+				}
+				reverse_add_opinion = {
+					who = ROOT
+					modifier = tlx_mending_relations # +20 Relations, -1 Yearly
+				}
+			}
+		}
+		ai_chance = {
+			factor = 1
+		}
+	}
+	option = {
+		name = orthodox_flavor.3.b
+		add_patriarch_authority = -0.05
+		add_legitimacy_equivalent = { amount = 5 republican_tradition = 3 }
+		add_estate_church_loyalty_effect = yes
+		ai_chance = {
+			factor = 0
+		}
+	}
+}
+
+# Reduce the Independence of the Church
+country_event = {
+	id = orthodox_flavor.4
+	title = orthodox_flavor.4.t
+	desc = orthodox_flavor.4.d
+	picture = ORTHODOX_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		religion = impotian
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = {
+		name = orthodox_flavor.4.b
+		add_patriarch_authority = -0.05
+		add_estate_church_loyalty_effect = yes
+		ai_chance = {
+			factor = 1
+		}
+	}
+	option = {
+		name = orthodox_flavor.4.a
+		add_patriarch_authority = 0.05
+		add_years_of_income = 0.1 
+		reduce_estate_church_loyalty_effect = yes
+		ai_chance = {
+			factor = 5
+			modifier = {
+				factor = 0
+				NOT = {
+					estate_loyalty = { # AI should not choose -10% loyalty if their church is already disloyal
+						estate = estate_church
+						loyalty = 30
+					}
+				}
+			}
+		}
+	}
+}
+
+# State appointed Lay Members? 
+country_event = {
+	id = orthodox_flavor.5
+	title = orthodox_flavor.5.t
+	desc = orthodox_flavor.5.d
+	picture = ORTHODOX_eventPicture
+	
+	is_triggered_only = yes
+
+	trigger = {
+		religion = impotian
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = {
+		name = orthodox_flavor.5.b
+		add_patriarch_authority = -0.05
+		add_estate_church_loyalty_effect = yes
+		ai_chance = {
+			factor = 1
+		}
+	}
+	option = {
+		name = orthodox_flavor.5.a
+		add_patriarch_authority = -0.05
+		add_adm_power = 50
+		reduce_estate_church_loyalty_effect = yes
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				NOT = {
+					estate_loyalty = { # AI should not choose -10% loyalty if their church is already disloyal
+						estate = estate_church
+						loyalty = 30
+					}
+				}
+			}
+		}
+	}
+}
