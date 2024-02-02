@@ -1836,7 +1836,6 @@ alexandria_library = {
 
 		#what modifiers are added to the province when we have this project here on this tier
 		province_modifiers = {
-			local_development_cost = -0.1
 		}
 
 		#what modifiers are added to the provinces in the map area when we have this project here on this tier
@@ -1851,7 +1850,9 @@ alexandria_library = {
 
 		#what effects happen when this tier is achieved
 		on_upgraded = {
-			
+			owner = {
+				change_innovativeness = 15
+			}
 		}
 	}
 
@@ -1868,7 +1869,7 @@ alexandria_library = {
 
 		#what modifiers are added to the province when we have this project here on this tier
 		province_modifiers = {
-			local_development_cost = -0.1
+
 		}
 
 		#what modifiers are added to the provinces in the map area when we have this project here on this tier
@@ -1884,7 +1885,9 @@ alexandria_library = {
 
 		#what effects happen when this tier is achieved
 		on_upgraded = {
-			
+			owner = {
+				change_innovativeness = 15
+			}
 		}
 	}
 }
@@ -2523,9 +2526,14 @@ aldabba_palace = {
 		owner = {
 			OR = {
 				primary_culture = aldabban
-				accepted_culture = aldabban
+				AND = {
+					accepted_culture = aldabban
+					religion = indictian
+				}
+				mission_completed = rho_africanus
 			}
 		}
+		
 	}
 
 	#can our country upgrade it?
@@ -2590,7 +2598,6 @@ aldabba_palace = {
 
 		#what modifiers are added to the country when we have this project here on this tier
 		country_modifiers = {
-			improve_relation_modifier = 0.15
 			monarch_lifespan = 0.1
 			legitimacy = 0.25
 		}
@@ -2651,13 +2658,15 @@ aldabba_palace = {
 
 		#what modifiers are added to the province when we have this project here on this tier
 		province_modifiers = {
-			local_development_cost = -0.33
+			local_development_cost = -0.25
 		}
 
 		#what modifiers are added to the provinces in the map area when we have this project here on this tier
 		area_modifier = {
 		}
-
+		region_modifier = {
+			local_development_cost = -0.1
+		}
 		#what modifiers are added to the country when we have this project here on this tier
 		country_modifiers = {
 			improve_relation_modifier = 0.33
