@@ -99,7 +99,7 @@ country_event = {
 		}
 	}
 	mean_time_to_happen = {
-		months = 600
+		months = 200
 		modifier = {
 			factor = 0.9
 			has_country_modifier = accepting_to_rashidis_modifier
@@ -107,11 +107,22 @@ country_event = {
 		modifier = {
 			factor = 0.75
 			any_neighbor_province = {
-				OR = {
+				
 					has_province_modifier = rashidi_community_in_province
-					has_province_modifier = jafar_al_rashidi_activity
-				}
+					
+				
 			}
+		}
+		modifier = {
+			factor = 0.75
+			any_neighbor_province = {
+				has_province_modifier = jafar_al_rashidi_activity
+			}
+		}
+		
+		modifier = {
+			factor = 2
+			has_country_modifier = rashidi_expel_10_year_cooldown
 		}
 	}
 	immediate = {
@@ -121,8 +132,7 @@ country_event = {
 					NOT = {
 						has_province_modifier = rashidi_community_in_province
 					}
-					region = arabia_region
-					culture_group = turko_semitic
+					religion = islam
 				}
 				save_event_target_as = rashidi_community_province
 			}
@@ -142,6 +152,44 @@ country_event = {
 		event_target:rashidi_community_province = {
 			add_permanent_province_modifier = {
 				name = rashidi_community_in_province
+				duration = -1
+			}
+		}
+		add_country_modifier = {
+			name = accepting_to_rashidis_modifier
+			duration = -1
+		}
+	}
+}
+
+#Rashid flees the nation
+country_event = {
+	id = alb_islam_events.3
+	title = alb_islam_events.3.test
+	desc = alb_islam_events.3.desc
+	picture = muslimgfx_REFORM_eventPicture
+	
+	is_triggered_only = yes
+	option = {
+		name = alb_islam_events.2a
+		random_owned_province = {
+			limit = {
+				religion = islam
+			}
+			add_permanent_province_modifier = {
+				name = jafar_al_rashidi_activity
+				duration = -1
+			}
+		}
+	}
+	option = {
+		name = alb_islam_events.2b
+		random_owned_province = {
+			limit = {
+				religion = islam
+			}
+			add_permanent_province_modifier = {
+				name = jafar_al_rashidi_activity
 				duration = -1
 			}
 		}

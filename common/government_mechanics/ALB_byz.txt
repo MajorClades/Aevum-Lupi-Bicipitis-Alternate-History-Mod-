@@ -6,29 +6,31 @@ byz_muslim_mechanic = {
 	}
 	
 	powers = {
-		byz_adm_power = {
-			max = 150
-			monarch_power = ADM
-			base_monthly_growth = 0.25
-		}
-		byz_dip_power = {
-			max = 150
-			monarch_power = DIP
-			base_monthly_growth = 0.25
-		}
-		byz_mil_power = {
-			max = 150
-			monarch_power = MIL
-			base_monthly_growth = 0.25
+		byz_rule_power = {
+			gui = byz_muslim_mechanic_gui
+			max = 100
+			scaled_modifier = {
+				modifier = { 
+					tolerance_own = 2
+				}
+				start_value = 50
+			}
+			scaled_modifier = {
+				modifier = { 
+					development_cost = -0.1
+					same_religion_advisor_cost = -0.25
+					global_tax_modifier = 0.2
+				}
+			}
+			base_monthly_growth = 0.1
 		}
 	}
 	
 	interactions = {
 		BYZ_FAITH_RULE = {
-			gui = russian_mechanics_interaction_gui
-			icon = GFX_russian_ability_ADM
-			cost_type = byz_adm_power
-			cost = 100
+			icon = GFX_BYZ_FAITH_RULE
+			cost_type = byz_rule_power
+			cost = 90
 			trigger = {
 				any_owned_province = {
 					NOT = {
@@ -38,32 +40,8 @@ byz_muslim_mechanic = {
 			}
 			effect = {
 				custom_tooltip = BYZ_ABILITY_ADM
-				random_owned_province = {
-					limit = {
-						NOT = {
-							religion = ROOT
-						}
-					}
-					add_province_modifier = {
-						name = rhomania_fast_clergy
-						duration = 3650
-					}
-				}
-				hidden_effect = {
-					every_owned_province = {
-						limit = {
-							NOT = {
-								religion = ROOT
-							}
-						}
-						add_province_modifier = {
-							name = rhomania_fast_clergy
-							duration = 3650
-						}
-					}
-				}
 			}
-			cooldown_years = 0
+			cooldown_years = 10
 			ai_chance = {
 				factor = 10
 				modifier = {
@@ -77,20 +55,14 @@ byz_muslim_mechanic = {
 			}
 		}
 		BYZ_PEOPLE_RULE = {
-			gui = russian_mechanics_interaction_gui
-			icon = GFX_russian_ability_DIP
-			cost_type = byz_dip_power
-			cost = 100
+			icon = GFX_BYZ_PEOPLE_RULE
+			cost_type = byz_rule_power
+			cost = 90
 			trigger = { 
-				average_unrest = 2
 			}
-			effect = { 
-				add_country_modifier = {
-					name = rhomania_little_faith
-					duration = 7300
-				}
+			effect = {
 			}
-			cooldown_years = 0
+			cooldown_years = 10
 			ai_chance = {
 				factor = 10
 				modifier = {
@@ -104,10 +76,9 @@ byz_muslim_mechanic = {
 			}
 		}
 		BYZ_EMPEROR_RULE = {
-			gui = russian_mechanics_interaction_gui
-			icon = GFX_russian_ability_MIL
-			cost_type = byz_mil_power
-			cost = 100
+			icon = GFX_BYZ_EMPEROR_RULE
+			cost_type = byz_rule_power
+			cost = 90
 			trigger = {
 				
 			}
@@ -118,9 +89,10 @@ byz_muslim_mechanic = {
 						add_local_autonomy = -10
 					}
 				}
+				custom_tooltip = empty_line_tt
 				add_war_exhaustion = -2
 			}
-			cooldown_years = 0
+			cooldown_years = 10
 			ai_chance = {
 				factor = 10
 				modifier = {
