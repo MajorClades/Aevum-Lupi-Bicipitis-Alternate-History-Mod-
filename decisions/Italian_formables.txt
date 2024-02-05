@@ -149,4 +149,88 @@ country_decisions = {
 			factor = 1
 		}
 	}
+	illyria_nation = {
+		major = yes
+		potential = {
+			NOT = { has_country_flag = illyria_flag }
+			is_nomad = no
+			was_never_end_game_tag_trigger = yes
+			is_random_new_world = no
+			NOT = { tag = PD0 }
+			OR = {
+				primary_culture = dalmatian
+				primary_culture = pannonian
+			}
+			capital_scope = {
+				OR = {
+					area = slavonia_area
+					area = east_adriatic_coast_area
+					area = croatia_area
+					area = bosnia_area
+				}
+			}
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = slavonia_area
+				area = east_adriatic_coast_area
+				area = croatia_area
+				area = bosnia_area
+			}
+		}
+		allow = {
+			is_free_or_tributary_trigger = yes
+			is_at_war = no
+			capital_scope = {
+				OR = {
+					area = slavonia_area
+					area = east_adriatic_coast_area
+					area = croatia_area
+					area = bosnia_area
+				}
+			}
+			num_of_owned_provinces_with = {
+				value = 14
+				OR = {
+					area = slavonia_area
+					area = east_adriatic_coast_area
+					area = croatia_area
+					area = bosnia_area
+				}
+			}
+			NOT = { exists = IL1 }
+		}
+		effect = {
+			set_country_flag = illyria_flag
+			change_tag = IL1
+			if = {
+				limit = {
+					NOT = { government_rank = 2 }
+				}
+				set_government_rank = 2
+			}		
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			add_prestige_or_monarch_power = {
+				amount = 25
+			}
+			if = {
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			#can't have more than one elective monarchy in the game
+			if = {
+				limit = {
+					has_reform = elective_monarchy
+				}
+				change_government = monarchy
+				add_government_reform = feudalism_reform
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
 }
