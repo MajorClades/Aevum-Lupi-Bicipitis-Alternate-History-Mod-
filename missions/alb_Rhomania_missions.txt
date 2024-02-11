@@ -1,34 +1,29 @@
-
 Rhomania_1_slot = {
 	slot = 1
 	generic = no
 	ai = yes
-	potential = {	tag = RU0	}
 	has_country_shield = yes
+	potential = { tag = RU0 } 
 
 	rho_loyal_nobles = {
-		icon = mission_assemble_an_army
-		required_missions = {rho_recover_old_glory }
+		icon = mission_have_two_subjects
 		position = 2
+		required_missions = { rho_recover_old_glory } 
+		provinces_to_highlight = {  } 
 
-		trigger = { 
+		trigger = {
 			OR = {
 				AND = {
 					army_tradition = 30
 					has_estate_privilege = alb_rhoman_bad_nobles
 				}
-				NOT = {
-					has_estate_privilege = alb_rhoman_bad_nobles
-				}
+				NOT = { has_estate_privilege = alb_rhoman_bad_nobles } 
 			}
-
 		}
-		
+
 		effect = {
 			if = {
-				limit = {
-					has_estate_privilege = alb_rhoman_bad_nobles
-				}
+				limit = { has_estate_privilege = alb_rhoman_bad_nobles } 
 				custom_tooltip = RHO_TT_1
 				add_army_tradition = -5
 				clr_country_flag = rhoman_nobles_flag
@@ -36,19 +31,21 @@ Rhomania_1_slot = {
 			add_army_professionalism = 0.05
 		}
 	}
-	rho_better_nobles = {
-		icon = mission_assemble_an_army
-		required_missions = {rho_loyal_nobles }
-		position = 4
 
-		trigger = { 
+	rho_better_nobles = {
+		icon = mission_mediterranean_islands
+		position = 4
+		required_missions = { rho_loyal_nobles } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
 			army_tradition = 50
 			estate_loyalty = {
 				estate = estate_nobles
 				loyalty = 70
 			}
 		}
-		
+
 		effect = {
 			define_advisor = {
 				type = army_reformer
@@ -58,27 +55,26 @@ Rhomania_1_slot = {
 			custom_tooltip = RHO_PRIV_2
 		}
 	}
+
 	rho_soldier = {
-		icon = mission_assemble_an_army
-		required_missions = { }
+		icon = mission_build_up_to_force_limit
 		position = 5
 		provinces_to_highlight = {
 			owned_by = ROOT
 			OR = {
-				NOT = {
-					base_manpower = 7
-				}
+				NOT = { base_manpower = 7 } 
 				can_build = barracks
 			}
 		}
-		trigger = { 
+
+		trigger = {
 			num_of_owned_provinces_with = {
 				value = 10
 				base_manpower = 7
 				has_manpower_building_trigger = yes
 			}
 		}
-		
+
 		effect = {
 			add_yearly_manpower = 0.5
 			151 = {
@@ -87,115 +83,165 @@ Rhomania_1_slot = {
 			}
 		}
 	}
+
 	rho_more_soldier = {
-		icon = mission_assemble_an_army
-		required_missions = {rho_soldier }
+		icon = mission_cannons_firing
 		position = 6
-		trigger = { 
-			has_leader_with = {
-				total_pips = 12
-			}
+		required_missions = { rho_soldier } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			has_leader_with = { total_pips = 12 } 
 			num_of_artillery = 10
 		}
-		
+
 		effect = {
 			add_country_modifier = {
-				name = rho_use_that_fire
+				name = "rho_use_that_fire"
 				duration = 10950
 			}
 		}
 	}
+
 	rho_war_plans = {
-		icon = mission_assemble_an_army
-		required_missions = {rho_more_soldier }
+		icon = mission_roman_legions
 		position = 8
-		trigger = { 
-			has_leader_with = {
-				total_pips = 18
-			}
+		required_missions = { rho_more_soldier } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			has_leader_with = { total_pips = 18 } 
 			OR = {
 				army_tradition = 70
-				num_of_completed_idea_groups_mil = {
-					amount = 2
-				}
+				num_of_completed_idea_groups_mil = { amount = 2 } 
 			}
 		}
-		
-		effect = {
-			country_event = {
-				id = rhom.16
-			}
-		}
+
+		effect = { country_event = { id = rhom.16 }  } 
 	}
-	rho_cyprus = {
-		icon = mission_assemble_an_army
-		required_missions = {rho_naval_problems }
-		position = 10
+
+	rho_pharoah_canal = {
+		icon = mission_se_along_the_river
+		position = 11
+		required_missions = { rho_egyptian_faith } 
 		provinces_to_highlight = {
 			OR = {
-				province_id = 321
-				province_id = 5015
+				province_id = 4316
+				province_id = 2315
 			}
 		}
-		trigger = { 
-			owns_or_non_sovereign_subject_of = 321
-			owns_or_non_sovereign_subject_of = 5015
-		}
-		
-		effect = {
-			remove_country_modifier = rho_naval_crisis_2
-			add_country_modifier = {
-				name = rho_naval_crisis_3
-				duration = -1
+
+		trigger = {
+			2315 = {
+				owned_by = ROOT
+				has_trade_building_trigger = yes
+				has_dock_building_trigger = yes
 			}
-			aegean_archipelago_area = {
-				add_permanent_claim = ROOT
-			}
-		}
-	}
-	rho_naval_power = {
-		icon = mission_assemble_an_army
-		required_missions = {rho_cyprus }
-		position = 11
-		trigger = { 
-			num_of_light_ship = 30
-			num_of_owned_provinces_with = {
-				value = 15
+			4316 = {
+				owned_by = ROOT
+				has_trade_building_trigger = yes
 				has_dock_building_trigger = yes
 			}
 		}
-		
+
+		effect = { custom_tooltip = SOX_TT_9 } 
+	}
+
+	rho_red_sea = {
+		icon = mission_control_the_red_sea
+		position = 13
+		required_missions = { rho_pharoah_canal } 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 387
+				province_id = 1215
+			}
+		}
+
+		trigger = {
+			387 = {
+				owned_by = ROOT
+				has_trade_building_trigger = yes
+				has_dock_building_trigger = yes
+			}
+			1215 = {
+				owned_by = ROOT
+				has_trade_building_trigger = yes
+				has_dock_building_trigger = yes
+			}
+		}
+
 		effect = {
-			add_navy_tradition = 25
-			remove_country_modifier = rho_naval_crisis_3
-			add_country_modifier = {
-				name = rho_naval_power_mod
-				duration = -1
+			4346 = {
+				add_trade_modifier = {
+					who = ROOT
+					duration = 10950
+					power = 35
+					key = RHO_TRADE_MOD
+				}
+			}
+			504 = {
+				add_trade_modifier = {
+					who = ROOT
+					duration = 10950
+					power = 15
+					key = RHO_TRADE_MOD
+				}
 			}
 		}
 	}
-}
 
+	rho_faith_war = {
+		icon = mission_seize_the_isles
+		position = 15
+		required_missions = { rho_italia_restorer } 
+		provinces_to_highlight = {
+			OR = {
+				area = apulia_area
+				area = calabria_area
+				area = naples_area
+				area = western_sicily_area
+				area = sicily_area
+			}
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 23
+				OR = {
+					area = apulia_area
+					area = calabria_area
+					area = naples_area
+					area = western_sicily_area
+					area = sicily_area
+				}
+			}
+		}
+
+		effect = { country_event = { id = rhom.17 }  } 
+	}
+}
 Rhomania_2_slot = {
 	slot = 2
 	generic = no
 	ai = yes
-	potential = {	tag = RU0	}
 	has_country_shield = yes
+	potential = { tag = RU0 } 
 
 	rho_scribes = {
-		icon = mission_assemble_an_army
-		required_missions = {rho_law_honor }
+		icon = mission_hands_praying
 		position = 3
+		required_missions = { rho_law_honor } 
+		provinces_to_highlight = {  } 
 
-		trigger = { 
+		trigger = {
 			stability = 3
 			estate_loyalty = {
 				estate = estate_church
 				loyalty = 65
 			}
 		}
-		
+
 		effect = {
 			add_estate_loyalty = {
 				estate = estate_church
@@ -204,114 +250,237 @@ Rhomania_2_slot = {
 			custom_tooltip = RHO_PRIV_3
 		}
 	}
+
 	rho_more_fire = {
-		icon = mission_assemble_an_army
-		required_missions = {rho_more_soldier }
+		icon = byz_greek_fire
 		position = 7
-		
-		trigger = { 
+		required_missions = { rho_more_soldier } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
 			is_at_war = yes
 			num_of_artillery = 20
 		}
-		
+
 		effect = {
 			add_country_modifier = {
-				name = rho_use_that_fire_2
+				name = "rho_use_that_fire_2"
 				duration = 10950
 			}
 		}
 	}
-	rho_naval_problems = {
-		icon = mission_assemble_an_army
-		required_missions = { }
-		position = 9
-		trigger = { 
-			num_of_admirals = 1
-			dip_power = 100
+
+	rho_egyptian_faith = {
+		icon = mission_egyptian_mamluk_soldier
+		position = 10
+		required_missions = { rho_restore_control } 
+		provinces_to_highlight = { region = egypt_region } 
+
+		trigger = {
+			egypt_region = {
+				type = all
+				owned_by = ROOT
+				religion = ROOT
+			}
 		}
-		
+
 		effect = {
-			add_dip_power = -100
-			remove_country_modifier = rho_naval_crisis
-			add_country_modifier = {
-				name = rho_naval_crisis_2
+			country_event = { id = rhom.14 } 
+			egypt_region = { add_unrest = -10 } 
+			maghreb_region = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	rho_africa_camping = {
+		icon = mission_arabian_fort
+		position = 11
+		required_missions = { rho_egyptian_faith } 
+		provinces_to_highlight = { region = maghreb_region } 
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 15
+				region = maghreb_region
+			}
+		}
+
+		effect = {
+			add_army_tradition = 15
+			country_event = { id = rhom.15 } 
+		}
+	}
+
+	rho_africanus = {
+		icon = africa_proconsulare
+		position = 12
+		required_missions = { rho_africa_camping } 
+		provinces_to_highlight = { region = maghreb_region } 
+
+		trigger = {
+			maghreb_region = {
+				type = all
+				owned_by = ROOT
+				religion = ROOT
+			}
+		}
+
+		effect = {
+			338 = { destroy_great_project = { type = indictian_cathedral }  } 
+			add_ruler_modifier = {
+				name = "rho_africanus_modifier"
 				duration = -1
 			}
 		}
 	}
-	rho_greek_turks = {
-		icon = mission_assemble_an_army
-		required_missions = {rho_naval_problems }
-		position = 10
-		trigger = { 
-			num_of_generals = 1
-			has_mil_advisor_2 = yes
-		}
-		
+
+	rho_italia_restorer = {
+		icon = mission_rule_italy
+		position = 14
+		required_missions = { rho_to_illyria } 
+		provinces_to_highlight = { is_capital_of = emperor } 
+
+		trigger = { NOT = { hre_size = 1 }  } 
+
 		effect = {
-			add_prestige_or_monarch_power = {
-				amount = 10
+			add_country_modifier = {
+				name = "rho_heir_of_rome"
+				duration = -1
 			}
-			balkan_region = {
-				add_permanent_claim = ROOT
+			italy_region = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	rho_italia_provincia = {
+		icon = the_italian_league
+		position = 16
+		required_missions = { rho_italia_restorer } 
+		provinces_to_highlight = { region = italy_region } 
+
+		trigger = {
+			italy_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "rho_italian_conversion"
+				duration = 10950
+			}
+			custom_tooltip = RHO_TT_3
+			tooltip = {
+				random_country = {
+					limit = { religion = catholic } 
+					add_stability = -2
+					add_aggressive_expansion = {
+						who = ROOT
+						value = 15
+						apply_calc = no
+					}
+				}
+			}
+			hidden_effect = {
+				every_known_country = {
+					limit = { religion = catholic } 
+					add_stability = -2
+					add_aggressive_expansion = {
+						who = ROOT
+						value = 15
+						apply_calc = no
+					}
+				}
+			}
+		}
+	}
+
+	rho_italia_faith = {
+		icon = answer_the_roman_question
+		position = 17
+		required_missions = { rho_italia_provincia } 
+		provinces_to_highlight = {
+			region = italy_region
+			NOT = { religion = ROOT } 
+		}
+
+		trigger = {
+			italy_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				religion = ROOT
+			}
+		}
+
+		effect = {
+			add_splendor = 1000
+			custom_tooltip = RHO_TT_4
+			hidden_effect = {
+				if = {
+					limit = { in_golden_age = yes } 
+					extend_golden_age = 50
+				}
+				else = {
+					if = {
+						limit = { has_had_golden_age = yes } 
+						reset_golden_age = yes
+					}
+				}
 			}
 		}
 	}
 }
-
 Rhomania_3_slot = {
 	slot = 3
 	generic = no
 	ai = yes
-	potential = {	tag = RU0	}
 	has_country_shield = yes
+	potential = { tag = RU0 } 
 
 	rho_recover_old_glory = {
 		icon = mission_pf_soldier
-		required_missions = { }
 		position = 1
-		
-		trigger = { 
+		provinces_to_highlight = {  } 
+
+		trigger = {
 			OR = {
 				stability = 1
 				prestige = 30
 			}
 		}
-		
-		effect = {
-			thrace_area = {
-				add_permanent_claim = ROOT
-			}
-		}
-	}
-	rho_law_honor = {
-		icon = mission_assemble_an_army
-		required_missions = {rho_recover_old_glory }
-		position = 2
 
-		trigger = { 
+		effect = { thrace_area = { add_permanent_claim = ROOT }  } 
+	}
+
+	rho_law_honor = {
+		icon = mission_asian_trader
+		position = 2
+		required_missions = { rho_recover_old_glory } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
 			stability = 2
 			crown_land_share = 35
-			NOT = {
-				num_of_rebel_armies = 1
-			}
+			NOT = { num_of_rebel_armies = 1 } 
 		}
-		
+
 		effect = {
 			custom_tooltip = RHO_PRIV_1
 			add_yearly_manpower = 2
 		}
 	}
-	rho_islamic_faith = {
-		icon = mission_assemble_an_army
-		required_missions = {rho_scribes rho_ensure_no_corruption}
-		position = 4
 
-		trigger = { 
+	rho_islamic_faith = {
+		icon = mission_islamic_golden_age
+		position = 4
+		required_missions = {
+			rho_scribes
+			rho_ensure_no_corruption
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {
 			crown_land_share = 50
-			NOT = {
-				num_of_rebel_armies = 1
-			}
+			NOT = { num_of_rebel_armies = 1 } 
 			custom_trigger_tooltip = {
 				tooltip = RHO_CTT_1
 				estate_loyalty = {
@@ -328,21 +497,23 @@ Rhomania_3_slot = {
 				}
 			}
 		}
-		
+
 		effect = {
 			change_government_reform_progress = 50
 			add_country_modifier = {
-				name = rho_imperial_absolute
+				name = "rho_imperial_absolute"
 				duration = -1
 			}
 		}
 	}
-	rho_better_goverment = {
-		icon = mission_assemble_an_army
-		required_missions = {rho_islamic_faith }
-		position = 5
 
-		trigger = { 
+	rho_better_goverment = {
+		icon = mission_roman_empire
+		position = 5
+		required_missions = { rho_islamic_faith } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
 			stability = 3
 			NOT = {
 				has_government_power = {
@@ -356,273 +527,365 @@ Rhomania_3_slot = {
 				has_courthouse_building_trigger = yes
 			}
 		}
-		
+
 		effect = {
 			add_government_reform = byz_no_decadence_government
+			set_country_flag = rhom_decad_gone_flag
 		}
 	}
-	rho_egyptian_faith = {
-		icon = mission_assemble_an_army
-		required_missions = { rho_restore_control }
-		position = 7
-		provinces_to_highlight = {
-			region = egypt_region
+
+	rho_naval_problems = {
+		icon = mission_galleys_in_port
+		position = 6
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			num_of_admirals = 1
+			dip_power = 100
 		}
-		trigger = { 
-			egypt_region = {
-				type = all
-				owned_by = ROOT
-				religion = ROOT
-			}
-		}
-		
+
 		effect = {
-			country_event = {
-				id = rhom.14
-			}
-			egypt_region = {
-				add_unrest = -10
-			}
-			maghreb_region = {
-				add_permanent_claim = ROOT
-			}
-		}
-	}
-	rho_africa_camping = {
-		icon = mission_assemble_an_army
-		required_missions = { rho_egyptian_faith }
-		position = 8
-		provinces_to_highlight = {
-			region = maghreb_region
-		}
-		trigger = { 
-			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-				value = 15
-				region = maghreb_region
-			}
-		}
-		
-		effect = {
-			add_army_tradition = 15
-			country_event = {
-				id = rhom.15
-			}
-		}
-	}
-	rho_africanus = {
-		icon = mission_assemble_an_army
-		required_missions = { rho_africa_camping }
-		position = 9
-		provinces_to_highlight = {
-			region = maghreb_region
-		}
-		trigger = { 
-			maghreb_region = {
-				type = all
-				owned_by = ROOT
-				religion = ROOT
-			}
-		}
-		
-		effect = {
-			338 = {
-				destroy_great_project = {
-					type = indictian_cathedral
-				}
-			}
-			add_ruler_modifier = {
-				name = rho_africanus_modifier
+			add_dip_power = -100
+			remove_country_modifier = rho_naval_crisis
+			add_country_modifier = {
+				name = "rho_naval_crisis_2"
 				duration = -1
 			}
 		}
 	}
-}
 
-Rhomania_4_slot = {
-	slot = 4
-	generic = no
-	ai = yes
-	potential = {	tag = RU0	}
-	has_country_shield = yes
-
-	rho_ensure_no_corruption = {
-		icon = mission_assemble_an_army
-		required_missions = {rho_god_and_country rho_law_honor }
-		position = 3
-
-		trigger = { 
-			NOT = {
-				corruption = 1
+	rho_cyprus = {
+		icon = mission_establish_high_seas_navy
+		position = 7
+		required_missions = { rho_naval_problems } 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 321
+				province_id = 5015
 			}
-			has_adm_advisor_2 = yes
-			has_institution = renaissance
 		}
-		
+
+		trigger = {
+			owns_or_non_sovereign_subject_of = 321
+			owns_or_non_sovereign_subject_of = 5015
+		}
+
 		effect = {
+			remove_country_modifier = rho_naval_crisis_2
 			add_country_modifier = {
-				name = rho_less_corruption
-				duration = 10950
+				name = "rho_naval_crisis_3"
+				duration = -1
 			}
+			aegean_archipelago_area = { add_permanent_claim = ROOT } 
 		}
 	}
+
+	rho_naval_power = {
+		icon = mission_invade_island
+		position = 8
+		required_missions = { rho_cyprus } 
+		provinces_to_highlight = {
+			can_build = dock
+			owned_by = ROOT
+		}
+
+		trigger = {
+			num_of_light_ship = 30
+			num_of_owned_provinces_with = {
+				value = 15
+				has_dock_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_navy_tradition = 25
+			remove_country_modifier = rho_naval_crisis_3
+			add_country_modifier = {
+				name = "rho_naval_power_mod"
+				duration = -1
+			}
+			custom_tooltip = RHO_TT_2
+		}
+	}
+
 	rho_restore_control = {
-		icon = mission_assemble_an_army
-		required_missions = {  }
-		position = 6
-		trigger = { 
+		icon = mission_impaled_soldies
+		position = 9
+		provinces_to_highlight = {  } 
+
+		trigger = {
 			if = {
-				limit = { ai = yes}
+				limit = { ai = yes } 
 				manpower_percentage = 0.5
 				army_size_percentage = 0.6
-			}else = {
+			}
+			else = {
 				manpower_percentage = 0.7
 				army_size = 70
 			}
 		}
-		
+
 		effect = {
 			define_advisor = {
-				type = theologian
+				type = inquisitor
 				skill = 2
 				discount = yes
 			}
-			egypt_region = {
-				add_permanent_claim = ROOT
+			egypt_region = { add_permanent_claim = ROOT } 
+			mashriq_region = { add_permanent_claim = ROOT } 
+			balkan_region = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	rho_hellenes = {
+		icon = byz_justinians_ambition
+		position = 11
+		required_missions = { rho_restore_control } 
+		provinces_to_highlight = {
+			OR = {
+				area = silistria_area
+				area = thrace_area
+				area = macedonia_area
+				area = bulgaria_area
 			}
-			mashriq_region = {
-				add_permanent_claim = ROOT
+			NOT = { owned_by = ROOT } 
+		}
+
+		trigger = {
+			thrace_area = {
+				type = all
+				owned_by = ROOT
+			}
+			num_of_owned_provinces_with = {
+				value = 17
+				OR = {
+					area = silistria_area
+					area = thrace_area
+					area = macedonia_area
+					area = bulgaria_area
+				}
+			}
+		}
+
+		effect = {
+			thrace_area = {
+				change_religion = ROOT
+				change_culture = greek_new
+			}
+			151 = {
+				add_great_project_tier = {
+					type = hippodrome_byz
+					tier = 1
+				}
 			}
 		}
 	}
-	rho_mesopotamia = {
-		icon = mission_assemble_an_army
-		required_missions = { rho_syrian_faith }
-		position = 8
-		provinces_to_highlight = {
-			region = mesopotamia_region
+
+	rho_to_illyria = {
+		icon = peace_in_europe
+		position = 13
+		required_missions = { rho_hellenes } 
+		provinces_to_highlight = { region = balkan_region } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 30
+				region = balkan_region
+				is_core = ROOT
+			}
+			num_of_owned_provinces_with = {
+				value = 15
+				region = balkan_region
+				religion = ROOT
+			}
 		}
-		trigger = { 
-			mesopotamia_region = {
+
+		effect = {
+			add_casus_belli = {
+				type = cb_hie_soxony_war
+				target = emperor
+			}
+			custom_tooltip = SOX_TT_7
+			custom_tooltip = empty_line_tt
+			carpathia_region = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	rho_cisalpine = {
+		icon = mission_conquer_north_italy
+		position = 15
+		required_missions = { rho_italia_restorer } 
+		provinces_to_highlight = {
+			OR = {
+				area = piedmont_area
+				area = lombardy_area
+			}
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				OR = {
+					area = piedmont_area
+					area = lombardy_area
+				}
+			}
+		}
+
+		effect = {
+			add_treasury = 1000
+			france_region = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	rho_north_gaul = {
+		icon = give_him_back_his_legions
+		position = 17
+		required_missions = { rho_cisalpine } 
+		provinces_to_highlight = { region = france_region } 
+
+		trigger = {
+			france_region = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
-		
+
 		effect = {
-			mashriq_region = {
-				change_culture = sirian
+			add_country_modifier = {
+				name = "rho_breaker_of_pretenders"
+				duration = -1
 			}
-			arabia_region = {
-				add_permanent_claim = ROOT
+			british_isles_region = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	rho_west_rome = {
+		icon = a_real_roman_empire
+		position = 18
+		required_missions = {
+			rho_italia_faith
+			rho_north_gaul
+			rho_iberian_snack
+		}
+		provinces_to_highlight = {
+			OR = {
+				region = iberia_region
+				region = france_region
 			}
-			mesopotamia_region = {
-				add_permanent_claim = ROOT
+			NOT = { religion = ROOT } 
+		}
+
+		trigger = {
+			iberia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				religion = ROOT
+			}
+			france_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				religion = ROOT
+			}
+		}
+
+		effect = {
+			custom_tooltip = RHO_TT_5
+			tooltip = {
+				capital_scope = {
+					add_permanent_province_modifier = {
+						name = "rho_conquerors"
+						duration = 10950
+					}
+				}
 			}
 		}
 	}
 }
-
-Rhomania_5_slot = {
-	slot = 5
+Rhomania_4_slot = {
+	slot = 4
 	generic = no
 	ai = yes
-	potential = {	tag = RU0	}
 	has_country_shield = yes
+	potential = { tag = RU0 } 
 
-	rho_god_and_country = {
-		icon = mission_assemble_an_army
-		required_missions = {rho_recover_old_glory }
-		position = 2
-
-		trigger = { 
-			OR = {
-				religious_unity = 0.9
-				theologian = 1
-			}
+	rho_ensure_no_corruption = {
+		icon = mission_luther_theses
+		position = 3
+		required_missions = {
+			rho_god_and_country
+			rho_law_honor
 		}
-		
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			NOT = { corruption = 1 } 
+			has_adm_advisor_2 = yes
+			has_institution = renaissance
+		}
+
 		effect = {
-			add_country_modifier_for_age = {
-				name = rho_islam_war
-				age = age_of_discovery
+			add_country_modifier = {
+				name = "rho_less_corruption"
+				duration = 10950
 			}
 		}
 	}
-	rho_caliphate = {
-		icon = mission_assemble_an_army
-		required_missions = {rho_god_and_country }
-		position = 4
 
-		trigger = { 
-			total_development = 1000
-			OR = {
-				religious_unity = 0.9
-				theologian = 4
-			}
-		}
-		
-		effect = {
-			add_country_modifier_for_age = {
-				name = rho_islam_war_1
-				age = age_of_reformation
-			}
-		}
-	}
-	rho_reclaim_caliphate = {
-		icon = mission_assemble_an_army
-		required_missions = {rho_caliphate }
-		position = 5
-
-		trigger = { 
-			#this is for when the rashids stuff is done, the mission wil require to have beaten them or at least survived big enough
-		}
-		
-		effect = {
-			#a cool modifier with some missionaries
-		}
-	}
-	rho_syrian_faith = {
-		icon = mission_assemble_an_army
-		required_missions = { rho_restore_control }
+	rho_markets = {
+		icon = mission_castle_construction
 		position = 7
+		required_missions = { rho_naval_problems } 
 		provinces_to_highlight = {
-			region = mashriq_region
+			can_build = marketplace
+			owned_by = ROOT
 		}
-		trigger = { 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				has_trade_building_trigger = yes
+			}
+		}
+
+		effect = { add_years_of_income = 1 } 
+	}
+
+	rho_syrian_faith = {
+		icon = mission_fortifying_the_plain
+		position = 10
+		required_missions = { rho_restore_control } 
+		provinces_to_highlight = { region = mashriq_region } 
+
+		trigger = {
 			mashriq_region = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 				religion = ROOT
 			}
 		}
-		
+
 		effect = {
-			mashriq_region = {
-				change_culture = sirian
-			}
-			arabia_region = {
-				add_permanent_claim = ROOT
-			}
-			mesopotamia_region = {
-				add_permanent_claim = ROOT
-			}
+			mashriq_region = { change_culture = sirian } 
+			arabia_region = { add_permanent_claim = ROOT } 
+			mesopotamia_region = { add_permanent_claim = ROOT } 
 		}
 	}
+
 	rho_enter_arabia = {
-		icon = mission_assemble_an_army
-		required_missions = { rho_syrian_faith }
-		position = 8
-		provinces_to_highlight = {
-			region = arabia_region
-		}
-		trigger = { 
+		icon = mam_arabia
+		position = 11
+		required_missions = { rho_syrian_faith } 
+		provinces_to_highlight = { region = arabia_region } 
+
+		trigger = {
 			owns_or_non_sovereign_subject_of = 385
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
 				value = 15
 				region = arabia_region
 			}
 		}
-		
+
 		effect = {
 			define_general = {
 				shock = 5
@@ -631,38 +894,335 @@ Rhomania_5_slot = {
 				siege = 3
 			}
 			add_country_modifier = {
-				name = rho_arabian_knights
+				name = "rho_arabian_knights"
 				duration = 10950
 			}
 			385 = {
-				add_base_tax = 2
-				add_base_production = 2
-				add_base_manpower = 2
+				add_base_tax = 1
+				add_base_production = 1
+				add_base_manpower = 1
 			}
 		}
 	}
+
 	rho_arabia = {
-		icon = mission_assemble_an_army
-		required_missions = { rho_enter_arabia }
-		position = 9
-		provinces_to_highlight = {
-			region = arabia_region
-		}
-		trigger = { 
+		icon = mission_into_arabia
+		position = 12
+		required_missions = { rho_enter_arabia } 
+		provinces_to_highlight = { region = arabia_region } 
+
+		trigger = {
 			arabia_region = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
-		
+
 		effect = {
 			385 = {
+				add_great_project_tier = {
+					type = kaaba
+					tier = 3
+				}
 				add_base_tax = 2
 				add_base_production = 2
 				add_base_manpower = 2
 			}
-			horn_of_africa_region = {
-				add_permanent_claim = ROOT
+			horn_of_africa_region = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	rho_to_pannonia = {
+		icon = the_hungarian_question
+		position = 14
+		required_missions = { rho_to_illyria } 
+		provinces_to_highlight = { region = carpathia_region } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 15
+				region = carpathia_region
+				is_core = ROOT
+			}
+		}
+
+		effect = {
+			add_stability_or_adm_power = yes
+			add_country_modifier = {
+				name = "rho_pannonian_fields"
+				duration = 10950
+			}
+		}
+	}
+
+	rho_south_gaul = {
+		icon = hispaniae
+		position = 16
+		required_missions = { rho_cisalpine } 
+		provinces_to_highlight = {
+			OR = {
+				area = languedoc_area
+				area = pyrenees_area
+			}
+		}
+
+		trigger = {
+			languedoc_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			pyrenees_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_adm_power = 200
+			iberia_region = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	rho_iberian_snack = {
+		icon = mission_plus_ultra
+		position = 17
+		required_missions = { rho_south_gaul } 
+		provinces_to_highlight = { region = iberia_region } 
+
+		trigger = {
+			iberia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			iberia_region = {
+				add_permanent_province_modifier = {
+					name = "rho_west_end"
+					duration = 36500
+				}
+			}
+		}
+	}
+}
+Rhomania_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = RU0 } 
+
+	rho_god_and_country = {
+		icon = mission_non-western_soldiers
+		position = 2
+		required_missions = { rho_recover_old_glory } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			OR = {
+				religious_unity = 0.9
+				inquisitor = 1
+			}
+		}
+
+		effect = {
+			add_country_modifier_for_age = {
+				name = "rho_islam_war"
+				age = age_of_discovery
+			}
+		}
+	}
+
+	rho_caliphate = {
+		icon = mission_mosque
+		position = 4
+		required_missions = { rho_god_and_country } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			total_development = 1000
+			OR = {
+				religious_unity = 0.9
+				inquisitor = 4
+			}
+		}
+
+		effect = {
+			add_country_modifier_for_age = {
+				name = "rho_islam_war_1"
+				age = age_of_reformation
+			}
+		}
+	}
+
+	rho_reclaim_caliphate = {
+		icon = the_land_of_moses
+		position = 5
+		required_missions = { rho_caliphate } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	rho_constatine = {
+		icon = take_constantinople
+		position = 6
+		provinces_to_highlight = {
+			OR = {
+				province_id = 151
+				province_id = 316
+				province_id = 317
+				province_id = 2296
+				province_id = 4779
+			}
+		}
+
+		trigger = {
+			151 = {
+				development = 25
+				num_of_buildings_in_province = 5
+			}
+			num_of_owned_provinces_with = {
+				value = 5
+				OR = {
+					province_id = 151
+					province_id = 316
+					province_id = 317
+					province_id = 2296
+					province_id = 4779
+				}
+			}
+		}
+
+		effect = {
+			151 = { add_or_upgrade_tax_building = yes } 
+			316 = {
+				add_base_tax = 1
+				add_or_upgrade_tax_building = yes
+			}
+			317 = {
+				add_base_tax = 1
+				add_or_upgrade_tax_building = yes
+			}
+			2296 = {
+				add_base_tax = 1
+				add_or_upgrade_tax_building = yes
+			}
+			4779 = {
+				add_base_tax = 1
+				add_or_upgrade_tax_building = yes
+			}
+		}
+	}
+
+	rho_manufactories = {
+		icon = mission_constantinople
+		position = 8
+		required_missions = {
+			rho_markets
+			rho_constatine
+		}
+		provinces_to_highlight = {
+			has_manufactory_trigger = no
+			owned_by = ROOT
+		}
+
+		trigger = {
+			151 = {
+				development = 35
+				has_manufactory_trigger = yes
+			}
+			num_of_owned_provinces_with = {
+				value = 10
+				has_manufactory_trigger = yes
+			}
+		}
+
+		effect = {
+			151 = {
+				add_permanent_province_modifier = {
+					name = "rho_world_desire"
+					duration = -1
+				}
+			}
+		}
+	}
+
+	rho_roman_pride = {
+		icon = a_roman_empire
+		position = 9
+		required_missions = { rho_manufactories } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			118 = {
+				development = 40
+				has_manufactory_trigger = yes
+				num_of_buildings_in_province = 5
+			}
+		}
+
+		effect = {
+			118 = {
+				change_culture = rhoman
+				change_religion = ROOT
+				add_permanent_province_modifier = {
+					name = "rho_world_desire"
+					duration = -1
+				}
+			}
+		}
+	}
+
+	rho_mesopotamia = {
+		icon = develop_the_po_valley
+		position = 11
+		required_missions = { rho_syrian_faith } 
+		provinces_to_highlight = { region = mesopotamia_region } 
+
+		trigger = {
+			mesopotamia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			mesopotamia_region = {
+				add_permanent_province_modifier = {
+					name = "rho_conquer_mesopotamia"
+					duration = 36500
+				}
+			}
+		}
+	}
+
+	rho_to_dacia = {
+		icon = the_alpine_wall
+		position = 15
+		required_missions = { rho_to_pannonia } 
+		provinces_to_highlight = { region = carpathia_region } 
+
+		trigger = {
+			carpathia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			define_general = {
+				shock = 5
+				fire = 5
+				manuever = 2
+				siege = 2
+			}
+			add_country_modifier = {
+				name = "rho_dacian_fury"
+				duration = 10950
 			}
 		}
 	}

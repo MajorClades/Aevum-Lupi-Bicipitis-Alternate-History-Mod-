@@ -555,13 +555,13 @@ country_event = { #old ideas bad
 		has_institution = renaissance
 	}
 	mean_time_to_happen = {
-		months = 120
+		months = 12
 	}
 	fire_only_once = yes
 	option = {
 		name = rhom.12a
 		ai_chance = {
-			factor = 60
+			factor = 40
 		}
 		add_adm_power = -50
 		add_dip_power = -50
@@ -570,7 +570,7 @@ country_event = { #old ideas bad
 	option = {
 		name = rhom.12b
 		ai_chance = {
-			factor = 40
+			factor = 60
 		}
 		add_government_power = {
 			mechanic_type = rhoman_decadence_mechanic
@@ -644,6 +644,8 @@ country_event = { #egyp event
 			factor = 40
 		}
 		358 = {
+			add_base_tax = 2
+			add_base_production = 2
 			add_great_project_tier = {
 				type = alexandria_library
 				tier = 1
@@ -663,17 +665,29 @@ country_event = { #afric event
 		ai_chance = {
 			factor = 70
 		}
-		every_owned_province = {
+		if = {
 			limit = {
-				region = maghreb_region
-				NOT = {
-					religion = ROOT
+				any_owned_province = {
+					region = maghreb_region
+					NOT = {
+						religion = ROOT
+					}
 				}
 			}
-			add_province_modifier = {
-				name = rho_conquest_of_africa
-				duration = 10950
+			every_owned_province = {
+				limit = {
+					region = maghreb_region
+					NOT = {
+						religion = ROOT
+					}
+				}
+				add_province_modifier = {
+					name = rho_conquest_of_africa
+					duration = 10950
+				}
 			}
+		}else = {
+			add_stability_or_adm_power = yes
 		}
 	}
 	option = {
@@ -682,7 +696,7 @@ country_event = { #afric event
 			factor = 30
 		}
 		define_advisor = {
-			type = theologian
+			type = inquisitor
 			skill = 3
 			discount = yes
 		}
@@ -768,6 +782,42 @@ country_event = { #stronger armies
 			name = rho_mil_stronger_5
 			duration = -1
 		}
+	}
+}
+country_event = { #restore Magna Grekia
+	id = rhom.17
+	title = rhom.17.test
+	desc = rhom.17.desc
+	picture = BYZ_BAD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = rhom.17a
+		ai_chance = {
+			factor = 70
+		}
+		apulia_area = {
+			change_culture = greek_new
+		}
+		calabria_area = {
+			change_culture = greek_new
+		}
+		naples_area = {
+			change_culture = greek_new
+		}
+		western_sicily_area = {
+			change_culture = greek_new
+		}
+		sicily_area = {
+			change_culture = greek_new
+		}
+	}
+	option = {
+		name = rhom.17b
+		ai_chance = {
+			factor = 30
+		}
+		add_dip_power = 300
 	}
 }
 country_event = {
