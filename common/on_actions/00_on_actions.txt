@@ -665,35 +665,6 @@ on_siege_won_country = {
 		}
 	}
 	grant_manpower_from_besieging_fort = yes
-	if = {
-		limit = {
-			has_dlc = "Domination"
-			not = { tag = MAM }
-			exists = MAM
-			FROM = {
-				is_capital = yes
-				owner = { tag = MAM }
-			}
-			root = {
-				or = {
-					tag = TUR
-					and = {
-						is_subject = yes
-						is_subject_of = TUR
-						is_subject_other_than_tributary_trigger = yes
-					}
-				}
-				is_in_war = {
-					casus_belli = cb_ottoman_invasion
-					attacker_leader = TUR
-					defender_leader = MAM
-				}
-			}
-		}
-		TUR = {
-			country_event = { id = flavor_tur.240 }	#Collapse of the Mamluks
-		}
-	}
 	events = {
 		tyw_events.14 # Fall of Prague in Religious War
 		flavor_oir.5 # Oirats capture Beijing
