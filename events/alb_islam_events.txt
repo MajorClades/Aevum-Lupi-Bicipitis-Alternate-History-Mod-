@@ -99,7 +99,7 @@ country_event = {
 		}
 	}
 	mean_time_to_happen = {
-		months = 200
+		months = 100
 		modifier = {
 			factor = 0.9
 			has_country_modifier = accepting_to_rashidis_modifier
@@ -171,7 +171,7 @@ country_event = {
 	
 	is_triggered_only = yes
 	option = {
-		name = alb_islam_events.2a
+		name = alb_islam_events.3a
 		random_owned_province = {
 			limit = {
 				religion = islam
@@ -183,7 +183,7 @@ country_event = {
 		}
 	}
 	option = {
-		name = alb_islam_events.2b
+		name = alb_islam_events.3b
 		random_owned_province = {
 			limit = {
 				religion = islam
@@ -197,5 +197,211 @@ country_event = {
 			name = accepting_to_rashidis_modifier
 			duration = -1
 		}
+	}
+}
+
+#The Rashidi Caliphate
+country_event = {
+	id = alb_islam_events.4
+	title = alb_islam_events.4.test
+	desc = alb_islam_events.4.desc
+	picture = muslimgfx_REFORM_eventPicture
+	
+	trigger = {
+		REB = {
+			NOT = {
+				check_variable = {
+					which = caliph_authority_var
+					value = 0.001
+				}
+			}
+		}
+		any_province = {
+			OR = {
+				has_province_modifier = rashidi_community_in_province
+				has_province_modifier = jafar_al_rashidi_activity
+			}
+		}
+		has_global_flag = jafar_al_rashid_preaching
+	}
+	mean_time_to_happen = {
+		months = 6
+	}
+
+	immediate = {
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						has_province_modifier = rashidi_community_in_province
+						has_province_modifier = jafar_al_rashidi_activity
+					}
+				}
+				cede_province = RS0
+				add_core = RS0
+				random_list = {
+					50 = {
+						change_religion = rashidi
+					}
+					50 = {
+						
+					}
+				}
+			}
+			RS0 = {
+				if = {
+					limit = {
+						is_year = 1565
+					}
+					define_ruler = {
+						name = "Muhammad al-Jeddahi"
+						dynasty = "Usfurid"
+						claim = 95
+						adm = 5
+						dip = 3
+						mil = 3
+						age = 44
+					}
+				}
+				add_manpower = 10
+				add_treasury = 500
+				save_global_event_target_as = alb_rashidi_caliphate_target
+			}
+			RS0 = {
+				capital_scope = {
+					infantry = RS0
+					infantry = RS0
+					infantry = RS0
+					infantry = RS0
+					infantry = RS0
+					infantry = RS0
+					infantry = RS0
+					infantry = RS0
+					infantry = RS0
+					infantry = RS0
+					infantry = RS0
+					infantry = RS0
+					infantry = RS0
+					infantry = RS0
+					infantry = RS0
+					infantry = RS0
+					infantry = RS0
+					infantry = RS0
+					infantry = RS0
+					infantry = RS0
+					infantry = RS0
+					cavalry = RS0
+					cavalry = RS0
+					cavalry = RS0
+					cavalry = RS0
+					cavalry = RS0
+					cavalry = RS0
+					cavalry = RS0
+					cavalry = RS0
+					cavalry = RS0
+					cavalry = RS0
+					cavalry = RS0
+					cavalry = RS0
+					cavalry = RS0
+					cavalry = RS0
+					cavalry = RS0
+					cavalry = RS0
+					artillery = RS0
+					artillery = RS0
+					artillery = RS0
+					artillery = RS0
+					artillery = RS0
+					artillery = RS0
+					artillery = RS0
+					artillery = RS0
+					artillery = RS0
+					artillery = RS0
+					artillery = RS0
+					artillery = RS0
+				}
+				add_country_modifier = {
+					name = alb_rise_of_rashidi_caliphate
+					duration = 9125
+				}
+			}
+			every_country = {
+				limit = {
+					any_owned_province = {
+						OR = {
+							has_province_modifier = rashidi_community_in_province
+							has_province_modifier = jafar_al_rashidi_activity
+						}
+					}
+				}
+				country_event = {
+					id = alb_islam_events.5
+				}
+			}
+		}
+	}
+	option = {
+		name = alb_islam_events.4a
+		declare_war_with_cb = {
+			casus_belli = cb_annex
+			who = RS0
+		}
+		
+	}
+	option = {
+		name = alb_islam_events.4b
+		declare_war_with_cb = {
+			casus_belli = cb_annex
+			who = RS0
+		}
+		change_tag = RS0
+
+	}
+}
+
+#The Rashidi Caliphate for other countries
+country_event = {
+	id = alb_islam_events.5
+	title = alb_islam_events.5.test
+	desc = alb_islam_events.5.desc
+	picture = muslimgfx_REFORM_eventPicture
+	
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						has_province_modifier = rashidi_community_in_province
+						has_province_modifier = jafar_al_rashidi_activity
+					}
+				}
+				cede_province = RS0
+				add_core = RS0
+				random_list = {
+					50 = {
+						change_religion = rashidi
+					}
+					50 = {
+						
+					}
+				}
+			}
+		}
+	}
+	option = {
+		name = alb_islam_events.5a
+		declare_war_with_cb = {
+			casus_belli = cb_annex
+			who = RS0
+		}
+	}
+	option = {
+		name = alb_islam_events.5b
+		declare_war_with_cb = {
+			casus_belli = cb_annex
+			who = RS0
+		}
+		change_tag = RS0
 	}
 }

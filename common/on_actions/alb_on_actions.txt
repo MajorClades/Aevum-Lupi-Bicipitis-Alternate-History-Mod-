@@ -339,3 +339,36 @@ on_province_religion_converted = {
 		}
 	}
 }
+
+# province
+# root = location, from = losing country
+on_siege_won_province = {
+
+}
+
+# province
+# root = location, from = winning country
+on_siege_lost_province =  {
+	if = {
+		limit = {
+			FROM = {
+				has_country_modifier = alb_rise_of_rashidi_caliphate
+			}
+		}
+		cede_province = FROM
+		controller = {
+			add_core = ROOT
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_country_modifier = alb_rise_of_rashidi_caliphate
+			}
+		}
+		cede_province = FROM
+		FROM = {
+			add_core = ROOT
+		}
+	}
+}
