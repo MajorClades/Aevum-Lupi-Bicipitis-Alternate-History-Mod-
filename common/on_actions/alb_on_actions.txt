@@ -8,6 +8,19 @@ on_startup = {
 		rhom.1
 	}
 }
+on_regiment_recruited = {
+	FROM = {
+		if = {
+			limit = {
+				has_country_modifier = rom_legions
+			}
+			random = {
+				chance = 5
+				add_army_tradition = 1
+			}
+		}
+	}
+}
 on_war_lost = {
 	if = {
 		limit = { 
@@ -332,10 +345,12 @@ on_province_religion_converted = {
 			}
 		}
 		}
-		add_government_power = {
-			mechanic_type = baldrlight_mechanic
-			power_type = lightness_power
-			value = 5
+		owner = {
+			add_government_power = {
+				mechanic_type = baldrlight_mechanic
+				power_type = lightness_power
+				value = 5
+			}
 		}
 	}
 }

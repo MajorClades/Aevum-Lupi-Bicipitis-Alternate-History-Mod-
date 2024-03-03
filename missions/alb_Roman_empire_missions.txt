@@ -1,0 +1,446 @@
+Roman_empire_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = ROM } 
+
+	roman_legions = {
+		icon = mission_have_two_subjects
+		position = 1
+		trigger = {
+			has_leader_with = {
+				total_pips = 13
+			}
+			army_size = 100
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = rom_legions
+				duration = 10950
+			}
+			custom_tooltip = ROM_TT_3
+		}
+	}
+
+}
+
+Roman_empire_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = ROM }
+
+	iberian_woes = {
+		icon = mission_mediterranean_islands
+		position = 2
+		required_missions = { when_in_rome } 
+		provinces_to_highlight = { region = iberia_region } 
+
+		trigger = {
+			iberia_region = {
+				type = all
+				owned_by = ROOT
+				num_of_buildings_in_province = 2
+				NOT = {
+					local_autonomy = 1
+				}
+			}
+		}
+
+		effect = {
+			if = {
+				limit = {
+					primary_culture = romano_iberic
+				}
+				add_stability_or_adm_power = yes
+				iberia_region = {
+					add_base_manpower = 1
+				}
+			}else = {
+				add_accepted_culture = romano_iberic
+				iberia_region = {
+					change_culture = romano_iberic
+				}
+			}
+		}
+	}
+	cartago_repaired_est = {
+		icon = mission_mediterranean_islands
+		position = 3
+		required_missions = { iberian_woes } 
+		provinces_to_highlight = { region = maghreb_region } 
+
+		trigger = {
+			maghreb_region = {
+				type = all
+				owned_by = ROOT
+				num_of_buildings_in_province = 2
+				NOT = {
+					local_autonomy = 1
+				}
+			}
+		}
+
+		effect = {
+			if = {
+				limit = {
+					primary_culture = romano_afric
+				}
+				add_stability_or_adm_power = yes
+				maghreb_region = {
+					add_base_manpower = 1
+				}
+			}else = {
+				add_accepted_culture = romano_afric
+				maghreb_region = {
+					change_culture = romano_afric
+				}
+			}
+		}
+	}
+}
+
+Roman_empire_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = ROM } 
+
+	when_in_rome = {
+		icon = mission_have_two_subjects
+		position = 1
+		provinces_to_highlight = {
+			province_id = 118
+		}
+		trigger = {
+			OR = {
+				capital_scope = {
+					development = 50
+					num_of_buildings_in_province = 6
+				}
+				118 = {
+					is_capital_of = ROOT
+					owned_by = ROOT
+					development = 50
+				}
+			}
+		}
+
+		effect = {
+			if = {
+				limit = {
+					capital_scope = {
+						region = british_isles_region
+					}
+				}
+				change_primary_culture = romano_britannic
+				british_isles_region = {
+					change_culture = romano_britannic
+				}
+			}
+			else_if = {
+				limit = { 
+					capital_scope = {
+						region = france_region
+					}
+				}
+				change_primary_culture = romano_gallic
+				france_region = {
+					change_culture = romano_gallic
+				}
+			}
+			else_if = {
+				limit = { 
+					capital_scope = {
+						region = iberia_region
+					}
+				}
+				change_primary_culture = romano_iberic
+				iberia_region = {
+					change_culture = romano_iberic
+				}
+			}
+			else_if = {
+				limit = { 
+					capital_scope = {
+						region = italy_region
+					}
+				}
+				change_primary_culture = romano_italic
+				italy_region = {
+					change_culture = romano_italic
+				}
+			}
+			else_if = {
+				limit = { 
+					capital_scope = {
+						region = maghreb_region
+					}
+				}
+				change_primary_culture = romano_afric
+				maghreb_region = {
+					change_culture = romano_afric
+				}
+			}
+			else_if = {
+				limit = { 
+					capital_scope = {
+						region = egypt_region
+					}
+				}
+				change_primary_culture = romano_kemetic
+				egypt_region = {
+					change_culture = romano_kemetic
+				}
+			}
+			else_if = {
+				limit = { 
+					capital_scope = {
+						region = mashriq_region
+					}
+				}
+				change_primary_culture = romano_syric
+				mashriq_region = {
+					change_culture = romano_syric
+				}
+			}
+			else_if = {
+				limit = { 
+					capital_scope = {
+						region = anatolia_region
+					}
+				}
+				change_primary_culture = romano_anatolic
+				anatolia_region = {
+					change_culture = romano_anatolic
+				}
+			}
+			else_if = {
+				limit = { 
+					capital_scope = {
+						region = balkan_region
+					}
+				}
+				change_primary_culture = romano_illyric
+				balkan_region = {
+					change_culture = romano_illyric
+				}
+			}
+			else_if = {
+				limit = { 
+					capital_scope = {
+						region = carpathia_region
+					}
+				}
+				change_primary_culture = romano_pannonic
+				carpathia_region = {
+					change_culture = romano_pannonic
+				}
+			}
+			else = {
+				change_primary_culture = romano_italic
+				italy_region = {
+					change_culture = romano_italic
+				}
+			}
+		}
+	}
+
+	do_as_rome_does = {
+		icon = mission_mediterranean_islands
+		position = 2
+		required_missions = { when_in_rome } 
+		provinces_to_highlight = { region = italy_region } 
+
+		trigger = {
+			italy_region = {
+				type = all
+				owned_by = ROOT
+				num_of_buildings_in_province = 2
+				NOT = {
+					local_autonomy = 1
+				}
+			}
+		}
+
+		effect = {
+			if = {
+				limit = {
+					primary_culture = romano_italic
+				}
+				add_stability_or_adm_power = yes
+				italy_region = {
+					add_base_manpower = 1
+				}
+			}else = {
+				add_accepted_culture = romano_italic
+				italy_region = {
+					change_culture = romano_italic
+				}
+			}
+		}
+	}
+	de_brutto_gallico = {
+		icon = mission_mediterranean_islands
+		position = 4
+		required_missions = { do_as_rome_does } 
+		provinces_to_highlight = { region = france_region } 
+
+		trigger = {
+			france_region = {
+				type = all
+				owned_by = ROOT
+				num_of_buildings_in_province = 2
+				NOT = {
+					local_autonomy = 1
+				}
+			}
+		}
+
+		effect = {
+			if = {
+				limit = {
+					primary_culture = romano_gallic
+				}
+				add_stability_or_adm_power = yes
+				france_region = {
+					add_base_manpower = 1
+				}
+			}else = {
+				add_accepted_culture = romano_gallic
+				france_region = {
+					change_culture = romano_gallic
+				}
+			}
+		}
+	}
+}
+
+Roman_empire_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = ROM } 
+
+	hellenic_woes = {
+		icon = mission_mediterranean_islands
+		position = 2
+		required_missions = { when_in_rome } 
+		provinces_to_highlight = { region = balkan_region } 
+
+		trigger = {
+			balkan_region = {
+				type = all
+				owned_by = ROOT
+				num_of_buildings_in_province = 2
+				NOT = {
+					local_autonomy = 1
+				}
+			}
+		}
+
+		effect = {
+			if = {
+				limit = {
+					primary_culture = romano_illyric
+				}
+				add_stability_or_adm_power = yes
+				balkan_region = {
+					add_base_manpower = 1
+				}
+			}else = {
+				add_accepted_culture = romano_illyric
+				balkan_region = {
+					change_culture = romano_illyric
+				}
+			}
+		}
+	}
+	byzantine_restoring = {
+		icon = mission_mediterranean_islands
+		position = 3
+		required_missions = { hellenic_woes } 
+		provinces_to_highlight = { region = anatolia_region } 
+
+		trigger = {
+			anatolia_region = {
+				type = all
+				owned_by = ROOT
+				num_of_buildings_in_province = 2
+				NOT = {
+					local_autonomy = 1
+				}
+			}
+		}
+
+		effect = {
+			if = {
+				limit = {
+					primary_culture = romano_anatolic
+				}
+				add_stability_or_adm_power = yes
+				anatolia_region = {
+					add_base_manpower = 1
+				}
+			}else = {
+				add_accepted_culture = romano_anatolic
+				anatolia_region = {
+					change_culture = romano_anatolic
+				}
+			}
+		}
+	}
+}
+
+Roman_empire_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = ROM } 
+
+	imperial_governance = {
+		icon = mission_mediterranean_islands
+		position = 1
+		provinces_to_highlight = { can_build = state_house } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 30
+				has_building = state_house
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = roman_cool_admin
+				duration = -1
+			}
+			custom_tooltip = ROM_TT_4
+			tooltip = {
+				random_owned_province = {
+					add_province_modifier = {
+						name = rom_extra_administration
+						duration = -1
+					}
+				}	
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						has_building = state_house
+					}
+					add_province_modifier = {
+						name = rom_extra_administration
+						duration = -1
+					}
+				}
+			}
+		}
+	}
+}
