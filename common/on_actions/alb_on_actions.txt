@@ -8,6 +8,12 @@ on_startup = {
 		rhom.1
 	}
 }
+on_province_culture_changed = {
+	if = {
+		limit = {owner = { has_country_flag = romanization_culture_change}}
+		add_nationalism = -5
+	}
+}
 on_regiment_recruited = {
 	FROM = {
 		if = {
@@ -183,6 +189,17 @@ on_main_war_won = {
 			value = 10
 		}
 		}
+	}
+	if = {
+		limit = {
+			OR = {
+				has_country_modifier = redleg_prepare_for_crusade
+				has_country_modifier = redleg_prepare_for_crusade_AI
+			}
+		}
+		remove_country_modifier = redleg_prepare_for_crusade
+		remove_country_modifier = redleg_prepare_for_crusade_AI
+
 	}
 }
 
