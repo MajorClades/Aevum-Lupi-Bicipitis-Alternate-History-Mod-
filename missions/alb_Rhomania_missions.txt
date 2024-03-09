@@ -73,6 +73,10 @@ Rhomania_1_slot = {
 				base_manpower = 7
 				has_manpower_building_trigger = yes
 			}
+			151 = {
+				development = 30
+				has_manpower_building_trigger = yes
+			}
 		}
 
 		effect = {
@@ -98,8 +102,10 @@ Rhomania_1_slot = {
 		effect = {
 			add_country_modifier = {
 				name = "rho_use_that_fire"
-				duration = 10950
+				duration = 5475
 			}
+
+			custom_tooltip = rho_more_soldier_tt
 		}
 	}
 
@@ -372,7 +378,7 @@ Rhomania_2_slot = {
 			tooltip = {
 				random_country = {
 					limit = { religion = catholic } 
-					add_stability = -2
+					add_stability = -1
 					add_aggressive_expansion = {
 						who = ROOT
 						value = 15
@@ -383,7 +389,7 @@ Rhomania_2_slot = {
 			hidden_effect = {
 				every_known_country = {
 					limit = { religion = catholic } 
-					add_stability = -2
+					add_stability = -1
 					add_aggressive_expansion = {
 						who = ROOT
 						value = 15
@@ -795,7 +801,7 @@ Rhomania_3_slot = {
 				capital_scope = {
 					add_permanent_province_modifier = {
 						name = "rho_conquerors"
-						duration = 10950
+						duration = 3650
 					}
 				}
 			}
@@ -844,11 +850,23 @@ Rhomania_4_slot = {
 		trigger = {
 			num_of_owned_provinces_with = {
 				value = 10
+				base_production = 5
 				has_trade_building_trigger = yes
 			}
 		}
 
-		effect = { add_years_of_income = 1 } 
+		effect = { 
+			add_years_of_trade_income = {
+				years = 2
+			}
+			random_owned_province = {
+				limit = {
+					has_trade_building_trigger = yes
+					base_production = 5
+				}
+				change_trade_goods = silk
+			}
+		} 
 	}
 
 	rho_syrian_faith = {
@@ -1042,9 +1060,13 @@ Rhomania_5_slot = {
 
 		trigger = {
 			total_development = 1000
-			OR = {
-				religious_unity = 0.9
-				inquisitor = 4
+			religious_unity = 0.95
+			NOT = {
+				any_country = {
+					religion = islam
+					prestige = ROOT
+					total_development = ROOT
+				}
 			}
 		}
 
@@ -1052,6 +1074,18 @@ Rhomania_5_slot = {
 			add_country_modifier_for_age = {
 				name = "rho_islam_war_1"
 				age = age_of_reformation
+			}
+			custom_tooltip = rho_caliphate_tt
+			hidden_effect = {
+				every_country = {
+					limit = {
+						religion = islam
+					}
+					add_opinion = {
+						who = ROOT
+						modifier = rho_caliph_leader
+					}
+				}
 			}
 		}
 	}
@@ -1084,36 +1118,41 @@ Rhomania_5_slot = {
 			151 = {
 				development = 25
 				num_of_buildings_in_province = 5
+				has_trade_building_trigger = yes
 			}
-			num_of_owned_provinces_with = {
-				value = 5
-				OR = {
-					province_id = 151
-					province_id = 316
-					province_id = 317
-					province_id = 2296
-					province_id = 4779
-				}
+			316 = {
+				development = 15
+				has_manpower_building_trigger = yes
+			}
+			317 = {
+				development = 15
+				has_production_building_trigger = yes
+			}
+			2296 = {
+				development = 15
+				has_tax_building_trigger = yes
+			}
+			4779 = {
+				development = 15
+				has_shipyard_building_trigger = yes
 			}
 		}
 
 		effect = {
-			151 = { add_or_upgrade_tax_building = yes } 
+			151 = { 
+				add_or_upgrade_trade_building = yes
+			} 
 			316 = {
-				add_base_tax = 1
-				add_or_upgrade_tax_building = yes
+				add_or_upgrade_manpower_building = yes
 			}
 			317 = {
-				add_base_tax = 1
-				add_or_upgrade_tax_building = yes
+				add_or_upgrade_production_building = yes
 			}
 			2296 = {
-				add_base_tax = 1
 				add_or_upgrade_tax_building = yes
 			}
 			4779 = {
-				add_base_tax = 1
-				add_or_upgrade_tax_building = yes
+				add_or_upgrade_shipyard_building = yes
 			}
 		}
 	}
