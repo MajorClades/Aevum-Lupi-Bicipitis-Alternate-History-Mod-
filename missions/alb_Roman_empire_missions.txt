@@ -136,6 +136,53 @@ Roman_empire_1_slot = {
 			}
 		}
 	}
+	provincia_americana = {
+		icon = mission_mediterranean_islands
+		position = 12
+		required_missions = {roma_grand_empire}
+		provinces_to_highlight = {
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			OR = {
+				continent = north_america
+				continent = south_america
+			}
+			is_sea = no
+			is_wasteland = no
+		}
+		trigger = {
+			north_america = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				is_sea = no
+				is_wasteland = no
+			}
+			south_america = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				is_sea = no
+				is_wasteland = no
+			}
+		}
+
+		effect = {
+			every_subject_country = {
+				limit = {
+					capital_scope = {
+						OR = {
+							continent = north_america
+							continent = south_america
+						}
+					}
+				}
+				add_country_modifier = {
+					name = rom_colonia_americana
+					duration = -1
+				}
+			}
+		}
+	}
 }
 
 Roman_empire_2_slot = {
@@ -366,6 +413,34 @@ Roman_empire_2_slot = {
 			}
 			russia_region = {
 				add_permanent_claim = ROOT
+			}
+		}
+	}
+	provincia_lybica = {
+		icon = mission_mediterranean_islands
+		position = 12
+		required_missions = {roma_grand_empire}
+		provinces_to_highlight = {
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			continent = africa
+			is_sea = no
+			is_wasteland = no
+		}
+		trigger = {
+			africa = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				is_sea = no
+				is_wasteland = no
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = rom_provincia_lybica
+				duration = -1
 			}
 		}
 	}
@@ -617,10 +692,8 @@ Roman_empire_3_slot = {
 		trigger = {
 			all_province = {
 				is_sea = no
-				OR = {
-					owned_by = ROOT
-					owned_by_subject_of = ROOT
-				}
+				is_wasteland = no
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 
@@ -739,6 +812,34 @@ Roman_empire_3_slot = {
 				south_america = {
 					add_permanent_claim = ROOT
 				}
+			}
+		}
+	}
+	iupiter_europa = {
+		icon = mission_mediterranean_islands
+		position = 12
+		required_missions = {roma_grand_empire}
+		provinces_to_highlight = {
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			continent = europe
+			is_sea = no
+			is_wasteland = no
+		}
+		trigger = {
+			europe = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				is_sea = no
+				is_wasteland = no
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = rom_europa_universalis
+				duration = -1
 			}
 		}
 	}
@@ -884,6 +985,9 @@ Roman_empire_4_slot = {
 		trigger = {
 			num_of_provinces_owned_or_owned_by_subjects_with = {
 				value = 1000
+				custom_trigger_tooltip = {
+					tooltip = ROM_TT_6
+				}
 			}
 		}
 
@@ -967,6 +1071,34 @@ Roman_empire_4_slot = {
 			}
 			hindusthan_region = {
 				add_permanent_claim = ROOT
+			}
+		}
+	}
+	magna_asia = {
+		icon = mission_mediterranean_islands
+		position = 12
+		required_missions = {roma_grand_empire}
+		provinces_to_highlight = {
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			continent = asia
+			is_sea = no
+			is_wasteland = no
+		}
+		trigger = {
+			asia = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				is_sea = no
+				is_wasteland = no
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = rom_magna_asia
+				duration = -1
 			}
 		}
 	}
@@ -1128,6 +1260,34 @@ Roman_empire_5_slot = {
 			}
 			country_event = {
 				id = roman_emp.3
+			}
+		}
+	}
+	terra_australis = {
+		icon = mission_mediterranean_islands
+		position = 12
+		required_missions = {roma_grand_empire}
+		provinces_to_highlight = {
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			continent = oceania
+			is_sea = no
+			is_wasteland = no
+		}
+		trigger = {
+			oceania = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				is_sea = no
+				is_wasteland = no
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = rom_down_under
+				duration = -1
 			}
 		}
 	}
