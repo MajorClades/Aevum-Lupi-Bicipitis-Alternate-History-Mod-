@@ -92,4 +92,51 @@ country_decisions = {
 			}
 		}
 	}
+
+	alb_restore_caliphal_authority_dec = {
+		potential = {
+			NOT = {
+				REB = {
+					check_variable = {
+						which = caliph_authority_var
+						value = 0.1
+					}
+				}
+			}
+			tag = event_target:islam_caliph_target
+			RS0 = {
+				exists = yes
+			}
+			NOT = {
+				has_global_flag = caliph_authority_restored
+			}
+		}
+		major = yes
+		allow = {
+			dip_power = 100
+			adm_power = 100
+			mil_power = 100
+			has_won_war_against = {
+				who = RS0
+			}
+			NOT = {
+				calc_true_if = {
+					amount = 50
+					all_province = {
+						religion = rashidi
+					}
+				}
+			}
+		}
+		effect = {
+			add_dip_power = -100
+			add_mil_power = -100
+			add_adm_power = -100
+			custom_tooltip = alb_caliph_authority_will_tick_up_now_tt
+			set_global_flag = caliph_authority_restored
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
 }

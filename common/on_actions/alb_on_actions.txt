@@ -229,7 +229,27 @@ on_main_war_lost = {
 		}
 	}
 }
-
+on_monthly_pulse = {
+	if = {
+		limit = {
+			NOT = {
+				REB = {
+					check_variable = {
+						which = caliph_authority_var
+						value = 100
+					}
+				}
+			}
+			has_global_flag = caliph_authority_restored
+		}
+		REB = {
+			change_variable = {
+				which = caliph_authority_var
+				value = 0.42
+			}
+		}
+	}
+}
 on_monarch_death = {
 
 	if = {
@@ -410,5 +430,15 @@ on_siege_lost_province =  {
 		FROM = {
 			add_core = ROOT
 		}
+	}
+}
+
+on_bi_yearly_pulse_5 = {
+	random_events = { #all these were shifted from on_bi_yearly_pulse_1
+		#Islam
+		100 = alb_islam_events.6
+		100 = alb_islam_events.7
+		100 = alb_islam_events.8
+		2000 = 0
 	}
 }
