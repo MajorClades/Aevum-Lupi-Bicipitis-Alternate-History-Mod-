@@ -1,0 +1,26 @@
+cb_vassalize_maharlika = {
+	valid_for_subject = no
+
+	prerequisites_self = {
+		FROM = {
+			is_free_or_tributary_trigger = yes
+			culture = filipino
+		}
+	}
+
+	prerequisites = {
+		FROM = {
+			is_free_or_tributary_trigger = yes
+			OR = {
+				culture_group = filipino
+				AND = {
+					technology_group = chinese
+					ROOT = { num_of_non_tributary_subjects = 3 }
+				}
+				ROOT = { num_of_non_tributary_subjects = 15 }
+			}
+		}
+	}
+
+	war_goal = take_capital_vassalize_mhl
+}
