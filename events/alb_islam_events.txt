@@ -6,7 +6,6 @@ country_event = {
 	title = alb_islam_events.1.test
 	desc = alb_islam_events.1.desc
 	picture = muslimgfx_REFORM_eventPicture
-	
 	trigger = {
 		is_year = 1520
 		REB = {
@@ -206,13 +205,13 @@ country_event = {
 	title = alb_islam_events.4.test
 	desc = alb_islam_events.4.desc
 	picture = muslimgfx_REFORM_eventPicture
-	
+	fire_only_once = yes
 	trigger = {
 		REB = {
 			NOT = {
 				check_variable = {
 					which = caliph_authority_var
-					value = 0.001
+					value = 0.1
 				}
 			}
 		}
@@ -413,5 +412,154 @@ country_event = {
 			who = RS0
 		}
 		change_tag = RS0
+	}
+}
+
+#Quran in Greek?
+country_event = {
+	id = alb_islam_events.6
+	title = alb_islam_events.6.test
+	desc = alb_islam_events.6.desc
+	picture = muslimgfx_REFORM_eventPicture
+	
+	is_triggered_only = yes
+	trigger = {
+		religion = islam
+		REB = {
+			check_variable = {
+				which = caliph_authority_var
+				value = 1
+			}
+		}
+	}
+
+	option = {
+		name = alb_islam_events.6a
+		add_prestige = -10
+		add_to_caliph_authority = {
+			amount = 2
+		}
+	}
+	option = {
+		name = alb_islam_events.6b
+		add_prestige = 10
+		subtract_from_caliph_authority = {
+			amount = 0.5
+		}
+	}
+}
+
+#Jizya?
+country_event = {
+	id = alb_islam_events.7
+	title = alb_islam_events.7.test
+	desc = alb_islam_events.7.desc
+	picture = muslimgfx_REFORM_eventPicture
+	
+	is_triggered_only = yes
+	trigger = {
+		religion = islam
+		NOT = {
+			has_country_modifier = alb_no_jizya_modifier
+		}
+		REB = {
+			check_variable = {
+				which = caliph_authority_var
+				value = 1
+			}
+		}
+	}
+
+	option = {
+		name = alb_islam_events.7a
+		add_country_modifier = {
+			name = alb_no_jizya_modifier
+			duration = 3650
+		}
+		add_to_caliph_authority = {
+			amount = 1
+		}
+	}
+	option = {
+		name = alb_islam_events.7b
+		add_owned_provinces_development_ducats = {
+			custom_tooltip = FROM_PROVINCES_OF_HEATHEN_OR_HERETIC_RELIGION
+			trigger = {
+				NOT = {
+					religion = ROOT
+				}
+			}
+			multiplier = 2
+			age_multiplier = 1
+		}
+		subtract_from_caliph_authority = {
+			amount = 2.5
+		}
+	}
+}
+
+#Conversion of Heathens
+country_event = {
+	id = alb_islam_events.8
+	title = alb_islam_events.8.test
+	desc = alb_islam_events.8.desc
+	picture = muslimgfx_REFORM_eventPicture
+	
+	is_triggered_only = yes
+	trigger = {
+		religion = islam
+		any_owned_province = {
+			NOT = {
+				religion = ROOT
+			}
+			NOT = {
+				has_province_modifier = alb_no_convert_heathens_modifier
+			}
+		}
+		REB = {
+			check_variable = {
+				which = caliph_authority_var
+				value = 1
+			}
+		}
+	}
+
+	immediate = {
+		random_owned_province = {
+			limit = {
+				NOT = {
+					religion = ROOT
+				}
+				NOT = {
+					has_province_modifier = alb_no_convert_heathens_modifier
+				}
+			}
+			save_event_target_as = alb_heathen_province_to_convert
+		}
+	}
+
+	option = {
+		name = alb_islam_events.8a
+		event_target:alb_heathen_province_to_convert = {
+			add_province_modifier = {
+				name = alb_no_heathens_modifier
+				duration = 5475
+			}
+		}
+		add_to_caliph_authority = {
+			amount = 2.5
+		}
+	}
+	option = {
+		name = alb_islam_events.8b
+		event_target:alb_heathen_province_to_convert = {
+			add_province_modifier = {
+				name = alb_no_convert_heathens_modifier
+				duration = 5475
+			}
+		}
+		subtract_from_caliph_authority = {
+			amount = 1
+		}
 	}
 }
