@@ -7,7 +7,7 @@ country_event = {
 	desc = alb_islam_events.1.desc
 	picture = muslimgfx_REFORM_eventPicture
 	trigger = {
-		is_year = 1520
+		is_year = 1515
 		REB = {
 			NOT = {
 				check_variable = {
@@ -44,6 +44,9 @@ country_event = {
 			}
 		}
 		set_global_flag = jafar_al_rashid_preaching
+		subtract_from_caliph_authority = {
+			amount = 5
+		}
 	}
 	option = {
 		name = alb_islam_events.1b
@@ -68,6 +71,9 @@ country_event = {
 			duration = -1
 		}
 		set_global_flag = jafar_al_rashid_preaching
+		subtract_from_caliph_authority = {
+			amount = 5
+		}
 	}
 }
 
@@ -145,6 +151,9 @@ country_event = {
 				duration = -1
 			}
 		}
+		subtract_from_caliph_authority = {
+			amount = 2.5
+		}
 	}
 	option = {
 		name = alb_islam_events.2b
@@ -157,6 +166,9 @@ country_event = {
 		add_country_modifier = {
 			name = accepting_to_rashidis_modifier
 			duration = -1
+		}
+		subtract_from_caliph_authority = {
+			amount = 2.5
 		}
 	}
 }
@@ -229,6 +241,10 @@ country_event = {
 
 	immediate = {
 		hidden_effect = {
+			every_province = {
+				remove_province_modifier = rashidi_community_in_province
+				remove_province_modifier = jafar_al_rashidi_activity
+			}
 			every_owned_province = {
 				limit = {
 					OR = {
@@ -238,8 +254,6 @@ country_event = {
 				}
 				cede_province = RS0
 				add_core = RS0
-				remove_province_modifier = rashidi_community_in_province
-				remove_province_modifier = jafar_al_rashidi_activity
 				random_list = {
 					50 = {
 						change_religion = rashidi
@@ -264,8 +278,14 @@ country_event = {
 						age = 44
 					}
 				}
-				add_manpower = 30
+				add_manpower = 50
 				add_treasury = 500
+				create_general = {
+					tradition = 100
+				}
+				create_general = {
+					tradition = 80
+				}
 				save_global_event_target_as = alb_rashidi_caliphate_target
 			}
 			RS0 = {
@@ -437,14 +457,14 @@ country_event = {
 		name = alb_islam_events.6a
 		add_prestige = -10
 		add_to_caliph_authority = {
-			amount = 2
+			amount = 0.5
 		}
 	}
 	option = {
 		name = alb_islam_events.6b
 		add_prestige = 10
 		subtract_from_caliph_authority = {
-			amount = 0.5
+			amount = 2
 		}
 	}
 }
@@ -547,7 +567,7 @@ country_event = {
 			}
 		}
 		add_to_caliph_authority = {
-			amount = 2.5
+			amount = 1
 		}
 	}
 	option = {
@@ -559,7 +579,7 @@ country_event = {
 			}
 		}
 		subtract_from_caliph_authority = {
-			amount = 1
+			amount = 2.5
 		}
 	}
 }
