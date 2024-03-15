@@ -1,0 +1,96 @@
+namespace = zimmska
+
+#Brjika vassalize slasmeri triangle members
+country_event = {
+	id = zimmska.1
+	title = zimmska.1.test
+	desc = zimmska.1.desc
+	picture = GOOD_WITH_MONARCH_eventPicture
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	option = {
+		name = zimmska.1a
+		if = {
+			limit = {
+				JU1 = {
+					alliance_with = ROOT
+				}
+			}
+			custom_tooltip = alb_zimmska_offer_to_be_vassal_tt
+			JU1 = {
+				country_event = {
+					id = zimmska.2
+				}
+			}
+		}
+		if = {
+			limit = {
+				TS1 = {
+					alliance_with = ROOT
+				}
+			}
+			custom_tooltip = alb_zimmska_offer_to_be_vassal_tt
+			TS1 = {
+				country_event = {
+					id = zimmska.2
+				}
+			}
+		}
+	}
+}
+
+#Slasmeri triangle members side
+country_event = {
+	id = zimmska.2
+	title = zimmska.2.test
+	desc = zimmska.2.desc
+	picture = GOOD_WITH_MONARCH_eventPicture
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	option = {
+		name = zimmska.2a
+		ZL5 = {
+			vassalize = ROOT
+		}
+		ai_chance = {
+			factor = 80
+			modifier = {
+				factor = 0.5
+				NOT = {
+					trust = {
+						who = ZL5
+						value = 1
+					}
+				}
+			}
+			modifier = {
+				factor = 0.5
+				NOT = {
+					has_opinion = {
+						who = ZL5
+						value = 150
+					}
+				}
+			}
+			modifier = {
+				factor = 0.5
+				NOT = {
+					ZL5 = {
+						diplomatic_reputation = 0
+					}
+				}
+			}
+		}
+	}
+	option = {
+		name = zimmska.2b
+		add_prestige = 10
+		ai_chance = {
+			factor = 20
+		}
+	}
+}

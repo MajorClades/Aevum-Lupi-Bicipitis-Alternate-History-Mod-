@@ -3,17 +3,72 @@ ZL0_1_branch = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = ZL0 } 
+	potential = { 
+		OR = {
+			culture_group = zladinian
+			tag = ZL0
+		}
+	} 
 
 	ZL0_frozen_north = {
 		icon = mission_rb_settle_the_north
 		position = 2
 		required_missions = { ZL0_zimmska_army } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {
+			OR = {
+				area = northern_norway
+				area = norrland_area
+				area = laponia_area
+				province_id = 4151
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			northern_norway = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			norrland_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			laponia_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			if = {
+				limit = {
+					ai = no
+				}
+				4151 = {
+					country_or_non_sovereign_subject_holds = ROOT
+					OR = {
+						has_fort_building_trigger = yes
+						development = 10
+					}
+				}
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_accepted_culture = gorian
+			4151 = {
+				if = {
+					limit = {
+						NOT = {
+							has_fort_building_trigger = yes
+						}
+					}
+					add_or_upgrade_fort_building = yes
+				}
+				add_permanent_province_modifier = {
+					name = "gorian_shield"
+					duration = -1
+				}
+			}
+		} 
 	}
 }
 ZL0_2_branch = {
@@ -21,27 +76,90 @@ ZL0_2_branch = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = ZL0 } 
+	potential = { 
+		OR = {
+			culture_group = zladinian
+			tag = ZL0
+		}
+	} 
 
 	ZL0_zimmska_army = {
 		icon = mission_early_russian_army
 		position = 1
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			army_size_percentage = 0.9
+		} 
 
-		effect = {  } 
+		effect = {  
+			custom_tooltip = OLD_ZIMMSKA
+			hidden_effect = {
+				every_province = {
+					limit = {
+						culture_group = zladinian
+						NOT = { culture = silesian } 
+					}
+					add_permanent_claim = ROOT
+				}
+			}
+		} 
 	}
 
 	ZL0_heartland = {
 		icon = mission_expand_into_the_forest
 		position = 2
 		required_missions = { ZL0_zimmska_army } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = western_norway
+			area = eastern_norway
+			area = vastra_gotaland_area
+			area = svealand_area
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			western_norway = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			eastern_norway = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			vastra_gotaland_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			svealand_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			5 = {
+				add_province_modifier = {
+					name = alb_zim_old_capital
+					duration = -1
+				}
+				add_base_production = 1
+				add_base_tax = 1
+				add_base_manpower = 1
+			}
+			if = {
+				limit = {
+					NOT = {
+						tag = ZL6
+					}
+				}
+				add_country_modifier = {
+					name = alb_zim_crushed_peasantry
+					duration = 9125
+				}
+			}
+		} 
 	}
 
 	ZL0_united_zimmska = {
@@ -64,17 +182,59 @@ ZL0_3_branch = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = ZL0 } 
+	potential = { 
+		OR = {
+			culture_group = zladinian
+			tag = ZL0
+		}
+	} 
 
 	ZL0_slasmeri_coast = {
 		icon = mission_pol_embellish_gdansk
 		position = 2
 		required_missions = { ZL0_zimmska_army } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = ostra_svealand_area
+			area = gotaland_area
+			area = skaneland_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			ostra_svealand_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			gotaland_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			skaneland_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			1 = {
+				add_province_modifier = {
+					name = great_port_of_zimmska
+					duration = -1
+				}
+			}
+			if = {
+				limit = {
+					tag = ZL5
+				}
+				country_event = {
+					id = zimmska.1
+				}
+			}
+		} 
 	}
 }
 ZL0_4_branch = {
@@ -82,16 +242,27 @@ ZL0_4_branch = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = ZL0 } 
+	potential = { 
+		OR = {
+			culture_group = zladinian
+			tag = ZL0
+		}
+	 } 
 
 	ZL0_zimmska_navy = {
 		icon = mission_establish_high_seas_navy
 		position = 1
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			navy_size_percentage = 1
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_navy_tradition = 10
+			370 = { add_permanent_claim = ROOT } 
+			371 = { add_permanent_claim = ROOT } 
+		} 
 	}
 
 	ZL0_slasmeri_triangle = {
@@ -101,11 +272,36 @@ ZL0_4_branch = {
 			ZL0_slasmeri_coast
 			ZL0_zimmska_navy
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			province_id = 1926
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			1926 = {
+				is_strongest_trade_power = ROOT
+			}
+			num_of_light_ship = 30
+			1 = {
+				has_shipyard_building_trigger = yes
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_mercantilism = 20
+			1 = {
+				add_unit_construction = {
+					type = heavy_ship
+					cost = 0
+					speed = 0.25
+					amount = 5
+				}
+				upgrade_shipyard_building = yes
+			}
+			add_country_modifier = {
+				name = alb_zim_trademaxxing
+				duration = 9125
+			}
+		} 
 	}
 }
 ZL0_5_branch = {
@@ -113,7 +309,12 @@ ZL0_5_branch = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = ZL0 } 
+	potential = { 
+		OR = {
+			culture_group = zladinian
+			tag = ZL0
+		}
+	} 
 
 	ZL0_icelandic_adventure = {
 		icon = mission_rb_cod_wars
@@ -391,11 +592,43 @@ ZL0_second_4_slot = {
 		icon = mission_rb_monopolize_the_channel
 		position = 9
 		required_missions = { ZL0_found_zardom } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				trade_goods = fish
+				trade_goods = naval_supplies
+			}
+			owned_by = ROOT
+			NOT = { base_production = 5 } 
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 12
+				trade_goods = fish
+				base_production = 5
+			}
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 12
+				trade_goods = naval_supplies
+				base_production = 5
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_years_of_owned_provinces_production_income = {
+				years = 15
+				trigger = { trade_goods = fish } 
+				custom_tooltip = MONOPOLY_INCOME_FISH_DESC
+			}
+			add_years_of_owned_provinces_production_income = {
+				years = 15
+				trigger = { trade_goods = naval_supplies } 
+				custom_tooltip = MONOPOLY_INCOME_NAVAL_SUPPLIES_DESC
+			}
+			unlock_estate_privilege = {
+				estate_privilege = alb_zimmska_slasmeri_monopolies
+			}
+		} 
 	}
 
 	ZL0_maximum_navy = {
@@ -404,7 +637,9 @@ ZL0_second_4_slot = {
 		required_missions = { ZL0_slasmeri_monopolies } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+
+		} 
 
 		effect = {  } 
 	}
