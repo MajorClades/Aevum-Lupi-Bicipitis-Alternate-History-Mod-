@@ -170,11 +170,23 @@ ZL0_2_branch = {
 			ZL0_heartland
 			ZL0_frozen_north
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			region = scandinavia_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			tag = ZL0
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_prestige = 25
+			country_event = {
+				id = zimmska.3
+			}
+		} 
 	}
 }
 ZL0_3_branch = {
@@ -205,17 +217,14 @@ ZL0_3_branch = {
 		} 
 
 		trigger = {  
-			ostra_svealand_area = {
-				country_or_non_sovereign_subject_holds = ROOT
-				type = all
-			}
-			gotaland_area = {
-				country_or_non_sovereign_subject_holds = ROOT
-				type = all
-			}
-			skaneland_area = {
-				country_or_non_sovereign_subject_holds = ROOT
-				type = all
+			num_of_owned_provinces_with = {
+				value = 13
+				OR = {
+					area = ostra_svealand_area
+				area = gotaland_area
+				area = skaneland_area
+				}
+				culture_group = zladinian
 			}
 		} 
 
