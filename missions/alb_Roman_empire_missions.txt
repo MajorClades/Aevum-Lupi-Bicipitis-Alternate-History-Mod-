@@ -6,26 +6,26 @@ Roman_empire_1_slot = {
 	potential = { tag = ROM } 
 
 	roman_legions = {
-		icon = mission_have_two_subjects
+		icon = mission_roman_legions
 		position = 1
+		provinces_to_highlight = {  } 
+
 		trigger = {
-			has_leader_with = {
-				total_pips = 13
-			}
+			has_leader_with = { total_pips = 13 } 
 			army_size = 100
 		}
 
 		effect = {
-			###there no need to give them a special unit, the idea is that the normal army is now all legionnaries, Soxony gets to be a little special
 			add_country_modifier = {
-				name = rom_legions
+				name = "rom_legions"
 				duration = 10950
 			}
 			custom_tooltip = ROM_TT_3
 		}
 	}
+
 	cartago_repaired_est = {
-		icon = mission_mediterranean_islands
+		icon = africa_proconsulare
 		position = 3
 		required_missions = { iberian_woes } 
 		provinces_to_highlight = { region = maghreb_region } 
@@ -35,25 +35,20 @@ Roman_empire_1_slot = {
 				type = all
 				owned_by = ROOT
 				num_of_buildings_in_province = 2
-				NOT = {
-					local_autonomy = 1
-				}
+				NOT = { local_autonomy = 1 } 
 			}
 		}
 
 		effect = {
 			if = {
-				limit = {
-					primary_culture = romano_afric
-				}
+				limit = { primary_culture = romano_afric } 
 				add_stability_or_adm_power = yes
-				maghreb_region = {
-					add_base_manpower = 1
-				}
-			}else = {
+				maghreb_region = { add_base_manpower = 1 } 
+			}
+			else = {
 				maghreb_region = {
 					add_permanent_province_modifier = {
-						name = provincia_romana_modifier
+						name = "provincia_romana_modifier"
 						duration = -1
 					}
 				}
@@ -65,8 +60,9 @@ Roman_empire_1_slot = {
 			}
 		}
 	}
+
 	a_senator_of_rome = {
-		icon = mission_mediterranean_islands
+		icon = mission_egyptian_mamluk_soldier
 		position = 4
 		required_missions = { cartago_repaired_est } 
 		provinces_to_highlight = { region = egypt_region } 
@@ -76,47 +72,41 @@ Roman_empire_1_slot = {
 				type = all
 				owned_by = ROOT
 				num_of_buildings_in_province = 2
-				NOT = {
-					local_autonomy = 1
-				}
+				NOT = { local_autonomy = 1 } 
 			}
 		}
 
 		effect = {
 			if = {
-				limit = {
-					primary_culture = romano_kemetic
-				}
+				limit = { primary_culture = romano_kemetic } 
 				add_stability_or_adm_power = yes
-				egypt_region = {
-					add_base_manpower = 1
-				}
-			}else = {
+				egypt_region = { add_base_manpower = 1 } 
+			}
+			else = {
 				egypt_region = {
 					add_permanent_province_modifier = {
-						name = provincia_romana_modifier
+						name = "provincia_romana_modifier"
 						duration = -1
 					}
 				}
 				358 = {
 					custom_tooltip = ROMANIZATION_TT_1
-					
 					custom_tooltip = empty_line_tt
 					change_culture = romano_kemetic
 				}
 			}
 		}
 	}
+
 	cold_thule = {
-		icon = mission_mediterranean_islands
+		icon = mission_unite_scandinavia
 		position = 9
-		required_missions = {varuslegions}
+		required_missions = { varuslegions } 
 		provinces_to_highlight = {
-			NOT = {
-				owned_by = ROOT
-			}
+			NOT = { owned_by = ROOT } 
 			region = scandinavia_region
 		}
+
 		trigger = {
 			scandinavia_region = {
 				type = all
@@ -127,23 +117,20 @@ Roman_empire_1_slot = {
 		effect = {
 			scandinavia_region = {
 				add_permanent_province_modifier = {
-					name = provincia_romana_modifier
+					name = "provincia_romana_modifier"
 					duration = -1
 				}
 			}
-			country_event = {
-				id = roman_emp.2
-			}
+			country_event = { id = roman_emp.2 } 
 		}
 	}
+
 	provincia_americana = {
-		icon = mission_mediterranean_islands
+		icon = mission_colonize_the_caribbean
 		position = 12
-		required_missions = {roma_grand_empire}
+		required_missions = { roma_grand_empire } 
 		provinces_to_highlight = {
-			NOT = {
-				country_or_non_sovereign_subject_holds = ROOT
-			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 			OR = {
 				continent = north_america
 				continent = south_america
@@ -151,6 +138,7 @@ Roman_empire_1_slot = {
 			is_sea = no
 			is_wasteland = no
 		}
+
 		trigger = {
 			north_america = {
 				type = all
@@ -177,23 +165,22 @@ Roman_empire_1_slot = {
 					}
 				}
 				add_country_modifier = {
-					name = rom_colonia_americana
+					name = "rom_colonia_americana"
 					duration = -1
 				}
 			}
 		}
 	}
 }
-
 Roman_empire_2_slot = {
 	slot = 2
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = ROM }
+	potential = { tag = ROM } 
 
 	iberian_woes = {
-		icon = mission_mediterranean_islands
+		icon = hispaniae
 		position = 2
 		required_missions = { when_in_rome } 
 		provinces_to_highlight = { region = iberia_region } 
@@ -203,39 +190,34 @@ Roman_empire_2_slot = {
 				type = all
 				owned_by = ROOT
 				num_of_buildings_in_province = 2
-				NOT = {
-					local_autonomy = 1
-				}
+				NOT = { local_autonomy = 1 } 
 			}
 		}
 
 		effect = {
 			if = {
-				limit = {
-					primary_culture = romano_iberic
-				}
+				limit = { primary_culture = romano_iberic } 
 				add_stability_or_adm_power = yes
-				iberia_region = {
-					add_base_manpower = 1
-				}
-			}else = {
+				iberia_region = { add_base_manpower = 1 } 
+			}
+			else = {
 				iberia_region = {
 					add_permanent_province_modifier = {
-						name = provincia_romana_modifier
+						name = "provincia_romana_modifier"
 						duration = -1
 					}
 				}
 				219 = {
 					custom_tooltip = ROMANIZATION_TT_1
-					
 					custom_tooltip = empty_line_tt
 					change_culture = romano_iberic
 				}
 			}
 		}
 	}
+
 	de_brutto_gallico = {
-		icon = mission_mediterranean_islands
+		icon = fra_refine_bombards
 		position = 3
 		required_missions = { do_as_rome_does } 
 		provinces_to_highlight = { region = france_region } 
@@ -245,39 +227,34 @@ Roman_empire_2_slot = {
 				type = all
 				owned_by = ROOT
 				num_of_buildings_in_province = 2
-				NOT = {
-					local_autonomy = 1
-				}
+				NOT = { local_autonomy = 1 } 
 			}
 		}
 
 		effect = {
 			if = {
-				limit = {
-					primary_culture = romano_gallic
-				}
+				limit = { primary_culture = romano_gallic } 
 				add_stability_or_adm_power = yes
-				france_region = {
-					add_base_manpower = 1
-				}
-			}else = {
+				france_region = { add_base_manpower = 1 } 
+			}
+			else = {
 				france_region = {
 					add_permanent_province_modifier = {
-						name = provincia_romana_modifier
+						name = "provincia_romana_modifier"
 						duration = -1
 					}
 				}
 				183 = {
 					custom_tooltip = ROMANIZATION_TT_1
-					
 					custom_tooltip = empty_line_tt
 					change_culture = romano_gallic
 				}
 			}
 		}
 	}
+
 	perfidio_albione = {
-		icon = mission_mediterranean_islands
+		icon = defeat_the_english
 		position = 4
 		required_missions = { de_brutto_gallico } 
 		provinces_to_highlight = { region = british_isles_region } 
@@ -287,47 +264,41 @@ Roman_empire_2_slot = {
 				type = all
 				owned_by = ROOT
 				num_of_buildings_in_province = 2
-				NOT = {
-					local_autonomy = 1
-				}
+				NOT = { local_autonomy = 1 } 
 			}
 		}
 
 		effect = {
 			if = {
-				limit = {
-					primary_culture = romano_britannic
-				}
+				limit = { primary_culture = romano_britannic } 
 				add_stability_or_adm_power = yes
-				british_isles_region = {
-					add_base_manpower = 1
-				}
-			}else = {
+				british_isles_region = { add_base_manpower = 1 } 
+			}
+			else = {
 				british_isles_region = {
 					add_permanent_province_modifier = {
-						name = provincia_romana_modifier
+						name = "provincia_romana_modifier"
 						duration = -1
 					}
 				}
 				236 = {
 					custom_tooltip = ROMANIZATION_TT_1
-					
 					custom_tooltip = empty_line_tt
 					change_culture = romano_britannic
 				}
 			}
 		}
 	}
+
 	barbarian_quid = {
-		icon = mission_mediterranean_islands
+		icon = mission_fall_of_constantinople
 		position = 6
-		required_missions = {true_power_of_rome } 
+		required_missions = { true_power_of_rome } 
 		provinces_to_highlight = {
 			owned_by = ROOT
-			NOT = {
-				culture_group = imperial_group
-			}
+			NOT = { culture_group = imperial_group } 
 		}
+
 		trigger = {
 			num_of_owned_provinces_with = {
 				value = 500
@@ -340,18 +311,18 @@ Roman_empire_2_slot = {
 			set_country_flag = Barbarians_at_the_walls
 		}
 	}
+
 	varuslegions = {
-		icon = mission_mediterranean_islands
+		icon = give_him_back_his_legions
 		position = 8
 		provinces_to_highlight = {
-			NOT = {
-				owned_by = ROOT
-			}
+			NOT = { owned_by = ROOT } 
 			OR = {
 				region = france_region
 				region = south_german_region
 			}
 		}
+
 		trigger = {
 			num_of_owned_provinces_with = {
 				value = 50
@@ -364,33 +335,27 @@ Roman_empire_2_slot = {
 
 		effect = {
 			add_country_modifier = {
-				name = rom_varus_avenged
+				name = "rom_varus_avenged"
 				duration = 10950
 			}
-			north_german_region = {
-				add_permanent_claim = ROOT
-			}
-			scandinavia_region = {
-				add_permanent_claim = ROOT
-			}
-			poland_region = {
-				add_permanent_claim = ROOT
-			}
+			north_german_region = { add_permanent_claim = ROOT } 
+			scandinavia_region = { add_permanent_claim = ROOT } 
+			poland_region = { add_permanent_claim = ROOT } 
 		}
 	}
+
 	germanicus_whereareyou = {
-		icon = mission_mediterranean_islands
+		icon = mission_seize_the_dragon_throne
 		position = 10
-		required_missions = {varuslegions}
+		required_missions = { varuslegions } 
 		provinces_to_highlight = {
-			NOT = {
-				owned_by = ROOT
-			}
+			NOT = { owned_by = ROOT } 
 			OR = {
 				region = north_german_region
 				region = poland_region
 			}
 		}
+
 		trigger = {
 			num_of_owned_provinces_with = {
 				value = 60
@@ -402,32 +367,24 @@ Roman_empire_2_slot = {
 		}
 
 		effect = {
-			add_power_projection_mission = {
-				amount = 20 
-			}
-			baltic_region = {
-				add_permanent_claim = ROOT
-			}
-			ruthenia_region = {
-				add_permanent_claim = ROOT
-			}
-			russia_region = {
-				add_permanent_claim = ROOT
-			}
+			add_power_projection_mission = { amount = 20 } 
+			baltic_region = { add_permanent_claim = ROOT } 
+			ruthenia_region = { add_permanent_claim = ROOT } 
+			russia_region = { add_permanent_claim = ROOT } 
 		}
 	}
+
 	provincia_lybica = {
-		icon = mission_mediterranean_islands
+		icon = mission_kon_protector_of_africa
 		position = 12
-		required_missions = {roma_grand_empire}
+		required_missions = { roma_grand_empire } 
 		provinces_to_highlight = {
-			NOT = {
-				country_or_non_sovereign_subject_holds = ROOT
-			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 			continent = africa
 			is_sea = no
 			is_wasteland = no
 		}
+
 		trigger = {
 			africa = {
 				type = all
@@ -439,13 +396,12 @@ Roman_empire_2_slot = {
 
 		effect = {
 			add_country_modifier = {
-				name = rom_provincia_lybica
+				name = "rom_provincia_lybica"
 				duration = -1
 			}
 		}
 	}
 }
-
 Roman_empire_3_slot = {
 	slot = 3
 	generic = no
@@ -454,11 +410,10 @@ Roman_empire_3_slot = {
 	potential = { tag = ROM } 
 
 	when_in_rome = {
-		icon = mission_have_two_subjects
+		icon = mission_colosseo
 		position = 1
-		provinces_to_highlight = {
-			province_id = 118
-		}
+		provinces_to_highlight = { province_id = 118 } 
+
 		trigger = {
 			OR = {
 				capital_scope = {
@@ -475,125 +430,64 @@ Roman_empire_3_slot = {
 
 		effect = {
 			if = {
-				limit = {
-					capital_scope = {
-						region = british_isles_region
-					}
-				}
+				limit = { capital_scope = { region = british_isles_region }  } 
 				change_primary_culture = romano_britannic
-				british_isles_region = {
-					change_culture = romano_britannic
-				}
+				british_isles_region = { change_culture = romano_britannic } 
 			}
 			else_if = {
-				limit = { 
-					capital_scope = {
-						region = france_region
-					}
-				}
+				limit = { capital_scope = { region = france_region }  } 
 				change_primary_culture = romano_gallic
-				france_region = {
-					change_culture = romano_gallic
-				}
+				france_region = { change_culture = romano_gallic } 
 			}
 			else_if = {
-				limit = { 
-					capital_scope = {
-						region = iberia_region
-					}
-				}
+				limit = { capital_scope = { region = iberia_region }  } 
 				change_primary_culture = romano_iberic
-				iberia_region = {
-					change_culture = romano_iberic
-				}
+				iberia_region = { change_culture = romano_iberic } 
 			}
 			else_if = {
-				limit = { 
-					capital_scope = {
-						region = italy_region
-					}
-				}
+				limit = { capital_scope = { region = italy_region }  } 
 				change_primary_culture = romano_italic
-				italy_region = {
-					change_culture = romano_italic
-				}
+				italy_region = { change_culture = romano_italic } 
 			}
 			else_if = {
-				limit = { 
-					capital_scope = {
-						region = maghreb_region
-					}
-				}
+				limit = { capital_scope = { region = maghreb_region }  } 
 				change_primary_culture = romano_afric
-				maghreb_region = {
-					change_culture = romano_afric
-				}
+				maghreb_region = { change_culture = romano_afric } 
 			}
 			else_if = {
-				limit = { 
-					capital_scope = {
-						region = egypt_region
-					}
-				}
+				limit = { capital_scope = { region = egypt_region }  } 
 				change_primary_culture = romano_kemetic
-				egypt_region = {
-					change_culture = romano_kemetic
-				}
+				egypt_region = { change_culture = romano_kemetic } 
 			}
 			else_if = {
-				limit = { 
-					capital_scope = {
-						region = mashriq_region
-					}
-				}
+				limit = { capital_scope = { region = mashriq_region }  } 
 				change_primary_culture = romano_syric
-				mashriq_region = {
-					change_culture = romano_syric
-				}
+				mashriq_region = { change_culture = romano_syric } 
 			}
 			else_if = {
-				limit = { 
-					capital_scope = {
-						region = anatolia_region
-					}
-				}
+				limit = { capital_scope = { region = anatolia_region }  } 
 				change_primary_culture = romano_anatolic
-				anatolia_region = {
-					change_culture = romano_anatolic
-				}
+				anatolia_region = { change_culture = romano_anatolic } 
 			}
 			else_if = {
-				limit = { 
-					capital_scope = {
-						region = balkan_region
-					}
-				}
+				limit = { capital_scope = { region = balkan_region }  } 
 				change_primary_culture = romano_illyric
-				balkan_region = {
-					change_culture = romano_illyric
-				}
+				balkan_region = { change_culture = romano_illyric } 
 			}
 			else_if = {
-				limit = { 
-					capital_scope = {
-						region = carpathia_region
-					}
-				}
+				limit = { capital_scope = { region = carpathia_region }  } 
 				change_primary_culture = romano_pannonic
-				carpathia_region = {
-					change_culture = romano_pannonic
-				}
+				carpathia_region = { change_culture = romano_pannonic } 
 			}
 			else = {
 				change_primary_culture = romano_italic
-				italy_region = {
-					change_culture = romano_italic
-				}
+				italy_region = { change_culture = romano_italic } 
 			}
 		}
 	}
+
 	do_as_rome_does = {
-		icon = mission_mediterranean_islands
+		icon = mission_rule_italy
 		position = 2
 		required_missions = { when_in_rome } 
 		provinces_to_highlight = { region = italy_region } 
@@ -603,41 +497,37 @@ Roman_empire_3_slot = {
 				type = all
 				owned_by = ROOT
 				num_of_buildings_in_province = 2
-				NOT = {
-					local_autonomy = 1
-				}
+				NOT = { local_autonomy = 1 } 
 			}
 		}
 
 		effect = {
 			if = {
-				limit = {
-					primary_culture = romano_italic
-				}
+				limit = { primary_culture = romano_italic } 
 				add_stability_or_adm_power = yes
-				italy_region = {
-					add_base_manpower = 1
-				}
-			}else = {
+				italy_region = { add_base_manpower = 1 } 
+			}
+			else = {
 				italy_region = {
 					add_permanent_province_modifier = {
-						name = provincia_romana_modifier
+						name = "provincia_romana_modifier"
 						duration = -1
 					}
 				}
 				118 = {
 					custom_tooltip = ROMANIZATION_TT_1
-					
 					custom_tooltip = empty_line_tt
 					change_culture = romano_italic
 				}
 			}
 		}
 	}
+
 	what_have_they_done_for_us = {
-		icon = mission_mediterranean_islands
+		icon = a_place_among_the_great_powers
 		position = 3
 		required_missions = { do_as_rome_does } 
+		provinces_to_highlight = {  } 
 
 		trigger = {
 			years_of_income = 2
@@ -657,18 +547,22 @@ Roman_empire_3_slot = {
 
 		effect = {
 			custom_tooltip = ROMANIZATION_TT_3
-			capital_scope = {
-				add_great_project = {
-					type = roman_imperial_admin
-				}
-			}
+			capital_scope = { add_great_project = { type = roman_imperial_admin }  } 
 			set_country_flag = faster_romanization_flag
 		}
 	}
+
 	true_power_of_rome = {
-		icon = mission_mediterranean_islands
+		icon = mission_roman_empire
 		position = 5
-		required_missions = {a_senator_of_rome perfidio_albione siria_palestina_is_real holy_germania_empire} 
+		required_missions = {
+			a_senator_of_rome
+			perfidio_albione
+			siria_palestina_is_real
+			holy_germania_empire
+		}
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			num_of_owned_provinces_with = {
 				value = 300
@@ -677,18 +571,22 @@ Roman_empire_3_slot = {
 		}
 
 		effect = {
-			add_ruler_modifier = {
-				name = rom_augustus
-			}
+			add_ruler_modifier = { name = "rom_augustus" } 
 			change_adm = 2
 			change_dip = 2
 			change_mil = 2
 		}
 	}
+
 	imperium_sine_fine_ultra = {
-		icon = mission_mediterranean_islands
+		icon = a_roman_empire
 		position = 7
-		required_missions = {barbarian_quid empire_doing_empire_things} 
+		required_missions = {
+			barbarian_quid
+			empire_doing_empire_things
+		}
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			all_province = {
 				is_sea = no
@@ -697,24 +595,20 @@ Roman_empire_3_slot = {
 			}
 		}
 
-		effect = {
-			country_event = {
-				id = roman_emp.4
-			}
-		}
+		effect = { country_event = { id = roman_emp.4 }  } 
 	}
+
 	rains_down_in_lybia = {
-		icon = mission_mediterranean_islands
+		icon = mission_bedouins
 		position = 8
 		provinces_to_highlight = {
-			NOT = {
-				owned_by = ROOT
-			}
+			NOT = { owned_by = ROOT } 
 			OR = {
 				region = egypt_region
 				region = mashriq_region
 			}
 		}
+
 		trigger = {
 			num_of_owned_provinces_with = {
 				value = 50
@@ -727,27 +621,23 @@ Roman_empire_3_slot = {
 
 		effect = {
 			add_country_modifier = {
-				name = rom_desert_storm
+				name = "rom_desert_storm"
 				duration = 10950
 			}
-			arabia_region = {
-				add_permanent_claim = ROOT
-			}
-			horn_of_africa_region = {
-				add_permanent_claim = ROOT
-			}
+			arabia_region = { add_permanent_claim = ROOT } 
+			horn_of_africa_region = { add_permanent_claim = ROOT } 
 		}
 	}
+
 	arabian_fights = {
-		icon = mission_mediterranean_islands
+		icon = mission_into_arabia
 		position = 9
-		required_missions = {rains_down_in_lybia}
+		required_missions = { rains_down_in_lybia } 
 		provinces_to_highlight = {
-			NOT = {
-				owned_by = ROOT
-			}
+			NOT = { owned_by = ROOT } 
 			region = arabia_region
 		}
+
 		trigger = {
 			arabia_region = {
 				type = all
@@ -758,20 +648,22 @@ Roman_empire_3_slot = {
 		effect = {
 			arabia_region = {
 				add_permanent_province_modifier = {
-					name = roman_arabia
+					name = "roman_arabia"
 					duration = -1
 				}
 			}
 		}
 	}
+
 	roma_grand_empire = {
-		icon = mission_mediterranean_islands
+		icon = mission_riches_of_golconda
 		position = 11
-		required_missions = {germanicus_whereareyou into_parthia}
+		required_missions = {
+			germanicus_whereareyou
+			into_parthia
+		}
 		provinces_to_highlight = {
-			NOT = {
-				owned_by = ROOT
-			}
+			NOT = { owned_by = ROOT } 
 			OR = {
 				region = russia_region
 				region = ruthenia_region
@@ -779,6 +671,7 @@ Roman_empire_3_slot = {
 				region = horn_of_africa_region
 			}
 		}
+
 		trigger = {
 			num_of_owned_provinces_with = {
 				value = 175
@@ -794,39 +687,27 @@ Roman_empire_3_slot = {
 		effect = {
 			custom_tooltip = ROM_TT_5
 			hidden_effect = {
-				africa = {
-					add_permanent_claim = ROOT
-				}
-				asia = {
-					add_permanent_claim = ROOT
-				}
-				europe = {
-					add_permanent_claim = ROOT
-				}
-				oceania = {
-					add_permanent_claim = ROOT
-				}
-				north_america = {
-					add_permanent_claim = ROOT
-				}
-				south_america = {
-					add_permanent_claim = ROOT
-				}
+				africa = { add_permanent_claim = ROOT } 
+				asia = { add_permanent_claim = ROOT } 
+				europe = { add_permanent_claim = ROOT } 
+				oceania = { add_permanent_claim = ROOT } 
+				north_america = { add_permanent_claim = ROOT } 
+				south_america = { add_permanent_claim = ROOT } 
 			}
 		}
 	}
+
 	iupiter_europa = {
-		icon = mission_mediterranean_islands
+		icon = mission_european_politics
 		position = 12
-		required_missions = {roma_grand_empire}
+		required_missions = { roma_grand_empire } 
 		provinces_to_highlight = {
-			NOT = {
-				country_or_non_sovereign_subject_holds = ROOT
-			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 			continent = europe
 			is_sea = no
 			is_wasteland = no
 		}
+
 		trigger = {
 			europe = {
 				type = all
@@ -838,13 +719,12 @@ Roman_empire_3_slot = {
 
 		effect = {
 			add_country_modifier = {
-				name = rom_europa_universalis
+				name = "rom_europa_universalis"
 				duration = -1
 			}
 		}
 	}
 }
-
 Roman_empire_4_slot = {
 	slot = 4
 	generic = no
@@ -853,7 +733,7 @@ Roman_empire_4_slot = {
 	potential = { tag = ROM } 
 
 	hellenic_woes = {
-		icon = mission_mediterranean_islands
+		icon = mission_the_great_conqueror
 		position = 2
 		required_missions = { when_in_rome } 
 		provinces_to_highlight = { region = balkan_region } 
@@ -863,39 +743,34 @@ Roman_empire_4_slot = {
 				type = all
 				owned_by = ROOT
 				num_of_buildings_in_province = 2
-				NOT = {
-					local_autonomy = 1
-				}
+				NOT = { local_autonomy = 1 } 
 			}
 		}
 
 		effect = {
 			if = {
-				limit = {
-					primary_culture = romano_illyric
-				}
+				limit = { primary_culture = romano_illyric } 
 				add_stability_or_adm_power = yes
-				balkan_region = {
-					add_base_manpower = 1
-				}
-			}else = {
+				balkan_region = { add_base_manpower = 1 } 
+			}
+			else = {
 				balkan_region = {
 					add_permanent_province_modifier = {
-						name = provincia_romana_modifier
+						name = "provincia_romana_modifier"
 						duration = -1
 					}
 				}
 				151 = {
 					custom_tooltip = ROMANIZATION_TT_1
-					
 					custom_tooltip = empty_line_tt
 					change_culture = romano_illyric
 				}
 			}
 		}
 	}
+
 	byzantine_restoring = {
-		icon = mission_mediterranean_islands
+		icon = anatolian_frontier
 		position = 3
 		required_missions = { hellenic_woes } 
 		provinces_to_highlight = { region = anatolia_region } 
@@ -905,39 +780,34 @@ Roman_empire_4_slot = {
 				type = all
 				owned_by = ROOT
 				num_of_buildings_in_province = 2
-				NOT = {
-					local_autonomy = 1
-				}
+				NOT = { local_autonomy = 1 } 
 			}
 		}
 
 		effect = {
 			if = {
-				limit = {
-					primary_culture = romano_anatolic
-				}
+				limit = { primary_culture = romano_anatolic } 
 				add_stability_or_adm_power = yes
-				anatolia_region = {
-					add_base_manpower = 1
-				}
-			}else = {
+				anatolia_region = { add_base_manpower = 1 } 
+			}
+			else = {
 				anatolia_region = {
 					add_permanent_province_modifier = {
-						name = provincia_romana_modifier
+						name = "provincia_romana_modifier"
 						duration = -1
 					}
 				}
 				316 = {
 					custom_tooltip = ROMANIZATION_TT_1
-					
 					custom_tooltip = empty_line_tt
 					change_culture = romano_anatolic
 				}
 			}
 		}
 	}
+
 	siria_palestina_is_real = {
-		icon = mission_mediterranean_islands
+		icon = jerusalem
 		position = 4
 		required_missions = { byzantine_restoring } 
 		provinces_to_highlight = { region = mashriq_region } 
@@ -947,69 +817,64 @@ Roman_empire_4_slot = {
 				type = all
 				owned_by = ROOT
 				num_of_buildings_in_province = 2
-				NOT = {
-					local_autonomy = 1
-				}
+				NOT = { local_autonomy = 1 } 
 			}
 		}
 
 		effect = {
 			if = {
-				limit = {
-					primary_culture = romano_syric
-				}
+				limit = { primary_culture = romano_syric } 
 				add_stability_or_adm_power = yes
-				mashriq_region = {
-					add_base_manpower = 1
-				}
-			}else = {
+				mashriq_region = { add_base_manpower = 1 } 
+			}
+			else = {
 				mashriq_region = {
 					add_permanent_province_modifier = {
-						name = provincia_romana_modifier
+						name = "provincia_romana_modifier"
 						duration = -1
 					}
 				}
 				5045 = {
 					custom_tooltip = ROMANIZATION_TT_1
-					
 					custom_tooltip = empty_line_tt
 					change_culture = romano_syric
 				}
 			}
 		}
 	}
+
 	empire_doing_empire_things = {
-		icon = mission_mediterranean_islands
+		icon = mission_conquer_romania
 		position = 6
-		required_missions = {true_power_of_rome } 
+		required_missions = { true_power_of_rome } 
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			num_of_provinces_owned_or_owned_by_subjects_with = {
 				value = 1000
-				custom_trigger_tooltip = {
-					tooltip = ROM_TT_6
-				}
+				custom_trigger_tooltip = { tooltip = ROM_TT_6 } 
 			}
 		}
 
 		effect = {
 			add_country_modifier = {
-				name = rom_internal_trades
+				name = "rom_internal_trades"
 				duration = -1
 			}
 		}
 	}
+
 	persian_campaign = {
-		icon = mission_mediterranean_islands
+		icon = per_convert_persia
 		position = 8
 		provinces_to_highlight = {
-			NOT = {
-				owned_by = ROOT
-			}
+			NOT = { owned_by = ROOT } 
 			OR = {
 				region = anatolia_region
 				region = mashriq_region
 			}
 		}
+
 		trigger = {
 			num_of_owned_provinces_with = {
 				value = 50
@@ -1022,33 +887,27 @@ Roman_empire_4_slot = {
 
 		effect = {
 			add_country_modifier = {
-				name = rom_destroy_persia
+				name = "rom_destroy_persia"
 				duration = 10950
 			}
-			mesopotamia_region = {
-				add_permanent_claim = ROOT
-			}
-			persia_region = {
-				add_permanent_claim = ROOT
-			}
-			caucasia_region = {
-				add_permanent_claim = ROOT
-			}
+			mesopotamia_region = { add_permanent_claim = ROOT } 
+			persia_region = { add_permanent_claim = ROOT } 
+			caucasia_region = { add_permanent_claim = ROOT } 
 		}
 	}
+
 	into_parthia = {
-		icon = mission_mediterranean_islands
+		icon = mission_persian_lion
 		position = 10
-		required_missions = {persian_campaign}
+		required_missions = { persian_campaign } 
 		provinces_to_highlight = {
-			NOT = {
-				owned_by = ROOT
-			}
+			NOT = { owned_by = ROOT } 
 			OR = {
 				region = persia_region
 				region = mesopotamia_region
 			}
 		}
+
 		trigger = {
 			num_of_owned_provinces_with = {
 				value = 60
@@ -1060,32 +919,24 @@ Roman_empire_4_slot = {
 		}
 
 		effect = {
-			add_power_projection_mission = {
-				amount = 20 
-			}
-			khorasan_region = {
-				add_permanent_claim = ROOT
-			}
-			west_india_region = {
-				add_permanent_claim = ROOT
-			}
-			hindusthan_region = {
-				add_permanent_claim = ROOT
-			}
+			add_power_projection_mission = { amount = 20 } 
+			khorasan_region = { add_permanent_claim = ROOT } 
+			west_india_region = { add_permanent_claim = ROOT } 
+			hindusthan_region = { add_permanent_claim = ROOT } 
 		}
 	}
+
 	magna_asia = {
-		icon = mission_mediterranean_islands
+		icon = jap_conquer_north_china
 		position = 12
-		required_missions = {roma_grand_empire}
+		required_missions = { roma_grand_empire } 
 		provinces_to_highlight = {
-			NOT = {
-				country_or_non_sovereign_subject_holds = ROOT
-			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 			continent = asia
 			is_sea = no
 			is_wasteland = no
 		}
+
 		trigger = {
 			asia = {
 				type = all
@@ -1097,13 +948,12 @@ Roman_empire_4_slot = {
 
 		effect = {
 			add_country_modifier = {
-				name = rom_magna_asia
+				name = "rom_magna_asia"
 				duration = -1
 			}
 		}
 	}
 }
-
 Roman_empire_5_slot = {
 	slot = 5
 	generic = no
@@ -1125,33 +975,32 @@ Roman_empire_5_slot = {
 
 		effect = {
 			add_country_modifier = {
-				name = roman_cool_admin
+				name = "roman_cool_admin"
 				duration = -1
 			}
 			custom_tooltip = ROM_TT_4
 			tooltip = {
 				random_owned_province = {
 					add_province_modifier = {
-						name = rom_extra_administration
+						name = "rom_extra_administration"
 						duration = -1
 					}
-				}	
+				}
 			}
 			hidden_effect = {
 				every_owned_province = {
-					limit = {
-						has_building = state_house
-					}
+					limit = { has_building = state_house } 
 					add_province_modifier = {
-						name = rom_extra_administration
+						name = "rom_extra_administration"
 						duration = -1
 					}
 				}
 			}
 		}
 	}
+
 	pannonian_et_dacia = {
-		icon = mission_mediterranean_islands
+		icon = mission_impaled_soldies
 		position = 3
 		required_missions = { hellenic_woes } 
 		provinces_to_highlight = { region = carpathia_region } 
@@ -1161,39 +1010,34 @@ Roman_empire_5_slot = {
 				type = all
 				owned_by = ROOT
 				num_of_buildings_in_province = 2
-				NOT = {
-					local_autonomy = 1
-				}
+				NOT = { local_autonomy = 1 } 
 			}
 		}
 
 		effect = {
 			if = {
-				limit = {
-					primary_culture = romano_pannonic
-				}
+				limit = { primary_culture = romano_pannonic } 
 				add_stability_or_adm_power = yes
-				carpathia_region = {
-					add_base_manpower = 1
-				}
-			}else = {
+				carpathia_region = { add_base_manpower = 1 } 
+			}
+			else = {
 				carpathia_region = {
 					add_permanent_province_modifier = {
-						name = provincia_romana_modifier
+						name = "provincia_romana_modifier"
 						duration = -1
 					}
 				}
 				153 = {
 					custom_tooltip = ROMANIZATION_TT_1
-					
 					custom_tooltip = empty_line_tt
 					change_culture = romano_pannonic
 				}
 			}
 		}
 	}
+
 	holy_germania_empire = {
-		icon = mission_mediterranean_islands
+		icon = encroach_on_the_germans
 		position = 4
 		required_missions = { pannonian_et_dacia } 
 		provinces_to_highlight = { region = south_german_region } 
@@ -1203,47 +1047,41 @@ Roman_empire_5_slot = {
 				type = all
 				owned_by = ROOT
 				num_of_buildings_in_province = 2
-				NOT = {
-					local_autonomy = 1
-				}
+				NOT = { local_autonomy = 1 } 
 			}
 		}
 
 		effect = {
 			if = {
-				limit = {
-					primary_culture = romano_germanic
-				}
+				limit = { primary_culture = romano_germanic } 
 				add_stability_or_adm_power = yes
-				south_german_region = {
-					add_base_manpower = 1
-				}
-			}else = {
+				south_german_region = { add_base_manpower = 1 } 
+			}
+			else = {
 				south_german_region = {
 					add_permanent_province_modifier = {
-						name = provincia_romana_modifier
+						name = "provincia_romana_modifier"
 						duration = -1
 					}
 				}
 				1872 = {
 					custom_tooltip = ROMANIZATION_TT_1
-					
 					custom_tooltip = empty_line_tt
 					change_culture = romano_germanic
 				}
 			}
 		}
 	}
+
 	armenia_old_ally = {
-		icon = mission_mediterranean_islands
+		icon = arm_restore_armenian_cilicia
 		position = 9
-		required_missions = {persian_campaign}
+		required_missions = { persian_campaign } 
 		provinces_to_highlight = {
-			NOT = {
-				owned_by = ROOT
-			}
+			NOT = { owned_by = ROOT } 
 			region = caucasia_region
 		}
+
 		trigger = {
 			caucasia_region = {
 				type = all
@@ -1254,27 +1092,25 @@ Roman_empire_5_slot = {
 		effect = {
 			caucasia_region = {
 				add_permanent_province_modifier = {
-					name = provincia_romana_modifier
+					name = "provincia_romana_modifier"
 					duration = -1
 				}
 			}
-			country_event = {
-				id = roman_emp.3
-			}
+			country_event = { id = roman_emp.3 } 
 		}
 	}
+
 	terra_australis = {
-		icon = mission_mediterranean_islands
+		icon = settle_austrialasia
 		position = 12
-		required_missions = {roma_grand_empire}
+		required_missions = { roma_grand_empire } 
 		provinces_to_highlight = {
-			NOT = {
-				country_or_non_sovereign_subject_holds = ROOT
-			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 			continent = oceania
 			is_sea = no
 			is_wasteland = no
 		}
+
 		trigger = {
 			oceania = {
 				type = all
@@ -1286,7 +1122,7 @@ Roman_empire_5_slot = {
 
 		effect = {
 			add_country_modifier = {
-				name = rom_down_under
+				name = "rom_down_under"
 				duration = -1
 			}
 		}
