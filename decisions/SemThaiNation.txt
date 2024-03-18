@@ -1,0 +1,87 @@
+country_decisions = {
+	TH9_decision = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			NOT = { has_country_flag = formed_TH9 }
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			was_never_end_game_tag_trigger = yes
+			primary_culture = central_thai
+			NOT = { exists = TH9 }
+		}
+		provinces_to_highlight = {
+			OR = {
+					area = central_thai_area
+					area = northern_thai_area
+					area = north_laos_area
+					area = khorat_area
+					area = sukhothai_area
+					area = champasak_area
+					area = vientiane_area
+					culture = central_thai
+								}
+			NOT = { owned_by = ROOT }
+		}
+		allow = {
+			is_nomad = no
+			is_at_war = no
+			has_unified_culture = yes
+			central_thai_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			northern_thai_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			north_laos_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			khorat_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			sukhothai_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			champasak_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			vientiane_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+		effect = {
+			change_tag = TH9
+			swap_non_generic_missions = yes
+			add_prestige = 25
+			if = {
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			if = {
+				limit = {
+					NOT = { government_rank = 2 }
+				}
+				set_government_rank = 2
+			}
+			add_prestige = 25
+			add_country_modifier = {
+				name = centralization_modifier
+				duration = 3650
+			}
+			set_country_flag = formed_TH9
+		}		
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+}
