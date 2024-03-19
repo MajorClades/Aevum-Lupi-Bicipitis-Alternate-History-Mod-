@@ -117,6 +117,9 @@ ZL0_2_branch = {
 			area = vastra_gotaland_area
 			area = svealand_area
 			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
 		} 
 
 		trigger = {  
@@ -217,14 +220,13 @@ ZL0_3_branch = {
 		} 
 
 		trigger = {  
-			num_of_owned_provinces_with = {
-				value = 13
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 12
 				OR = {
 					area = ostra_svealand_area
 				area = gotaland_area
 				area = skaneland_area
 				}
-				culture_group = zladinian
 			}
 		} 
 
@@ -297,6 +299,7 @@ ZL0_4_branch = {
 
 		effect = {  
 			add_mercantilism = 20
+			custom_tooltip = empty_line_tt
 			1 = {
 				add_unit_construction = {
 					type = heavy_ship
@@ -306,6 +309,7 @@ ZL0_4_branch = {
 				}
 				upgrade_shipyard_building = yes
 			}
+			custom_tooltip = empty_line_tt
 			add_country_modifier = {
 				name = alb_zim_trademaxxing
 				duration = 9125
@@ -329,33 +333,140 @@ ZL0_5_branch = {
 		icon = mission_rb_cod_wars
 		position = 2
 		required_missions = { ZL0_zimmska_navy } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				province_id = 370
+				province_id = 371
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			owns_or_non_sovereign_subject_of = 370
+			owns_or_non_sovereign_subject_of = 371
+		} 
 
-		effect = {  } 
+		effect = {  
+			capital_scope = { add_base_production = 2 } 
+			denmark_strait_area = { discover_country = ROOT } 
+			greenland_area = {
+				discover_country = ROOT
+				add_permanent_claim = ROOT
+			}
+		} 
+		
 	}
 
-	ZL0_vinlandic_landing = {
+	ZL0_greenland_landing = {
 		icon = mission_rb_colonise_canada
 		position = 3
 		required_missions = { ZL0_icelandic_adventure } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			area = greenland_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			greenland_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			greenland_area = {
+				change_trade_goods = ivory
+				add_province_modifier = {
+					name = alb_zim_walrus_ivory
+					duration = -1
+				}
+			}
+			add_country_modifier = {
+				name = alb_zim_explore_further
+				duration = 9125
+			}
+			canada_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	ZL0_dominon_of_frjalslundt = {
 		icon = settle_north_america
 		position = 4
-		required_missions = { ZL0_vinlandic_landing } 
-		provinces_to_highlight = {  } 
+		required_missions = { ZL0_greenland_landing } 
+		provinces_to_highlight = {  
+			region = canada_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 15
+				region = canada_region
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			custom_tooltip = 5_colonial_provinces_in_canada_tt
+			tooltip = {
+				change_culture = ROOT
+				change_religion = ROOT
+				add_base_manpower = 1
+				add_base_production = 1
+				add_base_tax = 1
+			}
+			custom_tooltip = empty_line_tt
+			custom_tooltip = subject_in_canada_gets_tt
+			tooltip = {
+				add_country_modifier = {
+					name = alb_zim_slav_settlement
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				random_subject_country = {
+					limit = {
+						is_colonial_nation_of = ROOT
+						capital_scope = {
+							colonial_region = colonial_canada
+						}
+					}
+					add_country_modifier = {
+						name = alb_zim_slav_settlement
+						duration = -1
+					}
+					for = {
+						amount = 5
+						effect = "
+						random_owned_province = {
+							limit = {
+								NOT = {
+									OR = {
+										culture = ROOT
+										religion = ROOT
+									}
+								}
+							}
+							change_culture = ROOT
+							change_religion = ROOT
+							add_base_manpower = 1
+							add_base_production = 1
+							add_base_tax = 1
+						}
+						"
+					}
+				}
+				
+			}
+
+		} 
 	}
 }
 ZL0_second_1_slot = {
@@ -365,26 +476,109 @@ ZL0_second_1_slot = {
 	has_country_shield = yes
 	potential = { tag = ZL0 } 
 
-	ZL0_saxangl_lands = {
-		icon = mission_germ_saxangle
+	ZL0_marines = {
+		icon = mission_russian_navy
 		position = 4
 		required_missions = { ZL0_united_zimmska } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_transport = 20
+			num_of_marines = 10
+			if = {
+				limit = {
+					ai = no
+				}
+				navy_size_percentage = 0.9
+			army_size_percentage = 0.9
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			if = {
+				limit = {
+					AN1 = {
+						exists = yes
+					}
+				}
+				add_casus_belli = {
+					type = cb_vassalize_mission
+					target = AN1
+				}
+			}
+			weser_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
-
+	
 	ZL0_anglaska = {
 		icon = mission_russian_navy
 		position = 5
-		required_missions = { ZL0_saxangl_lands } 
-		provinces_to_highlight = {  } 
+		required_missions = { ZL0_marines } 
+		provinces_to_highlight = {  
+			area = weser_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			weser_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			denmark_area = {
+				add_permanent_claim = ROOT
+			}
+			jutland_area = {
+				add_permanent_claim = ROOT
+			}
+			holstein_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	ZL0_saxangl_lands = {
+		icon = mission_germ_saxangle
+		position = 6
+		required_missions = { ZL0_anglaska } 
+		provinces_to_highlight = {  
+			OR = {
+				area = denmark_area
+				area = jutland_area
+				area = holstein_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			denmark_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			jutland_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			holstein_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {  
+			add_mercantilism = 15
+			
+			#uhh todo drift cultures or whatever
+		} 
 	}
 
 	ZL0_timber_industry = {
