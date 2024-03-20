@@ -1,0 +1,374 @@
+VR01 = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = VR0 } 
+
+	vr0_pyrennes = {
+		icon = mission_build_up_to_force_limit
+		position = 2
+		required_missions = { vr0_build_army } 
+		provinces_to_highlight = {  } 
+
+		trigger = { 
+			197 = { owned_by = ROOT } 
+			basque_country = {
+				owns_or_non_sovereign_subject_of = ROOT 
+				type = all 
+			}
+		}
+
+		effect = {  } 
+	}
+
+	vr0_beyond_pyrennes = {
+		icon = mission_build_up_to_force_limit
+		position = 3
+		required_missions = { vr0_pyrennes } 
+		provinces_to_highlight = {  } 
+
+		trigger = { 
+			pyrenees_area = {
+				owns_or_non_sovereign_subject_of = ROOT 
+				type = all 
+			}
+			languedoc_area = {
+				owns_or_non_sovereign_subject_of = ROOT 
+				type = all 
+			}
+		} 
+
+		effect = {  } 
+	}
+
+	vr0_beat_france = {
+		icon = mission_unite_home_region
+		position = 5
+		required_missions = {
+			vr0_lowland_alliance
+			vr0_beyond_pyrennes
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+}
+VR02 = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = VR0 } 
+
+	vr0_build_army = {
+		icon = mission_build_up_to_force_limit
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = { 
+			army_size_percentage = 0.9
+			num_of_generals = 1
+		} 
+
+		effect = { 
+			create_general = { tradition = 50} 
+			add_country_modifier = {
+				name = vr0_vrancish_knights
+				duration = 9125
+			}
+		} 
+	}
+
+	vr0_defy_legion = {
+		icon = mission_build_up_to_force_limit
+		position = 3
+		required_missions = { vr0_pyrennes } 
+		provinces_to_highlight = {  } 
+
+		trigger = { 
+			2990 = { owned_by = ROOT }
+			valencia_area = {
+				owns_or_non_sovereign_subject_of = ROOT 
+				type = all 
+			}
+		} 
+
+		effect = {  } 
+	}
+
+	vr0_lowland_alliance = {
+		icon = mission_alliances
+		position = 4
+		provinces_to_highlight = {  } 
+
+		trigger = { 
+			OR = {
+				any_country = {
+					AND = {
+						OR = {
+							primary_culture = franken
+							primary_culture = ellan 
+							primary_culture = gurippen
+						}
+						alliance_with = ROOT 
+						trust = { WHO = ROOT value = 60 }
+					}
+				}
+				calc_true_if = {
+					any_owned_province = {
+						region = low_countries_region
+					}
+					amount = 10
+				}
+			}
+		} 
+
+		effect = {  } 
+	}
+
+	vr0_francia = {
+		icon = mission_alliances
+		position = 6
+		required_missions = { vr0_beat_france } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+}
+VR03 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = VR0 } 
+
+	vr0_seize_narosia = {
+		icon = mission_build_up_to_force_limit
+		position = 2
+		required_missions = { vr0_build_army } 
+		provinces_to_highlight = { province_id = 4550  } 
+
+		trigger = {
+			4550 = {
+				owned_by = ROOT 
+				is_core = ROOT 
+				num_of_times_developed = 5
+				OR = {
+					has_building = marketplace
+					province_has_center_of_trade_of_level = 2
+				}
+			}
+			baleares_area = {
+				owned_by = ROOT 
+				type = all 
+			}
+		} 
+
+		effect = { 
+			4550 = {
+				add_base_production = 2
+				add_province_modifier = {
+					name = vr0_developing_narosia
+					duration = 7300
+				}
+			}
+		} 
+	}
+
+	vr0_unify_iberia = {
+		icon = mission_unite_home_region
+		position = 4
+		required_missions = {
+			vr0_narosia
+			vr0_defy_legion
+		}
+		provinces_to_highlight = { region = iberia_region type = all } 
+
+		trigger = { 
+			iberia_region = {
+				owns_or_non_sovereign_subject_of = ROOT 
+				type = all 
+			}
+		} 
+
+		effect = {  } 
+	}
+
+	vr0_iberia = {
+		icon = mission_unite_home_region
+		position = 6
+		required_missions = { vr0_unify_iberia } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+}
+VR04 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = VR0 } 
+
+	vr0_vrancish_navy = {
+		icon = mission_build_up_to_force_limit
+		position = 2
+		required_missions = { vr0_build_army } 
+		provinces_to_highlight = {  } 
+
+		trigger = { 
+			navy_size_percentage = 1
+			num_of_admirals = 1
+		} 
+
+		effect = { 
+			add_country_modifier = {
+				name = vr0_naval_ascendence
+				duration = 7300
+			}
+			baleares_area = { add_permanent_claim = ROOT }
+			corsica_sardinia_area = { add_permanent_claim = ROOT }
+			sardinia_area = { add_permanent_claim = ROOT }
+		} 
+	}
+
+	vr0_majorca_sardinia = {
+		icon = mission_build_up_to_force_limit
+		position = 3
+		required_missions = {
+			vr0_seize_narosia
+			vr0_vrancish_navy
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = { 
+			corsica_sardinia_area = {
+				owned_by = ROOT 
+				type = all 
+			}
+			sardinia_area = {
+				owned_by = ROOT 
+				type = all 
+			}
+		} 
+
+		effect = {  } 
+	}
+
+	vr0_italian_foothold = {
+		icon = mission_build_up_to_force_limit
+		position = 5
+		required_missions = { vr0_majorca_sardinia } 
+		provinces_to_highlight = {  } 
+
+		trigger = { 
+			calc_true_if = {
+				all_province = {
+					region = italy_region 
+					owned_by = ROOT 
+				}
+				amount = 15
+			}
+		} 
+
+		effect = {  } 
+	}
+}
+VR05 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = VR0 } 
+
+	vr0_recruit_hospitallers = {
+		icon = mission_build_up_to_force_limit
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			OR = {
+				PAP = {
+					has_opinion = {
+						WHO = ROOT 
+						value = 150
+					}
+				}
+				AND = {
+					estate_loyalty = {
+						estate = estate_church
+						loyalty = 65
+					}
+					num_of_estate_privileges = {
+						estate = estate_church
+						value = 4
+					}
+				}
+			}
+			naval_forcelimit = 18
+		} 
+
+		effect = { 
+			set_country_flag = vr0_hosting_knights
+			custom_tooltip = vr0_knights_tt
+			capital_scope = {
+				add_province_modifier = {
+					name = vr0_seat_of_hospitaller
+					duration = -1
+				}
+			}
+		} 
+	}
+
+	vr0_knights_at_sea = {
+		icon = mission_build_up_to_force_limit
+		position = 3
+		required_missions = {
+			vr0_recruit_hospitallers
+			vr0_vrancish_navy
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = { 
+			213 = {
+				has_building = shipyard
+				has_building = coastal_defence
+			}
+			num_of_galley = 15
+			any_country = {
+				NOT = { religion = catholic }
+				has_won_war_against =  {
+					who = PREV
+					max_years_since = 100
+				}
+			}
+		} 
+
+		effect = { 
+			country_event = {
+				id = VR0_flavor.1
+			}
+		} 
+	}
+
+	vr0_dominate_sea = {
+		icon = mission_build_up_to_force_limit
+		position = 6
+		required_missions = {
+			vr0_italian_foothold
+			vr0_knights_at_sea
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+}

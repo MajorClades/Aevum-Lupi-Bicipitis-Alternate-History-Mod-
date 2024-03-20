@@ -23,3 +23,48 @@ padania_doge_company = {
 	max_size = 30
 	manpower_pool = 30 
 }
+
+vrancish_knights_of_rhodes = {
+    regiments_per_development = 0.03 #1 regiment every 10 dev. Reaches max at 100.
+	max_size = 40
+	cost_modifier = 1
+	counts_towards_force_limit = no 
+    home_province = 213 # Rhodes
+	cavalry_weight = 0
+	artillery_weight = 0
+	cavalry_cap = 6
+	sprites = { dlc040_kni_sprite_pack westerngfx_sprite_pack }
+    trigger = {
+		has_country_flag = vr0_hosting_knights
+		NOT = { has_country_flag = vr0_knights_merc_expansion }
+		capital_scope = { continent = europe }
+		religion_group = christian
+	}
+	modifier = { 
+		shock_damage = 0.05
+		morale_damage = 0.05
+	}
+}
+
+vrancish_knights_of_rhodes_marines = {
+    regiments_per_development = 0.06 #1 regiment every 10 dev. Reaches max at 100.
+	max_size = 40
+	cost_modifier = 0.5
+	counts_towards_force_limit = no 
+    home_province = 213 # Rhodes
+	cavalry_weight = 0
+	artillery_weight = 0
+	cavalry_cap = 6
+	sprites = { dlc040_kni_sprite_pack westerngfx_sprite_pack }
+    trigger = {
+		has_country_flag = vr0_knights_merc_expansion
+		capital_scope = { continent = europe }
+		religion_group = christian
+	}
+	modifier = { 
+		shock_damage = 0.05
+		morale_damage = 0.05
+		regiment_disembark_speed = 0.33
+		landing_penalty = -2
+	}
+}
