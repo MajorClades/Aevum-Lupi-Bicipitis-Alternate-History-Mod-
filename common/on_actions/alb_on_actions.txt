@@ -7,6 +7,7 @@ on_startup = {
 		rhom.6
 		rhom.1
 		vedr.1
+		arian.1
 	}
 }
 on_province_culture_changed = {
@@ -231,6 +232,30 @@ on_main_war_lost = {
 	}
 }
 on_monthly_pulse = {
+	##Arian Fervor
+	if = {
+		limit = {religion = arian}
+		if = {
+			limit = {
+				NOT = {
+					check_variable = {
+						which = arian_fervor_var
+						value = 100
+					}
+				}
+			}
+			change_variable = {
+				which = arian_fervor_var
+				value = 0.5
+			}
+		}else = {
+			set_variable = {
+				which = arian_fervor_var
+				value = 100
+			}
+		}
+	}
+	##islam caliphate
 	if = {
 		limit = {
 			tag = event_target:islam_caliph_target
@@ -481,7 +506,36 @@ on_thri_yearly_pulse_2 = {
 
 
 on_province_religion_converted = {
-
+	##Arian Fervor
+	if = {
+		limit = {owner = {religion = arian}}
+		if = {
+			limit = {
+				owner = {
+					NOT = {
+						check_variable = {
+							which = arian_fervor_var
+							value = 100
+						}
+					}
+				}
+			}
+			owner = {
+				change_variable = {
+					which = arian_fervor_var
+					value = 1
+				}
+			}
+		}else = {
+			owner = {
+				set_variable = {
+					which = arian_fervor_var
+					value = 100
+				}
+			}
+		}
+	}
+	##NORSE
 	if = {
 		limit = {
 			owner = {
