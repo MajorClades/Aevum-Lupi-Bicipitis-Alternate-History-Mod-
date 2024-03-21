@@ -1,0 +1,790 @@
+mt_cherosyne_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	potential_on_load = {
+		has_dlc = "Leviathan"
+	}
+	potential = {
+		tag = KH1
+		has_dlc = "Leviathan"
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	cherosyne_varman_lament = {
+		icon = mission_buddhist_monk_praying
+		required_missions = { }
+		provinces_to_highlight = {
+			is_capital = yes 
+			owned_by = ROOT
+		}
+
+		trigger = {
+			capital_scope = {
+				num_of_times_improved = 4
+			}
+		}
+
+		effect = {
+			capital_scope = {
+				add_province_modifier = {
+					name = small_size_capital
+					duration = -1
+				}
+			}
+		}
+	}
+	
+	cherosyne_amass_subjects = {
+		icon = mission_mnd_khm_city_of_temples
+		position = 3
+		required_missions = { cherosyne_varman_lament } 
+		provinces_to_highlight = {
+			
+		}
+
+		trigger = {
+			OR = {
+				 num_of_subjects = 3
+				 grown_by_states = 4
+				 }
+		}
+
+		effect = {
+			if = {
+				limit = {
+					any_subject_country={
+					has_opinion = {
+						who = ROOT
+						value = 180
+					}
+				}
+				}
+				vassalize = PREV
+				PREV = { add_liberty_desire = -25 }
+			}
+			add_subjects_development_ducats = {
+			multiplier = 3
+			trigger = { is_subject_of_type = tributary_state }
+			}
+			capital_scope = {
+				add_province_modifier = {
+					name = cherosyne_mahaprasat
+					duration = -1
+				}
+			}
+		}
+	}
+	
+	cherosyne_devaraja = {
+		icon = mission_mnd_khm_restored_empire
+		required_missions = { cherosyne_amass_subjects }
+		provinces_to_highlight = {
+		}
+		trigger = {
+			if = {
+				limit = {
+					government = monarchy
+				}
+				legitimacy = 90
+			}
+			if = {
+				limit = {
+					has_estate = estate_church
+				}
+				estate_loyalty = {
+					estate = estate_church
+					loyalty = 80
+				}
+			}
+			stability = 3
+		}
+		effect = {
+			add_country_modifier = {
+					name = cherosyne_devaraja
+					duration = -1
+				}
+		}
+	}
+	
+	cherosyne_angkor_restored = {
+		icon = mission_mnd_khm_resurgence
+		required_missions = { cherosyne_devaraja }
+		provinces_to_highlight = {
+		province_id = 609
+			NOT = {
+				base_tax = 10
+				base_production = 10
+				base_manpower = 10
+				has_great_project = {
+					type = angkor_wat
+					tier = 3
+				}
+			}
+		}
+		trigger = {
+			609 = {
+				base_tax = 10
+				base_production = 10
+				base_manpower = 10
+				has_great_project = {
+					type = angkor_wat
+					tier = 3
+				}
+			}
+			if = {
+				limit = {
+					is_revolutionary = no
+				}
+				absolutism = 75
+			}
+			has_regency = no
+			is_at_war = no
+			indo_china_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			add_country_modifier = {
+					name = cherosyne_angkorean_god_king
+					duration = -1
+				}
+		}
+	}
+
+}
+mt_cherosyne_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential_on_load = {
+		has_dlc = "Leviathan"
+	}
+	potential = {
+		tag = KH1
+		has_dlc = "Leviathan"
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	cherosyne_prey_nokor = {
+		icon = mission_end_manipuri_raids
+		position = 2
+		required_missions = { cherosyne_varman_lament } 
+		provinces_to_highlight = {
+			owned_by = KH2
+		}
+
+		trigger = {
+			mekong_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			NOT = { exists = KH2 }
+		}
+
+		effect = {
+		champa_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+					name = cherosyne_prey_nokor_vanquished
+					duration = 18250
+				}
+		}
+	}
+	
+	cherosyne_take_back_isan = {
+		icon = mission_rule_indochina
+		position = 4
+		required_missions = { } 
+		provinces_to_highlight = {
+			OR = {
+				area = khorat_area
+				area = vientiane_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			khorat_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			vientiane_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+
+		effect = {
+		north_laos_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+					}
+					add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+					name = cherosyne_rule_isan
+					duration = 18250
+				}
+		}
+	}
+	
+	cherosyne_pierce_heavenly_veils = {
+		icon = mission_chakravarti
+		position = 6
+		required_missions = { cherosyne_angkor_restored } 
+		provinces_to_highlight = {
+			region = south_china_region 
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				region = south_china_region 
+				value = 40
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+					name = cherosyne_pierce_heaven
+					duration = 18250
+				}
+		}
+	}
+	
+	cherosyne_master_of_mandate = {
+		icon = mission_seize_the_dragon_throne
+		required_missions = { cherosyne_pierce_heavenly_veils } 
+		provinces_to_highlight = {
+			
+		}
+
+		trigger = {
+			OR = { any_subject_country={ is_emperor_of_china = yes } is_emperor_of_china = yes }
+		}
+
+		effect = {
+		if = {
+				limit = {
+					any_subject_country={ is_emperor_of_china = yes }
+				}
+				add_country_modifier = {
+					name = cherosyne_master_mandate_vassal
+					duration = -1
+				}
+			}
+		if = {
+				limit = { is_emperor_of_china = yes }
+				add_country_modifier = {
+					name = cherosyne_master_mandate_holder
+					duration = -1
+				}
+			}
+		}
+	}
+}
+
+mt_cherosyne_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential_on_load = {
+		has_dlc = "Leviathan"
+	}
+	potential = {
+		tag = KH1
+		has_dlc = "Leviathan"
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	cherosyne_gear_up_for_war = {
+		icon = mission_indian_soldier_elephant
+		required_missions = { } 
+		provinces_to_highlight = {
+			
+		}
+
+		trigger = {
+			army_size_percentage = 1
+			manpower_percentage = 0.69
+		}
+
+		effect = {
+			cambodia_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			angkor_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			mekong_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	cherosyne_put_down_syama = {
+		icon = mission_conquer_siam
+		required_missions = { cherosyne_gear_up_for_war } 
+		provinces_to_highlight = {
+			owned_by = KH4
+		}
+
+		trigger = {
+			angkor_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			NOT = { exists = KH4 }
+		}
+
+		effect = {
+			khorat_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+					}
+					add_permanent_claim = ROOT
+			}
+			vientiane_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+					}
+					add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+					name = cherosyne_syama_vanquished
+					duration = 18250
+				}
+		}
+	}
+	
+	cherosyne_rebuild_our_kingdom = {
+		icon = mission_unite_home_region
+		required_missions = { cherosyne_prey_nokor cherosyne_put_down_syama cherosyne_repel_cham } 
+		provinces_to_highlight = {
+			
+		}
+
+		trigger = {
+			grown_by_states = 3
+		}
+
+		effect = {
+			sukhothai_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+					}
+					add_permanent_claim = ROOT
+			}
+			central_thai_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+					}
+					add_permanent_claim = ROOT
+			}
+			northern_thai_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+					}
+					add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	cherosyne_fall_of_lavo = {
+		icon = mission_mnd_maj_subjugate_makassar
+		required_missions = { cherosyne_rebuild_our_kingdom } 
+		provinces_to_highlight = {
+			owned_by = SU2
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			OR = {
+			SU2 = {
+			is_subject_of = ROOT
+			}
+			AND = {
+			4832 = {
+				owned_by = ROOT
+			}
+			NOT = { exists = SU2 }
+			}
+			}
+		}
+
+		effect = {
+			country_event = {
+				id = alb_sea.4
+			}
+			prestige = 10
+		}
+	}
+	
+	cherosyne_campaign_of_conquest = {
+		icon = mission_mnd_dai_control_the_army
+		required_missions = { cherosyne_take_back_isan cherosyne_fall_of_lavo cherosyne_curse_champa } 
+		provinces_to_highlight = {
+			
+		}
+
+		trigger = {
+			army_size_percentage = 0.9
+			manpower_percentage = 0.8
+		}
+
+		effect = {
+			add_country_modifier = {
+					name = SEM_conquer_frenzy
+					duration = 5475
+				}
+		}
+	}
+	
+	cherosyne_golden_subcontinent = {
+		icon = mission_great_wall
+		required_missions = { cherosyne_campaign_of_conquest } 
+		provinces_to_highlight = {
+			
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				NOT = { region = indo_china_region }
+				value = 35
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+					name = SEM_emboldened_conqueror
+					duration = 9125
+				}
+		}
+	}
+	
+	cherosyne_glided_century = {
+		icon = mission_scholar_officials
+		required_missions = { cherosyne_golden_subcontinent } 
+		provinces_to_highlight = {
+			
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				NOT = { region = indo_china_region }
+				value = 50
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+					name = SEM_legendary_conquest
+					duration = 9125
+				}
+		}
+	}
+
+}
+mt_cherosyne_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	potential_on_load = {
+		has_dlc = "Leviathan"
+	}
+	potential = {
+		tag = KH1
+		has_dlc = "Leviathan"
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	cherosyne_repel_cham = {
+		icon = mission_rule_indochina
+		position = 2
+		required_missions = { cherosyne_asura_highland } 
+		provinces_to_highlight = {
+			OR = {
+				area = tay_nguyen_area
+				area = angkor_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			tay_nguyen_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			angkor_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+
+		effect = {
+		vietnam_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+					}
+					add_permanent_claim = ROOT
+			}
+			champa_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+					}
+					add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+					name = cherosyne_cham_kicked
+					duration = 9125
+				}
+			every_owned_province = {
+				limit = {
+					culture = cham
+				}
+				add_province_modifier = {
+					name = local_mad_MON
+					duration = 9125
+				}
+			}
+		}
+	}
+	
+	cherosyne_curse_champa = {
+		icon = mission_impaled_soldies
+		position = 4
+		required_missions = { cherosyne_repel_cham } 
+		provinces_to_highlight = {
+			OR = {
+				area = vietnam_area
+				area = champa_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			vietnam_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			champa_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+
+		effect = {
+			every_owned_province = {
+				limit = {
+					culture = cham
+				}
+				add_province_modifier = {
+					name = cherosyne_cham_cursed
+					duration = 9125
+				}
+			}
+		}
+	}
+	
+	cherosyne_skull_throne = {
+		icon = mission_rajendras_ambition
+		position = 6
+		required_missions = { cherosyne_curse_champa } 
+		provinces_to_highlight = {
+			culture = cham
+		}
+
+		trigger = {
+			owns_all_provinces = {
+			culture = cham
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+					name = cherosyne_skull_throne
+					duration = -1
+				}
+		}
+	}
+	
+	cherosyne_karmic_crusader = {
+		icon = mission_subdue_rajputana
+		required_missions = { cherosyne_skull_throne } 
+		provinces_to_highlight = {
+			
+		}
+
+		trigger = {
+			religious_unity = 1
+		}
+
+		effect = {
+			add_country_modifier = {
+					name = cherosyne_karmic_crusader
+					duration = -1
+				}
+		}
+	}
+
+}
+mt_cherosyne_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	potential_on_load = {
+		has_dlc = "Leviathan"
+	}
+	potential = {
+		tag = KH1
+		has_dlc = "Leviathan"
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	cherosyne_asura_highland = {
+		icon = mission_che_the_cave_country
+		required_missions = { } 
+		provinces_to_highlight = {
+			area = tay_nguyen_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			tay_nguyen_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			
+		}
+
+		effect = {
+			add_country_modifier = {
+					name = cherosyne_asura_highland
+					duration = 9125
+				}
+		}
+	}
+	
+	cherosyne_sabotage_cham = {
+		icon = mission_malayan_viceroyalty
+		position = 3
+		required_missions = { } 
+		provinces_to_highlight = {
+			
+		}
+
+		trigger = {
+			all_country = {
+					primary_culture = cham
+					has_spy_network_from = {
+					who = ROOT
+					value = 20
+					}
+				}
+		}
+
+		effect = {
+			if = {
+				limit = {
+					any_country={
+					primary_culture = cham
+					has_spy_network_from = {
+					who = ROOT
+					value = 20
+					}
+				}
+				}
+				PREV = { add_country_modifier = {
+					name = cherosyne_cham_slandered
+					duration = 18250
+				} }
+			}
+		}
+	}
+	
+	cherosyne_sought_out_maharlika = {
+		icon = mission_junk_boat
+		required_missions = { cherosyne_sabotage_cham } 
+		provinces_to_highlight = {
+			
+		}
+
+		trigger = {
+			any_country = {
+					primary_culture = maharlika
+					has_opinion = {
+						who = ROOT
+						value = 150
+					}
+				}
+		}
+
+		effect = {
+			add_country_modifier = {
+					name = maharlika_deal
+					duration = -1
+				}
+		}
+	}
+	
+	
+	cherosyne_capitalize_mekong_trade = {
+		icon = mission_open_up_china
+		required_missions = { cherosyne_sought_out_maharlika } 
+		provinces_to_highlight = {
+			province_id = 605
+			NOT = {
+			has_trade_building_trigger = yes
+			has_tax_building_trigger = yes
+			num_free_building_slots = 1
+			}
+		}
+		trigger = {
+			605	 = {
+				has_trade_building_trigger = yes
+				has_tax_building_trigger = yes
+				num_free_building_slots = 1
+			}
+		}
+		effect = {
+			mekong_area = {
+				add_province_modifier = {
+					name = mekong_trade_KPJ
+					duration = -1
+				}
+			}
+		}
+	}
+
+}
