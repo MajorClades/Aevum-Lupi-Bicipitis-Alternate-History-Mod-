@@ -842,26 +842,74 @@ ZL0_second_2_slot = {
 			ZL0_turk_barrier
 			ZL0_further_into_serica
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			owned_by = ROOT
+			region = russia_region
+			NOT = {
+				religion = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 30
+				region = russia_region
+				religion = ROOT
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			unlock_estate_privilege = {
+				estate_privilege = alb_serica_marcher_lords
+			}
+			custom_tooltip = empty_line_tt
+			define_advisor = {
+				type = theologian
+				skill = 2
+				cost_multiplier = 0.5
+			}
+		} 
 	}
 
 	ZL0_kingdom_of_serica = {
 		icon = the_russian_campaign
 		position = 7
 		required_missions = { ZL0_convert_serica } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				region = russia_region
+				region = ural_region
+			}
+			NOT = {	
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			NOT = {	
+				religion = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			russia_region = {
+				country_or_non_sovereign_subject_holds = ROOT
+				religion = ROOT
+				type = all
+			}
+			ural_region = {
+				country_or_non_sovereign_subject_holds = ROOT
+				religion = ROOT
+				type = all
+			}
+			num_of_owned_provinces_with = {
+				value = 15
+				region = russia_region
+				culture_group = zladinian
+			}
+		} 
 
 		effect = {  
 			custom_tooltip = BYZ_rebel_sentiment_will_fire_more_rarely
 			set_country_flag = BYZ_less_rebel_sentiment
 			custom_tooltip = empty_line_tt
-			
 		} 
 	}
 
@@ -966,11 +1014,22 @@ ZL0_second_3_slot = {
 			ZL0_turkish_push
 			ZL0_valtea
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			region = russia_region
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			russia_region = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			ural_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	ZL0_found_zardom = {
@@ -989,7 +1048,9 @@ ZL0_second_3_slot = {
 		required_missions = {
 			ZL0_found_zardom
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			
+		} 
 
 		trigger = { 
 			OR = {
@@ -1202,13 +1263,52 @@ ZL0_second_4_slot = {
 		icon = imperial_navy
 		position = 10
 		required_missions = { ZL0_slasmeri_monopolies } 
-		provinces_to_highlight = {  } 
-
-		trigger = {  
-
+		provinces_to_highlight = {  
+			any_great_power = {
+				navy_size = ROOT
+			}
 		} 
 
-		effect = {  } 
+		trigger = {  
+			num_of_heavy_ship = 50
+			num_of_marines = 30
+			navy_size_percentage = 1
+			is_great_power = yes
+		} 
+
+		effect = {  
+			if = {
+				limit = {
+					NOT = {
+						any_great_power = {
+							navy_size = ROOT
+						}
+					}
+				}
+				custom_tooltip = alb_zim_nogp_bettr_navy_yes_tt
+				custom_tooltip = empty_line_tt
+				add_country_modifier = {
+					name = alb_zim_navy_army_cooperation_marine
+					duration = -1
+				}
+				add_country_modifier = {
+					name = alb_zim_navy_army_cooperation_navy
+					duration = -1
+				}
+			}
+			else = {
+				custom_tooltip = alb_zim_nogp_bettr_navy_no_tt
+				custom_tooltip = empty_line_tt
+				add_country_modifier = {
+					name = alb_zim_navy_army_cooperation_marine
+					duration = 36500
+				}
+				add_country_modifier = {
+					name = alb_zim_navy_army_cooperation_navy
+					duration = 36500
+				}
+			}	
+		} 
 	}
 }
 ZL0_second_5_slot = {
