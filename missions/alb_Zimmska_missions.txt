@@ -913,26 +913,66 @@ ZL0_second_2_slot = {
 		} 
 	}
 
-	ZL0_free_peasants = {
-		icon = mission_peasantry
+	ZL0_curtail_nobles = {
+		icon = mission_swedish_peasantry
 		position = 9
 		required_missions = { ZL0_found_zardom } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			crown_land_share = 40
+			estate_loyalty = {
+				estate = estate_nobles
+				loyalty = 60
+			}
+			NOT = {
+				estate_influence = {
+					estate = estate_nobles
+					influence = 40
+				}
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			unlock_estate_privilege = {
+				estate_privilege = alb_zim_free_serfs
+			}
+			add_stability_or_adm_power = yes
+		} 
 	}
 
-	ZL0_curtail_nobles = {
-		icon = mission_swedish_peasantry
+	ZL0_free_peasants = {
+		icon = mission_peasantry
 		position = 10
-		required_missions = { ZL0_free_peasants } 
+		required_missions = { ZL0_curtail_nobles } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			has_estate_privilege = alb_zim_free_serfs
+			OR = {
+				num_of_estate_agendas_completed = {
+					estate = estate_nobles
+					value = 5
+				}
+				crown_land_share = 70
+			}
+			NOT = {
+				any_owned_province = {
+					NOT = {
+						development = 7
+					}
+				}
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			custom_tooltip = alb_upgrade_free_peasantry_priv_tt
+			set_country_flag = upgraded_alb_zim_free_serfs_flag
+			add_country_modifier = {
+				name = alb_zim_peasant_army
+				duration = -1
+			}
+		} 
 	}
 }
 ZL0_second_3_slot = {
@@ -1035,11 +1075,27 @@ ZL0_second_3_slot = {
 	ZL0_found_zardom = {
 		icon = mission_the_russian_tsardom
 		position = 8
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			culture_group = zladinian
+			NOT = {
+				owned_by = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			owns_all_provinces = {
+				culture_group = zladinian
+			}
+			stability = 1
+		} 
 
-		effect = {  } 
+		effect = {  
+			remove_country_modifier = centralization_modifier
+			add_country_modifier = {
+				name = alb_zim_zladinian_realm
+				duration = 7300
+			}
+		} 
 	}
 
 	ZL0_slavic_unity = {
@@ -1344,11 +1400,51 @@ ZL0_second_5_slot = {
 		icon = mission_sword_of_the_reformation
 		position = 9
 		required_missions = { ZL0_found_zardom } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
 
-		trigger = {  } 
+		} 
 
-		effect = {  } 
+		trigger = {  
+			custom_trigger_tooltip = {
+				tooltip = alb_is_wycliffian_reformation_began_tt
+				is_religion_enabled = wycliffian
+			}
+			OR = {
+				AND = {
+					religion = wycliffian
+					num_of_aspects = 3
+				}
+				AND = {
+					religion = catholic
+					OR = {
+						NOT = { exists = PAP }
+						AND = {
+							reverse_has_opinion = {
+								who = PAP
+								value = 150
+							}
+							alliance_with = PAP
+						}
+					}
+				}
+			}
+		} 
+
+		effect = {  
+			change_ruler_stat = {
+				type = adm
+				amount = 1
+			}
+			change_ruler_stat = {
+				type = dip
+				amount = 1
+			}
+			change_ruler_stat = {
+				type = mil
+				amount = 1
+			}
+			add_stability_or_adm_power = yes
+		} 
 	}
 
 	ZL0_religion_harmony = {
@@ -1357,8 +1453,58 @@ ZL0_second_5_slot = {
 		required_missions = { ZL0_reformation_question } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			if = {
+				limit = {
+					religion = catholic
+				}
+				num_of_cardinals = 2
+				OR = {
+					is_papal_controller = yes
+					invested_papal_influence = 100
+				}
+			}
+			else_if = {
+				limit = {
+					religion = wycliffian
+				}
+				OR = {
+					has_church_aspect = sola_scriptura_aspect
+					has_church_aspect = taborite_resurgence_aspect
+					has_church_aspect = orphan_hetmans_aspect
+				}
+				church_power = 200
+				army_size_percentage = 0.8
+			}
+			religious_unity = 1
+			is_defender_of_faith_of_tier = 4
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_estate_loyalty = {
+				estate = estate_church
+				loyalty = 15
+			}
+			if = {
+				limit = {
+					religion = wycliffian
+				}
+				add_stability_or_adm_power = yes
+				add_country_modifier = {
+					name = alb_zim_defender_maxxing
+					duration = -1
+				}
+			}
+			if = {
+				limit = {
+					religion = catholic
+				}
+				add_papal_influence = 100
+				add_country_modifier = {
+					name = alb_zim_northern_crusade
+					duration = -1
+				}
+			}
+		} 
 	}
 }
