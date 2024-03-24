@@ -23,10 +23,33 @@ Britannia_1_slot = {
 		}
 
 		effect = {
-			4366 = {
-				add_province_modifier = {
-					name = "naval_buildup"
-					duration = 10950
+			if = {
+				limit = {
+					capital_scope = {
+						has_port = yes
+					}
+				}
+				capital_scope = {
+					add_province_modifier = {
+						name = "naval_buildup"
+						duration = 10950
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					capital_scope = {
+						has_port = no
+					}
+				}
+				random_owned_province = {
+					limit = {
+						has_port = yes
+					}
+					add_province_modifier = {
+						name = "naval_buildup"
+						duration = 10950
+					}
 				}
 			}
 			242 = { add_permanent_claim = ROOT } 
@@ -209,19 +232,23 @@ Britannia_2_slot = {
 		icon = mission_control_the_channel
 		position = 7
 		required_missions = { 3_londinium } 
-		provinces_to_highlight = { province_id = 236 } 
+		provinces_to_highlight = { 
+			province_id = 236 
+			NOT = {
+				AND = {
+					province_has_center_of_trade_of_level = 2
+					has_trade_building_trigger = yes
+				}
+			}
+		} 
 
 		trigger = {
 			236 = {
-				province_has_center_of_trade_of_level = 3
-				OR = {
-					has_building = marketplace
-					has_building = trade_depot
-					has_building = stock_exchange
-				}
+				province_has_center_of_trade_of_level = 2
+				has_trade_building_trigger = yes
 			}
-			owns_or_non_sovereign_subject_of = 238
-			owns_or_non_sovereign_subject_of = 235
+			owns = 238
+			owns = 235
 		}
 
 		effect = {
@@ -236,6 +263,9 @@ Britannia_2_slot = {
 					name = "londinium_trade_up"
 					duration = -1
 				}
+			}
+			236 = {
+				set_center_level_3_center_of_trade = yes
 			}
 		}
 	}
@@ -346,18 +376,14 @@ Britannia_3_slot = {
 			if = {
 				limit = { accepted_culture = juts } 
 				add_accepted_culture = jutlander
+				remove_accepted_culture = juts
 			}
-			home_counties_area = {
-				limit = { culture = juts } 
-				change_culture = jutlander
-			}
-			east_anglia_area = {
-				limit = { culture = juts } 
-				change_culture = jutlander
-			}
-			east_midlands_area = {
-				limit = { culture = juts } 
-				change_culture = jutlander
+			custom_tooltip = alb_brit_move_jutish_culture_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = { culture = juts } 
+					change_culture = jutlander
+				}
 			}
 			1861 = { change_culture = briton } 
 			4785 = { change_culture = briton } 
@@ -595,7 +621,11 @@ Britannia_5_slot = {
 		icon = mission_swedish_peasantry
 		position = 8
 		required_missions = { 4_londinium_school } 
-		provinces_to_highlight = { culture = svede } 
+		provinces_to_highlight = { 
+			culture = svede 
+			owned_by = ROOT
+			unrest = 1
+		} 
 
 		trigger = {
 			num_of_owned_provinces_with = {
@@ -609,10 +639,14 @@ Britannia_5_slot = {
 			if = {
 				limit = { accepted_culture = svede } 
 				add_accepted_culture = svevish
+				remove_accepted_culture = svede
 			}
-			every_owned_province = {
-				limit = { culture = svede } 
-				change_culture = svevish
+			custom_tooltip = alb_brit_move_swedish_culture_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = { culture = svede } 
+					change_culture = svevish
+				}
 			}
 		}
 	}

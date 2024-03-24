@@ -842,49 +842,137 @@ ZL0_second_2_slot = {
 			ZL0_turk_barrier
 			ZL0_further_into_serica
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			owned_by = ROOT
+			region = russia_region
+			NOT = {
+				religion = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 30
+				region = russia_region
+				religion = ROOT
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			unlock_estate_privilege = {
+				estate_privilege = alb_serica_marcher_lords
+			}
+			custom_tooltip = empty_line_tt
+			define_advisor = {
+				type = theologian
+				skill = 2
+				cost_multiplier = 0.5
+			}
+		} 
 	}
 
 	ZL0_kingdom_of_serica = {
 		icon = the_russian_campaign
 		position = 7
 		required_missions = { ZL0_convert_serica } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				region = russia_region
+				region = ural_region
+			}
+			NOT = {	
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			NOT = {	
+				religion = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			russia_region = {
+				country_or_non_sovereign_subject_holds = ROOT
+				religion = ROOT
+				type = all
+			}
+			ural_region = {
+				country_or_non_sovereign_subject_holds = ROOT
+				religion = ROOT
+				type = all
+			}
+			num_of_owned_provinces_with = {
+				value = 15
+				region = russia_region
+				culture_group = zladinian
+			}
+		} 
 
 		effect = {  
 			custom_tooltip = BYZ_rebel_sentiment_will_fire_more_rarely
 			set_country_flag = BYZ_less_rebel_sentiment
 			custom_tooltip = empty_line_tt
-			
+		} 
+	}
+
+	ZL0_curtail_nobles = {
+		icon = mission_swedish_peasantry
+		position = 9
+		required_missions = { ZL0_found_zardom } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			crown_land_share = 40
+			estate_loyalty = {
+				estate = estate_nobles
+				loyalty = 60
+			}
+			NOT = {
+				estate_influence = {
+					estate = estate_nobles
+					influence = 40
+				}
+			}
+		} 
+
+		effect = {  
+			unlock_estate_privilege = {
+				estate_privilege = alb_zim_free_serfs
+			}
+			add_stability_or_adm_power = yes
 		} 
 	}
 
 	ZL0_free_peasants = {
 		icon = mission_peasantry
-		position = 9
-		required_missions = { ZL0_found_zardom } 
-		provinces_to_highlight = {  } 
-
-		trigger = {  } 
-
-		effect = {  } 
-	}
-
-	ZL0_curtail_nobles = {
-		icon = mission_swedish_peasantry
 		position = 10
-		required_missions = { ZL0_free_peasants } 
+		required_missions = { ZL0_curtail_nobles } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			has_estate_privilege = alb_zim_free_serfs
+			OR = {
+				num_of_estate_agendas_completed = {
+					estate = estate_nobles
+					value = 5
+				}
+				crown_land_share = 70
+			}
+			NOT = {
+				any_owned_province = {
+					NOT = {
+						development = 7
+					}
+				}
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			custom_tooltip = alb_upgrade_free_peasantry_priv_tt
+			set_country_flag = upgraded_alb_zim_free_serfs_flag
+			add_country_modifier = {
+				name = alb_zim_peasant_army
+				duration = -1
+			}
+		} 
 	}
 }
 ZL0_second_3_slot = {
@@ -966,21 +1054,48 @@ ZL0_second_3_slot = {
 			ZL0_turkish_push
 			ZL0_valtea
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			region = russia_region
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			russia_region = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			ural_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	ZL0_found_zardom = {
 		icon = mission_the_russian_tsardom
 		position = 8
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			culture_group = zladinian
+			NOT = {
+				owned_by = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			owns_all_provinces = {
+				culture_group = zladinian
+			}
+			stability = 1
+		} 
 
-		effect = {  } 
+		effect = {  
+			remove_country_modifier = centralization_modifier
+			add_country_modifier = {
+				name = alb_zim_zladinian_realm
+				duration = 7300
+			}
+		} 
 	}
 
 	ZL0_slavic_unity = {
@@ -989,7 +1104,9 @@ ZL0_second_3_slot = {
 		required_missions = {
 			ZL0_found_zardom
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			
+		} 
 
 		trigger = { 
 			OR = {
@@ -1070,7 +1187,7 @@ ZL0_second_3_slot = {
 		required_missions = {
 			ZL0_maximum_navy
 			ZL0_religion_harmony
-			ZL0_curtail_nobles
+			ZL0_free_peasants
 			ZL0_develop_silesia
 		}
 		provinces_to_highlight = {  } 
@@ -1112,33 +1229,107 @@ ZL0_second_4_slot = {
 		icon = mission_caribbean_cn
 		position = 4
 		required_missions = { ZL0_greenland_landing } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			colonial_region = colonial_the_carribean
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+			has_discovered = ROOT
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			custom_trigger_tooltip = {
+				tooltip = miss_discover_caribbean
+				colonial_the_carribean = {
+					has_discovered = ROOT
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = english_colony_in_the_carribean.tooltip
+				num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+					value = 5
+					colonial_region = colonial_the_carribean
+					is_city = yes
+				}
+			}
+			owns = 499
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_country_modifier = {
+				name = alb_zim_caribbean_trade
+				duration = 18250
+			}
+			499 = {
+				change_province_name = "Svatá Lucie"
+				set_center_level_2_center_of_trade = yes
+			}
+			mexico_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	ZL0_mexico = {
 		icon = mission_iberian_conquistador
 		position = 5
 		required_missions = { ZL0_warmer_lands } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			region = mexico_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+			has_discovered = ROOT
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				religion = ROOT
+				region = mexico_region
+				value = 15
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_country_modifier = {
+				name = alb_zim_mexico_moment
+				duration = 18250
+			}
+			custom_tooltip = colonial_jamesland_get_perma_claim_tt
+			hidden_effect = {
+				colonial_jamesland = {
+					add_permanent_claim = ROOT
+				}
+			}
+			if = {
+				limit = {
+					owns_or_non_sovereign_subject_of = 2647
+				}
+				2647 = {
+					change_province_name = "Mesto Yucatán"
+				}
+			}
+		} 
 	}
 
 	ZL0_south_america = {
 		icon = mission_norwegian_south_america
 		position = 6
 		required_missions = { ZL0_mexico } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			continent = south_america
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+			has_discovered = ROOT
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 5
+				continent = south_america
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			country_event = {
+				id = zimmska.5
+			}
+		} 
 	}
 
 	ZL0_rausulia_hegemon = {
@@ -1148,11 +1339,32 @@ ZL0_second_4_slot = {
 			ZL0_south_america
 			ZL0_fiorita
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				continent = north_america
+				continent = south_america
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+			has_discovered = ROOT
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 300
+				OR = {
+					continent = north_america
+					continent = south_america
+				}
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_country_modifier = {
+				name = gbr_new_world_dominance
+				duration = -1
+			}
+			custom_tooltip = gbr_dominiate_new_world_at
+		} 
 	}
 
 	ZL0_slasmeri_monopolies = {
@@ -1202,13 +1414,52 @@ ZL0_second_4_slot = {
 		icon = imperial_navy
 		position = 10
 		required_missions = { ZL0_slasmeri_monopolies } 
-		provinces_to_highlight = {  } 
-
-		trigger = {  
-
+		provinces_to_highlight = {  
+			any_great_power = {
+				navy_size = ROOT
+			}
 		} 
 
-		effect = {  } 
+		trigger = {  
+			num_of_heavy_ship = 50
+			num_of_marines = 30
+			navy_size_percentage = 1
+			is_great_power = yes
+		} 
+
+		effect = {  
+			if = {
+				limit = {
+					NOT = {
+						any_great_power = {
+							navy_size = ROOT
+						}
+					}
+				}
+				custom_tooltip = alb_zim_nogp_bettr_navy_yes_tt
+				custom_tooltip = empty_line_tt
+				add_country_modifier = {
+					name = alb_zim_navy_army_cooperation_marine
+					duration = -1
+				}
+				add_country_modifier = {
+					name = alb_zim_navy_army_cooperation_navy
+					duration = -1
+				}
+			}
+			else = {
+				custom_tooltip = alb_zim_nogp_bettr_navy_no_tt
+				custom_tooltip = empty_line_tt
+				add_country_modifier = {
+					name = alb_zim_navy_army_cooperation_marine
+					duration = 18250
+				}
+				add_country_modifier = {
+					name = alb_zim_navy_army_cooperation_navy
+					duration = 18250
+				}
+			}	
+		} 
 	}
 }
 ZL0_second_5_slot = {
@@ -1222,33 +1473,134 @@ ZL0_second_5_slot = {
 		icon = mission_colonial
 		position = 5
 		required_missions = { ZL0_dominon_of_frjalslundt } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			colonial_region = colonial_eastern_america
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+			has_discovered = ROOT
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 10
+				colonial_region = colonial_eastern_america
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			create_conquistador = {
+				tradition = 80
+			}
+			custom_tooltip = subject_in_eastern_america_gets_tt
+			tooltip = {
+				add_country_modifier = {
+					name = alb_zim_slav_settlement
+					duration = -1
+				}
+			}
+			custom_tooltip = colonial_north_south_get_perma_claim_tt
+			hidden_effect = {
+				random_subject_country = {
+					limit = {
+						is_colonial_nation_of = ROOT
+						capital_scope = {
+							colonial_region = colonial_canada
+						}
+					}
+					add_country_modifier = {
+						name = alb_zim_slav_settlement
+						duration = -1
+					}
+				}
+				colonial_north_south = {
+					add_permanent_claim = ROOT
+				}
+			}
+			custom_tooltip = empty_line_tt
+			965 = {
+				change_province_name = "Novy Berezhangrod"
+			}
+		} 
 	}
 
 	ZL0_fiorita = {
 		icon = mission_colonize_florida
 		position = 6
 		required_missions = { ZL0_eastern_rausulia } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			colonial_region = colonial_north_south
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+			has_discovered = ROOT
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 10
+				colonial_region = colonial_north_south
+			}
+			owns_or_non_sovereign_subject_of = 2543
+		} 
 
-		effect = {  } 
+		effect = {  
+			country_event = {
+				id = zimmska.6
+			}
+			2543 = {
+				change_province_name = "Novy Bezgo"
+				set_center_level_2_center_of_trade = yes
+			}
+		} 
 	}
 
 	ZL0_reformation_question = {
 		icon = mission_sword_of_the_reformation
 		position = 9
 		required_missions = { ZL0_found_zardom } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
 
-		trigger = {  } 
+		} 
 
-		effect = {  } 
+		trigger = {  
+			custom_trigger_tooltip = {
+				tooltip = alb_is_wycliffian_reformation_began_tt
+				is_religion_enabled = wycliffian
+			}
+			OR = {
+				AND = {
+					religion = wycliffian
+					num_of_aspects = 3
+				}
+				AND = {
+					religion = catholic
+					OR = {
+						NOT = { exists = PAP }
+						AND = {
+							reverse_has_opinion = {
+								who = PAP
+								value = 150
+							}
+							alliance_with = PAP
+						}
+					}
+				}
+			}
+		} 
+
+		effect = {  
+			change_ruler_stat = {
+				type = adm
+				amount = 1
+			}
+			change_ruler_stat = {
+				type = dip
+				amount = 1
+			}
+			change_ruler_stat = {
+				type = mil
+				amount = 1
+			}
+			custom_tooltip = empty_line_tt
+			add_stability_or_adm_power = yes
+		} 
 	}
 
 	ZL0_religion_harmony = {
@@ -1257,8 +1609,58 @@ ZL0_second_5_slot = {
 		required_missions = { ZL0_reformation_question } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			if = {
+				limit = {
+					religion = catholic
+				}
+				num_of_cardinals = 2
+				OR = {
+					is_papal_controller = yes
+					invested_papal_influence = 100
+				}
+			}
+			else_if = {
+				limit = {
+					religion = wycliffian
+				}
+				OR = {
+					has_church_aspect = sola_scriptura_aspect
+					has_church_aspect = taborite_resurgence_aspect
+					has_church_aspect = orphan_hetmans_aspect
+				}
+				church_power = 200
+				army_size_percentage = 0.8
+			}
+			religious_unity = 1
+			is_defender_of_faith_of_tier = 4
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_estate_loyalty = {
+				estate = estate_church
+				loyalty = 15
+			}
+			if = {
+				limit = {
+					religion = wycliffian
+				}
+				add_stability_or_adm_power = yes
+				add_country_modifier = {
+					name = alb_zim_defender_maxxing
+					duration = -1
+				}
+			}
+			if = {
+				limit = {
+					religion = catholic
+				}
+				add_papal_influence = 100
+				add_country_modifier = {
+					name = alb_zim_northern_crusade
+					duration = -1
+				}
+			}
+		} 
 	}
 }

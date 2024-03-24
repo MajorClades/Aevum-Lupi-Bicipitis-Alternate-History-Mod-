@@ -5,7 +5,7 @@ country_event = {
 	id = zimmska.1
 	title = zimmska.1.test
 	desc = zimmska.1.desc
-	picture = GOOD_WITH_MONARCH_eventPicture
+	picture = GLOBAL_TRADE_eventPicture
 	
 	is_triggered_only = yes
 
@@ -45,7 +45,7 @@ country_event = {
 	id = zimmska.2
 	title = zimmska.2.test
 	desc = zimmska.2.desc
-	picture = GOOD_WITH_MONARCH_eventPicture
+	picture = GLOBAL_TRADE_eventPicture
 	
 	is_triggered_only = yes
 
@@ -99,7 +99,7 @@ country_event = {
 	id = zimmska.3
 	title = zimmska.3.test
 	desc = zimmska.3.desc
-	picture = GOOD_WITH_MONARCH_eventPicture
+	picture = CITY_VIEW_eventPicture
 	
 	is_triggered_only = yes
 
@@ -202,7 +202,7 @@ country_event = {
 	id = zimmska.4
 	title = zimmska.4.test
 	desc = zimmska.4.desc
-	picture = GOOD_WITH_MONARCH_eventPicture
+	picture = POMERANIA_eventPicture
 	
 	is_triggered_only = yes
 
@@ -327,5 +327,78 @@ country_event = {
 		name = zimmska.4b
 		add_adm_power = 100
 		add_accepted_culture = anglish
+	}
+}
+
+#PIEROGI
+country_event = {
+	id = zimmska.5
+	title = zimmska.5.test
+	desc = zimmska.5.desc
+	picture = FEAST_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = zimmska.5a
+		change_price = {
+			trade_goods = grain
+			key = alb_zim_pierogi_wahoo
+			value = 0.1
+			duration = -1
+		}
+		add_years_of_owned_provinces_production_income = {
+			years = 15
+			custom_tooltip = MONOPOLY_INCOME_GRAIN_DESC
+			trigger = {
+				trade_goods = grain
+			}
+		}
+	}
+}
+
+#Slavery
+country_event = {
+	id = zimmska.6
+	title = zimmska.6.test
+	desc = zimmska.6.desc
+	picture = ENCOMIENDA_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = zimmska.6a
+		custom_tooltip = alb_fioritan_cashcrop_provinces_tt
+		tooltip = {
+			add_province_modifier = {
+				name = alb_zim_plantation_economy
+				duration = -1
+			}
+			add_base_production = 1
+		}
+		random_subject_country = {
+			limit = {
+				capital_scope = {
+					colonial_region = colonial_north_south
+				}
+				is_colonial_nation = yes
+			}
+			every_owned_province = {
+				limit = {
+					OR = {
+						trade_goods = tobacco
+						trade_goods = sugar
+						trade_goods = cotton
+						trade_goods = coffee
+					}
+					colonial_region = colonial_north_south
+				}
+				add_province_modifier = {
+					name = alb_zim_plantation_economy
+					duration = -1
+				}
+				add_base_production = 1
+			}
+		}
 	}
 }
