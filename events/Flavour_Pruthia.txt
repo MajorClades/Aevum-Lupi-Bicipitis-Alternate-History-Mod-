@@ -1,0 +1,180 @@
+namespace = prut
+
+country_event = {
+	id = prut.1
+	title = prut.1.test
+	desc = prut.1.desc
+	picture = ANGRY_MOB_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = PU0
+	}
+
+	option = {
+		name = prut.1a
+	}
+}
+country_event = {
+	id = prut.2
+	title = prut.2.test
+	desc = prut.2.desc
+	picture = ANGRY_MOB_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = prut.2a
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 1.1
+				has_opinion = {
+					who = ROOT
+					value = 110
+				}
+			}
+			modifier = {
+				factor = 1.5
+				has_opinion = {
+					who = ROOT
+					value = 150
+				}
+			}
+			modifier = {
+				factor = 2
+				has_opinion = {
+					who = ROOT
+					value = 180
+				}
+			}
+			modifier = {
+				factor = 2
+				alliance_with = ROOT
+			}
+		}
+		PU0 = {
+			create_subject = {
+				subject_type = ger_vassal
+				subject = ROOT
+			}
+		}
+	}
+	option = {
+		name = prut.2b
+		ai_chance = {
+			factor = 70
+			modifier = {
+				factor = 0.5
+				alliance_with = ROOT
+			}
+		}
+		add_stability = 1
+	}
+}
+country_event = {
+	id = prut.3
+	title = prut.3.test
+	desc = prut.3.desc
+	picture = ANGRY_MOB_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = prut.3a
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 1.1
+				has_opinion = {
+					who = ROOT
+					value = 110
+				}
+			}
+			modifier = {
+				factor = 1.5
+				has_opinion = {
+					who = ROOT
+					value = 150
+				}
+			}
+			modifier = {
+				factor = 2
+				has_opinion = {
+					who = ROOT
+					value = 180
+				}
+			}
+			modifier = {
+				factor = 2
+				alliance_with = ROOT
+			}
+		}
+		if = {
+			limit = {ai = yes}
+			PU0 = {
+				create_union = GR1
+			}
+		}else = {
+			GR1 = {
+				define_heir = {
+					mil = 5
+					dynasty = PU0
+				}
+			}
+		}
+	}
+	option = {
+		name = prut.3b
+		ai_chance = {
+			factor = 70
+			modifier = {
+				factor = 0.5
+				alliance_with = ROOT
+			}
+		}
+		add_stability = 1
+		PU0 = {
+			add_casus_belli = {
+				type = cb_restore_personal_union
+				target = ROOT
+			}
+		}
+	}
+}
+country_event = {
+	id = prut.4
+	title = prut.4.test
+	desc = prut.4.desc
+	picture = ANGRY_MOB_eventPicture
+	fire_only_once = yes
+	trigger = {
+		any_province = {
+			culture_group = central_germanic
+			religion = arian
+		}
+		has_reform = german_cofederation_monarchy
+		is_year = 1500
+	}
+	mean_time_to_happen = {
+		months = 60
+	}
+
+	option = {
+		name = prut.4a
+		ai_chance = {
+			factor = 80
+		}
+		add_country_modifier = {
+			name = prussian_supremacy
+			duration = -1
+		}
+	}
+	option = {
+		name = prut.4b
+		ai_chance = {
+			factor = 20
+		}
+		add_country_modifier = {
+			name = teutonic_supremacy
+			duration = -1
+		}
+	}
+}

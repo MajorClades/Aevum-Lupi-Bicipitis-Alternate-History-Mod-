@@ -4,11 +4,15 @@ country_decisions = {
 		potential = {
 			religion = arian
 			ai = yes
+			NOT = {
+				has_country_flag = ai_used_arian_decs
+			}
 		}
 		allow = {
 			have_5_arian_fervor = yes
 		}
 		effect = {
+			set_country_flag = ai_used_arian_decs
 			subtract_variable = {
 				which = arian_fervor_var
 				value = 5
@@ -51,11 +55,15 @@ country_decisions = {
 		potential = {
 			religion = arian
 			ai = yes
+			NOT = {
+				has_country_flag = ai_used_arian_decs
+			}
 		}
 		allow = {
 			have_5_arian_fervor = yes
 		}
 		effect = {
+			set_country_flag = ai_used_arian_decs
 			subtract_variable = {
 				which = arian_fervor_var
 				value = 5
@@ -78,11 +86,15 @@ country_decisions = {
 		potential = {
 			religion = arian
 			ai = yes
+			NOT = {
+				has_country_flag = ai_used_arian_decs
+			}
 		}
 		allow = {
 			have_10_arian_fervor = yes
 		}
 		effect = {
+			set_country_flag = ai_used_arian_decs
 			every_known_country = {
 				add_aggressive_expansion = {
 					who = ROOT
@@ -109,11 +121,15 @@ country_decisions = {
 		potential = {
 			religion = arian
 			ai = yes
+			NOT = {
+				has_country_flag = ai_used_arian_decs
+			}
 		}
 		allow = {
 			have_10_arian_fervor = yes
 		}
 		effect = {
+			set_country_flag = ai_used_arian_decs
 			subtract_variable = {
 				which = arian_fervor_var
 				value = 10
@@ -185,5 +201,26 @@ country_decisions = {
 			}
 		}
 		ai_importance = 500
+	}
+	ai_timer_arian_decs= {
+		major = yes
+		potential = {
+			religion = arian
+			ai = yes
+			has_country_flag = ai_used_arian_decs
+		}
+		allow = {
+			had_country_flag = {
+				flag = ai_used_arian_decs
+				days = 365
+			}
+		}
+		effect = {
+			clr_country_flag = ai_used_arian_decs
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 50
 	}
 }
