@@ -11,6 +11,21 @@ custom_button = {
 			}
 			has_country_modifier = arian_pacifism
 		}
+		check_variable = {
+			which = arian_fervor_var
+			value = 10
+		}
+		if = {
+			limit = {
+				has_country_modifier = arian_cooldown_mod_6
+			}
+			custom_trigger_tooltip = {
+				tooltip = ALB_NOT_TAKEN_IN_5_YEARS_TT
+				NOT = {
+					has_country_modifier = arian_cooldown_mod_6
+				}
+			}
+		}
 	}
 	effect = {
 		if = {
@@ -18,10 +33,23 @@ custom_button = {
 				has_country_modifier = arian_pacifism
 			}
 			remove_country_modifier = arian_pacifism
-		}else = {
+		}
+		else = {
 			add_country_modifier = {
 				name = arian_pacifism
 				duration = -1
+			}
+		}
+		subtract_variable = {
+			which = arian_fervor_var
+			value = 10
+		}
+		custom_tooltip = alb_cost_0.25_fervor_monthly_tt
+		hidden_effect = {
+			add_country_modifier = {
+				name = arian_cooldown_mod_6
+				duration = 1825
+				hidden = yes
 			}
 		}
 	}
@@ -34,18 +62,39 @@ custom_button = {
 		religion = arian
 	}
 	trigger = {
-		have_5_arian_fervor = yes
+		check_variable = {
+			which = arian_fervor_var
+			value = 25
+		}
+		if = {
+			limit = {
+				has_country_modifier = arian_cooldown_mod_5
+			}
+			custom_trigger_tooltip = {
+				tooltip = ALB_NOT_TAKEN_IN_5_YEARS_TT
+				NOT = {
+					has_country_modifier = arian_cooldown_mod_5
+				}
+			}
+		}
 	}
 	effect = {
 		subtract_variable = {
 			which = arian_fervor_var
-			value = 5
+			value = 25
 		}
 		add_estate_loyalty = {
 			estate = estate_church
 			loyalty = -10
 		}
-		add_years_of_income = 0.5
+		add_years_of_estate_land_income = 0.5
+		hidden_effect = {
+			add_country_modifier = {
+				name = arian_cooldown_mod_5
+				duration = 1825
+				hidden = yes
+			}
+		}
 	}
 	tooltip = arian_clergy_mad_tt
 }
@@ -56,15 +105,36 @@ custom_button = {
 		religion = arian
 	}
 	trigger = {
-		have_5_arian_fervor = yes
+		check_variable = {
+			which = arian_fervor_var
+			value = 25
+		}
+		if = {
+			limit = {
+				has_country_modifier = arian_cooldown_mod_4
+			}
+			custom_trigger_tooltip = {
+				tooltip = ALB_NOT_TAKEN_IN_5_YEARS_TT
+				NOT = {
+					has_country_modifier = arian_cooldown_mod_4
+				}
+			}
+		}
 	}
 	effect = {
 		subtract_variable = {
 			which = arian_fervor_var
-			value = 5
+			value = 25
 		}
 		home_trade_node_effect_scope = {
-			add_trade_node_income = 12
+			add_trade_node_income = 10
+		}
+		hidden_effect = {
+			add_country_modifier = {
+				name = arian_cooldown_mod_4
+				duration = 1825
+				hidden = yes
+			}
 		}
 	}
 	tooltip = arian_marketplace_tt
@@ -76,7 +146,21 @@ custom_button = {
 		religion = arian
 	}
 	trigger = {
-		have_10_arian_fervor = yes
+		check_variable = {
+			which = arian_fervor_var
+			value = 50
+		}
+		if = {
+			limit = {
+				has_country_modifier = arian_cooldown_mod_3
+			}
+			custom_trigger_tooltip = {
+				tooltip = ALB_NOT_TAKEN_IN_5_YEARS_TT
+				NOT = {
+					has_country_modifier = arian_cooldown_mod_3
+				}
+			}
+		}
 	}
 	effect = {
 		custom_tooltip = arian_diplomacy_effect_tt
@@ -84,9 +168,16 @@ custom_button = {
 			every_known_country = {
 				add_aggressive_expansion = {
 					who = ROOT
-					value = -5
-					apply_calc = yes
+					value = -10
+					apply_calc = no
 				}
+			}
+		}
+		hidden_effect = {
+			add_country_modifier = {
+				name = arian_cooldown_mod_3
+				duration = 1825
+				hidden = yes
 			}
 		}
 	}
@@ -99,7 +190,21 @@ custom_button = {
 		religion = arian
 	}
 	trigger = {
-		have_10_arian_fervor = yes
+		check_variable = {
+			which = arian_fervor_var
+			value = 25
+		}
+		if = {
+			limit = {
+				has_country_modifier = arian_cooldown_mod_2
+			}
+			custom_trigger_tooltip = {
+				tooltip = ALB_NOT_TAKEN_IN_5_YEARS_TT
+				NOT = {
+					has_country_modifier = arian_cooldown_mod_2
+				}
+			}
+		}
 	}
 	effect = {
 		subtract_variable = {
@@ -118,6 +223,13 @@ custom_button = {
 			estate = estate_burghers
 			loyalty = 10
 		}
+		hidden_effect = {
+			add_country_modifier = {
+				name = arian_cooldown_mod_2
+				duration = 1825
+				hidden = yes
+			}
+		}
 	}
 	tooltip = arian_estates_tt
 }
@@ -129,6 +241,21 @@ custom_button = {
 	}
 	trigger = {
 		is_at_war = yes
+		check_variable = {
+			which = arian_fervor_var
+			value = 10
+		}
+		if = {
+			limit = {
+				has_country_modifier = arian_cooldown_mod_1
+			}
+			custom_trigger_tooltip = {
+				tooltip = ALB_NOT_TAKEN_IN_5_YEARS_TT
+				NOT = {
+					has_country_modifier = arian_cooldown_mod_1
+				}
+			}
+		}
 	}
 	effect = {
 		if = {
@@ -136,10 +263,23 @@ custom_button = {
 				has_country_modifier = arian_guerrilla
 			}
 			remove_country_modifier = arian_guerrilla
-		}else = {
+		}
+		else = {
 			add_country_modifier = {
 				name = arian_guerrilla
 				duration = -1
+			}
+		}
+		subtract_variable = {
+			which = arian_fervor_var
+			value = 10
+		}
+		custom_tooltip = alb_cost_0.25_fervor_monthly_tt
+		hidden_effect = {
+			add_country_modifier = {
+				name = arian_cooldown_mod_1
+				duration = 1825
+				hidden = yes
 			}
 		}
 	}

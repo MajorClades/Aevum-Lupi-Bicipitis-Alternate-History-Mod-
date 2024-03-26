@@ -8,6 +8,7 @@ on_startup = {
 		rhom.1
 		vedr.1
 		arian.1
+		prut.1
 	}
 }
 on_province_culture_changed = {
@@ -244,11 +245,26 @@ on_monthly_pulse = {
 					}
 				}
 			}
-			change_variable = {
-				which = arian_fervor_var
-				value = 0.5
+			if = {
+				limit = {
+					OR = {
+						has_country_modifier = arian_pacifism
+						has_country_modifier = arian_guerrilla
+					}
+				}
+				change_variable = {
+					which = arian_fervor_var
+					value = 0.25
+				}
 			}
-		}else = {
+			else = {
+				change_variable = {
+					which = arian_fervor_var
+					value = 0.5
+				}
+			}
+		}
+		else = {
 			set_variable = {
 				which = arian_fervor_var
 				value = 100
