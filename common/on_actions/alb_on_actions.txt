@@ -232,6 +232,14 @@ on_main_war_lost = {
 		}
 	}
 }
+on_mil_tech_taken = {
+	if = {
+		limit = {
+			has_reform = pruthian_professional_army
+		}
+		add_army_professionalism = 0.05
+	}
+}
 on_monthly_pulse = {
 	##Arian Fervor
 	if = {
@@ -256,11 +264,29 @@ on_monthly_pulse = {
 					which = arian_fervor_var
 					value = 0.25
 				}
+				if = {
+					limit = { 
+						has_country_flag = more_arian_power_per_month_flag
+					}
+					change_variable = {
+						which = arian_fervor_var
+						value = 0.5
+					}
+				}
 			}
 			else = {
 				change_variable = {
 					which = arian_fervor_var
 					value = 0.5
+				}
+				if = {
+					limit = { 
+						has_country_flag = more_arian_power_per_month_flag
+					}
+					change_variable = {
+						which = arian_fervor_var
+						value = 0.5
+					}
 				}
 			}
 		}

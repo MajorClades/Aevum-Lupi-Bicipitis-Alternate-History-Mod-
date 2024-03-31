@@ -83,7 +83,27 @@ Germania_1_slot = {
 			}
 		}
 	}
-
+	germanic_war_path = {
+		icon = mission_conquer_50_development
+		required_missions = { }
+		position = 9
+		trigger = { 
+			is_at_war = yes
+			any_war_enemy_country = {
+				army_strength = {
+					who = ROOT
+					value = 1.2
+				}
+			}
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = germans_on_the_warpath
+				duration = 10950
+			}
+		}
+	}
 }
 Germania_2_slot = {
 	slot = 2
@@ -157,9 +177,39 @@ Germania_2_slot = {
 					change_culture = ug_mongolish
 				}
 				every_owned_province = {
-					limit = { culture = pommeranian }
+					limit = { culture = pomeranian }
 					change_culture = ug_anglish
 				}
+			}
+		}
+	}
+	germanic_war_councils = {
+		icon = mission_conquer_50_development
+		required_missions = {germanic_war_path germanic_governings}
+		position = 10
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_manpower_building_trigger = no
+			has_forcelimit_building_trigger = no
+		}
+		trigger = { 
+			years_of_manpower = 3
+			num_of_owned_provinces_with = {
+				value = 20
+				has_manpower_building_trigger = yes
+				has_forcelimit_building_trigger = yes
+			}
+		}
+		
+		effect = {
+			add_yearly_manpower = -3
+			change_government_reform_progress = 50
+			unlock_government_reform = {
+				government_reform = pruthian_professional_army
+			}
+			custom_tooltip = unlock_government_reform_tooltip
+				tooltip = {
+					add_government_reform = pruthian_professional_army
 			}
 		}
 	}
@@ -269,7 +319,7 @@ Germania_3_slot = {
 					change_culture = ug_teutonic
 				}
 				every_owned_province = {
-					limit = { culture = bavarian }
+					limit = { culture = bavarian_new }
 					change_culture = ug_bavarian
 				}
 				every_owned_province = {
@@ -280,6 +330,51 @@ Germania_3_slot = {
 					limit = { culture = hunnic_ger }
 					change_culture = ug_hunnic_ger
 				}
+			}
+		}
+	}
+	germanic_governings = {
+		icon = mission_conquer_50_development
+		required_missions = {germanic_unified_league }
+		position = 9
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_courthouse_building_trigger = no
+		}
+		trigger = { 
+			num_of_owned_provinces_with = {
+				value = 15
+				has_courthouse_building_trigger = yes
+			}
+		}
+		
+		effect = {
+			change_government_reform_progress = 50
+			unlock_government_reform = {
+				government_reform = german_efficient_governing
+			}
+			custom_tooltip = unlock_government_reform_tooltip
+				tooltip = {
+					add_government_reform = german_efficient_governing
+			}
+		}
+	}
+	germania_hegemony_over_europe = {
+		icon = mission_conquer_50_development
+		required_missions = {germanic_war_councils germanic_work_for_others}
+		position = 11
+		trigger = { 
+			NOT = {
+				great_power_rank = 2
+			}
+		}
+		
+		effect = {
+			europe_superregion = {
+				add_permanent_claim = ROOT
+			}
+			eastern_europe_superregion = {
+				add_permanent_claim = ROOT
 			}
 		}
 	}
@@ -360,6 +455,36 @@ Germania_4_slot = {
 				every_owned_province = {
 					limit = { culture = litaisch }
 					change_culture = ug_litaisch
+				}
+			}
+		}
+	}
+	germanic_work_for_others = {
+		icon = mission_conquer_50_development
+		required_missions = {germanic_governings germanic_more_work }
+		position = 10
+		provinces_to_highlight = {
+			culture_group = unified_germanic
+		}
+		trigger = { 
+			development_in_provinces = {
+				value = 1500
+				culture_group = unified_germanic
+			}
+		}
+		
+		effect = {
+			custom_tooltip = GERMS_TT_1
+			random_owned_province = {
+				limit = { NOT = {culture_group = unified_germanic}}
+				add_nationalism = -10
+				add_unrest = -5
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = { NOT = {culture_group = unified_germanic}}
+					add_nationalism = -10
+					add_unrest = -5
 				}
 			}
 		}
@@ -451,6 +576,27 @@ Germania_5_slot = {
 					duration = 10950
 				}
 			}
+		}
+	}
+	germanic_more_work = {
+		icon = mission_conquer_50_development
+		required_missions = { }
+		position = 9
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_production_building_trigger = no
+		}
+		trigger = { 
+			years_of_income = 2
+			num_of_owned_provinces_with = {
+				value = 15
+				has_production_building_trigger = yes
+			}
+		}
+		
+		effect = {
+			add_years_of_income = -2
+			add_dip_tech = 1
 		}
 	}
 }
