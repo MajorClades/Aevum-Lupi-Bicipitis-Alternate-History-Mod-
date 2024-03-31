@@ -13,152 +13,17 @@ country_event = {
 		ai_chance = {
 			factor = 80
 		}
-		add_country_modifier = {
-			name = prussian_supremacy
-			duration = -1
-		}
+	
 	}
 	option = {
 		name = germania.1b
 		ai_chance = {
 			factor = 20
 		}
-		add_country_modifier = {
-			name = teutonic_supremacy
-			duration = -1
-		}
+		
 	}
 }
 
-country_event = {
-	id = germania.2
-	title = germania.2.test
-	desc = germania.2.desc
-	picture = ECONOMY_eventPicture
-	
-	is_triggered_only = yes
-
-	option = {
-		name = germania.2a
-		ai_chance = {
-			factor = 60
-		}
-		add_country_modifier = {
-			name = german_steel
-			duration = 18250
-		}
-	}
-	option = {
-		name = germania.2b
-		ai_chance = {
-			factor = 40
-		}
-		add_country_modifier = {
-			name = german_work_culture
-			duration = 18250
-		}
-	}
-}
-
-country_event = {
-	id = germania.3
-	title = germania.3.test
-	desc = germania.3.desc
-	picture = CONQUEST_eventPicture
-	
-	is_triggered_only = yes
-
-	option = {
-		name = germania.3a
-		ai_chance = {
-			factor = 1
-			modifier = {
-				factor = 0
-				NOT = { primary_culture = pruthian }
-			}
-		}
-		12 = {
-			change_culture = pruthian
-		}
-	}
-	option = {
-		name = germania.3b
-		ai_chance = {
-			factor = 1
-			modifier = {
-				factor = 0
-				NOT = { primary_culture = teutonic }
-			}
-		}
-		12 = {
-			change_culture = teutonic
-		}
-	}
-}
-
-country_event = {
-	id = germania.4
-	title = germania.4.test
-	desc = germania.4.desc
-	picture = COURT_eventPicture
-	
-	is_triggered_only = yes
-
-	option = {
-		name = germania.4a
-		ai_chance = {
-			factor = 1
-			modifier = {
-				factor = 0
-				NOT = { primary_culture = pruthian }
-			}
-		}
-		260 = {
-			change_culture = pruthian
-			change_religion = ROOT
-		}
-	}
-	option = {
-		name = germania.4b
-		ai_chance = {
-			factor = 1
-			modifier = {
-				factor = 0
-				NOT = { primary_culture = teutonic }
-			}
-		}
-		260 = {
-			change_culture = teutonic
-			change_religion = ROOT
-		}
-	}
-}
-country_event = {
-	id = germania.5
-	title = germania.5.test
-	desc = germania.5.desc
-	picture = GOOD_WITH_MONARCH_eventPicture
-	
-	is_triggered_only = yes
-
-	option = {
-		name = germania.5a
-		change_primary_culture = teutonic
-		add_country_modifier = {
-			name = teut_power
-			duration = -1
-		}
-	}
-	option = {
-		name = germania.5b
-		change_primary_culture = pruthian
-		add_country_modifier = {
-			name = prus_power
-			duration = -1
-		}
-	}
-
-}
 
 country_event = {
 	id = germania.6
@@ -168,7 +33,7 @@ country_event = {
 	
 	trigger = {
 		owns = 54
-		culture_group = central_germanic
+		culture_group = unified_germanic
 	}
 	fire_only_once = yes
 	mean_time_to_happen = {
@@ -182,39 +47,121 @@ country_event = {
 	}
 }
 country_event = {
-	id = germania.7
-	title = germania.7.test
-	desc = germania.7.desc
+	id = germania.97
+	title = germania.97.test
+	desc = germania.97.desc
 	picture = GOOD_WITH_MONARCH_eventPicture
 	hidden = yes
-	is_triggered_only = yes
+	fire_only_once = yes
+	trigger = {
+		real_month_of_year = 3
+		NOT = {
+			real_month_of_year = 4
+		}
+		real_day_of_year = 1
+		NOT = {
+			real_day_of_year = 2
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+
 	option = {
-		name = germania.6a
-		add_government_power = {
-			mechanic_type = german_conf_mechanic
-			power_type = confederation_power
-			value = 10
+		africa = {
+			cede_province = NUB
 		}
 	}
 }
 country_event = {
-	id = germania.8
-	title = germania.8.test
-	desc = germania.8.desc
+	id = germania.98
+	title = germania.98.test
+	desc = germania.98.desc
 	picture = GOOD_WITH_MONARCH_eventPicture
 	hidden = yes
-	is_triggered_only = yes
+	trigger = {
+		mission_completed = germanic_unify_saxangle
+		any_owned_province = {
+			culture_group = saxangle 
+		}
+	}
+	mean_time_to_happen = {
+		months = 120
+	}
+
 	option = {
-		name = germania.6a
-		add_government_power = {
-			mechanic_type = german_conf_mechanic
-			power_type = confederation_power
-			value = -5
+		every_owned_province = {
+			limit = { culture = saxish }
+			change_culture = ug_saxish
+		}
+		every_owned_province = {
+			limit = { culture = anglish }
+			change_culture = ug_anglish
+		}
+		every_owned_province = {
+			limit = { culture = samit }
+			change_culture = ug_samit
+		}
+		every_owned_province = {
+			limit = { culture = anglaskan }
+			change_culture = ug_saxish
+		}
+		every_owned_province = {
+			limit = { culture = mongolish }
+			change_culture = ug_mongolish
+		}
+		every_owned_province = {
+			limit = { culture = pommeranian }
+			change_culture = ug_anglish
+		}
+	}
+}
+country_event = {
+	id = germania.99
+	title = germania.99.test
+	desc = germania.99.desc
+	picture = GOOD_WITH_MONARCH_eventPicture
+	hidden = yes
+	trigger = {
+		mission_completed = germanic_unify_saxonards
+		any_owned_province = {
+			culture_group = saxonic
+		}
+	}
+	mean_time_to_happen = {
+		months = 120
+	}
+
+	option = {
+		every_owned_province = {
+			limit = { culture = balten_new }
+			change_culture = ug_balten
+		}
+		every_owned_province = {
+			limit = { culture = saxonard }
+			change_culture = ug_saxonard
+		}
+		every_owned_province = {
+			limit = { culture = gepid }
+			change_culture = ug_gepid
+		}
+		every_owned_province = {
+			limit = { culture = rimedaxian }
+			change_culture = ug_rimedaxian
+		}
+		every_owned_province = {
+			limit = { culture = mongolish }
+			change_culture = ug_mongolish
+		}
+		every_owned_province = {
+			limit = { culture = litaisch }
+			change_culture = ug_litaisch
 		}
 	}
 }
 
-country_event = {
+
+country_event = { #AI help
 	id = germania.100
 	title = germania.100.test
 	desc = germania.100.desc
@@ -237,6 +184,40 @@ country_event = {
 			mechanic_type = german_conf_mechanic
 			power_type = confederation_power
 			value = 12
+		}
+	}
+}
+
+country_event = {
+	id = germania.200
+	title = germania.200.test
+	desc = germania.200.desc
+	picture = GOOD_WITH_MONARCH_eventPicture
+	hidden = yes
+	is_triggered_only = yes
+	option = {
+		name = germania.6a
+		add_government_power = {
+			mechanic_type = german_conf_mechanic
+			power_type = confederation_power
+			value = 10
+		}
+	}
+}
+
+country_event = {
+	id = germania.300
+	title = germania.300.test
+	desc = germania.300.desc
+	picture = GOOD_WITH_MONARCH_eventPicture
+	hidden = yes
+	is_triggered_only = yes
+	option = {
+		name = germania.6a
+		add_government_power = {
+			mechanic_type = german_conf_mechanic
+			power_type = confederation_power
+			value = -5
 		}
 	}
 }
