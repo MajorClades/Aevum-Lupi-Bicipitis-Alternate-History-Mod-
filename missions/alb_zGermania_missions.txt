@@ -5,7 +5,84 @@ Germania_1_slot = {
 	ai = yes
 	potential = {	tag = GR0	}
 	has_country_shield = yes
+	
+	germania_navy = {
+		icon = mission_conquer_50_development
+		required_missions = { }
+		position = 5
+		provinces_to_highlight = {
+			owned_by = ROOT
+			can_build = dock
+		}
+		trigger = { 
+			OR = {
+				dock = 5
+				drydock = 5
+			}
+			num_of_admirals = 1
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = german_first_navy
+				duration = 10950
+			}
+		}
+	}
+	germania_naval_power = {
+		icon = mission_conquer_50_development
+		required_missions = {germania_navy }
+		position = 6
 
+		trigger = { 
+			navy_tradition = 30
+			num_of_light_ship = 15
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = german_new_navy
+				duration = 10950
+			}
+		}
+	}
+	germania_angleland = {
+		icon = mission_conquer_50_development
+		required_missions = {germania_naval_power north_germania_federated}
+		position = 7
+		provinces_to_highlight = {
+			OR = {
+				culture = saxish
+				culture = anglish
+			}
+		}
+		trigger = { 
+			if = {
+				limit = {mission_completed = germanic_unify_saxangle}
+				navy_tradition = 75
+			}else = {
+				navy_tradition = 50
+				num_of_owned_provinces_with = {
+					value = 10 
+					OR = {
+						culture = saxish
+						culture = anglish
+					}
+				}
+				OR = {
+					accepted_culture = saxish
+					accepted_culture = anglish
+				}
+			}
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = german_saxanglish_admiralty
+				duration = -1
+			}
+		}
+	}
 
 }
 Germania_2_slot = {
@@ -15,6 +92,77 @@ Germania_2_slot = {
 	potential = {	tag = GR0	}
 	has_country_shield = yes
 
+	north_germania_federated = {
+		icon = mission_conquer_50_development
+		required_missions = {germania_after_all }
+		position = 6
+		provinces_to_highlight = {
+			region = north_german_region
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		trigger = { 
+			north_german_region = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = germania_northern_victory
+				duration = 10950
+			}
+			scandinavia_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	germanic_unify_saxangle = {
+		icon = mission_conquer_50_development
+		required_missions = {germanic_unified_league }
+		position = 8
+		provinces_to_highlight = {
+			culture_group = saxangle 
+		}
+		trigger = { 
+			owns_all_provinces = {
+				culture_group = saxangle 
+				superregion = europe_superregion
+			}
+		}
+		
+		effect = {
+			custom_tooltip = UNIFY_SAXANGLE
+			hidden_effect = {
+				every_owned_province = {
+					limit = { culture = saxish }
+					change_culture = ug_saxish
+				}
+				every_owned_province = {
+					limit = { culture = anglish }
+					change_culture = ug_anglish
+				}
+				every_owned_province = {
+					limit = { culture = samit }
+					change_culture = ug_samit
+				}
+				every_owned_province = {
+					limit = { culture = anglaskan }
+					change_culture = ug_saxish
+				}
+				every_owned_province = {
+					limit = { culture = mongolish }
+					change_culture = ug_mongolish
+				}
+				every_owned_province = {
+					limit = { culture = pommeranian }
+					change_culture = ug_anglish
+				}
+			}
+		}
+	}
 }
 Germania_3_slot = {
 	slot = 3
@@ -38,7 +186,7 @@ Germania_3_slot = {
 		}
 		trigger = { 
 			num_of_owned_provinces_with = {
-				value = 60
+				value = 75
 				OR = {
 					region = north_german_region
 					region = south_german_region
@@ -54,14 +202,84 @@ Germania_3_slot = {
 					duration = -1
 				}
 			}
-			poland_region = {
-				add_permanent_claim = ROOT
+			add_country_modifier = {
+				name = unifier_of_all_germans
+				duration = 10950
 			}
-			low_countries_region = {
-				add_permanent_claim = ROOT
+		}
+	}
+	capital_germania = {
+		icon = mission_conquer_50_development
+		required_missions = {germania_after_all }
+		position = 6
+		provinces_to_highlight = {
+			is_capital_of = ROOT
+		}
+		trigger = { 
+			capital_scope = {
+				development = 25
+				num_of_buildings_in_province = 5
 			}
-			carpathia_region = {
-				add_permanent_claim = ROOT
+		}
+		
+		effect = {
+			capital_scope = {
+				add_province_modifier = {
+					name = wannabe_berlin
+					duration = -1
+				}
+				if = {
+					limit = {
+						province_has_center_of_trade_of_level = 1
+					}
+					add_center_of_trade_level = 2
+				}else = {
+					center_of_trade = 3
+				}
+			}
+		}
+	}
+	germanic_unified_league = {
+		icon = mission_conquer_50_development
+		required_missions = {capital_germania }
+		position = 7
+		provinces_to_highlight = {
+			culture_group = central_germanic
+		}
+		trigger = { 
+			owns_all_provinces = {
+				culture_group = central_germanic
+			}
+		}
+		
+		effect = {
+			custom_tooltip = INITIATE_UNITED_GERMANS
+			hidden_effect = {
+				change_culture_to_ug = yes
+				every_owned_province = {
+					limit = { culture = pruthian }
+					change_culture = ug_pruthian
+				}
+				every_owned_province = {
+					limit = { culture = south_german }
+					change_culture = ug_south_german
+				}
+				every_owned_province = {
+					limit = { culture = teutonic }
+					change_culture = ug_teutonic
+				}
+				every_owned_province = {
+					limit = { culture = bavarian }
+					change_culture = ug_bavarian
+				}
+				every_owned_province = {
+					limit = { culture = longobard }
+					change_culture = ug_longobard
+				}
+				every_owned_province = {
+					limit = { culture = hunnic_ger }
+					change_culture = ug_hunnic_ger
+				}
 			}
 		}
 	}
@@ -73,7 +291,79 @@ Germania_4_slot = {
 	potential = {	tag = GR0	}
 	has_country_shield = yes
 
-
+	south_germania_federated = {
+		icon = mission_conquer_50_development
+		required_missions = {germania_after_all }
+		position = 6
+		provinces_to_highlight = {
+			region = south_german_region
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		trigger = { 
+			south_german_region = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = germania_southern_victory
+				duration = 10950
+			}
+			poland_region = {
+				add_permanent_claim = ROOT
+			}
+			carpathia_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	germanic_unify_saxonards = {
+		icon = mission_conquer_50_development
+		required_missions = {germanic_unified_league }
+		position = 8
+		provinces_to_highlight = {
+			culture_group = saxonic 
+		}
+		trigger = { 
+			owns_all_provinces = {
+				culture_group = saxonic
+			}
+		}
+		
+		effect = {
+			custom_tooltip = UNIFY_SAXONICS
+			hidden_effect = {
+				every_owned_province = {
+					limit = { culture = balten_new }
+					change_culture = ug_balten
+				}
+				every_owned_province = {
+					limit = { culture = saxonard }
+					change_culture = ug_saxonard
+				}
+				every_owned_province = {
+					limit = { culture = gepid }
+					change_culture = ug_gepid
+				}
+				every_owned_province = {
+					limit = { culture = rimedaxian }
+					change_culture = ug_rimedaxian
+				}
+				every_owned_province = {
+					limit = { culture = mongolish }
+					change_culture = ug_mongolish
+				}
+				every_owned_province = {
+					limit = { culture = litaisch }
+					change_culture = ug_litaisch
+				}
+			}
+		}
+	}
 }
 Germania_5_slot = {
 	slot = 5
@@ -82,4 +372,85 @@ Germania_5_slot = {
 	potential = {	tag = GR0	}
 	has_country_shield = yes
 
+	germania_industries_inc = {
+		icon = mission_conquer_50_development
+		required_missions = { }
+		position = 5
+		provinces_to_highlight = {
+			owned_by = ROOT
+			trade_goods = iron
+		}
+		trigger = { 
+			num_of_owned_provinces_with = {
+				value = 5
+				trade_goods = iron
+				has_production_building_trigger = yes
+			}
+		}
+		
+		effect = {
+			add_years_of_owned_provinces_production_income = {
+				years = 5
+				trigger = {
+					trade_goods = iron
+				}
+				custom_tooltip = MONOPOLY_INCOME_IRON_DESC
+			}
+		}
+	}
+	germania_by_gott = {
+		icon = mission_conquer_50_development
+		required_missions = {germania_industries_inc }
+		position = 6
+		provinces_to_highlight = {
+			owned_by = ROOT
+			NOT = {
+				religion = ROOT
+			}
+			has_tax_building_trigger = no
+		}
+		trigger = { 
+			religious_unity = 0.95
+			num_of_owned_provinces_with = {
+				value = 20
+				has_tax_building_trigger = yes
+			}
+		}
+		
+		effect = {
+			add_stability_or_adm_power = yes
+			add_country_modifier = {
+				name = germania_faith_choosen
+				duration = 10950
+			}
+		}
+	}
+	germania_money = {
+		icon = mission_conquer_50_development
+		required_missions = {south_germania_federated }
+		position = 7
+		provinces_to_highlight = {
+			OR = {
+				culture = helvet
+				culture = hunnic
+				culture = hunnic_fra
+			}
+		}
+		trigger = { 
+			accepted_culture = helvet
+			OR = {
+				accepted_culture = hunnic
+				accepted_culture = hunnic_fra
+			}
+		}
+		
+		effect = {
+			south_german_region = {
+				add_province_modifier = {
+					name = germania_south_peace
+					duration = 10950
+				}
+			}
+		}
+	}
 }
