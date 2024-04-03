@@ -182,6 +182,36 @@ on_main_war_won = {
 	if = {
 		limit = {
 			ROOT = {
+				mission_completed = germania_hegemon_of_faith_3
+				religion = arian
+			}
+		}
+		ROOT = {
+			if = {
+				limit = {
+					NOT = {
+						check_variable = {
+							which = arian_fervor_var
+							value = 100
+						}
+					}
+				}
+				change_variable = {
+					which = arian_fervor_var
+					value = 10
+				}
+			}else = {
+				set_variable = {
+					which = arian_fervor_var
+					value = 100
+				}
+			}
+
+		}
+	}
+	if = {
+		limit = {
+			ROOT = {
 				has_reform = saxony_order
 			}
 		}
@@ -528,7 +558,6 @@ on_mil_development = {
 			random_list = {
 				25 = {
 					change_culture = saxon
-					change_religion = wycliffian
 				}
 				75 = {
 					
@@ -565,8 +594,17 @@ on_thri_yearly_pulse_2 = {
 	}
 }
 
-
 on_province_religion_converted = {
+	##wycclifism
+	if = {
+		limit = {owner = {religion = wycliffian mission_completed = germania_hegemon_of_faith_2}}
+		if = {
+			limit = {
+				religion = wycliffian
+			}
+			add_random_development = 2
+		}
+	}
 	##Arian Fervor
 	if = {
 		limit = {owner = {religion = arian}}
