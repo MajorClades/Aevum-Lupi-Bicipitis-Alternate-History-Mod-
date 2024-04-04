@@ -583,19 +583,24 @@ Germania_5_slot = {
 		provinces_to_highlight = {
 			owned_by = ROOT
 			NOT = {
-				religion = ROOT
+				AND = {
+					religion = ROOT
+					has_tax_building_trigger = yes
+				}
 			}
-			has_tax_building_trigger = no
 		}
 		trigger = { 
 			num_of_owned_provinces_with = {
-				value = 15
+				value = 10
 				religion = ROOT
 				has_tax_building_trigger = yes
 			}
 		}	
 		effect = {
 			add_stability_or_adm_power = yes
+			country_event = {
+				id = prut.4
+			}
 		}
 	}
 	germania_ideals = {
@@ -638,7 +643,7 @@ Germania_5_slot = {
 			}
 			if = {
 				limit = { religion = wycliffian}
-				add_church_power = 25
+				add_church_power = 100
 			}
 			if = {
 				limit = { religion = arian}

@@ -145,18 +145,8 @@ country_event = {
 	desc = prut.4.desc
 	picture = ANGRY_MOB_eventPicture
 	fire_only_once = yes
-	trigger = {
-		any_province = {
-			culture_group = central_germanic
-			religion = arian
-		}
-		tag = PU0
-		has_reform = german_cofederation_monarchy
-		is_institution_enabled = printing_press
-	}
-	mean_time_to_happen = {
-		months = 24
-	}
+
+	is_triggered_only = yes
 
 	option = {
 		name = prut.4a
@@ -164,6 +154,13 @@ country_event = {
 			factor = 40
 		}
 		set_country_flag = prut_faith_chosen_cath
+		custom_tooltip = GERMAN_BECOME_CATH_TT #uhh just say ur becoming X religon
+		hidden_effect = {
+			country_event = {
+				id = prut.5
+				days = 360
+			}
+		}
 	}
 	option = {
 		name = prut.4b
@@ -171,13 +168,30 @@ country_event = {
 			factor = 40
 		}
 		set_country_flag = prut_faith_chosen_goth
+		custom_tooltip = GERMAN_BECOME_GOTH_TT #uhh just say ur becoming X religon
+		hidden_effect = {
+			country_event = {
+				id = prut.5
+				days = 360
+			}
+		}
 	}
 	option = {
 		name = prut.4c
 		ai_chance = {
 			factor = 20
 		}
+		trigger = {
+			is_religion_enabled = wycliffian
+		}
 		set_country_flag = prut_faith_chosen_wycl
+		custom_tooltip = GERMAN_BECOME_WYCL_TT #uhh just say ur becoming X religon
+		hidden_effect = {
+			country_event = {
+				id = prut.5
+				days = 360
+			}
+		}
 	}
 }
 
@@ -188,7 +202,6 @@ country_event = {
 	picture = ANGRY_MOB_eventPicture
 	fire_only_once = yes
 	trigger = {
-		has_institution = printing_press
 		germany_choosen_faith = yes
 	}
 	mean_time_to_happen = {
@@ -200,6 +213,10 @@ country_event = {
 		trigger = {
 			has_country_flag = prut_faith_chosen_cath
 		}
+		change_religion = catholic
+		capital_scope = {
+			change_religion = catholic
+		}
 		add_country_modifier_for_age = {
 			name = germania_catholic_bastion
 			age = age_of_revolutions
@@ -209,6 +226,7 @@ country_event = {
 		name = prut.4b
 		trigger = {
 			has_country_flag = prut_faith_chosen_wycl
+			is_religion_enabled = wycliffian	
 		}
 		change_religion = wycliffian
 		capital_scope = {
