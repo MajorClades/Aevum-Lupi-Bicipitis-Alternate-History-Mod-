@@ -1,69 +1,76 @@
-
 Germania_1_slot = {
 	slot = 1
 	generic = no
 	ai = yes
-	potential = {	tag = GR0	}
 	has_country_shield = yes
-	
+	potential = { tag = GR0 } 
+
 	germania_navy = {
-		icon = mission_conquer_50_development
-		required_missions = { }
+		icon = mission_establish_high_seas_navy
 		position = 5
 		provinces_to_highlight = {
 			owned_by = ROOT
 			can_build = dock
 		}
-		trigger = { 
+
+		trigger = {
 			OR = {
 				dock = 5
 				drydock = 5
 			}
 			num_of_admirals = 1
 		}
-		
+
 		effect = {
 			add_country_modifier = {
-				name = german_first_navy
+				name = "german_first_navy"
 				duration = 10950
 			}
 		}
 	}
-	germania_naval_power = {
-		icon = mission_conquer_50_development
-		required_missions = {germania_navy }
-		position = 6
 
-		trigger = { 
+	germania_naval_power = {
+		icon = imperial_navy
+		position = 6
+		required_missions = { germania_navy } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
 			navy_tradition = 30
 			num_of_light_ship = 15
 		}
-		
+
 		effect = {
 			add_country_modifier = {
-				name = german_new_navy
+				name = "german_new_navy"
 				duration = 10950
 			}
 		}
 	}
+
 	germania_angleland = {
-		icon = mission_conquer_50_development
-		required_missions = {germania_naval_power north_germania_federated}
+		icon = mission_danish_navy
 		position = 7
+		required_missions = {
+			germania_naval_power
+			north_germania_federated
+		}
 		provinces_to_highlight = {
 			OR = {
 				culture = saxish
 				culture = anglish
 			}
 		}
-		trigger = { 
+
+		trigger = {
 			if = {
-				limit = {mission_completed = germanic_unify_saxangle}
+				limit = { mission_completed = germanic_unify_saxangle } 
 				navy_tradition = 75
-			}else = {
+			}
+			else = {
 				navy_tradition = 50
 				num_of_owned_provinces_with = {
-					value = 10 
+					value = 10
 					OR = {
 						culture = saxish
 						culture = anglish
@@ -75,18 +82,19 @@ Germania_1_slot = {
 				}
 			}
 		}
-		
+
 		effect = {
 			add_country_modifier = {
-				name = german_saxanglish_admiralty
+				name = "german_saxanglish_admiralty"
 				duration = -1
 			}
 		}
 	}
+
 	germania_non_german = {
-		icon = mission_conquer_50_development
-		required_missions = {south_germania_federated }
+		icon = helvetic_conquest
 		position = 8
+		required_missions = { south_germania_federated } 
 		provinces_to_highlight = {
 			OR = {
 				culture = helvet
@@ -94,28 +102,31 @@ Germania_1_slot = {
 				culture = hunnic_fra
 			}
 		}
-		trigger = { 
+
+		trigger = {
 			accepted_culture = helvet
 			OR = {
 				accepted_culture = hunnic
 				accepted_culture = hunnic_fra
 			}
 		}
-		
+
 		effect = {
 			south_german_region = {
 				add_province_modifier = {
-					name = germania_south_peace
+					name = "germania_south_peace"
 					duration = 10950
 				}
 			}
 		}
 	}
+
 	germanic_war_path = {
-		icon = mission_conquer_50_development
-		required_missions = { }
+		icon = mission_steppe_warriors
 		position = 10
-		trigger = { 
+		provinces_to_highlight = {  } 
+
+		trigger = {
 			is_at_war = yes
 			any_war_enemy_country = {
 				army_strength = {
@@ -124,10 +135,10 @@ Germania_1_slot = {
 				}
 			}
 		}
-		
+
 		effect = {
 			add_country_modifier = {
-				name = germans_on_the_warpath
+				name = "germans_on_the_warpath"
 				duration = 10950
 			}
 		}
@@ -137,120 +148,118 @@ Germania_2_slot = {
 	slot = 2
 	generic = no
 	ai = yes
-	potential = {	tag = GR0	}
 	has_country_shield = yes
+	potential = { tag = GR0 } 
 
 	north_germania_federated = {
-		icon = mission_conquer_50_development
-		required_missions = {germania_after_all }
+		icon = mission_conquer_prussia
 		position = 6
+		required_missions = { germania_after_all } 
 		provinces_to_highlight = {
 			region = north_german_region
-			NOT = {
-				owned_by = ROOT
-			}
+			NOT = { owned_by = ROOT } 
 		}
-		trigger = { 
+
+		trigger = {
 			north_german_region = {
 				type = all
 				owned_by = ROOT
 			}
 		}
-		
+
 		effect = {
 			add_country_modifier = {
-				name = germania_northern_victory
+				name = "germania_northern_victory"
 				duration = 10950
 			}
-			scandinavia_region = {
-				add_permanent_claim = ROOT
-			}
+			scandinavia_region = { add_permanent_claim = ROOT } 
 		}
 	}
+
 	south_germania_federated = {
-		icon = mission_conquer_50_development
-		required_missions = {north_germania_federated }
+		icon = bavarian_cultural_dominance
 		position = 7
+		required_missions = { north_germania_federated } 
 		provinces_to_highlight = {
 			region = south_german_region
-			NOT = {
-				owned_by = ROOT
-			}
+			NOT = { owned_by = ROOT } 
 		}
-		trigger = { 
+
+		trigger = {
 			south_german_region = {
 				type = all
 				owned_by = ROOT
 			}
 		}
-		
+
 		effect = {
 			add_country_modifier = {
-				name = germania_southern_victory
+				name = "germania_southern_victory"
 				duration = 10950
 			}
-			poland_region = {
-				add_permanent_claim = ROOT
-			}
-			carpathia_region = {
-				add_permanent_claim = ROOT
-			}
+			poland_region = { add_permanent_claim = ROOT } 
+			carpathia_region = { add_permanent_claim = ROOT } 
 		}
 	}
+
 	germanic_unify_saxangle = {
-		icon = mission_conquer_50_development
-		required_missions = {germanic_unified_league }
+		icon = mission_germ_saxangle
 		position = 9
-		provinces_to_highlight = {
-			culture_group = saxangle 
-		}
-		trigger = { 
+		required_missions = { germanic_unified_league } 
+		provinces_to_highlight = { culture_group = saxangle } 
+
+		trigger = {
 			owns_all_provinces = {
-				culture_group = saxangle 
+				culture_group = saxangle
 				superregion = europe_superregion
 			}
 		}
-		
+
 		effect = {
 			custom_tooltip = UNIFY_SAXANGLE
 			hidden_effect = {
 				every_owned_province = {
-					limit = { culture = saxish }
+					limit = { culture = saxish } 
 					change_culture = ug_saxish
 				}
 				every_owned_province = {
-					limit = { culture = anglish }
+					limit = { culture = anglish } 
 					change_culture = ug_anglish
 				}
 				every_owned_province = {
-					limit = { culture = samit }
+					limit = { culture = samit } 
 					change_culture = ug_samit
 				}
 				every_owned_province = {
-					limit = { culture = anglaskan }
+					limit = { culture = anglaskan } 
 					change_culture = ug_saxish
 				}
 				every_owned_province = {
-					limit = { culture = mongolish }
+					limit = { culture = mongolish } 
 					change_culture = ug_mongolish
 				}
 				every_owned_province = {
-					limit = { culture = pomeranian }
+					limit = { culture = pomeranian } 
 					change_culture = ug_anglish
 				}
 			}
 		}
 	}
+
 	germanic_war_councils = {
-		icon = mission_conquer_50_development
-		required_missions = {germanic_war_path germanic_governings}
+		icon = mission_teutonic_riders
 		position = 11
+		required_missions = {
+			germanic_war_path
+			germanic_governings
+		}
 		provinces_to_highlight = {
 			owned_by = ROOT
 			has_manpower_building_trigger = no
 			has_forcelimit_building_trigger = no
 		}
-		trigger = { 
+
+		trigger = {
 			years_of_manpower = 3
 			num_of_owned_provinces_with = {
 				value = 20
@@ -258,17 +267,13 @@ Germania_2_slot = {
 				has_forcelimit_building_trigger = yes
 			}
 		}
-		
+
 		effect = {
 			add_yearly_manpower = -3
 			change_government_reform_progress = 50
-			unlock_government_reform = {
-				government_reform = pruthian_professional_army
-			}
+			unlock_government_reform = { government_reform = pruthian_professional_army } 
 			custom_tooltip = unlock_government_reform_tooltip
-				tooltip = {
-					add_government_reform = pruthian_professional_army
-			}
+			tooltip = { add_government_reform = pruthian_professional_army } 
 		}
 	}
 }
@@ -276,23 +281,25 @@ Germania_3_slot = {
 	slot = 3
 	generic = no
 	ai = yes
-	potential = {	tag = GR0	}
 	has_country_shield = yes
+	potential = { tag = GR0 } 
 
 	germania_after_all = {
-		icon = mission_conquer_50_development
-		required_missions = {germania_unified german_capital_conf_4}
+		icon = encroach_on_the_germans
 		position = 5
+		required_missions = {
+			germania_unified
+			german_capital_conf_4
+		}
 		provinces_to_highlight = {
 			OR = {
 				region = north_german_region
 				region = south_german_region
 			}
-			NOT = {
-				owned_by = ROOT
-			}
+			NOT = { owned_by = ROOT } 
 		}
-		trigger = { 
+
+		trigger = {
 			num_of_owned_provinces_with = {
 				value = 75
 				OR = {
@@ -301,139 +308,129 @@ Germania_3_slot = {
 				}
 			}
 		}
-		
+
 		effect = {
 			if = {
-				limit = { was_german_confederated_duchy = yes }
+				limit = { was_german_confederated_duchy = yes } 
 				add_country_modifier = {
-					name = prut_germanic_power_2
+					name = "prut_germanic_power_2"
 					duration = -1
 				}
 			}
 			add_country_modifier = {
-				name = unifier_of_all_germans
+				name = "unifier_of_all_germans"
 				duration = 10950
 			}
 		}
 	}
+
 	capital_germania = {
-		icon = mission_conquer_50_development
-		required_missions = {germania_after_all }
+		icon = renovate_berlin
 		position = 7
-		provinces_to_highlight = {
-			is_capital_of = ROOT
-		}
-		trigger = { 
+		required_missions = { germania_after_all } 
+		provinces_to_highlight = { is_capital_of = ROOT } 
+
+		trigger = {
 			capital_scope = {
 				development = 25
 				num_of_buildings_in_province = 5
 			}
 		}
-		
+
 		effect = {
 			capital_scope = {
 				add_province_modifier = {
-					name = wannabe_berlin
+					name = "wannabe_berlin"
 					duration = -1
 				}
 				if = {
-					limit = {
-						province_has_center_of_trade_of_level = 1
-					}
+					limit = { province_has_center_of_trade_of_level = 1 } 
 					add_center_of_trade_level = 2
-				}else = {
-					center_of_trade = 3
 				}
+				else = { center_of_trade = 3 } 
 			}
 		}
 	}
+
 	germanic_unified_league = {
-		icon = mission_conquer_50_development
-		required_missions = {capital_germania }
+		icon = catholic_confraternity
 		position = 8
-		provinces_to_highlight = {
-			culture_group = central_germanic
-		}
-		trigger = { 
-			owns_all_provinces = {
-				culture_group = central_germanic
-			}
-		}
-		
+		required_missions = { capital_germania } 
+		provinces_to_highlight = { culture_group = central_germanic } 
+
+		trigger = { owns_all_provinces = { culture_group = central_germanic }  } 
+
 		effect = {
 			custom_tooltip = INITIATE_UNITED_GERMANS
 			hidden_effect = {
 				change_culture_to_ug = yes
 				every_owned_province = {
-					limit = { culture = pruthian }
+					limit = { culture = pruthian } 
 					change_culture = ug_pruthian
 				}
 				every_owned_province = {
-					limit = { culture = south_german }
+					limit = { culture = south_german } 
 					change_culture = ug_south_german
 				}
 				every_owned_province = {
-					limit = { culture = teutonic }
+					limit = { culture = teutonic } 
 					change_culture = ug_teutonic
 				}
 				every_owned_province = {
-					limit = { culture = bavarian_new }
+					limit = { culture = bavarian_new } 
 					change_culture = ug_bavarian
 				}
 				every_owned_province = {
-					limit = { culture = longobard }
+					limit = { culture = longobard } 
 					change_culture = ug_longobard
 				}
 				every_owned_province = {
-					limit = { culture = hunnic_ger }
+					limit = { culture = hunnic_ger } 
 					change_culture = ug_hunnic_ger
 				}
 			}
 		}
 	}
+
 	germanic_governings = {
-		icon = mission_conquer_50_development
-		required_missions = {germanic_unified_league }
+		icon = mission_plc_governance_act
 		position = 10
+		required_missions = { germanic_unified_league } 
 		provinces_to_highlight = {
 			owned_by = ROOT
 			has_courthouse_building_trigger = no
 		}
-		trigger = { 
+
+		trigger = {
 			num_of_owned_provinces_with = {
 				value = 15
 				has_courthouse_building_trigger = yes
 			}
 		}
-		
+
 		effect = {
 			change_government_reform_progress = 50
-			unlock_government_reform = {
-				government_reform = german_efficient_governing
-			}
+			unlock_government_reform = { government_reform = german_efficient_governing } 
 			custom_tooltip = unlock_government_reform_tooltip
-				tooltip = {
-					add_government_reform = german_efficient_governing
-			}
+			tooltip = { add_government_reform = german_efficient_governing } 
 		}
 	}
+
 	germania_hegemony_over_europe = {
-		icon = mission_conquer_50_development
-		required_missions = {germanic_war_councils germanic_work_for_others}
+		icon = ger_kaiserreich
 		position = 12
-		trigger = { 
-			NOT = {
-				great_power_rank = 2
-			}
+		required_missions = {
+			germanic_war_councils
+			germanic_work_for_others
 		}
-		
+		provinces_to_highlight = {  } 
+
+		trigger = { NOT = { great_power_rank = 2 }  } 
+
 		effect = {
-			europe_superregion = {
-				add_permanent_claim = ROOT
-			}
-			eastern_europe_superregion = {
-				add_permanent_claim = ROOT
-			}
+			override_country_name = "GROB_GERMANIA"
+			europe_superregion = { add_permanent_claim = ROOT } 
+			eastern_europe_superregion = { add_permanent_claim = ROOT } 
 		}
 	}
 }
@@ -441,144 +438,151 @@ Germania_4_slot = {
 	slot = 4
 	generic = no
 	ai = yes
-	potential = {	tag = GR0	}
 	has_country_shield = yes
+	potential = { tag = GR0 } 
+
 	germania_pillars = {
-		icon = mission_conquer_50_development
-		required_missions = {germania_ideals }
+		icon = mission_cathedral_cities
 		position = 6
+		required_missions = { germania_ideals } 
 		provinces_to_highlight = {
 			owned_by = ROOT
 			religion = ROOT
-			NOT = {
-				base_tax = 14
-			}
+			NOT = { base_tax = 14 } 
 		}
-		trigger = { 
+
+		trigger = {
 			num_of_owned_provinces_with = {
 				value = 1
 				religion = ROOT
 				base_tax = 15
 			}
-		}	
+		}
+
 		effect = {
 			if = {
-				limit = { religion = catholic}
+				limit = { religion = catholic } 
 				random_owned_province = {
-					limit = {base_tax = 15 religion = ROOT}
+					limit = {
+						base_tax = 15
+						religion = ROOT
+					}
 					add_province_modifier = {
-						name = germ_pillar_of_faith_1
+						name = "germ_pillar_of_faith_1"
 						duration = -1
 					}
 				}
 			}
 			if = {
-				limit = { religion = wycliffian}
+				limit = { religion = wycliffian } 
 				random_owned_province = {
-					limit = {base_tax = 15 religion = ROOT}
+					limit = {
+						base_tax = 15
+						religion = ROOT
+					}
 					add_province_modifier = {
-						name = germ_pillar_of_faith_2
+						name = "germ_pillar_of_faith_2"
 						duration = -1
 					}
 				}
 			}
 			if = {
-				limit = { religion = arian}
+				limit = { religion = arian } 
 				random_owned_province = {
-					limit = {base_tax = 15 religion = ROOT}
+					limit = {
+						base_tax = 15
+						religion = ROOT
+					}
 					add_province_modifier = {
-						name = germ_pillar_of_faith_3
+						name = "germ_pillar_of_faith_3"
 						duration = -1
 					}
 				}
 			}
 		}
 	}
+
 	germanic_unify_saxonards = {
-		icon = mission_conquer_50_development
-		required_missions = {germanic_unified_league }
+		icon = mission_germ_sax
 		position = 9
-		provinces_to_highlight = {
-			culture_group = saxonic 
-		}
-		trigger = { 
-			owns_all_provinces = {
-				culture_group = saxonic
-			}
-		}
-		
+		required_missions = { germanic_unified_league } 
+		provinces_to_highlight = { culture_group = saxonic } 
+
+		trigger = { owns_all_provinces = { culture_group = saxonic }  } 
+
 		effect = {
 			custom_tooltip = UNIFY_SAXONICS
 			hidden_effect = {
 				every_owned_province = {
-					limit = { culture = balten_new }
+					limit = { culture = balten_new } 
 					change_culture = ug_balten
 				}
 				every_owned_province = {
-					limit = { culture = saxonard }
+					limit = { culture = saxonard } 
 					change_culture = ug_saxonard
 				}
 				every_owned_province = {
-					limit = { culture = gepid }
+					limit = { culture = gepid } 
 					change_culture = ug_gepid
 				}
 				every_owned_province = {
-					limit = { culture = rimedaxian }
+					limit = { culture = rimedaxian } 
 					change_culture = ug_rimedaxian
 				}
 				every_owned_province = {
-					limit = { culture = mongolish }
+					limit = { culture = mongolish } 
 					change_culture = ug_mongolish
 				}
 				every_owned_province = {
-					limit = { culture = litaisch }
+					limit = { culture = litaisch } 
 					change_culture = ug_litaisch
 				}
 			}
 		}
 	}
+
 	germanic_work_for_others = {
-		icon = mission_conquer_50_development
-		required_missions = {germanic_governings germanic_more_work }
+		icon = catholic_volunteers
 		position = 11
-		provinces_to_highlight = {
-			culture_group = unified_germanic
+		required_missions = {
+			germanic_governings
+			germanic_more_work
 		}
-		trigger = { 
+		provinces_to_highlight = { culture_group = unified_germanic } 
+
+		trigger = {
 			development_in_provinces = {
 				value = 1500
 				culture_group = unified_germanic
 			}
 		}
-		
+
 		effect = {
 			custom_tooltip = GERMS_TT_1
 			random_owned_province = {
-				limit = { NOT = {culture_group = unified_germanic}}
+				limit = { NOT = { culture_group = unified_germanic }  } 
 				add_nationalism = -10
 				add_unrest = -5
 			}
 			hidden_effect = {
 				every_owned_province = {
-					limit = { NOT = {culture_group = unified_germanic}}
+					limit = { NOT = { culture_group = unified_germanic }  } 
 					add_nationalism = -10
 					add_unrest = -5
 				}
 			}
 		}
 	}
-	
 }
 Germania_5_slot = {
 	slot = 5
 	generic = no
 	ai = yes
-	potential = {	tag = GR0	}
 	has_country_shield = yes
+	potential = { tag = GR0 } 
 
 	germania_faith = {
-		icon = mission_conquer_50_development
-		required_missions = { }
+		icon = mission_restore_faith_in_the_throne
 		position = 4
 		provinces_to_highlight = {
 			owned_by = ROOT
@@ -589,64 +593,48 @@ Germania_5_slot = {
 				}
 			}
 		}
-		trigger = { 
+
+		trigger = {
 			num_of_owned_provinces_with = {
 				value = 10
 				religion = ROOT
 				has_tax_building_trigger = yes
 			}
-		}	
+		}
+
 		effect = {
 			add_stability_or_adm_power = yes
-			country_event = {
-				id = prut.4
-			}
+			country_event = { id = prut.4 } 
 		}
 	}
+
 	germania_ideals = {
-		icon = mission_conquer_50_development
-		required_missions = {germania_faith }
+		icon = mission_land_of_churches
 		position = 5
+		required_missions = { germania_faith } 
 		provinces_to_highlight = {
 			owned_by = ROOT
 			has_tax_building_trigger = no
 		}
-		trigger = { 
+
+		trigger = {
 			custom_trigger_tooltip = {
 				tooltip = GERMANIA_FAITH_CTT
-				OR = {
-					germany_choosen_faith = yes
-					was_german_confederated_duchy = yes
-				}
+				germany_choosen_faith = yes
 			}
 		}
-		
+
 		effect = {
 			if = {
-				limit = {was_german_confederated_duchy = yes}
-				if = {
-					limit = { religion = catholic}
-					set_country_flag = prut_faith_chosen_cath
-				}
-				if = {
-					limit = { religion = wycliffian}
-					set_country_flag = prut_faith_chosen_wycl
-				}
-				if = {
-					limit = { religion = arian}
-					set_country_flag = prut_faith_chosen_goth
-				}
-			}
-			if = {
-				limit = { religion = catholic}
+				limit = { religion = catholic } 
 				add_papal_influence = 25
 			}
 			if = {
-				limit = { religion = wycliffian}
+				limit = { religion = wycliffian } 
 				add_church_power = 100
 			}
 			if = {
-				limit = { religion = arian}
+				limit = { religion = arian } 
 				change_variable = {
 					which = arian_fervor_var
 					value = 20
@@ -657,89 +645,92 @@ Germania_5_slot = {
 				skill = 3
 				discount = yes
 			}
-			hidden_effect = {
-				swap_non_generic_missions = yes
-			}
+			hidden_effect = { swap_non_generic_missions = yes } 
 		}
 	}
+
 	germania_stronger_faith = {
-		icon = mission_conquer_50_development
-		required_missions = {germania_ideals }
+		icon = ark_of_the_covenant
 		position = 6
-		trigger = { 
+		required_missions = { germania_ideals } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
 			if = {
-				limit = { germany_choosen_faith = yes}
+				limit = { germany_choosen_faith = yes } 
 				if = {
-					limit = { has_country_flag = prut_faith_chosen_cath}
+					limit = { has_country_flag = prut_faith_chosen_cath } 
 					development_in_provinces = {
 						value = 200
 						religion = catholic
 					}
 				}
 				if = {
-					limit = { has_country_flag = prut_faith_chosen_wycl}
+					limit = { has_country_flag = prut_faith_chosen_wycl } 
 					development_in_provinces = {
 						value = 200
 						religion = wycliffian
-					}			
+					}
 				}
 				if = {
-					limit = { has_country_flag = prut_faith_chosen_goth}
+					limit = { has_country_flag = prut_faith_chosen_goth } 
 					development_in_provinces = {
 						value = 200
 						religion = arian
-					}		
-				}
-			}else = {
-				custom_trigger_tooltip = {
-					tooltip = GERMANIA_FAITH_CTT
+					}
 				}
 			}
-		}	
+			else = { custom_trigger_tooltip = { tooltip = GERMANIA_FAITH_CTT }  } 
+		}
+
 		effect = {
 			if = {
-				limit = { germany_choosen_faith = yes}
+				limit = { germany_choosen_faith = yes } 
 				if = {
-					limit = { has_country_flag = prut_faith_chosen_cath}
+					limit = { has_country_flag = prut_faith_chosen_cath } 
 					add_country_modifier = {
-						name = germ_inquisition_1
+						name = "germ_inquisition_1"
 						duration = 10950
 					}
 				}
 				if = {
-					limit = { has_country_flag = prut_faith_chosen_wycl}
+					limit = { has_country_flag = prut_faith_chosen_wycl } 
 					add_country_modifier = {
-						name = germ_inquisition_2
+						name = "germ_inquisition_2"
 						duration = 10950
 					}
 				}
 				if = {
-					limit = { has_country_flag = prut_faith_chosen_goth}
+					limit = { has_country_flag = prut_faith_chosen_goth } 
 					add_country_modifier = {
-						name = germ_inquisition_3
+						name = "germ_inquisition_3"
 						duration = 10950
 					}
 				}
-			}else = {
+			}
+			else = {
 				tooltip = {
 					add_country_modifier = {
-						name = germ_inquisition_1
+						name = "germ_inquisition_1"
 						duration = 10950
 					}
 				}
 			}
 		}
 	}
+
 	germania_strongest_faith = {
-		icon = mission_conquer_50_development
-		required_missions = {germania_stronger_faith }
+		icon = the_land_of_moses
 		position = 7
-		trigger = { 
+		required_missions = { germania_stronger_faith } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
 			army_size = 20
 			if = {
-				limit = { germany_choosen_faith = yes}
+				limit = { germany_choosen_faith = yes } 
 				if = {
-					limit = { has_country_flag = prut_faith_chosen_cath}
+					limit = { has_country_flag = prut_faith_chosen_cath } 
 					all_country = {
 						religion = catholic
 						NOT = {
@@ -751,7 +742,7 @@ Germania_5_slot = {
 					}
 				}
 				if = {
-					limit = { has_country_flag = prut_faith_chosen_wycl}
+					limit = { has_country_flag = prut_faith_chosen_wycl } 
 					all_country = {
 						religion = wycliffian
 						NOT = {
@@ -760,10 +751,10 @@ Germania_5_slot = {
 								value = 1.2
 							}
 						}
-					}		
+					}
 				}
 				if = {
-					limit = { has_country_flag = prut_faith_chosen_goth}
+					limit = { has_country_flag = prut_faith_chosen_goth } 
 					all_country = {
 						religion = arian
 						NOT = {
@@ -772,14 +763,12 @@ Germania_5_slot = {
 								value = 1.2
 							}
 						}
-					}	
-				}
-			}else = {
-				custom_trigger_tooltip = {
-					tooltip = GERMANIA_FAITH_CTT
+					}
 				}
 			}
-		}	
+			else = { custom_trigger_tooltip = { tooltip = GERMANIA_FAITH_CTT }  } 
+		}
+
 		effect = {
 			define_general = {
 				shock = 5
@@ -788,7 +777,7 @@ Germania_5_slot = {
 				siege = 4
 			}
 			add_country_modifier = {
-				name = germ_army_of_faith
+				name = "germ_army_of_faith"
 				duration = 10950
 			}
 		}
@@ -798,14 +787,19 @@ Germania_5_1_slot = {
 	slot = 5
 	generic = no
 	ai = yes
-	potential = {	tag = GR0 has_country_flag = prut_faith_chosen_cath}
 	has_country_shield = yes
+	potential = {
+		tag = GR0
+		has_country_flag = prut_faith_chosen_cath
+	}
 
 	germania_hegemon_of_faith_1 = {
-		icon = mission_conquer_50_development
-		required_missions = {germania_strongest_faith }
+		icon = victor_for_the_true_faith
 		position = 8
-		trigger = { 
+		required_missions = { germania_strongest_faith } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
 			religion = catholic
 			has_institution = manufactories
 			development_in_provinces = {
@@ -813,8 +807,9 @@ Germania_5_1_slot = {
 				has_tax_building_trigger = yes
 				religion = catholic
 			}
-		}	
-		effect = {			
+		}
+
+		effect = {
 			transfer_papal_controller = ROOT
 			custom_tooltip = PERMANENT_PAPACY_GERM
 		}
@@ -824,60 +819,64 @@ Germania_5_2_slot = {
 	slot = 5
 	generic = no
 	ai = yes
-	potential = {	tag = GR0 has_country_flag = prut_faith_chosen_wycl}
 	has_country_shield = yes
+	potential = {
+		tag = GR0
+		has_country_flag = prut_faith_chosen_wycl
+	}
 
 	germania_hegemon_of_faith_2 = {
-		icon = mission_conquer_50_development
-		required_missions = {germania_strongest_faith }
+		icon = hussite_regency
 		position = 8
-		trigger = { 
+		required_missions = { germania_strongest_faith } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
 			religion = wycliffian
 			church_power = 100
 			OR = {
 				calc_true_if = {
 					amount = 20
-					all_country = {
-						religion = wycliffian
-					}
+					all_country = { religion = wycliffian } 
 				}
 				calc_true_if = {
 					amount = 500
-					all_province = {
-						religion = wycliffian
-					}
+					all_province = { religion = wycliffian } 
 				}
 			}
-		}	
-		effect = {
-			custom_tooltip = WYCLIF_GERM_TT
 		}
+
+		effect = { custom_tooltip = WYCLIF_GERM_TT } 
 	}
 }
 Germania_5_3_slot = {
 	slot = 5
 	generic = no
 	ai = yes
-	potential = {	tag = GR0 has_country_flag = prut_faith_chosen_goth}
 	has_country_shield = yes
+	potential = {
+		tag = GR0
+		has_country_flag = prut_faith_chosen_goth
+	}
 
 	germania_hegemon_of_faith_3 = {
-		icon = mission_conquer_50_development
-		required_missions = {germania_strongest_faith }
+		icon = mission_most_holy_synod
 		position = 8
-		trigger = { 
+		required_missions = { germania_strongest_faith } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
 			religion = arian
 			calc_true_if = {
 				amount = 500
-				all_province = {
-					religion = arian
-				}
+				all_province = { religion = arian } 
 			}
-		}	
+		}
+
 		effect = {
 			custom_tooltip = ARIAN_GERM_TT
 			add_country_modifier = {
-				name = arian_more_missions
+				name = "arian_more_missions"
 				duration = -1
 			}
 		}
@@ -887,51 +886,51 @@ Germania_5_more_slot = {
 	slot = 5
 	generic = no
 	ai = yes
-	potential = {	tag = GR0	}
 	has_country_shield = yes
+	potential = { tag = GR0 } 
 
 	germanic_more_work = {
-		icon = mission_conquer_50_development
-		required_missions = { }
+		icon = mission_vedic_education
 		position = 10
 		provinces_to_highlight = {
 			owned_by = ROOT
 			trade_goods = iron
 		}
-		trigger = { 
+
+		trigger = {
 			num_of_owned_provinces_with = {
 				value = 5
 				trade_goods = iron
 				has_production_building_trigger = yes
 			}
 		}
-		
+
 		effect = {
 			add_years_of_owned_provinces_production_income = {
 				years = 5
-				trigger = {
-					trade_goods = iron
-				}
+				trigger = { trade_goods = iron } 
 				custom_tooltip = MONOPOLY_INCOME_IRON_DESC
 			}
 		}
 	}
+
 	germanic_invent_more_work = {
-		icon = mission_conquer_50_development
-		required_missions = { germanic_more_work}
+		icon = saxon_manufacturing
 		position = 11
+		required_missions = { germanic_more_work } 
 		provinces_to_highlight = {
 			owned_by = ROOT
 			has_production_building_trigger = no
 		}
-		trigger = { 
+
+		trigger = {
 			years_of_income = 2
 			num_of_owned_provinces_with = {
 				value = 15
 				has_production_building_trigger = yes
 			}
 		}
-		
+
 		effect = {
 			add_years_of_income = -2
 			add_dip_tech = 1
