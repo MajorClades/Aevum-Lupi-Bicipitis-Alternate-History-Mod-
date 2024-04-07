@@ -4,7 +4,7 @@ country_event = {
 	id = prut.1
 	title = prut.1.test
 	desc = prut.1.desc
-	picture = ANGRY_MOB_eventPicture
+	picture = RELIGIOUS_CONVERSION_eventPicture
 	fire_only_once = yes
 	trigger = {
 		tag = PU0
@@ -45,7 +45,7 @@ country_event = {
 	id = prut.2
 	title = prut.2.test
 	desc = prut.2.desc
-	picture = ANGRY_MOB_eventPicture
+	picture = GOOD_WITH_MONARCH_eventPicture
 	is_triggered_only = yes
 
 	option = {
@@ -101,7 +101,7 @@ country_event = {
 	id = prut.3
 	title = prut.3.test
 	desc = prut.3.desc
-	picture = ANGRY_MOB_eventPicture
+	picture = GOOD_WITH_MONARCH_eventPicture
 	is_triggered_only = yes
 
 	option = {
@@ -170,7 +170,7 @@ country_event = {
 	id = prut.4
 	title = prut.4.test
 	desc = prut.4.desc
-	picture = ANGRY_MOB_eventPicture
+	picture = PRINTING_PRESS_eventPicture
 	fire_only_once = yes
 
 	is_triggered_only = yes
@@ -181,64 +181,6 @@ country_event = {
 			factor = 40
 		}
 		set_country_flag = prut_faith_chosen_cath
-		custom_tooltip = GERMAN_BECOME_CATH_TT #uhh just say ur becoming X religon
-		hidden_effect = {
-			country_event = {
-				id = prut.5
-				days = 360
-			}
-		}
-	}
-	option = {
-		name = prut.4b
-		ai_chance = {
-			factor = 20
-		}
-		trigger = {
-			is_religion_enabled = wycliffian
-		}
-		set_country_flag = prut_faith_chosen_wycl
-		custom_tooltip = GERMAN_BECOME_WYCL_TT #uhh just say ur becoming X religon
-		hidden_effect = {
-			country_event = {
-				id = prut.5
-				days = 360
-			}
-		}
-	}
-	option = {
-		name = prut.4c
-		ai_chance = {
-			factor = 40
-		}
-		set_country_flag = prut_faith_chosen_goth
-		custom_tooltip = GERMAN_BECOME_GOTH_TT #uhh just say ur becoming X religon
-		hidden_effect = {
-			country_event = {
-				id = prut.5
-				days = 360
-			}
-		}
-	}
-}
-country_event = {
-	id = prut.5
-	title = prut.5.test
-	desc = prut.5.desc
-	picture = ANGRY_MOB_eventPicture
-	fire_only_once = yes
-	trigger = {
-		germany_choosen_faith = yes
-	}
-	mean_time_to_happen = {
-		months = 24
-	}
-
-	option = {
-		name = prut.5a
-		trigger = {
-			has_country_flag = prut_faith_chosen_cath
-		}
 		change_religion = catholic
 		capital_scope = {
 			change_religion = catholic
@@ -250,10 +192,13 @@ country_event = {
 	}
 	option = {
 		name = prut.4b
-		trigger = {
-			has_country_flag = prut_faith_chosen_wycl
-			is_religion_enabled = wycliffian	
+		ai_chance = {
+			factor = 20
 		}
+		trigger = {
+			is_religion_enabled = wycliffian
+		}
+		set_country_flag = prut_faith_chosen_wycl
 		change_religion = wycliffian
 		capital_scope = {
 			change_religion = wycliffian
@@ -264,10 +209,11 @@ country_event = {
 		}
 	}
 	option = {
-		name = prut.5c
-		trigger = {
-			has_country_flag = prut_faith_chosen_goth
+		name = prut.4c
+		ai_chance = {
+			factor = 40
 		}
+		set_country_flag = prut_faith_chosen_goth
 		change_religion = arian
 		capital_scope = {
 			change_religion = arian
