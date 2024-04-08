@@ -1,0 +1,90 @@
+estate_knight_lodges = {
+	icon = 16
+
+	# If true, country will get estate
+	trigger = {
+		NOT = { has_government_attribute = disables_estate_knight_lodges }
+		NOT = { has_disabled_estate = { estate = estate_knight_lodges } }
+		NOT = { has_estate = estate_nobles }
+		OR = {
+			has_government_attribute = enables_alb_estate_knight_lodges
+			has_enabled_estate = { estate = estate_knight_lodges }
+			has_unlocked_estate = { estate = estate_knight_lodges }
+			AND = {
+				NOT = { has_government_attribute = is_pirate_republic_reform }
+				NOT = { has_reform = siberian_tribe }
+				NOT = { government = native }
+				NOT = { is_revolutionary_republic_trigger = yes }
+				NOT = { has_reform = revolutionary_empire_reform }
+				OR = {
+					NOT = { tag = USA }
+					government = theocracy
+				}
+				is_nomad = no
+				is_colonial_nation = no
+			}
+		}
+		has_government_attribute = alb_enable_knight_lodges_estate
+	}
+
+	# These scale with loyalty & power
+	country_modifier_happy = {
+		army_tradition = 1
+		infantry_cost = -0.1
+		infantry_power = 0.1
+	}
+	country_modifier_neutral = {
+		army_tradition = 1
+	}	
+	country_modifier_angry = {
+		army_tradition = -1
+		infantry_cost = 0.2
+		infantry_power = -0.1
+		global_unrest = 2
+	}
+
+	land_ownership_modifier = {
+		knight_lodges_loyalty_modifier = 0.2
+	}
+
+	province_independence_weight = {
+		factor = 1
+		modifier = {
+			factor = 0.1
+			NOT = { religion_group = owner }
+		}
+		modifier = {
+			factor = 0.5
+			NOT = { religion = owner }
+		}
+		modifier = {
+			factor = 0.67
+			NOT = { is_state_core = owner }
+		}
+		modifier = {
+			factor = 1.2
+			base_manpower = 10
+		}
+	}
+
+	# Influence modifiers
+	base_influence = 10
+	influence_modifier = {
+		desc = EST_VAL_OTHER_ESTATE_IN_POWER
+		trigger = {
+			has_any_estate_disaster_active = yes
+		}
+		influence = -40
+	}
+	
+	color = { 20 150 50 }
+
+	privileges = {
+		
+	}
+
+	agendas = {
+		
+	}
+	influence_from_dev_modifier = 1.0
+}
