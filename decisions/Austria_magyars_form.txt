@@ -1,0 +1,95 @@
+country_decisions = {
+
+	austria_magyar_junior = {
+		major = yes
+		potential = {
+			tag = GR5 
+		}
+		provinces_to_highlight = {
+			OR = {
+				is_capital_of = GR5
+				is_capital_of = KO1
+			}
+		}
+		allow = {
+			adm_tech = 10
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			is_at_war = no
+			senior_union_with = KO1
+		}
+		effect = {
+			inherit = KO1
+			change_tag = KO7
+			restore_country_name_effect = yes
+			balkan_region = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = KO7
+			}		
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			add_prestige_or_monarch_power = {
+				amount = 25
+			}
+			if = {
+				limit = {
+					has_custom_ideas = no
+				}
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	magyar_austria_junior = {
+		major = yes
+		potential = {
+			tag = KO1 
+		}
+		provinces_to_highlight = {
+			OR = {
+				is_capital_of = GR5
+				is_capital_of = KO1
+			}
+		}
+		allow = {
+			adm_tech = 10
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			is_at_war = no
+			senior_union_with = GR5
+		}
+		effect = {
+			inherit = GR5
+			change_tag = KO8
+			restore_country_name_effect = yes
+			balkan_region = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = KO7
+			}		
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			add_prestige_or_monarch_power = {
+				amount = 25
+			}
+			if = {
+				limit = {
+					has_custom_ideas = no
+				}
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+}

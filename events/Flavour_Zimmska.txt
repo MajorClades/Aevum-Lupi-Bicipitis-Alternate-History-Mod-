@@ -11,13 +11,13 @@ country_event = {
 
 	option = {
 		name = zimmska.1a
+		custom_tooltip = alb_zimmska_offer_to_be_vassal_tt
 		if = {
 			limit = {
 				JU1 = {
 					alliance_with = ROOT
 				}
 			}
-			custom_tooltip = alb_zimmska_offer_to_be_vassal_tt
 			JU1 = {
 				country_event = {
 					id = zimmska.2
@@ -30,7 +30,6 @@ country_event = {
 					alliance_with = ROOT
 				}
 			}
-			custom_tooltip = alb_zimmska_offer_to_be_vassal_tt
 			TS1 = {
 				country_event = {
 					id = zimmska.2
@@ -55,7 +54,7 @@ country_event = {
 			vassalize = ROOT
 		}
 		ai_chance = {
-			factor = 80
+			factor = 70
 			modifier = {
 				factor = 0.5
 				NOT = {
@@ -86,7 +85,7 @@ country_event = {
 	}
 	option = {
 		name = zimmska.2b
-		add_prestige = 10
+		add_prestige = 30
 		ai_chance = {
 			factor = 20
 		}
@@ -399,6 +398,48 @@ country_event = {
 				}
 				add_base_production = 1
 			}
+		}
+	}
+}
+
+#Slasmeri triangle event
+country_event = {
+	id = zimmska.7
+	title = zimmska.7.test
+	desc = zimmska.7.desc
+	picture = GLOBAL_TRADE_eventPicture
+	trigger = {
+		OR = {
+			tag = ZL5
+			tag = TS1
+			tag = JU1
+		}
+		NOT = {
+			is_year = 1445
+		}
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = zimmska.7a
+		if = {
+			limit = {
+				tag = ZL5
+			}
+			add_historical_friend = TS1
+			add_historical_friend = JU1
+			custom_tooltip = alb_get_to_integrate_slasmeri_triangle_later_tt
+		}
+		else_if = {
+			limit = {
+				tag = JU1
+			}
+			add_historical_friend = TS1
+			add_historical_friend = ZL5
+		}
+		else = {
+			add_historical_friend = ZL5
+			add_historical_friend = JU1
 		}
 	}
 }
