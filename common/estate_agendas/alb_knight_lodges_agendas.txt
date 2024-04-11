@@ -1,0 +1,47 @@
+estate_knight_lodges_build_horsemen = {
+	can_select = {
+		NOT = {
+			cavalry_fraction = 0.1
+		}
+	}
+	selection_weight = {
+		factor = 1
+	}
+	task_requirements = {
+		if = {
+			limit = {
+				has_estate_agenda_auto_completion = {
+					estate = estate_knight_lodges
+				}
+			}
+			has_estate_agenda_auto_completion = {
+				estate = estate_knight_lodges
+			}
+		}
+		else = {
+			employed_advisor = {
+				category = ADM
+			}
+			is_in_deficit = no
+		}
+	}
+    task_completed_effect = {
+		on_completed_agenda_effect = {
+			estate = estate_knight_lodges
+		}
+		add_estate_loyalty = {
+			estate = estate_knight_lodges
+			loyalty = 10
+		}
+    }
+    failing_effect = {
+		on_failed_agenda_effect = yes
+		clr_auto_complete_flag = yes
+        add_estate_loyalty_modifier = {
+            estate = estate_knight_lodges
+			desc = EST_VAL_AGENDA_DENIED
+			loyalty = -5
+			duration = 7300
+        }
+    }
+}
