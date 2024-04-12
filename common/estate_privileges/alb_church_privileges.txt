@@ -234,3 +234,69 @@ alb_rhoman_laws_over_faith_laws = {
 		}
 	}
 }
+
+estate_church_lax_sangha_rule = {
+	icon = privilege_tolerance_heathen
+	land_share = 5
+	max_absolutism = -5
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	loyalty = 0.1
+	influence = 0.1
+	is_valid = {
+		primary_culture = burmese
+		religion_group = eastern
+	}
+	can_revoke = {
+	custom_trigger_tooltip = {
+			tooltip = BYZ_revokable_via_decision
+			always = no
+		}
+	}
+	penalties = {
+		monthly_karma = -0.1
+		yearly_harmony = -1
+	}
+	benefits = {
+		same_religion_advisor_cost = -0.2
+	}
+	cooldown_years = 25
+	ai_will_do = {
+		factor = -300
+	}
+}
+
+estate_church_devastated_sangha = {
+	icon = privilege_seek_support_of_clergy
+	max_absolutism = -5
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	loyalty = -0.1
+	influence = 0
+	is_valid = {
+		OR = {
+			has_estate_privilege = estate_church_devastated_sangha
+			AND = {
+				religion_group = eastern
+				primary_culture = burmese
+			}
+		}
+	}
+	can_revoke = {
+	custom_trigger_tooltip = {
+			tooltip = BYZ_revokable_via_decision
+			always = no
+		}
+	}
+	penalties = {
+		tolerance_own = -2
+		war_exhaustion = 0.02
+	}
+	benefits = {
+	}
+	mechanics = {
+		exempt_from_seize_land
+	}
+	cooldown_years = 25
+	ai_will_do = {
+		factor = -300
+	}
+}
