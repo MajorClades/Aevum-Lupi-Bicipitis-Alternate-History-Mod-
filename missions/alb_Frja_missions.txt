@@ -324,9 +324,37 @@ Frja_4_slot = {
 		required_missions = {fj_cows_and_horse  }
 		position = 2
 		trigger = {
-			any_estate_loyalty = {amount = 70}
+			OR = {
+				estate_loyalty = {
+					estate = estate_church
+					loyalty = 70
+				}
+				estate_loyalty = {
+					estate = estate_nobles
+					loyalty = 70
+				}
+				estate_loyalty = {
+					estate = estate_burghers
+					loyalty = 70
+				}
+			}
 			NOT = {
-				any_estate_loyalty = {amount = 40}
+				estate_loyalty = {
+					estate = estate_church
+					loyalty = 40
+				}
+			}
+			NOT = {
+				estate_loyalty = {
+					estate = estate_nobles
+					loyalty = 40
+				}
+			}
+			NOT = {
+				estate_loyalty = {
+					estate = estate_burghers
+					loyalty = 40
+				}
 			}
 		}
 		
