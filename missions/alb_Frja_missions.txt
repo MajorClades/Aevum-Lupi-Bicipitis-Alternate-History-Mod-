@@ -33,13 +33,9 @@ Frja_1_slot = {
 			add_manpower = -2
 			2578 = {
 				colonize_or_core_fj0 = yes
-				change_province_name = "Gormey"
-				rename_capital = "Gormey"
 			}
 			986 = {
 				colonize_or_core_fj0 = yes
-				change_province_name = "Haralderfa"
-				rename_capital = "Haralderfa"
 			}
 		}
 	}
@@ -62,18 +58,12 @@ Frja_1_slot = {
 			add_manpower = -3
 			996 = {
 				colonize_or_core_fj0 = yes
-				change_province_name = "Risnasultr"
-				rename_capital = "Risnasultr"
 			}
 			2576 = {
 				colonize_or_core_fj0 = yes
-				change_province_name = "Hundrstund"
-				rename_capital = "Hundrstund"
 			}
 			2577 = {
 				colonize_or_core_fj0 = yes
-				change_province_name = "Firarlaeging"
-				rename_capital = "Firarlaeging"
 			}
 		}
 	}
@@ -299,16 +289,30 @@ Frja_3_slot = {
 		icon = mission_rb_grow_the_channel
 		required_missions = { fj_new_world fj_land_share}
 		position = 3
-
+		provinces_to_highlight = {owned_by = ROOT}
+		trigger = {	grown_by_development = 100	}
+		effect = {add_country_modifier = {name = fj0_immigration_waves	duration = 10950}	}
+	}
+	fj_city_builder = {
+		icon = mission_rb_grow_the_channel
+		required_missions = { fj_new_home }
+		position = 5
+		provinces_to_highlight = {
+			owned_by = ROOT
+			NOT = {
+				num_of_buildings_in_province = 2
+			}
+		}
 		trigger = {
-			grown_by_development = 100
+			num_of_owned_provinces_with = {
+				value = 20
+				num_of_buildings_in_province = 2
+			}
 		}
 		
 		effect = {
-			add_country_modifier = {
-				name = fj0_immigration_waves
-				duration = 10950
-			}
+			add_yearly_manpower = 1
+			add_years_of_income = 1
 		}
 	}
 }
@@ -338,23 +342,17 @@ Frja_4_slot = {
 					loyalty = 70
 				}
 			}
-			NOT = {
-				estate_loyalty = {
-					estate = estate_church
-					loyalty = 40
-				}
+			estate_loyalty = {
+				estate = estate_church
+				loyalty = 40
 			}
-			NOT = {
-				estate_loyalty = {
-					estate = estate_nobles
-					loyalty = 40
-				}
+			estate_loyalty = {
+				estate = estate_nobles
+				loyalty = 40
 			}
-			NOT = {
-				estate_loyalty = {
-					estate = estate_burghers
-					loyalty = 40
-				}
+			estate_loyalty = {
+				estate = estate_burghers
+				loyalty = 40
 			}
 		}
 		
@@ -370,6 +368,27 @@ Frja_4_slot = {
 			change_estate_land_share = {
 				estate = estate_burghers
 				share = -5
+			}
+		}
+	}
+	fj_iron_mines = {
+		icon = mission_rb_grow_the_channel
+		required_missions = { fj_land_share }
+		position = 4
+		provinces_to_highlight = {
+			province_id = 2579
+		}
+		trigger = {
+			2579 = {
+				owned_by = ROOT
+				grown_by_development = 5
+			}
+		}
+		
+		effect = {
+			2579 = {
+				change_trade_goods = iron
+				add_or_upgrade_production_building = yes
 			}
 		}
 	}
@@ -402,15 +421,17 @@ Frja_5_slot = {
 		effect = {
 			981 = {
 				change_trade_goods = livestock
-				custom_tooltip = seat_in_parliament_yes
-				add_province_modifier = {
-					name = fj0_meat_barons
-					duration = 10950
-				}
-				custom_tooltip = seat_in_parliament_no
-				add_province_modifier = {
-					name = fj0_meat_fields
-					duration = 10950
+				tooltip = {
+					custom_tooltip = seat_in_parliament_yes
+					add_province_modifier = {
+						name = fj0_meat_barons
+						duration = 10950
+					}
+					custom_tooltip = seat_in_parliament_no
+					add_province_modifier = {
+						name = fj0_meat_fields
+						duration = 10950
+					}
 				}
 			}
 			hidden_effect = {
@@ -459,15 +480,17 @@ Frja_5_slot = {
 			}
 			984 = {
 				change_trade_goods = wine
-				custom_tooltip = seat_in_parliament_yes
-				add_province_modifier = {
-					name = fj0_wine_barons
-					duration = 10950
-				}
-				custom_tooltip = seat_in_parliament_no
-				add_province_modifier = {
-					name = fj0_wine_fields
-					duration = 10950
+				tooltip = {
+					custom_tooltip = seat_in_parliament_yes
+					add_province_modifier = {
+						name = fj0_wine_barons
+						duration = 10950
+					}
+					custom_tooltip = seat_in_parliament_no
+					add_province_modifier = {
+						name = fj0_wine_fields
+						duration = 10950
+					}
 				}
 			}
 			hidden_effect = {
