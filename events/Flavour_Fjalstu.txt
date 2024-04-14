@@ -9,34 +9,13 @@ country_event = {
 	is_triggered_only = yes
 	option = {
 		name = fjal.1a
-		ai_chance = {
-			factor = 80
+		993 = {
+			set_seat_in_parliament = yes
 		}
-		every_owned_province = {
-			limit = {
-				NOT = {
-					culture = vinlandic
-				}
-				NOT = {
-					culture = icelandic
-				}
-				region = canada_region
-			}
-			change_religion = norse_ragnaroked
-			change_culture = ROOT
-			add_devastation = 15
-		}
-	}
-	option = {
-		name = fjal.1b
-		ai_chance = {
-			factor = 20
-		}
-		add_country_modifier = {
-			name = accepted_natives_fj
-			duration = -1
-		}
-		add_dip_power = -100
+		change_tag = FJ9
+		custom_tooltip = VINLAND_CUSTOM
+		swap_free_idea_group = yes
+		# swap_non_generic_missions = yes
 	}
 }
 
@@ -49,7 +28,6 @@ country_event = {
 	fire_only_once = yes
 	trigger = {
 		tag = FJ0
-		mission_completed = fj_native
 		canada_region = {
 			type = all
 			owned_by = ROOT
@@ -60,26 +38,6 @@ country_event = {
 	}
 	option = {
 		name = fjal.2a
-		ai_chance = {
-			factor = 80
-		}
-		every_owned_province = {
-			limit = {
-				OR = {
-					culture = innu
-					culture = anishinabe
-					culture = cree
-					culture = algonquin
-				}
-			}
-			change_culture = skraeling
-		}
-	}
-	option = {
-		name = fjal.2b
-		ai_chance = {
-			factor = 20
-		}
 		add_country_modifier = {
 			name = monster_hunters
 			duration = 10950
@@ -102,8 +60,10 @@ country_event = {
 	
 	fire_only_once = yes
 	trigger = {
-		tag = FJ0
-		mission_completed = fj_canada
+		OR = {
+			tag = FJ0
+			tag = FJ9
+		}
 		lower_canada_area = {
 			type = all
 			owned_by = ROOT
@@ -114,26 +74,11 @@ country_event = {
 	}
 	option = {
 		name = fjal.3a
-		ai_chance = {
-			factor = 80
-		}
-		every_owned_province = {
-			limit = {
-				culture_group = iroquoian
-			}
-			change_culture = verslunling
-		}
-	}
-	option = {
-		name = fjal.3b
-		ai_chance = {
-			factor = 20
-		}
-		add_mercantilism = 10
-		add_dip_power = 200
+		add_mercantilism = 5
+		add_dip_power = 100
 		add_estate_loyalty = {
 			estate = estate_burghers
-			loyalty = 20
+			loyalty = 10
 		}
 	}
 }
@@ -142,15 +87,17 @@ country_event = {
 	id = fjal.4
 	title = fjal.4.test
 	desc = fjal.4.desc
-	picture = ANGRY_MOB_eventPicture
+	picture = northamericagfx_DIPLOMACY_eventPicture
 	
 	fire_only_once = yes
 	trigger = {
-		tag = FJ0
-		mission_completed = fj_native
-		northeast_america_region = {
-			type = all
-			owned_by = ROOT
+		OR = {
+			tag = FJ0
+			tag = FJ9
+		}
+		num_of_owned_provinces_with = {
+			value = 20
+			region = northeast_america_region
 		}
 	}
 	mean_time_to_happen = {
@@ -158,23 +105,8 @@ country_event = {
 	}
 	option = {
 		name = fjal.4a
-		ai_chance = {
-			factor = 80
-		}
-		every_owned_province = {
-			limit = {
-				culture_group = eastern_algonquian
-			}
-			change_culture = rausundian
-		}
-	}
-	option = {
-		name = fjal.4b
-		ai_chance = {
-			factor = 20
-		}
 		capital_scope = {
-			add_base_production = 3
+			add_base_production = 1
 		}
 		define_conquistador = {
 			name = "Bjorn 'the Gobbler'"
@@ -185,30 +117,44 @@ country_event = {
 		}
 	}
 }
+
 country_event = {
-	id = fjal.300
-	title = fjal.300.test
-	desc = fjal.300.desc
-	picture = ANGRY_MOB_eventPicture
-	hidden = yes
-	fire_only_once = yes
+	id = fjal.5
+	title = fjal.5.test
+	desc = fjal.5.desc
+	picture = FORESTS_eventPicture
+	
 	trigger = {
-		tag = FJ0
-		ai = yes
-		is_year = 1466
+		religion = norse_ragnaroked
+		NOT = {
+			has_country_flag = new_norse_deity_flag_a
+		}
+		NOT = {
+			has_country_flag = new_norse_deity_flag_b
+		}
+		current_age = age_of_reformation
 	}
 	mean_time_to_happen = {
-		months = 1
+		months = 120
 	}
 	option = {
-		name = fjal.3a
-		capital_scope = {
-			light_ship = ROOT
-			light_ship = ROOT
-			light_ship = ROOT
+		name = fjal.5a
+		set_country_flag = new_norse_deity_flag_a
+		custom_tooltip = ASASTRU_LYSA_TT
+		tooltip = {
+			change_personal_deity = lysa_a
+		}
+	}
+	option = {
+		name = fjal.5b
+		set_country_flag = new_norse_deity_flag_b
+		custom_tooltip = ASASTRU_LYSA_TT
+		tooltip = {
+			change_personal_deity = lysa_b
 		}
 	}
 }
+
 country_event = {
 	id = fjal.301
 	title = fjal.301.test
@@ -232,6 +178,7 @@ country_event = {
 			}
 	}
 }
+
 country_event = {
 	id = fjal.302
 	title = fjal.302.test
@@ -239,48 +186,39 @@ country_event = {
 	picture = ANGRY_MOB_eventPicture
 	hidden = yes
 	fire_only_once = yes
-	is_triggered_only = yes
-	immediate = {
-		1250 = {
-			undiscover_country = FJ0
-		}
-		1260 = {
-			undiscover_country = FJ0
-		}
-		1261 = {
-			undiscover_country = FJ0
-		}
-		europe = {
-			undiscover_country = FJ0
-		 }
-		 africa = {
-			 undiscover_country = FJ0
-		  }
-		  asia = {
-			 undiscover_country = FJ0
-		 }
-		north_atlantic_region = {
-			undiscover_country = FJ0
-		}
-		mediterrenean_region = {
-			undiscover_country = FJ0
-		}
-		west_african_sea_region = {
-			undiscover_country = FJ0
-		}
-		baltic_sea_region = {
-			undiscover_country = FJ0
-		}
-		american_east_coast_region = {
-			discover_country = FJ0
-		}
-		arabian_sea_region = {
-			undiscover_country = FJ0
-		}
+	trigger = {
+		tag = FJ0
 	}
 	option = {
 		name = fjal.3a
-
+		sea_of_labrador_area = {
+			discover_country = FJ0
+			discover_country = ICE
+		}
+		denmark_strait_area = {
+			discover_country = FJ0
+			discover_country = ICE
+		}
+		gulf_stream_area = {
+			discover_country = FJ0
+			discover_country = ICE
+		}
+		norwegian_sea_area = {
+			discover_country = FJ0
+			discover_country = ICE
+		}
+		gulf_of_st_lawrence_area = {
+			discover_country = FJ0
+			discover_country = ICE
+		}
+		hudson_bay_sea_area = {
+			discover_country = FJ0
+			discover_country = ICE
+		}
+		canada_region = {
+			discover_country = FJ0
+			discover_country = ICE
+		}
 	}
 }
 
@@ -305,8 +243,6 @@ country_event = {
 	}
 	option = {
 		name = fjal.3a
-		complete_mission = fj_canada
-		complete_mission = fj_true_capital
 		994 = {
 			change_religion = ROOT
 			change_culture = ROOT
@@ -358,7 +294,6 @@ country_event = {
 		tag = FJ0
 		ai = yes
 		is_year = 1530
-		NOT = { mission_completed = fj_vinland }
 	}
 	mean_time_to_happen = {
 		months = 1

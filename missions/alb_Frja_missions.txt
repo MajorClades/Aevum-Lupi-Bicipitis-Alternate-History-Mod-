@@ -1,167 +1,130 @@
-
 Frja_1_slot = {
 	slot = 1
 	generic = no
 	ai = yes
-	potential = {	tag = FJ0	}
 	has_country_shield = yes
+	potential = { tag = FJ0 } 
 
 	fj_new_life = {
-		icon = mission_rb_grow_the_channel
-		required_missions = {  }
-		position = 1
-		
-		provinces_to_highlight = {
-			is_capital_of = ROOT
-		}
-		
-		trigger = {
-			OR = {
-				capital_scope = {
-					grown_by_development = 3
-				}
-				is_subject = yes
-			}
-		}
-		
-		effect = {
-			define_advisor = {
-				type = treasurer
-				skill = 2
-				discount = yes
-			}
-		}
-	}
-	fj_new_land = {
-		icon = mission_hanseatic_city
-		required_missions = {fj_new_life  }
-		position = 2
-				
-		trigger = {
-			monthly_income = 3
-		}
-		
-		effect = {
-			newfoundland_area = {
-				add_base_manpower = 1
-			}
-		}
-	}
-	fj_cattle = {
-		icon = hispaniae
-		required_missions = {fj_new_land  }
-		position = 3
-				
-		provinces_to_highlight = {
-			is_capital = yes
-			continent = europe
-			owner = {
-				num_of_owned_provinces_with = {
-					value = 3
-					trade_goods = livestock
-				}
-			}
-		}
-
-		trigger = {
-			OR = {
-				any_country = {
-					NOT = {
-						tag = ICE
-					}
-					capital_scope = {
-						continent = europe
-					}
-					num_of_owned_provinces_with = {
-						value = 3
-						trade_goods = livestock
-					}
-					has_opinion = {
-						who = ROOT
-						value = 100
-					}	
-				}
-				treasury = 500
-			}
-		}
-		
-		effect = {	
-			if = {
-				limit = {
-					NOT = {
-						any_country = {
-							NOT = {
-								tag = ICE
-							}
-							capital_scope = {
-								continent = europe
-							}
-							num_of_owned_provinces_with = {
-								value = 3
-								trade_goods = livestock
-							}
-							has_opinion = {
-								who = ROOT
-								value = 100
-							}	
-						}
-					}
-				}
-				add_treasury = -500
-			}
-			981 = {
-				add_base_production = 1
-				change_trade_goods = livestock
-			}
-		}
-	}
-	fj_qebec = {
 		icon = mission_rb_colonise_canada
-		required_missions = {fj_cattle  }
-		position = 4
-				
-		provinces_to_highlight = {
-			area = notre_dame_mountains_area 
-		}
+		position = 1
+		provinces_to_highlight = { is_capital_of = ROOT } 
 
 		trigger = {
-			num_of_owned_provinces_with = {
-				value = 1
-				area = notre_dame_mountains_area 
+			if = {
+				limit = { ai = yes } 
+				prestige = 10
+			}
+			else = {
+				manpower = 2
+				treasury = 100
+				capital_scope = { grown_by_development = 3 } 
 			}
 		}
-		
+
 		effect = {
-			add_prestige_or_monarch_power = {
-				amount = 15
-			}
-			notre_dame_mountains_area = {
-				add_permanent_claim = ROOT
-			}
+			add_treasury = -100
+			add_manpower = -2
+			2578 = { colonize_or_core_fj0 = yes } 
+			986 = { colonize_or_core_fj0 = yes } 
 		}
 	}
-	fj_native = {
-		icon = mission_iroquois_warriors
-		required_missions = {fj_qebec  }
-		position = 6
+
+	fj_control_coast = {
+		icon = mission_rb_cod_wars
+		position = 2
+		required_missions = { fj_new_life } 
+		provinces_to_highlight = {  } 
 
 		trigger = {
-			num_of_owned_provinces_with = {
-				value = 10
-				NOT = {
-					culture = vinlandic
-				}
-				NOT = {
-					culture = icelandic
-				}
-				continent = north_america
+			if = {
+				limit = { ai = yes } 
+				prestige = 20
+			}
+			else = {
+				has_adm_advisor = yes
+				manpower = 3
 			}
 		}
-		
+
 		effect = {
-			country_event = {
-				id = fjal.1
+			add_manpower = -3
+			996 = { colonize_or_core_fj0 = yes } 
+			2576 = { colonize_or_core_fj0 = yes } 
+			2577 = { colonize_or_core_fj0 = yes } 
+		}
+	}
+
+	fj_control_coast_2 = {
+		icon = mission_native_build_army_mission
+		position = 3
+		required_missions = { fj_control_coast } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			if = {
+				limit = { ai = yes } 
+				prestige = 30
 			}
+			else = {
+				has_mil_advisor = yes
+				manpower = 5
+			}
+		}
+
+		effect = {
+			add_manpower = -5
+			995 = { colonize_or_core_fj0 = yes } 
+			2582 = { colonize_or_core_fj0 = yes } 
+			2579 = { colonize_or_core_fj0 = yes } 
+		}
+	}
+
+	fj_river_mouth = {
+		icon = mission_ne_great_lakes_conquest
+		position = 4
+		required_missions = { fj_control_coast_2 } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			if = {
+				limit = { ai = yes } 
+				prestige = 40
+			}
+			else = {
+				has_dip_advisor = yes
+				manpower = 3
+			}
+		}
+
+		effect = {
+			add_manpower = -3
+			994 = { colonize_or_core_fj0 = yes } 
+			2583 = { colonize_or_core_fj0 = yes } 
+		}
+	}
+
+	fj_vinland_proper = {
+		icon = mission_se_along_the_river
+		position = 5
+		required_missions = { fj_river_mouth } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			if = {
+				limit = { ai = yes } 
+				prestige = 50
+			}
+			else = {
+				treasury = 100
+				manpower = 3
+			}
+		}
+
+		effect = {
+			add_treasury = -100
+			add_manpower = -3
+			trois_rivieres_area = { colonize_or_core_fj0 = yes } 
 		}
 	}
 }
@@ -169,192 +132,199 @@ Frja_2_slot = {
 	slot = 2
 	generic = no
 	ai = yes
-	potential = {	tag = FJ0	}
 	has_country_shield = yes
+	potential = { tag = FJ0 } 
 
-	fj_more_coast = {
-		icon = mission_rb_cod_wars
-		required_missions = {fj_new_life  }
+	fj_control_trade = {
+		icon = mission_the_triangle_trade
 		position = 2
-		
-		provinces_to_highlight = {
-			OR = {
-				province_id = 2577
-				province_id = 2578
-			}
-		}
-		
-		trigger = {
-			2577 = {
-				owned_by = ROOT
-			}
-			2578 = {
-				owned_by = ROOT
-			}
-		}
-		
+		required_missions = { fj_new_life } 
+		provinces_to_highlight = { province_id = 1490 } 
+
+		trigger = { 1490 = { is_strongest_trade_power = ROOT }  } 
+
 		effect = {
-			2573 = {
-				add_province_modifier = {
-					name = capital_city_fj
-					duration = 18250
+			define_conquistador = {
+				shock = 3
+				fire = 3
+				manuever = 6
+				siege = 3
+			}
+			great_lakes_region = { discover_country = ROOT } 
+		}
+	}
+
+	fj_control_native = {
+		icon = mission_sio_sun_dance
+		position = 4
+		required_missions = { fj_control_coast_2 } 
+		provinces_to_highlight = { is_capital_of = MIK } 
+
+		trigger = {
+			MIK = {
+				OR = {
+					exists = no
+					AND = {
+						is_subject_of = ROOT
+						has_opinion = {
+							who = ROOT
+							value = 190
+						}
+					}
 				}
 			}
 		}
-	}
-	fj_feed = {
-		icon = mission_rice_field
-		required_missions = {fj_cattle  fj_more_coast}
-		position = 4
-				
-		provinces_to_highlight = {
-			owned_by = ROOT
-			trade_goods = livestock
-		}
 
-		trigger = {
-			any_owned_province = {
-				trade_goods = livestock
-				base_production = 5
-				has_building = marketplace
-			}
-		}
-		
 		effect = {
-			cote_nord_area = {
-				add_base_manpower = 1
+			if = {
+				limit = { MIK = { exists = yes }  } 
+				MIK = {
+					hidden_effect = {
+						add_government_reform = native_clan_council_reform
+						add_government_reform = native_martial_tradition_reform
+						add_government_reform = native_settle_down_reform
+					}
+					add_country_modifier = {
+						name = "fja_overlord_help"
+						duration = 10950
+					}
+					capital_scope = { change_religion = norse_ragnaroked } 
+					change_religion = norse_ragnaroked
+				}
+			}
+			else = {
+				lower_acadia_area = { add_permanent_claim = ROOT } 
+				upper_acadia_area = { add_permanent_claim = ROOT } 
 			}
 		}
 	}
-	fj_canada = {
-		icon = mission_unite_home_region
-		required_missions = {fj_qebec  }
+
+	fj_vinland_proper_2 = {
+		icon = mission_iroquois_the_great_peacemaker
 		position = 5
-				
-		provinces_to_highlight = {
-			province_id = 994
-		}
+		required_missions = { fj_river_mouth } 
+		provinces_to_highlight = {  } 
 
 		trigger = {
-			994 = {
-				owned_by = ROOT
-				is_core = ROOT
-				has_building = marketplace
+			if = {
+				limit = { ai = yes } 
+				prestige = 70
+			}
+			else = {
+				treasury = 300
+				manpower = 5
 			}
 		}
-		
+
 		effect = {
-			994 = {
-				change_religion = ROOT
-				change_culture = ROOT
-			}
-			canada_region = {
-				add_permanent_claim = ROOT
-			}
+			add_treasury = -300
+			add_manpower = -5
+			lower_canada_area = { colonize_or_core_fj0 = yes } 
 		}
 	}
-
 }
 Frja_3_slot = {
 	slot = 3
 	generic = no
 	ai = yes
-	potential = {	tag = FJ0	}
 	has_country_shield = yes
+	potential = { tag = FJ0 } 
 
-	fj_old_traditions = {
-		icon = mission_rb_control_electors
-		required_missions = { }
+	fj_jarl_allthing = {
+		icon = mission_rb_grow_the_channel
 		position = 1
-		
-		trigger = {
-			OR = {
-				has_personal_deity = hoenir
-				prestige = 20
+		provinces_to_highlight = {  } 
+
+		trigger = { stability = 2 } 
+
+		effect = {
+			add_country_modifier_for_age = {
+				name = "fjo_explorations"
+				age = age_of_discovery
 			}
 		}
-		
+	}
+
+	fj_new_world = {
+		icon = mission_rb_control_electors
+		position = 2
+		required_missions = { fj_jarl_allthing } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			stability = 3
+			current_size_of_parliament = 3
+		}
+
 		effect = {
-			labrador_area = {
-				add_base_manpower = 1
-			}
+			custom_tooltip = FJA_TT_1
 			every_owned_province = {
-				limit = {
-					has_province_modifier = old_vikings
-				}
-				remove_province_modifier = old_vikings
+				limit = { has_seat_in_parliament = yes } 
+				add_base_tax = 2
 			}
 		}
 	}
-	fj_true_capital = {
-		icon = mission_early_modern_university
-		required_missions = {fj_more_coast fj_old_traditions fj_supplies }
+
+	fj_new_home = {
+		icon = mission_colonize_the_west
 		position = 3
-		
-		provinces_to_highlight = {
-			is_capital_of = ROOT
+		required_missions = {
+			fj_new_world
+			fj_land_share
 		}
-		
-		trigger = {
-			2573 = {
-				development = 15
-			}
-		}
-		
+		provinces_to_highlight = { owned_by = ROOT } 
+
+		trigger = { grown_by_development = 75 } 
+
 		effect = {
-			2573 = {
-				add_permanent_province_modifier = {
-					name = fj_true_cap
-					duration = 18250
-				}
+			add_country_modifier = {
+				name = "fj0_immigration_waves"
+				duration = 10950
 			}
 		}
 	}
-	fj_vinland = {
-		icon = mission_empire
-		required_missions = {fj_canada fj_true_capital } 
-		position = 6
-				
+
+	fj_city_builder = {
+		icon = mission_colonial
+		position = 5
+		required_missions = { fj_new_home } 
 		provinces_to_highlight = {
-			region = canada_region
+			owned_by = ROOT
+			NOT = { num_of_buildings_in_province = 2 } 
 		}
 
 		trigger = {
 			num_of_owned_provinces_with = {
 				value = 20
-				region = canada_region
-			}
-			993 = {
-				owned_by = ROOT
-				is_core = ROOT
-				development = 15
+				num_of_buildings_in_province = 2
 			}
 		}
-		
+
 		effect = {
-			set_country_flag = vinland_formed
-			2573 = {
-				remove_province_modifier = fj_true_cap
-				remove_province_modifier = capital_city_fj
-			}
-			993 = {
-				change_religion = ROOT
-				change_culture = ROOT
-				add_permanent_province_modifier = {
-					name = fj_true_cap
-					duration = -1
-				}
-				add_permanent_province_modifier = {
-					name = capital_city_fj
-					duration = -1
-				}
-			}
+			add_yearly_manpower = 1
+			add_years_of_income = 1
+		}
+	}
+
+	fj_halls_of_glory = {
+		icon = mission_rb_trinity_college_dublin
+		position = 6
+		required_missions = {
+			fj_vinland_proper
+			fj_vinland_proper_2
+			fj_city_builder
+			fj_glass
+		}
+		provinces_to_highlight = { province_id = 993 } 
+
+		trigger = {
+			owns = 993
+			993 = { development = 25 } 
+		}
+
+		effect = {
 			set_capital = 993
-			override_country_name = VINLAND_FJ
-			custom_tooltip = VINLAND_CUSTOM
-			hidden_effect = {
-				swap_free_idea_group = yes
-			}
+			country_event = { id = fjal.1 } 
 		}
 	}
 }
@@ -362,150 +332,77 @@ Frja_4_slot = {
 	slot = 4
 	generic = no
 	ai = yes
-	potential = {	tag = FJ0	}
 	has_country_shield = yes
+	potential = { tag = FJ0 } 
 
-	fj_jarl_gard = {
-		icon = mission_build_up_to_force_limit
-		required_missions = {  }
-		position = 1
-		
-		trigger = {
-			has_mil_advisor = yes
-			mil_power = 100
-		}
-		
-		effect = {
-			add_mil_power = -100
-			add_country_modifier = {
-				name = jarl_guards
-				duration = 10950
-			}
-		}
-	}
-	fj_supplies = {
-		icon = mission_dominate_home_trade_node
-		required_missions = {fj_jarl_gard fj_island_hopping }
+	fj_land_share = {
+		icon = mission_rb_import_potatoes
 		position = 2
-		
-		provinces_to_highlight = {
-			province_id = 980
-		}
+		required_missions = { fj_cows_and_horse } 
+		provinces_to_highlight = {  } 
 
 		trigger = {
-			980 = {
-				OR = {
-					trade_goods = naval_supplies
-					base_production = 3
-				}
-			}
-			army_size_percentage = 1
-		}
-		
-		effect = {
-			980 = {
-				change_trade_goods = naval_supplies
-				add_permanent_province_modifier = {
-					name = focus_woods
-					duration = -1
-				}
-			}
-		}
-	}
-	fj_acadia = {
-		icon = bohemian_crystal
-		required_missions = { fj_native_encounter }
-		position = 4
-
-		provinces_to_highlight = {
-			is_capital = yes
-			continent = europe
-			owner = {
-				num_of_owned_provinces_with = {
-					value = 3
-					trade_goods = wine
-				}
-			}
-		}
-
-		trigger = {
-			lower_acadia_area = {
-				type = all
-				owned_by = ROOT
-			}
 			OR = {
-				any_country = {
-					NOT = {
-						tag = ICE
-					}
-					capital_scope = {
-						continent = europe
-					}
-					num_of_owned_provinces_with = {
-						value = 3
-						trade_goods = wine
-					}
-					has_opinion = {
-						who = ROOT
-						value = 100
-					}	
+				estate_loyalty = {
+					estate = estate_church
+					loyalty = 60
 				}
-				treasury = 500
-			}	
+				estate_loyalty = {
+					estate = estate_nobles
+					loyalty = 60
+				}
+				estate_loyalty = {
+					estate = estate_burghers
+					loyalty = 60
+				}
+			}
+			estate_loyalty = {
+				estate = estate_church
+				loyalty = 40
+			}
+			estate_loyalty = {
+				estate = estate_nobles
+				loyalty = 40
+			}
+			estate_loyalty = {
+				estate = estate_burghers
+				loyalty = 40
+			}
 		}
+
 		effect = {
-			if = {
-				limit = {
-					NOT = {
-						any_country = {
-							NOT = {
-								tag = ICE
-							}
-							capital_scope = {
-								continent = europe
-							}
-							num_of_owned_provinces_with = {
-								value = 3
-								trade_goods = wine
-							}
-							has_opinion = {
-								who = ROOT
-								value = 100
-							}	
-						}
-					}
-				}
-				add_treasury = -500
+			change_estate_land_share = {
+				estate = estate_church
+				share = -5
 			}
-			2569 = {
-				add_base_production = 1
-				change_trade_goods = wine
+			change_estate_land_share = {
+				estate = estate_nobles
+				share = -5
 			}
-			984 = {
-				change_trade_goods = wine
+			change_estate_land_share = {
+				estate = estate_burghers
+				share = -5
 			}
 		}
 	}
-	fj_furtherer_inland = {
-		icon = mission_colonize_alaska
-		required_missions = {  }
-		position = 5
 
-		provinces_to_highlight = {
-			region = cascadia_region
-		}
+	fj_iron_mines = {
+		icon = mission_rb_central_belt_coal_mining
+		position = 4
+		required_missions = { fj_land_share } 
+		provinces_to_highlight = { province_id = 2579 } 
 
 		trigger = {
-			num_of_owned_provinces_with = {
-				value = 1
-				region = cascadia_region
-				is_core = ROOT
+			2579 = {
+				owned_by = ROOT
+				grown_by_development = 5
 			}
 		}
-		
+
 		effect = {
-			cascadia_region = {
-				add_permanent_claim = ROOT
+			2579 = {
+				change_trade_goods = iron
+				add_or_upgrade_production_building = yes
 			}
 		}
 	}
@@ -514,219 +411,147 @@ Frja_5_slot = {
 	slot = 5
 	generic = no
 	ai = yes
-	potential = {	tag = FJ0	}
 	has_country_shield = yes
+	potential = { tag = FJ0 } 
 
-	fj_island_hopping = {
-		icon = mission_exploration
-		required_missions = {  }
+	fj_cows_and_horse = {
+		icon = mission_rb_conquer_wales
 		position = 1
-		
+		provinces_to_highlight = { province_id = 981 } 
+
 		trigger = {
-			navy_size_percentage = 0.9
-			OR = {
-				982 = {
-					is_empty = yes
-				}
-				is_subject = no
-			}
-		}
-		
-		effect = {
-			if = {
-				limit = {
-					982 = {
-						is_empty = yes
-					}
-				}
-				982 = {
-					change_culture = ROOT
-					change_religion = ROOT
-					cede_province = ROOT
-				}
-			}else = {
-				add_army_tradition = 15
-				982 = {
-					add_permanent_claim = ROOT
-				}
-			}
-		}
-	}
-	fj_more_land = {
-		icon = mission_settlers_north_america
-		required_missions = { fj_island_hopping }
-		position = 2
-		
-		provinces_to_highlight = {
-			province_id = 982
-		}
-		
-		trigger = {
-			982 = {
+			981 = {
 				owned_by = ROOT
+				grown_by_development = 3
 				OR = {
-					infantry_in_province = 3
-					owner = {
-						ai = yes
-					}
+					has_seat_in_parliament = yes
+					has_seat_in_parliament = no
 				}
 			}
 		}
-		
+
 		effect = {
-			982 = {
-				kill_units = {
-					who = ROOT
-					type = infantry
-					amount = 3
-				}
-			}
-			if = {
-				limit = {
-					2569 = {
-						is_empty = yes
+			981 = {
+				change_trade_goods = livestock
+				tooltip = {
+					custom_tooltip = seat_in_parliament_yes
+					add_province_modifier = {
+						name = "fj0_meat_barons"
+						duration = 10950
+					}
+					custom_tooltip = seat_in_parliament_no
+					add_province_modifier = {
+						name = "fj0_meat_fields"
+						duration = 10950
 					}
 				}
-				2569 = {
-					create_colony = 888
-				}
-			}else = {
-				add_army_tradition = 15
 			}
-			lower_acadia_area = {
-				add_permanent_claim = ROOT
+			hidden_effect = {
+				981 = {
+					if = {
+						limit = { has_seat_in_parliament = yes } 
+						add_province_modifier = {
+							name = "fj0_meat_barons"
+							duration = 10950
+						}
+					}
+					else = {
+						add_province_modifier = {
+							name = "fj0_meat_fields"
+							duration = 10950
+						}
+					}
+				}
 			}
 		}
 	}
-	fj_native_encounter = {
-		icon = mission_colonial
-		required_missions = { fj_more_land }
+
+	fj_wine = {
+		icon = mission_wine_monopolies
 		position = 3
-		
-		provinces_to_highlight = {
-			province_id = 2569
-		}
-		
-		trigger = {
-			2569 = {
-				owned_by = ROOT
-				is_core = ROOT
-				development = 10
-			}
-		}
-		
-		effect = {
-			if = {
-				limit = {
-					2568 = {
-						is_empty = yes
-					}
-				}
-				2568 = {
-					add_siberian_construction = 15
-				}
-				add_dip_power = -20
-			}else = {
-				add_dip_power = 20
-			}
-			if = {
-				limit = {
-					984 = {
-						is_empty = yes
-					}
-				}
-				984 = {
-					add_siberian_construction = 15
-				}
-				add_dip_power = -20
-			}else = {
-				add_dip_power = 20
-			}
-			if = {
-				limit = {
-					4891 = {
-						is_empty = yes
-					}
-				}
-				4891 = {
-					add_siberian_construction = 15
-				}
-				add_dip_power = -20
-			}else = {
-				add_dip_power = 20
-			}
-		}
-	}
-	fj_army = {
-		icon = mission_have_two_subjects
-		required_missions = { fj_native_encounter }
-		position = 4
-		
-		trigger = {
-			army_size_percentage = 1
-			has_mil_advisor_2 = yes
-		}
-		
-		effect = {
-			add_army_tradition = 10
-			add_country_modifier = {
-				name = grand_army_fj
-				duration = 10950
-			}
-		}
-	}
-	fj_further_inland = {
-		icon = colonize_the_cape
-		required_missions = {  }
-		position = 5
-
-		provinces_to_highlight = {
-			region = hudson_bay_region
-		}
-
-		trigger = {
-			num_of_owned_provinces_with = {
-				value = 1
-				region = hudson_bay_region
-				is_core = ROOT
-			}
-		}
-		
-		effect = {
-			hudson_bay_region = {
-				add_permanent_claim = ROOT
-			}
-		}
-	}
-	fj_coast_coast = {
-		icon = mission_conquer_50_development
-		required_missions = {fj_furtherer_inland fj_further_inland}
-		position = 6
-
+		required_missions = { fj_cows_and_horse } 
 		provinces_to_highlight = {
 			OR = {
-				region = hudson_bay_region
-				region = cascadia_region
+				province_id = 2568
+				province_id = 2569
+				province_id = 984
 			}
 		}
 
 		trigger = {
-			hudson_bay_region = {
-				type = all
-				owned_by = ROOT
+			owns = 2568
+			owns = 2569
+			owns = 984
+			treasury = 500
+		}
+
+		effect = {
+			add_treasury = -500
+			2568 = { change_trade_goods = wine } 
+			2569 = { change_trade_goods = wine } 
+			984 = {
+				change_trade_goods = wine
+				tooltip = {
+					custom_tooltip = seat_in_parliament_yes
+					add_province_modifier = {
+						name = "fj0_wine_barons"
+						duration = 10950
+					}
+					custom_tooltip = seat_in_parliament_no
+					add_province_modifier = {
+						name = "fj0_wine_fields"
+						duration = 10950
+					}
+				}
 			}
-			cascadia_region = {
-				type = all
-				owned_by = ROOT
+			hidden_effect = {
+				981 = {
+					if = {
+						limit = { has_seat_in_parliament = yes } 
+						add_province_modifier = {
+							name = "fj0_meat_barons"
+							duration = 10950
+						}
+					}
+					else = {
+						add_province_modifier = {
+							name = "fj0_meat_fields"
+							duration = 10950
+						}
+					}
+				}
 			}
 		}
-		
+	}
+
+	fj_glass = {
+		icon = bohemian_crystal
+		position = 5
+		required_missions = {
+			fj_wine
+			fj_iron_mines
+		}
+		provinces_to_highlight = { province_id = 993 } 
+
+		trigger = {
+			owns = 993
+			993 = { development = 15 } 
+			treasury = 500
+		}
+
 		effect = {
-			add_country_modifier = {
-				name = coast_to_coast_fj
-				duration = -1
+			add_treasury = -500
+			993 = {
+				change_trade_goods = glass
+				add_province_modifier = {
+					name = "fja_glass_home_minus"
+					duration = 7300
+				}
+				add_province_modifier = {
+					name = "fja_glass_home"
+					duration = -1
+				}
 			}
 		}
 	}
 }
-
