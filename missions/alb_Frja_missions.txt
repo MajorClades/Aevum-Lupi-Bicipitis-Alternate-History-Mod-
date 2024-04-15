@@ -13,10 +13,11 @@ Frja_1_slot = {
 		trigger = {
 			if = {
 				limit = { ai = yes } 
-				prestige = 10
+				prestige = 15
+				manpower = 3
 			}
 			else = {
-				manpower = 2
+				manpower = 3
 				treasury = 100
 				capital_scope = { grown_by_development = 3 } 
 			}
@@ -24,7 +25,7 @@ Frja_1_slot = {
 
 		effect = {
 			add_treasury = -100
-			add_manpower = -2
+			add_manpower = -3
 			2578 = { colonize_or_core_fj0 = yes } 
 			986 = { colonize_or_core_fj0 = yes } 
 		}
@@ -39,16 +40,19 @@ Frja_1_slot = {
 		trigger = {
 			if = {
 				limit = { ai = yes } 
-				prestige = 20
+				prestige = 25
+				manpower = 4
 			}
 			else = {
 				has_adm_advisor = yes
-				manpower = 3
+				adm_power = 100
+				manpower = 4
 			}
 		}
 
 		effect = {
-			add_manpower = -3
+			add_adm_power = -100
+			add_manpower = -4
 			996 = { colonize_or_core_fj0 = yes } 
 			2576 = { colonize_or_core_fj0 = yes } 
 			2577 = { colonize_or_core_fj0 = yes } 
@@ -64,15 +68,18 @@ Frja_1_slot = {
 		trigger = {
 			if = {
 				limit = { ai = yes } 
-				prestige = 30
+				prestige = 35
+				manpower = 5
 			}
 			else = {
 				has_mil_advisor = yes
+				mil_power = 100
 				manpower = 5
 			}
 		}
 
 		effect = {
+			add_mil_power = -100
 			add_manpower = -5
 			995 = { colonize_or_core_fj0 = yes } 
 			2582 = { colonize_or_core_fj0 = yes } 
@@ -90,15 +97,18 @@ Frja_1_slot = {
 			if = {
 				limit = { ai = yes } 
 				prestige = 40
+				manpower = 5
 			}
 			else = {
 				has_dip_advisor = yes
-				manpower = 3
+				dip_power = 100
+				manpower = 5
 			}
 		}
 
 		effect = {
-			add_manpower = -3
+			add_dip_power = -100
+			add_manpower = -5
 			994 = { colonize_or_core_fj0 = yes } 
 			2583 = { colonize_or_core_fj0 = yes } 
 		}
@@ -117,13 +127,13 @@ Frja_1_slot = {
 			}
 			else = {
 				treasury = 100
-				manpower = 3
+				manpower = 4
 			}
 		}
 
 		effect = {
 			add_treasury = -100
-			add_manpower = -3
+			add_manpower = -4
 			trois_rivieres_area = { colonize_or_core_fj0 = yes } 
 		}
 	}
@@ -144,13 +154,20 @@ Frja_2_slot = {
 		trigger = { 1490 = { is_strongest_trade_power = ROOT }  } 
 
 		effect = {
-			define_conquistador = {
-				shock = 3
-				fire = 3
-				manuever = 6
-				siege = 3
+			country_event = {
+				id = fjal.6
 			}
-			great_lakes_region = { discover_country = ROOT } 
+			hidden_effect = {
+				discover_province = 2526
+			}
+			2526 = {
+				add_trade_modifier = {
+					who = ROOT
+					duration = 10950
+					power = 20
+					key = "Norse Explorers"
+				}
+			}
 		}
 	}
 
@@ -258,7 +275,23 @@ Frja_3_slot = {
 
 		effect = {
 			custom_tooltip = FJA_TT_1
-			every_owned_province = {
+			random_owned_province = {
+				limit = { has_seat_in_parliament = yes } 
+				add_base_tax = 2
+			}
+			random_owned_province = {
+				limit = { has_seat_in_parliament = yes } 
+				add_base_tax = 2
+			}
+			random_owned_province = {
+				limit = { has_seat_in_parliament = yes } 
+				add_base_tax = 2
+			}
+			random_owned_province = {
+				limit = { has_seat_in_parliament = yes } 
+				add_base_tax = 2
+			}
+			random_owned_province = {
 				limit = { has_seat_in_parliament = yes } 
 				add_base_tax = 2
 			}
@@ -440,10 +473,8 @@ Frja_5_slot = {
 						duration = 10950
 					}
 					custom_tooltip = seat_in_parliament_no
-					add_province_modifier = {
-						name = "fj0_meat_fields"
-						duration = 10950
-					}
+					add_base_production = 2
+					add_base_manpower = 1
 				}
 			}
 			hidden_effect = {
@@ -456,10 +487,8 @@ Frja_5_slot = {
 						}
 					}
 					else = {
-						add_province_modifier = {
-							name = "fj0_meat_fields"
-							duration = 10950
-						}
+						add_base_production = 2
+						add_base_manpower = 1
 					}
 				}
 			}
@@ -479,48 +508,21 @@ Frja_5_slot = {
 		}
 
 		trigger = {
-			owns = 2568
-			owns = 2569
-			owns = 984
+			owns_or_subject_of = 2568
+			owns_or_subject_of = 2569
+			owns_or_subject_of = 984
 			treasury = 500
 		}
 
 		effect = {
 			add_treasury = -500
-			2568 = { change_trade_goods = wine } 
-			2569 = { change_trade_goods = wine } 
-			984 = {
-				change_trade_goods = wine
-				tooltip = {
-					custom_tooltip = seat_in_parliament_yes
-					add_province_modifier = {
-						name = "fj0_wine_barons"
-						duration = 10950
-					}
-					custom_tooltip = seat_in_parliament_no
-					add_province_modifier = {
-						name = "fj0_wine_fields"
-						duration = 10950
-					}
-				}
+			add_country_modifier = {
+				name = fj0_wine_barons
+				duration = 10930
 			}
-			hidden_effect = {
-				981 = {
-					if = {
-						limit = { has_seat_in_parliament = yes } 
-						add_province_modifier = {
-							name = "fj0_meat_barons"
-							duration = 10950
-						}
-					}
-					else = {
-						add_province_modifier = {
-							name = "fj0_meat_fields"
-							duration = 10950
-						}
-					}
-				}
-			}
+			2568 = { change_trade_goods = wine cede_province = ROOT} 
+			2569 = { change_trade_goods = wine cede_province = ROOT} 
+			984 = {	change_trade_goods = wine cede_province = ROOT}
 		}
 	}
 

@@ -23,11 +23,14 @@ country_event = {
 	id = fjal.2
 	title = fjal.2.test
 	desc = fjal.2.desc
-	picture = ANGRY_MOB_eventPicture
+	picture = CONQUISTADORS_eventPicture
 	
 	fire_only_once = yes
 	trigger = {
-		tag = FJ0
+		OR = {
+			tag = FJ0
+			tag = FJ9
+		}
 		canada_region = {
 			type = all
 			owned_by = ROOT
@@ -56,7 +59,7 @@ country_event = {
 	id = fjal.3
 	title = fjal.3.test
 	desc = fjal.3.desc
-	picture = ANGRY_MOB_eventPicture
+	picture = TRADE_GOODS_FURS_FISH_AND_SALT_eventPicture
 	
 	fire_only_once = yes
 	trigger = {
@@ -156,26 +159,22 @@ country_event = {
 }
 
 country_event = {
-	id = fjal.301
-	title = fjal.301.test
-	desc = fjal.301.desc
-	picture = ANGRY_MOB_eventPicture
-	hidden = yes
+	id = fjal.6
+	title = fjal.6.test
+	desc = fjal.6.desc
+	picture = USA_EXPLORERS_eventPicture
+	
+	is_triggered_only = yes
 	fire_only_once = yes
-	trigger = {
-		tag = FJ0
-		ai = yes
-		total_development = 200
-	}
-	mean_time_to_happen = {
-		months = 1
-	}
 	option = {
-		name = fjal.3a
-		complete_mission = fj_new_life
-		946 =  {
-			 discover_country = FJ0
-			}
+		name = fjal.6a
+		define_conquistador = {
+			shock = 3
+			fire = 3
+			manuever = 6
+			siege = 3
+		}
+		great_lakes_region = { discover_country = ROOT } 
 	}
 }
 
@@ -223,37 +222,6 @@ country_event = {
 }
 
 country_event = {
-	id = fjal.303
-	title = fjal.303.test
-	desc = fjal.303.desc
-	picture = ANGRY_MOB_eventPicture
-	hidden = yes
-	fire_only_once = yes
-	trigger = {
-		tag = FJ0
-		ai = yes
-		994 = {
-			owned_by = ROOT
-			is_core = ROOT
-		}
-		is_year = 1500
-	}
-	mean_time_to_happen = {
-		months = 1
-	}
-	option = {
-		name = fjal.3a
-		994 = {
-			change_religion = ROOT
-			change_culture = ROOT
-		}
-		canada_region = {
-			add_permanent_claim = ROOT
-		}
-	}
-}
-
-country_event = {
 	id = fjal.304
 	title = fjal.304.test
 	desc = fjal.304.desc
@@ -280,30 +248,6 @@ country_event = {
 			set_base_tax = 5
 			set_base_production = 5
 			set_base_manpower = 5
-		}
-	}
-}
-country_event = {
-	id = fjal.305
-	title = fjal.305.test
-	desc = fjal.305.desc
-	picture = ANGRY_MOB_eventPicture
-	hidden = yes
-	fire_only_once = yes
-	trigger = {
-		tag = FJ0
-		ai = yes
-		is_year = 1530
-	}
-	mean_time_to_happen = {
-		months = 1
-	}
-	option = {
-		name = fjal.3a
-		set_country_flag = vinland_formed
-		override_country_name = VINLAND_FJ
-		hidden_effect = {
-			swap_free_idea_group = yes
 		}
 	}
 }
