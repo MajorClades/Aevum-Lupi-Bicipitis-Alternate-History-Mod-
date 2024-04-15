@@ -6,7 +6,10 @@ mt_pyu_1 = {
 		has_dlc = "Leviathan"
 	}
 	potential = {
-		culture = burmese
+		OR = {
+			tag = PY5
+			tag = PY1
+		}
 	}
 	has_country_shield = yes
 	
@@ -92,11 +95,11 @@ mt_pyu_1 = {
 					}
 				}
 				TA1 = {
-				remove_country_modifier = mongtai_disorder
-				add_country_modifier = {
-					name = mongtai_discord
-					duration = 7200
-				}
+					remove_country_modifier = mongtai_disorder
+					add_country_modifier = {
+						name = mongtai_discord
+						duration = 7200
+					}
 				}
 			}
 			add_country_modifier = {
@@ -121,7 +124,10 @@ mt_pyu_2 = {
 		has_dlc = "Leviathan"
 	}
 	potential = {
-		culture = burmese
+		OR = {
+			tag = PY5
+			tag = PY1
+		}
 	}
 	has_country_shield = yes
 	
@@ -245,7 +251,10 @@ mt_pyu_3 = {
 		has_dlc = "Leviathan"
 	}
 	potential = {
-		culture = burmese
+		OR = {
+			tag = PY5
+			tag = PY1
+		}
 	}
 	has_country_shield = yes
 	
@@ -345,7 +354,10 @@ mt_pyu_4 = {
 		has_dlc = "Leviathan"
 	}
 	potential = {
-		culture = burmese
+		OR = {
+			tag = PY5
+			tag = PY1
+		}
 	}
 	has_country_shield = yes
 	
@@ -471,7 +483,10 @@ mt_pyu_5 = {
 		has_dlc = "Leviathan"
 	}
 	potential = {
-		culture = burmese
+		OR = {
+			tag = PY5
+			tag = PY1
+		}
 	}
 	has_country_shield = yes
 	
@@ -483,14 +498,14 @@ mt_pyu_5 = {
 		}
 
 		trigger = {
-			4832 = {
+			2396 = {
 				owned_by = ROOT
 				has_production_building_trigger = yes
 			}
 		}
 
 		effect = {
-			4832 = {
+			2396 = {
 				add_province_modifier = {
 					name = SEA_kachin_jade_mine
 					duration = -1
@@ -509,18 +524,34 @@ mt_pyu_5 = {
 		trigger = {
 			num_of_owned_provinces_with = {
 			trade_goods = tropical_wood
+			base_production = 5
 				value = 10
 			}
 		}
 
 		effect = {
-			every_owned_province = {
-				limit = {
-					trade_goods = tropical_wood
-				}
+			custom_tooltip = 5_provinces_fulfilling_requirements_tt
+			tooltip = {
 				add_province_modifier = {
 					name = SEA_teakwood_trade
 					duration = -1
+				}
+			}
+			hidden_effect = {
+				for = {
+					amount = 5
+					effect = "
+					random_owned_province = {
+						limit = {
+							trade_goods = tropical_wood
+							base_production = 5
+						}
+						add_province_modifier = {
+							name = SEA_teakwood_trade
+							duration = -1
+						}
+					}
+					"
 				}
 			}
 		} 
@@ -535,17 +566,26 @@ mt_pyu_5 = {
 
 		trigger = {
 		AND = {
-		has_great_project = {
-				type = bagan_temples
-				tier = 2
+			2399 = {
+				owned_by = ROOT
+				has_great_project = {
+					type = bagan_temples
+					tier = 2
+				}
 			}
-		has_great_project = {
-				type = shwedagon_pagoda
-				tier = 2
+			4399 = {
+				owned_by = ROOT
+				has_great_project = {
+					type = shwedagon_pagoda
+					tier = 2
+				}
 			}
-		has_great_project = {
-				type = angkor_wat
-				tier = 2
+			609 = {
+				owned_by = ROOT
+				has_great_project = {
+					type = angkor_wat
+					tier = 2
+				}
 			}
 		}
 		}
@@ -555,6 +595,10 @@ mt_pyu_5 = {
 					name = PYU_land_of_temple
 					duration = -1
 				}
+			add_estate_loyalty = {
+				estate = estate_church
+				loyalty = 20
+			}
 		} 
 	}
 
