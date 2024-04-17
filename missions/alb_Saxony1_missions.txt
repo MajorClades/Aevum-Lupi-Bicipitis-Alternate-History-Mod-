@@ -5,10 +5,33 @@ saxon_1_slot = {
 	has_country_shield = yes
 	potential = { tag = SX0 } 
 
+	sx0_support_rija = {
+		icon = mission_pol_embellish_gdansk
+		position = 2
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	sx0_crush_mongoland = {
+		icon = qng_end_yuan
+		position = 4
+		required_missions = {
+			sx0_support_rija
+			sx0_strike_germany
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
 	sx0_empower_knights = {
 		icon = mission_knight
-		position = 2
-		required_missions = { sx0_gather_knights } 
+		position = 5
 		provinces_to_highlight = {  } 
 
 		trigger = {  } 
@@ -18,7 +41,7 @@ saxon_1_slot = {
 
 	sx0_knightly_army = {
 		icon = mission_livonian_knights
-		position = 3
+		position = 6
 		required_missions = { sx0_empower_knights } 
 		provinces_to_highlight = {  } 
 
@@ -29,8 +52,19 @@ saxon_1_slot = {
 
 	sx0_empire_on_horseback = {
 		icon = mission_teutonic_knights
-		position = 5
+		position = 7
 		required_missions = { sx0_knightly_army } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	sx0_valtean_union = {
+		icon = mission_conquer_baltic_region
+		position = 10
+		required_missions = { sx0_valtean_succession } 
 		provinces_to_highlight = {  } 
 
 		trigger = {  } 
@@ -51,9 +85,13 @@ saxon_2_slot = {
 		required_missions = { sx0_gather_knights } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = { poland_region = { country_or_non_sovereign_subject_holds = ROOT }  } 
 
-		effect = {  } 
+		effect = {
+			wielkopolska_area = { add_permanent_claim = ROOT } 
+			silesia_area = { add_permanent_claim = ROOT } 
+			neumark_area = { add_permanent_claim = ROOT } 
+		}
 	}
 
 	sx0_strike_germany = {
@@ -68,8 +106,8 @@ saxon_2_slot = {
 	}
 
 	sx0_usurp_german_confed = {
-		icon = bavarian_cultural_dominance
-		position = 4
+		icon = mission_germ_sax
+		position = 5
 		required_missions = { sx0_strike_germany } 
 		provinces_to_highlight = {  } 
 
@@ -80,8 +118,18 @@ saxon_2_slot = {
 
 	sx0_union_of_germans = {
 		icon = mission_unite_home_region
-		position = 5
+		position = 7
 		required_missions = { sx0_usurp_german_confed } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	sx0_valtean_succession = {
+		icon = the_spanish_succession
+		position = 9
 		provinces_to_highlight = {  } 
 
 		trigger = {  } 
@@ -101,29 +149,42 @@ saxon_3_slot = {
 		position = 1
 		provinces_to_highlight = {  } 
 
-		trigger = {  
+		trigger = {
 			if = {
-				limit = {
-					ai = no
-				}
+				limit = { ai = no } 
 				army_size_percentage = 1
 				num_of_generals = 2
+				cavalry_fraction = 0.2
 			}
 			else = {
 				army_size_percentage = 0.8
+				num_of_generals = 1
 			}
-		} 
+		}
 
-		effect = {  } 
+		effect = {
+			country_event = { id = saxo.2 } 
+			add_country_modifier = {
+				name = "sx0_build_army_mod"
+				duration = 3650
+			}
+			poland_region = { add_permanent_claim = ROOT } 
+			west_dniepr_area = { add_permanent_claim = ROOT } 
+			podolia_volhynia_area = { add_permanent_claim = ROOT } 
+			pripyat_area = { add_permanent_claim = ROOT } 
+		}
 	}
 
 	sx0_siescheng_city = {
 		icon = mng_outer_city_beijing
 		position = 2
 		required_missions = { sx0_gather_knights } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {
+			province_id = 280
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
 
-		trigger = {  } 
+		trigger = { owns_or_non_sovereign_subject_of = 280 } 
 
 		effect = {  } 
 	}
@@ -142,9 +203,15 @@ saxon_3_slot = {
 		effect = {  } 
 	}
 
-	sx0_valtean_wedding = {
-		icon = unite_the_wittelsbachs
-		position = 5
+	sx0_saxon_empire = {
+		icon = fra_dominate_europe
+		position = 8
+		required_missions = {
+			sx0_serica_lords
+			sx0_danubian_dominion
+			sx0_union_of_germans
+			sx0_empire_on_horseback
+		}
 		provinces_to_highlight = {  } 
 
 		trigger = {  } 
@@ -152,16 +219,10 @@ saxon_3_slot = {
 		effect = {  } 
 	}
 
-	sx0_saxon_empire = {
-		icon = fra_dominate_europe
+	sx0_construct_kesars_palace = {
+		icon = versailles_palace
 		position = 6
-		required_missions = {
-			sx0_valtean_wedding
-			sx0_serica_lords
-			sx0_danubian_dominion
-			sx0_union_of_germans
-			sx0_empire_on_horseback
-		}
+		required_missions = { sx0_new_capital } 
 		provinces_to_highlight = {  } 
 
 		trigger = {  } 
@@ -200,7 +261,7 @@ saxon_4_slot = {
 
 	sx0_serica_push = {
 		icon = the_russian_campaign
-		position = 4
+		position = 5
 		required_missions = { sx0_latveria_conquest } 
 		provinces_to_highlight = {  } 
 
@@ -211,8 +272,33 @@ saxon_4_slot = {
 
 	sx0_serica_lords = {
 		icon = mission_empire_of_russia
-		position = 5
+		position = 7
 		required_missions = { sx0_serica_push } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	sx0_depower_estates = {
+		icon = balance_the_estates
+		position = 8
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	sx0_saxon_absolutism = {
+		icon = enlightened_absolutism
+		position = 10
+		required_missions = {
+			sx0_depower_estates
+			sx0_construct_schrotvurge_university
+			sx0_valtean_succession
+		}
 		provinces_to_highlight = {  } 
 
 		trigger = {  } 
@@ -227,10 +313,33 @@ saxon_5_slot = {
 	has_country_shield = yes
 	potential = { tag = SX0 } 
 
+	sx0_lithuanian_lands = {
+		icon = mission_lit_great_power_politics
+		position = 2
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	sx0_cultural_supremacy = {
+		icon = bavarian_cultural_dominance
+		position = 4
+		required_missions = {
+			sx0_lithuanian_lands
+			sx0_latveria_conquest
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
 	sx0_gepid_help = {
 		icon = hungarian_union
-		position = 2
-		required_missions = { sx0_gather_knights } 
+		position = 5
 		provinces_to_highlight = {  } 
 
 		trigger = {  } 
@@ -240,7 +349,7 @@ saxon_5_slot = {
 
 	sx0_dacia_conquest = {
 		icon = mission_conquer_romania
-		position = 4
+		position = 6
 		required_missions = { sx0_gepid_help } 
 		provinces_to_highlight = {  } 
 
@@ -251,8 +360,18 @@ saxon_5_slot = {
 
 	sx0_danubian_dominion = {
 		icon = danubian_power
-		position = 5
+		position = 7
 		required_missions = { sx0_dacia_conquest } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	sx0_construct_schrotvurge_university = {
+		icon = misison_uppsala_university
+		position = 9
 		provinces_to_highlight = {  } 
 
 		trigger = {  } 
