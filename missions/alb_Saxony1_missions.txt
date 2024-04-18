@@ -8,11 +8,67 @@ saxon_1_slot = {
 	sx0_support_rija = {
 		icon = mission_pol_embellish_gdansk
 		position = 2
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			if = {
+				limit = {
+					SX3 = {
+						exists = no
+					}
+				}
+				province_id = 43
+				NOT = {
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			OR = {
+				AND = {
+					SX3 = {
+						exists = yes
+						owns = 43
+					}
+					alliance_with = SX3
+				}
+				owns_or_non_sovereign_subject_of = 43
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			complex_dynamic_effect = {
+				first_custom_tooltip = sx0_if_allied_rija_tt
+				first_limit = "
+					SX3 = {
+						exists = yes
+						owns = 43
+					}
+					alliance_with = SX3
+				"
+				first_effect = "
+					vassalize = SX3
+					SX3 = {
+						add_liberty_desire = -25
+					}"
+				second_custom_tooltip = sx0_if_no_rija_tt
+				second_limit = "
+					owns_or_non_sovereign_subject_of = 43"
+				second_effect = "
+					43 = {
+						add_great_project_tier = {
+							type = ruined_city
+							tier = 1
+						}
+						add_province_modifier = {
+							name = sx0_restore_araatan
+							duration = 9125
+						}
+					}"
+			}
+			hinter_pommern_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	sx0_crush_mongoland = {
@@ -22,11 +78,43 @@ saxon_1_slot = {
 			sx0_support_rija
 			sx0_strike_germany
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			culture = mongolish
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			owns_all_provinces = {
+				culture = mongolish
+			}
+			ML0 = {
+				exists = no
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			if = {
+				limit = {
+					culture_group = unified_germanic
+				}
+				custom_tooltip = UNIFY_MONGOLISH
+				hidden_effect = {
+					every_owned_province = {
+						limit = { culture = mongolish } 
+						change_culture = ug_mongolish
+					}
+				}
+			}
+			add_country_modifier = {
+				name = sx0_mongols_ended
+				duration = 9125
+			}
+			add_prestige_or_monarch_power = {
+				amount = 25
+			}
+		} 
 	}
 
 	sx0_empower_knights = {
@@ -85,7 +173,12 @@ saxon_2_slot = {
 		required_missions = { sx0_gather_knights } 
 		provinces_to_highlight = {  } 
 
-		trigger = { poland_region = { country_or_non_sovereign_subject_holds = ROOT }  } 
+		trigger = { 
+			poland_region = { 
+				country_or_non_sovereign_subject_holds = ROOT 
+				type = all
+			}  
+		} 
 
 		effect = {
 			wielkopolska_area = { add_permanent_claim = ROOT } 
@@ -186,7 +279,23 @@ saxon_3_slot = {
 
 		trigger = { owns_or_non_sovereign_subject_of = 280 } 
 
-		effect = {  } 
+		effect = {  
+			if = {
+				limit = { subject_owns = 280 } 
+				capital_scope = {
+					add_base_tax = 2
+					add_base_production = 2
+					add_base_manpower = 2
+				}
+			}
+			else = {
+				280 = {
+					add_base_tax = 2
+					add_base_production = 2
+					add_base_manpower = 2
+				}
+			}
+		} 
 	}
 
 	sx0_new_capital = {
@@ -196,6 +305,17 @@ saxon_3_slot = {
 			sx0_siescheng_city
 			sx0_latveria_conquest
 		}
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	sx0_construct_kesars_palace = {
+		icon = versailles_palace
+		position = 6
+		required_missions = { sx0_new_capital } 
 		provinces_to_highlight = {  } 
 
 		trigger = {  } 
@@ -218,17 +338,6 @@ saxon_3_slot = {
 
 		effect = {  } 
 	}
-
-	sx0_construct_kesars_palace = {
-		icon = versailles_palace
-		position = 6
-		required_missions = { sx0_new_capital } 
-		provinces_to_highlight = {  } 
-
-		trigger = {  } 
-
-		effect = {  } 
-	}
 }
 saxon_4_slot = {
 	slot = 4
@@ -241,22 +350,94 @@ saxon_4_slot = {
 		icon = mission_conquer_5_states
 		position = 2
 		required_missions = { sx0_gather_knights } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = west_dniepr_area
+				area = podolia_volhynia_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			west_dniepr_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			podolia_volhynia_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_country_modifier = {
+				name = sx0_across_plains
+				duration = 3650
+			}
+			if = {
+				limit = { 	
+					LT1 = {
+						exists = yes
+					}	
+				}
+				add_casus_belli = {
+					type = cb_vassalize_mission
+					target = LT1
+				}
+			}
+			if = {
+				limit = { 	
+					LT2 = {
+						exists = yes
+					}	
+				}
+				add_casus_belli = {
+					type = cb_vassalize_mission
+					target = LT2
+				}
+			}
+			if = {
+				limit = { 	
+					LT3 = {
+						exists = yes
+					}	
+				}
+				add_casus_belli = {
+					type = cb_vassalize_mission
+					target = LT3
+				}
+			}
+		} 
 	}
 
 	sx0_latveria_conquest = {
 		icon = king_of_poland
 		position = 3
 		required_missions = { sx0_strike_vurozia } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			region = ruthenia_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 25
+				region = ruthenia_region
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			ruthenia_region = {
+				add_permanent_claim = ROOT
+			}
+			russia_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	sx0_serica_push = {

@@ -145,3 +145,65 @@ country_event = {
 		}
 	}
 }
+
+country_event = {
+	id = saxo.3
+	title = saxo.3.test
+	desc = saxo.3.desc
+	picture = DIPLOMACY_eventPicture
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = saxo.3a
+		
+		create_subject = {
+			subject_type = siesheng_vassal
+			who = SI0
+		}
+		white_peace = SI0
+	}
+	option = {
+		name = saxo.3b
+		ai_chance = {
+			factor = 0
+		}
+		add_mil_power = 100
+	}
+}
+
+country_event = {
+	id = saxo.4
+	title = saxo.4.test
+	desc = saxo.4.desc
+	picture = ARTILLERY_eventPicture
+
+	trigger = {
+		tag = SX0
+		NOT = { is_year = 1455 }
+		NOT = { owns = 280 }
+		years_of_income = 0.1
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	fire_only_once = yes
+
+	option = {
+		name = saxo.4a
+		add_years_of_income = -0.1
+		define_advisor = {
+			name = "Sieger Ürbanus"
+			culture = gepid
+			religion = catholic
+			type = army_reformer
+			skill = 2
+			cost_multiplier = 0.25
+		}
+	}
+	option = {
+		name = saxo.4b
+		add_mil_power = 100
+	}
+}
