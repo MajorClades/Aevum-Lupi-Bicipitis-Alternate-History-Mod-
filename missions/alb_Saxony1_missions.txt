@@ -191,22 +191,134 @@ saxon_2_slot = {
 		icon = encroach_on_the_germans
 		position = 3
 		required_missions = { sx0_consolidate_saxonia } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = wielkopolska_area
+				area = silesia_area
+				area = neumark_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			neumark_area = {
+				country_or_non_sovereign_subject_holds = ROOT 
+				type = all
+			}
+			silesia_area = {
+				country_or_non_sovereign_subject_holds = ROOT 
+				type = all
+			}
+			wielkopolska_area = {
+				country_or_non_sovereign_subject_holds = ROOT 
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			if = {
+				limit = {
+					GR0 = {
+						exists = no
+					}
+					PU0 = {
+						exists = yes
+					}
+				}
+				PU0 = {
+					add_casus_belli = {
+						type = cb_sax_end_confed
+						target = THIS
+					}
+				}
+				set_country_flag = sax_dismantling_german_confed_flag
+			}
+			else = {
+				north_german_region = {
+					add_permanent_claim = ROOT
+				}
+				south_german_region = {
+					add_permanent_claim = ROOT
+				}
+				set_country_flag = sax_conquer_germania_flag
+			}
+		} 
 	}
 
 	sx0_usurp_german_confed = {
 		icon = mission_germ_sax
 		position = 5
 		required_missions = { sx0_strike_germany } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			if = {
+				limit = {
+					ROOT = {
+						has_country_flag = sax_conquer_germania_flag
+					}
+				}
+				OR = {
+					region = north_german_region
+					region = south_german_region
+				}
+			}
+			culture_group = saxonic
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			GR0 = {
+				exists = no
+			}
+			if = {
+				limit = {
+					has_country_flag = sax_dismantling_german_confed_flag
+				}
+				custom_trigger_tooltip = {
+					tooltip = alb_sx0_dismantled_german_confed_tt
+					has_country_flag = sax_dismantled_confed_flag
+				}
+			}
+			else = {
+				num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+					value = 30
+					OR = {
+						region = north_german_region
+						region = south_german_region
+					}
+				}
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			custom_tooltip = INITIATE_UNITED_GERMANS
+			hidden_effect = {
+				change_culture_to_ug = yes
+				every_owned_province = {
+					limit = { culture = balten_new } 
+					change_culture = ug_balten
+				}
+				every_owned_province = {
+					limit = { culture = saxonard } 
+					change_culture = ug_saxonard
+				}
+				every_owned_province = {
+					limit = { culture = gepid } 
+					change_culture = ug_gepid
+				}
+				every_owned_province = {
+					limit = { culture = rimedaxian } 
+					change_culture = ug_rimedaxian
+				}
+				every_owned_province = {
+					limit = { culture = litaisch } 
+					change_culture = ug_litaisch
+				}
+			}
+		} 
 	}
 
 	sx0_union_of_germans = {
@@ -217,7 +329,34 @@ saxon_2_slot = {
 
 		trigger = {  } 
 
-		effect = {  } 
+		effect = {  
+			hidden_effect = {
+				every_owned_province = {
+					limit = { culture = pruthian } 
+					change_culture = ug_pruthian
+				}
+				every_owned_province = {
+					limit = { culture = south_german } 
+					change_culture = ug_south_german
+				}
+				every_owned_province = {
+					limit = { culture = teutonic } 
+					change_culture = ug_teutonic
+				}
+				every_owned_province = {
+					limit = { culture = bavarian_new } 
+					change_culture = ug_bavarian
+				}
+				every_owned_province = {
+					limit = { culture = longobard } 
+					change_culture = ug_longobard
+				}
+				every_owned_province = {
+					limit = { culture = hunnic_ger } 
+					change_culture = ug_hunnic_ger
+				}
+			}
+		} 
 	}
 
 	sx0_valtean_succession = {
