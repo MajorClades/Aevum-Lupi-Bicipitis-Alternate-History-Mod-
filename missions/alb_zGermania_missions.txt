@@ -219,6 +219,7 @@ Germania_2_slot = {
 
 		effect = {
 			custom_tooltip = UNIFY_SAXANGLE
+			custom_tooltip = UNIFY_MONGOLISH
 			hidden_effect = {
 				every_owned_province = {
 					limit = { culture = saxish } 
@@ -734,6 +735,9 @@ Germania_5_slot = {
 					custom_trigger_tooltip = {
 						tooltip = GERMANIA_FAITH_CTT1
 						all_country = {
+							NOT = {
+								tag = ROOT
+							}
 							religion = catholic
 							NOT = {
 								army_strength = {
@@ -749,6 +753,9 @@ Germania_5_slot = {
 					custom_trigger_tooltip = {
 						tooltip = GERMANIA_FAITH_CTT2
 						all_country = {
+							NOT = {
+								tag = ROOT
+							}
 							religion = wycliffian
 							NOT = {
 								army_strength = {
@@ -763,12 +770,17 @@ Germania_5_slot = {
 					limit = { has_country_flag = prut_faith_chosen_goth } 
 					custom_trigger_tooltip = {
 						tooltip = GERMANIA_FAITH_CTT3
-						all_country = {
-							religion = arian
-							NOT = {
-								army_strength = {
-									who = ROOT
-									value = 1.2
+						OR = {
+							all_country = {
+								NOT = {
+									tag = ROOT
+								}
+								religion = arian
+								NOT = {
+									army_strength = {
+										who = ROOT
+										value = 1.2
+									}
 								}
 							}
 						}

@@ -3,49 +3,60 @@ Erulia_1_slot = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = TU0 } 
+	potential = { NOT = {tag = ROM} OR = {tag = TU0 AND = { has_country_flag = generic_italy_MT was_tag = TU0} }} 
 
-	# erulian_climb = {
-	# 	icon = mission_establish_high_seas_navy
-	# 	position = 1
-	# 	provinces_to_highlight = {
-			
-	# 	}
+	erulian_climb = {
+		icon = mission_establish_high_seas_navy
+		position = 1
+		provinces_to_highlight = {province_id = 103}
 
-	# 	trigger = {
-	# 		OR = {
-	# 			dock = 5
-	# 			drydock = 5
-	# 		}
-	# 		num_of_admirals = 1
-	# 	}
+		trigger = {
+			if = { 
+				limit = {ai = yes} 
+				103 = {
+					owned_by = ROOT
+					num_of_buildings_in_province = 1
+				}
+			}else = {
+				103 = {
+					owned_by = ROOT
+					grown_by_development = 3
+				}
+			}
+		}
 
-	# 	effect = {
-	# 		add_country_modifier = {
-	# 			name = "german_first_navy"
-	# 			duration = 10950
-	# 		}
-	# 	}
-	# }
+		effect = {
+			103 = {
+				add_or_upgrade_fort_building = yes
+			}
+		}
+	}
 
-	# germania_naval_power = {
-	# 	icon = imperial_navy
-	# 	position = 6
-	# 	required_missions = { germania_navy } 
-	# 	provinces_to_highlight = {  } 
+	erulian_alpine = {
+		icon = imperial_navy
+		position = 2
+		required_missions = { erulian_climb } 
 
-	# 	trigger = {
-	# 		navy_tradition = 30
-	# 		num_of_light_ship = 15
-	# 	}
+		trigger = {
+			if = { 
+				limit = {ai = yes} 
+				num_of_generals = 1
+				army_size_percentage = 0.6
+			}else = {
+				army_size_percentage = 1
+			}
+		}
 
-	# 	effect = {
-	# 		add_country_modifier = {
-	# 			name = "german_new_navy"
-	# 			duration = 10950
-	# 		}
-	# 	}
-	# }
+		effect = {
+			add_country_modifier = {
+				name = erulian_army_buff
+				duration = 10950
+			}
+			romandie_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
 
 }
 Erulia_2_slot = {
@@ -53,31 +64,196 @@ Erulia_2_slot = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = TU0 } 
+	potential = { NOT = {tag = ROM} OR = {tag = TU0 AND = { has_country_flag = generic_italy_MT was_tag = TU0} }} 
 
+	erulian_corrands = {
+		icon = mission_establish_high_seas_navy
+		position = 2
+		required_missions = { erulian_diplomats } 
+		trigger = {
+			grown_by_development = 20
+			has_mil_advisor_2 = yes	
+		}
+
+		effect = {
+			TU1 = {
+				country_event = {
+					id = gen_ita.1
+				}
+				custom_tooltip = ERULIA_TT_1
+			}
+			coradia_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
 }
 Erulia_3_slot = {
 	slot = 3
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = TU0 } 
+	potential = { NOT = {tag = ROM} OR = {tag = TU0 AND = { has_country_flag = generic_italy_MT was_tag = TU0} }} 
 
+	erulian_diplomats = {
+		icon = mission_establish_high_seas_navy
+		position = 1
+		provinces_to_highlight = {province_id = 205}
+
+		trigger = {
+			if = {
+				limit = { IT2 = { NOT = { total_development = 25  }}}
+				is_at_war = no
+				IT2 = {
+					NOT = {
+						total_development = 25
+					}
+					is_at_war = no
+					alliance_with = ROOT
+					has_opinion = {
+						who = ROOT
+						value = 190
+					}
+				}
+			}else = {
+				205 = {
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+			}		
+		}
+
+		effect = {
+			if = {
+				limit = { IT2 = { is_subject_of = ROOT }}
+				inherit = IT2
+			}else = {
+				if = {
+					limit = {
+						205 = {
+							country_or_non_sovereign_subject_holds = ROOT
+						}
+					}
+					add_adm_power = 75
+				}else = {
+					vassalize = IT2
+				}
+			}
+			savoy_dauphine_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	erulian_corradia = {
+		icon = mission_establish_high_seas_navy
+		position = 3
+		required_missions = { erulian_corrands erulian_renaissance} 
+		provinces_to_highlight = {
+			area = coradia_area
+		}
+		trigger = {
+			coradia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_army_tradition_or_mil_power = {
+				amount = 15
+			}
+			lombardy_area = {
+				add_permanent_claim = ROOT
+			}
+			po_valley_area = {
+				add_permanent_claim = ROOT
+			}
+			liguria_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
 }
 Erulia_4_slot = {
 	slot = 4
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = TU0 } 
+	potential = { NOT = {tag = ROM} OR = {tag = TU0 AND = { has_country_flag = generic_italy_MT was_tag = TU0} }} 
 
+	erulian_polenta = {
+		icon = mission_establish_high_seas_navy
+		position = 1
+
+		trigger = {
+			prestige = 20
+			has_dip_advisor = yes
+		}
+
+		effect = {
+			define_general = {
+				name = "Aldo Giovangiacomo"
+				shock = 2
+				fire = 2
+				manuever = 2
+				siege = 2
+			}
+			piedmont_area = {
+				add_permanent_claim = ROOT
+			}
+			provence_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	erulian_renaissance = {
+		icon = mission_establish_high_seas_navy
+		position = 2
+		provinces_to_highlight = {has_province_modifier = birthplace_of_the_renaissance}
+		required_missions = { erulian_polenta } 
+		trigger = {
+			has_institution = renaissance
+		}
+
+		effect = {
+			add_dip_power = 150
+			define_advisor = {
+				type = diplomat
+				skill = 3
+				discount = yes
+			}
+		}
+	}
 }
 Erulia_5_slot = {
 	slot = 5
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = TU0 } 
+	potential = { NOT = {tag = ROM} OR = {tag = TU0 AND = { has_country_flag = generic_italy_MT was_tag = TU0} }} 
 
+	erulian_mines = {
+		icon = mission_establish_high_seas_navy
+		position = 2
+		provinces_to_highlight = {province_id = 4727}
+		required_missions = { erulian_polenta } 
+		trigger = {
+			4727 = {
+				owned_by = ROOT
+				base_production = 5
+				has_production_building_trigger = yes
+			}
+		}
 
+		effect = {
+			capital_scope = {
+				add_base_production = 2
+			}
+			4727 = {
+				add_province_modifier = {
+					name = erulian_mining_steel
+					duration = 10950
+				}
+			}
+		}
+	}
 }
