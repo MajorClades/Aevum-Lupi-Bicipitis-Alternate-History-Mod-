@@ -304,3 +304,44 @@ country_event = {
 		}
 	}
 }
+
+country_event = {
+	id = saxo.7
+	title = saxo.7.test
+	desc = saxo.7.desc
+	picture = DIPLOMACY_eventPicture
+
+	is_triggered_only = yes
+
+	option = {
+		name = saxo.7a
+		if = {
+			limit = {
+				tag = SX1
+			}
+			SX0 = {
+				add_historical_friend = SX1
+				add_country_modifier = {
+					name = sx0_sax_gepid_cooperation
+					duration = -1
+					desc = pol_as_long_as_allies_or_subjects
+				}
+			}
+		}
+		else = {
+			SX1 = {
+				add_historical_friend = SX0
+				add_country_modifier = {
+					name = sx0_sax_gepid_cooperation
+					duration = -1
+					desc = pol_as_long_as_allies_or_subjects
+				}
+			}
+		}
+		add_country_modifier = {
+			name = sx0_sax_gepid_cooperation
+			duration = -1
+			desc = pol_as_long_as_allies_or_subjects
+		}
+	}
+}

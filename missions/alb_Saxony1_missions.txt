@@ -835,9 +835,97 @@ saxon_5_slot = {
 		position = 5
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			SX1 = {
+				OR = {
+					AND = {
+						alliance_with = ROOT
+						has_opinion = {
+							who = ROOT
+							value = 180
+						}
+					}
+					AND = {
+						is_rival = ROOT
+						has_opinion_modifier = {
+							who = ROOT
+							modifier = scornfully_insulted
+						}
+					}
+					NOT = {
+						exists = yes
+					}
+				}
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			simple_dynamic_effect = {
+				first_custom_tooltip = sx0_alliance_gepids_tt
+				first_limit = "
+					SX1 = {
+						AND = {
+							alliance_with = ROOT
+							has_opinion = {
+								who = ROOT
+								value = 180
+							}
+						}
+					}
+				"
+				first_effect = "
+					country_event = {
+						id = saxo.7
+					}
+					SX1 = {
+						country_event = {
+							id = saxo.7
+						}
+					}
+					custom_tooltip = sx0_will_grant_land_to_gepids_tt
+				"
+				second_limit = "
+					SX1 = {
+						OR = {
+							AND = {
+								is_rival = ROOT
+								has_opinion_modifier = {
+									who = ROOT
+									modifier = scornfully_insulted
+								}
+							}
+							NOT = {
+								exists = yes
+							}
+						}
+					} 
+				"
+				second_effect = "
+					custom_tooltip = sx0_get_gepid_culture_cores_tt
+					hidden_effect = {
+						every_province = {
+							limit = {
+								culture = gepid
+							}
+							add_core = ROOT
+						}
+					}
+				"
+			}
+			custom_tooltip = empty_line_tt
+			moldavia_area = {
+				add_permanent_claim = ROOT
+			}
+			wallachia_area = {
+				add_permanent_claim = ROOT
+			}
+			transylvania_area = {
+				add_permanent_claim = ROOT
+			}
+			southern_transylvania_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	sx0_dacia_conquest = {
@@ -865,14 +953,40 @@ saxon_5_slot = {
 	sx0_construct_schrotvurge_university = {
 		icon = misison_uppsala_university
 		position = 9
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			province_id = 1940
+			NOT = {
+				AND = {
+					development = 30
+					has_production_building_trigger = yes
+					has_courthouse_building_trigger = yes
+				}
+			}
+			owned_by = ROOT
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			1940 = {
+				development = 30
+			}
+			1940 = {
+				has_production_building_trigger = yes
+			}
+			1940 = {
+				has_courthouse_building_trigger = yes
+			}
+			1940 = {
+				owned_by = ROOT
+			}
+		} 
 
 		effect = {  
 			remove_comet_sighted_events = yes
 			1940 = {
 				add_or_upgrade_university_building = yes
+			}
+			country_event = {
+				id = saxo.6
 			}
 		} 
 	}
