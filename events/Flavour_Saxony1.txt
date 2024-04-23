@@ -207,3 +207,100 @@ country_event = {
 		add_mil_power = 100
 	}
 }
+
+#convert balts
+province_event = {
+	id = saxo.5
+	title = saxo.5.t
+	desc = saxo.5.d
+	picture = CZECH_NOBLES_eventPicture
+	
+	# is_mtth_scaled_to_size = 1
+	hidden = yes
+	
+	trigger = {
+		culture_group = baltic
+		owner = { has_country_flag = alb_sax_germanize_baltics_flag }
+	}
+
+	mean_time_to_happen = {
+		months = 300
+		modifier = {
+			factor = 0.75
+			development = 15
+		}
+		modifier = {
+			factor = 0.75
+			development = 20
+		}
+		modifier = {
+			factor = 0.75
+			development = 25
+		}
+		modifier = {
+			factor = 0.75
+			development = 30
+		}
+	}
+	
+	option = {
+		name = saxo.5a
+		if = {
+			limit = {
+				owner = {
+					culture_group = unified_germanic
+				}
+				OR = {
+					culture = lithuanian
+					culture = latvian
+				}
+			}
+			change_culture = ug_litaisch
+		}
+		else_if = {
+			limit = { 
+				OR = {
+					culture = lithuanian
+					culture = latvian
+				}
+			}
+			change_culture = litaisch
+		}
+		else_if = {
+			limit = { 
+				owner = {
+					culture_group = unified_germanic
+				}
+				culture = valtean
+			}
+			change_culture = ug_balten
+		}
+		else = {
+			change_culture = balten_new
+		}
+	}
+}
+
+country_event = {
+	id = saxo.6
+	title = saxo.6.test
+	desc = saxo.6.desc
+	picture = ARTILLERY_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = saxo.6a
+		1940 = {
+			add_province_modifier = {
+				name = sx0_schrotvurge_university
+				duration = -1
+			}
+		}
+		define_advisor = {
+			type = natural_scientist
+			skill = 3
+			cost_multiplier = 0.5
+		}
+	}
+}
