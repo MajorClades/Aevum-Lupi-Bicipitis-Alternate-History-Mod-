@@ -727,67 +727,13 @@ Germania_5_slot = {
 		provinces_to_highlight = {  } 
 
 		trigger = {
-			army_size = 20
-			if = {
-				limit = { germany_choosen_faith = yes } 
-				if = {
-					limit = { has_country_flag = prut_faith_chosen_cath } 
-					custom_trigger_tooltip = {
-						tooltip = GERMANIA_FAITH_CTT1
-						all_country = {
-							NOT = {
-								tag = ROOT
-							}
-							religion = catholic
-							NOT = {
-								army_strength = {
-									who = ROOT
-									value = 1.2
-								}
-							}
-						}
-					}
-				}
-				if = {
-					limit = { has_country_flag = prut_faith_chosen_wycl } 
-					custom_trigger_tooltip = {
-						tooltip = GERMANIA_FAITH_CTT2
-						all_country = {
-							NOT = {
-								tag = ROOT
-							}
-							religion = wycliffian
-							NOT = {
-								army_strength = {
-									who = ROOT
-									value = 1.2
-								}
-							}
-						}
-					}
-				}
-				if = {
-					limit = { has_country_flag = prut_faith_chosen_goth } 
-					custom_trigger_tooltip = {
-						tooltip = GERMANIA_FAITH_CTT3
-						OR = {
-							all_country = {
-								NOT = {
-									tag = ROOT
-								}
-								religion = arian
-								NOT = {
-									army_strength = {
-										who = ROOT
-										value = 1.2
-									}
-								}
-							}
-						}
-					}
-				}
+			army_size = 50
+			army_tradition = 30
+			num_of_owned_provinces_with = {
+				value = 30
+				has_manpower_building_trigger = yes
+				religion = ROOT
 			}
-			else = { custom_trigger_tooltip = { tooltip = GERMANIA_FAITH_CTT }  } 
 		}
 
 		effect = {
