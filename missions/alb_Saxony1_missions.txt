@@ -522,11 +522,25 @@ saxon_3_slot = {
 		icon = versailles_palace
 		position = 6
 		required_missions = { sx0_new_capital } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			province_id = 280
+			NOT = {
+				has_province_modifier = sx0_kesars_palace
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			custom_trigger_tooltip = {
+				tooltip = sax_kesar_palace_tt
+				has_country_flag = sax_kesars_palace_flag
+			}
+			years_of_income = 0.5
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_years_of_income = -0.5
+			get_access_to_siescheng_monuments = yes
+		} 
 	}
 
 	sx0_saxon_empire = {
@@ -845,13 +859,10 @@ saxon_5_slot = {
 							value = 180
 						}
 					}
-					AND = {
-						is_rival = ROOT
-						has_opinion_modifier = {
-							who = ROOT
-							modifier = scornfully_insulted
-						}
-					}
+					has_opinion_modifier = {
+						who = ROOT
+						modifier = scornfully_insulted
+					}	
 					NOT = {
 						exists = yes
 					}
@@ -996,21 +1007,58 @@ saxon_5_slot = {
 
 		trigger = {  
 			carpathia_region = {
-				OR = {
-					country_or_non_sovereign_subject_holds = ROOT
-					AND = {
+				if = {
+					limit = {
 						SX1 = {
 							alliance_with = ROOT
 						}
+					}
+					OR = {
+						country_or_non_sovereign_subject_holds = ROOT
 						owned_by = SX1
 					}
+				}
+				else = {
+					country_or_non_sovereign_subject_holds = ROOT
 				}
 				type = all
 			}
 		} 
 
 		effect = {  
-			
+			simple_dynamic_effect = {
+				first_custom_tooltip = sx0_alliance_gepids_tt
+				first_limit = "
+					SX1 = {
+						alliance_with = ROOT
+					}
+				"
+				first_effect = "
+					vassalize = SX1
+					SX1 = {
+						add_liberty_desire = -50
+					}
+				"
+				second_limit = "
+					NOT = {
+						SX1 = {
+							alliance_with = ROOT
+						}
+					}
+				"
+				second_effect = "
+					add_country_modifier = {
+						name = sx0_lord_of_danubia
+						duration = -1
+					}
+					add_accepted_culture_or_dip_power = {
+						culture = dacian
+					}
+					add_accepted_culture_or_dip_power = {
+						culture = gepid
+					}
+				"
+			}
 		} 
 	}
 
