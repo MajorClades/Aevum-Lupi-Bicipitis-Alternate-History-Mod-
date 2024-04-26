@@ -153,11 +153,63 @@ saxon_1_slot = {
 		icon = mission_conquer_baltic_region
 		position = 10
 		required_missions = { sx0_valtean_succession } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				culture = valtean
+				if = {
+					limit = {
+						culture_group = unified_germanic
+					}
+					culture = ug_balten
+				}
+				else = {
+					culture = balten_new
+				}
+				owned_by = LT0
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			owns = 38
+			LT0 = {
+				exists = no
+			}
+			owns_all_provinces = {
+				OR = {
+					culture = valtean
+					if = {
+						limit = {
+							culture_group = unified_germanic
+						}
+						culture = ug_balten
+					}
+					else = {
+						culture = balten_new
+					}
+				}
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			override_country_name = SAXONY_VALTEA
+			add_accepted_culture_or_dip_power = {
+				culture = valtean
+			}
+			38 = {
+				add_unit_construction = {
+					type = heavy_ship
+					cost = 0
+					speed = 0.1
+				}
+				create_flagship = {
+					type = heavy_ship
+					name = "Sachsische Kongravin"
+				}
+			}
+		} 
 	}
 }
 saxon_2_slot = {
@@ -429,11 +481,91 @@ saxon_2_slot = {
 	sx0_valtean_succession = {
 		icon = the_spanish_succession
 		position = 9
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			is_capital_of = LT0
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			custom_trigger_tooltip = {
+				tooltip = alb_had_valtean_wedding_tt
+				has_country_flag = had_slasmeri_union_flag
+			}
+			OR = {
+				LT0 = {
+					is_subject_of = ROOT
+				}
+				AND = {
+					NOT = {
+						LT0 = {
+							is_subject_of = ROOT
+						}
+					}
+					mazovia_area = {
+						country_or_non_sovereign_subject_holds = ROOT
+						type = all
+					}
+				}
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			simple_dynamic_effect = {
+				first_custom_tooltip = sx0_valtean_union_tt
+				first_limit = "
+					LT0 = {
+						is_subject_of = ROOT
+					}
+				"
+				first_effect = "
+					add_dip_power = 100
+					custom_tooltip = sx0_get_all_balten_provinces_tt
+					hidden_effect = {
+						LT0 = {
+							every_owned_province = {
+								limit = {
+									OR = {
+										culture = balten_new
+										culture = ug_balten
+									}
+								}
+								cede_province = ROOT
+								add_core = ROOT
+							}
+						}
+					}
+				"
+				second_limit = "
+					AND = {
+						NOT = {
+							LT0 = {
+								is_subject_of = ROOT
+							}
+						}
+						mazovia_area = {
+							country_or_non_sovereign_subject_holds = ROOT
+							type = all
+						}
+					}
+				"
+				second_effect = "
+					add_accepted_culture_or_dip_power = {
+						culture = balten_new
+					}
+					custom_tooltip = sx0_core_on_balten_culture_tt
+					hidden_effect = {
+						every_province = {
+							limit = {
+								OR = {
+									culture = balten_new
+									culture = ug_balten
+								}
+							}
+							add_core = ROOT
+						}
+					}
+				"
+			}
+		} 
 	}
 }
 saxon_3_slot = {
@@ -511,11 +643,40 @@ saxon_3_slot = {
 			sx0_siescheng_city
 			sx0_latveria_conquest
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			province_id = 280
+			NOT = {
+				is_capital_of = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			280 = {
+				is_capital_of = ROOT
+			}
+			280 = {
+				development = 35
+			}
+			280 = {
+				has_tax_building_trigger = yes
+			}
+			280 = {
+				is_prosperous = yes
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			280 = {
+				add_or_upgrade_tax_building = yes
+				add_province_modifier = {
+					name = sx0_grand_capital
+					duration = 36500
+				}
+			}
+			pripyat_area = {
+				add_core = ROOT
+			}
+		} 
 	}
 
 	sx0_construct_kesars_palace = {
@@ -556,7 +717,10 @@ saxon_3_slot = {
 
 		trigger = {  } 
 
-		effect = {  } 
+		effect = {  
+			restore_country_name_effect = yes
+			override_country_name = SAXONIC_EMPIRE
+		} 
 	}
 }
 saxon_4_slot = {
