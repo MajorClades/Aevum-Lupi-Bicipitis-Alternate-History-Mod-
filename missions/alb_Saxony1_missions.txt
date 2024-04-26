@@ -751,7 +751,7 @@ saxon_5_slot = {
 			owned_by = ROOT
 			culture = lithuanian
 			unrest = 1
-			local_autonomy = 0.25
+			local_autonomy = 25
 		} 
 
 		trigger = {  
@@ -825,7 +825,7 @@ saxon_5_slot = {
 			custom_tooltip = empty_line_tt
 			add_country_modifier = {
 				name = sx0_germanization
-				duration = 182500
+				duration = 18250
 			}
 		} 
 	}
@@ -932,22 +932,86 @@ saxon_5_slot = {
 		icon = mission_conquer_romania
 		position = 6
 		required_missions = { sx0_gepid_help } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = moldavia_area
+				area = wallachia_area
+				area = transylvania_area
+				area = southern_transylvania_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			moldavia_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			wallachia_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			transylvania_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			southern_transylvania_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			country_event = {
+				id = saxo.8
+			}
+			carpathia_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	sx0_danubian_dominion = {
 		icon = danubian_power
 		position = 7
 		required_missions = { sx0_dacia_conquest } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			region = carpathia_region
+			NOT = {
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					if = {
+						limit = {
+							SX1 = {
+								alliance_with = ROOT
+							}
+						}
+						owned_by = SX1
+					}
+				}
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			carpathia_region = {
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					AND = {
+						SX1 = {
+							alliance_with = ROOT
+						}
+						owned_by = SX1
+					}
+				}
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			
+		} 
 	}
 
 	sx0_construct_schrotvurge_university = {

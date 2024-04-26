@@ -345,3 +345,36 @@ country_event = {
 		}
 	}
 }
+
+country_event = {
+	id = saxo.8
+	title = saxo.8.test
+	desc = saxo.8.desc
+	picture = DIPLOMACY_eventPicture
+
+	is_triggered_only = yes
+
+	option = {
+		name = saxo.8a
+		custom_tooltip = sax_cede_dacia_to_gepid_tt
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						area = moldavia_area
+						area = wallachia_area
+						area = transylvania_area
+						area = southern_transylvania_area
+					}
+				}
+				cede_province = SX1
+				if = {
+					limit = {
+						is_core = ROOT
+					}
+					add_core = SX1
+				}
+			}
+		}
+	}
+}
