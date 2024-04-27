@@ -34,6 +34,26 @@ Rasna_1_slot = {
 			corsica_sardinia_area = { add_permanent_claim = ROOT } 
 		}
 	}
+	rasna_old_claims = {
+		icon = republican_yearnings
+		position = 3
+		required_missions = { rasna_of_coast } 
+		provinces_to_highlight = { area = corsica_sardinia_area } 
+
+		trigger = {
+			corsica_sardinia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			country_event = {
+				id = gen_ita.8
+			}
+			sardinia_area = { add_permanent_claim = ROOT } 
+		}
+	}
 }
 Rasna_2_slot = {
 	slot = 2
@@ -98,6 +118,26 @@ Rasna_2_slot = {
 			central_italy_area = { add_permanent_claim = ROOT } 
 		}
 	}
+	rasna_ancona = {
+		icon = republican_yearnings
+		position = 4
+		required_missions = { rasna_in_land } 
+		provinces_to_highlight = { area = central_italy_area } 
+
+		trigger = {
+			central_italy_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			capital_scope = {
+				add_or_upgrade_university_building = yes
+			}
+			lazio_area = { add_permanent_claim = ROOT } 
+		}
+	}
 
 }
 Rasna_3_slot = {
@@ -159,6 +199,50 @@ Rasna_3_slot = {
 			}
 		}
 	}
+	rasna_boilogna = {
+		icon = republican_yearnings
+		position = 3
+		required_missions = { rasna_in_land } 
+		provinces_to_highlight = { area = emilia_romagna_area } 
+
+		trigger = {
+			emilia_romagna_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			change_innovativeness = 15
+			veneto_area = { add_permanent_claim = ROOT } 
+			po_valley_area = { add_permanent_claim = ROOT } 
+		}
+	}
+	rasna_rome = {
+		icon = republican_yearnings
+		position = 5
+		required_missions = { rasna_ancona rasna_boilogna} 
+		provinces_to_highlight = { area = lazio_area } 
+
+		trigger = {
+			lazio_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			118 = {
+				add_core = ROOT
+			}
+			italy_region = {
+				add_permanent_claim = ROOT
+			}
+			country_event = {
+				id = gen_ita.100
+			}
+		}
+	}
 }
 Rasna_4_slot = {
 	slot = 4
@@ -175,7 +259,51 @@ Rasna_4_slot = {
 			}
 		}
 	}
+	rasna_medici = {
+		icon = alpine_defenses
+		position = 2
+		required_missions = { rasna_papal_enemy }
+		trigger = {
+			estate_loyalty = {
+				estate = estate_burghers
+				loyalty = 65
+			}
+		}
 
+		effect = { 
+			define_advisor = {
+				type = statesman
+				name = "Cosimo Medici"
+				skill = 2
+				cost_multiplier = 0.33
+			}
+		} 
+	}
+	rasna_veneto = {
+		icon = republican_yearnings
+		position = 4
+		required_missions = { rasna_boilogna } 
+		provinces_to_highlight = { OR = {
+			area = po_valley_area
+			area = veneto_area
+		} } 
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 6
+				OR = {
+					area = po_valley_area
+					area = veneto_area
+				} 
+			}
+		}
+
+		effect = {
+			add_army_tradition = 10
+			add_navy_tradition = 10
+			add_treasury = 500 
+		}
+	}
 }
 Rasna_5_slot = {
 	slot = 5
@@ -232,6 +360,9 @@ Rasna_5_slot = {
 				4956 = {
 					add_core = ROOT
 				}
+				lazio_area = {
+					add_permanent_claim = ROOT
+				}
 			}
 			custom_tooltip = RASNA_TT_1c
 			tooltip = {
@@ -277,6 +408,266 @@ Rasna_5_slot = {
 							amount = 50
 						}
 					}
+				}
+			}
+		} 
+	}
+	rasna_de_forza = {
+		icon = alpine_defenses
+		position = 2
+		required_missions = { rasna_papal_enemy }
+		trigger = {
+			estate_loyalty = {
+				estate = estate_nobles
+				loyalty = 65
+			}
+		}
+
+		effect = { 
+			define_general = {
+				name = "Francesco De'Forza"
+				shock = 4
+				fire = 3
+				manuever = 4
+				siege = 2
+			}
+		} 
+	}
+	rasna_overture = {
+		icon = alpine_defenses
+		position = 3
+		required_missions = {rasna_tuscany rasna_medici rasna_de_forza}
+		provinces_to_highlight = {
+			OR = {
+				area = tuscany_area
+				area = rasna_area
+			}
+		}
+		trigger = {
+			development_in_provinces = {
+				value = 100
+				OR = {
+					area = tuscany_area
+					area = rasna_area
+				}
+			}
+		}
+
+		effect = { 
+			country_event = {
+				id = gen_ita.6
+			}
+		} 
+	}
+}
+Rasna_5a_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { tag = ROM } 
+		OR = {
+			tag = PD7
+			AND = {
+				has_country_flag = generic_italy_MT
+				was_tag = PD7
+			}
+		}
+		has_country_flag = medici_missions_flag
+	}
+
+	rasna_med_more_stuff = {
+		icon = alpine_defenses
+		position = 4
+		required_missions = {rasna_overture}
+		trigger = {
+			stability = 2
+			calc_true_if = {
+				amount = 2
+				all_elector = {
+					alliance_with = ROOT
+				}
+			}
+		}
+
+		effect = { 
+			every_country = {
+				limit = { is_part_of_hre = yes }
+				reverse_add_aggressive_expansion = {
+					who = ROOT
+					value = -10
+					apply_calc = no
+				}
+			}
+			add_country_modifier = {
+				name = rasna_medici_rizz
+				duration = 10950
+			}
+		} 
+	}
+	rasna_med_emperors = {
+		icon = alpine_defenses
+		position = 5
+		required_missions = {rasna_med_more_stuff}
+		trigger = {
+			stability = 3
+			is_emperor = yes
+		}
+
+		effect = { 
+			add_imperial_influence = 20
+			every_country = {
+				limit = { is_part_of_hre = yes }
+				reverse_add_aggressive_expansion = {
+					who = ROOT
+					value = -10
+					apply_calc = no
+				}
+			}
+		} 
+	}
+}
+Rasna_5b_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { tag = ROM } 
+		OR = {
+			tag = PD7
+			AND = {
+				has_country_flag = generic_italy_MT
+				was_tag = PD7
+			}
+		}
+		has_country_flag = forza_missions_flag
+	}
+
+	rasna_for_more_stuff = {
+		icon = alpine_defenses
+		position = 4
+		required_missions = {rasna_overture}
+		provinces_to_highlight = {
+			colonial_region = colonial_the_carribean
+		}
+		trigger = {
+			stability = 2
+			any_owned_province = {
+				colonial_region = colonial_the_carribean
+				is_city = yes
+			}
+		}
+
+		effect = { 
+			add_country_modifier = {
+				name = rasna_forza_expedition
+				duration = 10950
+			}
+			cuba_area = {
+				add_permanent_claim = ROOT
+			}
+			colonial_mexico = {
+				discover_country = ROOT
+			}
+			gulf_of_mexico_area = {
+				discover_country = ROOT	
+			}
+			caribbean_sea_area = {
+				discover_country = ROOT
+			}
+		} 
+	}
+	rasna_for_colonialism = {
+		icon = alpine_defenses
+		position = 5
+		required_missions = {rasna_for_more_stuff}
+		provinces_to_highlight = {
+			area = cuba_area
+		}
+		trigger = {
+			manpower = 1
+			cuba_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = { 
+			add_manpower = -1
+			2630 = {
+				if = {
+					limit = { owner = { technology_group = mesoamerican }}
+					owner = {
+						country_event = {
+							id = gen_ita.9
+							days = 23
+						}
+					}
+					custom_tooltip = RASNA_TT_2
+					tooltip = {
+						owner = {
+							PD7 = {
+								vassalize = PREV
+							}
+							add_manpower = 1
+							define_conquistador = {
+								name = "Federico De'Forza"
+								shock = 4
+								fire = 3
+								manuever = 2
+								siege = 3
+							}
+							add_country_modifier = {
+								name = rasna_oversea_help
+								duration = -1
+							}
+							colonial_mexico = {
+								add_core = PREV
+							}
+						}
+					}
+				}else = {
+					add_permanent_claim = ROOT
+				}
+			}
+		} 
+	}
+	rasna_for_yucatan = {
+		icon = alpine_defenses
+		position = 6
+		required_missions = {rasna_for_more_stuff}
+		provinces_to_highlight = {
+			colonial_region = colonial_mexico
+			country_or_non_sovereign_subject_holds = ROOT
+		}
+		trigger = {
+			any_subject_country = {
+				is_colonial_nation = yes
+				num_of_owned_provinces_with = {
+					value = 30
+					colonial_region = colonial_mexico
+				}
+			}
+		}
+
+		effect = { 
+			every_subject_country = {
+				limit = {
+					capital_scope = {
+						colonial_region = colonial_mexico
+					}
+				}
+				capital_scope = {
+					add_random_development = 8
+				}
+				change_primary_culture = iocotanobo
+				every_owned_province = {
+					limit = {
+						has_owner_accepted_culture = yes
+					}
+					change_culture = iocotanobo
 				}
 			}
 		} 
