@@ -1,0 +1,284 @@
+Rasna_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { tag = ROM } 
+		OR = {
+			tag = PD7
+			AND = {
+				has_country_flag = generic_italy_MT
+				was_tag = PD7
+			}
+		}
+	}
+	rasna_of_coast = {
+		icon = republican_yearnings
+		position = 2
+		required_missions = { rasna_coastline } 
+		provinces_to_highlight = { area = rasna_area } 
+
+		trigger = {
+			rasna_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			115 = {
+				add_center_of_trade_level = 2
+			}
+			liguria_area = { add_permanent_claim = ROOT } 
+			corsica_sardinia_area = { add_permanent_claim = ROOT } 
+		}
+	}
+}
+Rasna_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { tag = ROM } 
+		OR = {
+			tag = PD7
+			AND = {
+				has_country_flag = generic_italy_MT
+				was_tag = PD7
+			}
+		}
+	}
+
+	rasna_coastline = {
+		icon = alpine_defenses
+		position = 1
+
+		trigger = {
+			if = {
+				limit = { ai = yes } 
+				num_of_generals = 1
+				army_size_percentage = 0.6
+			}
+			else = { army_size_percentage = 1 } 
+		}
+
+		effect = { 
+			tuscany_area = {
+				add_permanent_claim = ROOT
+			}
+			rasna_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	rasna_in_land = {
+		icon = republican_yearnings
+		position = 2
+		required_missions = { rasna_coastline } 
+		provinces_to_highlight = { area = tuscany_area } 
+
+		trigger = {
+			tuscany_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			116 = {
+				add_great_project_tier = {
+					type = santa_maria_del_fiore
+					tier = 1
+				}
+			}
+			emilia_romagna_area = { add_permanent_claim = ROOT } 
+			central_italy_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+}
+Rasna_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { tag = ROM } 
+		OR = {
+			tag = PD7
+			AND = {
+				has_country_flag = generic_italy_MT
+				was_tag = PD7
+			}
+		}
+	}
+
+	rasna_tuscany = {
+		icon = republican_yearnings
+		position = 2
+		required_missions = { rasna_coastline }
+		provinces_to_highlight = {
+			OR = {
+				is_capital_of = AP8
+				is_capital_of = SIE
+			}
+		}
+		trigger = {
+			has_dip_advisor = yes
+			prestige = 15
+			if = {
+				limit = {
+					OR = {
+						AP8 = { exists = yes}
+						SIE = { exists = yes}
+					}
+				}
+				OR = {
+					alliance_with = AP8
+					alliance_with = SIE
+				}
+			}
+		}
+
+		effect = {
+			if = {
+				limit = {
+					OR = {
+						AP8 = { exists = yes}
+						SIE = { exists = yes}
+					}
+				}
+				country_event = {
+					id = gen_ita.3
+				}
+			}else = {
+				add_adm_power = 100
+			}
+		}
+	}
+}
+Rasna_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { tag = ROM } 
+		OR = {
+			tag = PD7
+			AND = {
+				has_country_flag = generic_italy_MT
+				was_tag = PD7
+			}
+		}
+	}
+
+}
+Rasna_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { tag = ROM } 
+		OR = {
+			tag = PD7
+			AND = {
+				has_country_flag = generic_italy_MT
+				was_tag = PD7
+			}
+		}
+	}
+
+	rasna_papal_enemy = {
+		icon = alpine_defenses
+		position = 1
+		provinces_to_highlight = {
+			is_capital_of = PAP
+		}
+		trigger = {
+			OR = {
+				PAP = { exists = no}
+				PAP = {
+					alliance_with = ROOT
+					has_opinion = {
+						who = ROOT
+						value = 180
+					}
+					papal_influence = 50
+				}
+				AND = {
+					PAP = {
+						is_rival = ROOT
+					}
+					is_rival = PAP
+				}
+			}
+		}
+
+		effect = { 
+			custom_tooltip = RASNA_TT_1a
+			tooltip = {
+				lazio_area = {
+					add_permanent_claim = ROOT
+				}
+			}
+			custom_tooltip = RASNA_TT_1b
+			tooltip = {
+				excommunicate = ROOT
+				4956 = {
+					add_core = ROOT
+				}
+			}
+			custom_tooltip = RASNA_TT_1c
+			tooltip = {
+				add_papal_influence = -50
+				4956 = {
+					add_core = ROOT
+				}
+				add_favors = {
+					who = PAP
+					amount = 50
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						PAP = { exists = no} 
+					}
+					lazio_area = {
+						add_permanent_claim = ROOT
+					}
+				}else = {
+					if = {
+						limit = {
+							PAP = {
+								is_rival = ROOT
+							}
+							is_rival = PAP
+						}
+						excommunicate = ROOT
+						4956 = {
+							add_core = ROOT
+						}
+						lazio_area = {
+							add_permanent_claim = ROOT
+						}
+					}else = {
+						add_papal_influence = -50
+						4956 = {
+							add_core = ROOT
+						}
+						add_favors = {
+							who = PAP
+							amount = 50
+						}
+					}
+				}
+			}
+		} 
+	}
+}
