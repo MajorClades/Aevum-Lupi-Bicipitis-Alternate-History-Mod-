@@ -177,15 +177,21 @@ Erulia_2_slot = {
 
 		trigger = {
 			if = {
-				limit = { IT2 = { NOT = { total_development = 25 }  }  } 
+				limit = { IT2 = { NOT = { total_development = 30 }  }  } 
 				is_at_war = no
-				IT2 = {
-					NOT = { total_development = 25 } 
+				emperor = {
 					is_at_war = no
-					alliance_with = ROOT
-					has_opinion = {
-						who = ROOT
-						value = 190
+					OR = {
+						alliance_with = ROOT
+						has_opinion = {
+							who = ROOT
+							value = 190
+						}
+					}
+				}
+				IT2 = {
+					NOT = {
+						total_development = 30
 					}
 				}
 			}
@@ -194,15 +200,20 @@ Erulia_2_slot = {
 
 		effect = {
 			if = {
-				limit = { IT2 = { is_subject_of = ROOT }  } 
-				inherit = IT2
+				limit = { 
+					IT2 = {
+						OR = {
+							ai = no
+							total_development = 30		
+						}
+					}
+				} 
+				add_core = 205
 			}
 			else = {
-				if = {
-					limit = { 205 = { country_or_non_sovereign_subject_holds = ROOT }  } 
-					add_adm_power = 75
+				IT2 = {
+					remove_government_reform = free_city
 				}
-				else = { vassalize = IT2 } 
 			}
 			savoy_dauphine_area = { add_permanent_claim = ROOT } 
 		}
@@ -340,16 +351,14 @@ Erulia_3_slot = {
 
 		trigger = {
 			owns = 118
-			OR = {
-				lazio_area = {
-					type = all
-					country_or_non_sovereign_subject_holds = ROOT
-				}
-				central_italy_area = {
-					type = all
-					country_or_non_sovereign_subject_holds = ROOT
-				}
+			lazio_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
 			}
+			central_italy_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}	
 		}
 
 		effect = {
