@@ -203,6 +203,7 @@ saxon_1_slot = {
 					type = heavy_ship
 					cost = 0
 					speed = 0.1
+					amount = 10
 				}
 				create_flagship = {
 					type = heavy_ship
@@ -668,13 +669,12 @@ saxon_3_slot = {
 		effect = {  
 			280 = {
 				add_or_upgrade_tax_building = yes
+				change_culture = ROOT
+				change_religion = ROOT
 				add_province_modifier = {
 					name = sx0_grand_capital
 					duration = 36500
 				}
-			}
-			pripyat_area = {
-				add_core = ROOT
 			}
 		} 
 	}
@@ -895,9 +895,60 @@ saxon_4_slot = {
 		position = 8
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			crown_land_share = 40
+			if = {
+				limit = {
+					has_estate = estate_church
+				}
+				OR = {
+					num_of_estate_privileges = {
+						estate = estate_church
+						value = 5
+					}
+					num_of_estate_agendas_completed = {
+						estate = estate_church
+						value = 2
+					}
+				}
+				estate_loyalty = {
+					estate = estate_church
+					loyalty = 60
+				}
+			}
+			if = {
+				limit = {
+					has_estate = estate_burghers
+				}
+				OR = {
+					num_of_estate_privileges = {
+						estate = estate_burghers
+						value = 5
+					}
+					num_of_estate_agendas_completed = {
+						estate = estate_burghers
+						value = 2
+					}
+				}
+				estate_loyalty = {
+					estate = estate_burghers
+					loyalty = 60
+				}
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			disable_stab_cost_advisor_privs = yes
+			custom_tooltip = empty_line_tt
+			change_estate_land_share = {
+				estate = estate_church
+				share = -5
+			}
+			change_estate_land_share = {
+				estate = estate_burghers
+				share = -5
+			}
+		} 
 	}
 
 	sx0_saxon_absolutism = {
@@ -910,9 +961,58 @@ saxon_4_slot = {
 		}
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			if = {
+				limit = {
+					is_absolutism_active = no
+				}
+				legitimacy_equivalent = 90
+				stability = 3
+				custom_trigger_tooltip = {
+					tooltip = absolutism_dynamic_reward_tt
+					is_absolutism_active = no
+				}
+			}
+			else = {
+				if = {
+					limit = {
+						is_revolutionary = yes
+						has_dlc = "Emperor"
+					}
+					revolutionary_zeal = 75
+				}
+				else = {
+					if = {
+						limit = { government = republic }
+						absolutism = 35
+					}
+					else = {
+						absolutism = 80
+					}
+				}
+				NOT = { average_home_autonomy = 15 }
+			}
+			if = {
+				limit = {
+					has_any_estates = yes
+				}
+				custom_trigger_tooltip = {
+					tooltip = rus_increase_absolute_rule_tt
+					check_variable = {
+						which = seize_land_counter
+						value = 10
+					}
+				}
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_absolutism = 20
+			add_country_modifier_for_age = {
+				name = sx0_absolute_empire
+				age = age_of_absolutism
+			}
+		} 
 	}
 }
 saxon_5_slot = {
