@@ -1,0 +1,480 @@
+Pruthia_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = PU0
+			AND = {
+				tag = GR0
+				has_country_flag = prussian_germany_flag
+			}
+		}
+	}
+
+	teutonic_frankfurt = {
+		icon = mission_conquer_50_development
+		position = 1
+		provinces_to_highlight = { province_id = 1876 } 
+
+		trigger = {
+			if = {
+				limit = { ai = yes } 
+				1876 = { grown_by_development = 2 } 
+			}
+			else = { 1876 = { base_manpower = 7 }  } 
+		}
+
+		effect = {
+			1876 = {
+				add_permanent_province_modifier = {
+					name = "frankly_fortified"
+					duration = -1
+				}
+			}
+		}
+	}
+
+	prut_willofgott = {
+		icon = mission_hands_praying
+		position = 2
+		required_missions = { teutonic_frankfurt } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			can_build = temple
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				has_tax_building_trigger = yes
+			}
+		}
+
+		effect = { add_years_of_income = 1.5 } 
+	}
+
+	prut_confederation_consideration = {
+		icon = mission_european_church
+		position = 3
+		required_missions = {
+			prut_willofgott
+			prut_willofpeople
+		}
+		provinces_to_highlight = {
+			owner = { is_subject_of_type = ger_vassal } 
+			is_capital = yes
+		}
+
+		trigger = {
+			calc_true_if = {
+				amount = 5
+				all_province = {
+					owner = { is_subject_of_type = ger_vassal } 
+					is_capital = yes
+					has_tax_building_trigger = yes
+				}
+			}
+		}
+
+		effect = {
+			add_stability_or_adm_power = yes
+			add_government_power = {
+				mechanic_type = german_conf_mechanic
+				power_type = confederation_power
+				value = 10
+			}
+		}
+	}
+
+	prut_grand_confederation = {
+		icon = mission_conquer_5_states
+		position = 4
+		required_missions = { prut_confederation_consideration } 
+		provinces_to_highlight = {
+			owner = { is_subject_of_type = ger_vassal } 
+			is_capital = yes
+		}
+
+		trigger = {
+			calc_true_if = {
+				amount = 5
+				all_subject_country = {
+					is_subject_of_type = ger_vassal
+					has_opinion = {
+						who = ROOT
+						value = 180
+					}
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "prut_good_leader"
+				duration = 10950
+			}
+		}
+	}
+}
+Pruthia_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = PU0
+			AND = {
+				tag = GR0
+				has_country_flag = prussian_germany_flag
+			}
+		}
+	}
+
+	prut_willofpeople = {
+		icon = mission_religious
+		position = 2
+		required_missions = { germanic_confederate_army } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			has_adm_advisor = yes
+			has_dip_advisor = yes
+		}
+
+		effect = {
+			add_country_modifier_for_age = {
+				name = "prut_no_religion_problems"
+				age = age_of_discovery
+			}
+		}
+	}
+}
+Pruthia_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = PU0
+			AND = {
+				tag = GR0
+				has_country_flag = prussian_germany_flag
+			}
+		}
+	}
+
+	germanic_confederate_army = {
+		icon = mission_teutonic_knights
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			if = {
+				limit = { ai = yes } 
+				num_of_generals = 1
+			}
+			else = { army_size_percentage = 1 } 
+		}
+
+		effect = {
+			add_government_power = {
+				mechanic_type = german_conf_mechanic
+				power_type = confederation_power
+				value = 5
+			}
+			add_country_modifier = {
+				name = "prut_safe_confederation"
+				duration = 10950
+			}
+		}
+	}
+
+	germanic_external_threat = {
+		icon = mission_unite_home_region
+		position = 3
+		required_missions = { germanic_confederate_army } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			if = {	limit = { NOT = { tag = GR0}}
+				has_government_power = {
+					mechanic_type = german_conf_mechanic
+					power_type = confederation_power
+					value = 30
+				}
+			}else = {
+				stability = 2
+				is_great_power = yes
+			}
+		}
+
+		effect = {
+			north_german_region = { add_permanent_claim = ROOT } 
+			south_german_region = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	germania_unified = {
+		icon = interfere_in_germany
+		position = 4
+		required_missions = { germanic_external_threat } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			total_development = 500
+			if = {	limit = { NOT = { tag = GR0}}
+				has_government_power = {
+					mechanic_type = german_conf_mechanic
+					power_type = confederation_power
+					value = 40
+				}
+			}else = {
+				stability = 3
+				is_great_power = yes
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "prut_germanic_power"
+				duration = 10950
+			}
+		}
+	}
+}
+Pruthia_3b_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = PU0 } 
+
+	germania_for_all = {
+		icon = encroach_on_the_germans
+		position = 5
+		required_missions = { germania_unified } 
+		provinces_to_highlight = {  } 
+
+		trigger = { tag = GR0 } 
+
+		effect = {
+			set_country_flag = prussian_germany_flag
+			hidden_effect = { complete_mission = german_capital_conf_4 } 
+			swap_non_generic_missions = yes
+			add_country_modifier = {
+				name = "prut_germanic_power_2"
+				duration = -1
+			}
+		}
+	}
+}
+Pruthia_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = PU0
+			AND = {
+				tag = GR0
+				has_country_flag = prussian_germany_flag
+			}
+		}
+	}
+
+	bring_into_the_fold = {
+		icon = mission_have_two_subjects
+		position = 2
+		required_missions = { undo_the_huns } 
+		provinces_to_highlight = { is_capital_of = GR3 } 
+
+		trigger = {
+			if = {
+				limit = {ai = yes}
+				GR3 = {
+					OR = {
+						exists = no
+						AND = {
+							alliance_with = ROOT
+							has_opinion = {
+								who = ROOT
+								value = 180
+							}
+						}
+					}
+				}
+			}else = {
+				GR3 = {
+					OR = {
+						exists = no
+						AND = {
+							alliance_with = ROOT
+							has_opinion = {
+								who = ROOT
+								value = 180
+							}
+						}
+						NOT = {
+							has_opinion = {
+								who = ROOT
+								value = 30
+							}
+						}
+					}
+				}
+			}
+		}
+
+		effect = {
+			GR3 = { country_event = { id = prut.2 }  } 
+			custom_tooltip = PRUT_TT_1
+			franconia_area = { add_permanent_claim = ROOT } 
+			upper_franconia_area = { add_permanent_claim = ROOT } 
+		}
+	}
+}
+Pruthia_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = PU0
+			AND = {
+				tag = GR0
+				has_country_flag = prussian_germany_flag
+			}
+		}
+	}
+
+	undo_the_huns = {
+		icon = mission_cossack_cavalry
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			if = {
+				limit = { ai = yes } 
+				num_of_generals = 2
+			}
+			else = {
+				num_of_generals = 1
+				OR = {
+					prestige = 20
+					has_mil_advisor = yes
+				}
+			}
+		}
+
+		effect = {
+			palatinate_area = { add_permanent_claim = ROOT } 
+			alsace_area = { add_permanent_claim = ROOT } 
+			lower_swabia_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	drag_in_sterm = {
+		icon = mission_cannons_firing
+		position = 2
+		required_missions = { undo_the_huns } 
+		provinces_to_highlight = { is_capital_of = GR4 } 
+
+		trigger = {
+			if = {
+				limit = {ai = yes}
+				GR4 = {
+					OR = {
+						exists = no
+						AND = {
+							alliance_with = ROOT
+							has_opinion = {
+								who = ROOT
+								value = 180
+							}
+						}
+					}
+				}
+			}else = {
+				GR4 = {
+					OR = {
+						exists = no
+						AND = {
+							alliance_with = ROOT
+							has_opinion = {
+								who = ROOT
+								value = 180
+							}
+						}
+						NOT = {
+							has_opinion = {
+								who = ROOT
+								value = 30
+							}
+						}
+					}
+				}
+			}
+		}
+
+		effect = {
+			GR4 = { country_event = { id = prut.2 }  } 
+			custom_tooltip = PRUT_TT_1
+			lower_bavaria_area = { add_permanent_claim = ROOT } 
+			upper_bavaria_area = { add_permanent_claim = ROOT } 
+			lower_swabia_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	bavarian_thrones = {
+		icon = mission_seize_the_dragon_throne
+		position = 3
+		required_missions = {
+			bring_into_the_fold
+			drag_in_sterm
+		}
+		provinces_to_highlight = { is_capital_of = GR1 } 
+
+		trigger = {
+			if = {
+				limit = {ai = yes}
+				GR1 = {
+					OR = {
+						exists = no
+						alliance_with = ROOT
+						has_opinion = {
+							who = ROOT
+							value = 130
+						}
+					}
+				}
+			}else = {
+				GR1 = {
+					OR = {
+						exists = no
+						alliance_with = ROOT
+						NOT = {
+							has_opinion = {
+								who = ROOT
+								value = 30
+							}
+						}
+					}
+				}
+			}
+		}
+
+		effect = {
+			GR1 = { country_event = { id = prut.3 }  } 
+			custom_tooltip = PRUT_TT_2
+			erzgebirge_area = { add_permanent_claim = ROOT } 
+			bohemia_area = { add_permanent_claim = ROOT } 
+			moravia_area = { add_permanent_claim = ROOT } 
+		}
+	}
+}

@@ -2093,12 +2093,28 @@ ramparts = {
 				duration = -1
 			}
 		}
+		if = {
+			limit = {
+				owner = {
+					has_country_flag = extra_powerful_ramparts_flag
+				}
+				NOT = { has_province_modifier = extra_powerful_ramparts_modifier }
+			}
+			add_province_modifier = {
+				name = extra_powerful_ramparts_modifier
+				duration = -1
+			}
+		}
 	}
 	
 	on_destroyed = {
 		if = {
 			limit = { has_province_modifier = per_reinforced_defenses }
 			remove_province_modifier = per_reinforced_defenses
+		}
+		if = {
+			limit = { has_province_modifier = extra_powerful_ramparts_modifier }
+			remove_province_modifier = extra_powerful_ramparts_modifier
 		}
 		remove_dev_from_building = {
 			building = manufactory 

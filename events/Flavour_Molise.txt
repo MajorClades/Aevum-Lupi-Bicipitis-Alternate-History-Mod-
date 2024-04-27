@@ -68,7 +68,7 @@ country_event = {
 			create_union = ROOT
 		}
 		ai_chance = {
-			factor = 1
+			factor = 50
 			modifier = {
 				factor = 2
 				has_opinion = {
@@ -91,11 +91,11 @@ country_event = {
 		MO0 = {
 			add_prestige = 10
 			central_italy_area = {
-				add_permanent_claim = ROOT
+				add_permanent_claim = MO0
 			}
 		}
 		ai_chance = {
-			factor = 1
+			factor = 50
 			modifier = {
 				factor = 2
 				NOT = {
@@ -139,7 +139,7 @@ country_event = {
 		ai_chance = {
 			factor = 50
 			modifier = {
-				factor = 1.5
+				factor = 1.25
 				NOT = {
 					has_opinion = {
 						who = MO0
@@ -148,14 +148,14 @@ country_event = {
 				}
 			}
 			modifier = {
-				factor = 1.5
-				total_development = 25
+				factor = 1.25
+				total_development = 50
 			}
 			modifier = {
 				factor = 1.25
 				military_strength = {
 					who = MO0
-					value = 0.25
+					value = 0.33
 				}
 				
 			}
@@ -163,20 +163,36 @@ country_event = {
 	}
 	option = {
 		name = molis.6c
-		change_tag = SIC
+		if = {
+			limit = {
+				SIC = {
+					exists = no
+				}
+			}
+			change_tag = SIC
+			event_target:molise_for_sicily_mission = {
+				create_union = SIC
+			}
+		}
+		else = {
+			SIC = {
+				inherit = ROOT
+			}
+		}
+		clear_global_event_target = molise_for_sicily_mission
 		ai_chance = {
 			factor = 50
 			modifier = {
 				factor = 1.5
 				has_opinion = {
 					who = MO0
-					value = 190
+					value = 180
 				}
 			}
 			modifier = {
 				factor = 1.5
 				NOT = {
-					total_development = 25
+					total_development = 50
 				}
 			}
 			modifier = {

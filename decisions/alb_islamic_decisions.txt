@@ -2,86 +2,65 @@ country_decisions = {
 
 	expel_rashidis_dec = {
 		potential = {
-			religion = islam
-			NOT = {
-				tag = event_target:islam_caliph_target
+			any_owned_province = {
+				OR = {
+					has_province_modifier = rashidi_community_in_province
+					has_province_modifier = jafar_al_rashidi_activity
+				}
 			}
 		}
 		allow = {
+			mil_power = 200
 			custom_trigger_tooltip = {
-				tooltip = alb_we_are_not_caliph_tt
+				tooltip = alb_can_only_expel_every_ten_years_tt
 				NOT = {
-					tag = event_target:islam_caliph_target
+					has_country_modifier = rashidi_expel_10_year_cooldown
 				}
 			}
-			custom_trigger_tooltip = {
-				tooltip = alb_caliph_authority_below_50_tt
-				REB = {
-					NOT = {
-						check_variable = {
-							which = caliph_authority_var
-							value = 30
-						}
-					}
-				}
-			}
-			prestige = event_target:islam_caliph_target
-			OR = {
-				AND = {
-					owns = 385
-					owns = 384
-					owns = 379
-				}
-				AND = {
-					owns = 385
-					total_development = event_target:islam_caliph_target
-				}
-			}
-			legitimacy = 100
 		}
 		effect = {
-			add_prestige = 50
-		custom_tooltip = alb_we_caliph_wooo_tt
-		custom_tooltip = empty_line_tt
-		custom_tooltip = alb_set_caliph_auth_to_60_tt
-		hidden_effect = {
-			clear_global_event_target = islam_caliph_target
-			save_global_event_target_as = islam_caliph_target
-			REB = {
-				set_variable = {
-					which = caliph_authority_var
-					value = 60
+			if = {
+				limit = {
+					any_owned_province = {
+						has_province_modifier = jafar_al_rashidi_activity
+					}
+				}
+				custom_tooltip = jafar_al_rashid_flees_nation_tt
+			}
+			custom_tooltip = alb_all_provinces_lose_rashidi_modifier_tt
+			tooltip = {
+				add_province_modifier = {
+					name = expelled_rashidis
+					duration = 3650
 				}
 			}
-		}
+			hidden_effect = {
+				every_province = {
+					limit = {
+						OR = {
+							has_province_modifier = jafar_al_rashidi_activity
+							has_province_modifier = rashidi_community_in_province
+						}
+					}
+					remove_province_modifier = jafar_al_rashidi_activity
+					remove_province_modifier = rashidi_community_in_province
+					add_province_modifier = {
+						name = expelled_rashidis
+						duration = 3650
+					}
+					add_devastation = 30
+				}
+			}
 		}
 		ai_will_do = {
-			factor = 5
+			factor = 0
 			modifier = {
-				factor = 0
-				ruler_has_personality = sinner_personality	
-			}
-			modifier = {
-				factor = 5
-				OR = {
+				factor = 10
+				NOT = {
+					OR = {
 						ruler_has_personality = zealot_personality
 						has_idea_group = religious_ideas
-				}
-			}
-			modifier = {
-				factor = 0.2
-				has_opinion = {
-					who = event_target:islam_caliph_target
-					value = 100
-				}
-			}
-			modifier = {
-				factor = 0.2
-				NOT = {
-					total_development = 200
-				}
-				event_target:islam_caliph_target = {
-					total_development = PREV
+					}
 				}
 			}
 		}
@@ -136,34 +115,84 @@ country_decisions = {
 
 	alb_ai_claim_caliphate = {
 		potential = {
-			ai = yes
 			religion = islam
+			NOT = {
+				tag = event_target:islam_caliph_target
+			}
 		}
 		allow = {
-			dip_power = 100
-			adm_power = 100
-			mil_power = 100
-			has_won_war_against = {
-				who = RS0
+			custom_trigger_tooltip = {
+				tooltip = alb_we_are_not_caliph_tt
+				NOT = {
+					tag = event_target:islam_caliph_target
+				}
 			}
-			NOT = {
-				calc_true_if = {
-					amount = 50
-					all_province = {
-						religion = rashidi
+			custom_trigger_tooltip = {
+				tooltip = alb_caliph_authority_below_50_tt
+				REB = {
+					NOT = {
+						check_variable = {
+							which = caliph_authority_var
+							value = 30
+						}
 					}
 				}
 			}
+			prestige = event_target:islam_caliph_target
+			OR = {
+				AND = {
+					owns = 385
+					owns = 384
+					owns = 379
+				}
+				AND = {
+					owns = 385
+					total_development = event_target:islam_caliph_target
+				}
+			}
+			legitimacy = 100
 		}
 		effect = {
-			add_dip_power = -100
-			add_mil_power = -100
-			add_adm_power = -100
-			custom_tooltip = alb_caliph_authority_will_tick_up_now_tt
-			set_global_flag = caliph_authority_restored
+			add_prestige = 50
+		custom_tooltip = alb_we_caliph_wooo_tt
+		custom_tooltip = empty_line_tt
+		custom_tooltip = alb_set_caliph_auth_to_60_tt
+		hidden_effect = {
+			clear_global_event_target = islam_caliph_target
+			save_global_event_target_as = islam_caliph_target
+			REB = {
+				set_variable = {
+					which = caliph_authority_var
+					value = 60
+				}
+			}
+		}
 		}
 		ai_will_do = {
-			factor = 100
+			factor = 1
+			modifier = {
+				factor = 5
+				OR = {
+						ruler_has_personality = zealot_personality
+						has_idea_group = religious_ideas
+				}
+			}
+			modifier = {
+				factor = 0.2
+				has_opinion = {
+					who = event_target:islam_caliph_target
+					value = 100
+				}
+			}
+			modifier = {
+				factor = 0.2
+				NOT = {
+					total_development = 200
+				}
+				event_target:islam_caliph_target = {
+					total_development = PREV
+				}
+			}
 		}
 	}
 }

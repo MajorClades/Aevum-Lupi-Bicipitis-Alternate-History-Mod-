@@ -1,0 +1,226 @@
+country_decisions = {
+	ai_arian_clergy_mad_button = {
+		major = yes
+		potential = {
+			religion = arian
+			ai = yes
+			NOT = {
+				has_country_flag = ai_used_arian_decs
+			}
+		}
+		allow = {
+			have_5_arian_fervor = yes
+		}
+		effect = {
+			set_country_flag = ai_used_arian_decs
+			subtract_variable = {
+				which = arian_fervor_var
+				value = 5
+			}
+			add_estate_loyalty = {
+				estate = estate_church
+				loyalty = -10
+			}
+			add_years_of_income = 0.5
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				NOT = {
+					estate_loyalty = {
+						estate = estate_church
+						loyalty = 35
+					}
+				}
+			}
+			modifier = {
+				factor = 0.5
+				NOT = {
+					estate_loyalty = {
+						estate = estate_church
+						loyalty = 40
+					}
+				}
+			}
+			modifier = {
+				factor = 2
+				is_in_deficit = yes
+			}
+		}
+		ai_importance = 100
+	}
+	ai_arian_marketplace_button = {
+		major = yes
+		potential = {
+			religion = arian
+			ai = yes
+			NOT = {
+				has_country_flag = ai_used_arian_decs
+			}
+		}
+		allow = {
+			have_5_arian_fervor = yes
+		}
+		effect = {
+			set_country_flag = ai_used_arian_decs
+			subtract_variable = {
+				which = arian_fervor_var
+				value = 5
+			}
+			home_trade_node_effect_scope = {
+				add_trade_node_income = 12
+			}
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 2
+				is_in_deficit = yes
+			}
+		}
+		ai_importance = 50
+	}
+	ai_arian_diplomacy_button = {
+		major = yes
+		potential = {
+			religion = arian
+			ai = yes
+			NOT = {
+				has_country_flag = ai_used_arian_decs
+			}
+		}
+		allow = {
+			have_10_arian_fervor = yes
+		}
+		effect = {
+			set_country_flag = ai_used_arian_decs
+			every_known_country = {
+				add_aggressive_expansion = {
+					who = ROOT
+					value = -5
+					apply_calc = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 2
+				had_recent_war = 1
+			}
+			modifier = {
+				factor = 0
+				had_recent_war = 2
+			}
+		}
+		ai_importance = 50
+	}
+	ai_arian_estates_button= {
+		major = yes
+		potential = {
+			religion = arian
+			ai = yes
+			NOT = {
+				has_country_flag = ai_used_arian_decs
+			}
+		}
+		allow = {
+			have_10_arian_fervor = yes
+		}
+		effect = {
+			set_country_flag = ai_used_arian_decs
+			subtract_variable = {
+				which = arian_fervor_var
+				value = 10
+			}
+			add_estate_loyalty = {
+				estate = estate_church
+				loyalty = 10
+			}
+			add_estate_loyalty = {
+				estate = estate_nobles
+				loyalty = 10
+			}
+			add_estate_loyalty = {
+				estate = estate_burghers
+				loyalty = 10
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 50
+	}
+	ai_arian_guerrilla_button= {
+		major = yes
+		potential = {
+			religion = arian
+			ai = yes
+		}
+		allow = {
+			is_at_war = yes
+		}
+		effect = {
+			if = {
+				limit = {
+					has_country_modifier = arian_guerrilla
+				}
+				remove_country_modifier = arian_guerrilla
+			}else = {
+				add_country_modifier = {
+					name = arian_guerrilla
+					duration = -1
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				war_score = 0
+			}
+			modifier = {
+				factor = 2
+				NOT = {
+					war_score = 0
+				}
+			}
+			modifier = {
+				factor = 0
+				is_at_war = no
+			}
+			modifier = {
+				factor = 20
+				any_war_enemy_country = {
+					army_strength = {
+						who = ROOT
+						value = 2
+					}
+				}
+			}
+		}
+		ai_importance = 500
+	}
+	ai_timer_arian_decs= {
+		major = yes
+		potential = {
+			religion = arian
+			ai = yes
+			has_country_flag = ai_used_arian_decs
+		}
+		allow = {
+			had_country_flag = {
+				flag = ai_used_arian_decs
+				days = 365
+			}
+		}
+		effect = {
+			clr_country_flag = ai_used_arian_decs
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 50
+	}
+}

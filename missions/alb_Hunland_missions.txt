@@ -115,18 +115,16 @@ hunland_2_slot = {
 		icon = mission_hands_praying
 		position = 3
 		required_missions = { 1_hun_conquest } 
-		provinces_to_highlight = { area = palatinate_area } 
-
 		trigger = {
-			palatinate_area = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
-			}
 			has_adm_advisor_2 = yes
 			stability = 2
 		}
 
-		effect = { palatinate_area = { change_religion = ROOT }  } 
+		effect = { 
+			random_owned_province = {limit = {NOT = { religion = ROOT}}	change_religion = ROOT}  
+			random_owned_province = {limit = {NOT = { religion = ROOT}}	change_religion = ROOT}  
+			random_owned_province = {limit = {NOT = { religion = ROOT}}	change_religion = ROOT}  
+		} 
 	}
 
 	2_hun_frankia = {
@@ -398,72 +396,43 @@ hunland_4_slot = {
 		position = 3
 		required_missions = { 5_hun_conquest } 
 		provinces_to_highlight = {
-			OR = {
-				province_id = 72
-				province_id = 75
-				province_id = 4712
-			}
+			culture = hunnic_fra
 		}
 
 		trigger = {
-			owns = 72
-			owns = 75
-			owns = 4712
-			has_dip_advisor_2 = yes
-			dip_power = 100
+			owns_all_provinces = {
+				culture = hunnic_fra
+			}
+			owns_all_provinces = {
+				culture = hunnic_ger
+			}
 		}
 
 		effect = {
 			add_dip_power = -100
 			if = {
 				limit = { primary_culture = hunnic_ger } 
-				72 = { change_culture = hunnic_ger } 
-				75 = { change_culture = hunnic_ger } 
-				4712 = { change_culture = hunnic_ger } 
+				every_owned_province = {
+					limit = {culture = hunnic_fra }
+					change_culture = hunnic_ger
+				}
 			}
 			if = {
 				limit = { primary_culture = hunnic_fra } 
-				72 = {
-					add_culture_construction = {
-						cost = 0.00
-						speed = 0.15
-					}
-				}
-				75 = {
-					add_culture_construction = {
-						cost = 0.00
-						speed = 0.15
-					}
-				}
-				4712 = {
-					add_culture_construction = {
-						cost = 0.00
-						speed = 0.15
-					}
+				every_owned_province = {
+					limit = {culture = hunnic_ger }
+					change_culture = hunnic_fra
 				}
 			}
 			if = {
 				limit = { primary_culture = hunnic } 
-				72 = {
-					add_devastation = 10
-					add_culture_construction = {
-						cost = 0.00
-						speed = 0.75
-					}
+				every_owned_province = {
+					limit = {culture = hunnic_ger }
+					change_culture = hunnic
 				}
-				75 = {
-					add_devastation = 10
-					add_culture_construction = {
-						cost = 0.00
-						speed = 0.75
-					}
-				}
-				4712 = {
-					add_devastation = 10
-					add_culture_construction = {
-						cost = 0.00
-						speed = 0.75
-					}
+				every_owned_province = {
+					limit = {culture = hunnic_fra }
+					change_culture = hunnic
 				}
 			}
 		}

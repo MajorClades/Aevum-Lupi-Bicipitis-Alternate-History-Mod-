@@ -1,0 +1,166 @@
+ambrosian_league = {
+	icon = "ambrosian_republic"
+	allow_normal_conversion = yes
+	potential = {
+		is_or_was_tag = {tag = MLO}
+	}
+	trigger = {
+	}
+	valid_for_nation_designer = no
+	nation_designer_cost = 100
+	custom_attributes = {
+		enables_plutocratic_idea_group = yes
+	}
+	modifiers = {
+		annexation_relations_impact = -0.5
+		reduced_liberty_desire = 5
+		adm_advisor_cost = -0.05
+	}
+}
+erulian_kingdom = {
+	icon = "bohemian_monarchy"
+	allow_normal_conversion = yes
+	potential = {
+		is_or_was_tag = {tag = TU0}
+	}
+	trigger = {
+	}
+	valid_for_nation_designer = no
+	nation_designer_cost = 100
+	modifiers = {
+		mercenary_cost = -0.1
+		mercenary_manpower = 0.1
+		infantry_power = 0.05
+		nobles_loyalty_modifier = -0.05
+	}
+}
+
+kingdom_of_one_sicily = {
+	icon = "portuguese_king"
+	allow_normal_conversion = yes
+	potential = {
+		is_or_was_tag = {tag = PD8}
+	}
+	trigger = {
+	}
+	valid_for_nation_designer = no
+	nation_designer_cost = 100
+	modifiers = {
+		allowed_marine_fraction = 0.2
+		vassal_income = 0.25
+		nobles_influence_modifier = 0.05
+	}
+}
+kingdom_of_two_sicily = {
+	icon = "united_cantons_reform"
+	allow_normal_conversion = yes
+	potential = {
+		is_or_was_tag = {tag = TTS}
+	}
+	trigger = {
+	}
+	valid_for_nation_designer = no
+	nation_designer_cost = 100
+	modifiers = {
+		allowed_marine_fraction = 0.2
+		development_cost_in_primary_culture = -0.15
+		trade_efficiency = 0.1
+		nobles_influence_modifier = 0.05
+	}
+}
+three_pointed_empire = {
+	icon = "consulate_of_the_sea"
+	allow_normal_conversion = yes
+	potential = {
+		is_or_was_tag = {tag = TTS}
+	}
+	trigger = {
+		development_in_provinces = {
+			value = 200
+			OR = {
+				area = sicily_area
+				area = western_sicily_area
+			}
+		}
+	}
+	valid_for_nation_designer = no
+	nation_designer_cost = 100
+	effect = {
+		sicily_area = {
+			add_province_modifier = {
+				name = sicilian_coastline_protected
+				duration = -1
+			}
+		}
+		western_sicily_area = {
+			add_province_modifier = {
+				name = sicilian_coastline_protected
+				duration = -1
+			}
+		}
+	}
+	removed_effect = {
+		sicily_area = {
+			remove_province_modifier = sicilian_coastline_protected
+		}
+		western_sicily_area = {
+			remove_province_modifier = sicilian_coastline_protected
+		}
+	}
+	modifiers = {
+		allowed_marine_fraction = 0.33
+		development_cost_in_primary_culture = -0.15
+		trade_efficiency = 0.15
+		all_estate_loyalty_equilibrium = 0.05
+	}
+}
+
+rasnan_republic = {
+	icon = "religious_permanent_revolution_reform"
+	allow_normal_conversion = yes
+	potential = {
+		is_or_was_tag = {tag = PD7}
+	}
+	trigger = {}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 200
+	modifiers = {
+		interest = -1
+		ship_trade_power_modifier = 0.2
+		trade_steering = 0.25
+	}
+	duration = 15
+	custom_attributes = {
+		republican_tradition_from_diets = yes
+		can_use_trade_post = yes
+		enables_plutocratic_idea_group = yes
+		enables_aristocratic_idea_group = no
+	}
+}
+
+italian_scroogemcduck_reference = {
+	icon = "war_economy"
+	allow_normal_conversion = yes
+	potential = {
+		has_unlocked_government_reform = { government_reform = italian_scroogemcduck_reference }
+	}
+	trigger = {}
+	nation_designer_cost = 50
+	effect = {
+		capital_scope = {
+			add_province_triggered_modifier = paperoni_deposit
+		}
+	}
+	removed_effect = {
+		every_owned_province = {
+			limit = {
+				has_province_modifier = paperoni_deposit
+			}
+			remove_province_triggered_modifier = paperoni_deposit
+		}
+	}
+	modifiers = {
+		interest = -1
+		burghers_influence_modifier = -0.05
+	}
+}

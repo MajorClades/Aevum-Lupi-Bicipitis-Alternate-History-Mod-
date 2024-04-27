@@ -7,11 +7,8 @@ alb_armerican_colonization = {
 	is_valid = {
 		OR = {
 			has_reform = armerica_explo_reform
-			AND = {
-				tag = SO0
-				NOT = {
-					exists = SO2
-				}
+			has_unlocked_estate_privilege = {
+				estate_privilege = alb_armerican_colonization
 			}
 		}
 	}
@@ -38,17 +35,19 @@ alb_armerican_colonization = {
 	}
 	conditional_modifier = {
 		trigger = {
-			tag = SO0
+			NOT = {
+				tag = SO2
+			}
 		}
 		modifier = {
-			global_ship_cost = 0.15
+			global_sailors_modifier = -0.15
 		}
 	}
 	penalties = {
-		allowed_marine_fraction = -0.15
 	}
 	benefits = {
 		colonists = 1
+		global_colonial_growth = 15
 	}
 
 	ai_will_do = {

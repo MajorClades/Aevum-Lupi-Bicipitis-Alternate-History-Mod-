@@ -1,0 +1,220 @@
+namespace = gen_ita
+
+country_event = {	#Erulia vassalization event
+	id = gen_ita.1
+	title = gen_ita.1.test
+	desc = gen_ita.1.desc
+	picture = GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = gen_ita.1a
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 1.1
+				has_opinion = {
+					who = TU0
+					value = 110
+				}
+			}
+			modifier = {
+				factor = 1.5
+				has_opinion = {
+					who = TU0
+					value = 150
+				}
+			}
+			modifier = {
+				factor = 2
+				has_opinion = {
+					who = TU0
+					value = 180
+				}
+			}
+			modifier = {
+				factor = 2
+				alliance_with = TU0
+			}
+		}
+		TU0 = {
+			vassalize = ROOT
+		}
+	}
+	option = {
+		name = gen_ita.1b
+		ai_chance = {
+			factor = 70
+			modifier = {
+				factor = 0.5
+				alliance_with = TU0
+			}
+		}
+		add_stability = 1
+	}
+}
+country_event = {	#Funny meme not alot will understand
+	id = gen_ita.2
+	title = gen_ita.2.test
+	desc = gen_ita.2.desc
+	picture = GOOD_WITH_MONARCH_eventPicture
+	fire_only_once = yes
+	trigger = {
+		culture_group = latin
+		owns = 2979
+		is_year = 1554
+	}
+	mean_time_to_happen = {
+		months = 60
+	}
+	option = {
+		name = gen_ita.2a
+		ai_chance = {
+			factor = 50
+		}
+		2979 = {
+			change_trade_goods = gold
+		}
+	}
+	option = {
+		name = gen_ita.2b
+		ai_chance = {
+			factor = 20
+		}
+		if = {
+			limit = {
+				has_consort = no
+			}
+			define_consort = {
+				name = "Rosa"
+				dynasty = "De'Paperoni"
+				adm = 5
+				dip = 6
+				mil = 1
+			}
+		}
+		unlock_government_reform = { government_reform = italian_scroogemcduck_reference } 
+		custom_tooltip = unlock_government_reform_tooltip
+		tooltip = { add_government_reform = italian_scroogemcduck_reference } 
+	}
+	option = {
+		name = gen_ita.2c
+		ai_chance = {
+			factor = 30
+		}
+		add_treasury = 500
+	}
+}
+country_event = {	#Rasna choose who to vassalize
+	id = gen_ita.3
+	title = gen_ita.3.test
+	desc = gen_ita.3.desc
+	picture = GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = gen_ita.3a
+		trigger = {
+			alliance_with = SIE
+		}
+		ai_chance = {
+			factor = 70
+		}
+		SIE = {
+			country_event = {
+				id = gen_ita.4
+			}
+		}
+	}
+	option = {
+		name = gen_ita.3b
+		trigger = {
+			alliance_with = AP8
+		}
+		ai_chance = {
+			factor = 30
+		}
+		AP8 = {
+			country_event = {
+				id = gen_ita.4
+			}
+		}
+	}
+}
+country_event = {	#Rasna vassalization event
+	id = gen_ita.4
+	title = gen_ita.4.test
+	desc = gen_ita.4.desc
+	picture = GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = gen_ita.4a
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 1.1
+				has_opinion = {
+					who = PD7
+					value = 110
+				}
+			}
+			modifier = {
+				factor = 1.5
+				has_opinion = {
+					who = PD7
+					value = 150
+				}
+			}
+			modifier = {
+				factor = 2
+				has_opinion = {
+					who = PD7
+					value = 180
+				}
+			}
+			modifier = {
+				factor = 2
+				alliance_with = PD7
+			}
+		}
+		PD7 = {
+			vassalize = ROOT
+		}
+	}
+	option = {
+		name = gen_ita.4b
+		ai_chance = {
+			factor = 70
+			modifier = {
+				factor = 0.5
+				alliance_with = PD7
+			}
+		}
+		add_stability = 1
+	}
+}
+country_event = {	#Holy Italian Empire Broke
+	id = gen_ita.100
+	title = gen_ita.100.test
+	desc = gen_ita.100.desc
+	picture = GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = gen_ita.100a
+		ai_chance = {
+			factor = 30
+		}
+		dismantle_hre = yes
+		set_government_rank = 3
+	}
+	option = {
+		name = gen_ita.100b
+		ai_chance = {
+			factor = 70
+		}
+		set_emperor = yes
+		add_imperial_influence = 100
+	}
+}

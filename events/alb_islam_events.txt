@@ -90,13 +90,12 @@ country_event = {
 			NOT = {
 				has_province_modifier = rashidi_community_in_province
 			}
-			region = arabia_region
-			culture_group = turko_semitic
+			superregion = near_east_superregion
 			religion = islam
 		}
 		NOT = {
 			calc_true_if = {
-				amount = 31
+				amount = 41
 				all_province = {
 					has_province_modifier = rashidi_community_in_province
 				}
@@ -104,7 +103,7 @@ country_event = {
 		}
 	}
 	mean_time_to_happen = {
-		months = 100
+		months = 60
 		modifier = {
 			factor = 0.9
 			has_country_modifier = accepting_to_rashidis_modifier
@@ -112,10 +111,7 @@ country_event = {
 		modifier = {
 			factor = 0.75
 			any_neighbor_province = {
-				
-					has_province_modifier = rashidi_community_in_province
-					
-				
+				has_province_modifier = rashidi_community_in_province
 			}
 		}
 		modifier = {
@@ -223,7 +219,7 @@ country_event = {
 			NOT = {
 				check_variable = {
 					which = caliph_authority_var
-					value = 0.1
+					value = 10
 				}
 			}
 		}
@@ -233,7 +229,10 @@ country_event = {
 				has_province_modifier = jafar_al_rashidi_activity
 			}
 		}
-		has_global_flag = jafar_al_rashid_preaching
+		had_global_flag = {
+			flag  = jafar_al_rashid_preaching
+			days = 9125
+		}
 	}
 	mean_time_to_happen = {
 		months = 6
@@ -276,6 +275,25 @@ country_event = {
 						dip = 3
 						mil = 3
 						age = 44
+					}
+				}
+				else = {
+					define_ruler = {
+						name = "Ja'far al-Rashidi"
+						dynasty = "Jafarid"
+						adm = 3
+						dip = 3
+						mil = 6
+						age = 45
+					}
+					define_heir = {
+						name = "Muhammad al-Jeddahi"
+						dynasty = "Usfurid"
+						claim = 95
+						adm = 5
+						dip = 3
+						mil = 3
+						age = 33
 					}
 				}
 				add_manpower = 50
@@ -382,8 +400,10 @@ country_event = {
 			casus_belli = cb_annex
 			who = RS0
 		}
-		change_tag = RS0
-
+		ai_chance = {
+			factor = 0
+		}
+		switch_tag = RS0
 	}
 }
 

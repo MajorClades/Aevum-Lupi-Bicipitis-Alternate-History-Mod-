@@ -26,20 +26,27 @@ sox_empire_mechanic = {
 	interactions = {
 		SOX_FIRST = {
 			gui = russian_mechanics_interaction_gui
-			icon = GFX_russian_ability_ADM
+			icon = GFX_SOX_FIRST
 			cost_type = sox_adm_power
-			cost = 75
+			cost = 100
 			trigger = {			}
 			effect = {
-				random_owned_province = {
+				custom_tooltip = alb_sox_random_owned_province_gets_tt
+				tooltip = {
 					add_base_tax = 1
-					custom_tooltip = SOX_ADM_TT
+				}
+				custom_tooltip = empty_line_tt
+				custom_tooltip = SOX_ADM_TT
+				tooltip = {
 					add_province_modifier = {
 						name = sox_adm_ability_mod
 						duration = 3650
 					}
 				}
 				hidden_effect = {
+					random_owned_province = {
+						add_base_tax = 1
+					}
 					every_province = {
 						limit = {
 							owner = {
@@ -69,32 +76,54 @@ sox_empire_mechanic = {
 		}
 		SOX_SECOND = {
 			gui = russian_mechanics_interaction_gui
-			icon = GFX_russian_ability_DIP
+			icon = GFX_SOX_SECOND
 			cost_type = sox_dip_power
-			cost = 75
+			cost = 100
 			trigger = { 		}
-			effect = { 
-				add_corruption = -2
-				random_owned_province = {
+			effect = {
+				add_corruption = -1
+				custom_tooltip = empty_line_tt
+				custom_tooltip = alb_sox_random_owned_province_gets_tt
+				tooltip = {
 					add_base_production = 1
 					add_province_modifier = {
 						name = sox_dip_sponsored_church
 						duration = 3650
 					}
 				}
-				random_province = {
-					limit = {
-						owner = {
-							NOT = {
-								tag = ROOT
-							}
-							religion = impotian
-						}
-						religion = impotian					
-					}
+				custom_tooltip = alb_sox_random_non_owned_province_tt
+				tooltip = {
+					add_base_production = 1
 					add_province_modifier = {
 						name = sox_dip_sponsored_church
 						duration = 3650
+					}
+				}
+				hidden_effect = {
+					random_owned_province = {
+						limit = {
+							religion = impotian
+						}
+						add_base_production = 1
+						add_province_modifier = {
+							name = sox_dip_sponsored_church
+							duration = 3650
+						}
+					}
+					random_province = {
+						limit = {
+							owner = {
+								NOT = {
+									tag = ROOT
+								}
+								religion = impotian
+							}
+							religion = impotian					
+						}
+						add_province_modifier = {
+							name = sox_dip_sponsored_church
+							duration = 3650
+						}
 					}
 				}
 			}
@@ -113,26 +142,42 @@ sox_empire_mechanic = {
 		}
 		SOX_THIRD = {
 			gui = russian_mechanics_interaction_gui
-			icon = GFX_russian_ability_MIL
+			icon = GFX_SOX_THIRD
 			cost_type = sox_mil_power
-			cost = 75
+			cost = 100
 			trigger = {			}
 			effect = { 
-				random_owned_province = {
+				custom_tooltip = alb_sox_random_owned_province_gets_tt
+				tooltip = {
 					add_base_manpower = 1
 				}
-				every_country = {
-					limit = {
-						religion = impotian
-						NOT = {
-							any_war_enemy_country = {
-								tag = ROOT
-							}
-						}
-					}
+				custom_tooltip = alb_sox_every_impotian_country_tt
+				tooltip = {
 					add_country_modifier = {
 						name = sox_impotian_crusade
 						duration = 3650
+					}
+				}
+				hidden_effect = {
+					random_owned_province = {
+						limit = {
+							religion = impotian
+						}
+						add_base_manpower = 1
+					}
+					every_country = {
+						limit = {
+							religion = impotian
+							NOT = {
+								any_war_enemy_country = {
+									tag = ROOT
+								}
+							}
+						}
+						add_country_modifier = {
+							name = sox_impotian_crusade
+							duration = 3650
+						}
 					}
 				}
 			}
