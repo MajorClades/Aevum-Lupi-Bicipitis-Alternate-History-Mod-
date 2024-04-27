@@ -65,19 +65,35 @@ friendship_action = {
 
 	is_allowed = {
 		is_at_war = no
+		treasury = 100
 		FROM = {
 			primary_culture = ellan
 			is_at_war = no
 			has_opinion = {
 				who = ROOT
-				value = 180
+				value = 190
 			}
+			alliance_with = ROOT
 		}
     }
 	on_accept = {
 		ROOT = {
-			add_treasury = -50
-			vassalize = FROM
+			add_treasury = -100
+			if = {
+				limit = {
+					from = {
+						ai = yes
+					}
+				}
+				vassalize = FROM
+			}
+			else = {
+				FROM = {
+					every_owned_province = {
+						add_core = ROOT
+					}
+				}
+			}
 		}
     }
 	ai_will_do = {
