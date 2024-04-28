@@ -396,6 +396,27 @@ country_event = {	#Rasna vassalization event
 }
 
 country_event = {	#Holy Italian Empire Broke
+	id = gen_ita.10
+	title = gen_ita.10.test
+	desc = gen_ita.10.desc
+	picture = CONQUEST_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = gen_ita.10a
+		ai_chance = {
+			factor = 30
+		}
+		add_country_modifier = {
+			name = rasna_etruscan_heir
+			duration = -1
+		}
+		custom_tooltip = alb_ita_etruscia_rename_tt
+		set_country_flag = alb_unlock_etruscia_rename_flag
+	}
+}
+
+country_event = {	#Holy Italian Empire Broke
 	id = gen_ita.100
 	title = gen_ita.100.test
 	desc = gen_ita.100.desc
@@ -407,18 +428,19 @@ country_event = {	#Holy Italian Empire Broke
 		ai_chance = {
 			factor = 30
 		}
-		dismantle_hre = yes
-		set_government_rank = 3
+		add_country_modifier = {
+			name = alb_dismantle_empire_dream
+			duration = -1
+		}
 	}
 	option = {
 		name = gen_ita.100b
-		trigger = {
-			government = monarchy
-		}
 		ai_chance = {
 			factor = 70
 		}
-		set_emperor = yes
-		add_imperial_influence = 100
+		add_country_modifier = {
+			name = alb_working_towards_emperor
+			duration = -1
+		}
 	}
 }

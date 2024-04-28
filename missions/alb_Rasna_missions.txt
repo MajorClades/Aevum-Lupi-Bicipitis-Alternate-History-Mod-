@@ -38,7 +38,12 @@ Rasna_1_slot = {
 		icon = republican_yearnings
 		position = 3
 		required_missions = { rasna_of_coast } 
-		provinces_to_highlight = { area = corsica_sardinia_area } 
+		provinces_to_highlight = { 
+			area = corsica_sardinia_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			} 
+		} 
 
 		trigger = {
 			corsica_sardinia_area = {
@@ -98,7 +103,12 @@ Rasna_2_slot = {
 		icon = republican_yearnings
 		position = 2
 		required_missions = { rasna_coastline } 
-		provinces_to_highlight = { area = tuscany_area } 
+		provinces_to_highlight = { 
+			area = tuscany_area 
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
 		trigger = {
 			tuscany_area = {
@@ -122,7 +132,12 @@ Rasna_2_slot = {
 		icon = republican_yearnings
 		position = 4
 		required_missions = { rasna_in_land } 
-		provinces_to_highlight = { area = central_italy_area } 
+		provinces_to_highlight = { 
+			area = central_italy_area 
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
 		trigger = {
 			central_italy_area = {
@@ -169,16 +184,20 @@ Rasna_3_slot = {
 		trigger = {
 			has_dip_advisor = yes
 			prestige = 15
-			if = {
-				limit = {
-					OR = {
-						AP8 = { exists = yes}
-						SIE = { exists = yes}
+			OR = {
+				alliance_with = AP8
+				alliance_with = SIE
+				AND = {
+					NOT = {
+						AP8 = {
+							exists = yes
+						}
 					}
-				}
-				OR = {
-					alliance_with = AP8
-					alliance_with = SIE
+					NOT = {
+						SIE = {
+							exists = yes
+						}
+					}
 				}
 			}
 		}
@@ -239,7 +258,7 @@ Rasna_3_slot = {
 				add_permanent_claim = ROOT
 			}
 			country_event = {
-				id = gen_ita.100
+				id = gen_ita.10
 			}
 		}
 	}
