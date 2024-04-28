@@ -35,35 +35,34 @@ saxon_1_slot = {
 			}
 		} 
 
-		effect = {  
-			complex_dynamic_effect = {
+		effect = {
+			simple_dynamic_effect = {
 				first_custom_tooltip = sx0_if_allied_rija_tt
 				first_limit = "
-					SX3 = {
-						exists = yes
-						owns = 43
-					}
 					alliance_with = SX3
 				"
 				first_effect = "
 					vassalize = SX3
 					SX3 = {
 						add_liberty_desire = -25
-					}"
-				second_custom_tooltip = sx0_if_no_rija_tt
+					}
+				"
 				second_limit = "
-					owns_or_non_sovereign_subject_of = 43"
+					43 = {
+						OR = {
+							owned_by = ROOT
+							owned_by_subject_of = ROOT
+						}
+					}
+				"
 				second_effect = "
 					43 = {
-						add_great_project_tier = {
-							type = ruined_city
-							tier = 1
-						}
 						add_province_modifier = {
 							name = sx0_restore_araatan
 							duration = 9125
 						}
-					}"
+					}
+				"
 			}
 			hinter_pommern_area = {
 				add_permanent_claim = ROOT
@@ -1037,7 +1036,7 @@ saxon_5_slot = {
 				any_owned_province = {
 					culture = lithuanian
 					unrest = 1
-					local_autonomy = 0.25
+					local_autonomy = 25
 				}
 			}
 		} 
