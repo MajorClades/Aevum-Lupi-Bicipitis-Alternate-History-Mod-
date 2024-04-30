@@ -121,9 +121,41 @@ saxon_1_slot = {
 		position = 5
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			if = {
+				limit = {
+					has_estate = estate_knight_lodges
+				}
+				OR = {
+					num_of_estate_agendas_completed = {
+						estate = estate_knight_lodges
+						value = 3
+					}
+					num_of_estate_privileges = {
+						estate = estate_knight_lodges
+						value = 5
+					}
+				}
+				estate_loyalty = {
+					estate = estate_knight_lodges
+					loyalty = 60
+				}
+			}
+			else = {
+				cavalry_fraction = 0.5
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_estate_loyalty = {
+				estate = estate_knight_lodges
+				loyalty = 10
+			}
+			create_general = {
+				tradition = 100
+			}
+			add_yearly_manpower = 2
+		} 
 	}
 
 	sx0_knightly_army = {
@@ -132,9 +164,26 @@ saxon_1_slot = {
 		required_missions = { sx0_empower_knights } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			cavalry_fraction = 0.5
+			army_size_percentage = 1
+			num_of_generals = 2
+			OR = {
+				has_mil_advisor_3 = yes
+				mil = 6
+			}
+			monthly_mil = 12
+		} 
 
-		effect = {  } 
+		effect = {  
+			unlock_government_reform = {
+				government_reform = sx0_knightly_army_reform
+				tooltip = yes
+			}
+			custom_tooltip = empty_line_tt
+			add_mil_power = 100
+			change_government_reform_progress = 50
+		} 
 	}
 
 	sx0_empire_on_horseback = {
@@ -143,9 +192,40 @@ saxon_1_slot = {
 		required_missions = { sx0_knightly_army } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			has_reform = sx0_knightly_army_reform
+			has_leader_with = { total_pips = 13 } 
+			num_of_cavalry = 100
+			estate_loyalty = {
+				estate = estate_knight_lodges
+				loyalty = 80
+			}
+			has_global_modifier_value = {
+				which = cavalry_power
+				value = 0.5
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			if = {
+				limit = {
+					government = monarchy
+				}
+				hidden_effect = {
+					unlock_government_reform = {
+						government_reform = sx0_saxony_empire
+					}
+				}
+				add_government_reform = sx0_saxony_empire
+			}
+			else = {
+				unlock_government_reform = {
+					government_reform = sx0_saxony_empire
+					tooltip = yes
+				}
+			}
+			add_splendor = 1000
+		} 
 	}
 
 	sx0_valtean_union = {
@@ -714,11 +794,15 @@ saxon_3_slot = {
 		}
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			check_variable = { which = num_converted_religion value = 100 }
+			religious_unity = 1 #gonna add more 
+		} 
 
 		effect = {  
 			restore_country_name_effect = yes
 			override_country_name = SAXONIC_EMPIRE
+
 		} 
 	}
 }
@@ -876,6 +960,7 @@ saxon_4_slot = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
+			check_variable = { which = num_converted_religion value = 40 }
 		} 
 
 		effect = {
@@ -1000,6 +1085,21 @@ saxon_4_slot = {
 					check_variable = {
 						which = seize_land_counter
 						value = 10
+					}
+				}
+				custom_trigger_tooltip = {
+					tooltip = sax_3_estates_max_loyalty_tt
+					estate_loyalty = {
+						estate = estate_church
+						loyalty = 60
+					}
+					estate_loyalty = {
+						estate = estate_burghers
+						loyalty = 60
+					}
+					estate_loyalty = {
+						estate = estate_knight_lodges
+						loyalty = 60
 					}
 				}
 			}

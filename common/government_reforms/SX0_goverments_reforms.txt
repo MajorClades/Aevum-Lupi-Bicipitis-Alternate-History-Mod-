@@ -1,11 +1,11 @@
-saxony_order = {
+sx0_saxony_order = {
 	lock_level_when_selected = yes
 	allow_normal_conversion = no
 	icon = "soldiers_2"
 	potential = {
 		OR = {
-			has_reform = saxony_order
-			have_had_reform = saxony_order
+			has_reform = sx0_saxony_order
+			have_had_reform = sx0_saxony_order
 			tag = SX0
 		}
 	}
@@ -14,6 +14,56 @@ saxony_order = {
 		tolerance_heathen = -2
 		missionaries = 1
 		cavalry_power = 0.1
+	}
+	#government_abilities = { #They get an estate now
+	#	saxony_knight_lodge
+	#}
+	custom_attributes = {
+		locked_government_type = yes
+		alb_enable_knight_lodges_estate = yes
+		disables_estate_nobles = yes
+	}
+}
+
+sx0_knightly_army_reform = {
+	icon = "commander_king_reform"
+	potential = {
+		has_unlocked_government_reform = {
+			government_reform = sx0_knightly_army_reform
+		}
+		has_estate = estate_knight_lodges
+	}
+	valid_for_nation_designer = no
+	modifiers = {
+		knight_lodges_influence_modifier = 0.1
+		knight_lodges_loyalty_modifier = 0.05
+		cavalry_power = 0.1
+		cav_to_inf_ratio = 0.25
+	}
+	#government_abilities = { #They get an estate now
+	#	saxony_knight_lodge
+	#}
+	custom_attributes = {
+		recruiting_general_gives_army_tradition = yes
+	}
+}
+
+sx0_saxony_empire = {
+	lock_level_when_selected = yes
+	allow_normal_conversion = no
+	icon = "soldiers_2"
+	potential = {
+		has_unlocked_government_reform = {
+			government_reform = sx0_saxony_empire
+		}
+	}
+	valid_for_nation_designer = no
+	modifiers = {
+		tolerance_heathen = -4
+		missionaries = 1
+		cavalry_power = 0.15
+		cav_to_inf_ratio = 0.25
+		general_cost = -0.25
 	}
 	#government_abilities = { #They get an estate now
 	#	saxony_knight_lodge
