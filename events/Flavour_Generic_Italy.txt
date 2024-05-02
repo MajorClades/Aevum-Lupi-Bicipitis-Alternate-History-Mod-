@@ -511,6 +511,7 @@ country_event = {	#peasant being revolting
 			estate = estate_nobles
 			loyalty = 5
 		}
+		add_manpower = -0.2
 		random_owned_province = {
 			limit = {
 				culture = sicilian
@@ -531,8 +532,9 @@ country_event = {	#peasant being revolt
 	}
 	trigger = {
 		has_country_flag = sicilian_fascio_flag
+		is_year = 1560
 		OR = {
-			is_year = 1640
+			is_year = 1590
 			check_variable = {
 				which = sicilian_fascio_rebel_numbers
 				value = 10
@@ -546,48 +548,32 @@ country_event = {	#peasant being revolt
 	option = {
 		name = gen_ita.13a
 		trigger = {
+			NOT = {
+				is_year = 1590
+			}
 			check_variable = {
 				which = sicilian_fascio_rebel_numbers
 				value = 10
 			}
 		}
-		random_owned_province = {
+		random_owned_province = {limit = {culture = sicilian} spawn_rebels = { type = fasci_siciliani_rebels size = 2}}
+		random_owned_province = {limit = {culture = sicilian} spawn_rebels = { type = fasci_siciliani_rebels size = 3}}
+		random_owned_province = {limit = {culture = sicilian} spawn_rebels = { type = fasci_siciliani_rebels size = 2}}
+		if = {
 			limit = {
-				culture = sicilian
+				check_variable = {
+					which = sicilian_fascio_rebel_numbers
+					value = 15
+				}
 			}
-			spawn_rebels = {
-				type = fasci_siciliani_rebels
-				size = 3
-			}
-		}
-		random_owned_province = {
-			limit = {
-				culture = sicilian
-			}
-			spawn_rebels = {
-				type = fasci_siciliani_rebels
-				size = 2
-			}
-		}
-		random_owned_province = {
-			limit = {
-				culture = sicilian
-			}
-			spawn_rebels = {
-				type = fasci_siciliani_rebels
-				size = 2
-			}
-		}
+			random_owned_province = {limit = {culture = sicilian} spawn_rebels = { type = fasci_siciliani_rebels size = 2}}
+			random_owned_province = {limit = {culture = sicilian} spawn_rebels = { type = fasci_siciliani_rebels size = 2}}
+		}	
 	}
 	option = {
 		name = gen_ita.13b
 		trigger = {
-			NOT = {
-				check_variable = {
-					which = sicilian_fascio_rebel_numbers
-					value = 10
-				}
-			}
+			is_year = 1590
 		}
 		add_stability_or_adm_power = yes
 		every_owned_province = {
