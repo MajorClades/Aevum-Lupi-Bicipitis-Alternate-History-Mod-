@@ -399,6 +399,206 @@ country_event = {	#Rasna vassalization event
 	}
 }
 
+country_event = {	#sicania army_buffs
+	id = gen_ita.10
+	title = gen_ita.10.test
+	desc = gen_ita.10.desc
+	picture = MARCHING_PEASANTS_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = gen_ita.10a
+		ai_chance = {
+			factor = 50
+		}
+		add_country_modifier = {
+			name = sica_marines
+			duration = -1
+		}
+	}
+	option = {
+		name = gen_ita.10b
+		ai_chance = {
+			factor = 50
+		}
+		add_country_modifier = {
+			name = sica_gambit
+			duration = -1
+		}
+	}
+}
+
+country_event = {	#Etna doing Vulcano things
+	id = gen_ita.11
+	title = gen_ita.11.test
+	desc = gen_ita.11.desc
+	picture = REVOLT_eventPicture
+	fire_only_once = yes
+	mean_time_to_happen = {
+		months = 12
+	}
+	trigger = {
+		culture = sicilian
+		is_year = 1536
+		owns = 124
+	}
+
+	option = {
+		name = gen_ita.11a
+		ai_chance = {
+			factor = 50
+		}
+		add_manpower = -0.01
+		124 = {
+			add_devastation = 50
+			add_local_autonomy = 50
+		}
+	}
+	option = {
+		name = gen_ita.11b
+		ai_chance = {
+			factor = 50
+		}
+		add_estate_loyalty = {
+			estate = estate_nobles
+			loyalty = 5
+		}
+		add_manpower = -0.01
+		124 = {
+			add_devastation = 50
+		}
+		set_country_flag = sicilian_fascio_flag 
+		hidden_effect = {
+			set_variable = {
+				which = sicilian_fascio_rebel_numbers
+				value = 1
+			}
+		}
+	}
+}
+
+country_event = {	#peasant being revolting
+	id = gen_ita.12
+	title = gen_ita.12.test
+	desc = gen_ita.12.desc
+	picture = REVOLT_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = gen_ita.12a
+		ai_chance = {
+			factor = 50
+		}
+		add_estate_loyalty = {
+			estate = estate_nobles
+			loyalty = -5
+		}
+		change_estate_land_share = {
+			estate = estate_nobles
+			share = -2
+		}
+		change_variable = {
+			which = sicilian_fascio_rebel_numbers
+			value = 1
+		}
+	}
+	option = {
+		name = gen_ita.12b
+		ai_chance = {
+			factor = 50
+		}
+		add_estate_loyalty = {
+			estate = estate_nobles
+			loyalty = 5
+		}
+		random_owned_province = {
+			limit = {
+				culture = sicilian
+			}
+			add_local_autonomy = 15
+		}
+	}
+}
+
+country_event = {	#peasant being revolt
+	id = gen_ita.13
+	title = gen_ita.13.test
+	desc = gen_ita.13.desc
+	picture = REVOLT_eventPicture
+	fire_only_once = yes
+	mean_time_to_happen = {
+		months = 12
+	}
+	trigger = {
+		has_country_flag = sicilian_fascio_flag
+		OR = {
+			is_year = 1640
+			check_variable = {
+				which = sicilian_fascio_rebel_numbers
+				value = 10
+			}
+		}
+	}
+	immediate = {
+		clr_country_flag = sicilian_fascio_flag
+	}
+
+	option = {
+		name = gen_ita.13a
+		trigger = {
+			check_variable = {
+				which = sicilian_fascio_rebel_numbers
+				value = 10
+			}
+		}
+		random_owned_province = {
+			limit = {
+				culture = sicilian
+			}
+			spawn_rebels = {
+				type = fasci_siciliani_rebels
+				size = 3
+			}
+		}
+		random_owned_province = {
+			limit = {
+				culture = sicilian
+			}
+			spawn_rebels = {
+				type = fasci_siciliani_rebels
+				size = 2
+			}
+		}
+		random_owned_province = {
+			limit = {
+				culture = sicilian
+			}
+			spawn_rebels = {
+				type = fasci_siciliani_rebels
+				size = 2
+			}
+		}
+	}
+	option = {
+		name = gen_ita.13b
+		trigger = {
+			NOT = {
+				check_variable = {
+					which = sicilian_fascio_rebel_numbers
+					value = 10
+				}
+			}
+		}
+		add_stability_or_adm_power = yes
+		every_owned_province = {
+			limit = {
+				culture = sicilian
+			}
+			add_local_autonomy = -15
+		}
+	}
+}
+
 country_event = {	#Holy Italian Empire Broke
 	id = gen_ita.100
 	title = gen_ita.100.test
