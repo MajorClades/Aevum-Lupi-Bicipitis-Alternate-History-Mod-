@@ -795,14 +795,25 @@ saxon_3_slot = {
 		provinces_to_highlight = {  } 
 
 		trigger = {  
-			check_variable = { which = num_converted_religion value = 100 }
-			religious_unity = 1 #gonna add more 
+			check_variable = { 
+				which = num_converted_religion 
+				value = 100 
+			}
+			religious_unity = 1 #gonna add more
+			total_development = 1000
+			NOT = {
+				great_power_rank = 2
+			}
 		} 
 
 		effect = {  
 			restore_country_name_effect = yes
 			override_country_name = SAXONIC_EMPIRE
-
+			if = {
+				limit = { in_golden_age = yes } 
+				extend_golden_age = 50
+			}
+			else = { reset_golden_age = yes } 
 		} 
 	}
 }

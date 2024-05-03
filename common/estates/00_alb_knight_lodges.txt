@@ -7,7 +7,7 @@ estate_knight_lodges = {
 		NOT = { has_disabled_estate = { estate = estate_knight_lodges } }
 		NOT = { has_estate = estate_nobles }
 		OR = {
-			has_government_attribute = enables_alb_estate_knight_lodges
+			has_government_attribute = alb_enable_knight_lodges_estate
 			has_enabled_estate = { estate = estate_knight_lodges }
 			has_unlocked_estate = { estate = estate_knight_lodges }
 			AND = {
@@ -24,7 +24,6 @@ estate_knight_lodges = {
 				is_colonial_nation = no
 			}
 		}
-		has_government_attribute = alb_enable_knight_lodges_estate
 	}
 
 	# These scale with loyalty & power
@@ -75,6 +74,14 @@ estate_knight_lodges = {
 			has_any_estate_disaster_active = yes
 		}
 		influence = -40
+	}
+	loyalty_modifier = {
+		desc = EST_VAL_OTHER_ESTATE_IN_POWER_LOY
+		trigger = {
+			has_any_estate_disaster_active = yes
+			has_not_own_estate_disaster_active = { estate = estate_knight_lodges }
+		}
+		loyalty = -20
 	}
 	
 	color = { 20 150 50 }
