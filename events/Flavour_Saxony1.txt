@@ -403,3 +403,79 @@ country_event = {
 		}
 	}
 }
+
+country_event = {
+	id = saxo.100
+	title = saxo.100.test
+	desc = saxo.100.desc
+	picture = GHULAMS_ESTATE_DEMANDS_eventPicture
+	
+	major = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		set_country_flag = estate_knight_lodges_triggered
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = {
+						estate_territory = {
+							estate = estate_knight_lodges
+							territory = 1
+						}
+					}
+				}
+				change_estate_land_share = {
+					estate = estate_knight_lodges
+					share = 5
+				}
+			}
+		}
+	}
+
+	after = {
+		change_estate_land_share = {
+			estate = estate_knight_lodges
+			share = -5
+		}
+	}
+	
+	option = {
+		name = saxo.100a
+		if = {
+			limit = { has_government_mechanic = ottoman_decadence_mechanic }
+			add_government_power = { 
+				mechanic_type = ottoman_decadence_mechanic
+				power_type = ottoman_decadence
+				value = 5
+			}
+		}
+		create_independent_estate = {
+			estate = estate_knight_lodges
+			play_as = no
+			government = republic
+			government_reform = sx0_knight_lodge_state
+		}
+	}
+	
+	option = {
+		name = saxo.100b
+		trigger = { 
+			ai = no 
+		}
+		if = {
+			limit = { has_government_mechanic = ottoman_decadence_mechanic }
+			add_government_power = { 
+				mechanic_type = ottoman_decadence_mechanic
+				power_type = ottoman_decadence
+				value = 5
+			}
+		}
+		create_independent_estate = {
+			estate = estate_knight_lodges
+			play_as = yes
+			government = republic
+			government_reform = sx0_knight_lodge_state
+		}
+	}
+}

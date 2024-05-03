@@ -3,6 +3,10 @@ country_decisions = {
 	sax_move_capital_dec = {
 		potential = {
 			tag = SX0
+			OR = {
+				owns = 280
+				subject_owns = 280
+			}
 			NOT = {
 				has_country_flag = sax_moved_capital_flag
 			}
@@ -19,9 +23,10 @@ country_decisions = {
 						value = 200
 					}
 					NOT = {
-						num_of_owned_provinces_with = {
-							value = 5
-						}
+						num_of_cities = 6
+					}
+					hidden_trigger = {
+						ai = yes
 					}
 				}
 			}
@@ -33,6 +38,18 @@ country_decisions = {
 			}
 		}
 		effect = {
+			if = {
+				limit = {
+					subject_owns = 280
+				}
+				random_subject_country = {
+					limit = {
+						owns = 280
+					}
+					save_event_target_as = siescheng_owner
+				}
+				inherit = event_target:siescheng_owner
+			}
 			set_country_flag = sax_moved_capital_flag
 			280 = {
 				move_capital_effect = yes
