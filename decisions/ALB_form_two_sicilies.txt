@@ -22,7 +22,10 @@ alb_form_two_sicilies = {
 		}
 	}
 	allow = {
-		adm_tech = 10
+		OR = {
+			adm_tech = 10
+			adm_power = 400
+		}
 		is_free_or_tributary_trigger = yes
 		is_at_war = no
 		western_sicily_area = {
@@ -37,6 +40,12 @@ alb_form_two_sicilies = {
 		}
 	}
 	effect = {
+		if = {
+			limit = {
+				NOT = { adm_tech = 10 }
+			}
+			add_adm_power = -400
+		}
 		if = {
 			limit = {
 				NOT = { government_rank = 2 }
@@ -58,7 +67,6 @@ alb_form_two_sicilies = {
 		}
 		custom_tooltip = empty_line_tt
 		add_government_reform = kingdom_of_two_sicily
-		swap_non_generic_missions = yes
 		set_country_flag = formed_two_sicilies_flag
 	}
 	ai_will_do = {
