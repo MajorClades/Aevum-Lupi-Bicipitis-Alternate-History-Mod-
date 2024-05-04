@@ -72,16 +72,9 @@ three_pointed_empire = {
 	icon = "consulate_of_the_sea"
 	allow_normal_conversion = yes
 	potential = {
-		is_or_was_tag = {tag = TTS}
+		has_country_flag = sicilian_monarchy_victory_flag
 	}
 	trigger = {
-		development_in_provinces = {
-			value = 200
-			OR = {
-				area = sicily_area
-				area = western_sicily_area
-			}
-		}
 	}
 	valid_for_nation_designer = no
 	nation_designer_cost = 100
@@ -184,4 +177,46 @@ italian_scroogemcduck_reference = {
 		interest = -1
 		burghers_influence_modifier = -0.05
 	}
+}
+
+# deforza_colonial_empire_reform = { I'm sure the DeForza would never betray the republic to form his own Empire far away from anyone that could stop him
+# 	icon = "war_economy"
+# 	allow_normal_conversion = yes
+# 	potential = {
+# 		has_country_flag = forza_colonial_empire
+# 	}
+# 	trigger = {}
+# 	nation_designer_cost = 50
+# 	maintain_dynasty = yes
+# 	modifiers = {
+# 		culture_conversion_time = -0.5
+# 		culture_conversion_cost = -0.25
+# 		land_morale = 0.1
+# 	}
+# }
+
+fascioist_republic_reform = {
+	allow_normal_conversion = yes
+	icon = "peasant_republic"
+	potential = {
+		has_country_flag = fascioist_victory_flag
+	}
+	trigger = {
+		is_not_blocked_by_estate_privilege = { estate = estate_nobles }
+	}
+	valid_for_nation_designer = no
+	nation_designer_cost = 20
+	legacy_equivalent = peasants_republic_legacy
+	modifiers = {
+		production_efficiency = 0.1
+		land_morale = 0.05
+		max_absolutism = -10
+	}
+	custom_attributes = {
+		enables_plutocratic_idea_group = yes
+		enables_aristocratic_idea_group = no
+		disables_estate_nobles = yes
+		is_peasants_republic = yes
+	}
+	duration = 4
 }
