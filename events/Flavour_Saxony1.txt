@@ -479,3 +479,214 @@ country_event = {
 		}
 	}
 }
+country_event = {		# Look the other way
+	id = saxo.9
+	title = saxo.9.test
+	desc = saxo.9.desc
+	picture = HUSSARS_eventPicture
+
+	trigger = {
+		has_estate = estate_knight_lodges
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	is_triggered_only = yes
+
+	option = {
+		name = saxo.9a
+		add_mil_power = 100
+		add_estate_influence_modifier = {
+			influence = 10
+			duration = 3650
+			estate = estate_knight_lodges
+		}
+	}
+	option = {
+		name = saxo.9b
+		add_estate_loyalty = {
+			estate = estate_knight_lodges
+			loyalty = -15
+		}
+	}
+}
+
+country_event = {	#Successful eastern raid
+	id = saxo.10
+	title = saxo.10.test
+	desc = saxo.10.desc
+	picture = COSSACK_ESTATE_RAIDERS_eventPicture
+
+	trigger = {
+		has_estate = estate_knight_lodges
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+	immediate = {
+		hidden_effect = {
+			random_owned_province = {
+				limit = {
+					has_fort_building_trigger = yes
+				}
+				save_event_target_as = alb_knights_invest_province
+			}
+		}
+	}
+
+	is_triggered_only = yes
+
+	option = {
+		name = saxo.10a
+		add_years_of_income = 0.1
+		event_target:alb_knights_invest_province = {
+			add_base_tax = 1
+		}
+	}
+}
+
+country_event = {		# Knightly Feudalism
+	id = saxo.11
+	title = saxo.11.test
+	desc = saxo.11.desc
+	picture = NOBLE_ESTATE_DEMANDS_eventPicture
+
+	trigger = {
+		has_estate = estate_knight_lodges
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	is_triggered_only = yes
+
+	option = {
+		name = saxo.11a
+		add_estate_loyalty = {
+			estate = estate_knight_lodges
+			loyalty = -10
+		}
+		add_country_modifier = {
+			name = alb_knights_less_taxes
+			duration = 3650
+		}
+	}
+	option = {
+		name = saxo.11b
+		add_estate_loyalty = {
+			estate = estate_knight_lodges
+			loyalty = 10
+		}
+		add_adm_power = -50
+	}
+}
+
+country_event = {		# Knightly Feudalism
+	id = saxo.11
+	title = saxo.11.test
+	desc = saxo.11.desc
+	picture = NOBLE_ESTATE_DEMANDS_eventPicture
+
+	trigger = {
+		has_estate = estate_knight_lodges
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	is_triggered_only = yes
+
+	option = {
+		name = saxo.11a
+		add_estate_loyalty = {
+			estate = estate_knight_lodges
+			loyalty = -10
+		}
+	}
+	option = {
+		name = saxo.11b
+		add_estate_loyalty = {
+			estate = estate_knight_lodges
+			loyalty = 10
+		}
+		add_adm_power = -50
+	}
+}
+
+country_event = {		# sgs demands new markets
+	id = saxo.12
+	title = saxo.12.test
+	desc = saxo.12.desc
+	picture = MERCHANTS_TALKING_eventPicture
+
+	trigger = {
+		has_estate = estate_knight_lodges
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	is_triggered_only = yes
+
+	option = {
+		name = saxo.12a		# cede it to them
+		add_estate_loyalty = {
+			estate = estate_knight_lodges
+			loyalty = 10
+		}
+		change_estate_land_share = {
+			estate = estate_knight_lodges
+			share = 1
+		}
+		random_owned_province = {
+			add_base_manpower = 1
+		}
+	}
+	option = {
+		name = saxo.12b
+		add_estate_loyalty = {
+			estate = estate_knight_lodges
+			loyalty = -10
+		}
+	}
+}
+
+country_event = {		# sgs demands new markets
+	id = saxo.13
+	title = saxo.13.test
+	desc = saxo.13.desc
+	picture = ARTWORK_eventPicture
+
+	trigger = {
+		has_estate = estate_knight_lodges
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	is_triggered_only = yes
+
+	option = {
+		name = saxo.13a		# cede it to them
+		add_estate_loyalty = {
+			estate = estate_knight_lodges
+			loyalty = 10
+		}
+		add_stability_or_adm_power = yes
+		add_years_of_income = -0.1
+	}
+	option = {
+		name = saxo.13b
+		add_estate_loyalty = {
+			estate = estate_knight_lodges
+			loyalty = -10
+		}
+	}
+}
