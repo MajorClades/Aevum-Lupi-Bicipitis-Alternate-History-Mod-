@@ -1348,9 +1348,20 @@ saxon_5_slot = {
 			}
 		} 
 
-		effect = {  
-			country_event = {
-				id = saxo.8
+		effect = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = sx0_alliance_gepids_tt
+				first_limit = "
+					SX1 = {
+						exists = yes
+						alliance_with = ROOT
+					}
+				"
+				first_effect = "
+					country_event = {
+						id = saxo.8
+					}
+				"
 			}
 			carpathia_region = {
 				add_permanent_claim = ROOT
@@ -1364,17 +1375,22 @@ saxon_5_slot = {
 		required_missions = { sx0_dacia_conquest } 
 		provinces_to_highlight = {  
 			region = carpathia_region
-			NOT = {
-				OR = {
-					country_or_non_sovereign_subject_holds = ROOT
-					if = {
-						limit = {
-							SX1 = {
-								alliance_with = ROOT
-							}
-						}
+			if = {
+				limit = {
+					SX1 = {
+						alliance_with = ROOT
+					}
+				}
+				NOT = {
+					OR = {
+						country_or_non_sovereign_subject_holds = ROOT
 						owned_by = SX1
 					}
+				}
+			}
+			else = {
+				NOT = {
+					country_or_non_sovereign_subject_holds = ROOT
 				}
 			}
 		} 
