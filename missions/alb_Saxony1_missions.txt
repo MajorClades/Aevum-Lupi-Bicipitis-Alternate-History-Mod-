@@ -35,35 +35,34 @@ saxon_1_slot = {
 			}
 		} 
 
-		effect = {  
-			complex_dynamic_effect = {
+		effect = {
+			simple_dynamic_effect = {
 				first_custom_tooltip = sx0_if_allied_rija_tt
 				first_limit = "
-					SX3 = {
-						exists = yes
-						owns = 43
-					}
 					alliance_with = SX3
 				"
 				first_effect = "
 					vassalize = SX3
 					SX3 = {
 						add_liberty_desire = -25
-					}"
-				second_custom_tooltip = sx0_if_no_rija_tt
+					}
+				"
 				second_limit = "
-					owns_or_non_sovereign_subject_of = 43"
+					43 = {
+						OR = {
+							owned_by = ROOT
+							owned_by_subject_of = ROOT
+						}
+					}
+				"
 				second_effect = "
 					43 = {
-						add_great_project_tier = {
-							type = ruined_city
-							tier = 1
-						}
 						add_province_modifier = {
 							name = sx0_restore_araatan
 							duration = 9125
 						}
-					}"
+					}
+				"
 			}
 			hinter_pommern_area = {
 				add_permanent_claim = ROOT
@@ -122,9 +121,41 @@ saxon_1_slot = {
 		position = 5
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			if = {
+				limit = {
+					has_estate = estate_knight_lodges
+				}
+				OR = {
+					num_of_estate_agendas_completed = {
+						estate = estate_knight_lodges
+						value = 3
+					}
+					num_of_estate_privileges = {
+						estate = estate_knight_lodges
+						value = 5
+					}
+				}
+				estate_loyalty = {
+					estate = estate_knight_lodges
+					loyalty = 60
+				}
+			}
+			else = {
+				cavalry_fraction = 0.5
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_estate_loyalty = {
+				estate = estate_knight_lodges
+				loyalty = 10
+			}
+			create_general = {
+				tradition = 100
+			}
+			add_yearly_manpower = 2
+		} 
 	}
 
 	sx0_knightly_army = {
@@ -133,9 +164,26 @@ saxon_1_slot = {
 		required_missions = { sx0_empower_knights } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			cavalry_fraction = 0.5
+			army_size_percentage = 1
+			num_of_generals = 2
+			OR = {
+				has_mil_advisor_3 = yes
+				mil = 6
+			}
+			monthly_mil = 12
+		} 
 
-		effect = {  } 
+		effect = {  
+			unlock_government_reform = {
+				government_reform = sx0_knightly_army_reform
+				tooltip = yes
+			}
+			custom_tooltip = empty_line_tt
+			add_mil_power = 100
+			change_government_reform_progress = 50
+		} 
 	}
 
 	sx0_empire_on_horseback = {
@@ -144,9 +192,40 @@ saxon_1_slot = {
 		required_missions = { sx0_knightly_army } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			has_reform = sx0_knightly_army_reform
+			has_leader_with = { total_pips = 13 } 
+			num_of_cavalry = 100
+			estate_loyalty = {
+				estate = estate_knight_lodges
+				loyalty = 80
+			}
+			has_global_modifier_value = {
+				which = cavalry_power
+				value = 0.5
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			if = {
+				limit = {
+					government = monarchy
+				}
+				hidden_effect = {
+					unlock_government_reform = {
+						government_reform = sx0_saxony_empire
+					}
+				}
+				add_government_reform = sx0_saxony_empire
+			}
+			else = {
+				unlock_government_reform = {
+					government_reform = sx0_saxony_empire
+					tooltip = yes
+				}
+			}
+			add_splendor = 1000
+		} 
 	}
 
 	sx0_valtean_union = {
@@ -715,11 +794,26 @@ saxon_3_slot = {
 		}
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			check_variable = { 
+				which = num_converted_religion 
+				value = 100 
+			}
+			religious_unity = 1 #gonna add more
+			total_development = 1000
+			NOT = {
+				great_power_rank = 2
+			}
+		} 
 
 		effect = {  
 			restore_country_name_effect = yes
 			override_country_name = SAXONIC_EMPIRE
+			if = {
+				limit = { in_golden_age = yes } 
+				extend_golden_age = 50
+			}
+			else = { reset_golden_age = yes } 
 		} 
 	}
 }
@@ -877,6 +971,7 @@ saxon_4_slot = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
+			check_variable = { which = num_converted_religion value = 40 }
 		} 
 
 		effect = {
@@ -1003,6 +1098,21 @@ saxon_4_slot = {
 						value = 10
 					}
 				}
+				custom_trigger_tooltip = {
+					tooltip = sax_3_estates_max_loyalty_tt
+					estate_loyalty = {
+						estate = estate_church
+						loyalty = 60
+					}
+					estate_loyalty = {
+						estate = estate_burghers
+						loyalty = 60
+					}
+					estate_loyalty = {
+						estate = estate_knight_lodges
+						loyalty = 60
+					}
+				}
 			}
 		} 
 
@@ -1037,7 +1147,7 @@ saxon_5_slot = {
 				any_owned_province = {
 					culture = lithuanian
 					unrest = 1
-					local_autonomy = 0.25
+					local_autonomy = 25
 				}
 			}
 		} 
@@ -1238,9 +1348,20 @@ saxon_5_slot = {
 			}
 		} 
 
-		effect = {  
-			country_event = {
-				id = saxo.8
+		effect = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = sx0_alliance_gepids_tt
+				first_limit = "
+					SX1 = {
+						exists = yes
+						alliance_with = ROOT
+					}
+				"
+				first_effect = "
+					country_event = {
+						id = saxo.8
+					}
+				"
 			}
 			carpathia_region = {
 				add_permanent_claim = ROOT
@@ -1254,17 +1375,22 @@ saxon_5_slot = {
 		required_missions = { sx0_dacia_conquest } 
 		provinces_to_highlight = {  
 			region = carpathia_region
-			NOT = {
-				OR = {
-					country_or_non_sovereign_subject_holds = ROOT
-					if = {
-						limit = {
-							SX1 = {
-								alliance_with = ROOT
-							}
-						}
+			if = {
+				limit = {
+					SX1 = {
+						alliance_with = ROOT
+					}
+				}
+				NOT = {
+					OR = {
+						country_or_non_sovereign_subject_holds = ROOT
 						owned_by = SX1
 					}
+				}
+			}
+			else = {
+				NOT = {
+					country_or_non_sovereign_subject_holds = ROOT
 				}
 			}
 		} 

@@ -7,7 +7,7 @@ estate_knight_lodges = {
 		NOT = { has_disabled_estate = { estate = estate_knight_lodges } }
 		NOT = { has_estate = estate_nobles }
 		OR = {
-			has_government_attribute = enables_alb_estate_knight_lodges
+			has_government_attribute = alb_enable_knight_lodges_estate
 			has_enabled_estate = { estate = estate_knight_lodges }
 			has_unlocked_estate = { estate = estate_knight_lodges }
 			AND = {
@@ -24,7 +24,6 @@ estate_knight_lodges = {
 				is_colonial_nation = no
 			}
 		}
-		has_government_attribute = alb_enable_knight_lodges_estate
 	}
 
 	# These scale with loyalty & power
@@ -63,7 +62,11 @@ estate_knight_lodges = {
 		}
 		modifier = {
 			factor = 1.2
-			base_manpower = 10
+			base_manpower = 8
+		}
+		modifier = {
+			factor = 1.1
+			has_manpower_building_trigger = yes
 		}
 	}
 
@@ -76,16 +79,36 @@ estate_knight_lodges = {
 		}
 		influence = -40
 	}
+	loyalty_modifier = {
+		desc = EST_VAL_OTHER_ESTATE_IN_POWER_LOY
+		trigger = {
+			has_any_estate_disaster_active = yes
+			has_not_own_estate_disaster_active = { estate = estate_knight_lodges }
+		}
+		loyalty = -20
+	}
 	
 	color = { 20 150 50 }
 
 	privileges = {
-		
+		estate_knight_lodges_land_rights
+		alb_knight_lodges_primacy
+		alb_knightly_officers
+		alb_knight_lodges_form_cavalry_corps
+		alb_knight_lodges_knightly_advisors
+		alb_knight_lodges_knightly_court
+		alb_knight_lodges_develop_castles
+		alb_knight_expanded_fiefdoms
+		alb_knight_lodges_crusading_east
+		alb_knight_lodges_unsupervised_construction
 	}
 
 	agendas = {
 		estate_knight_lodges_build_fort_building_in_y
 		estate_knight_lodges_build_horsemen
+		estate_knight_lodges_three_privileges
+		estate_knight_lodges_fire_advisor
+		estate_knight_lodges_hire_advisor
 	}
 	influence_from_dev_modifier = 1.0
 }

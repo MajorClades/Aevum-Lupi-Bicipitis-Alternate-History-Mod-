@@ -1,0 +1,596 @@
+Sica_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { tag = ROM } 
+		OR = {
+			tag = PD8
+			AND = {
+				has_country_flag = generic_italy_MT
+				was_tag = PD8
+			}
+		}
+	}
+
+	sica_free_city = {
+		icon = mission_seize_the_isles
+		position = 1
+		provinces_to_highlight = {
+			province_id = 4736
+		}
+
+		trigger = {
+			OR = {
+				SA5 = { 
+					alliance_with = ROOT
+					has_opinion = {
+						who = ROOT
+						value = 50
+					}
+					treasury = 200
+				}
+				owns = 4736
+			}
+		}
+
+		effect = {
+			custom_tooltip = SICANIA_TT_1a
+			tooltip = {
+				add_treasury = -200
+				vassalize = SA5
+			}
+			custom_tooltip = SICANIA_TT_1b
+			tooltip = {
+				add_adm_power = 75
+			}
+			hidden_effect = {
+				if = {
+					limit = {SA5 = {alliance_with = ROOT}}
+					add_treasury = -200
+					vassalize = SA5
+				}else = {
+					add_adm_power = 75
+				}
+			}
+		}
+	}
+	sica_jewel = {
+		icon = mission_seize_the_isles
+		position = 3
+		required_missions = { sica_west_sicily } 
+		provinces_to_highlight = {	area = western_sicily_area	NOT = {grown_by_development = 4}}
+
+		trigger = {
+			western_sicily_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				num_of_buildings_in_province = 2
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = sica_advisor_king
+				duration = 10950
+			}
+		}
+	}
+	sica_second_island = {
+		icon = mission_seize_the_isles
+		position = 5
+		required_missions = { sica_wealth } 
+		provinces_to_highlight = {	OR = {	area = corsica_sardinia_area area = sardinia_area}}
+
+		trigger = {
+			corsica_sardinia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			sardinia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			2986 = {
+				add_or_upgrade_production_building = yes
+			}
+			4946 = {
+				change_culture = sardinian
+			}
+			define_advisor = {
+				type = trader
+				culture = sardinian
+				skill = 3
+				cost_multiplier = 0.33	
+			}
+		}
+	}
+	sica_island_defenders = {
+		icon = mission_seize_the_isles
+		position = 6
+		required_missions = { sica_second_island } 
+		provinces_to_highlight = { owned_by = ROOT OR = { can_build = dock can_build = barracks}}
+
+		trigger = {
+			navy_tradition = 50
+			army_tradition = 50
+			num_of_owned_provinces_with = {
+				value = 10
+				has_dock_building_trigger = yes
+			}
+			num_of_owned_provinces_with = {
+				value = 10
+				has_manpower_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_navy_tradition = -25
+			add_army_tradition = -25
+			country_event = {
+				id = gen_ita.10
+			}
+		}
+	}
+}
+Sica_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { tag = ROM } 
+		OR = {
+			tag = PD8
+			AND = {
+				has_country_flag = generic_italy_MT
+				was_tag = PD8
+			}
+		}
+	}
+	sica_west_sicily = {
+		icon = mission_seize_the_isles
+		position = 2
+		required_missions = { sica_free_city sica_richness } 
+		provinces_to_highlight = {	area = western_sicily_area	NOT = {country_or_non_sovereign_subject_holds = ROOT}}
+
+		trigger = {
+			western_sicily_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				grown_by_development = 2
+			}
+		}
+
+		effect = {
+			add_years_of_income = 0.5
+			western_sicily_area = {
+				add_province_modifier = {
+					name = sica_fast_build
+					duration = 10950
+				}
+			}
+		}
+	}
+	sica_better_than_rome = {
+		icon = mission_seize_the_isles
+		position = 3
+		required_missions = { sica_west_sicily } 
+		provinces_to_highlight = {	is_capital_of = ROOT }
+
+		trigger = {
+			capital_scope = {
+				development = 25
+				higher_development_than = 118
+				higher_development_than = 151
+			}
+		}
+
+		effect = {
+			lazio_area = {
+				add_permanent_claim = ROOT
+			}
+			naples_area = {
+				add_permanent_claim = ROOT
+			}
+			rasna_area = {
+				add_permanent_claim = ROOT
+			}
+			corsica_sardinia_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	sica_wealth = {
+		icon = mission_seize_the_isles
+		position = 4
+		required_missions = { sica_better_than_rome sica_panormo} 
+		provinces_to_highlight = {	OR = {	area = western_sicily_area	area = sicily_area}}
+
+		trigger = {
+			western_sicily_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			sicily_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			development_in_provinces = {
+				value = 120
+				OR = {
+					area = western_sicily_area
+					area = sicily_area
+				}
+			}
+		}
+
+		effect = {
+			western_sicily_area = {
+				add_province_modifier = {
+					name = sica_better_gov
+					duration = -1
+				}
+			}
+			sicily_area = {
+				add_province_modifier = {
+					name = sica_better_gov
+					duration = -1
+				}
+			}
+		}
+	}
+
+
+}
+Sica_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { tag = ROM } 
+		OR = {
+			tag = PD8
+			AND = {
+				has_country_flag = generic_italy_MT
+				was_tag = PD8
+			}
+		}
+	}
+
+	sica_richness = {
+		icon = pulverize_pisa
+		position = 1
+		required_missions = {  } 
+
+		trigger = {
+			if = { limit = {ai = yes} army_size_percentage = 0.6 num_of_generals = 1}
+			else = {
+				army_size_percentage = 1
+			}
+		}
+
+		effect = {
+			add_papal_influence = 15
+			western_sicily_area = { add_permanent_claim = ROOT } 
+			sicily_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	sica_naval_power = {
+		icon = mission_seize_the_isles
+		position = 2
+		required_missions = { sica_richness} 
+
+		trigger = {
+			if = { limit = {ai = yes} navy_size_percentage = 0.6 num_of_admirals = 1}
+			else = {
+				navy_size_percentage = 1
+				num_of_admirals = 1
+			}
+		}
+
+		effect = {
+			add_navy_tradition = 15
+			sardinia_area = {
+				add_permanent_claim = ROOT
+			}
+			tunisia_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	sica_panormo = {
+		icon = mission_seize_the_isles
+		position = 3
+		required_missions = { sica_naval_power} 
+		provinces_to_highlight = {
+			province_id = 125
+		}
+
+		trigger = {
+			125 = {
+				owned_by = ROOT
+				OR = {
+					development = 15
+					province_has_center_of_trade_of_level = 2
+				}
+			}
+		}
+
+		effect = {
+			125 = {
+				heavy_ship = ROOT
+				add_or_upgrade_shipyard_building = yes
+			}
+		}
+	}
+	sica_land_fall = {
+		icon = mission_seize_the_isles
+		position = 5
+		required_missions = { sica_wealth } 
+		provinces_to_highlight = {	area = naples_area }
+
+		trigger = {
+			naples_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			1304 = {
+				add_trade_node_income = 24
+			}
+			121 = {
+				add_or_upgrade_university_building = yes
+			}
+		}
+	}
+	sica_rome = {
+		icon = mission_seize_the_isles
+		position = 6
+		required_missions = { sica_land_fall } 
+		provinces_to_highlight = {	area = lazio_area }
+
+		trigger = {
+			lazio_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_core = 118
+			italy_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+}
+Sica_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { tag = ROM } 
+		OR = {
+			tag = PD8
+			AND = {
+				has_country_flag = generic_italy_MT
+				was_tag = PD8
+			}
+		}
+	}
+	sica_two_sicily = {
+		icon = mission_seize_the_isles
+		position = 2
+		required_missions = { sica_richness } 
+		provinces_to_highlight = {	area = sicily_area	NOT = {country_or_non_sovereign_subject_holds = ROOT}}
+
+		trigger = {
+			sicily_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_stability_or_adm_power = yes
+			calabria_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	sica_port_cities = {
+		icon = mission_seize_the_isles
+		position = 4
+		required_missions = { sica_panormo} 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 124
+				province_id = 5002
+				province_id = 5003
+				province_id = 5004
+			}
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 4
+				OR = {
+					province_id = 124
+					province_id = 5002
+					province_id = 5003
+					province_id = 5004
+				}
+				has_shipyard_building_trigger = yes
+			}
+		}
+
+		effect = {
+			124 = {
+				add_devastation = -20
+				add_province_modifier = {
+					name = sica_port_profits
+					duration = 10950
+				}
+			}
+			5002 = {
+				add_province_modifier = {
+					name = sica_port_profits
+					duration = 10950
+				}
+			}
+			5003 = {
+				add_province_modifier = {
+					name = sica_port_profits
+					duration = 10950
+				}
+			}
+			5004 = {
+				add_province_modifier = {
+					name = sica_port_profits
+					duration = 10950
+				}
+			}
+		}
+	}
+	sica_practice = {
+		icon = mission_seize_the_isles
+		position = 5
+		required_missions = { sica_port_cities sica_tech} 
+		trigger = {
+			OR = {
+				full_idea_group = maritime_ideas
+				full_idea_group = naval_ideas
+			}
+			navy_tradition = 50
+		}
+
+		effect = {
+			add_navy_tradition = -20
+			add_country_modifier = {
+				name = sica_naval_supremacy
+				duration = -1
+			}
+		}
+	}
+}
+Sica_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { tag = ROM } 
+		OR = {
+			tag = PD8
+			AND = {
+				has_country_flag = generic_italy_MT
+				was_tag = PD8
+			}
+		}
+	}
+
+	sica_syracuse = {
+		icon = mission_seize_the_isles
+		position = 1
+		provinces_to_highlight = {
+			province_id = 2982
+		}
+
+		trigger = {
+			2982 = {
+				owned_by = ROOT
+				OR = {
+					development = 15
+					province_has_center_of_trade_of_level = 2
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = sica_archimedes_thought
+				duration = 10950
+			}
+		}
+	}
+	sica_greeks = {
+		icon = mission_seize_the_isles
+		position = 3
+		required_missions = { sica_syracuse sica_two_sicily} 
+
+		trigger = {
+			accepted_culture = greek_new
+			OR = {
+				adm_power = 200
+				has_idea = patron_of_art  
+				has_idea = local_traditions
+			}
+		}
+
+		effect = {
+			if = {
+				limit = {
+					OR = {
+						has_idea = patron_of_art  
+						has_idea = local_traditions
+					}
+				}
+			}else = {
+				add_adm_power = -200 
+			}
+			capital_scope = {
+				add_or_upgrade_university_building = yes
+			}
+		}
+	}
+	sica_tech = {
+		icon = mission_seize_the_isles
+		position = 4
+		required_missions = { sica_greeks} 
+		trigger = {
+			OR = {
+				full_idea_group = innovativeness_ideas
+				full_idea_group = humanist_ideas
+			}
+			employed_advisor = {
+				skill = 3
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = sica_old_ideals
+				duration = -1
+			}
+		}
+	}
+	sica_tech_2 = {
+		icon = mission_seize_the_isles
+		position = 6
+		required_missions = { sica_tech} 
+		trigger = {
+			OR = {
+				monthly_adm = 12
+				monthly_dip = 12
+				monthly_mil = 12
+			}
+			has_adm_advisor_3 = yes
+			has_dip_advisor_3 = yes
+			has_mil_advisor_3 = yes
+		}
+
+		effect = {
+			give_advisor_tech_discounts = yes
+		}
+	}
+}
