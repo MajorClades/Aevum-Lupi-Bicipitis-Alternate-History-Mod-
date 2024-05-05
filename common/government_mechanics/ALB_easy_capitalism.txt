@@ -1,0 +1,89 @@
+capitanolistism = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 11
+	available = {	}
+	powers = {
+		venetian_capitalism = {
+			max = 100
+			min = 0
+			reset_on_new_ruler = no
+			scaled_modifier = {
+				modifier = {
+					global_tax_modifier = 0.5
+					production_efficiency = 0.5
+					trade_efficiency = 0.5
+					trade_company_investment_cost = -0.5
+					land_maintenance_modifier = 0.5
+					naval_maintenance_modifier = 0.5
+					build_cost = 0.5
+					burghers_influence_modifier = 0.5
+				}
+			}
+			scaled_modifier = {
+				trigger = {
+					has_disabled_estate = { estate = estate_burghers }
+				}
+				modifier = {
+					global_unrest = 10
+				}
+			}
+			scaled_modifier = {
+				trigger = {
+					estate_influence = {
+						estate = estate_burghers
+						influence = 90
+					}
+				}
+				modifier = {
+					burghers_loyalty_modifier = -0.5
+				}
+			}
+			is_good = yes
+		}
+	}
+	
+	interactions = {
+		contain_capitalism = {
+			gui = hessian_militarization_gov_mech
+			cost_type = venetian_capitalism
+			center = no
+			trigger = {
+				has_government_power = {
+					mechanic_type = capitanolistism
+					power_type = venetian_capitalism
+					value = 5
+				}
+				adm_power = 50
+			}
+			effect = {
+				add_adm_power = -50
+				add_government_power = {
+					mechanic_type = capitanolistism
+					power_type = venetian_capitalism
+					value = -5
+				}
+			}
+			ai_chance = {
+				factor = 50
+				modifier = {
+					factor = 0
+					is_in_deficit = no
+				}
+				modifier = {
+					factor = 0
+					num_of_loans = 3
+				}
+				modifier = {
+					factor = 0
+					NOT = {
+						has_government_power = {
+							mechanic_type = capitanolistism
+							power_type = venetian_capitalism
+							value = 25
+						}
+					}
+				}
+			}
+		}
+	}
+}
