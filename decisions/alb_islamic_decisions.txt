@@ -68,29 +68,26 @@ country_decisions = {
 
 	alb_restore_caliphal_authority_dec = {
 		potential = {
-			NOT = {
-				REB = {
-					check_variable = {
-						which = caliph_authority_var
-						value = 0.1
-					}
-				}
-			}
 			tag = event_target:islam_caliph_target
-			RS0 = {
-				exists = yes
-			}
 			NOT = {
 				has_global_flag = caliph_authority_restored
 			}
+			is_religion_enabled = rashidi
 		}
 		major = yes
 		allow = {
 			dip_power = 100
 			adm_power = 100
 			mil_power = 100
-			has_won_war_against = {
-				who = RS0
+			OR = {
+				has_won_war_against = {
+					who = RS0
+				}
+				NOT = {
+					any_country = {
+						religion = rashidi
+					}
+				}
 			}
 			NOT = {
 				calc_true_if = {
