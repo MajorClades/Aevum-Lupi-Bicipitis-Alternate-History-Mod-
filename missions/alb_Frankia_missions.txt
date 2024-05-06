@@ -8,7 +8,12 @@ Francia_1_slot = {
 	1_frankia_strong = {
 		icon = bavarian_netherlands
 		position = 1
-		provinces_to_highlight = { region = low_countries_region } 
+		provinces_to_highlight = { 
+			region = low_countries_region 
+			NOT = {
+				owned_by = ROOT
+			}
+		} 
 
 		trigger = {
 			low_countries_region = {
@@ -30,80 +35,50 @@ Francia_1_slot = {
 		position = 3
 		required_missions = { 1_frankia_strong } 
 		provinces_to_highlight = {
-			OR = {
-				is_capital_of = PU0
-				is_capital_of = GR0
-				is_capital_of = SO0
-			}
+			is_capital_of = SO0
 		}
 
 		trigger = {
 			OR = {
-				army_balance = {
-					who = PU0
-					value = 1
+				AND = {
+					SO0 = {
+						exists = yes
+					}
+					army_size = SO0
 				}
-				army_balance = {
-					who = GR0
-					value = 1
+				num_of_provinces_owned_or_owned_by_subjects_with = {
+					value = 5
+					region = france_region
 				}
-			}
-			army_balance = {
-				who = SO0
-				value = 1
 			}
 		}
 
 		effect = {
-			weser_area = { add_permanent_claim = ROOT } 
-			braunschweig_area = { add_permanent_claim = ROOT } 
-			hesse_area = { add_permanent_claim = ROOT } 
-			franconia_area = { add_permanent_claim = ROOT } 
-			upper_rhineland_area = { add_permanent_claim = ROOT } 
-			picardy_area = { add_permanent_claim = ROOT } 
-			champagne_area = { add_permanent_claim = ROOT } 
-			lorraine_area = { add_permanent_claim = ROOT } 
-			alsace_area = { add_permanent_claim = ROOT } 
+			france_region = {
+				add_permanent_claim = ROOT
+			}
 		}
 	}
 
 	1_frankia_empire = {
 		icon = deal_with_the_illuminati
 		position = 4
-		required_missions = { 1_frankia_stronger } 
+		required_missions = { 1_frankia_stronger }
 		provinces_to_highlight = {
-			OR = {
-				area = weser_area
-				area = braunschweig_area
-				area = hesse_area
-				area = franconia_area
-				area = upper_rhineland_area
-				area = picardy_area
-				area = champagne_area
-				area = lorraine_area
-				area = alsace_area
+			region = france_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 
 		trigger = {
 			num_of_provinces_owned_or_owned_by_subjects_with = {
-				value = 25
-				OR = {
-					area = weser_area
-					area = braunschweig_area
-					area = hesse_area
-					area = franconia_area
-					area = upper_rhineland_area
-					area = picardy_area
-					area = champagne_area
-					area = lorraine_area
-					area = alsace_area
-				}
+				value = 30
+				region = france_region
 			}
 		}
 
 		effect = {
-			france_region = { add_permanent_claim = ROOT } 
 			north_german_region = { add_permanent_claim = ROOT } 
 			south_german_region = { add_permanent_claim = ROOT } 
 			set_government_rank = 3
@@ -115,10 +90,30 @@ Francia_1_slot = {
 		position = 6
 		required_missions = { 1_frankia_empire } 
 		provinces_to_highlight = {
-			country_or_non_sovereign_subject_holds = ROOT
+			any_country = {
+				capital_scope = {
+					continent = europe
+				}
+				OR = {
+					army_size = ROOT
+					total_development = ROOT
+				}
+			}
 		}
 
-		trigger = { num_of_provinces_owned_or_owned_by_subjects_with = { value = 300 }  } 
+		trigger = { 
+			NOT = {
+				any_country = {
+					capital_scope = {
+						continent = europe
+					}
+					OR = {
+						army_size = ROOT
+						total_development = ROOT
+					}
+				}
+			}
+		} 
 
 		effect = {
 			add_country_modifier = {
@@ -150,30 +145,15 @@ Francia_2_slot = {
 
 		effect = {
 			1744 = {
-				if = {
-					limit = { has_province_modifier = karlesmagne_home } 
-					add_great_project_tier = {
-						type = tomb_charlesmagne
-						tier = 2
-					}
-					owner = {
-						add_prestige_or_monarch_power = {
-							amount = 20
-						}
-						change_dip = 1
-					}
-				}
-				else = {
-					add_great_project_tier = {
-						type = tomb_charlesmagne
-						tier = 2
-					}
-					add_permanent_province_modifier = {
-						name = "karlesmagne_home"
-						duration = -1
-					}
+				add_great_project_tier = {
+					type = tomb_charlesmagne
+					tier = 1
 				}
 			}
+			add_prestige_or_monarch_power = {
+				amount = 20
+			}
+			change_dip = 1
 		}
 	}
 
@@ -181,22 +161,31 @@ Francia_2_slot = {
 		icon = carolingian_empire
 		position = 2
 		required_missions = { 2_franconia } 
-		provinces_to_highlight = { province_id = 1744 } 
+		provinces_to_highlight = {
+			
+		} 
 
 		trigger = {
-			1744 = {
-				owned_by = ROOT
-				has_building = cathedral
+			has_global_modifier_value = {
+				which = discipline
+				value = 0.15
+			}
+			army_size = 100
+			OR = {
+				army_professionalism = 0.6
+				army_tradition = 90
 			}
 		}
 
 		effect = {
-			1744 = {
-				remove_province_modifier = karlesmagne_home
-				add_permanent_province_modifier = {
-					name = "karlesmagne_home_2"
-					duration = -1
-				}
+			add_country_modifier = {
+				name = fc9_make_martel_proud
+				duration = -1
+			}
+			if = { 
+				limit = { has_dlc = "Emperor" }
+				custom_tooltip = lit_halve_hegemony_reqs_tt
+				set_country_flag = halve_hegemony_requirements
 			}
 		}
 	}
@@ -213,21 +202,20 @@ Francia_2_slot = {
 		}
 
 		trigger = {
-			OR = {
-				north_german_region = {
-					type = all
-					OR = {
-						owned_by = ROOT
-						owned_by_subject_of = ROOT
-					}
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 50
+				OR = {
+					region = north_german_region
+					region = south_german_region
 				}
-				south_german_region = {
-					type = all
-					OR = {
-						owned_by = ROOT
-						owned_by_subject_of = ROOT
-					}
+			}
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 10
+				OR = {
+					region = north_german_region
+					region = south_german_region
 				}
+				religion = ROOT
 			}
 		}
 
@@ -249,8 +237,6 @@ Francia_2_slot = {
 		provinces_to_highlight = {
 			OR = {
 				region = france_region
-				region = iberia_region
-				region = italy_region
 				region = north_german_region
 				region = south_german_region
 			}
@@ -258,14 +244,6 @@ Francia_2_slot = {
 
 		trigger = {
 			france_region = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
-			}
-			iberia_region = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
-			}
-			italy_region = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
@@ -280,12 +258,20 @@ Francia_2_slot = {
 		}
 
 		effect = {
-			remove_country_modifier = german_tribute
-			remove_country_modifier = frankish_romance
-			add_country_modifier = {
-				name = "frankish_falcon"
-				duration = -1
+			custom_tooltip = fc9_combine_past_modifiers_and_add_tt
+			hidden_effect = {
+				remove_country_modifier = german_tribute
+				add_country_modifier = {
+					name = "frankish_falcon"
+					duration = -1
+				}
 			}
+			add_splendor = 1000
+			if = {
+				limit = { in_golden_age = yes } 
+				extend_golden_age = 50
+			}
+			else = { reset_golden_age = yes } 
 		}
 	}
 
@@ -363,18 +349,76 @@ Francia_3_slot = {
 		provinces_to_highlight = { region = france_region } 
 
 		trigger = {
-			france_region = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
+			if = {
+				limit = { 
+					religion = impotian
+				}
+				patriarch_authority = 80
+			}
+			religious_unity = 0.9
+			is_defender_of_faith_of_tier = 5
+			OR = {
+				current_icon = icon_jesus_farming
+				current_icon = icon_jesus_fishing
+				current_icon = icon_jesus_carpentry
+				current_icon = icon_jesus_dinner
+				current_icon = icon_jesus_cleansing_temple
 			}
 		}
 
 		effect = {
-			add_prestige_or_monarch_power = {
-				amount = 100
+			complex_dynamic_effect = {
+				first_custom_tooltip = alb_if_icon_jesus_farming_tt
+				first_limit = "
+					current_icon = icon_jesus_farming
+				"
+				first_effect = "
+					add_country_modifier = {
+						name = fc9_jesus_farm_buff
+						duration = -1
+					}
+				"
+				second_custom_tooltip = alb_if_icon_jesus_fishing_tt
+				second_limit = "
+					current_icon = icon_jesus_fishing
+				"
+				second_effect = "
+					add_country_modifier = {
+						name = fc9_jesus_fish_buff
+						duration = -1
+					}
+				"
+				third_custom_tooltip = alb_if_icon_jesus_carpentry_tt
+				third_limit = "
+					current_icon = icon_jesus_carpentry
+				"
+				third_effect = "
+					add_country_modifier = {
+						name = fc9_jesus_carpentry_buff
+						duration = -1
+					}
+				"
+				fourth_custom_tooltip = alb_if_icon_jesus_dinner_tt
+				fourth_limit = "
+					current_icon = icon_jesus_dinner
+				"
+				fourth_effect = "
+					add_country_modifier = {
+						name = fc9_jesus_dinner_buff
+						duration = -1
+					}
+				"
+				fifth_custom_tooltip = alb_if_icon_jesus_cleansing_temple_tt
+				fifth_limit = "
+					current_icon = icon_jesus_cleansing_temple
+				"
+				fifth_effect = "
+					add_country_modifier = {
+						name = fc9_jesus_fight_buff
+						duration = -1
+					}
+				"
 			}
-			iberia_region = { add_permanent_claim = ROOT } 
-			italy_region = { add_permanent_claim = ROOT } 
 		}
 	}
 
@@ -383,28 +427,14 @@ Francia_3_slot = {
 		position = 6
 		required_missions = { 3_frankish_legacy } 
 		provinces_to_highlight = {
-			OR = {
-				region = iberia_region
-				region = italy_region
-			}
+			region = france_region
+			country_or_non_sovereign_subject_holds = ROOT
 		}
 
 		trigger = {
-			OR = {
-				iberia_region = {
-					type = all
-					OR = {
-						owned_by = ROOT
-						owned_by_subject_of = ROOT
-					}
-				}
-				italy_region = {
-					type = all
-					OR = {
-						owned_by = ROOT
-						owned_by_subject_of = ROOT
-					}
-				}
+			france_region = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
 			}
 		}
 
@@ -412,6 +442,10 @@ Francia_3_slot = {
 			add_country_modifier = {
 				name = "frankish_romance"
 				duration = -1
+			}
+			add_power_projection = {
+				type = mission_rewards_power_projection
+				amount = 50
 			}
 		}
 	}
@@ -551,11 +585,9 @@ Francia_4_slot = {
 
 		effect = {
 			add_years_of_income = 1.5
-			capital_scope = {
-				add_institution_embracement = {
-					which = global_trade
-					value = 50
-				}
+			custom_tooltip = empty_line_tt
+			unlock_estate_privilege = {
+				estate_privilege = alb_frankish_trades
 			}
 		}
 	}
@@ -575,9 +607,8 @@ Francia_4_slot = {
 			add_dip_power = -100
 			add_country_modifier = {
 				name = "frankish_explorations"
-				duration = 10950
+				duration = 9125
 			}
-
 		}
 	}
 
@@ -632,12 +663,28 @@ Francia_5_slot = {
 		position = 1
 		provinces_to_highlight = { owned_by = ROOT } 
 
-		trigger = { development_in_provinces = { value = 500 }  } 
+		trigger = { 
+			total_development = 500
+		} 
 
 		effect = {
 			add_power_projection = {
 				type = 10_permanent_power_projection
-				amount = 50
+				amount = 10
+			}
+			custom_tooltip = alb_10_tax_in_frankish_provinces_tt
+			hidden_effect = {
+				for = {
+					amount = 10
+					effect = "
+						random_owned_province = {
+							limit = {
+								culture_group = frankish
+							}
+							add_base_tax = 1
+						}
+					"
+				}
 			}
 		}
 	}
@@ -828,6 +875,9 @@ Francia_5_slot = {
 			development_in_provinces = {
 				value = 300
 				culture = ellan
+			}
+			1269 = {
+				is_strongest_trade_power = ROOT
 			}
 		}
 
