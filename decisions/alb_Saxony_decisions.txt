@@ -1,0 +1,109 @@
+country_decisions = {
+
+	sax_move_capital_dec = {
+		potential = {
+			tag = SX0
+			OR = {
+				owns = 280
+				subject_owns = 280
+			}
+			NOT = {
+				has_country_flag = sax_moved_capital_flag
+			}
+		}
+		allow = {
+			if = {
+				limit = {
+					subject_owns = 280
+				}
+				any_subject_country = {
+					owns = 280
+					has_opinion = {
+						who = ROOT
+						value = 200
+					}
+					NOT = {
+						num_of_cities = 6
+					}
+					hidden_trigger = {
+						ai = yes
+					}
+				}
+			}
+			else = {
+				owns = 280
+				280 = {
+					is_core = ROOT
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					subject_owns = 280
+				}
+				random_subject_country = {
+					limit = {
+						owns = 280
+					}
+					save_event_target_as = siescheng_owner
+				}
+				inherit = event_target:siescheng_owner
+			}
+			set_country_flag = sax_moved_capital_flag
+			280 = {
+				move_capital_effect = yes
+				add_province_modifier = {
+					name = sx0_restructuring_siescheng
+					duration = 3650
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				factor = 0
+				SI0 = {
+					ai = no
+				}
+			}
+		}
+	}
+
+	sax_kesars_palace = {
+		potential = {
+			tag = SX0
+			capital = 280
+		}
+		allow = {
+			280 = {
+				is_capital_of = ROOT
+			}
+			280 = {
+				development = 40
+			}
+			280 = {
+				num_of_buildings_in_province = 5
+			}
+		}
+		effect = {
+			set_country_flag = sax_kesars_palace_flag
+			280 = {
+				remove_province_modifier = sx0_restructuring_siescheng
+				add_province_modifier = {
+					name = sx0_kesars_palace
+					duration = -1
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 100
+			modifier = {
+				factor = 0
+				SI0 = {
+					ai = no
+				}
+			}
+		}
+	}
+}

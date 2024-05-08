@@ -1,6 +1,6 @@
 namespace = gen_ita
 
-country_event = {
+country_event = {	#Erulia vassalization event
 	id = gen_ita.1
 	title = gen_ita.1.test
 	desc = gen_ita.1.desc
@@ -51,5 +51,642 @@ country_event = {
 			}
 		}
 		add_stability = 1
+	}
+}
+country_event = {	#Funny meme not alot will understand
+	id = gen_ita.2
+	title = gen_ita.2.test
+	desc = gen_ita.2.desc
+	picture = ECONOMY_eventPicture
+	fire_only_once = yes
+	trigger = {
+		culture_group = latin
+		owns = 2979
+		is_year = 1554
+	}
+	mean_time_to_happen = {
+		months = 60
+	}
+	option = {
+		name = gen_ita.2a
+		ai_chance = {
+			factor = 50
+		}
+		2979 = {
+			change_trade_goods = gold
+		}
+	}
+	option = {
+		name = gen_ita.2b
+		ai_chance = {
+			factor = 20
+		}
+		if = {
+			limit = {
+				has_consort = no
+			}
+			define_consort = {
+				name = "Rosa"
+				dynasty = "De'Paperoni"
+				adm = 5
+				dip = 6
+				mil = 1
+			}
+		}
+		unlock_government_reform = { government_reform = italian_scroogemcduck_reference } 
+		custom_tooltip = unlock_government_reform_tooltip
+		tooltip = { add_government_reform = italian_scroogemcduck_reference } 
+	}
+	option = {
+		name = gen_ita.2c
+		ai_chance = {
+			factor = 30
+		}
+		add_treasury = 500
+	}
+}
+country_event = {	#Rasna choose who to vassalize
+	id = gen_ita.3
+	title = gen_ita.3.test
+	desc = gen_ita.3.desc
+	picture = GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = gen_ita.3a
+		trigger = {
+			alliance_with = SIE
+		}
+		ai_chance = {
+			factor = 70
+		}
+		SIE = {
+			country_event = {
+				id = gen_ita.4
+			}
+		}
+	}
+	option = {
+		name = gen_ita.3b
+		trigger = {
+			alliance_with = AP8
+		}
+		ai_chance = {
+			factor = 30
+		}
+		AP8 = {
+			country_event = {
+				id = gen_ita.4
+			}
+		}
+	}
+}
+country_event = {	#Rasna vassalization event
+	id = gen_ita.4
+	title = gen_ita.4.test
+	desc = gen_ita.4.desc
+	picture = GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = gen_ita.4a
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 1.1
+				has_opinion = {
+					who = PD7
+					value = 110
+				}
+			}
+			modifier = {
+				factor = 1.5
+				has_opinion = {
+					who = PD7
+					value = 150
+				}
+			}
+			modifier = {
+				factor = 2
+				has_opinion = {
+					who = PD7
+					value = 180
+				}
+			}
+			modifier = {
+				factor = 2
+				alliance_with = PD7
+			}
+		}
+		PD7 = {
+			vassalize = ROOT
+		}
+	}
+	option = {
+		name = gen_ita.4b
+		ai_chance = {
+			factor = 70
+			modifier = {
+				factor = 0.5
+				alliance_with = PD7
+			}
+		}
+		add_stability = 1
+	}
+}
+country_event = {	#Another meme
+	id = gen_ita.5
+	title = gen_ita.5.test
+	desc = gen_ita.5.desc
+	picture = COLONIZATION_eventPicture
+	fire_only_once = yes
+	trigger = {
+		culture_group = latin
+		owns = 5012
+		any_hired_mercenary_company = {
+			home_province = {
+				province_id = 5012
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 60
+	}
+	option = {
+		name = gen_ita.5a
+		ai_chance = {
+			factor = 50
+		}
+		5012 = {
+			add_permanent_province_modifier = {
+				name = rasnian_khitans
+				duration = 36500
+			}
+		}
+	}
+	option = {
+		name = gen_ita.5b
+		ai_chance = {
+			factor = 50
+		}
+		add_country_modifier = {
+			name = rasnian_khitans_mercs
+			duration = 10950
+		}
+	}
+}
+country_event = {	#Rasna choose Republic or Kingdom
+	id = gen_ita.6
+	title = gen_ita.6.test
+	desc = gen_ita.6.desc
+	picture = ECONOMICALLY_TALLANTED_RULER_eventPicture
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = gen_ita.7
+				days = 60
+				random = 25
+			}
+		}
+	}
+	option = {
+		name = gen_ita.6a
+		ai_chance = {
+			factor = 70
+		}
+		add_treasury = 500
+		add_country_modifier = {
+			name = rasna_medici_dominion
+			duration = -1
+		}
+	}
+	option = {
+		name = gen_ita.6b
+		ai_chance = {
+			factor = 30
+		}
+		add_mil_power = 100
+		add_country_modifier = {
+			name = rasna_deforza_dominion
+			duration = -1
+		}
+	}
+}
+country_event = {	#Rasna choose Republic or Kingdom
+	id = gen_ita.7
+	title = gen_ita.7.test
+	desc = gen_ita.7.desc
+	picture = BAD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+	
+	option = {
+		name = gen_ita.7a
+		trigger = {
+			has_country_modifier = rasna_medici_dominion
+		}
+		change_government = monarchy
+		add_government_reform = etrurian_kingdom
+		define_ruler = {
+			name = "Carlo"
+			dynasty = "Medici"
+			adm = 5
+			dip = 3
+			mil = 5
+			age = 35
+		}
+		remove_country_modifier = rasna_medici_dominion
+		set_country_flag = medici_missions_flag
+		swap_non_generic_missions = yes
+	}
+	option = {
+		name = gen_ita.7b
+		trigger = {
+			has_country_modifier = rasna_deforza_dominion
+		}
+		define_ruler = {
+			name = "Giulio De'Forza"
+			adm = 4
+			dip = 2
+			mil = 6
+			age = 27
+		}
+		remove_country_modifier = rasna_deforza_dominion
+		set_country_flag = forza_missions_flag
+		swap_non_generic_missions = yes
+	}
+}
+country_event = {	#Rasna Holy Italian Colonialism
+	id = gen_ita.8
+	title = gen_ita.8.test
+	desc = gen_ita.8.desc
+	picture = EXPLORERS_eventPicture
+	is_triggered_only = yes
+	
+	option = {
+		name = gen_ita.8a
+		ai_chance = {
+			factor = 70
+		}
+		define_explorer = {
+			name = "Paolo Moro"
+			shock = 2
+			fire = 1
+			manuever = 4
+			trait = great_explorer_personality
+		}
+		add_country_modifier = {
+			name = rasna_colonial_push
+			duration = 10950
+		}
+		5009 = {
+			light_ship = ROOT
+			light_ship = ROOT
+			light_ship = ROOT
+		}
+		custom_tooltip = RASNA_TT_3
+		set_country_flag = rasna_colonial_flag
+	}
+	option = {
+		name = gen_ita.8b
+		ai_chance = {
+			factor = 30
+		}
+		emperor = {
+			add_imperial_influence = 25
+		}
+		add_dip_power = 200
+	}
+}
+
+country_event = {	#Rasna vassalization event
+	id = gen_ita.9
+	title = gen_ita.9.test
+	desc = gen_ita.9.desc
+	picture = GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = gen_ita.9a
+		ai_chance = {
+			factor = 90
+		}
+		PD7 = {
+			vassalize = ROOT
+		}
+		add_manpower = 1
+		define_conquistador = {
+			name = "Federico De'Forza"
+			shock = 4
+			fire = 3
+			manuever = 2
+			siege = 3
+		}
+		add_country_modifier = {
+			name = rasna_oversea_help
+			duration = -1
+		}
+		colonial_mexico = {
+			add_core = ROOT
+		}
+	}
+	option = {
+		name = gen_ita.9b
+		ai_chance = {
+			factor = 10
+		}
+		add_stability = 1
+	}
+}
+
+country_event = {	#sicania army_buffs
+	id = gen_ita.10
+	title = gen_ita.10.test
+	desc = gen_ita.10.desc
+	picture = MARCHING_PEASANTS_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = gen_ita.10a
+		ai_chance = {
+			factor = 50
+		}
+		add_country_modifier = {
+			name = sica_marines
+			duration = -1
+		}
+	}
+	option = {
+		name = gen_ita.10b
+		ai_chance = {
+			factor = 50
+		}
+		add_country_modifier = {
+			name = sica_gambit
+			duration = -1
+		}
+	}
+}
+
+country_event = {	#Etna doing Vulcano things
+	id = gen_ita.11
+	title = gen_ita.11.test
+	desc = gen_ita.11.desc
+	picture = REVOLT_eventPicture
+	fire_only_once = yes
+	mean_time_to_happen = {
+		months = 12
+	}
+	trigger = {
+		culture = sicilian
+		is_year = 1536
+		owns = 124
+	}
+
+	option = {
+		name = gen_ita.11a
+		ai_chance = {
+			factor = 50
+		}
+		add_manpower = -0.01
+		124 = {
+			add_devastation = 50
+			add_local_autonomy = 50
+		}
+	}
+	option = {
+		name = gen_ita.11b
+		ai_chance = {
+			factor = 50
+		}
+		add_estate_loyalty = {
+			estate = estate_nobles
+			loyalty = 5
+		}
+		add_manpower = -0.01
+		124 = {
+			add_devastation = 50
+		}
+		set_country_flag = sicilian_fascio_flag 
+		hidden_effect = {
+			set_variable = {
+				which = sicilian_fascio_rebel_numbers
+				value = 1
+			}
+		}
+	}
+}
+
+country_event = {	#peasant being revolting
+	id = gen_ita.12
+	title = gen_ita.12.test
+	desc = gen_ita.12.desc
+	picture = REVOLT_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = gen_ita.12a
+		ai_chance = {
+			factor = 50
+		}
+		add_estate_loyalty = {
+			estate = estate_nobles
+			loyalty = -5
+		}
+		change_estate_land_share = {
+			estate = estate_nobles
+			share = -2
+		}
+		change_variable = {
+			which = sicilian_fascio_rebel_numbers
+			value = 1
+		}
+	}
+	option = {
+		name = gen_ita.12b
+		ai_chance = {
+			factor = 50
+		}
+		add_estate_loyalty = {
+			estate = estate_nobles
+			loyalty = 5
+		}
+		add_manpower = -0.2
+		random_owned_province = {
+			limit = {
+				culture = sicilian
+			}
+			add_local_autonomy = 15
+		}
+	}
+}
+
+country_event = {	#peasant being revolt
+	id = gen_ita.13
+	title = gen_ita.13.test
+	desc = gen_ita.13.desc
+	picture = REVOLT_eventPicture
+	fire_only_once = yes
+	mean_time_to_happen = {
+		months = 12
+	}
+	trigger = {
+		has_country_flag = sicilian_fascio_flag
+		is_year = 1560
+		OR = {
+			is_year = 1590
+			check_variable = {
+				which = sicilian_fascio_rebel_numbers
+				value = 10
+			}
+		}
+	}
+	immediate = {
+		clr_country_flag = sicilian_fascio_flag
+	}
+
+	option = {
+		name = gen_ita.13a
+		trigger = {
+			NOT = {
+				is_year = 1590
+			}
+			check_variable = {
+				which = sicilian_fascio_rebel_numbers
+				value = 10
+			}
+		}
+		random_owned_province = {limit = {culture = sicilian} spawn_rebels = { type = fasci_siciliani_rebels size = 2}}
+		random_owned_province = {limit = {culture = sicilian} spawn_rebels = { type = fasci_siciliani_rebels size = 3}}
+		random_owned_province = {limit = {culture = sicilian} spawn_rebels = { type = fasci_siciliani_rebels size = 2}}
+		if = {
+			limit = {
+				check_variable = {
+					which = sicilian_fascio_rebel_numbers
+					value = 15
+				}
+			}
+			random_owned_province = {limit = {culture = sicilian} spawn_rebels = { type = fasci_siciliani_rebels size = 2}}
+			random_owned_province = {limit = {culture = sicilian} spawn_rebels = { type = fasci_siciliani_rebels size = 2}}
+		}	
+	}
+	option = {
+		name = gen_ita.13b
+		trigger = {
+			is_year = 1590
+		}
+		add_stability_or_adm_power = yes
+		every_owned_province = {
+			limit = {
+				culture = sicilian
+			}
+			add_local_autonomy = -15
+		}
+	}
+}
+
+country_event = {	#event for Gjilormu's Conquests
+	id = gen_ita.14
+	title = gen_ita.14.test
+	desc = gen_ita.14.desc
+	picture = MILITARISTICALLY_TALENTED_RULER_eventPicture
+	fire_only_once = yes
+	mean_time_to_happen = {
+		months = 6
+	}
+	trigger = {
+		tag = COR
+		has_ruler = "Ghjilormu"
+	}
+
+	option = {
+		name = gen_ita.14a
+		add_manpower = -2
+		4948 = {
+			add_devastation = 50
+		}
+		add_treasury = 75
+	}
+	option = {
+		name = gen_ita.14b
+		4948 = {
+			add_unrest = -1
+			add_base_tax = 1
+		}
+		add_prestige = -15
+	}
+}
+
+
+country_event = {	#event Aquileia consort
+	id = gen_ita.15
+	title = gen_ita.15.test
+	desc = gen_ita.15.desc
+	picture = MILITARISTICALLY_TALENTED_RULER_eventPicture
+	fire_only_once = yes
+	mean_time_to_happen = {
+		months = 6
+	}
+	trigger = {
+		tag = AQU
+	}
+
+	option = {
+		name = gen_ita.15a
+		define_consort = {
+			name = "Arianna" #Random names are random
+			dynasty = "Beretta"
+			age = 23
+			adm = 4
+			dip = 5
+			mil = 6
+		}
+		add_ruler_modifier = {
+			name = alb_beretta_consort
+		}
+	}
+	option = {
+		name = gen_ita.15b
+		define_consort = {
+			name = "Lisa" 
+			dynasty = "Gioconda"
+			age = 22
+			adm = 6
+			dip = 5
+			mil = 4
+		}
+		add_ruler_modifier = {
+			name = alb_monalisa_consort
+		}
+	}
+}
+
+
+country_event = {	#Holy Italian Empire Broke
+	id = gen_ita.100
+	title = gen_ita.100.test
+	desc = gen_ita.100.desc
+	picture = GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = gen_ita.100a
+		ai_chance = {
+			factor = 30
+		}
+		add_country_modifier = {
+			name = alb_dismantle_empire_dream
+			duration = -1
+		}
+	}
+	option = {
+		name = gen_ita.100b
+		ai_chance = {
+			factor = 70
+		}
+		add_country_modifier = {
+			name = alb_working_towards_emperor
+			duration = -1
+		}
 	}
 }

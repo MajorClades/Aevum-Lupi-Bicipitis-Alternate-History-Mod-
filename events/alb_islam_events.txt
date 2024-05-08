@@ -240,6 +240,7 @@ country_event = {
 
 	immediate = {
 		hidden_effect = {
+			enable_religion = rashidi
 			every_province = {
 				remove_province_modifier = rashidi_community_in_province
 				remove_province_modifier = jafar_al_rashidi_activity
@@ -636,6 +637,70 @@ country_event = {
 		name = alb_islam_events.8b
 		subtract_from_caliph_authority = {
 			amount = 2.5
+		}
+	}
+}
+
+#End of movement
+country_event = {
+	id = alb_islam_events.10
+	title = alb_islam_events.10.test
+	desc = alb_islam_events.10.desc
+	picture = muslimgfx_REFORM_eventPicture
+	fire_only_once = yes
+	immediate = {
+		hidden_effect = {
+			enable_religion = rashidi
+			every_province = {
+				limit = {
+					OR = {
+						has_province_modifier = rashidi_community_in_province
+						has_province_modifier = jafar_al_rashidi_activity
+					}
+				}
+				remove_province_modifier = rashidi_community_in_province
+				remove_province_modifier = jafar_al_rashidi_activity
+				change_religion = rashidi
+			}
+		}
+	}
+	trigger = {
+		religion = islam
+		REB = {
+			check_variable = {
+				which = caliph_authority_var
+				value = 40
+			}
+		}
+		had_global_flag = {
+			flag  = jafar_al_rashid_preaching
+			days = 18250
+		}
+		any_owned_province = {
+			OR = {
+				has_province_modifier = rashidi_community_in_province
+				has_province_modifier = jafar_al_rashidi_activity
+			}
+		}
+	}
+
+	option = {
+		name = alb_islam_events.6a
+		trigger = {
+			NOT = {
+				tag = event_target:islam_caliph_target
+			}
+		}
+		change_religion = rashidi
+		subtract_from_caliph_authority = {
+			amount = 5
+		}
+	}
+	option = {
+		name = alb_islam_events.6b
+		add_prestige = 10
+		subtract_from_caliph_authority = {
+			amount = 5
 		}
 	}
 }

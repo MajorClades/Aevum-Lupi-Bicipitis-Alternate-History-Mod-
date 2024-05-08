@@ -1149,10 +1149,34 @@ ZL0_second_3_slot = {
 
 		trigger = { 
 			OR = {
-				SE0 = {
-					has_opinion = {
-						who = ROOT
-						value = 180
+				if = {
+					limit = {
+						SE0 = {
+							exists = no
+						}
+						SE9 = {
+							exists = yes
+						}
+					}
+					SE9 = {
+						has_opinion = {
+							who = ROOT
+							value = 180
+						}
+					}
+					SE9 = {
+						exists = no
+					}
+				}
+				else = {
+					SE0 = {
+						has_opinion = {
+							who = ROOT
+							value = 180
+						}
+					}
+					SE0 = {
+						exists = no
 					}
 				}
 				AND = {
