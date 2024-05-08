@@ -8,45 +8,20 @@ Padania_1_slot = {
 	1_mantua = {
 		icon = imperial_capitals
 		position = 1
-		provinces_to_highlight = { is_capital_of = MAN } 
+		provinces_to_highlight = { province_id = 109 } 
 
 		trigger = {
-			OR = {
-				MAN = {
-					alliance_with = ROOT
-					trust = {
-						who = ROOT
-						value = 65
-					}
-				}
-				AND = {
-					treasury = 100
-					NOT = { alliance_with = MAN } 
-				}
-				MAN = { exists = no } 
+			109 = {
+				owned_by = ROOT
+				grown_by_development = 2
 			}
 		}
 
 		effect = {
-			custom_tooltip = PAD_MAN_CT
-			if = {
-				limit = { MAN = { alliance_with = ROOT }  } 
-				vassalize = MAN
+			109 = {
+				add_or_upgrade_courthouse_building = yes
 			}
-			else = {
-				if = {
-					limit = { exists = MAN } 
-					add_treasury = -100
-					109 = {
-						spawn_rebels = {
-							size = 1
-							type = noble_rebels
-						}
-					}
-				}
-				109 = { add_permanent_claim = ROOT } 
-				4968 = { add_permanent_claim = ROOT } 
-			}
+			4968 = { add_permanent_claim = ROOT } 
 		}
 	}
 
