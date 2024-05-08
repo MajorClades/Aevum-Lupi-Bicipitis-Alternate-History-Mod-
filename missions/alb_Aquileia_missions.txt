@@ -29,14 +29,31 @@ Aqui_1_slot = {
 				}
 				add_or_upgrade_fort_building = yes
 			}
-			po_valley_area = {
-				add_permanent_claim = ROOT
-			}
-			lombardy_area = {
-				add_permanent_claim = ROOT
-			}
-			emilia_romagna_area = {
-				add_permanent_claim = ROOT
+			po_valley_area = {		add_permanent_claim = ROOT	}
+			lombardy_area = {		add_permanent_claim = ROOT	}
+			emilia_romagna_area = {	add_permanent_claim = ROOT	}
+		} 
+	}
+	aqu_verona = {
+		icon = mng_outer_city_beijing
+		position = 3
+		required_missions = {aqu_dolomite } 
+		provinces_to_highlight = {province_id = 108}
+		trigger = { 108 = { owned_by = ROOT OR = { base_production = 9 has_production_building_trigger = yes} } } 
+
+		effect = {  
+			add_army_tradition = 5
+			if = {
+				limit = { has_ruler_modifier = alb_beretta_consort }
+				108 = {
+					add_or_upgrade_production_building = yes
+					add_permanent_province_modifier = {
+						name = beretta_fire_design
+						duration = -1
+					}
+				}
+			}else = {
+				108 = {add_or_upgrade_production_building = yes}
 			}
 		} 
 	}
@@ -73,6 +90,25 @@ Aqui_2_slot = {
 			}
 		} 
 	}
+	aqu_padanian_pawn_shop = {
+		icon = mng_outer_city_beijing
+		position = 3
+		required_missions = {aqu_dolomite } 
+		provinces_to_highlight = { OR = {area = po_valley_area area = emilia_romagna_area}}
+		trigger = { num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {value = 9 OR = {area = po_valley_area area = emilia_romagna_area}}} 
+		effect = {  
+			add_splendor = 100
+			113 = {
+				center_of_trade = 1
+			}
+			tuscany_area = {
+				add_permanent_claim = ROOT
+			}
+			central_italy_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
 }
 Aqui_3_slot = {
 	slot = 3
@@ -96,11 +132,7 @@ Aqui_3_slot = {
 		provinces_to_highlight = {province_id = 111}
 		trigger = { 111 = {grown_by_development = 2}  has_dip_advisor = yes } 
 
-		effect = {  
-			111 = {
-				add_or_upgrade_production_building = yes
-			}
-		} 
+		effect = { 111 = {add_or_upgrade_production_building = yes}	} 
 	}
 	aqu_guilds = {
 		icon = mng_outer_city_beijing
@@ -114,6 +146,18 @@ Aqui_3_slot = {
 				add_base_tax = 1
 				add_base_production = 1
 				add_base_manpower = 1
+			}
+		} 
+	}
+	aqu_renaissance = {
+		icon = mng_outer_city_beijing
+		position = 3
+		required_missions = {aqu_guilds } 
+		trigger = { has_institution = renaissance stability = 2 } 
+
+		effect = {  
+			country_event = {
+				id = gen_ita.16
 			}
 		} 
 	}
@@ -147,6 +191,19 @@ Aqui_4_slot = {
 			}
 			carinthia_area = {
 				add_permanent_claim = ROOT
+			}
+		} 
+	}
+	aqu_adriatic_adventure = {
+		icon = mng_outer_city_beijing
+		position = 3
+		required_missions = {aqu_carniola } 
+		provinces_to_highlight = { OR = {area = east_adriatic_coast_area area = croatia_area}}
+		trigger = { num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {value = 9 OR = {area = east_adriatic_coast_area area = croatia_area}}} 
+		effect = {  
+			add_mercantilism_or_monarch_power = { amount = 10}
+			137 = {
+				add_trade_node_income = 60
 			}
 		} 
 	}
@@ -187,6 +244,24 @@ Aqui_5_slot = {
 			}
 			croatia_area = {
 				add_permanent_claim = ROOT
+			}
+		} 
+	}
+	aqu_ships_on_water = {
+		icon = mng_outer_city_beijing
+		position = 3
+		required_missions = {aqu_carniola } 
+		trigger = { navy_size_percentage = 1  } 
+
+		effect = {  
+			define_admiral = {
+				shock = 4
+				fire = 4
+				manuever = 3
+			}
+			add_country_modifier = {
+				name = aqu_sea_worthy
+				duration = 10950
 			}
 		} 
 	}
