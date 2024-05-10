@@ -569,6 +569,9 @@ country_event = {	#peasant being revolt
 			random_owned_province = {limit = {culture = sicilian} spawn_rebels = { type = fasci_siciliani_rebels size = 2}}
 			random_owned_province = {limit = {culture = sicilian} spawn_rebels = { type = fasci_siciliani_rebels size = 2}}
 		}	
+		unlock_government_reform = { government_reform = three_pointed_empire } 
+		custom_tooltip = unlock_government_reform_tooltip
+		tooltip = { add_government_reform = three_pointed_empire } 
 	}
 	option = {
 		name = gen_ita.13b
@@ -576,6 +579,9 @@ country_event = {	#peasant being revolt
 			is_year = 1590
 		}
 		add_stability_or_adm_power = yes
+		unlock_government_reform = { government_reform = three_pointed_empire } 
+		custom_tooltip = unlock_government_reform_tooltip
+		tooltip = { add_government_reform = three_pointed_empire } 
 		every_owned_province = {
 			limit = {
 				culture = sicilian
@@ -644,6 +650,7 @@ country_event = {	#event Aquileia consort
 		add_ruler_modifier = {
 			name = alb_beretta_consort
 		}
+		custom_tooltip = AQU_TT_2
 	}
 	option = {
 		name = gen_ita.15b
@@ -712,5 +719,40 @@ country_event = {	#Holy Italian Empire Broke
 			name = alb_working_towards_emperor
 			duration = -1
 		}
+	}
+}
+
+country_event = {	#capitalism for me, not for thee
+	id = gen_ita.101
+	title = gen_ita.101.test
+	desc = gen_ita.101.desc
+	picture = GOOD_WITH_MONARCH_eventPicture
+	trigger = {
+		has_government_power = { 
+			mechanic_type = capitanolistism
+			power_type = venetian_capitalism
+			value = 50
+		}
+	}
+	mean_time_to_happen = {
+		months = 600
+	}
+
+	option = {
+		name = gen_ita.101a
+		ai_chance = {
+			factor = 30
+		}
+		add_years_of_income = -1
+	}
+	option = {
+		name = gen_ita.101b
+		ai_chance = {
+			factor = 70
+		}
+		add_years_of_income = -0.35
+		add_adm_power = -50
+		add_dip_power = -50
+		add_mil_power = -50
 	}
 }
