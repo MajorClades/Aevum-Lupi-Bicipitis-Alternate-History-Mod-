@@ -57,6 +57,30 @@ Aqui_1_slot = {
 			}
 		} 
 	}
+	aqu_tuscania = {
+		icon = mng_outer_city_beijing
+		position = 4
+		required_missions = {aqu_padanian_pawn_shop } 
+		provinces_to_highlight = {area = tuscany_area}
+		trigger = { 
+			tuscany_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+		effect = {  
+			add_country_modifier = {
+				name = aqu_trade_city
+				duration = -1
+			}
+			rasna_area = {
+				add_permanent_claim = ROOT
+			}
+			liguria_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
 }
 Aqui_2_slot = {
 	slot = 2
@@ -105,6 +129,27 @@ Aqui_2_slot = {
 				add_permanent_claim = ROOT
 			}
 			central_italy_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+	aqu_rubicon = {
+		icon = mng_outer_city_beijing
+		position = 5
+		required_missions = {aqu_padanian_pawn_shop } 
+		provinces_to_highlight = {area = central_italy_area}
+		trigger = { 
+			central_italy_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+		effect = {  
+			add_country_modifier = {
+				name = aqu_enter_latium
+				duration = 10950
+			}
+			lazio_area = {
 				add_permanent_claim = ROOT
 			}
 		} 
@@ -161,6 +206,54 @@ Aqui_3_slot = {
 			}
 		} 
 	}
+	aqu_greater_aquileia = {
+		icon = mng_outer_city_beijing
+		position = 4
+		required_missions = {aqu_padanian_pawn_shop aqu_renaissance aqu_adriatic_adventure} 
+		trigger = { 
+			if = {
+				limit = { has_government_mechanic = capitanolistism }
+				NOT = {
+					has_government_power = {
+						mechanic_type = capitanolistism
+						power_type = venetian_capitalism
+						value = 50
+					}
+				}
+			}else = {
+				stability = 3
+			}
+			num_of_completed_idea_groups_all = {amount = 4}
+		} 
+
+		effect = {  
+			hidden_effect = {
+				unlock_government_reform = { government_reform = greater_aquilean_kingdom } 
+			}
+			add_government_reform = greater_aquilean_kingdom 
+			custom_tooltip = empty_line_tt
+			unlock_government_reform = { government_reform = capitanolista_burocrazia } 
+			custom_tooltip = unlock_government_reform_tooltip
+			tooltip = { add_government_reform = capitanolista_burocrazia } 
+		} 
+	}
+	aqu_god_and_romans = {
+		icon = mng_outer_city_beijing
+		position = 6
+		required_missions = {aqu_greater_aquileia aqu_rubicon } 
+		provinces_to_highlight = {area = lazio_area}
+		trigger = { 
+			lazio_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+		effect = {  
+			add_core = 118
+			italy_region = {add_permanent_claim = ROOT}
+			country_event = { id = gen_ita.100 } 
+		} 
+	}
 }
 Aqui_4_slot = {
 	slot = 4
@@ -205,6 +298,23 @@ Aqui_4_slot = {
 			137 = {
 				add_trade_node_income = 60
 			}
+		} 
+	}
+	aqu_ducats_of_buckets = {
+		icon = mng_outer_city_beijing
+		position = 5
+		required_missions = {aqu_adriatic_adventure } 
+		trigger = { 
+			treasury = 2000
+			num_of_owned_provinces_with = {
+				value = 3
+				province_has_center_of_trade_of_level = 3
+			}
+		} 
+		effect = {  
+			add_treasury = -1000
+			custom_tooltip = AQU_TT_4
+			set_country_flag = aqu_strong_center_trade
 		} 
 	}
 }
@@ -263,6 +373,47 @@ Aqui_5_slot = {
 				name = aqu_sea_worthy
 				duration = 10950
 			}
+		} 
+	}
+	aqu_light_or_heavy = {
+		icon = mng_outer_city_beijing
+		position = 4
+		provinces_to_highlight = {province_id = 112}
+		required_missions = {aqu_ships_on_water } 
+		trigger = { 
+			OR = {
+				owns = 112
+				navy_tradition = 50
+			}
+			OR = {
+				num_of_heavy_ship = 20
+				num_of_light_ship = 20
+			}  
+		} 
+		effect = {  
+			country_event_with_insight = {
+				id = gen_ita.17
+				insight_tooltip = AQU_TT_3
+			}
+		} 
+	}
+	aqu_silly_feasts = {
+		icon = mng_outer_city_beijing
+		position = 6
+		required_missions = {aqu_light_or_heavy aqu_ducats_of_buckets} 
+		trigger = { 
+			OR = {
+				artist = 5
+				trader = 5
+				naval_reformer = 5
+			} 
+			treasury = 500
+		} 
+		effect = {  
+			set_country_flag = aqu_carnevale
+			custom_tooltip = AQU_TT_5
+			add_treasury = -500
+			remove_plague_events = yes
 		} 
 	}
 }
