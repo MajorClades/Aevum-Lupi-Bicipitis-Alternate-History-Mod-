@@ -139,7 +139,28 @@ on_war_won = {
 		}
 	}
 }
-	
+on_center_of_trade_upgrade = {
+	if = {
+		limit = {
+			owner = {
+				has_country_flag = aqu_strong_center_trade
+			}
+		}
+		add_random_development = 1
+		add_or_upgrade_trade_building = yes
+	}
+}
+on_center_of_trade_downgrade = {
+	if = {
+		limit = {
+			owner = {
+				has_country_flag = aqu_strong_center_trade
+			}
+		}
+		remove_building = trade_depot
+		remove_building = stock_exchange
+	}
+}
 on_battle_won_country = {
 	#on_battle_ended_effect = yes
 	on_battle_won_country_effect = yes
