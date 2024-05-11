@@ -4,213 +4,29 @@ germ_conf_mechanic = {
 	available = {
 	
 	}
-	
-	interactions = {
-		germ_vassal_1 = {
-			icon = GFX_table_of_ranks_adm_button
-			trigger = {
-			}
-			effect = {
-				custom_tooltip = GAIN_5_GERM
-				hidden_effect = {
-					country_event = {
-						id = germania.300
-					}
-				}
-				add_subjects_development_ducats = {
-					multiplier = 1.33
-				}
-			}
-			cooldown_years = 5
-			cooldown_token = germ_vassallage_action
-			cooldown_desc = ACTION_GERM_CONF
-			ai_chance = {
-				factor = 20
-				modifier = {
-					factor = 0
-					NOT = { num_of_loans = 1 }
-				}
-				modifier = {
-					factor = 0.5
-					is_in_deficit = no
-				}
-				modifier = {
-					factor = 1.25
-					has_any_disaster = yes
-				}
-				modifier = {
-					factor = 1.5
-					num_of_loans = 2
-					is_in_deficit = yes
-				}
-				modifier = {
-					factor = 20
-					num_of_loans = 1
-				}
-				modifier = {
-					factor = 100
-					num_of_loans = 3
-				}
-				modifier = {
-					factor = 100
-					num_of_loans = 5
-				}
-				modifier = {
-					factor = 100
-					num_of_loans = 7
-				}
-				modifier = {
-					factor = 0.2
-					has_government_power = { 
-						mechanic_type = german_conf_mechanic 
-						power_type = confederation_power 
-						value = 10
-					}
-				}
-				modifier = {
-					factor = 0
-					NOT = {
-						num_of_subjects = 1
-					}
-				}
-			}
-		}
-		germ_vassal_2 = {
-			icon = GFX_table_of_ranks_dip_button
-			trigger = { 
-			}
-			effect = { 
-				custom_tooltip = GAIN_5_GERM
-				hidden_effect = {
-					country_event = {
-						id = germania.300
-					}
-				}
-				add_subjects_development_manpower = {
-					multiplier = 0.05
-				}
-			}
-			cooldown_years = 5
-			cooldown_token = germ_vassallage_action
-			cooldown_desc = ACTION_GERM_CONF
-			ai_chance = {
-				factor = 20
-				modifier = {
-					factor = 20
-					not = { manpower_percentage = 0.3 }
-				}
-				modifier = {
-					factor = 20
-					not = { manpower_percentage = 0.2 }
-				}
-				modifier = {
-					factor = 20
-					not = { manpower_percentage = 0.1 }
-				}
-				modifier = {
-					factor = 100
-					is_in_important_war = yes
-				}
-				modifier = {
-					factor = 30
-					is_at_war = yes
-					is_in_deficit = no
-				}
-				modifier = {
-					factor = 0
-					is_at_war = no
-					OR = {
-						NOT = {
-							any_neighbor_country = {
-								NOT = { truce_with = ROOT }
-							}
-						}
-						manpower_percentage = 0.9
-					}
-				}
-				modifier = {
-					factor = 0.2
-					has_government_power = { 
-						mechanic_type = german_conf_mechanic 
-						power_type = confederation_power 
-						value = 10
-					}
-				}
-				modifier = {
-					factor = 0
-					NOT = {
-						num_of_subjects = 1
-					}
-				}
-			}
-		}
-		germ_vassal_3 = {
-			icon = GFX_table_of_ranks_mil_button
-			trigger = {
-			}
-			effect = { 	
-				custom_tooltip = GAIN_10_GERM
-				hidden_effect = {
-					country_event = {
-						id = germania.200
-					}
-				}
-			}
-			cooldown_years = 5
-			cooldown_token = germ_vassallage_action
-			cooldown_desc = ACTION_GERM_CONF
-			ai_chance = {
-				factor = 10
-				modifier = {
-					factor = 0
-					any_subject_country = {
-						liberty_desire = 45
-					}
-				}
-			}
-		}
-	}
-}
-german_conf_mechanic = {
-	available = {
-		
-	}
-
 	powers = {	
 		confederation_power = {
 			gui = parliament_vs_monarchy_gov_mech
 			max = 100	#Centralized
 			min = -100	#Decentralized direction
-			base_monthly_growth = 0
+			base_monthly_growth = 0.1
 			scaled_modifier = {
-				trigger = {
-					has_government_power = { 
-						mechanic_type = german_conf_mechanic 
-						power_type = confederation_power 
-						value = 0
-					}
-				}
 				modifier = {
 					vassal_manpower_bonus = 2
 					vassal_forcelimit_bonus = 1
 					reduced_liberty_desire_on_same_continent = -33
 				}
+				start_value = 0
+				end_value = 100
 			}
 			reverse_scaled_modifier = {
-				trigger = {
-					NOT = {
-						has_government_power = { 
-							mechanic_type = german_conf_mechanic 
-							power_type = confederation_power 
-							value = 0
-						}
-					}
-				}
 				modifier = {
 					vassal_manpower_bonus = -1
 					vassal_forcelimit_bonus = -0.5
 					reduced_liberty_desire_on_same_continent = 33
 				}
+				start_value = 0
+				end_value = -100
 			}
 			on_max_reached = {
 				custom_tooltip = german_confederation_max
@@ -267,6 +83,177 @@ german_conf_mechanic = {
 			}
 			on_min_reached = {
 				release_all_subjects = yes
+			}
+		}
+	}
+	interactions = {
+		germ_vassal_1 = {
+			icon = GFX_table_of_ranks_adm_button
+			trigger = {
+			}
+			effect = {
+				custom_tooltip = GAIN_5_GERM
+				hidden_effect = {
+					add_government_power = {
+						mechanic_type = germ_conf_mechanic
+						power_type = confederation_power
+						value = -5
+					}
+				}
+				add_subjects_development_ducats = {
+					multiplier = 1.33
+				}
+			}
+			cooldown_years = 5
+			cooldown_token = germ_vassallage_action
+			cooldown_desc = ACTION_GERM_CONF
+			ai_chance = {
+				factor = 20
+				modifier = {
+					factor = 0
+					NOT = { num_of_loans = 1 }
+				}
+				modifier = {
+					factor = 0.5
+					is_in_deficit = no
+				}
+				modifier = {
+					factor = 1.25
+					has_any_disaster = yes
+				}
+				modifier = {
+					factor = 1.5
+					num_of_loans = 2
+					is_in_deficit = yes
+				}
+				modifier = {
+					factor = 20
+					num_of_loans = 1
+				}
+				modifier = {
+					factor = 100
+					num_of_loans = 3
+				}
+				modifier = {
+					factor = 100
+					num_of_loans = 5
+				}
+				modifier = {
+					factor = 100
+					num_of_loans = 7
+				}
+				modifier = {
+					factor = 0.2
+					has_government_power = { 
+						mechanic_type = germ_conf_mechanic 
+						power_type = confederation_power 
+						value = 10
+					}
+				}
+				modifier = {
+					factor = 0
+					NOT = {
+						num_of_subjects = 1
+					}
+				}
+			}
+		}
+		germ_vassal_2 = {
+			icon = GFX_table_of_ranks_dip_button
+			trigger = { 
+			}
+			effect = { 
+				custom_tooltip = GAIN_5_GERM
+				hidden_effect = {
+					add_government_power = {
+						mechanic_type = germ_conf_mechanic
+						power_type = confederation_power
+						value = -5
+					}
+				}
+				add_subjects_development_manpower = {
+					multiplier = 0.05
+				}
+			}
+			cooldown_years = 5
+			cooldown_token = germ_vassallage_action
+			cooldown_desc = ACTION_GERM_CONF
+			ai_chance = {
+				factor = 20
+				modifier = {
+					factor = 20
+					not = { manpower_percentage = 0.3 }
+				}
+				modifier = {
+					factor = 20
+					not = { manpower_percentage = 0.2 }
+				}
+				modifier = {
+					factor = 20
+					not = { manpower_percentage = 0.1 }
+				}
+				modifier = {
+					factor = 100
+					is_in_important_war = yes
+				}
+				modifier = {
+					factor = 30
+					is_at_war = yes
+					is_in_deficit = no
+				}
+				modifier = {
+					factor = 0
+					is_at_war = no
+					OR = {
+						NOT = {
+							any_neighbor_country = {
+								NOT = { truce_with = ROOT }
+							}
+						}
+						manpower_percentage = 0.9
+					}
+				}
+				modifier = {
+					factor = 0.2
+					has_government_power = { 
+						mechanic_type = germ_conf_mechanic 
+						power_type = confederation_power 
+						value = 10
+					}
+				}
+				modifier = {
+					factor = 0
+					NOT = {
+						num_of_subjects = 1
+					}
+				}
+			}
+		}
+		germ_vassal_3 = {
+			icon = GFX_table_of_ranks_mil_button
+			trigger = {
+			}
+			effect = { 	
+				custom_tooltip = GAIN_10_GERM
+				hidden_effect = {
+					add_government_power = {
+						mechanic_type = germ_conf_mechanic
+						power_type = confederation_power
+						value = 10
+					}
+				}
+			}
+			cooldown_years = 5
+			cooldown_token = germ_vassallage_action
+			cooldown_desc = ACTION_GERM_CONF
+			ai_chance = {
+				factor = 10
+				modifier = {
+					factor = 0
+					any_subject_country = {
+						liberty_desire = 45
+					}
+				}
 			}
 		}
 	}

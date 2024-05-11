@@ -1,0 +1,76 @@
+fasci_siciliani_disaster = {
+
+	potential = {
+		culture = sicilian
+		owns = 124
+		NOT = {
+			current_age = age_of_discovery
+		}
+		NOT = {
+			has_country_flag = finished_fasci_siciliani_flag
+		}
+	}
+	
+	can_start = {
+		NOT = {
+			stability = 0
+		}
+	}
+	
+	can_stop = {
+		has_any_disaster = yes
+	}
+	
+	down_progress = {
+		factor = 0
+	}
+	
+	progress = {
+		modifier = {
+			factor = 0.5
+			NOT = {
+				stability = -2
+			}
+		}	
+		modifier = {
+			factor = 0.25
+			NOT = {
+				stability = -1
+			}
+		}	
+		modifier = {
+			factor = 0.5
+			unrest = 2	
+		}	
+		modifier = {
+			factor = 0.2
+			estate_influence = {
+				estate = estate_nobles
+				influence = 60
+			}
+		}
+		modifier = {
+			factor = 1
+			custom_trigger_tooltip = {
+				tooltip = alb_sic_disaster_in_torino_tt
+				has_country_flag = etna_erupted_flag
+			}
+		}
+		modifier = {
+			factor = 2
+			custom_trigger_tooltip = {
+				tooltip = alb_sic_situation_escalates_tt
+				has_country_flag = alb_sic_situation_escalated_flag
+			}
+		}
+	}
+	
+	can_end = {
+		NOT = { num_of_rebel_armies = 1 }
+		NOT = { num_of_rebel_controlled_provinces = 1 }
+		stability = 1
+	}
+	
+	on_start = gen_ita.13
+	on_end = gen_ita.16
+}
