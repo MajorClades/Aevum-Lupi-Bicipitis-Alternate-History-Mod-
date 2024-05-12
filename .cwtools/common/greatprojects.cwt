@@ -1,0 +1,311 @@
+
+types = {
+	type[great_project] = {
+		path = "game/common/great_projects"
+		localisation = {
+			## required
+			name = "$"
+			## optional
+			desc = "$_desc"
+		}
+
+		subtype[monument] = {
+			type = monument
+		}
+		subtype[canal] = {
+			type = canal
+		}
+	}
+}
+
+great_project = {
+	start = int
+
+	date = scalar
+
+	time = {
+		months = int
+	}
+	build_cost = int
+	can_be_moved = bool
+
+	## cardinality = 0..1
+	move_days_per_unit_distance = int
+
+
+	starting_tier = int
+
+	subtype[monument] = {
+		type = monument
+	}
+	subtype[canal] = {
+		type = canal
+	}
+
+	## replace_scope = { root = province this = province from = owner }
+	build_trigger = {
+		alias_name[trigger] = alias_match_left[trigger]
+	}
+
+	## replace_scope = { root = province this = province from = owner }
+	## cardinality = 0..1
+	on_built = {
+		## cardinality = 0..1
+		add_canal = <great_project.canal>
+		## cardinality = 0..2
+		show_ambient_object = <great_project>
+		## cardinality = 0..2
+		show_ambient_object = <ambient_object>
+		alias_name[effect] = alias_match_left[effect]
+	}
+
+	## replace_scope = { root = province this = province from = owner }
+	## cardinality = 0..1
+	on_destroyed = {
+		## cardinality = 0..1
+		remove_canal = <great_project.canal>
+		## cardinality = 0..2
+		hide_ambient_object = <great_project>
+		## cardinality = 0..2
+		hide_ambient_object = <ambient_object>
+
+		alias_name[effect] = alias_match_left[effect]
+	}
+
+	## replace_scope = { root = province this = province from = owner }
+	can_use_modifiers_trigger = {
+		alias_name[trigger] = alias_match_left[trigger]
+	}
+
+	## replace_scope = { root = province this = province from = owner }
+	can_upgrade_trigger = {
+		alias_name[trigger] = alias_match_left[trigger]
+	}
+
+	## replace_scope = { root = province this = province from = owner }
+	keep_trigger = {
+		alias_name[trigger] = alias_match_left[trigger]
+	}
+
+	tier_0 = {
+		upgrade_time = {
+			months = int
+		}
+		cost_to_upgrade = {
+			factor = int
+		}
+		## replace_scope = { root = province this = province }
+		province_modifiers = {
+			alias_name[modifier] = alias_match_left[modifier]
+		}
+		## cardinality = 0..1
+		## replace_scope = { root = province this = province }
+		area_modifier = {
+			alias_name[modifier] = alias_match_left[modifier]
+		}
+		# This one seems to be optional, it is not present
+		# in any monument, including the ones from 1.34
+		## cardinality = 0..1
+		## replace_scope = { root = province this = province }
+		region_modifier = {
+			alias_name[modifier] = alias_match_left[modifier]
+		}
+		## replace_scope = { root = country this = country }
+		## cardinality = 0..1
+		country_modifiers = {
+			alias_name[modifier] = alias_match_left[modifier]
+		}
+		## replace_scope = { root = province this = province }
+		## cardinality = 0..1
+		###Effects to run when the project is upgraded to tier 0
+		on_upgraded = {
+			alias_name[effect] = alias_match_left[effect]
+
+			## cardinality = 0..1
+			add_canal = <great_project.canal>
+		}
+		## cardinality = 0..inf
+		###Modifier that are applied if the specified conditions are true.
+		conditional_modifier = {
+			## cardinality = 0..1
+			###If true will show the conditional modifier, will be hidden otherwise
+			tooltip_potential = {
+				alias_name[trigger] = alias_match_left[trigger]
+			}
+			trigger = {
+				alias_name[trigger] = alias_match_left[trigger]
+			}
+			modifier = {
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			###Specifies whether the tooltip should list it as positive or not
+			is_bad = bool
+		}
+	}
+	tier_1 = {
+		upgrade_time = {
+			months = int
+		}
+		cost_to_upgrade = {
+			factor = int
+		}
+		## replace_scope = { root = province this = province }
+		province_modifiers = {
+			alias_name[modifier] = alias_match_left[modifier]
+		}
+		## replace_scope = { root = province this = province }
+		area_modifier = {
+			alias_name[modifier] = alias_match_left[modifier]
+		}
+		# This one seems to be optional, it is not present
+		# in any monument, including the ones from 1.34
+		## cardinality = 0..1
+		## replace_scope = { root = province this = province }
+		region_modifier = {
+			alias_name[modifier] = alias_match_left[modifier]
+		}
+		## replace_scope = { root = country this = country }
+		## cardinality = 0..1
+		country_modifiers = {
+			alias_name[modifier] = alias_match_left[modifier]
+		}
+		## replace_scope = { root = province this = province }
+		## cardinality = 0..1
+		###Effects to run when the project is upgraded to tier 1
+		on_upgraded = {
+			alias_name[effect] = alias_match_left[effect]
+
+			## cardinality = 0..1
+			add_canal = <great_project.canal>
+		}
+		## cardinality = 0..inf
+		###Modifier that are applied if the specified conditions are true.
+		conditional_modifier = {
+			## cardinality = 0..1
+			###If true will show the conditional modifier, will be hidden otherwise
+			tooltip_potential = {
+				alias_name[trigger] = alias_match_left[trigger]
+			}
+			trigger = {
+				alias_name[trigger] = alias_match_left[trigger]
+			}
+			modifier = {
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			###Specifies whether the tooltip should list it as positive or not
+			is_bad = bool
+		}
+	}
+	tier_2 = {
+		upgrade_time = {
+			months = int
+		}
+		cost_to_upgrade = {
+			factor = int
+		}
+		## replace_scope = { root = province this = province }
+		province_modifiers = {
+			alias_name[modifier] = alias_match_left[modifier]
+		}
+		## replace_scope = { root = province this = province }
+		area_modifier = {
+			alias_name[modifier] = alias_match_left[modifier]
+		}
+		# This one seems to be optional, it is not present
+		# in any monument, including the ones from 1.34
+		## cardinality = 0..1
+		## replace_scope = { root = province this = province }
+		region_modifier = {
+			alias_name[modifier] = alias_match_left[modifier]
+		}
+		## replace_scope = { root = country this = country }
+		## cardinality = 0..1
+		country_modifiers = {
+			alias_name[modifier] = alias_match_left[modifier]
+		}
+		## replace_scope = { root = province this = province }
+		## cardinality = 0..1
+		###Effects to run when the project is upgraded to tier 2
+		on_upgraded = {
+			alias_name[effect] = alias_match_left[effect]
+
+			## cardinality = 0..1
+			add_canal = <great_project.canal>
+		}
+		## cardinality = 0..inf
+		###Modifier that are applied if the specified conditions are true.
+		conditional_modifier = {
+			## cardinality = 0..1
+			###If true will show the conditional modifier, will be hidden otherwise
+			tooltip_potential = {
+				alias_name[trigger] = alias_match_left[trigger]
+			}
+			trigger = {
+				alias_name[trigger] = alias_match_left[trigger]
+			}
+			modifier = {
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			###Specifies whether the tooltip should list it as positive or not
+			is_bad = bool
+		}
+	}
+	tier_3 = {
+		upgrade_time = {
+			months = int
+		}
+		cost_to_upgrade = {
+			factor = int
+		}
+		## replace_scope = { root = province this = province }
+		province_modifiers = {
+			alias_name[modifier] = alias_match_left[modifier]
+		}
+		## replace_scope = { root = province this = province }
+		area_modifier = {
+			alias_name[modifier] = alias_match_left[modifier]
+		}
+		# This one seems to be optional, it is not present
+		# in any monument, including the ones from 1.34
+		## cardinality = 0..1
+		## replace_scope = { root = province this = province }
+		region_modifier = {
+			alias_name[modifier] = alias_match_left[modifier]
+		}
+		## replace_scope = { root = country this = country }
+		## cardinality = 0..1
+		country_modifiers = {
+			alias_name[modifier] = alias_match_left[modifier]
+		}
+		## replace_scope = { root = province this = province }
+		## cardinality = 0..1
+		###Effects to run when the project is upgraded to tier 3
+		on_upgraded = {
+			alias_name[effect] = alias_match_left[effect]
+
+			## cardinality = 0..1
+			add_canal = <great_project.canal>
+		}
+		## cardinality = 0..inf
+		###Modifier that are applied if the specified conditions are true.
+		conditional_modifier = {
+			## cardinality = 0..1
+			###If true will show the conditional modifier, will be hidden otherwise
+			tooltip_potential = {
+				alias_name[trigger] = alias_match_left[trigger]
+			}
+			trigger = {
+				alias_name[trigger] = alias_match_left[trigger]
+			}
+			modifier = {
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## cardinality = 0..1
+			###Specifies whether the tooltip should list it as positive or not
+			is_bad = bool
+		}
+	}
+}
