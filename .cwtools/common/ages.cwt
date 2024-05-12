@@ -1,0 +1,95 @@
+
+types = {
+	type[game_age] = {
+		path = "game/common/ages"
+
+		localisation = {
+			## required
+			name = "$"
+			## required
+			short = "$_short"
+			## required
+			description = "$_desc"
+		}
+	}
+	type[game_age_ability] = {
+		path = "game/common/ages"
+
+		skip_root_key = { any abilities }
+
+		localisation = {
+			## required
+			name = "$"
+		}
+	}
+}
+
+
+game_age = {
+	start = int
+	
+	can_start = {
+		alias_name[trigger] = alias_match_left[trigger]
+	}
+	
+	## cardinality = 0..1
+	religious_conflicts = yes
+
+	## cardinality = 0..1
+	papacy = float
+	
+
+	## cardinality = 0..1
+	absolutism = {
+		harsh_treatment = int
+		stability = int
+		decrease_autonomy_command = int
+		strengthen_government = int
+		
+		increase_autonomy_command = int
+		debase_currency = int
+		execute_rebel_acceptance_command = int
+		automatic_seat_in_parliament = int
+		manual_seat_in_parliament = int
+		war_exhaustion = int
+	}
+	
+	objectives = {
+		## cardinality = 4..inf
+		## replace_scope = { root = country this = country }
+		localisation = {
+			## cardinality = 0..1
+			## replace_scope = { root = country this = country }
+			allow = {
+				alias_name[trigger] = alias_match_left[trigger]
+			}
+			alias_name[trigger] = alias_match_left[trigger]
+		}
+	}
+	
+	
+	abilities = {
+		## cardinality = 1..inf
+		<game_age_ability> = {
+			## cardinality = 0..1
+			## replace_scope = { root = country this = country }
+			allow = {
+				alias_name[trigger] = alias_match_left[trigger]
+			}
+			## cardinality = 0..1
+			## replace_scope = { root = country this = country }
+			effect = {
+				alias_name[effect] = alias_match_left[effect]
+			}
+			## cardinality = 0..1
+			modifier = {
+				alias_name[modifier] = alias_match_left[modifier]
+			}
+			## replace_scope = { root = country this = country }
+			ai_will_do = {
+				factor = float
+				alias_name[modifier_rule] = alias_match_left[modifier_rule]
+			}
+		}
+	}
+}

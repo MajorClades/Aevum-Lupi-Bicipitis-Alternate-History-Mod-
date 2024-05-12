@@ -448,26 +448,21 @@ country_event = {	#Etna doing Vulcano things
 		ai_chance = {
 			factor = 50
 		}
-		add_manpower = -0.01
+		add_manpower = -0.1
 		124 = {
 			add_devastation = 50
 			add_local_autonomy = 50
 		}
-	}
-	option = {
-		name = gen_ita.11b
-		ai_chance = {
-			factor = 50
+		sicily_area = {
+			add_devastation = 30
 		}
-		add_estate_loyalty = {
-			estate = estate_nobles
-			loyalty = 5
+		western_sicily_area = {
+			add_devastation = 10
 		}
-		add_manpower = -0.01
-		124 = {
-			add_devastation = 50
+		calabria_area = {
+			add_devastation = 10
 		}
-		set_country_flag = sicilian_fascio_flag 
+		set_country_flag = etna_erupted_flag 
 		hidden_effect = {
 			set_variable = {
 				which = sicilian_fascio_rebel_numbers
@@ -483,7 +478,11 @@ country_event = {	#peasant being revolting
 	desc = gen_ita.12.desc
 	picture = REVOLT_eventPicture
 	is_triggered_only = yes
-
+	immediate = {
+		hidden_effect = {
+			set_country_flag = alb_sic_situation_escalated_flag
+		}
+	}
 	option = {
 		name = gen_ita.12a
 		ai_chance = {
@@ -527,60 +526,57 @@ country_event = {	#peasant being revolt
 	desc = gen_ita.13.desc
 	picture = REVOLT_eventPicture
 	fire_only_once = yes
-	mean_time_to_happen = {
-		months = 12
-	}
-	trigger = {
-		has_country_flag = sicilian_fascio_flag
-		is_year = 1560
-		OR = {
-			is_year = 1590
-			check_variable = {
-				which = sicilian_fascio_rebel_numbers
-				value = 10
-			}
-		}
-	}
+	is_triggered_only = yes
 	immediate = {
-		clr_country_flag = sicilian_fascio_flag
+		add_stability = -3
 	}
-
 	option = {
 		name = gen_ita.13a
-		trigger = {
-			NOT = {
-				is_year = 1590
-			}
-			check_variable = {
-				which = sicilian_fascio_rebel_numbers
-				value = 10
+		random_owned_province = {
+			limit = {culture = sicilian} 
+			spawn_rebels = { 
+				type = fasci_siciliani_rebels 
+				size = 2
 			}
 		}
-		random_owned_province = {limit = {culture = sicilian} spawn_rebels = { type = fasci_siciliani_rebels size = 2}}
-		random_owned_province = {limit = {culture = sicilian} spawn_rebels = { type = fasci_siciliani_rebels size = 3}}
-		random_owned_province = {limit = {culture = sicilian} spawn_rebels = { type = fasci_siciliani_rebels size = 2}}
-		if = {
-			limit = {
-				check_variable = {
-					which = sicilian_fascio_rebel_numbers
-					value = 15
-				}
+		random_owned_province = {
+			limit = {culture = sicilian} 
+			spawn_rebels = { 
+				type = fasci_siciliani_rebels 
+				size = 3
 			}
-			random_owned_province = {limit = {culture = sicilian} spawn_rebels = { type = fasci_siciliani_rebels size = 2}}
-			random_owned_province = {limit = {culture = sicilian} spawn_rebels = { type = fasci_siciliani_rebels size = 2}}
-		}	
+		}
+		random_owned_province = {
+			limit = {culture = sicilian} 
+			spawn_rebels = { 
+				type = fasci_siciliani_rebels 
+				size = 2
+			}
+		}
 	}
 	option = {
 		name = gen_ita.13b
-		trigger = {
-			is_year = 1590
-		}
-		add_stability_or_adm_power = yes
-		every_owned_province = {
-			limit = {
-				culture = sicilian
+		random_owned_province = {
+			limit = {culture = sicilian} 
+			spawn_rebels = { 
+				type = noble_rebels 
+				size = 2
 			}
-			add_local_autonomy = -15
+		}
+		random_owned_province = {
+			limit = {culture = sicilian} 
+			spawn_rebels = { 
+				type = noble_rebels 
+				size = 2
+			}
+		}
+		random_owned_province = {
+			limit = {culture = sicilian} 
+			spawn_rebels = { 
+				type = pretender_rebels
+				use_monarch_as_leader = yes 
+				size = 3
+			}
 		}
 	}
 }
@@ -644,6 +640,7 @@ country_event = {	#event Aquileia consort
 		add_ruler_modifier = {
 			name = alb_beretta_consort
 		}
+		custom_tooltip = AQU_TT_2
 	}
 	option = {
 		name = gen_ita.15b
@@ -660,7 +657,126 @@ country_event = {	#event Aquileia consort
 		}
 	}
 }
+country_event = {	#event Aquileia Renaissance
+	id = gen_ita.16
+	title = gen_ita.16.test
+	desc = gen_ita.16.desc
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
 
+	option = {
+		name = gen_ita.16a
+		add_government_power = {
+			mechanic_type = capitanolistism
+			power_type = venetian_capitalism
+			value = 15
+		}
+		set_country_flag = aqu_capitalist_advisors
+		custom_tooltip = AQU_TT_1
+	}
+	option = {
+		name = gen_ita.16b
+		add_country_modifier = {
+			name = aqu_advisor_discounts
+			duration = 10950
+		}
+	}
+}
+country_event = {	#end of revolt
+	id = gen_ita.17
+	title = gen_ita.17.test
+	desc = gen_ita.17.desc
+	picture = GOOD_WITH_MONARCH_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+	immediate = {
+		set_country_flag = finished_fasci_siciliani_flag
+	}
+	option = {
+		name = gen_ita.17a
+		trigger = {
+			government = republic
+		}
+		add_stability_or_adm_power = yes
+		custom_tooltip = empty_line_tt
+		hidden_effect = {
+			unlock_government_reform = {
+				government_reform = fascioist_republic_reform
+			}
+		}
+		add_government_reform = fascioist_republic_reform
+	}
+	option = {
+		name = gen_ita.17b
+		trigger = {
+			NOT = {
+				government = republic
+			}
+		}
+		add_stability_or_adm_power = yes
+		custom_tooltip = empty_line_tt
+		hidden_effect = {
+			unlock_government_reform = {
+				government_reform = three_pointed_empire
+			}
+		}
+		if = {
+			limit = { 
+				government = monarchy
+			}
+			add_government_reform = three_pointed_empire
+		}
+	}
+}
+country_event = {	#event Aquileia ships
+	id = gen_ita.18
+	title = gen_ita.18.test
+	desc = gen_ita.18.desc
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = gen_ita.18a
+		set_country_flag = aqu_venetian_fleet_1
+		set_naval_doctrine = aqu_heavy_ships_doctrine
+	}
+	option = {
+		name = gen_ita.18b
+		set_country_flag = aqu_venetian_fleet_2
+		set_naval_doctrine = aqu_light_ships_doctrine
+	}
+}
+
+country_event = {	#event carneval
+	id = gen_ita.19
+	title = gen_ita.19.test
+	desc = gen_ita.19.desc
+	picture = MILITARISTICALLY_TALENTED_RULER_eventPicture
+	fire_only_once = yes
+	mean_time_to_happen = {
+		months = 2
+	}
+	trigger = {
+		has_country_flag = aqu_carnevale
+		OR = {
+			is_month = 11
+			is_month = 0
+			is_month = 1
+			is_month = 2
+		}
+	}
+
+	option = {
+		name = gen_ita.19a
+		every_known_country = {
+			reverse_add_aggressive_expansion = {
+				who = ROOT
+				value = -5
+				apply_calc = no
+			}
+		}
+	}
+}
 
 country_event = {	#Holy Italian Empire Broke
 	id = gen_ita.100
@@ -690,3 +806,39 @@ country_event = {	#Holy Italian Empire Broke
 		}
 	}
 }
+
+country_event = {	#capitalism for me, not for thee
+	id = gen_ita.101
+	title = gen_ita.101.test
+	desc = gen_ita.101.desc
+	picture = GOOD_WITH_MONARCH_eventPicture
+	trigger = {
+		has_government_power = { 
+			mechanic_type = capitanolistism
+			power_type = venetian_capitalism
+			value = 50
+		}
+	}
+	mean_time_to_happen = {
+		months = 300
+	}
+
+	option = {
+		name = gen_ita.101a
+		ai_chance = {
+			factor = 30
+		}
+		add_years_of_income = -1
+	}
+	option = {
+		name = gen_ita.101b
+		ai_chance = {
+			factor = 70
+		}
+		add_years_of_income = -0.35
+		add_adm_power = -50
+		add_dip_power = -50
+		add_mil_power = -50
+	}
+}
+

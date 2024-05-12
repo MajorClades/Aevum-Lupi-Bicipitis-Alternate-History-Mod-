@@ -12,4 +12,4 @@ tags={
 	"Gameplay"
 }
 name="Aevum Lupi Bicipitis"
-supported_version="1.36.2"
+supported_version="1.37.*"
