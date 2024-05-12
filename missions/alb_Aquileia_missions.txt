@@ -220,13 +220,32 @@ Aqui_3_slot = {
 		}
 		provinces_to_highlight = { province_id = 111 } 
 
-		trigger = { 111 = { has_tax_building_trigger = yes }  } 
+		trigger = { 
+			capital_scope = { 
+				has_tax_building_trigger = yes 
+			}
+			has_estate_privilege = alb_capitalism_make_money
+		} 
 
 		effect = {
-			111 = {
+			capital_scope = {
 				add_base_tax = 1
 				add_base_production = 1
 				add_base_manpower = 1
+			}
+			custom_tooltip = empty_line_tt
+			simple_dynamic_effect = {
+				first_custom_tooltip = alb_if_has_alb_capitalism_make_money_tt
+				first_limit = "
+					has_estate_privilege = alb_capitalism_make_money
+				"
+				first_effect = "
+					add_years_of_income = 1
+					add_estate_loyalty = {
+						estate = estate_burghers
+						loyalty = 15
+					}
+				"
 			}
 		}
 	}
