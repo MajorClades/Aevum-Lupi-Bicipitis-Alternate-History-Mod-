@@ -1,57 +1,44 @@
 alb_move_iberian_culture = {
-	custom_tooltip = alb_ib0_move_$culture$_tt
 	add_country_modifier = {
 		name = ib0_integrated_$culture$
 		duration = -1
+		hidden = yes
 	}
-	[[iberisch]
-		if = {
+	add_accepted_culture = $culture$
+}
+alb_change_iberian_culture_provinces_iberisch = {
+	custom_tooltip = alb_ib0_move_$culture$_tt
+	hidden_effect = {
+		every_province = {
 			limit = {
-				$culture$ = {
-					OR = {
-						culture_group = romano_hispanian
-						culture_group = frankish
-					}
-				}
+				culture = $culture$
 			}
-			every_province = {
-				limit = {
-					culture = $culture$
-				}
-				change_culture = iberisch_$culture$
-			}
-			every_country = {
-				limit = {
-					accepted_culture = $culture$
-				}
-				remove_accepted_culture = $culture$
-				add_accepted_culture = iberisch_$culture$
-			}
+			change_culture = iberisch_$culture$
 		}
-	]
-	[[hispanian]
-		if = {
+		every_country = {
 			limit = {
-				$culture$ = {	
-					OR = {	
-						culture_group = iberisch
-						culture_group = frankish
-					}
-				}
+				accepted_culture = $culture$
 			}
-			every_province = {
-				limit = {
-					culture = $culture$
-				}
-				change_culture = hispanian_$culture$
-			}
-			every_country = {
-				limit = {
-					accepted_culture = $culture$
-				}
-				remove_accepted_culture = $culture$
-				add_accepted_culture = hispanian_$culture$
-			}	
+			remove_accepted_culture = $culture$
+			add_accepted_culture = iberisch_$culture$
 		}
-	]
+	}
+}
+alb_change_iberian_culture_provinces_hispanian = {
+	custom_tooltip = alb_ib0_move_$culture$_tt
+	hidden_effect = {
+		every_province = {
+			limit = {
+				culture = $culture$
+			}
+			change_culture = hispanian_$culture$
+		}
+		every_country = {
+			limit = {
+				accepted_culture = $culture$
+			}
+			remove_accepted_culture = $culture$
+			add_accepted_culture = hispanian_$culture$
+		}
+	}
 }
