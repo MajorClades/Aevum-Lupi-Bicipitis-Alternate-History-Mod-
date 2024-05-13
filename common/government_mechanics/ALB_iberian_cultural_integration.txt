@@ -1,0 +1,39 @@
+alb_iberian_cultural_integration = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 21
+	available = {
+		
+	}
+	powers = {
+		iberian_cultural_unity = {
+			max = 100
+			min = 0
+			reset_on_new_ruler = no
+			is_good = yes
+			base_monthly_growth = 0.5
+			scaled_modifier = {
+				modifier = {
+					promote_culture_cost = -0.5
+					same_culture_advisor_cost = -0.2
+				}
+			}
+			range_modifier = {
+				trigger = {
+					NOT = {
+						is_iberian_grouped_trigger = yes
+					}
+				}
+				modifier = {
+					monthly_iberian_cultural_unity = -1
+				}
+				start_value = 0
+				end_value = 100
+			}
+			on_max_reached = {
+				country_event = {
+					id = iberia.1
+				}
+			}
+		}
+	}
+}
