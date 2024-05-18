@@ -391,11 +391,47 @@ Iberia_5_slot = {
 		icon = become_king
 		position = 2
 		required_missions = { ib0_united_at_last } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = languedoc_area
+				area = pyrenees_area
+				area = guyenne_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			196 = {
+				owned_by = ROOT
+				is_core = ROOT
+				development = 25
+			}
+			languedoc_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			pyrenees_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			guyenne_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			196 = {
+				add_random_development = 2	
+				add_province_modifier = {
+					name = ib0_goth_capital_mod
+					duration = -1
+				}
+			}
+			#claims on provence, auvergne, poiters
+		} 
 	}
 
 	ib0_cross_dordogne = {
@@ -417,7 +453,11 @@ Iberia_5_slot = {
 
 		trigger = {  } 
 
-		effect = {  } 
+		effect = {  
+			country_event = {
+				id = iberia.2
+			}
+		} 
 	}
 
 	ib0_kingdom_of_soissons = {
