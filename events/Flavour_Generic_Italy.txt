@@ -778,6 +778,36 @@ country_event = {	#event carneval
 	}
 }
 
+country_event = {	#event once formed Italy decide to stay or not in the hre
+	id = gen_ita.20
+	title = gen_ita.20.test
+	desc = gen_ita.20.desc
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = gen_ita.20a
+		set_government_rank = 3
+		set_in_empire = no
+		add_casus_belli = {
+			type = cb_war_on_empire
+			target = emperor
+		}
+	}
+	option = {
+		name = gen_ita.20b
+		trigger = {
+			government = monarchy
+		}
+		add_imperial_influence = 30
+		add_stability_or_adm_power = yes
+		add_country_modifier = {
+			name = ita_electorate_bribring
+			duration = -1
+		}
+	}
+}
+
 country_event = {	#Holy Italian Empire Broke
 	id = gen_ita.100
 	title = gen_ita.100.test
@@ -842,3 +872,51 @@ country_event = {	#capitalism for me, not for thee
 	}
 }
 
+province_event = {	#get booted idiota italian migrate to the new world so that provinces dont get to high dev
+	id = gen_ita.102
+	title = gen_ita.102.test
+	desc = gen_ita.102.desc
+	picture = GOOD_WITH_MONARCH_eventPicture
+	trigger = {
+		is_part_of_hre = yes
+		owner = {
+			any_province = {
+				has_discovered = ROOT
+				OR = {
+					continent = north_america
+					continent = south_america
+				}
+			}
+			culture_group = latin
+		}
+		OR = {
+			owner = {
+				war_exhaustion = 5
+			}
+			owner = {
+				NOT = {
+					stability = -1
+				}
+			}
+			devastation = 80
+		}
+		culture_group = latin
+	}
+	mean_time_to_happen = {
+		months = 300
+	}
+
+	option = {
+		name = gen_ita.102a
+		trigger = {	owner = { ai = yes}	}
+		add_random_development = -1
+		add_base_manpower = -1
+	}
+	option = {
+		name = gen_ita.102b
+		trigger = {	owner = { ai = no}	}
+		owner = {
+			add_yearly_manpower = -0.2
+		}
+	}
+}

@@ -12,6 +12,22 @@ genita_1_slot = {
 		has_country_flag = generic_italy_MT
 	}
 
+	gita_war_changes = {
+		icon = mission_english_renaissance
+		position = 8
+		required_missions = { gita_armata_legionaria }
+
+		trigger = {
+			army_size = 90
+			num_of_completed_idea_groups_mil = {amount = 2}
+			has_mil_advisor_of_level = {level = 5}
+		}
+
+		effect = {
+			custom_tooltip = GITA_TT_1
+			set_country_flag = gita_stronger_mil_advisor
+		}
+	}
 }
 genita_2_slot = {
 	slot = 2
@@ -26,8 +42,62 @@ genita_2_slot = {
 		}
 		has_country_flag = generic_italy_MT
 	}
+	gita_armata_legionaria = {
+		icon = mission_english_renaissance
+		position = 7
+		provinces_to_highlight = { culture_group = latin owned_by = ROOT has_manpower_building_trigger = no } 
 
+		trigger = {
+			army_size = 80
+			num_of_owned_provinces_with = {
+				value = 25
+				has_manpower_building_trigger = yes
+				culture_group = latin
+			}
+		}
 
+		effect = {
+			define_general = {
+				name = "Paolo Bitta"
+				shock = 5
+				fire = 4
+				manuever = 1
+				siege = 5
+			}
+			add_country_modifier = {
+				name = alb_new_recruitments
+				duration = 10950
+			}
+		}
+	}
+	gita_l_arma = {
+		icon = mission_english_renaissance
+		position = 9
+		required_missions = { gita_armata_legionaria gita_italian_unified}
+		provinces_to_highlight = { owned_by = ROOT OR = { AND = {has_manpower_building_trigger = yes has_forcelimit_building_trigger = no} AND = {has_manpower_building_trigger = no has_forcelimit_building_trigger = yes}}} 
+
+		trigger = {
+			army_size = 100
+			num_of_owned_provinces_with = {
+				value = 35
+				has_manpower_building_trigger = yes
+				has_forcelimit_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = alb_carabinieri
+				duration = -1
+			}
+			italy_region = {
+				add_province_modifier = {
+					name = ita_la_carambanieri
+					duration = -1
+				}
+			}
+		}
+	}
 }
 genita_3_slot = {
 	slot = 3
@@ -50,6 +120,7 @@ genita_3_slot = {
 		provinces_to_highlight = { region = italy_region NOT = {owned_by = ROOT}} 
 
 		trigger = {
+			owns = 118
 			num_of_owned_provinces_with = {
 				value = 60
 				region = italy_region 
@@ -57,7 +128,15 @@ genita_3_slot = {
 		}
 
 		effect = {
-			
+			country_event = {
+				id = gen_ita.20
+			}
+			set_capital = 118
+			118 = {
+				add_random_development = 1
+				add_random_development = 1
+				add_random_development = 1
+			}
 		}
 	}
 
@@ -75,6 +154,16 @@ genita_3_slot = {
 		}
 
 		effect = {
+			balkan_region = {
+				add_permanent_claim = ROOT
+			}
+			france_region = {
+				add_permanent_claim = ROOT
+			}
+			italy_region = {
+				add_unrest = -10
+				add_nationalism = -10
+			}
 		}
 	}
 
@@ -93,7 +182,33 @@ genita_4_slot = {
 		has_country_flag = generic_italy_MT
 	}
 
+	gita_buconellaacqua = {
+		icon = mission_english_renaissance
+		position = 7
+		provinces_to_highlight = { region = italy_region has_port = yes NOT = {owned_by = ROOT } }
 
+		trigger = {
+			navy_size = 100
+			num_of_owned_provinces_with = {
+				value = 45
+				region = italy_region 
+				has_port = yes
+			}
+		}
+
+		effect = {
+			define_admiral = {
+				name = "Luca Nervi"
+				shock = 4
+				fire = 4
+				manuever = 5
+			}
+			add_country_modifier = {
+				name = alb_regia_marina
+				duration = 10950
+			}
+		}
+	}
 }
 genita_5_slot = {
 	slot = 5
@@ -110,4 +225,30 @@ genita_5_slot = {
 	}
 
 
+	gita_water_changes = {
+		icon = mission_english_renaissance
+		position = 8
+		required_missions = { gita_buconellaacqua }
+		provinces_to_highlight = { has_dock_building_trigger = no owned_by = ROOT }
+		trigger = {
+			navy_size = 100
+			num_of_owned_provinces_with = {
+				value = 40
+				has_dock_building_trigger = yes
+				has_trade_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_navy_tradition = 30
+			add_country_modifier = {
+				name = gita_market_garden
+				duration = -1
+			}
+			home_trade_node_effect_scope = {
+				add_trade_node_income = 60
+			}
+
+		}
+	}
 }
