@@ -430,7 +430,12 @@ Iberia_5_slot = {
 					duration = -1
 				}
 			}
-			#claims on provence, auvergne, poiters
+			massif_central_area = {
+				add_permanent_claim = ROOT
+			}
+			poitou_area = {
+				add_permanent_claim = ROOT
+			}
 		} 
 	}
 
@@ -438,11 +443,32 @@ Iberia_5_slot = {
 		icon = conquer_east_francia
 		position = 3
 		required_missions = { ib0_kingdom_of_the_goths } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = massif_central_area
+				area = poitou_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			massif_central_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			poitou_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			france_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	ib0_gothic_borders_restored = {
