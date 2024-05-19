@@ -475,13 +475,46 @@ Iberia_5_slot = {
 		icon = mission_invade_occitania
 		position = 4
 		required_missions = { ib0_cross_dordogne } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = provence_area
+				area = loire_area
+				area = brittany_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			owns_all_provinces = {
+				culture = goth_p
+			}
+			provence_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			loire_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			brittany_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
 		effect = {  
+			add_accepted_culture_or_dip_power = {
+				culture = goth_p
+			}
 			country_event = {
 				id = iberia.2
+			}
+			custom_tooltip = empty_line_tt
+			add_country_modifier = {
+				name = ib0_masters_of_gallia
+				duration = -1
 			}
 		} 
 	}
@@ -490,11 +523,85 @@ Iberia_5_slot = {
 		icon = mission_roman_legions
 		position = 5
 		required_missions = { ib0_gothic_borders_restored } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				region = france_region
+				province_id = 182
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 50
+				region = france_region
+			}
+			owns_core_province = 182
+		} 
 
-		effect = {  } 
+		effect = {  
+			custom_tooltip = alb_ib0_modify_masters_of_gallia_tt
+			hidden_effect = {
+				remove_country_modifier = ib0_masters_of_gallia
+				add_country_modifier = {
+					name = ib0_masters_of_gallia_2
+					duration = -1
+				}
+			}
+			custom_tooltip = empty_line_tt
+			complex_dynamic_effect = {
+				first_custom_tooltip = alb_ib0_if_we_impotian_tt
+				first_limit = "
+					religion = impotian
+				"
+				first_effect = "
+					custom_tooltip = SOX_TT_5
+					set_global_flag = sox_holy_moly_orders
+				"
+				second_custom_tooltip = alb_ib0_if_we_arian_tt
+				second_limit = "
+					religion = arian
+				"
+				second_effect = "
+					change_variable = {
+						which = arian_fervor_var
+						value = 50
+					}
+				"
+				third_limit = "
+					NOT = {
+						OR = {
+							religion = impotian
+							religion = arian
+						}
+					}
+				"
+				third_effect = "
+					custom_tooltip = alb_ib0_convert_5_provinces_in_gallia_tt
+					while = {
+						limit = { 
+							NOT = {
+								calc_true_if = {
+									amount = 6
+									all_owned_province = {
+										has_province_flag = alb_converted_away_from_impotian_flag
+									}
+								}
+							}
+						}
+						random_owned_province = {
+							limit = {
+								region = france_region
+							}
+							change_religion = ROOT
+							set_province_flag = alb_converted_away_from_impotian_flag
+						}
+					}
+				"
+			}
+		} 
 	}
 
 	ib0_expand_molendinum_castra = {
