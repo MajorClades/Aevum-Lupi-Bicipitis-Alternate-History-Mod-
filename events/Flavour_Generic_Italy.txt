@@ -738,7 +738,8 @@ country_event = {	#event Aquileia ships
 	option = {
 		name = gen_ita.18a
 		set_country_flag = aqu_venetian_fleet_1
-		set_naval_doctrine = aqu_heavy_ships_doctrine
+		add_years_of_income = 1
+		custom_tooltip = AQU_TT_3a
 		tooltip = {
 			add_country_modifier = {
 				name = aqu_heavy_ships_doctrine_tt
@@ -749,7 +750,8 @@ country_event = {	#event Aquileia ships
 	option = {
 		name = gen_ita.18b
 		set_country_flag = aqu_venetian_fleet_2
-		set_naval_doctrine = aqu_light_ships_doctrine
+		add_years_of_income = 1
+		custom_tooltip = AQU_TT_3a
 		tooltip = {
 			add_country_modifier = {
 				name = aqu_light_ships_doctrine_tt
@@ -890,6 +892,7 @@ province_event = {	#get booted idiota italian migrate to the new world so that p
 	desc = gen_ita.102.desc
 	picture = GOOD_WITH_MONARCH_eventPicture
 	trigger = {
+		is_absolutism_active = no
 		is_part_of_hre = yes
 		owner = {
 			any_province = {
@@ -898,6 +901,11 @@ province_event = {	#get booted idiota italian migrate to the new world so that p
 					continent = north_america
 					continent = south_america
 				}
+				NOT = {
+					development = 3
+				}
+				has_port = yes
+				is_city = yes
 			}
 			culture_group = latin
 		}
@@ -923,12 +931,86 @@ province_event = {	#get booted idiota italian migrate to the new world so that p
 		trigger = {	owner = { ai = yes}	}
 		add_random_development = -1
 		add_base_manpower = -1
+		random_province = {
+			limit = { 
+				OR = {
+					continent = north_america
+					continent = south_america
+				}
+				NOT = {
+					development = 3
+				}
+				has_port = yes
+				is_city = yes
+			}
+			province_event = {
+				id = gen_ita.103
+			}
+		}
 	}
 	option = {
 		name = gen_ita.102b
 		trigger = {	owner = { ai = no}	}
 		owner = {
 			add_yearly_manpower = -0.2
+		}
+		random_province = {
+			limit = { 
+				OR = {
+					continent = north_america
+					continent = south_america
+				}
+				NOT = {
+					development = 3
+				}
+				has_port = yes
+				is_city = yes
+			}
+			province_event = {
+				id = gen_ita.103
+			}
+		}
+	}
+}
+
+province_event = {	# Italian Migrations
+	id = gen_ita.103
+	title = gen_ita.103.test
+	desc = gen_ita.103.desc
+	picture = GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = gen_ita.103a
+		ai_chance = {
+			factor = 75
+		}
+		owner = {
+			add_manpower = 1
+		}
+		add_base_manpower = 1
+		random = {
+			chance = 50 
+			add_random_development = 1
+		}
+		random = {
+			chance = 5 
+			change_culture = libertine
+		}
+	}
+	option = {
+		name = gen_ita.103b
+		ai_chance = {
+			factor = 25
+		}
+		owner = {
+			add_adm_power = 50
+			every_owned_province = {
+				limit = {
+					culture_group = latin
+				}
+				add_unrest = 3
+			}
 		}
 	}
 }

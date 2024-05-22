@@ -25,7 +25,9 @@ genita_1_slot = {
 
 		effect = {
 			custom_tooltip = GITA_TT_1
-			set_country_flag = gita_stronger_mil_advisor
+			# set_country_flag = gita_stronger_mil_advisor
+			set_country_flag = army_tradition_from_tech_flag
+			add_army_tradition_or_mil_power = {amount = 20}
 		}
 	}
 }
@@ -206,6 +208,50 @@ genita_4_slot = {
 			add_country_modifier = {
 				name = alb_regia_marina
 				duration = 10950
+			}
+		}
+	}
+	
+	gita_coastal_defense = {
+		icon = mission_english_renaissance
+		position = 9
+		required_missions = { gita_buconellaacqua gita_italian_unified}
+		provinces_to_highlight = { italy_coastal_defense = yes }
+
+		trigger = {
+			navy_size = 150
+			num_of_owned_provinces_with = {
+				value = 9
+				italy_coastal_defense = yes
+				light_ships_in_province = 5
+				OR = {
+					has_building = coastal_defence
+					has_building = naval_battery
+					base_production = 10
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = gita_costa_nostra
+				duration = -1
+			}
+			custom_tooltip = GITA_TT_2
+			118 = {
+				add_province_modifier = {
+					name = gita_costal_guard
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {italy_coastal_defense = yes}
+					add_province_modifier = {
+						name = gita_costal_guard
+						duration = -1
+					}
+				}
 			}
 		}
 	}
