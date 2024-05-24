@@ -8,33 +8,103 @@ Iberia_1_slot = {
 	ib0_the_port_of_hispalis = {
 		icon = spa_dominate_sevilla
 		position = 1
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			province_id = 224
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			224 = { owned_by = ROOT }
+			224 = { 
+				if = { 
+					limit = { 
+						has_dlc = "Leviathan" 
+						owner = {
+							ai = no
+						}
+					} 
+					num_of_times_expanded_infrastructure = 1
+				}
+			}
+			224 = { has_trade_building_trigger = yes }
+			224 = { num_of_times_improved = 5 }
+		} 
 
-		effect = {  } 
+		effect = {  
+			country_event = {
+				id = iberia.3
+			}
+			224 = {
+				add_or_upgrade_trade_building = yes
+			}
+			macaronesia_area = {
+				add_permanent_claim = ROOT
+				discover_country = ROOT
+			}
+		} 
 	}
 
 	ib0_isles_of_batirsinoo = {
 		icon = mission_rb_conquer_the_isles
 		position = 3
 		required_missions = { ib0_the_port_of_hispalis } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			area = macaronesia_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			owns = 367
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 2
+				area = macaronesia_area
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			367 = {
+				center_of_trade = 1
+			}
+			custom_tooltip = NED_BUFF_NEW_WORLD_CHARTERS
+			set_country_flag = ned_new_world_charters_buff_flag
+			if = {
+				limit = {
+					NOT = {
+						is_year = 1530
+					}
+					NOT = {
+						has_global_flag = alb_banrik_hired_flag
+					}
+				}
+				country_event = {
+					id = iberia.4
+				}
+			}
+		} 
 	}
 
 	ib0_viceroyalty_of_banrika = {
 		icon = mission_caribbean_cn
 		position = 4
 		required_missions = { ib0_isles_of_batirsinoo } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			colonial_region = colonial_the_carribean
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				colonial_region = colonial_the_carribean 
+				value = 5
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			
+		} 
 	}
 
 	ib0_gold_mines_of_the_yucatan = {

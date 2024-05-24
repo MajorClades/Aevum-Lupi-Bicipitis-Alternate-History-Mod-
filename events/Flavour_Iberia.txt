@@ -370,7 +370,7 @@ country_event = {
 	id = iberia.3
 	title = iberia.3.test
 	desc = iberia.3.desc
-	picture = GLOBAL_TRADE_eventPicture
+	picture = HOUSE_OF_TRADE_eventPicture
 	
 	is_triggered_only = yes
 	option = {
@@ -395,6 +395,59 @@ country_event = {
 		add_prestige_or_monarch_power = {
 			amount = 20
 		}
+	}
+}
+
+country_event = {
+	id = iberia.4
+	title = iberia.4.test
+	desc = iberia.4.desc
+	picture = CARIBBEAN_PIRATE_FORT_eventPicture
+	
+	trigger = {
+		OR = {
+			culture_group = romano_hispanian
+			culture_group = iberisch
+		}
+		NOT = {
+			is_year = 1530
+		}
+		NOT = {
+			has_global_flag = alb_banrik_hired_flag
+		}
+		OR = {
+			num_of_light_ship = 3
+			num_of_heavy_ship = 3
+		}
+		num_of_owned_provinces_with = {
+			value = 5
+			has_port = yes
+		}
+	}
+	option = {
+		name = iberia.4a
+		define_explorer = {
+			shock = 3
+			fire = 3
+			manuever = 6
+			siege = 2
+			name = "Banrik"
+		}
+		add_treasury = -100
+		set_global_flag = alb_banrik_hired_flag
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				NOT = {
+					treasury = 100
+				}
+			}
+		}
+	}
+	option = {
+		name = iberia.4b
+		add_prestige = 5
 	}
 }
 
