@@ -801,7 +801,12 @@ country_event = {	#event once formed Italy decide to stay or not in the hre
 
 	option = {
 		name = gen_ita.20a
-		set_government_rank = 3
+		if = {
+			limit = {
+				government_rank = 2
+			}
+			set_government_rank = 3
+		}
 		set_in_empire = no
 		add_casus_belli = {
 			type = cb_war_on_empire
@@ -818,6 +823,29 @@ country_event = {	#event once formed Italy decide to stay or not in the hre
 		add_country_modifier = {
 			name = ita_electorate_bribring
 			duration = -1
+		}
+	}
+}
+
+country_event = {	#event go Rome or stay Home
+	id = gen_ita.21
+	title = gen_ita.21.test
+	desc = gen_ita.21.desc
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = gen_ita.21a
+		custom_tooltip = GITA_TT_5
+		hidden_effect = {every_province = {	limit = {Roman_empire_required_provinces_decision = yes	}	add_permanent_claim = ROOT}}
+	}
+	option = {
+		name = gen_ita.21b
+		italy_region = {
+			add_province_modifier = {
+				name = italian_golden_age
+				duration = -1
+			}
 		}
 	}
 }
