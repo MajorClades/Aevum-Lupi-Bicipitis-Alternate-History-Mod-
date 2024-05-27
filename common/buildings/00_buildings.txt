@@ -1191,23 +1191,22 @@ university = {
 		allowed_num_of_buildings = 1
 	}
 
-	build_trigger = {
-		owner = {
-			OR = {
-				adm_tech = 17
-				custom_trigger_tooltip = {
-					tooltip = can_build_university_tt
-					has_country_flag = can_build_early_university_flag
-				}
-			}
-		}
-	}
-
 	on_built = {
 		add_development_from_building = {
 			building = university
 			type = tax
 			value = 2
+		}
+		if = {
+			limit = {
+				owner = {
+					mission_completed = gita_universalita 
+				}
+			}
+			add_province_modifier = {
+				name = gita_advanced_universities
+				duration = -1
+			}
 		}
 	}
 	on_destroyed = {
@@ -1215,6 +1214,12 @@ university = {
 			building = university
 			type = tax
 			value = 2
+		}
+		if = {
+			limit = { 
+				has_province_modifier = gita_advanced_universities
+			}
+			remove_province_modifier = gita_advanced_universities
 		}
 	}
 	on_obsolete = {

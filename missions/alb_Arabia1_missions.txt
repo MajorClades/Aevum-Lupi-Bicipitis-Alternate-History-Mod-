@@ -5,59 +5,6 @@ Arab_1_slot = {
 	has_country_shield = yes
 	potential = { tag = AB0 } 
 
-	1_sand_trade = {
-		icon = mission_bedouins
-		position = 1
-		provinces_to_highlight = { is_capital_of = AB3 } 
-
-		trigger = {
-			AB3 = {
-				OR = {
-					alliance_with = ROOT
-					exists = no
-				}
-			}
-		}
-
-		effect = {
-			393 = { add_base_production = 1 } 
-			394 = { add_base_production = 1 } 
-			if = {
-				limit = { AB3 = { exists = no }  } 
-				AB3 = { every_core_province = { add_permanent_claim = ROOT }  } 
-			}
-		}
-	}
-
-	1_friends = {
-		icon = mission_mosque
-		position = 2
-		required_missions = { 1_sand_trade } 
-		provinces_to_highlight = { is_capital_of = AB3 } 
-
-		trigger = {
-			AB3 = {
-				OR = {
-					has_opinion = {
-						who = ROOT
-						value = 190
-					}
-					exists = no
-				}
-			}
-		}
-
-		effect = {
-			vassalize = AB3
-			if = {
-				limit = { AB3 = { exists = no }  } 
-				AB3 = { every_core_province = { add_permanent_claim = ROOT }  } 
-			}
-			mecca_area = { add_permanent_claim = ROOT } 
-			medina_area = { add_permanent_claim = ROOT } 
-		}
-	}
-
 	1_horn = {
 		icon = mission_envoy_to_ethiopia
 		position = 4
