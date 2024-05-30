@@ -32,17 +32,16 @@ Atro_branch1 = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
-			tabriz_area = {
+			media_area = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 
 		effect = {
-			khuzestan_area = { add_permanent_claim = ROOT } 
-			basra_area = { add_permanent_claim = ROOT } 
-			iraq_arabi_area = { add_permanent_claim = ROOT } 
-			al_jazira_area = { add_permanent_claim = ROOT } 
+			mesopotamia_region = {
+				add_permanent_claim = ROOT
+			}
 		}
 	}
 
@@ -56,7 +55,6 @@ Atro_branch1 = {
 		}
 
 		trigger = {
-			SH0 = { exists = no } 
 			owns = 410
 		}
 
@@ -183,44 +181,18 @@ Atro_branch2 = {
 		}
 		provinces_to_highlight = {
 			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
-			OR = {
-				area = basra_area
-				area = iraq_arabi_area
-				area = al_jazira_area
-			}
+			region = mesopotamia_region
 		}
 
 		trigger = {
-			basra_area = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
-			}
-			iraq_arabi_area = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
-			}
-			al_jazira_area = {
+			mesopotamia_region = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 
 		effect = {
-			basra_area = {
-				add_province_modifier = {
-					name = "he0_rule_in_mesopotamia"
-					duration = 10950
-				}
-				add_local_autonomy = -30
-			}
-			iraq_arabi_area = {
-				add_province_modifier = {
-					name = "he0_rule_in_mesopotamia"
-					duration = 10950
-				}
-				add_local_autonomy = -30
-			}
-			al_jazira_area = {
+			mesopotamia_region = {
 				add_province_modifier = {
 					name = "he0_rule_in_mesopotamia"
 					duration = 10950
@@ -302,11 +274,12 @@ Atro_branch3 = {
 		}
 		provinces_to_highlight = {  } 
 
-		trigger = { prestige = 50 } 
+		trigger = { 
+			tag = SL1
+		 } 
 
 		effect = {
-			custom_tooltip = seleucid_legacy_tooltip
-			set_country_flag = seleucid_legacy_flag
+			add_splendor = 500
 		}
 	}
 }
@@ -1428,11 +1401,7 @@ Seleucids_branch1 = {
 		required_missions = { restore_seleucia } 
 		provinces_to_highlight = {  
 			owned_by = root
-			OR = {
-				area = al_jazira_area
-				area = iraq_arabi_area
-				area = basra_area
-			}
+			region = mesopotamia_region
 			NOT = {
 				AND = {
 					development = 10
@@ -1443,36 +1412,16 @@ Seleucids_branch1 = {
 		} 
 
 		trigger = {  
-			all_owned_province = {
-				OR = {
-					area = al_jazira_area
-					area = iraq_arabi_area
-					area = basra_area
-				}
-				AND = {
+			mesopotamia_region = {
+				type = all
 					development = 10
 					has_tax_building_trigger = yes
 					has_production_building_trigger = yes
-				}
 			}
 		} 
 
 		effect = {  
-			al_jazira_area = {
-				add_province_modifier = {
-					name = he0_rule_in_mesopotamia
-					duration = -1
-				}
-				add_prosperity = 100
-			}
-			iraq_arabi_area = {
-				add_province_modifier = {
-					name = he0_rule_in_mesopotamia
-					duration = -1
-				}
-				add_prosperity = 100
-			}
-			basra_area = {
+			mesopotamia_region = {
 				add_province_modifier = {
 					name = he0_rule_in_mesopotamia
 					duration = -1
