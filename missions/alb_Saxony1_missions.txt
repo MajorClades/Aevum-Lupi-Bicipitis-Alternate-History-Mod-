@@ -1142,21 +1142,28 @@ saxon_5_slot = {
 		provinces_to_highlight = {  
 			owned_by = ROOT
 			culture = lithuanian
-			unrest = 1
+			AND = {
+				unrest = 1
 			local_autonomy = 25
+			}
 		} 
 
 		trigger = {  
 			NOT = {
 				any_owned_province = {
 					culture = lithuanian
-					unrest = 1
-					local_autonomy = 25
+					AND = {
+						unrest = 1
+						local_autonomy = 25
+					}
 				}
 			}
 		} 
 
 		effect = {  
+			add_accepted_culture_or_dip_power = {
+				culture = lithuanian
+			}
 			custom_tooltip = alb_sx0_every_lithuanian_province_tt
 			tooltip = {
 				add_province_modifier = {
