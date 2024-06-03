@@ -6,7 +6,7 @@ Franconia_1_slot = {
 	potential = { tag = FC0 } 
 
 }
-Franconia_1_M_slot = {
+Franconia_1_M_slot = { #secret path
 	slot = 1
 	generic = no
 	ai = yes
@@ -22,20 +22,20 @@ Franconia_1_M_slot = {
 		}
 
 		trigger = {
-			overlord = {
+			SO0 = {
 				is_at_war = no
 			}
 			is_at_war = no
 			is_subject = yes
 			adm_power = 350
 			treasury = 300
-			has_adm_advisor = yes
+			has_adm_advisor_3 = yes
 		}
 
 		effect = {
 			add_adm_power = -350
 			add_treasury = -300
-			create_union = overlord
+			create_union = SO0
 		}
 	}
 }
@@ -103,7 +103,7 @@ Franconia_2_slot = {
 	}
 }
 
-Franconia_2_M_slot = {
+Franconia_2_M_slot = { #secret path
 	slot = 2
 	generic = no
 	ai = yes
@@ -123,6 +123,7 @@ Franconia_2_M_slot = {
 		}
 
 		effect = {
+			custom_tooltip = FRANCONIA_TT_4
 			SO0 = {
 				every_owned_province = {
 					limit = {
@@ -137,7 +138,41 @@ Franconia_2_M_slot = {
 			}
 		}
 	}
+	fc_gallia_franca = {
+		icon = mission_empire
+		position = 5
+		required_missions = { fc_soxon_unions fc_franconia_to_frankia} 
+		provinces_to_highlight = {
+			is_capital_of = SO0
+		}
 
+		trigger = {
+			total_development = 300
+			SO0 = {
+				NOT = {
+					liberty_desire = 20
+				}
+				years_in_union_under = {
+					who = ROOT
+					years = 30
+				}
+			}
+		}
+
+		effect = {
+			inherit = SO0
+			change_tag = FRA
+			custom_tooltip = FRANCONIA_TT_5
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						is_core = SO0
+					}
+					add_local_autonomy = 20
+				}
+			}
+		}
+	}
 }
 Franconia_2_K_slot = {
 	slot = 2
@@ -176,7 +211,26 @@ Franconia_2_K_slot = {
 			}
 		}
 	}
+	fc_gallic_victory = {
+		icon = mission_empire
+		position = 5
+		required_missions = { fc_gallic_wars } 
+		provinces_to_highlight = {NOT = { owned_by = ROOT } OR = { area = ile_de_france_area area = normandy_area}}
 
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 8
+				OR = { area = ile_de_france_area area = normandy_area}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = fc_overshadow_soxon
+				duration = -1
+			}
+		}
+	}
 }
 
 Franconia_3_slot = {
@@ -234,6 +288,28 @@ Franconia_3_slot = {
 		effect = {
 			set_country_flag = unite_frankia_cb_flag
 			custom_tooltip = FRANCONIA_TT_3
+			low_countries_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	fc_frankish_fervor = {
+		icon = mission_empire
+		position = 6
+		required_missions = { fc_franconia_to_frankia } 
+		provinces_to_highlight = {NOT = { owned_by = ROOT } region = low_countries_region }
+
+		trigger = {
+			low_countries_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_prestige_or_monarch_power = { amount = 20}
+			add_years_of_income = 2
 		}
 	}
 }
@@ -273,7 +349,7 @@ Franconia_4_slot = {
 		icon = mission_empire
 		position = 3
 		required_missions = { fc_franconia_stronger } 
-		provinces_to_highlight = {owned_by = ROOT has_tax_building_trigger = yes  }
+		provinces_to_highlight = {owned_by = ROOT has_tax_building_trigger = no  }
 
 		trigger = {
 			num_of_owned_provinces_with = {
@@ -285,6 +361,30 @@ Franconia_4_slot = {
 		effect = {
 			add_years_of_income = 0.5
 			add_patriarch_authority = 0.05
+		}
+	}
+	fc_old_martel = {
+		icon = mission_empire
+		position = 5
+		required_missions = { fc_production_of_wealth } 
+		provinces_to_highlight = {province_id = 1744}
+
+		trigger = {
+			treasury = 500
+			owns = 1744
+			1744 = {
+				development = 25
+			}
+		}
+
+		effect = {
+			add_treasury = -500
+			1744 = {
+				add_great_project_tier = {
+					type = tomb_charlesmagne
+					tier = 1
+				}
+			}
 		}
 	}
 }
@@ -337,6 +437,54 @@ Franconia_5_slot = {
 			add_country_modifier = {
 				name = fc_huns_champagne
 				duration = 10950
+			}
+		}
+	}
+	fc_production_of_wealth = {
+		icon = mission_empire
+		position = 4
+		required_missions = { fc_impotian_teachings } 
+		provinces_to_highlight = {owned_by = ROOT has_production_building_trigger = no  }
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 7
+				culture_group = frankish
+				has_production_building_trigger = yes
+			}
+		}
+
+		effect = {
+			define_advisor = {
+				type = natural_scientist
+				skill = 3
+				discount = yes
+			}
+			add_country_modifier = {
+				name = fc_frankish_goods
+				duration = 10950
+			}
+		}
+	}
+	fc_burocracy = {
+		icon = mission_empire
+		position = 6
+		required_missions = { fc_production_of_wealth } 
+		provinces_to_highlight = {owned_by = ROOT has_courthouse_building_trigger = no }
+
+		trigger = {
+			num_of_completed_idea_groups_adm = { amount = 1 }
+			num_of_owned_provinces_with = {
+				value = 15
+				culture_group = frankish
+				has_courthouse_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = fc_measurments
+				duration = -1
 			}
 		}
 	}
