@@ -6,78 +6,13 @@ country_event = {
 	desc = soxony.1.desc
 	picture = soxon_civil_war
 	is_triggered_only = yes
-	trigger = {
-		OR = {
-			tag = SO0
-			is_subject_of = SO0
-		}
-		NOT = {
-			is_month = 11
-		}
-		NOT = {
-			is_year = 1445
-		}
-		NOT = {
-			has_country_flag = sox_civil_war
-		}
-	}
+	major = yes
 	option = {
 		name = soxony.1a
 		trigger = {
 				tag = SO0
 		}
-		add_country_modifier = {
-			name = soxon_instability
-			duration = -1
-		}
-		add_country_modifier = {
-			name = sox_pending_answer
-			duration = 77
-		}
-		if = {
-			limit = {
-				SO0 = {
-					ai = yes
-				}
-			}
-			add_country_modifier = {
-				name = CHAOS
-				duration = 500
-			}
-		}
-		hidden_effect = {
-			country_event = {
-				id = soxony.2
-				days = 77
-			}
-		}
-		set_country_flag = sox_civil_war
-	}
-	option = {
-		name = soxony.1b
-		trigger = {
-			NOT = {
-				tag = SO0
-			}
-			NOT = {
-				tag = SO4
-			}
-			NOT = {
-				tag = SO6
-			}
-		}
-		add_treasury = 50
-		add_manpower = 5
-	}
-	option = {
-		name = soxony.1c
-		trigger = {
-			OR = {
-				tag = SO4
-				tag = SO6
-			}
-		}
-		add_stability_or_adm_power = yes
+		add_stability = -3
 	}
 }
 
@@ -88,22 +23,20 @@ country_event = {
 	picture = ANGRY_MOB_eventPicture
 	
 	is_triggered_only = yes
-	fire_only_once = yes
+	trigger = {
+		any_subject_country = {
+			NOT = {
+				has_country_flag = alb_revolted_from_soxony_flag
+			}
+		}
+	}
 	immediate = {
-		remove_country_modifier = soxon_instability
-		hidden_effect = {
-			every_province = {
-				limit = {
-					OR = {
-						owned_by = SO1
-						owned_by = SO2
-						owned_by = SO3
-						owned_by = SO4
-						owned_by = SO5
-						owned_by = SO6
-					}
+		random_subject_country = {
+			save_event_target_as = sox_rebelling_vassal_target
+			limit = {
+				NOT = {
+					tag = SO4
 				}
-				add_permanent_claim = ROOT
 			}
 		}
 	}
@@ -111,106 +44,22 @@ country_event = {
 	option = {
 		name = soxony.2a
 		ai_chance = { factor = 55 }
-		FC0 = {
+		event_target:sox_rebelling_vassal_target = {
 			grant_independence = yes
+			set_country_flag = alb_revolted_from_soxony_flag
 		}
-		SO2 = {
-			grant_independence = yes
-		}
-		SO3 = {
-			grant_independence = yes
-		}
-		SO5 = {
-			grant_independence = yes
-		}
-		SO0 = {
-			declare_war_with_cb = {
-				who = SO1
-				casus_belli = cb_vassalize_mission
-			}
-		}
-		SO2 = {
-			join_all_defensive_wars_of = SO1
-		}
-		SO3 = {
-			join_all_defensive_wars_of = SO1
-		}
-		SO5 = {
-			join_all_defensive_wars_of = SO1
-		}
-		clr_country_flag = sox_civil_war
 	}
 	option = {
 		name = soxony.2b
-		ai_chance = { factor = 30 }
-		SO1 = {
+		ai_chance = { factor = 45 }
+		event_target:sox_rebelling_vassal_target = {
 			grant_independence = yes
-		}
-		SO2 = {
-			grant_independence = yes
-		}
-		SO3 = {
-			grant_independence = yes
-		}
-		SO5 = {
-			grant_independence = yes
+			set_country_flag = alb_revolted_from_soxony_flag
 		}
 		declare_war_with_cb = {
-			who = FC0
-			casus_belli = cb_annex
+			casus_belli = cb_disloyal_vassal
+			who = event_target:sox_rebelling_vassal_target
 		}
-		clr_country_flag = sox_civil_war
-	}
-	option = {
-		name = soxony.2c
-		ai_chance = { factor = 15 }
-		inherit = SO4
-		inherit = SO6
-		release_all_subjects = yes
-		add_stability = 2
-		
-		clr_country_flag = sox_civil_war
-	}
-	option = {
-		name = soxony.2d
-		ai_chance = { factor = 0 }
-		inherit = SO4
-		SO1 = {
-			grant_independence = yes
-		}
-		SO2 = {
-			grant_independence = yes
-		}
-		SO3 = {
-			grant_independence = yes
-			define_general = {
-				shock = 5
-				fire = 5
-				manuever = 4
-				siege = 3
-			}
-		}
-		SO5 = {
-			grant_independence = yes
-		}
-		declare_war_with_cb = {
-			who = SO1
-			casus_belli = cb_vassalize_mission
-		}
-		SO2 = {
-			join_all_defensive_wars_of = SO1
-		}
-		SO3 = {
-			join_all_defensive_wars_of = SO1
-		}
-		SO5 = {
-			join_all_defensive_wars_of = SO1
-		}
-		declare_war_with_cb = {
-			who = FC0
-			casus_belli = cb_vassalize_mission
-		}
-		clr_country_flag = sox_civil_war
 	}
 }
 
@@ -219,19 +68,10 @@ country_event = {
 	title = soxony.3.test
 	desc = soxony.3.desc
 	picture = KING_SICK_IN_BED_eventPicture
-	
+	is_triggered_only = yes
 	trigger = {
 		tag = SO0
 		is_year = 1445
-		NOT = {
-			has_country_flag = sox_civil_war
-		}
-		NOT = {
-			is_at_war = yes
-		}
-	}
-	mean_time_to_happen = {
-		months = 5
 	}
 	fire_only_once = yes
 	option = {
@@ -718,6 +558,91 @@ country_event = {
 		name = soxony.16b
 		unlock_estate_privilege = {
 			estate_privilege = alb_legion_academies
+		}
+	}
+}
+
+country_event = {
+	id = soxony.17
+	title = soxony.17.test
+	desc = soxony.17.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = soxony.17a
+		ai_chance = { factor = 55 }
+		add_stability_or_adm_power = yes
+		set_country_flag = alb_ended_sygirdom_revolt_flag
+	}
+}
+
+country_event = {
+	id = soxony.18
+	title = soxony.18.test
+	desc = soxony.18.desc
+	picture = ANGRY_MOB_eventPicture
+	trigger = {
+		SO0 = {
+			is_subject_of = ROOT
+		}
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = soxony.18a
+		ai_chance = { factor = 55 }
+		inherit = SO4
+		add_adm_power = -100
+	}
+	option = {
+		name = soxony.18b
+		ai_chance = { factor = 55 }
+		add_dip_power = 100
+		add_manpower = 5
+		add_treasury = 100
+	}
+}
+
+country_event = {
+	id = soxony.19
+	title = soxony.19.test
+	desc = soxony.19.desc
+	picture = ANGRY_MOB_eventPicture
+	immediate = {
+		hidden_effect = {
+			random_owned_province = {
+				save_event_target_as = soxony_revolter_province
+			}
+			clr_country_flag = has_soxony_event_19_flag
+		}
+	}
+	trigger = {
+		OR ={
+			not = {
+				has_country_flag = has_soxony_event_19_flag
+			}
+			had_country_flag = {
+				flag = has_soxony_event_19_flag
+				days = 1095
+			}
+		}
+	}
+	is_triggered_only = yes
+	option = {
+		name = soxony.19a
+		event_target:soxony_revolter_province = {
+			noble_rebels = 2
+		}
+		set_country_flag = has_soxony_event_19_flag
+	}
+	option = {
+		name = soxony.19b
+		add_estate_influence_modifier = {
+			influence = 5
+			duration = 3650
+			desc = SOX_APPEASED_NOBLE_REVOLT
 		}
 	}
 }
