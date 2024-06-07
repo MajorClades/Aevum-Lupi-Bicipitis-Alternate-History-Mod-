@@ -5,26 +5,43 @@ Franconia_1_slot = {
 	has_country_shield = yes
 	potential = { tag = FC0 } 
 
+	fc_frankish_manpower = {
+		icon = bavarian_netherlands
+		position = 2
+		required_missions = { fc_free_franconia } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			manpower = 30
+			army_size = 30
+		}
+
+		effect = {
+			capital_scope = {
+				add_base_manpower = 2
+				add_or_upgrade_manpower_building = yes
+			}
+		}
+	}
 }
-Franconia_1_M_slot = { #secret path
+Franconia_1_M_slot = {
 	slot = 1
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = FC0 has_country_flag = victory_ofthe_merovingians_flag} 
+	potential = {
+		tag = FC0
+		has_country_flag = victory_ofthe_merovingians_flag
+	}
 
 	fc_soxon_unions = {
 		icon = mission_empire
 		position = 4
 		required_missions = { fc_gallic_unions } 
-		provinces_to_highlight = {
-			is_capital_of = SO0
-		}
+		provinces_to_highlight = { is_capital_of = SO0 } 
 
 		trigger = {
-			SO0 = {
-				is_at_war = no
-			}
+			SO0 = { is_at_war = no } 
 			is_at_war = no
 			is_subject = yes
 			adm_power = 350
@@ -44,13 +61,22 @@ Franconia_1_K_slot = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = FC0 NOT = {has_country_flag = victory_ofthe_merovingians_flag}} 
+	potential = {
+		tag = FC0
+		NOT = { has_country_flag = victory_ofthe_merovingians_flag } 
+	}
 
 	fc_gallic_sons = {
 		icon = mission_empire
 		position = 4
 		required_missions = { fc_gallic_wars } 
-		provinces_to_highlight = {NOT = { owned_by = ROOT } OR = { area = champagne_area area = picardy_area}}
+		provinces_to_highlight = {
+			NOT = { owned_by = ROOT } 
+			OR = {
+				area = champagne_area
+				area = picardy_area
+			}
+		}
 
 		trigger = {
 			accepted_culture = soxon
@@ -73,7 +99,6 @@ Franconia_1_K_slot = {
 			}
 		}
 	}
-
 }
 Franconia_2_slot = {
 	slot = 2
@@ -85,50 +110,43 @@ Franconia_2_slot = {
 	fc_free_franconia = {
 		icon = bavarian_netherlands
 		position = 1
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			if = {
-				limit = { ai = yes}
+				limit = { ai = yes } 
 				num_of_generals = 1
 				army_size_percentage = 0.7
-			}else = {
-				army_size_percentage = 1
 			}
+			else = { army_size_percentage = 1 } 
 		}
 
-		effect = {
-			create_general = {
-				tradition = 50
-			}
-		}
+		effect = { create_general = { tradition = 50 }  } 
 	}
 }
-
-Franconia_2_M_slot = { #secret path
+Franconia_2_M_slot = {
 	slot = 2
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = FC0 has_country_flag = victory_ofthe_merovingians_flag} 
+	potential = {
+		tag = FC0
+		has_country_flag = victory_ofthe_merovingians_flag
+	}
 
 	fc_gallic_unions = {
 		icon = mission_empire
 		position = 3
 		required_missions = { fc_franconia_stronger } 
-		provinces_to_highlight = {
-			is_capital_of = SO0
-		}
+		provinces_to_highlight = { is_capital_of = SO0 } 
 
-		trigger = {
-			alliance_with = SO0
-		}
+		trigger = { alliance_with = SO0 } 
 
 		effect = {
 			custom_tooltip = FRANCONIA_TT_4
 			SO0 = {
 				every_owned_province = {
-					limit = {
-						is_core = FC0
-					}
+					limit = { is_core = FC0 } 
 					cede_province = FC0
 				}
 				create_subject = {
@@ -138,20 +156,20 @@ Franconia_2_M_slot = { #secret path
 			}
 		}
 	}
+
 	fc_gallia_franca = {
 		icon = mission_empire
 		position = 5
-		required_missions = { fc_soxon_unions fc_franconia_to_frankia} 
-		provinces_to_highlight = {
-			is_capital_of = SO0
+		required_missions = {
+			fc_soxon_unions
+			fc_franconia_to_frankia
 		}
+		provinces_to_highlight = { is_capital_of = SO0 } 
 
 		trigger = {
 			total_development = 300
 			SO0 = {
-				NOT = {
-					liberty_desire = 20
-				}
+				NOT = { liberty_desire = 20 } 
 				years_in_union_under = {
 					who = ROOT
 					years = 30
@@ -161,13 +179,11 @@ Franconia_2_M_slot = { #secret path
 
 		effect = {
 			inherit = SO0
-			change_tag = FRA
+			override_country_name = FRANKIA_GALLIA
 			custom_tooltip = FRANCONIA_TT_5
 			hidden_effect = {
 				every_owned_province = {
-					limit = {
-						is_core = SO0
-					}
+					limit = { is_core = SO0 } 
 					add_local_autonomy = 20
 				}
 			}
@@ -179,13 +195,22 @@ Franconia_2_K_slot = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = FC0 NOT = {has_country_flag = victory_ofthe_merovingians_flag}} 
+	potential = {
+		tag = FC0
+		NOT = { has_country_flag = victory_ofthe_merovingians_flag } 
+	}
 
 	fc_gallic_wars = {
 		icon = mission_empire
 		position = 3
 		required_missions = { fc_franconia_stronger } 
-		provinces_to_highlight = {NOT = { owned_by = ROOT } OR = { area = champagne_area area = picardy_area}}
+		provinces_to_highlight = {
+			NOT = { owned_by = ROOT } 
+			OR = {
+				area = champagne_area
+				area = picardy_area
+			}
+		}
 
 		trigger = {
 			custom_trigger_tooltip = {
@@ -194,45 +219,53 @@ Franconia_2_K_slot = {
 			}
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
 				value = 7
-				OR = { area = champagne_area area = picardy_area}
+				OR = {
+					area = champagne_area
+					area = picardy_area
+				}
 			}
 		}
 
 		effect = {
 			add_country_modifier = {
-				name = fc_gallic_champagne
+				name = "fc_gallic_champagne"
 				duration = 10950
 			}
-			ile_de_france_area = {
-				add_permanent_claim = ROOT
-			}
-			normandy_area = {
-				add_permanent_claim = ROOT
-			}
+			ile_de_france_area = { add_permanent_claim = ROOT } 
+			normandy_area = { add_permanent_claim = ROOT } 
 		}
 	}
+
 	fc_gallic_victory = {
 		icon = mission_empire
 		position = 5
 		required_missions = { fc_gallic_wars } 
-		provinces_to_highlight = {NOT = { owned_by = ROOT } OR = { area = ile_de_france_area area = normandy_area}}
+		provinces_to_highlight = {
+			NOT = { owned_by = ROOT } 
+			OR = {
+				area = ile_de_france_area
+				area = normandy_area
+			}
+		}
 
 		trigger = {
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
 				value = 8
-				OR = { area = ile_de_france_area area = normandy_area}
+				OR = {
+					area = ile_de_france_area
+					area = normandy_area
+				}
 			}
 		}
 
 		effect = {
 			add_country_modifier = {
-				name = fc_overshadow_soxon
+				name = "fc_overshadow_soxon"
 				duration = -1
 			}
 		}
 	}
 }
-
 Franconia_3_slot = {
 	slot = 3
 	generic = no
@@ -243,32 +276,27 @@ Franconia_3_slot = {
 	fc_franconia_stronger = {
 		icon = mission_empire
 		position = 2
-		required_missions = { fc_free_franconia fc_franconia_rules } 
-		provinces_to_highlight = {NOT = { owned_by = ROOT } is_core = ROOT}
+		required_missions = {
+			fc_free_franconia
+			fc_franconia_rules
+		}
+		provinces_to_highlight = {
+			NOT = { owned_by = ROOT } 
+			is_core = ROOT
+		}
 
 		trigger = {
 			if = {
-				limit = {
-					dynasty = "Meroveching"
-				}
+				limit = { dynasty = Meroveching } 
 				stability = 2
-			}else = {
-				owns_all_provinces = {
-					is_core = FC0
-				}
 			}
+			else = { owns_all_provinces = { is_core = FC0 }  } 
 		}
 
 		effect = {
-			lorraine_area = {
-				add_permanent_claim = ROOT
-			}
-			champagne_area = {
-				add_permanent_claim = ROOT
-			}
-			picardy_area = {
-				add_permanent_claim = ROOT
-			}
+			lorraine_area = { add_permanent_claim = ROOT } 
+			champagne_area = { add_permanent_claim = ROOT } 
+			picardy_area = { add_permanent_claim = ROOT } 
 		}
 	}
 
@@ -276,6 +304,7 @@ Franconia_3_slot = {
 		icon = mission_empire
 		position = 4
 		required_missions = { fc_franconia_stronger } 
+		provinces_to_highlight = {  } 
 
 		trigger = {
 			custom_trigger_tooltip = {
@@ -288,9 +317,7 @@ Franconia_3_slot = {
 		effect = {
 			set_country_flag = unite_frankia_cb_flag
 			custom_tooltip = FRANCONIA_TT_3
-			low_countries_region = {
-				add_permanent_claim = ROOT
-			}
+			low_countries_region = { add_permanent_claim = ROOT } 
 		}
 	}
 
@@ -298,7 +325,10 @@ Franconia_3_slot = {
 		icon = mission_empire
 		position = 6
 		required_missions = { fc_franconia_to_frankia } 
-		provinces_to_highlight = {NOT = { owned_by = ROOT } region = low_countries_region }
+		provinces_to_highlight = {
+			NOT = { owned_by = ROOT } 
+			region = low_countries_region
+		}
 
 		trigger = {
 			low_countries_region = {
@@ -308,12 +338,11 @@ Franconia_3_slot = {
 		}
 
 		effect = {
-			add_prestige_or_monarch_power = { amount = 20}
+			add_prestige_or_monarch_power = { amount = 20 } 
 			add_years_of_income = 2
 		}
 	}
 }
-
 Franconia_4_slot = {
 	slot = 4
 	generic = no
@@ -324,23 +353,25 @@ Franconia_4_slot = {
 	fc_franconia_rules = {
 		icon = mission_empire
 		position = 1
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			if = {
-				limit = { ai = yes}
+				limit = { ai = yes } 
 				prestige = 10
-			}else = {
-				has_mil_advisor = yes
 			}
+			else = { has_mil_advisor = yes } 
 			mil_power = 150
 		}
 
 		effect = {
 			if = {
-				limit = { ai = yes}
+				limit = { ai = yes } 
 				add_army_tradition = 10
-			}else = {
+			}
+			else = {
 				add_mil_power = -150
-				set_estate_privilege = estate_nobles_officer_corp 
+				set_estate_privilege = estate_nobles_officer_corp
 			}
 		}
 	}
@@ -349,7 +380,10 @@ Franconia_4_slot = {
 		icon = mission_empire
 		position = 3
 		required_missions = { fc_franconia_stronger } 
-		provinces_to_highlight = {owned_by = ROOT has_tax_building_trigger = no  }
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_tax_building_trigger = no
+		}
 
 		trigger = {
 			num_of_owned_provinces_with = {
@@ -363,18 +397,17 @@ Franconia_4_slot = {
 			add_patriarch_authority = 0.05
 		}
 	}
+
 	fc_old_martel = {
 		icon = mission_empire
 		position = 5
 		required_missions = { fc_production_of_wealth } 
-		provinces_to_highlight = {province_id = 1744}
+		provinces_to_highlight = { province_id = 1744 } 
 
 		trigger = {
 			treasury = 500
 			owns = 1744
-			1744 = {
-				development = 25
-			}
+			1744 = { development = 25 } 
 		}
 
 		effect = {
@@ -388,7 +421,6 @@ Franconia_4_slot = {
 		}
 	}
 }
-
 Franconia_5_slot = {
 	slot = 5
 	generic = no
@@ -399,52 +431,58 @@ Franconia_5_slot = {
 	fc_jousting = {
 		icon = mission_empire
 		position = 1
-		required_missions = {  } 
+		provinces_to_highlight = {  } 
 
-		trigger = {
-			num_of_cavalry = 6
-		}
+		trigger = { num_of_cavalry = 6 } 
 
 		effect = {
-			lorraine_area = {
-				add_permanent_claim = ROOT
-			}
-			alsace_area = {
-				add_permanent_claim = ROOT
-			}
-			palatinate_area = {
-				add_permanent_claim = ROOT
-			}
+			lorraine_area = { add_permanent_claim = ROOT } 
+			alsace_area = { add_permanent_claim = ROOT } 
+			palatinate_area = { add_permanent_claim = ROOT } 
 		}
 	}
+
 	fc_hunnic_wars = {
 		icon = mission_empire
 		position = 2
 		required_missions = { fc_jousting } 
-		provinces_to_highlight = {NOT = { owned_by = ROOT } OR = { area = lorraine_area area = alsace_area area = palatinate_area}}
+		provinces_to_highlight = {
+			NOT = { owned_by = ROOT } 
+			OR = {
+				area = lorraine_area
+				area = alsace_area
+				area = palatinate_area
+			}
+		}
 
 		trigger = {
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
 				value = 10
-				OR = { area = lorraine_area area = alsace_area area = palatinate_area}
+				OR = {
+					area = lorraine_area
+					area = alsace_area
+					area = palatinate_area
+				}
 			}
 		}
 
 		effect = {
-			add_accepted_culture_or_dip_power = {
-				culture = hunnic_fra
-			}
+			add_accepted_culture_or_dip_power = { culture = hunnic_fra } 
 			add_country_modifier = {
-				name = fc_huns_champagne
+				name = "fc_huns_champagne"
 				duration = 10950
 			}
 		}
 	}
+
 	fc_production_of_wealth = {
 		icon = mission_empire
 		position = 4
 		required_missions = { fc_impotian_teachings } 
-		provinces_to_highlight = {owned_by = ROOT has_production_building_trigger = no  }
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_production_building_trigger = no
+		}
 
 		trigger = {
 			num_of_owned_provinces_with = {
@@ -461,19 +499,23 @@ Franconia_5_slot = {
 				discount = yes
 			}
 			add_country_modifier = {
-				name = fc_frankish_goods
+				name = "fc_frankish_goods"
 				duration = 10950
 			}
 		}
 	}
+
 	fc_burocracy = {
 		icon = mission_empire
 		position = 6
 		required_missions = { fc_production_of_wealth } 
-		provinces_to_highlight = {owned_by = ROOT has_courthouse_building_trigger = no }
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_courthouse_building_trigger = no
+		}
 
 		trigger = {
-			num_of_completed_idea_groups_adm = { amount = 1 }
+			num_of_completed_idea_groups_adm = { amount = 1 } 
 			num_of_owned_provinces_with = {
 				value = 15
 				culture_group = frankish
@@ -483,7 +525,7 @@ Franconia_5_slot = {
 
 		effect = {
 			add_country_modifier = {
-				name = fc_measurments
+				name = "fc_measurments"
 				duration = -1
 			}
 		}
