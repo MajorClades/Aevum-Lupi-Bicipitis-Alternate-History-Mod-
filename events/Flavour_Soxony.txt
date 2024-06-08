@@ -22,43 +22,67 @@ country_event = {
 	desc = soxony.2.desc
 	picture = ANGRY_MOB_eventPicture
 	
-	is_triggered_only = yes
+	mean_time_to_happen = {
+		months = 24
+	}
 	trigger = {
-		any_subject_country = {
+		is_subject_of = SO0
+		SO0 = {
+			has_disaster = alb_sygirdom_revolt_disaster
+		}
+		NOT = {
+			has_country_flag = alb_revolted_from_soxony_flag
+		}
+		if= {
+			limit = {
+				ai = yes
+			}
 			NOT = {
-				has_country_flag = alb_revolted_from_soxony_flag
+				tag = SO4
 			}
 		}
 	}
 	immediate = {
-		random_subject_country = {
-			save_event_target_as = sox_rebelling_vassal_target
-			limit = {
-				NOT = {
-					tag = SO4
-				}
-			}
+		hidden_effect = {
+			save_global_event_target_as = sox_rebelling_vassal_target
+			set_country_flag = alb_revolted_from_soxony_flag
 		}
 	}
 
 	option = {
 		name = soxony.2a
-		ai_chance = { factor = 55 }
+		ai_chance = { 
+			factor = 85
+			modifier ={
+				factor = 10000
+				tag = FC0
+			}
+		}
 		event_target:sox_rebelling_vassal_target = {
 			grant_independence = yes
-			set_country_flag = alb_revolted_from_soxony_flag
 		}
+		SO0 = {
+			country_event = {
+				id = soxony.21
+			}
+		}
+
 	}
 	option = {
 		name = soxony.2b
-		ai_chance = { factor = 45 }
-		event_target:sox_rebelling_vassal_target = {
-			grant_independence = yes
-			set_country_flag = alb_revolted_from_soxony_flag
+		ai_chance = { 
+			factor = 45 
+			modifier ={
+				factor = 10000
+				tag = SO4
+			}
 		}
-		declare_war_with_cb = {
-			casus_belli = cb_disloyal_vassal
-			who = event_target:sox_rebelling_vassal_target
+		add_prestige = -10
+		add_liberty_desire = -50
+		SO0 = {
+			country_event = {
+				id = soxony.20
+			}
 		}
 	}
 }
@@ -625,7 +649,7 @@ country_event = {
 			}
 			had_country_flag = {
 				flag = has_soxony_event_19_flag
-				days = 1095
+				days = 365
 			}
 		}
 	}
@@ -644,5 +668,79 @@ country_event = {
 			duration = 3650
 			desc = SOX_APPEASED_NOBLE_REVOLT
 		}
+	}
+}
+
+country_event = {
+	id = soxony.20
+	title = soxony.20.test
+	desc = soxony.20.desc
+	picture = ANGRY_MOB_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = soxony.20a
+		reverse_add_opinion = {
+			who = event_target:sox_rebelling_vassal_target
+			modifier = sox_loyal_vassal
+		}
+		add_treasury = 100
+	}
+}
+
+country_event = {
+	id = soxony.21
+	title = soxony.21.test
+	desc = soxony.21.desc
+	picture = ANGRY_MOB_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = soxony.21a
+		declare_war_with_cb = {
+			casus_belli = cb_disloyal_vassal
+			who = event_target:sox_rebelling_vassal_target
+		}
+		if = {
+			limit = {
+				ai = yes
+			}
+			add_manpower = 3
+		}
+		ai_chance = {
+			factor = 100
+			modifier = {
+				factor = 0
+				calc_true_if = {
+					amount = 3
+					all_country = {
+						war_with = ROOT
+					}
+				}
+			}
+		}
+	}
+	option = {
+		name = soxony.21b
+		add_prestige = -10
+		event_target:sox_rebelling_vassal_target = {
+			add_opinion = {
+				who = ROOT
+				modifier = opinion_acknowledged_independence
+			}
+		}
+		ai_chance = {
+			factor = 0
+			modifier = {
+				factor = 100
+				calc_true_if = {
+					amount = 3
+					all_country = {
+						war_with = ROOT
+					}
+				}
+			}
+		}
+	}
+	after = {
+		clear_global_event_target = sox_rebelling_vassal_target
 	}
 }
