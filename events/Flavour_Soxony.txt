@@ -60,6 +60,12 @@ country_event = {
 		}
 		event_target:sox_rebelling_vassal_target = {
 			grant_independence = yes
+			every_war_enemy_country = {
+				limit = {
+					has_country_flag = alb_revolted_from_soxony_flag
+				}
+				white_peace = ROOT
+			}
 		}
 		SO0 = {
 			country_event = {
@@ -653,7 +659,7 @@ country_event = {
 			}
 			had_country_flag = {
 				flag = has_soxony_event_19_flag
-				days = 365
+				days = 100
 			}
 		}
 	}
@@ -664,13 +670,21 @@ country_event = {
 			noble_rebels = 2
 		}
 		set_country_flag = has_soxony_event_19_flag
+		ai_chance ={
+			factor = 50
+		}
 	}
 	option = {
 		name = soxony.19b
 		add_estate_influence_modifier = {
-			influence = 5
+			influence = 10
 			duration = 3650
+			estate = estate_nobles
 			desc = SOX_APPEASED_NOBLE_REVOLT
+		}
+		set_country_flag = has_soxony_event_19_flag
+		ai_chance ={
+			factor = 50
 		}
 	}
 }
