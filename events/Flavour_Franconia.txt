@@ -222,14 +222,21 @@ country_event = { #just for proper testing
 		name = franco.4a
 		if = {
 			limit = {
-				dynasty = "Martel"
+				OR = {
+					dynasty = "Martel"
+					dynasty = "Karling"
+				}
 			}
 			country_event = {
 				id = franco.5
 			}
-		}else = {
+		}
+		else = {
 			set_country_flag = victory_ofthe_merovingians_flag
 			swap_non_generic_missions = yes
+			country_event = {
+				id = franco.6
+			}
 		}
 	}
 }
@@ -240,11 +247,25 @@ country_event = { #yo the Carolingians have won, w-o-w
 	desc = franco.5.desc
 	picture = ANGRY_MOB_eventPicture
 	is_triggered_only = yes
-	hidden = yes
 	fire_only_once = yes
 	option = {
 		name = franco.5a
 		add_stability_or_adm_power = yes
 		add_ruler_personality = martel_personality
+		custom_tooltip = empty_line_tt
+		custom_tooltip = alb_unlock_martel_personality_tt
+	}
+}
+
+country_event = { #yo the Merovingians have won, w-o-w
+	id = franco.6
+	title = franco.6.test
+	desc = franco.6.desc
+	picture = ANGRY_MOB_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = franco.5a
+		add_stability_or_adm_power = yes
 	}
 }
