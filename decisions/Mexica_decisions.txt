@@ -235,6 +235,7 @@ country_decisions = {
 			OR = {
 				tag = MX0
 				tag = FJ0
+				tag = FJ9
 			}
 			has_country_flag = mexican_vinland_treaty
 			if = {
@@ -249,6 +250,7 @@ country_decisions = {
 			OR = {
 				alliance_with = MX0
 				alliance_with = FJ0
+				alliance_with = FJ9
 			}
 			custom_trigger_tooltip = {
 				tooltip = ALLIANCE_MEX_VIN
@@ -264,11 +266,22 @@ country_decisions = {
 				limit = {
 					tag = MX0
 				}
-				inherit = FJ0
+				if = {
+					limit = {
+						exists = FJ9
+					}
+					inherit = FJ9
+				}
+				else = {
+					inherit = FJ0
+				}
 			}
 			if = {
 				limit = {
-					tag = FJ0
+					OR = {
+						tag = FJ0
+						tag = FJ9
+					}
 				}
 				inherit = MX0
 			}

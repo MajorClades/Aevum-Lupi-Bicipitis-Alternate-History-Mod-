@@ -9,29 +9,21 @@ country_event = { #Start of the Merovingian Plot, if Soxony declares war at the 
 	trigger = {
 		tag = FC0
 		is_subject = no
-		OR = {
-			is_at_war = no
-			defensive_war_with = SO0
-		}
+		is_at_war = no #Disaster is cool so you get it no matter what lol
 	}
+
 	mean_time_to_happen = {
 		months = 1
 	}
+
 	fire_only_once = yes
+
 	option = {
 		name = franco.1a
 		trigger = {
 			is_at_war = no
 		}
 		set_country_flag = start_the_merov_plot_flag
-	}
-	option = {
-		name = franco.2a
-		trigger = {
-			is_at_war = yes
-		}
-		custom_tooltip = FRANCONIA_TT_1
-		set_country_flag = kicked_the_merovingians_flag
 	}
 }
 
@@ -63,7 +55,7 @@ country_event = { #Once the disaster starts, the Plot has reached its apex, it e
 				spawn_rebels = {
 					size = 2
 					type = pretender_rebels
-					leader_dynasty = "Merovee"
+					leader_dynasty = "Meroveching"
 					leader = "Childeric"
 					should_take_capital = yes
 				}
@@ -73,7 +65,7 @@ country_event = { #Once the disaster starts, the Plot has reached its apex, it e
 				spawn_rebels = {
 					size = 1
 					type = pretender_rebels
-					leader_dynasty = "Merovee"
+					leader_dynasty = "Meroveching"
 					leader = "Childeric"
 				}
 			}
@@ -82,7 +74,7 @@ country_event = { #Once the disaster starts, the Plot has reached its apex, it e
 				spawn_rebels = {
 					size = 1
 					type = pretender_rebels
-					leader_dynasty = "Merovee"
+					leader_dynasty = "Meroveching"
 					leader = "Childeric"
 				}
 			}
@@ -98,14 +90,17 @@ country_event = { #Once the disaster starts, the Plot has reached its apex, it e
 		add_stability = -2
 		define_ruler = {
 			name = "Childeric"
-			dynasty = "Merovee"
+			dynasty = "Meroveching"
 			adm = 4
 			dip = 6
 			mil = 1
 		}
+		kill_heir = {
+			allow_new_heir = no
+		}
 		custom_tooltip = resolve_the_merov_plot_tt
 		clr_country_flag = start_the_merov_plot_flag
-		set_country_flag = kicked_the_merovingians_flag
+		set_country_flag = victory_ofthe_merovingians_flag
 	}
 }
 
@@ -135,7 +130,7 @@ country_event = { #Soxony either helps the Merovingians or not, the difference i
 				spawn_rebels = {
 					size = 2
 					type = pretender_rebels
-					leader_dynasty = "Merovee"
+					leader_dynasty = "Meroveching"
 					leader = "Childeric"
 					should_take_capital = yes
 					friend = SO0
@@ -146,7 +141,7 @@ country_event = { #Soxony either helps the Merovingians or not, the difference i
 				spawn_rebels = {
 					size = 1
 					type = pretender_rebels
-					leader_dynasty = "Merovee"
+					leader_dynasty = "Meroveching"
 					leader = "Childeric"
 					friend = SO0
 				}
@@ -156,7 +151,7 @@ country_event = { #Soxony either helps the Merovingians or not, the difference i
 				spawn_rebels = {
 					size = 1
 					type = pretender_rebels
-					leader_dynasty = "Merovee"
+					leader_dynasty = "Meroveching"
 					leader = "Childeric"
 					friend = SO0
 				}
@@ -166,7 +161,7 @@ country_event = { #Soxony either helps the Merovingians or not, the difference i
 				spawn_rebels = {
 					size = 1
 					type = pretender_rebels
-					leader_dynasty = "Merovee"
+					leader_dynasty = "Meroveching"
 					leader = "Childeric"
 					friend = SO0
 				}
@@ -188,7 +183,7 @@ country_event = { #Soxony either helps the Merovingians or not, the difference i
 				spawn_rebels = {
 					size = 2
 					type = pretender_rebels
-					leader_dynasty = "Merovee"
+					leader_dynasty = "Meroveching"
 					leader = "Childeric"
 					should_take_capital = yes
 				}
@@ -198,7 +193,7 @@ country_event = { #Soxony either helps the Merovingians or not, the difference i
 				spawn_rebels = {
 					size = 1
 					type = pretender_rebels
-					leader_dynasty = "Merovee"
+					leader_dynasty = "Meroveching"
 					leader = "Childeric"
 				}
 			}
@@ -207,7 +202,7 @@ country_event = { #Soxony either helps the Merovingians or not, the difference i
 				spawn_rebels = {
 					size = 1
 					type = pretender_rebels
-					leader_dynasty = "Merovee"
+					leader_dynasty = "Meroveching"
 					leader = "Childeric"
 				}
 			}
@@ -227,10 +222,20 @@ country_event = { #just for proper testing
 		name = franco.4a
 		if = {
 			limit = {
-				dynasty = "Martel"
+				OR = {
+					dynasty = "Martel"
+					dynasty = "Karling"
+				}
 			}
 			country_event = {
 				id = franco.5
+			}
+		}
+		else = {
+			set_country_flag = victory_ofthe_merovingians_flag
+			swap_non_generic_missions = yes
+			country_event = {
+				id = franco.6
 			}
 		}
 	}
@@ -242,11 +247,25 @@ country_event = { #yo the Carolingians have won, w-o-w
 	desc = franco.5.desc
 	picture = ANGRY_MOB_eventPicture
 	is_triggered_only = yes
-	hidden = yes
 	fire_only_once = yes
 	option = {
 		name = franco.5a
 		add_stability_or_adm_power = yes
 		add_ruler_personality = martel_personality
+		custom_tooltip = empty_line_tt
+		custom_tooltip = alb_unlock_martel_personality_tt
+	}
+}
+
+country_event = { #yo the Merovingians have won, w-o-w
+	id = franco.6
+	title = franco.6.test
+	desc = franco.6.desc
+	picture = ANGRY_MOB_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = franco.5a
+		add_stability_or_adm_power = yes
 	}
 }

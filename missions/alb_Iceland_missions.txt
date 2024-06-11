@@ -12,25 +12,26 @@ Iceland_1_slot = {
 		position = 2
 		
 		provinces_to_highlight = {
-			OR = {
-				province_id = 1482
-				province_id = 1483
-				province_id = 1493
-			}
 		}
 		
 		trigger = {
-			has_discovered = 1482
-			has_discovered = 1483
-			has_discovered = 1493
+			OR ={
+				overlord = {
+					has_opinion = {
+						who = ROOT
+						value = 180
+					}
+				}
+				overlord = {
+					has_been_insulted_by_root = yes
+				}
+			}
 		}
 		
 		effect = {
+			add_dip_power = 100
 			labrador_area = {
-				discover_country = ROOT
-			}
-			newfoundland_area = {
-				discover_country = ROOT
+				add_core = ROOT
 			}
 		}
 	}
@@ -44,13 +45,16 @@ Iceland_1_slot = {
 			NOT = {
 				num_of_loans = 1
 			}
+			NOT = {
+				is_subject = yes
+			}
 		}
 		
 		effect = {
 			add_treasury = -100
 			country_event = {
 					id = icel.2
-				}
+			}
 		}
 	}
 	Ice_vinland_2 = {
@@ -59,14 +63,15 @@ Iceland_1_slot = {
 		position = 4
 		
 		trigger = {
-			FJ0 = {
-				monthly_income = 5
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 10
+				region = canada_region
 			}
 		}
 		
 		effect = {
 			canada_region = {
-				add_permanent_claim = FJ0
+				add_permanent_claim = ROOT
 			}
 			add_country_modifier = {
 				name = ice_colonists
@@ -81,18 +86,51 @@ Iceland_1_slot = {
 		
 		trigger = {
 			canada_region = {
-				owned_by = FJ0
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
 			}
 			adm_power = 300
+
 		}
 		
 		effect = {
 			add_adm_power = -300
-			FJ0 = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = alb_ice_if_no_colonies_tt
+				first_limit = "
+					has_country_flag = no_colonial_nations
+				"
+				first_effect = "
+					override_country_name = UNION_OF_THULE
+					canada_region = {
+						add_core = ROOT
+					}
+				"
+				#second_limit = "
+				#	NOT = { has_country_flag = no_colonial_nations }
+				#"
+				second_effect = "
+					custom_tooltip = alb_every_subject_in_canada_tt
+					tooltip = {
+						add_country_modifier = {
+				name = iceland_direct_control
+				duration = -1
+			}
+					}
+					hidden_effect = {
+					every_subject_country = {
+				limit = {
+					capital_scope = {
+						region = canada_region
+					}
+				}
 				add_country_modifier = {
 					name = iceland_direct_control
 					duration = -1
 				}
+			}
+					}
+				"
 			}
 		}
 	}
@@ -426,6 +464,7 @@ Iceland_4_slot = {
 				discount = yes
 				culture = pictish
 			}
+			custom_tooltip = empty_line_tt
 			british_isles_region = {
 				add_permanent_claim = ROOT
 			}
@@ -451,18 +490,24 @@ Iceland_4_slot = {
 			change_tag = IC0
 			set_capital = 236
 			set_government_rank = 3
+			custom_tooltip = empty_line_tt
 			add_government_reform = northsea_parlamant_reform
+			custom_tooltip = empty_line_tt
 			if = {
 				limit = {
 					has_custom_ideas = no
 				}
 				country_event = { id = ideagroups.1 } #Swap Ideas
-				}
-			remove_country_modifier = master_of_scotia
+			}
+			hidden_effect = {
+				remove_country_modifier = master_of_scotia
 			add_country_modifier = {
 				name = master_of_biorno
 				duration = -1
 			}
+			}
+			custom_tooltip = empty_line_tt
+			custom_tooltip = alb_upgrade_master_of_scotia_tt
 			hidden_effect = {
 				complete_mission = ice_biorno
 			}
@@ -577,7 +622,7 @@ Iceland_5_slot = {
 		}
 	}
 	ice_push_northeast = {
-		icon = mission_conquer_sweden
+		icon = mission_longships
 		required_missions = { ice_push_east }
 		position = 4
 		
@@ -653,13 +698,22 @@ Iceland_5_slot = {
 		}
 		
 		effect = {
-			every_owned_province = {
-				limit = {
-					region = scandinavia_region
-				}
+			custom_tooltip = alb_ice_all_scandinavia_provs_tt
+			tooltip = {
 				add_province_modifier = {
 					name = newoldmanegment
 					duration = 10950
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						region = scandinavia_region
+					}
+					add_province_modifier = {
+						name = newoldmanegment
+						duration = 10950
+					}
 				}
 			}
 		}
