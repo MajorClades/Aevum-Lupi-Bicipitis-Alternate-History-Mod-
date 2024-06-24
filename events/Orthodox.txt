@@ -1,16 +1,19 @@
 namespace = orthodox_flavor
 
-#The Non-Possessor Movement (Impotian)
+#The Non-Possessor Movement (Impotian/Wycliffian)
 country_event = {
 	id = orthodox_flavor.1
 	title = orthodox_flavor.1.t
-	desc = ALB_orthodox_flavor.1.d
+	desc = AEVUM_orthodox_flavor.1.d #Changed description, title stays the same as vanilla
 	picture = ORTHODOX_eventPicture
 	
 	is_triggered_only = yes
 
 	trigger = {
-		religion = impotian
+		OR = {
+			religion = impotian
+			religion = hussite #Wycliffian
+		}
 	}
 	
 	mean_time_to_happen = {
@@ -22,9 +25,10 @@ country_event = {
 	}
 	
 	option = {
-		name = ALB_orthodox_flavor.1.a
-		add_patriarch_authority = 0.05 
-		reduce_estate_church_loyalty_effect = yes 
+		name = AEVUM_orthodox_flavor.1.a
+		add_patriarch_authority = 0.05 # Compatible with both Impotian as well as Wycliffian as they are both against Church possession in some form
+		add_church_power = 5 # (Impotian for Jesus Temple Cleansing, Wycliffian for Clerical Poverty, essentialy same ideal) (Is 5 Church Power equivalent to PA? I'd personally say 10 Church Power is closer to 5% PA)
+		reduce_estate_church_loyalty_effect = yes # It turns out people like owning their stuff regardless of faith and whether or not they're a priest
 		add_estate_influence_modifier = {
 			influence = -0.1
 			duration = 1825 #5 Years
@@ -43,8 +47,9 @@ country_event = {
 		}
 	}
 	option = {
-		name = ALB_orthodox_flavor.1.b
+		name = AEVUM_orthodox_flavor.1.b
 		add_patriarch_authority = -0.05
+		add_church_power = -5
 		add_estate_church_loyalty_effect = yes
 		add_estate_influence_modifier = {
 			influence = 0.05
@@ -66,14 +71,17 @@ country_event = {
 #A Great Synod (Impotian, it could also be applied to the other Christian denominations but let's keep with the Impotian =?= Orthodox theme)
 country_event = {
 	id = orthodox_flavor.2
-	title =  ALB_orthodox_flavor.2.t #
-	desc = ALB_orthodox_flavor.2.d
+	title =  AEVUM_orthodox_flavor.2.t #
+	desc = AEVUM_orthodox_flavor.2.d
 	picture = ORTHODOX_eventPicture
 	
 	is_triggered_only = yes
 
 	trigger = {
-		religion = impotian
+		OR = {
+			religion = impotian
+			religion = hussite #Wycliffian
+		}
 	}
 	
 	mean_time_to_happen = {
@@ -87,6 +95,7 @@ country_event = {
 	option = {
 		name = orthodox_flavor.2.a
 		add_patriarch_authority = 0.05
+		add_church_power = 5
 		add_estate_church_loyalty_effect = yes
 		ai_chance = {
 			factor = 1
@@ -95,6 +104,7 @@ country_event = {
 	option = {
 		name = orthodox_flavor.2.b
 		add_patriarch_authority = -0.05
+		add_church_power = -5
 		add_stability_or_adm_power = yes
 		reduce_estate_church_loyalty_effect = yes
 		ai_chance = {
@@ -111,13 +121,16 @@ country_event = {
 country_event = {
 	id = orthodox_flavor.3
 	title = orthodox_flavor.3.t
-	desc = ALB_orthodox_flavor.3.d
+	desc = AEVUM_orthodox_flavor.3.d
 	picture = REFORM_eventPicture
 	
 	is_triggered_only = yes
 
 	trigger = {
-		religion = impotian
+		OR = {
+			religion = impotian
+			religion = hussite #Wycliffian
+		}
 		is_lesser_in_union = no
 	}
 	
@@ -128,8 +141,9 @@ country_event = {
 	option = {
 		name = orthodox_flavor.3.a
 		add_patriarch_authority = 0.05
+		add_church_power = 5
 		reduce_estate_church_loyalty_effect = yes
-		custom_tooltip = ALB_orthodox_flavor.3.tt
+		custom_tooltip = AEVUM_orthodox_flavor.3.tt
 		hidden_effect = { #To avoid clutter
 			every_neighbor_country = { # Mends relations with all neighbour non-ROOT christian religions religions
 				limit = {
@@ -151,6 +165,7 @@ country_event = {
 	option = {
 		name = orthodox_flavor.3.b
 		add_patriarch_authority = -0.05
+		add_church_power = -5
 		add_legitimacy_equivalent = { amount = 5 republican_tradition = 3 }
 		add_estate_church_loyalty_effect = yes
 		ai_chance = {
@@ -169,7 +184,10 @@ country_event = {
 	is_triggered_only = yes
 
 	trigger = {
-		religion = impotian
+		OR = {
+			religion = impotian
+			religion = hussite #Wycliffian
+		}
 	}
 	
 	mean_time_to_happen = {
@@ -179,6 +197,7 @@ country_event = {
 	option = {
 		name = orthodox_flavor.4.b
 		add_patriarch_authority = -0.05
+		add_church_power = -5
 		add_estate_church_loyalty_effect = yes
 		ai_chance = {
 			factor = 1
@@ -187,6 +206,7 @@ country_event = {
 	option = {
 		name = orthodox_flavor.4.a
 		add_patriarch_authority = 0.05
+		add_church_power = 5
 		add_years_of_income = 0.1 
 		reduce_estate_church_loyalty_effect = yes
 		ai_chance = {
@@ -214,7 +234,10 @@ country_event = {
 	is_triggered_only = yes
 
 	trigger = {
-		religion = impotian
+		OR = {
+			religion = impotian
+			religion = hussite #Wycliffian
+		}
 	}
 	
 	mean_time_to_happen = {
@@ -224,6 +247,7 @@ country_event = {
 	option = {
 		name = orthodox_flavor.5.b
 		add_patriarch_authority = -0.05
+		add_church_power = -5
 		add_estate_church_loyalty_effect = yes
 		ai_chance = {
 			factor = 1
@@ -232,12 +256,13 @@ country_event = {
 	option = {
 		name = orthodox_flavor.5.a
 		add_patriarch_authority = -0.05
+		add_church_power = -5
 		add_adm_power = 50
 		reduce_estate_church_loyalty_effect = yes
 		ai_chance = {
 			factor = 1
 			modifier = {
-				factor = 0
+				factor = 0.25
 				NOT = {
 					estate_loyalty = { # AI should not choose -10% loyalty if their church is already disloyal
 						estate = estate_church
