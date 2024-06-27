@@ -281,23 +281,32 @@ Aldabba_2_slot = {
 	ald_atlantic = {
 		icon = mission_plus_ultra
 		required_missions = {ald_new_grudge }
-		position = 5
+		position = 4
 		provinces_to_highlight = {
-			area = northern_morocco_area
+			OR = {
+				area = lower_andalucia_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
 		}
 		trigger = { 
-			1749 = {
-				owned_by = ROOT
-			}
-			224 = {
+			lower_andalucia_area = {
+				type = all
 				owned_by = ROOT
 			}
 		}
 		
 		effect = {
 			1293 = {
-				add_trade_node_income = 10
+				add_trade_modifier = {
+					who = ROOT
+					duration = 10950
+					power = 35
+					key = ALD_HERC
+				}
 			}
+			custom_tooltip = " "
 			alentejo_area = {
 				add_permanent_claim = ROOT
 			}
@@ -311,7 +320,7 @@ Aldabba_2_slot = {
 	}
 	ald_iberia = {
 		icon = mission_reclaim_andalucia
-		required_missions = {ald_hispania ald_atlantic }
+		required_missions = { ald_atlantic ald_hispania }
 		position = 6
 		provinces_to_highlight = {
 			OR = {
@@ -345,12 +354,16 @@ Aldabba_2_slot = {
 		}
 		
 		effect = {
+			iberia_region = {
+				add_permanent_claim = ROOT
+			}
+			custom_tooltip = " "
 			add_country_modifier = {
 				name = ald_spanish_jewel
 				duration = 10950
 			}
-			iberia_region = {
-				add_permanent_claim = ROOT
+			country_event = {
+				id = aldab.5
 			}
 		}
 	}
@@ -372,10 +385,6 @@ Aldabba_2_slot = {
 		}
 		
 		effect = {
-			add_country_modifier = {
-				name = ald_iberian_united
-				duration = -1
-			}
 			languedoc_area = {
 				add_permanent_claim = ROOT
 			}
@@ -384,6 +393,143 @@ Aldabba_2_slot = {
 			}
 			guyenne_area = {
 				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name = ald_iberian_united
+				duration = 5475
+			}
+			if = {
+				limit = {
+					NOT = {
+						had_country_flag = {
+							flag = must_convert_30_provinces_in_30_years
+							days = 10950
+						}
+					}
+					has_country_flag = must_convert_30_provinces_in_30_years
+					num_of_provinces_owned_or_owned_by_subjects_with = {
+						region = iberia_region
+						religion = ROOT
+						value = 30
+					}
+				}
+				custom_tooltip = if_chosen_to_convert_and_not_been_30_years_yes
+			}
+			else_if = {
+				limit = {
+					OR = {
+						had_country_flag = {
+							flag = must_convert_30_provinces_in_30_years
+							days = 10950
+						}
+						NOT = {
+							has_country_flag = must_convert_30_provinces_in_30_years
+						}
+						NOT = {
+							num_of_provinces_owned_or_owned_by_subjects_with = {
+								region = iberia_region
+								religion = ROOT
+								value = 30
+							}
+						}
+					}
+				}
+				custom_tooltip = if_chosen_to_convert_and_not_been_30_years_no
+			}
+			tooltip = {
+				custom_tooltip = " "
+				custom_tooltip = brotherhood_of_cross_gains_development
+				add_country_modifier = {
+					name = alb_crusade_successful
+					duration = -1
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						had_country_flag = {
+							flag = must_conquer_iberia_in_30_years
+							days = 10950
+						}
+					}
+					has_country_flag = must_conquer_iberia_in_30_years
+				}
+				custom_tooltip = if_chosen_to_conquer_and_not_been_30_years_yes
+			}
+			else_if = {
+				limit = {
+					OR = {
+						had_country_flag = {
+							flag = must_conquer_iberia_in_30_years
+							days = 10950
+						}
+						NOT = {
+							has_country_flag = must_conquer_iberia_in_30_years
+						}
+					}
+				}
+				custom_tooltip = if_chosen_to_conquer_and_not_been_30_years_no
+			}
+			tooltip = {
+				custom_tooltip = " "
+				custom_tooltip = inquisitorial_gains_development
+				add_country_modifier = {
+					name = alb_conquest_successful
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						NOT = {
+							had_country_flag = {
+								flag = must_convert_30_provinces_in_30_years
+								days = 10950
+							}
+						}
+						has_country_flag = must_convert_30_provinces_in_30_years
+						num_of_provinces_owned_or_owned_by_subjects_with = {
+							region = iberia_region
+							religion = ROOT
+							value = 30
+						}
+					}
+					add_country_modifier = {
+						name = alb_crusade_successful
+						duration = -1
+					}
+					set_country_flag = alb_crusade_successful_flag
+					every_province = {
+						limit = {
+							holy_order = ind_1_order
+							country_or_non_sovereign_subject_holds = ROOT
+						}
+						add_base_tax = 1
+					}
+				}
+				else_if = {
+					limit = {
+						NOT = {
+							had_country_flag = {
+								flag = must_conquer_iberia_in_30_years
+								days = 10950
+							}
+						}
+						has_country_flag = must_conquer_iberia_in_30_years
+					}
+					add_country_modifier = {
+						name = alb_conquest_successful
+						duration = -1
+					}
+					set_country_flag = alb_campaign_successful_flag
+					every_province = {
+						limit = {
+							holy_order = ind_3_order
+							country_or_non_sovereign_subject_holds = ROOT
+						}
+						add_base_manpower = 1
+					}
+				}
 			}
 		}
 	}
@@ -500,16 +646,30 @@ Aldabba_3_slot = {
 		position = 1
 		
 		trigger = { 
-			OR = {
-				AF1 = {
-					OR = {
-						is_rival = ROOT
-						exists = no
+			AF1 = {
+				OR = {
+					AND = {
+						custom_trigger_tooltip = {
+							tooltip = has_been_insulted_by_root
+							OR = {
+								has_opinion_modifier = {
+									who = ROOT
+									modifier = insulted
+								}
+								has_opinion_modifier = {
+									who = ROOT
+									modifier = scornfully_insulted
+								}
+							}
+						}
+						OR = {
+							is_rival = ROOT
+							is_enemy = ROOT
+						}
 					}
+					exists = no
 				}
-				ROOT = {
-					is_rival = AF1
-				}
+				
 			}
 		}
 		
@@ -520,7 +680,7 @@ Aldabba_3_slot = {
 			add_casus_belli = {
 				target = AF1
 				type = cb_vassalize_mission
-				months = -1
+				months = 9125
 			}
 		}
 	}
@@ -530,36 +690,79 @@ Aldabba_3_slot = {
 		position = 2
 		provinces_to_highlight = {
 			province_id = 335
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
 		}
 		trigger = { 
-			owns_or_non_sovereign_subject_of = 335
+			335 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
 		}
 		
 		effect = {
-			northern_morocco_area = {
+			western_morocco_area = {
 				add_permanent_claim = ROOT
 			}
 			marrekesh_area = {
 				add_permanent_claim = ROOT
+			}
+			northern_morocco_area = {
+				add_permanent_claim = ROOT
+			}
+			custom_tooltip = " "
+			add_prestige_or_monarch_power = {
+				amount = 25
+			}
+			custom_tooltip = " "
+			if = {
+				limit = {
+					AF1 = {
+						is_subject_of = ROOT
+					}
+				}
+				custom_tooltip = if_af1_subject_yes
+			}
+			else = {
+				custom_tooltip = if_af1_subject_no
+			}
+			tooltip = {
+				365 = {
+					cede_province = ROOT
+					add_core = ROOT
+					add_base_manpower = 3
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						AF1 = {
+							is_subject_of = ROOT
+						}
+					}
+					365 = {
+						cede_province = ROOT
+						add_core = ROOT
+						add_base_manpower = 3
+					}
+				}
 			}
 		}
 	}
 	ald_new_grudge = {
 		icon = mission_moroccan_ports
 		required_missions = {ald_old_grudge }
-		position = 4
+		position = 3
 		provinces_to_highlight = {
 			area = northern_morocco_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
 		}
 		trigger = { 
-			OR = {
-				any_war_enemy_country = {
-					tag = RK0
-				}
-				northern_morocco_area = {
-					type = all
-					owned_by = ROOT
-				}
+			northern_morocco_area = {
+				type = all
+				owned_by = ROOT
 			}
 		}
 		
@@ -567,11 +770,51 @@ Aldabba_3_slot = {
 			upper_andalucia_area = {
 				add_permanent_claim = ROOT
 			}
-			1749 = {
+			lower_andalucia_area = {
 				add_permanent_claim = ROOT
 			}
-			224 = {
-				add_permanent_claim = ROOT
+			custom_tooltip = " "
+			1751 = {
+				add_province_modifier = {
+					name = alb_atlantic_gate
+					duration = -1
+				}
+			}
+			if = {
+				limit = {
+					AF1 = {
+						is_subject_of = ROOT
+					}
+				}
+				custom_tooltip = if_af1_subject_yes
+			}
+			else = {
+				custom_tooltip = if_af1_subject_no
+			}
+			tooltip = {
+				northern_morocco_area = {
+					add_core = AF1
+					cede_province = AF1
+				}
+				AF1 = {
+					add_liberty_desire = -25
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						AF1 = {
+							is_subject_of = ROOT
+						}
+					}
+					northern_morocco_area = {
+						add_core = AF1
+						cede_province = AF1
+					}
+					AF1 = {
+						add_liberty_desire = -25
+					}
+				}
 			}
 		}
 	}
@@ -580,7 +823,10 @@ Aldabba_3_slot = {
 		required_missions = {ald_new_grudge }
 		position = 5
 		provinces_to_highlight = {
-			area = upper_andalucia_area
+			OR = {
+				area = upper_andalucia_area
+			}
+			
 		}
 		trigger = { 
 			upper_andalucia_area = {
@@ -590,14 +836,6 @@ Aldabba_3_slot = {
 		}
 		
 		effect = {
-			1293 = {
-				add_trade_modifier = {
-					who = ROOT
-					duration = 10950
-					power = 35
-					key = ALD_HERC
-				}
-			}
 			lower_andalucia_area = {
 				add_permanent_claim = ROOT
 			}
@@ -609,6 +847,20 @@ Aldabba_3_slot = {
 			}
 			baleares_area = {
 				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name = alb_sea_worthy_fleet
+				duration = 12775
+			}
+			custom_tooltip = spawn_voc_men_tt
+			hidden_effect = {
+				226 = {
+					voc_indiamen_light = ROOT
+					voc_indiamen_light = ROOT
+					voc_indiamen_light = ROOT
+					voc_indiamen_light = ROOT
+					voc_indiamen_light = ROOT
+				}
 			}
 		}
 	}
@@ -747,12 +999,33 @@ Aldabba_4_slot = {
 		required_missions = {ald_old_grudge }
 		position = 3
 		provinces_to_highlight = {
-			is_capital_of = AF1
+			OR = {
+				area = western_morocco_area
+				area = marrekesh_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
 		}
 		trigger = { 
-			AF1 = {
-				NOT = {
-					total_development = 50
+			western_morocco_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			marrekesh_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			if = {
+				limit = {
+					AF1 = {
+						is_subject_of = ROOT
+					}
+				}
+				AF1 = {
+					NOT = {
+						liberty_desire = 50
+					}
 				}
 			}
 		}
@@ -761,11 +1034,49 @@ Aldabba_4_slot = {
 			southern_morocco_area = {
 				add_permanent_claim = ROOT
 			}
-			western_morocco_area = {
+			tafilalt_area = {
 				add_permanent_claim = ROOT
 			}
 			sus_area = {
 				add_permanent_claim = ROOT
+			}
+			custom_tooltip = " "
+			343 = {
+				add_province_modifier = {
+					name = alb_fez_secured
+					duration = -1
+				}
+			}
+			custom_tooltip = " "
+			if = {
+				limit = {
+					AF1 = {
+						is_subject_of = ROOT
+					}
+				}
+				custom_tooltip = if_af1_subject_yes
+			}
+			else = {
+				custom_tooltip = if_af1_subject_no
+			}
+			tooltip = {
+				add_country_modifier = {
+					name = alb_annexation_of_mauria
+					duration = 5475
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						AF1 = {
+							is_subject_of = ROOT
+						}
+					}
+					add_country_modifier = {
+						name = alb_annexation_of_mauria
+						duration = 5475
+					}
+				}
 			}
 		}
 	}
@@ -774,18 +1085,58 @@ Aldabba_4_slot = {
 		required_missions = {ald_mauria }
 		position = 4
 		provinces_to_highlight = {
-			is_capital_of = AF1
+			OR = {
+				is_capital_of = AF1
+				area = sus_area
+				area = tafilalt_area
+				area = southern_morocco_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
 		}
 		trigger = { 
 			AF1 = {
 				exists = no
 			}
+			sus_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			tafilalt_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			southern_morocco_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
 		}
 		
 		effect = {
-			add_country_modifier = {
-				name = mauria_def
-				duration = -1
+			macaronesia_area = {
+				add_permanent_claim = ROOT
+			}
+			custom_tooltip = " "
+			add_accepted_culture_or_dip_power = {
+				culture = maurian
+			}
+			if = {
+				limit = {
+					has_country_modifier = annexers_legacy
+				}
+				custom_tooltip = hun_annexed_subject_tt_yes
+			}
+			else = {
+				custom_tooltip = hun_annexed_subject_tt_no
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_country_modifier = annexers_legacy
+					}
+					remove_country_modifier = annexers_legacy
+				}
 			}
 		}
 	}
@@ -1035,6 +1386,12 @@ Aldabba_5_slot = {
 		
 		trigger = { 
 			has_mil_advisor = yes
+			army_size_percentage = 1
+			has_government_power = {
+				mechanic_type = aldabba_failure_mechanic
+				power_type = restoration_aldabba
+				value = 10
+			}
 		}
 		
 		effect = {
@@ -1045,27 +1402,16 @@ Aldabba_5_slot = {
 			}
 		}
 	}
-	ald_new_fort = {
-		icon = mission_invade_mali
-		required_missions = { ald_fort}
-		position = 2
-		
-		trigger = { 
-			army_size_percentage = 1
-			manpower = 5
-		}
-		
-		effect = {
-			add_manpower = -5
-			remove_country_modifier = afr_military_problem
-		}
-	}
+	
 	ald_power = {
 		icon = mission_conquer_tunisia
-		required_missions = { ald_new_fort}
+		required_missions = { ald_fort }
 		position = 3
 		provinces_to_highlight = {
 			province_id = 350
+			NOT = {
+				owned_by = ROOT
+			}
 		}
 		trigger = { 
 			350 = {
@@ -1080,8 +1426,17 @@ Aldabba_5_slot = {
 			north_saharan_area = {
 				add_permanent_claim = ROOT
 			}
+			kabylia_area = {
+				add_permanent_claim = ROOT
+			}
+			custom_tooltip = " "
 			350 = {
-				add_base_tax = 2
+				add_or_upgrade_fort_building = yes
+				add_province_modifier = {
+					name = alb_defensive_position
+					duration = -1
+				}
+				
 			}
 		}
 	}
@@ -1090,27 +1445,51 @@ Aldabba_5_slot = {
 		required_missions = { ald_power}
 		position = 4
 		provinces_to_highlight = {
-			area = ouled_nail_area
+			OR = {
+				area = ouled_nail_area
+				area = north_saharan_area
+				area = kabylia_area
+			}
+			
 		}
 		trigger = { 
 			ouled_nail_area = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			north_saharan_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			kabylia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 		
 		effect = {
-			ouled_nail_area = {
-				add_base_production = 1
+			djerba_area = {
+				add_permanent_claim = ROOT
 			}
-			kabylia_area = {
+			tripolitania_area = {
 				add_permanent_claim = ROOT
 			}
 			tunisia_area = {
 				add_permanent_claim = ROOT
 			}
-			djerba_area = {
-				add_permanent_claim = ROOT
+			custom_tooltip = " "
+			add_ruler_modifier = {
+				name = alb_unifier_of_the_east
+				duration = -1
+			}
+			custom_tooltip = " "
+			custom_tooltip = for_next_20_years
+			hidden_effect = {
+				add_country_modifier = {
+					name = alb_hidden_effect_mod
+					hidden = yes
+					duration = 7300
+				}
 			}
 		}
 	}
@@ -1120,33 +1499,49 @@ Aldabba_5_slot = {
 		position = 5
 		provinces_to_highlight = {
 			OR = {
-				province_id = 353
-				province_id = 2450
+				area = tripolitania_area
+				area = djerba_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 		trigger = { 
-			353 = {
-				owned_by = ROOT
+			djerba_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
 			}
-			2450 = {
-				owned_by = ROOT
+			tripolitania_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 		
 		effect = {
-			353 = {
-				add_base_manpower = 1
-				add_base_production = 1
-				add_base_tax = 1
-			}
-			tripolitania_area = {
+			356 = {
 				add_permanent_claim = ROOT
 			}
 			fezzan_area = {
 				add_permanent_claim = ROOT
 			}
-			356 = {
-				add_permanent_claim = ROOT
+			custom_tooltip = " "
+			353 = {
+				add_or_upgrade_trade_building = yes
+				if = {
+					limit = {
+						NOT = {
+							province_has_center_of_trade_of_level = 3
+						}
+					}
+					add_center_of_trade_level = 1
+				}
+				else = {
+					add_base_production = 3
+				}
+			}
+			custom_tooltip = dip_advisors_now_give_african_lateens
+			hidden_effect = {
+				set_country_flag = african_lateen_dip_advisors
 			}
 		}
 	}
@@ -1155,11 +1550,21 @@ Aldabba_5_slot = {
 		required_missions = { ald_trip }
 		position = 6
 		provinces_to_highlight = {
+			OR = {
 				province_id = 356	
+				area = fezzan_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
 		}
 		trigger = { 
 			356 = {
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			fezzan_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 		

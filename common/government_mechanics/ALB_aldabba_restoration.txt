@@ -4,7 +4,6 @@ aldabba_failure_mechanic = {
 	available = {	}
 	powers = {
 		restoration_aldabba = {
-			gui = alb_venetian_capitalism_gui
 			max = 100
 			min = 0
 			reset_on_new_ruler = no
@@ -13,13 +12,44 @@ aldabba_failure_mechanic = {
 					global_tax_modifier = 0.25 
 					nobles_loyalty_modifier = 0.1
 					nobles_influence_modifier = 0.1
-					legitimacy = 1 
+					discipline = 0.05
 				}
 			}
 			on_max_reached = {
 				add_government_reform = aldabban_restored_reform
 			}
 			is_good = yes
+		}
+	}
+	interactions = {
+		purge_weakness = {
+			gui = prussian_militarization_gov_mech_1_2
+			center = no
+			trigger = {
+				mil_power = 100
+				manpower = 10
+			}
+			effect = { 
+				add_government_power = {
+					mechanic_type = aldabba_failure_mechanic
+					power_type = restoration_aldabba
+					value = 10
+				}
+				add_mil_power = -100
+				add_manpower = -10
+			}
+			cooldown_years = 5
+			ai_chance = {
+				factor = 5
+				modifier = {
+					factor = 0
+					not = { mil_power = 600 }
+				}
+				modifier = {
+					factor = 0
+					not = { mil = 4 }
+				}
+			}
 		}
 	}
 }
