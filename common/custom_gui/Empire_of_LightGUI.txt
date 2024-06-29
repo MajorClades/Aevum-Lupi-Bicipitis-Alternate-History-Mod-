@@ -24,7 +24,7 @@ custom_button = { #Must match a scripted guiButtonType in a .gui file
 	tooltip = open_eol_menu_tt
 } 
 
-custom_button = { #Must match a scripted guiButtonType in a .gui file
+custom_button = { #the actual button that does the effect
 	name = eol_button_1
 	potential = {
 		has_country_flag = open_eol_menu_flag
@@ -33,6 +33,7 @@ custom_button = { #Must match a scripted guiButtonType in a .gui file
 		}
 	}
 	trigger = {
+		tag = LE0
 		prestige = 20
 		if = {
 			limit = {
@@ -48,13 +49,25 @@ custom_button = { #Must match a scripted guiButtonType in a .gui file
 		}
 	}
 	effect = {
+		if = {
+			limit = {
+				has_institution = renaissance
+			}
+			add_adm_power = -500
+			add_dip_power = -500 
+			add_mil_power = -500
+		}else = {
+			add_adm_power = -1000
+			add_dip_power = -1000
+			add_mil_power = -1000
+		}
 		set_global_flag = decree_eol_1_done
 		custom_tooltip = get_cool_modifier_from_light_vassals
 	}
-	tooltip = get_cool_modifier_from_light_vassals
+	tooltip = eol_have_institution_1
 } 
 
-custom_button = { #Must match a scripted guiButtonType in a .gui file
+custom_button = { #a fake button that does nothing, just for the visuals
 	name = eol_button_1_done
 	potential = {
 		has_country_flag = open_eol_menu_flag
@@ -76,7 +89,7 @@ custom_button = { #Must match a scripted guiButtonType in a .gui file
 		}
 	}
 	trigger = {
-		stability = 2
+		stability = 1
 		if = {
 			limit = {
 				has_institution = renaissance
@@ -91,10 +104,304 @@ custom_button = { #Must match a scripted guiButtonType in a .gui file
 		}
 	}
 	effect = {
+		if = {
+			limit = {
+				has_institution = renaissance
+			}
+			add_adm_power = -500
+			add_dip_power = -500 
+			add_mil_power = -500
+		}else = {
+			add_adm_power = -1000
+			add_dip_power = -1000
+			add_mil_power = -1000
+		}
 		set_global_flag = decree_eol_2_done
 		custom_tooltip = trigger_events_to_change_religion_of_provinces
 	}
+	tooltip = eol_have_institution_1
+} 
+
+custom_button = { #a fake button that does nothing, just for the visuals
+	name = eol_button_2_done
+	potential = {
+		has_country_flag = open_eol_menu_flag
+		has_global_flag = decree_eol_2_done
+	}
+	trigger = {
+	}
+	effect = {	
+	}
 	tooltip = trigger_events_to_change_religion_of_provinces
+} 
+
+custom_button = { #the actual button that does the effect
+	name = eol_button_3
+	potential = {
+		has_country_flag = open_eol_menu_flag
+		NOT = {
+			has_global_flag = decree_eol_3_done
+		}
+	}
+	trigger = {
+		tag = LE0
+		prestige = 40
+		if = {
+			limit = {
+				has_institution = new_world_i
+			}
+			adm_power = 500
+			dip_power = 500 
+			mil_power = 500
+		}else = {
+			adm_power = 1000
+			dip_power = 1000 
+			mil_power = 1000
+		}
+	}
+	effect = {
+		if = {
+			limit = {
+				has_institution = new_world_i
+			}
+			add_adm_power = -500
+			add_dip_power = -500 
+			add_mil_power = -500
+		}else = {
+			add_adm_power = -1000
+			add_dip_power = -1000
+			add_mil_power = -1000
+		}
+		set_global_flag = decree_eol_3_done
+		custom_tooltip = get_casus_belli_make_light_vassals
+	}
+	tooltip = eol_have_institution_2
+} 
+
+custom_button = { #a fake button that does nothing, just for the visuals
+	name = eol_button_3_done
+	potential = {
+		has_country_flag = open_eol_menu_flag
+		has_global_flag = decree_eol_3_done
+	}
+	trigger = {
+	}
+	effect = {	
+	}
+	tooltip = get_casus_belli_make_light_vassals
+} 
+
+custom_button = { #the actual button that does the effect
+	name = eol_button_4
+	potential = {
+		has_country_flag = open_eol_menu_flag
+		NOT = {
+			has_global_flag = decree_eol_4_done
+		}
+	}
+	trigger = {
+		tag = LE0
+		stability = 2
+		if = {
+			limit = {
+				has_institution = new_world_i
+			}
+			adm_power = 500
+			dip_power = 500 
+			mil_power = 500
+		}else = {
+			adm_power = 1000
+			dip_power = 1000 
+			mil_power = 1000
+		}
+	}
+	effect = {
+		if = {
+			limit = {
+				has_institution = new_world_i
+			}
+			add_adm_power = -500
+			add_dip_power = -500 
+			add_mil_power = -500
+		}else = {
+			add_adm_power = -1000
+			add_dip_power = -1000
+			add_mil_power = -1000
+		}
+		set_global_flag = decree_eol_4_done
+		custom_tooltip = make_war_illegal_in_eol
+	}
+	tooltip = eol_have_institution_2
+} 
+
+custom_button = { #a fake button that does nothing, just for the visuals
+	name = eol_button_4_done
+	potential = {
+		has_country_flag = open_eol_menu_flag
+		has_global_flag = decree_eol_4_done
+	}
+	trigger = {
+	}
+	effect = {	
+	}
+	tooltip = make_war_illegal_in_eol
+} 
+
+custom_button = { #the actual button that does the effect
+	name = eol_button_5
+	potential = {
+		has_country_flag = open_eol_menu_flag
+		NOT = {
+			has_global_flag = decree_eol_5_done
+		}
+	}
+	trigger = {
+		tag = LE0
+		prestige = 60
+		if = {
+			limit = {
+				has_institution = printing_press
+			}
+			adm_power = 500
+			dip_power = 500 
+			mil_power = 500
+		}else = {
+			adm_power = 1000
+			dip_power = 1000 
+			mil_power = 1000
+		}
+	}
+	effect = {
+		if = {
+			limit = {
+				has_institution = printing_press
+			}
+			add_adm_power = -500
+			add_dip_power = -500 
+			add_mil_power = -500
+		}else = {
+			add_adm_power = -1000
+			add_dip_power = -1000
+			add_mil_power = -1000
+		}
+		set_global_flag = decree_eol_5_done
+		custom_tooltip = make_vassals_less_revolting
+	}
+	tooltip = eol_have_institution_3
+} 
+
+custom_button = { #a fake button that does nothing, just for the visuals
+	name = eol_button_5_done
+	potential = {
+		has_country_flag = open_eol_menu_flag
+		has_global_flag = decree_eol_5_done
+	}
+	trigger = {
+	}
+	effect = {	
+	}
+	tooltip = make_vassals_less_revolting
+} 
+
+custom_button = { #the actual button that does the effect
+	name = eol_button_6
+	potential = {
+		has_country_flag = open_eol_menu_flag
+		NOT = {
+			has_global_flag = decree_eol_6_done
+		}
+	}
+	trigger = {
+		tag = LE0
+		stability = 3
+		if = {
+			limit = {
+				has_institution = printing_press
+			}
+			adm_power = 500
+			dip_power = 500 
+			mil_power = 500
+		}else = {
+			adm_power = 1000
+			dip_power = 1000 
+			mil_power = 1000
+		}
+	}
+	effect = {
+		if = {
+			limit = {
+				has_institution = printing_press
+			}
+			add_adm_power = -500
+			add_dip_power = -500 
+			add_mil_power = -500
+		}else = {
+			add_adm_power = -1000
+			add_dip_power = -1000
+			add_mil_power = -1000
+		}
+		set_global_flag = decree_eol_6_done
+		custom_tooltip = make_big_army_for_vassals_and_overlord
+	}
+	tooltip = eol_have_institution_3
+} 
+
+custom_button = { #a fake button that does nothing, just for the visuals
+	name = eol_button_6_done
+	potential = {
+		has_country_flag = open_eol_menu_flag
+		has_global_flag = decree_eol_6_done
+	}
+	trigger = {
+	}
+	effect = {	
+	}
+	tooltip = make_big_army_for_vassals_and_overlord
+} 
+
+custom_button = { #a fake button that does nothing, just for the visuals
+	name = eol_form_empire_button
+	potential = {
+		has_country_flag = open_eol_menu_flag
+	}
+	trigger = {
+		is_at_war = no
+		custom_trigger_tooltip = {
+			tooltip = all_light_decrees_done
+			has_global_flag = decree_eol_1_done
+			has_global_flag = decree_eol_2_done
+			has_global_flag = decree_eol_3_done
+			has_global_flag = decree_eol_4_done
+			has_global_flag = decree_eol_5_done
+			has_global_flag = decree_eol_6_done
+		}	
+	}
+	effect = {	
+		override_country_name = ARJUNASAMRAJYA
+		hidden_effect = {
+			every_subject_country = {
+				limit = {
+					is_subject_of_type = light_empire_vassal
+					NOT = {
+						liberty_desire = 50
+					}
+				}
+				country_event = {
+					id = light_emp.3
+				}
+			}
+			every_subject_country = {
+				limit = {
+					is_subject_of_type = light_empire_vassal
+					liberty_desire = 50
+				}
+				country_event = {
+					id = light_emp.4
+				}
+			}
+		}
+	}
+	tooltip = inherit_all_light_vassals_or_core_them
 } 
 
 custom_text_box = {
