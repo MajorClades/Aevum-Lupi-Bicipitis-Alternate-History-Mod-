@@ -1,0 +1,142 @@
+custom_button = { #Must match a scripted guiButtonType in a .gui file
+	name = open_eol_base_button
+	potential = {
+		OR = {
+			tag = LE0
+			is_subject_of_type_with_overlord = {
+				who = LE0
+				type = light_empire_vassal
+			}
+		}
+	}
+	trigger = {
+	}
+	effect = {
+		if = {
+			limit = {
+				has_country_flag = open_eol_menu_flag
+			}
+			clr_country_flag = open_eol_menu_flag
+		}else = {
+			set_country_flag = open_eol_menu_flag
+		}
+	}
+	tooltip = open_eol_menu_tt
+} 
+
+custom_button = { #Must match a scripted guiButtonType in a .gui file
+	name = eol_button_1
+	potential = {
+		has_country_flag = open_eol_menu_flag
+		NOT = {
+			has_global_flag = decree_eol_1_done
+		}
+	}
+	trigger = {
+		prestige = 20
+		if = {
+			limit = {
+				has_institution = renaissance
+			}
+			adm_power = 500
+			dip_power = 500 
+			mil_power = 500
+		}else = {
+			adm_power = 1000
+			dip_power = 1000 
+			mil_power = 1000
+		}
+	}
+	effect = {
+		set_global_flag = decree_eol_1_done
+		custom_tooltip = get_cool_modifier_from_light_vassals
+	}
+	tooltip = get_cool_modifier_from_light_vassals
+} 
+
+custom_button = { #Must match a scripted guiButtonType in a .gui file
+	name = eol_button_1_done
+	potential = {
+		has_country_flag = open_eol_menu_flag
+		has_global_flag = decree_eol_1_done
+	}
+	trigger = {
+	}
+	effect = {	
+	}
+	tooltip = get_cool_modifier_from_light_vassals
+} 
+
+custom_button = { #Must match a scripted guiButtonType in a .gui file
+	name = eol_button_2
+	potential = {
+		has_country_flag = open_eol_menu_flag
+		NOT = {
+			has_global_flag = decree_eol_2_done
+		}
+	}
+	trigger = {
+		stability = 2
+		if = {
+			limit = {
+				has_institution = renaissance
+			}
+			adm_power = 500
+			dip_power = 500 
+			mil_power = 500
+		}else = {
+			adm_power = 1000
+			dip_power = 1000 
+			mil_power = 1000
+		}
+	}
+	effect = {
+		set_global_flag = decree_eol_2_done
+		custom_tooltip = trigger_events_to_change_religion_of_provinces
+	}
+	tooltip = trigger_events_to_change_religion_of_provinces
+} 
+
+custom_text_box = {
+    name = eol_base_title #Must match a scripted instantTextBoxType in a .gui file
+    potential = { 
+		has_country_flag = open_eol_menu_flag
+	} #Determines when the text is visible
+    #To localize it, use the name of the button as a key, can also use customizable localisation
+}
+
+custom_text_box = {
+    name = eol_base_2_title #Must match a scripted instantTextBoxType in a .gui file
+    potential = { 
+		has_country_flag = open_eol_menu_flag
+	} #Determines when the text is visible
+    #To localize it, use the name of the button as a key, can also use customizable localisation
+}
+
+custom_icon = {
+    name = eol_base_bg #Must match a scripted iconType in a .gui file
+    potential = { 
+		has_country_flag = open_eol_menu_flag
+	} #Determines when the icon is visible
+}
+
+custom_window = {
+	name = eol_test
+	potential = {has_country_flag = open_eol_menu_flag }
+}
+
+custom_shield = {
+    name = light_empire_shield #Must match a scripted guiButtonType in a .gui file
+    potential = { 
+		has_country_flag = open_eol_menu_flag
+	} #Determines when the shield is visible
+    trigger = { 
+		hidden_trigger = {
+			always = yes
+		}
+	} #Determines when the shield is clickable
+    effect = { } #Effect for clicking
+    tooltip = is_light_empire_shield_target_tt #Can use customizable localisation
+    global_event_target = light_empire_shield_target
+    open_country = yes #If clicking opens the country view
+}
