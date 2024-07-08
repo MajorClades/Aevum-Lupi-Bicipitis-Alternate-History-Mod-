@@ -2,7 +2,10 @@ red_legions_reform = {
 	icon = "religious_permanent_revolution_reform"
 	allow_normal_conversion = yes
 	potential = {
-		have_had_reform = red_legions_reform 
+		OR = {
+			has_reform = red_legions_reform
+			have_had_reform = red_legions_reform 
+		}
 	}
 	trigger = {
 		OR = {
@@ -16,9 +19,7 @@ red_legions_reform = {
 	modifiers = {
 		global_missionary_strength = 0.02
 		warscore_from_battles_modifier = 0.1
-		manpower_in_true_faith_provinces = 0.33
-		cb_on_religious_enemies = yes
-		land_forcelimit = 25
+		manpower_in_true_faith_provinces = 0.15
 	}
 	
 	rulers_can_be_generals = yes
@@ -26,4 +27,90 @@ red_legions_reform = {
 	custom_attributes = {
 		monastic_order = yes
 	}
+}
+
+mars_legions_reform = {
+	icon = "religious_permanent_revolution_reform"
+	allow_normal_conversion = no
+	potential = {
+		OR = {
+			has_reform = mars_legions_reform
+			have_had_reform = mars_legions_reform 
+		}
+	}
+	trigger = {
+		tag = AF6
+	}
+	valid_for_nation_designer = no
+	nation_designer_cost = 200
+	
+	modifiers = {
+		governing_capacity_modifier = -0.5
+		general_cost = -0.2
+		may_recruit_female_generals = yes
+		global_unrest = 4
+		warscore_from_battles_modifier = 0.25
+		cb_on_religious_enemies = yes
+	}
+	heir = no
+	generals_become_rulers = yes
+	rulers_can_be_generals = yes
+}
+
+red_republic_reform = {
+	icon = "religious_permanent_revolution_reform"
+	allow_normal_conversion = yes
+	potential = {
+		OR = {
+			has_reform = red_republic_reform
+			have_had_reform = red_republic_reform 
+		}
+	}
+	trigger = {
+		OR = {
+			religion = indictian
+			is_playing_custom_nation = yes
+		}
+	}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 200
+	
+	modifiers = {
+		global_missionary_strength = 0.02
+		trade_efficiency = 0.1
+		warscore_from_battles_modifier = 0.1
+	}
+	duration = 4
+	rulers_can_be_generals = yes
+	custom_attributes = {
+		election_on_death = yes
+		enables_plutocratic_idea_group = yes
+		enables_aristocratic_idea_group = no
+	}
+}
+
+red_dynasty_reform = {
+	icon = "religious_permanent_revolution_reform"
+	allow_normal_conversion = yes
+	potential = {
+		OR = {
+			has_reform = red_dynasty_reform
+			have_had_reform = red_dynasty_reform 
+		}
+	}
+	trigger = {
+		OR = {
+			religion = indictian
+			is_playing_custom_nation = yes
+		}
+	}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 200
+	
+	modifiers = {
+		global_missionary_strength = 0.02
+		global_autonomy = -0.03
+		vassal_income = 0.25
+	}
+	rulers_can_be_generals = yes
 }

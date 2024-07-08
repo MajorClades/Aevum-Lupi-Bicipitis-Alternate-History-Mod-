@@ -1,0 +1,192 @@
+Austrho_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = RX0 } 
+
+	aust_capital_power = {
+		icon = mission_colonial
+		position = 1
+		provinces_to_highlight = { is_capital_of = ROOT } 
+
+		trigger = { capital_scope = { development = 10 }  } 
+
+		effect = {
+			madagascar_highlands_area = { add_permanent_claim = ROOT } 
+			southern_madagascar = { add_permanent_claim = ROOT } 
+			betsimasaraka_area = { add_permanent_claim = ROOT } 
+			sakalava_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	aust_growth = {
+		icon = mission_war_chest
+		position = 2
+		required_missions = { aust_capital_power } 
+		provinces_to_highlight = {  } 
+
+		trigger = { total_development = 50 } 
+
+		effect = {
+			capital_scope = {
+				add_institution_embracement = {
+					which = renaissance
+					value = 100
+				}
+			}
+			overlord = { add_treasury = 300 } 
+		}
+	}
+
+	aust_rebirth = {
+		icon = mission_trade_company_region_abroad
+		position = 3
+		required_missions = { aust_growth } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			has_adm_advisor_2 = yes
+			has_institution = renaissance
+		}
+
+		effect = { add_adm_tech = 1 } 
+	}
+}
+Austrho_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = RX0 } 
+
+	aust_colonial_expansion = {
+		icon = mission_unite_home_region
+		position = 2
+		required_missions = { aust_capital_power } 
+		provinces_to_highlight = {
+			OR = {
+				area = madagascar_highlands_area
+				area = southern_madagascar
+				area = betsimasaraka_area
+				area = sakalava_area
+			}
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 15
+				OR = {
+					area = madagascar_highlands_area
+					area = southern_madagascar
+					area = betsimasaraka_area
+					area = sakalava_area
+				}
+			}
+		}
+
+		effect = {
+			madagascar_highlands_area = { change_culture = austro_greek } 
+			southern_madagascar = { change_culture = austro_greek } 
+			betsimasaraka_area = { change_culture = austro_greek } 
+			sakalava_area = { change_culture = austro_greek } 
+		}
+	}
+}
+Austrho_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = RX0 } 
+
+	aust_marittime_expand = {
+		icon = mission_invade_island
+		position = 2
+		required_missions = { aust_armies } 
+		provinces_to_highlight = {  } 
+
+		trigger = { navy_size = 13 } 
+
+		effect = {
+			add_country_modifier = {
+				name = "rho_australian_colonists"
+				duration = 10950
+			}
+		}
+	}
+
+	aust_more_island = {
+		icon = scramble_for_africa
+		position = 3
+		required_missions = {
+			aust_marittime_expand
+			aust_colonial_expansion
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = mascarenes_area
+				province_id = 4020
+			}
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 4
+				OR = {
+					area = mascarenes_area
+					province_id = 4020
+				}
+			}
+		}
+
+		effect = { sakalava_area = { add_base_manpower = 1 }  } 
+	}
+}
+Austrho_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = RX0 } 
+
+	aust_armies = {
+		icon = mission_assemble_an_army
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = { army_size = 10 } 
+
+		effect = {
+			define_conquistador = {
+				shock = 4
+				fire = 2
+				manuever = 2
+				siege = 1
+			}
+		}
+	}
+}
+Austrho_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = RX0 } 
+
+	aust_grand_armies = {
+		icon = mission_islamic_golden_age
+		position = 2
+		required_missions = { aust_armies } 
+		provinces_to_highlight = {  } 
+
+		trigger = { army_size = 20 } 
+
+		effect = {
+			add_country_modifier = {
+				name = "rho_islam_war"
+				duration = 10950
+			}
+		}
+	}
+}

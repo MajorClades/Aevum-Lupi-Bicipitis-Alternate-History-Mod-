@@ -1,0 +1,445 @@
+namespace = zimmska
+
+#Brjika vassalize slasmeri triangle members
+country_event = {
+	id = zimmska.1
+	title = zimmska.1.test
+	desc = zimmska.1.desc
+	picture = GLOBAL_TRADE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = zimmska.1a
+		custom_tooltip = alb_zimmska_offer_to_be_vassal_tt
+		if = {
+			limit = {
+				JU1 = {
+					alliance_with = ROOT
+				}
+			}
+			JU1 = {
+				country_event = {
+					id = zimmska.2
+				}
+			}
+		}
+		if = {
+			limit = {
+				TS1 = {
+					alliance_with = ROOT
+				}
+			}
+			TS1 = {
+				country_event = {
+					id = zimmska.2
+				}
+			}
+		}
+	}
+}
+
+#Slasmeri triangle members side
+country_event = {
+	id = zimmska.2
+	title = zimmska.2.test
+	desc = zimmska.2.desc
+	picture = GLOBAL_TRADE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = zimmska.2a
+		ZL5 = {
+			vassalize = ROOT
+		}
+		ai_chance = {
+			factor = 70
+			modifier = {
+				factor = 0.5
+				NOT = {
+					trust = {
+						who = ZL5
+						value = 1
+					}
+				}
+			}
+			modifier = {
+				factor = 0.5
+				NOT = {
+					has_opinion = {
+						who = ZL5
+						value = 150
+					}
+				}
+			}
+			modifier = {
+				factor = 0.5
+				NOT = {
+					ZL5 = {
+						diplomatic_reputation = 0
+					}
+				}
+			}
+		}
+	}
+	option = {
+		name = zimmska.2b
+		add_prestige = 30
+		ai_chance = {
+			factor = 20
+		}
+	}
+}
+
+
+#Brjika vassalize slasmeri triangle members
+country_event = {
+	id = zimmska.3
+	title = zimmska.3.test
+	desc = zimmska.3.desc
+	picture = CITY_VIEW_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = zimmska.3a
+		trigger = {
+			owns = 26
+		}
+		26 = {
+			move_capital_effect = yes
+			add_base_manpower = 1
+			add_base_production = 1
+			add_base_tax = 1
+		}
+		add_country_modifier = {
+			name = alb_zimmska_oreple_capital
+			duration = -1
+		}
+	}
+	option = {
+		name = zimmska.3b
+		trigger = {
+			owns = 5
+		}
+		5 = {
+			move_capital_effect = yes
+			add_base_manpower = 1
+			add_base_production = 1
+			add_base_tax = 1
+		}
+		add_country_modifier = {
+			name = alb_zimmska_azeri_capital
+			duration = -1
+		}
+	}
+	option = {
+		name = zimmska.3c
+		trigger = {
+			owns = 1
+		}
+		1 = {
+			move_capital_effect = yes
+			add_base_manpower = 1
+			add_base_production = 1
+			add_base_tax = 1
+		}
+		add_country_modifier = {
+			name = alb_zimmska_brjika_capital
+			duration = -1
+		}
+	}
+	option = {
+		name = zimmska.3d
+		trigger = {
+			owns = 24
+		}
+		24 = {
+			move_capital_effect = yes
+			add_base_manpower = 1
+			add_base_production = 1
+			add_base_tax = 1
+		}
+		add_country_modifier = {
+			name = alb_zimmska_berezangrod_capital
+			duration = -1
+		}
+	}
+	option = {
+		name = zimmska.3e
+		trigger = {
+			owns = 27
+		}
+		27 = {
+			move_capital_effect = yes
+			add_base_manpower = 1
+			add_base_production = 1
+			add_base_tax = 1
+		}
+		add_country_modifier = {
+			name = alb_zimmska_rommerskoje_capital
+			duration = -1
+		}
+	}
+	option = {
+		name = zimmska.3f
+		capital_scope = {
+			add_base_manpower = 1
+			add_base_production = 1
+			add_base_tax = 1
+		}
+		add_country_modifier = {
+			name = alb_our_capital_good
+			duration = -1
+		}
+	}
+}
+
+#anglish march
+country_event = {
+	id = zimmska.4
+	title = zimmska.4.test
+	desc = zimmska.4.desc
+	picture = POMERANIA_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = zimmska.4a
+		custom_tooltip = alb_creat_anglish_march_tt
+		hidden_effect = {
+			if = {
+				limit = {
+					AN0 = {
+						exists = no
+					}
+				}
+				AN0 = {
+					override_country_name = ALBZIM_ANGLISH_MARCH
+					change_country_color = {
+						country = ROOT
+					}
+					change_religion = ROOT
+				}
+				every_province = {
+					limit = {
+						is_core = AN0
+					}
+					remove_core = AN0
+				}
+				denmark_area = {
+					add_core = AN0
+				}
+				jutland_area = {
+					add_core = AN0
+				}
+				holstein_area = {
+					add_core = AN0
+				}
+				release = AN0
+				create_march = AN0
+				AN0 = {
+					add_liberty_desire = -100
+				}
+			}
+			else_if = {
+				limit = {
+					AN0 = {
+						exists = yes
+					}
+					AN3 = {
+						exists = no
+					}
+				}
+				AN3 = {
+					override_country_name = ALBZIM_ANGLISH_MARCH
+					change_country_color = {
+						country = ROOT
+					}
+					change_religion = ROOT
+				}
+				every_province = {
+					limit = {
+						is_core = AN3
+					}
+					remove_core = AN3
+				}
+				denmark_area = {
+					add_core = AN3
+				}
+				jutland_area = {
+					add_core = AN3
+				}
+				holstein_area = {
+					add_core = AN3
+				}
+				release = AN3
+				create_march = AN3
+				AN3 = {
+					add_liberty_desire = -100
+				}
+			}
+			else_if = {
+				limit = {
+					AN0 = {
+						exists = yes
+					}
+					AN3 = {
+						exists = yes
+					}
+					POM = {
+						exists = no
+					}
+				}
+				POM = {
+					override_country_name = ALBZIM_ANGLISH_MARCH
+					change_country_color = {
+						country = ROOT
+					}
+					change_religion = ROOT
+				}
+				every_province = {
+					limit = {
+						is_core = POM
+					}
+					remove_core = POM
+				}
+				denmark_area = {
+					add_core = POM
+				}
+				jutland_area = {
+					add_core = POM
+				}
+				holstein_area = {
+					add_core = POM
+				}
+				release = POM
+				create_march = POM
+				POM = {
+					add_liberty_desire = -100
+				}
+			}
+		}
+	}
+	option = {
+		name = zimmska.4b
+		add_adm_power = 100
+		add_accepted_culture = anglish
+	}
+}
+
+#PIEROGI
+country_event = {
+	id = zimmska.5
+	title = zimmska.5.test
+	desc = zimmska.5.desc
+	picture = FEAST_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = zimmska.5a
+		change_price = {
+			trade_goods = grain
+			key = alb_zim_pierogi_wahoo
+			value = 0.1
+			duration = -1
+		}
+		add_years_of_owned_provinces_production_income = {
+			years = 15
+			custom_tooltip = MONOPOLY_INCOME_GRAIN_DESC
+			trigger = {
+				trade_goods = grain
+			}
+		}
+	}
+}
+
+#Slavery
+country_event = {
+	id = zimmska.6
+	title = zimmska.6.test
+	desc = zimmska.6.desc
+	picture = ENCOMIENDA_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = zimmska.6a
+		custom_tooltip = alb_fioritan_cashcrop_provinces_tt
+		tooltip = {
+			add_province_modifier = {
+				name = alb_zim_plantation_economy
+				duration = -1
+			}
+			add_base_production = 1
+		}
+		random_subject_country = {
+			limit = {
+				capital_scope = {
+					colonial_region = colonial_north_south
+				}
+				is_colonial_nation = yes
+			}
+			every_owned_province = {
+				limit = {
+					OR = {
+						trade_goods = tobacco
+						trade_goods = sugar
+						trade_goods = cotton
+						trade_goods = coffee
+					}
+					colonial_region = colonial_north_south
+				}
+				add_province_modifier = {
+					name = alb_zim_plantation_economy
+					duration = -1
+				}
+				add_base_production = 1
+			}
+		}
+	}
+}
+
+#Slasmeri triangle event
+country_event = {
+	id = zimmska.7
+	title = zimmska.7.test
+	desc = zimmska.7.desc
+	picture = GLOBAL_TRADE_eventPicture
+	trigger = {
+		OR = {
+			tag = ZL5
+			tag = TS1
+			tag = JU1
+		}
+		NOT = {
+			is_year = 1445
+		}
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = zimmska.7a
+		if = {
+			limit = {
+				tag = ZL5
+			}
+			add_historical_friend = TS1
+			add_historical_friend = JU1
+			custom_tooltip = alb_get_to_integrate_slasmeri_triangle_later_tt
+		}
+		else_if = {
+			limit = {
+				tag = JU1
+			}
+			add_historical_friend = TS1
+			add_historical_friend = ZL5
+		}
+		else = {
+			add_historical_friend = ZL5
+			add_historical_friend = JU1
+		}
+	}
+}

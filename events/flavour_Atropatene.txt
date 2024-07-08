@@ -49,8 +49,8 @@ country_event = {
 		every_country = {
 			limit = {
 				OR = {
-					primary_culture = pontic_greek
-					primary_culture = greek
+					primary_culture = rhoman
+					primary_culture = greek_new
 				}
 				NOT = { tag = RU0 } 
 				NOT = { tag = HE0 } 
@@ -124,16 +124,16 @@ country_event = {
 			factor = 50
 		}
 		thrace_area = {
-			change_culture = greek
+			change_culture = greek_new
 		}
 		morea_area = {
-			change_culture = greek
+			change_culture = greek_new
 		}
 		northern_greece_area = {
-			change_culture = greek
+			change_culture = greek_new
 		}
 		macedonia_area = {
-			change_culture = greek
+			change_culture = greek_new
 		}
 	}
 	option = {
@@ -141,7 +141,9 @@ country_event = {
 		ai_chance = {
 			factor = 50
 		}
-		add_prestige = 20
+		add_prestige_or_monarch_power = {
+			amount = 20
+		}
 		thrace_area = {
 			add_province_modifier = {
 				name = respected_local_culture
@@ -177,7 +179,6 @@ country_event = {
 	trigger = {
 		tag = SL1
 		AND = {
-			mission_completed = greek_settlements
 			mission_completed = crush_mani_followers
 			mission_completed = bactrian_advance
 			mission_completed = into_syria
@@ -206,7 +207,7 @@ country_event = {
 						region = caucasia_region
 						region = anatolia_region
 					}
-					culture_group = byzantine
+					culture_group = hellenic_group
 				}
 				change_culture = yunani
 			}
@@ -232,7 +233,7 @@ country_event = {
 					culture = azerbaijani
 					culture = yunani
 				}
-				NOT = { culture = aramaic_2 }
+				NOT = { culture_group = aramaic_group }
 			}
 			change_culture = koine
 		}
@@ -250,7 +251,7 @@ country_event = {
 		every_owned_province = {
 			limit = {
 				OR = {
-					culture = aramaic_2
+					culture_group = aramaic_group
 				}
 			}
 			change_culture = hellenic_aramaic

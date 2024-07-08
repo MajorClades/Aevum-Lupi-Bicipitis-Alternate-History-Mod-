@@ -1,0 +1,205 @@
+incident_italian_republic = {
+    event = padan.2
+	default_option = 1
+	
+	can_stop = {
+		OR = {
+			NOT = {
+				exists = PD0
+			}
+			PD0 = {
+				is_subject = yes
+			}
+			PD0 = {
+				NOT = { government = republic }
+			}
+		}
+	}
+	
+	0 = { # grant
+		factor = 1
+		modifier = {
+			factor = 100
+			OR = {
+				ai_attitude = {
+					who = PD0
+					attitude = attitude_friendly
+				}
+				ai_attitude = {
+					who = PD0
+					attitude = attitude_loyal
+				}
+				ai_attitude = {
+					who = PD0
+					attitude = attitude_allied
+				}
+			}
+		}
+	}
+	
+	1 = { # deny
+		factor = 1
+		modifier = {
+			factor = 100
+			OR = {
+				ai_attitude = {
+					who = PD0
+					attitude = attitude_rivalry
+				}
+				ai_attitude = {
+					who = PD0
+					attitude = attitude_hostile
+				}
+				ai_attitude = {
+					who = PD0
+					attitude = attitude_threatened
+				}
+				ai_attitude = {
+					who = PD0
+					attitude = attitude_outraged
+				}
+				ai_attitude = {
+					who = PD0
+					attitude = attitude_disloyal
+				}
+				ai_attitude = {
+					who = PD0
+					attitude = attitude_rebellious
+				}
+			}
+		}
+	}
+}
+
+incident_avignon_petetion = {
+    event = molis.3
+	default_option = 1
+	
+	can_stop = {
+		OR = {
+			NOT = {
+				exists = IT1
+			}
+			IT1 = {
+				is_subject = yes
+			}
+		}
+	}
+	
+	0 = { # grant
+		factor = 1
+		modifier = {
+			factor = 1500
+			OR = {
+				ai_attitude = {
+					who = IT1
+					attitude = attitude_friendly
+				}
+				ai_attitude = {
+					who = IT1
+					attitude = attitude_loyal
+				}
+				ai_attitude = {
+					who = IT1
+					attitude = attitude_allied
+				}
+			}
+		}
+	}
+	
+	1 = { # deny
+		factor = 1
+		modifier = {
+			factor = 1500
+			OR = {
+				tag = TU0
+				ai_attitude = {
+					who = IT1
+					attitude = attitude_rivalry
+				}
+				ai_attitude = {
+					who = IT1
+					attitude = attitude_hostile
+				}
+				ai_attitude = {
+					who = IT1
+					attitude = attitude_threatened
+				}
+				ai_attitude = {
+					who = IT1
+					attitude = attitude_outraged
+				}
+				ai_attitude = {
+					who = IT1
+					attitude = attitude_disloyal
+				}
+				ai_attitude = {
+					who = IT1
+					attitude = attitude_rebellious
+				}
+			}
+		}
+	}
+}
+
+incident_turkey_petetion = {
+    event = molis.4
+	default_option = 1
+	
+	can_stop = {
+		OR = {
+			NOT = {
+				exists = TR0
+			}
+			IT1 = {
+				is_subject = yes
+			}
+		}
+	}
+	
+	0 = { # grant
+		factor = 1
+		modifier = {
+			factor = 1500
+			OR = {
+				culture = aquileian
+				culture = romanzi
+				ai_attitude = {
+					who = TR0
+					attitude = attitude_friendly
+				}
+				ai_attitude = {
+					who = TR0
+					attitude = attitude_loyal
+				}
+				ai_attitude = {
+					who = TR0
+					attitude = attitude_allied
+				}
+			}
+		}
+	}
+	
+	1 = { # deny
+		factor = 1
+		modifier = {
+			factor = 1500
+			OR = {
+				tag = PD1
+				tag = SA9
+				ai_attitude = {
+					who = TR0
+					attitude = attitude_rivalry
+				}
+				ai_attitude = {
+					who = TR0
+					attitude = attitude_hostile
+				}
+				ai_attitude = {
+					who = TR0
+					attitude = attitude_outraged
+				}
+			}
+		}
+	}
+}

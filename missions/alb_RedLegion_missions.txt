@@ -1,0 +1,1221 @@
+CRUSADE_AE0_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = AF6 } 
+
+	AF6_control_alexandria = {
+		icon = mission_rb_seize_alexandria
+		position = 1
+		provinces_to_highlight = {
+			province_id = 358
+			NOT = { controlled_by = ROOT } 
+		}
+
+		trigger = {
+			war_with = RU0
+			358 = { unit_in_siege = yes } 
+		}
+
+		effect = {
+			custom_tooltip = change_siege_progress_10_tt
+			358 = { change_siege = 10 } 
+		}
+	}
+
+	AF6_control_memphis = {
+		icon = mission_egyptian_mamluk_soldier
+		position = 1
+		required_missions = { AF6_control_alexandria } 
+		provinces_to_highlight = {
+			province_id = 361
+			NOT = { controlled_by = ROOT } 
+		}
+
+		trigger = {
+			war_with = RU0
+			controls = 361
+		}
+
+		effect = { add_treasury = 500 } 
+	}
+
+	AF6_control_jerusalem = {
+		icon = jerusalem
+		position = 1
+		required_missions = { AF6_control_memphis } 
+		provinces_to_highlight = {
+			province_id = 379
+			NOT = { controlled_by = ROOT } 
+		}
+
+		trigger = {
+			war_with = RU0
+			controls = 379
+		}
+
+		effect = {
+			379 = {
+				add_devastation = 50
+				change_religion = ROOT
+			}
+		}
+	}
+}
+RED_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = AE0 } 
+
+	AE0_indictian_rule = {
+		icon = chivalry_is_not_dead
+		position = 1
+		provinces_to_highlight = { region = egypt_region } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				region = egypt_region
+				religion = ROOT
+			}
+		}
+
+		effect = {
+			add_adm_power = 150
+			add_dip_power = 75
+		}
+	}
+
+	AE0_indictian_power = {
+		icon = mission_rb_trinity_college_dublin
+		position = 2
+		required_missions = { AE0_indictian_rule } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			num_of_converted_provinces = {
+				amount = 30
+			}
+		}
+
+		effect = {
+			define_advisor = {
+				type = theologian
+				skill = 2
+				cost_multiplier = 0.25
+			}
+			custom_tooltip = empty_line_tt
+			add_stability_or_adm_power = yes
+		}
+	}
+
+	AE0_jerusalem__econ = {
+		icon = jerusalem
+		position = 3
+		required_missions = {
+			AE0_alexandria
+			AE0_indictian_power
+		}
+		provinces_to_highlight = { province_id = 379 } 
+
+		trigger = {
+			owns = 379
+			379 = {
+				development = 20
+				religion = ROOT
+			}
+		}
+
+		effect = {
+			add_accepted_culture = sirian
+			377 = {
+				add_trade_modifier = {
+					who = ROOT
+					duration = 7300
+					power = 25
+					key = RED_TRADE_EGYPT
+				}
+			}
+		}
+	}
+
+	AE0_empire_nascent = {
+		icon = ark_of_the_covenant
+		position = 4
+		required_missions = {
+			AE0_egypt_prosperity
+			AE0_jerusalem__econ
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			prestige = 99
+			estate_loyalty = {
+				estate = estate_church
+				loyalty = 60
+			}
+			num_of_owned_provinces_with = {
+				value = 30
+				has_tax_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = af6_world_crusader
+				duration = -1
+			}
+		}
+	}
+
+	AE0_tunisia = {
+		icon = africa_proconsulare
+		position = 7
+		required_missions = { AE0_desert_warriors } 
+		provinces_to_highlight = {  
+			OR = {
+				area = tunisia_area
+				area = djerba_area
+			}
+		} 
+
+		trigger = {  
+			tunisia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			djerba_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		effect = {  
+			custom_tooltip = ae0_change_cartaroma_culture_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						culture = cartaroma
+					}
+					change_culture = carthaginian
+				}
+			}
+			custom_tooltip = empty_line_tt
+			tunisia_area = {
+				change_religion = ROOT
+			}
+			djerba_area = {
+				change_religion = ROOT
+			}
+			custom_tooltip = empty_line_tt
+			341 = {
+				add_or_upgrade_trade_building = yes
+			}
+		} 
+	}
+}
+RED_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = AE0 } 
+
+	AE0_alexandria = {
+		icon = mission_conquer_alexandria
+		position = 2
+		provinces_to_highlight = { province_id = 358 } 
+
+		trigger = {
+			owns = 358
+			358 = {
+				development = 20
+				province_has_center_of_trade_of_level = 2
+			}
+		}
+
+		effect = {
+			358 = {
+				add_great_project_tier = {
+					type = alexandria_library
+					tier = 1
+				}
+			}
+		}
+	}
+
+	AE0_egypt_prosperity = {
+		icon = mission_rb_seize_alexandria
+		position = 3
+		required_missions = { AE0_alexandria } 
+		provinces_to_highlight = { 
+			OR = {
+				province_id = 2316
+				province_id = 361
+				province_id = 359
+				area = vostani_area
+				area = said_area
+				area = delta_area
+			}
+			owned_by = ROOT
+			OR = {
+				is_prosperous = no 
+				NOT = { num_of_times_improved = 1 }
+				NOT = { num_of_buildings_in_province = 1 }
+			}	
+		} 
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = ae0_every_nile_province_tt
+				2316 = {
+					country_or_non_sovereign_subject_holds = ROOT
+					OR = {
+						num_of_buildings_in_province = 1
+						num_of_times_improved = 1
+						is_prosperous = yes
+					}
+				}
+				361 = {
+					country_or_non_sovereign_subject_holds = ROOT
+					OR = {
+						num_of_buildings_in_province = 1
+						num_of_times_improved = 1
+						is_prosperous = yes
+					}
+				}
+				359 = {
+					country_or_non_sovereign_subject_holds = ROOT
+					OR = {
+						num_of_buildings_in_province = 1
+						num_of_times_improved = 1
+						is_prosperous = yes
+					}
+				}
+				vostani_area = {
+					country_or_non_sovereign_subject_holds = ROOT
+					type = all 
+					OR = {
+						num_of_buildings_in_province = 1
+						num_of_times_improved = 1
+						is_prosperous = yes
+					}
+				}
+				said_area = {
+					country_or_non_sovereign_subject_holds = ROOT
+					type = all
+					OR = {
+						num_of_buildings_in_province = 1
+						num_of_times_improved = 1
+						is_prosperous = yes
+					}
+				}
+				delta_area = {
+					country_or_non_sovereign_subject_holds = ROOT
+					type = all
+					OR = {
+						num_of_buildings_in_province = 1
+						num_of_times_improved = 1
+						is_prosperous = yes
+					}
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = ae0_every_province_across_nile_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						OR = {
+							province_id = 2316
+							province_id = 361
+							province_id = 359
+							area = vostani_area
+							area = said_area
+							area = delta_area
+						}
+					}
+					add_base_production = 1
+				}
+			}
+			custom_tooltip = empty_line_tt
+			add_country_modifier = {
+				name = "egypt_red_economy"
+				duration = 10950
+			}
+		}
+	}
+
+	AE0_desert_warriors = {
+		icon = mission_sw_against_the_desert
+		position = 6
+		required_missions = { AE0_tripolitania } 
+		provinces_to_highlight = {  
+			OR = {
+				area = north_saharan_area
+				area = ouled_nail_area
+				area = kabylia_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			north_saharan_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			ouled_nail_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			kabylia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		effect = {  
+			djerba_area = {
+				add_permanent_claim = ROOT
+			}
+			tunisia_area = {
+				add_permanent_claim = ROOT
+			}
+			hautes_plaines_area = {
+				add_permanent_claim = ROOT
+			}
+			barbary_coast_area = {
+				add_permanent_claim = ROOT
+			}
+			algiers_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	AE0_aldabba = {
+		icon = per_muslim_integration
+		position = 7
+		required_missions = { AE0_desert_warriors } 
+		provinces_to_highlight = {  
+			or = {
+				area = hautes_plaines_area 
+				area = barbary_coast_area
+				area = algiers_area 
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			hautes_plaines_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			barbary_coast_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			algiers_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		effect = {  
+			maghreb_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	AE0_african_hegemon = {
+		icon = mission_empire
+		position = 8
+		required_missions = {
+			AE0_aldabba
+			AE0_tunisia
+		}
+		provinces_to_highlight = {  
+			region = maghreb_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 45
+				region = maghreb_region
+			}
+		} 
+
+		effect = {  
+			add_country_modifier = {
+				name = af6_insertname_africanus
+				duration = -1
+			}
+		} 
+	}
+}
+RED_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = AE0 } 
+
+	AE0_victory = {
+		icon = mission_asian_trader
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			stability = 1
+			is_at_war = no
+			has_adm_advisor = yes
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "aeo_small_unrest"
+				duration = 3650
+			}
+		}
+	}
+
+	AE0_beacon_of_learning = {
+		icon = mission_early_modern_university
+		position = 3
+		required_missions = { AE0_alexandria } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			university = 10
+			OR = {
+				innovativeness = 50
+				has_idea_group = innovativeness_ideas
+			}
+		} 
+
+		effect = {  
+			custom_tooltip = ae0_gain_better_ideas_tt
+			set_country_flag = ae0_get_better_ideas_flag
+			hidden_effect = {
+				swap_free_idea_group = yes
+			}
+		} 
+	}
+
+	AE0_world_granary = {
+		icon = prosperity_for_all
+		position = 4
+		required_missions = { AE0_egypt_prosperity } 
+		provinces_to_highlight = {  
+			OR = {
+				province_id = 362 
+				province_id = 363
+				province_id = 4316 
+				province_id = 2316 
+			}
+			OR = {
+				NOT = { country_or_non_sovereign_subject_holds = ROOT }
+				NOT = { num_of_times_improved = 4 }
+				is_prosperous = no
+			}
+		} 
+
+		trigger = {  
+			362 = {
+				OR = {
+					is_prosperous = yes 
+					num_of_times_improved = 4
+				}
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			2316 = {
+				OR = {
+					is_prosperous = yes 
+					num_of_times_improved = 4
+				}
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			363 = {
+				OR = {
+					is_prosperous = yes 
+					num_of_times_improved = 4
+				}
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			4316 = {
+				OR = {
+					is_prosperous = yes 
+					num_of_times_improved = 4
+				}
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		effect = {  
+			add_mercantilism = 5
+			custom_tooltip = ae0_expand_grain_production_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						has_province_modifier = granary_of_the_mediterranean
+					}
+					remove_province_modifier = granary_of_the_mediterranean
+					add_province_modifier = {
+						name = expanded_granary_of_the_mediterranean_modifier
+						duration = -1 
+					}
+				}
+			}
+		} 
+	}
+
+	AE0_tripolitania = {
+		icon = mission_control_the_barbary_coast
+		position = 5
+		required_missions = { AE0_financial_stability } 
+		provinces_to_highlight = {  
+			area = tripolitania_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			tripolitania_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			354 = {
+				development = 10
+			}
+		} 
+
+		effect = {  
+			354 = {
+				add_base_production = 1
+				add_base_tax = 1
+				add_base_manpower = 1
+				add_or_upgrade_tax_building = yes
+			}
+			custom_tooltip = empty_line_tt
+			north_saharan_area = {
+				add_permanent_claim = ROOT
+			}
+			ouled_nail_area = {
+				add_permanent_claim = ROOT
+			}
+			kabylia_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	AE0_horn = {
+		icon = mission_envoy_to_ethiopia
+		position = 6
+		required_missions = { AE0_expansions } 
+		provinces_to_highlight = {
+			OR = {
+				area = lower_nubia_area
+				area = red_sea_coast_area
+				area = dongola_area
+				area = upper_nubia_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		trigger = {
+			lower_nubia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			red_sea_coast_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			dongola_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			upper_nubia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_army_tradition = 15
+			custom_tooltip = empty_line_tt
+			tigray_area = {
+				add_permanent_claim = ROOT
+			}
+			central_ethiopia_area = {
+				add_permanent_claim = ROOT
+			}
+			damot_area = {
+				add_permanent_claim = ROOT
+			}
+			shewa_area = {
+				add_permanent_claim = ROOT
+			}
+			hadiya_area = {
+				add_permanent_claim = ROOT
+			}
+			southern_ethiopia_area = {
+				add_permanent_claim = ROOT
+			}
+			aussa_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	AE0_ethiopia = {
+		icon = befriend_ethiopia
+		position = 7
+		required_missions = { AE0_horn } 
+		provinces_to_highlight = { 
+			OR = {
+				area = tigray_area					
+				area = central_ethiopia_area					
+				area = damot_area				
+				area = shewa_area					
+				area = hadiya_area					
+				area = southern_ethiopia_area 					
+				area = aussa_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {
+			tigray_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			central_ethiopia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			damot_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			shewa_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			hadiya_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			southern_ethiopia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			aussa_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			custom_tooltip = AE0_allow_rock_churches_access_tt
+			1217 = {
+				create_colony_mission_reward_province = yes
+			}
+			custom_tooltip = empty_line_tt
+			horn_of_africa_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	AE0_sounding_horn = {
+		icon = hornofafrica
+		position = 8
+		required_missions = { AE0_ethiopia } 
+		provinces_to_highlight = {  
+			region = horn_of_africa_region
+			is_city = yes
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			horn_of_africa_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT	
+			}
+		} 
+
+		effect = {  
+			add_country_modifier = {
+				name = "egypt_horn"
+				duration = -1
+			}
+		} 
+	}
+
+	AE0_empire = {
+		icon = mission_west_african_ports
+		position = 9
+		required_missions = {
+			AE0_sounding_horn
+			AE0_african_hegemon
+			AE0_red_trade
+			AE0_constantine_city
+		}
+		provinces_to_highlight = {
+
+		} 
+
+		trigger = {
+			development_in_provinces = {
+				value = 1000
+			}
+			great_power_rank = 5
+		}
+
+		effect = {
+			complex_dynamic_effect = {
+				first_custom_tooltip = EGY_MON_TT
+				first_limit = "government = monarchy"
+				first_effect = "
+					override_country_name = AE0_AEGYPTIAN_EMPIRE
+				"
+				second_custom_tooltip = EGY_REP_TT
+				second_limit = "government = republic"
+				second_effect = "
+					override_country_name = AE0_NILE_FEDERATION
+				"
+				third_custom_tooltip = EGY_TEO_TT
+				third_limit = "government = theocracy"
+				third_effect = "
+					override_country_name = AE0_KINGDOM_OF_HEAVEN
+				"
+			}
+			custom_tooltip = empty_line_tt
+			add_country_modifier = {
+				name = af6_empire_in_red
+				duration = -1
+			}
+		}
+	}
+}
+RED_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = AE0 } 
+
+	AE0_money = {
+		icon = mission_hands_praying
+		position = 2
+		required_missions = {
+			AE0_victory
+			AE0_jerusalem_defense
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				has_tax_building_trigger = yes
+			}
+		}
+
+		effect = {
+			capital_scope = { add_or_upgrade_tax_building = yes } 
+			custom_tooltip = empty_line_tt
+			add_country_modifier = {
+				name = "af6_place_for_the_faithful"
+				duration = 7300
+			}
+			custom_tooltip = empty_line_tt
+			country_event = {
+				id = redleg.6
+			}
+		}
+	}
+
+	AE0_egypt = {
+		icon = mission_egyptian_mamluk_soldier
+		position = 3
+		required_missions = { AE0_money } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			is_at_war = no
+			legitimacy_equivalent = 90
+			stability = 2
+		}
+
+		effect = { country_event = { id = redleg.8 }  } 
+	}
+
+	AE0_financial_stability = {
+		icon = mission_diplomatic_relation
+		position = 4
+		required_missions = { AE0_egypt } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			NOT = {
+				unrest = 0
+			}
+			stability = 3
+
+		}
+
+		effect = {
+			complex_dynamic_effect = {
+				first_custom_tooltip = EGY_MON_TT
+				first_limit = "government = monarchy"
+				first_effect = "
+					add_country_modifier = {
+						name = egypt_monarchy_stability
+						duration = 10950
+					}
+				"
+				second_custom_tooltip = EGY_REP_TT
+				second_limit = "government = republic"
+				second_effect = "
+					add_country_modifier = {
+						name = egypt_republic_stability
+						duration = 10950
+					}
+				"
+				third_custom_tooltip = EGY_TEO_TT
+				third_limit = "government = theocracy"
+				third_effect = "
+					add_country_modifier = {
+						name = egypt_theocracy_stability
+						duration = 10950
+					}
+				"
+			}
+			custom_tooltip = empty_line_tt
+			tripolitania_area = {
+				add_permanent_claim = ROOT
+			}
+			trans_jordan_area = {
+				add_permanent_claim = ROOT
+			}
+			palestine_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	AE0_expansions = {
+		icon = mission_establish_the_black_guard
+		position = 5
+		required_missions = { AE0_financial_stability } 
+		provinces_to_highlight = {  } 
+
+		trigger = { 
+			has_mil_advisor_2 = yes 
+		} 
+
+		effect = {
+			lower_nubia_area = { add_permanent_claim = ROOT } 
+			red_sea_coast_area = { add_permanent_claim = ROOT } 
+			dongola_area = { add_permanent_claim = ROOT } 
+			upper_nubia_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	AE0_conquer_syria = {
+		icon = mam_yemen
+		position = 6
+		required_missions = { AE0_secure_surroundings } 
+		provinces_to_highlight = {  
+			region = mashriq_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			mashriq_region = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {  
+			cukurova_area = {
+				add_permanent_claim = ROOT
+			}
+			aydin_area = {
+				add_permanent_claim = ROOT
+			}
+			hudavendigar_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	AE0_break_rhomania = {
+		icon = mission_dismantle_hre
+		position = 7
+		required_missions = { AE0_conquer_syria } 
+		provinces_to_highlight = {  
+			OR = {
+				area = hudavendigar_area
+				area = aydin_area
+				area = cukurova_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			cukurova_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			aydin_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			hudavendigar_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {  
+			anatolia_region = {
+				add_permanent_claim = ROOT
+			}
+			151 = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	AE0_constantine_city = {
+		icon = take_constantinople
+		position = 8
+		required_missions = { AE0_break_rhomania } 
+		provinces_to_highlight = {  
+			province_id = 151
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			owns = 151
+			151 = {
+				development = 30
+			}
+		} 
+
+		effect = {  
+			151 = {
+				upgrade_trade_building = yes
+			}
+		} 
+	}
+}
+RED_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = AE0 } 
+
+	AE0_jerusalem_defense = {
+		icon = jerusalem
+		position = 1
+		provinces_to_highlight = { province_id = 379 } 
+
+		trigger = {
+			owns = 379
+			379 = { has_fort_building_trigger = yes } 
+		}
+
+		effect = {
+			379 = {
+				change_religion = ROOT
+				add_province_modifier = {
+					name = "holycity_defense"
+					duration = -1
+				}
+			}
+		}
+	}
+
+	AE0_secure_surroundings = {
+		icon = mam_basrah
+		position = 5
+		required_missions = { AE0_financial_stability } 
+		provinces_to_highlight = {  
+			OR = {
+				area = palestine_area
+				area = trans_jordan_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			palestine_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			trans_jordan_area ={
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		effect = {  
+			mashriq_region = {
+				add_permanent_claim = ROOT
+			}
+			tabuk_area = {
+				add_permanent_claim = ROOT
+			}
+			medina_area = {
+				add_permanent_claim = ROOT
+			}
+			mecca_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	AE0_hedjaz_conquest = {
+		icon = kok_mam_holy_cities
+		position = 6
+		required_missions = { AE0_secure_surroundings } 
+		provinces_to_highlight = {  
+			OR = {
+				area = tabuk_area
+				area = medina_area
+				area = mecca_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {
+			tabuk_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			medina_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			mecca_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		effect = {  
+			385 = {
+				destroy_great_project = {
+					type = kaaba
+				}
+				add_devastation = 50
+				remove_loot = {
+					who = ROOT
+					amount = 50
+				}
+			}
+			custom_tooltip = empty_line_tt
+			arabia_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	AE0_arabian_nights = {
+		icon = mam_arabia
+		position = 7
+		required_missions = { AE0_hedjaz_conquest } 
+		provinces_to_highlight = {
+			region = arabia_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 40
+				region = arabia_region
+			}
+		} 
+
+		effect = {  
+			add_country_modifier = {
+				name = af6_arabian_trade
+				duration = -1
+			}
+		} 
+	}
+
+	AE0_red_trade = {
+		icon = mission_dharma_mission_arabian_trade
+		position = 8
+		required_missions = { AE0_arabian_nights } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			num_of_owned_provinces_with = {
+				value = 5
+				trade_goods = coffee
+				region = arabia_region
+				has_production_building_trigger = yes
+				base_production = 5
+			}
+			4346 = {
+				is_strongest_trade_power = ROOT
+			}
+		} 
+
+		effect = {  
+			add_years_of_owned_provinces_production_income = {
+				years = 15
+				trigger = {
+					trade_goods = coffee
+				}
+				custom_tooltip = AE0_coffee_trade_money
+			}
+			custom_tooltip = empty_line_tt
+			387 = {
+				add_base_production = 2
+				add_or_upgrade_production_building = yes
+			}
+		} 
+	}
+}

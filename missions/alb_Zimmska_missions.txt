@@ -1,0 +1,1744 @@
+ZL0_1_branch = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			culture_group = zladinian
+			tag = ZL0
+		}
+		NOT = {
+			OR = {
+				tag = ZL6
+				tag = A99
+			}
+		}
+		NOT = {
+			is_colonial_nation = yes
+		}
+	} 
+
+	ZL0_frozen_north = {
+		icon = mission_rb_settle_the_north
+		position = 2
+		required_missions = { ZL0_zimmska_army } 
+		provinces_to_highlight = {
+			OR = {
+				area = northern_norway
+				area = norrland_area
+				area = laponia_area
+				province_id = 4151
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			northern_norway = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			norrland_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			laponia_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			if = {
+				limit = {
+					ai = no
+				}
+				4151 = {
+					country_or_non_sovereign_subject_holds = ROOT
+					OR = {
+						has_fort_building_trigger = yes
+						development = 10
+					}
+				}
+			}
+		} 
+
+		effect = {  
+			add_accepted_culture = gorian
+			4151 = {
+				if = {
+					limit = {
+						NOT = {
+							has_fort_building_trigger = yes
+						}
+					}
+					add_or_upgrade_fort_building = yes
+				}
+				add_permanent_province_modifier = {
+					name = "gorian_shield"
+					duration = -1
+				}
+			}
+		} 
+	}
+}
+ZL0_2_branch = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			culture_group = zladinian
+			tag = ZL0
+		}
+		NOT = {
+			OR = {
+				tag = ZL6
+				tag = A99
+			}
+		}
+		NOT = {
+			is_colonial_nation = yes
+		}
+	} 
+
+	ZL0_zimmska_army = {
+		icon = mission_early_russian_army
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			army_size_percentage = 0.9
+		} 
+
+		effect = {  
+			custom_tooltip = OLD_ZIMMSKA
+			hidden_effect = {
+				every_province = {
+					limit = {
+						culture_group = zladinian
+						NOT = { culture = silesian } 
+					}
+					add_permanent_claim = ROOT
+				}
+			}
+		} 
+	}
+
+	ZL0_heartland = {
+		icon = mission_expand_into_the_forest
+		position = 2
+		required_missions = { ZL0_zimmska_army } 
+		provinces_to_highlight = {  
+			OR = {
+				area = western_norway
+			area = eastern_norway
+			area = vastra_gotaland_area
+			area = svealand_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			western_norway = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			eastern_norway = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			vastra_gotaland_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			svealand_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {  
+			5 = {
+				add_province_modifier = {
+					name = alb_zim_old_capital
+					duration = -1
+				}
+				add_base_production = 1
+				add_base_tax = 1
+				add_base_manpower = 1
+			}
+			if = {
+				limit = {
+					NOT = {
+						tag = ZL6
+					}
+				}
+				add_country_modifier = {
+					name = alb_zim_crushed_peasantry
+					duration = 9125
+				}
+			}
+		} 
+	}
+
+	ZL0_united_zimmska = {
+		icon = mission_unite_scandinavia
+		position = 3
+		required_missions = {
+			ZL0_slasmeri_coast
+			ZL0_heartland
+			ZL0_frozen_north
+		}
+		provinces_to_highlight = {  
+			region = scandinavia_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			tag = ZL0
+		} 
+
+		effect = {  
+			add_prestige = 25
+			country_event = {
+				id = zimmska.3
+			}
+			custom_tooltip = empty_line_tt
+			pomor_area = {
+				add_permanent_claim = ROOT
+			}
+			karelia_area = {
+				add_permanent_claim = ROOT
+			}
+			north_karelia = {
+				add_permanent_claim = ROOT
+			}
+			scandinavia_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+}
+ZL0_3_branch = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			culture_group = zladinian
+			tag = ZL0
+		}
+		NOT = {
+			OR = {
+				tag = ZL6
+				tag = A99
+			}
+		}
+		NOT = {
+			is_colonial_nation = yes
+		}
+	} 
+
+	ZL0_slasmeri_coast = {
+		icon = mission_pol_embellish_gdansk
+		position = 2
+		required_missions = { ZL0_zimmska_army } 
+		provinces_to_highlight = {  
+			OR = {
+				area = ostra_svealand_area
+			area = gotaland_area
+			area = skaneland_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 12
+				OR = {
+					area = ostra_svealand_area
+				area = gotaland_area
+				area = skaneland_area
+				}
+			}
+		} 
+
+		effect = {  
+			1 = {
+				add_province_modifier = {
+					name = great_port_of_zimmska
+					duration = -1
+				}
+			}
+			if = {
+				limit = {
+					tag = ZL5
+				}
+				country_event = {
+					id = zimmska.1
+				}
+				custom_tooltip = alb_zimmska_offer_to_be_vassal_tt
+			}
+		} 
+	}
+}
+ZL0_4_branch = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			culture_group = zladinian
+			tag = ZL0
+		}
+		NOT = {
+			OR = {
+				tag = ZL6
+				tag = A99
+			}
+		}
+		NOT = {
+			is_colonial_nation = yes
+		}
+	 } 
+
+	ZL0_zimmska_navy = {
+		icon = mission_establish_high_seas_navy
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			navy_size_percentage = 1
+		} 
+
+		effect = {  
+			add_navy_tradition = 10
+			370 = { add_permanent_claim = ROOT } 
+			371 = { add_permanent_claim = ROOT } 
+		} 
+	}
+
+	ZL0_slasmeri_triangle = {
+		icon = mission_baltic_empire
+		position = 3
+		required_missions = {
+			ZL0_slasmeri_coast
+			ZL0_zimmska_navy
+		}
+		provinces_to_highlight = {  
+			province_id = 1926
+		} 
+
+		trigger = {  
+			1926 = {
+				is_strongest_trade_power = ROOT
+			}
+			num_of_light_ship = 30
+			1 = {
+				has_shipyard_building_trigger = yes
+			}
+		} 
+
+		effect = {  
+			add_mercantilism = 20
+			custom_tooltip = empty_line_tt
+			1 = {
+				add_unit_construction = {
+					type = heavy_ship
+					cost = 0
+					speed = 0.25
+					amount = 5
+				}
+				upgrade_shipyard_building = yes
+			}
+			custom_tooltip = empty_line_tt
+			baltic_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+}
+ZL0_5_branch = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			culture_group = zladinian
+			tag = ZL0
+		}
+		NOT = {
+			OR = {
+				tag = ZL6
+				tag = A99
+			}
+		}
+		NOT = {
+			is_colonial_nation = yes
+		}
+	} 
+
+	ZL0_icelandic_adventure = {
+		icon = mission_rb_cod_wars
+		position = 2
+		required_missions = { ZL0_zimmska_navy } 
+		provinces_to_highlight = {  
+			OR = {
+				province_id = 370
+				province_id = 371
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			owns_or_non_sovereign_subject_of = 370
+			owns_or_non_sovereign_subject_of = 371
+		} 
+
+		effect = {  
+			capital_scope = { add_base_production = 2 } 
+			denmark_strait_area = { discover_country = ROOT } 
+			greenland_area = {
+				discover_country = ROOT
+				add_permanent_claim = ROOT
+			}
+		} 
+		
+	}
+
+	ZL0_greenland_landing = {
+		icon = mission_rb_colonise_canada
+		position = 3
+		required_missions = { ZL0_icelandic_adventure } 
+		provinces_to_highlight = {  
+			area = greenland_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			greenland_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {  
+			greenland_area = {
+				change_trade_goods = ivory
+				add_province_modifier = {
+					name = alb_zim_walrus_ivory
+					duration = -1
+				}
+			}
+			add_country_modifier = {
+				name = alb_zim_explore_further
+				duration = 9125
+			}
+			canada_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	ZL0_dominon_of_frjalslundt = {
+		icon = settle_north_america
+		position = 4
+		required_missions = { ZL0_greenland_landing } 
+		provinces_to_highlight = {  
+			region = canada_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 15
+				region = canada_region
+			}
+		} 
+
+		effect = {  
+			custom_tooltip = 5_colonial_provinces_in_canada_tt
+			tooltip = {
+				change_culture = ROOT
+				change_religion = ROOT
+				add_base_manpower = 1
+				add_base_production = 1
+				add_base_tax = 1
+			}
+			custom_tooltip = empty_line_tt
+			custom_tooltip = subject_in_canada_gets_tt
+			tooltip = {
+				add_country_modifier = {
+					name = alb_zim_slav_settlement
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				random_subject_country = {
+					limit = {
+						is_colonial_nation_of = ROOT
+						capital_scope = {
+							colonial_region = colonial_canada
+						}
+					}
+					add_country_modifier = {
+						name = alb_zim_slav_settlement
+						duration = -1
+					}
+					for = {
+						amount = 5
+						effect = "
+						random_owned_province = {
+							limit = {
+								NOT = {
+									OR = {
+										culture = ROOT
+										religion = ROOT
+									}
+								}
+							}
+							change_culture = ROOT
+							change_religion = ROOT
+							add_base_manpower = 1
+							add_base_production = 1
+							add_base_tax = 1
+						}
+						"
+					}
+				}
+				
+			}
+
+		} 
+	}
+}
+ZL0_second_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = ZL0 } 
+
+	ZL0_marines = {
+		icon = mission_russian_navy
+		position = 4
+		required_missions = { ZL0_united_zimmska } 
+		provinces_to_highlight = {  
+		} 
+
+		trigger = {  
+			num_of_transport = 20
+			num_of_marines = 10
+			if = {
+				limit = {
+					ai = no
+				}
+				navy_size_percentage = 0.9
+			army_size_percentage = 0.9
+			}
+		} 
+
+		effect = {  
+			if = {
+				limit = {
+					AN1 = {
+						exists = yes
+					}
+				}
+				add_casus_belli = {
+					type = cb_vassalize_mission
+					target = AN1
+				}
+			}
+			weser_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+	
+	ZL0_anglaska = {
+		icon = mission_pol_embellish_gdansk
+		position = 5
+		required_missions = { ZL0_marines } 
+		provinces_to_highlight = {  
+			area = weser_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			weser_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {  
+			denmark_area = {
+				add_permanent_claim = ROOT
+			}
+			jutland_area = {
+				add_permanent_claim = ROOT
+			}
+			holstein_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	ZL0_saxangl_lands = {
+		icon = mission_germ_saxangle
+		position = 6
+		required_missions = { ZL0_anglaska } 
+		provinces_to_highlight = {  
+			OR = {
+				area = denmark_area
+				area = jutland_area
+				area = holstein_area
+				culture = anglish
+				culture = saxish
+			}
+
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			denmark_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			jutland_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			holstein_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {  
+			add_mercantilism = 15
+			country_event = {
+				id = zimmska.4
+			}
+		} 
+	}
+
+	ZL0_silesian_borders = {
+		icon = mission_the_finns
+		position = 9
+		required_missions = { ZL0_found_zardom } 
+		provinces_to_highlight = {  
+			OR = {
+				area = finland_area
+				area = bothnia_area
+				province_id = 30
+
+			}
+			OR = {
+				NOT = { owned_by = ROOT }
+				NOT = { is_core = ROOT }
+				NOT = { culture = silesian }
+			}
+		} 
+
+		trigger = {  
+			finland_area = {
+				owned_by = ROOT
+				is_core = ROOT
+				culture = silesian
+				has_owner_accepted_culture = yes
+				type = all
+			}
+			finland_area = {
+				owned_by = ROOT
+				is_core = ROOT
+				culture = silesian
+				has_owner_accepted_culture = yes
+				type = all
+			}
+			30 = {
+				owned_by = ROOT
+				is_core = ROOT
+				culture = silesian
+				has_owner_accepted_culture = yes
+			}
+		} 
+
+		effect = {  
+			unlock_estate_privilege = {
+				estate_privilege = estate_burghers_forest_expansion
+			}
+			custom_tooltip = alb_distribute_5_dev_silesia_tt
+			hidden_effect = {
+				for = {
+					amount = 5
+					effect = "
+					random_owned_province = {
+						limit = {
+							OR = {
+								area = finland_area
+								area = bothnia_area
+								province_id = 30
+							}
+						}
+						add_random_development = 1
+					}
+					"
+				}
+			}
+			custom_tooltip = empty_line_tt
+			custom_tooltip = SIL_JAR
+			hidden_effect = {
+				every_owned_province = {
+					limit = { culture = silesian } 
+					add_nationalism = -10
+				}
+			}
+		} 
+	}
+
+	ZL0_develop_silesia = {
+		icon = mission_conquer_finland
+		position = 10
+		required_missions = { ZL0_silesian_borders } 
+		provinces_to_highlight = {  
+			OR = {
+				area = finland_area
+				area = bothnia_area
+				province_id = 30
+
+			}
+			OR = {
+				NOT = { owned_by = ROOT }
+				NOT = { has_production_building_trigger = yes }
+				NOT = { has_manufactory_trigger = yes }
+				local_autonomy = 10
+				NOT = { base_production = 3 }
+			}
+		} 
+
+		trigger = {  
+			bothnia_area = {
+				owned_by = ROOT
+				has_production_building_trigger = yes
+				has_manufactory_trigger = yes
+				NOT = { local_autonomy = 10 }
+				base_production = 3
+				type = all
+			}
+			finland_area = {
+				owned_by = ROOT
+				has_production_building_trigger = yes
+				has_manufactory_trigger = yes
+				NOT = { local_autonomy = 10 }
+				base_production = 3
+				type = all
+			}
+			30 = {
+				owned_by = ROOT
+				has_production_building_trigger = yes
+				has_manufactory_trigger = yes
+				NOT = { local_autonomy = 10 }
+				base_production = 3
+			}
+		} 
+
+		effect = {  
+			add_yearly_manpower = 2
+			add_years_of_owned_provinces_production_income = {
+				custom_tooltip = alb_zim_silesia_growth_tt
+				years = 12
+				trigger = {
+					OR = {
+						area = finland_area
+						area = bothnia_area
+						province_id = 30
+					}
+				}
+			}
+		} 
+	}
+}
+ZL0_second_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = ZL0 } 
+
+	ZL0_turkish_push = {
+		icon = mission_crusade_for_varna
+		position = 4
+		required_missions = { ZL0_united_zimmska } 
+		provinces_to_highlight = {  
+			OR = {
+				area = pomor_area
+				area = karelia_area
+				area = north_karelia
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			pomor_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			karelia_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			north_karelia = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {  
+			russia_region = {
+				add_permanent_claim = ROOT
+			}
+			33 = {
+				add_trade_modifier = {
+					who = ROOT
+					duration = 9125
+					power = 25
+					key = ALBZIM_TRADE_GAJNAKA
+				}
+			}
+		} 
+	}
+
+	ZL0_turk_barrier = {
+		icon = protect_against_the_turks
+		position = 5
+		required_missions = { ZL0_turkish_push } 
+		provinces_to_highlight = {  
+			OR = {
+				province_id = 1958
+				province_id = 33
+			}
+			NOT = {
+				AND = {
+					country_or_non_sovereign_subject_holds = ROOT
+					has_fort_building_trigger = yes
+					development = 15
+					religion = ROOT
+				}
+			}
+		} 
+
+		trigger = {  
+			owns_or_non_sovereign_subject_of = 1958
+			1958 = {
+				has_fort_building_trigger = yes
+				development = 15
+				religion = ROOT
+			}
+			owns_or_non_sovereign_subject_of = 33
+			33 = {
+				has_fort_building_trigger = yes
+				development = 15
+				religion = ROOT
+			}
+		} 
+
+		effect = {  
+			33 = {
+				add_permanent_province_modifier = {
+					name = "nevan_walls"
+					duration = -1
+				}
+			}
+			1958 = {
+				add_permanent_province_modifier = {
+					name = "forest_walls"
+					duration = -1
+				}
+			}
+		} 
+	}
+
+	ZL0_convert_serica = {
+		icon = convert_the_holy_lands
+		position = 6
+		required_missions = {
+			ZL0_turk_barrier
+			ZL0_further_into_serica
+		}
+		provinces_to_highlight = {  
+			owned_by = ROOT
+			region = russia_region
+			NOT = {
+				religion = ROOT
+			}
+		} 
+
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 30
+				region = russia_region
+				religion = ROOT
+			}
+		} 
+
+		effect = {  
+			unlock_estate_privilege = {
+				estate_privilege = alb_serica_marcher_lords
+			}
+			custom_tooltip = empty_line_tt
+			define_advisor = {
+				type = theologian
+				skill = 2
+				cost_multiplier = 0.5
+			}
+		} 
+	}
+
+	ZL0_kingdom_of_serica = {
+		icon = the_russian_campaign
+		position = 7
+		required_missions = { ZL0_convert_serica } 
+		provinces_to_highlight = {  
+			OR = {
+				region = russia_region
+				region = ural_region
+			}
+			NOT = {	
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			NOT = {	
+				religion = ROOT
+			}
+		} 
+
+		trigger = {  
+			russia_region = {
+				country_or_non_sovereign_subject_holds = ROOT
+				religion = ROOT
+				type = all
+			}
+			ural_region = {
+				country_or_non_sovereign_subject_holds = ROOT
+				religion = ROOT
+				type = all
+			}
+			num_of_owned_provinces_with = {
+				value = 15
+				region = russia_region
+				culture_group = zladinian
+			}
+		} 
+
+		effect = {  
+			custom_tooltip = BYZ_rebel_sentiment_will_fire_more_rarely
+			set_country_flag = BYZ_less_rebel_sentiment
+			custom_tooltip = empty_line_tt
+			custom_tooltip = alb_upgrade_marcher_lords_zim_priv_tt
+			set_country_flag = upgraded_alb_serica_marcher_lords_flag
+		} 
+	}
+
+	ZL0_curtail_nobles = {
+		icon = mission_swedish_peasantry
+		position = 9
+		required_missions = { ZL0_found_zardom } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			crown_land_share = 40
+			estate_loyalty = {
+				estate = estate_nobles
+				loyalty = 60
+			}
+			NOT = {
+				estate_influence = {
+					estate = estate_nobles
+					influence = 40
+				}
+			}
+		} 
+
+		effect = {  
+			unlock_estate_privilege = {
+				estate_privilege = alb_zim_free_serfs
+			}
+			add_stability_or_adm_power = yes
+		} 
+	}
+
+	ZL0_free_peasants = {
+		icon = mission_peasantry
+		position = 10
+		required_missions = { ZL0_curtail_nobles } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			has_estate_privilege = alb_zim_free_serfs
+			OR = {
+				num_of_estate_agendas_completed = {
+					estate = estate_nobles
+					value = 5
+				}
+				crown_land_share = 70
+			}
+			NOT = {
+				any_owned_province = {
+					NOT = {
+						development = 7
+					}
+				}
+			}
+		} 
+
+		effect = {  
+			custom_tooltip = alb_upgrade_free_peasantry_priv_tt
+			set_country_flag = upgraded_alb_zim_free_serfs_flag
+			add_country_modifier = {
+				name = alb_zim_peasant_army
+				duration = -1
+			}
+		} 
+	}
+}
+ZL0_second_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = ZL0 } 
+
+	ZL0_valtea = {
+		icon = mission_conquer_baltic_region
+		position = 4
+		required_missions = { ZL0_slasmeri_triangle } 
+		provinces_to_highlight = {  
+			region = baltic_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			baltic_region = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {  
+			add_country_modifier = {
+				name = alb_zim_trademaxxing
+				duration = 9125
+			}
+			define_advisor = {
+				type = recruitmaster
+				cost_multiplier = 0.5
+				skill = 3
+			}
+			custom_tooltip = empty_line_tt
+			if = {
+				limit = { 	
+					LT1 = {
+						exists = yes
+					}	
+				}
+				add_casus_belli = {
+					type = cb_vassalize_mission
+					target = LT1
+				}
+			}
+			if = {
+				limit = { 	
+					LT2 = {
+						exists = yes
+					}	
+				}
+				add_casus_belli = {
+					type = cb_vassalize_mission
+					target = LT2
+				}
+			}
+			if = {
+				limit = { 	
+					LT3 = {
+						exists = yes
+					}	
+				}
+				add_casus_belli = {
+					type = cb_vassalize_mission
+					target = LT3
+				}
+			}
+		} 
+	}
+
+	ZL0_further_into_serica = {
+		icon = mam_refine_the_furusiyya
+		position = 5
+		required_missions = {
+			ZL0_turkish_push
+			ZL0_valtea
+		}
+		provinces_to_highlight = {  
+			region = russia_region
+		} 
+
+		trigger = {  
+			russia_region = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {  
+			ural_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	ZL0_found_zardom = {
+		icon = mission_the_russian_tsardom
+		position = 8
+		provinces_to_highlight = {  
+			culture_group = zladinian
+			NOT = {
+				owned_by = ROOT
+			}
+			NOT = {
+				culture = anglaskan
+			}
+		} 
+
+		trigger = {  
+			owns_all_provinces = {
+				culture_group = zladinian
+				NOT = {
+					culture = anglaskan
+				}
+			}
+			stability = 1
+		} 
+
+		effect = {  
+			remove_country_modifier = centralization_modifier
+			add_country_modifier = {
+				name = alb_zim_zladinian_realm
+				duration = 7300
+			}
+		} 
+	}
+
+	ZL0_slavic_unity = {
+		icon = mission_russian_patriarchatee
+		position = 9
+		required_missions = {
+			ZL0_found_zardom
+		}
+		provinces_to_highlight = {  
+			
+		} 
+
+		trigger = { 
+			OR = {
+				if = {
+					limit = {
+						SE0 = {
+							exists = no
+						}
+						SE9 = {
+							exists = yes
+						}
+					}
+					SE9 = {
+						has_opinion = {
+							who = ROOT
+							value = 180
+						}
+					}
+					SE9 = {
+						exists = no
+					}
+				}
+				else = {
+					SE0 = {
+						has_opinion = {
+							who = ROOT
+							value = 180
+						}
+					}
+					SE0 = {
+						exists = no
+					}
+				}
+				AND = {
+					is_rival = SE0
+					SE0 = {
+						has_been_insulted_by_root = yes
+					}
+				}
+				SE0 = {
+					exists = no
+				}
+			}
+		} 
+
+		effect = { 
+			complex_dynamic_effect = {
+				first_custom_tooltip = alb_zim_friends_with_serb_tt
+				first_limit = "
+					SE0 = {
+						has_opinion = {
+							who = ROOT
+							value = 180
+						}	
+					}
+				"
+				first_effect = "
+					add_historical_friend = SE0
+					add_country_modifier = {
+						name = alb_zim_slav_brothers
+						duration = -1
+					}
+					SE0 = {
+						add_historical_friend = ROOT
+						add_country_modifier = {
+							name = alb_zim_slav_brothers
+							duration = -1
+						}
+					} 
+				"
+				second_custom_tooltip = alb_zim_enemies_with_serb_tt
+				second_limit = "
+					AND = {
+						is_rival = SE0
+						SE0 = {
+							has_been_insulted_by_root = yes
+						}
+					}
+				"
+				second_effect = "
+					add_casus_belli = {
+						type = cb_claim_throne
+						target = SE0
+					}
+				"
+				third_custom_tooltip = alb_zim_no_serb_tt
+				third_limit = "
+					SE0 = {
+						exists = no
+					}
+				"
+				third_effect = "
+					add_adm_power = 300
+				"
+			}
+		} 
+	}
+
+	ZL0_ancient_glory = {
+		icon = glory_to_von_habsburg
+		position = 11
+		required_missions = {
+			ZL0_maximum_navy
+			ZL0_religion_harmony
+			ZL0_free_peasants
+			ZL0_develop_silesia
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			NOT = {
+				great_power_rank = 4
+			}
+			total_development = 1000
+			legitimacy_equivalent = 100
+		} 
+
+		effect = {  
+			custom_tooltip = ZIMMSKA_LOWER_GOV
+			hidden_effect = {
+				every_owned_province = {
+					limit = { culture_group = zladinian } 
+					add_province_modifier = {
+						name = "zimmska_lower_govern"
+						duration = -1
+					}
+				}
+			}
+			add_country_modifier = {
+				name = alb_zim_top_of_the_world
+				duration = -1
+			}
+		} 
+	}
+}
+ZL0_second_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = ZL0 } 
+
+	ZL0_warmer_lands = {
+		icon = mission_caribbean_cn
+		position = 4
+		required_missions = { ZL0_greenland_landing } 
+		provinces_to_highlight = {  
+			colonial_region = colonial_the_carribean
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+			has_discovered = ROOT
+		} 
+
+		trigger = {  
+			custom_trigger_tooltip = {
+				tooltip = miss_discover_caribbean
+				colonial_the_carribean = {
+					has_discovered = ROOT
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = english_colony_in_the_carribean.tooltip
+				num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+					value = 5
+					colonial_region = colonial_the_carribean
+					is_city = yes
+				}
+			}
+			owns = 499
+		} 
+
+		effect = {  
+			add_country_modifier = {
+				name = alb_zim_caribbean_trade
+				duration = 18250
+			}
+			499 = {
+				change_province_name = "Svatá Lucie"
+				set_center_level_2_center_of_trade = yes
+			}
+			mexico_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	ZL0_mexico = {
+		icon = mission_iberian_conquistador
+		position = 5
+		required_missions = { ZL0_warmer_lands } 
+		provinces_to_highlight = {  
+			region = mexico_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+			has_discovered = ROOT
+		} 
+
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				religion = ROOT
+				region = mexico_region
+				value = 15
+			}
+		} 
+
+		effect = {  
+			add_country_modifier = {
+				name = alb_zim_mexico_moment
+				duration = 18250
+			}
+			custom_tooltip = colonial_jamesland_get_perma_claim_tt
+			hidden_effect = {
+				colonial_jamesland = {
+					add_permanent_claim = ROOT
+				}
+			}
+			if = {
+				limit = {
+					owns_or_non_sovereign_subject_of = 2647
+				}
+				2647 = {
+					change_province_name = "Mesto Yucatán"
+				}
+			}
+		} 
+	}
+
+	ZL0_south_america = {
+		icon = mission_norwegian_south_america
+		position = 6
+		required_missions = { ZL0_mexico } 
+		provinces_to_highlight = {  
+			continent = south_america
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+			has_discovered = ROOT
+		} 
+
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 5
+				continent = south_america
+			}
+		} 
+
+		effect = {  
+			country_event = {
+				id = zimmska.5
+			}
+		} 
+	}
+
+	ZL0_rausulia_hegemon = {
+		icon = mission_ruler_of_north_america
+		position = 7
+		required_missions = {
+			ZL0_south_america
+			ZL0_fiorita
+		}
+		provinces_to_highlight = {  
+			OR = {
+				continent = north_america
+				continent = south_america
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+			has_discovered = ROOT
+		} 
+
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 300
+				OR = {
+					continent = north_america
+					continent = south_america
+				}
+			}
+		} 
+
+		effect = {  
+			add_country_modifier = {
+				name = gbr_new_world_dominance
+				duration = -1
+			}
+			custom_tooltip = gbr_dominiate_new_world_at
+		} 
+	}
+
+	ZL0_slasmeri_monopolies = {
+		icon = mission_rb_monopolize_the_channel
+		position = 9
+		required_missions = { ZL0_found_zardom } 
+		provinces_to_highlight = {  
+			OR = {
+				trade_goods = fish
+				trade_goods = naval_supplies
+			}
+			owned_by = ROOT
+			NOT = { base_production = 5 } 
+		} 
+
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 12
+				trade_goods = fish
+				base_production = 5
+			}
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 12
+				trade_goods = naval_supplies
+				base_production = 5
+			}
+		} 
+
+		effect = {  
+			add_years_of_owned_provinces_production_income = {
+				years = 15
+				trigger = { trade_goods = fish } 
+				custom_tooltip = MONOPOLY_INCOME_FISH_DESC
+			}
+			add_years_of_owned_provinces_production_income = {
+				years = 15
+				trigger = { trade_goods = naval_supplies } 
+				custom_tooltip = MONOPOLY_INCOME_NAVAL_SUPPLIES_DESC
+			}
+			unlock_estate_privilege = {
+				estate_privilege = alb_zimmska_slasmeri_monopolies
+			}
+		} 
+	}
+
+	ZL0_maximum_navy = {
+		icon = imperial_navy
+		position = 10
+		required_missions = { ZL0_slasmeri_monopolies } 
+		provinces_to_highlight = {  
+			any_great_power = {
+				navy_size = ROOT
+			}
+		} 
+
+		trigger = {  
+			num_of_heavy_ship = 50
+			num_of_marines = 30
+			navy_size_percentage = 1
+			is_great_power = yes
+		} 
+
+		effect = {  
+			if = {
+				limit = {
+					NOT = {
+						any_great_power = {
+							navy_size = ROOT
+						}
+					}
+				}
+				custom_tooltip = alb_zim_nogp_bettr_navy_yes_tt
+				custom_tooltip = empty_line_tt
+				add_country_modifier = {
+					name = alb_zim_navy_army_cooperation_marine
+					duration = -1
+				}
+				add_country_modifier = {
+					name = alb_zim_navy_army_cooperation_navy
+					duration = -1
+				}
+			}
+			else = {
+				custom_tooltip = alb_zim_nogp_bettr_navy_no_tt
+				custom_tooltip = empty_line_tt
+				add_country_modifier = {
+					name = alb_zim_navy_army_cooperation_marine
+					duration = 18250
+				}
+				add_country_modifier = {
+					name = alb_zim_navy_army_cooperation_navy
+					duration = 18250
+				}
+			}	
+		} 
+	}
+}
+ZL0_second_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = ZL0 } 
+
+	ZL0_eastern_rausulia = {
+		icon = mission_colonial
+		position = 5
+		required_missions = { ZL0_dominon_of_frjalslundt } 
+		provinces_to_highlight = {  
+			colonial_region = colonial_eastern_america
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+			has_discovered = ROOT
+		} 
+
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 10
+				colonial_region = colonial_eastern_america
+			}
+		} 
+
+		effect = {  
+			create_conquistador = {
+				tradition = 80
+			}
+			custom_tooltip = subject_in_eastern_america_gets_tt
+			tooltip = {
+				add_country_modifier = {
+					name = alb_zim_slav_settlement
+					duration = -1
+				}
+			}
+			custom_tooltip = colonial_north_south_get_perma_claim_tt
+			hidden_effect = {
+				random_subject_country = {
+					limit = {
+						is_colonial_nation_of = ROOT
+						capital_scope = {
+							colonial_region = colonial_canada
+						}
+					}
+					add_country_modifier = {
+						name = alb_zim_slav_settlement
+						duration = -1
+					}
+				}
+				colonial_north_south = {
+					add_permanent_claim = ROOT
+				}
+			}
+			custom_tooltip = empty_line_tt
+			965 = {
+				change_province_name = "Novy Berezhangrod"
+			}
+		} 
+	}
+
+	ZL0_fiorita = {
+		icon = mission_colonize_florida
+		position = 6
+		required_missions = { ZL0_eastern_rausulia } 
+		provinces_to_highlight = {  
+			colonial_region = colonial_north_south
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+			has_discovered = ROOT
+		} 
+
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 10
+				colonial_region = colonial_north_south
+			}
+			owns_or_non_sovereign_subject_of = 2543
+		} 
+
+		effect = {  
+			country_event = {
+				id = zimmska.6
+			}
+			2543 = {
+				change_province_name = "Novy Bezgo"
+				set_center_level_2_center_of_trade = yes
+			}
+		} 
+	}
+
+	ZL0_reformation_question = {
+		icon = mission_sword_of_the_reformation
+		position = 9
+		required_missions = { ZL0_found_zardom } 
+		provinces_to_highlight = {  
+
+		} 
+
+		trigger = {  
+			custom_trigger_tooltip = {
+				tooltip = alb_is_wycliffian_reformation_began_tt
+				is_religion_enabled = wycliffian
+			}
+			OR = {
+				AND = {
+					religion = wycliffian
+					num_of_aspects = 3
+				}
+				AND = {
+					religion = catholic
+					OR = {
+						NOT = { exists = PAP }
+						AND = {
+							reverse_has_opinion = {
+								who = PAP
+								value = 150
+							}
+							alliance_with = PAP
+						}
+					}
+				}
+			}
+		} 
+
+		effect = {  
+			change_ruler_stat = {
+				type = adm
+				amount = 1
+			}
+			change_ruler_stat = {
+				type = dip
+				amount = 1
+			}
+			change_ruler_stat = {
+				type = mil
+				amount = 1
+			}
+			custom_tooltip = empty_line_tt
+			add_stability_or_adm_power = yes
+		} 
+	}
+
+	ZL0_religion_harmony = {
+		icon = mission_rb_weather_the_reformation
+		position = 10
+		required_missions = { ZL0_reformation_question } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			if = {
+				limit = {
+					religion = catholic
+				}
+				num_of_cardinals = 2
+				OR = {
+					is_papal_controller = yes
+					invested_papal_influence = 100
+				}
+			}
+			else_if = {
+				limit = {
+					religion = wycliffian
+				}
+				OR = {
+					has_church_aspect = sola_scriptura_aspect
+					has_church_aspect = taborite_resurgence_aspect
+					has_church_aspect = orphan_hetmans_aspect
+				}
+				church_power = 200
+				army_size_percentage = 0.8
+			}
+			religious_unity = 1
+			is_defender_of_faith_of_tier = 4
+		} 
+
+		effect = {  
+			add_estate_loyalty = {
+				estate = estate_church
+				loyalty = 15
+			}
+			if = {
+				limit = {
+					religion = wycliffian
+				}
+				add_stability_or_adm_power = yes
+				add_country_modifier = {
+					name = alb_zim_defender_maxxing
+					duration = -1
+				}
+			}
+			if = {
+				limit = {
+					religion = catholic
+				}
+				add_papal_influence = 100
+				add_country_modifier = {
+					name = alb_zim_northern_crusade
+					duration = -1
+				}
+			}
+		} 
+	}
+}

@@ -21,6 +21,7 @@ country_decisions = {
 				id = redleg.1
 			}
 			set_country_flag = red_crusade
+			remove_country_modifier = redleg_no_diplo
 		}
 		ai_will_do = {
 			factor = 1
@@ -39,6 +40,7 @@ country_decisions = {
 		}
 		effect = {
 			add_mil_power = -75
+			custom_tooltip = alb_10_infantry_3_cav_in_capital_tt
 			hidden_effect = {
 				capital_scope = {
 					ROOT = {
@@ -77,6 +79,7 @@ country_decisions = {
 		effect = {
 			add_dip_power = -75
 			add_treasury = 20
+			custom_tooltip = alb_10_infantry_in_capital_tt
 			hidden_effect = {
 				capital_scope = {
 					ROOT = {
@@ -111,7 +114,10 @@ country_decisions = {
 		}
 		effect = {
 			add_adm_power = -75
-			add_prestige = 5
+			add_prestige_or_monarch_power = {
+				amount = 5
+			}
+			custom_tooltip = alb_10_infantry_in_capital_tt
 			hidden_effect = {
 				capital_scope = {
 					ROOT = {
@@ -142,7 +148,7 @@ country_decisions = {
 		allow = {
 			is_at_war = no
 			is_subject = no
-			army_size_percentage = 0.9
+			army_size_percentage = 1
 		}
 		effect = {
 			create_general = { tradition = 70 }
@@ -187,6 +193,12 @@ country_decisions = {
 		}
 		ai_will_do = {
 			factor = 1
+			modifier = {
+				factor = 0
+				NOT = {
+					is_year = 1525
+				}
+			}
 		}
 	}
 }

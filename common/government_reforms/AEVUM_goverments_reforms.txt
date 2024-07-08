@@ -1,0 +1,399 @@
+
+indictian_monarchy_reform = {
+	icon = "indictian_monarchy_reform"
+	allow_normal_conversion = yes
+	valid_for_nation_designer = yes
+	nation_designer_cost = 0
+	potential = {
+		religion = indictian
+	}
+	modifiers = {
+		global_tax_modifier = 0.05
+		church_influence_modifier = 0.05
+
+	}
+	ai = {
+		factor = 0.5 #generic
+	}
+	#PUT SOME MECHANIC FOR INDICTIANS
+	custom_attributes = {
+		seizing_land_no_rebels = yes
+	}
+}
+
+molise_monarchy_reform = {
+	icon = "king"
+	allow_normal_conversion = yes
+	valid_for_nation_designer = yes
+	nation_designer_cost = 0
+	potential = {
+		OR = {
+			tag = MO0
+			was_tag = MO0
+		}
+	}
+	modifiers = {
+		diplomatic_reputation = 2
+		diplomatic_upkeep = 1
+	}
+	ai = {
+		factor = 1 #generic
+	}
+}
+
+paduan_merchants_reform = {
+	icon = "trading_city"
+	allow_normal_conversion = yes
+	modifiers = {
+		max_absolutism = -10
+		ship_trade_power_modifier = 0.33
+		merchants = 1
+		yearly_corruption = -0.1
+	}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 40
+	potential = {
+		tag = PD0
+		NOT = { tag = IT0 }
+	}
+	boost_income = yes
+	conditional = {
+		allow = {
+			has_dlc = "Res Publica"
+			NOT = { has_dlc = "Mare Nostrum" }
+		}
+		can_use_trade_post = yes
+	}
+	# conditional = {
+	# 	allow = {
+	# 		has_dlc = "Mare Nostrum"
+	# 		NOT = { has_dlc = "Res Publica" }
+	# 	}
+	# 	can_form_trade_league = yes
+	# 	trade_city_reform = trading_city
+	# }
+	conditional = {
+		allow = {
+			has_dlc = "Res Publica"
+			has_dlc = "Mare Nostrum"
+		}
+		can_use_trade_post = yes
+		# can_form_trade_league = yes
+		# trade_city_reform = trading_city
+	}
+	custom_attributes = {
+		enables_plutocratic_idea_group = yes
+		enables_aristocratic_idea_group = no
+		lottery_election = yes
+		election_on_death = yes
+		is_merchant_republic = yes
+		elections_increase_factions_influence = yes
+		bonus_stats_for_elected_ruler = yes
+	}
+	has_term_election = no
+}
+italian_merchants_reform = {
+	icon = "trading_city"
+	allow_normal_conversion = yes
+	modifiers = {
+		merchants = 1
+		advisor_cost = -0.15
+	}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 40
+	potential = {
+		NOT = { map_setup = map_setup_random }
+		OR = {
+			tag = IT0
+			AND = {
+				is_playing_custom_nation = yes
+				have_had_reform = italian_merchants_reform
+			}
+		}
+	}
+	boost_income = yes
+	conditional = {
+		allow = {
+			has_dlc = "Res Publica"
+			NOT = { has_dlc = "Mare Nostrum" }
+		}
+		can_use_trade_post = yes
+	}
+	conditional = {
+		allow = {
+			has_dlc = "Mare Nostrum"
+			NOT = { has_dlc = "Res Publica" }
+		}
+		can_form_trade_league = yes
+		trade_city_reform = trading_city
+	}
+	conditional = {
+		allow = {
+			has_dlc = "Res Publica"
+			has_dlc = "Mare Nostrum"
+		}
+		can_use_trade_post = yes
+		can_form_trade_league = yes
+		trade_city_reform = trading_city
+	}
+	custom_attributes = {
+		has_parliament = yes
+		enables_plutocratic_idea_group = yes
+		enables_aristocratic_idea_group = no
+		lottery_election = yes
+		election_on_death = yes
+		is_merchant_republic = yes
+		bonus_stats_for_elected_ruler = yes
+	}
+	has_term_election = no
+}
+serican_principality = {
+	icon = "russian_principality"
+	allow_normal_conversion = yes
+	potential = {
+		NOT = { has_reform = serican_tsardom }
+		NOT = { have_had_reform = serican_tsardom }
+		NOT = {
+			culture = bolgar
+		}
+		OR = {
+			OR = {
+				culture_group = west_serican
+				culture_group = turkic
+			}
+			
+			AND = {
+				is_playing_custom_nation = yes
+				have_had_reform = serican_principality
+			}
+		}
+	}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 5
+	nation_designer_trigger = {
+		is_serican_trigger = yes
+		religion_group = muslim
+	}
+	modifiers = {
+		infantry_cost = -0.1
+		cavalry_cost = -0.1
+		global_regiment_recruit_speed = 0.1
+		governing_capacity = 100
+	}
+}
+serican_tsardom = {
+	icon = "king"
+	allow_normal_conversion = yes
+	potential = {
+		OR = {
+			tag = TH1
+			AND = {
+				is_serican_trigger = yes
+				have_had_reform = serican_tsardom
+			}
+		}
+	}
+	fixed_rank = 3
+	valid_for_nation_designer = yes
+	nation_designer_cost = 40
+
+	nation_designer_trigger = {
+		is_serican_trigger = yes
+	}
+
+	modifiers = {
+		infantry_cost = -0.1
+		cavalry_cost = -0.1
+		global_regiment_recruit_speed = -0.1
+		leader_land_shock = 1
+		yearly_absolutism = 0.5
+		governing_capacity = 350
+	}
+
+	conditional = {
+		allow = { has_dlc = "Third Rome" }
+		claim_states = yes
+	}
+}
+indian_manichanate_reform = {
+	icon = "indian_sultanate"
+	allow_normal_conversion = yes
+	potential = {
+		OR = {
+			capital_scope = {
+				superregion = india_superregion
+			}
+			has_reform = indian_manichanate_reform
+		}
+		religion = manich
+	}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 10
+	nation_designer_trigger = {
+		religion = manich
+		capital_scope = {
+			superregion = india_superregion
+		}
+	}
+
+	modifiers = {
+		tolerance_heathen = 3
+ 		tolerance_of_heathens_capacity = 3
+	}
+	#PUT SOME MECHANIC HERE FOR MANICHEASIM
+}
+
+light_empire_government = {
+	icon = "peacock_throne"
+	allow_normal_conversion = no
+	potential = {
+		tag = LE0
+	}
+	maintain_dynasty = yes
+	allow_vassal_war = yes
+	allow_vassal_alliance = yes
+	lock_level_when_selected = yes
+
+	modifiers = {
+		tolerance_own = 1
+		tolerance_heathen = -2
+		tolerance_heretic = -2
+		global_missionary_strength = 0.03
+		governing_capacity = 150
+	}
+}
+
+
+khanate_europe_reform = {
+	icon = "horde_riding"
+	allow_normal_conversion = yes
+	valid_for_nation_designer = yes
+	nation_designer_cost = 0
+	potential = {
+		tag = ML0
+	}
+	modifiers = {
+		cavalry_cost = -0.15
+		global_ship_cost = 0.15
+		leader_land_shock = 1
+	}
+	ai = {
+		factor = 0.5 #generic
+	}
+
+}
+
+britannia_regnum_reform = {
+	icon = "regnum_brittanium"
+	allow_normal_conversion = yes
+	valid_for_nation_designer = yes
+	nation_designer_cost = 0
+	potential = {
+		OR = {
+			tag = BR0
+			was_tag = BR0
+		}
+	}
+	modifiers = {
+		mercenary_cost = 0.15
+		nobles_influence_modifier = 0.1
+		development_cost_in_primary_culture = -0.05
+		manpower_in_own_culture_provinces = 0.1
+	}
+	ai = {
+		factor = 1 #generic
+	}
+}
+
+armerica_explo_reform = {
+	icon = "armerica_explo_reform"
+	allow_normal_conversion = yes
+	valid_for_nation_designer = yes
+	nation_designer_cost = 0
+	potential = {
+		culture = armerican
+	}
+	modifiers = {
+		burghers_influence_modifier = 0.05
+		nobles_influence_modifier = 0.1
+		range = 0.25
+		light_ship_cost = -0.1
+		global_sailors_modifier = 0.2
+		allowed_marine_fraction = 0.15
+	}
+	ai = {
+		factor = 1 #generic
+	}
+}
+
+frankonia_martel_reform = {
+	icon = "frankonia_martel_reform"
+	allow_normal_conversion = yes
+	valid_for_nation_designer = yes
+	nation_designer_cost = 0
+	potential = {
+		OR = {
+			tag = FC0
+			was_tag = FC0
+		}
+	}
+	modifiers = {
+		nobles_influence_modifier = 0.1
+		nobles_loyalty_modifier = 0.05
+		autonomy_change_time = -0.25
+	}
+	custom_attributes = {
+		recruiting_general_gives_army_tradition = yes
+		winning_war_increases_legitimacy = yes
+	}
+	ai = {
+		factor = 1 #generic
+	}
+}
+
+gallic_republic_reform = {
+	icon = "gallic_republic_reform"
+	allow_normal_conversion = yes
+	valid_for_nation_designer = yes
+	nation_designer_cost = 0
+	potential = {
+		OR = {
+			tag = SO3
+			was_tag = SO3
+		}
+	}
+	duration = 6
+	modifiers = {
+		burghers_loyalty_modifier = 0.05
+		merc_maintenance_modifier = -0.1
+		global_tax_modifier = 0.05
+	}
+	custom_attributes = {
+		has_parliament = yes
+		enables_plutocratic_idea_group = yes
+		enables_aristocratic_idea_group = no
+	}
+	ai = {
+		factor = 1 #generic
+	}
+}
+
+aldabban_failure_reform = {
+	icon = "castle"
+	valid_for_nation_designer = yes
+	nation_designer_cost = 0
+	lock_level_when_selected = yes
+	potential = {
+		have_had_reform = aldabban_failure_reform
+	}
+	modifiers = {
+		global_tax_modifier = -0.05
+		church_influence_modifier = 0.05
+	}
+	government_abilities = {
+		aldabba_failure_mechanic
+	}
+	ai = {
+		factor = 0.5 #generic
+	}
+}

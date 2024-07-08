@@ -1,0 +1,28 @@
+
+types = {
+	type[scripted_function] = {
+		path = "game/common/scripted_functions"
+	}
+}
+
+scripted_function = {
+	## cardinality = 0..inf
+	###Block containing a tooltip, potential, and an allow section.
+	condition = {
+		## cardinality = 0..1
+		tooltip = localisation
+		###If triggered it will prevent the action from being performed.
+		potential = {
+			alias_name[trigger] = alias_match_left[trigger]
+		}
+		###If triggered then action can be performed, even if potential is triggered.
+		allow = {
+			alias_name[trigger] = alias_match_left[trigger]
+		}
+	}
+	## cardinality = 0..1
+	effect = {
+		## cardinality = 0..inf
+		alias_name[effect] = alias_match_left[effect]
+	}
+}

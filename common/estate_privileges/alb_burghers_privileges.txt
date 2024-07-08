@@ -1,0 +1,379 @@
+alb_armerican_colonization = {
+	icon = privilege_grant_new_world_charter
+	max_absolutism = -5
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	loyalty = 0.05
+	influence = 0.1
+	is_valid = {
+		OR = {
+			has_reform = armerica_explo_reform
+			has_unlocked_estate_privilege = {
+				estate_privilege = alb_armerican_colonization
+			}
+		}
+	}
+	can_revoke = {
+		
+	}
+	on_granted = {
+
+	}
+	on_granted_province = {
+	
+	}
+	on_revoked = {
+	
+	}
+	on_revoked_province = {
+		
+	}
+	on_invalid = {
+		
+	}
+	on_invalid_province = {
+		
+	}
+	conditional_modifier = {
+		trigger = {
+			NOT = {
+				tag = SO2
+			}
+		}
+		modifier = {
+			global_sailors_modifier = -0.15
+		}
+	}
+	penalties = {
+	}
+	benefits = {
+		colonists = 1
+		global_colonial_growth = 15
+	}
+
+	ai_will_do = {
+		factor = 1000
+		modifier = {
+			factor = 0
+			full_idea_group = exploration_ideas
+		}
+		modifier = {
+			factor = 0
+			tag = SO0
+		}
+		modifier = {
+			factor = 0
+			NOT = {
+				is_year = 1455
+			}
+		}
+	}
+}
+
+alb_frankish_trades = {
+	icon = privilege_give_money
+	max_absolutism = -5
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	loyalty = -0.05
+	influence = 0.15
+	is_valid = {
+		has_unlocked_estate_privilege = {
+			estate_privilege = alb_frankish_trades
+		}
+		num_of_provinces_owned_or_owned_by_subjects_with = {
+			value = 20
+			region = low_countries_region
+		}
+	}
+	can_revoke = {
+		
+	}
+	on_granted = {
+
+	}
+	on_granted_province = {
+	
+	}
+	on_revoked = {
+	
+	}
+	on_revoked_province = {
+		
+	}
+	on_invalid = {
+		
+	}
+	on_invalid_province = {
+		
+	}
+	penalties = {
+		burghers_privilege_slots = -1
+	}
+	benefits = {
+		trade_steering = 0.1
+		trade_efficiency = 0.1
+		global_trade_goods_size_modifier = 0.05
+	}
+
+	ai_will_do = {
+		factor = 1000
+		modifier = {
+			factor = 0
+			full_idea_group = exploration_ideas
+		}
+		modifier = {
+			factor = 0
+			tag = SO0
+		}
+		modifier = {
+			factor = 0
+			NOT = {
+				is_year = 1455
+			}
+		}
+	}
+}
+
+alb_rhoman_indian_goods = {
+	icon = privilege_unifying
+	max_absolutism = -5
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	loyalty = 0.05
+	influence = 0.05
+	is_valid = {
+		RX0 = {
+			exists = yes
+			is_subject_of = ROOT
+		}
+	}
+	can_revoke = {
+		
+	}
+	on_granted = {
+
+	}
+	on_granted_province = {
+	
+	}
+	on_revoked = {
+	
+	}
+	on_revoked_province = {
+		
+	}
+	on_invalid = {
+		
+	}
+	on_invalid_province = {
+		
+	}
+	penalties = {
+
+	}
+	benefits = {
+		monthly_rhoman_decadence = -0.1
+		merchants = 1
+	}
+
+	ai_will_do = {
+		factor = 1000
+	}
+}
+
+alb_zimmska_slasmeri_monopolies = {
+	icon = privilege_make_generous_donation
+	max_absolutism = -5
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	loyalty = 0.1
+	influence = 0.1
+	is_valid = {
+		has_unlocked_estate_privilege = {
+			estate_privilege = alb_zimmska_slasmeri_monopolies
+		}
+	}
+	can_revoke = {
+		
+	}
+	on_granted = {
+
+	}
+	on_granted_province = {
+	
+	}
+	on_revoked = {
+	
+	}
+	on_revoked_province = {
+		
+	}
+	on_invalid = {
+		
+	}
+	on_invalid_province = {
+		
+	}
+	penalties = {
+		state_maintenance_modifier = 0.1
+		stability_cost_modifier = 0.1
+	}
+	benefits = {
+		province_trade_power_modifier = 0.25
+		mercantilism_cost = -0.5
+		trade_efficiency = 0.1
+	}
+
+	ai_will_do = {
+		factor = 1000
+	}
+}
+
+alb_capitalism_make_money = {
+	icon = privilege_ducats
+	max_absolutism = -15
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	loyalty = 0.1
+	influence = 0.1
+	is_valid = {
+		has_government_mechanic = capitanolistism
+	}
+	can_revoke = {
+		
+	}
+	on_granted = {
+		add_years_of_income = 0.7
+	}
+	on_granted_province = {
+	
+	}
+	on_revoked = {
+	
+	}
+	on_revoked_province = {
+		
+	}
+	on_invalid = {
+		
+	}
+	on_invalid_province = {
+		
+	}
+	penalties = {
+
+	}
+	benefits = {
+		monthly_venetian_capitalism = 0.2
+	}
+	cooldown_years = 2
+	ai_will_do = {
+		factor = 10
+		modifier = {
+			factor = 0
+			years_of_income = 1
+		}
+		modifier = {
+			factor = 0
+			has_government_power = {
+				mechanic_type = capitanolistism
+				power_type = venetian_capitalism
+				value = 50
+			}
+		}
+		modifier = {
+			factor = 0
+			NOT = {
+				is_year = 1456
+			}
+		}
+	}
+}
+
+alb_capitalism_tax_the_rich = {
+	icon = privilege_make_generous_donation
+	max_absolutism = -5
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	loyalty = -0.05
+	influence = -0.1
+	is_valid = {
+		has_government_mechanic = capitanolistism
+	}
+	can_revoke = {
+		
+	}
+	on_granted = {
+
+	}
+	on_granted_province = {
+	
+	}
+	on_revoked = {
+	
+	}
+	on_revoked_province = {
+		
+	}
+	on_invalid = {
+		
+	}
+	on_invalid_province = {
+		
+	}
+	penalties = {
+
+	}
+	benefits = {
+		global_tax_modifier = 0.15
+		nobles_loyalty_modifier = 0.05
+	}
+	ai_will_do = {
+		factor = 0
+	}
+}
+
+alb_capitalism_taxes = {
+	icon = privilege_loot
+	max_absolutism = -5
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	loyalty = 0.05
+	influence = 0.1
+	is_valid = {
+		has_government_mechanic = capitanolistism
+	}
+	can_revoke = {
+		
+	}
+	on_granted = {
+		add_government_power = {
+			mechanic_type = capitanolistism
+			power_type = venetian_capitalism
+			value = 10
+		}
+		random_owned_province = {
+			add_base_tax = 1
+		}
+		add_years_of_income = -0.25
+	}
+	on_granted_province = {
+		
+	}
+	on_revoked = {
+	
+	}
+	on_revoked_province = {
+		
+	}
+	on_invalid = {
+		
+	}
+	on_invalid_province = {
+		
+	}
+	penalties = {
+
+	}
+	benefits = {
+		global_tax_modifier = 0.1
+	}
+	cooldown_years = 5
+	ai_will_do = {
+		factor = 0
+	}
+}

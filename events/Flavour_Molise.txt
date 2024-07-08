@@ -1,86 +1,6 @@
 namespace = molis
 
 country_event = {
-	id = molis.1
-	title = molis.1.test
-	desc = molis.1.desc
-	picture = TRADE_GOODS_eventPicture
-	
-	is_triggered_only = yes
-
-	option = {
-		name = molis.1a
-		ai_chance = {
-			factor = 80
-		}
-		if = {
-			limit = {
-				RAG = {
-					is_subject_of = ROOT
-				}
-			}
-			RAG = {
-				add_country_modifier = {
-					name = imperial_trade
-					duration = -1
-				}
-			}
-		}
-		if = {
-			limit = {
-				RAG = {
-					exists = no
-				}
-			}
-			137 = {
-				add_core = RAG
-				cede_province = RAG
-			}
-			vassalize = RAG
-			RAG = {
-				add_country_modifier = {
-					name = imperial_trade
-					duration = -1
-				}
-			}
-		}
-	}
-	option = {
-		name = molis.1b
-		ai_chance = {
-			factor = 20
-		}
-		add_treasury = 333
-		137 = {
-			add_base_production = 2
-		}
-	}
-}
-
-country_event = {
-	id = molis.2
-	title = molis.2.test
-	desc = molis.2.desc
-	picture = TRADE_GOODS_eventPicture
-	
-	hidden = yes
-	fire_only_once = yes
-
-	trigger = {
-		tag = MO0
-		is_emperor = yes
-		prestige = 5
-	}
-	mean_time_to_happen = {
-		days = 5
-	}
-	option = {
-		name = molis.2b
-		add_prestige = 33
-	}
-}
-
-country_event = {
 	id = molis.3
 	title = molis.3.test
 	desc = molis.3.desc
@@ -133,3 +53,303 @@ country_event = {
 		}
 	}
 }
+
+country_event = {
+	id = molis.5
+	title = molis.5.test
+	desc = molis.5.desc
+	picture = TRADE_GOODS_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = molis.5a
+		MO0 = {
+			create_union = ROOT
+		}
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 2
+				has_opinion = {
+					who = MO0
+					value = 130
+				}
+			}
+			modifier = {
+				factor = 2
+				has_opinion = {
+					who = MO0
+					value = 170
+				}
+			}
+		}
+	}
+	option = {
+		name = molis.5b
+		break_alliance = MO0
+		MO0 = {
+			add_prestige = 10
+			central_italy_area = {
+				add_permanent_claim = MO0
+			}
+		}
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 2
+				NOT = {
+					has_opinion = {
+						who = MO0
+						value = 50
+					}
+				}
+			}
+			modifier = {
+				factor = 2
+				NOT = {
+					has_opinion = {
+						who = MO0
+						value = 0
+					}
+				}
+			}
+		}
+	}
+}
+country_event = {
+	id = molis.6
+	title = molis.6.test
+	desc = molis.6.desc
+	picture = PEASANTS_BARTERING_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = molis.6a
+	}
+	option = {
+		name = molis.6b
+		add_stability_or_adm_power = yes
+		add_trust = {
+			who = MO0
+			value = -50
+			mutual = yes
+		}
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 1.25
+				NOT = {
+					has_opinion = {
+						who = MO0
+						value = 180
+					}
+				}
+			}
+			modifier = {
+				factor = 1.25
+				total_development = 50
+			}
+			modifier = {
+				factor = 1.25
+				military_strength = {
+					who = MO0
+					value = 0.33
+				}
+				
+			}
+		}
+	}
+	option = {
+		name = molis.6c
+		if = {
+			limit = {
+				SIC = {
+					exists = no
+				}
+			}
+			change_tag = SIC
+			event_target:molise_for_sicily_mission = {
+				create_union = SIC
+			}
+		}
+		else = {
+			SIC = {
+				inherit = ROOT
+			}
+		}
+		clear_global_event_target = molise_for_sicily_mission
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 1.5
+				has_opinion = {
+					who = MO0
+					value = 180
+				}
+			}
+			modifier = {
+				factor = 1.5
+				NOT = {
+					total_development = 50
+				}
+			}
+			modifier = {
+				factor = 1.25
+				NOT = {
+					military_strength = {
+						who = MO0
+						value = 0.25
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = molis.7
+	title = molis.7.test
+	desc = molis.7.desc
+	picture = TRADE_GOODS_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = molis.7a
+		ai_chance = {
+			factor = 30
+		}
+		trigger = {
+			is_emperor = no
+		}
+		137 = {
+			cede_province = RAG
+			add_core = RAG
+		}
+	}
+	option = {
+		name = molis.7b
+		ai_chance = {
+			factor = 60
+		}
+		if = {
+			limit = {
+				is_emperor = no
+			}
+			MO0 = {
+				add_aggressive_expansion = {
+					who = ROOT
+					value = 10
+					apply_calc = no
+				}
+			}
+		}
+		137 = {
+			cede_province = RAG
+			add_core = RAG
+		}
+		vassalize = RAG
+	}
+	option = {
+		name = molis.7c
+		trigger = {
+			is_emperor = no
+		}
+		ai_chance = {
+			factor = 10
+		}
+		every_known_country = {
+			limit = {
+				is_part_of_hre = yes
+			}
+			add_aggressive_expansion = {
+				who = ROOT
+				value = 5
+				apply_calc = no
+			}
+		}
+	}
+}
+
+
+country_event = {
+	id = molis.100
+	title = molis.100.test
+	desc = molis.100.desc
+	picture = TRADE_GOODS_eventPicture
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	option = {
+		name = molis.100a
+		add_mil_power = -25
+		add_ruler_modifier = {
+			name = mol_mano_di_ferro
+			duration = -1
+		}
+	}
+	option = {
+		name = molis.100b
+		add_years_of_income = -0.33
+		add_ruler_modifier = {
+			name = mol_mano_doro
+			duration = -1
+		}
+	}
+	option = {
+		name = molis.100c
+		add_army_tradition = 25
+	}
+}
+country_event = {
+	id = molis.101
+	title = molis.101.test
+	desc = molis.101.desc
+	picture = GUARDED_TREASURE_eventPicture
+	
+	trigger = {
+		has_country_flag = mol_bodyguard_flag
+		NOT = {
+			has_ruler_modifier = mol_bodyguard
+		}
+		any_army = {
+			is_ruler_commanding_unit = yes
+		}
+	}
+	mean_time_to_happen = {
+		days = 10
+	}
+	option = {
+		name = molis.101a
+		add_ruler_modifier = {
+			name = mol_bodyguard
+			duration = -1
+		}
+	}
+}
+#country_event = {
+#	id = molis.102
+#	title = molis.102.test
+#	desc = molis.102.desc
+#	picture = TRADE_GOODS_eventPicture
+#	
+##		mission_completed = mol_war_never
+#		NOT = {
+#			has_country_modifier = mol_writing_book
+#		}
+#		NOT = {
+#			has_country_modifier = mol_art_of_war
+#		}
+#	}
+#	mean_time_to_happen = {
+#		days = 10
+#	}
+#	option = {
+#		name = molis.102a
+#		add_country_modifier = {
+#			duration = 10950
+#		}
+#	}
+#}

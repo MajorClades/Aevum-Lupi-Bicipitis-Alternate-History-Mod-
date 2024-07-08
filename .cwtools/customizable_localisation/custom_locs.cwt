@@ -1,0 +1,34 @@
+
+enums = {
+	complex_enum[defined_text_commands] = {
+		path = "game/customizable_localization"
+		name = {
+			name = scalar
+		}	
+	}
+}
+
+types = {
+	type[defined_text] = {
+		path = "game/customizable_localization"
+		name_field = "name"
+	}
+}
+
+defined_text = {
+	name = scalar
+
+	## cardinality = 0..1
+	###Appears to default to yes.
+	random = no
+
+	## cardinality = 1..inf
+	text = {
+		localisation_key = scalar #localisation but only in correct language so turned off. Turn on to verify.
+
+		## cardinality = 0..1
+		trigger = {
+			alias_name[trigger] = alias_match_left[trigger]
+		}
+	}
+}

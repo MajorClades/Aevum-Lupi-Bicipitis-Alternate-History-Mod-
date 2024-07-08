@@ -4,67 +4,134 @@ country_event = {
 	id = saxo.1
 	title = saxo.1.test
 	desc = saxo.1.desc
-	picture = COMET_SIGHTED_eventPicture
+	picture = DIPLOMACY_eventPicture
 
 	trigger = {
-		tag = SX0
-		owns_or_subject_of = 280
+		NOT = {
+			has_country_flag = had_slasmeri_union_flag
+		}
+		government = monarchy
+		is_year = 1450
+		is_subject = no
+		OR = {
+			OR = {
+				AND = {
+					SX0 = { is_female = yes }
+					LT0 = { is_female = no }
+				}
+				AND = {
+					SX0 = { is_female = no }
+					LT0 = { is_female = yes }
+				}
+				LT0 = {
+					ai = yes
+					has_regency = yes
+				}
+				SX0 = {
+					ai = yes
+					has_regency = yes
+				}
+			}
+			is_year = 1500
+		}
+		OR = {
+			AND = {
+				tag = SX0
+				NOT = { war_with = LT0 }
+				is_subject = no
+				LT0 = {
+					exists = yes
+					ai = yes
+					was_player = no
+					is_subject = no
+					is_neighbor_of = ROOT
+					NOT = { is_in_war = { attacker_leader = LT0 } }
+					NOT = { is_in_war = { defender_leader = LT0 } }
+					NOT = { is_in_war = { casus_belli = cb_independence_war } }
+					government = monarchy
+				}
+			}
+			AND = {
+				tag = LT0
+				NOT = { war_with = SX0 }
+				is_subject = no
+				ai = no
+				SX0 = {
+					exists = yes
+					ai = yes
+					was_player = no
+					is_subject = no
+					is_neighbor_of = ROOT
+					NOT = { is_in_war = { attacker_leader = SX0 } }
+					NOT = { is_in_war = { defender_leader = SX0 } }
+					NOT = { is_in_war = { casus_belli = cb_independence_war } }
+					government = monarchy
+				}
+			}
+		}
 	}
 
 	mean_time_to_happen = {
-		months = 2
+		months = 60
+		modifier = {
+			factor = 0.1
+			OR = {
+				AND = {
+					tag = SX0
+					LT0 = {
+						has_regency = no 
+					}
+				}
+				AND = {
+					tag = LT0
+					SX0 = { 
+						has_regency = no 
+					}
+				}
+			}
+		}
 	}
-
+	major = yes
 	fire_only_once = yes
-
+	immediate = {
+		hidden_effect = {
+			set_country_flag = had_slasmeri_union_flag
+		}
+	}
 	option = {
 		name = saxo.1a
-		ai_chance = {
-			factor = 80
+		ai_chance = { factor = 100 }
+		if = {
+			limit = { tag = SX0 }
+			create_union = LT0
+			LT0 = {
+				add_liberty_desire = -50
+			}
 		}
-		280 = {
-			remove_core = ROOT
-			add_core = SI0
-			cede_province = SI0
-		}
-		create_subject = {
-			subject_type = siesheng_vassal
-			subject = SI0
-		}
-		custom_tooltip = VAS_SIE_TIP
-		add_country_modifier = {
-			name = siescheng_vassalage
-			duration = -1
-		}
-		hidden_effect = {
-			set_country_flag = siescheng_vassal_flag
-			SI0 = {
-				change_government = republic
-				change_primary_culture = chitans
-				change_religion = confucianism
-				add_government_reform = walled_city_reform
-				define_ruler = {
-					name = "Master's Council"
-					adm = 4
-					dip = 4
-					mil = 4
-				}
-				add_ruler_personality = immortal_personality
-				add_ruler_personality = calm_personality
-				add_ruler_personality = incorruptible_personality
+		if = {
+			limit = { tag = LT0 }
+			create_union = SX0
+			SX0 = {
+				add_liberty_desire = -50
 			}
 		}
 	}
 	option = {
 		name = saxo.1b
-		ai_chance = {
-			factor = 10
+		ai_chance = { factor = 10 }
+		add_stability_or_adm_power = yes
+		if = {
+			limit = {
+				has_regency = no
+				has_consort = no
+				has_government_attribute = queen
+			}
+			define_consort = {
+				ADM = 3
+				MIL = 3
+				DIP = 3
+			}
 		}
-		280 = {
-			add_core = ROOT
-		}
-		inherit = SI0
-		set_capital = 280
 	}
 }
 
@@ -72,106 +139,554 @@ country_event = {
 	id = saxo.2
 	title = saxo.2.test
 	desc = saxo.2.desc
-	picture = COMET_SIGHTED_eventPicture
+	picture = STRELTSY_MARCHING_eventPicture
 
-	trigger = {
-		has_country_flag = siescheng_vassal_flag
-		SIO = {
-			NOT = {
-				is_subject_of = ROOT
-			}
-		}
-	}
-	hidden = yes
-	mean_time_to_happen = {
-		months = 1
-	}
+	is_triggered_only = yes
+	fire_only_once = yes
 
 	option = {
-		name = saxo.1a
-		remove_country_modifier = siescheng_vassalage
-		clr_country_flag = siescheng_vassal_flag
+		name = saxo.2a
+		define_general = {
+			shock = 4
+			fire = 1
+			manuever = 6
+			siege = 1
+			name = "Grandmaster Wolfram von Gersdorff"
+		}
 	}
 }
+
 country_event = {
 	id = saxo.3
 	title = saxo.3.test
 	desc = saxo.3.desc
-	picture = COMET_SIGHTED_eventPicture
+	picture = DIPLOMACY_eventPicture
 
-	trigger = {
-		has_country_flag = siescheng_vassal_flag
-		SIO = {
-			is_subject_of = ROOT
-			any_owned_province = {
-				NOT = {
-					province_id = 280
-				} 
-			}
-		}
-	}
-	hidden = yes
-	mean_time_to_happen = {
-		months = 1
-	}
+	is_triggered_only = yes
+	fire_only_once = yes
 
 	option = {
-		name = saxo.1a
-		SI0 = {
-			every_owned_province = {
-				limit = {
-					NOT = {
-						province_id = 280
-					}
-				}
-				cede_province = ROOT
-			}
+		name = saxo.3a
+		
+		create_subject = {
+			subject_type = siesheng_vassal
+			who = SI0
 		}
+		white_peace = SI0
+	}
+	option = {
+		name = saxo.3b
+		ai_chance = {
+			factor = 0
+		}
+		add_mil_power = 100
 	}
 }
+
 country_event = {
 	id = saxo.4
 	title = saxo.4.test
 	desc = saxo.4.desc
-	picture = COMET_SIGHTED_eventPicture
+	picture = ARTILLERY_eventPicture
 
 	trigger = {
-		has_country_flag = VALTEA_SAXONY_UNION
-		LT0 = {
-			exists = yes
-			junior_union_with = ROOT
-			any_owned_province = {
-				NOT = {
+		tag = SX0
+		NOT = { is_year = 1455 }
+		NOT = { owns = 280 }
+		years_of_income = 0.1
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	fire_only_once = yes
+
+	option = {
+		name = saxo.4a
+		add_years_of_income = -0.1
+		define_advisor = {
+			name = "Sieger Ürbanus"
+			culture = gepid
+			religion = catholic
+			type = army_reformer
+			skill = 2
+			cost_multiplier = 0.25
+		}
+	}
+	option = {
+		name = saxo.4b
+		add_mil_power = 100
+	}
+}
+
+#convert balts
+province_event = {
+	id = saxo.5
+	title = saxo.5.t
+	desc = saxo.5.d
+	picture = CZECH_NOBLES_eventPicture
+	
+	# is_mtth_scaled_to_size = 1
+	hidden = yes
+	
+	trigger = {
+		culture_group = baltic
+		owner = { has_country_flag = alb_sax_germanize_baltics_flag }
+	}
+
+	mean_time_to_happen = {
+		months = 300
+		modifier = {
+			factor = 0.75
+			development = 15
+		}
+		modifier = {
+			factor = 0.75
+			development = 20
+		}
+		modifier = {
+			factor = 0.75
+			development = 25
+		}
+		modifier = {
+			factor = 0.75
+			development = 30
+		}
+	}
+	
+	option = {
+		name = saxo.5a
+		if = {
+			limit = {
+				owner = {
+					culture_group = unified_germanic
+				}
+				OR = {
+					culture = lithuanian
+					culture = latvian
+				}
+			}
+			change_culture = ug_litaisch
+		}
+		else_if = {
+			limit = { 
+				OR = {
+					culture = lithuanian
+					culture = latvian
+				}
+			}
+			change_culture = litaisch
+		}
+		else_if = {
+			limit = { 
+				owner = {
+					culture_group = unified_germanic
+				}
+				culture = valtean
+			}
+			change_culture = ug_balten
+		}
+		else = {
+			change_culture = balten_new
+		}
+	}
+}
+
+country_event = {
+	id = saxo.6
+	title = saxo.6.test
+	desc = saxo.6.desc
+	picture = ARTILLERY_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = saxo.6a
+		279 = {
+			add_province_modifier = {
+				name = sx0_schrotvurge_university
+				duration = -1
+			}
+		}
+		define_advisor = {
+			type = natural_scientist
+			skill = 3
+			cost_multiplier = 0.5
+		}
+	}
+}
+
+country_event = {
+	id = saxo.7
+	title = saxo.7.test
+	desc = saxo.7.desc
+	picture = DIPLOMACY_eventPicture
+
+	is_triggered_only = yes
+
+	option = {
+		name = saxo.7a
+		if = {
+			limit = {
+				tag = SX1
+			}
+			SX0 = {
+				add_historical_friend = SX1
+				add_country_modifier = {
+					name = sx0_sax_gepid_cooperation
+					duration = -1
+					desc = pol_as_long_as_allies_or_subjects
+				}
+			}
+		}
+		else = {
+			SX1 = {
+				add_historical_friend = SX0
+				add_country_modifier = {
+					name = sx0_sax_gepid_cooperation
+					duration = -1
+					desc = pol_as_long_as_allies_or_subjects
+				}
+			}
+		}
+		add_country_modifier = {
+			name = sx0_sax_gepid_cooperation
+			duration = -1
+			desc = pol_as_long_as_allies_or_subjects
+		}
+	}
+}
+
+country_event = {
+	id = saxo.8
+	title = saxo.8.test
+	desc = saxo.8.desc
+	picture = DIPLOMACY_eventPicture
+
+	is_triggered_only = yes
+
+	option = {
+		name = saxo.8a
+		custom_tooltip = sax_cede_dacia_to_gepid_tt
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
 					OR = {
-						region = baltic_region
-						region = scandinavia_region
-						region = russia_region
+						area = moldavia_area
+						area = wallachia_area
+						area = transylvania_area
+						area = southern_transylvania_area
 					}
+				}
+				cede_province = SX1
+				if = {
+					limit = {
+						is_core = ROOT
+					}
+					add_core = SX1
+				}
+			}
+		}
+		SX1 = {
+			add_opinion = {
+				who = ROOT
+				modifier = sax_danubian_dominion
+			}
+		}
+	}
+	option = {
+		name = saxo.8b
+		SX1 = {
+			add_opinion = {
+				who = ROOT
+				modifier = sax_denied_danubia
+			}
+		}
+	}
+}
+
+country_event = {
+	id = saxo.100
+	title = saxo.100.test
+	desc = saxo.100.desc
+	picture = GHULAMS_ESTATE_DEMANDS_eventPicture
+	
+	major = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		set_country_flag = estate_knight_lodges_triggered
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = {
+						estate_territory = {
+							estate = estate_knight_lodges
+							territory = 1
+						}
+					}
+				}
+				change_estate_land_share = {
+					estate = estate_knight_lodges
+					share = 5
 				}
 			}
 		}
 	}
-	hidden = yes
-	mean_time_to_happen = {
-		months = 1
+
+	after = {
+		change_estate_land_share = {
+			estate = estate_knight_lodges
+			share = -5
+		}
+	}
+	
+	option = {
+		name = saxo.100a
+		if = {
+			limit = { has_government_mechanic = ottoman_decadence_mechanic }
+			add_government_power = { 
+				mechanic_type = ottoman_decadence_mechanic
+				power_type = ottoman_decadence
+				value = 5
+			}
+		}
+		create_independent_estate = {
+			estate = estate_knight_lodges
+			play_as = no
+			government = republic
+			government_reform = sx0_knight_lodge_state
+		}
+	}
+	
+	option = {
+		name = saxo.100b
+		trigger = { 
+			ai = no 
+		}
+		if = {
+			limit = { has_government_mechanic = ottoman_decadence_mechanic }
+			add_government_power = { 
+				mechanic_type = ottoman_decadence_mechanic
+				power_type = ottoman_decadence
+				value = 5
+			}
+		}
+		create_independent_estate = {
+			estate = estate_knight_lodges
+			play_as = yes
+			government = republic
+			government_reform = sx0_knight_lodge_state
+		}
+	}
+}
+country_event = {		# Look the other way
+	id = saxo.9
+	title = saxo.9.test
+	desc = saxo.9.desc
+	picture = HUSSARS_eventPicture
+
+	trigger = {
+		has_estate = estate_knight_lodges
 	}
 
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	is_triggered_only = yes
+
 	option = {
-		name = saxo.1a
-		LT0 = {
-			every_owned_province = {
+		name = saxo.9a
+		add_mil_power = 100
+		add_estate_influence_modifier = {
+			influence = 10
+			duration = 3650
+			estate = estate_knight_lodges
+		}
+	}
+	option = {
+		name = saxo.9b
+		add_estate_loyalty = {
+			estate = estate_knight_lodges
+			loyalty = -15
+		}
+	}
+}
+
+country_event = {	#Successful eastern raid
+	id = saxo.10
+	title = saxo.10.test
+	desc = saxo.10.desc
+	picture = COSSACK_ESTATE_RAIDERS_eventPicture
+
+	trigger = {
+		has_estate = estate_knight_lodges
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+	immediate = {
+		hidden_effect = {
+			random_owned_province = {
 				limit = {
-					NOT = {
-						OR = {
-							region = baltic_region
-							region = scandinavia_region
-							region = russia_region
-						}
-					}
+					has_fort_building_trigger = yes
 				}
-				cede_province = ROOT
-				add_core = ROOT
+				save_event_target_as = alb_knights_invest_province
 			}
+		}
+	}
+
+	is_triggered_only = yes
+
+	option = {
+		name = saxo.10a
+		add_years_of_income = 0.1
+		event_target:alb_knights_invest_province = {
+			add_base_tax = 1
+		}
+	}
+}
+
+country_event = {		# Knightly Feudalism
+	id = saxo.11
+	title = saxo.11.test
+	desc = saxo.11.desc
+	picture = NOBLE_ESTATE_DEMANDS_eventPicture
+
+	trigger = {
+		has_estate = estate_knight_lodges
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	is_triggered_only = yes
+
+	option = {
+		name = saxo.11a
+		add_estate_loyalty = {
+			estate = estate_knight_lodges
+			loyalty = -10
+		}
+		add_country_modifier = {
+			name = alb_knights_less_taxes
+			duration = 3650
+		}
+	}
+	option = {
+		name = saxo.11b
+		add_estate_loyalty = {
+			estate = estate_knight_lodges
+			loyalty = 10
+		}
+		add_adm_power = -50
+	}
+}
+
+country_event = {		# Knightly Feudalism
+	id = saxo.11
+	title = saxo.11.test
+	desc = saxo.11.desc
+	picture = NOBLE_ESTATE_DEMANDS_eventPicture
+
+	trigger = {
+		has_estate = estate_knight_lodges
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	is_triggered_only = yes
+
+	option = {
+		name = saxo.11a
+		add_estate_loyalty = {
+			estate = estate_knight_lodges
+			loyalty = -10
+		}
+	}
+	option = {
+		name = saxo.11b
+		add_estate_loyalty = {
+			estate = estate_knight_lodges
+			loyalty = 10
+		}
+		add_adm_power = -50
+	}
+}
+
+country_event = {		# sgs demands new markets
+	id = saxo.12
+	title = saxo.12.test
+	desc = saxo.12.desc
+	picture = MERCHANTS_TALKING_eventPicture
+
+	trigger = {
+		has_estate = estate_knight_lodges
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	is_triggered_only = yes
+
+	option = {
+		name = saxo.12a		# cede it to them
+		add_estate_loyalty = {
+			estate = estate_knight_lodges
+			loyalty = 10
+		}
+		change_estate_land_share = {
+			estate = estate_knight_lodges
+			share = 1
+		}
+		random_owned_province = {
+			add_base_manpower = 1
+		}
+	}
+	option = {
+		name = saxo.12b
+		add_estate_loyalty = {
+			estate = estate_knight_lodges
+			loyalty = -10
+		}
+	}
+}
+
+country_event = {		# sgs demands new markets
+	id = saxo.13
+	title = saxo.13.test
+	desc = saxo.13.desc
+	picture = ARTWORK_eventPicture
+
+	trigger = {
+		has_estate = estate_knight_lodges
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	is_triggered_only = yes
+
+	option = {
+		name = saxo.13a		# cede it to them
+		add_estate_loyalty = {
+			estate = estate_knight_lodges
+			loyalty = 10
+		}
+		add_stability_or_adm_power = yes
+		add_years_of_income = -0.1
+	}
+	option = {
+		name = saxo.13b
+		add_estate_loyalty = {
+			estate = estate_knight_lodges
+			loyalty = -10
 		}
 	}
 }

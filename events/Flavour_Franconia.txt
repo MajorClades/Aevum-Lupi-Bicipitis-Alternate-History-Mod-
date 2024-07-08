@@ -1,0 +1,271 @@
+namespace = franco
+
+country_event = { #Start of the Merovingian Plot, if Soxony declares war at the start through its own events the disaster is averted since the war would be its own disaster
+	id = franco.1
+	title = franco.1.test
+	desc = franco.1.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	trigger = {
+		tag = FC0
+		is_subject = no
+		is_at_war = no #Disaster is cool so you get it no matter what lol
+	}
+
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	fire_only_once = yes
+
+	option = {
+		name = franco.1a
+		trigger = {
+			is_at_war = no
+		}
+		set_country_flag = start_the_merov_plot_flag
+	}
+}
+
+country_event = { #Once the disaster starts, the Plot has reached its apex, it either works out or the Caroligians beat them, but first they ask Soxony for help
+	id = franco.2
+	title = franco.2.test
+	desc = franco.2.desc
+	picture = ANGRY_MOB_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = franco.2a
+		ai_chance = {
+			factor = 90
+		}
+		if = {
+			limit = {
+				SO0 = { exists = yes }
+			}
+			SO0 = {
+				country_event = {
+					id = franco.3
+					days = 14
+				}
+			}
+		}else = {
+			set_country_flag = kicked_the_merovingians_flag
+			capital_scope = {
+				spawn_rebels = {
+					size = 2
+					type = pretender_rebels
+					leader_dynasty = "Meroveching"
+					leader = "Childeric"
+					should_take_capital = yes
+				}
+			}
+			random_owned_province = {
+				limit = { culture = franconian }
+				spawn_rebels = {
+					size = 1
+					type = pretender_rebels
+					leader_dynasty = "Meroveching"
+					leader = "Childeric"
+				}
+			}
+			random_owned_province = {
+				limit = { culture = franconian }
+				spawn_rebels = {
+					size = 1
+					type = pretender_rebels
+					leader_dynasty = "Meroveching"
+					leader = "Childeric"
+				}
+			}
+		}
+		custom_tooltip = FRANCONIA_TT_2
+		clr_country_flag = start_the_merov_plot_flag
+	}
+	option = {
+		name = franco.2b
+		ai_chance = {
+			factor = 10
+		}
+		add_stability = -2
+		define_ruler = {
+			name = "Childeric"
+			dynasty = "Meroveching"
+			adm = 4
+			dip = 6
+			mil = 1
+		}
+		kill_heir = {
+			allow_new_heir = no
+		}
+		custom_tooltip = resolve_the_merov_plot_tt
+		clr_country_flag = start_the_merov_plot_flag
+		set_country_flag = victory_ofthe_merovingians_flag
+	}
+}
+
+country_event = { #Soxony either helps the Merovingians or not, the difference is a war for vassalization and a little more rebels
+	id = franco.3
+	title = franco.3.test
+	desc = franco.3.desc
+	picture = ANGRY_MOB_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = franco.3a
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 0
+				alliance_with = SO0
+			}
+		}
+		declare_war_with_cb = {
+			casus_belli = cb_vassalize_mission
+			who = FC0
+		}
+		FC0 = {
+			set_country_flag = kicked_the_merovingians_flag
+			capital_scope = {
+				spawn_rebels = {
+					size = 2
+					type = pretender_rebels
+					leader_dynasty = "Meroveching"
+					leader = "Childeric"
+					should_take_capital = yes
+					friend = SO0
+				}
+			}
+			random_owned_province = {
+				limit = { culture = franconian }
+				spawn_rebels = {
+					size = 1
+					type = pretender_rebels
+					leader_dynasty = "Meroveching"
+					leader = "Childeric"
+					friend = SO0
+				}
+			}
+			random_owned_province = {
+				limit = { culture = franconian }
+				spawn_rebels = {
+					size = 1
+					type = pretender_rebels
+					leader_dynasty = "Meroveching"
+					leader = "Childeric"
+					friend = SO0
+				}
+			}
+			random_owned_province = {
+				limit = { culture = franconian }
+				spawn_rebels = {
+					size = 1
+					type = pretender_rebels
+					leader_dynasty = "Meroveching"
+					leader = "Childeric"
+					friend = SO0
+				}
+			}
+		}
+	}
+	option = {
+		name = franco.3b
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 3
+				alliance_with = SO0
+			}
+		}
+		FC0 = {
+			set_country_flag = kicked_the_merovingians_flag
+			capital_scope = {
+				spawn_rebels = {
+					size = 2
+					type = pretender_rebels
+					leader_dynasty = "Meroveching"
+					leader = "Childeric"
+					should_take_capital = yes
+				}
+			}
+			random_owned_province = {
+				limit = { culture = franconian }
+				spawn_rebels = {
+					size = 1
+					type = pretender_rebels
+					leader_dynasty = "Meroveching"
+					leader = "Childeric"
+				}
+			}
+			random_owned_province = {
+				limit = { culture = franconian }
+				spawn_rebels = {
+					size = 1
+					type = pretender_rebels
+					leader_dynasty = "Meroveching"
+					leader = "Childeric"
+				}
+			}
+		}
+	}
+}
+
+country_event = { #just for proper testing
+	id = franco.4
+	title = franco.4.test
+	desc = franco.4.desc
+	picture = ANGRY_MOB_eventPicture
+	is_triggered_only = yes
+	hidden = yes
+	fire_only_once = yes
+	option = {
+		name = franco.4a
+		if = {
+			limit = {
+				OR = {
+					dynasty = "Martel"
+					dynasty = "Karling"
+				}
+			}
+			country_event = {
+				id = franco.5
+			}
+		}
+		else = {
+			set_country_flag = victory_ofthe_merovingians_flag
+			swap_non_generic_missions = yes
+			country_event = {
+				id = franco.6
+			}
+		}
+	}
+}
+
+country_event = { #yo the Carolingians have won, w-o-w
+	id = franco.5
+	title = franco.5.test
+	desc = franco.5.desc
+	picture = ANGRY_MOB_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = franco.5a
+		add_stability_or_adm_power = yes
+		add_ruler_personality = martel_personality
+		custom_tooltip = empty_line_tt
+		custom_tooltip = alb_unlock_martel_personality_tt
+	}
+}
+
+country_event = { #yo the Merovingians have won, w-o-w
+	id = franco.6
+	title = franco.6.test
+	desc = franco.6.desc
+	picture = ANGRY_MOB_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = franco.5a
+		add_stability_or_adm_power = yes
+	}
+}

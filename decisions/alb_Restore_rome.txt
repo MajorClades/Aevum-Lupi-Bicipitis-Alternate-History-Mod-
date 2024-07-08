@@ -1,0 +1,203 @@
+country_decisions = {
+
+	alb_restore_rome = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			NOT = { has_country_flag = restored_rome_flag }
+			OR = {
+				owns = 118
+				is_emperor = yes
+				tag = WR0
+				tag = RU0
+				tag = SO0
+				tag = IB0
+				tag = BR0
+			}
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			OR = {
+				is_free_or_tributary_trigger = yes
+				ai = no
+			}
+			NOT = { tag = IT9 }
+			NOT = { tag = ROM }
+			NOT = { tag = PAP }
+			NOT = { exists = ROM }
+			OR = {
+				religion_group = christian
+				religion_group = pagan
+				religion_group = muslim
+			}
+		}
+		provinces_to_highlight = {
+			Roman_empire_required_provinces_decision = yes
+			NOT = { owned_by = ROOT }
+		}
+		allow = {
+			num_of_owned_provinces_with = {
+				custom_trigger_tooltip = {
+					tooltip = BYZ_highlighted_by_decision
+					Roman_empire_required_provinces_decision = yes
+				}
+				value = 500
+			}
+			is_at_war = no
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			118 = {
+				is_state = yes
+			}
+		}
+		effect = {
+			# 118 = {
+			# 	move_capital_effect = yes
+			# }
+			restore_country_name = yes
+			change_tag = ROM
+			on_change_tag_effect = yes
+			custom_tooltip = restore_roman_empire_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						is_part_of_hre = yes
+					}
+					set_in_empire = no
+				}
+			}
+			set_government_rank = 3
+			add_prestige_or_monarch_power = { amount = 50 }
+			if = {
+				limit = {
+					has_dlc = "Domination"
+					NOT = {
+						tag = SO0
+					}
+				}
+				if = {
+					limit = {
+						government = monarchy
+						is_revolutionary = no
+						NOT = { has_reform = celestial_empire }
+					}
+					hidden_effect = {
+						unlock_government_reform = {
+							government_reform = roman_empire_reform
+						}
+						unlock_government_reform = {
+							government_reform = roman_republic_government
+						}
+					}
+					add_government_reform = roman_empire_reform
+				}
+				else_if = {
+					limit = {
+						government = republic
+						is_revolutionary = no
+					}
+					hidden_effect = {
+						unlock_government_reform = {
+							government_reform = roman_empire_reform
+						}
+						unlock_government_reform = {
+							government_reform = roman_republic_government
+						}
+					}
+					add_government_reform = roman_republic_government
+				}
+				else = {
+					unlock_government_reform = {
+						government_reform = roman_empire_reform
+					}
+					unlock_government_reform = {
+						government_reform = roman_republic_government
+					}
+				}
+			}
+			add_core = 118 # Rome
+			#if = {
+			#	limit = {
+			#		is_part_of_hre = yes
+			#		is_elector = no
+			#	}
+			#	every_owned_province = {
+			#		limit = {
+			#			is_part_of_hre = yes
+			#		}
+			#		set_in_empire = no
+			#	}
+			#}
+			if = {
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			set_country_flag = restored_rome_flag
+			country_event = {
+				id = roman_emp.1
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	alb_rome_mission_change = {
+		major = yes
+		color = {
+			111 111 111
+		}
+		potential = {
+			has_country_flag = rom_mission_tree_flag
+		}
+		allow = {
+
+		}
+		effect = {
+			swap_non_generic_missions = yes
+			custom_tooltip = ROM_TT_1
+			clr_country_flag = rom_mission_tree_flag
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	alb_rome_frankia_province = {
+		major = yes
+		potential = {
+			tag = ROM
+			NOT = {
+				primary_culture = romano_frankic
+			}
+		}
+		provinces_to_highlight = {
+			region = low_countries_region
+		}
+		allow = {
+			low_countries_region = {
+				type = all
+				owned_by = ROOT
+				num_of_buildings_in_province = 2
+				NOT = {
+					local_autonomy = 1
+				}
+			}
+		}
+		effect = {
+			low_countries_region = {
+				add_permanent_province_modifier = {
+					name = provincia_romana_modifier
+					duration = -1
+				}
+			}
+			1744 = {
+				custom_tooltip = ROMANIZATION_TT_1
+				custom_tooltip = empty_line_tt
+				change_culture = romano_frankic
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+}

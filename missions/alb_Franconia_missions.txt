@@ -1,0 +1,533 @@
+Franconia_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = FC0 } 
+
+	fc_frankish_manpower = {
+		icon = mission_assemble_an_army
+		position = 2
+		required_missions = { fc_free_franconia } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			manpower = 30
+			army_size = 30
+		}
+
+		effect = {
+			capital_scope = {
+				add_base_manpower = 2
+				add_or_upgrade_manpower_building = yes
+			}
+		}
+	}
+}
+Franconia_1_M_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = FC0
+		has_country_flag = victory_ofthe_merovingians_flag
+	}
+
+	fc_soxon_unions = {
+		icon = king_of_france
+		position = 4
+		required_missions = { fc_gallic_unions } 
+		provinces_to_highlight = { is_capital_of = SO0 } 
+
+		trigger = {
+			SO0 = { is_at_war = no } 
+			is_at_war = no
+			is_subject = yes
+			adm_power = 350
+			treasury = 300
+			has_adm_advisor_3 = yes
+		}
+
+		effect = {
+			add_adm_power = -350
+			add_treasury = -300
+			create_union = SO0
+		}
+	}
+}
+Franconia_1_K_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = FC0
+		NOT = { has_country_flag = victory_ofthe_merovingians_flag } 
+	}
+
+	fc_gallic_sons = {
+		icon = conquer_east_francia
+		position = 4
+		required_missions = { fc_gallic_wars } 
+		provinces_to_highlight = {
+			NOT = { owned_by = ROOT } 
+			OR = {
+				area = champagne_area
+				area = picardy_area
+			}
+		}
+
+		trigger = {
+			accepted_culture = soxon
+			picardy_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			87 = {
+				add_base_production = 2
+				add_center_of_trade_level = 1
+			}
+			picardy_area = {
+				add_culture_construction = {
+					cost = 0
+					speed = 0.67
+				}
+			}
+		}
+	}
+}
+Franconia_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = FC0 } 
+
+	fc_free_franconia = {
+		icon = bavarian_netherlands
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			if = {
+				limit = { ai = yes } 
+				num_of_generals = 1
+				army_size_percentage = 0.7
+			}
+			else = { army_size_percentage = 1 } 
+		}
+
+		effect = { create_general = { tradition = 50 }  } 
+	}
+}
+Franconia_2_M_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = FC0
+		has_country_flag = victory_ofthe_merovingians_flag
+	}
+
+	fc_gallic_unions = {
+		icon = france_antarctique
+		position = 3
+		required_missions = { fc_franconia_stronger } 
+		provinces_to_highlight = { is_capital_of = SO0 } 
+
+		trigger = { alliance_with = SO0 } 
+
+		effect = {
+			custom_tooltip = FRANCONIA_TT_4
+			SO0 = {
+				every_owned_province = {
+					limit = { is_core = FC0 } 
+					cede_province = FC0
+				}
+				create_subject = {
+					subject_type = autonomous_vassal
+					who = FC0
+				}
+			}
+		}
+	}
+
+	fc_gallia_franca = {
+		icon = centralize_france
+		position = 5
+		required_missions = {
+			fc_soxon_unions
+			fc_franconia_to_frankia
+		}
+		provinces_to_highlight = { is_capital_of = SO0 } 
+
+		trigger = {
+			total_development = 300
+			SO0 = {
+				NOT = { liberty_desire = 20 } 
+				years_in_union_under = {
+					who = ROOT
+					years = 30
+				}
+			}
+		}
+
+		effect = {
+			inherit = SO0
+			override_country_name = "FRANKIA_GALLIA"
+			custom_tooltip = FRANCONIA_TT_5
+			hidden_effect = {
+				every_owned_province = {
+					limit = { is_core = SO0 } 
+					add_local_autonomy = 20
+				}
+			}
+		}
+	}
+}
+Franconia_2_K_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = FC0
+		NOT = { has_country_flag = victory_ofthe_merovingians_flag } 
+	}
+
+	fc_gallic_wars = {
+		icon = king_of_the_franks
+		position = 3
+		required_missions = { fc_franconia_stronger } 
+		provinces_to_highlight = {
+			NOT = { owned_by = ROOT } 
+			OR = {
+				area = champagne_area
+				area = picardy_area
+			}
+		}
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = kicked_the_merovingians_flag_tt
+				has_country_flag = kicked_the_merovingians_flag
+			}
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 7
+				OR = {
+					area = champagne_area
+					area = picardy_area
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "fc_gallic_champagne"
+				duration = 10950
+			}
+			ile_de_france_area = { add_permanent_claim = ROOT } 
+			normandy_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	fc_gallic_victory = {
+		icon = centralize_france
+		position = 5
+		required_missions = { fc_gallic_wars } 
+		provinces_to_highlight = {
+			NOT = { owned_by = ROOT } 
+			OR = {
+				area = ile_de_france_area
+				area = normandy_area
+			}
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 8
+				OR = {
+					area = ile_de_france_area
+					area = normandy_area
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "fc_overshadow_soxon"
+				duration = -1
+			}
+		}
+	}
+}
+Franconia_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = FC0 } 
+
+	fc_franconia_stronger = {
+		icon = mission_empire
+		position = 2
+		required_missions = {
+			fc_free_franconia
+			fc_franconia_rules
+		}
+		provinces_to_highlight = {
+			NOT = { owned_by = ROOT } 
+			is_core = ROOT
+		}
+
+		trigger = {
+			if = {
+				limit = { dynasty = Meroveching } 
+				stability = 2
+			}
+			else = { owns_all_provinces = { is_core = FC0 }  } 
+		}
+
+		effect = {
+			lorraine_area = { add_permanent_claim = ROOT } 
+			champagne_area = { add_permanent_claim = ROOT } 
+			picardy_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	fc_franconia_to_frankia = {
+		icon = interest_of_holland
+		position = 4
+		required_missions = { fc_franconia_stronger } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = kicked_the_merovingians_flag_tt
+				has_country_flag = kicked_the_merovingians_flag
+			}
+			grown_by_development = 100
+		}
+
+		effect = {
+			set_country_flag = unite_frankia_cb_flag
+			custom_tooltip = FRANCONIA_TT_3
+			low_countries_region = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	fc_frankish_fervor = {
+		icon = mission_war_chest
+		position = 6
+		required_missions = { fc_franconia_to_frankia } 
+		provinces_to_highlight = {
+			NOT = { owned_by = ROOT } 
+			region = low_countries_region
+		}
+
+		trigger = {
+			low_countries_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_prestige_or_monarch_power = { amount = 20 } 
+			add_years_of_income = 2
+		}
+	}
+}
+Franconia_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = FC0 } 
+
+	fc_franconia_rules = {
+		icon = mission_alliances
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			if = {
+				limit = { ai = yes } 
+				prestige = 10
+			}
+			else = { has_mil_advisor = yes } 
+			mil_power = 150
+		}
+
+		effect = {
+			if = {
+				limit = { ai = yes } 
+				add_army_tradition = 10
+			}
+			else = {
+				add_mil_power = -150
+				set_estate_privilege = estate_nobles_officer_corp
+			}
+		}
+	}
+
+	fc_impotian_teachings = {
+		icon = show_piety
+		position = 3
+		required_missions = { fc_franconia_stronger } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_tax_building_trigger = no
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				has_tax_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_years_of_income = 0.5
+			add_patriarch_authority = 0.05
+		}
+	}
+
+	fc_old_martel = {
+		icon = carolingian_empire
+		position = 5
+		required_missions = { fc_production_of_wealth } 
+		provinces_to_highlight = { province_id = 1744 } 
+
+		trigger = {
+			treasury = 500
+			owns = 1744
+			1744 = { development = 25 } 
+		}
+
+		effect = {
+			add_treasury = -500
+			1744 = {
+				add_great_project_tier = {
+					type = tomb_charlesmagne
+					tier = 1
+				}
+			}
+		}
+	}
+}
+Franconia_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = FC0 } 
+
+	fc_jousting = {
+		icon = mission_conquer_5_states
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = { num_of_cavalry = 6 } 
+
+		effect = {
+			lorraine_area = { add_permanent_claim = ROOT } 
+			alsace_area = { add_permanent_claim = ROOT } 
+			palatinate_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	fc_hunnic_wars = {
+		icon = mission_hunting
+		position = 2
+		required_missions = { fc_jousting } 
+		provinces_to_highlight = {
+			NOT = { owned_by = ROOT } 
+			OR = {
+				area = lorraine_area
+				area = alsace_area
+				area = palatinate_area
+			}
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 10
+				OR = {
+					area = lorraine_area
+					area = alsace_area
+					area = palatinate_area
+				}
+			}
+		}
+
+		effect = {
+			add_accepted_culture_or_dip_power = { culture = hunnic_fra } 
+			add_country_modifier = {
+				name = "fc_huns_champagne"
+				duration = 10950
+			}
+		}
+	}
+
+	fc_production_of_wealth = {
+		icon = mission_have_manufactories
+		position = 4
+		required_missions = { fc_impotian_teachings } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_production_building_trigger = no
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 7
+				culture_group = frankish
+				has_production_building_trigger = yes
+			}
+		}
+
+		effect = {
+			define_advisor = {
+				type = natural_scientist
+				skill = 3
+				discount = yes
+			}
+			add_country_modifier = {
+				name = "fc_frankish_goods"
+				duration = 10950
+			}
+		}
+	}
+
+	fc_burocracy = {
+		icon = crush_the_revolution
+		position = 6
+		required_missions = { fc_production_of_wealth } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_courthouse_building_trigger = no
+		}
+
+		trigger = {
+			num_of_completed_idea_groups_adm = { amount = 1 } 
+			num_of_owned_provinces_with = {
+				value = 15
+				culture_group = frankish
+				has_courthouse_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "fc_measurments"
+				duration = -1
+			}
+		}
+	}
+}

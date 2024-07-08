@@ -7,9 +7,10 @@ country_decisions = {
 			is_nomad = no
 			was_never_end_game_tag_trigger = yes
 			is_random_new_world = no
-			NOT = { tag = HLR }
+			NOT = { tag = IT9 }
 			NOT = { tag = PAP }
 			NOT = { tag = FJ0 }
+			NOT = { tag = FJ9 }
 			OR = {
 				is_former_colonial_nation = yes
 				is_colonial_nation = yes
@@ -24,12 +25,12 @@ country_decisions = {
 						}
 					}
 					capital_scope = {
-						colonial_region = colonial_mexico
+						colonial_region = colonial_louisiana
 						is_core = ROOT
 					}
 				}
 			}
-			colonial_mexico = {
+			colonial_louisiana = {
 				owned_by = ROOT
 			}
 			OR = {
@@ -41,7 +42,7 @@ country_decisions = {
 			}
 		}
 		provinces_to_highlight = {
-			colonial_region = colonial_mexico
+			colonial_region = colonial_louisiana
 			OR = {
 				NOT = { owned_by = ROOT }
 				is_city = no
@@ -52,12 +53,12 @@ country_decisions = {
 			is_free_or_tributary_trigger = yes
 			is_at_war = no
 			capital_scope = {
-				colonial_region = colonial_mexico
+				colonial_region = colonial_louisiana
 				is_core = ROOT
 			}
 			num_of_owned_provinces_with = {
 				value = 10
-				colonial_region = colonial_mexico
+				colonial_region = colonial_louisiana
 				is_city = yes
 			}
 			NOT = { exists = MEX }
@@ -88,7 +89,7 @@ country_decisions = {
 			}
 			if = {
 				limit = {
-					culture_group = iberian
+					is_iberian_grouped_trigger = yes
 					NOT = { primary_culture = mexican }
 				}
 				change_primary_culture = mexican
@@ -103,7 +104,9 @@ country_decisions = {
 				name = "centralization_modifier"
 				duration = 7300
 			}
-			add_prestige = 25
+			add_prestige_or_monarch_power = {
+				amount = 25
+			}
 			if = {
 				limit = { has_custom_ideas = no }
 				country_event = { id = ideagroups.1 } #Swap Ideas

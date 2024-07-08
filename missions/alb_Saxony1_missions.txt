@@ -1,0 +1,1514 @@
+saxon_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = SX0 } 
+
+	sx0_support_rija = {
+		icon = mission_pol_embellish_gdansk
+		position = 2
+		provinces_to_highlight = {  
+			if = {
+				limit = {
+					SX3 = {
+						exists = no
+					}
+				}
+				province_id = 43
+				NOT = {
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+			}
+		} 
+
+		trigger = {  
+			OR = {
+				AND = {
+					SX3 = {
+						exists = yes
+						owns = 43
+					}
+					alliance_with = SX3
+				}
+				owns_or_non_sovereign_subject_of = 43
+			}
+		} 
+
+		effect = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = sx0_if_allied_rija_tt
+				first_limit = "
+					alliance_with = SX3
+				"
+				first_effect = "
+					vassalize = SX3
+					SX3 = {
+						add_liberty_desire = -25
+					}
+				"
+				second_limit = "
+					43 = {
+						OR = {
+							owned_by = ROOT
+							owned_by_subject_of = ROOT
+						}
+					}
+				"
+				second_effect = "
+					43 = {
+						add_province_modifier = {
+							name = sx0_restore_araatan
+							duration = 9125
+						}
+					}
+				"
+			}
+			hinter_pommern_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	sx0_crush_mongoland = {
+		icon = qng_end_yuan
+		position = 4
+		required_missions = {
+			sx0_support_rija
+			sx0_strike_germany
+		}
+		provinces_to_highlight = {  
+			culture = mongolish
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			owns_all_provinces = {
+				culture = mongolish
+			}
+			ML0 = {
+				exists = no
+			}
+		} 
+
+		effect = {  
+			if = {
+				limit = {
+					culture_group = unified_germanic
+				}
+				custom_tooltip = UNIFY_MONGOLISH
+				hidden_effect = {
+					every_owned_province = {
+						limit = { culture = mongolish } 
+						change_culture = ug_mongolish
+					}
+				}
+			}
+			add_country_modifier = {
+				name = sx0_mongols_ended
+				duration = 9125
+			}
+			add_prestige_or_monarch_power = {
+				amount = 25
+			}
+		} 
+	}
+
+	sx0_empower_knights = {
+		icon = mission_knight
+		position = 5
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			if = {
+				limit = {
+					has_estate = estate_knight_lodges
+				}
+				OR = {
+					num_of_estate_agendas_completed = {
+						estate = estate_knight_lodges
+						value = 3
+					}
+					num_of_estate_privileges = {
+						estate = estate_knight_lodges
+						value = 5
+					}
+				}
+				estate_loyalty = {
+					estate = estate_knight_lodges
+					loyalty = 60
+				}
+			}
+			else = {
+				cavalry_fraction = 0.5
+			}
+		} 
+
+		effect = {  
+			add_estate_loyalty = {
+				estate = estate_knight_lodges
+				loyalty = 10
+			}
+			create_general = {
+				tradition = 100
+			}
+			add_yearly_manpower = 2
+		} 
+	}
+
+	sx0_knightly_army = {
+		icon = mission_livonian_knights
+		position = 6
+		required_missions = { sx0_empower_knights } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			cavalry_fraction = 0.5
+			army_size_percentage = 1
+			num_of_generals = 2
+			OR = {
+				has_mil_advisor_3 = yes
+				mil = 6
+			}
+			monthly_mil = 12
+		} 
+
+		effect = {  
+			unlock_government_reform = {
+				government_reform = sx0_knightly_army_reform
+				tooltip = yes
+			}
+			custom_tooltip = empty_line_tt
+			add_mil_power = 100
+			change_government_reform_progress = 50
+		} 
+	}
+
+	sx0_empire_on_horseback = {
+		icon = mission_teutonic_knights
+		position = 7
+		required_missions = { sx0_knightly_army } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			has_reform = sx0_knightly_army_reform
+			has_leader_with = { total_pips = 13 } 
+			num_of_cavalry = 100
+			estate_loyalty = {
+				estate = estate_knight_lodges
+				loyalty = 80
+			}
+			has_global_modifier_value = {
+				which = cavalry_power
+				value = 0.5
+			}
+		} 
+
+		effect = {  
+			if = {
+				limit = {
+					government = monarchy
+				}
+				hidden_effect = {
+					unlock_government_reform = {
+						government_reform = sx0_saxony_empire
+					}
+				}
+				add_government_reform = sx0_saxony_empire
+			}
+			else = {
+				unlock_government_reform = {
+					government_reform = sx0_saxony_empire
+					tooltip = yes
+				}
+			}
+			add_splendor = 1000
+		} 
+	}
+
+	sx0_valtean_union = {
+		icon = mission_conquer_baltic_region
+		position = 10
+		required_missions = { sx0_valtean_succession } 
+		provinces_to_highlight = {  
+			OR = {
+				culture = valtean
+				if = {
+					limit = {
+						culture_group = unified_germanic
+					}
+					culture = ug_balten
+				}
+				else = {
+					culture = balten_new
+				}
+				owned_by = LT0
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		} 
+
+		trigger = {  
+			owns = 38
+			LT0 = {
+				exists = no
+			}
+			owns_all_provinces = {
+				OR = {
+					culture = valtean
+					if = {
+						limit = {
+							culture_group = unified_germanic
+						}
+						culture = ug_balten
+					}
+					else = {
+						culture = balten_new
+					}
+				}
+			}
+		} 
+
+		effect = {  
+			override_country_name = SAXONY_VALTEA
+			add_accepted_culture_or_dip_power_stated = {
+				culture = valtean
+			}
+			38 = {
+				add_unit_construction = {
+					type = heavy_ship
+					cost = 0
+					speed = 0.1
+					amount = 10
+				}
+				create_flagship = {
+					type = heavy_ship
+					name = "Sachsische Kongravin"
+				}
+			}
+		} 
+	}
+}
+saxon_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = SX0 } 
+
+	sx0_consolidate_saxonia = {
+		icon = mission_pol_deal_mazovia
+		position = 2
+		required_missions = { sx0_gather_knights } 
+		provinces_to_highlight = {  
+			region = poland_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = { 
+			poland_region = { 
+				country_or_non_sovereign_subject_holds = ROOT 
+				type = all
+			}  
+		} 
+
+		effect = {
+			wielkopolska_area = { add_permanent_claim = ROOT } 
+			silesia_area = { add_permanent_claim = ROOT } 
+			neumark_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	sx0_strike_germany = {
+		icon = encroach_on_the_germans
+		position = 3
+		required_missions = { sx0_consolidate_saxonia } 
+		provinces_to_highlight = {  
+			OR = {
+				area = wielkopolska_area
+				area = silesia_area
+				area = neumark_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			neumark_area = {
+				country_or_non_sovereign_subject_holds = ROOT 
+				type = all
+			}
+			silesia_area = {
+				country_or_non_sovereign_subject_holds = ROOT 
+				type = all
+			}
+			wielkopolska_area = {
+				country_or_non_sovereign_subject_holds = ROOT 
+				type = all
+			}
+		} 
+
+		effect = {  
+			if = {
+				limit = {
+					GR0 = {
+						exists = no
+					}
+					PU0 = {
+						exists = yes
+					}
+				}
+				PU0 = {
+					add_casus_belli = {
+						type = cb_sax_end_confed
+						target = THIS
+					}
+				}
+				set_country_flag = sax_dismantling_german_confed_flag
+			}
+			else = {
+				north_german_region = {
+					add_permanent_claim = ROOT
+				}
+				south_german_region = {
+					add_permanent_claim = ROOT
+				}
+				set_country_flag = sax_conquer_germania_flag
+			}
+			custom_tooltip = empty_line_tt
+			define_advisor = {
+				type = army_reformer
+				skill = 3
+				cost_multiplier = 0.25
+			}
+		} 
+	}
+
+	sx0_usurp_german_confed = {
+		icon = mission_germ_sax
+		position = 5
+		required_missions = { sx0_strike_germany } 
+		provinces_to_highlight = {  
+			if = {
+				limit = {
+					GR0 = {
+						exists = yes
+					}
+					PU0 = {
+						exists = no
+					}
+				}
+				OR = {
+					region = north_german_region
+					region = south_german_region
+				}
+			}
+			culture_group = saxonic
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			if = {
+				limit = {
+					GR0 = {
+						exists = no
+					}
+					PU0 = {
+						exists = yes
+					}
+				}
+				custom_trigger_tooltip = {
+					tooltip = alb_sx0_dismantled_german_confed_tt
+					has_country_flag = sax_dismantled_confed_flag
+				}
+			}
+			else = {
+				num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+					value = 35
+					OR = {
+						region = north_german_region
+						region = south_german_region
+					}
+				}
+			}
+			owns_all_provinces = {
+				culture_group = saxonic
+			}
+		} 
+
+		effect = {  
+			custom_tooltip = INITIATE_UNITED_GERMANS
+			hidden_effect = {
+				change_culture_to_ug = yes
+				every_owned_province = {
+					limit = { culture = balten_new } 
+					change_culture = ug_balten
+				}
+				every_owned_province = {
+					limit = { culture = saxonard } 
+					change_culture = ug_saxonard
+				}
+				every_owned_province = {
+					limit = { culture = gepid } 
+					change_culture = ug_gepid
+				}
+				every_owned_province = {
+					limit = { culture = rimedaxian } 
+					change_culture = ug_rimedaxian
+				}
+				every_owned_province = {
+					limit = { culture = litaisch } 
+					change_culture = ug_litaisch
+				}
+			}
+			north_german_region = {
+				add_permanent_claim = ROOT
+			}
+			south_german_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	sx0_union_of_germans = {
+		icon = mission_unite_home_region
+		position = 7
+		required_missions = { sx0_usurp_german_confed } 
+		provinces_to_highlight = {  
+			OR = {
+				culture_group = central_germanic
+				culture_group = saxangle
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		} 
+
+		trigger = {  
+			owns_all_provinces = {
+				OR = {
+					culture_group = central_germanic
+					culture_group = saxangle
+				}
+			}
+		} 
+
+		effect = {  
+			custom_tooltip = UNIFY_SAXANGLE
+			custom_tooltip = UNIFY_CENTRAL_GERMANS
+			custom_tooltip = UNIFY_MONGOLISH
+			hidden_effect = {
+				every_owned_province = {
+					limit = { culture = pruthian } 
+					change_culture = ug_pruthian
+				}
+				every_owned_province = {
+					limit = { culture = south_german } 
+					change_culture = ug_south_german
+				}
+				every_owned_province = {
+					limit = { culture = teutonic } 
+					change_culture = ug_teutonic
+				}
+				every_owned_province = {
+					limit = { culture = bavarian_new } 
+					change_culture = ug_bavarian
+				}
+				every_owned_province = {
+					limit = { culture = longobard } 
+					change_culture = ug_longobard
+				}
+				every_owned_province = {
+					limit = { culture = hunnic_ger } 
+					change_culture = ug_hunnic_ger
+				}
+				every_owned_province = {
+					limit = { culture = saxish } 
+					change_culture = ug_saxish
+				}
+				every_owned_province = {
+					limit = { culture = anglish } 
+					change_culture = ug_anglish
+				}
+				every_owned_province = {
+					limit = { culture = samit } 
+					change_culture = ug_samit
+				}
+				every_owned_province = {
+					limit = { culture = anglaskan } 
+					change_culture = ug_saxish
+				}
+				every_owned_province = {
+					limit = { culture = mongolish } 
+					change_culture = ug_mongolish
+				}
+				every_owned_province = {
+					limit = { culture = pomeranian } 
+					change_culture = ug_anglish
+				}
+			}
+		} 
+	}
+
+	sx0_valtean_succession = {
+		icon = the_spanish_succession
+		position = 9
+		provinces_to_highlight = {  
+			is_capital_of = LT0
+		} 
+
+		trigger = {  
+			custom_trigger_tooltip = {
+				tooltip = alb_had_valtean_wedding_tt
+				has_country_flag = had_slasmeri_union_flag
+			}
+			OR = {
+				LT0 = {
+					is_subject_of = ROOT
+				}
+				AND = {
+					NOT = {
+						LT0 = {
+							is_subject_of = ROOT
+						}
+					}
+					mazovia_area = {
+						country_or_non_sovereign_subject_holds = ROOT
+						type = all
+					}
+				}
+			}
+		} 
+
+		effect = {  
+			simple_dynamic_effect = {
+				first_custom_tooltip = sx0_valtean_union_tt
+				first_limit = "
+					LT0 = {
+						is_subject_of = ROOT
+					}
+				"
+				first_effect = "
+					add_dip_power = 100
+					custom_tooltip = sx0_get_all_balten_provinces_tt
+					hidden_effect = {
+						LT0 = {
+							every_owned_province = {
+								limit = {
+									OR = {
+										culture = balten_new
+										culture = ug_balten
+									}
+								}
+								cede_province = ROOT
+								add_core = ROOT
+							}
+						}
+					}
+				"
+				second_limit = "
+					AND = {
+						NOT = {
+							LT0 = {
+								is_subject_of = ROOT
+							}
+						}
+						mazovia_area = {
+							country_or_non_sovereign_subject_holds = ROOT
+							type = all
+						}
+					}
+				"
+				second_effect = "
+					add_accepted_culture_or_dip_power_stated = {
+						culture = balten_new
+					}
+					custom_tooltip = sx0_core_on_balten_culture_tt
+					hidden_effect = {
+						every_province = {
+							limit = {
+								OR = {
+									culture = balten_new
+									culture = ug_balten
+								}
+							}
+							add_core = ROOT
+						}
+					}
+				"
+			}
+		} 
+	}
+}
+saxon_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = SX0 } 
+
+	sx0_gather_knights = {
+		icon = mission_united_knight_order
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			if = {
+				limit = { ai = no } 
+				army_size_percentage = 1
+				num_of_generals = 2
+				cavalry_fraction = 0.2
+			}
+			else = {
+				army_size_percentage = 0.8
+				num_of_generals = 1
+			}
+		}
+
+		effect = {
+			country_event = { id = saxo.2 } 
+			add_country_modifier = {
+				name = "sx0_build_army_mod"
+				duration = 3650
+			}
+			poland_region = { add_permanent_claim = ROOT } 
+			west_dniepr_area = { add_permanent_claim = ROOT } 
+			podolia_volhynia_area = { add_permanent_claim = ROOT } 
+			pripyat_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	sx0_siescheng_city = {
+		icon = mng_outer_city_beijing
+		position = 2
+		required_missions = { sx0_gather_knights } 
+		provinces_to_highlight = {
+			province_id = 280
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = { owns_or_non_sovereign_subject_of = 280 } 
+
+		effect = {  
+			if = {
+				limit = { subject_owns = 280 } 
+				capital_scope = {
+					add_base_tax = 2
+					add_base_production = 2
+					add_base_manpower = 2
+				}
+			}
+			else = {
+				280 = {
+					add_base_tax = 2
+					add_base_production = 2
+					add_base_manpower = 2
+				}
+			}
+		} 
+	}
+
+	sx0_new_capital = {
+		icon = imperial_capitals
+		position = 4
+		required_missions = {
+			sx0_siescheng_city
+			sx0_latveria_conquest
+		}
+		provinces_to_highlight = {  
+			province_id = 280
+			NOT = {
+				is_capital_of = ROOT
+			}
+		} 
+
+		trigger = {  
+			280 = {
+				is_capital_of = ROOT
+			}
+			280 = {
+				development = 35
+			}
+			280 = {
+				has_tax_building_trigger = yes
+			}
+			280 = {
+				is_prosperous = yes
+			}
+		} 
+
+		effect = {  
+			280 = {
+				add_or_upgrade_tax_building = yes
+				change_culture = ROOT
+				change_religion = ROOT
+				add_province_modifier = {
+					name = sx0_grand_capital
+					duration = 36500
+				}
+			}
+		} 
+	}
+
+	sx0_construct_kesars_palace = {
+		icon = versailles_palace
+		position = 6
+		required_missions = { sx0_new_capital } 
+		provinces_to_highlight = {  
+			province_id = 280
+			NOT = {
+				has_province_modifier = sx0_kesars_palace
+			}
+		} 
+
+		trigger = {  
+			custom_trigger_tooltip = {
+				tooltip = sax_kesar_palace_tt
+				has_country_flag = sax_kesars_palace_flag
+			}
+			years_of_income = 0.5
+		} 
+
+		effect = {  
+			add_years_of_income = -0.5
+			get_access_to_siescheng_monuments = yes
+		} 
+	}
+
+	sx0_saxon_empire = {
+		icon = fra_dominate_europe
+		position = 8
+		required_missions = {
+			sx0_serica_lords
+			sx0_danubian_dominion
+			sx0_union_of_germans
+			sx0_empire_on_horseback
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			check_variable = { 
+				which = num_converted_religion 
+				value = 100 
+			}
+			religious_unity = 1 #gonna add more
+			total_development = 1000
+			NOT = {
+				great_power_rank = 2
+			}
+		} 
+
+		effect = {  
+			restore_country_name_effect = yes
+			override_country_name = SAXONIC_EMPIRE
+			if = {
+				limit = { in_golden_age = yes } 
+				extend_golden_age = 50
+			}
+			else = { reset_golden_age = yes } 
+		} 
+	}
+}
+saxon_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = SX0 } 
+
+	sx0_strike_vurozia = {
+		icon = mission_conquer_5_states
+		position = 2
+		required_missions = { sx0_gather_knights } 
+		provinces_to_highlight = {  
+			OR = {
+				area = west_dniepr_area
+				area = podolia_volhynia_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			west_dniepr_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			podolia_volhynia_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {  
+			add_country_modifier = {
+				name = sx0_across_plains
+				duration = 3650
+			}
+			if = {
+				limit = { 	
+					LT1 = {
+						exists = yes
+					}	
+				}
+				add_casus_belli = {
+					type = cb_vassalize_mission
+					target = LT1
+				}
+			}
+			if = {
+				limit = { 	
+					LT2 = {
+						exists = yes
+					}	
+				}
+				add_casus_belli = {
+					type = cb_vassalize_mission
+					target = LT2
+				}
+			}
+			if = {
+				limit = { 	
+					LT3 = {
+						exists = yes
+					}	
+				}
+				add_casus_belli = {
+					type = cb_vassalize_mission
+					target = LT3
+				}
+			}
+		} 
+	}
+
+	sx0_latveria_conquest = {
+		icon = king_of_poland
+		position = 3
+		required_missions = { sx0_strike_vurozia } 
+		provinces_to_highlight = {  
+			region = ruthenia_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 25
+				region = ruthenia_region
+			}
+		} 
+
+		effect = {  
+			ruthenia_region = {
+				add_permanent_claim = ROOT
+			}
+			russia_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	sx0_serica_push = {
+		icon = the_russian_campaign
+		position = 5
+		required_missions = { sx0_latveria_conquest } 
+		provinces_to_highlight = {  
+			region = russia_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 35
+				region = russia_region
+			}
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 15
+				region = russia_region
+				religion = ROOT
+			}
+		} 
+
+		effect = {  
+			custom_tooltip = BYZ_rebel_sentiment_will_fire_more_rarely
+			set_country_flag = BYZ_less_rebel_sentiment
+			custom_tooltip = empty_line_tt
+			unlock_estate_privilege = {
+				estate_privilege = alb_knights_lodges_serica_marcher_lords
+			}
+			custom_tooltip = empty_line_tt
+			custom_tooltip = alb_sax_upgrade_eastern_crusade_tt
+			set_country_flag = alb_upgrade_eastern_crusade_priv_sax_flag
+		} 
+	}
+
+	sx0_serica_lords = {
+		icon = mission_empire_of_russia
+		position = 7
+		required_missions = { sx0_serica_push } 
+		provinces_to_highlight = {  
+			OR = {
+				region = russia_region
+				region = ural_region
+			}
+		} 
+
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 30
+				region = ural_region
+			}
+			russia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			check_variable = { which = num_converted_religion value = 40 }
+		} 
+
+		effect = {
+			custom_tooltip = alb_sax_upgrade_marcher_lords_tt  
+			set_country_flag = sax_upgraded_alb_serica_marcher_lords_flag
+			custom_tooltip = empty_line_tt
+			add_country_modifier = {
+				name = sx0_siberian_frontier
+				duration = 36500
+			}
+		} 
+	}
+
+	sx0_depower_estates = {
+		icon = balance_the_estates
+		position = 8
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			crown_land_share = 40
+			if = {
+				limit = {
+					has_estate = estate_church
+				}
+				OR = {
+					num_of_estate_privileges = {
+						estate = estate_church
+						value = 5
+					}
+					num_of_estate_agendas_completed = {
+						estate = estate_church
+						value = 2
+					}
+				}
+				estate_loyalty = {
+					estate = estate_church
+					loyalty = 60
+				}
+			}
+			if = {
+				limit = {
+					has_estate = estate_burghers
+				}
+				OR = {
+					num_of_estate_privileges = {
+						estate = estate_burghers
+						value = 5
+					}
+					num_of_estate_agendas_completed = {
+						estate = estate_burghers
+						value = 2
+					}
+				}
+				estate_loyalty = {
+					estate = estate_burghers
+					loyalty = 60
+				}
+			}
+		} 
+
+		effect = {  
+			disable_stab_cost_advisor_privs = yes
+			custom_tooltip = empty_line_tt
+			change_estate_land_share = {
+				estate = estate_church
+				share = -5
+			}
+			change_estate_land_share = {
+				estate = estate_burghers
+				share = -5
+			}
+		} 
+	}
+
+	sx0_saxon_absolutism = {
+		icon = enlightened_absolutism
+		position = 10
+		required_missions = {
+			sx0_depower_estates
+			sx0_construct_schrotvurge_university
+			sx0_valtean_succession
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			if = {
+				limit = {
+					is_absolutism_active = no
+				}
+				legitimacy_equivalent = 90
+				stability = 3
+				custom_trigger_tooltip = {
+					tooltip = absolutism_dynamic_reward_tt
+					is_absolutism_active = no
+				}
+			}
+			else = {
+				if = {
+					limit = {
+						is_revolutionary = yes
+						has_dlc = "Emperor"
+					}
+					revolutionary_zeal = 75
+				}
+				else = {
+					if = {
+						limit = { government = republic }
+						absolutism = 35
+					}
+					else = {
+						absolutism = 80
+					}
+				}
+				NOT = { average_home_autonomy = 15 }
+			}
+			if = {
+				limit = {
+					has_any_estates = yes
+				}
+				custom_trigger_tooltip = {
+					tooltip = rus_increase_absolute_rule_tt
+					check_variable = {
+						which = seize_land_counter
+						value = 10
+					}
+				}
+				custom_trigger_tooltip = {
+					tooltip = sax_3_estates_max_loyalty_tt
+					estate_loyalty = {
+						estate = estate_church
+						loyalty = 60
+					}
+					estate_loyalty = {
+						estate = estate_burghers
+						loyalty = 60
+					}
+					estate_loyalty = {
+						estate = estate_knight_lodges
+						loyalty = 60
+					}
+				}
+			}
+		} 
+
+		effect = {  
+			add_absolutism = 20
+			add_country_modifier_for_age = {
+				name = sx0_absolute_empire
+				age = age_of_absolutism
+			}
+			half_estate_privilege_absolutism_loss = yes
+		} 
+	}
+}
+saxon_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = SX0 } 
+
+	sx0_lithuanian_lands = {
+		icon = mission_lit_great_power_politics
+		position = 2
+		provinces_to_highlight = {  
+			owned_by = ROOT
+			culture = lithuanian
+			NOT = {
+				num_of_times_improved = 2
+			}
+			unrest = 1
+		} 
+
+		trigger = {  
+			all_owned_province = {
+				OR ={
+					AND = {
+						culture = lithuanian
+						num_of_times_improved = 2
+						NOT = {
+							local_autonomy = 20
+						}
+						NOT = {
+							unrest = 1
+						}
+					}
+					NOT = {
+						culture = lithuanian
+					}
+				}
+			}
+		} 
+
+		effect = {  
+			add_accepted_culture_or_dip_power = {
+				culture = lithuanian
+			}
+			custom_tooltip = alb_sx0_every_lithuanian_province_tt
+			tooltip = {
+				add_province_modifier = {
+					name = sx0_south_pacified
+					duration = 3650
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						culture = lithuanian
+					}
+					add_province_modifier = {
+						name = sx0_south_pacified
+						duration = 3650
+					}
+				}
+			}
+		} 
+	}
+
+	sx0_cultural_supremacy = {
+		icon = bavarian_cultural_dominance
+		position = 4
+		required_missions = {
+			sx0_lithuanian_lands
+			sx0_latveria_conquest
+		}
+		provinces_to_highlight = {  
+			culture_group = baltic
+			NOT = {
+				owned_by = ROOT
+			}
+		} 
+
+		trigger = {  
+			owns_all_provinces = {
+				culture_group = baltic
+			}
+			num_of_owned_provinces_with = {
+				value = 8
+				culture_group = baltic
+				development = 15
+				base_manpower = 4
+			}
+		} 
+
+		effect = {  
+			custom_tooltip = alb_eastgerman_culture_spread_slowly_tt
+			set_country_flag = alb_sax_germanize_baltics_flag
+			add_years_of_owned_provinces_manpower = {
+				years = 10
+				trigger = { 
+					culture_group = baltic
+				}
+				custom_tooltip = FROM_BALTIC_PROVINCES
+			}
+			custom_tooltip = empty_line_tt
+			add_country_modifier = {
+				name = sx0_germanization
+				duration = 18250
+			}
+		} 
+	}
+
+	sx0_gepid_help = {
+		icon = hungarian_union
+		position = 5
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			SX1 = {
+				OR = {
+					AND = {
+						alliance_with = ROOT
+						has_opinion = {
+							who = ROOT
+							value = 180
+						}
+					}
+					has_opinion_modifier = {
+						who = ROOT
+						modifier = scornfully_insulted
+					}	
+					NOT = {
+						exists = yes
+					}
+				}
+			}
+		} 
+
+		effect = {  
+			simple_dynamic_effect = {
+				first_custom_tooltip = sx0_alliance_gepids_tt
+				first_limit = "
+					SX1 = {
+						AND = {
+							alliance_with = ROOT
+							has_opinion = {
+								who = ROOT
+								value = 180
+							}
+						}
+					}
+				"
+				first_effect = "
+					country_event = {
+						id = saxo.7
+					}
+					SX1 = {
+						country_event = {
+							id = saxo.7
+						}
+					}
+					custom_tooltip = sx0_will_grant_land_to_gepids_tt
+				"
+				second_limit = "
+					SX1 = {
+						OR = {
+							AND = {
+								is_rival = ROOT
+								has_opinion_modifier = {
+									who = ROOT
+									modifier = scornfully_insulted
+								}
+							}
+							NOT = {
+								exists = yes
+							}
+						}
+					} 
+				"
+				second_effect = "
+					custom_tooltip = sx0_get_gepid_culture_cores_tt
+					hidden_effect = {
+						every_province = {
+							limit = {
+								culture = gepid
+							}
+							add_core = ROOT
+						}
+					}
+				"
+			}
+			custom_tooltip = empty_line_tt
+			moldavia_area = {
+				add_permanent_claim = ROOT
+			}
+			wallachia_area = {
+				add_permanent_claim = ROOT
+			}
+			transylvania_area = {
+				add_permanent_claim = ROOT
+			}
+			southern_transylvania_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	sx0_dacia_conquest = {
+		icon = mission_conquer_romania
+		position = 6
+		required_missions = { sx0_gepid_help } 
+		provinces_to_highlight = {  
+			OR = {
+				area = moldavia_area
+				area = wallachia_area
+				area = transylvania_area
+				area = southern_transylvania_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			moldavia_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			wallachia_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			transylvania_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			southern_transylvania_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = sx0_alliance_gepids_tt
+				first_limit = "
+					SX1 = {
+						exists = yes
+						alliance_with = ROOT
+					}
+				"
+				first_effect = "
+					country_event = {
+						id = saxo.8
+					}
+				"
+			}
+			carpathia_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	sx0_danubian_dominion = {
+		icon = danubian_power
+		position = 7
+		required_missions = { sx0_dacia_conquest } 
+		provinces_to_highlight = {  
+			region = carpathia_region
+			if = {
+				limit = {
+					SX1 = {
+						alliance_with = ROOT
+					}
+				}
+				NOT = {
+					OR = {
+						country_or_non_sovereign_subject_holds = ROOT
+						owned_by = SX1
+					}
+				}
+			}
+			else = {
+				NOT = {
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+			}
+		} 
+
+		trigger = {  
+			carpathia_region = {
+				if = {
+					limit = {
+						SX1 = {
+							alliance_with = ROOT
+						}
+					}
+					OR = {
+						country_or_non_sovereign_subject_holds = ROOT
+						owned_by = SX1
+					}
+				}
+				else = {
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				type = all
+			}
+		} 
+
+		effect = {  
+			simple_dynamic_effect = {
+				first_custom_tooltip = sx0_alliance_gepids_tt
+				first_limit = "
+					SX1 = {
+						alliance_with = ROOT
+					}
+				"
+				first_effect = "
+					vassalize = SX1
+					SX1 = {
+						add_liberty_desire = -50
+					}
+				"
+				second_limit = "
+					NOT = {
+						SX1 = {
+							alliance_with = ROOT
+						}
+					}
+				"
+				second_effect = "
+					add_country_modifier = {
+						name = sx0_lord_of_danubia
+						duration = -1
+					}
+					add_accepted_culture_or_dip_power_stated = {
+						culture = dacian
+					}
+					add_accepted_culture_or_dip_power_stated = {
+						culture = gepid
+					}
+				"
+			}
+		} 
+	}
+
+	sx0_construct_schrotvurge_university = {
+		icon = misison_uppsala_university
+		position = 9
+		provinces_to_highlight = {  
+			province_id = 279
+			NOT = {
+				AND = {
+					development = 30
+					has_production_building_trigger = yes
+					has_courthouse_building_trigger = yes
+				}
+			}
+			owned_by = ROOT
+		} 
+
+		trigger = {  
+			279 = {
+				development = 30
+			}
+			279 = {
+				has_production_building_trigger = yes
+			}
+			279 = {
+				has_courthouse_building_trigger = yes
+			}
+			279 = {
+				owned_by = ROOT
+			}
+		} 
+
+		effect = {  
+			remove_comet_sighted_events = yes
+			279 = {
+				add_or_upgrade_university_building = yes
+			}
+			country_event = {
+				id = saxo.6
+			}
+		} 
+	}
+}

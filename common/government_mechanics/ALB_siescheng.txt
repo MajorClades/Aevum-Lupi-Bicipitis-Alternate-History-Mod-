@@ -115,8 +115,19 @@ sie_council_mechanic = {
 			cost_type = sie_single_power
 			cost = -5
 			trigger = {
-				years_of_manpower = 1
-				years_of_income = 1
+				if = {
+					limit = {
+						NOT = {
+							has_country_flag = sie_less_man_down
+						}
+					}
+					years_of_manpower = 1
+					years_of_income = 1
+				}
+				else = {
+					years_of_manpower = 0.5
+					years_of_income = 0.5
+				}
 			}
 			effect = { 
 
@@ -128,7 +139,8 @@ sie_council_mechanic = {
 					}
 					add_yearly_manpower = -1
 					add_years_of_income = -1
-				}else = {
+				}
+				else = {
 					add_yearly_manpower = -0.5
 					add_years_of_income = -0.5
 				}

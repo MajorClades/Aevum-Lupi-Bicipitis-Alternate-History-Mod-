@@ -1,0 +1,45 @@
+custom_button = {
+	name = legionnary_button
+	potential = {
+		FROM = {
+			has_country_modifier = sox_legion_primer
+		}
+		owned_by = FROM
+		is_core = FROM
+	}
+	trigger = {
+		owner = {
+			adm_power = 100
+			treasury = 300
+		}
+		owner = {
+			NOT = {
+				check_variable = {
+					which = legion_recruiting_number_provinces_variable
+					value = 11
+				}
+			}
+		}
+		NOT = {
+			has_province_modifier = sox_allow_legionnary
+		}
+	}
+	effect = {
+		owner = {
+			add_adm_power = -100
+			add_treasury = -300
+			hidden_effect = {
+				change_variable = {
+					which = legion_recruiting_number_provinces_variable
+					value = 1
+				}
+			}
+		}
+		add_province_modifier = {
+			name = sox_allow_legionnary
+			duration = -1
+		}
+		#play_sound = get_war_declare
+	}
+	tooltip = legionnary_button_tt
+}
