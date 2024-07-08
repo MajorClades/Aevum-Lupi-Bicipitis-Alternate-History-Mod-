@@ -4,65 +4,15 @@ country_event = {
 	id = soxony.1
 	title = soxony.1.test
 	desc = soxony.1.desc
-	picture = ANGRY_MOB_eventPicture
-	
-	trigger = {
-		culture_group = french
-		NOT = {
-			is_year = 1445
-		}
-		NOT = {
-			has_country_flag = sox_civil_war
-		}
-		NOT = {
-			tag = SO4
-		}
-		NOT = {
-			tag = RE0
-		}
-		NOT = {
-			tag = RE1
-		}
-		NOT = {
-			tag = IT1
-		}
-	}
-
+	picture = soxon_civil_war
+	is_triggered_only = yes
+	major = yes
 	option = {
 		name = soxony.1a
 		trigger = {
 				tag = SO0
 		}
-		add_country_modifier = {
-			name = soxon_instability
-			duration = -1
-		}
-		if = {
-			limit = {
-				SO0 = {
-					ai = yes
-				}
-			}
-			add_country_modifier = {
-				name = CHAOS
-				duration = 500
-			}
-		}
-		country_event = {
-			id = soxony.2
-			days = 77
-		}
-		set_country_flag = sox_civil_war
-	}
-	option = {
-		name = soxony.1b
-		trigger = {
-			NOT = {
-				tag = SO0
-			}
-		}
-		add_treasury = 50
-		add_manpower = 5
+		add_stability = -3
 	}
 }
 
@@ -72,153 +22,74 @@ country_event = {
 	desc = soxony.2.desc
 	picture = ANGRY_MOB_eventPicture
 	
-	is_triggered_only = yes
-	fire_only_once = yes
+	mean_time_to_happen = {
+		months = 18
+	}
+	trigger = {
+		is_subject_of = SO0
+		SO0 = {
+			has_disaster = alb_sygirdom_revolt_disaster
+		}
+		NOT = {
+			has_country_flag = alb_revolted_from_soxony_flag
+		}
+		if= {
+			limit = {
+				ai = yes
+			}
+			NOT = {
+				tag = SO4
+			}
+		}
+	}
 	immediate = {
-		remove_country_modifier = soxon_instability
+		hidden_effect = {
+			save_global_event_target_as = sox_rebelling_vassal_target
+			set_country_flag = alb_revolted_from_soxony_flag
+		}
 	}
 
 	option = {
 		name = soxony.2a
-		ai_chance = { factor = 40 }
-		FC0 = {
-			grant_independence = yes
+		ai_chance = { 
+			factor = 85
+			modifier ={
+				factor = 10000
+				tag = FC0
+			}
 		}
-		SO2 = {
+		event_target:sox_rebelling_vassal_target = {
 			grant_independence = yes
-		}
-		SO3 = {
-			grant_independence = yes
+			every_war_enemy_country = {
+				limit = {
+					has_country_flag = alb_revolted_from_soxony_flag
+				}
+				white_peace = ROOT
+			}
 		}
 		SO0 = {
-			declare_war_with_cb = {
-				who = SO1
-				casus_belli = cb_restore_personal_union
+			country_event = {
+				id = soxony.21
 			}
 		}
-		SO2 = {
-			join_all_defensive_wars_of = SO1
-		}
-		SO3 = {
-			join_all_defensive_wars_of = SO1
-		}
-		hidden_effect = {
-			every_province = {
-				limit = {
-					OR = {
-						owned_by = SO1
-						owned_by = SO2
-						owned_by = SO3
-						owned_by = SO4
-					}
-				}
-				add_permanent_claim = ROOT
-			}
-		}
-		clr_country_flag = sox_civil_war
+
 	}
 	option = {
 		name = soxony.2b
-		ai_chance = { factor = 30 }
-		SO1 = {
-			grant_independence = yes
+		ai_chance = { 
+			factor = 45 
+			modifier ={
+				factor = 10000
+				tag = SO4
+			}
 		}
-		SO2 = {
-			grant_independence = yes
-		}
-		SO3 = {
-			grant_independence = yes
-		}
+		add_prestige = -10
+		add_liberty_desire = -50
 		SO0 = {
-			declare_war_with_cb = {
-				who = FC0
-				casus_belli = cb_annex
+			country_event = {
+				id = soxony.20
 			}
 		}
-		hidden_effect = {
-			every_province = {
-				limit = {
-					OR = {
-						owned_by = SO1
-						owned_by = SO2
-						owned_by = SO3
-						owned_by = SO4
-					}
-				}
-				add_permanent_claim = ROOT
-			}
-		}
-		clr_country_flag = sox_civil_war
-	}
-	option = {
-		name = soxony.2c
-		ai_chance = { factor = 15 }
-		inherit = SO4
-		release_all_subjects = yes
-		add_stability = 2
-		hidden_effect = {
-			every_province = {
-				limit = {
-					OR = {
-						owned_by = SO1
-						owned_by = SO2
-						owned_by = SO3
-						owned_by = SO4
-					}
-				}
-				add_permanent_claim = ROOT
-			}
-		}
-		clr_country_flag = sox_civil_war
-	}
-	option = {
-		name = soxony.2d
-		ai_chance = { factor = 15 }
-		inherit = SO4
-		SO2 = {
-			grant_independence = yes
-		}
-		SO3 = {
-			grant_independence = yes
-			define_general = {
-				shock = 5
-				fire = 5
-				manuever = 4
-				siege = 3
-			}
-		}
-		SO0 = {
-			declare_war_with_cb = {
-				who = SO1
-				casus_belli = cb_restore_personal_union
-			}
-		}
-		SO2 = {
-			join_all_defensive_wars_of = SO1
-		}
-		SO3 = {
-			join_all_defensive_wars_of = SO1
-		}
-		SO0 = {
-			declare_war_with_cb = {
-				who = FC0
-				casus_belli = cb_vassalize_mission
-			}
-		}
-		hidden_effect = {
-			every_province = {
-				limit = {
-					OR = {
-						owned_by = SO1
-						owned_by = SO2
-						owned_by = SO3
-						owned_by = SO4
-					}
-				}
-				add_permanent_claim = ROOT
-			}
-		}
-		clr_country_flag = sox_civil_war
 	}
 }
 
@@ -227,16 +98,10 @@ country_event = {
 	title = soxony.3.test
 	desc = soxony.3.desc
 	picture = KING_SICK_IN_BED_eventPicture
-	
+	is_triggered_only = yes
 	trigger = {
 		tag = SO0
 		is_year = 1445
-		NOT = {
-			has_country_flag = sox_civil_war
-		}
-		NOT = {
-			is_at_war = yes
-		}
 	}
 	fire_only_once = yes
 	option = {
@@ -291,59 +156,81 @@ country_event = {
 		}
 	}
 }
-
 country_event = {
 	id = soxony.4
 	title = soxony.4.test
 	desc = soxony.4.desc
-	picture = GOOD_WITH_MONARCH_eventPicture
-	
-	is_triggered_only = yes
+	picture = FORT_eventPicture
 	fire_only_once = yes
-
+	is_triggered_only = yes
 
 	option = {
 		name = soxony.4a
-		set_capital = 118
-		118 = {
-			add_permanent_province_modifier = {
-				name = sox_west_rome_capital
-				duration = -1
-			}
+		add_country_modifier = {
+			name = sox_quality_legion
+			duration = -1
 		}
 	}
 	option = {
 		name = soxony.4b
-		capital_scope = {
-			add_permanent_province_modifier = {
-				name = sox_west_rome_capital
-				duration = -1
-			}
+		add_country_modifier = {
+			name = sox_quantity_legion
+			duration = -1
+		}
+	}
+	option = {
+		name = soxony.4c
+		add_country_modifier = {
+			name = sox_special_legion
+			duration = -1
 		}
 	}
 }
+
 country_event = {
 	id = soxony.5
 	title = soxony.5.test
 	desc = soxony.5.desc
-	picture = LIBERUM_VETO_eventPicture
-	
-	is_triggered_only = yes
+	picture = HRE_eventPicture
 	fire_only_once = yes
-
+	is_triggered_only = yes
 
 	option = {
 		name = soxony.5a
+		ai_chance = {
+			factor = 5
+		}
+		add_accepted_culture = goth_p
 		add_country_modifier = {
-			name = sox_vassal_play
+			name = sox_gothic_topic
 			duration = -1
 		}
 	}
 	option = {
 		name = soxony.5b
-		add_country_modifier = {
-			name = sox_empire_wide
-			duration = -1
+		ai_chance = {
+			factor = 95
+		}
+		if = {
+			limit = {
+				ai = no
+			}
+			add_dip_power = -150
+		}
+		194 = {
+			change_culture = acutanian
+		}
+		every_country = {
+			limit = {
+				primary_culture = goth_p
+			}
+			change_primary_culture = soxon_goths
+		}
+		every_province = {
+			limit = {
+				culture = goth_p
+			}
+			change_culture = soxon_goths
 		}
 	}
 }
@@ -352,24 +239,30 @@ country_event = {
 	id = soxony.6
 	title = soxony.6.test
 	desc = soxony.6.desc
-	picture = REFORM_eventPicture
-	
-	is_triggered_only = yes
+	picture = RELIGION_eventPicture
 	fire_only_once = yes
-
+	is_triggered_only = yes
 
 	option = {
 		name = soxony.6a
-		add_country_modifier = {
-			name = sox_vassal_play_s
-			duration = -1
+		change_religion = impotian
+		capital_scope = {
+			change_religion = impotian
+		}
+		random_owned_area = {
+			change_religion = impotian
+		}
+		random_owned_province = {
+			change_religion = impotian
 		}
 	}
 	option = {
 		name = soxony.6b
-		add_country_modifier = {
-			name = sox_empire_wide_s
-			duration = -1
+		random_owned_province = {
+			change_religion = impotian
+		}
+		random_owned_province = {
+			change_religion = impotian
 		}
 	}
 }
@@ -378,24 +271,500 @@ country_event = {
 	id = soxony.7
 	title = soxony.7.test
 	desc = soxony.7.desc
-	picture = COMET_SIGHTED_eventPicture
-	
-	is_triggered_only = yes
+	picture = DIET_eventPicture
 	fire_only_once = yes
-
+	is_triggered_only = yes
 
 	option = {
 		name = soxony.7a
-		add_country_modifier = {
-			name = sox_vassal_play_t
-			duration = -1
+		change_country_color = {
+			country = ROM
 		}
 	}
 	option = {
 		name = soxony.7b
+		change_country_color = {
+			country = SO0
+		}
+	}
+	option = {
+		name = soxony.7c
+		change_country_color = {
+			country = MO0
+		}
+	}
+	option = {
+		name = soxony.7d
+		change_country_color = {
+			country = SPA
+		}
+	}
+	option = {
+		name = soxony.7e
+		change_country_color = {
+			country = BYZ
+		}
+	}
+	option = {
+		name = soxony.7f
+		add_prestige = 5
+	}
+}
+
+country_event = { 
+	id = soxony.8
+	title = soxony.8.test
+	desc = soxony.8.desc
+	picture = SIEGE_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = soxony.8a
 		add_country_modifier = {
-			name = sox_empire_wide_t
+			name = sox_empire_vassals_1
 			duration = -1
 		}
+	}
+	option = {
+		name = soxony.8b
+		add_country_modifier = {
+			name = sox_empire_conquest_1
+			duration = -1
+		}
+	}
+}
+
+country_event = { 
+	id = soxony.9
+	title = soxony.9.test
+	desc = soxony.9.desc
+	picture = JESUIT_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = soxony.9a
+		every_owned_province = {
+			limit = {
+				religion = jewish
+			}
+			change_religion = ROOT
+		}
+		every_owned_province = {
+			limit = {
+				culture = hebrew
+			}
+			change_culture = ROOT
+		}
+		palestine_area = {
+			add_base_manpower = 1
+			cede_province = ISR
+			change_culture = hebrew
+		}
+		hidden_effect = {
+			ISR = {
+				change_primary_culture = hebrew
+				change_religion = jewish
+			}
+		}
+		vassalize = ISR
+	}
+	option = {
+		name = soxony.9b
+		palestine_area = {
+			change_religion = ROOT
+		}
+	}
+}
+
+country_event = { 
+	id = soxony.10
+	title = soxony.10.test
+	desc = soxony.10.desc
+	picture = ECONOMY_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = soxony.10a
+		add_treasury = 500
+		add_manpower = 5
+	}
+	option = {
+		name = soxony.10b
+		every_subject_country = {
+			limit = {
+				is_colonial_nation_of = ROOT
+			}
+			add_treasury = 100
+			add_manpower = 1
+		}
+	}
+}
+
+country_event = { 
+	id = soxony.11
+	title = soxony.11.test
+	desc = soxony.11.desc
+	picture = ECONOMY_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = soxony.11a
+		add_treasury = 500
+		add_stability_or_adm_power = yes
+		A33 = {
+			change_religion = arian
+			every_owned_province = {
+				limit = {
+					religion = impotian
+				}
+				change_religion = arian
+			}
+		}
+	}
+	option = {
+		name = soxony.11b
+		add_manpower = -1
+		A33 = {
+			add_stability = -1
+		}
+	}
+}
+
+country_event = { 
+	id = soxony.12
+	title = soxony.12.test
+	desc = soxony.12.desc
+	picture = ECONOMY_eventPicture
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			tag = SO0
+			tag = WR0
+		}
+		owns = 201
+		is_core = 201
+	}
+	mean_time_to_happen = {
+		months = 6
+	}
+
+	option = {
+		name = soxony.12a
+		add_treasury = -500
+		201 = {
+			set_center_level_3_center_of_trade = yes
+		}
+	}
+	option = {
+		name = soxony.12b
+		add_stability_or_adm_power = yes
+	}
+}
+
+country_event = { 
+	id = soxony.13
+	title = soxony.13.test
+	desc = soxony.13.desc
+	picture = HABSBURG_eventPicture
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			tag = SO0
+			tag = WR0
+		}
+		SP0 = {
+			years_in_union_under = {
+				who = ROOT
+				years = 30
+			}
+		}
+	}
+
+	option = {
+		name = soxony.13a
+		inherit = SP0
+	}
+}
+
+country_event = { 
+	id = soxony.14
+	title = soxony.14.test
+	desc = soxony.14.desc
+	picture = ECONOMY_eventPicture
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			tag = SO0
+			tag = WR0
+		}
+		has_regency = no
+		NOT = {
+			ruler_has_personality = greedy_personality
+		}
+		is_female = no
+		is_year = 1550
+	}
+	option = {
+		name = soxony.14a
+		add_years_of_income = -0.1
+		add_prestige = 10
+	}
+	option = {
+		name = soxony.14b
+		add_years_of_income = -0.15
+		add_adm_power = 150
+		hidden_effect = {
+			country_event = {
+				id = soxony.15
+				days = 25
+			}
+		}
+	}
+	option = {
+		name = soxony.14c
+		add_years_of_income = -0.15
+		add_dip_power = 150
+		hidden_effect = {
+			country_event = {
+				id = soxony.15
+				days = 25
+			}
+		}
+	}
+	option = {
+		name = soxony.14d
+		add_years_of_income = -0.15
+		add_mil_power = 150
+		hidden_effect = {
+			country_event = {
+				id = soxony.15
+				days = 25
+			}
+		}
+	}
+	option = {
+		name = soxony.14e
+		add_prestige = -20
+	}
+}
+
+country_event = { 
+	id = soxony.15
+	title = soxony.15.test
+	desc = soxony.15.desc
+	picture = ECONOMY_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+	option = {
+		name = soxony.15a
+		add_years_of_income = -0.5
+	}
+	option = {
+		name = soxony.15b
+		ile_de_france_area = {
+			add_province_modifier = {
+				name = sox_expensive_feast
+				duration = 3560
+			}
+		}
+	}
+}
+country_event = { 
+	id = soxony.16
+	title = soxony.16.test
+	desc = soxony.16.desc
+	picture = ECONOMY_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+	option = {
+		name = soxony.16a
+		unlock_estate_privilege = {
+			estate_privilege = alb_noble_academies
+		}
+	}
+	option = {
+		name = soxony.16b
+		unlock_estate_privilege = {
+			estate_privilege = alb_legion_academies
+		}
+	}
+}
+
+country_event = {
+	id = soxony.17
+	title = soxony.17.test
+	desc = soxony.17.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			set_country_flag = alb_ended_sygirdom_revolt_flag
+		}
+	}
+	option = {
+		name = soxony.17a
+		ai_chance = { factor = 55 }
+		add_stability_or_adm_power = yes
+		set_country_flag = alb_ended_sygirdom_revolt_flag
+	}
+}
+
+country_event = {
+	id = soxony.18
+	title = soxony.18.test
+	desc = soxony.18.desc
+	picture = ANGRY_MOB_eventPicture
+	trigger = {
+		SO0 = {
+			is_subject_of = ROOT
+		}
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = soxony.18a
+		ai_chance = { factor = 55 }
+		inherit = SO4
+		add_adm_power = -100
+	}
+	option = {
+		name = soxony.18b
+		ai_chance = { factor = 55 }
+		add_dip_power = 100
+		add_manpower = 5
+		add_treasury = 100
+	}
+}
+
+country_event = {
+	id = soxony.19
+	title = soxony.19.test
+	desc = soxony.19.desc
+	picture = ANGRY_MOB_eventPicture
+	immediate = {
+		hidden_effect = {
+			random_owned_province = {
+				save_event_target_as = soxony_revolter_province
+			}
+			clr_country_flag = has_soxony_event_19_flag
+		}
+	}
+	trigger = {
+		OR ={
+			not = {
+				has_country_flag = has_soxony_event_19_flag
+			}
+			had_country_flag = {
+				flag = has_soxony_event_19_flag
+				days = 100
+			}
+		}
+	}
+	is_triggered_only = yes
+	option = {
+		name = soxony.19a
+		event_target:soxony_revolter_province = {
+			noble_rebels = 2
+		}
+		set_country_flag = has_soxony_event_19_flag
+		ai_chance ={
+			factor = 50
+		}
+	}
+	option = {
+		name = soxony.19b
+		add_estate_influence_modifier = {
+			influence = 10
+			duration = 3650
+			estate = estate_nobles
+			desc = SOX_APPEASED_NOBLE_REVOLT
+		}
+		set_country_flag = has_soxony_event_19_flag
+		ai_chance ={
+			factor = 50
+		}
+	}
+}
+
+country_event = {
+	id = soxony.20
+	title = soxony.20.test
+	desc = soxony.20.desc
+	picture = ANGRY_MOB_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = soxony.20a
+		reverse_add_opinion = {
+			who = event_target:sox_rebelling_vassal_target
+			modifier = sox_loyal_vassal
+		}
+		add_treasury = 100
+	}
+}
+
+country_event = {
+	id = soxony.21
+	title = soxony.21.test
+	desc = soxony.21.desc
+	picture = ANGRY_MOB_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = soxony.21a
+		declare_war_with_cb = {
+			casus_belli = cb_disloyal_vassal
+			who = event_target:sox_rebelling_vassal_target
+		}
+		if = {
+			limit = {
+				ai = yes
+			}
+			add_manpower = 3
+		}
+		ai_chance = {
+			factor = 100
+			modifier = {
+				factor = 0
+				calc_true_if = {
+					amount = 3
+					all_country = {
+						war_with = ROOT
+					}
+				}
+			}
+			modifier = {
+				factor = 0
+				event_target:sox_rebelling_vassal_target = {
+					is_part_of_hre = yes
+				}
+			}
+		}
+	}
+	option = {
+		name = soxony.21b
+		add_prestige = -10
+		event_target:sox_rebelling_vassal_target = {
+			add_opinion = {
+				who = ROOT
+				modifier = opinion_acknowledged_independence
+			}
+		}
+		ai_chance = {
+			factor = 0
+			modifier = {
+				factor = 100
+				calc_true_if = {
+					amount = 3
+					all_country = {
+						war_with = ROOT
+					}
+				}
+			}
+		}
+	}
+	after = {
+		clear_global_event_target = sox_rebelling_vassal_target
 	}
 }

@@ -1,0 +1,744 @@
+
+Iceland_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	potential = {	tag = ICE	}
+	has_country_shield = yes
+
+	Ice_far_far_west = {
+		icon = mission_exploration
+		required_missions = { Ice_far_west }
+		position = 2
+		
+		provinces_to_highlight = {
+		}
+		
+		trigger = {
+			OR ={
+				overlord = {
+					has_opinion = {
+						who = ROOT
+						value = 180
+					}
+				}
+				overlord = {
+					has_been_insulted_by_root = yes
+				}
+			}
+		}
+		
+		effect = {
+			add_dip_power = 100
+			labrador_area = {
+				add_core = ROOT
+			}
+		}
+	}
+	Ice_vinland = {
+		icon = mission_hanseatic_city
+		required_missions = { Ice_far_far_west }
+		position = 3
+		
+		trigger = {
+			treasury = 100
+			NOT = {
+				num_of_loans = 1
+			}
+			NOT = {
+				is_subject = yes
+			}
+		}
+		
+		effect = {
+			add_treasury = -100
+			country_event = {
+					id = icel.2
+			}
+		}
+	}
+	Ice_vinland_2 = {
+		icon = mission_rb_colonise_canada
+		required_missions = { Ice_vinland }
+		position = 4
+		
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 10
+				region = canada_region
+			}
+		}
+		
+		effect = {
+			canada_region = {
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name = ice_colonists
+				duration = 10950
+			}
+		}
+	}
+	Ice_vinland_3 = {
+		icon = mission_rb_settle_the_north
+		required_missions = { Ice_vinland_2 }
+		position = 5
+		
+		trigger = {
+			canada_region = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			adm_power = 300
+
+		}
+		
+		effect = {
+			add_adm_power = -300
+			simple_dynamic_effect = {
+				first_custom_tooltip = alb_ice_if_no_colonies_tt
+				first_limit = "
+					has_country_flag = no_colonial_nations
+				"
+				first_effect = "
+					override_country_name = UNION_OF_THULE
+					canada_region = {
+						add_core = ROOT
+					}
+				"
+				#second_limit = "
+				#	NOT = { has_country_flag = no_colonial_nations }
+				#"
+				second_effect = "
+					custom_tooltip = alb_every_subject_in_canada_tt
+					tooltip = {
+						add_country_modifier = {
+				name = iceland_direct_control
+				duration = -1
+			}
+					}
+					hidden_effect = {
+					every_subject_country = {
+				limit = {
+					capital_scope = {
+						region = canada_region
+					}
+				}
+				add_country_modifier = {
+					name = iceland_direct_control
+					duration = -1
+				}
+			}
+					}
+				"
+			}
+		}
+	}
+}
+
+Iceland_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential = {	tag = ICE	}
+	has_country_shield = yes
+
+	Ice_far_west = {
+		icon = mission_invade_island
+		required_missions = { }
+		position = 1
+		
+		trigger = { 
+			navy_size_percentage = 1
+		}
+		
+		effect = {
+			discover_province = 1105
+			1105 = {
+				change_trade_goods = fish
+				cede_province = ICE
+			}
+			hidden_effect = {
+				1105 = {
+					change_culture = ROOT
+					change_religion = ROOT
+				}
+			}
+		}
+	}
+	ice_atlantic = {
+		icon = mission_rb_grow_the_channel
+		required_missions = { Ice_far_west }
+		position = 2
+		
+		trigger = {
+			dock = 2
+		}
+		
+		effect = {
+			add_navy_tradition = 10
+			north_atlantic_region = {
+				discover_country = ROOT
+			}
+		}
+	}
+	ice_atlantic_power = {
+		icon = mission_galleys_in_port
+		required_missions = { ice_atlantic }
+		position = 4
+		
+		trigger = {
+			navy_tradition = 30
+		}
+		
+		effect = {
+			add_navy_tradition = -15
+			add_country_modifier = {
+				name = strong_ice_ships
+				duration = 10950
+			}
+		}
+	}
+	ice_admirals = {
+		icon = mission_danish_navy
+		required_missions = { ice_atlantic_power }
+		position = 5
+		
+		trigger = {
+			OR = {
+				has_leader_with = {
+					admiral = yes
+					total_pips = 10
+				}
+				full_idea_group = naval_ideas
+			}
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = great_navy_ice
+				duration = -1
+			}
+			if = {
+				limit = {
+					full_idea_group = naval_ideas
+				}
+				add_navy_tradition = 15
+			}
+		}
+	}
+	ice_naval_dominance = {
+		icon = mission_naval_kingdom
+		required_missions = { ice_admirals }
+		position = 6
+		
+		trigger = {
+			OR = {
+				navy_size = 100
+				full_idea_group = maritime_ideas
+			}
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = ice_many_ships
+				duration = 36500
+			}
+		}
+	}
+}
+
+Iceland_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential = {	tag = ICE	}
+	has_country_shield = yes
+
+	ice_green = {
+		icon = mission_sailor_boat
+		required_missions = { Ice_far_west }
+		position = 2
+		
+		trigger = {
+			grown_by_development = 15
+		}
+		
+		effect = {
+			370 = {
+				add_permanent_province_modifier = {
+					name = icelandic_shipping
+					duration = -1
+				}
+			}
+			371 = {
+				add_permanent_province_modifier = {
+					name = icelandic_shipping
+					duration = -1
+				}
+			}
+			greenland_area = {
+				add_permanent_province_modifier = {
+					name = icelandic_shipping
+					duration = -1
+				}
+			}
+		}
+	}
+	ice_push_ire = {
+		icon = mission_rb_conquer_the_isles
+		required_missions = { ice_push_south }
+		position = 4
+		
+		provinces_to_highlight = {
+			province_id = 253
+		}
+
+		trigger = {
+			owns = 253
+		}
+		
+		effect = {
+			add_prestige_or_monarch_power = {
+				amount = 15
+			}
+			ulster_area = {
+				add_permanent_claim = ROOT
+			}
+			connacht_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	ice_push_ire_2 = {
+		icon = mission_rb_import_potatoes
+		required_missions = { ice_push_ire }
+		position = 5
+		
+		provinces_to_highlight = {
+			OR = {
+				area = ulster_area
+				area = connacht_area
+			}
+		}
+
+		trigger = {
+			ulster_area = {
+				type = all
+				owned_by = ROOT
+			}
+			connacht_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		
+		effect = {
+			define_advisor = {
+				type = theologian
+				skill = 3
+				discount = yes
+				culture = irish
+			}
+			leinster_area = {
+				add_permanent_claim = ROOT
+			}
+			munster_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	ice_push_ire_3 = {
+		icon = mission_rb_conquer_ireland
+		required_missions = { ice_push_ire_2 }
+		position = 6
+		
+		provinces_to_highlight = {
+			OR = {
+				area = leinster_area
+				area = munster_area
+			}
+		}
+
+		trigger = {
+			ulster_area = {
+				type = all
+				owned_by = ROOT
+			}
+			connacht_area = {
+				type = all
+				owned_by = ROOT
+			}
+			leinster_area = {
+				type = all
+				owned_by = ROOT
+			}
+			munster_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = master_of_scotia
+				duration = -1
+			}
+		}
+	}
+}
+
+Iceland_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	potential = {	tag = ICE	}
+	has_country_shield = yes
+
+	ice_push_south = {
+		icon = mission_rb_conquer_the_highlands
+		required_missions = { ice_faroe }
+		position = 3
+		
+		provinces_to_highlight = {
+			province_id = 369
+		}
+
+		trigger = {
+			owns = 369
+		}
+		
+		effect = {
+			add_army_tradition = 10
+			kingdom_of_the_isles_area = {
+				add_permanent_claim = ROOT
+			}
+			highlands_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	ice_push_ganden = {
+		icon = mission_rb_into_england
+		required_missions = { ice_push_south }
+		position = 5
+		
+		provinces_to_highlight = {
+			area = highlands_area
+		}
+
+		trigger = {
+			highlands_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		
+		effect = {
+			add_accepted_culture = gandeans
+			lowlands_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	ice_push_sweden = {
+		icon = mission_rb_rule_britannia_scottish_version
+		required_missions = { ice_push_ganden }
+		position = 6
+		
+		provinces_to_highlight = {
+			area = lowlands_area
+		}
+
+		trigger = {
+			lowlands_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		
+		effect = {
+			define_advisor = {
+				type = inquisitor
+				skill = 3
+				discount = yes
+				culture = pictish
+			}
+			custom_tooltip = empty_line_tt
+			british_isles_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	ice_biorno = {
+		icon = NSE_mission
+		required_missions = { ice_push_sweden  ice_push_ire_3}
+		position = 7
+		
+		provinces_to_highlight = {
+			region = british_isles_region
+		}
+
+		trigger = {
+			british_isles_region = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		
+		effect = {
+			change_tag = IC0
+			set_capital = 236
+			set_government_rank = 3
+			custom_tooltip = empty_line_tt
+			add_government_reform = northsea_parlamant_reform
+			custom_tooltip = empty_line_tt
+			if = {
+				limit = {
+					has_custom_ideas = no
+				}
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			hidden_effect = {
+				remove_country_modifier = master_of_scotia
+			add_country_modifier = {
+				name = master_of_biorno
+				duration = -1
+			}
+			}
+			custom_tooltip = empty_line_tt
+			custom_tooltip = alb_upgrade_master_of_scotia_tt
+			hidden_effect = {
+				complete_mission = ice_biorno
+			}
+		}
+	}
+}
+
+Iceland_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	potential = {	tag = ICE	}
+	has_country_shield = yes
+
+	ice_recover = {
+		icon = mission_fish_markets
+		required_missions = {  }
+		position = 1
+		
+		provinces_to_highlight = {
+			is_capital = yes
+			owner = {
+				owns = 1979
+			}
+		}
+
+		trigger = {
+			1979 = {
+				owner = {
+					OR = {
+						has_spy_network_from = {
+							who = ROOT
+							value = 50
+						}
+						tag = ROOT
+					}
+				}	
+			}
+		}
+		
+		effect = {
+			if = {
+				limit = {
+					NOT = {
+						owns = 1979
+					}
+				}
+				1979 = {
+					add_core = ROOT
+					spawn_rebels = {
+						size = 2
+						type = nationalist_rebels
+						friend = ROOT
+					}
+				}
+			}else = {
+				add_manpower = 2
+				1979 = {
+					add_base_manpower = 1
+				}
+			}
+		}
+	}
+	ice_faroe = {
+		icon = mission_hessian_jaeger_corps
+		required_missions = { ice_recover }
+		position = 2
+		
+		provinces_to_highlight = {
+			province_id = 1979
+		}
+
+		trigger = {
+			owns = 1979
+		}
+		
+		effect = {
+			capital_scope = {
+				heavy_ship = ROOT
+			}
+			1979 = {
+				add_base_tax = 1
+			}
+			1978 = {
+				add_permanent_claim = ROOT
+			}
+			369 = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	ice_push_east = {
+		icon = mission_conquer_norway
+		required_missions = { ice_faroe }
+		position = 3
+		
+		provinces_to_highlight = {
+			province_id = 1978
+		}
+
+		trigger = {
+			owns = 1978
+		}
+		
+		effect = {
+			1978 = {
+				add_base_tax = 1
+			}
+			western_norway = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	ice_push_northeast = {
+		icon = mission_longships
+		required_missions = { ice_push_east }
+		position = 4
+		
+		provinces_to_highlight = {
+			area = western_norway
+		}
+
+		trigger = {
+			western_norway = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		
+		effect = {
+			western_norway = {
+				add_nationalism = -10
+			}
+			northern_norway = {
+				add_permanent_claim = ROOT
+			}
+			eastern_norway = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	ice_push_scand = {
+		icon = mission_unite_scandinavia
+		required_missions = { ice_push_northeast }
+		position = 5
+		
+		provinces_to_highlight = {
+			OR = {
+				area = northern_norway
+				area = eastern_norway
+			}
+		}
+
+		trigger = {
+			northern_norway = {
+				type = all
+				owned_by = ROOT
+			}
+			eastern_norway = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		
+		effect = {
+			western_norway = {
+				change_culture = zladian
+			}
+			scandinavia_region = {
+				add_permanent_claim = ROOT
+			}	
+		}
+	}
+	ice_scandinavia = {
+		icon = mission_baltic_empire
+		required_missions = { ice_push_scand }
+		position = 6
+		
+		provinces_to_highlight = {
+			region = scandinavia_region
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 35
+				region = scandinavia_region
+			}
+		}
+		
+		effect = {
+			custom_tooltip = alb_ice_all_scandinavia_provs_tt
+			tooltip = {
+				add_province_modifier = {
+					name = newoldmanegment
+					duration = 10950
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						region = scandinavia_region
+					}
+					add_province_modifier = {
+						name = newoldmanegment
+						duration = 10950
+					}
+				}
+			}
+		}
+	}
+	ice_old_home = {
+		icon = mission_norse_faith
+		required_missions = { ice_scandinavia }
+		position = 7
+		
+		provinces_to_highlight = {
+			region = scandinavia_region
+		}
+
+		trigger = {
+			scandinavia_region = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = scandinavia_control
+				duration = -1
+			}
+		}
+	}
+}

@@ -7,9 +7,10 @@ country_decisions = {
 			was_never_end_game_tag_trigger = yes
 			is_nomad = no
 			is_random_new_world = no
-			NOT = { tag = HLR }
+			NOT = { tag = IT9 }
 			NOT = { tag = PAP }
 			NOT = { tag = FJ0 }
+			NOT = { tag = FJ9 }
 			OR = {
 				is_former_colonial_nation = yes
 				is_colonial_nation = yes
@@ -96,14 +97,14 @@ country_decisions = {
 			
 			if = {
 				limit = {
-					culture_group = iberian
+					is_iberian_grouped_trigger = yes
 					NOT = { primary_culture = mexican }
 				}
 				change_primary_culture = mexican
 			}
 			if = {
 				limit = {
-					culture_group = french
+					culture_group = romon
 					NOT = { primary_culture = quebecois }
 				}
 				change_primary_culture = quebecois
@@ -112,7 +113,9 @@ country_decisions = {
 				name = "centralization_modifier"
 				duration = 7300
 			}
-			add_prestige = 25
+			add_prestige_or_monarch_power = {
+				amount = 25
+			}
 			if = {
 				limit = { has_custom_ideas = no }
 				country_event = { id = ideagroups.1 } #Swap Ideas

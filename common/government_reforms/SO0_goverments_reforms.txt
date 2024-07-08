@@ -1,7 +1,7 @@
 sox_empire_government = {
 	lock_level_when_selected = yes
 	allow_normal_conversion = yes
-	icon = "ottoman_government"
+	icon = "sox_empire_government"
 	potential = {
 		tag = SO0
 	}
@@ -12,9 +12,8 @@ sox_empire_government = {
 	}
 	modifiers = {
 		legitimacy = 1
-		liberty_desire_from_subject_development = 0.33
+		liberty_desire_from_subject_development = 0.25
 		max_absolutism = 35
-		governing_capacity = 150
 	}
 	government_abilities = {
 		sox_empire_mechanic
@@ -25,7 +24,7 @@ sox_empire_government = {
 	}
 }
 sygirdom_reform = {
-	icon = "people_walking"
+	icon = "sygirdom_reform"
 	allow_normal_conversion = yes
 	potential = {
 		OR = {
@@ -50,6 +49,44 @@ sygirdom_reform = {
 		vassal_income = 0.1
 		burghers_loyalty_modifier = 0.05
 		nobles_loyalty_modifier = 0.05
+	}
+}
+
+reformed_sygirdom_system_reform = {
+	icon = "crown_colony_government"
+	allow_normal_conversion = yes
+	potential = {
+		OR = {
+			have_had_reform = reformed_sygirdom_system_reform
+			has_reform = reformed_sygirdom_system_reform
+			culture_group = romon
+		}
+	}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 100
+	modifiers = {
+		governing_capacity_modifier = 0.1
+		reduced_liberty_desire = 10
+		diplomatic_upkeep = -1
+	}
+}
+
+roman_legitimacy_reform = {
+	icon = "roman_empire"
+	allow_normal_conversion = yes
+	potential = {
+		OR = {
+			have_had_reform = roman_legitimacy_reform
+			tag = ROM
+		}
+	}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 100
+	modifiers = {
+		core_creation = -0.1
+		province_warscore_cost = -0.2
+		governing_capacity = 150
+		legitimacy = 1
 	}
 
 }

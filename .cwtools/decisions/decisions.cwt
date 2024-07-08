@@ -1,0 +1,65 @@
+
+types = {
+	type[decision] = {
+		path = "game/decisions"
+		skip_root_key = country_decisions
+		localisation = {
+			## required
+			## replace_scope = { root = country this = country }
+			name = "$_title"
+			## required
+			## replace_scope = { root = country this = country }
+			desc = "$_desc"
+		}
+	}
+}
+
+
+decision = {
+	## cardinality = 0..1
+	major = yes
+
+	## replace_scope = { root = country this = country }
+	potential = {
+		alias_name[trigger] = alias_match_left[trigger]
+	}
+	## cardinality = 0..1
+	## replace_scope = { root = country this = province }
+	provinces_to_highlight = {
+		alias_name[trigger] = alias_match_left[trigger]
+	}
+	## replace_scope = { root = country this = country }
+	allow = {
+		alias_name[trigger] = alias_match_left[trigger]
+	}
+	## replace_scope = { root = country this = country }
+	effect = {
+		alias_name[effect] = alias_match_left[effect]
+	}
+
+	#Not sure other settings are used or do anything
+	## cardinality = 0..1
+	## replace_scope = { root = country this = country }
+	ai_will_do = {
+		factor = int[0..400]
+		alias_name[modifier_rule] = alias_match_left[modifier_rule]
+	}
+
+	## cardinality = 0..1
+	ai_importance = int
+
+	## cardinality = 0..inf
+	###The AI will not try to integrate this country if the decision is available, meant to prevent them from using diplomatic power integrating countries that will get annexed or changed.
+	do_not_integrate = enum[country_tags]
+
+	## cardinality = 0..inf
+	###The AI will not try to core this province if the decision is available, meant to prevent them from using monarch power coring provinces that will get cored or given away to another country.
+	do_not_core = <province_id>
+
+	## cardinality = 0..1
+	###Changes the color used in the decision tab
+	color = {
+		## cardinality = 3..3
+		int[0..255]
+	}
+}

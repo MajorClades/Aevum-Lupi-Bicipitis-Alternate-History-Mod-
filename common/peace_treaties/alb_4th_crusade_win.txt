@@ -1,0 +1,93 @@
+po_legion_win = {
+	category = 6
+	power_projection = humiliated_rival
+	power_cost_base = 1.0
+	prestige_base = 1.0 # Base factor for prestige gain and loss. Scales with war score cost.
+	ae_base = 0.5
+	warscore_cost = {
+		# Which of the giver's provinces' war score costs are included and by how much. All entries default to 0. Any combination of entries can be used. Try negative values at your own risk.
+		all_provinces = 1 # All the giver's provinces
+		no_provinces = 0.0 # This is just a constant. Equivalent to a single province with with war score cost 1
+		owner_keeps = 0.0 # The provinces that are not of any of the types below
+		conquered = 0.0 # Provinces that are selected by a Demand Province treaty
+		returned_core = 0.0 # Provinces that are selected by a Return Core treaty
+		released_nation = 0.0 # Provinces that will become a part of a selected released-to-be nation
+		cancelled_subject = 0.0 # This one should not be relevant here since Giver can't be a cancelled subject. Including anyway for completeness
+		concede_colonial_region = 0.0 # Ditto
+	}
+	
+	warscore_cap = 90 # Warscore cost will never go above this value. Only enabled if non-negative. This value defaults to -1.
+	is_make_subject = yes # This will make the treaty mutually exclusive with other treaties that makes the giver a subject, or that explicitly frees the giver from their current overlord.
+	requires_is_allowed = yes # If set to "yes", treaty will only be visible when explicitly allowed by casus belli. If not, it will be available but cost diplomatic power.
+	
+	is_visible = { # Defaults to equivalent of "always = yes"
+		always = yes
+	}
+	is_allowed = { # Defaults to equivalent of "always = yes"
+	}
+	effect = { # Defaults to empty effect (which makes error log entry but is safe)
+		remove_country_modifier = redleg_prepare_for_crusade
+		remove_country_modifier = redleg_prepare_for_crusade_AI
+		set_capital = 358
+		364 = {
+			cede_province = ROOT
+		}
+		379 = {
+			cede_province = ROOT
+		}
+		hidden_effect = {
+			egypt_region = {
+				limit = {
+					AND = {
+						is_core = RU0
+						owned_by = RU0
+					}
+				}
+				remove_core = RU0
+				add_core = ROOT
+			}
+		}
+		egypt_region = {
+			limit = {
+				owned_by = RU0
+			}
+			cede_province = ROOT
+		}
+		horn_of_africa_region = {
+			limit = {
+				owned_by = RU0
+			}
+			cede_province = ROOT
+		}
+		hidden_effect = {
+			change_tag = AE0
+			swap_non_generic_missions = yes
+			add_accepted_culture = hell_egypt
+			add_accepted_culture = copt
+			if = {
+				limit = {
+					ai = yes
+				}
+				add_treasury = 1500
+				disband_all_regiments = yes
+			}
+			AF6 = {
+				every_owned_province = {
+					cede_province = ROOT
+				}
+			}
+		}
+		FROM = {
+			country_event = {
+				id = rhom.2
+			}
+		}
+		
+	}
+	ai_weight = { # Defaults to always evaluate to 0
+		export_to_variable = {
+			variable_name = ai_value # Mandatory to have entry called "ai_value". Its value at the end of the ai_weight scope is what will be used
+			value = 1000
+		}
+	}
+}

@@ -138,15 +138,120 @@ emperor_landfriede = {
 	province = {
 		local_institution_spread = 0.1
 	}
-	on_effect = {
-		internal_hre_cb = no
-	}
-	off_effect = {
-		internal_hre_cb = yes
-	}
+	#on_effect = { 
+	#	internal_hre_cb = no #I hate this and the AI will actually get to this so it's commented out
+	#}
+	#off_effect = {
+	#	internal_hre_cb = yes #Disabling it also reduces the amount of dev the AI will get and therefore improve performance
+	#}
 	required_reform = emperor_landsknechtswesen
 	gui_container = mainline
 }
+
+emperor_hofgericht = { 
+	empire = hre
+	potential = {
+		has_dlc = "Emperor"
+	}
+	emperor = {
+		core_creation = -0.10
+	}
+	required_reform = emperor_perpetual_diet
+	disabled_by = emperor_reichstag_collegia
+	gui_container = right_branch
+	ai_acceptance_decentralize = yes
+}
+
+emperor_imperial_estates = {
+	empire = hre
+	required_reform = emperor_hofgericht
+	gui_container = right_branch
+	ai_acceptance_centralize = yes
+	potential = {
+		has_dlc = "Emperor"
+	}
+	emperor = {
+		imperial_authority = 0.25
+	}
+}
+
+emperor_erbkaisertum = {
+	empire = hre
+	potential = {
+		has_dlc = "Emperor"
+	}
+	emperor = {
+		imperial_authority = 0.25
+	}
+	on_effect = {
+		if = {
+			limit = {
+				hre_religion_locked = no
+				hre_religion_treaty = no
+			}
+			set_hre_religion_treaty = yes
+		}
+		hre_inheritable = yes
+	}
+	off_effect = {
+		hre_inheritable = no
+	}
+	required_reform = emperor_imperial_estates
+	gui_container = right_branch
+	ai_acceptance_centralize = yes
+}
+
+emperor_privilegia_de_non_appelando = {
+	empire = hre
+	war = yes			#this may cause a war, so special AI check needed, to not lose many.
+	discounted_from_foreign_overlord_check = yes
+	potential = {
+		has_dlc = "Emperor"
+	}
+	member = {
+		stability_cost_modifier = -0.10
+	}
+	
+	emperor = {
+		imperial_authority = 0.25
+	}
+	on_effect = {
+	
+		emperor = {
+			country_event = { id = 9073 tooltip = vassalize_empire2 }
+		}
+		hidden_effect = {
+			every_country = {
+				limit = {
+					is_part_of_hre = yes
+					is_emperor = no
+					num_of_cities = 1
+					NOT = { vassal_of = ROOT }
+				}
+				country_event = { id = 9074 }
+			}
+		}
+	}
+	required_reform = emperor_erbkaisertum
+	gui_container = right_branch
+	ai_acceptance_centralize = yes
+}
+
+emperor_renovatio = {
+	empire = hre
+	potential = {
+		has_dlc = "Emperor"
+	}
+	on_effect = {
+		emperor = {
+			country_event = { id = 9075 tooltip = renovatio_effect }
+		}
+	}
+	required_reform = emperor_privilegia_de_non_appelando
+	gui_container = right_branch
+	ai_acceptance_centralize = yes
+}
+
 
 emperor_reichstag_collegia = {
 	empire = hre
@@ -238,108 +343,4 @@ emperor_reichskrieg = {
 	off_effect = {
 		enable_imperial_realm_war = no
 	}
-}
-
-emperor_hofgericht = { 
-	empire = hre
-	potential = {
-		has_dlc = "Emperor"
-	}
-	emperor = {
-		core_creation = -0.10
-	}
-	required_reform = emperor_perpetual_diet
-	disabled_by = emperor_reichstag_collegia
-	gui_container = right_branch
-	ai_acceptance_centralize = yes
-}
-
-emperor_imperial_estates = {
-	empire = hre
-	required_reform = emperor_hofgericht
-	gui_container = right_branch
-	ai_acceptance_centralize = yes
-	potential = {
-		has_dlc = "Emperor"
-	}
-	emperor = {
-		imperial_authority = 0.25
-	}
-}
-
-emperor_erbkaisertum = {
-	empire = hre
-	potential = {
-		has_dlc = "Emperor"
-	}
-	emperor = {
-		imperial_authority = 0.25
-	}
-	on_effect = {
-		if = {
-			limit = {
-				hre_religion_locked = no
-				hre_religion_treaty = no
-			}
-			set_hre_religion_treaty = yes
-		}
-		hre_inheritable = yes
-	}
-	off_effect = {
-		hre_inheritable = no
-	}
-	required_reform = emperor_imperial_estates
-	gui_container = right_branch
-	ai_acceptance_centralize = yes
-}
-
-emperor_privilegia_de_non_appelando = {
-	empire = hre
-	war = yes			#this may cause a war, so special AI check needed, to not lose many.
-	discounted_from_foreign_overlord_check = yes
-	potential = {
-		has_dlc = "Emperor"
-	}
-	member = {
-		stability_cost_modifier = -0.10
-	}
-	
-	emperor = {
-		imperial_authority = 0.25
-	}
-	on_effect = {
-	
-		emperor = {
-			country_event = { id = 9073 tooltip = vassalize_empire2 }
-		}
-		hidden_effect = {
-			every_country = {
-				limit = {
-					is_part_of_hre = yes
-					is_emperor = no
-					num_of_cities = 1
-					NOT = { vassal_of = ROOT }
-				}
-				country_event = { id = 9074 }
-			}
-		}
-	}
-	required_reform = emperor_erbkaisertum
-	gui_container = right_branch
-	ai_acceptance_centralize = yes
-}
-
-emperor_renovatio = {
-	empire = hre
-	potential = {
-		has_dlc = "Emperor"
-	}
-	on_effect = {
-		emperor = {
-			country_event = { id = 9075 tooltip = renovatio_effect }
-		}
-	}
-	required_reform = emperor_privilegia_de_non_appelando
-	gui_container = right_branch
-	ai_acceptance_centralize = yes
 }

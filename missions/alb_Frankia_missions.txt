@@ -1,0 +1,889 @@
+Francia_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = FR9 } 
+
+	1_frankia_strong = {
+		icon = bavarian_netherlands
+		position = 1
+		provinces_to_highlight = { 
+			region = low_countries_region 
+			NOT = {
+				owned_by = ROOT
+			}
+		} 
+
+		trigger = {
+			low_countries_region = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "rise_of_frankia"
+				duration = 10950
+			}
+		}
+	}
+
+	1_frankia_stronger = {
+		icon = mission_empire
+		position = 3
+		required_missions = { 1_frankia_strong } 
+		provinces_to_highlight = {
+			is_capital_of = SO0
+		}
+
+		trigger = {
+			OR = {
+				AND = {
+					SO0 = {
+						exists = yes
+					}
+					army_size = SO0
+				}
+				num_of_provinces_owned_or_owned_by_subjects_with = {
+					value = 5
+					region = france_region
+				}
+			}
+		}
+
+		effect = {
+			france_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	1_frankia_empire = {
+		icon = deal_with_the_illuminati
+		position = 4
+		required_missions = { 1_frankia_stronger }
+		provinces_to_highlight = {
+			region = france_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 30
+				region = france_region
+			}
+		}
+
+		effect = {
+			north_german_region = { add_permanent_claim = ROOT } 
+			south_german_region = { add_permanent_claim = ROOT } 
+			set_government_rank = 3
+		}
+	}
+
+	1_frankish_legacy = {
+		icon = a_place_among_the_great_powers
+		position = 6
+		required_missions = { 1_frankia_empire } 
+		provinces_to_highlight = {
+			any_country = {
+				capital_scope = {
+					continent = europe
+				}
+				OR = {
+					army_size = ROOT
+					total_development = ROOT
+				}
+			}
+		}
+
+		trigger = { 
+			NOT = {
+				any_country = {
+					capital_scope = {
+						continent = europe
+					}
+					OR = {
+						army_size = ROOT
+						total_development = ROOT
+					}
+				}
+			}
+		} 
+
+		effect = {
+			add_country_modifier = {
+				name = "frankish_empire"
+				duration = -1
+			}
+		}
+	}
+}
+Francia_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = FR9 } 
+
+	2_franconia = {
+		icon = lead_the_empire
+		position = 2
+		required_missions = { 1_frankia_strong } 
+		provinces_to_highlight = { province_id = 1744 } 
+
+		trigger = {
+			1744 = {
+				owned_by = ROOT
+				development = 30
+			}
+		}
+
+		effect = {
+			1744 = {
+				add_great_project_tier = {
+					type = tomb_charlesmagne
+					tier = 1
+				}
+			}
+			add_prestige_or_monarch_power = {
+				amount = 20
+			}
+			change_dip = 1
+		}
+	}
+
+	2_frank_history = {
+		icon = carolingian_empire
+		position = 2
+		required_missions = { 2_franconia } 
+		provinces_to_highlight = {
+			
+		} 
+
+		trigger = {
+			has_global_modifier_value = {
+				which = discipline
+				value = 0.15
+			}
+			army_size = 100
+			OR = {
+				army_professionalism = 0.6
+				army_tradition = 90
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = fc9_make_martel_proud
+				duration = -1
+			}
+			set_dynasty = "Karling"
+			custom_tooltip = lit_halve_hegemony_reqs_tt
+			set_country_flag = halve_hegemony_requirements
+		}
+	}
+
+	2_frankish_legacy = {
+		icon = interfere_in_germany
+		position = 5
+		required_missions = { 1_frankia_empire } 
+		provinces_to_highlight = {
+			OR = {
+				region = north_german_region
+				region = south_german_region
+			}
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 50
+				OR = {
+					region = north_german_region
+					region = south_german_region
+				}
+			}
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 10
+				OR = {
+					region = north_german_region
+					region = south_german_region
+				}
+				religion = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "german_tribute"
+				duration = -1
+			}
+		}
+	}
+
+	2_frankish_fury = {
+		icon = encroach_on_the_germans
+		position = 7
+		required_missions = {
+			3_frankish_romance
+			2_frankish_legacy
+		}
+		provinces_to_highlight = {
+			OR = {
+				region = france_region
+				region = north_german_region
+				region = south_german_region
+			}
+		}
+
+		trigger = {
+			france_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			north_german_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			south_german_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			custom_tooltip = fc9_combine_past_modifiers_and_add_tt
+			hidden_effect = {
+				remove_country_modifier = german_tribute
+				add_country_modifier = {
+					name = "frankish_falcon"
+					duration = -1
+				}
+			}
+			add_splendor = 1000
+			if = {
+				limit = { in_golden_age = yes } 
+				extend_golden_age = 50
+			}
+			else = { reset_golden_age = yes } 
+		}
+	}
+
+	2_fra_n_rausulia = {
+		icon = mission_colonize_the_west
+		position = 9
+		required_missions = { 3_frankia_atlantic } 
+		provinces_to_highlight = { continent = north_america } 
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 5
+				continent = north_america
+			}
+			any_subject_country = { capital_scope = { continent = north_america }  } 
+		}
+
+		effect = {
+			if = {
+				limit = { any_subject_country = { capital_scope = { continent = north_america }  }  } 
+				random_subject_country = {
+					limit = { capital_scope = { continent = north_america }  } 
+					capital_scope = {
+						add_province_modifier = {
+							name = "frank_experiment"
+							duration = -1
+						}
+					}
+				}
+			}
+			else = {
+				custom_tooltip = FRANK_COLONY_MOD
+				capital_scope = {
+					add_province_modifier = {
+						name = "frank_experiment"
+						duration = -1
+					}
+				}
+			}
+		}
+	}
+}
+Francia_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = FR9 } 
+
+	3_frankia_lang = {
+		icon = france_antarctique
+		position = 3
+		required_missions = { 4_frankia_power } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			has_institution = printing_press
+			has_dip_advisor_3 = yes
+			dip_power = 200
+		}
+
+		effect = {
+			add_dip_power = -200
+			add_country_modifier = {
+				name = "frankish_lang_2"
+				duration = -1
+			}
+		}
+	}
+
+	3_frankish_legacy = {
+		icon = weaken_france
+		position = 5
+		required_missions = { 1_frankia_empire } 
+		provinces_to_highlight = { region = france_region } 
+
+		trigger = {
+			if = {
+				limit = { 
+					religion = impotian
+				}
+				patriarch_authority = 0.8
+			}
+			religious_unity = 0.9
+			is_defender_of_faith_of_tier = 5
+			OR = {
+				current_icon = icon_jesus_farming
+				current_icon = icon_jesus_fishing
+				current_icon = icon_jesus_carpentry
+				current_icon = icon_jesus_dinner
+				current_icon = icon_jesus_cleansing_temple
+			}
+		}
+
+		effect = {
+			complex_dynamic_effect = {
+				first_custom_tooltip = alb_if_icon_jesus_farming_tt
+				first_limit = "
+					current_icon = icon_jesus_farming
+				"
+				first_effect = "
+					add_country_modifier = {
+						name = fc9_jesus_farm_buff
+						duration = -1
+					}
+				"
+				second_custom_tooltip = alb_if_icon_jesus_fishing_tt
+				second_limit = "
+					current_icon = icon_jesus_fishing
+				"
+				second_effect = "
+					add_country_modifier = {
+						name = fc9_jesus_fish_buff
+						duration = -1
+					}
+				"
+				third_custom_tooltip = alb_if_icon_jesus_carpentry_tt
+				third_limit = "
+					current_icon = icon_jesus_carpentry
+				"
+				third_effect = "
+					add_country_modifier = {
+						name = fc9_jesus_carpentry_buff
+						duration = -1
+					}
+				"
+				fourth_custom_tooltip = alb_if_icon_jesus_dinner_tt
+				fourth_limit = "
+					current_icon = icon_jesus_dinner
+				"
+				fourth_effect = "
+					add_country_modifier = {
+						name = fc9_jesus_dinner_buff
+						duration = -1
+					}
+				"
+				fifth_custom_tooltip = alb_if_icon_jesus_cleansing_temple_tt
+				fifth_limit = "
+					current_icon = icon_jesus_cleansing_temple
+				"
+				fifth_effect = "
+					add_country_modifier = {
+						name = fc9_jesus_fight_buff
+						duration = -1
+					}
+				"
+			}
+		}
+	}
+
+	3_frankish_romance = {
+		icon = west_rome_empire
+		position = 6
+		required_missions = { 3_frankish_legacy } 
+		provinces_to_highlight = {
+			region = france_region
+			country_or_non_sovereign_subject_holds = ROOT
+		}
+
+		trigger = {
+			france_region = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "frankish_romance"
+				duration = -1
+			}
+			add_power_projection = {
+				type = mission_rewards_power_projection
+				amount = 50
+			}
+		}
+	}
+
+	3_frankia_atlantic = {
+		icon = mission_colonize_the_caribbean
+		position = 8
+		required_missions = { 4_frankia_london } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			OR = {
+				any_core_province = { continent = north_america } 
+				any_core_province = { continent = south_america } 
+			}
+			num_of_colonists = 1
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "frankish_expansions"
+				duration = 7300
+			}
+		}
+	}
+
+	3_fra_rausulia = {
+		icon = mission_rb_colonise_spice_islands
+		position = 10
+		required_missions = { 3_frankia_atlantic } 
+		provinces_to_highlight = {
+			owned_by_subject_of = ROOT
+			OR = {
+				continent = north_america
+				continent = south_america
+			}
+		}
+
+		trigger = {
+			OR = {
+				any_subject_country = {
+					num_of_owned_provinces_with = {
+						value = 20
+						continent = north_america
+					}
+					capital_scope = { continent = north_america } 
+				}
+				any_subject_country = {
+					num_of_owned_provinces_with = {
+						value = 20
+						continent = south_america
+					}
+					capital_scope = { continent = south_america } 
+				}
+			}
+		}
+
+		effect = {
+			add_years_of_income = 5
+			custom_tooltip = FRANK_COLONISM
+			hidden_effect = {
+				every_subject_country = {
+					limit = {
+						capital_scope = {
+							OR = {
+								continent = north_america
+								continent = south_america
+							}
+						}
+					}
+					every_owned_province = {
+						random_list = {
+							50 = {
+								change_culture = ROOT
+								change_religion = ROOT
+							}
+							50 = {  } 
+						}
+					}
+				}
+			}
+		}
+	}
+}
+Francia_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = FR9 } 
+
+	4_frankia_power = {
+		icon = mission_scholar_officials
+		position = 2
+		required_missions = { 5_frankia_strong } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			culture_group = frankish
+			trade_goods = paper
+		}
+
+		trigger = {
+			development_in_provinces = {
+				value = 30
+				culture_group = frankish
+				trade_goods = paper
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "frankish_lang"
+				duration = 10950
+			}
+		}
+	}
+
+	4_frankia_cult = {
+		icon = mission_african_gold
+		position = 4
+		required_missions = { 4_frankia_power } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			can_build = workshop
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				OR = {
+					has_building = workshop
+					has_building = counting_house
+				}
+				base_production = 10
+			}
+		}
+
+		effect = {
+			add_years_of_income = 1.5
+			custom_tooltip = empty_line_tt
+			unlock_estate_privilege = {
+				estate_privilege = alb_frankish_trades
+			}
+		}
+	}
+
+	4_frankia_london = {
+		icon = mission_settlers_north_america
+		position = 7
+		required_missions = { 5_frankia_port } 
+		
+
+		trigger = {
+			dip_power = 100
+			any_owned_province = { NOT = { continent = europe }  } 
+		}
+
+		effect = {
+			add_dip_power = -100
+			add_country_modifier = {
+				name = "frankish_explorations"
+				duration = 9125
+			}
+		}
+	}
+
+	4_fra_s_rausulia = {
+		icon = mission_colonise_brazil
+		position = 9
+		required_missions = { 3_frankia_atlantic } 
+		provinces_to_highlight = { continent = south_america } 
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 5
+				continent = south_america
+			}
+			any_subject_country = { capital_scope = { continent = south_america }  } 
+		}
+
+		effect = {
+			if = {
+				limit = { any_subject_country = { capital_scope = { continent = south_america }  }  } 
+				random_subject_country = {
+					limit = { capital_scope = { continent = south_america }  } 
+					capital_scope = {
+						add_province_modifier = {
+							name = "frank_coloni"
+							duration = -1
+						}
+					}
+				}
+			}
+			else = {
+				custom_tooltip = FRANK_COLONY_MOD
+				capital_scope = {
+					add_province_modifier = {
+						name = "frank_coloni"
+						duration = -1
+					}
+				}
+			}
+		}
+	}
+}
+Francia_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = FR9 } 
+
+	5_frankia_strong = {
+		icon = mission_colonial
+		position = 1
+		provinces_to_highlight = { owned_by = ROOT } 
+
+		trigger = { 
+			total_development = 500
+		} 
+
+		effect = {
+			add_power_projection = {
+				type = 10_permanent_power_projection
+				amount = 10
+			}
+			custom_tooltip = alb_10_tax_in_frankish_provinces_tt
+			hidden_effect = {
+				for = {
+					amount = 10
+					effect = "
+						random_owned_province = {
+							limit = {
+								culture_group = frankish
+							}
+							add_base_tax = 1
+						}
+					"
+				}
+			}
+		}
+	}
+
+	5_frankia_stronger = {
+		icon = mission_high_income
+		position = 3
+		required_missions = { 5_frankia_strong } 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 1744
+				province_id = 97
+				province_id = 85
+				province_id = 69
+			}
+		}
+
+		trigger = {
+			1744 = {
+				owned_by = ROOT
+				province_has_center_of_trade_of_level = 2
+			}
+			97 = {
+				owned_by = ROOT
+				province_has_center_of_trade_of_level = 2
+			}
+			85 = {
+				owned_by = ROOT
+				province_has_center_of_trade_of_level = 2
+			}
+			69 = {
+				owned_by = ROOT
+				province_has_center_of_trade_of_level = 2
+			}
+		}
+
+		effect = {
+			1744 = {
+				add_province_modifier = {
+					name = "frank_markets"
+					duration = 9125
+				}
+			}
+			97 = {
+				add_province_modifier = {
+					name = "frank_markets"
+					duration = 9125
+				}
+			}
+			85 = {
+				add_province_modifier = {
+					name = "frank_markets"
+					duration = 9125
+				}
+			}
+			69 = {
+				add_province_modifier = {
+					name = "frank_markets"
+					duration = 9125
+				}
+			}
+		}
+	}
+
+	5_frankia_markets = {
+		icon = mission_war_chest
+		position = 5
+		required_missions = { 5_frankia_stronger } 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 1744
+				province_id = 97
+				province_id = 85
+				province_id = 69
+			}
+		}
+
+		trigger = {
+			treasury = 1000
+			1744 = {
+				owned_by = ROOT
+				province_has_center_of_trade_of_level = 3
+				base_production = 10
+				has_manufactory_trigger = yes
+			}
+			97 = {
+				owned_by = ROOT
+				province_has_center_of_trade_of_level = 3
+				base_production = 10
+				has_manufactory_trigger = yes
+			}
+			85 = {
+				owned_by = ROOT
+				province_has_center_of_trade_of_level = 3
+				base_production = 10
+				has_manufactory_trigger = yes
+			}
+			69 = {
+				owned_by = ROOT
+				province_has_center_of_trade_of_level = 3
+				base_production = 10
+				has_manufactory_trigger = yes
+			}
+		}
+
+		effect = {
+			1744 = {
+				add_permanent_province_modifier = {
+					name = "frank_markets_2"
+					duration = -1
+				}
+			}
+			97 = {
+				add_permanent_province_modifier = {
+					name = "frank_markets_2"
+					duration = -1
+				}
+			}
+			85 = {
+				add_permanent_province_modifier = {
+					name = "frank_markets_2"
+					duration = -1
+				}
+			}
+			69 = {
+				add_permanent_province_modifier = {
+					name = "frank_markets_2"
+					duration = -1
+				}
+			}
+		}
+	}
+
+	5_frankia_port = {
+		icon = mission_invade_island
+		position = 6
+		provinces_to_highlight = {
+			owned_by = ROOT
+			can_build = dock
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				OR = {
+					has_building = dock
+					has_building = drydock
+				}
+			}
+			navy_size_percentage = 1
+		}
+
+		effect = {
+			add_years_of_income = 1
+			add_sailors = 5000
+			define_explorer = {
+				shock = 2
+				fire = 3
+				manuever = 4
+			}
+		}
+	}
+
+	5_frankia_ports = {
+		icon = mission_spanish_armada
+		position = 7
+		required_missions = { 5_frankia_port } 
+		provinces_to_highlight = {  } 
+
+		trigger = { num_of_light_ship = 50 } 
+
+		effect = {
+			add_country_modifier = {
+				name = "ellan_ships"
+				duration = 10950
+			}
+		}
+	}
+
+	5_frankia_portss = {
+		icon = the_glorious_revolution
+		position = 8
+		required_missions = { 5_frankia_ports } 
+		provinces_to_highlight = { culture = ellan } 
+
+		trigger = {
+			num_of_light_ship = 100
+			development_in_provinces = {
+				value = 300
+				culture = ellan
+			}
+			1269 = {
+				is_strongest_trade_power = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "ellan_hands"
+				duration = -1
+			}
+		}
+	}
+}

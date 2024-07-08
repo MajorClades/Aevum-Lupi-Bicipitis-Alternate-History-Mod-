@@ -1,0 +1,226 @@
+namespace = prut
+
+country_event = {
+	id = prut.1
+	title = prut.1.test
+	desc = prut.1.desc
+	picture = RELIGIOUS_CONVERSION_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = PU0
+	}
+
+	option = {
+		name = prut.1a
+		ai_chance = {
+			factor = 80
+		}
+		capital_scope = {
+			spawn_rebels = {
+				size = 3
+				type = goth_christ_rebels
+				religion = arian
+			}
+		}	
+		GE0 = {
+			change_religion = catholic
+			add_liberty_desire = 10
+		}
+	}
+	option = {
+		name = prut.1b
+		ai_chance = {
+			factor = 20
+		}
+		GE0 = {
+			add_liberty_desire = -20
+		}
+		GE7 = {
+			change_religion = arian
+			add_liberty_desire = -20
+		}
+	}
+}
+country_event = {
+	id = prut.2
+	title = prut.2.test
+	desc = prut.2.desc
+	picture = GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = prut.2a
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 1.1
+				has_opinion = {
+					who = PU0
+					value = 110
+				}
+			}
+			modifier = {
+				factor = 1.5
+				has_opinion = {
+					who = PU0
+					value = 150
+				}
+			}
+			modifier = {
+				factor = 2
+				has_opinion = {
+					who = PU0
+					value = 180
+				}
+			}
+			modifier = {
+				factor = 2
+				alliance_with = PU0
+			}
+		}
+		PU0 = {
+			create_subject = {
+				subject_type = ger_vassal
+				subject = ROOT
+			}
+		}
+	}
+	option = {
+		name = prut.2b
+		ai_chance = {
+			factor = 70
+			modifier = {
+				factor = 0.5
+				alliance_with = PU0
+			}
+		}
+		add_stability = 1
+	}
+}
+country_event = {
+	id = prut.3
+	title = prut.3.test
+	desc = prut.3.desc
+	picture = GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = prut.3a
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 1.1
+				has_opinion = {
+					who = PU0
+					value = 110
+				}
+			}
+			modifier = {
+				factor = 1.5
+				has_opinion = {
+					who = PU0
+					value = 150
+				}
+			}
+			modifier = {
+				factor = 2
+				has_opinion = {
+					who = PU0
+					value = 180
+				}
+			}
+			modifier = {
+				factor = 2
+				alliance_with = PU0
+			}
+		}
+		if = {
+			limit = {ai = yes}
+			PU0 = {
+				create_union = GR1
+			}
+		}else = {
+			GR1 = {
+				define_heir = {
+					mil = 5
+					dynasty = PU0
+				}
+			}
+		}
+	}
+	option = {
+		name = prut.3b
+		ai_chance = {
+			factor = 70
+			modifier = {
+				factor = 0.5
+				alliance_with = PU0
+			}
+		}
+		add_stability = 1
+		PU0 = {
+			add_casus_belli = {
+				type = cb_restore_personal_union
+				target = ROOT
+			}
+		}
+	}
+}
+country_event = {
+	id = prut.4
+	title = prut.4.test
+	desc = prut.4.desc
+	picture = PRINTING_PRESS_eventPicture
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = prut.4a
+		ai_chance = {
+			factor = 40
+		}
+		set_country_flag = prut_faith_chosen_cath
+		change_religion = catholic
+		capital_scope = {
+			change_religion = catholic
+		}
+		add_country_modifier_for_age = {
+			name = germania_catholic_bastion
+			age = age_of_reformation
+		}
+	}
+	option = {
+		name = prut.4b
+		ai_chance = {
+			factor = 20
+		}
+		trigger = {
+			is_religion_enabled = wycliffian
+		}
+		set_country_flag = prut_faith_chosen_wycl
+		change_religion = wycliffian
+		capital_scope = {
+			change_religion = wycliffian
+		}
+		add_country_modifier_for_age = {
+			name = germania_wycl_bastion
+			age = age_of_reformation
+		}
+	}
+	option = {
+		name = prut.4c
+		ai_chance = {
+			factor = 40
+		}
+		set_country_flag = prut_faith_chosen_goth
+		change_religion = arian
+		capital_scope = {
+			change_religion = arian
+		}
+		add_country_modifier_for_age = {
+			name = germania_arian_bastion
+			age = age_of_reformation
+		}
+	}
+}

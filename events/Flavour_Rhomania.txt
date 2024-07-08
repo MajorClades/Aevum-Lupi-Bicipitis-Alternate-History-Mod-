@@ -4,25 +4,35 @@ country_event = {
 	id = rhom.1
 	title = rhom.1.test
 	desc = rhom.1.desc
-	picture = BYZ_BAD_WITH_MONARCH_eventPicture
+	picture = roman_shadows
 	
 	trigger = {
 		tag = RU0
 	}
-	mean_time_to_happen = {
-		months = 1
+	immediate = {
+		hidden_effect = {
+			save_global_event_target_as = islam_caliph_target
+			REB = {
+				set_variable = {
+					which = caliph_authority_var
+					value = 100
+				}
+			}
+		}
 	}
 	fire_only_once = yes
 	option = {
 		name = rhom.1a
-		add_country_modifier = {
-			name = rho_army_bad
-			duration = -1
+		add_government_power = {
+			mechanic_type = rhoman_decadence_mechanic
+			power_type = rhoman_decadence
+			value = 5
 		}
 		add_country_modifier = {
 			name = rho_naval_crisis
 			duration = -1
 		}
+		add_corruption = 5
 	}
 }
 
@@ -30,12 +40,18 @@ country_event = {
 	id = rhom.2
 	title = rhom.2.test
 	desc = rhom.2.desc
-	picture = ANGRY_MOB_eventPicture
+	picture = PLAGUE_eventPicture
 	
 	is_triggered_only = yes
 	option = {
 		name = rhom.2a
-		remove_country_modifier = rho_army_bad
+		add_estate_influence_modifier = {
+			estate = estate_nobles
+			influence = -50
+			duration = 3650
+		}
+		custom_tooltip = RHOM_ACTIVATE_DECADENCE
+		clr_country_flag = rhoman_nobles_flag
 	}
 }
 
@@ -43,7 +59,7 @@ country_event = {
 	id = rhom.3
 	title = rhom.3.test
 	desc = rhom.3.desc
-	picture = ANGRY_MOB_eventPicture
+	picture = BANKRUPTCY_eventPicture
 	
 	trigger = {
 		tag = RU0
@@ -55,10 +71,11 @@ country_event = {
 			type = all
 			owned_by = RU0
 		}
-		NOT = {
-			stability = -1
+		has_government_power = {
+			mechanic_type = rhoman_decadence_mechanic
+			power_type = rhoman_decadence
+			value = 50
 		}
-		is_year = 1500
 	}
 	mean_time_to_happen = {
 		months = 12
@@ -104,13 +121,17 @@ country_event = {
 				infantry = PM0
 			}
 			syria_area = {
-				artillery = PM0
+				cavalry = PM0
 			}
 		}
 	}
 	option = {
 		name = rhom.3b
-		
+		add_government_power = {
+			mechanic_type = rhoman_decadence_mechanic
+			power_type = rhoman_decadence
+			value = 5
+		}
 		aleppo_area = {
 			add_core = PM0
 			cede_province = PM0
@@ -157,7 +178,7 @@ country_event = {
 				infantry = PM0
 			}
 			syria_area = {
-				artillery = PM0
+				cavalry = PM0
 			}
 		}
 	}
@@ -167,7 +188,7 @@ country_event = {
 	id = rhom.4
 	title = rhom.4.test
 	desc = rhom.4.desc
-	picture = ANGRY_MOB_eventPicture
+	picture = ASSASSINATION_eventPicture
 	
 	is_triggered_only = yes
 	option = {
@@ -228,37 +249,37 @@ country_event = {
 	}
 }
 
-country_event = {
-	id = rhom.5
-	title = rhom.5.test
-	desc = rhom.5.desc
-	picture = ANGRY_MOB_eventPicture
-	
-	trigger = {
-		tag = PM0
-		PM0 = {
-			NOT = {
-				general_with_name = "Hakimos"
-			}
-		}
-		war_with = RU0
-		NOT = {
-			has_won_war_against = {
-				who = RU0
-			}
-		}
-	}
-	mean_time_to_happen = {
-		months = 2
-	}
-	fire_only_once = yes
-	option = {
-		name = rhom.5a
-		every_owned_province = {
-			cede_province = RU0
-		}
-	}
-}
+#country_event = {  #Buggy Event
+#	id = rhom.5
+#	title = rhom.5.test
+#	desc = rhom.5.desc
+#	picture = ANGRY_MOB_eventPicture
+#	
+#	trigger = {
+#		tag = PM0
+#		PM0 = {
+#			NOT = {
+	#			general_with_name = "Hakimos"
+#			}
+#		}
+#		war_with = RU0
+#		NOT = {
+#			has_won_war_against = {
+#				who = RU0
+#			}
+#		}
+#	}
+#	mean_time_to_happen = {
+#		months = 2
+#	}
+#	fire_only_once = yes
+#	option = {
+#		name = rhom.5a
+#		every_owned_province = {
+#			cede_province = RU0
+#		}
+#	}
+#}
 
 country_event = {
 	id = rhom.6
@@ -273,11 +294,11 @@ country_event = {
 
 	option = {
 		name = rhom.5a
-		free_vassal = RX0
 		if = {
 			limit = {
 				has_dlc = "Conquest of Paradise"
 			}
+			free_vassal = RX0
 			RU0 = {
 				create_subject = {
 					who = RX0
@@ -290,11 +311,533 @@ country_event = {
 }
 
 country_event = {
+	id = rhom.7
+	title = rhom.7.test
+	desc = rhom.7.desc
+	picture = PRAYING_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = RU0
+		has_won_war_against = {
+			who = AF6
+		}
+	}
+
+	option = {
+		name = rhom.7a
+		add_government_power = {
+			mechanic_type = rhoman_decadence_mechanic
+			power_type = rhoman_decadence
+			value = -15
+		}
+		361 = {
+			add_province_modifier = {
+				name = rho_ruler_egypt
+				duration = 7300
+			}
+		}
+	}
+}
+
+country_event = {
+	id = rhom.8
+	title = rhom.8.test
+	desc = rhom.8.desc
+	picture = REFORM_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = rhom.8a
+		ai_chance = {
+			factor = 99
+		}
+		add_treasury = 500
+		RU0 = {
+			vassalize = ROOT
+		}
+	}
+	option = {
+		name = rhom.8b
+		ai_chance = {
+			factor = 1
+		}
+		add_stability = 1
+		RU0 = {
+			add_treasury = 500
+		}
+	}
+}
+
+country_event = {
+	id = rhom.9
+	title = rhom.9.test
+	desc = rhom.9.desc
+	picture = COURT_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = rhom.9a
+		ai_chance = {
+			factor = 80
+		}
+		custom_tooltip = SOX_OLIKORKIAN_GUARD
+		SM0 = {
+			country_event = {
+				id = rhom.10
+			}
+		}
+	}
+	option = {
+		name = rhom.9b
+		ai_chance = {
+			factor = 20
+		}
+		custom_tooltip = SOX_OLIKORKIAN_GUARD2
+		SM0 = {
+			set_country_flag = rhom_demanding_faith
+			country_event = {
+				id = rhom.10
+			}
+		}
+	}
+}
+
+country_event = {
+	id = rhom.10
+	title = rhom.10.test
+	desc = rhom.10.desc
+	picture = CONQUEST_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = rhom.10a
+		ai_chance = {
+			factor = 80
+			modifier = {
+				factor = 2.5
+				has_opinion = {
+					who = RU0
+					value = 180
+				}
+			}
+		}
+		trigger = {
+			NOT = {
+				has_country_flag = rhom_demanding_faith
+			}
+		}
+		RU0 = {
+			create_march = ROOT
+		}
+		add_trust = {
+			who = RU0
+			value = 30
+			mutual = yes
+		}
+	}
+	option = {
+		name = rhom.10b
+		ai_chance = {
+			factor = 20
+			modifier = {
+				factor = 2.5
+				alliance_with = RU0
+			}
+			modifier = {
+				factor = 2.5
+				has_opinion = {
+					who = RU0
+					value = 180
+				}
+			}
+		}
+		trigger = {
+			has_country_flag = rhom_demanding_faith
+		}
+		clr_country_flag = rhom_demanding_faith
+		change_religion = islam
+		RU0 = {
+			create_march = ROOT
+		}
+	}
+	option = {
+		name = rhom.10c
+		ai_chance = {
+			factor = 20
+		}
+		add_stability = 1
+		add_trust = {
+			who = RU0
+			value = -10
+			mutual = yes
+		}
+	}
+}
+
+country_event = {
+	id = rhom.11
+	title = rhom.11.test
+	desc = rhom.11.desc
+	picture = DEATH_OF_HEIR_eventPicture
+	
+	trigger = {
+		tag = RU0
+		AF6 = {
+			war_with = RU0
+			OR = {
+				has_country_modifier = redleg_prepare_for_crusade
+				has_country_modifier = redleg_prepare_for_crusade_AI
+			}
+		}
+		war_score_against = {
+			who = AF6
+			value = -10
+		}
+	}
+	mean_time_to_happen = {
+		months = 2
+	}
+	fire_only_once = yes
+	option = {
+		name = rhom.11a
+		ai_chance = {
+			factor = 20
+		}
+		define_heir_to_general = {
+			fire = 3
+			shock = 5
+			manuever = 4
+			siege = 2	
+		}
+	}
+	option = {
+		name = rhom.11b
+		ai_chance = {
+			factor = 50
+		}
+		define_general = {
+			name = "Demetrios Thylakas"
+			fire = 2
+			shock = 3
+			manuever = 3
+			siege = 1
+			trait = glory_seeker_personality
+		}
+		add_government_power = {
+			mechanic_type = rhoman_decadence_mechanic
+			power_type = rhoman_decadence
+			value = 5
+		}
+	}
+	option = {
+		name = rhom.11c
+		ai_chance = {
+			factor = 30
+		}
+		add_government_power = {
+			mechanic_type = rhoman_decadence_mechanic
+			power_type = rhoman_decadence
+			value = 15
+		}
+	}
+}
+
+country_event = { #old ideas bad
+	id = rhom.12
+	title = rhom.12.test
+	desc = rhom.12.desc
+	picture = BYZ_BAD_WITH_MONARCH_eventPicture
+	
+	trigger = {
+		tag = RU0
+		has_institution = renaissance
+	}
+	mean_time_to_happen = {
+		months = 12
+	}
+	fire_only_once = yes
+	option = {
+		name = rhom.12a
+		ai_chance = {
+			factor = 40
+		}
+		add_adm_power = -50
+		add_dip_power = -50
+		add_mil_power = -50
+	}
+	option = {
+		name = rhom.12b
+		ai_chance = {
+			factor = 60
+		}
+		add_government_power = {
+			mechanic_type = rhoman_decadence_mechanic
+			power_type = rhoman_decadence
+			value = 10
+		}
+	}
+}
+country_event = { #fire good
+	id = rhom.13
+	title = rhom.13.test
+	desc = rhom.13.desc
+	picture = COUNTRY_COLLAPSE_eventPicture
+	
+	trigger = {
+		tag = RU0
+		mission_completed = rho_more_fire
+		is_at_war = yes
+	}
+	mean_time_to_happen = {
+		months = 120
+	}
+	fire_only_once = yes
+	option = {
+		name = rhom.13a
+		ai_chance = {
+			factor = 60
+		}
+		add_country_modifier = {
+			name = rho_use_that_fire_3
+			duration = -1
+		}
+		custom_tooltip = ALLOW_STUPID_CANNONS
+	}
+	option = {
+		name = rhom.13b
+		ai_chance = {
+			factor = 40
+		}
+		add_country_modifier = {
+			name = rho_use_that_fire_4
+			duration = -1
+		}
+	}
+}
+country_event = { #egyp event
+	id = rhom.14
+	title = rhom.14.test
+	desc = rhom.14.desc
+	picture = GREAT_BUILDING_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = rhom.14a
+		ai_chance = {
+			factor = 60
+		}
+		358 = {
+			add_permanent_province_modifier = {
+				name = rho_secured_egypt
+				duration = -1
+			}
+		}
+		delta_area = {
+			add_base_tax = 1
+			add_base_production = 1
+		}
+	}
+	option = {
+		name = rhom.14b
+		ai_chance = {
+			factor = 40
+		}
+		358 = {
+			add_base_tax = 2
+			add_base_production = 2
+			add_great_project_tier = {
+				type = alexandria_library
+				tier = 1
+			}
+		}
+	}
+}
+country_event = { #afric event
+	id = rhom.15
+	title = rhom.15.test
+	desc = rhom.15.desc
+	picture = ECONOMY_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = rhom.15a
+		ai_chance = {
+			factor = 70
+		}
+		if = {
+			limit = {
+				any_owned_province = {
+					region = maghreb_region
+					NOT = {
+						religion = ROOT
+					}
+				}
+			}
+			custom_tooltip = rhom.15_tt
+			tooltip = {
+				add_province_modifier = {
+					name = rho_conquest_of_africa
+					duration = 10950
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						region = maghreb_region
+						NOT = {
+							religion = ROOT
+						}
+					}
+					add_province_modifier = {
+						name = rho_conquest_of_africa
+						duration = 10950
+					}
+				}
+			}
+		}
+		else = {
+			add_stability_or_adm_power = yes
+		}
+	}
+	option = {
+		name = rhom.15b
+		ai_chance = {
+			factor = 30
+		}
+		define_advisor = {
+			type = inquisitor
+			skill = 3
+			discount = yes
+		}
+	}
+}
+country_event = { #stronger armies
+	id = rhom.16
+	title = rhom.16.test
+	desc = rhom.16.desc
+	picture = HORDE_ON_HORSEBACK_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = rhom.16a
+		ai_chance = {
+			factor = 70
+		}
+		trigger = {
+			army_tradition = 70
+		}
+		add_country_modifier = {
+			name = rho_mil_stronger_1
+			duration = -1
+		}
+	}
+	option = {
+		name = rhom.16b
+		ai_chance = {
+			factor = 30
+		}
+		trigger = {
+			OR = {
+				full_idea_group = offensive_ideas
+				full_idea_group = quality_ideas
+			}
+		}
+		add_country_modifier = {
+			name = rho_mil_stronger_2
+			duration = -1
+		}
+	}
+	option = {
+		name = rhom.16c
+		ai_chance = {
+			factor = 30
+		}
+		trigger = {
+			OR = {
+				full_idea_group = defensive_ideas
+				full_idea_group = quantity_ideas
+			}
+		}
+		add_country_modifier = {
+			name = rho_mil_stronger_3
+			duration = -1
+		}
+	}
+	option = {
+		name = rhom.16d
+		ai_chance = {
+			factor = 30
+		}
+		trigger = {
+			OR = {
+				full_idea_group = aristocracy_ideas
+				full_idea_group = mercenary_ideas
+			}
+		}
+		add_country_modifier = {
+			name = rho_mil_stronger_4
+			duration = -1
+		}
+	}
+	option = {
+		name = rhom.16e
+		ai_chance = {
+			factor = 30
+		}
+		trigger = {
+			full_idea_group = naval_ideas
+		}
+		add_country_modifier = {
+			name = rho_mil_stronger_5
+			duration = -1
+		}
+	}
+}
+country_event = { #restore Magna Grekia
+	id = rhom.17
+	title = rhom.17.test
+	desc = rhom.17.desc
+	picture = HRE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = rhom.17a
+		ai_chance = {
+			factor = 70
+		}
+		apulia_area = {
+			change_culture = greek_new
+		}
+		calabria_area = {
+			change_culture = greek_new
+		}
+		naples_area = {
+			change_culture = greek_new
+		}
+		western_sicily_area = {
+			change_culture = greek_new
+		}
+		sicily_area = {
+			change_culture = greek_new
+		}
+	}
+	option = {
+		name = rhom.17b
+		ai_chance = {
+			factor = 30
+		}
+		add_dip_power = 300
+	}
+}
+country_event = {
 	id = rhom.100
 	title = rhom.100.test
 	desc = rhom.100.desc
 	picture = BYZ_BAD_WITH_MONARCH_eventPicture
-
+	
 	trigger = {
 		tag = RU0
 		RU0 = {
@@ -318,16 +861,25 @@ country_event = {
 	id = rhom.1000
 	title = rhom.1000.test
 	desc = rhom.1000.desc
-	picture = ANGRY_MOB_eventPicture
+	picture = MERCHANTS_TALKING_eventPicture
 	
 	trigger = {
 		tag = RU0
+	
 		exists = CY0
 		CY0 = {
 			has_reform = pirate_republic_reform
 		}
 		NOT = {
+			has_country_flag = rho_war_cyo
+		}
+		NOT = {
 			truce_with = CY0
+		}
+		CY0 = {
+			NOT = {
+				total_development = 50
+			}
 		}
 	}
 	mean_time_to_happen = {
@@ -349,6 +901,7 @@ country_event = {
 		ai_chance = {
 			factor = 10
 		}
+		set_country_flag = rho_war_cyo
 		CY0 = {
 			every_owned_province = {
 				add_permanent_claim = ROOT
@@ -360,7 +913,7 @@ country_event = {
 	id = rhom.1001
 	title = rhom.1001.test
 	desc = rhom.1001.desc
-	picture = ANGRY_MOB_eventPicture
+	picture = TRADEGOODS_eventPicture
 	
 	is_triggered_only = yes
 	option = {
@@ -384,7 +937,6 @@ country_event = {
 				}
 				add_devastation = -25
 			}
-			
 		}
 	}
 	option = {
@@ -392,9 +944,47 @@ country_event = {
 		ai_chance = {
 			factor = 10
 		}
+		RU0 = {
+			set_country_flag = rho_war_cyo
+		}
 		add_trust = {
 			who = RU0
 			value = -100
+		}
+	}
+}
+
+country_event = { #Slavery is banned, idiot!
+	id = rhom.1002
+	title = rhom.1002.test
+	desc = rhom.1002.desc
+	picture = MARCHING_PEASANTS_eventPicture
+	trigger = {
+		OR = {
+			tag = RU0
+			overlord = {
+				tag = RU0
+			}
+		}
+		any_owned_province = {
+			trade_goods = slaves
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	option = {
+		name = rhom.1002a
+		every_owned_province = {
+			limit = {
+				trade_goods = slaves
+			}
+			change_trade_goods = unknown
+			remove_building = tradecompany
+			if = {
+				limit = { has_province_modifier = slave_entrepot }
+				remove_province_modifier = slave_entrepot
+			}
 		}
 	}
 }

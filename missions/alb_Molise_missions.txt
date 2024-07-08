@@ -1,0 +1,1410 @@
+Molise_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = MO0 } 
+
+	mol_prestige = {
+		icon = show_piety
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			OR = {
+				prestige = 35
+				has_adm_advisor = yes
+			}
+		}
+
+		effect = {
+			add_papal_influence = 20
+			add_imperial_influence = 5
+		}
+	}
+
+	mol_papal_due = {
+		icon = mission_european_church
+		position = 2
+		required_missions = { mol_prestige } 
+		provinces_to_highlight = {  } 
+
+		trigger = { papal_influence = 30 } 
+
+		effect = {
+			add_papal_influence = -30
+			capital_scope = { add_building = cathedral } 
+		}
+	}
+
+	mol_papal_tre = {
+		icon = sway_the_pope
+		position = 3
+		required_missions = { mol_papal_due } 
+		provinces_to_highlight = { is_capital_of = PAP } 
+
+		trigger = {
+			OR = {
+				alliance_with = PAP
+				PAP = {
+					NOT = {
+						has_opinion = {
+							who = ROOT
+							value = -50
+						}
+					}
+				}
+				NOT = { exists = PAP } 
+			}
+		}
+
+		effect = {
+			tooltip = {
+				if = {
+					limit = { alliance_with = PAP } 
+					custom_tooltip = MOL_TT_2a
+				}
+				else = { custom_tooltip = MOL_TT_2b } 
+				set_papal_controller = ROOT
+				custom_tooltip = MOL_TT_2c
+				add_mil_power = 100
+				add_papal_influence = -25
+				lazio_area = { add_permanent_claim = ROOT } 
+			}
+			hidden_effect = {
+				if = {
+					limit = { alliance_with = PAP } 
+					set_papal_controller = ROOT
+				}
+				else = {
+					add_mil_power = 100
+					add_papal_influence = -25
+					lazio_area = { add_permanent_claim = ROOT } 
+				}
+			}
+		}
+	}
+
+	mol_papal_qat = {
+		icon = a_roman_empire
+		position = 4
+		required_missions = { mol_papal_tre } 
+		provinces_to_highlight = { area = lazio_area } 
+
+		trigger = {
+			papal_influence = 80
+			OR = {
+				AND = {
+					alliance_with = PAP
+					PAP = {
+						has_opinion = {
+							who = ROOT
+							value = 190
+						}
+					}
+				}
+				lazio_area = {
+					type = all
+					owned_by = ROOT
+				}
+			}
+		}
+
+		effect = {
+			tooltip = {
+				if = {
+					limit = { alliance_with = PAP } 
+					custom_tooltip = MOL_TT_3a
+				}
+				else = { custom_tooltip = MOL_TT_3b } 
+				add_papal_influence = -80
+				vassalize = PAP
+				PAP = { add_liberty_desire = -25 } 
+				lazio_area = { add_permanent_claim = ROOT } 
+				custom_tooltip = MOL_TT_3c
+				add_papal_influence = -50
+				set_capital = 118
+				118 = {
+					add_permanent_province_modifier = {
+						name = "mol_imperial_seat"
+						duration = -1
+					}
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = { alliance_with = PAP } 
+					add_papal_influence = -80
+					vassalize = PAP
+					PAP = { add_liberty_desire = -25 } 
+					lazio_area = { add_permanent_claim = ROOT } 
+				}
+				else = {
+					add_papal_influence = -50
+					set_capital = 118
+					118 = {
+						add_permanent_province_modifier = {
+							name = "mol_imperial_seat"
+							duration = -1
+						}
+					}
+				}
+			}
+		}
+	}
+
+	mol_austria = {
+		icon = protect_against_austria
+		position = 6
+		required_missions = { mol_ragusan_deal } 
+		provinces_to_highlight = { 
+			area = bosnia_area 
+			NOT = {
+				is_part_of_hre = yes
+			}
+		} 
+
+		trigger = {
+			OR = {
+				GR5 = { overlord = { is_part_of_hre = yes }  } 
+				bosnia_area = {
+					type = all
+					owner = { is_part_of_hre = yes } 
+				}
+			}
+		}
+
+		effect = {
+			add_imperial_influence = 25
+			custom_tooltip = empty_line_tt
+			complex_dynamic_effect = {
+				first_custom_tooltip = mol_subjugated_austria_tt
+				first_limit = "
+					GR5 = { overlord = { is_part_of_hre = yes }  } 
+				"
+				first_effect = "
+					GR5 = {
+						set_in_empire = yes
+						add_liberty_desire = -25
+					}
+				"
+				second_custom_tooltip = mol_austria_empire_tt
+				second_limit = "
+					bosnia_area = {
+						type = all
+						owner = { is_part_of_hre = yes } 
+					}
+				"
+				second_effect = "
+					bosnia_area = {
+						set_in_empire = yes
+						add_nationalism = -10
+				}
+				"
+			}
+		}
+	}
+
+	mol_big_empire = {
+		icon = mission_rule_italy
+		position = 8
+		required_missions = {
+			mol_austria
+			mol_estonia
+		}
+		provinces_to_highlight = {
+			NOT = { is_part_of_hre = yes } 
+			is_sea = no
+			has_discovered = ROOT
+		}
+
+		trigger = {
+			calc_true_if = {
+				amount = 50
+				all_province = {
+					NOT = { region = italy_region } 
+					is_part_of_hre = yes
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "mol_empire_expander"
+				duration = -1
+			}
+		}
+	}
+
+	mol_markets = {
+		icon = mission_dominate_home_trade_node
+		position = 9
+		provinces_to_highlight = {
+			owned_by = ROOT
+			can_build = marketplace
+		}
+
+		trigger = {
+			years_of_income = 0.5
+			num_of_owned_provinces_with = {
+				value = 5
+				has_trade_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_years_of_income = -0.5
+			1304 = {
+				add_trade_modifier = {
+					who = ROOT
+					duration = 10950
+					power = 50
+					key = MOL_TRADE_MODIFIER
+				}
+			}
+		}
+	}
+
+	mol_mercato = {
+		icon = mission_early_game_buildings
+		position = 10
+		required_missions = { mol_markets } 
+		provinces_to_highlight = { province_id = 1298 } 
+
+		trigger = { 1298 = { is_strongest_trade_power = ROOT }  } 
+
+		effect = {
+			add_dip_power = 200
+			define_admiral = {
+				shock = 4
+				fire = 4
+				manuever = 6
+			}
+		}
+	}
+}
+Molise_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = MO0 } 
+
+	mol_ancona = {
+		icon = mission_alliances
+		position = 2
+		required_missions = { mol_prestige } 
+		provinces_to_highlight = { is_capital_of = PD6 } 
+
+		trigger = {
+			OR = {
+				alliance_with = PD6
+				PD6 = {
+					NOT = {
+						has_opinion = {
+							who = ROOT
+							value = -50
+						}
+					}
+				}
+				NOT = { exists = PD6 } 
+			}
+		}
+
+		effect = {
+			tooltip = {
+				if = {
+					limit = { alliance_with = PD6 } 
+					custom_tooltip = MOL_TT_1a
+				}
+				else = { custom_tooltip = MOL_TT_1b } 
+				PD6 = { country_event = { id = molis.5 }  } 
+				custom_tooltip = MOL_TT_1c
+				add_prestige = 10
+				central_italy_area = { add_permanent_claim = ROOT } 
+			}
+			hidden_effect = {
+				if = {
+					limit = { alliance_with = PD6 } 
+					PD6 = { country_event = { id = molis.5 }  } 
+				}
+				else = {
+					add_prestige = 10
+					central_italy_area = { add_permanent_claim = ROOT } 
+				}
+			}
+		}
+	}
+
+	mol_ragusan_deal = {
+		icon = dalmatian_conquest
+		position = 5
+		provinces_to_highlight = { province_id = 137 } 
+
+		trigger = {
+			is_emperor = yes
+			137 = {
+				owner = {
+					OR = {
+						is_part_of_hre = yes
+						has_spy_network_from = {
+							who = ROOT
+							value = 50
+						}
+					}
+				}
+			}
+		}
+
+		effect = {
+			tooltip = {
+				if = {
+					limit = { 137 = { owner = { is_part_of_hre = yes }  }  } 
+					custom_tooltip = MOL_TT_7a
+				}
+				else = { custom_tooltip = MOL_TT_7b } 
+				137 = { owner = { country_event = { id = molis.7 }  }  } 
+				custom_tooltip = MOL_TT_7c
+				137 = {
+					spawn_rebels = {
+						size = 3
+						type = nationalist_rebels
+						friend = ROOT
+					}
+					custom_tooltip = empty_line_tt
+					owner = {
+						reverse_add_casus_belli = {
+							type = cb_vassalize_mission
+							target = ROOT
+						}
+					}
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = { 137 = { owner = { is_part_of_hre = yes }  }  } 
+					137 = { owner = { country_event = { id = molis.7 }  }  } 
+				}
+				else = {
+					137 = {
+						spawn_rebels = {
+							size = 3
+							type = nationalist_rebels
+							friend = ROOT
+							separatists_target = RAG
+						}
+						owner = {
+							reverse_add_casus_belli = {
+								type = cb_vassalize_mission
+								target = ROOT
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	mol_estonia = {
+		icon = mission_restore_kiev
+		position = 7
+		required_missions = { mol_turchia } 
+		provinces_to_highlight = { is_core = ES0 } 
+
+		trigger = {
+			OR = {
+				AND = {
+					exists = ES0
+					ES0 = { alliance_with = ROOT } 
+				}
+				3001 = {
+					owner = {
+						has_spy_network_from = {
+							who = ROOT
+							value = 50
+						}
+					}
+				}
+				macedonia_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+			}
+		}
+
+		effect = {
+			if = {
+				limit = {
+					3001 = {
+						owner = {
+							has_spy_network_from = {
+								who = ROOT
+								value = 50
+							}
+						}
+					}
+				}
+				custom_tooltip = MOL_TT_9a
+			}
+			else = { custom_tooltip = MOL_TT_9b } 
+			tooltip = {
+				3001 = {
+					spawn_rebels = {
+						size = 2
+						type = nationalist_rebels
+						friend = ROOT
+					}
+					set_in_empire = yes
+				}
+				macedonia_area = {
+					set_in_empire = yes 
+				}
+				custom_tooltip = MOL_TT_9c
+			}
+			custom_tooltip = empty_line_tt
+			add_prestige_or_monarch_power = {
+				amount = 25
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						3001 = {
+							owner = {
+								has_spy_network_from = {
+									who = ROOT
+									value = 50
+								}
+							}
+						}
+					}
+					3001 = {
+						spawn_rebels = {
+							size = 2
+							type = nationalist_rebels
+							friend = ROOT
+						}
+						set_in_empire = yes
+					}
+					macedonia_area = {
+						set_in_empire = yes 
+					}
+				}
+				else = {
+					ES0 = { set_in_empire = yes }
+					macedonia_area = {
+						set_in_empire = yes 
+					}
+				} 
+			}
+		}
+	}
+
+	mol_markets_2 = {
+		icon = mission_market_place_with_asian_traders
+		position = 10
+		required_missions = { mol_markets } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			can_build = marketplace
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 15
+				has_trade_building_trigger = yes
+			}
+		}
+
+		effect = {
+			tooltip = {
+				custom_tooltip = MOL_TT_12
+				add_base_production = 1
+				owner = { add_treasury = 50 } 
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = { province_trade_power = 10 } 
+					add_base_production = 1
+					owner = { add_treasury = 50 } 
+				}
+			}
+		}
+	}
+}
+Molise_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = MO0 } 
+
+	mol_neapoli = {
+		icon = all_bases_covered
+		position = 2
+		required_missions = { mol_army } 
+		provinces_to_highlight = { 
+			area = naples_area 
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {
+			naples_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "mol_napoli_trade"
+				duration = 10950
+			}
+			if = {
+				limit = { NAP = { is_subject_of = ROOT }  } 
+				custom_tooltip = MOL_TT_5a
+				121 = { add_core = ROOT } 
+				NAP = { add_liberty_desire = -15 } 
+			}
+			else = {
+				tooltip = {
+					custom_tooltip = MOL_TT_5b
+					121 = { add_core = ROOT } 
+					NAP = { add_liberty_desire = -15 } 
+				}
+			}
+			custom_tooltip = empty_line_tt
+			calabria_area = { add_permanent_claim = ROOT } 
+			sicily_area = { add_permanent_claim = ROOT } 
+			western_sicily_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	mol_sicilia = {
+		icon = arb_sicily
+		position = 3
+		required_missions = { mol_neapoli } 
+		provinces_to_highlight = {
+			OR = {
+				area = sicily_area
+				area = western_sicily_area
+			}
+			country_or_non_sovereign_subject_holds = ROOT
+		}
+
+		trigger = {
+			imperial_influence = 10
+			OR = {
+				num_of_provinces_owned_or_owned_by_subjects_with = {
+					value = 8
+					OR = {
+						area = sicily_area
+						area = western_sicily_area
+					}
+				}
+				calc_true_if = {
+					amount = 3
+					all_ally = {
+						OR = {
+							culture = sicilian
+							culture = melitan
+						}
+						has_opinion = {
+							who = ROOT
+							value = 150
+						}
+					}
+				}
+			}
+		}
+
+		effect = {
+			add_imperial_influence = -10
+			###YO CHECK WHY THIS DOESNT WORK
+			if = {
+				limit = {
+					calc_true_if = {
+						amount = 3
+						all_ally = {
+							OR = {
+								culture = sicilian
+								culture = melitan
+							}
+							has_opinion = {
+								who = ROOT
+								value = 150
+							}
+						}
+					}
+				}
+				custom_tooltip =  MOL_TT_6a
+				custom_tooltip = MOL_TT_6b
+				hidden_effect = {
+					for = {
+						amount = 3
+						effect = "
+							random_ally = {
+								limit = {
+									OR = {
+										culture = sicilian
+										culture = melitan
+									}
+									has_opinion = {
+										who = ROOT
+										value = 150
+									}
+								}
+								country_event = { id = molis.6 }
+							}
+						"
+					}
+					sicily_area = { add_core = SIC } 
+					western_sicily_area = { add_core = SIC } 
+					save_global_event_target_as = molise_for_sicily_mission
+				}
+			}
+			else_if = {
+				limit = { 
+					NOT = {
+						calc_true_if = {
+							amount = 3
+							all_ally = {
+								OR = {
+									culture = sicilian
+									culture = melitan
+								}
+								has_opinion = {
+									who = ROOT
+									value = 150
+								}
+							}
+						}
+					}
+				}
+				custom_tooltip =  MOL_TT_6ano
+				custom_tooltip = MOL_TT_6b
+			}
+			custom_tooltip = empty_line_tt
+			if = {
+				limit = { 
+					num_of_provinces_owned_or_owned_by_subjects_with = {
+						value = 8
+						OR = {
+							area = sicily_area
+							area = western_sicily_area
+						}
+					}
+				}
+				custom_tooltip = MOL_TT_6c
+				sicily_area = {
+					add_permanent_province_modifier = {
+						name = mol_sicilian_jewel
+						duration = 10950
+					}
+				}
+				western_sicily_area = {
+					add_permanent_province_modifier = {
+						name = mol_sicilian_jewel
+						duration = 10950
+					}
+				}
+			}
+			else_if = {
+				limit = { 
+					NOT = {
+						num_of_provinces_owned_or_owned_by_subjects_with = {
+							value = 8
+							OR = {
+								area = sicily_area
+								area = western_sicily_area
+							}
+						}
+					}
+				}
+				custom_tooltip = MOL_TT_6cno
+				tooltip = {
+					sicily_area = {
+						add_permanent_province_modifier = {
+							name = mol_sicilian_jewel
+							duration = 10950
+						}
+					}
+					western_sicily_area = {
+						add_permanent_province_modifier = {
+							name = mol_sicilian_jewel
+							duration = 10950
+						}
+					}
+				}
+			}
+		}
+	}
+
+	mol_crown_jewel = {
+		icon = mission_sicily_island_2
+		position = 3
+		required_missions = { mol_sicilia } 
+		provinces_to_highlight = {
+			OR = {
+				area = sicily_area
+				area = western_sicily_area
+			}
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 5
+				development = 20
+				OR = {
+					area = sicily_area
+					area = western_sicily_area
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "mol_trinacria"
+				duration = 10950
+			}
+		}
+	}
+
+	mol_turchia = {
+		icon = mission_turkish_merchants
+		position = 6
+		required_missions = { mol_ragusan_deal } 
+		provinces_to_highlight = { culture = turk_greek } 
+
+		trigger = {
+			calc_true_if = {
+				amount = 7
+				all_province = {
+					culture = turk_greek
+					is_part_of_hre = yes
+				}
+			}
+		}
+
+		effect = {
+			add_imperial_influence = 5
+			custom_tooltip = MOL_TT_8
+			
+			hidden_effect = {
+				random_country = {
+					limit = {
+						culture = turk_greek
+						is_part_of_hre = yes
+					}
+					add_opinion = {
+						who = ROOT
+						modifier = welcomed_in_the_empire
+					}
+				}
+				random_province = {
+					limit = {
+						culture = turk_greek
+						is_part_of_hre = yes
+					}
+					add_base_tax = 1
+				}
+				random_province = {
+					limit = {
+						culture = turk_greek
+						is_part_of_hre = yes
+					}
+					add_base_tax = 1
+				}
+				random_province = {
+					limit = {
+						culture = turk_greek
+						is_part_of_hre = yes
+					}
+					add_base_tax = 1
+				}
+			}
+		}
+	}
+
+	mol_grecia = {
+		icon = mission_dismantle_hre
+		position = 8
+		required_missions = {
+			mol_turchia
+			mol_fire_power
+		}
+		provinces_to_highlight = { is_capital_of = RU0 } 
+
+		trigger = {
+			if = {
+				limit = {
+					is_part_of_hre = yes
+				}
+				is_emperor = yes
+			}
+			army_size = 50
+			army_size = RU0
+		}
+
+		effect = {
+			if = {
+				limit = { exists = RU0 } 
+				add_casus_belli = {
+					type = cb_hie_rhoman_war
+					target = RU0
+				}
+			}
+			else = {
+				add_adm_power = 200
+				add_dip_power = 200
+				add_mil_power = 200
+				add_imperial_influence = 50
+			}
+		}
+	}
+
+	mol_east_roman = {
+		icon = mission_fall_of_constantinople
+		position = 9
+		required_missions = { mol_grecia } 
+		provinces_to_highlight = { province_id = 151 } 
+
+		trigger = {
+			151 = {
+				owned_by = ROOT
+				is_core = ROOT
+			}
+		}
+
+		effect = {
+			151 = {
+				add_devastation = 25
+				change_religion = catholic
+			}
+			custom_tooltip = MOL_TT_14
+			hidden_effect = {
+				every_country = {
+					limit = {
+						religion = islam
+					}
+					add_stability = -1
+				}
+			}
+		}
+	}
+
+	mol_working_trading = {
+		icon = give_him_back_his_legions
+		position = 11
+		required_missions = {
+			mol_markets_2
+			mol_working_2
+		}
+		provinces_to_highlight = { province_id = 118 } 
+
+		trigger = {
+			years_of_income = 1
+			owns = 118
+			118 = { development = 35 } 
+		}
+
+		effect = {
+			add_years_of_income = -1
+			118 = {
+				add_great_project_tier = {
+					type = italy_altar
+					tier = 1
+				}
+			}
+		}
+	}
+}
+Molise_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = MO0 } 
+
+	mol_army = {
+		icon = king_of_naples
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			if = {
+				limit = { ai = yes } 
+				num_of_generals = 1
+				army_size = 10
+			}
+			else = { army_size = 20 } 
+		}
+
+		effect = {
+			add_casus_belli = {
+				type = cb_vassalize_mission
+				target = NAP
+			}
+			custom_tooltip = empty_line_tt
+			naples_area = { add_permanent_claim = ROOT } 
+			apulia_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	mol_islands = {
+		icon = reclaim_the_aegean
+		position = 3
+		required_missions = { mol_navy } 
+		provinces_to_highlight = {
+			OR = {
+				area = crete_area
+				province_id = 321
+				province_id = 5015
+			}
+		}
+
+		trigger = {
+			navy_tradition = 30
+			crete_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			321 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			5015 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_accepted_culture_or_dip_power_stated = { culture = greek_new } 
+			custom_tooltip = empty_line_tt
+			5015 = {
+				add_permanent_province_modifier = {
+					name = "mol_imperial_marine"
+					duration = -1
+				}
+			}
+			321 = {
+				add_permanent_province_modifier = {
+					name = "mol_imperial_marine"
+					duration = -1
+				}
+			}
+			crete_area = {
+				add_permanent_province_modifier = {
+					name = "mol_imperial_marine"
+					duration = -1
+				}
+			}
+		}
+	}
+
+	mol_mare_nostrum = {
+		icon = mission_rb_cod_wars
+		position = 5
+		required_missions = {
+			mol_arsenale
+			mol_crown_jewel
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			navy_tradition = 75
+			num_of_heavy_ship = 15
+			has_leader_with = {
+				admiral = yes
+				total_pips = 10
+			}
+			owns = 4733
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "mol_imperial_navy_3"
+				duration = -1
+			}
+			4733 = {
+				create_flagship = {
+					type = heavy_ship
+					name = "Regina del Mar"
+				
+				}
+			}
+		}
+	}
+
+	mol_fire_power = {
+		icon = mission_cannons_firing
+		position = 7
+		required_missions = { mol_legions } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			army_tradition = 25
+			num_of_artillery = 15
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "mol_fires"
+				duration = 10950
+			}
+		}
+	}
+
+	mol_working_2 = {
+		icon = mission_high_income
+		position = 10
+		required_missions = { mol_working } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			can_build = workshop
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				base_production = 7
+				has_production_building_trigger = yes
+			}
+		}
+
+		effect = { 
+			add_years_of_income = 1 
+			define_advisor = {
+				type = natural_scientist
+				skill = 3
+				cost_multiplier = 0.5
+			}
+		} 
+	}
+}
+Molise_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = MO0 } 
+
+	mol_navy = {
+		icon = mission_galleys_in_port
+		position = 2
+		required_missions = { mol_army } 
+		provinces_to_highlight = {  
+			area = apulia_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {
+			if = {
+				limit = { ai = yes } 
+				num_of_admirals = 1
+				navy_size_percentage = 0.5
+			}
+			else = {
+				num_of_admirals = 1
+				navy_size_percentage = 0.8
+			}
+		}
+
+		effect = {
+			if = {
+				limit = {
+					apulia_area = {
+						type = all
+						owned_by = ROOT
+					}
+				}
+				custom_tooltip = MOL_TT_4a
+				1933 = {
+					heavy_ship = ROOT
+					heavy_ship = ROOT
+					heavy_ship = ROOT
+				}
+			}
+			else = {
+				tooltip = {
+					custom_tooltip = MOL_TT_4b
+					1933 = {
+						heavy_ship = ROOT
+						heavy_ship = ROOT
+						heavy_ship = ROOT
+					}
+				}
+			}
+			custom_tooltip = empty_line_tt
+			crete_area = { add_permanent_claim = ROOT } 
+			321 = { add_permanent_claim = ROOT } 
+			5015 = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	mol_marina = {
+		icon = mission_hessian_jaeger_corps
+		position = 3
+		required_missions = { mol_navy } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			can_build = dock
+			NOT = {
+				has_dock_building_trigger = yes
+			}
+		}
+
+		trigger = {
+			sailors = 5000
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 5
+				has_dock_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "mol_imperial_navy"
+				duration = 10950
+			}
+		}
+	}
+
+	mol_arsenale = {
+		icon = expand_the_arsenal
+		position = 4
+		required_missions = { mol_marina } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			can_build = shipyard
+			NOT = {
+				has_shipyard_building_trigger = yes
+			}
+		}
+
+		trigger = {
+			navy_tradition = 40
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 10
+				has_dock_building_trigger = yes
+				has_shipyard_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "mol_imperial_navy_2"
+				duration = -1
+			}
+			custom_tooltip = MOL_TT_13
+			hidden_effect = {
+				for = {
+					amount = 10
+					effect = "
+						random_owned_province = {
+							limit = {
+								has_port = yes
+							}
+							add_random_development = 1
+						}
+					"
+				}
+			}
+		}
+	}
+
+	mol_legions = {
+		icon = the_italian_league
+		position = 6
+		provinces_to_highlight = {
+			owned_by = ROOT
+			can_build = barracks
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				has_manpower_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_army_tradition = 10
+			custom_tooltip = MOL_TT_10
+			set_country_flag = mol_bodyguard_flag
+			add_ruler_modifier = {
+				name = "mol_bodyguard"
+				duration = -1
+			}
+		}
+	}
+
+	mol_castles = {
+		icon = mission_castle_construction
+		position = 7
+		required_missions = { mol_legions } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			can_build = barracks
+		}
+
+		trigger = {
+			army_tradition = 30
+			num_of_owned_provinces_with = {
+				value = 5
+				base_manpower = 10
+				has_manpower_building_trigger = yes
+			}
+		}
+
+		effect = {
+			custom_tooltip = MOL_TT_11
+			tooltip = {
+				random_owned_province = {
+					add_province_modifier = {
+						name = "mol_manpower_free"
+						duration = -1
+					}
+				}
+			}
+			hidden_effect = {
+				random_owned_province = {
+					limit = {
+						base_manpower = 10
+						has_manpower_building_trigger = yes
+					}
+					add_province_modifier = {
+						name = "mol_manpower_free"
+						duration = -1
+					}
+				}
+				random_owned_province = {
+					limit = {
+						base_manpower = 10
+						has_manpower_building_trigger = yes
+					}
+					add_province_modifier = {
+						name = "mol_manpower_free"
+						duration = -1
+					}
+				}
+				random_owned_province = {
+					limit = {
+						base_manpower = 10
+						has_manpower_building_trigger = yes
+					}
+					add_province_modifier = {
+						name = "mol_manpower_free"
+						duration = -1
+					}
+				}
+				random_owned_province = {
+					limit = {
+						base_manpower = 10
+						has_manpower_building_trigger = yes
+					}
+					add_province_modifier = {
+						name = "mol_manpower_free"
+						duration = -1
+					}
+				}
+				random_owned_province = {
+					limit = {
+						base_manpower = 10
+						has_manpower_building_trigger = yes
+					}
+					add_province_modifier = {
+						name = "mol_manpower_free"
+						duration = -1
+					}
+				}
+			}
+		}
+	}
+
+	mol_war_never = {
+		icon = mission_assemble_an_army
+		position = 8
+		required_missions = { mol_castles } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			army_tradition = 75
+			army_professionalism = 0.5
+			army_size = 100
+		}
+
+		effect = {
+			add_army_tradition = -25
+			add_country_modifier = {
+				name = "mol_art_of_war"
+				duration = 36500
+			}
+		}
+	}
+
+	mol_working = {
+		icon = mission_have_manufactories
+		position = 9
+		provinces_to_highlight = {
+			owned_by = ROOT
+			can_build = workshop
+		}
+
+		trigger = {
+			owns = 4733
+			4733 = {
+				has_production_building_trigger = yes
+			}
+			num_of_owned_provinces_with = {
+				value = 6
+				has_production_building_trigger = yes
+			}
+		}
+
+		effect = {
+			4733 = { 
+				add_random_development = 2
+				custom_tooltip = empty_line_tt
+				set_center_level_2_center_of_trade = yes
+			} 
+			add_years_of_income = 0.5
+		}
+	}
+
+	mol_cagliari = {
+		icon = mission_war_chest
+		position = 10
+		required_missions = { mol_working } 
+		provinces_to_highlight = { province_id = 2986 } 
+
+		trigger = {
+			owns = 2986
+			2986 = {
+				is_core = ROOT
+			}
+			2986 = {
+				num_of_buildings_in_province = 4
+				development = 20
+			}
+		}
+
+		effect = {
+			add_years_of_owned_provinces_production_income = {
+				years = 10
+				custom_tooltip = MONOPOLY_INCOME_GOLD_DESC
+				trigger = {
+					trade_goods = gold
+				}
+			}
+			2986 = {
+				add_permanent_province_modifier = {
+					name = "mol_production_mine"
+					duration = -1
+				}
+			}
+		}
+	}
+}

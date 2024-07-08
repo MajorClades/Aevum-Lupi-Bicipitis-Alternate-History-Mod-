@@ -1,0 +1,226 @@
+alb_kolmejary_edict_of_zetulii = {
+	icon = privilege_grant_autonomy
+	max_absolutism = -5
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	loyalty = -0.1
+	influence = 0.15
+	is_valid = {
+		tag = KO0
+		any_owned_province = {
+			religion = suomi_pagan
+		}
+	}
+	can_revoke = {
+	}
+	on_granted = {
+		custom_tooltip = kolmejar_on_granted_suomi_provinces
+		tooltip = {
+			add_province_modifier = {
+				name = edict_of_zetulii
+				duration = -1
+			}
+		}
+	}
+	on_granted_province = {
+		if = {
+			limit = {
+				religion = suomi_pagan
+			}
+			add_province_modifier = {
+				name = edict_of_zetulii
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = {
+				has_province_modifier = edict_of_zetulii
+			}
+			remove_province_modifier = edict_of_zetulii
+		}
+	}
+	on_revoked = {
+		custom_tooltip = kolmejar_on_removed_suomi_provinces
+		tooltip = {
+			remove_province_modifier = edict_of_zetulii
+		}
+	}
+	on_revoked_province = {
+		if = {
+			limit = {
+				has_province_modifier = edict_of_zetulii
+			}
+			remove_province_modifier = edict_of_zetulii
+		}
+	}
+	on_invalid = {
+		custom_tooltip = kolmejar_on_removed_suomi_provinces
+	}
+	on_invalid_province = {
+		if = {
+			limit = {
+				has_province_modifier = edict_of_zetulii
+			}
+			remove_province_modifier = edict_of_zetulii
+		}
+	}
+	penalties = {
+		yearly_corruption = 0.1
+		tolerance_own = -3
+	}
+	benefits = {
+		tolerance_heathen = 2
+	}
+	conditional_modifier = {
+		trigger = { has_government_mechanic = russian_modernization_mechanic }
+		modifier = { monthly_russian_modernization = -0.03 }
+	}
+	#conditional_modifier = {
+	#	trigger = { has_government_mechanic = ottoman_decadence_mechanic }
+	#	modifier = { monthly_ottoman_decadence = 0.02 }
+	#}
+	ai_will_do = {
+		factor = 1000
+		modifier = {
+			factor = 0
+			OR = {
+				NOT = {
+					any_owned_province = {
+						religion = suomi_pagan
+					}
+				}
+				has_idea_group = religious_ideas
+				is_year = 1500
+			}
+		}
+		modifier = {
+			factor = 0
+			is_subject = yes
+		}
+		modifier = {
+			factor = 0
+			religion = suomi_pagan
+		}
+	}
+}
+
+alb_rhoman_laws_over_faith_laws = {
+	icon = privilege_seek_support_of_clergy
+	max_absolutism = -5
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	loyalty = 0
+	influence = 0
+	is_valid = {
+		tag = RU0
+	}
+	can_revoke = {
+		has_institution = printing_press
+	}
+	on_granted = {
+
+	}
+	on_granted_province = {
+	
+	}
+	on_revoked = {
+	
+	}
+	on_revoked_province = {
+		
+	}
+	on_invalid = {
+		
+	}
+	on_invalid_province = {
+		
+	}
+	conditional_modifier = {
+		trigger = {
+			war_exhaustion = 2
+			NOT = {
+				war_exhaustion = 5
+			}
+		}
+		modifier = {
+			global_tax_modifier = -0.2
+		}
+	}
+	conditional_modifier = {
+		trigger = {
+			war_exhaustion = 5
+			NOT = {
+				war_exhaustion = 9
+			}
+		}
+		modifier = {
+			global_tax_modifier = -0.4
+		}
+	}
+	conditional_modifier = {
+		trigger = {
+			war_exhaustion = 9
+		}
+		modifier = {
+			global_tax_modifier = -0.6
+		}
+	}
+	conditional_modifier = {
+		trigger = {
+			corruption = 2
+			NOT = {
+				corruption = 5
+			}
+		}
+		modifier = {
+			all_estate_loyalty_equilibrium = -0.05
+		}
+	}
+	conditional_modifier = {
+		trigger = {
+			corruption = 5
+			NOT = {
+				corruption = 8
+			}
+		}
+		modifier = {
+			all_estate_loyalty_equilibrium = -0.1
+		}
+	}
+	conditional_modifier = {
+		trigger = {
+			corruption = 8
+		}
+		modifier = {
+			all_estate_loyalty_equilibrium = -0.15
+		}
+	}
+	conditional_modifier = {
+		trigger = {
+			mission_completed = rho_law_honor
+		}
+		modifier = {
+			all_estate_loyalty_equilibrium = 0.05
+		}
+	}
+	conditional_modifier = {
+		trigger = {
+			mission_completed = rho_scribes
+		}
+		modifier = {
+			same_religion_advisor_cost = -0.15
+		}
+	}
+	penalties = {
+		tolerance_own = -1
+	}
+	benefits = {
+		global_unrest = -1
+	}
+
+	ai_will_do = {
+		factor = 1000
+		modifier = {
+			factor = 0
+			has_institution = enlightenment
+		}
+	}
+}

@@ -4,7 +4,77 @@ germ_conf_mechanic = {
 	available = {
 	
 	}
-	
+	powers = {	
+		confederation_power = {
+			gui = parliament_vs_monarchy_gov_mech
+			max = 100	#Centralized
+			min = -100	#Decentralized direction
+			base_monthly_growth = 0.1
+			scaled_modifier = {
+				modifier = {
+					vassal_manpower_bonus = 2
+					vassal_forcelimit_bonus = 1
+					reduced_liberty_desire_on_same_continent = -33
+				}
+				start_value = 0
+				end_value = 100
+			}
+			reverse_scaled_modifier = {
+				modifier = {
+					vassal_manpower_bonus = -1
+					vassal_forcelimit_bonus = -0.5
+					reduced_liberty_desire_on_same_continent = 33
+				}
+				start_value = 0
+				end_value = -100
+			}
+			on_max_reached = {
+				custom_tooltip = german_confederation_max
+				hidden_effect = {
+					every_subject_country = {
+						limit = {
+							is_subject_of_type = ger_vassal
+							NOT = {
+								liberty_desire = 50
+							}
+						}
+						every_owned_province = {
+							add_core = ROOT
+							cede_province = ROOT
+						}
+					}
+					every_subject_country = {
+						limit = {
+							is_subject_of_type = ger_vassal
+							liberty_desire = 50
+						}
+						grant_independence = yes
+					}
+					change_tag = GR0
+					restore_country_name_effect = yes
+					set_government_rank = 3			
+					add_country_modifier = {
+						name = "centralization_modifier"
+						duration = 7300
+					}
+					add_prestige_or_monarch_power = {
+						amount = 25
+					}
+					set_country_flag = formed_germany_flag
+					if = {
+						limit = {
+							has_custom_ideas = no
+						}
+						country_event = { id = ideagroups.1 } #Swap Ideas
+					}
+					add_government_reform = great_germany_reform
+				}				
+			}
+			on_min_reached = {
+				release_all_subjects = yes
+			}
+		}
+	}
 	interactions = {
 		germ_vassal_1 = {
 			icon = GFX_table_of_ranks_adm_button
@@ -13,8 +83,10 @@ germ_conf_mechanic = {
 			effect = {
 				custom_tooltip = GAIN_5_GERM
 				hidden_effect = {
-					country_event = {
-						id = germania.8
+					add_government_power = {
+						mechanic_type = germ_conf_mechanic
+						power_type = confederation_power
+						value = -5
 					}
 				}
 				add_subjects_development_ducats = {
@@ -62,7 +134,7 @@ germ_conf_mechanic = {
 				modifier = {
 					factor = 0.2
 					has_government_power = { 
-						mechanic_type = german_conf_mechanic 
+						mechanic_type = germ_conf_mechanic 
 						power_type = confederation_power 
 						value = 10
 					}
@@ -82,8 +154,10 @@ germ_conf_mechanic = {
 			effect = { 
 				custom_tooltip = GAIN_5_GERM
 				hidden_effect = {
-					country_event = {
-						id = germania.8
+					add_government_power = {
+						mechanic_type = germ_conf_mechanic
+						power_type = confederation_power
+						value = -5
 					}
 				}
 				add_subjects_development_manpower = {
@@ -131,7 +205,7 @@ germ_conf_mechanic = {
 				modifier = {
 					factor = 0.2
 					has_government_power = { 
-						mechanic_type = german_conf_mechanic 
+						mechanic_type = germ_conf_mechanic 
 						power_type = confederation_power 
 						value = 10
 					}
@@ -151,8 +225,10 @@ germ_conf_mechanic = {
 			effect = { 	
 				custom_tooltip = GAIN_10_GERM
 				hidden_effect = {
-					country_event = {
-						id = germania.7
+					add_government_power = {
+						mechanic_type = germ_conf_mechanic
+						power_type = confederation_power
+						value = 10
 					}
 				}
 			}
@@ -167,112 +243,6 @@ germ_conf_mechanic = {
 						liberty_desire = 45
 					}
 				}
-			}
-		}
-	}
-}
-german_conf_mechanic = {
-	available = {
-		
-	}
-
-	powers = {	
-		confederation_power = {
-			gui = parliament_vs_monarchy_gov_mech
-			max = 100	#Centralized
-			min = -100	#Decentralized direction
-			base_monthly_growth = 0
-			scaled_modifier = {
-				trigger = {
-					has_government_power = { 
-						mechanic_type = german_conf_mechanic 
-						power_type = confederation_power 
-						value = 0
-					}
-				}
-				modifier = {
-					vassal_manpower_bonus = 2
-					vassal_forcelimit_bonus = 1
-					reduced_liberty_desire_on_same_continent = -33
-				}
-			}
-			reverse_scaled_modifier = {
-				trigger = {
-					NOT = {
-						has_government_power = { 
-							mechanic_type = german_conf_mechanic 
-							power_type = confederation_power 
-							value = 0
-						}
-					}
-				}
-				modifier = {
-					vassal_manpower_bonus = -1
-					vassal_forcelimit_bonus = -0.5
-					reduced_liberty_desire_on_same_continent = 33
-				}
-			}
-			on_max_reached = {
-				custom_tooltip = german_confederation_max
-				hidden_effect = {
-					every_subject_country = {
-						limit = {
-							is_subject_of_type = ger_vassal
-							NOT = {
-								liberty_desire = 50
-							}
-						}
-						every_owned_province = {
-							add_core = ROOT
-							cede_province = ROOT
-						}
-					}
-					change_tag = GR0
-				restore_country_name_effect = yes
-				if = {
-					limit = {
-						is_emperor = yes
-					}
-					dismantle_hre = yes
-				}
-				else = {
-					emperor = {
-						add_opinion = {
-							who = root
-							modifier = opinion_left_empire
-						}
-					}
-					set_in_empire = no
-					emperor = {
-						country_event = { id = hre_event.5 }
-					}
-				}
-				set_government_rank = 3			
-				add_country_modifier = {
-					name = "centralization_modifier"
-					duration = 7300
-				}
-				add_prestige = 25
-				set_country_flag = formed_germany_flag
-				if = {
-					limit = {
-						has_custom_ideas = no
-					}
-					country_event = { id = ideagroups.1 } #Swap Ideas
-				}
-				add_government_reform = great_germany_reform
-				if = {
-					limit = {
-						NOT = {
-							was_tag = PU0
-						}
-					}
-					swap_non_generic_missions = yes
-				}
-				}				
-			}
-			on_min_reached = {
-				release_all_subjects = yes
 			}
 		}
 	}

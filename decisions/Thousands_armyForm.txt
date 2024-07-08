@@ -17,7 +17,13 @@ country_decisions = {
 				is_free_or_tributary_trigger = yes
 				ai = no
 			}
-			culture_group = serican
+			OR = {
+				culture_group = west_serican
+				culture_group = turkic
+			}
+			NOT = {
+				culture = bolgar
+			}
 			is_colonial_nation = no
 			OR = {
 				is_former_colonial_nation = no
@@ -65,8 +71,8 @@ country_decisions = {
 				add_government_reform = serican_tsardom
 			}
 			if = {
-				limit = { NOT = { government_rank = 2 } }
-				set_government_rank = 2
+				limit = { NOT = { government_rank = 3 } }
+				set_government_rank = 3
 				}
 			if = {
 				limit = {
@@ -91,7 +97,9 @@ country_decisions = {
 				duration = 7300
 			}
 			set_country_flag = formed_1000_flag 
-			add_prestige = 25
+			add_prestige_or_monarch_power = {
+				amount = 50
+			}
 		}
 		ai_will_do = {
 			factor = 1

@@ -1,0 +1,548 @@
+Iberia_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = IB0 } 
+
+	1_ibe_starting_good = {
+		icon = mission_pol_breadbasket_europe
+		position = 1
+		provinces_to_highlight = { region = iberia_region } 
+
+		trigger = {
+			development_in_provinces = {
+				value = 600
+				region = iberia_region
+			}
+		}
+
+		effect = { iberia_region = { add_unrest = -5 }  } 
+	}
+
+	1_ibe_builds = {
+		icon = mission_african_gold
+		position = 2
+		required_missions = { 1_ibe_starting_good } 
+		provinces_to_highlight = { region = iberia_region } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 20
+				region = iberia_region
+				OR = {
+					has_building = workshop
+					has_building = counting_house
+				}
+			}
+		}
+
+		effect = {
+			add_adm_power = 100
+			add_years_of_income = 1.5
+		}
+	}
+
+	1_empire_of_rome = {
+		icon = take_constantinople
+		position = 8
+		required_missions = { 3_empire_of_rome } 
+		provinces_to_highlight = { region = anatolia_region } 
+
+		trigger = {
+			anatolia_region = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			151 = { change_religion = ROOT } 
+			add_country_modifier = {
+				name = "recover_the_east"
+				duration = -1
+			}
+		}
+	}
+}
+Iberia_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = IB0 } 
+
+	2_a_place_under = {
+		icon = mission_west_african_ports
+		position = 4
+		required_missions = { 3_a_place_under } 
+		provinces_to_highlight = { region = maghreb_region } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 20
+				region = maghreb_region
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "ibe_march_for_africa"
+				duration = 10950
+			}
+			if = {
+				limit = { AF0 = { exists = no }  } 
+				country_event = { id = iberia.6 } 
+			}
+		}
+	}
+
+	2_Africa_lord = {
+		icon = africa_proconsulare
+		position = 5
+		required_missions = { 2_a_place_under } 
+		provinces_to_highlight = { region = maghreb_region } 
+
+		trigger = {
+			maghreb_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "ibe_africa_lords"
+				duration = -1
+			}
+			if = {
+				limit = { AF0 = { junior_union_with = ROOT }  } 
+				AF0 = {
+					add_country_modifier = {
+						name = "ibe_africa_lords"
+						duration = -1
+					}
+				}
+				336 = {
+					add_base_tax = 2
+					add_base_production = 2
+					add_base_manpower = 2
+				}
+				217 = {
+					add_base_tax = 2
+					add_base_production = 2
+					add_base_manpower = 2
+				}
+			}
+			else = { custom_tooltip = IBE_AFRICA_LORD } 
+		}
+	}
+
+	2_empire_of_rome = {
+		icon = illyria_mission
+		position = 8
+		required_missions = { 3_empire_of_rome } 
+		provinces_to_highlight = { region = balkan_region } 
+
+		trigger = {
+			balkan_region = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "the_illyrian_iberia"
+				duration = -1
+			}
+		}
+	}
+}
+Iberia_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = IB0 } 
+
+	3_ibe_starting_good = {
+		icon = mission_plc_golden_liberty
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			OR = {
+				stability = 3
+				AND = {
+					stability = 2
+					adm_power = 150
+				}
+			}
+		}
+
+		effect = {
+			add_years_of_income = 1
+			capital_scope = { add_base_manpower = 2 } 
+		}
+	}
+
+	3_ibe_starting_better = {
+		icon = mission_golden_century
+		position = 2
+		required_missions = { 3_ibe_starting_good } 
+		provinces_to_highlight = { area = castille_area } 
+
+		trigger = {
+			castille_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			set_capital = 217
+			217 = {
+				add_province_modifier = {
+					name = "ibe_new_capital"
+					duration = 10950
+				}
+			}
+		}
+	}
+
+	3_a_place_under = {
+		icon = mission_monarch_in_throne_room
+		position = 3
+		required_missions = {
+			1_ibe_builds
+			3_ibe_starting_better
+			5_ibe_empire
+		}
+		provinces_to_highlight = { area = castille_area } 
+
+		trigger = {
+			army_size_percentage = 0.85
+			navy_size_percentage = 0.75
+		}
+
+		effect = {
+			maghreb_region = { add_permanent_claim = ROOT } 
+			france_region = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	3_ibe_italia = {
+		icon = mission_rule_italy
+		position = 5
+		provinces_to_highlight = { region = italy_region } 
+
+		trigger = {
+			OR = {
+				NOT = { hre_size = 0 } 
+				calc_true_if = {
+					desc = ibe_electorate_help
+					amount = 3
+					all_known_country = {
+						alliance_with = root
+						is_elector = yes
+					}
+				}
+			}
+		}
+
+		effect = {
+			italy_region = { add_permanent_claim = ROOT } 
+			custom_tooltip = IBE_ITA_QUEST
+			every_known_country = {
+				limit = {
+					alliance_with = root
+					is_elector = yes
+				}
+				country_event = { id = iberia.8 } 
+			}
+		}
+	}
+
+	3_italian_wars = {
+		icon = west_rome_empire
+		position = 6
+		required_missions = {
+			2_Africa_lord
+			3_ibe_italia
+			4_gothic
+		}
+		provinces_to_highlight = { region = italy_region } 
+
+		trigger = {
+			italy_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			override_country_name = "SOX_ROMAN_WEST"
+			dismantle_hre = yes
+			set_capital = 118
+			118 = {
+				add_base_manpower = 5
+				add_base_production = 5
+				add_base_tax = 5
+			}
+		}
+	}
+
+	3_empire_of_rome = {
+		icon = a_roman_empire
+		position = 7
+		required_missions = { 3_italian_wars } 
+		provinces_to_highlight = {  } 
+
+		trigger = { NOT = { great_power_rank = 2 }  } 
+
+		effect = {
+			if = {
+				limit = { SO0 = { junior_union_with = ROOT }  } 
+				inherit = SO0
+			}
+			if = {
+				limit = { AF0 = { junior_union_with = ROOT }  } 
+				inherit = AF0
+			}
+			balkan_region = { add_permanent_claim = ROOT } 
+			anatolia_region = { add_permanent_claim = ROOT } 
+			egypt_region = { add_permanent_claim = ROOT } 
+			british_isles_region = { add_permanent_claim = ROOT } 
+			mashriq_region = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	3_new_empire_of_rome = {
+		icon = mission_conquer_persia
+		position = 8
+		required_missions = { 3_empire_of_rome } 
+		provinces_to_highlight = { region = mashriq_region } 
+
+		trigger = {
+			mashriq_region = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			379 = { change_religion = ROOT } 
+			add_ruler_modifier = { name = "restorer_of_the_world" } 
+		}
+	}
+
+	3_greatest_empire = {
+		icon = a_place_among_the_great_powers
+		position = 9
+		required_missions = {
+			1_empire_of_rome
+			2_empire_of_rome
+			3_new_empire_of_rome
+			4_empire_of_rome
+			5_empire_of_rome
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = { tag = ROM } 
+
+		effect = {
+			custom_tooltip = ROMAN_CULTURAL_IBE
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						OR = {
+							region = italy_region
+							region = france_region
+							region = iberia_region
+							region = maghreb_region
+						}
+					}
+					change_culture = roman
+				}
+			}
+		}
+	}
+}
+Iberia_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = IB0 } 
+
+	4_a_place_under = {
+		icon = weaken_france
+		position = 4
+		required_missions = { 3_a_place_under } 
+		provinces_to_highlight = { region = france_region } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 20
+				region = france_region
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "ibe_conquest_of_cotia"
+				duration = 10950
+			}
+			if = {
+				limit = { SO0 = { exists = yes }  } 
+				custom_tooltip = IBE_SOX_QUEST
+				SO0 = { country_event = { id = iberia.7 }  } 
+			}
+		}
+	}
+
+	4_gothic = {
+		icon = centralize_france
+		position = 5
+		required_missions = { 4_a_place_under } 
+		provinces_to_highlight = { region = france_region } 
+
+		trigger = {
+			france_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "ibe_gauls"
+				duration = -1
+			}
+			if = {
+				limit = { SO0 = { junior_union_with = ROOT }  } 
+				SO0 = {
+					add_country_modifier = {
+						name = "ibe_gauls"
+						duration = -1
+					}
+				}
+				186 = {
+					add_base_tax = 2
+					add_base_production = 2
+					add_base_manpower = 2
+				}
+				217 = {
+					add_base_tax = 2
+					add_base_production = 2
+					add_base_manpower = 2
+				}
+			}
+			else = { custom_tooltip = IBE_GAUL_LORD } 
+		}
+	}
+
+	4_empire_of_rome = {
+		icon = mission_egyptian_mamluk_soldier
+		position = 8
+		required_missions = { 3_empire_of_rome } 
+		provinces_to_highlight = { region = egypt_region } 
+
+		trigger = {
+			egypt_region = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			358 = { change_religion = ROOT } 
+			delta_area = {
+				add_permanent_province_modifier = {
+					name = "nile_trade"
+					duration = -1
+				}
+			}
+		}
+	}
+}
+Iberia_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = IB0 } 
+
+	5_ibe_starting_good = {
+		icon = mission_religious
+		position = 1
+		provinces_to_highlight = { region = iberia_region } 
+
+		trigger = {
+			iberia_region = {
+				type = all
+				owned_by = ROOT
+				NOT = { unrest = 1 } 
+			}
+		}
+
+		effect = {
+			iberia_region = {
+				add_province_modifier = {
+					name = "ibe_prosperity"
+					duration = 10950
+				}
+			}
+			custom_tooltip = IBE_NORMANS
+			hidden_effect = {
+				every_owned_province = {
+					limit = { culture = vrankish } 
+					change_culture = hispanian_vrankish
+				}
+			}
+		}
+	}
+
+	5_ibe_empire = {
+		icon = mission_empire
+		position = 2
+		required_missions = { 5_ibe_starting_good } 
+		provinces_to_highlight = {  } 
+
+		trigger = { is_great_power = yes } 
+
+		effect = {
+			if = {
+				limit = { government_rank = 3 } 
+				add_power_projection = {
+					type = 10_permanent_power_projection
+					amount = 25
+				}
+				add_reform_progress_big_effect = yes
+			}
+			else = { set_government_rank = 3 } 
+		}
+	}
+
+	5_empire_of_rome = {
+		icon = defeat_the_english
+		position = 8
+		required_missions = { 3_empire_of_rome } 
+		provinces_to_highlight = { region = british_isles_region } 
+
+		trigger = {
+			british_isles_region = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "britannic_walls"
+				duration = -1
+			}
+		}
+	}
+}

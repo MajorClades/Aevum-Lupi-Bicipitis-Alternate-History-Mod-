@@ -1,0 +1,123 @@
+saxony_knight_lodge = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 11
+	available = {
+
+	}
+
+	powers = {
+		knight_influence = {
+			max = 100
+			min = 0
+			reset_on_new_ruler = no
+			development_scaled_monthly_growth = 0
+			scaled_modifier = {
+				modifier = {
+					infantry_power = 0.2
+					cavalry_power = 0.2
+					army_tradition = 1
+					monthly_knight_influence = 0.5
+					diplomatic_reputation = -2
+					monthly_reform_progress = -1
+					global_unrest = 6
+					war_exhaustion_cost = 0.5
+				}
+			}
+			base_monthly_growth = -0.1
+			is_good = no
+		}
+	}
+	
+	interactions = {
+		contain_knight_influence = {
+			gui = hessian_militarization_gov_mech
+			cost_type = knight_influence
+			center = no
+			trigger = {
+				has_government_power = {
+					mechanic_type = saxony_knight_lodge
+					power_type = knight_influence
+					value = 5
+				}
+				adm_power = 100
+			}
+			effect = {
+				add_adm_power = -100
+				add_government_power = {
+					mechanic_type = saxony_knight_lodge
+					power_type = knight_influence
+					value = -5
+				}
+			}
+			ai_chance = {
+				factor = 50
+				modifier = {
+					factor = 0
+					is_at_war = yes
+				}
+				modifier = {
+					factor = 0
+					is_in_deficit = yes
+				}
+				modifier = {
+					factor = 0
+					num_of_loans = 3
+				}
+				modifier = {
+					factor = 0
+					NOT = {
+						unrest = 2
+					}
+				}
+				modifier = {
+					factor = 0
+					NOT = { adm_power = 250 }
+				}
+				modifier = {
+					factor = 0
+					NOT = { stability = 0 }
+				}
+				modifier = {
+					factor = 0
+					NOT = { 
+						has_government_power = {
+							mechanic_type = saxony_knight_lodge
+							power_type = knight_influence
+							value = 30
+						}
+					}
+				}
+				modifier = {
+					factor = 0.25
+					NOT = { 
+						has_government_power = {
+							mechanic_type = saxony_knight_lodge
+							power_type = knight_influence
+							value = 40
+						}
+					}
+				}
+				modifier = {
+					factor = 0.5
+					NOT = { 
+						has_government_power = {
+							mechanic_type = saxony_knight_lodge
+							power_type = knight_influence
+							value = 50
+						}
+					}
+				}
+				modifier = {
+					factor = 0.75
+					NOT = { 
+						has_government_power = {
+							mechanic_type = saxony_knight_lodge
+							power_type = knight_influence
+							value = 60
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -196,6 +196,11 @@ country_decisions = {
 		potential = {
 			tag = MX0
 			government_rank = 3
+			any_owned_province = {
+				NOT = {
+					culture = aztlan
+				}
+			}
 		}
 
 		allow = {
@@ -230,15 +235,22 @@ country_decisions = {
 			OR = {
 				tag = MX0
 				tag = FJ0
+				tag = FJ9
 			}
-			ai = no
 			has_country_flag = mexican_vinland_treaty
+			if = {
+				limit = {
+					ai = yes
+				}
+				is_year = 1750
+			}
 		}
 
 		allow = {
 			OR = {
 				alliance_with = MX0
 				alliance_with = FJ0
+				alliance_with = FJ9
 			}
 			custom_trigger_tooltip = {
 				tooltip = ALLIANCE_MEX_VIN
@@ -254,17 +266,55 @@ country_decisions = {
 				limit = {
 					tag = MX0
 				}
-				inherit = FJ0
+				if = {
+					limit = {
+						exists = FJ9
+					}
+					inherit = FJ9
+				}
+				else = {
+					inherit = FJ0
+				}
 			}
 			if = {
 				limit = {
-					tag = FJ0
+					OR = {
+						tag = FJ0
+						tag = FJ9
+					}
 				}
 				inherit = MX0
 			}
 			add_country_modifier = {
 				name = rausulian_tolerance
 				duration = -1
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	colonize_empty_fja = {
+		major = yes
+		potential = {
+			any_core_province = {
+				is_city = no
+				is_core = FJ0
+			}
+		}
+
+		allow = {
+			any_core_province = {
+				is_city = no
+				is_core = FJ0
+			}
+		}
+		effect = {
+			every_core_province = {
+				limit = {
+					is_city = no
+				}
+				colonize_or_core_fj0 = yes
 			}
 		}
 		ai_will_do = {

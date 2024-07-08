@@ -16,7 +16,7 @@ country_decisions = {
 			}
 			NOT = { exists = ZL0 }
 			NOT = { tag = PAP }
-			NOT = { tag = HLR }
+			NOT = { tag = IT9 }
 			culture_group = zladinian
 			OR = {
 				ai = no
@@ -57,23 +57,112 @@ country_decisions = {
 			change_tag = ZL0
 			remove_non_electors_emperors_from_empire_effect = yes
 			if = {
-				limit = { NOT = { government_rank = 2 } }
-				set_government_rank = 2
+				limit = { NOT = { government_rank = 3 } }
+				set_government_rank = 3
+			}
+			if = {
+				limit = {
+					government = monarchy
+				}
+				add_government_reform = alb_zimmska_zardom
 			}
 			add_country_modifier = {
 				name = "centralization_modifier"
 				duration = 7300
 			}
-			add_prestige = 10
+			add_prestige_or_monarch_power = {
+				amount = 25
+			}
 			set_country_flag = formed_zimmska_flag
 			if = {
 				limit = { has_custom_ideas = no }
 				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			swap_non_generic_missions = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	zimmska_raise_vyhlasky = {
+		potential = {
+			has_government_attribute = alb_zimmska_can_raise_manpower_from_home_region
+		}
+		allow = {
+			is_at_war = yes
+			custom_trigger_tooltip = {
+				tooltip = decision_once_every_ten_years
+				OR = {
+					NOT = { has_country_flag = raised_the_vyhlasky }
+					had_country_flag = {
+						flag = raised_the_vyhlasky
+						days = 3650
+					}
+				}
+			}
+			OR = {
+				is_in_war = {
+					defender_leader = ROOT
+				}
+				mil_power_cost = 50
+			}
+		}
+		effect = {
+			clr_country_flag = raised_the_vyhlasky
+			set_country_flag = raised_the_vyhlasky
+			if = {
+				limit = {
+					is_in_war = {
+						defender_leader = ROOT
+					}
+				}
+				custom_tooltip = por_raise_the_ordenancas_bt
+			}
+			else = {
+				mil_power_cost = 50
+			}
+			hidden_effect = {
+				capital_scope = {
+					save_event_target_as = capital_province
+					region = {
+						limit = {
+							owned_by = ROOT
+							NOT = {
+								province_distance = {
+									who = event_target:capital_province
+									distance = 50
+								}
+							}
+						}
+						set_province_flag = vyhlasky_province_flag
+					}
+				}
+				add_years_of_owned_provinces_manpower = {
+					years = 1
+					trigger = {
+						has_province_flag = vyhlasky_province_flag
+					}
+				}
+				add_years_of_owned_provinces_sailors = {
+					years = 1
+					trigger = {
+						has_province_flag = vyhlasky_province_flag
+					}
+				}
+				every_owned_province = {
+					limit = { has_province_flag = vyhlasky_province_flag }
+					clr_province_flag = vyhlasky_province_flag
+				}
+			}
+			custom_tooltip = por_raise_the_ordenancas_at
+			add_war_exhaustion = -2
+			add_country_modifier = {
+				name = alb_zimmska_raised_vyhlasky
+				duration = 3650
 			}
 		}
 		ai_will_do = {
 			factor = 1
 		}
 	}
-	
 }

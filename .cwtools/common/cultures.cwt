@@ -1,0 +1,116 @@
+
+types = {
+	type[culture_group] = {
+		path = "game/common/cultures"
+		localisation = {
+			name = "$"
+		}
+	}
+	## type_key_filter <> { male_names female_names dynasty_names province country }
+	type[culture] = {
+		path = "game/common/cultures"
+		skip_root_key = any
+		localisation = {
+			name = "$"
+		}
+	}
+}
+
+enums = {
+	complex_enum[dynasty_name] = {
+		path = "game/common/cultures"
+		name = {
+			dynasty_names = {
+				enum_name
+			}
+			name = {
+				dynasty_names = {
+					enum_name
+				}
+			}
+		}
+	}
+}
+
+culture_group = {
+	## cardinality = 0..1
+	graphical_culture = enum[graphical_cultures]
+
+	## cardinality = 0..1
+	second_graphical_culture = enum[graphical_cultures]
+
+	## cardinality = 0..1
+	male_names = {
+		## cardinality = 1..inf
+		scalar
+	}
+
+	## cardinality = 0..1
+	female_names = {
+		## cardinality = 1..inf
+		scalar
+	}
+
+	## cardinality = 0..1
+	dynasty_names = {
+		## cardinality = 0..inf
+		scalar
+	}
+
+	## cardinality = 0..1
+	## replace_scope = { this = province root = province }
+	###All provinces with a culture in this culture group will get the following modifiers, stacks with specific culture modifiers
+	province = {
+		alias_name[modifier] = alias_match_left[modifier]
+	}
+
+	## cardinality = 0..1
+	## replace_scope = { this = country root = country }
+	###All countries with primary culture in this culture group will get the following modifiers, stacks with specific tulture modifiers
+	country = {
+		alias_name[modifier] = alias_match_left[modifier]
+	}
+
+	## cardinality = 0..inf
+	<culture> = {
+		## cardinality = 0..1
+		graphical_culture = enum[graphical_cultures]
+		## cardinality = 0..1
+		second_graphical_culture = enum[graphical_cultures]
+
+		## cardinality = 0..1
+		primary = enum[country_tags]
+
+		## cardinality = 0..1
+		male_names = {
+			## cardinality = 1..inf
+			scalar
+		}
+
+		## cardinality = 0..1
+		female_names = {
+			## cardinality = 1..inf
+			scalar
+		}
+
+		## cardinality = 0..1
+		dynasty_names = {
+			## cardinality = 0..inf
+			scalar
+		}
+
+		## cardinality = 0..1
+		## replace_scope = { this = province root = province }
+		###All provinces of this culture will get the following modifiers, stacks with culture group modifiers
+		province = {
+			alias_name[modifier] = alias_match_left[modifier]
+		}
+
+		## cardinality = 0..1
+		## replace_scope = { this = country root = country }
+		###All countries with this primary culture will get the following modifiers, stacks with culture group modifiers
+		country = {
+			alias_name[modifier] = alias_match_left[modifier]
+		}
+	}
+}

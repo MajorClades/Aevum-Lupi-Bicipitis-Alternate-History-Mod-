@@ -1,0 +1,814 @@
+Rasna_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { tag = ROM } 
+		OR = {
+			tag = PD7
+			AND = {
+				has_country_flag = generic_italy_MT
+				was_tag = PD7
+			}
+		}
+	}
+
+	rasna_of_coast = {
+		icon = pulverize_pisa
+		position = 2
+		required_missions = { rasna_coastline } 
+		provinces_to_highlight = { 
+			area = rasna_area 
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {
+			rasna_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			115 = { add_center_of_trade_level = 2 } 
+			liguria_area = { add_permanent_claim = ROOT } 
+			corsica_sardinia_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	rasna_old_claims = {
+		icon = mission_seize_the_isles
+		position = 3
+		required_missions = { rasna_of_coast } 
+		provinces_to_highlight = {
+			area = corsica_sardinia_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			corsica_sardinia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			country_event = { id = gen_ita.8 } 
+			sardinia_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	rasna_more_islands = {
+		icon = mission_invade_island
+		position = 5
+		required_missions = { rasna_old_claims } 
+		provinces_to_highlight = {
+			area = sardinia_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			sardinia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_dip_power = 50
+			2986 = { add_base_production = 2 } 
+			baleares_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	rasna_more_more_islands = {
+		icon = mission_plus_ultra
+		position = 6
+		required_missions = { rasna_more_islands } 
+		provinces_to_highlight = {
+			area = baleares_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			baleares_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			226 = { add_permanent_claim = ROOT } 
+			1751 = { add_permanent_claim = ROOT } 
+			add_country_modifier = {
+				name = "rasna_more_exploration"
+				duration = 10950
+			}
+		}
+	}
+}
+Rasna_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { tag = ROM } 
+		OR = {
+			tag = PD7
+			AND = {
+				has_country_flag = generic_italy_MT
+				was_tag = PD7
+			}
+		}
+	}
+
+	rasna_coastline = {
+		icon = continue_the_renaissance
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			if = {
+				limit = { ai = yes } 
+				num_of_generals = 1
+				army_size_percentage = 0.6
+			}
+			else = { army_size_percentage = 1 } 
+		}
+
+		effect = {
+			tuscany_area = { add_permanent_claim = ROOT } 
+			rasna_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	rasna_in_land = {
+		icon = conquer_tuscany
+		position = 2
+		required_missions = { rasna_coastline } 
+		provinces_to_highlight = {
+			area = tuscany_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			tuscany_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			116 = {
+				add_great_project_tier = {
+					type = santa_maria_del_fiore
+					tier = 1
+				}
+			}
+			emilia_romagna_area = { add_permanent_claim = ROOT } 
+			central_italy_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	rasna_ancona = {
+		icon = bibliotheca_corviana
+		position = 4
+		required_missions = { rasna_in_land } 
+		provinces_to_highlight = {
+			area = central_italy_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			central_italy_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			capital_scope = { add_or_upgrade_university_building = yes } 
+			lazio_area = { add_permanent_claim = ROOT } 
+		}
+	}
+}
+Rasna_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { tag = ROM } 
+		OR = {
+			tag = PD7
+			AND = {
+				has_country_flag = generic_italy_MT
+				was_tag = PD7
+			}
+		}
+	}
+
+	rasna_tuscany = {
+		icon = republican_yearnings
+		position = 2
+		required_missions = { rasna_coastline } 
+		provinces_to_highlight = {
+			OR = {
+				is_capital_of = AP8
+				is_capital_of = SIE
+			}
+		}
+
+		trigger = {
+			has_dip_advisor = yes
+			prestige = 15
+			OR = {
+				alliance_with = AP8
+				alliance_with = SIE
+				AND = {
+					NOT = { AP8 = { exists = yes }  } 
+					NOT = { SIE = { exists = yes }  } 
+				}
+			}
+		}
+
+		effect = {
+			if = {
+				limit = {
+					OR = {
+						AP8 = { exists = yes } 
+						SIE = { exists = yes } 
+					}
+				}
+				country_event = { id = gen_ita.3 } 
+			}
+			else = { add_adm_power = 100 } 
+		}
+	}
+
+	rasna_boilogna = {
+		icon = republican_yearnings
+		position = 3
+		required_missions = { rasna_in_land } 
+		provinces_to_highlight = {
+			area = emilia_romagna_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			emilia_romagna_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			change_innovativeness = 10
+			veneto_area = { add_permanent_claim = ROOT } 
+			po_valley_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	rasna_old_names = {
+		icon = tuscan_birthright
+		position = 5
+		required_missions = {
+			rasna_ancona
+			rasna_boilogna
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = tuscany_area
+				area = rasna_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			tuscany_area = {
+				type = all
+				owned_by = ROOT
+			}
+			rasna_area = {
+				type = all
+				owned_by = ROOT
+			}
+			grown_by_development = 150
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "rasna_etruscan_heir"
+				duration = -1
+			}
+			custom_tooltip = alb_ita_etruscia_rename_tt
+			set_country_flag = alb_unlock_etruscia_rename_flag
+		}
+	}
+
+	rasna_rome = {
+		icon = a_real_roman_empire
+		position = 5
+		required_missions = { rasna_old_names } 
+		provinces_to_highlight = {
+			area = lazio_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			lazio_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			118 = { add_core = ROOT } 
+			italy_region = { add_permanent_claim = ROOT } 
+			country_event = { id = gen_ita.100 } 
+		}
+	}
+}
+Rasna_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { tag = ROM } 
+		OR = {
+			tag = PD7
+			AND = {
+				has_country_flag = generic_italy_MT
+				was_tag = PD7
+			}
+		}
+	}
+
+	rasna_medici = {
+		icon = mission_high_income
+		position = 2
+		required_missions = { rasna_papal_enemy } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			estate_loyalty = {
+				estate = estate_burghers
+				loyalty = 65
+			}
+		}
+
+		effect = {
+			define_advisor = {
+				type = statesman
+				name = "Cosimo Medici"
+				skill = 2
+				cost_multiplier = 0.25
+			}
+		}
+	}
+
+	rasna_veneto = {
+		icon = republican_yearnings
+		position = 4
+		required_missions = { rasna_boilogna } 
+		provinces_to_highlight = {
+			OR = {
+				area = po_valley_area
+				area = veneto_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 6
+				OR = {
+					area = po_valley_area
+					area = veneto_area
+				}
+			}
+		}
+
+		effect = {
+			add_army_tradition = 10
+			add_navy_tradition = 10
+			add_treasury = 500
+		}
+	}
+}
+Rasna_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { tag = ROM } 
+		OR = {
+			tag = PD7
+			AND = {
+				has_country_flag = generic_italy_MT
+				was_tag = PD7
+			}
+		}
+	}
+
+	rasna_papal_enemy = {
+		icon = sway_the_pope
+		position = 1
+		provinces_to_highlight = { is_capital_of = PAP } 
+
+		trigger = {
+			OR = {
+				PAP = { exists = no } 
+				PAP = {
+					alliance_with = ROOT
+					has_opinion = {
+						who = ROOT
+						value = 180
+					}
+					papal_influence = 50
+				}
+				AND = {
+					PAP = { is_rival = ROOT } 
+					is_rival = PAP
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = RASNA_TT_1a
+			tooltip = { lazio_area = { add_permanent_claim = ROOT }  } 
+			custom_tooltip = RASNA_TT_1b
+			tooltip = {
+				excommunicate = ROOT
+				4956 = { add_core = ROOT } 
+				lazio_area = { add_permanent_claim = ROOT } 
+			}
+			custom_tooltip = RASNA_TT_1c
+			tooltip = {
+				add_papal_influence = -50
+				4956 = { add_core = ROOT } 
+				add_favors = {
+					who = PAP
+					amount = 50
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = { PAP = { exists = no }  } 
+					lazio_area = { add_permanent_claim = ROOT } 
+				}
+				else = {
+					if = {
+						limit = {
+							PAP = { is_rival = ROOT } 
+							is_rival = PAP
+						}
+						excommunicate = ROOT
+						4956 = { add_core = ROOT } 
+						lazio_area = { add_permanent_claim = ROOT } 
+					}
+					else = {
+						add_papal_influence = -50
+						4956 = { add_core = ROOT } 
+						add_favors = {
+							who = PAP
+							amount = 50
+						}
+					}
+				}
+			}
+		}
+	}
+
+	rasna_de_forza = {
+		icon = mission_have_two_subjects
+		position = 2
+		required_missions = { rasna_papal_enemy } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			estate_loyalty = {
+				estate = estate_nobles
+				loyalty = 65
+			}
+		}
+
+		effect = {
+			define_general = {
+				name = "Francesco De'Forza"
+				shock = 4
+				fire = 3
+				manuever = 4
+				siege = 2
+			}
+		}
+	}
+
+	rasna_overture = {
+		icon = mission_unite_home_region
+		position = 3
+		required_missions = {
+			rasna_tuscany
+			rasna_medici
+			rasna_de_forza
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = tuscany_area
+				area = rasna_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			development_in_provinces = {
+				value = 100
+				OR = {
+					area = tuscany_area
+					area = rasna_area
+				}
+			}
+		}
+
+		effect = { country_event = { id = gen_ita.6 }  } 
+	}
+}
+Rasna_5c_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { tag = ROM } 
+		OR = {
+			tag = PD7
+			AND = {
+				has_country_flag = generic_italy_MT
+				was_tag = PD7
+			}
+		}
+		NOT = { has_country_flag = medici_missions_flag } 
+		NOT = { has_country_flag = forza_missions_flag } 
+	}
+
+	rasna_unlock_1 = {
+		icon = mission_locked_mission
+		position = 4
+		required_missions = { rasna_overture } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = RASNA_TT_LOCK
+				always = no
+			}
+		}
+
+		effect = {  } 
+	}
+
+	rasna_unlock_2 = {
+		icon = mission_locked_mission
+		position = 5
+		required_missions = { rasna_unlock_1 } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = RASNA_TT_LOCK
+				always = no
+			}
+		}
+
+		effect = {  } 
+	}
+
+	rasna_unlock_3 = {
+		icon = mission_locked_mission
+		position = 6
+		required_missions = { rasna_unlock_2 } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = RASNA_TT_LOCK
+				always = no
+			}
+		}
+
+		effect = {  } 
+	}
+}
+Rasna_5a_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { tag = ROM } 
+		OR = {
+			tag = PD7
+			AND = {
+				has_country_flag = generic_italy_MT
+				was_tag = PD7
+			}
+		}
+		has_country_flag = medici_missions_flag
+	}
+
+	rasna_med_more_stuff = {
+		icon = commission_the_mona_lisa
+		position = 4
+		required_missions = { rasna_overture } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			stability = 2
+			calc_true_if = {
+				amount = 2
+				all_elector = { alliance_with = ROOT } 
+			}
+		}
+
+		effect = {
+			every_country = {
+				limit = { is_part_of_hre = yes } 
+				reverse_add_aggressive_expansion = {
+					who = ROOT
+					value = -10
+					apply_calc = no
+				}
+			}
+			add_country_modifier = {
+				name = "rasna_medici_rizz"
+				duration = 10950
+			}
+		}
+	}
+
+	rasna_med_emperors = {
+		icon = medici_bank_ledgers
+		position = 5
+		required_missions = { rasna_med_more_stuff } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			stability = 3
+			diplomatic_reputation = 5
+			is_emperor = yes
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "rasna_imperial_connections"
+				duration = 10950
+			}
+			every_country = {
+				limit = { is_part_of_hre = yes } 
+				reverse_add_aggressive_expansion = {
+					who = ROOT
+					value = -10
+					apply_calc = no
+				}
+			}
+		}
+	}
+
+	rasna_glorious_empire = {
+		icon = carolingian_empire
+		position = 6
+		required_missions = { rasna_med_emperors } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			is_emperor = yes
+			all_elector = {
+				has_opinion = {
+					who = ROOT
+					value = 180
+				}
+			}
+			imperial_influence = 50
+		}
+
+		effect = {
+			add_imperial_influence = -50
+			add_country_modifier = {
+				name = "rasna_imperial_family"
+				duration = -1
+			}
+		}
+	}
+}
+Rasna_5b_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { tag = ROM } 
+		OR = {
+			tag = PD7
+			AND = {
+				has_country_flag = generic_italy_MT
+				was_tag = PD7
+			}
+		}
+		has_country_flag = forza_missions_flag
+	}
+
+	rasna_for_more_stuff = {
+		icon = mission_exploration
+		position = 4
+		required_missions = { rasna_overture } 
+		provinces_to_highlight = { colonial_region = colonial_the_carribean } 
+
+		trigger = {
+			stability = 2
+			any_owned_province = {
+				colonial_region = colonial_the_carribean
+				is_city = yes
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "rasna_forza_expedition"
+				duration = 10950
+			}
+			cuba_area = { add_permanent_claim = ROOT } 
+			colonial_mexico = { discover_country = ROOT } 
+			gulf_of_mexico_area = { discover_country = ROOT } 
+			caribbean_sea_area = { discover_country = ROOT } 
+		}
+	}
+
+	rasna_for_colonialism = {
+		icon = mission_explore_the_world
+		position = 5
+		required_missions = { rasna_for_more_stuff } 
+		provinces_to_highlight = { area = cuba_area } 
+
+		trigger = {
+			manpower = 1
+			cuba_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_manpower = -1
+			2630 = {
+				if = {
+					limit = { owner = { technology_group = mesoamerican }  } 
+					owner = {
+						country_event = {
+							id = gen_ita.9
+							days = 23
+						}
+					}
+					custom_tooltip = RASNA_TT_2
+				}
+				else = { add_permanent_claim = ROOT } 
+			}
+		}
+	}
+
+	rasna_for_yucatan = {
+		icon = mission_mayan_conquest
+		position = 6
+		required_missions = { rasna_for_colonialism } 
+		provinces_to_highlight = {
+			colonial_region = colonial_mexico
+			country_or_non_sovereign_subject_holds = ROOT
+		}
+
+		trigger = {
+			any_subject_country = {
+				num_of_owned_provinces_with = {
+					value = 30
+					colonial_region = colonial_mexico
+				}
+			}
+		}
+
+		effect = {
+			every_subject_country = {
+				limit = { capital_scope = { colonial_region = colonial_mexico }  } 
+				capital_scope = { add_random_development = 8 } 
+				change_primary_culture = iocotanobo
+				every_owned_province = {
+					limit = { has_owner_accepted_culture = yes } 
+					change_culture = iocotanobo
+				}
+			}
+		}
+	}
+}

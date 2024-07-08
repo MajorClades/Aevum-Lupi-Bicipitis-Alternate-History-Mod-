@@ -4,7 +4,7 @@ valtea_event_action = {
 	category = covert
 	require_acceptance = no
 	is_visible = {
-		has_reform = valtea_spy_reform
+		has_government_mechanic = valtea_intel_mechanic
     }
 
 	is_allowed = {
@@ -18,8 +18,16 @@ valtea_event_action = {
 					tech_difference = 2
 				}
 			}
-			NOT = {
-				has_country_modifier = valtea_defense
+			if = {
+				limit = {
+					has_country_modifier = valtea_defense
+				}
+				custom_trigger_tooltip = {
+					tooltip = NOT_DONE_VALTEA_SPY_ACTION_IN_COUNTRY
+					NOT = {
+						has_country_modifier = valtea_defense
+					}
+				}
 			}
 		}
     }
@@ -57,22 +65,154 @@ friendship_action = {
 
 	is_allowed = {
 		is_at_war = no
+		treasury = 100
 		FROM = {
 			primary_culture = ellan
 			is_at_war = no
 			has_opinion = {
 				who = ROOT
-				value = 180
+				value = 190
 			}
+			alliance_with = ROOT
 		}
     }
 	on_accept = {
 		ROOT = {
-			add_treasury = -50
-			vassalize = FROM
+			add_treasury = -100
+			if = {
+				limit = {
+					from = {
+						ai = yes
+					}
+				}
+				vassalize = FROM
+			}
+			else = {
+				FROM = {
+					every_owned_province = {
+						add_core = ROOT
+					}
+				}
+			}
 		}
     }
 	ai_will_do = {
         always = no
     }
+}
+
+# Shamely copied from Anbennar
+make_autonomous_vassal = {
+	category = influence
+	
+	alert_index = 40
+	alert_tooltip = demand_dummy_alert_tooltip
+	require_acceptance = no # Whether the recipient gets an option to decline
+	is_visible = {
+		is_subject = no
+		FROM = {
+			is_subject_of_type = vassal
+			is_subject_of = ROOT		
+		}
+	}
+	is_allowed = {
+		hidden_trigger = {
+			is_subject = no
+			FROM = {
+				is_subject_of_type = vassal
+				is_subject_of = ROOT		
+			}
+		}
+		reverse_has_opinion = {
+			who = FROM
+			value = 0
+		}
+		FROM = {
+			is_subject_of_type = vassal
+			is_subject_of = ROOT		
+		}
+	}
+	on_accept = {
+		add_trust = {
+			who = FROM
+			value = 10
+			mutual = yes
+		}
+		create_subject = {
+			subject_type = autonomous_vassal
+			subject = FROM 
+		}
+	}
+	on_decline = 	{
+	}
+	
+	ai_acceptance = { # This works similarly to variable_arithmetic_trigger, but does not support triggers generally. Instead, "limit" will be evaluated first and the rest ignored if it isn't passed.
+  	
+	}
+
+	ai_will_do = { # this is a trigger
+		always = no
+	}
+}
+
+cancel_autonomous_vassal =  {
+	category = influence
+	require_acceptance = no
+	is_visible = {
+		overlord_of = FROM
+		FROM = {
+			is_subject_of_type = autonomous_vassal
+		}
+	}
+	
+	is_allowed = {
+		hidden_trigger = {
+			overlord_of = FROM
+			FROM = {
+				is_subject_of_type = autonomous_vassal
+			}
+		}
+		FROM = {
+			NOT = { liberty_desire = 50 }
+		}
+		reverse_has_opinion = {
+			who = FROM
+			value = 0
+		}
+		FROM = {
+			is_subject_of_type = autonomous_vassal
+			is_subject_of = ROOT		
+		}
+		stability = 0
+	}
+	
+	on_accept = {
+		add_trust = {
+			who = FROM
+			value = -20
+			mutual = yes
+		}
+		create_subject = {
+			subject_type = vassal
+			subject = FROM  # dk check
+		}
+		FROM = {
+			add_liberty_desire = 65
+		}
+		if = {
+			limit = {
+				NOT = { full_idea_group = diplomatic_ideas } #reduced_stab_impacts = yes
+			}
+			add_stability = -1
+		}
+
+	}
+	
+	ai_will_do = {
+		stability = 2 # Need to have the stab for it
+		NOT = { vassal = 2 } # Gotta have a small number of other subjects, so you don't make em all disloyal
+		FROM = { # They must have low liberty desire
+			liberty_desire = 0
+		}
+	}
 }

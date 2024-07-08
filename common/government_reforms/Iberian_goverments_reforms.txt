@@ -1,0 +1,103 @@
+
+raklion_merchants_reform = {
+	icon = "trading_city"
+	allow_normal_conversion = no
+	duration = 6
+	modifiers = {
+		max_absolutism = -50
+		admiral_cost = -0.25
+		burghers_loyalty_modifier = 0.1
+		burghers_privilege_slots = 1
+	}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 40
+	potential = {
+		OR = {
+			tag = RK0
+			was_tag = RK0
+		}
+	}
+	
+	boost_income = yes
+	factions = {
+		mr_aristocrats
+		mr_traders
+		mr_guilds
+	}
+	conditional = {
+		allow = {
+			has_dlc = "Res Publica"
+			NOT = { has_dlc = "Mare Nostrum" }
+		}
+		can_use_trade_post = yes
+	}
+	conditional = {
+		allow = {
+			has_dlc = "Mare Nostrum"
+			NOT = { has_dlc = "Res Publica" }
+		}
+		can_form_trade_league = yes
+		trade_city_reform = trading_city
+	}
+	conditional = {
+		allow = {
+			has_dlc = "Res Publica"
+			has_dlc = "Mare Nostrum"
+		}
+		can_use_trade_post = yes
+		can_form_trade_league = yes
+		trade_city_reform = trading_city
+	}
+	custom_attributes = {
+		enables_plutocratic_idea_group = yes
+		enables_aristocratic_idea_group = no
+		is_merchant_republic = yes
+		elections_increase_factions_influence = yes
+	}
+}
+
+swebish_monarchy = {
+	icon = "austrian_dual_monarchy_reform"
+	allow_normal_conversion = yes
+	potential = {
+		culture = swebish
+	}
+	trigger = {
+		OR = {
+			culture = swebish
+			tag = WE0
+			was_tag = WE0
+		}
+	}
+	valid_for_nation_designer = no
+	nation_designer_cost = 100
+	modifiers = {
+		max_absolutism = -10
+		tolerance_heathen = 1
+		burghers_influence_modifier = 0.05
+		prestige_from_land = 0.5
+	}
+}
+
+vrankish_kingdom = {
+	icon = "commander_king_reform"
+	allow_normal_conversion = yes
+	potential = {
+		culture = vrankish
+	}
+	trigger = {
+		OR = {
+			culture = vrankish
+			tag = VR0
+			was_tag = VR0
+		}
+	}
+	valid_for_nation_designer = no
+	nation_designer_cost = 100
+	modifiers = {
+		mercenary_cost = 0.15
+		infantry_cost = 0.15
+		discipline = 0.05
+		monarch_admin_power = 1
+	}
+}

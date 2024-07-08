@@ -1028,19 +1028,18 @@ country_event = {
 	option = {
 		name = siec.11a
 		ai_chance = {
-			factor = 0
+			factor = 50
 		}
 		SX0 = {
-			create_subject = {
-				subject_type = siesheng_vassal
-				who = ROOT
+			country_event = {
+				id = saxo.3
 			}
 		}
 	}
 	option = {
 		name = siec.11b
 		ai_chance = {
-			factor = 50
+			factor = 0
 		}
 		define_general = {
 			shock = 4
@@ -1576,19 +1575,60 @@ country_event = {
 	is_triggered_only = yes
 	option = {
 		name = siec.1000a
-		override_country_name = SIE_DRAGON_EMPIRE
 		inherit = SI1
 		inherit = SI2
 		inherit = SI3
 		inherit = SI4
+		custom_tooltip = empty_line_tt
+		change_tag = TH1
+			restore_country_name = yes
+			remove_non_electors_emperors_from_empire_effect = yes
+			if = {
+				limit = {
+					government = monarchy
+				}
+				add_government_reform = serican_tsardom
+			}
+			if = {
+				limit = { NOT = { government_rank = 3 } }
+				set_government_rank = 3
+				}
+			if = {
+				limit = {
+					has_custom_ideas = no
+				}
+					country_event = { id = ideagroups.1 } #Swap Ideas
+				}
+				russia_region = {
+					add_permanent_claim = TH1
+				}
+				ruthenia_region = {
+					add_permanent_claim = TH1
+				}
+				ural_region = {
+					add_permanent_claim = TH1
+				}
+				baltic_region = {
+					add_permanent_claim = TH1
+				}
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			set_country_flag = formed_1000_flag 
+			add_prestige_or_monarch_power = {
+				amount = 50
+			}
 	}
 	option = {
 		name = siec.1000b
+		set_country_flag = unlock_empire_city_reform_flag
 		add_government_reform = empire_city_reform
+		override_country_name = SIE_DRAGON_EMPIRE
 		280 = {
-			add_base_tax = 20
-			add_base_production = 20
-			add_base_manpower = 20
+			add_base_tax = 10
+			add_base_production = 10
+			add_base_manpower = 10
 		}
 	}
 }
