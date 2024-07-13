@@ -1,0 +1,59 @@
+alb_sygirdom_revolt_disaster = {
+
+	potential = {
+		tag = SO0
+		NOT = {
+			has_country_flag = alb_ended_sygirdom_revolt_flag
+		}
+	}
+	
+	can_start = {
+		always = yes
+	}
+	
+	can_stop = {
+		has_any_disaster = yes
+	}
+	
+	down_progress = {
+		factor = 0
+	}
+	
+	progress = {
+		modifier = {
+			factor = 100
+			tag = SO0
+		}	
+	}
+	
+	can_end = {
+		NOT = { num_of_rebel_armies = 1 }
+		NOT = { num_of_rebel_controlled_provinces = 1 }
+		stability = 1
+		custom_trigger_tooltip = {
+			tooltip = alb_sox_dealt_with_all_subjects_tt
+			all_subject_country = {
+				OR = {
+					has_country_flag = alb_revolted_from_soxony_flag
+					tag = SO4
+				}
+			}
+		}
+	}
+	modifier = {
+		global_unrest = 5
+		stability_cost_modifier = 0.33
+		land_forcelimit_modifier = -0.15
+	}
+	on_monthly = {
+		random_events = {
+			100 = soxony.2
+			100 = soxony.19
+			50 = soxony.3
+			50 = soxony.18
+			1000 = 0
+		}
+	}
+	on_start = soxony.1
+	on_end = soxony.17
+}

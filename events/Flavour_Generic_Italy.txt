@@ -632,7 +632,7 @@ country_event = {	#event Aquileia consort
 		define_consort = {
 			name = "Arianna" #Random names are random
 			dynasty = "Beretta"
-			age = 23
+			age = 19
 			adm = 4
 			dip = 5
 			mil = 6
@@ -647,7 +647,7 @@ country_event = {	#event Aquileia consort
 		define_consort = {
 			name = "Lisa" 
 			dynasty = "Gioconda"
-			age = 22
+			age = 23
 			adm = 6
 			dip = 5
 			mil = 4
@@ -738,12 +738,26 @@ country_event = {	#event Aquileia ships
 	option = {
 		name = gen_ita.18a
 		set_country_flag = aqu_venetian_fleet_1
-		set_naval_doctrine = aqu_heavy_ships_doctrine
+		add_years_of_income = 1
+		custom_tooltip = AQU_TT_3a
+		tooltip = {
+			add_country_modifier = {
+				name = aqu_heavy_ships_doctrine_tt
+				duration = -1
+			}
+		}
 	}
 	option = {
 		name = gen_ita.18b
 		set_country_flag = aqu_venetian_fleet_2
-		set_naval_doctrine = aqu_light_ships_doctrine
+		add_years_of_income = 1
+		custom_tooltip = AQU_TT_3a
+		tooltip = {
+			add_country_modifier = {
+				name = aqu_light_ships_doctrine_tt
+				duration = -1
+			}
+		}
 	}
 }
 
@@ -773,6 +787,64 @@ country_event = {	#event carneval
 				who = ROOT
 				value = -5
 				apply_calc = no
+			}
+		}
+	}
+}
+
+country_event = {	#event once formed Italy decide to stay or not in the hre
+	id = gen_ita.20
+	title = gen_ita.20.test
+	desc = gen_ita.20.desc
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = gen_ita.20a
+		if = {
+			limit = {
+				government_rank = 2
+			}
+			set_government_rank = 3
+		}
+		set_in_empire = no
+		add_casus_belli = {
+			type = cb_war_on_empire
+			target = emperor
+		}
+	}
+	option = {
+		name = gen_ita.20b
+		trigger = {
+			government = monarchy
+		}
+		add_imperial_influence = 30
+		add_stability_or_adm_power = yes
+		add_country_modifier = {
+			name = ita_electorate_bribring
+			duration = -1
+		}
+	}
+}
+
+country_event = {	#event go Rome or stay Home
+	id = gen_ita.21
+	title = gen_ita.21.test
+	desc = gen_ita.21.desc
+	picture = REFORM_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = gen_ita.21a
+		custom_tooltip = GITA_TT_5
+		hidden_effect = {every_province = {	limit = {Roman_empire_required_provinces_decision = yes	}	add_permanent_claim = ROOT}}
+	}
+	option = {
+		name = gen_ita.21b
+		italy_region = {
+			add_province_modifier = {
+				name = italian_golden_age
+				duration = -1
 			}
 		}
 	}
@@ -842,3 +914,145 @@ country_event = {	#capitalism for me, not for thee
 	}
 }
 
+province_event = {	#get booted idiota italian migrate to the new world so that provinces dont get to high dev
+	id = gen_ita.102
+	title = gen_ita.102.test
+	desc = gen_ita.102.desc
+	picture = GOOD_WITH_MONARCH_eventPicture
+	trigger = {
+		is_part_of_hre = yes
+		owner = {
+			NOT = { #eventually the player will probably get tired of this events
+				AND = {
+					ai = no
+					absolutism = 25
+				}
+			}
+			any_province = {
+				has_discovered = ROOT
+				OR = {
+					continent = north_america
+					continent = south_america
+				}
+				has_port = yes
+				is_city = yes
+				owner = {
+					OR = {
+						is_colonial_nation = yes
+						has_country_flag = changed_from_colonial_nation
+					}
+				}
+			}
+			culture_group = latin
+		}
+		OR = {
+			owner = {
+				war_exhaustion = 5
+			}
+			owner = {
+				NOT = {
+					stability = -1
+				}
+			}
+			devastation = 80
+		}
+		culture_group = latin
+	}
+	mean_time_to_happen = {
+		months = 300
+	}
+
+	option = {
+		name = gen_ita.102a
+		trigger = {	owner = { ai = yes}	}
+		add_random_development = -1
+		add_base_manpower = -1
+		random_province = {
+			limit = { 
+				OR = {
+					continent = north_america
+					continent = south_america
+				}
+				has_port = yes
+				is_city = yes
+				owner = {
+					OR = {
+						is_colonial_nation = yes
+						has_country_flag = changed_from_colonial_nation
+					}
+				}
+			}
+			province_event = {
+				id = gen_ita.103
+			}
+		}
+	}
+	option = {
+		name = gen_ita.102b
+		trigger = {	owner = { ai = no}	}
+		owner = {
+			add_yearly_manpower = -0.2
+		}
+		random_province = {
+			limit = { 
+				OR = {
+					continent = north_america
+					continent = south_america
+				}
+				has_port = yes
+				is_city = yes
+				owner = {
+					OR = {
+						is_colonial_nation = yes
+						has_country_flag = changed_from_colonial_nation
+					}
+				}
+			}
+			province_event = {
+				id = gen_ita.103
+			}
+		}
+	}
+}
+
+province_event = {	# Italian Migrations
+	id = gen_ita.103
+	title = gen_ita.103.test
+	desc = gen_ita.103.desc
+	picture = GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = gen_ita.103a
+		ai_chance = {
+			factor = 75
+		}
+		owner = {
+			add_manpower = 1
+		}
+		add_base_manpower = 1
+		random = {
+			chance = 50 
+			add_random_development = 1
+		}
+		random = {
+			chance = 5 
+			change_culture = rausuliano
+		}
+	}
+	option = {
+		name = gen_ita.103b
+		ai_chance = {
+			factor = 25
+		}
+		owner = {
+			add_adm_power = 50
+			every_owned_province = {
+				limit = {
+					culture_group = latin
+				}
+				add_unrest = 3
+			}
+		}
+	}
+}

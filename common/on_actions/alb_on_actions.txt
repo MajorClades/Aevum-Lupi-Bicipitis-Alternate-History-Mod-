@@ -1,6 +1,5 @@
 on_startup = {	
 	events = {
-		soxony.1
 		mexic.1
 		thetruth.1
 		fjal.302
@@ -162,20 +161,6 @@ on_center_of_trade_downgrade = {
 	}
 }
 on_battle_won_country = {
-	#on_battle_ended_effect = yes
-	on_battle_won_country_effect = yes
-	if = {
-		limit = {
-			ROOT = {
-				has_reform = sx0_saxony_order
-			}
-		}
-		add_government_power = {
-			mechanic_type = saxony_knight_lodge
-			power_type = knight_influence
-			value = 1
-		}
-	}
 
 }
 
@@ -228,20 +213,6 @@ on_main_war_won = {
 				}
 			}
 
-		}
-	}
-	if = {
-		limit = {
-			ROOT = {
-				has_reform = sx0_saxony_order
-			}
-		}
-		ROOT = {
-		add_government_power = {
-			mechanic_type = saxony_knight_lodge
-			power_type = knight_influence
-			value = 10
-		}
 		}
 	}
 	if = {
@@ -366,96 +337,6 @@ on_monthly_pulse = {
 			change_variable = {
 				which = caliph_authority_var
 				value = 0.42
-			}
-		}
-	}
-	if = {
-		limit = {
-			tag = event_target:islam_caliph_target
-			event_target:islam_caliph_target = {
-				NOT = {
-					owns = 385
-				}
-			}
-		}
-		REB = {
-			subtract_variable = {
-				which = caliph_authority_var
-				value = 0.05
-			}
-		}
-	}
-	if = {
-		limit = {
-			tag = event_target:islam_caliph_target
-			event_target:islam_caliph_target = {
-				NOT = {
-					owns = 384
-				}
-			}
-		}
-		REB = {
-			subtract_variable = {
-				which = caliph_authority_var
-				value = 0.05
-			}
-		}
-	}
-	if = {
-		limit = {
-			tag = event_target:islam_caliph_target
-			event_target:islam_caliph_target = {
-				NOT = {
-					owns = 379
-				}
-			}
-		}
-		REB = {
-			subtract_variable = {
-				which = caliph_authority_var
-				value = 0.05
-			}
-		}
-	}
-	if = {
-		limit = {
-			tag = event_target:islam_caliph_target
-			event_target:islam_caliph_target = {
-				owns = 379
-			}
-		}
-		REB = {
-			change_variable = {
-				which = caliph_authority_var
-				value = 0.05
-			}
-		}
-	}
-	if = {
-		limit = {
-			tag = event_target:islam_caliph_target
-			event_target:islam_caliph_target = {
-				owns = 384
-			}
-		}
-		REB = {
-			change_variable = {
-				which = caliph_authority_var
-				value = 0.05
-			}
-		}
-	}
-	if = {
-		limit = {
-			tag = event_target:islam_caliph_target
-			event_target:islam_caliph_target = {
-				owns = 385
-			}
-		}
-		REB = {
-			change_variable = {
-				which = caliph_authority_var
-				value = 0.05
 			}
 		}
 	}
@@ -693,17 +574,6 @@ on_siege_lost_province =  {
 			}
 		}
 	}
-	if = {
-		limit = {
-			owner = {
-				has_country_modifier = alb_rise_of_rashidi_caliphate
-			}
-		}
-		cede_province = FROM
-		FROM = {
-			add_core = ROOT
-		}
-	}
 }
 
 on_bi_yearly_pulse_5 = {
@@ -732,5 +602,12 @@ on_thri_yearly_pulse_2 = {
 		25 = alb_islam_events.7
 		25 = alb_islam_events.8
 		25 = alb_islam_events.9
+	}
+}
+
+on_mil_tech_taken = {
+	if = {
+		limit = {has_country_flag = army_tradition_from_tech_flag}
+		add_army_tradition = 5
 	}
 }

@@ -1,6 +1,6 @@
 
 indictian_monarchy_reform = {
-	icon = "castle"
+	icon = "indictian_monarchy_reform"
 	allow_normal_conversion = yes
 	valid_for_nation_designer = yes
 	nation_designer_cost = 0
@@ -16,6 +16,9 @@ indictian_monarchy_reform = {
 		factor = 0.5 #generic
 	}
 	#PUT SOME MECHANIC FOR INDICTIANS
+	custom_attributes = {
+		seizing_land_no_rebels = yes
+	}
 }
 
 molise_monarchy_reform = {
@@ -43,28 +46,17 @@ paduan_merchants_reform = {
 	allow_normal_conversion = yes
 	modifiers = {
 		max_absolutism = -10
+		ship_trade_power_modifier = 0.33
 		merchants = 1
 		yearly_corruption = -0.1
 	}
 	valid_for_nation_designer = yes
 	nation_designer_cost = 40
 	potential = {
+		tag = PD0
 		NOT = { tag = IT0 }
-		NOT = { map_setup = map_setup_random }
-		OR = {
-			tag = PD0
-			AND = {
-				is_playing_custom_nation = yes
-				have_had_reform = paduan_merchants_reform
-			}
-		}
 	}
 	boost_income = yes
-	factions = {
-		mr_aristocrats
-		mr_traders
-		mr_guilds
-	}
 	conditional = {
 		allow = {
 			has_dlc = "Res Publica"
@@ -72,22 +64,22 @@ paduan_merchants_reform = {
 		}
 		can_use_trade_post = yes
 	}
-	conditional = {
-		allow = {
-			has_dlc = "Mare Nostrum"
-			NOT = { has_dlc = "Res Publica" }
-		}
-		can_form_trade_league = yes
-		trade_city_reform = trading_city
-	}
+	# conditional = {
+	# 	allow = {
+	# 		has_dlc = "Mare Nostrum"
+	# 		NOT = { has_dlc = "Res Publica" }
+	# 	}
+	# 	can_form_trade_league = yes
+	# 	trade_city_reform = trading_city
+	# }
 	conditional = {
 		allow = {
 			has_dlc = "Res Publica"
 			has_dlc = "Mare Nostrum"
 		}
 		can_use_trade_post = yes
-		can_form_trade_league = yes
-		trade_city_reform = trading_city
+		# can_form_trade_league = yes
+		# trade_city_reform = trading_city
 	}
 	custom_attributes = {
 		enables_plutocratic_idea_group = yes
@@ -188,9 +180,6 @@ serican_principality = {
 		global_regiment_recruit_speed = 0.1
 		governing_capacity = 100
 	}
-	government_abilities = {
-		russian_mechanic
-	}
 }
 serican_tsardom = {
 	icon = "king"
@@ -223,9 +212,6 @@ serican_tsardom = {
 
 	conditional = {
 		allow = { has_dlc = "Third Rome" }
-		government_abilities = {
-			russian_mechanic
-		}
 		claim_states = yes
 	}
 }
@@ -392,3 +378,22 @@ gallic_republic_reform = {
 	}
 }
 
+aldabban_failure_reform = {
+	icon = "castle"
+	valid_for_nation_designer = yes
+	nation_designer_cost = 0
+	lock_level_when_selected = yes
+	potential = {
+		have_had_reform = aldabban_failure_reform
+	}
+	modifiers = {
+		global_tax_modifier = -0.05
+		church_influence_modifier = 0.05
+	}
+	government_abilities = {
+		aldabba_failure_mechanic
+	}
+	ai = {
+		factor = 0.5 #generic
+	}
+}

@@ -15,12 +15,17 @@ country_decisions = {
 				ai = no
 			}
 			NOT = { tag = IB0 }
+			NOT = { tag = SPA }
 			NOT = { tag = PAP }
 			NOT = { tag = IT9 }
+			NOT = { tag = FRA }		# Basque is a valid culture for both FRA and SPA
+			NOT = { tag = KNI }		# Maltese is part of iberian culture group
+			NOT = { tag = ADU }
 			NOT = { religion_group = muslim }
 			OR = {
 				is_iberian_grouped_trigger = yes
 				primary_culture = basque
+				tag = AF1
 				tag = VR0
 			}
 			is_colonial_nation = no
@@ -40,6 +45,7 @@ country_decisions = {
 			}
 		}
 		allow = {
+			adm_tech = 10
 			NOT = { exists = IB0 }
 			is_free_or_tributary_trigger = yes
 			is_nomad = no
@@ -66,39 +72,30 @@ country_decisions = {
 			iberia_region = {
 				add_permanent_claim = IB0
 			}
-			swap_non_generic_missions = yes
+			
 			add_country_modifier = {
 				name = "centralization_modifier"
 				duration = 7300
 			}
 			set_country_flag = formed_iberia_flag
-			if = {
-				limit = { 
-					primary_culture = vrankish
-				}
-				custom_tooltip = alb_ibe_move_vrankish_ibe_tt
-				hidden_effect = {
-					every_province = {
-						limit = {
-							culture = vrankish
-						}
-						change_culture = normand_ibe
-					}
-					every_country = {
-						limit = {
-							accepted_culture = vrankish
-						}
-						remove_accepted_culture = vrankish
-						add_accepted_culture = normand_ibe
-					}
-				}
-			}
 			add_prestige_or_monarch_power = {
 				amount = 25
 			}
 		}
 		ai_will_do = {
 			factor = 1
+			modifier = {
+				factor = 0
+				tag = CAS
+				NOT = { is_enemy = ARA }
+				NOT = { is_rival = ARA }
+			}
+			modifier = {
+				factor = 0
+				tag = ARA
+				NOT = { is_enemy = CAS }
+				NOT = { is_rival = CAS }
+			}
 		}
 		ai_importance = 400
 	}

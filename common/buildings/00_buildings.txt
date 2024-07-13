@@ -1197,12 +1197,29 @@ university = {
 			type = tax
 			value = 2
 		}
+		if = {
+			limit = {
+				owner = {
+					mission_completed = gita_universalita 
+				}
+			}
+			add_province_modifier = {
+				name = gita_advanced_universities
+				duration = -1
+			}
+		}
 	}
 	on_destroyed = {
 		remove_development_from_building = {
 			building = university
 			type = tax
 			value = 2
+		}
+		if = {
+			limit = { 
+				has_province_modifier = gita_advanced_universities
+			}
+			remove_province_modifier = gita_advanced_universities
 		}
 	}
 	on_obsolete = {

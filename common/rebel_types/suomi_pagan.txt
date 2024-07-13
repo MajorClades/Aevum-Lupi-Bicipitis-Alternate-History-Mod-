@@ -1,13 +1,13 @@
 ######################################################################
 # Impotian rebels. Disgruntled fanatics.
 ######################################################################
-vaitta_christ_rebels = {
+suomi_pagan_rebels = {
 
 	color = { 230 175 175 }
 
 	area = nation 					# Sticks to provinces of their nation
 	government = theocracy 			# Desires Theocracy
-	religion = vaitta_christ
+	religion = suomi_pagan
 	defection = none				# Will not defect
 	defect_delay = 120				# Held provinces will auto-defect after 18 months, regardless of accept/enforce demands.
 	independence = none				# Does not strive for independence
@@ -45,7 +45,7 @@ vaitta_christ_rebels = {
 		}
 		modifier = {
 			factor = 0.0
-			NOT = { religion = vaitta_christ }
+			NOT = { religion = suomi_pagan }
 		}
 		modifier = {
 			factor = 0.001
@@ -90,21 +90,21 @@ vaitta_christ_rebels = {
 		}
 		modifier = {
 			factor = 0.0
-			religion = vaitta_christ
-			owner = { religion = vaitta_christ }
+			religion = suomi_pagan
+			owner = { religion = suomi_pagan }
 		}
 		modifier = {
 			factor = 2.0
-			NOT = { religion = vaitta_christ }
+			NOT = { religion = suomi_pagan }
 			any_neighbor_province = {
-	 			religion = vaitta_christ
+	 			religion = suomi_pagan
 	 			NOT = { has_province_modifier = "forced_conversion" }
 	 		}
 	 	}
 		modifier = {
 			factor = 5
 			has_missionary = yes
-			religion = vaitta_christ
+			religion = suomi_pagan
 		}
 		modifier = {
 			factor = 1.5
@@ -135,9 +135,9 @@ vaitta_christ_rebels = {
 			if = {
 				limit = {
 					OR = {
-						religion = vaitta_christ
+						religion = suomi_pagan
 						is_reformation_center = yes
-						owner = { religion = vaitta_christ }
+						owner = { religion = suomi_pagan }
 					}
 				}
 				add_province_modifier = {
@@ -147,11 +147,11 @@ vaitta_christ_rebels = {
 			}
 			if = {
 				limit = {
-					NOT = { religion = vaitta_christ }
+					NOT = { religion = suomi_pagan }
 					is_reformation_center = no
-					NOT = { owner = { religion = vaitta_christ } }
+					NOT = { owner = { religion = suomi_pagan } }
 				}
-				change_religion = vaitta_christ
+				change_religion = suomi_pagan
 				add_province_modifier = {
 					name = "forced_conversion"
 					duration = 730
@@ -171,7 +171,7 @@ vaitta_christ_rebels = {
 	can_negotiate_trigger = {
 		OR = {
 			religion_group = christian
-			dominant_religion = vaitta_christ
+			dominant_religion = suomi_pagan
 		}
 	}
 	
@@ -181,7 +181,7 @@ vaitta_christ_rebels = {
 	}
 	
 	# Localisation for their demands
-	demands_description = "vaitta_christ_rebels_demand"
+	demands_description = "suomi_pagan_rebels_demand"
 	
 	# Country Scope	
 	demands_enforced_effect = {
@@ -212,7 +212,7 @@ vaitta_christ_rebels = {
 		}
 		else_if = {
 			limit = {
-				religion = vaitta_christ
+				religion = suomi_pagan
 			}
 			add_country_modifier = {
 				name = "religious_intolerance_enforced"
@@ -221,16 +221,16 @@ vaitta_christ_rebels = {
 		}
 		else_if = {
 			limit = {
-				NOT = { religion = vaitta_christ }
-				dominant_religion = vaitta_christ
+				NOT = { religion = suomi_pagan }
+				dominant_religion = suomi_pagan
 			}
-			change_religion = vaitta_christ
+			change_religion = suomi_pagan
 			force_converted = yes
 		}
 		else_if = {
 			limit = {
-				NOT = { religion = vaitta_christ }
-				NOT = { dominant_religion = vaitta_christ }
+				NOT = { religion = suomi_pagan }
+				NOT = { dominant_religion = suomi_pagan }
 				religion_group = christian
 				NOT = { has_country_modifier = heretic_tolerance }
 			}
@@ -243,7 +243,7 @@ vaitta_christ_rebels = {
 		else = { add_stability = -1 } #Should probably never get here
 		if = {
 			limit = {
-				religion = vaitta_christ
+				religion = suomi_pagan
 				has_estate = estate_church
 				NOT = {
 					has_estate_influence_modifier = {

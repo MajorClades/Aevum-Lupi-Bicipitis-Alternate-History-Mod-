@@ -512,24 +512,26 @@ Soxon_3_slot = {
 			NOT = { is_at_war = yes } 
 			custom_trigger_tooltip = {
 				tooltip = SOXON_VERYMUCHPROBLEM
-				NOT = { has_country_flag = sox_civil_war } 
+				has_country_flag = alb_ended_sygirdom_revolt_flag
 				is_year = 1445
 			}
 		}
 
 		effect = {
 			add_legitimacy = 20
-			add_casus_belli = {
-				type = cb_disloyal_vassal
-				target = SO1
-			}
-			add_casus_belli = {
-				type = cb_disloyal_vassal
-				target = SO2
-			}
-			add_casus_belli = {
-				type = cb_disloyal_vassal
-				target = SO3
+			every_country = {
+				limit ={
+					has_country_flag = alb_revolted_from_soxony_flag
+					NOT = {
+						is_subject_of = ROOT
+					}
+				}
+				ROOT = {
+					add_casus_belli = {
+						type = cb_disloyal_vassal
+						target = PREV
+					}
+				}
 			}
 		}
 	}
@@ -699,7 +701,6 @@ Soxon_3_slot = {
 				every_country = {
 					limit = {
 						religion = catholic
-						capital_scope = { same_continent = ROOT } 
 					}
 					country_event = { id = soxony.6 } 
 				}

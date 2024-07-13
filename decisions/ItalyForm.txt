@@ -71,17 +71,12 @@ country_decisions = {
 			adm_tech = 10
 			is_free_or_tributary_trigger = yes
 			is_at_war = no
-			calc_true_if = {
-				amount = 4
-				all_core_province = {
-					province_id = 101	# Genoa
-					province_id = 104	# Milan
-					province_id = 116	# Firenze
-					province_id = 118	# Roma
-					province_id = 4733 	#Molisia
-					province_id = 1862 	#Padia
-				}
-			}
+			owns_core_province = 101	# Genoa
+			owns_core_province = 104	# Milan
+			owns_core_province = 116 # Firenze
+			owns_core_province = 118 # Roma
+			owns_core_province = 4733 #Molisia
+			owns_core_province = 1862 #Padia
 			num_of_owned_provinces_with = {
 				value = 45
 				region = italy_region
@@ -89,6 +84,13 @@ country_decisions = {
 			}
 		}
 		effect = {
+			if = {
+				limit = {
+					NOT = { tag = MO0}
+					NOT = { tag = PD0}
+				}
+				set_country_flag = generic_italy_MT
+			}
 			if = {
 				limit = {
 					is_part_of_hre = yes
@@ -113,7 +115,7 @@ country_decisions = {
 				hidden_effect = {
 					set_in_empire = no
 				}
-				set_government_rank = 3
+				set_government_rank = 2
 			}
 			if = {
 				limit = {

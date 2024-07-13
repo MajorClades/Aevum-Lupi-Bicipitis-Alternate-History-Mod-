@@ -33,6 +33,9 @@ country_decisions = {
 			NOT = {
 				culture = longobard
 			}
+			NOT = {
+				culture = hunnic_ger
+			}
 		}
 		provinces_to_highlight = {
 			OR = {
@@ -62,24 +65,6 @@ country_decisions = {
 		effect = {
 			change_tag = GR0
 			restore_country_name_effect = yes
-			if = {
-				limit = {
-					is_emperor = yes
-				}
-				dismantle_hre = yes
-			}
-			else = {
-				emperor = {
-					add_opinion = {
-						who = root
-						modifier = opinion_left_empire
-					}
-				}
-				set_in_empire = no
-				emperor = {
-					country_event = { id = hre_event.5 }
-				}
-			}
 			GR0 = { set_government_rank = 3 }
 			north_german_region = {
 				limit = {
@@ -135,7 +120,12 @@ country_decisions = {
 			NOT = { tag = PU0 }
 			NOT = { tag = IT9 }
 			NOT = { tag = ROM }
-			culture = south_german
+			OR = {
+				culture = south_german
+				culture = longobard
+				culture = ug_longobard
+				culture = ug_south_german
+			}
 			is_colonial_nation = no
 		}
 		provinces_to_highlight = {

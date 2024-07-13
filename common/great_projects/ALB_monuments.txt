@@ -3215,6 +3215,7 @@ tomb_charlesmagne = {
 				culture_group = frankish
 				accepted_culture = franken
 				dynasty = "Martel" 
+				dynasty = "Karling" 
 			}
 		}
 		
@@ -3591,7 +3592,9 @@ roman_imperial_admin = {
 	type = monument
 	#can we build it?
 	build_trigger = {
-		always = no
+		owner = {
+			mission_completed = what_have_they_done_for_us
+		}
 	}
 	#what to do when it's built
 	on_built = {}
@@ -3836,7 +3839,7 @@ duscia_monument = {
 		}
 		#what modifiers are added to the country when we have this project here on this tier
 		country_modifiers = {
-			local_unrest = -4
+			global_unrest = -4
 		}
 		#what effects happen when this tier is achieved
 		on_upgraded = {		
@@ -4276,7 +4279,12 @@ arian_cathedral = {
 	#project type
 	type = monument
 	#can we build it?
-	build_trigger = {}
+	build_trigger = {
+		religion = arian
+		owner = {
+			religion = arian
+		}
+	}
 	#what to do when it's built
 	on_built = {}
 	#what to do when it's destroyed
@@ -4289,7 +4297,12 @@ arian_cathedral = {
 		}
 	}
 	#can our country upgrade it?
-	can_upgrade_trigger = {			}
+	can_upgrade_trigger = {	
+		religion = arian
+		owner = {
+			religion = arian
+		}
+	}
 	#can our country keep it or is it destroyed when we get hold of it?
 	keep_trigger = {}
 	#tier data
