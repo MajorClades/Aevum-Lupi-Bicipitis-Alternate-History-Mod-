@@ -1149,12 +1149,20 @@ saxon_5_slot = {
 		} 
 
 		trigger = {  
-			NOT = {
-				any_owned_province = {
-					culture = lithuanian
-					unrest = 1
-					NOT = {
+			all_owned_province = {
+				OR ={
+					AND = {
+						culture = lithuanian
 						num_of_times_improved = 2
+						NOT = {
+							local_autonomy = 20
+						}
+						NOT = {
+							unrest = 1
+						}
+					}
+					NOT = {
+						culture = lithuanian
 					}
 				}
 			}
