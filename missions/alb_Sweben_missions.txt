@@ -1,0 +1,420 @@
+WE0_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = WE0 } 
+
+	weo_war_on_colors = {
+		icon = mission_buddhist_monk_praying
+		required_missions = {  }
+		position = 1
+		trigger = {
+			if = {
+				limit = { ai = yes}
+				num_of_generals = 1
+			}else = {
+				army_size_percentage = 1
+			}
+		}
+		
+		effect = {
+			beieras_area = {
+				add_permanent_claim = ROOT
+			}
+			extremadura_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	weo_colorful_victory = {
+		icon = mission_humiliate_provence
+		required_missions = {weo_war_on_colors  }
+		position = 2
+		
+		provinces_to_highlight = {
+			OR = {
+				area = beieras_area
+				area = extremadura_area
+			}
+		}
+		
+		trigger = {
+			beieras_area = {
+				type = all
+				owned_by = ROOT
+			}
+			extremadura_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = weo_burgundian_hues
+				duration = 10950
+			}
+			alentejo_area = {
+				add_permanent_claim = ROOT
+			}
+			add_casus_belli = {
+				type = cb_vassalize_mission
+				target = BT0
+				months = -1
+			}
+		}
+	}
+	weo_bet_on_us = {
+		icon = mission_humiliate_provence
+		required_missions = {weo_colorful_victory  }
+		position = 3
+		
+		provinces_to_highlight = {
+			area = alentejo_area
+		}
+		
+		trigger = {
+			OR = {
+				BT0 = {
+					is_subject_of = ROOT
+				}
+				alentejo_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+			}
+		}
+		
+		effect = {
+			custom_tooltip = SWEBEN_TT_1
+			tooltip = {
+				if = {
+					limit = {
+						BT0 = {
+							is_subject_of = ROOT
+						}
+					}
+					custom_tooltip = YES_MARK
+				}else = {
+					custom_tooltip = NOT_MARK
+				}
+				inherit = BT0
+				custom_tooltip = SWEBEN_TT_2
+				random_owned_province = {
+					add_province_modifier = {
+						name = weo_integrating_bettia
+						duration = 10950
+					}
+				}
+			}
+			custom_tooltip = SWEBEN_TT_3
+			tooltip = {
+				iberia_region = {
+					add_permanent_claim = ROOT
+				}
+				add_dip_power = 400
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						BT0 = {
+							is_subject_of = ROOT
+						}
+					}
+					inherit = BT0
+					every_owned_province = {
+						limit = {
+							is_core = BT0
+						}
+						add_province_modifier = {
+							name = weo_integrating_bettia
+							duration = 10950
+						}
+					}
+				}else = {
+					iberia_region = {
+						add_permanent_claim = ROOT
+					}
+					add_dip_power = 400
+				}
+			}
+		}
+	}
+}
+
+WE0_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = WE0 } 
+
+	weo_horsepower = {
+		icon = mission_humiliate_provence
+		required_missions = {weo_waitpower  }
+		position = 2
+		
+		trigger = {
+			treasury = 300
+			num_of_cavalry = 6
+		}
+		
+		effect = {
+			add_treasury = -300
+			define_general = {
+				shock = 5
+				fire = 2
+				manuever = 5
+				siege = 0
+				trait = born_to_the_saddle_personality
+			}
+		}
+	}
+}
+
+WE0_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = WE0 } 
+
+	weo_waitpower = {
+		icon = mission_buddhist_monk_praying
+		required_missions = {  }
+		position = 1
+		provinces_to_highlight = {
+			has_tax_building_trigger = no 
+			owned_by = ROOT
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				religion = arian
+				has_tax_building_trigger = yes
+			}
+		}
+		
+		effect = {
+			add_stability_or_adm_power = yes
+			change_variable = {
+				which = arian_fervor_var
+				value = 5
+			}
+		}
+	}
+	weo_gottem = {
+		icon = mission_humiliate_provence
+		required_missions = {weo_horsepower weo_faithtime}
+		position = 3
+		provinces_to_highlight = {
+			has_manpower_building_trigger = no
+			owned_by = ROOT
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				has_manpower_building_trigger = yes
+			}
+		}
+		
+		effect = {
+			add_yearly_manpower = 0.5
+			capital_scope = {
+				add_base_manpower = 3
+			}
+		}
+	}
+}
+
+WE0_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = WE0 } 
+
+	weo_faithtime = {
+		icon = mission_humiliate_provence
+		required_missions = {weo_waitpower  }
+		position = 2
+		provinces_to_highlight = {
+			region = iberia_region
+			NOT = {
+				religion = arian
+			}
+		}
+		trigger = {
+			calc_true_if = {
+				amount = 20
+				all_province = {
+					region = iberia_region
+					religion = arian
+				}
+			}
+		}
+		
+		effect = {
+			add_adm_power = 150
+			distribute_development = {
+				amount = 10
+				type = tax
+				limit = "owned_by = ROOT region = iberia_region religion = arian"
+			}
+			custom_tooltip = weo_random_tax_dev
+		}
+	}
+}
+
+WE0_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = WE0 } 
+
+	weo_gothic_wedding = {
+		icon = mission_buddhist_monk_praying
+		required_missions = {  }
+		position = 1
+		provinces_to_highlight = {
+			is_capital_of = CO0
+		}
+		trigger = {
+			OR = {
+				CO0 = {
+					marriage_with = ROOT
+					alliance_with = ROOT
+				}
+				CO0 = {
+					is_rival = ROOT
+				}
+				CO0 = {
+					exists = no
+				}
+			}
+		}
+		
+		effect = {
+			asturias_area = {
+				add_permanent_claim = ROOT
+			}
+			basque_country = {
+				add_permanent_claim = ROOT
+			}	
+		}
+	}
+	weo_gothic_renewal = {
+		icon = mission_humiliate_provence
+		required_missions = {weo_gothic_wedding  }
+		position = 2
+		
+		provinces_to_highlight = {
+			OR = {
+				area = asturias_area
+				area = basque_country
+			}
+		}
+		
+		trigger = {
+			asturias_area = {
+				type = all
+				owned_by = ROOT
+			}
+			basque_country = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		
+		effect = {
+			country_event = {
+				id = sweb.1
+			}
+			custom_tooltip = SWEB_UNION_WITH_COTIA
+			castille_area = {
+				add_permanent_claim = ROOT
+			}
+			aragon_area = {
+				add_permanent_claim = ROOT
+			}
+			valencia_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	weo_goth_on_us = {
+		icon = mission_humiliate_provence
+		required_missions = {weo_gothic_renewal  }
+		position = 3
+		
+		provinces_to_highlight = {
+			province_group = coth_old_border
+		}
+		
+		trigger = {
+			coth_old_border = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+			custom_tooltip = SWEBEN_TT_4
+			tooltip = {
+				if = {
+					limit = {
+							CO0 = {
+								is_subject_of = ROOT
+							}
+						}
+						custom_tooltip = YES_MARK
+					}else = {
+						custom_tooltip = NOT_MARK
+					}
+					inherit = CO0
+					custom_tooltip = SWEBEN_TT_5
+				}
+				custom_tooltip = SWEBEN_TT_6
+				tooltip = {
+				add_casus_belli = {
+					type = cb_restore_personal_union
+					target = CO0
+				}
+				add_dip_power = 400
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						CO0 = {
+							is_subject_of = ROOT
+						}
+					}
+					inherit = CO0
+					change_country_color = {
+						color = { 109 142 152 }
+					}
+					CO0 = {
+						every_core_province = {
+							add_core = ROOT
+						}
+					}
+					every_owned_province = {
+						limit = {
+							is_core = CO0
+						}
+						add_unrest = 10
+						add_nationalism = -5
+					}
+				}else = {
+					add_casus_belli = {
+						type = cb_restore_personal_union
+						target = CO0
+					}
+					add_dip_power = 400
+				}
+			}
+		}
+	}
+}
