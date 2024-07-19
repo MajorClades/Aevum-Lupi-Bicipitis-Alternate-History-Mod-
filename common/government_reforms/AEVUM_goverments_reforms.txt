@@ -387,9 +387,9 @@ aldabban_failure_reform = {
 		have_had_reform = aldabban_failure_reform
 	}
 	modifiers = {
-		global_tax_modifier = -0.05
-		church_influence_modifier = 0.1
-		nobles_influence_modifier = 0.1
+		global_tax_modifier = -0.15
+		yearly_corruption = 0.1
+		all_estate_influence_modifier = 0.15
 	}
 	government_abilities = {
 		aldabba_failure_mechanic
@@ -400,21 +400,27 @@ aldabban_failure_reform = {
 }
 
 aldabban_restored_reform = {
-	icon = "castle"
+	icon = "religious_permanent_revolution_reform"
 	valid_for_nation_designer = yes
 	nation_designer_cost = 0
 	lock_level_when_selected = yes
 	potential = {
-		have_had_reform = aldabban_restored_reform
+		OR = {
+			have_had_reform = aldabban_restored_reform
+			has_reform = aldabban_restored_reform
+		}
 	}
 	modifiers = {
-		global_tax_modifier = 0.25 
-		nobles_loyalty_modifier = 0.1
-		nobles_influence_modifier = 0.1
-		discipline = 0.05
+		global_tax_modifier = 0.1
+		development_cost = -0.05
+		yearly_absolutism = 1
 	}
 	custom_attributes = {
 		seizing_land_no_rebels = yes
+		enables_divine_idea_group = yes
+	}
+	government_abilities = {
+		aldabba_failure_mechanic
 	}
 	ai = {
 		factor = 0.5 #generic

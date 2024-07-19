@@ -7,24 +7,25 @@ Aldabba_1_slot = {
 	has_country_shield = yes
 
 	ald_list = {
-		icon = mission_bedouins
+		icon = mission_apostolic_kingdom
 		required_missions = { }
 		position = 1
 		
 		trigger = { 
-			treasury = 100
-			adm_power = 50
+			treasury = 50
+			NOT = {
+				num_of_loans = 1
+			}
 		}
 		
 		effect = {
-			add_treasury = -100
-			add_adm_power = -50
-			336 = {
-				add_province_modifier = {
-					name = make_it_work
-					duration = 10950
-				}
+			add_treasury = -50
+			custom_tooltip = " "
+			add_country_modifier = {
+				name = make_it_work
+				duration = 10950
 			}
+			add_adm_power = 50
 		}
 	}
 	ald_fix_it = {
@@ -32,17 +33,25 @@ Aldabba_1_slot = {
 		required_missions = { ald_list}
 		position = 2
 		provinces_to_highlight = {
-			is_capital_of = ROOT
+			province_id = 336
+			NOT = {
+				base_tax = 7
+			}
+			NOT = {
+				development = 25
+			}
 		}
 		trigger = { 
 			336 = {
 				base_tax = 7
+				development = 25
+			}
+			NOT = {
+				corruption = 1
 			}
 		}
 		
 		effect = {
-			add_treasury = 100
-			add_adm_power = 50
 			define_advisor = {
 				type = natural_scientist
 				skill = 2
@@ -50,31 +59,58 @@ Aldabba_1_slot = {
 				culture = spaniard
 				religion = jewish
 			}
+			custom_tooltip =  " "
+			algiers_area = {
+				add_random_development = 1
+			}
+			custom_tooltip = " "
+			custom_tooltip = on_development_aldabban_restoration
+			hidden_effect = {
+				set_country_flag = aldabban_restoration_dev_flag
+			}
 		}
 	}
 	ald_good_advice = {
 		icon = mission_indian_stateman
-		required_missions = { ald_fix_it}
+		required_missions = { ald_fix_it ald_better_balance }
 		position = 3
 		
 		trigger = { 
-			has_adm_advisor_2 = yes
+			has_government_power = {
+				mechanic_type = aldabba_failure_mechanic
+				power_type = restoration_aldabba
+				value = 25
+			}
 			stability = 1
+
 		}
-		
 		effect = {
-			remove_country_modifier = afr_economic_problem
+			336 = {
+				add_great_project_tier = {
+					type = aldabba_palace
+					tier = 1
+				}
+			}
+			custom_tooltip = " "
+			custom_tooltip = enable_purge_estates_button
+			set_country_flag = enable_purge_estates_button_flag
 		}
 	}
 	ald_friends = {
-		icon = mission_mosque
+		icon = mam_yemen
 		required_missions = { ald_good_advice}
 		position = 4
 		provinces_to_highlight = {
-			is_capital_of = ROOT
+			NOT = {
+				has_tax_building_trigger = yes
+			}
+			country_or_non_sovereign_subject_holds = ROOT
 		}
 		trigger = { 
-			has_adm_advisor_3 = yes
+			num_of_owned_provinces_with = {
+				has_tax_building_trigger = yes
+				value = 10
+			}
 			336 = {
 				base_tax = 9
 				has_building = temple
@@ -82,21 +118,26 @@ Aldabba_1_slot = {
 		}
 		
 		effect = {
-
-			2465 = {
-				add_base_tax = 2
-			}
-			4562 = {
-				add_base_tax = 2
-			}
 			336 = {
 				remove_building = temple
 				add_building = cathedral
 			}
+			custom_tooltip = " "
+			custom_tooltip = every_church_provinces_ALD
+			hidden_effect = {
+				set_country_flag = build_churches_flag_ALD
+				every_owned_province = {
+					limit = {
+						has_tax_building_trigger = yes
+					}
+					add_base_tax = 1
+				}
+			}
+			
 		}
 	}
 	ald_africa = {
-		icon = mission_african_trade_post
+		icon = mission_restore_faith_in_the_throne
 		required_missions = {ald_friends  }
 		position = 6
 		provinces_to_highlight = {
@@ -104,129 +145,31 @@ Aldabba_1_slot = {
 			owned_by = ROOT
 		}
 		trigger = { 
-			num_of_provinces_owned_or_owned_by_subjects_with = {
-				value = 8
-				region = maghreb_region
-				OR = {
-					has_building = workshop
-					has_building = counting_house
-				}
-			}
+			tag = AF0
+			has_reform = aldabban_restored_reform
+			at_war_with_religious_enemy = yes 
 		}
 		
 		effect = {
-			every_owned_province = {
-				limit = {
-					region = maghreb_region
-					OR = {
-						has_building = workshop
-						has_building = counting_house
-					}
-				}
-				add_base_production = 1
-				if = {
+			set_government_rank = 3
+			add_ruler_modifier = {
+				name = ald_first_king_of_africa
+				duration = -1
+			}
+			custom_tooltip = gain_core_on_all_holy_sites
+			hidden_effect = {
+				every_province = {
 					limit = {
-						NOT = {
-							development = 10
+						OR = {
+							province_id = 343
+							province_id = 336
+							province_id = 341
+							province_id = 358
+							province_id = 379
 						}
 					}
-					random_list = {
-						50 = {
-							add_base_manpower = 1
-						}
-						50 = {
-							add_base_tax = 1
-						}
-					}
-				}		
-			}
-		}
-	}
-	ald_africa_s = {
-		icon = mission_patronize_art_and_religion
-		required_missions = {ald_africa  }
-		position = 8
-		provinces_to_highlight = {
-			region = maghreb_region
-			owned_by = ROOT
-		}
-		trigger = { 
-			num_of_provinces_owned_or_owned_by_subjects_with = {
-				value = 8
-				region = maghreb_region
-				has_manufactory_trigger = yes
-				base_production = 7
-			}
-		}
-		
-		effect = {
-			every_owned_province = {
-				limit = {
-					region = maghreb_region
-					has_manufactory_trigger = yes
-					base_production = 7
+					add_core = ROOT
 				}
-				random_list = {
-					33 = {
-						add_base_tax = 1
-						add_permanent_province_modifier = {
-							name = ald_gold_touch_1
-							duration = -1
-						}
-					}
-					33 = {				
-						add_base_production = 1
-						add_permanent_province_modifier = {
-							name = ald_gold_touch_2
-							duration = -1
-						}
-					}
-					33 = {
-						add_base_manpower = 1
-						add_permanent_province_modifier = {
-							name = ald_gold_touch_3
-							duration = -1
-						}
-					}
-				}		
-			}
-		}
-	}
-	ald_coal = {
-		icon = mission_rb_build_furnaces
-		required_missions = {ald_africa_s ald_soxony }
-		position = 10
-		provinces_to_highlight = {
-			OR = {
-				trade_goods = coal
-				has_latent_trade_goods = coal
-			}
-			owned_by = ROOT
-		}
-		trigger = { 
-			num_of_provinces_owned_or_owned_by_subjects_with = {
-				value = 5
-				OR = {
-					trade_goods = coal
-					has_latent_trade_goods = coal
-				}
-				base_production = 10
-			}
-		}
-		
-		effect = {
-			every_owned_province = {
-				limit = {
-					OR = {
-						trade_goods = coal
-						has_latent_trade_goods = coal
-					}
-					base_production = 10
-				}
-				add_permanent_province_modifier = {
-					name = ald_proto_industrial
-					duration = -1
-				}		
 			}
 		}
 	}
@@ -240,42 +183,75 @@ Aldabba_2_slot = {
 	has_country_shield = yes
 
 	ald_better_balance = {
-		icon = mission_conquer_air
+		icon = mission_fekete_sereg
 		required_missions = { ald_list}
 		position = 2
 		
 		trigger = { 
-			prestige = 20
+			num_of_battles = { amount = 15 }
+			NOT = {
+				has_regency = yes
+			}
 		}
 		
 		effect = {
-			346 = {
-				add_permanent_claim = ROOT
+			if = {
+				limit = {
+					has_ruler_flag = is_lucius_galeni
+				}
+				custom_tooltip = has_lucius_tooltip_yes
+				tooltip = {
+					change_mil = 1	
+					add_ruler_personality = aldabban_king
+				}
+			}
+			else = {
+				custom_tooltip = has_lucius_tooltip_no
+				tooltip = {
+					change_mil = 1	
+					add_ruler_personality = aldabban_king
+				}
+			}
+			custom_tooltip = " "
+			add_yearly_manpower = 2
+			custom_tooltip = " "
+			custom_tooltip = winning_battles_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						has_ruler_flag = is_lucius_galeni
+					}
+					set_country_flag = aldabban_king_flag
+					change_mil = 1	
+					add_ruler_personality = aldabban_king
+				}
 			}
 		}
 	}
 	ald_gold_book = {
-		icon = mission_african_gold
+		icon = ven_navy_mission_2
 		required_missions = { ald_better_balance}
 		position = 3
 		provinces_to_highlight = {
 			province_id = 346
 		}
 		trigger = { 
-			owns_or_non_sovereign_subject_of = 346
+			num_of_battles = { amount = 50 }
+			innovativeness = 25
+			OR = {
+				full_idea_group = quality_ideas
+				has_global_modifier_value = {
+					which = discipline
+					value = 0.20
+				}
+			}
 		}
 		
 		effect = {
-			add_treasury = 300
-			346 = {
-				add_permanent_province_modifier = {
-					name = gold_balance
-					duration = -1
-				}
-			}
-			tafilalt_area = {
-				add_permanent_claim = ROOT
-			}
+			add_mil_tech = 1
+			custom_tooltip = " "
+			custom_tooltip = taking_mil_tech_improvement
+			set_country_flag = taking_mil_tech_ald
 		}
 	}
 	ald_atlantic = {
@@ -530,69 +506,6 @@ Aldabba_2_slot = {
 						add_base_manpower = 1
 					}
 				}
-			}
-		}
-	}
-	ald_cotia = {
-		icon = mission_invade_occitania
-		required_missions = {ald_more  }
-		position = 8
-		provinces_to_highlight = {
-			OR = {
-				area = languedoc_area
-				area = pyrenees_area
-				area = guyenne_area
-			}
-			NOT = {
-				owned_by = ROOT
-			}
-		}
-		trigger = { 
-			num_of_provinces_owned_or_owned_by_subjects_with = {
-				value = 10
-				OR = {
-					area = languedoc_area
-					area = pyrenees_area
-					area = guyenne_area
-				}
-			}
-		}
-		
-		effect = {
-			add_years_of_income = 3.5
-			france_region = {
-				add_permanent_claim = ROOT
-			}
-		}
-	}
-	ald_soxony = {
-		icon = centralize_france
-		required_missions = {ald_cotia  }
-		position = 9
-		provinces_to_highlight = {
-			OR = {
-				area = brittany_area
-				area = normandy_area
-				area = picardy_area
-			}
-			NOT = {
-				owned_by = ROOT
-			}
-		}
-		trigger = { 
-			num_of_provinces_owned_or_owned_by_subjects_with = {
-				value = 8
-				OR = {
-					area = brittany_area
-					area = normandy_area
-					area = picardy_area
-				}
-			}
-		}
-		
-		effect = {
-			british_isles_region = {
-				add_permanent_claim = ROOT
 			}
 		}
 	}
@@ -864,128 +777,6 @@ Aldabba_3_slot = {
 			}
 		}
 	}
-	ald_silver_mine = {
-		icon = mission_war_chest
-		required_missions = {ald_sicily }
-		position = 7
-
-		provinces_to_highlight = {
-			province_id = 2986
-		}
-		trigger = { 
-			2986 = {
-				owned_by = ROOT
-				base_production = 10
-			}
-		}
-		
-		effect = {
-			2986 = {
-				add_base_production = -5
-				change_trade_goods = gold
-			}
-		}
-	}
-	ald_roman = {
-		icon = answer_the_roman_question
-		required_missions = {ald_boots }
-		position = 9
-		provinces_to_highlight = {
-			province_id = 118
-		}
-		trigger = { 
-			118 = {
-				owned_by = ROOT
-			}
-		}
-		
-		effect = {
-			add_country_modifier = {
-				name = ald_roma
-				duration = -1
-			}
-			capital_scope = {
-				add_base_tax = 2
-				add_base_manpower = 2
-				add_base_production = 2
-			}
-			set_capital = 118
-			118 = {
-				change_culture = ROOT
-				change_religion = ROOT
-			}
-		}
-	}
-	ald_empire_roman = {
-		icon = centralized_empire
-		required_missions = { ald_roman }
-		position = 11
-
-		trigger = { 
-			tag = ROM
-		}
-		
-		effect = {
-			every_owned_province = {
-				limit = {
-					culture_group = afro_roman
-				}
-				change_culture = roman
-			}
-		}
-	}
-	ald_roman_italia = {
-		icon = a_roman_empire
-		required_missions = { ald_empire_roman}
-		position = 12
-		
-		trigger = { 
-			italy_region = {
-				type = all
-				NOT = {
-					unrest = 1
-				}
-			}
-			balkan_region = {
-				type = all
-				NOT = {
-					unrest = 1
-				}
-			}
-		}
-		
-		effect = {
-			every_owned_province = {
-				limit = {
-					region = italy_region
-				}
-				change_culture = roman
-			}
-			every_owned_province = {
-				limit = {
-					region = balkan_region
-				}
-				change_culture = roman
-			}
-		}
-	}
-	ald_roman_culture = {
-		icon = a_place_among_the_great_powers
-		required_missions = { ald_roman_italia ald_roman_east ald_roman_culture_west}
-		position = 13
-		
-		trigger = { 
-			adm_power = 500
-			dip_power = 500
-			mil_power = 500
-		}
-		
-		effect = {
-			add_adm_power = -500
-			add_dip_power = -500
-			add_mil_power = -500
-		}
-	}
 }
 Aldabba_4_slot = {
 	slot = 4
@@ -1143,7 +934,7 @@ Aldabba_4_slot = {
 	ald_tus_returned = {
 		icon = mission_conquer_tunis
 		required_missions = {ald_kab }
-		position = 5
+		position = 6
 		provinces_to_highlight = {
 			OR = {
 				is_capital_of = CR1
@@ -1169,204 +960,6 @@ Aldabba_4_slot = {
 			add_country_modifier = {
 				name = tunis_navy
 				duration = -1
-			}
-		}
-	}
-	ald_sicily = {
-		icon = mission_seize_the_isles
-		required_missions = {ald_tus_returned }
-		position = 6
-
-		trigger = { 
-			navy_size = 50
-			is_great_power = yes
-		}
-		
-		effect = {
-			corsica_sardinia_area = {
-				limit = {
-					NOT = {
-						province_id = 1247
-					}
-					NOT = {
-						province_id = 4948
-					}
-				}
-				add_permanent_claim = ROOT
-			}
-			sardinia_area = {
-				add_permanent_claim = ROOT
-			}
-			western_sicily_area = {
-				add_permanent_claim = ROOT
-			}
-		}
-	}
-	ald_trinacria = {
-		icon = king_of_naples
-		required_missions = {ald_sicily }
-		position = 7
-
-		provinces_to_highlight = {
-			area = western_sicily_area
-		}
-		trigger = { 
-			western_sicily_area = {
-				type = all
-				owned_by = ROOT
-			}
-		}
-		
-		effect = {
-			341 = {
-				add_base_production = 2
-				add_center_of_trade_level = 1
-				change_religion = ROOT
-			}
-			naples_area = {
-				add_permanent_claim = ROOT
-			}
-			calabria_area = {
-				add_permanent_claim = ROOT
-			}
-			sicily_area = {
-				add_permanent_claim = ROOT
-			}
-		}
-	}
-	ald_boots = {
-		icon = italian_riches
-		required_missions = {ald_trinacria  }
-		position = 8
-		provinces_to_highlight = {
-			OR = {
-				area = naples_area
-				area = calabria_area
-				area = western_sicily_area
-				area = sicily_area
-				area = corsica_sardinia_area
-				area = sardinia_area
-			}
-			NOT = {
-				owned_by = ROOT
-			}
-		}
-		trigger = { 
-			num_of_provinces_owned_or_owned_by_subjects_with = {
-				value = 15
-				OR = {
-					area = naples_area
-					area = calabria_area
-					area = western_sicily_area
-					area = sicily_area
-					area = corsica_sardinia_area
-					area = sardinia_area
-				}
-			}
-		}
-		
-		effect = {
-			add_country_modifier = {
-				name = ald_religion_supreme
-				duration = 10950
-			}
-			italy_region = {
-				add_permanent_claim = ROOT
-			}
-		}
-	}
-	ald_itals = {
-		icon = complete_the_risorgimento
-		required_missions = {ald_boots  }
-		position = 9
-		provinces_to_highlight = {
-			region = italy_region
-			NOT = {
-				owned_by = ROOT
-			}
-		}
-		trigger = { 
-			italy_region = {
-				type = all
-				owned_by = ROOT
-			}
-		}
-		
-		effect = {
-			add_country_modifier = {
-				name = ald_illirian
-				duration = 10950
-			}
-			balkan_region = {
-				add_permanent_claim = ROOT
-			}
-		}
-	}
-	ald_illria = {
-		icon = adriatic_access
-		required_missions = {ald_itals  }
-		position = 10
-		provinces_to_highlight = {
-			region = balkan_region
-			NOT = {
-				owned_by = ROOT
-			}
-		}
-		trigger = { 
-			num_of_provinces_owned_or_owned_by_subjects_with = {
-				value = 25
-				region = balkan_region
-			}
-			151 = {
-				owned_by = ROOT
-			}
-		}
-		
-		effect = {
-			151 = {
-				change_religion = ROOT
-			}
-			add_country_modifier = {
-				name = ald_broken_phoenix
-				duration = -1
-			}
-			anatolia_region = {
-				add_permanent_claim = ROOT
-			}
-		}
-	}
-	ald_roman_east = {
-		icon = a_roman_empire
-		required_missions = { ald_empire_roman}
-		position = 12
-		
-		trigger = { 
-			egypt_region = {
-				type = all
-				NOT = {
-					unrest = 1
-				}
-			}
-			anatolia_region = {
-				type = all
-				NOT = {
-					unrest = 1
-				}
-			}
-		}
-		
-		effect = {
-			every_owned_province = {
-				limit = {
-					region = egypt_region
-				}
-				change_culture = roman
-			}
-			every_owned_province = {
-				limit = {
-					region = anatolia_region
-				}
-				change_culture = roman
 			}
 		}
 	}
@@ -1443,7 +1036,7 @@ Aldabba_5_slot = {
 	ald_kab = {
 		icon = mission_fatimid_caliphate
 		required_missions = { ald_power}
-		position = 4
+		position = 5
 		provinces_to_highlight = {
 			OR = {
 				area = ouled_nail_area
@@ -1496,7 +1089,7 @@ Aldabba_5_slot = {
 	ald_trip = {
 		icon = mission_pacify_the_berbers
 		required_missions = { ald_kab }
-		position = 5
+		position = 6
 		provinces_to_highlight = {
 			OR = {
 				area = tripolitania_area
@@ -1548,7 +1141,7 @@ Aldabba_5_slot = {
 	ald_desert = {
 		icon = mission_traverse_the_sahara
 		required_missions = { ald_trip }
-		position = 6
+		position = 7
 		provinces_to_highlight = {
 			OR = {
 				province_id = 356	
@@ -1575,83 +1168,6 @@ Aldabba_5_slot = {
 			}
 			egypt_region = {
 				add_permanent_claim = ROOT
-			}
-		}
-	}
-	ald_cairo = {
-		icon = mission_occupy_alexandria
-		required_missions = { ald_desert }
-		position = 7
-		provinces_to_highlight = {
-			OR = {
-				province_id = 358
-				province_id = 361
-			}	
-		}
-		trigger = { 
-			358 = {
-				owned_by = ROOT
-			}
-			361 = {
-				owned_by = ROOT
-			}
-		}
-		
-		effect = {
-			358 = {
-				change_religion = ROOT
-			}
-			361 = {
-				change_religion = ROOT
-			}
-			mashriq_region = {
-				add_permanent_claim = ROOT
-			}
-		}
-	}
-	ald_jerusalem = {
-		icon = jerusalem
-		required_missions = { ald_cairo }
-		position = 9
-		provinces_to_highlight = {
-				province_id = 379	
-		}
-		trigger = { 
-			379 = {
-				owned_by = ROOT
-			}
-		}
-		
-		effect = {
-			add_country_modifier = {
-				name = muslim_versus
-				duration = -1
-			}
-			anatolia_region = {
-				add_permanent_claim = ROOT
-			}
-		}
-	}
-	ald_anatolia = {
-		icon = anatolian_frontier
-		required_missions = { ald_jerusalem ald_illria}
-		position = 11
-		provinces_to_highlight = {
-			region = anatolia_region
-		}
-		trigger = { 
-			anatolia_region = {
-				type = all 
-				owned_by = ROOT
-			}
-		}
-		
-		effect = {
-			remove_country_modifier = muslim_versus
-			remove_country_modifier = ald_broken_phoenix
-			add_country_modifier = {
-				name = end_the_crusade
-				duration = -1
 			}
 		}
 	}
