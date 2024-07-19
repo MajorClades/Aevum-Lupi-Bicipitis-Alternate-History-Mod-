@@ -12,4 +12,5 @@ tags={
 	"Gameplay"
 }
 name="Aevum Lupi Bicipitis"
-supported_version="1.37.*"
+supported_version="v1.37.2.0"
+remote_file_id="3288644137"

@@ -10,30 +10,24 @@ scot_clans_mechanic = {
 			max = 100
 			is_good = yes
 			min = 0
-			base_monthly_growth = -0.25
+			base_monthly_growth = -0.1
 			reverse_scaled_modifier = {
 				modifier = {
-					core_creation = 0.2
-					nobles_loyalty_modifier = -0.2
-					stability_cost_modifier = 0.5
+					core_creation = 0.1
+					nobles_loyalty_modifier = -0.15
+					stability_cost_modifier = 0.2
 				}
+				start_value = 50
+				end_value = 0
 			}
 			scaled_modifier = {
 				modifier = {
-					core_creation = -0.2
-					nobles_loyalty_modifier = 0.2
-					stability_cost_modifier = 0.5
+					core_creation = -0.1
+					nobles_loyalty_modifier = 0.15
+					stability_cost_modifier = -0.2
 				}
 				start_value = 50
 				end_value = 100
-			}
-			on_min_reached = {
-				capital_scope = {
-					spawn_rebels = {
-						size = 3
-						type = noble_rebels
-					}
-				}
 			}
 		}
 	}
@@ -41,7 +35,7 @@ scot_clans_mechanic = {
 	interactions = {
 		SCOT_first = {
 			gui = russian_mechanics_interaction_gui
-			icon = GFX_russian_ability_ADM
+			icon = GFX_SCOT_first
 			cost_type = scot_single_power
 			cost = 5
 			trigger = {
@@ -50,14 +44,14 @@ scot_clans_mechanic = {
 			effect = {
 				add_yearly_manpower = 0.75
 			}
-			cooldown_years = 1
+			cooldown_years = 5
 			ai_chance = {
 				factor = 0
 			}
 		}
 		SCOT_second = {
 			gui = russian_mechanics_interaction_gui
-			icon = GFX_russian_ability_DIP
+			icon = GFX_SCOT_second
 			cost_type = scot_single_power
 			cost = 5
 			trigger = { 
@@ -65,31 +59,32 @@ scot_clans_mechanic = {
 			}
 			effect = { 
 				add_mil_power = 100
+				
 			}
-			cooldown_years = 1
+			cooldown_years = 5
 			ai_chance = {
 				factor = 0
 			}
 		}
 		SCOT_three = {
 			gui = russian_mechanics_interaction_gui
-			icon = GFX_russian_ability_MIL
+			icon = GFX_SCOT_three
 			cost_type = scot_single_power
 			cost = 0
 			trigger = {
-				years_of_income = 0.25
+				years_of_income = 0.15
 			}
 			effect = { 
-				add_years_of_income = -0.25
+				add_years_of_income = -0.15
 				add_government_power = {
 					mechanic_type = scot_clans_mechanic
 					power_type = scot_single_power
 					value = 5
 				}
 			}
-			cooldown_years = 1
+			cooldown_years = 0
 			ai_chance = {
-				factor = 0
+				factor = 1
 			}
 		}
 	}
