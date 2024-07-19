@@ -279,7 +279,9 @@ Atro_branch3 = {
 		 } 
 
 		effect = {
-			add_splendor = 500
+			country_event = {
+				id = atro.6
+			}
 		}
 	}
 }
@@ -588,21 +590,30 @@ Seleucids_branch5 = {
 		} 
 
 		effect = {  
-			every_owned_province = {
-				limit = {
-					OR = {
-						culture_group = hellenic_group
-						culture = yunani
-					}
-					OR = {
-						region = khorasan_region
-						region = persia_region
-					}
-					NOT = { culture = sirian }
-				}
+			custom_tooltip = alb_greek_military_town_tt
+			tooltip = {
 				add_province_modifier = {
 					name = greek_military_town
 					duration = -1
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						OR = {
+							culture_group = hellenic_group
+							culture = yunani
+						}
+						OR = {
+							region = khorasan_region
+							region = persia_region
+						}
+						NOT = { culture = sirian }
+					}
+					add_province_modifier = {
+						name = greek_military_town
+						duration = -1
+					}
 				}
 			}
 		} 
@@ -1157,18 +1168,14 @@ Seleucids_branch2 = {
 		trigger = {  
 			mission_completed = new_pharoahs
 			egypt_region = {
-				NOT = {
-					OR = {
-						has_terrain = desert
-						has_terrain = coastal_desert
-						hidden_trigger = {
-							province_id = 365
-						}
+				OR = {
+					has_terrain = desert
+					has_terrain = coastal_desert
+					province_id = 365
+					AND = {
+						development = 15
+						has_production_building_trigger = yes
 					}
-				}
-				AND = {
-					development = 15
-					has_production_building_trigger = yes
 				}
 				type = all
 			}
@@ -1380,8 +1387,7 @@ Seleucids_branch1 = {
 				has_trade_building_trigger = yes
 				has_production_building_trigger = yes
 				has_tax_building_trigger = yes
-				has_manufactory_trigger = yes
-				NOT = { devastation = 0 }
+				NOT = { devastation = 1 }
 			}
 		} 
 
