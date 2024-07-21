@@ -151,6 +151,9 @@ country_decisions = {
 		major = yes
 		potential = {
 			NOT = {
+				has_country_flag = sie_flag_harm_islam
+			}
+			NOT = {
 				has_harmonized_with = islam
 			}
 			tag = SI0
@@ -173,6 +176,7 @@ country_decisions = {
 			}
 		}
 		effect = {
+			set_country_flag = sie_flag_harm_islam
 			add_harmonized_religion = islam
 			if = {
 				limit = {
@@ -194,6 +198,9 @@ country_decisions = {
 	sie_harmony_pagan = {
 		major = yes
 		potential = {
+			NOT = {
+				has_country_flag = sie_flag_harm_pagan
+			}
 			NOT = {
 				has_harmonized_with = tengri_pagan_reformed
 			}
@@ -217,6 +224,7 @@ country_decisions = {
 			}
 		}
 		effect = {
+			set_country_flag = sie_flag_harm_pagan
 			add_harmonized_religion = tengri_pagan_reformed
 			if = {
 				limit = {
@@ -238,6 +246,9 @@ country_decisions = {
 	sie_harmony_zoro = {
 		major = yes
 		potential = {
+			NOT = {
+				has_country_flag = sie_flag_harm_zoro
+			}
 			NOT = {
 				has_harmonized_with = zoroastrian
 			}
@@ -261,6 +272,7 @@ country_decisions = {
 			}
 		}
 		effect = {
+			set_country_flag = sie_flag_harm_zoro
 			add_harmonized_religion = zoroastrian
 			if = {
 				limit = {
@@ -272,6 +284,85 @@ country_decisions = {
 			}
 			every_subject_country = {
 				add_harmonized_religion = zoroastrian
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	sie_spread_harmony = {
+		major = yes
+		potential = {
+			any_subject_country = {
+				num_of_owned_provinces_with = {
+					value = 1
+					province_is_or_accepts_religion = no
+				}
+			}
+			tag = SI0
+			ai = no
+		}
+		allow = {
+			any_subject_country = {
+				num_of_owned_provinces_with = {
+					value = 1
+					province_is_or_accepts_religion = no
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					has_harmonized_with = zoroastrian
+				}
+				every_subject_country = {
+					limit = {
+						NOT = {
+							has_harmonized_with = zoroastrian
+						}
+					}
+					add_harmonized_religion = zoroastrian
+				}
+			}
+			if = {
+				limit = {
+					has_harmonized_with = catholic
+				}
+				every_subject_country = {
+					limit = {
+						NOT = {
+							has_harmonized_with = catholic
+						}
+					}
+					add_harmonized_religion = zoroastrian
+				}
+			}
+			if = {
+				limit = {
+					has_harmonized_with = islam
+				}
+				every_subject_country = {
+					limit = {
+						NOT = {
+							has_harmonized_with = islam
+						}
+					}
+					add_harmonized_religion = islam
+				}
+			}
+			if = {
+				limit = {
+					has_harmonized_with = suomi_pagan
+				}
+				every_subject_country = {
+					limit = {
+						NOT = {
+							has_harmonized_with = suomi_pagan
+						}
+					}
+					add_harmonized_religion = suomi_pagan
+				}
 			}
 		}
 		ai_will_do = {
