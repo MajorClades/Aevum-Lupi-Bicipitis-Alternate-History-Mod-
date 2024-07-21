@@ -1,0 +1,66 @@
+
+help_cathkin_action = {
+	category = relation
+
+	is_visible = {
+		has_government_mechanic = saints_and_sinners
+    }
+	require_acceptance = no
+	is_allowed = {
+		curia_treasury_size = 500
+		is_at_war = no
+		FROM = {
+			religion = catholic
+			at_war_with_religious_enemy = yes
+		}
+    }
+	on_accept = {
+		FROM = {
+			add_treasury = 500
+		}
+		ROOT = {
+			add_curia_treasury = -500
+			add_government_power = {
+				mechanic_type = saints_and_sinners
+				power_type = nice_or_naughty
+				value = 5
+			}
+		}
+    }
+
+	ai_will_do = {
+		always = yes
+    }
+}
+
+papal_vassalization_action = {
+	category = influence
+
+	is_visible = {
+		OR = {
+			tag = PAP
+			was_tag = PAP
+		}
+    }
+	require_acceptance = yes
+	is_allowed = {
+		is_at_war = no
+		FROM = {
+			religion = catholic
+			is_subject_of = ROOT
+		}
+    }
+	
+	on_accept = {
+		FROM = {
+			change_subject_type = {
+				subject_type = papal_vassal
+			}
+		}
+    }
+
+	ai_will_do = {
+		always = yes
+    }
+}
+
