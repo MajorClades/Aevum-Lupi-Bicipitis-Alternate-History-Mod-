@@ -205,3 +205,152 @@ country_event = {
 		name = aldab.6
 	}
 }
+country_event = {
+	id = aldab.7
+	title = aldab.7.t
+	desc = aldab.7.d
+	picture = muslimgfx_SIEGE_eventPicture
+
+	is_triggered_only = yes
+	
+	option = {
+		name = aldab.7.a
+		custom_tooltip = every_holy_site_indictian_tt
+		tooltip = {
+			add_province_modifier = {
+				name = alb_source_of_the_faith
+				duration = -1
+			}
+		}
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						province_id = 343
+						province_id = 336
+						province_id = 341
+						province_id = 358
+						province_id = 379
+					}
+				}
+				add_province_modifier = {
+					name = alb_source_of_the_faith
+					duration = -1
+				}
+			}
+		}
+		
+	}
+
+}
+country_event = {
+	id = aldab.8
+	title = aldab.8.t
+	desc = aldab.8.d
+	picture = muslimgfx_CULTURE_eventPicture
+
+	is_triggered_only = yes
+
+	option = {
+		name = aldab.8.a
+		custom_tooltip = sardinian_culture_shift_tt
+		add_accepted_culture = sardinian_african
+		hidden_effect = {
+			every_province = {
+				limit = {
+					OR = {
+						area = sardinia_area
+						area = corsica_sardinia_area
+					}
+				}
+				change_culture = sardinian_african
+			}
+			every_subject_country = {
+				limit = {
+					primary_culture = sardinian
+				}
+				change_primary_culture = sardinian_african
+			}
+		}
+	}
+}
+country_event = {
+	id = aldab.9
+	title = aldab.9.t
+	desc = aldab.9.d
+	picture = muslimgfx_GOOD_WITH_MONARCH_eventPicture
+
+	is_triggered_only = yes
+
+	major = yes
+
+	option = {
+		name = aldab.9.a
+		add_years_of_income = 5
+		change_price = {
+			trade_goods = cloth
+			key = cloth_scheme
+			value = 0.25
+			duration = 18250
+		}
+		add_country_modifier = {
+			name = protectionist_policy_ALD
+			duration = -1
+		}
+		custom_tooltip = every_country_with_cloth_gets_event_AFR
+		hidden_effect = {
+			every_country = {
+				limit = {
+					capital_scope = {
+						continent = europe
+						continent = africa
+					}
+					NOT = { tag = ROOT }
+					any_owned_province = {
+						trade_goods = cloth
+					}
+				}
+				country_event = {
+					id = aldab.10
+					random = 60
+					days = 10
+				}
+			}
+			
+		}
+	}
+}
+country_event = {
+	id = aldab.10
+	title = aldab.10.t
+	desc = aldab.10.d
+	picture = OVEREXTENSION_eventPicture
+
+	is_triggered_only = yes
+
+	major = yes
+	major_trigger = {
+		any_owned_province = {
+			trade_goods = cloth
+		}
+		capital_scope = {
+			continent = europe
+			continent = africa
+		}
+	}
+
+	option = {
+		name = aldab.10.a
+		add_stability = -1
+		add_inflation = 5
+		every_owned_province = {
+			limit = {
+				trade_goods = cloth
+			}
+			add_province_modifier = {
+				name = cloth_crash_ald
+				duration = 18250
+			}
+		}
+	}
+}

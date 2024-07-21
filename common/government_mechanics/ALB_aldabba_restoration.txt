@@ -65,6 +65,11 @@ aldabba_failure_mechanic = {
 					estate = all
 					loyalty = 30
 				}
+				has_government_power = {
+					mechanic_type = aldabba_failure_mechanic
+					power_type = restoration_aldabba
+					value = 15
+				}
 			}
 			effect = {
 				add_government_power = {
@@ -72,6 +77,7 @@ aldabba_failure_mechanic = {
 					power_type = restoration_aldabba
 					value = -15
 				}
+				add_adm_power = -50
 				custom_tooltip = "We will gain 5 Crownland at the expense of 15 Loyalty. This will not cause uprisings in our provinces."
 				hidden_effect = {
 					take_estate_land_share_massive = { estate = all }
@@ -94,6 +100,68 @@ aldabba_failure_mechanic = {
 						}
 					}
 					adm_power = 500
+				}
+			}
+		}
+		purge_nonbelievers = {
+			icon = GFX_prussian_militarization_rewrite_military_manual
+			cost_type = restoration_aldabba
+			trigger = {
+				custom_trigger_tooltip = {
+					tooltip = has_enabled_purge_nonbelievers
+					has_country_flag = enable_third_button_aldabba
+				}
+				any_neighbor_country = {
+					NOT = {
+						religion = ROOT
+					}
+				}
+				has_government_power = {
+					mechanic_type = aldabba_failure_mechanic
+					power_type = restoration_aldabba
+					value = 30
+				}
+				dip_power = 50
+			}
+			effect = {
+				add_government_power = {
+					mechanic_type = aldabba_failure_mechanic
+					power_type = restoration_aldabba
+					value = -30
+				}
+				add_dip_power = 50
+				custom_tooltip = " "
+				custom_tooltip = "We will gain the Holy War Casus Belli on a Random Neighbor country that is NOT our religion."
+				random_neighbor_country = {
+					limit = {
+						NOT = {
+							religion = ROOT
+						}
+						NOT = {
+							is_subject_of = ROOT
+						}
+					}
+					ROOT = {
+						add_casus_belli = {
+							type = cb_crusade
+							target = PREV
+						}
+					}
+				}
+				
+			}
+			ai_chance = {
+				factor = 0
+				modifier = {
+					factor = 10
+					not = {
+						has_government_power = {
+							mechanic_type = aldabba_failure_mechanic
+							power_type = restoration_aldabba
+							value = 90
+						}
+					}
+					dip_power = 500
 				}
 			}
 		}
