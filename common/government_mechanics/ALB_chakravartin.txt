@@ -35,16 +35,34 @@ chakravartin_mechanic = {
 		}
 	}
 	interactions = {
-		alb_low_godliness_interaction = {
+	
+	alb_low_godliness_interaction = {
 			icon = GFX_alb_low_godliness_interaction
 			cost = -50
+			cost_type = alb_worldliness_vs_godliness
+			center = no
 			trigger = {
-				
+				has_government_power = {
+					mechanic_type = chakravartin_mechanic
+					power_type = alb_worldliness_vs_godliness
+					NOT = { value = 50 }
+				}
+				adm_power = 50
 			}
 			effect = {
-				
+				add_estate_loyalty = {
+					estate = estate_church
+					loyalty = 15
+				}
+				add_manpower = -5
+				add_treasury = -250
+				add_adm_power = -50
+				add_government_power = {
+					mechanic_type = chakravartin_mechanic
+					power_type = alb_worldliness_vs_godliness
+					value = 50
+				}
 			}
-			cooldown_years = 10
 		}
 		alb_placeholder_thing_button = { # so spacing is correct
 			icon = GFX_placeholder_no_button
@@ -59,13 +77,27 @@ chakravartin_mechanic = {
 		alb_high_godliness_interaction = {
 			icon = GFX_alb_high_godliness_interaction
 			cost = 50
+			cost_type = alb_worldliness_vs_godliness
+			center = no
 			trigger = {
-				
+				has_government_power = {
+					mechanic_type = chakravartin_mechanic
+					power_type = alb_worldliness_vs_godliness
+					value = 50
+				}
+				estate_influence = {
+						estate = estate_church
+						influence = 50
+					}
 			}
 			effect = {
-				
+				add_estate_loyalty = {
+					estate = estate_church
+					loyalty = -15
+				}
+				add_manpower = 5
+				add_treasury = 300
 			}
-			cooldown_years = 10
 		}
 	}
 }
