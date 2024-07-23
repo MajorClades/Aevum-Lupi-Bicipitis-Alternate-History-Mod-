@@ -255,7 +255,6 @@ WE0_2_slot = {
 			}
 		}
 	}
-	
 	weo_port_vurte = {
 		icon = mission_humiliate_provence
 		required_missions = {  }
@@ -308,6 +307,38 @@ WE0_2_slot = {
 					power = 50
 					key = SWEBEN_SUGAR_RUSH
 				}
+			}
+		}
+	}
+	weo_colonial_rush = {
+		icon = mission_humiliate_provence
+		required_missions = {weo_south_wards weo_west_wards}
+		position = 7
+		trigger = {
+			full_idea_group = exploration_ideas
+			years_of_income = 0.77
+			OR = {
+				AND = {
+					adm_power = 200
+					dip_power = 200
+				}
+				full_idea_group = expansion_ideas
+			}
+		}
+		
+		effect = {
+			add_years_of_income = -0.77
+			if = {
+				limit = {
+					NOT = {
+						full_idea_group = expansion_ideas
+					}
+				}
+				add_adm_power = -200
+				add_dip_power = -200
+			}
+			country_event = {
+				id = sweb.3
 			}
 		}
 	}
@@ -442,6 +473,26 @@ WE0_4_slot = {
 			add_treasury = 500
 		}
 	}
+	weo_iron_strike = {
+		icon = mission_humiliate_provence
+		required_missions = { weo_gottem }
+		position = 4
+		trigger = {
+			num_of_completed_idea_groups_mil = { amount = 1}
+			BU0 = {
+				all_core_province = {
+					owned_by = ROOT
+				}
+			}
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = alb_attritional_warfare
+				duration = -1
+			}
+		}
+	}
 	weo_imperial_cavalry = {
 		icon = mission_humiliate_provence
 		required_missions = {weo_good_god }
@@ -449,10 +500,19 @@ WE0_4_slot = {
 
 		trigger = {
 			num_of_completed_idea_groups_mil = { amount = 2}
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 20
+				NOT = {
+					continent = europe
+				}
+			}
 		}
 		
 		effect = {
-			#add something
+			add_country_modifier = {
+				name = alb_external_army
+				duration = -1
+			}
 		}
 	}
 }
@@ -570,7 +630,7 @@ WE0_5_slot = {
 	weo_swegothia = {
 		icon = mission_humiliate_provence
 		required_missions = {weo_goth_on_us  }
-		position = 4
+		position = 5
 		
 		provinces_to_highlight = {
 			province_group = coth_old_border
@@ -647,6 +707,32 @@ WE0_5_slot = {
 					}
 					add_dip_power = 200
 				}
+			}
+		}
+	}
+	weo_imperial_navy = {
+		icon = mission_humiliate_provence
+		required_missions = {weo_imperial_cavalry }
+		position = 7
+
+		trigger = {
+			navy_size = 100
+			calc_true_if = {
+				amount = 3
+				all_subject_country = {
+					capital_scope = {
+						NOT = {
+							continent = europe
+						}
+					}
+				}
+			}
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = alb_ocean_man
+				duration = -1
 			}
 		}
 	}
