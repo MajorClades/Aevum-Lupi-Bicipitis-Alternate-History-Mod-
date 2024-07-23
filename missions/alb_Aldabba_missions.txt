@@ -3,7 +3,13 @@ Aldabba_1_slot = {
 	slot = 1
 	generic = no
 	ai = yes
-	potential = {tag = AF2}
+	potential = {OR = {
+		tag = AF2
+		tag = AF4
+		tag = AF3
+		tag = AF5
+		tag = AF0
+	}}
 	has_country_shield = yes
 
 	ald_list = {
@@ -178,7 +184,7 @@ Aldabba_1a_slot = { #Eco / Development (TAX METAAAA)
 	slot = 1
 	generic = no
 	ai = yes
-	potential = {tag = AF2}
+	potential = {tag = AF0}
 	has_country_shield = yes
 
 	afr_rebuild_the_treasury = {
@@ -466,12 +472,231 @@ Aldabba_1a_slot = { #Eco / Development (TAX METAAAA)
 			}
 		}
 	}
+	afr_the_american_coast = {
+		icon = brest_dockyards
+		position = 14
+		required_missions = {
+			afr_conquer_the_cotians
+		}
+		provinces_to_highlight = {
+			area = brittany_area
+			area = normandy_area
+			area = loire_area
+			area = poitou_area
+		}
+		trigger = {
+			brittany_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			normandy_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			loire_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			poitou_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = AFR_lateen_open_water
+				duration = -1
+			}
+			if = {
+				limit = {
+					has_country_flag = focus_on_gallia
+				}
+				custom_tooltip = yes_focus_on_gallia
+			}
+			else = {
+				custom_tooltip = no_focus_on_gallia
+			}
+			tooltip = {
+				add_country_modifier = {
+					name = focus_on_gallia_3
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_country_flag = focus_on_gallia
+					}
+					add_country_modifier = {
+						name = focus_on_gallia_3
+						duration = -1
+					}
+				}
+			}
+		}
+	}
+	afr_the_soxon_heart = {
+		icon = versailles_palace
+		position = 16
+		required_missions = {
+			afr_the_american_coast
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = ile_de_france_area
+				area = orleans_area
+				area = champagne_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			ile_de_france_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			orleans_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			champagne_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			add_army_tradition_or_mil_power = {
+				amount = 25
+			}
+			custom_tooltip = " "
+			define_advisor = {
+				type = theologian
+				skill = 3
+				cost_multiplier = 0.75
+				culture = soxon
+			}
+			custom_tooltip = " "
+			if = {
+				limit = {
+					has_country_flag = focus_on_gallia
+				}
+				custom_tooltip = yes_focus_on_gallia
+			}
+			else = {
+				custom_tooltip = no_focus_on_gallia
+			}
+			tooltip = {
+				custom_tooltip = every_soxon_province_tt
+				add_province_modifier = {
+					name = focus_on_gallia_4
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_country_flag = focus_on_gallia
+					}
+					every_owned_province = {
+						limit = {
+							culture = soxon
+						}
+						add_province_modifier = {
+							name = focus_on_gallia_4
+							duration = -1
+						}
+					}
+				}
+			}
+		}
+	}
+	afr_the_gallic_wars = {
+		icon = centralize_france
+		position = 17
+		required_missions = {
+			afr_the_soxon_heart
+			afr_secure_the_rhine
+		}
+		provinces_to_highlight = {
+			OR = {
+				region = france_region
+				AND = {
+					superregion = europe_superregion 
+					owned_by = so0
+				}
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			france_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			europe_superregion = {
+				type = all
+				NOT = {
+					owned_by = so0
+				}
+			}
+		}
+		effect = {
+			home_counties_area = {
+				add_permanent_claim = ROOT
+			}
+			wessex_area = {
+				add_permanent_claim = ROOT
+			}
+			east_anglia_area = {
+				add_permanent_claim = ROOT
+			}
+			custom_tooltip = " "
+			add_country_modifier = {
+				name = AFR_permanent_growth
+				duration = -1
+			}
+			if = {
+				limit = {
+					has_country_flag = focus_on_gallia
+				}
+				custom_tooltip = yes_focus_on_gallia
+			}
+			else = {
+				custom_tooltip = no_focus_on_gallia
+			}
+			tooltip = {
+				add_country_modifier = {
+					name = focus_on_gallia_5
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_country_flag = focus_on_gallia
+					}
+					add_country_modifier = {
+						name = focus_on_gallia_5
+						duration = -1
+					}
+				}
+			}
+		}
+	}
 }
 Aldabba_2_slot = {
 	slot = 2
 	generic = no
 	ai = yes
-	potential = {tag = AF2}
+	potential = {OR = {
+		tag = AF2
+		tag = AF4
+		tag = AF3
+		tag = AF5
+		tag = AF0
+	}}
 	has_country_shield = yes
 
 	ald_better_balance = {
@@ -806,7 +1031,7 @@ Aldabba_2a_slot = { #Eco / Development (Deviating from Tax Meta a bit)
 	slot = 2
 	generic = no
 	ai = yes
-	potential = {tag = AF2}
+	potential = {tag = AF0}
 	has_country_shield = yes
 
 	afr_cloth_and_cotton = {
@@ -885,12 +1110,212 @@ Aldabba_2a_slot = { #Eco / Development (Deviating from Tax Meta a bit)
 			}
 		}
 	}
+	afr_conquer_the_cotians = {
+		icon = mission_hessian_jaeger_corps
+		position = 13
+		required_missions = {
+			afr_great_power
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = pyrenees_area
+				area = languedoc_area
+				area = guyenne_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			pyrenees_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			languedoc_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			guyenne_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			france_region = {
+				add_permanent_claim = ROOT
+			}
+			custom_tooltip = " "
+			add_country_modifier = {
+				name = AFR_dealing_with_cotians
+				duration = 7300
+			}
+			if = {
+				limit = {
+					has_country_flag = focus_on_gallia
+				}
+				custom_tooltip = yes_focus_on_gallia
+			}
+			else = {
+				custom_tooltip = no_focus_on_gallia
+			}
+			custom_tooltip = enable_gothic_fortification_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						has_country_flag = focus_on_gallia
+					}
+					set_country_flag = focus_on_gallia_1_flag
+				}
+			}
+		}
+	}
+	afr_occitanii = {
+		icon = mission_wine_monopolies
+		position = 14
+		required_missions = {
+			afr_conquer_the_cotians
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = massif_central_area
+				area = west_burgundy_area
+				area = bourgogne_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			massif_central_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			west_burgundy_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			bourgogne_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			add_years_of_owned_provinces_production_income = {
+				years = 5
+				trigger = {
+					OR = {
+						area = west_burgundy_area
+						area = bourgogne_area
+					}
+				}
+				custom_tooltip = FROM_BURGUNDY_AREAS
+			}
+			custom_tooltip = " "
+			add_adm_power = 100
+			custom_tooltip = " "
+			if = {
+				limit = {
+					has_country_flag = focus_on_gallia
+				}
+				custom_tooltip = yes_focus_on_gallia
+			}
+			else = {
+				custom_tooltip = no_focus_on_gallia
+			}
+			tooltip = {
+				add_country_modifier = {
+					name = focus_on_gallia_2
+					duration = 10950
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_country_flag = focus_on_gallia
+					}
+					add_country_modifier = {
+						name = focus_on_gallia_2
+						duration = 10950
+					}
+				}
+			}
+		}
+	}
+	afr_secure_the_rhine = {
+		icon = mission_rhine
+		position = 16
+		required_missions = {
+			afr_occitanii
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = savoy_dauphine_area
+				area = romandie_area
+				area = lorraine_area
+				area = alsace_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			savoy_dauphine_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			romandie_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			lorraine_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			alsace_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			75 = {
+				add_or_upgrade_fort_building = yes
+				add_province_modifier = {
+					name = AFR_wall_of_the_rhine
+					duration = -1
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = focus_on_gallia
+				}
+				custom_tooltip = yes_focus_on_gallia
+			}
+			else = {
+				custom_tooltip = no_focus_on_gallia
+			}
+			custom_tooltip = enable_african_settlers_in_woods_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						has_country_flag = focus_on_gallia
+					}
+					set_country_flag = enable_african_settlers_in_woods
+				}
+			}
+		}
+	}
 }
 Aldabba_3_slot = {
 	slot = 3
 	generic = no
 	ai = yes
-	potential = {tag = AF2}
+	potential = {OR = {
+		tag = AF2
+		tag = AF4
+		tag = AF3
+		tag = AF5
+		tag = AF0
+	}}
 	has_country_shield = yes
 
 
@@ -1123,7 +1548,7 @@ Aldabba_3a_slot = {
 	slot = 3
 	generic = no
 	ai = yes
-	potential = {tag = AF2}
+	potential = {tag = AF0}
 	has_country_shield = yes
 
 	ald_claim_the_seas = {
@@ -1192,6 +1617,146 @@ Aldabba_3a_slot = {
 			}
 		}
 	}
+	afr_great_power = {
+		icon = mission_the_renaissance_king
+		position = 12
+		required_missions = {
+		}
+		provinces_to_highlight = {
+			OR = {
+				region = egypt_region
+				region = iberia_region
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			egypt_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			iberia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			is_great_power = yes
+			total_development = 500
+		}
+		effect = {
+			country_event = {
+				id = aldab.11
+			}
+		}
+	}
+	afr_bring_in_egypt = {
+		icon = mission_egyptian_mamluk_soldier
+		position = 13
+		required_missions = {
+			afr_great_power
+		}
+		provinces_to_highlight = {
+			region = egypt_region
+			NOT = {
+				AND = {
+					owned_by = ROOT
+					religion = ROOT
+				}
+			}
+		}
+		trigger = {
+			OR = {
+				accepted_culture = hell_egypt
+				accepted_culture = copt
+			}
+			egypt_region = {
+				type = all
+				owned_by = ROOT
+				religion = ROOT
+			}
+			num_of_owned_provinces_with = {
+				has_courthouse_building_trigger = yes
+				region = egypt_region
+				value = 10
+			}
+		}
+		effect = {
+			custom_tooltip = move_egypt_into_african_group
+			add_accepted_culture = african_egyptian
+			hidden_effect = {
+				every_province = {
+					limit = {
+						region = egypt_region
+					}
+					change_culture = african_egyptian
+				}
+				remove_accepted_culture = hell_egypt
+				remove_accepted_culture = copt
+			}
+		}
+	}
+	afr_bring_in_iberia = {
+		icon = fra_peninsular_war
+		position = 15
+		required_missions = {
+			afr_bring_in_egypt
+		}
+		provinces_to_highlight = {
+			region = iberia_region
+			NOT = {
+				AND = {
+					owned_by = ROOT
+					religion = ROOT
+				}
+			}
+		}
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = accept_two_of_all_iberian_cultures
+				calc_true_if = {
+					accepted_culture = spaniard
+					accepted_culture = bettian
+					accepted_culture = burgund
+					accepted_culture = swebish
+					accepted_culture = celtiberian
+					accepted_culture = vrankish
+					accepted_culture = basque
+					accepted_culture = raklionne
+					amount = 2
+				}
+			}
+			iberia_region = {
+				type = all
+				owned_by = ROOT
+				religion = ROOT
+			}
+			num_of_owned_provinces_with = {
+				has_courthouse_building_trigger = yes
+				region = iberia_region
+				value = 10
+			}
+		}
+		effect = {
+			custom_tooltip = move_iberia_into_african_group
+			add_accepted_culture = african_iberian
+			hidden_effect = {
+				every_province = {
+					limit = {
+						region = iberia_region
+					}
+					change_culture = african_iberian
+				}
+				remove_accepted_culture = spaniard
+				remove_accepted_culture = bettian
+				remove_accepted_culture = burgund
+				remove_accepted_culture = swebish
+				remove_accepted_culture = celtiberian
+				remove_accepted_culture = vrankish
+				remove_accepted_culture = basque
+				remove_accepted_culture = raklionne
+			}
+		}
+	}
 }
 
 
@@ -1199,7 +1764,15 @@ Aldabba_4_slot = {
 	slot = 4
 	generic = no
 	ai = yes
-	potential = {tag = AF2}
+	potential = {
+		OR = {
+			tag = AF2
+			tag = AF4
+			tag = AF3
+			tag = AF5
+			tag = AF0
+		}
+	}
 	has_country_shield = yes
 
 	ald_mauria = {
@@ -1416,7 +1989,9 @@ Aldabba_4a_slot = {
 	slot = 4
 	generic = no
 	ai = yes
-	potential = {tag = AF2}
+	potential = {
+		tag = AF0
+	}
 	has_country_shield = yes
 
 	ald_sicily = {
@@ -1641,6 +2216,13 @@ Aldabba_4a_slot = {
 			}
 		}
 		effect = {
+			add_permanent_power_projection = {
+				amount = 25
+			}
+			custom_tooltip = " "
+			change_ruler_stat = {
+				mil = 2
+			}
 			custom_tooltip = " "
 			if = {
 				limit = {
@@ -1660,12 +2242,251 @@ Aldabba_4a_slot = {
 			}
 		}
 	}
+	afr_syrian_campaign = {
+		icon = per_recruit_the_qizilbash
+		position = 13
+		required_missions = {
+			afr_great_power
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = palestine_area
+				area = syria_area
+				area = trans_jordan_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			palestine_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			syria_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			trans_jordan_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			mashriq_region = {
+				add_permanent_claim = ROOT
+			}
+			cukurova_area = {
+				add_permanent_claim = ROOT
+			}
+			dulkadir_area = {
+				add_permanent_claim = ROOT
+			}
+			custom_tooltip = " "
+			define_advisor = {
+				type = inquisitor
+				cost_multiplier = 0.25
+				skill = 3
+				religion = ROOT
+			}
+			custom_tooltip = " "
+			if = {
+				limit = {
+					has_country_flag = focus_on_rhomania
+				}
+				custom_tooltip = yes_focus_on_rhomania
+			}
+			else = {
+				custom_tooltip = no_focus_on_rhomania
+			}
+			tooltip = {
+				379 = {
+					set_great_project_tier_3 = {
+						type = holy_city_jerusalem
+					}
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_country_flag = focus_on_rhomania
+					}
+					379 = {
+						set_great_project_tier_3 = {
+							type = holy_city_jerusalem
+						}
+					}
+				}
+			}
+		}
+	}
+	afr_into_anatolia = {
+		icon = mam_persia
+		position = 14
+		required_missions = {
+			afr_syrian_campaign
+		}
+		provinces_to_highlight = {
+			OR = {
+				region = mashriq_region
+				area = cukurova_area
+				area = dulkadir_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			mashriq_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = root
+			}
+			cukurova_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			dulkadir_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			anatolia_region = {
+				add_permanent_claim = ROOT
+			}
+			custom_tooltip = " "
+			add_country_modifier = {
+				name = AFR_conquest_of_the_empire
+				duration = -1
+			}
+			if = {
+				limit = {
+					has_country_flag = focus_on_rhomania
+				}
+				custom_tooltip = yes_focus_on_rhomania
+			}
+			else = {
+				custom_tooltip = no_focus_on_rhomania
+			}
+			tooltip = {
+				custom_tooltip = every_non_owned_anatolian_fort
+				add_province_modifier = {
+					name = focus_on_rhomania_2
+					duration = 5475
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_country_flag = focus_on_rhomania
+					}
+					every_province = {
+						limit = {
+							region = anatolia_region
+							fort_level = 1
+							NOT = {
+								OR = {
+									country_or_non_sovereign_subject_holds = ROOT
+									owner = {
+										alliance_with = ROOT
+									}
+								}
+							}
+						}
+						add_province_modifier = {
+							name = focus_on_rhomania_2
+							duration = 5475
+						}
+					}
+				}
+			}
+		}
+		
+	}
+	afr_sweep_the_west = {
+		icon = mission_pf_soldier
+		position = 16
+		required_missions = {
+			afr_into_anatolia
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = ankara_area
+				area = aydin_area
+				area = hudavendigar_area
+				area = karaman_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			ankara_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			aydin_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			hudavendigar_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			karaman_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			thrace_area = {
+				add_permanent_claim = ROOT
+			}
+			add_power_projection_mission = { amount = 25 }
+			custom_tooltip = " "
+			define_general = {
+				shock = 1
+				fire = 1
+				manuever = 4
+				siege = 4
+			}
+			custom_tooltip = " "
+			if = {
+				limit = {
+					has_country_flag = focus_on_rhomania
+				}
+				custom_tooltip = yes_focus_on_rhomania
+			}
+			else = {
+				custom_tooltip = no_focus_on_rhomania
+			}
+			tooltip = {
+				custom_tooltip = converting_religion_AFR_bonus
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_country_flag = focus_on_rhomania
+					}
+					set_country_flag = converting_religion_AFR_bonus
+				}
+			}
+		}
+	}
 }
 Aldabba_5_slot = {
 	slot = 5
 	generic = no
 	ai = yes
-	potential = {tag = AF2}
+	potential = {
+		OR = {
+			tag = AF2
+			tag = AF4
+			tag = AF3
+			tag = AF5
+			tag = AF0
+		}
+	}
 	has_country_shield = yes
 
 	ald_fort = {
@@ -1675,7 +2496,7 @@ Aldabba_5_slot = {
 		
 		trigger = { 
 			has_mil_advisor = yes
-			army_size_percentage = 1
+			num_of_generals = 1
 			has_government_power = {
 				mechanic_type = aldabba_failure_mechanic
 				power_type = restoration_aldabba
@@ -1689,6 +2510,22 @@ Aldabba_5_slot = {
 				name = fort_renovation
 				duration = 10950
 			}
+			if = {
+				limit = {
+					NOT = {
+						tag = AF2
+					}
+				}
+				ouled_nail_area = {
+					add_permanent_claim = ROOT
+				}
+				north_saharan_area = {
+					add_permanent_claim = ROOT
+				}
+				kabylia_area = {
+					add_permanent_claim = ROOT
+				}
+			}
 		}
 	}
 	
@@ -1697,26 +2534,80 @@ Aldabba_5_slot = {
 		required_missions = { ald_fort }
 		position = 3
 		provinces_to_highlight = {
-			province_id = 350
-			NOT = {
-				owned_by = ROOT
+			if = {
+				limit = {
+					336 = {
+						is_capital_of = ROOT
+					}
+				}
+				province_id = 350
+				NOT = {
+					owned_by = ROOT
+				}
+			}
+			else = {
+				OR = {
+					area = ouled_nail_area
+					area = north_saharan_area
+					area = kabylia_area
+				}
+				NOT = {
+					country_or_non_sovereign_subject_holds = ROOT
+				}
 			}
 		}
 		trigger = { 
-			350 = {
-				owned_by = ROOT
+			if = {
+				limit = {
+					tag = AF2
+				}
+				350 = {
+					owned_by = ROOT
+				}
 			}
+			else = {
+				ouled_nail_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				north_saharan_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				kabylia_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+			}
+			
 		}
 		
 		effect = {
-			ouled_nail_area = {
-				add_permanent_claim = ROOT
+			if = {
+				limit = {
+					tag = AF2
+				}
+				ouled_nail_area = {
+					add_permanent_claim = ROOT
+				}
+				north_saharan_area = {
+					add_permanent_claim = ROOT
+				}
+				kabylia_area = {
+					add_permanent_claim = ROOT
+				}
 			}
-			north_saharan_area = {
-				add_permanent_claim = ROOT
-			}
-			kabylia_area = {
-				add_permanent_claim = ROOT
+			else = {
+				hautes_plaines_area = {
+					add_permanent_claim = ROOT
+				}
+				algiers_area = {
+					add_permanent_claim = ROOT
+				}
+				barbary_coast_area = {
+					add_permanent_claim = ROOT
+				}
+				add_adm_power = 100
 			}
 			custom_tooltip = " "
 			350 = {
@@ -1734,26 +2625,65 @@ Aldabba_5_slot = {
 		required_missions = { ald_power}
 		position = 5
 		provinces_to_highlight = {
-			OR = {
-				area = ouled_nail_area
-				area = north_saharan_area
-				area = kabylia_area
+			if = {
+				limit = {
+					336 = {
+						is_capital_of = ROOT
+					}
+				}
+				OR = {
+					area = ouled_nail_area
+					area = north_saharan_area
+					area = kabylia_area
+				}
+				NOT = {
+					country_or_non_sovereign_subject_holds = ROOT
+				}
 			}
-			
+			else = {
+				OR = {
+					area = hautes_plaines_area
+					area = algiers_area
+					area = barbary_coast_area
+				}
+				NOT = {
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+			}
 		}
 		trigger = { 
-			ouled_nail_area = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
+			if = {
+				limit = {
+					tag = af2
+				}
+				ouled_nail_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				north_saharan_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				kabylia_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
 			}
-			north_saharan_area = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
+			else = {
+				hautes_plaines_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				algiers_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				barbary_coast_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
 			}
-			kabylia_area = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
-			}
+		
 		}
 		
 		effect = {
@@ -1837,7 +2767,7 @@ Aldabba_5_slot = {
 	ald_desert = {
 		icon = mission_traverse_the_sahara
 		required_missions = { ald_trip }
-		position = 7
+		position = 8
 		provinces_to_highlight = {
 			OR = {
 				province_id = 356	
@@ -1875,7 +2805,7 @@ Aldabba_5_slot = {
 		required_missions = {
 			ald_desert
 		}
-		position = 8
+		position = 9
 		provinces_to_highlight = {
 			OR = {
 				area = cyrenaica_area
@@ -1906,6 +2836,16 @@ Aldabba_5_slot = {
 			}
 		}
 		effect = {
+			palestine_area = {
+				add_permanent_claim = ROOT
+			}
+			syria_area = {
+				add_permanent_claim = ROOT
+			}
+			trans_jordan_area = {
+				add_permanent_claim = ROOT
+			}
+			custom_tooltip = " "
 			add_government_power = {
 				mechanic_type = aldabba_failure_mechanic
 				power_type = restoration_aldabba
@@ -1914,6 +2854,153 @@ Aldabba_5_slot = {
 			custom_tooltip = " "
 			country_event = {
 				id = aldab.7
+			}
+		}
+	}
+}
+Aldabba_5a_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	potential = {tag = AF0}
+	has_country_shield = yes
+	
+	afr_secure_the_east = {
+		icon = arm_proclaim_great_armenia
+		position = 15
+		required_missions = {
+			afr_into_anatolia
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = erzurum_area
+				area = rum_area
+				area = kastamonu_area
+				area = north_kurdistan_area
+			}
+		}
+		trigger = {
+			erzurum_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			rum_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			kastamonu_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			north_kurdistan_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			custom_tooltip = every_highlighted_area_gain_modifier 
+			tooltip = {
+				add_province_modifier = {
+					name = defensive_rear_AFR
+					duration = 10950
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = focus_on_rhomania
+				}
+				custom_tooltip = yes_focus_on_rhomania
+			}
+			else = {
+				custom_tooltip = no_focus_on_rhomania
+			}
+			custom_tooltip = african_settlers_discount_tt
+			hidden_effect = {
+				every_province = {
+					limit = {
+						OR = {
+							area = erzurum_area
+							area = rum_area
+							area = kastamonu_area
+							area = north_kurdistan_area
+						}
+					}
+					add_province_modifier = {
+						name = defensive_rear_AFR
+						duration = 10950
+					}
+				}
+				if = {
+					limit = {
+						has_country_flag = focus_on_rhomania
+					}
+					set_country_flag = african_settlers_discount
+				}
+			}
+		}
+	}
+	afr_rhomania_delenda_est = {
+		icon = mission_fall_of_third_rome
+		position = 17
+		required_missions = {
+			afr_secure_the_east
+			afr_sweep_the_west
+		}
+		provinces_to_highlight = {
+			OR = {
+				region = anatolia_region
+				area = thrace_area
+			}
+		}
+		trigger = {
+			anatolia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			thrace_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			near_east_superregion = {
+				type = all
+				NOT = {
+					owned_by = RU0
+				}
+			}
+		}
+		effect = {
+			balkan_region = {
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name = AFR_true_rhoman_heir
+				duration = 9125
+			}
+			if = {
+				limit = {
+					has_country_flag = focus_on_rhomania
+				}
+				custom_tooltip = yes_focus_on_rhomania
+			}
+			else = {
+				custom_tooltip = no_focus_on_rhomania
+			}
+			tooltip = {
+				add_country_modifier = {
+					name = focus_on_rhomania_3
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_country_flag = focus_on_rhomania
+					}
+					add_country_modifier = {
+						name = focus_on_rhomania_3
+						duration = -1
+					}
+				}
 			}
 		}
 	}

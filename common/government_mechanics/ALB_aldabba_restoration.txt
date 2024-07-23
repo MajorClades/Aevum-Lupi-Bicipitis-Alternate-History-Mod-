@@ -18,7 +18,32 @@ aldabba_failure_mechanic = {
 				}
 			}
 			on_max_reached = {
-				add_government_reform = aldabban_restored_reform
+				if = {
+					limit = {
+						NOT = {
+							has_country_flag = reached_max_once
+						}
+					}
+					if = {
+						limit = {
+							government = monarchy
+						}
+						add_government_reform = aldabban_restored_reform
+					}
+					if = {
+						limit = {
+							government = republic
+						}
+						add_government_reform = aldabban_republic_reform
+					}
+					if = {
+						limit = {
+							government = theocracy
+						}
+						add_government_reform = aldabban_theocracy_reform
+					}
+					set_country_flag = reached_max_once
+				}
 			}
 			is_good = yes
 		}
@@ -78,6 +103,7 @@ aldabba_failure_mechanic = {
 					value = -15
 				}
 				add_adm_power = -50
+				custom_tooltip = " "
 				custom_tooltip = "We will gain 5 Crownland at the expense of 15 Loyalty. This will not cause uprisings in our provinces."
 				hidden_effect = {
 					take_estate_land_share_massive = { estate = all }
@@ -129,7 +155,7 @@ aldabba_failure_mechanic = {
 					power_type = restoration_aldabba
 					value = -30
 				}
-				add_dip_power = 50
+				add_dip_power = -50
 				custom_tooltip = " "
 				custom_tooltip = "We will gain the Holy War Casus Belli on a Random Neighbor country that is NOT our religion."
 				random_neighbor_country = {

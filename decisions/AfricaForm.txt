@@ -50,14 +50,6 @@ country_decisions = {
 		effect = {
 			change_tag = AF0
 			restore_country_name = yes
-			if = {
-				limit = {
-					NOT = {
-						was_tag = AF2
-					}
-				}
-				swap_non_generic_missions = yes
-			}
 			remove_non_electors_emperors_from_empire_effect = yes
 			if = {
 				limit = { NOT = { government_rank = 2 } }
@@ -81,12 +73,24 @@ country_decisions = {
 			add_prestige_or_monarch_power = {
 				amount = 25
 			}
-			hidden_effect = {
-				complete_mission = ald_list
-				complete_mission = ald_fix_it
-				complete_mission = ald_good_advice
-				complete_mission = ald_fort
-				complete_mission = ald_new_fort
+			if = {
+				limit = {
+					OR = {
+						is_or_was_tag = {
+							tag = AF2
+						}
+						is_or_was_tag = {
+							tag = AF3
+						}
+						is_or_was_tag = {
+							tag = AF4
+						}
+						is_or_was_tag = {
+							tag = AF5
+						}
+					}
+				}
+				swap_non_generic_missions = yes
 			}
 		}
 		ai_will_do = {
