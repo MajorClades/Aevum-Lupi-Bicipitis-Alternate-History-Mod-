@@ -6,39 +6,35 @@ WE0_1_slot = {
 	potential = { tag = WE0 } 
 
 	weo_war_on_colors = {
-		icon = mission_buddhist_monk_praying
-		required_missions = {  }
+		icon = mission_fire_of_london
 		position = 1
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			if = {
-				limit = { ai = yes}
+				limit = { ai = yes } 
 				num_of_generals = 1
-			}else = {
-				army_size_percentage = 1
 			}
+			else = { army_size_percentage = 1 } 
 		}
-		
+
 		effect = {
-			alentejo_area = {
-				add_permanent_claim = ROOT
-			}
-			extremadura_area = {
-				add_permanent_claim = ROOT
-			}
+			alentejo_area = { add_permanent_claim = ROOT } 
+			extremadura_area = { add_permanent_claim = ROOT } 
 		}
 	}
+
 	weo_colorful_victory = {
 		icon = mission_humiliate_provence
-		required_missions = {weo_war_on_colors  }
 		position = 2
-		
+		required_missions = { weo_war_on_colors } 
 		provinces_to_highlight = {
 			OR = {
 				area = alentejo_area
 				area = extremadura_area
 			}
 		}
-		
+
 		trigger = {
 			alentejo_area = {
 				type = all
@@ -49,15 +45,13 @@ WE0_1_slot = {
 				owned_by = ROOT
 			}
 		}
-		
+
 		effect = {
 			add_country_modifier = {
-				name = weo_burgundian_hues
+				name = "weo_burgundian_hues"
 				duration = 10950
 			}
-			bettia_area = {
-				add_permanent_claim = ROOT
-			}
+			bettia_area = { add_permanent_claim = ROOT } 
 			add_casus_belli = {
 				type = cb_vassalize_mission
 				target = BT0
@@ -65,89 +59,71 @@ WE0_1_slot = {
 			}
 		}
 	}
+
 	weo_bet_on_us = {
-		icon = mission_humiliate_provence
-		required_missions = {weo_colorful_victory  }
+		icon = mission_plus_ultra
 		position = 3
-		
-		provinces_to_highlight = {
-			area = bettia_area
-		}
-		
+		required_missions = { weo_colorful_victory } 
+		provinces_to_highlight = { area = bettia_area } 
+
 		trigger = {
 			OR = {
-				BT0 = {
-					is_subject_of = ROOT
-				}
+				BT0 = { is_subject_of = ROOT } 
 				bettia_area = {
 					type = all
 					country_or_non_sovereign_subject_holds = ROOT
 				}
 			}
 		}
-		
+
 		effect = {
 			custom_tooltip = SWEBEN_TT_1
 			tooltip = {
 				if = {
-					limit = {
-						BT0 = {
-							is_subject_of = ROOT
-						}
-					}
+					limit = { BT0 = { is_subject_of = ROOT }  } 
 					custom_tooltip = YES_MARK
-				}else = {
-					custom_tooltip = NOT_MARK
 				}
+				else = { custom_tooltip = NOT_MARK } 
 				inherit = BT0
 				custom_tooltip = SWEBEN_TT_2
 				random_owned_province = {
 					add_province_modifier = {
-						name = weo_integrating_bettia
+						name = "weo_integrating_bettia"
 						duration = 10950
 					}
 				}
 			}
 			custom_tooltip = SWEBEN_TT_3
 			tooltip = {
-				iberia_region = {
-					add_permanent_claim = ROOT
-				}
+				iberia_region = { add_permanent_claim = ROOT } 
 				add_dip_power = 400
 			}
 			hidden_effect = {
 				if = {
-					limit = {
-						BT0 = {
-							is_subject_of = ROOT
-						}
-					}
+					limit = { BT0 = { is_subject_of = ROOT }  } 
 					inherit = BT0
 					every_owned_province = {
-						limit = {
-							is_core = BT0
-						}
+						limit = { is_core = BT0 } 
 						add_province_modifier = {
-							name = weo_integrating_bettia
+							name = "weo_integrating_bettia"
 							duration = 10950
 						}
 					}
-				}else = {
-					iberia_region = {
-						add_permanent_claim = ROOT
-					}
+				}
+				else = {
+					iberia_region = { add_permanent_claim = ROOT } 
 					add_dip_power = 400
 				}
 			}
 		}
 	}
+
 	weo_west_wards = {
-		icon = mission_humiliate_provence
-		required_missions = {weo_port_vurte  }
+		icon = mission_look_west
 		position = 5
-		provinces_to_highlight = {
-			colonial_region = colonial_the_carribean
-		}
+		required_missions = { weo_port_vurte } 
+		provinces_to_highlight = { colonial_region = colonial_the_carribean } 
+
 		trigger = {
 			treasury = 250
 			num_of_owned_provinces_with = {
@@ -155,7 +131,7 @@ WE0_1_slot = {
 				colonial_region = colonial_the_carribean
 			}
 		}
-		
+
 		effect = {
 			add_treasury = -250
 			if = {
@@ -166,15 +142,16 @@ WE0_1_slot = {
 					}
 				}
 				random_owned_province = {
-					limit = {	colonial_region = colonial_the_carribean	}
+					limit = { colonial_region = colonial_the_carribean } 
 					add_base_tax = 1
 					add_base_production = 1
 					add_base_manpower = 1
 					add_colonysize = 500
 				}
-			}else = {
+			}
+			else = {
 				random_province = {
-					limit = {	colonial_region = colonial_the_carribean	}
+					limit = { colonial_region = colonial_the_carribean } 
 					add_base_tax = 1
 					add_base_production = 1
 					add_base_manpower = 1
@@ -183,13 +160,13 @@ WE0_1_slot = {
 			}
 		}
 	}
+
 	weo_south_wards = {
-		icon = mission_humiliate_provence
-		required_missions = {weo_west_wards  }
-		position = 7
-		provinces_to_highlight = {
-			colonial_region = colonial_karibba
-		}
+		icon = mission_colonial
+		position = 6
+		required_missions = { weo_west_wards } 
+		provinces_to_highlight = { colonial_region = colonial_karibba } 
+
 		trigger = {
 			treasury = 250
 			num_of_owned_provinces_with = {
@@ -197,7 +174,7 @@ WE0_1_slot = {
 				colonial_region = colonial_karibba
 			}
 		}
-		
+
 		effect = {
 			add_treasury = -250
 			if = {
@@ -208,15 +185,16 @@ WE0_1_slot = {
 					}
 				}
 				random_owned_province = {
-					limit = {	colonial_region = colonial_karibba	}
+					limit = { colonial_region = colonial_karibba } 
 					add_base_tax = 1
 					add_base_production = 1
 					add_base_manpower = 1
 					add_colonysize = 500
 				}
-			}else = {
+			}
+			else = {
 				random_province = {
-					limit = {	colonial_region = colonial_karibba	}
+					limit = { colonial_region = colonial_karibba } 
 					add_base_tax = 1
 					add_base_production = 1
 					add_base_manpower = 1
@@ -225,8 +203,39 @@ WE0_1_slot = {
 			}
 		}
 	}
-}
 
+	weo_colonial_rush = {
+		icon = mission_the_triangle_trade
+		position = 7
+		required_missions = {
+			weo_south_wards
+			weo_west_wards
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			full_idea_group = exploration_ideas
+			years_of_income = 0.77
+			OR = {
+				AND = {
+					adm_power = 200
+					dip_power = 200
+				}
+				full_idea_group = expansion_ideas
+			}
+		}
+
+		effect = {
+			add_years_of_income = -0.77
+			if = {
+				limit = { NOT = { full_idea_group = expansion_ideas }  } 
+				add_adm_power = -200
+				add_dip_power = -200
+			}
+			country_event = { id = sweb.3 } 
+		}
+	}
+}
 WE0_2_slot = {
 	slot = 2
 	generic = no
@@ -235,15 +244,16 @@ WE0_2_slot = {
 	potential = { tag = WE0 } 
 
 	weo_horsepower = {
-		icon = mission_humiliate_provence
-		required_missions = {weo_waitpower  }
+		icon = mission_cossack_cavalry
 		position = 2
-		
+		required_missions = { weo_waitpower } 
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			treasury = 300
 			num_of_cavalry = 6
 		}
-		
+
 		effect = {
 			add_treasury = -300
 			define_general = {
@@ -255,37 +265,34 @@ WE0_2_slot = {
 			}
 		}
 	}
+
 	weo_port_vurte = {
-		icon = mission_humiliate_provence
-		required_missions = {  }
+		icon = mission_galleys_in_port
 		position = 4
-		provinces_to_highlight = {
-			province_id = 4556
-		}
+		provinces_to_highlight = { province_id = 4556 } 
+
 		trigger = {
 			num_of_light_ship = 10
 			has_dip_advisor = yes
-			4556 = {
-				base_production = 8
-			}
+			4556 = { base_production = 8 } 
 		}
-		
+
 		effect = {
 			4556 = {
 				add_permanent_province_modifier = {
-					name = sweb_vuerte_fish
+					name = "sweb_vuerte_fish"
 					duration = -1
 				}
 			}
 		}
 	}
+
 	weo_sugars = {
-		icon = mission_humiliate_provence
-		required_missions = {weo_west_wards  }
+		icon = mission_rb_colonise_spice_islands
 		position = 6
-		provinces_to_highlight = {
-			colonial_region = colonial_the_carribean
-		}
+		required_missions = { weo_west_wards } 
+		provinces_to_highlight = { colonial_region = colonial_the_carribean } 
+
 		trigger = {
 			any_subject_country = {
 				capital_scope = {
@@ -298,7 +305,7 @@ WE0_2_slot = {
 				colonial_region = colonial_the_carribean
 			}
 		}
-		
+
 		effect = {
 			1516 = {
 				add_trade_modifier = {
@@ -310,40 +317,7 @@ WE0_2_slot = {
 			}
 		}
 	}
-	weo_colonial_rush = {
-		icon = mission_humiliate_provence
-		required_missions = {weo_south_wards weo_west_wards}
-		position = 7
-		trigger = {
-			full_idea_group = exploration_ideas
-			years_of_income = 0.77
-			OR = {
-				AND = {
-					adm_power = 200
-					dip_power = 200
-				}
-				full_idea_group = expansion_ideas
-			}
-		}
-		
-		effect = {
-			add_years_of_income = -0.77
-			if = {
-				limit = {
-					NOT = {
-						full_idea_group = expansion_ideas
-					}
-				}
-				add_adm_power = -200
-				add_dip_power = -200
-			}
-			country_event = {
-				id = sweb.3
-			}
-		}
-	}
 }
-
 WE0_3_slot = {
 	slot = 3
 	generic = no
@@ -353,12 +327,12 @@ WE0_3_slot = {
 
 	weo_waitpower = {
 		icon = mission_buddhist_monk_praying
-		required_missions = {  }
 		position = 1
 		provinces_to_highlight = {
-			has_tax_building_trigger = no 
+			has_tax_building_trigger = no
 			owned_by = ROOT
 		}
+
 		trigger = {
 			num_of_owned_provinces_with = {
 				value = 5
@@ -366,7 +340,7 @@ WE0_3_slot = {
 				has_tax_building_trigger = yes
 			}
 		}
-		
+
 		effect = {
 			add_stability_or_adm_power = yes
 			change_variable = {
@@ -375,72 +349,71 @@ WE0_3_slot = {
 			}
 		}
 	}
+
 	weo_gottem = {
-		icon = mission_humiliate_provence
-		required_missions = {weo_horsepower weo_faithtime}
+		icon = mission_assemble_an_army
 		position = 3
+		required_missions = {
+			weo_horsepower
+			weo_faithtime
+		}
 		provinces_to_highlight = {
 			has_manpower_building_trigger = no
 			owned_by = ROOT
 		}
+
 		trigger = {
 			num_of_owned_provinces_with = {
 				value = 10
 				has_manpower_building_trigger = yes
 			}
 		}
-		
+
 		effect = {
 			add_yearly_manpower = 0.5
-			capital_scope = {
-				add_base_manpower = 3
-			}
+			capital_scope = { add_base_manpower = 3 } 
 		}
 	}
+
 	weo_good_god = {
-		icon = mission_humiliate_provence
-		required_missions = {weo_port_vurte weo_gottem }
+		icon = mission_build_up_to_force_limit
 		position = 5
-		provinces_to_highlight = {
-			province_id = 4556
+		required_missions = {
+			weo_port_vurte
+			weo_gottem
 		}
+		provinces_to_highlight = { province_id = 4556 } 
+
 		trigger = {
 			num_of_light_ship = 15
 			num_of_infantry = 20
-			4556 = {
-				development = 30
-			}
+			4556 = { development = 30 } 
 		}
-		
+
 		effect = {
 			add_country_modifier = {
-				name = alb_swebish_marines
+				name = "alb_swebish_marines"
 				duration = -1
 			}
-			country_event = {
-				id = sweb.2
-			}
+			country_event = { id = sweb.2 } 
 		}
 	}
+
 	weo_empire = {
-		icon = mission_humiliate_provence
-		required_missions = {weo_good_god }
+		icon = spread_the_von_wettins
 		position = 7
+		required_missions = { weo_good_god } 
+		provinces_to_highlight = {  } 
 
 		trigger = {
 			total_development = 300
 			prestige = 50
-			any_subject_country = {
-				total_development = 100
-			}
+			any_subject_country = { total_development = 100 } 
 		}
-		
-		effect = {
-			set_government_rank = 3
-		}
+
+		effect = { set_government_rank = 3 } 
 	}
 }
-
 WE0_4_slot = {
 	slot = 4
 	generic = no
@@ -449,15 +422,14 @@ WE0_4_slot = {
 	potential = { tag = WE0 } 
 
 	weo_faithtime = {
-		icon = mission_humiliate_provence
-		required_missions = {weo_waitpower  }
+		icon = mission_religious
 		position = 2
+		required_missions = { weo_waitpower } 
 		provinces_to_highlight = {
 			region = iberia_region
-			NOT = {
-				religion = arian
-			}
+			NOT = { religion = arian } 
 		}
+
 		trigger = {
 			calc_true_if = {
 				amount = 20
@@ -467,56 +439,54 @@ WE0_4_slot = {
 				}
 			}
 		}
-		
+
 		effect = {
 			add_adm_power = 150
 			add_treasury = 500
 		}
 	}
+
 	weo_iron_strike = {
-		icon = mission_humiliate_provence
-		required_missions = { weo_gottem }
+		icon = mission_empire
 		position = 4
+		required_missions = { weo_gottem } 
+		provinces_to_highlight = {  } 
+
 		trigger = {
-			num_of_completed_idea_groups_mil = { amount = 1}
-			BU0 = {
-				all_core_province = {
-					owned_by = ROOT
-				}
-			}
+			num_of_completed_idea_groups_mil = { amount = 1 } 
+			BU0 = { all_core_province = { owned_by = ROOT }  } 
 		}
-		
+
 		effect = {
 			add_country_modifier = {
-				name = alb_attritional_warfare
+				name = "alb_attritional_warfare"
 				duration = -1
 			}
 		}
 	}
+
 	weo_imperial_cavalry = {
-		icon = mission_humiliate_provence
-		required_missions = {weo_good_god }
+		icon = mission_colonize_the_west
 		position = 6
+		required_missions = { weo_good_god } 
+		provinces_to_highlight = {  } 
 
 		trigger = {
-			num_of_completed_idea_groups_mil = { amount = 2}
+			num_of_completed_idea_groups_mil = { amount = 2 } 
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
 				value = 20
-				NOT = {
-					continent = europe
-				}
+				NOT = { continent = europe } 
 			}
 		}
-		
+
 		effect = {
 			add_country_modifier = {
-				name = alb_external_army
+				name = "alb_external_army"
 				duration = -1
 			}
 		}
 	}
 }
-
 WE0_5_slot = {
 	slot = 5
 	generic = no
@@ -525,48 +495,38 @@ WE0_5_slot = {
 	potential = { tag = WE0 } 
 
 	weo_gothic_wedding = {
-		icon = mission_buddhist_monk_praying
-		required_missions = {  }
+		icon = catholic_confraternity
 		position = 1
-		provinces_to_highlight = {
-			is_capital_of = CO0
-		}
+		provinces_to_highlight = { is_capital_of = CO0 } 
+
 		trigger = {
 			OR = {
 				CO0 = {
 					marriage_with = ROOT
 					alliance_with = ROOT
 				}
-				CO0 = {
-					is_rival = ROOT
-				}
-				CO0 = {
-					exists = no
-				}
+				CO0 = { is_rival = ROOT } 
+				CO0 = { exists = no } 
 			}
 		}
-		
+
 		effect = {
-			asturias_area = {
-				add_permanent_claim = ROOT
-			}
-			basque_country = {
-				add_permanent_claim = ROOT
-			}	
+			asturias_area = { add_permanent_claim = ROOT } 
+			basque_country = { add_permanent_claim = ROOT } 
 		}
 	}
+
 	weo_gothic_renewal = {
-		icon = mission_humiliate_provence
-		required_missions = {weo_gothic_wedding  }
+		icon = mission_court_education
 		position = 2
-		
+		required_missions = { weo_gothic_wedding } 
 		provinces_to_highlight = {
 			OR = {
 				area = asturias_area
 				area = basque_country
 			}
 		}
-		
+
 		trigger = {
 			asturias_area = {
 				type = all
@@ -577,35 +537,27 @@ WE0_5_slot = {
 				owned_by = ROOT
 			}
 		}
-		
+
 		effect = {
-			country_event = {
-				id = sweb.1
-			}
+			country_event = { id = sweb.1 } 
 			custom_tooltip = SWEB_UNION_WITH_COTIA
-			castille_area = {
-				add_permanent_claim = ROOT
-			}
-			aragon_area = {
-				add_permanent_claim = ROOT
-			}
-			catalonia_area = {
-				add_permanent_claim = ROOT
-			}
+			castille_area = { add_permanent_claim = ROOT } 
+			aragon_area = { add_permanent_claim = ROOT } 
+			catalonia_area = { add_permanent_claim = ROOT } 
 		}
 	}
+
 	weo_goth_on_us = {
-		icon = mission_humiliate_provence
-		required_missions = {weo_gothic_renewal  }
+		icon = hispaniae
 		position = 3
-		
+		required_missions = { weo_gothic_renewal } 
 		provinces_to_highlight = {
 			OR = {
 				area = aragon_area
 				area = catalonia_area
 			}
 		}
-		
+
 		trigger = {
 			aragon_area = {
 				type = all
@@ -616,62 +568,57 @@ WE0_5_slot = {
 				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
-		
+
 		effect = {
 			add_casus_belli = {
 				type = cb_restore_personal_union
 				target = CO0
 			}
-			coth_old_border = {
-				add_permanent_claim = ROOT
-			}
+			coth_old_border = { add_permanent_claim = ROOT } 
 		}
 	}
+
 	weo_swegothia = {
-		icon = mission_humiliate_provence
-		required_missions = {weo_goth_on_us  }
+		icon = mission_war_for_the_crown
 		position = 5
-		
-		provinces_to_highlight = {
-			province_group = coth_old_border
-		}
-		
+		required_missions = { weo_goth_on_us } 
+		provinces_to_highlight = { province_group = coth_old_border } 
+
 		trigger = {
 			coth_old_border = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
-		
+
 		effect = {
 			set_country_flag = allow_goth_monument_flag
 			tooltip = {
 				if = {
 					limit = {
-							CO0 = {
-								years_in_union_under = {
-									who = ROOT
-									years = 30
-								}
+						CO0 = {
+							years_in_union_under = {
+								who = ROOT
+								years = 30
 							}
 						}
-						custom_tooltip = SWEBEN_TT_4a
-					}else = {
-						custom_tooltip = SWEBEN_TT_4b
 					}
-					inherit = CO0
-					override_country_name = SWEGOTHIA
-					custom_tooltip = SWEBEN_TT_5
+					custom_tooltip = SWEBEN_TT_4a
 				}
-				custom_tooltip = SWEBEN_TT_6
-				tooltip = {
-					override_country_name = SWEGOTHIA
-					coth_old_border = {
-						add_unrest = -5
-						add_nationalism = -5
-					}
-					add_dip_power = 200
+				else = { custom_tooltip = SWEBEN_TT_4b } 
+				inherit = CO0
+				override_country_name = "SWEGOTHIA"
+				custom_tooltip = SWEBEN_TT_5
+			}
+			custom_tooltip = SWEBEN_TT_6
+			tooltip = {
+				override_country_name = "SWEGOTHIA"
+				coth_old_border = {
+					add_unrest = -5
+					add_nationalism = -5
 				}
+				add_dip_power = 200
+			}
 			hidden_effect = {
 				if = {
 					limit = {
@@ -682,25 +629,21 @@ WE0_5_slot = {
 							}
 						}
 					}
-					CO0 = {
-						every_core_province = {
-							add_core = ROOT
-						}
-					}
+					CO0 = { every_core_province = { add_core = ROOT }  } 
 					inherit = CO0
-					override_country_name = SWEGOTHIA
+					override_country_name = "SWEGOTHIA"
 					change_country_color = {
-						color = { 109 142 152 }
-					}	
-					every_owned_province = {
-						limit = {
-							is_core = CO0
+						color = {
+							109 = 142
+							152 = every_owned_province
+							limit = { is_core = CO0 } 
 						}
 						add_unrest = -5
 						add_nationalism = -5
 					}
-				}else = {
-					override_country_name = SWEGOTHIA
+				}
+				else = {
+					override_country_name = "SWEGOTHIA"
 					coth_old_border = {
 						add_unrest = -5
 						add_nationalism = -5
@@ -710,28 +653,24 @@ WE0_5_slot = {
 			}
 		}
 	}
+
 	weo_imperial_navy = {
-		icon = mission_humiliate_provence
-		required_missions = {weo_imperial_cavalry }
+		icon = mission_swedish_colonialism
 		position = 7
+		required_missions = { weo_imperial_cavalry } 
+		provinces_to_highlight = {  } 
 
 		trigger = {
 			navy_size = 100
 			calc_true_if = {
 				amount = 3
-				all_subject_country = {
-					capital_scope = {
-						NOT = {
-							continent = europe
-						}
-					}
-				}
+				all_subject_country = { capital_scope = { NOT = { continent = europe }  }  } 
 			}
 		}
-		
+
 		effect = {
 			add_country_modifier = {
-				name = alb_ocean_man
+				name = "alb_ocean_man"
 				duration = -1
 			}
 		}
