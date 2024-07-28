@@ -14,7 +14,12 @@ country_event = { # The Knights in our Navy
 		name = VR0_flavor.1.a 
 		set_country_flag = vr0_raiding_option
 		custom_tooltip = vr0_raiding_option_tt
-		add_prestige = 25
+		hidden_effect = {
+			add_country_modifier = {
+				name = vr0_raiding_coasts
+				duration = -1
+			}
+		}
 	}
 	
 	option = { # Their experience with amphibious warfare is an edge for our navy!
@@ -30,13 +35,12 @@ country_event = { # The Knights in our Navy
 	
 	option = { # They will aid our navy however possible.
 		name = VR0_flavor.1.c 
+		set_country_flag = vr0_knights_advisory_flag
 		random_owned_province = {
 			limit = { has_port = yes }
-			ROOT = {
-				create_flagship = {    
-					name = "St. Elmo"
-					type = galley
-				}
+			create_flagship = {    
+				name = "St. Elmo"
+				type = galley
 			}
 		}
 		add_country_modifier = {

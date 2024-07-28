@@ -9,17 +9,88 @@ VR01 = {
 		icon = mission_subjugate_navarra
 		position = 2
 		required_missions = { vr0_build_army } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				province_id = 197
+				area = basque_country
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
 		trigger = {
-			197 = { owned_by = ROOT } 
+			197 = { 
+				country_or_non_sovereign_subject_holds = ROOT
+			} 
 			basque_country = {
-				owns_or_non_sovereign_subject_of = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 				type = all
 			}
 		}
 
-		effect = {  } 
+		effect = { 
+			if = {
+				limit = {
+					197 = {
+						has_fort_building_trigger = yes
+					}
+				}
+				custom_tooltip = vr0_197_has_fort_yes_tt
+				197 = {
+					upgrade_fort_building = yes
+				}
+			}
+			else_if = {
+				limit = { 
+					197 = {
+						NOT = {
+							has_fort_building_trigger = yes
+						}
+					}
+				}
+				custom_tooltip = vr0_197_has_fort_yes_tt
+				tooltip = {
+					197 = {
+						upgrade_fort_building = yes
+					}
+				}
+			}
+			custom_tooltip = empty_line_tt 
+			if = {
+				limit = {
+					210 = {
+						has_fort_building_trigger = yes
+					}
+				}
+				custom_tooltip = vr0_210_has_fort_yes_tt
+				210 = {
+					upgrade_fort_building = yes
+				}
+			}
+			else_if = {
+				limit = { 
+					210 = {
+						NOT = {
+							has_fort_building_trigger = yes
+						}
+					}
+				}
+				custom_tooltip = vr0_210_has_fort_yes_tt
+				tooltip = {
+					210 = {
+						upgrade_fort_building = yes
+					}
+				}
+			}
+			custom_tooltip = empty_line_tt 
+			pyrenees_area = {
+				add_permanent_claim = ROOT
+			}
+			languedoc_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	vr0_beyond_pyrennes = {
@@ -30,11 +101,11 @@ VR01 = {
 
 		trigger = {
 			pyrenees_area = {
-				owns_or_non_sovereign_subject_of = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 				type = all
 			}
 			languedoc_area = {
-				owns_or_non_sovereign_subject_of = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 				type = all
 			}
 		}
@@ -91,12 +162,20 @@ VR02 = {
 		trigger = {
 			2990 = { owned_by = ROOT } 
 			valencia_area = {
-				owns_or_non_sovereign_subject_of = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 				type = all
 			}
 		}
 
-		effect = {  } 
+		effect = {  
+			220 = {
+				add_or_upgrade_trade_building = yes
+			}
+			custom_tooltip = empty_line_tt
+			iberia_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	vr0_lowland_alliance = {
@@ -147,7 +226,7 @@ VR03 = {
 			4550 = {
 				owned_by = ROOT
 				is_core = ROOT
-				num_of_times_developed = 5
+				grown_by_development = 5
 				OR = {
 					has_building = marketplace
 					province_has_center_of_trade_of_level = 2
@@ -174,33 +253,78 @@ VR03 = {
 		icon = hispaniae
 		position = 4
 		required_missions = {
-			vr0_narosia
+			vr0_seize_narosia
 			vr0_defy_legion
 		}
 		provinces_to_highlight = {
 			region = iberia_region
-			type = all
-		}
-
-		trigger = {
-			iberia_region = {
-				owns_or_non_sovereign_subject_of = ROOT
-				type = all
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 
-		effect = {  } 
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 50
+				region = iberia_region
+			}
+		}
+
+		effect = {  
+			add_yearly_manpower = 0.25
+			custom_tooltip = empty_line_tt
+			add_country_modifier = {
+				name = vr0_stability_in_iberia
+				duration = 18250
+			}
+		} 
 	}
 
 	vr0_iberia_cities = {
 		icon = mission_unite_home_region
 		position = 5
 		required_missions = { vr0_unify_iberia } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			owned_by = ROOT
+			region = iberia_region
+			NOT = {
+				AND = {
+					development = 20
+					num_of_buildings_in_province = 4
+				}
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_owned_provinces_with = {
+				value = 6
+				region = iberia_region
+				development = 21
+				num_of_buildings_in_province = 3
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			custom_tooltip = alb_vr0_iberia_cities_tt
+			hidden_effect = {
+				for = {
+					amount = 6
+					effect = "
+						random_owned_province = {
+							limit = {
+								region = iberia_region
+								development = 21
+								num_of_buildings_in_province = 3
+							}
+							add_province_modifier = {
+								name = vr0_cities_of_iberia_modifier
+								duration = -1
+							}
+						}
+					"
+				}
+			}
+		} 
 	}
 }
 VR04 = {
@@ -239,7 +363,15 @@ VR04 = {
 			vr0_seize_narosia
 			vr0_vrancish_navy
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = corsica_sardinia_area
+				area = sardinia_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
 		trigger = {
 			corsica_sardinia_area = {
@@ -252,7 +384,23 @@ VR04 = {
 			}
 		}
 
-		effect = {  } 
+		effect = {  
+			sicily_area = {
+				add_permanent_claim = ROOT
+			}
+			western_sicily_area = {
+				add_permanent_claim = ROOT
+			}
+			calabria_area = {
+				add_permanent_claim = ROOT
+			}
+			apulia_area = {
+				add_permanent_claim = ROOT
+			}
+			naples_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	vr0_italian_foothold = {
@@ -271,7 +419,16 @@ VR04 = {
 			}
 		}
 
-		effect = {  } 
+		effect = {  
+			unlock_estate_privilege = {
+				estate_privilege = alb_italian_merchant_grants
+			}
+			custom_tooltip = empty_line_tt
+			custom_tooltip = alb_permaclaims_on_med_islands_tt
+			hidden_effect = {
+				
+			}
+		} 
 	}
 }
 VR05 = {
@@ -356,8 +513,47 @@ VR05 = {
 		}
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			custom_trigger_tooltip = {
+				tooltip = alb_owns_all_med_islands_tt
 
-		effect = {  } 
+			}
+		} 
+
+		effect = {  
+			complex_dynamic_effect = {
+				first_custom_tooltip = alb_if_knights_raid_tt
+				first_limit = "
+					has_country_flag = vr0_raiding_option
+				"
+				first_effect = "
+					custom_tooltip = alb_modify_vr0_raiding_coasts_tt
+					hidden_effect = {
+						remove_country_modifier = vr0_raiding_coasts
+						add_country_modifier = {
+							name = vr0_raiding_coasts_2
+							duration = -1
+						}
+					}
+				"
+				second_custom_tooltip = alb_if_knights_marines_tt
+				second_limit = "
+					has_country_flag = vr0_knights_merc_expansion
+				"
+				second_effect = "
+					remove_country_modifier = vr0_knights_marines
+					unlock_government_reform = {
+						government_reform = vr0_knights_marines_reform
+					}
+				"
+				third_custom_tooltip = alb_if_knights_council_tt
+				third_limit = "
+					has_country_flag = vr0_knights_advisory_flag
+				"
+				third_effect = "
+					unlock_holy_order = { type = knights_templar_order }
+				"
+			}
+		} 
 	}
 }
