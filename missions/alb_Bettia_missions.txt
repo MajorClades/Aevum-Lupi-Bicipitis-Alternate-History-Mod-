@@ -1,0 +1,258 @@
+BT0_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = BT0 } 
+
+	bet_explorational = {
+		icon = bohemian_crystal
+		position = 2
+		required_missions = { bet_get_ready } 
+		trigger = {
+			navy_size = RK0
+			has_dip_advisor_3 = yes
+		}
+
+		effect = {
+			add_ruler_modifier = {
+				name = bet_explo_rex
+			}
+			define_explorer = {
+				shock = 3
+				fire = 3
+				manuever = 4
+			}
+		}
+	}
+	bet_westwards_push = {
+		icon = mission_finest_carpets
+		position = 3
+		provinces_to_highlight = {
+			area = cap_verde_area
+		}
+
+		trigger = {
+			cap_verde_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = { 
+			add_ruler_modifier = {
+				name = bet_explo_rex_2
+			}
+		} 
+	}
+	bet_colonisation = {
+		icon = mission_finest_carpets
+		position = 4
+		required_missions = { bet_westwards_push } 
+		provinces_to_highlight = {
+			colonial_region = colonial_the_carribean
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 3
+				development = 10
+				colonial_region = colonial_the_carribean
+			}
+		}
+
+		effect = { 
+			add_stability_or_adm_power = yes
+			set_government_rank = 2
+		} 
+	}
+}
+BT0_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = BT0 } 
+
+	bet_get_ready = {
+		icon = mission_finest_carpets
+		position = 1
+		provinces_to_highlight = {
+			area = bettia_area
+		}
+
+		trigger = {
+			development_in_provinces = {
+				value = 30
+				area = bettia_area
+				religion = ROOT
+			}
+		}
+
+		effect = { 
+			alentejo_area = {
+				add_permanent_claim = ROOT
+			}
+			lower_andalucia_area = {
+				add_permanent_claim = ROOT
+			}
+			macaronesia_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	bet_westwards = {
+		icon = mission_finest_carpets
+		position = 2
+		required_missions = { bet_get_ready } 
+		provinces_to_highlight = {
+			area = macaronesia_area
+		}
+
+		trigger = {
+			macaronesia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = { 
+			add_country_modifier_for_age = {
+				name = bet_beat_rak
+				age = age_of_discovery
+			}
+			cap_verde_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+}
+BT0_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = BT0 } 
+
+	bet_iberia = {
+		icon = mission_finest_carpets
+		position = 2
+		required_missions = { bet_get_ready } 
+		provinces_to_highlight = {
+			OR = { 
+				area = alentejo_area
+				area = lower_andalucia_area
+			}
+		}
+
+		trigger = {
+			alentejo_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			lower_andalucia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = { 
+			add_country_modifier = {
+				name = bet_even_the_odds
+				duration = 10950
+			}
+			extremadura_area = {
+				add_permanent_claim = ROOT
+			}
+			upper_andalucia_area = {
+				add_permanent_claim = ROOT
+			}
+			toledo_area = {
+				add_permanent_claim = ROOT
+			}
+			beieras_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+}
+BT0_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = BT0 } 
+
+}
+BT0_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = BT0 } 
+
+	bet_spania = {
+		icon = mission_finest_carpets
+		position = 1
+		provinces_to_highlight = {
+			is_capital_of = SP0
+		}
+
+		trigger = {
+			OR = {
+				SP0 = {
+					marriage_with = ROOT
+					alliance_with = ROOT
+				}
+				SP0 = {
+					exists = no
+				}
+				SP0 = {
+					NOT = {
+						has_opinion = {
+							who = ROOT
+							value = -50
+						}
+					}
+				}
+			}
+		}
+
+		effect = { 
+			tooltip = {
+				custom_tooltip = BETTIA_TT_1a
+				add_patriarch_authority = 0.05
+				define_advisor = {
+					type = inquisitor
+					skill = 2
+					discount = yes
+				}
+				custom_tooltip = BETTIA_TT_1b
+				change_religion = catholic
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						SP0 = {
+							marriage_with = ROOT
+							alliance_with = ROOT
+						}
+					}
+					add_patriarch_authority = 0.05
+					define_advisor = {
+						type = theologian
+						skill = 2
+						discount = yes
+					}
+				}else = {
+					change_religion = catholic
+					capital_scope = {
+						change_religion = catholic	
+					}
+				}
+			}
+		} 
+	}
+}
