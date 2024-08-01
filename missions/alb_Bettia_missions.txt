@@ -28,6 +28,7 @@ BT0_1_slot = {
 	bet_westwards_push = {
 		icon = mission_finest_carpets
 		position = 3
+		required_missions = { bet_explorational } 
 		provinces_to_highlight = {
 			area = cap_verde_area
 		}
@@ -250,6 +251,126 @@ BT0_5_slot = {
 					change_religion = catholic
 					capital_scope = {
 						change_religion = catholic	
+					}
+				}
+			}
+		} 
+	}
+	bet_spania_bros = {
+		icon = mission_finest_carpets
+		position = 2
+		required_missions = { bet_spania } 
+		provinces_to_highlight = {
+			is_capital_of = SP0
+		}
+
+		trigger = {
+			OR = {
+				SP0 = {
+					owes_favors = {
+						who = ROOT
+						value = 90
+					}
+					has_opinion = {
+						who = ROOT
+						value = 180
+					}
+					alliance_with = ROOT
+				}
+				SP0 = {
+					exists = no
+				}
+			}
+		}
+
+		effect = { 
+			tooltip = {
+				custom_tooltip = BETTIA_TT_2a
+				add_favors = {
+					who = SP0
+					amount = -50
+				}
+				SP0 = {
+					define_heir = {
+						dynasty = ROOT
+					}
+				}
+				custom_tooltip = BETTIA_TT_2b
+				add_papal_influence = 50
+				add_army_tradition_or_mil_power = {
+					amount = 15
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						SP0 = {
+							alliance_with = ROOT
+						}
+					}
+					add_favors = {
+						who = SP0
+						amount = -50
+					}
+					SP0 = {
+						define_heir = {
+							dynasty = ROOT
+							age = 5
+						}
+					}
+				}else = {
+					add_papal_influence = 50
+					add_army_tradition_or_mil_power = {
+						amount = 15
+					}
+				}
+			}
+		} 
+	}
+	bet_spania_union = {
+		icon = mission_finest_carpets
+		position = 3
+		required_missions = { bet_spania_bros } 
+		provinces_to_highlight = {
+			is_capital_of = SP0
+		}
+
+		trigger = {
+			OR = {
+				SP0 = {
+					alliance_with = ROOT
+					dynasty = ROOT
+					heir_age = 18
+				}
+				220 = {
+					owned_by = ROOT
+					is_core = ROOT
+				}
+			}
+		}
+
+		effect = { 
+			tooltip = {
+				custom_tooltip = BETTIA_TT_3a
+				create_union = SP0
+				custom_tooltip = BETTIA_TT_3b
+				add_papal_influence = 50
+				220 = {
+					change_religion = catholic
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						SP0 = {
+							alliance_with = ROOT
+						}
+					}
+					create_union = SP0
+				}else = {
+					add_papal_influence = 50
+					220 = {
+						change_religion = catholic
 					}
 				}
 			}
