@@ -25,27 +25,6 @@ BT0_1_slot = {
 			}
 		}
 	}
-	bet_westwards_push = {
-		icon = mission_finest_carpets
-		position = 3
-		required_missions = { bet_explorational } 
-		provinces_to_highlight = {
-			area = cap_verde_area
-		}
-
-		trigger = {
-			cap_verde_area = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
-			}
-		}
-
-		effect = { 
-			add_ruler_modifier = {
-				name = bet_explo_rex_2
-			}
-		} 
-	}
 	bet_colonisation = {
 		icon = mission_finest_carpets
 		position = 4
@@ -64,7 +43,16 @@ BT0_1_slot = {
 
 		effect = { 
 			add_stability_or_adm_power = yes
-			set_government_rank = 2
+			if = {
+				limit = {
+					government_rank = 1
+				}
+				set_government_rank = 2
+			}else = {
+				add_adm_power = 50
+				add_dip_power = 50
+				add_mil_power = 50
+			}
 		} 
 	}
 }
@@ -128,7 +116,27 @@ BT0_2_slot = {
 			}
 		} 
 	}
+	bet_westwards_push = {
+		icon = mission_finest_carpets
+		position = 3
+		required_missions = { bet_westwards } 
+		provinces_to_highlight = {
+			area = cap_verde_area
+		}
 
+		trigger = {
+			cap_verde_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = { 
+			add_ruler_modifier = {
+				name = bet_explo_rex_2
+			}
+		} 
+	}
 }
 BT0_3_slot = {
 	slot = 3
@@ -178,6 +186,31 @@ BT0_3_slot = {
 			}
 		} 
 	}
+	bet_iberia_nostros = {
+		icon = mission_finest_carpets
+		position = 4
+		required_missions = { bet_iberia } 
+		provinces_to_highlight = {
+			region = iberia_region
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 35
+				region = iberia_region
+			}
+		}
+
+		effect = { 
+			add_country_modifier = {
+				name = bet_even_the_odds_2
+				duration = 10950
+			}
+			iberia_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
 }
 BT0_4_slot = {
 	slot = 4
@@ -186,6 +219,50 @@ BT0_4_slot = {
 	has_country_shield = yes
 	potential = { tag = BT0 } 
 
+	bet_churchs = {
+		icon = mission_finest_carpets
+		position = 1
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_tax_building_trigger = no
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				has_tax_building_trigger = yes
+			}
+		}
+
+		effect = { 
+			add_country_modifier = {
+				name = bet_pio_pio
+				duration = 10950
+			}
+		} 
+	}
+	bet_markets = {
+		icon = mission_finest_carpets
+		position = 3
+		required_missions = {bet_churchs bet_iberia } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_trade_building_trigger = no
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				has_trade_building_trigger = yes
+			}
+		}
+
+		effect = { 
+			country_event = {
+				id = betti.1
+			}
+		} 
+	}
 }
 BT0_5_slot = {
 	slot = 5
