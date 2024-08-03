@@ -6,18 +6,18 @@ BT0_1_slot = {
 	potential = { tag = BT0 } 
 
 	bet_explorational = {
-		icon = bohemian_crystal
+		icon = mission_colonize_the_caribbean
 		position = 2
 		required_missions = { bet_get_ready } 
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			navy_size = RK0
 			has_dip_advisor_3 = yes
 		}
 
 		effect = {
-			add_ruler_modifier = {
-				name = bet_explo_rex
-			}
+			add_ruler_modifier = { name = "bet_explo_rex" } 
 			define_explorer = {
 				shock = 3
 				fire = 3
@@ -25,13 +25,12 @@ BT0_1_slot = {
 			}
 		}
 	}
+
 	bet_colonisation = {
-		icon = mission_finest_carpets
+		icon = mission_colonial
 		position = 4
 		required_missions = { bet_westwards_push } 
-		provinces_to_highlight = {
-			colonial_region = colonial_the_carribean
-		}
+		provinces_to_highlight = { colonial_region = colonial_the_carribean } 
 
 		trigger = {
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
@@ -41,19 +40,19 @@ BT0_1_slot = {
 			}
 		}
 
-		effect = { 
+		effect = {
 			add_stability_or_adm_power = yes
 			if = {
-				limit = {
-					government_rank = 1
-				}
+				limit = { government_rank = 1 } 
 				set_government_rank = 2
-			}else = {
+			}
+			else = {
 				add_adm_power = 50
 				add_dip_power = 50
 				add_mil_power = 50
 			}
-		} 
+			custom_tooltip = BETTIA_TT_6
+		}
 	}
 }
 BT0_2_slot = {
@@ -66,9 +65,7 @@ BT0_2_slot = {
 	bet_get_ready = {
 		icon = mission_finest_carpets
 		position = 1
-		provinces_to_highlight = {
-			area = bettia_area
-		}
+		provinces_to_highlight = { area = bettia_area } 
 
 		trigger = {
 			development_in_provinces = {
@@ -78,26 +75,18 @@ BT0_2_slot = {
 			}
 		}
 
-		effect = { 
-			alentejo_area = {
-				add_permanent_claim = ROOT
-			}
-			lower_andalucia_area = {
-				add_permanent_claim = ROOT
-			}
-			macaronesia_area = {
-				add_permanent_claim = ROOT
-			}
-		} 
+		effect = {
+			alentejo_area = { add_permanent_claim = ROOT } 
+			lower_andalucia_area = { add_permanent_claim = ROOT } 
+			macaronesia_area = { add_permanent_claim = ROOT } 
+		}
 	}
 
 	bet_westwards = {
-		icon = mission_finest_carpets
+		icon = mission_caribbean_cn
 		position = 2
 		required_missions = { bet_get_ready } 
-		provinces_to_highlight = {
-			area = macaronesia_area
-		}
+		provinces_to_highlight = { area = macaronesia_area } 
 
 		trigger = {
 			macaronesia_area = {
@@ -106,23 +95,20 @@ BT0_2_slot = {
 			}
 		}
 
-		effect = { 
+		effect = {
 			add_country_modifier_for_age = {
-				name = bet_beat_rak
+				name = "bet_beat_rak"
 				age = age_of_discovery
 			}
-			cap_verde_area = {
-				add_permanent_claim = ROOT
-			}
-		} 
+			cap_verde_area = { add_permanent_claim = ROOT } 
+		}
 	}
+
 	bet_westwards_push = {
-		icon = mission_finest_carpets
+		icon = mission_invade_island
 		position = 3
 		required_missions = { bet_westwards } 
-		provinces_to_highlight = {
-			area = cap_verde_area
-		}
+		provinces_to_highlight = { area = cap_verde_area } 
 
 		trigger = {
 			cap_verde_area = {
@@ -131,11 +117,37 @@ BT0_2_slot = {
 			}
 		}
 
-		effect = { 
-			add_ruler_modifier = {
-				name = bet_explo_rex_2
+		effect = {
+			add_ruler_modifier = { name = "bet_explo_rex_2" } 
+			1114 = { add_permanent_claim = ROOT } 
+			2258 = { add_permanent_claim = ROOT } 
+			1163 = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	bet_trade_and_gold = {
+		icon = mission_the_triangle_trade
+		position = 5
+		required_missions = { bet_westwards_push } 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 1114
+				province_id = 2258
+				province_id = 1163
 			}
-		} 
+		}
+
+		trigger = {
+			1114 = { country_or_non_sovereign_subject_holds = ROOT } 
+			2258 = { country_or_non_sovereign_subject_holds = ROOT } 
+			1163 = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		effect = {
+			1114 = { add_or_upgrade_trade_building = yes } 
+			2258 = { add_or_upgrade_trade_building = yes } 
+			1163 = { add_or_upgrade_trade_building = yes } 
+		}
 	}
 }
 BT0_3_slot = {
@@ -146,11 +158,11 @@ BT0_3_slot = {
 	potential = { tag = BT0 } 
 
 	bet_iberia = {
-		icon = mission_finest_carpets
+		icon = mission_conquer_50_development
 		position = 2
 		required_missions = { bet_get_ready } 
 		provinces_to_highlight = {
-			OR = { 
+			OR = {
 				area = alentejo_area
 				area = lower_andalucia_area
 			}
@@ -167,32 +179,23 @@ BT0_3_slot = {
 			}
 		}
 
-		effect = { 
+		effect = {
 			add_country_modifier = {
-				name = bet_even_the_odds
+				name = "bet_even_the_odds"
 				duration = 10950
 			}
-			extremadura_area = {
-				add_permanent_claim = ROOT
-			}
-			upper_andalucia_area = {
-				add_permanent_claim = ROOT
-			}
-			toledo_area = {
-				add_permanent_claim = ROOT
-			}
-			beieras_area = {
-				add_permanent_claim = ROOT
-			}
-		} 
+			extremadura_area = { add_permanent_claim = ROOT } 
+			upper_andalucia_area = { add_permanent_claim = ROOT } 
+			toledo_area = { add_permanent_claim = ROOT } 
+			beieras_area = { add_permanent_claim = ROOT } 
+		}
 	}
+
 	bet_iberia_nostros = {
-		icon = mission_finest_carpets
+		icon = mission_unite_home_region
 		position = 4
 		required_missions = { bet_iberia } 
-		provinces_to_highlight = {
-			region = iberia_region
-		}
+		provinces_to_highlight = { region = iberia_region } 
 
 		trigger = {
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
@@ -201,15 +204,13 @@ BT0_3_slot = {
 			}
 		}
 
-		effect = { 
+		effect = {
 			add_country_modifier = {
-				name = bet_even_the_odds_2
+				name = "bet_even_the_odds_2"
 				duration = 10950
 			}
-			iberia_region = {
-				add_permanent_claim = ROOT
-			}
-		} 
+			iberia_region = { add_permanent_claim = ROOT } 
+		}
 	}
 }
 BT0_4_slot = {
@@ -220,7 +221,7 @@ BT0_4_slot = {
 	potential = { tag = BT0 } 
 
 	bet_churchs = {
-		icon = mission_finest_carpets
+		icon = mission_buddhist_monk_praying
 		position = 1
 		provinces_to_highlight = {
 			owned_by = ROOT
@@ -234,17 +235,21 @@ BT0_4_slot = {
 			}
 		}
 
-		effect = { 
+		effect = {
 			add_country_modifier = {
-				name = bet_pio_pio
+				name = "bet_pio_pio"
 				duration = 10950
 			}
-		} 
+		}
 	}
+
 	bet_markets = {
-		icon = mission_finest_carpets
+		icon = mission_rb_colonise_spice_islands
 		position = 3
-		required_missions = {bet_churchs bet_iberia } 
+		required_missions = {
+			bet_churchs
+			bet_iberia
+		}
 		provinces_to_highlight = {
 			owned_by = ROOT
 			has_trade_building_trigger = no
@@ -257,11 +262,37 @@ BT0_4_slot = {
 			}
 		}
 
-		effect = { 
-			country_event = {
-				id = betti.1
+		effect = { country_event = { id = betti.1 }  } 
+	}
+
+	bettian_dreams = {
+		icon = centralized_empire
+		position = 5
+		required_missions = {
+			bet_iberia_nostros
+			bet_markets
+			bet_spania_union
+		}
+		provinces_to_highlight = { region = iberia_region } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 40
+				region = iberia_region
 			}
-		} 
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 40
+				NOT = { continent = europe } 
+				NOT = { region = maghreb_region } 
+			}
+		}
+
+		effect = {
+			country_event_with_insight = {
+				id = betti.2
+				insight_tooltip = BETTIA_TT_4
+			}
+		}
 	}
 }
 BT0_5_slot = {
@@ -272,11 +303,9 @@ BT0_5_slot = {
 	potential = { tag = BT0 } 
 
 	bet_spania = {
-		icon = mission_finest_carpets
+		icon = mission_alliances
 		position = 1
-		provinces_to_highlight = {
-			is_capital_of = SP0
-		}
+		provinces_to_highlight = { is_capital_of = SP0 } 
 
 		trigger = {
 			OR = {
@@ -284,9 +313,7 @@ BT0_5_slot = {
 					marriage_with = ROOT
 					alliance_with = ROOT
 				}
-				SP0 = {
-					exists = no
-				}
+				SP0 = { exists = no } 
 				SP0 = {
 					NOT = {
 						has_opinion = {
@@ -298,7 +325,7 @@ BT0_5_slot = {
 			}
 		}
 
-		effect = { 
+		effect = {
 			tooltip = {
 				custom_tooltip = BETTIA_TT_1a
 				add_patriarch_authority = 0.05
@@ -324,22 +351,20 @@ BT0_5_slot = {
 						skill = 2
 						discount = yes
 					}
-				}else = {
+				}
+				else = {
 					change_religion = catholic
-					capital_scope = {
-						change_religion = catholic	
-					}
+					capital_scope = { change_religion = catholic } 
 				}
 			}
-		} 
+		}
 	}
+
 	bet_spania_bros = {
-		icon = mission_finest_carpets
+		icon = mission_italian_condottiere
 		position = 2
 		required_missions = { bet_spania } 
-		provinces_to_highlight = {
-			is_capital_of = SP0
-		}
+		provinces_to_highlight = { is_capital_of = SP0 } 
 
 		trigger = {
 			OR = {
@@ -354,37 +379,25 @@ BT0_5_slot = {
 					}
 					alliance_with = ROOT
 				}
-				SP0 = {
-					exists = no
-				}
+				SP0 = { exists = no } 
 			}
 		}
 
-		effect = { 
+		effect = {
 			tooltip = {
 				custom_tooltip = BETTIA_TT_2a
 				add_favors = {
 					who = SP0
 					amount = -50
 				}
-				SP0 = {
-					define_heir = {
-						dynasty = ROOT
-					}
-				}
+				SP0 = { define_heir = { dynasty = ROOT }  } 
 				custom_tooltip = BETTIA_TT_2b
 				add_papal_influence = 50
-				add_army_tradition_or_mil_power = {
-					amount = 15
-				}
+				add_army_tradition_or_mil_power = { amount = 15 } 
 			}
 			hidden_effect = {
 				if = {
-					limit = {
-						SP0 = {
-							alliance_with = ROOT
-						}
-					}
+					limit = { SP0 = { alliance_with = ROOT }  } 
 					add_favors = {
 						who = SP0
 						amount = -50
@@ -395,22 +408,20 @@ BT0_5_slot = {
 							age = 5
 						}
 					}
-				}else = {
+				}
+				else = {
 					add_papal_influence = 50
-					add_army_tradition_or_mil_power = {
-						amount = 15
-					}
+					add_army_tradition_or_mil_power = { amount = 15 } 
 				}
 			}
-		} 
-	}
-	bet_spania_union = {
-		icon = mission_finest_carpets
-		position = 3
-		required_missions = { bet_spania_bros } 
-		provinces_to_highlight = {
-			is_capital_of = SP0
 		}
+	}
+
+	bet_spania_union = {
+		icon = sav_union_with_naples
+		position = 4
+		required_missions = { bet_spania_bros } 
+		provinces_to_highlight = { is_capital_of = SP0 } 
 
 		trigger = {
 			OR = {
@@ -426,31 +437,24 @@ BT0_5_slot = {
 			}
 		}
 
-		effect = { 
+		effect = {
 			tooltip = {
 				custom_tooltip = BETTIA_TT_3a
 				create_union = SP0
 				custom_tooltip = BETTIA_TT_3b
 				add_papal_influence = 50
-				220 = {
-					change_religion = catholic
-				}
+				220 = { change_religion = catholic } 
 			}
 			hidden_effect = {
 				if = {
-					limit = {
-						SP0 = {
-							alliance_with = ROOT
-						}
-					}
+					limit = { SP0 = { alliance_with = ROOT }  } 
 					create_union = SP0
-				}else = {
+				}
+				else = {
 					add_papal_influence = 50
-					220 = {
-						change_religion = catholic
-					}
+					220 = { change_religion = catholic } 
 				}
 			}
-		} 
+		}
 	}
 }

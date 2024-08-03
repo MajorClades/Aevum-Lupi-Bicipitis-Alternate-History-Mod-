@@ -105,4 +105,66 @@ country_decisions = {
 		}
 		ai_importance = 400
 	}
+
+	bettia_pulling_a_portugal = {
+		major = yes
+		potential = {
+			mission_completed = bet_colonisation
+			tag = BT0
+		}
+		provinces_to_highlight = {
+			colonial_region = colonial_the_carribean
+		}
+		allow = {
+			is_at_war = yes
+			NOT = {
+				war_score = -10
+			}
+			capital_scope = {
+				has_siege = yes
+			}
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 10
+				colonial_region = colonial_the_carribean
+			}
+		}
+		effect = {
+			every_subject_country = {
+				limit = {
+					is_colonial_nation = yes
+					capital_scope = {
+						colonial_region = colonial_the_carribean
+					}
+				}
+				FROM = { inherit = PREV }
+			}
+			custom_tooltip = bettia_move_capital_tooltip
+			hidden_effect = {
+				if = {
+					limit = {
+						4620 = {
+							owned_by = ROOT
+						}
+					}
+					4620 = {
+						rename_capital = "San Francisco"
+						change_province_name = "San Francisco"
+						move_capital_effect = yes
+					}
+				}
+				else = {
+					random_owned_province = {
+						limit = {
+							colonial_region = colonial_the_carribean
+						}
+						move_capital_effect = yes
+					}
+				}					
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		ai_importance = 400
+	}
 }
