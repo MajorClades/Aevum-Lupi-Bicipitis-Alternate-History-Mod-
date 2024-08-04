@@ -89,10 +89,7 @@ Dajb_2_slot = {
 		trigger = {
 			8 = {
 				development = 15
-				OR = {
-					has_building = temple
-					has_building = cathedral
-				}
+				has_tax_building_trigger = yes
 			}
 		}
 
@@ -106,17 +103,18 @@ Dajb_2_slot = {
 		icon = mission_hands_praying
 		position = 4
 		required_missions = { 3_people_victory } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = { owned_by = ROOT has_tax_building_trigger = no  } 
 
 		trigger = {
-			OR = {
-				temple = 20
-				cathedral = 20
+			num_of_owned_provinces_with = {
+				value = 15
+				has_tax_building_trigger = yes
 			}
 		}
 
 		effect = {
 			add_church_power = 100
+			add_papal_influence = 50
 			define_advisor = {
 				type = theologian
 				skill = 3
@@ -160,9 +158,9 @@ Dajb_2_slot = {
 		provinces_to_highlight = {  } 
 
 		trigger = {
-			monthly_adm = 10
-			monthly_dip = 10
-			monthly_mil = 10
+			monthly_adm = 8
+			monthly_dip = 8
+			monthly_mil = 8
 			OR = {
 				full_idea_group = religious_ideas
 				full_idea_group = diplomatic_ideas
@@ -297,13 +295,12 @@ Dajb_4_slot = {
 		icon = mission_dominate_home_trade_node
 		position = 4
 		required_missions = { 3_people_victory } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = { owned_by = ROOT has_trade_building_trigger = no  } 
 
 		trigger = {
-			OR = {
-				marketplace = 20
-				trade_depot = 20
-				stock_exchange = 20
+			num_of_owned_provinces_with = {
+				value = 15
+				has_trade_building_trigger = yes
 			}
 		}
 
@@ -321,7 +318,7 @@ Dajb_4_slot = {
 		icon = mission_have_manufactories
 		position = 6
 		required_missions = { 4_people_future } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = { owned_by = ROOT has_production_building_trigger = no  } 
 
 		trigger = {
 			NOT = {
@@ -332,10 +329,7 @@ Dajb_4_slot = {
 			}
 			num_of_owned_provinces_with = {
 				value = 10
-				OR = {
-					has_building = workshop
-					has_building = counting_house
-				}
+				has_production_building_trigger = yes
 			}
 		}
 
@@ -356,7 +350,7 @@ Dajb_4_slot = {
 				value = 3
 				province_has_center_of_trade_of_level = 3
 			}
-			monthly_income = 100
+			monthly_income = 50
 			OR = {
 				full_idea_group = humanist_ideas
 				full_idea_group = trade_ideas
@@ -437,7 +431,7 @@ Dajb_5_slot = {
 		provinces_to_highlight = {  } 
 
 		trigger = {
-			monthly_income = 300
+			monthly_income = 150
 			navy_size = 100
 		}
 
