@@ -97,7 +97,15 @@ VR01 = {
 		icon = alpine_defenses
 		position = 3
 		required_missions = { vr0_pyrennes } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = pyrenees_area
+				area = languedoc_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
 		trigger = {
 			pyrenees_area = {
@@ -110,7 +118,15 @@ VR01 = {
 			}
 		}
 
-		effect = {  } 
+		effect = {
+			add_country_modifier = {
+				name = vr0_defeated_goths
+				duration = -1
+			}  
+			196 = {
+				add_or_upgrade_tax_building = yes
+			}
+		} 
 	}
 
 	vr0_francia = {
@@ -120,11 +136,50 @@ VR01 = {
 			vr0_lowland_alliance
 			vr0_beyond_pyrennes
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			region = low_countries_region
+			NOT = {
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					owner = {
+						alliance_with = VR0
+					}
+				}
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			calc_true_if = {
+				amount = 25
+				desc = vr0_us_or_allies_own_francia_tt
+				all_province = {
+					region = low_countries_region
+					OR = {
+						country_or_non_sovereign_subject_holds = ROOT
+						owner = {
+							alliance_with = ROOT
+						}
+					}
+				}
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_years_of_trade_income = {
+				years = 6
+				custom_tooltip = ME_add_6_years_of_trade_income
+			}
+			custom_tooltip = empty_line_tt
+			custom_tooltip = vr0_every_frankish_aly_get_offer_to_become_PU_tt
+			hidden_effect = {
+				every_ally = {
+					limit = {
+						culture_group = frankish
+					}
+					country_event = { id = VR0_flavor.2 }
+				}
+			}
+		} 
 	}
 }
 VR02 = {
@@ -199,14 +254,73 @@ VR02 = {
 						}
 					}
 				}
-				calc_true_if = {
-					any_owned_province = { region = low_countries_region } 
-					amount = 10
+				num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+					value = 10
+					region = low_countries_region
 				}
 			}
 		}
 
-		effect = {  } 
+		effect = {  
+			simple_dynamic_effect = {
+				first_custom_tooltip = vr0_if_completed_by_diplomacy_tt
+				first_limit = "
+					any_country = {
+						AND = {
+							OR = {
+								primary_culture = franken
+								primary_culture = ellan
+								primary_culture = gurippen
+							}
+							alliance_with = ROOT
+							trust = {
+								WHO = ROOT
+								value = 60
+							}
+						}
+					}
+				"
+				first_effect = "
+					custom_tooltip = vr0_every_vrankish_province_gets_random_dev_tt
+					hidden_effect = {
+						every_owned_province = {
+							limit = {
+								culture = vrankish
+							}
+							add_random_development = 1
+						}
+						capital_scope = {
+							add_province_triggered_modifier = vrankia_embassy
+						}
+						random_ally = {
+							limit = {
+								OR = {
+									primary_culture = franken
+									primary_culture = ellan
+									primary_culture = gurippen
+								}
+							}
+							capital_scope = {
+								add_province_triggered_modifier = vrankia_embassy
+							}
+						}
+					}
+					custom_tooltip = empty_line_tt
+					custom_tooltip = vr0_embassy_tt
+				"
+				second_limit = "
+					num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+						value = 10
+						region = low_countries_region
+					}	
+				"
+				second_effect = "
+					low_countries_region = {
+						add_permanent_claim = ROOT
+					}
+				"
+			}
+		} 
 	}
 }
 VR03 = {
@@ -407,15 +521,18 @@ VR04 = {
 		icon = mission_italian_condottiere
 		position = 4
 		required_missions = { vr0_majorca_sardinia } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			region = italy_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+
+		} 
 
 		trigger = {
-			calc_true_if = {
-				all_province = {
-					region = italy_region
-					owned_by = ROOT
-				}
-				amount = 15
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 15
+				region = italy_region
 			}
 		}
 
@@ -426,7 +543,27 @@ VR04 = {
 			custom_tooltip = empty_line_tt
 			custom_tooltip = alb_permaclaims_on_med_islands_tt
 			hidden_effect = {
-				
+				every_province = {
+					limit = {
+						OR = {
+							province_id = 2954
+							province_id = 321
+							province_id = 5015
+							province_id = 3003
+							province_id = 142
+							province_id = 4698
+							province_id = 112
+							area = crete_area
+							area = aegean_archipelago_area
+							area = sicily_area
+							area = western_sicily_area
+							area = sardinia_area
+							area = corsica_sardinia_area
+							area = baleares_area
+						}
+					}
+					add_permanent_claim = ROOT
+				}
 			}
 		} 
 	}
@@ -511,12 +648,66 @@ VR05 = {
 			vr0_italian_foothold
 			vr0_knights_at_sea
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				province_id = 2954
+				province_id = 321
+				province_id = 5015
+				province_id = 3003
+				province_id = 142
+				province_id = 4698
+				province_id = 112
+				area = crete_area
+				area = aegean_archipelago_area
+				area = sicily_area
+				area = western_sicily_area
+				area = sardinia_area
+				area = corsica_sardinia_area
+				area = baleares_area
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		} 
 
 		trigger = {  
 			custom_trigger_tooltip = {
 				tooltip = alb_owns_all_med_islands_tt
-
+				owns = 2954
+				owns = 321
+				owns = 5015
+				owns = 3003
+				owns = 142
+				owns = 4698
+				owns = 112
+				crete_area = {
+					owned_by = ROOT
+					type = all
+				}
+				aegean_archipelago_area = {
+					owned_by = ROOT
+					type = all
+				}
+				sicily_area = {
+					owned_by = ROOT
+					type = all
+				}
+				western_sicily_area = {
+					owned_by = ROOT
+					type = all
+				}
+				sardinia_area = {
+					owned_by = ROOT
+					type = all
+				}
+				corsica_sardinia_area = {
+					owned_by = ROOT
+					type = all
+				}
+				baleares_area = {
+					owned_by = ROOT
+					type = all
+				}
 			}
 		} 
 
