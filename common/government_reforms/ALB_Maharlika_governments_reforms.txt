@@ -1,0 +1,128 @@
+filipino_rayah = {
+	icon = "sakdina_system_reform"
+	allow_normal_conversion = yes
+	potential = {
+		NOT = { has_country_flag = formed_maharlika_flag }
+		OR = {
+			AND = {
+				capital_scope = {
+					province_id = 2697
+				}
+				primary_culture = filipino
+				##NOT = { exists = JAP } #Maharlika
+			}
+			AND = {
+				is_playing_custom_nation = yes
+				have_had_reform = filipino_rayah
+			}
+		}
+	}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 50
+	nation_designer_trigger = {
+		primary_culture = filipino
+		capital_scope = { region = moluccas_region }
+		owns = 2697
+	}
+	legacy_equivalent = filipino_rayah_legacy
+	fixed_rank = 2
+	maintain_dynasty = yes
+	allow_vassal_war = yes
+	allow_vassal_alliance = yes
+	lock_level_when_selected = yes
+	can_change_primary_culture = no
+	
+
+	conditional = {
+		allow = { has_dlc = "Mandate of Heaven" }
+		government_abilities = {
+			shogunate_mechanic
+		}
+	}
+	
+
+	modifiers = {
+		diplomats = 1
+		envoy_travel_time = -0.25
+		max_absolutism = 5
+		amount_of_samurai = 10
+		has_samurai = yes
+	}
+
+	custom_attributes = {
+		locked_government_type = yes
+	}
+}
+
+senapati = {
+	icon = "uparaja_reform"
+	allow_normal_conversion = no
+	potential = {
+		NOT = { has_country_flag = formed_maharlika_flag }
+		overlord = { has_reform = filipino_rayah }
+	}
+	replacement_on_independence_war = indep_senapati
+	legacy_equivalent = plutocratic_reform
+	fixed_rank = 1
+	maintain_dynasty = yes
+	valid_for_nation_designer = yes
+	nation_designer_cost = 0
+	lock_level_when_selected = yes
+	nation_designer_trigger = {
+		primary_culture = filipino
+		capital_scope = { region = moluccas_region }
+	}
+	modifiers = {
+		merchants = 1
+		nobles_influence_modifier = -0.05
+		burghers_influence_modifier = 0.05
+		vaisyas_influence_modifier = 0.05
+	}
+	custom_attributes = {
+		locked_government_type = yes
+		enables_plutocratic_idea_group = yes
+		enables_aristocratic_idea_group = no
+	}
+}
+indep_senapati = {
+	icon = "uparaja_reform"
+	allow_normal_conversion = no
+	potential = {
+		NOT = { has_country_flag = formed_maharlika_flag }
+		OR = {
+			AND = {
+				OR = {
+					#overlord = { NOT = { has_reform = filipino_rayah } }
+					is_subject = no
+					is_subject_of_type = tributary_state
+				}
+				capital_scope = { region = moluccas_region }
+				primary_culture = filipino
+			}
+			AND = {
+				is_playing_custom_nation = yes
+				have_had_reform = indep_senapati
+			}
+		}
+	}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 0
+	nation_designer_trigger = {
+		primary_culture = filipino
+		capital_scope = { region = moluccas_region }
+	}
+	legacy_equivalent = plutocratic_reform
+	maintain_dynasty = yes
+
+	modifiers = {
+		merchants = 2
+		nobles_influence_modifier = -0.08
+		burghers_influence_modifier = 0.1
+		vaisyas_influence_modifier = 0.1
+	}
+	custom_attributes = {
+		locked_government_type = yes
+		enables_plutocratic_idea_group = yes
+		enables_aristocratic_idea_group = no
+	}
+}
