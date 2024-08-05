@@ -39,7 +39,7 @@ Aldabba_1_slot = {
 		required_missions = { ald_list}
 		position = 2
 		provinces_to_highlight = {
-			province_id = 336
+			is_capital_of = ROOT
 			NOT = {
 				base_tax = 7
 			}
@@ -48,7 +48,7 @@ Aldabba_1_slot = {
 			}
 		}
 		trigger = { 
-			336 = {
+			capital_scope = {
 				base_tax = 7
 				development = 25
 			}
@@ -66,7 +66,10 @@ Aldabba_1_slot = {
 				religion = jewish
 			}
 			custom_tooltip =  " "
-			algiers_area = {
+			random_owned_area = {
+				limit = {
+					is_capital_of = ROOT
+				}
 				add_random_development = 1
 			}
 			custom_tooltip = " "
@@ -88,7 +91,7 @@ Aldabba_1_slot = {
 				value = 25
 			}
 			stability = 1
-
+			owns = 336
 		}
 		effect = {
 			336 = {
@@ -152,7 +155,11 @@ Aldabba_1_slot = {
 		}
 		trigger = { 
 			tag = AF0
-			has_reform = aldabban_restored_reform
+			OR = {
+				has_reform = aldabban_restored_reform
+				has_reform = aldabban_republic_reform
+				has_reform = aldabban_theocracy_reform
+			}
 			at_war_with_religious_enemy = yes 
 		}
 		
@@ -714,19 +721,24 @@ Aldabba_2_slot = {
 		effect = {
 			if = {
 				limit = {
-					has_ruler_flag = is_lucius_galeni
+					tag = AF2
 				}
-				custom_tooltip = has_lucius_tooltip_yes
-				tooltip = {
-					change_mil = 1	
-					add_ruler_personality = aldabban_king
+				if = {
+					limit = {
+						has_ruler_flag = is_lucius_galeni
+					}
+					custom_tooltip = has_lucius_tooltip_yes
+					tooltip = {
+						change_mil = 1	
+						add_ruler_personality = aldabban_king
+					}
 				}
-			}
-			else = {
-				custom_tooltip = has_lucius_tooltip_no
-				tooltip = {
-					change_mil = 1	
-					add_ruler_personality = aldabban_king
+				else = {
+					custom_tooltip = has_lucius_tooltip_no
+					tooltip = {
+						change_mil = 1	
+						add_ruler_personality = aldabban_king
+					}
 				}
 			}
 			custom_tooltip = " "
