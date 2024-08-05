@@ -370,4 +370,66 @@ country_decisions = {
 		}
 		ai_importance = 400
 	}
+	sie_militia_summoning = {
+		major = yes
+		potential = {
+			tag = SI0
+		}
+		allow = {
+			is_at_war = yes
+			OR = {
+				280 = {
+					has_siege = yes
+				}
+				NOT = {
+					war_score = -10
+				}
+			}
+			280 = {
+				NOT = {
+					has_province_modifier = sie_guard_risen
+				}
+				controlled_by = ROOT
+				owned_by = ROOT
+				base_manpower = 3
+			}
+		}
+		effect = {
+			280 = {
+				add_province_modifier = {
+					name = sie_guard_risen
+					duration = 365
+				}
+				if = {
+					limit = {
+						owner = {
+							ai = yes
+						}
+					}
+					owner = {
+						add_manpower = -1000
+					}
+				}else = {
+					add_base_manpower = -2
+				}
+				custom_tooltip = SIE_SUMMON_THE_GUARD
+				hidden_effect = {
+					1_siescheng_militia = SI0
+					1_siescheng_militia = SI0
+					1_siescheng_militia = SI0
+					1_siescheng_militia = SI0
+					1_siescheng_militia = SI0
+					1_siescheng_militia = SI0
+					1_siescheng_militia = SI0
+					1_siescheng_militia = SI0
+					1_siescheng_militia = SI0
+					1_siescheng_militia = SI0
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
 }
