@@ -31,13 +31,29 @@ alb_iberian_cultural_integration = {
 				end_value = 100
 			}
 			on_max_reached = {
-				country_event = {
-					id = iberia.1
+				if = {
+					limit = {
+						has_country_modifier = ib0_integrated_vrankish
+						has_country_modifier = ib0_integrated_raklionne
+						has_country_modifier = ib0_integrated_spaniard
+						has_country_modifier = ib0_integrated_bettian
+						has_country_modifier = ib0_integrated_swebish
+						has_country_modifier = ib0_integrated_burgund
+						has_country_modifier = ib0_integrated_basque
+						has_country_modifier = ib0_integrated_celtiberian
+					}
+					clr_country_flag = ib0_disunited_cultures_flag
+					remove_government_reform = alb_ib0_fragmented_cultures
 				}
-				add_government_power = {
-					mechanic_type = alb_iberian_cultural_integration
-					power_type = iberian_cultural_unity
-					value = -100
+				else = {
+					country_event = {
+						id = iberia.1
+					}
+					add_government_power = {
+						mechanic_type = alb_iberian_cultural_integration
+						power_type = iberian_cultural_unity
+						value = -100
+					}
 				}
 			}
 		}
