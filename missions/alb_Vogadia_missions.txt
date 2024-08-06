@@ -1,0 +1,146 @@
+SP1_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = SP1 } 
+
+	vog_the_mog = {
+		icon = mission_colonize_the_caribbean
+		position = 1
+
+		trigger = {
+			if = {
+				limit = { ai = yes}
+				army_size_percentage = 0.75
+			}else = {
+				num_of_mercenaries = 5
+				army_size_percentage = 1
+			}
+		}
+
+		effect = {
+			every_neighbor_province = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	vog_naval_news = {
+		icon = mission_colonize_the_caribbean
+		position = 2
+		required_missions = { vog_the_mog } 
+		trigger = {
+			if = {
+				limit = { ai = yes}
+				navy_size_percentage = 0.75
+			}else = {
+				num_of_admirals = 1
+				navy_size_percentage = 1
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = vog_mercenary_navy
+				duration = 10950
+			}
+		}
+	}
+}
+SP1_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = SP1 } 
+
+	vog_more_lands = {
+		icon = mission_colonial
+		position = 2
+		required_missions = { vog_the_mog } 
+		provinces_to_highlight = { NOT = {owned_by = ROOT} is_neighbor_of = ROOT } 
+
+		trigger = {
+			grown_by_development = 100
+		}
+
+		effect = {
+			iberia_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+}
+SP1_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = SP1 } 
+
+	
+}
+SP1_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = SP1 } 
+
+	vog_military_republic = {
+		icon = mission_colonial
+		position = 1
+		provinces_to_highlight = { OR = { is_capital_of = SO0 is_capital_of = PAP} } 
+		trigger = {
+			OR = {
+				AND = {
+					SO0 = {
+						has_opinion = {
+							who = ROOT
+							value = 190
+						}
+					}
+					PAP = {
+						NOT = {
+							has_opinion = {
+								who = ROOT
+								value = 0
+							}
+						}
+					}
+				}
+				AND = {
+					SO0 = {
+						NOT = {
+							has_opinion = {
+								who = ROOT
+								value = 0
+							}
+						}
+					}
+					PAP = {
+						has_opinion = {
+							who = ROOT
+							value = 190
+						}
+					}
+				}
+			}
+		}
+
+		effect = {
+			country_event = {
+				id = voga.1
+			}
+		}
+	}
+}
+SP1_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = SP1 } 
+
+}
