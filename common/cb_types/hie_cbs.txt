@@ -18,7 +18,11 @@ cb_hie_soxony_war = {
 	valid_for_subject = no 
 	is_triggered_only = yes
 	prerequisites_self = {
-		tag = SO0
+		OR = {
+			tag = SO0
+			was_tag = SO0
+			tag = RU0
+		}
 	}
 
 	prerequisites = { 
@@ -29,11 +33,12 @@ cb_hie_soxony_war = {
 	war_goal = sox_supreme_war
 	ai_peace_desire = -30
 }
-cb_dismantle_hre_africa = {
+
+cb_hie_padania_war = {
 	valid_for_subject = no 
 	is_triggered_only = yes
 	prerequisites_self = {
-		has_country_flag = can_kill_emperor_AFR
+		has_country_flag = italian_war_pad_emp
 	}
 
 	prerequisites = { 
@@ -41,6 +46,20 @@ cb_dismantle_hre_africa = {
 			tag = emperor
 		}
 	}
+	war_goal = civil_war_in_italy
+	ai_peace_desire = -30
+}
+cb_dismantle_hre_africa = {
+	valid_for_subject = no 
+	is_triggered_only = yes
+	prerequisites_self = {
+		has_country_flag = can_kill_emperor_AFR
+	}
+		prerequisites = { 
+			FROM = {
+				tag = emperor
+			}
+		}
 
 	war_goal = dismantle_hre_africa
 	ai_peace_desire = -30

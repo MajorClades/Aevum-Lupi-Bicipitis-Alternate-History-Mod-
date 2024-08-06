@@ -721,11 +721,18 @@ Mex_4_slot = {
 			custom_trigger_tooltip = {
 				tooltip = MEX_GREATARMY
 				all_country = {
-					same_continent = ROOT
-					NOT = {
-						army_strength = {
-							who = ROOT
-							value = 1
+					OR = {
+						NOT = {
+							same_continent = ROOT
+						}
+						AND = {
+							same_continent = ROOT
+							NOT = {
+								army_strength = {
+									who = ROOT
+									value = 1
+								}
+							}
 						}
 					}
 				}
@@ -734,14 +741,10 @@ Mex_4_slot = {
 
 		effect = {
 			add_power_projection = {
-				type = 10_permanent_power_projection
-				amount = 50
+				type = 25_permanent_power_projection
+				amount = 25
 			}
-			if = {
-				limit = { has_country_flag = formed_aztlan } 
-				custom_tooltip = MEX_AMERICA_2
-			}
-			else = { custom_tooltip = MEX_AMERICA } 
+			custom_tooltip = MEX_AMERICA
 			hidden_effect = {
 				north_america = { add_permanent_claim = ROOT } 
 				south_america = { add_permanent_claim = ROOT } 
