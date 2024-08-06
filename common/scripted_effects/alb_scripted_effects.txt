@@ -1,0 +1,64 @@
+upgrade_vineyard = {
+	if = {
+		limit = {
+			NOT = {
+				OR = {
+					has_province_modifier = vineyard_lvl_1
+					has_province_modifier = vineyard_lvl_2
+					has_province_modifier = vineyard_lvl_3
+					has_province_modifier = vineyard_lvl_4
+				}
+			}
+		}
+		add_province_modifier = {
+			name = vineyard_lvl_1
+			duration = -1
+			hidden = yes
+		}
+		owner = {
+			add_treasury = -250
+		}
+	}
+	else_if = {
+		limit = {
+			has_province_modifier = vineyard_lvl_1
+		}
+		add_province_modifier = {
+			name = vineyard_lvl_2
+			duration = -1
+			hidden = yes
+		}
+		remove_province_modifier = vineyard_lvl_1
+		owner = {
+			add_treasury = -500
+		}
+	}
+	else_if = {
+		limit = {
+			has_province_modifier = vineyard_lvl_2
+		}
+		add_province_modifier = {
+			name = vineyard_lvl_3
+			duration = -1
+			hidden = yes
+		}
+			remove_province_modifier = vineyard_lvl_2
+		owner = {
+			add_treasury = -750
+		}
+	}
+	else_if = {
+		limit = {
+			has_province_modifier = vineyard_lvl_3
+		}
+		add_province_modifier = {
+			name = vineyard_lvl_4
+			duration = -1
+			hidden = yes
+		}
+			remove_province_modifier = vineyard_lvl_3
+		owner = {
+			add_treasury = -1000
+		}
+	}
+}
