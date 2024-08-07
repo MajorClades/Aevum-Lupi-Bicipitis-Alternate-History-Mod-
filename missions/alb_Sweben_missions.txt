@@ -77,43 +77,39 @@ WE0_1_slot = {
 		}
 
 		effect = {
-			custom_tooltip = SWEBEN_TT_1
-			tooltip = {
-				if = {
-					limit = { BT0 = { is_subject_of = ROOT }  } 
-					custom_tooltip = YES_MARK
-				}
-				else = { custom_tooltip = NOT_MARK } 
-				inherit = BT0
-				custom_tooltip = SWEBEN_TT_2
-				random_owned_province = {
-					add_province_modifier = {
-						name = "weo_integrating_bettia"
-						duration = 10950
-					}
-				}
-			}
-			custom_tooltip = SWEBEN_TT_3
-			tooltip = {
-				iberia_region = { add_permanent_claim = ROOT } 
-				add_dip_power = 400
-			}
-			hidden_effect = {
-				if = {
-					limit = { BT0 = { is_subject_of = ROOT }  } 
+			simple_dynamic_effect = {
+				first_custom_tooltip = SWEBEN_TT_1
+				first_limit = "
+					BT0 = { is_subject_of = ROOT }
+				"
+				first_effect = "
 					inherit = BT0
-					every_owned_province = {
-						limit = { is_core = BT0 } 
+					custom_tooltip = SWEBEN_TT_2
+					tooltip = {
 						add_province_modifier = {
-							name = "weo_integrating_bettia"
-							duration = 10950
+							name = weo_integrating_bettia
+							duration = 3650
 						}
 					}
-				}
-				else = {
+					hidden_effect = {
+						every_owned_province = {
+							limit = { is_core = BT0 } 
+							add_province_modifier = {
+								name = weo_integrating_bettia
+								duration = 10950
+							}
+						}
+					}
+				"
+				second_limit = "
+					NOT = {
+						BT0 = { is_subject_of = ROOT }
+					}
+				"
+				second_effect = "
 					iberia_region = { add_permanent_claim = ROOT } 
 					add_dip_power = 400
-				}
+				"
 			}
 		}
 	}
@@ -329,15 +325,22 @@ WE0_3_slot = {
 		icon = mission_buddhist_monk_praying
 		position = 1
 		provinces_to_highlight = {
-			has_tax_building_trigger = no
-			owned_by = ROOT
 		}
 
 		trigger = {
-			num_of_owned_provinces_with = {
+			OR = {
+				check_variable = {
+					which = arian_fervor_var
+					value = 40
+				}
+				estate_loyalty = {
+					estate = estate_church
+					loyalty = 60
+				}
+			}
+			num_of_estate_privileges = {
+				estate = estate_church
 				value = 5
-				religion = arian
-				has_tax_building_trigger = yes
 			}
 		}
 
@@ -345,7 +348,7 @@ WE0_3_slot = {
 			add_stability_or_adm_power = yes
 			change_variable = {
 				which = arian_fervor_var
-				value = 5
+				value = 20
 			}
 		}
 	}
@@ -370,8 +373,38 @@ WE0_3_slot = {
 		}
 
 		effect = {
-			add_yearly_manpower = 0.5
-			capital_scope = { add_base_manpower = 3 } 
+			define_advisor = {
+				type = recruitmaster
+				skill = 2
+				cost_multiplier = 0.25
+			}
+			custom_tooltip = empty_line_tt
+			custom_tooltip = weo_distribute_dev_among_provinces_tt
+			hidden_effect = {
+				while = {
+					limit = { 
+						NOT = {
+							num_of_owned_provinces_with = {
+								value = 3
+								has_province_flag = had_weo_gottem_effect_done_flag
+							}
+						}
+					}
+					random_owned_province = {
+						limit = {
+							NOT = {
+								has_province_flag = had_weo_gottem_effect_done_flag
+							}
+							num_of_units_in_province = {
+								amount = 10
+							}
+						}
+						add_base_manpower = 3
+					}
+				}
+			}
+			custom_tooltip = empty_line_tt
+			add_yearly_manpower = 1
 		}
 	}
 
@@ -539,8 +572,10 @@ WE0_5_slot = {
 		}
 
 		effect = {
-			country_event = { id = sweb.1 } 
-			custom_tooltip = SWEB_UNION_WITH_COTIA
+			country_event_with_insight = {
+				id = sweb.1
+				insight_tooltip = SWEB_UNION_WITH_COTIA
+			}
 			castille_area = { add_permanent_claim = ROOT } 
 			aragon_area = { add_permanent_claim = ROOT } 
 			catalonia_area = { add_permanent_claim = ROOT } 
@@ -570,12 +605,10 @@ WE0_5_slot = {
 		}
 
 		effect = {
-			add_casus_belli = {
-				type = cb_restore_personal_union
-				target = CO0
-				months = 360
-			}
 			coth_old_border = { add_permanent_claim = ROOT } 
+			iberia_region = {
+				add_permanent_claim = ROOT
+			}
 		}
 	}
 
@@ -583,7 +616,12 @@ WE0_5_slot = {
 		icon = mission_war_for_the_crown
 		position = 5
 		required_missions = { weo_goth_on_us } 
-		provinces_to_highlight = { province_group = coth_old_border } 
+		provinces_to_highlight = { 
+			province_group = coth_old_border 
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
 		trigger = {
 			coth_old_border = {
@@ -593,61 +631,57 @@ WE0_5_slot = {
 		}
 
 		effect = {
+			custom_tooltip = alb_get_access_to_goth_monument_tt
 			set_country_flag = allow_goth_monument_flag
-			tooltip = {
-				if = {
-					limit = {
-						CO0 = {
-							years_in_union_under = {
-								who = ROOT
-								years = 30
-							}
+			custom_tooltip = empty_line_tt
+			simple_dynamic_effect = {
+				first_custom_tooltip = SWEBEN_TT_4b
+				first_limit = "
+					CO0 = {
+						years_in_union_under = {
+							who = ROOT
+							years = 30
 						}
 					}
-					custom_tooltip = SWEBEN_TT_4a
-				}
-				else = { custom_tooltip = SWEBEN_TT_4b } 
-				inherit = CO0
-				override_country_name = "SWEGOTHIA"
-				custom_tooltip = SWEBEN_TT_5
-			}
-			custom_tooltip = SWEBEN_TT_6
-			tooltip = {
-				override_country_name = "SWEGOTHIA"
-				coth_old_border = {
-					add_unrest = -5
-					add_nationalism = -5
-				}
-				add_dip_power = 200
-			}
-			hidden_effect = {
-				if = {
-					limit = {
-						CO0 = {
-							years_in_union_under = {
-								who = ROOT
-								years = 30
-							}
-						}
-					}
-					CO0 = { every_core_province = { add_core = ROOT }  } 
+				"
+				first_effect = "
 					inherit = CO0
-					override_country_name = "SWEGOTHIA"
-					change_country_color = {color = { 109 142 152 }}
-					every_owned_province = {
-						limit = { is_core = CO0 } 
-						add_unrest = -5
-						add_nationalism = -5
-					}	
-				}
-				else = {
-					override_country_name = "SWEGOTHIA"
+					override_country_name = SWEGOTHIA
+					custom_tooltip = SWEBEN_TT_5
+					hidden_effect = {
+						every_owned_province = {
+							limit = { is_core = CO0 } 
+							add_nationalism = -5
+						}
+						every_province = {
+							limit = { 
+								is_core = CO0 
+								NOT = {
+									owned_by = ROOT
+								}
+							}
+							add_core = ROOT
+						}
+					}
+				"
+				second_limit = "
+					NOT = {
+						CO0 = {
+							years_in_union_under = {
+								who = ROOT
+								years = 30
+							}
+						}
+					}
+				"
+				second_effect = "
+					override_country_name = SWEGOTHIA
 					coth_old_border = {
 						add_unrest = -5
 						add_nationalism = -5
 					}
 					add_dip_power = 200
-				}
+				"
 			}
 		}
 	}
