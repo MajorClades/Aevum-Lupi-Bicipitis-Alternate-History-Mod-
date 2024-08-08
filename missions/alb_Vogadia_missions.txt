@@ -14,8 +14,10 @@ SP1_1_slot = {
 				limit = { ai = yes}
 				army_size_percentage = 0.75
 			}else = {
-				num_of_mercenaries = 5
-				army_size_percentage = 1
+				OR = {
+					num_of_mercenaries = 5
+					army_size_percentage = 1
+				}
 			}
 		}
 
@@ -47,6 +49,23 @@ SP1_1_slot = {
 			}
 		}
 	}
+
+	vog_naval_power = {
+		icon = mission_colonize_the_caribbean
+		position = 3
+		required_missions = { vog_naval_news } 
+		trigger = {
+			num_of_light_ship = 50
+			years_of_sailors = 2
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = vog_two_capital_ship
+				duration = -1
+			}
+		}
+	}
 }
 SP1_2_slot = {
 	slot = 2
@@ -66,11 +85,40 @@ SP1_2_slot = {
 		}
 
 		effect = {
+			unlock_merc_company = {
+				merc_company = merc_vogadia_loyals
+			}
 			iberia_region = {
 				add_permanent_claim = ROOT
 			}
 		}
 	}
+
+	vog_military_minds = {
+		icon = mission_colonial
+		position = 4
+		required_missions = { vog_more_lands } 
+		trigger = {
+			if = {
+				limit = {
+					has_estate = estate_nobles
+				}
+				estate_loyalty = {
+					estate = estate_nobles
+					loyalty = 65
+				}
+			}else = {
+				army_tradition = 40
+			}
+			has_mil_advisor_3 = yes
+		}
+
+		effect = {
+			set_country_flag = vog_more_professions
+			custom_tooltip = VOGADIA_TT_4
+		}
+	}
+
 }
 SP1_3_slot = {
 	slot = 3
@@ -79,6 +127,26 @@ SP1_3_slot = {
 	has_country_shield = yes
 	potential = { tag = SP1 } 
 
+	vog_more_power = {
+		icon = mission_colonial
+		position = 3
+		required_missions = { vog_more_lands vog_faithless} 
+		provinces_to_highlight = { NOT = {owned_by = ROOT} region = iberia_region } 
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 30
+				region = iberia_region
+			}
+		}
+
+		effect = {
+			country_event_with_insight = {
+				id = voga.4
+				insight_tooltip = VOGADIA_TT_3
+			}
+		}
+	}
 	
 }
 SP1_4_slot = {
@@ -135,6 +203,28 @@ SP1_4_slot = {
 			}
 		}
 	}
+	vog_faithless = {
+		icon = mission_colonial
+		position = 2
+		required_missions = { vog_military_republic } 
+		provinces_to_highlight = { owned_by = ROOT NOT = {religion = ROOT}} 
+
+		trigger = {
+			religious_unity = 1
+		}
+
+		effect = {
+			add_estate_loyalty = {
+				estate = estate_church
+				loyalty = 10
+			}
+			define_advisor = {
+				type = natural_scientist
+				skill = 3
+				cost_multiplier = 0.25
+			}
+		}
+	}
 }
 SP1_5_slot = {
 	slot = 5
@@ -143,4 +233,160 @@ SP1_5_slot = {
 	has_country_shield = yes
 	potential = { tag = SP1 } 
 
+	vog_lord_regent = {
+		icon = mission_colonial
+		position = 2
+		required_missions = { vog_military_republic } 
+		trigger = {
+			OR = {
+				AND = {
+					NOT = {
+						republican_tradition = 50
+					}
+					stability = 3
+				}
+				AND = {
+					republican_tradition = 100
+					NOT = {
+						stability = 0
+					}
+				}
+			}
+		}
+
+		effect = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = VOGADIA_TT_1a
+				first_limit = "
+					NOT = {
+						republican_tradition = 50
+					}
+					stability = 3
+				"
+				first_effect = "
+					country_event_with_insight = {
+						id = voga.2
+						insight_tooltip = VOGADIA_TT_2a
+					}
+				"
+				second_custom_tooltip = VOGADIA_TT_1b
+				second_limit = "
+					NOT = {
+						NOT = {
+							republican_tradition = 50
+						}
+						stability = 3
+					}
+				"
+				second_effect = "
+					country_event_with_insight = {
+						id = voga.3
+						insight_tooltip = VOGADIA_TT_2b
+					}
+				"
+			}
+		}
+	}
+	vog_goverless = {
+		icon = mission_colonial
+		position = 3
+		required_missions = { vog_lord_regent } 
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = VOG_MISSION_GOV
+				always = yes
+			}
+			if = {
+				limit = {
+					government = monarchy
+				}
+				legitimacy = 90
+				stability = 3
+				estate_loyalty = {
+					estate = estate_nobles
+					loyalty = 65
+				}
+			}
+			if = {
+				limit = {
+					government = republic
+				}
+				republican_tradition = 90
+				NOT = {
+					corruption = 0.5
+				}
+				NOT = {
+					inflation = 0.5
+				}
+				estate_loyalty = {
+					estate = estate_burghers
+					loyalty = 65
+				}
+			}
+			if = {
+				limit = {
+					government = theocracy
+				}
+				religious_unity = 1
+				OR = {
+					papal_influence = 50
+					patriarch_authority = 0.01
+				}
+				estate_loyalty = {
+					estate = estate_church
+					loyalty = 65
+				}
+			}
+		}
+
+		effect = {
+			tooltip = {
+				custom_tooltip = VOGADIA_TT_5a
+				add_country_modifier = {
+					name = vog_king_hands
+					duration = -1
+				}
+				custom_tooltip = VOGADIA_TT_5b
+				add_country_modifier = {
+					name = vog_work_hands
+					duration = -1
+				}
+				custom_tooltip = VOGADIA_TT_5c
+				add_country_modifier = {
+					name = vog_pray_hands
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						government = monarchy
+					}
+					add_country_modifier = {
+						name = vog_king_hands
+						duration = -1
+					}
+				}
+				if = {
+					limit = {
+						government = republic
+					}
+					add_country_modifier = {
+						name = vog_work_hands
+						duration = -1
+					}
+				}
+				if = {
+					limit = {
+						government = theocracy
+					}
+					add_country_modifier = {
+						name = vog_pray_hands
+						duration = -1
+					}
+				}
+			}
+		}
+	}
 }
