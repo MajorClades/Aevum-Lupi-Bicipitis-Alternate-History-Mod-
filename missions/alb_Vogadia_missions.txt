@@ -66,6 +66,26 @@ SP1_1_slot = {
 			}
 		}
 	}
+	vog_admin_minds = {
+		icon = mission_colonial
+		position = 5
+		required_missions = {vog_diplomatic_minds  } 
+		trigger = {
+			OR = {
+				num_of_completed_idea_groups_mil = {amount = 2}
+				army_tradition = 40
+			}
+			has_advisor_of_type_and_level = {
+				type = ADM
+				skill_level = 5
+			}
+		}
+
+		effect = {
+			set_country_flag = vog_more_professions
+			custom_tooltip = VOGADIA_TT_4
+		}
+	}
 }
 SP1_2_slot = {
 	slot = 2
@@ -93,29 +113,27 @@ SP1_2_slot = {
 			}
 		}
 	}
-
-	vog_military_minds = {
+	vog_diplomatic_minds = {
 		icon = mission_colonial
 		position = 4
 		required_missions = { vog_more_lands } 
 		trigger = {
-			if = {
-				limit = {
-					has_estate = estate_nobles
+			is_at_war = yes
+			OR = {
+				is_great_power = yes
+				any_ally = {
+					is_great_power = yes
+					is_at_war = yes
 				}
-				estate_loyalty = {
-					estate = estate_nobles
-					loyalty = 65
-				}
-			}else = {
-				army_tradition = 40
 			}
-			has_mil_advisor_3 = yes
+			army_size = 50
 		}
 
 		effect = {
-			set_country_flag = vog_more_professions
-			custom_tooltip = VOGADIA_TT_4
+			add_country_modifier = {
+				name = vog_more_warscore
+				duration = 10950
+			}
 		}
 	}
 
@@ -127,36 +145,7 @@ SP1_3_slot = {
 	has_country_shield = yes
 	potential = { tag = SP1 } 
 
-	vog_more_power = {
-		icon = mission_colonial
-		position = 3
-		required_missions = { vog_more_lands vog_faithless} 
-		provinces_to_highlight = { NOT = {owned_by = ROOT} region = iberia_region } 
-
-		trigger = {
-			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-				value = 30
-				region = iberia_region
-			}
-		}
-
-		effect = {
-			country_event_with_insight = {
-				id = voga.4
-				insight_tooltip = VOGADIA_TT_3
-			}
-		}
-	}
-	
-}
-SP1_4_slot = {
-	slot = 4
-	generic = no
-	ai = yes
-	has_country_shield = yes
-	potential = { tag = SP1 } 
-
-	vog_military_republic = {
+	vog_faith_in_what = {
 		icon = mission_colonial
 		position = 1
 		provinces_to_highlight = { OR = { is_capital_of = SO0 is_capital_of = PAP} } 
@@ -203,10 +192,82 @@ SP1_4_slot = {
 			}
 		}
 	}
+	vog_more_power = {
+		icon = mission_colonial
+		position = 3
+		required_missions = { vog_more_lands vog_faithless} 
+		provinces_to_highlight = { NOT = {owned_by = ROOT} region = iberia_region } 
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 30
+				region = iberia_region
+			}
+		}
+
+		effect = {
+			country_event_with_insight = {
+				id = voga.4
+				insight_tooltip = VOGADIA_TT_3
+			}
+		}
+	}
+	vog_war_god = {
+		icon = mission_colonial
+		position = 5
+		required_missions = { vog_more_wind vog_diplomatic_minds} 
+		provinces_to_highlight = { owned_by = ROOT has_manpower_building_trigger = no } 
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 30
+				has_manpower_building_trigger = yes
+			}
+		}
+
+		effect = {
+			custom_tooltip = VOGADIA_TT_6
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						has_manpower_building_trigger = yes
+						NOT = {
+							base_manpower = 4
+						}
+					}
+					add_base_manpower = 1
+				}
+			}
+		}
+	}
+}
+SP1_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = SP1 } 
+
+	vog_military_republic = {
+		icon = mission_colonial
+		position = 1
+
+		trigger = {
+			years_of_income = 0.4
+			stability = 1
+		}
+
+		effect = {
+			country_event_with_insight = {
+				id = voga.5
+				insight_tooltip = VOGADIA_TT_7
+			}
+		}
+	}
 	vog_faithless = {
 		icon = mission_colonial
 		position = 2
-		required_missions = { vog_military_republic } 
+		required_missions = { vog_faith_in_what vog_military_republic} 
 		provinces_to_highlight = { owned_by = ROOT NOT = {religion = ROOT}} 
 
 		trigger = {
@@ -222,6 +283,32 @@ SP1_4_slot = {
 				type = natural_scientist
 				skill = 3
 				cost_multiplier = 0.25
+			}
+		}
+	}
+	vog_more_wind = {
+		icon = mission_colonial
+		position = 4
+		required_missions = { vog_more_power } 
+		provinces_to_highlight = { has_great_project = {type = giant_windmills} } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 1
+				has_great_project = {
+					type = giant_windmills
+					tier = 2
+				}
+			}
+		}
+
+		effect = {
+			random_province = {
+				limit = { has_great_project = {type = giant_windmills} } 
+				add_great_project_tier = {
+					type = giant_windmills
+					tier = 1
+				}
 			}
 		}
 	}
@@ -386,6 +473,34 @@ SP1_5_slot = {
 						duration = -1
 					}
 				}
+			}
+		}
+	}
+	vog_esta_te = {
+		icon = mission_colonial
+		position = 5
+		required_missions = { vog_goverless vog_more_wind} 
+
+		trigger = {
+			grown_by_development = 500
+			is_great_power = yes
+		}
+
+		effect = {
+			add_reform_progress_big_effect = {
+				amount = 50
+			}
+			change_estate_land_share = {
+				estate = estate_nobles
+				share = -5
+			}
+			change_estate_land_share = {
+				estate = estate_burghers
+				share = -5
+			}
+			change_estate_land_share = {
+				estate = estate_church
+				share = -5
 			}
 		}
 	}
