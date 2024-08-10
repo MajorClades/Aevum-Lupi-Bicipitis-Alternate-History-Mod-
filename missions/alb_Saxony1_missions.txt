@@ -178,7 +178,6 @@ saxon_1_slot = {
 		effect = {  
 			unlock_government_reform = {
 				government_reform = sx0_knightly_army_reform
-				tooltip = yes
 			}
 			custom_tooltip = empty_line_tt
 			add_mil_power = 100
@@ -221,7 +220,6 @@ saxon_1_slot = {
 			else = {
 				unlock_government_reform = {
 					government_reform = sx0_saxony_empire
-					tooltip = yes
 				}
 			}
 			add_splendor = 1000
@@ -1355,19 +1353,75 @@ saxon_5_slot = {
 
 		trigger = {  
 			moldavia_area = {
-				country_or_non_sovereign_subject_holds = ROOT
+				if = {
+					limit = {
+						SX1 = {
+							exists = yes
+							alliance_with = ROOT
+						}
+					}
+					OR = {
+						country_or_non_sovereign_subject_holds = ROOT
+						owned_by = SX2
+					}
+				}
+				else = {
+					country_or_non_sovereign_subject_holds = ROOT
+				}
 				type = all
 			}
 			wallachia_area = {
-				country_or_non_sovereign_subject_holds = ROOT
+				if = {
+					limit = {
+						SX1 = {
+							exists = yes
+							alliance_with = ROOT
+						}
+					}
+					OR = {
+						country_or_non_sovereign_subject_holds = ROOT
+						owned_by = SX2
+					}
+				}
+				else = {
+					country_or_non_sovereign_subject_holds = ROOT
+				}
 				type = all
 			}
 			transylvania_area = {
-				country_or_non_sovereign_subject_holds = ROOT
+				if = {
+					limit = {
+						SX1 = {
+							exists = yes
+							alliance_with = ROOT
+						}
+					}
+					OR = {
+						country_or_non_sovereign_subject_holds = ROOT
+						owned_by = SX2
+					}
+				}
+				else = {
+					country_or_non_sovereign_subject_holds = ROOT
+				}
 				type = all
 			}
 			southern_transylvania_area = {
-				country_or_non_sovereign_subject_holds = ROOT
+				if = {
+					limit = {
+						SX1 = {
+							exists = yes
+							alliance_with = ROOT
+						}
+					}
+					OR = {
+						country_or_non_sovereign_subject_holds = ROOT
+						owned_by = SX2
+					}
+				}
+				else = {
+					country_or_non_sovereign_subject_holds = ROOT
+				}
 				type = all
 			}
 		} 
@@ -1386,9 +1440,19 @@ saxon_5_slot = {
 						id = saxo.8
 					}
 				"
-			}
-			carpathia_region = {
-				add_permanent_claim = ROOT
+				second_limit = "
+					SX1 = {
+						OR = {
+							exists = no
+							NOT = { alliance_with = ROOT }
+						}
+					}
+				"
+				second_effect = "
+					carpathia_region = {
+						add_permanent_claim = ROOT
+					}
+				"
 			}
 		} 
 	}
