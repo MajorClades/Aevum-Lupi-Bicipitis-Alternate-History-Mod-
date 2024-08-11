@@ -1,0 +1,80 @@
+country_decisions = {
+
+	atlas_nation = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			was_never_end_game_tag_trigger = yes
+			NOT = { has_country_flag = formed_atlas_flag }
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			OR = {
+				is_free_or_tributary_trigger = yes
+				ai = no
+			}
+			culture = berber
+			OR = {
+				tag = AF9
+				tag = AF8
+				tag = AF7
+			}
+			is_colonial_nation = no
+			OR = {
+				is_former_colonial_nation = no
+				AND = {
+					is_former_colonial_nation = yes
+					ai = no
+				}
+			}
+		}
+		provinces_to_highlight = {
+			culture = berber
+			OR = {
+				area = tafilalt_area
+				area = sus_area
+				area = southern_morocco_area
+			}
+			OR = {
+				NOT = { owned_by = ROOT }
+				NOT = { is_core = ROOT }
+			}
+		}
+		allow = {
+			NOT = { exists = ATL }
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			is_at_war = no
+			owns_all_provinces = {
+				culture = berber
+				OR = {
+					area = tafilalt_area
+					area = sus_area
+					area = southern_morocco_area
+				}
+			}
+		}
+		effect = {
+			change_tag = ATL
+			restore_country_name = yes
+			remove_non_electors_emperors_from_empire_effect = yes
+			if = {
+				limit = { NOT = { government_rank = 2 } }
+				set_government_rank = 2
+			}
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			set_country_flag = formed_atlas_flag
+			add_prestige_or_monarch_power = {
+				amount = 25
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+}
