@@ -72,11 +72,28 @@ atlas_2_slot = {
 		icon = mission_pacify_the_berbers
 		position = 2
 		required_missions = { atl_rally_the_tribes } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = southern_morocco_area
+				province_id = 348
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			owns_all_provinces = {
+				OR = {
+					area = southern_morocco_area
+					province_id = 348
+				}
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			
+		} 
 	}
 
 	atl_economic_recovery = {
@@ -109,9 +126,33 @@ atlas_3_slot = {
 		position = 1
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			if = {
+				limit = {
+					ai = no
+				}
+				army_size_percentage = 0.9
+				estate_loyalty = {
+					estate = estate_nobles
+					loyalty = 55
+				}
+			}
+			else = {
+				army_size_percentage = 0.9
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			sus_area = {
+				add_permanent_claim = ROOT
+			}
+			southern_morocco_area = {
+				add_permanent_claim = ROOT
+			}
+			tafilalt_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	atl_united_atlas = {
@@ -121,11 +162,42 @@ atlas_3_slot = {
 			atl_unite_east
 			atl_unite_west
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = sus_area
+				area = southern_morocco_area
+				area = tafilalt_area
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			tag = ATL
+			sus_area = {
+				owned_by = ROOT
+				is_core = ROOT
+				type = all
+			}
+			southern_morocco_area = {
+				owned_by = ROOT
+				is_core = ROOT
+				type = all
+			}
+			tafilalt_area = {
+				owned_by = ROOT
+				is_core = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {
+			
+			western_morocco_area = {
+				add_permanent_claim = ROOT
+			}
+			northern_morocco_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	atl_finish_off_mauria = {
@@ -157,11 +229,38 @@ atlas_4_slot = {
 		icon = mission_reclaim_morocco
 		position = 2
 		required_missions = { atl_rally_the_tribes } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = tafilalt_area
+				province_id = 2466
+				province_id = 2464
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			owns_all_provinces = {
+				OR = {
+					area = tafilalt_area
+					province_id = 2466
+					province_id = 2464
+				}
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			hautes_plaines_area = {
+				add_permanent_claim = ROOT
+			}
+			algiers_area = {
+				add_permanent_claim = ROOT
+			}
+			barbary_coast_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	atl_end_aldabba = {
@@ -218,11 +317,39 @@ atlas_5_slot = {
 	atl_flow_of_gold = {
 		icon = mission_zambezi_gold
 		position = 1
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			province_id = 346
+			NOT = {
+				AND = {
+					is_core = ROOT
+					owned_by = ROOT
+					base_production = 8
+					num_of_times_expanded_infrastructure = 1
+				}
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			owns_core_province = 346
+			346 = {
+				base_production = 8
+			}
+			346 = {
+				num_of_times_expanded_infrastructure = 1
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			346 = {
+				add_province_modifier = {
+					name = atl_expanded_gold_mining
+					duration = -1
+				}
+			}
+			unlock_estate_privilege = {
+				estate_privilege = estate_burghers_control_over_the_mint
+			}
+		} 
 	}
 
 	atl_garamantes_restoration = {
