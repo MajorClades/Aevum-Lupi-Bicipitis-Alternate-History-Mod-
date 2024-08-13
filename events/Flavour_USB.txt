@@ -1,0 +1,305 @@
+namespace = usbanr
+
+country_event = {
+	id = usbanr.1
+	title = usbanr.1.test
+	desc = usbanr.1.desc
+	picture = KINGS_CHOICE_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = US1
+		any_owned_province = {
+			OR = {
+				superregion = north_america_superregion
+				region = rio_grande_region
+			}
+			NOT = {
+				area = florida_area
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	immediate = {
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						superregion = north_america_superregion
+						region = rio_grande_region
+					}
+					NOT = {
+						area = florida_area
+					}
+				}
+				cede_province = US2
+				
+			}
+		}
+	}
+	option = {
+		name = usbanr.1a
+		create_subject = {
+			subject_type = fellow_states
+			who = US2
+		}
+		US2 = {
+			add_government_reform = banrikan_republic_usb
+		}
+	}
+}
+
+country_event = {
+	id = usbanr.2
+	title = usbanr.2.test
+	desc = usbanr.2.desc
+	picture = KINGS_CHOICE_eventPicture
+	trigger = {
+		tag = US1
+		any_owned_province = {
+			OR = {
+				superregion = north_america_superregion
+				region = rio_grande_region
+			}
+			NOT = {
+				area = florida_area
+			}
+		}
+		US2 = {
+			is_subject_of = ROOT
+			exists = yes
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	option = {
+		name = usbanr.2a
+		every_owned_province = {
+			limit = {
+				OR = {
+					superregion = north_america_superregion
+					region = rio_grande_region
+				}
+				NOT = {
+					area = florida_area
+				}
+			}
+			cede_province = US2
+			
+		}
+	}
+}
+
+country_event = {
+	id = usbanr.3
+	title = usbanr.3.test
+	desc = usbanr.3.desc
+	picture = KINGS_CHOICE_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = US1
+		any_owned_province = {
+			continent = south_america
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	immediate = {
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					continent = south_america
+				}
+				cede_province = US3		
+			}
+		}
+	}
+	option = {
+		name = usbanr.3a
+		create_subject = {
+			subject_type = fellow_states
+			who = US3
+		}
+		US3 = {
+
+			add_government_reform = banrikan_republic_usb
+		}
+	}
+}
+
+country_event = {
+	id = usbanr.4
+	title = usbanr.4.test
+	desc = usbanr.4.desc
+	picture = KINGS_CHOICE_eventPicture
+	trigger = {
+		tag = US1
+		any_owned_province = {
+			continent = south_america
+		}
+		US2 = {
+			is_subject_of = ROOT
+			exists = yes
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	option = {
+		name = usbanr.4a
+		every_owned_province = {
+			limit = {
+				continent = south_america
+			}
+			cede_province = US2
+			
+		}
+	}
+}
+
+country_event = { #what's this? some kind of Banrikan Civil War
+	id = usbanr.5
+	title = usbanr.5.test
+	desc = usbanr.5.desc
+	picture = KINGS_CHOICE_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = US1
+		any_known_country = {
+			has_country_modifier = the_abolish_slavery_act
+		}
+		US2 = {
+			exists = yes
+			is_subject_of = US1
+			total_development = 100
+		}
+		US3 = {
+			exists = yes
+			is_subject_of = US1
+			total_development = 100
+		}
+	}
+	mean_time_to_happen = {
+		months = 24
+	}
+	option = {
+		name = usbanr.5a
+		custom_tooltip = USB_TT_1a
+		free_vassal = US2
+		US2 = {
+			add_government_reform = aztlan_confederation_reform
+			random_owned_province = {
+				change_trade_goods = slaves
+			}
+		}
+		country_event = {
+			id = usbanr.6
+		}
+	}
+	option = {
+		name = usbanr.5b
+		custom_tooltip = USB_TT_1b
+		free_vassal = US3
+		US3 = {
+			add_government_reform = southern_union_reform
+			add_country_modifier = {
+				name = innovative_modifier
+				duration = 3650
+			}
+			add_country_modifier = {
+				name = "the_abolish_slavery_act"
+				duration = -1
+			}
+			custom_tooltip = abolished_slavery_act_tooltip
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						trade_goods = slaves
+					}
+					change_trade_goods = unknown
+					remove_building = tradecompany
+					if = {
+						limit = { has_province_modifier = slave_entrepot }
+						remove_province_modifier = slave_entrepot
+					}
+				}
+			}
+		}
+		country_event = {
+			id = usbanr.7
+		}
+	}
+}
+
+country_event = { #side with the bleeding hearts
+	id = usbanr.6
+	title = usbanr.6.test
+	desc = usbanr.6.desc
+	picture = KINGS_CHOICE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = usbanr.6a
+		inherit = US3
+		US2 = {
+			hidden_effect = {
+				every_core_province = {
+					add_core = US1
+				}
+			}
+			declare_war_with_cb = {
+				casus_belli = cb_annex
+				who = ROOT
+			}
+		}
+		add_country_modifier = {
+			name = innovative_modifier
+			duration = 3650
+		}
+		add_country_modifier = {
+			name = "the_abolish_slavery_act"
+			duration = -1
+		}
+		custom_tooltip = abolished_slavery_act_tooltip
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					trade_goods = slaves
+				}
+				change_trade_goods = unknown
+				remove_building = tradecompany
+				if = {
+					limit = { has_province_modifier = slave_entrepot }
+					remove_province_modifier = slave_entrepot
+				}
+			}
+		}
+	}
+}
+
+country_event = { #side with the slavers
+	id = usbanr.7
+	title = usbanr.7.test
+	desc = usbanr.7.desc
+	picture = KINGS_CHOICE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = usbanr.7a
+		inherit = US2
+		hidden_effect = {
+			US2 = {
+				every_core_province = {
+					add_core = US1
+				}
+			}
+		}
+		declare_war_with_cb = {
+			casus_belli = cb_annex
+			who = US3
+		}
+	}
+}
