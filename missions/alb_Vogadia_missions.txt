@@ -17,13 +17,18 @@ SP1_1_slot = {
 			}
 			else = {
 				OR = {
-					num_of_mercenaries = 5
+					num_of_mercenaries = 2
 					army_size_percentage = 1
 				}
 			}
 		}
 
-		effect = { every_neighbor_province = { add_permanent_claim = ROOT }  } 
+		effect = {
+			custom_tooltip = vog_claims_on_all_neighbor_provs_tt
+			hidden_effect = {
+				every_neighbor_province = { add_permanent_claim = ROOT }
+			}
+		} 
 	}
 
 	vog_naval_news = {
@@ -41,12 +46,49 @@ SP1_1_slot = {
 				num_of_admirals = 1
 				navy_size_percentage = 1
 			}
+			num_of_owned_provinces_with = {
+				value = 5
+				has_shipyard_building_trigger = yes
+				has_dock_building_trigger = yes
+			}
 		}
 
 		effect = {
 			add_country_modifier = {
 				name = "vog_mercenary_navy"
 				duration = 10950
+			}
+			custom_tooltip = VOGADIA_TT_8
+			hidden_effect = {
+				set_variable = {
+					which = vogadia_dip_navy_var
+					value = 0
+				}
+				while = {
+					limit = { 
+						NOT = {
+							check_variable = {
+								which = vogadia_dip_navy_var
+								value = 11
+							}
+						}
+					}
+					random_owned_province = {
+						limit = {
+							OR = {
+								has_shipyard_building_trigger = yes
+								has_dock_building_trigger = yes
+							}
+						}
+						owner = {
+							add_dip_power = 50
+							change_variable = {
+								which = vogadia_dip_navy_var
+								value = 1
+							}
+						}
+					}
+				}
 			}
 		}
 	}
@@ -58,14 +100,25 @@ SP1_1_slot = {
 		provinces_to_highlight = {  } 
 
 		trigger = {
-			num_of_light_ship = 50
+			naval_forcelimit = 50
+			navy_size_percentage = 1
 			years_of_sailors = 2
+			has_flagship = yes
 		}
 
 		effect = {
 			add_country_modifier = {
 				name = "vog_two_capital_ship"
 				duration = -1
+			}
+			random_owned_province = {
+				limit = {
+					has_port = yes
+				}
+				create_flagship = {
+					type = light_ship
+					name = "Emperatriz Vogadiana"
+				}
 			}
 		}
 	}
@@ -90,6 +143,10 @@ SP1_1_slot = {
 		effect = {
 			set_country_flag = vog_more_professions
 			custom_tooltip = VOGADIA_TT_4
+			custom_tooltip = empty_line_tt
+			unlock_estate_privilege = {
+				estate_privilege = alb_merc_extra_grants
+			}
 		}
 	}
 }
