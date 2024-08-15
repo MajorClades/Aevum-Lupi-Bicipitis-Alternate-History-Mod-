@@ -554,22 +554,39 @@ SP1_5_slot = {
 		trigger = {
 			grown_by_development = 500
 			is_great_power = yes
+			OR = {
+				AND = {
+					adm = 5
+					dip = 5
+					mil = 5
+				}
+				estate_loyalty = {
+					estate = estate_church
+					loyalty = 60
+				}
+				estate_loyalty = {
+					estate = estate_burghers
+					loyalty = 60
+				}
+				estate_loyalty = {
+					estate = estate_nobles
+					loyalty = 60
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = rus_increase_absolute_rule_tt
+				check_variable = {
+					which = seize_land_counter
+					value = 10
+				}
+			}
 		}
 
 		effect = {
 			add_years_of_income = 1
-			change_estate_land_share = {
-				estate = estate_nobles
-				share = -5
-			}
-			change_estate_land_share = {
-				estate = estate_burghers
-				share = -5
-			}
-			change_estate_land_share = {
-				estate = estate_church
-				share = -5
-			}
+			disable_stab_cost_advisor_privs = yes
+			custom_tooltip = empty_line_tt
+			half_estate_privilege_absolutism_loss = yes
 		}
 	}
 }

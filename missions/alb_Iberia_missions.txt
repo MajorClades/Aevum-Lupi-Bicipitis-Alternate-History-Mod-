@@ -102,16 +102,25 @@ Iberia_1_slot = {
 			}
 		} 
 
-		effect = {  
-			random_subject_country = {
-				limit = {
-					capital_scope = {
-						colonial_region = colonial_the_carribean
-					}
-				}
+		effect = {
+			custom_tooltip = ib0_subject_in_caribbean_tt
+			tooltip = {
 				add_country_modifier = {
 					name = ib0_caribbean_colony
 					duration = -1
+				}
+			}
+			hidden_effect = {
+				random_subject_country = {
+					limit = {
+						capital_scope = {
+							colonial_region = colonial_the_carribean
+						}
+					}
+					add_country_modifier = {
+						name = ib0_caribbean_colony
+						duration = -1
+					}
 				}
 			}
 		} 
@@ -159,11 +168,43 @@ Iberia_2_slot = {
 	ib0_toll_of_the_rock = {
 		icon = mission_rb_take_gibraltar
 		position = 1
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			province_id = 226
+			NOT = {
+				has_great_project = {
+					type = the_rock
+					tier = 2
+				}
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			226 = {
+				has_great_project = {
+					type = the_rock
+					tier = 2
+				}
+			}
+			1293 ={
+				trade_share = {
+					country = ROOT
+					share = 80
+				}
+			}
+		} 
 
-		effect = {  } 
+		effect = { 
+			226 = {
+				add_great_project_tier = {
+					type = the_rock
+					tier = 1
+				}
+			}
+			custom_tooltip = ib0_rack_give_more_power_tt
+		} 
 	}
 
 	ib0_mediterranean_ports = {
@@ -175,7 +216,11 @@ Iberia_2_slot = {
 		}
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			calc_true_if = {
+				amount = 7
+			}
+		} 
 
 		effect = {  } 
 	}
@@ -262,11 +307,44 @@ Iberia_3_slot = {
 		icon = a_real_roman_empire
 		position = 5
 		required_missions = { ib0_march_on_roma } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			region = iberia_region
+			NOT ={
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 40
+				region = italy_region
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_ruler_modifier = {
+				name = ib0_avenger_of_theodoric
+			}
+			change_mil = 1
+			custom_tooltip = "All of our Italian provinces recieve:"
+			tooltip = {
+				add_province_modifier = {
+					name = ib0_italian_iberian_rule
+					duration = 18250
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						region = italy_region
+					}
+					add_province_modifier = {
+						name = ib0_italian_iberian_rule
+						duration = 18250
+					}
+				}
+			}
+		} 
 	}
 
 	ib0_religious_unity = {
@@ -429,6 +507,11 @@ Iberia_4_slot = {
 			custom_tooltip = alb_no_penalty_for_owning_rome_tt
 			set_country_flag = general_flag_Rome_flag
 			custom_tooltip = empty_line_tt
+			add_casus_belli = {
+				type = cb_hie_soxony_war
+				target = emperor
+			}
+			custom_tooltip = empty_line_tt
 			italy_region = {
 				add_permanent_claim = ROOT
 			}
@@ -442,11 +525,32 @@ Iberia_4_slot = {
 			ib0_avenging_theodoric
 			ib0_kingdom_of_soissons
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
 
-		trigger = {  } 
+		} 
 
-		effect = {  } 
+		trigger = {  
+			total_development = 1000
+			is_hegemon = yes
+		} 
+
+		effect = {  
+			add_splendor = 1000
+			override_country_name = IBERIAN_EMPIRE
+			custom_tooltip = RHO_TT_4
+			hidden_effect = {
+				if = {
+					limit = { in_golden_age = yes } 
+					extend_golden_age = 50
+				}
+				else = {
+					if = {
+						limit = { has_had_golden_age = yes } 
+						reset_golden_age = yes
+					}
+				}
+			}
+		} 
 	}
 
 	ib0_great_army_reform = {
