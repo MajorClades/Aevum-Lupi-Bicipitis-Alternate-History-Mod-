@@ -282,29 +282,7 @@ VR02 = {
 				"
 				first_effect = "
 					custom_tooltip = vr0_every_vrankish_province_gets_random_dev_tt
-					hidden_effect = {
-						every_owned_province = {
-							limit = {
-								culture = vrankish
-							}
-							add_random_development = 1
-						}
-						capital_scope = {
-							add_province_triggered_modifier = vrankia_embassy
-						}
-						random_ally = {
-							limit = {
-								OR = {
-									primary_culture = franken
-									primary_culture = ellan
-									primary_culture = gurippen
-								}
-							}
-							capital_scope = {
-								add_province_triggered_modifier = vrankia_embassy
-							}
-						}
-					}
+					set_country_flag = vrancia_completed_by_diplo_flag
 					custom_tooltip = vr0_embassy_tt
 				"
 				second_limit = "
@@ -318,6 +296,35 @@ VR02 = {
 						add_permanent_claim = ROOT
 					}
 				"
+			}
+			if = {
+				limit = {
+					has_country_flag = vrancia_completed_by_diplo_flag
+				}
+				hidden_effect = {
+					every_owned_province = {
+						limit = {
+							culture = vrankish
+						}
+						add_random_development = 1
+					}
+					capital_scope = {
+						add_province_triggered_modifier = vrankia_embassy
+					}
+					random_ally = {
+						limit = {
+							OR = {
+								primary_culture = franken
+								primary_culture = ellan
+								primary_culture = gurippen
+							}
+						}
+						capital_scope = {
+							add_province_triggered_modifier = vrankia_embassy
+						}
+					}
+				}
+				clr_country_flag = vrancia_completed_by_diplo_flag
 			}
 		} 
 	}

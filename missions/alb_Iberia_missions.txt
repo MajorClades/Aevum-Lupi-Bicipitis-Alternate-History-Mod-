@@ -510,6 +510,7 @@ Iberia_4_slot = {
 			add_casus_belli = {
 				type = cb_hie_soxony_war
 				target = emperor
+				duration = 10950
 			}
 			custom_tooltip = empty_line_tt
 			italy_region = {
@@ -765,44 +766,28 @@ Iberia_5_slot = {
 				"
 				third_effect = "
 					custom_tooltip = alb_ib0_convert_5_provinces_in_gallia_tt
-					hidden_effect = {
-						random_owned_province = {
-							limit = {
-								region = france_region
-							}
-							change_religion = ROOT
-							set_province_flag = alb_converted_away_from_impotian_flag
-						}
-						random_owned_province = {
-							limit = {
-								region = france_region
-							}
-							change_religion = ROOT
-							set_province_flag = alb_converted_away_from_impotian_flag
-						}
-						random_owned_province = {
-							limit = {
-								region = france_region
-							}
-							change_religion = ROOT
-							set_province_flag = alb_converted_away_from_impotian_flag
-						}
-						random_owned_province = {
-							limit = {
-								region = france_region
-							}
-							change_religion = ROOT
-							set_province_flag = alb_converted_away_from_impotian_flag
-						}
-						random_owned_province = {
-							limit = {
-								region = france_region
-							}
-							change_religion = ROOT
-							set_province_flag = alb_converted_away_from_impotian_flag
-						}
-					}
+					set_country_flag = iberia_not_arian_or_impotian_flag
 				"
+			}
+			if ={
+				limit = {
+					has_country_flag = iberia_not_arian_or_impotian_flag
+				}
+				hidden_effect = {
+					for = {
+						amount = 5
+						effect = "
+							random_owned_province = {
+								limit = {
+									region = france_region
+								}
+								change_religion = ROOT
+								set_province_flag = alb_converted_away_from_impotian_flag
+							}
+						"
+					}
+					clr_country_flag = iberia_not_arian_or_impotian_flag
+				}
 			}
 		} 
 	}
