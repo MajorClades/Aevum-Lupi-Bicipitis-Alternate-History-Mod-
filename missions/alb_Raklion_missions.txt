@@ -36,6 +36,18 @@ raklion_1_slot = {
 
 		effect = {  } 
 	}
+
+	rk0_med_hegemon = {
+		icon = mission_consulate_of_the_sea
+		position = 5
+		provinces_to_highlight = {  
+
+		} 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
 }
 raklion_2_slot = {
 	slot = 2
@@ -94,6 +106,9 @@ raklion_3_slot = {
 		effect = {
 			bettia_area = { add_permanent_claim = ROOT } 
 			upper_andalucia_area = { add_permanent_claim = ROOT } 
+			northern_morocco_area = {
+				add_permanent_claim = ROOT
+			}
 		}
 	}
 
@@ -101,33 +116,133 @@ raklion_3_slot = {
 		icon = mission_rb_take_gibraltar
 		position = 3
 		required_missions = { rk0_raklion_finest } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			area = northern_morocco_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			northern_morocco_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			country_event = {
+				id = rakl.1
+			}
+			custom_tooltip = empty_line_tt
+			western_morocco_area = {
+				add_permanent_claim = ROOT
+			}
+			marrekesh_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	rk0_kill_mauria = {
 		icon = mission_conquer_malwa_bah
 		position = 4
 		required_missions = { rk0_cross_straits } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = western_morocco_area
+				area = marrekesh_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			western_morocco_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			marrekesh_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			if = {
+				limit = {
+					AF1 = {
+						exists = no
+					}
+				}
+				custom_tooltip = rk0_mauria_no_exists_yes_tt
+				add_power_projection = {
+					type = mission_rewards_power_projection
+					amount = 25
+				}
+			}
+			else = {
+				custom_tooltip = rk0_mauria_no_exists_no_tt
+				tooltip = {
+					add_power_projection = {
+						type = mission_rewards_power_projection
+						amount = 25
+					}
+				}
+			}
+			custom_tooltip = empty_line_tt
+			sus_area = {
+				add_permanent_claim = ROOT
+			}
+			tafilalt_area = {
+				add_permanent_claim = ROOT
+			}
+			southern_morocco_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	rk0_cross_atlas = {
 		icon = mission_moroccan_ports
 		position = 5
 		required_missions = { rk0_kill_mauria } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = sus_area
+				area = tafilalt_area
+				area = southern_morocco_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 8
+				OR = {
+					area = sus_area
+					area = tafilalt_area
+					area = southern_morocco_area
+				}
+			}
+			owns = 1110
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_country_modifier = {
+				name = rk0_control_saharan_trade
+				duration = 9125
+			}
+			1110 = {
+				add_center_of_trade_level = 1
+			}
+			1127 = {
+				create_colony_mission_reward_province = yes
+			}
+		} 
 	}
 }
 raklion_4_slot = {
@@ -141,22 +256,71 @@ raklion_4_slot = {
 		icon = mission_intervene_in_castile
 		position = 2
 		required_missions = { rk0_raklion_finest } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			area = bettia_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			bettia_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_country_modifier = {
+				name = rk0_ended_colonial_competition
+				duration = 3650
+			}
+			extremadura_area = {
+				add_permanent_claim = ROOT
+			}
+			alentejo_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	rk0_burgundia = {
 		icon = mission_establish_jesuit_missions
 		position = 4
 		required_missions = { rk0_kill_bettia } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = extremadura_area
+				area = alentejo_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			extremadura_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			alentejo_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {
+			add_years_of_owned_provinces_production_income = {
+				years = 15
+				trigger = {
+					trade_goods = wine
+				}
+				custom_tooltip = MONOPOLY_INCOME_WINE_DESC
+			}
+			iberia_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 }
 raklion_5_slot = {
@@ -170,22 +334,82 @@ raklion_5_slot = {
 		icon = ven_army_republic
 		position = 2
 		required_missions = { rk0_raklion_finest } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			area = upper_andalucia_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			upper_andalucia_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			valencia_area = {
+				add_permanent_claim = ROOT
+			}
+			toledo_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	rk0_kill_spania = {
 		icon = spa_infantes_aragon
 		position = 3
 		required_missions = { rk0_break_out } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = valencia_area
+				area = toledo_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			valencia_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			toledo_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			if = {
+				limit = {
+					SP0 = {
+						exists = no
+					}
+				}
+				custom_tooltip = rk0_spania_no_exists_yes_tt
+				add_power_projection = {
+					type = mission_rewards_power_projection
+					amount = 25
+				}
+			}
+			else = {
+				custom_tooltip = rk0_spania_no_exists_no_tt
+				tooltip = {
+					add_power_projection = {
+						type = mission_rewards_power_projection
+						amount = 25
+					}
+				}
+			}
+			custom_tooltip = empty_line_tt
+			iberia_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	rk0_iberia = {
@@ -195,10 +419,23 @@ raklion_5_slot = {
 			rk0_kill_spania
 			rk0_burgundia
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			region = iberia_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 40
+				region = iberia_region
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			custom_tooltip = alb_reduce_herkulia_form_tech_req_tt
+			set_country_flag = form_herkulia_early_flag
+		} 
 	}
 }
