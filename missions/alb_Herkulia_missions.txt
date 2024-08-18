@@ -111,6 +111,59 @@ HR0_1_slot = {
 			}
 		} 
 	}
+
+	herk_trade_god = {
+		icon = mission_landsknecht_soldier
+		position = 3
+		required_missions = {herk_trade_powers}
+		provinces_to_highlight = { 
+			OR = {
+				continent = asia
+				continent = oceania
+			}
+			has_port = yes
+			province_has_center_of_trade_of_level = 1
+		} 
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 10
+				OR = {
+					continent = asia
+					continent = oceania
+				}
+				has_port = yes
+				province_has_center_of_trade_of_level = 1
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = herk_free_trade_ships
+				duration = -1
+			}
+		} 
+	}
+
+	herk_trade_hegemony = {
+		icon = mission_landsknecht_soldier
+		position = 5
+		required_missions = {herk_trade_god}
+		trigger = {
+			is_great_power = yes
+			OR = {
+				monthly_trade_income = 500
+				monthly_income = 500
+			}
+		}
+
+		effect = {
+			country_event_with_insight = {
+				id = herk.3
+				insight_tooltip = HERK_TT_8a
+			}
+		} 
+	}
 }
 HR0_2_slot = {
 	slot = 2
@@ -142,6 +195,29 @@ HR0_2_slot = {
 				add_province_triggered_modifier = herkulan_naval_defenses
 			}
 		}
+	}
+	herk_companies = {
+		icon = mission_landsknecht_soldier
+		position = 4
+		required_missions = {herk_trade_god}
+		provinces_to_highlight = { 
+			country_or_non_sovereign_subject_holds = ROOT
+			has_port = yes
+			province_has_center_of_trade_of_level = 2
+		} 
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 10
+				has_port = yes
+				province_has_center_of_trade_of_level = 3
+			}
+		}
+
+		effect = {
+			custom_tooltip = HERK_TT_6
+			set_country_flag = gambling_herkulia_flag
+		} 
 	}
 }
 HR0_3_slot = {
@@ -192,6 +268,43 @@ HR0_3_slot = {
 			country_event_with_insight = {
 				id = herk.1
 				insight_tooltip = HERK_TT_2
+			}
+		}
+	}
+	herk_more_ports = {
+		icon = establish_the_musketeers
+		position = 4
+		required_missions = {herk_ships_for_ships }
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 10
+				has_dock_building_trigger = yes
+				has_shipyard_building_trigger = yes
+				base_production = 8
+			}
+			OR = {
+				num_of_caravel = 10
+				num_of_galleon = 5
+			}
+		}
+
+		effect = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = HERK_TT_5
+				first_limit = "has_country_modifier = herk_caravel"
+				first_effect = "
+					add_country_modifier = {
+						name = herk_caravel_powerup
+						duration = -1
+					}
+				"
+				second_limit = "has_country_modifier = herk_galleon"
+				second_effect = "
+					add_country_modifier = {
+						name = herk_galleon_powerup
+						duration = -1
+					} 
+				"
 			}
 		}
 	}
@@ -309,7 +422,47 @@ HR0_5_slot = {
 			unlock_government_reform = { government_reform = herkulian_colonial_trade_reform } 
 			custom_tooltip = unlock_government_reform_tooltip
 			tooltip = { add_government_reform = herkulian_colonial_trade_reform } 
-			
+		} 
+	}
+	herk_even_more_colonies = {
+		icon = mission_landsknecht_soldier
+		position = 6
+		required_missions = {herk_defend_the_colonies  }
+
+		trigger = {
+			calc_true_if = {
+				amount = 8
+				all_subject_country = {
+					is_colonial_nation_of = ROOT
+					NOT = {
+						liberty_desire = 40
+					}
+				}
+			}
+		}
+
+		effect = {
+			tooltip = {
+				custom_tooltip = HERK_TT_7
+				add_country_modifier = {
+					name = herk_integral_part
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				every_subject_country = {
+					limit = {
+						is_colonial_nation_of = ROOT
+						NOT = {
+							liberty_desire = 40
+						}
+					}
+					add_country_modifier = {
+						name = herk_integral_part
+						duration = -1
+					}
+				}
+			}
 		} 
 	}
 }
