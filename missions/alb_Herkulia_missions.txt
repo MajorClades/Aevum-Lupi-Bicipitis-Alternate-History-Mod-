@@ -57,9 +57,6 @@ HR0_1_slot = {
 				continent = africa
 			}
 			NOT = {
-				region = mashriq_region
-			}
-			NOT = {
 				region = maghreb_region
 			}
 			NOT = {
@@ -76,9 +73,6 @@ HR0_1_slot = {
 					continent = south_america
 					continent = north_america
 					continent = africa
-				}
-				NOT = {
-					region = mashriq_region
 				}
 				NOT = {
 					region = maghreb_region
@@ -104,6 +98,9 @@ HR0_1_slot = {
 						OR = {
 							continent = asia
 							continent = oceania
+						}
+						NOT = {
+							region = mashriq_region
 						}
 					}
 					add_permanent_claim = ROOT
@@ -132,6 +129,9 @@ HR0_1_slot = {
 					continent = asia
 					continent = oceania
 				}
+				NOT = {
+					region = mashriq_region
+				}
 				has_port = yes
 				province_has_center_of_trade_of_level = 1
 			}
@@ -151,10 +151,7 @@ HR0_1_slot = {
 		required_missions = {herk_trade_god}
 		trigger = {
 			is_great_power = yes
-			OR = {
-				monthly_trade_income = 500
-				monthly_income = 500
-			}
+			num_of_strong_trade_companies = 7
 		}
 
 		effect = {
@@ -308,6 +305,38 @@ HR0_3_slot = {
 			}
 		}
 	}
+	herk_banks_and_shares_companies = {
+		icon = mission_landsknecht_soldier
+		position = 5
+		required_missions = {herk_companies herk_more_ports}
+		provinces_to_highlight = { 
+			owned_by = ROOT
+			is_owned_by_trade_company = yes
+			NOT = {
+				has_trade_company_investment_in_area = {
+					investment = military_administration
+					investor = ROOT
+				}
+			}
+		} 
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 30
+				has_trade_company_investment_in_area = {
+					investment = military_administration
+					investor = ROOT
+				}
+			}
+		}
+
+		effect = {
+			country_event_with_insight = {
+				id = herk.4
+				insight_tooltip = HERK_TT_9
+			}
+		} 
+	}
 }
 HR0_4_slot = {
 	slot = 4
@@ -426,7 +455,7 @@ HR0_5_slot = {
 	}
 	herk_even_more_colonies = {
 		icon = mission_landsknecht_soldier
-		position = 6
+		position = 5
 		required_missions = {herk_defend_the_colonies  }
 
 		trigger = {
