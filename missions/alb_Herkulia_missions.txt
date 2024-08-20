@@ -118,6 +118,9 @@ HR0_1_slot = {
 				continent = asia
 				continent = oceania
 			}
+			NOT = {
+				region = mashriq_region
+			}
 			has_port = yes
 			province_has_center_of_trade_of_level = 1
 		} 
@@ -216,6 +219,74 @@ HR0_2_slot = {
 			set_country_flag = gambling_herkulia_flag
 		} 
 	}
+	herk_banks_and_shares_companies = {
+		icon = establish_the_musketeers
+		position = 6
+		required_missions = {herk_trade_hegemony herk_secure_manpower}
+		provinces_to_highlight = { 
+			owned_by = ROOT
+			is_territorial_core = ROOT
+			is_owned_by_trade_company = no
+		} 
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 100
+				is_owned_by_trade_company = yes
+			}
+		}
+
+		effect = {
+			custom_tooltip = HERK_TT_13
+			tooltip = {
+				random_owned_province = {
+					random_list = {
+						10 = {
+							change_religion = ROOT
+						}
+						10 = {
+							change_religion = ROOT
+							add_unrest = 5
+						}
+						40 = {
+							add_unrest = 1
+						}
+						40 = {
+							add_province_modifier = {
+								name = herk_colonialization
+								duration = 10950
+							}
+						}
+					}
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						is_owned_by_trade_company = yes
+					}
+					random_list = {
+						10 = {
+							change_religion = ROOT
+						}
+						10 = {
+							change_religion = ROOT
+							add_unrest = 5
+						}
+						40 = {
+							add_unrest = 1
+						}
+						40 = {
+							add_province_modifier = {
+								name = herk_colonialization
+								duration = 10950
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }
 HR0_3_slot = {
 	slot = 3
@@ -305,7 +376,7 @@ HR0_3_slot = {
 			}
 		}
 	}
-	herk_banks_and_shares_companies = {
+	herk_secure_manpower = {
 		icon = mission_landsknecht_soldier
 		position = 5
 		required_missions = {herk_companies herk_more_ports}
@@ -337,6 +408,41 @@ HR0_3_slot = {
 			}
 		} 
 	}
+	herk_company_dept = {
+		icon = establish_the_musketeers
+		position = 7
+		required_missions = {herk_love_and_spices }
+		provinces_to_highlight = { 
+			owned_by = ROOT
+			is_owned_by_trade_company = yes
+			NOT = {
+				has_trade_company_investment_in_area = {
+					investment = company_depot
+					investor = ROOT
+				}
+			}
+		} 
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 20
+				has_trade_company_investment_in_area = {
+					investment = company_depot
+					investor = ROOT
+				}
+			}
+		}
+
+		effect = {
+			add_years_of_owned_provinces_production_income = {
+				years = 1
+				trigger = {
+					is_owned_by_trade_company = yes
+				}
+				custom_tooltip = HERK_TT_11
+			}
+		}
+	}
 }
 HR0_4_slot = {
 	slot = 4
@@ -363,6 +469,35 @@ HR0_4_slot = {
 				id = herk.2
 				insight_tooltip = HERK_TT_3
 			}
+		}
+	}
+	herk_love_and_spices = {
+		icon = establish_the_musketeers
+		position = 6
+		provinces_to_highlight = { 
+			owned_by = ROOT
+			is_owned_by_trade_company = yes
+			NOT = {
+				has_trade_company_investment_in_area = {
+					investment = brokers_exchange
+					investor = ROOT
+				}
+			}
+		} 
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 10
+				has_trade_company_investment_in_area = {
+					investment = brokers_exchange
+					investor = ROOT
+				}
+			}
+		}
+
+		effect = {
+			set_country_flag = herk_monopo_lies_flag
+			custom_tooltip = HERK_TT_10a
 		}
 	}
 }
@@ -493,5 +628,47 @@ HR0_5_slot = {
 				}
 			}
 		} 
+	}
+	herk_company_district = {
+		icon = establish_the_musketeers
+		position = 7
+		required_missions = {herk_love_and_spices }
+		provinces_to_highlight = { 
+			owned_by = ROOT
+			is_owned_by_trade_company = yes
+			NOT = {
+				has_trade_company_investment_in_area = {
+					investment = district
+					investor = ROOT
+				}
+			}
+		} 
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 20
+				has_trade_company_investment_in_area = {
+					investment = district
+					investor = ROOT
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = HERK_TT_12
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						has_trade_company_investment_in_area = {
+							investment = district
+							investor = ROOT
+						}
+					}
+					every_neighbor_province = {
+						add_permanent_claim = ROOT
+					}
+				}
+			}
+		}
 	}
 }
