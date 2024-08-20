@@ -6,9 +6,12 @@ HR0_1_slot = {
 	potential = { tag = HR0 } 
 
 	herk_cultural_evolution = {
-		icon = mission_landsknecht_soldier
+		icon = mission_colonial
 		position = 1
-		provinces_to_highlight = { province_group = herkulia_region NOT = {owned_by = ROOT}} 
+		provinces_to_highlight = {
+			province_group = herkulia_region
+			NOT = { owned_by = ROOT } 
+		}
 
 		trigger = {
 			herkulia_region = {
@@ -30,41 +33,31 @@ HR0_1_slot = {
 							continent = north_america
 							continent = africa
 						}
-						NOT = {
-							region = mashriq_region
-						}
-						NOT = {
-							region = maghreb_region
-						}
-						NOT = {
-							region = egypt_region
-						}
+						NOT = { region = mashriq_region } 
+						NOT = { region = maghreb_region } 
+						NOT = { region = egypt_region } 
 					}
 					add_permanent_claim = ROOT
 				}
 			}
-		} 
+		}
 	}
 
 	herk_trade_powers = {
-		icon = mission_landsknecht_soldier
+		icon = settle_north_america
 		position = 2
-		required_missions = {herk_cultural_evolution}
-		provinces_to_highlight = { 
+		required_missions = { herk_cultural_evolution } 
+		provinces_to_highlight = {
 			OR = {
 				continent = south_america
 				continent = north_america
 				continent = africa
 			}
-			NOT = {
-				region = maghreb_region
-			}
-			NOT = {
-				region = egypt_region
-			}
+			NOT = { region = maghreb_region } 
+			NOT = { region = egypt_region } 
 			has_port = yes
 			province_has_center_of_trade_of_level = 1
-		} 
+		}
 
 		trigger = {
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
@@ -74,21 +67,15 @@ HR0_1_slot = {
 					continent = north_america
 					continent = africa
 				}
-				NOT = {
-					region = maghreb_region
-				}
-				NOT = {
-					region = egypt_region
-				}
+				NOT = { region = maghreb_region } 
+				NOT = { region = egypt_region } 
 				has_port = yes
 				province_has_center_of_trade_of_level = 1
 			}
 		}
 
 		effect = {
-			1293 = {
-				add_trade_node_income = 5
-			}
+			1293 = { add_trade_node_income = 5 } 
 			custom_tooltip = HERK_TT_1b
 			hidden_effect = {
 				every_province = {
@@ -99,31 +86,27 @@ HR0_1_slot = {
 							continent = asia
 							continent = oceania
 						}
-						NOT = {
-							region = mashriq_region
-						}
+						NOT = { region = mashriq_region } 
 					}
 					add_permanent_claim = ROOT
 				}
 			}
-		} 
+		}
 	}
 
 	herk_trade_god = {
-		icon = mission_landsknecht_soldier
+		icon = mission_indian_trade_company
 		position = 3
-		required_missions = {herk_trade_powers}
-		provinces_to_highlight = { 
+		required_missions = { herk_trade_powers } 
+		provinces_to_highlight = {
 			OR = {
 				continent = asia
 				continent = oceania
 			}
-			NOT = {
-				region = mashriq_region
-			}
+			NOT = { region = mashriq_region } 
 			has_port = yes
 			province_has_center_of_trade_of_level = 1
-		} 
+		}
 
 		trigger = {
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
@@ -132,9 +115,7 @@ HR0_1_slot = {
 					continent = asia
 					continent = oceania
 				}
-				NOT = {
-					region = mashriq_region
-				}
+				NOT = { region = mashriq_region } 
 				has_port = yes
 				province_has_center_of_trade_of_level = 1
 			}
@@ -142,16 +123,18 @@ HR0_1_slot = {
 
 		effect = {
 			add_country_modifier = {
-				name = herk_free_trade_ships
+				name = "herk_free_trade_ships"
 				duration = -1
 			}
-		} 
+		}
 	}
 
 	herk_trade_hegemony = {
-		icon = mission_landsknecht_soldier
+		icon = mission_the_triangle_trade
 		position = 5
-		required_missions = {herk_trade_god}
+		required_missions = { herk_trade_god } 
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			is_great_power = yes
 			num_of_strong_trade_companies = 7
@@ -162,7 +145,7 @@ HR0_1_slot = {
 				id = herk.3
 				insight_tooltip = HERK_TT_8a
 			}
-		} 
+		}
 	}
 }
 HR0_2_slot = {
@@ -173,9 +156,14 @@ HR0_2_slot = {
 	potential = { tag = HR0 } 
 
 	herk_one_to_hero = {
-		icon = establish_the_musketeers
+		icon = mission_plus_ultra
 		position = 2
-		required_missions = {herk_improve_marines herk_cultural_evolution}
+		required_missions = {
+			herk_improve_marines
+			herk_cultural_evolution
+		}
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			OR = {
 				full_idea_group = maritime_ideas
@@ -188,23 +176,20 @@ HR0_2_slot = {
 		}
 
 		effect = {
-			226 = {
-				add_province_triggered_modifier = herkulan_naval_defenses
-			}
-			1751 = {
-				add_province_triggered_modifier = herkulan_naval_defenses
-			}
+			226 = { add_province_triggered_modifier = herkulan_naval_defenses } 
+			1751 = { add_province_triggered_modifier = herkulan_naval_defenses } 
 		}
 	}
+
 	herk_companies = {
-		icon = mission_landsknecht_soldier
+		icon = the_emden_company
 		position = 4
-		required_missions = {herk_trade_god}
-		provinces_to_highlight = { 
+		required_missions = { herk_trade_god } 
+		provinces_to_highlight = {
 			country_or_non_sovereign_subject_holds = ROOT
 			has_port = yes
 			province_has_center_of_trade_of_level = 2
-		} 
+		}
 
 		trigger = {
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
@@ -217,17 +202,21 @@ HR0_2_slot = {
 		effect = {
 			custom_tooltip = HERK_TT_6
 			set_country_flag = gambling_herkulia_flag
-		} 
+		}
 	}
+
 	herk_banks_and_shares_companies = {
-		icon = establish_the_musketeers
+		icon = mission_horde_trade
 		position = 6
-		required_missions = {herk_trade_hegemony herk_secure_manpower}
-		provinces_to_highlight = { 
+		required_missions = {
+			herk_trade_hegemony
+			herk_secure_manpower
+		}
+		provinces_to_highlight = {
 			owned_by = ROOT
 			is_territorial_core = ROOT
 			is_owned_by_trade_company = no
-		} 
+		}
 
 		trigger = {
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
@@ -241,19 +230,15 @@ HR0_2_slot = {
 			tooltip = {
 				random_owned_province = {
 					random_list = {
-						10 = {
-							change_religion = ROOT
-						}
+						10 = { change_religion = ROOT } 
 						10 = {
 							change_religion = ROOT
 							add_unrest = 5
 						}
-						40 = {
-							add_unrest = 1
-						}
+						40 = { add_unrest = 1 } 
 						40 = {
 							add_province_modifier = {
-								name = herk_colonialization
+								name = "herk_colonialization"
 								duration = 10950
 							}
 						}
@@ -262,23 +247,17 @@ HR0_2_slot = {
 			}
 			hidden_effect = {
 				every_owned_province = {
-					limit = {
-						is_owned_by_trade_company = yes
-					}
+					limit = { is_owned_by_trade_company = yes } 
 					random_list = {
-						10 = {
-							change_religion = ROOT
-						}
+						10 = { change_religion = ROOT } 
 						10 = {
 							change_religion = ROOT
 							add_unrest = 5
 						}
-						40 = {
-							add_unrest = 1
-						}
+						40 = { add_unrest = 1 } 
 						40 = {
 							add_province_modifier = {
-								name = herk_colonialization
+								name = "herk_colonialization"
 								duration = 10950
 							}
 						}
@@ -298,32 +277,40 @@ HR0_3_slot = {
 	herk_improve_marines = {
 		icon = mission_landsknecht_soldier
 		position = 1
-		provinces_to_highlight = { owned_by = ROOT has_port = yes has_manpower_building_trigger = no has_dock_building_trigger = no } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_port = yes
+			has_manpower_building_trigger = no
+			has_dock_building_trigger = no
+		}
 
 		trigger = {
 			num_of_owned_provinces_with = {
 				value = 15
-				has_port = yes 
-				has_manpower_building_trigger = yes 
+				has_port = yes
+				has_manpower_building_trigger = yes
 				has_dock_building_trigger = yes
 			}
 		}
 
 		effect = {
 			add_country_modifier = {
-				name = herk_navy_seal
+				name = "herk_navy_seal"
 				duration = -1
 			}
 			add_country_modifier = {
-				name = herk_navy_sealed
+				name = "herk_navy_sealed"
 				duration = 10950
 			}
-		} 
+		}
 	}
+
 	herk_zero_to_hero = {
 		icon = establish_the_musketeers
 		position = 2
-		required_missions = {herk_improve_marines}
+		required_missions = { herk_improve_marines } 
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			OR = {
 				num_of_marines = 20
@@ -339,10 +326,13 @@ HR0_3_slot = {
 			}
 		}
 	}
+
 	herk_more_ports = {
-		icon = establish_the_musketeers
+		icon = mission_danish_navy
 		position = 4
-		required_missions = {herk_ships_for_ships }
+		required_missions = { herk_ships_for_ships } 
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
 				value = 10
@@ -376,11 +366,15 @@ HR0_3_slot = {
 			}
 		}
 	}
+
 	herk_secure_manpower = {
-		icon = mission_landsknecht_soldier
+		icon = mission_assemble_an_army
 		position = 5
-		required_missions = {herk_companies herk_more_ports}
-		provinces_to_highlight = { 
+		required_missions = {
+			herk_companies
+			herk_more_ports
+		}
+		provinces_to_highlight = {
 			owned_by = ROOT
 			is_owned_by_trade_company = yes
 			NOT = {
@@ -389,7 +383,7 @@ HR0_3_slot = {
 					investor = ROOT
 				}
 			}
-		} 
+		}
 
 		trigger = {
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
@@ -406,13 +400,14 @@ HR0_3_slot = {
 				id = herk.4
 				insight_tooltip = HERK_TT_9
 			}
-		} 
+		}
 	}
+
 	herk_company_dept = {
-		icon = establish_the_musketeers
+		icon = mission_high_income
 		position = 7
-		required_missions = {herk_love_and_spices }
-		provinces_to_highlight = { 
+		required_missions = { herk_love_and_spices } 
+		provinces_to_highlight = {
 			owned_by = ROOT
 			is_owned_by_trade_company = yes
 			NOT = {
@@ -421,7 +416,7 @@ HR0_3_slot = {
 					investor = ROOT
 				}
 			}
-		} 
+		}
 
 		trigger = {
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
@@ -436,9 +431,7 @@ HR0_3_slot = {
 		effect = {
 			add_years_of_owned_provinces_production_income = {
 				years = 1
-				trigger = {
-					is_owned_by_trade_company = yes
-				}
+				trigger = { is_owned_by_trade_company = yes } 
 				custom_tooltip = HERK_TT_11
 			}
 		}
@@ -452,9 +445,11 @@ HR0_4_slot = {
 	potential = { tag = HR0 } 
 
 	herk_ships_for_ships = {
-		icon = establish_the_musketeers
+		icon = mission_galleass
 		position = 3
-		required_missions = {herk_zero_to_hero }
+		required_missions = { herk_zero_to_hero } 
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
 				value = 10
@@ -471,10 +466,11 @@ HR0_4_slot = {
 			}
 		}
 	}
+
 	herk_love_and_spices = {
-		icon = establish_the_musketeers
+		icon = mission_trade_company_region_abroad
 		position = 6
-		provinces_to_highlight = { 
+		provinces_to_highlight = {
 			owned_by = ROOT
 			is_owned_by_trade_company = yes
 			NOT = {
@@ -483,7 +479,7 @@ HR0_4_slot = {
 					investor = ROOT
 				}
 			}
-		} 
+		}
 
 		trigger = {
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
@@ -509,9 +505,12 @@ HR0_5_slot = {
 	potential = { tag = HR0 } 
 
 	herk_colonial_evolution = {
-		icon = mission_landsknecht_soldier
+		icon = mission_colonize_the_caribbean
 		position = 1
-		provinces_to_highlight = { colonial_region = colonial_the_carribean NOT = {owned_by = ROOT}} 
+		provinces_to_highlight = {
+			colonial_region = colonial_the_carribean
+			NOT = { owned_by = ROOT } 
+		}
 
 		trigger = {
 			colonial_the_carribean = {
@@ -522,56 +521,54 @@ HR0_5_slot = {
 
 		effect = {
 			add_country_modifier = {
-				name = herk_colonial_success
+				name = "herk_colonial_success"
 				duration = 10950
 			}
 			random_subject_country = {
-				limit = {
-					capital_scope = {
-						colonial_region = colonial_the_carribean 
-					}
-				}
+				limit = { capital_scope = { colonial_region = colonial_the_carribean }  } 
 				capital_scope = {
 					add_base_tax = 1
 					add_base_production = 2
 					add_base_manpower = 3
 				}
 			}
-		} 
+		}
 	}
 
 	herk_colonial_purpose = {
-		icon = mission_landsknecht_soldier
+		icon = mission_west_african_ports
 		position = 2
-		required_missions = {herk_colonial_evolution }
+		required_missions = { herk_colonial_evolution } 
+		provinces_to_highlight = {  } 
 
 		trigger = {
 			calc_true_if = {
 				amount = 3
-				all_subject_country = {
-					is_colonial_nation_of = ROOT
-				}
+				all_subject_country = { is_colonial_nation_of = ROOT } 
 			}
 		}
 
 		effect = {
 			add_country_modifier = {
-				name = herk_colonial_push
+				name = "herk_colonial_push"
 				duration = 10950
 			}
-		} 
+		}
 	}
+
 	herk_defend_the_colonies = {
-		icon = mission_landsknecht_soldier
+		icon = deal_with_the_illuminati
 		position = 4
-		required_missions = {herk_ships_for_ships herk_colonial_purpose }
+		required_missions = {
+			herk_ships_for_ships
+			herk_colonial_purpose
+		}
+		provinces_to_highlight = {  } 
 
 		trigger = {
 			calc_true_if = {
 				amount = 5
-				all_subject_country = {
-					is_colonial_nation_of = ROOT
-				}
+				all_subject_country = { is_colonial_nation_of = ROOT } 
 			}
 			num_of_light_ship = 40
 			num_of_heavy_ship = 20
@@ -586,21 +583,21 @@ HR0_5_slot = {
 			unlock_government_reform = { government_reform = herkulian_colonial_trade_reform } 
 			custom_tooltip = unlock_government_reform_tooltip
 			tooltip = { add_government_reform = herkulian_colonial_trade_reform } 
-		} 
+		}
 	}
+
 	herk_even_more_colonies = {
-		icon = mission_landsknecht_soldier
+		icon = mission_unite_home_region
 		position = 5
-		required_missions = {herk_defend_the_colonies  }
+		required_missions = { herk_defend_the_colonies } 
+		provinces_to_highlight = {  } 
 
 		trigger = {
 			calc_true_if = {
 				amount = 8
 				all_subject_country = {
 					is_colonial_nation_of = ROOT
-					NOT = {
-						liberty_desire = 40
-					}
+					NOT = { liberty_desire = 40 } 
 				}
 			}
 		}
@@ -609,7 +606,7 @@ HR0_5_slot = {
 			tooltip = {
 				custom_tooltip = HERK_TT_7
 				add_country_modifier = {
-					name = herk_integral_part
+					name = "herk_integral_part"
 					duration = -1
 				}
 			}
@@ -617,23 +614,22 @@ HR0_5_slot = {
 				every_subject_country = {
 					limit = {
 						is_colonial_nation_of = ROOT
-						NOT = {
-							liberty_desire = 40
-						}
+						NOT = { liberty_desire = 40 } 
 					}
 					add_country_modifier = {
-						name = herk_integral_part
+						name = "herk_integral_part"
 						duration = -1
 					}
 				}
 			}
-		} 
+		}
 	}
+
 	herk_company_district = {
-		icon = establish_the_musketeers
+		icon = mission_chinese_general_riding
 		position = 7
-		required_missions = {herk_love_and_spices }
-		provinces_to_highlight = { 
+		required_missions = { herk_love_and_spices } 
+		provinces_to_highlight = {
 			owned_by = ROOT
 			is_owned_by_trade_company = yes
 			NOT = {
@@ -642,7 +638,7 @@ HR0_5_slot = {
 					investor = ROOT
 				}
 			}
-		} 
+		}
 
 		trigger = {
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
@@ -664,9 +660,7 @@ HR0_5_slot = {
 							investor = ROOT
 						}
 					}
-					every_neighbor_province = {
-						add_permanent_claim = ROOT
-					}
+					every_neighbor_province = { add_permanent_claim = ROOT } 
 				}
 			}
 		}
