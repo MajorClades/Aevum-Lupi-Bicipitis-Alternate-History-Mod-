@@ -143,7 +143,7 @@ Vinland_1_slot = {
 				}
 			}
 			1034 = {
-				colonize_or_core_fj0 = yes
+				colonize_or_core_fj9 = yes
 			}			
 		}
 	}
@@ -252,7 +252,7 @@ Frja_3_slot = {
 
 		trigger = {
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-				value = 100
+				value = 70
 				OR = {region = canada_region region = hudson_bay_region region = northeast_america_region}
 				culture_group = bionan
 			}
@@ -262,6 +262,34 @@ Frja_3_slot = {
 			set_government_rank = 3
 			add_ruler_modifier = {
 				name = vin_first_empire
+			}
+		}
+	}
+	vin_baldrlaw = {
+		icon = mission_rb_trinity_college_dublin
+		position = 4
+		required_missions = {vin_vinlander_empire }
+		provinces_to_highlight = { owned_by = ROOT has_courthouse_building_trigger = no	has_seat_in_parliament = no} 
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = VINLAND_EMPIRE_flag_tt
+				has_country_flag = VINLAND_EMPIRE 
+			}
+			993 = {
+				owned_by = ROOT
+				has_courthouse_building_trigger = yes
+				has_seat_in_parliament = yes
+			}
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 10
+				has_courthouse_building_trigger = yes
+				has_seat_in_parliament = yes
+			}
+		}
+
+		effect = {
+			993 = {
+				add_building = university
 			}
 		}
 	}
@@ -327,6 +355,69 @@ Frja_5_slot = {
 			country_event_with_insight = {
 				id =  fjal.10
 				insight_tooltip = VINLAND_TT_2
+			}
+		}
+	}
+	vin_rausundian_coast = {
+		icon = mission_rb_trinity_college_dublin
+		position = 3
+		required_missions = {vin_going_south}
+		provinces_to_highlight = { region = northeast_america_region } 
+
+		trigger = {
+			OR = {
+				has_institution = global_trade
+				trader = 5
+			}
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 12
+				has_port = yes
+				region = northeast_america_region
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = vin_coastal_defenders
+				duration = 10950
+			}
+			set_country_flag = vinland_trade_goods_flag
+			custom_tooltip = VINLAND_TT_4
+		}
+	}
+	vin_rausundian_trade = {
+		icon = mission_rb_trinity_college_dublin
+		position = 4
+		required_missions = {vin_rausundian_coast}
+		provinces_to_highlight = { region = northeast_america_region } 
+
+		trigger = {
+			northeast_america_region = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					owner = {
+						alliance_with = ROOT
+					}
+				}
+			}
+		}
+
+		effect = {
+			northeast_america_region = {
+				limit = {
+					has_port = yes
+					OR = {
+						owned_by = ROOT
+						owner = {
+							alliance_with = ROOT
+						}
+					}
+				}
+				add_permanent_province_modifier = {
+					name = vin_ocean_man
+					duration = -1
+				}
 			}
 		}
 	}
