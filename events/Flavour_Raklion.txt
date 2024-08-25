@@ -50,3 +50,49 @@ country_event = {
 		}
 	}
 }
+
+country_event = {
+	id = rakl.3
+	title = rakl.3.test
+	desc = rakl.3.desc
+	picture = COLONIZATION_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = rakl.3a
+		custom_tooltip = rk0_create_sardinian_company_tt
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						area = sardinia_area
+						area = corsica_sardinia_area
+					}
+				}
+				add_core = MO2
+			}
+			release = MO2
+			create_subject = {
+				subject_type = private_enterprise
+				who = MO2
+			}
+			MO2 = {
+				override_country_name = RAKLION_SARDINIA
+				change_country_color = {
+					country = ROOT
+				}
+			}
+			sardinia_area = {
+				add_core = MO2
+			}
+			corsica_sardinia_area = {
+				add_core = MO2
+			}
+		}
+	}
+	option = {
+		name = rakl.3b
+		add_adm_power = 200
+	}
+}
