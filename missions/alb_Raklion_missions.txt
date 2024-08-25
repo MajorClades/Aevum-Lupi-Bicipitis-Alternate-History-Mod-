@@ -141,8 +141,18 @@ raklion_2_slot = {
 		} 
 
 		effect = {  
-			country_event = {
-				id = iberia.4
+			if = {
+				limit = {
+					NOT = {
+						is_year = 1530
+					}
+					NOT = {
+						has_global_flag = alb_banrik_hired_flag
+					}
+				}
+				country_event = {
+					id = iberia.4
+				}
 			}
 			add_prestige_or_monarch_power = {
 				amount = 25
@@ -169,7 +179,45 @@ raklion_2_slot = {
 		} 
 
 		effect = {  
-			
+			custom_tooltip = NED_BUFF_NEW_WORLD_CHARTERS
+			set_country_flag = ned_new_world_charters_buff_flag
+			custom_tooltip = empty_line_tt
+			custom_tooltip = ib0_subject_in_caribbean_tt
+			tooltip = {
+				add_country_modifier = {
+					name = rk0_caribbean_colony
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				random_subject_country = {
+					limit = {
+						capital_scope = {
+							colonial_region = colonial_the_carribean
+						}
+					}
+					add_country_modifier = {
+						name = rk0_caribbean_colony
+						duration = -1
+					}
+				}
+				every_province = {
+					limit = {
+						NOT = {
+							country_or_non_sovereign_subject_holds = ROOT
+						}
+						continent = north_america
+						has_port = yes
+						OR = {
+							province_has_center_of_trade_of_level = 1
+							has_river_estuary_trigger = yes
+						}
+					}
+					add_permanent_claim = ROOT
+				}
+			}
+			custom_tooltip = empty_line_tt
+			custom_tooltip = alb_permaclaims_on_nrausulia_trade_centers_tt
 		} 
 	}
 
@@ -177,11 +225,61 @@ raklion_2_slot = {
 		icon = mission_portuguese_oman
 		position = 5
 		required_missions = { rk0_banrika_colony } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				province_has_center_of_trade_of_level = 1
+				has_river_estuary_trigger = yes
+			}
+			has_port = yes
+			continent = north_america
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 15
+				has_port = yes
+				custom_trigger_tooltip = {
+					tooltip = alb_estuary_or_center_of_trade_tt
+					OR = {
+						province_has_center_of_trade_of_level = 1
+						has_river_estuary_trigger = yes
+					}
+				}
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			custom_tooltip = rk0_create_rausulian_ports_admin_tt
+			hidden_effect = {
+				every_province = {
+					limit = {
+						country_or_non_sovereign_subject_holds = ROOT
+						OR = {
+							province_has_center_of_trade_of_level = 1
+							has_river_estuary_trigger = yes
+						}
+						has_port = yes
+						continent = north_america
+					}
+					add_core = RK1
+					cede_province = RK1
+					remove_core = ROOT
+				}
+				create_subject = {
+					subject_type = commercial_enterprise
+					who = RK1
+				}
+				RK1 = {
+					change_primary_culture = ROOT
+					change_religion = ROOT
+					add_government_reform = alb_raklion_company_reform
+				}
+			}
+			custom_tooltip = rk0_port_admin_diploaction_tt
+		} 
 	}
 
 	rk0_consolidate_baleares = {

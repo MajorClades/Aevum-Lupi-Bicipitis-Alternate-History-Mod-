@@ -216,3 +216,83 @@ cancel_autonomous_vassal =  {
 		}
 	}
 }
+
+alb_charter_colony_ports =  {
+	category = influence
+	require_acceptance = no
+	is_visible = {
+		overlord_of = FROM
+		FROM = {
+			OR = {
+				is_subject_of_type = colony
+				is_subject_of_type = crown_colony
+				is_subject_of_type = self_governing_colony
+			}
+		}
+		any_subject_country = {
+			tag = RK1
+		}
+	}
+	
+	is_allowed = {
+		hidden_trigger = {
+			overlord_of = FROM
+			FROM = {
+				OR = {
+					is_subject_of_type = colony
+					is_subject_of_type = crown_colony
+					is_subject_of_type = self_governing_colony
+				}
+			}
+		}
+		FROM = {
+			NOT = { liberty_desire = 50 }
+		}
+		reverse_has_opinion = {
+			who = FROM
+			value = 0
+		}
+		FROM = {
+			OR = {
+				is_subject_of_type = colony
+				is_subject_of_type = crown_colony
+				is_subject_of_type = self_governing_colony
+			}
+			is_subject_of = ROOT		
+		}
+		FROM = {
+			any_owned_province = {
+				OR = {
+					province_has_center_of_trade_of_level = 1
+					has_river_estuary_trigger = yes
+				}
+				has_port = yes
+			}
+		}
+		stability = 0
+	}
+	
+	on_accept = {
+		FROM = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						province_has_center_of_trade_of_level = 1
+						has_river_estuary_trigger = yes
+					}
+					has_port = yes
+				}
+				cede_province = RK1
+				add_core = RK1
+				remove_core = ROOT
+			}
+			add_liberty_desire = 50
+		}
+	}
+	
+	ai_will_do = {
+		FROM = { # They must have low liberty desire
+			liberty_desire = 0
+		}
+	}
+}
