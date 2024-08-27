@@ -91,7 +91,7 @@ Vinland_1_slot = {
 	}
 	vin_the_other_coast = {
 		icon = mission_rb_trinity_college_dublin
-		position = 4
+		position = 5
 		required_missions = {vin_place_to_wait	}
 		provinces_to_highlight = { OR = {province_id = 2020 province_id = 2605 } } 
 
@@ -124,7 +124,7 @@ Vinland_1_slot = {
 	}
 	vin_the_tail_end = {
 		icon = mission_rb_trinity_college_dublin
-		position = 5
+		position = 6
 		required_missions = {vin_the_other_coast	}
 		provinces_to_highlight = { has_port = yes region = cascadia_region } 
 
@@ -148,7 +148,7 @@ Vinland_1_slot = {
 		}
 	}
 }
-Frja_2_slot = {
+Vinland_2_slot = {
 	slot = 2
 	generic = no
 	ai = yes
@@ -189,8 +189,44 @@ Frja_2_slot = {
 			}		
 		}
 	}
+	vin_vinlander_mexican_friendship = {
+		icon = mission_rb_trinity_college_dublin
+		position = 4
+		required_missions = {vin_vinlander_empire }
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 100
+			}
+			alliance_with = MX0
+			MX0 = {
+				num_of_owned_provinces_with = {
+					value = 100
+				}
+			}
+		}
+
+		effect = {
+			add_stability_or_adm_power = yes
+			add_army_tradition_or_mil_power = {
+				amount = 10
+			}
+			add_prestige_or_monarch_power = {
+				amount = 15
+			}
+			MX0 = {
+				add_stability_or_adm_power = yes
+				add_army_tradition_or_mil_power = {
+					amount = 10
+				}
+				add_prestige_or_monarch_power = {
+					amount = 15
+				}
+			}
+		}
+	}
 }
-Frja_3_slot = {
+Vinland_3_slot = {
 	slot = 3
 	generic = no
 	ai = yes
@@ -271,16 +307,12 @@ Frja_3_slot = {
 		required_missions = {vin_vinlander_empire }
 		provinces_to_highlight = { owned_by = ROOT has_courthouse_building_trigger = no	has_seat_in_parliament = no} 
 		trigger = {
-			custom_trigger_tooltip = {
-				tooltip = VINLAND_EMPIRE_flag_tt
-				has_country_flag = VINLAND_EMPIRE 
-			}
 			993 = {
 				owned_by = ROOT
 				has_courthouse_building_trigger = yes
 				has_seat_in_parliament = yes
 			}
-			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+			num_of_owned_provinces_with = {
 				value = 10
 				has_courthouse_building_trigger = yes
 				has_seat_in_parliament = yes
@@ -293,8 +325,28 @@ Frja_3_slot = {
 			}
 		}
 	}
+	vin_baldr_light = {
+		icon = mission_rb_trinity_college_dublin
+		position = 5
+		required_missions = {vin_vinlander_empire }
+		provinces_to_highlight = { owned_by = ROOT NOT = { has_building = university }} 
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 15
+				has_building = university
+				has_seat_in_parliament = yes
+			}
+		}
+
+		effect = {
+			country_event_with_insight = {
+				id = fjal.22
+				insight_tooltip = VINLAND_TT_8
+			}
+		}
+	}
 }
-Frja_4_slot = {
+Vinland_4_slot = {
 	slot = 4
 	generic = no
 	ai = yes
@@ -332,8 +384,49 @@ Frja_4_slot = {
 			}
 		}
 	}
+	vin_njord_knows = {
+		icon = mission_rb_trinity_college_dublin
+		position = 5
+		required_missions = { vin_viking_boats}
+		provinces_to_highlight = { owned_by = ROOT has_dock_building_trigger = no } 
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 15
+				has_dock_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_navy_tradition = 15
+			custom_tooltip = VINLAND_TT_6
+			tooltip = {
+				capital_scope = {
+					add_province_modifier = {
+						name = vin_western_knowledge
+						duration = 10950
+					}
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						OR = {
+							region = canada_region
+							region = southeast_america_region
+							region = northeast_america_region
+						}
+						has_port = yes
+					}
+					add_province_modifier = {
+						name = vin_western_knowledge
+						duration = 10950
+					}
+				}
+			}
+		}
+	}
 }
-Frja_5_slot = {
+Vinland_5_slot = {
 	slot = 5
 	generic = no
 	ai = yes
@@ -360,7 +453,7 @@ Frja_5_slot = {
 	}
 	vin_rausundian_coast = {
 		icon = mission_rb_trinity_college_dublin
-		position = 3
+		position = 2
 		required_missions = {vin_going_south}
 		provinces_to_highlight = { region = northeast_america_region } 
 
@@ -387,7 +480,7 @@ Frja_5_slot = {
 	}
 	vin_rausundian_trade = {
 		icon = mission_rb_trinity_college_dublin
-		position = 4
+		position = 3
 		required_missions = {vin_rausundian_coast}
 		provinces_to_highlight = { region = northeast_america_region } 
 
@@ -417,6 +510,100 @@ Frja_5_slot = {
 				add_permanent_province_modifier = {
 					name = vin_ocean_man
 					duration = -1
+				}
+			}
+		}
+	}
+	vin_viking_boats = {
+		icon = mission_rb_trinity_college_dublin
+		position = 4
+
+		trigger = {
+			OR = {
+				naval_reformer = 3
+				navy_tradition = 30
+			}
+			OR = {
+				num_of_light_ship = 30
+				num_of_heavy_ship = 10
+			}
+		}
+
+		effect = {
+			define_admiral = {
+				shock = 3
+				fire = 3
+				manuever = 3
+			}
+			add_country_modifier = {
+				name = vin_viking_return
+				duration = -1
+			}
+		}
+	}
+	vin_njord_choosens = {
+		icon = mission_rb_trinity_college_dublin
+		position = 5
+		required_missions = {vin_viking_boats}
+		trigger = {
+			OR = {
+				naval_reformer = 5
+				navy_tradition = 50
+			}
+			OR = {
+				num_of_marines = 15
+				navy_size = 100
+			}
+		}
+
+		effect = {
+			country_event_with_insight = {
+				id = fjal.21
+				insight_tooltip = VINLAND_TT_5
+			}
+		}
+	}
+	vin_njord_water = {
+		icon = mission_rb_trinity_college_dublin
+		position = 6
+		required_missions = {vin_njord_knows vin_njord_choosens}
+		provinces_to_highlight = { owned_by = ROOT has_shipyard_building_trigger = no } 
+		trigger = {
+			OR = {
+				navy_tradition = 70
+				num_of_marines = 35
+				navy_size = 150
+			}
+			num_of_owned_provinces_with = {
+				value = 15
+				has_shipyard_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = vin_storm_sailors
+				duration = 10950
+			}
+			custom_tooltip = VINLAND_TT_7
+			hidden_effect = {
+				if = {
+					limit = {
+						has_naval_doctrine = vinland_raid_fleet
+					}
+					set_naval_doctrine = njord_raid_fleet
+				}
+				every_owned_province = { 
+					limit = {
+						has_shipyard_building_trigger = yes
+					}
+					if = {
+						limit = {
+							has_dock_building_trigger = yes
+						}
+						add_or_upgrade_dock_building = yes
+					}
+					add_or_upgrade_shipyard_building = yes
 				}
 			}
 		}

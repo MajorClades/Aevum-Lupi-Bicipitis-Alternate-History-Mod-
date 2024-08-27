@@ -448,6 +448,18 @@ country_event = {
 				}
 			}
 		}
+		if = {
+			limit = {
+				NOT = {
+					estate_territory = {
+						estate = estate_nobles
+						territory = 2
+					}
+				}
+			}
+			clr_country_flag = vinland_in_rebellion
+			set_country_flag = VINLAND_EMPIRE
+		}
 	}
 }
 
@@ -657,6 +669,152 @@ country_event = {
 	}
 }
 country_event = {
+	id = fjal.20
+	title = fjal.20.test
+	desc = fjal.20.desc
+	picture = NATIVES_LOW_eventPicture
+	trigger = {
+		OR = {
+			tag = FJ0
+			tag = FJ9
+		}
+		NOT = {
+			has_country_modifier = the_abolish_slavery_act
+		}
+		estate_territory = {
+			estate = estate_nobles
+			territory = 5
+		}
+		num_of_owned_provinces_with = {
+			value = 5
+			has_seat_in_parliament = yes
+		}
+	}
+	mean_time_to_happen = {
+		months = 120
+	}
+	option = {
+		name = fjal.20a
+		add_treasury = 100
+		change_estate_land_share = {
+			estate = estate_nobles
+			share = 3
+		}
+	}
+	option = {
+		name = fjal.20b
+		trigger = {
+			any_owned_province = {
+				OR = {
+					culture_group = apachean
+					culture_group = eastern_algonquian
+					culture_group = plains_algonquian
+					culture_group = iroquoian
+					culture_group = siouan
+					culture_group = caddoan
+					culture_group = central_algonquian
+				}
+			}
+		}
+		random_owned_province = {
+			limit = {
+				OR = {
+					culture_group = apachean
+					culture_group = eastern_algonquian
+					culture_group = plains_algonquian
+					culture_group = iroquoian
+					culture_group = siouan
+					culture_group = caddoan
+					culture_group = central_algonquian
+				}
+			}
+			random_list = {
+				40 = {
+					change_trade_goods = slaves
+				}
+				60 = {
+					add_local_autonomy = 40
+				}
+			}
+		}
+		add_treasury = 300
+	}
+}
+country_event = {
+	id = fjal.21
+	title = fjal.21.test
+	desc = fjal.21.desc
+	picture = SHIP_SAILING_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = fjal.21a
+		add_country_modifier = {
+			name = vin_stronger_vikings
+			duration = -1
+		}
+	}
+	option = {
+		name = fjal.21b
+		add_country_modifier = {
+			name = vin_stronger_ships
+			duration = -1
+		}
+	}
+	option = {
+		name = fjal.21c
+		add_country_modifier = {
+			name = vin_mixed_doctrine
+			duration = -1
+		}
+	}
+	option = {
+		name = fjal.21d
+		trigger = {
+			OR = {
+				full_idea_group = maritime_ideas
+				full_idea_group = naval_ideas
+			}
+		}
+		add_country_modifier = {
+			name = vin_stronger_vikings
+			duration = -1
+		}
+		add_country_modifier = {
+			name = vin_stronger_ships
+			duration = -1
+		}
+	}
+}
+
+country_event = {
+	id = fjal.22
+	title = fjal.22.test
+	desc = fjal.22.desc
+	picture = UNIVERSITY_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = fjal.22a
+		add_country_modifier = {
+			name = vin_norse_tech
+			duration = -1
+		}
+	}
+	option = {
+		name = fjal.22b
+		add_country_modifier = {
+			name = vin_better_rulers
+			duration = -1
+		}
+	}
+	option = {
+		name = fjal.22c
+		add_country_modifier = {
+			name = vin_great_advisors
+			duration = -1
+		}
+	}
+}
+country_event = {
 	id = fjal.302
 	title = fjal.302.test
 	desc = fjal.302.desc
@@ -800,3 +958,4 @@ country_event = {
 		}
 	}
 }
+
