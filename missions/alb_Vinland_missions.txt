@@ -147,6 +147,29 @@ Vinland_1_slot = {
 			}			
 		}
 	}
+	vin_magni_hammer = {
+		icon = mission_rb_trinity_college_dublin
+		position = 8
+		required_missions = {vin_magni_thunder }
+		
+		trigger = {
+			num_of_artillery = 20
+			num_of_completed_idea_groups_mil = { amount = 2}
+		}
+
+		effect = {
+			if = {
+				limit = {has_country_modifier = vin_create_gunpowder}	
+				remove_country_modifier = vin_create_gunpowder	
+			}else = {
+				custom_tooltip = VINLAND_TT_10
+			}
+			add_country_modifier = {
+				name = vin_thunderers
+				duration = 10950
+			}
+		}
+	}
 }
 Vinland_2_slot = {
 	slot = 2
@@ -222,6 +245,54 @@ Vinland_2_slot = {
 				add_prestige_or_monarch_power = {
 					amount = 15
 				}
+			}
+		}
+	}
+	vin_magni_thunder = {
+		icon = mission_rb_trinity_college_dublin
+		position = 7
+		required_missions = {vin_magni_modi }
+		
+		trigger = {
+			army_size = 50
+			OR = {
+				army_tradition = 30
+				num_of_completed_idea_groups_mil = { amount = 1}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = vin_create_gunpowder
+				duration = 10950
+			}
+			add_country_modifier = {
+				name = vin_norse_gunpowder
+				duration = -1
+			}
+		}
+	}
+	vin_hoenir_silence = {
+		icon = mission_rb_trinity_college_dublin
+		position = 9
+		
+		trigger = {
+			calc_true_if = {
+				amount = 2
+				all_known_country = {
+					tech_difference = 1
+					has_spy_network_from = {
+						who = ROOT
+						value = 50
+					}
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = vin_learning
+				duration = 10950
 			}
 		}
 	}
@@ -328,11 +399,11 @@ Vinland_3_slot = {
 	vin_baldr_light = {
 		icon = mission_rb_trinity_college_dublin
 		position = 5
-		required_missions = {vin_vinlander_empire }
+		required_missions = {vin_baldrlaw }
 		provinces_to_highlight = { owned_by = ROOT NOT = { has_building = university }} 
 		trigger = {
 			num_of_owned_provinces_with = {
-				value = 15
+				value = 10
 				has_building = university
 				has_seat_in_parliament = yes
 			}
@@ -342,6 +413,90 @@ Vinland_3_slot = {
 			country_event_with_insight = {
 				id = fjal.22
 				insight_tooltip = VINLAND_TT_8
+			}
+		}
+	}
+	vin_magni_modi = {
+		icon = mission_rb_trinity_college_dublin
+		position = 6
+		provinces_to_highlight = { owned_by = ROOT has_manpower_building_trigger = no } 
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				has_manpower_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_army_tradition_or_mil_power = {	amount = 15 }
+		}
+	}
+	vin_new_gods = {
+		icon = mission_rb_trinity_college_dublin
+		position = 8
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = VINLAND_TT_12a
+				OR = {
+					has_country_flag = new_norse_deity_flag_a
+					has_country_flag = new_norse_deity_flag_b
+				}
+			}
+		}
+
+		effect = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = VINLAND_TT_12b
+				first_limit = "
+					has_country_flag = new_norse_deity_flag_a
+				"
+				first_effect = "
+					define_advisor = {
+						type = recruitmaster
+						skill = 5
+						female = yes
+						cost_multiplier = 0.33
+					}
+				"
+				second_limit = "
+					has_country_flag = new_norse_deity_flag_b
+				"
+				second_effect = "
+					define_general = {
+						shock = 4
+						fire = 1
+						manuever = 5
+						siege = 5
+						female = yes
+					}
+				"
+			}
+		}
+	}
+	vin_vinland_saga = {
+		icon = mission_rb_trinity_college_dublin
+		position = 10
+		required_missions = {vin_hoenir_silence vin_new_gods vin_wars_of_destiny}
+		trigger = {
+			OR = {
+				AND = {
+					army_tradition = 80
+					has_mil_advisor_of_level = {
+						level = 5
+					}
+				}
+				AND = {
+					army_size = 50 
+					NOT = { any_other_great_power = { army_size = root } }
+				}
+			}
+			is_great_power = yes
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = vin_a_new_saga_ends
+				duration = -1
 			}
 		}
 	}
@@ -423,6 +578,53 @@ Vinland_4_slot = {
 					}
 				}
 			}
+		}
+	}
+	vin_modi_bravery = {
+		icon = mission_rb_trinity_college_dublin
+		position = 7
+		required_missions = {vin_magni_modi }
+		provinces_to_highlight = { owned_by = ROOT has_forcelimit_building_trigger = no has_tax_building_trigger = no} 
+		trigger = {
+			num_of_completed_idea_groups_adm = { amount = 1}
+			num_of_completed_idea_groups_dip = { amount = 1}
+			num_of_owned_provinces_with = {
+				value = 10
+				has_forcelimit_building_trigger = yes
+				has_tax_building_trigger = yes
+			}
+		}
+
+		effect = {
+			capital_scope = {
+				add_or_upgrade_forcelimit_building = yes
+			}
+			set_country_flag = vin_lightbringer_wars
+			custom_tooltip = VINLAND_TT_9
+		}
+	}
+	vin_wars_of_destiny = {
+		icon = mission_rb_trinity_college_dublin
+		position = 9
+		required_missions = {vin_modi_bravery vin_vali_sight}
+		trigger = {
+			OR = {
+				full_idea_group = religious_ideas
+				calc_true_if = {
+					amount = 3
+					all_subject_country = {
+						religion = ROOT
+					}
+				}
+			}
+			has_mil_advisor_of_level = {
+				level = 5
+			}
+		}
+
+		effect = {
+			custom_tooltip = VINLAND_TT_11
+			set_country_flag = vin_advisor_give_warscore_religion
 		}
 	}
 }
@@ -605,6 +807,22 @@ Vinland_5_slot = {
 					}
 					add_or_upgrade_shipyard_building = yes
 				}
+			}
+		}
+	}
+	vin_vali_sight = {
+		icon = mission_rb_trinity_college_dublin
+		position = 8
+		trigger = {
+			is_in_deficit = no
+			has_mil_advisor_of_level = {
+				level = 4
+			}
+		}
+
+		effect = {
+			capital_scope = {
+				add_or_upgrade_fort_building = yes
 			}
 		}
 	}
