@@ -6,7 +6,7 @@ Vinland_1_slot = {
 	potential = { tag = FJ9 } 
 
 	vin_going_east = {
-		icon = mission_rb_trinity_college_dublin
+		icon = mission_sailor_boat
 		position = 1
 		provinces_to_highlight = { area = laurentian_area } 
 
@@ -25,22 +25,19 @@ Vinland_1_slot = {
 				custom_tooltip = VINLAND_TT_1
 				tooltip = {
 					add_province_modifier = {
-						name = vin_east_coasting
+						name = "vin_east_coasting"
 						duration = 10950
 					}
 				}
 				hidden_effect = {
 					if = {
-						limit = {
-							is_empty = yes
-						}
+						limit = { is_empty = yes } 
 						add_province_modifier = {
-							name = vin_east_coasting
+							name = "vin_east_coasting"
 							duration = 10950
 						}
-					}else = {
-						add_core = ROOT
 					}
+					else = { add_core = ROOT } 
 				}
 			}
 			hudson_bay_area = {
@@ -48,31 +45,29 @@ Vinland_1_slot = {
 				custom_tooltip = VINLAND_TT_1
 				tooltip = {
 					add_province_modifier = {
-						name = vin_east_coasting
+						name = "vin_east_coasting"
 						duration = 10950
 					}
 				}
 				hidden_effect = {
 					if = {
-						limit = {
-							is_empty = yes
-						}
+						limit = { is_empty = yes } 
 						add_province_modifier = {
-							name = vin_east_coasting
+							name = "vin_east_coasting"
 							duration = 10950
 						}
-					}else = {
-						add_core = ROOT
 					}
+					else = { add_core = ROOT } 
 				}
 			}
 		}
 	}
+
 	vin_place_to_wait = {
-		icon = mission_rb_trinity_college_dublin
+		icon = mission_rb_colonise_canada
 		position = 3
-		required_missions = {vin_going_east_north	}
-		provinces_to_highlight = { province_id = 1008} 
+		required_missions = { vin_going_east_north } 
+		provinces_to_highlight = { province_id = 1008 } 
 
 		trigger = {
 			owns = 1008
@@ -84,16 +79,22 @@ Vinland_1_slot = {
 
 		effect = {
 			country_event_with_insight = {
-				id =  fjal.11
+				id = fjal.11
 				insight_tooltip = VINLAND_TT_3b
 			}
 		}
 	}
+
 	vin_the_other_coast = {
-		icon = mission_rb_trinity_college_dublin
+		icon = mission_colonize_alaska
 		position = 5
-		required_missions = {vin_place_to_wait	}
-		provinces_to_highlight = { OR = {province_id = 2020 province_id = 2605 } } 
+		required_missions = { vin_place_to_wait } 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 2020
+				province_id = 2605
+			}
+		}
 
 		trigger = {
 			OR = {
@@ -117,20 +118,22 @@ Vinland_1_slot = {
 					tier = 1
 				}
 			}
-			cascadia_region = {
-				add_permanent_claim = ROOT
-			}			
+			cascadia_region = { add_permanent_claim = ROOT } 
 		}
 	}
+
 	vin_the_tail_end = {
-		icon = mission_rb_trinity_college_dublin
+		icon = mission_protect_white_sea_trade
 		position = 6
-		required_missions = {vin_the_other_coast	}
-		provinces_to_highlight = { has_port = yes region = cascadia_region } 
+		required_missions = { vin_the_other_coast } 
+		provinces_to_highlight = {
+			has_port = yes
+			region = cascadia_region
+		}
 
 		trigger = {
 			owns_all_provinces = {
-				has_port = yes 
+				has_port = yes
 				region = cascadia_region
 			}
 		}
@@ -138,34 +141,33 @@ Vinland_1_slot = {
 		effect = {
 			873 = {
 				add_permanent_province_modifier = {
-					name = vin_eastern_trade
+					name = "vin_eastern_trade"
 					duration = -1
 				}
 			}
-			1034 = {
-				colonize_or_core_fj9 = yes
-			}			
+			1034 = { colonize_or_core_fj9 = yes } 
 		}
 	}
+
 	vin_magni_hammer = {
-		icon = mission_rb_trinity_college_dublin
+		icon = mission_cannons_firing
 		position = 8
-		required_missions = {vin_magni_thunder }
-		
+		required_missions = { vin_magni_thunder } 
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			num_of_artillery = 20
-			num_of_completed_idea_groups_mil = { amount = 2}
+			num_of_completed_idea_groups_mil = { amount = 2 } 
 		}
 
 		effect = {
 			if = {
-				limit = {has_country_modifier = vin_create_gunpowder}	
-				remove_country_modifier = vin_create_gunpowder	
-			}else = {
-				custom_tooltip = VINLAND_TT_10
+				limit = { has_country_modifier = vin_create_gunpowder } 
+				remove_country_modifier = vin_create_gunpowder
 			}
+			else = { custom_tooltip = VINLAND_TT_10 } 
 			add_country_modifier = {
-				name = vin_thunderers
+				name = "vin_thunderers"
 				duration = 10950
 			}
 		}
@@ -179,10 +181,15 @@ Vinland_2_slot = {
 	potential = { tag = FJ9 } 
 
 	vin_going_east_north = {
-		icon = mission_rb_trinity_college_dublin
+		icon = mission_explore_the_world
 		position = 2
-		required_missions = {vin_going_east	}
-		provinces_to_highlight = { OR = {area = james_bay_area area = hudson_bay_area} } 
+		required_missions = { vin_going_east } 
+		provinces_to_highlight = {
+			OR = {
+				area = james_bay_area
+				area = hudson_bay_area
+			}
+		}
 
 		trigger = {
 			james_bay_area = {
@@ -196,86 +203,72 @@ Vinland_2_slot = {
 		}
 
 		effect = {
-			hudson_bay_region = {
-				add_permanent_claim = ROOT	
-			}
+			hudson_bay_region = { add_permanent_claim = ROOT } 
 			every_known_country = {
-				limit = {
-					capital_scope = {
-						region = hudson_bay_region
-					}
-				}
+				limit = { capital_scope = { region = hudson_bay_region }  } 
 				reverse_add_casus_belli = {
 					type = cb_vassalize_mission
 					target = ROOT
 				}
-			}		
+			}
 		}
 	}
+
 	vin_vinlander_mexican_friendship = {
-		icon = mission_rb_trinity_college_dublin
+		icon = mission_mesoamerican_tributes
 		position = 4
-		required_missions = {vin_vinlander_empire }
+		required_missions = { vin_vinlander_empire } 
+		provinces_to_highlight = {  } 
 
 		trigger = {
-			num_of_owned_provinces_with = {
-				value = 100
-			}
+			num_of_owned_provinces_with = { value = 100 } 
 			alliance_with = MX0
-			MX0 = {
-				num_of_owned_provinces_with = {
-					value = 100
-				}
-			}
+			MX0 = { num_of_owned_provinces_with = { value = 100 }  } 
 		}
 
 		effect = {
 			add_stability_or_adm_power = yes
-			add_army_tradition_or_mil_power = {
-				amount = 10
-			}
-			add_prestige_or_monarch_power = {
-				amount = 15
-			}
+			add_army_tradition_or_mil_power = { amount = 10 } 
+			add_prestige_or_monarch_power = { amount = 15 } 
 			MX0 = {
 				add_stability_or_adm_power = yes
-				add_army_tradition_or_mil_power = {
-					amount = 10
-				}
-				add_prestige_or_monarch_power = {
-					amount = 15
-				}
+				add_army_tradition_or_mil_power = { amount = 10 } 
+				add_prestige_or_monarch_power = { amount = 15 } 
 			}
 		}
 	}
+
 	vin_magni_thunder = {
-		icon = mission_rb_trinity_college_dublin
+		icon = army_reforms
 		position = 7
-		required_missions = {vin_magni_modi }
-		
+		required_missions = { vin_magni_modi } 
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			army_size = 50
 			OR = {
 				army_tradition = 30
-				num_of_completed_idea_groups_mil = { amount = 1}
+				num_of_completed_idea_groups_mil = { amount = 1 } 
 			}
 		}
 
 		effect = {
 			add_country_modifier = {
-				name = vin_create_gunpowder
+				name = "vin_create_gunpowder"
 				duration = 10950
 			}
 			add_country_modifier = {
-				name = vin_norse_gunpowder
+				name = "vin_norse_gunpowder"
 				duration = -1
 			}
 		}
 	}
+
 	vin_hoenir_silence = {
-		icon = mission_rb_trinity_college_dublin
+		icon = mission_the_varangians
 		position = 9
-		
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			calc_true_if = {
 				amount = 2
@@ -291,7 +284,7 @@ Vinland_2_slot = {
 
 		effect = {
 			add_country_modifier = {
-				name = vin_learning
+				name = "vin_learning"
 				duration = 10950
 			}
 		}
@@ -311,29 +304,22 @@ Vinland_3_slot = {
 
 		trigger = {
 			owns = 993
-			993 = { 
-				num_of_buildings_in_province = 5
-			} 
+			993 = { num_of_buildings_in_province = 5 } 
 		}
 
 		effect = {
 			every_province = {
-				limit = {
-					any_neighbor_province = {
-						province_id = 993
-					}
-				}
+				limit = { any_neighbor_province = { province_id = 993 }  } 
 				add_colonysize = 555
 			}
-			canada_region = {
-				add_permanent_claim = ROOT
-			}
+			canada_region = { add_permanent_claim = ROOT } 
 		}
 	}
+
 	vin_vinlander_might = {
-		icon = mission_rb_trinity_college_dublin
+		icon = dominant_economy
 		position = 2
-		required_missions = {vin_halls_of_glory	}
+		required_missions = { vin_halls_of_glory } 
 		provinces_to_highlight = { region = canada_region } 
 
 		trigger = {
@@ -351,32 +337,51 @@ Vinland_3_slot = {
 			}
 		}
 	}
+
 	vin_vinlander_empire = {
-		icon = mission_rb_trinity_college_dublin
+		icon = mission_norse_faith
 		position = 3
-		required_missions = {vin_going_east_north vin_vinlander_might vin_going_south_west}
-		provinces_to_highlight = { OR = {region = canada_region region = hudson_bay_region region = northeast_america_region} } 
+		required_missions = {
+			vin_going_east_north
+			vin_vinlander_might
+			vin_going_south_west
+		}
+		provinces_to_highlight = {
+			OR = {
+				region = canada_region
+				region = hudson_bay_region
+				region = northeast_america_region
+			}
+		}
 
 		trigger = {
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
 				value = 70
-				OR = {region = canada_region region = hudson_bay_region region = northeast_america_region}
+				OR = {
+					region = canada_region
+					region = hudson_bay_region
+					region = northeast_america_region
+				}
 				culture_group = bionan
 			}
 		}
 
 		effect = {
 			set_government_rank = 3
-			add_ruler_modifier = {
-				name = vin_first_empire
-			}
+			add_ruler_modifier = { name = "vin_first_empire" } 
 		}
 	}
+
 	vin_baldrlaw = {
-		icon = mission_rb_trinity_college_dublin
+		icon = mission_university_of_copenhagen
 		position = 4
-		required_missions = {vin_vinlander_empire }
-		provinces_to_highlight = { owned_by = ROOT has_courthouse_building_trigger = no	has_seat_in_parliament = no} 
+		required_missions = { vin_vinlander_empire } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_courthouse_building_trigger = no
+			has_seat_in_parliament = no
+		}
+
 		trigger = {
 			993 = {
 				owned_by = ROOT
@@ -390,17 +395,18 @@ Vinland_3_slot = {
 			}
 		}
 
-		effect = {
-			993 = {
-				add_building = university
-			}
-		}
+		effect = { 993 = { add_building = university }  } 
 	}
+
 	vin_baldr_light = {
-		icon = mission_rb_trinity_college_dublin
+		icon = deal_with_the_illuminati
 		position = 5
-		required_missions = {vin_baldrlaw }
-		provinces_to_highlight = { owned_by = ROOT NOT = { has_building = university }} 
+		required_missions = { vin_baldrlaw } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			NOT = { has_building = university } 
+		}
+
 		trigger = {
 			num_of_owned_provinces_with = {
 				value = 10
@@ -416,10 +422,15 @@ Vinland_3_slot = {
 			}
 		}
 	}
+
 	vin_magni_modi = {
-		icon = mission_rb_trinity_college_dublin
+		icon = military_self_reliance
 		position = 6
-		provinces_to_highlight = { owned_by = ROOT has_manpower_building_trigger = no } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_manpower_building_trigger = no
+		}
+
 		trigger = {
 			num_of_owned_provinces_with = {
 				value = 10
@@ -427,13 +438,14 @@ Vinland_3_slot = {
 			}
 		}
 
-		effect = {
-			add_army_tradition_or_mil_power = {	amount = 15 }
-		}
+		effect = { add_army_tradition_or_mil_power = { amount = 15 }  } 
 	}
+
 	vin_new_gods = {
-		icon = mission_rb_trinity_college_dublin
+		icon = commission_the_mona_lisa
 		position = 8
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			custom_trigger_tooltip = {
 				tooltip = VINLAND_TT_12a
@@ -473,21 +485,26 @@ Vinland_3_slot = {
 			}
 		}
 	}
+
 	vin_vinland_saga = {
-		icon = mission_rb_trinity_college_dublin
+		icon = mission_north_sea_empire
 		position = 10
-		required_missions = {vin_hoenir_silence vin_new_gods vin_wars_of_destiny}
+		required_missions = {
+			vin_hoenir_silence
+			vin_new_gods
+			vin_wars_of_destiny
+		}
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			OR = {
 				AND = {
 					army_tradition = 80
-					has_mil_advisor_of_level = {
-						level = 5
-					}
+					has_mil_advisor_of_level = { level = 5 } 
 				}
 				AND = {
-					army_size = 50 
-					NOT = { any_other_great_power = { army_size = root } }
+					army_size = 50
+					NOT = { any_other_great_power = { army_size = root }  } 
 				}
 			}
 			is_great_power = yes
@@ -495,7 +512,7 @@ Vinland_3_slot = {
 
 		effect = {
 			add_country_modifier = {
-				name = vin_a_new_saga_ends
+				name = "vin_a_new_saga_ends"
 				duration = -1
 			}
 		}
@@ -509,9 +526,9 @@ Vinland_4_slot = {
 	potential = { tag = FJ9 } 
 
 	vin_going_south_west = {
-		icon = mission_rb_trinity_college_dublin
+		icon = mission_native_build_army_mission
 		position = 2
-		required_missions = {vin_going_south	}
+		required_missions = { vin_going_south } 
 		provinces_to_highlight = { region = northeast_america_region } 
 
 		trigger = {
@@ -523,15 +540,11 @@ Vinland_4_slot = {
 
 		effect = {
 			add_country_modifier = {
-				name = vin_less_cost_colony
+				name = "vin_less_cost_colony"
 				duration = 10950
 			}
 			every_known_country = {
-				limit = {
-					capital_scope = {
-						region = northeast_america_region
-					}
-				}
+				limit = { capital_scope = { region = northeast_america_region }  } 
 				reverse_add_casus_belli = {
 					type = cb_vassalize_mission
 					target = ROOT
@@ -539,11 +552,16 @@ Vinland_4_slot = {
 			}
 		}
 	}
+
 	vin_njord_knows = {
-		icon = mission_rb_trinity_college_dublin
+		icon = mission_dominate_home_trade_node
 		position = 5
-		required_missions = { vin_viking_boats}
-		provinces_to_highlight = { owned_by = ROOT has_dock_building_trigger = no } 
+		required_missions = { vin_viking_boats } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_dock_building_trigger = no
+		}
+
 		trigger = {
 			num_of_owned_provinces_with = {
 				value = 15
@@ -557,7 +575,7 @@ Vinland_4_slot = {
 			tooltip = {
 				capital_scope = {
 					add_province_modifier = {
-						name = vin_western_knowledge
+						name = "vin_western_knowledge"
 						duration = 10950
 					}
 				}
@@ -573,21 +591,27 @@ Vinland_4_slot = {
 						has_port = yes
 					}
 					add_province_modifier = {
-						name = vin_western_knowledge
+						name = "vin_western_knowledge"
 						duration = 10950
 					}
 				}
 			}
 		}
 	}
+
 	vin_modi_bravery = {
-		icon = mission_rb_trinity_college_dublin
+		icon = mission_aztecs_flower_wars
 		position = 7
-		required_missions = {vin_magni_modi }
-		provinces_to_highlight = { owned_by = ROOT has_forcelimit_building_trigger = no has_tax_building_trigger = no} 
+		required_missions = { vin_magni_modi } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_forcelimit_building_trigger = no
+			has_tax_building_trigger = no
+		}
+
 		trigger = {
-			num_of_completed_idea_groups_adm = { amount = 1}
-			num_of_completed_idea_groups_dip = { amount = 1}
+			num_of_completed_idea_groups_adm = { amount = 1 } 
+			num_of_completed_idea_groups_dip = { amount = 1 } 
 			num_of_owned_provinces_with = {
 				value = 10
 				has_forcelimit_building_trigger = yes
@@ -596,30 +620,30 @@ Vinland_4_slot = {
 		}
 
 		effect = {
-			capital_scope = {
-				add_or_upgrade_forcelimit_building = yes
-			}
+			capital_scope = { add_or_upgrade_forcelimit_building = yes } 
 			set_country_flag = vin_lightbringer_wars
 			custom_tooltip = VINLAND_TT_9
 		}
 	}
+
 	vin_wars_of_destiny = {
-		icon = mission_rb_trinity_college_dublin
+		icon = mission_hundred_years_war
 		position = 9
-		required_missions = {vin_modi_bravery vin_vali_sight}
+		required_missions = {
+			vin_modi_bravery
+			vin_vali_sight
+		}
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			OR = {
 				full_idea_group = religious_ideas
 				calc_true_if = {
 					amount = 3
-					all_subject_country = {
-						religion = ROOT
-					}
+					all_subject_country = { religion = ROOT } 
 				}
 			}
-			has_mil_advisor_of_level = {
-				level = 5
-			}
+			has_mil_advisor_of_level = { level = 5 } 
 		}
 
 		effect = {
@@ -636,27 +660,28 @@ Vinland_5_slot = {
 	potential = { tag = FJ9 } 
 
 	vin_going_south = {
-		icon = mission_rb_trinity_college_dublin
+		icon = mission_rb_the_thirteen_colonies
 		position = 1
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			army_size = 30
 			navy_size = 20
 		}
 
 		effect = {
-			northeast_america_region = {
-				add_permanent_claim = ROOT
-			}
+			northeast_america_region = { add_permanent_claim = ROOT } 
 			country_event_with_insight = {
-				id =  fjal.10
+				id = fjal.10
 				insight_tooltip = VINLAND_TT_2
 			}
 		}
 	}
+
 	vin_rausundian_coast = {
-		icon = mission_rb_trinity_college_dublin
+		icon = trade_with_the_natives
 		position = 2
-		required_missions = {vin_going_south}
+		required_missions = { vin_going_south } 
 		provinces_to_highlight = { region = northeast_america_region } 
 
 		trigger = {
@@ -673,17 +698,18 @@ Vinland_5_slot = {
 
 		effect = {
 			add_country_modifier = {
-				name = vin_coastal_defenders
+				name = "vin_coastal_defenders"
 				duration = 10950
 			}
 			set_country_flag = vinland_trade_goods_flag
 			custom_tooltip = VINLAND_TT_4
 		}
 	}
+
 	vin_rausundian_trade = {
-		icon = mission_rb_trinity_college_dublin
+		icon = mission_marines
 		position = 3
-		required_missions = {vin_rausundian_coast}
+		required_missions = { vin_rausundian_coast } 
 		provinces_to_highlight = { region = northeast_america_region } 
 
 		trigger = {
@@ -691,9 +717,7 @@ Vinland_5_slot = {
 				type = all
 				OR = {
 					owned_by = ROOT
-					owner = {
-						alliance_with = ROOT
-					}
+					owner = { alliance_with = ROOT } 
 				}
 			}
 		}
@@ -704,21 +728,21 @@ Vinland_5_slot = {
 					has_port = yes
 					OR = {
 						owned_by = ROOT
-						owner = {
-							alliance_with = ROOT
-						}
+						owner = { alliance_with = ROOT } 
 					}
 				}
 				add_permanent_province_modifier = {
-					name = vin_ocean_man
+					name = "vin_ocean_man"
 					duration = -1
 				}
 			}
 		}
 	}
+
 	vin_viking_boats = {
-		icon = mission_rb_trinity_college_dublin
+		icon = mission_modernized_vikings
 		position = 4
+		provinces_to_highlight = {  } 
 
 		trigger = {
 			OR = {
@@ -738,15 +762,18 @@ Vinland_5_slot = {
 				manuever = 3
 			}
 			add_country_modifier = {
-				name = vin_viking_return
+				name = "vin_viking_return"
 				duration = -1
 			}
 		}
 	}
+
 	vin_njord_choosens = {
-		icon = mission_rb_trinity_college_dublin
+		icon = ven_navy_mission_2
 		position = 5
-		required_missions = {vin_viking_boats}
+		required_missions = { vin_viking_boats } 
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			OR = {
 				naval_reformer = 5
@@ -765,11 +792,19 @@ Vinland_5_slot = {
 			}
 		}
 	}
+
 	vin_njord_water = {
-		icon = mission_rb_trinity_college_dublin
+		icon = mission_look_west
 		position = 6
-		required_missions = {vin_njord_knows vin_njord_choosens}
-		provinces_to_highlight = { owned_by = ROOT has_shipyard_building_trigger = no } 
+		required_missions = {
+			vin_njord_knows
+			vin_njord_choosens
+		}
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_shipyard_building_trigger = no
+		}
+
 		trigger = {
 			OR = {
 				navy_tradition = 70
@@ -784,25 +819,19 @@ Vinland_5_slot = {
 
 		effect = {
 			add_country_modifier = {
-				name = vin_storm_sailors
+				name = "vin_storm_sailors"
 				duration = 10950
 			}
 			custom_tooltip = VINLAND_TT_7
 			hidden_effect = {
 				if = {
-					limit = {
-						has_naval_doctrine = vinland_raid_fleet
-					}
+					limit = { has_naval_doctrine = vinland_raid_fleet } 
 					set_naval_doctrine = njord_raid_fleet
 				}
-				every_owned_province = { 
-					limit = {
-						has_shipyard_building_trigger = yes
-					}
+				every_owned_province = {
+					limit = { has_shipyard_building_trigger = yes } 
 					if = {
-						limit = {
-							has_dock_building_trigger = yes
-						}
+						limit = { has_dock_building_trigger = yes } 
 						add_or_upgrade_dock_building = yes
 					}
 					add_or_upgrade_shipyard_building = yes
@@ -810,20 +839,17 @@ Vinland_5_slot = {
 			}
 		}
 	}
+
 	vin_vali_sight = {
-		icon = mission_rb_trinity_college_dublin
+		icon = mission_tribal_wargames
 		position = 8
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			is_in_deficit = no
-			has_mil_advisor_of_level = {
-				level = 4
-			}
+			has_mil_advisor_of_level = { level = 4 } 
 		}
 
-		effect = {
-			capital_scope = {
-				add_or_upgrade_fort_building = yes
-			}
-		}
+		effect = { capital_scope = { add_or_upgrade_fort_building = yes }  } 
 	}
 }
