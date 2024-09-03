@@ -147,6 +147,27 @@ HR0_1_slot = {
 			}
 		}
 	}
+
+	herk_consolidate_mauria = {
+		icon = mission_moroccan_ports
+		position = 7
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	herk_complete_africa_conquest = {
+		icon = mission_the_sultan_of_morocco
+		position = 8
+		required_missions = { herk_consolidate_mauria } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
 }
 HR0_2_slot = {
 	slot = 2
@@ -266,6 +287,20 @@ HR0_2_slot = {
 			}
 		}
 	}
+
+	herk_atlantic_empire = {
+		icon = a_real_roman_empire
+		position = 9
+		required_missions = {
+			herk_consolidate_iberia
+			herk_complete_africa_conquest
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
 }
 HR0_3_slot = {
 	slot = 3
@@ -349,7 +384,7 @@ HR0_3_slot = {
 		effect = {
 			simple_dynamic_effect = {
 				first_custom_tooltip = HERK_TT_5
-				first_limit = "has_country_modifier = herk_caravel"
+				first_limit = " has_country_modifier = herk_caravel "
 				first_effect = "
 					add_country_modifier = {
 						name = herk_caravel_powerup
@@ -405,7 +440,7 @@ HR0_3_slot = {
 
 	herk_company_dept = {
 		icon = mission_high_income
-		position = 7
+		position = 6
 		required_missions = { herk_love_and_spices } 
 		provinces_to_highlight = {
 			owned_by = ROOT
@@ -435,6 +470,16 @@ HR0_3_slot = {
 				custom_tooltip = HERK_TT_11
 			}
 		}
+	}
+
+	herk_consolidate_iberia = {
+		icon = mission_plc_golden_liberty
+		position = 8
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
 	}
 }
 HR0_4_slot = {
@@ -469,7 +514,7 @@ HR0_4_slot = {
 
 	herk_love_and_spices = {
 		icon = mission_trade_company_region_abroad
-		position = 6
+		position = 5
 		provinces_to_highlight = {
 			owned_by = ROOT
 			is_owned_by_trade_company = yes
@@ -545,6 +590,13 @@ HR0_5_slot = {
 			calc_true_if = {
 				amount = 3
 				all_subject_country = { is_colonial_nation_of = ROOT } 
+			}
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				amount = 100
+				OR = {
+					continent = north_america
+					continent = south_america
+				}
 			}
 		}
 
@@ -627,7 +679,7 @@ HR0_5_slot = {
 
 	herk_company_district = {
 		icon = mission_chinese_general_riding
-		position = 7
+		position = 6
 		required_missions = { herk_love_and_spices } 
 		provinces_to_highlight = {
 			owned_by = ROOT
