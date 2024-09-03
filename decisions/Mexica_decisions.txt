@@ -23,6 +23,7 @@ country_decisions = {
 				OR= {
 					full_idea_group = exploration_ideas
 					tag = FJ0
+					tag = FJ9
 				}
 				has_opinion = {
 					who = ROOT
@@ -105,16 +106,34 @@ country_decisions = {
 		potential = {
 			tag = MX0
 			NOT = {has_country_flag = mexican_vinland_treaty}
-			exists = FJ0
+			OR = {
+				exists = FJ0
+				exists = FJ9
+			}
 		}
 		provinces_to_highlight = {
-			is_capital_of = FJ0
+			OR = {
+				is_capital_of = FJ0
+				is_capital_of = FJ9
+			}
 		}
 		allow = {
-			alliance_with = FJ0
-			trust = {
-				who = FJ0
-				value = 90
+			if = {
+				limit = {
+					exists = FJ9
+				}
+				alliance_with = FJ9
+				trust = {
+					who = FJ9
+					value = 90
+				}
+			}
+			else = {
+				alliance_with = FJ0
+				trust = {
+					who = FJ0
+					value = 90
+				}
 			}
 		}
 		effect = {
@@ -235,7 +254,7 @@ country_decisions = {
 			OR = {
 				tag = MX0
 				tag = FJ0
-				tag = FJ9
+					tag = FJ9
 			}
 			has_country_flag = mexican_vinland_treaty
 			if = {
@@ -280,7 +299,7 @@ country_decisions = {
 				limit = {
 					OR = {
 						tag = FJ0
-						tag = FJ9
+					tag = FJ9
 					}
 				}
 				inherit = MX0
