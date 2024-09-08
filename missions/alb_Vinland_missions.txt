@@ -768,17 +768,30 @@ Vinland_5_slot = {
 		icon = trade_with_the_natives
 		position = 2
 		required_missions = { vin_going_south } 
-		provinces_to_highlight = { region = northeast_america_region } 
+		provinces_to_highlight = { 
+			region = northeast_america_region
+			country_or_non_sovereign_subject_holds = ROOT
+			has_port = yes
+			NOT = {
+				OR = {
+					has_trade_building_trigger = yes
+					development = 15
+				}
+			}
+		} 
 
 		trigger = {
 			OR = {
 				has_institution = global_trade
-				trader = 5
+				trader = 3
 			}
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
 				value = 12
 				has_port = yes
-				has_trade_building_trigger = yes
+				OR = {
+					has_trade_building_trigger = yes
+					development = 15
+				}
 				region = northeast_america_region
 			}
 		}

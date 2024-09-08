@@ -661,7 +661,34 @@ on_thri_yearly_pulse_2 = {
 		25 = alb_islam_events.9
 	}
 }
-
+on_five_year_pulse = {
+	if = {
+		limit = {
+			OR = {
+				tag = FJ0
+				tag = FJ9
+			}
+			873 = {
+				owned_by = ROOT
+				has_province_modifier = vin_eastern_trade
+			}
+			1034 = {
+				OR = {
+					owned_by = ROOT
+					owner = {
+						alliance_with = ROOT
+					}
+				}
+				NOT = {
+					has_province_modifier = vin_eastern_trade_start
+				}
+			}
+		}
+		country_event = {
+			id = fjal.305
+		}
+	}
+}
 on_mil_tech_taken = {
 	if = {
 		limit = {has_country_flag = army_tradition_from_tech_flag}
