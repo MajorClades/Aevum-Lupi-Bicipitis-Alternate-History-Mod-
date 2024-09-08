@@ -373,11 +373,8 @@ BT0_5_slot = {
 				"
 				first_effect = "
 					add_patriarch_authority = 0.05
-					define_advisor = {
-						type = theologian
-						skill = 2
-						discount = yes
-					}
+					change_religion = impotian
+					capital_scope = { change_religion = impotian } 
 				"
 				second_limit = "
 					SP0 = { exists = no } 
@@ -386,8 +383,11 @@ BT0_5_slot = {
 					}
 				"
 				second_effect = "
-					change_religion = catholic
-					capital_scope = { change_religion = catholic } 
+					define_advisor = {
+						type = theologian
+						skill = 2
+						discount = yes
+					}
 				"
 			}
 		}
@@ -481,7 +481,12 @@ BT0_5_slot = {
 					}
 				"
 				first_effect = "
-					create_union = SP0
+					if = {
+						limit = {
+							SP0 = {ai = yes}
+						}
+						create_union = SP0
+					}
 				"
 				second_limit = "
 					220 = {
