@@ -661,3 +661,42 @@ on_added_to_trade_company = {
 		}
 	}
 }
+
+on_barrage = { #ROOT - barraging country, FROM - barraged province 
+	if = {
+		limit = {
+			has_country_flag = extra_fun_siege_forts_flag
+		}
+		FROM ={
+			random_list ={ 
+				10 = {
+					if ={
+						limit = {
+							has_building = fort_15th
+						}
+						remove_building = fort_15th
+					}
+					else_if = {
+						limit = {
+							has_building = fort_16th
+						}
+						remove_building = fort_16th
+					}
+					else_if = {
+						limit = {
+							has_building = fort_17th
+						}
+						remove_building = fort_17th
+					}
+					else_if = {
+						limit = {
+							has_building = fort_18th
+						}
+						remove_building = fort_18th
+					}
+				}
+				90 ={}
+			}
+		}
+	}
+}

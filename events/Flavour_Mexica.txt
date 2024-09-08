@@ -783,10 +783,7 @@ country_event = {
 			factor = 100
 		}
 		custom_tooltip = MV_TREATY
-		set_country_flag = mexican_vinland_treaty
-		MX0 = {
-			set_country_flag = mexican_vinland_treaty
-		}
+		set_global_flag = mexican_vinland_treaty
 	}
 	option = {
 		name = mexic.15b
@@ -801,23 +798,10 @@ country_event = {
 	picture = ADVISOR_eventPicture
 	hidden = yes
 	trigger = {
-		has_country_flag = mexican_vinland_treaty
+		has_global_flag = mexican_vinland_treaty
 		tag = MX0
 		any_owned_province = {
-			NOT = {
-				area = maryland_area
-			}
-			OR = {
-				region = hudson_bay_region 
-				region = canada_region 
-				region = cascadia_region 
-				region = northeast_america_region  			
-				region = scandinavia_region  
-				region = british_isles_region  
-				area = lake_superior_area
-				area = michigan_area
-				area = wisconsin_area
-			}
+			vinland_treaty_land = yes
 		}
 	}
 	mean_time_to_happen = {
@@ -833,61 +817,33 @@ country_event = {
 		add_truce_with = FJ0
 		every_owned_province = {
 			limit = {
-				region = hudson_bay_region 
+				vinland_treaty_land = yes
 			}
-			cede_province = FJ0
-			add_unrest = -5
-		}
-		every_owned_province = {
-			limit = {
-				region = canada_region 
-			}
-			cede_province = FJ0
-			add_unrest = -5
-		}
-		every_owned_province = {
-			limit = {
-				region = cascadia_region 
-			}
-			cede_province = FJ0
-			add_unrest = -5
-		}
-		every_owned_province = {
-			limit = {
-				region = northeast_america_region  
-				NOT = {
-					area = maryland_area
+			if = {
+				limit = {
+					exists = FJ9
+				}
+				cede_province = FJ9
+				if = {
+					limit = {
+						is_core = ROOT
+					}
+					add_core = FJ9
+					remove_core = ROOT
 				}
 			}
-			cede_province = FJ0
-			add_unrest = -5
-		}
-		every_owned_province = {
-			limit = {
-				region = scandinavia_region  
-			}
-			cede_province = FJ0
-			add_unrest = -5
-		}
-		every_owned_province = {
-			limit = {
-				region = british_isles_region  
-			}
-			cede_province = FJ0
-			add_unrest = -5
-		} 
-		every_owned_province = {
-			limit = {
-				OR = {
-					area = lake_superior_area
-					area = michigan_area
-					area = wisconsin_area
+			else = {
+				cede_province = FJ0
+				if = {
+					limit = {
+						is_core = ROOT
+					}
+					add_core = FJ0
+					remove_core = ROOT
 				}
 			}
-			cede_province = FJ0
 			add_unrest = -5
 		}
-
 	}
 
 }
@@ -898,24 +854,13 @@ country_event = {
 	picture = ADVISOR_eventPicture
 	hidden = yes
 	trigger = {
-		has_country_flag = mexican_vinland_treaty
-		tag = FJ0
-		tag = FJ9
+		has_global_flag = mexican_vinland_treaty
+		OR = {
+			tag = FJ0
+			tag = FJ9
+		}
 		any_owned_province = {
-			OR = {
-				region = great_plains_region 
-				region = mississippi_region 
-				region = southeast_america_region 
-				region = california_region  
-				region = rio_grande_region  
-				region = mexico_region  
-				region = central_america_region  
-				area = maryland_area
-				area = ohio_country_area
-				area = illinois_country_area
-				area = southern_illinois_area
-				area = miami_river_area
-			}
+			mexican_treaty_land = yes
 		}
 	}
 	mean_time_to_happen = {
@@ -931,68 +876,19 @@ country_event = {
 		add_truce_with = MX0
 		every_owned_province = {
 			limit = {
-				region = great_plains_region 
+				mexican_treaty_land = yes
 			}
 			cede_province = MX0
-			add_unrest = -5
-		}
-		every_owned_province = {
-			limit = {
-				region = mississippi_region 
-			}
-			cede_province = MX0
-			add_unrest = -5
-		}
-		every_owned_province = {
-			limit = {
-				region = southeast_america_region 
-			}
-			cede_province = MX0
-			add_unrest = -5
-		}
-		every_owned_province = {
-			limit = {
-				region = california_region  
-			}
-			cede_province = MX0
-			add_unrest = -5
-		}
-		every_owned_province = {
-			limit = {
-				region = rio_grande_region  
-			}
-			cede_province = MX0
-			add_unrest = -5
-		}
-		every_owned_province = {
-			limit = {
-				region = mexico_region  
-			}
-			cede_province = MX0
-			add_unrest = -5
-		} 
-		every_owned_province = {
-			limit = {
-				region = central_america_region  
-			}
-			cede_province = MX0
-			add_unrest = -5
-		} 
-		every_owned_province = {
-			limit = {
-				OR = {
-					area = maryland_area
-					area = ohio_country_area
-					area = illinois_country_area
-					area = southern_illinois_area
-					area = miami_river_area
+			if = {
+				limit = {
+					is_core = ROOT
 				}
+				add_core = MX0
+				remove_core = ROOT
 			}
-			cede_province = MX0
 			add_unrest = -5
 		}
 	}
-
 }
 country_event = {
 	id = mexic.18
@@ -1001,7 +897,7 @@ country_event = {
 	picture = ADVISOR_eventPicture
 	hidden = yes
 	trigger = {
-		has_country_flag = mexican_vinland_treaty
+		has_global_flag = mexican_vinland_treaty
 		tag = FJ0
 		tag = FJ9
 		NOT = {
