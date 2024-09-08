@@ -117,7 +117,7 @@ HR0_1_slot = {
 				}
 				NOT = { region = mashriq_region } 
 				has_port = yes
-				province_has_center_of_trade_of_level = 1
+				province_has_center_of_trade_of_level = 2
 			}
 		}
 
@@ -126,6 +126,7 @@ HR0_1_slot = {
 				name = "herk_free_trade_ships"
 				duration = -1
 			}
+			add_years_of_income = 1
 		}
 	}
 
@@ -162,16 +163,30 @@ HR0_2_slot = {
 			herk_improve_marines
 			herk_cultural_evolution
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				province_id = 226
+				province_id = 1751
+			}
+			NOT = {
+				AND = {
+					owned_by = ROOT
+					num_of_buildings_in_province = 4
+					development = 20
+				}
+			}
+		} 
 
 		trigger = {
-			OR = {
-				full_idea_group = maritime_ideas
-				full_idea_group = naval_ideas
-				AND = {
-					full_idea_group = offensive_ideas
-					full_idea_group = defensive_ideas
-				}
+			226 = {
+				owned_by = ROOT
+				num_of_buildings_in_province = 4
+				development = 20
+			}
+			1751 = {
+				owned_by = ROOT
+				num_of_buildings_in_province = 4
+				development = 20
 			}
 		}
 
@@ -334,36 +349,29 @@ HR0_3_slot = {
 		provinces_to_highlight = {  } 
 
 		trigger = {
-			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+			num_of_owned_provinces_with = {
 				value = 10
 				has_dock_building_trigger = yes
 				has_shipyard_building_trigger = yes
+				has_trade_building_trigger = yes
 				base_production = 8
-			}
-			OR = {
-				num_of_caravel = 10
-				num_of_galleon = 5
 			}
 		}
 
 		effect = {
-			simple_dynamic_effect = {
+			complex_dynamic_effect = {
 				first_custom_tooltip = HERK_TT_5
-				first_limit = "has_country_modifier = herk_caravel"
+				first_limit = "has_country_modifier = herk_big_quality"
 				first_effect = "
-					add_country_modifier = {
-						name = herk_caravel_powerup
-						duration = -1
-					}
+					unlock_government_reform = { government_reform = herkulian_quantity_reform } 
 				"
-				second_limit = "has_country_modifier = herk_galleon"
+				second_custom_tooltip = "HERK_TT_5_2"
+				second_limit = "has_country_modifier = herk_big_quantity"
 				second_effect = "
-					add_country_modifier = {
-						name = herk_galleon_powerup
-						duration = -1
-					} 
+					unlock_government_reform = { government_reform = herkulian_quality_reform }
 				"
 			}
+			change_government_reform_progress = 50
 		}
 	}
 
@@ -429,6 +437,27 @@ HR0_3_slot = {
 		}
 
 		effect = {
+			custom_tooltip = herk_upgrade_company_depot_provinces_tt
+			hidden_effect = {
+				for = {
+					amount = 20
+					effect = "
+						random_owned_province = {
+							limit = {
+								is_owned_by_trade_company = yes
+								has_trade_company_investment_in_area = {
+									investment = company_depot
+									investor = ROOT
+								}
+							}
+							add_province_modifier = {
+								name = herk_upgrade_company_depot
+								duration = -1
+							}
+						}
+					"
+				}
+			}
 			add_years_of_owned_provinces_production_income = {
 				years = 1
 				trigger = { is_owned_by_trade_company = yes } 
@@ -460,9 +489,16 @@ HR0_4_slot = {
 		}
 
 		effect = {
-			country_event_with_insight = {
+			country_event_with_insight = { #No special units used willy nilly lol
 				id = herk.2
 				insight_tooltip = HERK_TT_3
+			}
+			custom_tooltip = alb_gain_access_to_african_lateen_tt
+			hidden_effect = {
+				add_country_modifier = {
+					name = atl_get_african_lateens
+					duration = -1
+				}
 			}
 		}
 	}
@@ -522,13 +558,13 @@ HR0_5_slot = {
 		effect = {
 			add_country_modifier = {
 				name = "herk_colonial_success"
-				duration = 10950
+				duration = -1
 			}
 			random_subject_country = {
 				limit = { capital_scope = { colonial_region = colonial_the_carribean }  } 
 				capital_scope = {
-					add_base_tax = 1
-					add_base_production = 2
+					add_base_tax = 3
+					add_base_production = 3
 					add_base_manpower = 3
 				}
 			}
@@ -549,9 +585,13 @@ HR0_5_slot = {
 		}
 
 		effect = {
-			add_country_modifier = {
-				name = "herk_colonial_push"
-				duration = 10950
+			custom_tooltip = hk0_modify_colonial_success_tt
+			hidden_effect = {
+				remove_country_modifier = herk_colonial_success
+				add_country_modifier = {
+					name = herk_colonial_push
+					duration = -1
+				}
 			}
 		}
 	}
@@ -575,14 +615,19 @@ HR0_5_slot = {
 		}
 
 		effect = {
-			custom_tooltip = HERK_TT_4
 			unlock_government_reform = { government_reform = herkulian_colonial_power_reform } 
-			custom_tooltip = unlock_government_reform_tooltip
-			tooltip = { add_government_reform = herkulian_colonial_power_reform } 
 			custom_tooltip = empty_line_tt
 			unlock_government_reform = { government_reform = herkulian_colonial_trade_reform } 
-			custom_tooltip = unlock_government_reform_tooltip
-			tooltip = { add_government_reform = herkulian_colonial_trade_reform } 
+			custom_tooltip = HERK_TT_4
+			custom_tooltip = empty_line_tt
+			custom_tooltip = hk0_modify_colonial_success_2_tt
+			hidden_effect = {
+				remove_country_modifier = herk_colonial_push
+				add_country_modifier = {
+					name = herk_colonial_empire
+					duration = -1
+				}
+			}
 		}
 	}
 
@@ -620,6 +665,15 @@ HR0_5_slot = {
 						name = "herk_integral_part"
 						duration = -1
 					}
+				}
+			}
+			custom_tooltip = empty_line_tt
+			custom_tooltip = hk0_modify_colonial_success_3_tt
+			hidden_effect = {
+				remove_country_modifier = herk_colonial_empire
+				add_country_modifier = {
+					name = herk_colonial_hegemon
+					duration = -1
 				}
 			}
 		}
@@ -661,6 +715,12 @@ HR0_5_slot = {
 						}
 					}
 					every_neighbor_province = { add_permanent_claim = ROOT } 
+					random_list = {
+						50 = {}
+						50 = {
+							change_culture = ROOT
+						}
+					}
 				}
 			}
 		}

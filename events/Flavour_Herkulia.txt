@@ -36,14 +36,14 @@ country_event = {
 	option = {
 		name = herk.2a
 		add_country_modifier = {
-			name = herk_caravel
+			name = herk_big_quantity
 			duration = -1
 		}
 	}
 	option = {
 		name = herk.2b
 		add_country_modifier = {
-			name = herk_galleon
+			name = herk_big_quality
 			duration = -1
 		}
 	}
@@ -59,24 +59,68 @@ country_event = {
 	option = {
 		name = herk.3a
 		custom_tooltip = HERK_TT_8b
-		hidden_effect = {
-			every_owned_province = {
-				limit = {
-					is_owned_by_trade_company = yes
+		tooltip = {
+			random_list = {
+				60 = {
+					add_base_production = 1
 				}
-				add_or_upgrade_trade_building = yes
+				40 = {
+					add_or_upgrade_trade_building = yes
+				}
+			}
+		}
+		hidden_effect = {
+			for = {
+				amount = 20
+				effect = "
+					random_owned_province = {
+						limit = {
+							is_owned_by_trade_company = no
+						}
+						random_list = {
+							60 = {
+								add_base_production = 1
+							}
+							40 = {
+								add_or_upgrade_trade_building = yes
+							}
+						}
+					}
+				"
 			}
 		}
 	}
 	option = {
 		name = herk.3b
 		custom_tooltip = HERK_TT_8c
-		hidden_effect = {
-			every_owned_province = {
-				limit = {
-					is_owned_by_trade_company = no
+		tooltip = {
+			random_list = {
+				60 = {
+					add_base_production = 1
 				}
-				add_or_upgrade_trade_building = yes
+				40 = {
+					add_or_upgrade_trade_building = yes
+				}
+			}
+		}
+		hidden_effect = {
+			for = {
+				amount = 20
+				effect = "
+					random_owned_province = {
+						limit = {
+							is_owned_by_trade_company = no
+						}
+						random_list = {
+							60 = {
+								add_base_production = 1
+							}
+							40 = {
+								add_or_upgrade_trade_building = yes
+							}
+						}
+					}
+				"
 			}
 		}
 	}

@@ -398,6 +398,47 @@ aldabban_failure_reform = {
 	}
 }
 
+#LEVEL 5 MIL
+herkulian_quantity_reform = {
+	allow_normal_conversion = yes
+	icon = "armerica_explo_reform"
+	potential = {
+		has_unlocked_government_reform = { government_reform = herkulian_colonial_power_reform }
+	}
+	modifiers = {
+		global_ship_cost = -0.15
+		naval_maintenance_modifier = -0.1
+		naval_forcelimit_modifier = 0.15
+	}
+	effect = {
+		remove_country_modifier = herk_big_quantity
+	}
+	
+	ai = {
+		factor = 1
+	}
+}
+
+herkulian_quality_reform = {
+	allow_normal_conversion = yes
+	icon = "armerica_explo_reform"
+	potential = {
+		has_unlocked_government_reform = { government_reform = herkulian_quality_reform }
+	}
+	modifiers = {
+		naval_morale = 0.15
+		ship_durability = 0.1
+		leader_naval_fire = 1
+	}
+	effect = {
+		remove_country_modifier = herk_big_quantity
+	}
+	
+	ai = {
+		factor = 1
+	}
+}
+
 #LEVEL 7 REGIONALISM
 
 herkulian_colonial_power_reform = {
@@ -405,11 +446,6 @@ herkulian_colonial_power_reform = {
 	icon = "tribal_martial_society"
 	potential = {
 		has_unlocked_government_reform = { government_reform = herkulian_colonial_power_reform }
-	}
-	trigger = {
-		NOT = {
-			has_reform = herkulian_colonial_trade_reform
-		}
 	}
 	modifiers = {
 		reduced_liberty_desire_on_other_continent = 10
@@ -429,11 +465,6 @@ herkulian_colonial_trade_reform = {
 	icon = "tribal_martial_society"
 	potential = {
 		has_unlocked_government_reform = { government_reform = herkulian_colonial_trade_reform }
-	}
-	trigger = {
-		NOT = {
-			has_reform = herkulian_colonial_power_reform
-		}
 	}
 	modifiers = {
 		trade_efficiency = 0.1
