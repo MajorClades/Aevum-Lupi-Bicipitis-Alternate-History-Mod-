@@ -93,3 +93,79 @@ khitan_italian_company = {
 	max_size = 30
 	manpower_pool = 30 
 }
+# Iberian mercenari
+merc_argentine_company = {
+    regiments_per_development = 0.1
+    home_province = 215 
+	cavalry_cap = 0
+	artillery_weight = 0.1
+	sprites = { dlc056_lan_sprite_pack sav_base_sprite_pack westerngfx_sprite_pack }
+    trigger = {
+		is_allowed_to_recruit_mercenaries = yes
+		OR = {
+			capital_scope = { 
+				region = iberia_region
+			}
+			has_country_modifier = mercenaries_to_the_standard
+			has_country_modifier = glut_of_mercs
+		}
+	}
+	modifier = {
+		can_bypass_forts = yes
+	}
+	min_size = 6
+	max_size = 30   
+	manpower_pool = 30
+}
+
+merc_vogadia_loyals = {
+    regiments_per_development = 0.5
+    home_province = 215 
+	cavalry_cap = 6
+	cavalry_weight = 0.2
+	artillery_weight = 0.3
+	sprites = { dlc056_lan_sprite_pack sav_base_sprite_pack westerngfx_sprite_pack }
+    trigger = {
+		has_unlocked_merc_company = {
+			merc_company = merc_vogadia_loyals
+		}
+	}
+	modifier = {
+		land_morale = 0.1
+		morale_damage_received = -0.1
+		recover_army_morale_speed = 0.1
+		leader_land_shock = 1
+	}
+	min_size = 12
+	max_size = 32   
+	manpower_pool = 50
+}
+
+merc_the_rock = {
+    regiments_per_development = 0.1
+    home_province = 226 
+	cavalry_cap = 0
+	artillery_weight = 0.2
+	sprites = { dlc056_lan_sprite_pack sav_base_sprite_pack westerngfx_sprite_pack }
+    trigger = {
+		is_allowed_to_recruit_mercenaries = yes
+		OR = {
+			capital_scope = { 
+				OR = {
+					region = iberia_region
+					region = maghreb_region
+				}
+			}
+			has_country_modifier = mercenaries_to_the_standard
+			has_country_modifier = glut_of_mercs
+		}
+	}
+	modifier = {
+		land_attrition = -0.1
+		leader_siege = 1
+		max_general_siege = 2
+	}
+	min_size = 6
+	max_size = 20   
+	manpower_pool = 20
+}

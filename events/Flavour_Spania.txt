@@ -1,0 +1,106 @@
+namespace = span
+
+country_event = {
+	id = span.1
+	title = span.1.test
+	desc = span.1.desc
+	picture = EMPEROR_eventPicture
+	
+	trigger = {
+		tag = SP0
+		SO0 = {
+			NOT = {
+				num_of_owned_provinces_with = {
+					value = 5
+				}
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 20
+	}
+	option = {
+		name = span.1a
+		change_religion = catholic
+		capital_scope = {
+			change_religion = catholic
+		}
+		add_country_modifier = {
+			name = spa_impotian_failures
+			duration = 10950
+		}
+		add_stability = -1
+	}
+	option = {
+		name = span.1b
+		create_union = SO0
+		add_stability = -1
+	}
+	option = {
+		name = span.1c
+	}
+}
+
+country_event = {
+	id = span.2
+	title = span.2.test
+	desc = span.2.desc
+	picture = EMPEROR_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = span.2a
+		emperor = {
+			add_imperial_influence = 10
+		}
+		SP0 = {
+			add_stability = 1
+			set_in_empire = yes
+		}
+	}
+	option = {
+		name = span.2b
+		SP0 = {
+			country_event = {
+				id = span.3
+			}
+		}
+	}
+}
+
+country_event = {
+	id = span.3
+	title = span.3.test
+	desc = span.3.desc
+	picture = EMPEROR_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = span.3a
+		SP0 = {
+			add_stability = 1
+			change_religion = impotian
+			capital_scope = {
+				change_religion = impotian
+			}
+		}
+	}
+	option = {
+		name = span.2b
+		SP0 = {
+			change_religion = arian
+			capital_scope = {
+				change_religion = arian
+			}
+		}
+		hidden_effect = {
+			set_country_flag = arian_fervor_var_set
+			set_variable = {
+				which = arian_fervor_var
+				value = 20
+			}
+		}
+	}
+}

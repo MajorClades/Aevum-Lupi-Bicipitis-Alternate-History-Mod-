@@ -1,0 +1,490 @@
+BU0_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = BU0 } 
+
+	buo_wine_red = {
+		icon = mission_finest_carpets
+		position = 1
+		provinces_to_highlight = {
+			owned_by = ROOT
+			OR = {
+				trade_goods = wine
+				trade_goods = glass
+			}
+		}
+
+		trigger = {
+			owns = 227
+			227 = {
+				development = 20
+			}
+			development_in_provinces = {
+				value = 40
+				OR = {
+					trade_goods = wine
+					trade_goods = glass
+				}
+			}
+		}
+
+		effect = { 
+			227 = { 
+				change_trade_goods = wine
+				add_province_modifier = {
+					name = "buo_red_wine"
+					duration = -1
+				} 
+			}  
+		} 
+	}
+
+	buo_burgundian_colors = {
+		icon = bohemian_crystal
+		position = 2
+		required_missions = { buo_wine_red } 
+		provinces_to_highlight = {
+			trade_goods = wine
+			region = iberia_region
+		}
+
+		trigger = {
+			owns = 227
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 6
+				trade_goods = wine
+				region = iberia_region
+			}
+		}
+
+		effect = {
+			set_country_flag = alb_unlock_vineyards_flag
+			custom_tooltip = alb_unlock_vineyards_tt
+		}
+	}
+
+	buo_vineyards = {
+		icon = mission_wine_monopolies
+		position = 3
+		required_missions = { buo_burgundian_colors } 
+		provinces_to_highlight = {
+			trade_goods = wine
+			owned_by = ROOT
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 8
+				trade_goods = wine
+				has_manufactory_trigger = yes
+			}
+		}
+
+		effect = {
+			add_years_of_owned_provinces_production_income = {
+				years = 10
+				trigger = { trade_goods = wine } 
+				custom_tooltip = MONOPOLY_INCOME_WINE_DESC
+			}
+			change_price = {
+				trade_goods = wine
+				key = welovegettingdrunck
+				value = 0.2
+				duration = -1
+			}
+		}
+	}
+
+	buo_land = {
+		icon = mission_claim_hispaniola
+		position = 5
+		required_missions = { buo_water } 
+		provinces_to_highlight = { colonial_region = colonial_the_carribean } 
+
+		trigger = {
+			any_subject_country = {
+				is_colonial_nation_of = ROOT
+				capital_scope = { colonial_region = colonial_the_carribean } 
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "buo_vacation_1"
+				duration = 10950
+			}
+			custom_tooltip = BURGUNDIA_TT_3
+			tooltip = {
+				add_country_modifier = {
+					name = "buo_vacation_2"
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				random_subject_country = {
+					limit = {
+						is_colonial_nation_of = ROOT
+						capital_scope = { colonial_region = colonial_the_carribean } 
+					}
+					add_country_modifier = {
+						name = "buo_vacation_2"
+						duration = -1
+					}
+				}
+			}
+		}
+	}
+}
+BU0_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = BU0 } 
+
+	buo_betting = {
+		icon = mission_reclaim_andalucia
+		position = 2
+		required_missions = { buo_the_republic } 
+		provinces_to_highlight = { area = bettia_area } 
+
+		trigger = {
+			bettia_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			bettia_area = {
+				add_province_modifier = {
+					name = "buo_crush_impotians"
+					duration = 10950
+				}
+			}
+			macaronesia_area = {
+				discover_country = ROOT
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	buo_water = {
+		icon = mission_look_west
+		position = 4
+		required_missions = { buo_betting } 
+		provinces_to_highlight = { area = macaronesia_area } 
+
+		trigger = {
+			navy_size = 30
+			any_owned_province = { area = macaronesia_area } 
+		}
+
+		effect = {
+			define_explorer = {
+				name = "Alexandre du Forcer"
+				shock = 2
+				fire = 2
+				manuever = 4
+			}
+			add_country_modifier = {
+				name = "buo_disco"
+				duration = 10950
+			}
+		}
+	}
+
+	buo_cool_reason_to_play = {
+		icon = mission_colonise_brazil
+		position = 5
+		required_missions = { buo_water } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			years_of_manpower = 1
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 25
+				OR = {
+					continent = north_america
+					continent = south_america
+				}
+			}
+		}
+
+		effect = {
+			add_yearly_manpower = -1
+			custom_tooltip = chance_to_double_mil_a_colonial_province_tt
+			set_country_flag = chance_to_double_mil_a_colonial_province_flag
+		}
+	}
+}
+BU0_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = BU0 } 
+
+	buo_the_republic = {
+		icon = mission_alliances
+		position = 1
+		provinces_to_highlight = {
+			is_capital = yes
+			region = iberia_region
+		}
+
+		trigger = {
+			OR = {
+				any_ally = { capital_scope = { region = iberia_region }  } 
+				prestige = 25
+			}
+		}
+
+		effect = {
+			bettia_area = { add_permanent_claim = ROOT } 
+			toledo_area = { add_permanent_claim = ROOT } 
+			beieras_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	buo_sweat = {
+		icon = mission_marwari_horses
+		position = 2
+		required_missions = { buo_the_republic } 
+		provinces_to_highlight = { area = beieras_area } 
+
+		trigger = {
+			beieras_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "buo_good_horse"
+				duration = 10950
+			}
+			leon_area = { add_permanent_claim = ROOT } 
+			galicia_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	buo_iberian_power = {
+		icon = mission_empire
+		position = 3
+		required_missions = {
+			buo_betting
+			buo_sweat
+			buo_told_em
+		}
+		provinces_to_highlight = { region = iberia_region } 
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 35
+				region = iberia_region
+			}
+		}
+
+		effect = {
+			custom_tooltip = BURGUNDIA_TT_1
+			if = {
+				limit = { has_country_modifier = buo_good_horse } 
+				custom_tooltip = YES_MARK
+				add_country_modifier = {
+					name = "buo_good_horse"
+					duration = -1
+				}
+			}
+			else = { custom_tooltip = NOT_MARK } 
+			custom_tooltip = empty_line_tt
+			iberia_region = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	buo_iberian_lord = {
+		icon = hispaniae
+		position = 5
+		required_missions = { buo_iberian_power } 
+		provinces_to_highlight = { region = iberia_region } 
+
+		trigger = {
+			iberia_region = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			add_adm_power = 100
+			add_dip_power = 100
+			add_mil_power = 100
+			add_ruler_modifier = { name = "buo_lords_of_iberia" } 
+		}
+	}
+}
+BU0_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = BU0 } 
+
+	buo_told_em = {
+		icon = mission_impaled_soldies
+		position = 2
+		required_missions = { buo_the_republic } 
+		provinces_to_highlight = { area = toledo_area } 
+
+		trigger = {
+			toledo_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			toledo_area = {
+				add_province_modifier = {
+					name = "buo_crush_impotians"
+					duration = 10950
+				}
+			}
+			castille_area = { add_permanent_claim = ROOT } 
+			valencia_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	buo_cotian_wine = {
+		icon = mission_goths_and_romans
+		position = 4
+		required_missions = { buo_iberian_power } 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 197
+				province_id = 209
+				province_id = 210
+			}
+		}
+
+		trigger = {
+			owns = 197
+			owns = 209
+			owns = 210
+		}
+
+		effect = { 
+
+			coth_old_border = { add_permanent_claim = ROOT }  
+		} 
+	}
+}
+BU0_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = BU0 } 
+
+	buo_press_spania = {
+		icon = answer_the_roman_question
+		position = 1
+		provinces_to_highlight = { is_capital_of = PAP } 
+
+		trigger = {
+			if = {
+				limit = { ai = yes } 
+				papal_influence = 20
+			}
+			else = {
+				OR = {
+					PAP = {
+						has_opinion = {
+							who = ROOT
+							value = 180
+						}
+					}
+					papal_influence = 50
+				}
+			}
+		}
+
+		effect = {
+			if = {
+				limit = {
+					PAP = {
+						has_opinion = {
+							who = ROOT
+							value = 180
+						}
+					}
+				}
+			}
+			else = { add_papal_influence = -50 } 
+			add_army_tradition_or_mil_power = { amount = 10 } 
+			country_event = { id = burgu.1 } 
+		}
+	}
+
+	buo_paid_in_blood = {
+		icon = mission_unite_home_region
+		position = 3
+		required_missions = {
+			buo_told_em
+			buo_press_spania
+		}
+		provinces_to_highlight = { is_core = SP0 } 
+
+		trigger = {
+			SP0 = {
+				custom_trigger_tooltip = {
+					tooltip = burgundia_kills_spania
+					all_core_province = { NOT = { owned_by = SP0 }  } 
+				}
+			}
+		}
+
+		effect = {
+			country_event_with_insight = {
+				id = burgu.2
+				insight_tooltip = BURGUNDIA_TT_2
+			}
+		}
+	}
+
+	buo_a_new_iberia = {
+		icon = hispanic_monarchy
+		position = 5
+		required_missions = { buo_paid_in_blood } 
+		provinces_to_highlight = {
+			OR = {
+				culture = bettian
+				culture = spaniard
+			}
+		}
+
+		trigger = {
+			dip_power = 300
+			owns_all_provinces = { culture = bettian } 
+			owns_all_provinces = { culture = spaniard } 
+		}
+
+		effect = {
+			add_dip_power = -300
+			custom_tooltip = BURGUNDIA_TT_4
+			hidden_effect = {
+				every_owned_province = {
+					limit = { culture = bettian } 
+					change_culture = burgund
+				}
+				every_owned_province = {
+					limit = { culture = spaniard } 
+					change_culture = iberisch_spaniard
+				}
+			}
+		}
+	}
+}
