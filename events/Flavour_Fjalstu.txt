@@ -4,7 +4,7 @@ country_event = {
 	id = fjal.1
 	title = fjal.1.test
 	desc = fjal.1.desc
-	picture = ANGRY_MOB_eventPicture
+	picture = NORSE_TEMPLE_eventPicture
 	
 	is_triggered_only = yes
 	option = {
@@ -15,7 +15,7 @@ country_event = {
 		change_tag = FJ9
 		custom_tooltip = VINLAND_CUSTOM
 		swap_free_idea_group = yes
-		# swap_non_generic_missions = yes
+		swap_non_generic_missions = yes
 	}
 }
 
@@ -228,6 +228,719 @@ country_event = {
 		} 
 	}
 }
+
+country_event = {
+	id = fjal.8
+	title = fjal.8.test
+	desc = fjal.8.desc
+	picture = TRADE_GOODS_FURS_FISH_AND_SALT_eventPicture
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			tag = FJ0
+			tag = FJ9
+		}
+		is_year = 1525
+		owns = 982
+	}
+	mean_time_to_happen = {
+		months = 60
+	}
+	option = {
+		name = fjal.8a
+		982 = {
+			add_province_modifier = {
+				name = fja_basque_trade
+				duration = 36500
+			}
+		}
+	}
+	option = {
+		name = fjal.8b
+		982 = {
+			change_trade_goods = fish
+			add_province_modifier = {
+				name = fja_basque_trade
+				duration = -1
+			}
+		}
+	}
+}
+
+country_event = {
+	id = fjal.9
+	title = fjal.9.test
+	desc = fjal.9.desc
+	picture = TRADE_GOODS_FURS_FISH_AND_SALT_eventPicture
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			tag = FJ0
+			tag = FJ9
+		}
+		any_neighbor_country = {
+			has_idea_group = exploration_ideas
+			NOT = {
+				tag = ICE
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 60
+	}
+	option = {
+		name = fjal.9a
+		add_treasury = 500
+		set_country_flag = fjal_allowed_colonizers
+		hidden_effect = {
+			random_neighbor_country = {
+				limit = {
+					has_idea_group = exploration_ideas
+					NOT = {
+						tag = ICE
+					}
+				}
+				set_country_flag = fjal_allowed_tag
+			}
+		}
+	}
+	option = {
+		name = fjal.9b
+		random_neighbor_country = {
+			limit = {
+				has_idea_group = exploration_ideas
+				NOT = {
+					tag = ICE
+				}
+			}
+			add_trust = {
+				who = ROOT
+				value = -30
+				mutual = yes
+			}
+		}
+	}
+}
+
+country_event = {
+	id = fjal.10
+	title = fjal.10.test
+	desc = fjal.10.desc
+	picture = COLONIZATION_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = fjal.10a
+		trigger = {
+			968 = {
+				is_empty = yes
+			}
+		}
+		add_manpower = -0.7
+		add_adm_power = -50
+		968 = {
+			cede_province = ROOT
+			add_core = ROOT
+		}
+	}
+	option = {
+		name = fjal.10b
+		trigger = {
+			965 = {
+				is_empty = yes
+			}
+		}
+		add_manpower = -0.7
+		add_adm_power = -50
+		965 = {
+			cede_province = ROOT
+			add_core = ROOT
+		}
+	}
+	option = {
+		name = fjal.10c
+		trigger = {
+			957 = {
+				is_empty = yes
+			}
+		}
+		add_manpower = -0.7
+		add_adm_power = -75
+		957 = {
+			cede_province = ROOT
+			add_core = ROOT
+		}
+	}
+	option = {
+		name = fjal.10d
+		add_manpower = -0.7
+		add_adm_power = -75
+		random_province = {
+			limit = {
+				is_empty = yes
+				region = northeast_america_region
+				has_port = yes
+				NOT = {	province_id = 968	}
+				NOT = {	province_id = 965	}
+				NOT = {	province_id = 957	}
+			}
+			cede_province = ROOT
+			add_core = ROOT
+		}
+	}
+	option = {
+		name = fjal.10e
+		add_manpower = 1
+		add_adm_power = 75
+	}
+}
+
+country_event = {
+	id = fjal.11
+	title = fjal.11.test
+	desc = fjal.11.desc
+	picture = EXPLORERS_eventPicture
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			set_country_flag = choose_the_route_vin
+			hudson_bay_region = {
+				discover_country = ROOT
+			}
+		}
+	}
+	option = {
+		name = fjal.11a
+		4919 = {
+			colonize_or_core_fj9 = yes
+		}
+		custom_tooltip = VINLAND_TT_3a
+		set_country_flag = north_route_vin
+	}
+	option = {
+		name = fjal.11b
+		4919 = {
+			colonize_or_core_fj9 = yes
+		}
+		custom_tooltip = VINLAND_TT_3a
+		set_country_flag = climb_route_vin
+
+	}
+	option = {
+		name = fjal.11c
+		add_country_modifier = {
+			name = colonial_accommodation_mod
+			duration = 10950
+		}
+		clr_country_flag = choose_the_route_vin
+	}
+}
+
+country_event = {
+	id = fjal.12
+	title = fjal.12.test
+	desc = fjal.12.desc
+	picture = NOBLE_ESTATE_TAKE_OVER_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = fjal.12a
+		set_country_flag = vinland_in_rebellion
+		add_country_modifier = {
+			name = innovative_modifier
+			duration = 3650
+		}
+		add_country_modifier = {
+			name = "the_abolish_slavery_act"
+			duration = -1
+		}
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					trade_goods = slaves
+				}
+				change_trade_goods = unknown
+				remove_building = tradecompany
+				if = {
+					limit = { has_province_modifier = slave_entrepot }
+					remove_province_modifier = slave_entrepot
+				}
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					estate_territory = {
+						estate = estate_nobles
+						territory = 2
+					}
+				}
+			}
+			clr_country_flag = vinland_in_rebellion
+			set_country_flag = VINLAND_EMPIRE
+		}
+	}
+}
+
+country_event = {
+	id = fjal.13
+	title = fjal.13.test
+	desc = fjal.13.desc
+	picture = NOBLE_ESTATE_TAKE_OVER_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = fjal.13a
+		add_estate_loyalty = {
+			estate = estate_nobles
+			loyalty = -5
+		}
+		random_owned_province = {
+			limit = {
+				has_seat_in_parliament = yes
+				is_capital = no
+			}
+			random_list = {
+				50 = {
+					spawn_rebels = {
+						size = 1
+						type = noble_rebels
+					}
+				}
+				50 = {
+					add_devastation = 30
+				}
+			}
+		}
+		random_owned_province = {
+			limit = {
+				has_seat_in_parliament = yes
+				is_capital = no
+			}
+			random_list = {
+				50 = {
+					spawn_rebels = {
+						size = 1
+						type = noble_rebels
+					}
+				}
+				50 = {
+					add_devastation = 30
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = fjal.14
+	title = fjal.14.test
+	desc = fjal.14.desc
+	picture = NOBLE_ESTATE_TAKE_OVER_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = fjal.14a
+		random_owned_province = {
+			limit = {
+				has_seat_in_parliament = yes
+				is_capital = no
+			}
+			random_list = {
+				50 = {
+					spawn_rebels = {
+						size = 1
+						type = noble_rebels
+					}
+				}
+				50 = {
+					add_devastation = 30
+				}
+			}
+		}
+		random_owned_province = {
+			limit = {
+				has_seat_in_parliament = yes
+				is_capital = no
+			}
+			random_list = {
+				50 = {
+					spawn_rebels = {
+						size = 1
+						type = noble_rebels
+					}
+				}
+				50 = {
+					add_devastation = 30
+				}
+			}
+		}
+		random_owned_province = {
+			limit = {
+				has_seat_in_parliament = yes
+				is_capital = no
+			}
+			random_list = {
+				50 = {
+					spawn_rebels = {
+						size = 1
+						type = noble_rebels
+					}
+				}
+				50 = {
+					add_devastation = 50
+				}
+			}
+		}
+		random_owned_province = {
+			limit = {
+				has_seat_in_parliament = yes
+				is_capital = no
+			}
+			random_list = {
+				50 = {
+					spawn_rebels = {
+						size = 1
+						type = noble_rebels
+					}
+				}
+				50 = {
+					add_devastation = 50
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = fjal.15
+	title = fjal.15.test
+	desc = fjal.15.desc
+	picture = NOBLE_ESTATE_TAKE_OVER_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = fjal.15a
+		add_estate_loyalty = {
+			estate = estate_nobles
+			loyalty = -5
+		}
+		change_estate_land_share = {
+			estate = estate_nobles
+			share = -5
+		}
+	}
+}
+
+#country_event = {
+#	id = fjal.16
+#	title = fjal.16.test
+#	desc = fjal.16.desc
+#	picture = NOBLE_ESTATE_TAKE_OVER_eventPicture
+#	trigger = {
+#		had_country_flag = { flag = vinland_in_rebellion days = 3650 }
+#		NOT = {
+#			estate_territory = {
+#				estate = estate_nobles
+#				territory = 2
+#			}
+#		}
+#	}
+#	mean_time_to_happen = {
+#		months = 50
+#	}
+#	option = {
+#		name = fjal.16a
+#		clr_country_flag = vinland_in_rebellion
+#		set_country_flag = VINLAND_EMPIRE
+#	}
+#}
+
+country_event = {
+	id = fjal.17
+	title = fjal.17.test
+	desc = fjal.17.desc
+	picture = NOBLE_ESTATE_TAKE_OVER_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = fjal.17a
+		add_government_reform = vinland_empire_reform
+	}
+}
+
+country_event = {
+	id = fjal.18
+	title = fjal.18.test
+	desc = fjal.18.desc
+	picture = WAR_OF_THE_ROSES_eventPicture
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			tag = FJ0
+			tag = FJ9
+		}
+		has_country_flag = fjal_allowed_colonizers
+		any_war_enemy_country = {
+			is_in_war = {
+				attacker_leader = ROOT
+			}
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 1
+				continent = north_america
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 12
+	}
+	option = {
+		name = fjal.18a
+		add_stability = -1
+		clr_country_flag = fjal_allowed_colonizers
+		every_war_enemy_country = {
+			clr_country_flag = fjal_allowed_tag
+		}
+	}
+}
+country_event = {
+	id = fjal.19
+	title = fjal.19.test
+	desc = fjal.19.desc
+	picture = WAR_OF_THE_ROSES_eventPicture
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			tag = FJ0
+			tag = FJ9
+		}
+		any_war_enemy_country = {
+			is_in_war = {
+				attacker_leader = ROOT
+			}
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 1
+				continent = north_america
+			}
+			has_country_flag = fjal_allowed_tag
+		}
+	}
+	mean_time_to_happen = {
+		months = 12
+	}
+	option = {
+		name = fjal.19a
+		add_stability = -1
+		clr_country_flag = fjal_allowed_colonizers
+		every_war_enemy_country = {
+			clr_country_flag = fjal_allowed_tag
+		}
+	}
+}
+country_event = {
+	id = fjal.20
+	title = fjal.20.test
+	desc = fjal.20.desc
+	picture = NATIVES_LOW_eventPicture
+	trigger = {
+		OR = {
+			tag = FJ0
+			tag = FJ9
+		}
+		NOT = {
+			has_country_modifier = the_abolish_slavery_act
+		}
+		estate_territory = {
+			estate = estate_nobles
+			territory = 5
+		}
+		num_of_owned_provinces_with = {
+			value = 5
+			has_seat_in_parliament = yes
+		}
+	}
+	mean_time_to_happen = {
+		months = 120
+	}
+	option = {
+		name = fjal.20a
+		add_treasury = 100
+		change_estate_land_share = {
+			estate = estate_nobles
+			share = 2
+		}
+	}
+	option = {
+		name = fjal.20b
+		trigger = {
+			any_owned_province = {
+				OR = {
+					culture_group = apachean
+					culture_group = eastern_algonquian
+					culture_group = plains_algonquian
+					culture_group = iroquoian
+					culture_group = siouan
+					culture_group = caddoan
+					culture_group = central_algonquian
+				}
+			}
+		}
+		random_owned_province = {
+			limit = {
+				OR = {
+					culture_group = apachean
+					culture_group = eastern_algonquian
+					culture_group = plains_algonquian
+					culture_group = iroquoian
+					culture_group = siouan
+					culture_group = caddoan
+					culture_group = central_algonquian
+				}
+			}
+			random_list = {
+				40 = {
+					change_trade_goods = slaves
+				}
+				60 = {
+					add_local_autonomy = 40
+				}
+			}
+		}
+		add_treasury = 300
+	}
+}
+country_event = {
+	id = fjal.21
+	title = fjal.21.test
+	desc = fjal.21.desc
+	picture = SHIP_SAILING_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = fjal.21a
+		add_country_modifier = {
+			name = vin_stronger_vikings
+			duration = -1
+		}
+	}
+	option = {
+		name = fjal.21b
+		add_country_modifier = {
+			name = vin_stronger_ships
+			duration = -1
+		}
+	}
+	option = {
+		name = fjal.21c
+		add_country_modifier = {
+			name = vin_mixed_doctrine
+			duration = -1
+		}
+	}
+	option = {
+		name = fjal.21d
+		trigger = {
+			OR = {
+				full_idea_group = maritime_ideas
+				full_idea_group = naval_ideas
+			}
+		}
+		add_country_modifier = {
+			name = vin_stronger_vikings
+			duration = -1
+		}
+		add_country_modifier = {
+			name = vin_stronger_ships
+			duration = -1
+		}
+	}
+}
+
+country_event = {
+	id = fjal.22
+	title = fjal.22.test
+	desc = fjal.22.desc
+	picture = UNIVERSITY_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = fjal.22a
+		add_country_modifier = {
+			name = vin_norse_tech
+			duration = -1
+		}
+	}
+	option = {
+		name = fjal.22b
+		add_country_modifier = {
+			name = vin_better_rulers
+			duration = -1
+		}
+	}
+	option = {
+		name = fjal.22c
+		add_country_modifier = {
+			name = vin_great_advisors
+			duration = -1
+		}
+	}
+}
+country_event = {
+	id = fjal.23
+	title = fjal.23.test
+	desc = fjal.23.desc
+	picture = NORSE_TEMPLE_eventPicture
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			tag = FJ0
+			tag = FJ9
+		}
+		NOT = {
+			calc_true_if = {
+				amount = 5
+				all_province = {
+					region = british_isles_region
+					religion = norse_ragnaroked
+				}
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 60
+	}
+	option = {
+		name = fjal.23a
+		ai_chance = {
+			factor = 80
+		}
+		british_isles_region = {
+			add_permanent_claim = ROOT
+		}
+	}
+	option = {
+		name = fjal.23b
+		ai_chance = {
+			factor = 10
+		}
+		trigger = {
+			SW2 = {
+				exists = yes
+			}
+		}
+		create_union = SW2
+		british_isles_region = {
+			add_permanent_claim = SW2
+		}
+	}
+	option = {
+		name = fjal.23c
+		ai_chance = {
+			factor = 10
+		}
+		trigger = {
+			GA0 = {
+				exists = yes
+			}
+		}
+		create_union = GA0
+		british_isles_region = {
+			add_permanent_claim = GA0
+		}
+	}
+}
 country_event = {
 	id = fjal.302
 	title = fjal.302.test
@@ -237,6 +950,9 @@ country_event = {
 	fire_only_once = yes
 	trigger = {
 		tag = FJ0
+		NOT = {
+			is_year = 1445
+		}
 	}
 	option = {
 		name = fjal.3a
@@ -298,6 +1014,197 @@ country_event = {
 			set_base_tax = 5
 			set_base_production = 5
 			set_base_manpower = 5
+		}
+	}
+}
+
+country_event = {
+	id = fjal.305
+	title = fjal.305.test
+	desc = fjal.305.desc
+	picture = TRADEGOODS_eventPicture
+	trigger = {
+		873 = {
+			owned_by = ROOT
+			has_province_modifier = vin_eastern_trade
+		}
+		1034 = {
+			OR = {
+				owned_by = ROOT
+				owner = {
+					alliance_with = ROOT
+				}
+			}
+			NOT = {
+				has_province_modifier = vin_eastern_trade_start
+			}
+		}
+	}
+	is_triggered_only = yes
+	option = {
+		name = fjal.305a
+		1034 = {
+			add_permanent_province_modifier = {
+				name = vin_eastern_trade_start
+				duration = 1825
+			}
+		}
+		random_list = {
+			10 = {
+				add_treasury = 50
+			}
+			10 = {
+				add_treasury = 100
+			}
+			10 = {
+				add_treasury = 150
+			}
+			10 = {
+				add_treasury = 200
+			}
+			10 = {
+				add_treasury = 250
+			}
+			10 = {
+				add_treasury = 300
+			}
+			10 = {
+				add_treasury = 350
+			}
+			10 = {
+				add_treasury = 400
+			}
+			10 = {
+				add_treasury = 450
+			}
+			10 = {
+				add_treasury = 500
+			}
+		}
+	}
+}
+
+
+country_event = { #for the AI otherwise this cultures would never appear 
+	id = fjal.306
+	title = fjal.306.test
+	desc = fjal.306.desc
+	picture = TRADEGOODS_eventPicture
+	trigger = {
+		ai = yes 
+		OR = {
+			tag = FJ0
+			tag = FJ9
+		}
+		num_of_owned_provinces_with = {
+			value = 1
+			culture_group = eastern_algonquian
+		}
+	}
+	mean_time_to_happen = {
+		months = 60
+	}
+	option = {
+		name = fjal.305a
+		random_owned_province = {
+			limit = {
+				culture_group = eastern_algonquian	
+			}
+			change_culture = rausundian
+		}
+		random_owned_province = {
+			limit = {
+				culture_group = eastern_algonquian	
+			}
+			change_culture = rausundian
+		}
+		random_owned_province = {
+			limit = {
+				culture_group = eastern_algonquian	
+			}
+			change_culture = rausundian
+		}
+	}
+}
+country_event = { #for the AI otherwise this cultures would never appear 
+	id = fjal.307
+	title = fjal.307.test
+	desc = fjal.307.desc
+	picture = TRADEGOODS_eventPicture
+	trigger = {
+		ai = yes 
+		OR = {
+			tag = FJ0
+			tag = FJ9
+		}
+		num_of_owned_provinces_with = {
+			value = 1
+			culture_group = iroquoian
+		}
+	}
+	mean_time_to_happen = {
+		months = 60
+	}
+	option = {
+		name = fjal.305a
+		random_owned_province = {
+			limit = {
+				culture_group = iroquoian
+			}
+			change_culture = verslunling
+		}
+		random_owned_province = {
+			limit = {
+				culture_group = iroquoian
+			}
+			change_culture = verslunling
+		}
+		random_owned_province = {
+			limit = {
+				culture_group = iroquoian
+			}
+			change_culture = verslunling
+		}
+	}
+}
+country_event = { #for the AI otherwise this cultures would never appear 
+	id = fjal.308
+	title = fjal.308.test
+	desc = fjal.308.desc
+	picture = TRADEGOODS_eventPicture
+	trigger = {
+		ai = yes 
+		OR = {
+			tag = FJ0
+			tag = FJ9
+		}
+		num_of_owned_provinces_with = {
+			value = 1
+			culture_group = central_algonquian
+		}
+	}
+	mean_time_to_happen = {
+		months = 60
+	}
+	option = {
+		name = fjal.305a
+		random_owned_province = {
+			limit = {
+				culture_group = central_algonquian
+			}
+			change_culture = skraeling
+		}
+		random_owned_province = {
+			limit = {
+				culture_group = central_algonquian
+			}
+			change_culture = skraeling
+		}
+		random_owned_province = {
+			limit = {
+				culture_group = central_algonquian
+			}
+			change_culture = skraeling
 		}
 	}
 }

@@ -126,7 +126,7 @@ sie_mil_quarter = {
 		#what modifiers are added to the province when we have this project here on this tier
 		province_modifiers = {
 			local_garrison_size = 0.25
-			defensiveness = 0.25
+			local_defensiveness = 0.25
 		}
 
 		#what modifiers are added to the provinces in the map area when we have this project here on this tier
@@ -153,13 +153,13 @@ sie_mil_quarter = {
 
 		#cost to upgrade to this level (0 for tier 0)
 		cost_to_upgrade = {
-			factor = 2500
+			factor = 1500
 		}
 
 		#what modifiers are added to the province when we have this project here on this tier
 		province_modifiers = {
 			local_garrison_size = 0.33
-			defensiveness = 0.5
+			local_defensiveness = 0.5
 			garrison_growth = 0.5
 			supply_limit = 10
 		}
@@ -189,13 +189,13 @@ sie_mil_quarter = {
 
 		#cost to upgrade to this level (0 for tier 0)
 		cost_to_upgrade = {
-			factor = 2500
+			factor = 1500
 		}
 
 		#what modifiers are added to the province when we have this project here on this tier
 		province_modifiers = {
 			local_garrison_size = 1
-			defensiveness = 1
+			local_defensiveness = 1
 			garrison_growth = 1
 			supply_limit = 50
 		}
@@ -373,12 +373,11 @@ sie_dip_quarter = {
 
 		#cost to upgrade to this level (0 for tier 0)
 		cost_to_upgrade = {
-			factor = 2500
+			factor = 1000
 		}
 
 		#what modifiers are added to the province when we have this project here on this tier
 		province_modifiers = {
-			local_build_cost = -0.15
 			allowed_num_of_buildings = 1
 			allowed_num_of_manufactories = 1
 			province_trade_power_value = 25
@@ -409,12 +408,11 @@ sie_dip_quarter = {
 
 		#cost to upgrade to this level (0 for tier 0)
 		cost_to_upgrade = {
-			factor = 2500
+			factor = 1000
 		}
 
 		#what modifiers are added to the province when we have this project here on this tier
 		province_modifiers = {
-			local_build_cost = -0.25
 			allowed_num_of_buildings = 1
 			allowed_num_of_manufactories = 1
 			province_trade_power_value = 50
@@ -427,7 +425,6 @@ sie_dip_quarter = {
 		#what modifiers are added to the country when we have this project here on this tier
 		country_modifiers = {
 			trade_efficiency = 0.1
-			trade_range_modifier = 0.25
 			merchants = 1 
 		}
 
@@ -594,7 +591,7 @@ sie_adm_quarter = {
 
 		#cost to upgrade to this level (0 for tier 0)
 		cost_to_upgrade = {
-			factor = 2500
+			factor = 1500
 		}
 
 		#what modifiers are added to the province when we have this project here on this tier
@@ -629,7 +626,7 @@ sie_adm_quarter = {
 
 		#cost to upgrade to this level (0 for tier 0)
 		cost_to_upgrade = {
-			factor = 2500
+			factor = 1500
 		}
 
 		#what modifiers are added to the province when we have this project here on this tier
@@ -817,7 +814,7 @@ sie_council_quarter = {
 
 		#cost to upgrade to this level (0 for tier 0)
 		cost_to_upgrade = {
-			factor = 2500
+			factor = 1500
 		}
 
 		#what modifiers are added to the province when we have this project here on this tier
@@ -849,7 +846,7 @@ sie_council_quarter = {
 
 		#cost to upgrade to this level (0 for tier 0)
 		cost_to_upgrade = {
-			factor = 2500
+			factor = 1500
 		}
 
 		#what modifiers are added to the province when we have this project here on this tier
@@ -1106,10 +1103,12 @@ goth_castle = {
 	#can our country use it?
 	can_use_modifiers_trigger = {
 		owner = {
-			tag = CO0
-			custom_trigger_tooltip = {
-				tooltip = focus_on_gallia_1_tt
-				has_country_flag = focus_on_gallia_1_flag
+			OR = {
+				tag = CO0
+				custom_trigger_tooltip = {
+					tooltip = alb_monument_unlocked_by_mission_tt
+					has_country_flag = allow_goth_monument_flag
+				}
 			}
 		}
 	}
@@ -3135,6 +3134,14 @@ the_rock = {
 		on_upgraded = {
 			
 		}
+		conditional_modifier = {
+			trigger = { 
+				mission_completed = ib0_toll_of_the_rock
+			}
+			modifier = { 
+				global_prov_trade_power_modifier = 0.05
+			}
+		}
 	}
 
 	tier_2 = {
@@ -3169,6 +3176,14 @@ the_rock = {
 		on_upgraded = {
 		
 		}
+		conditional_modifier = {
+			trigger = { 
+				mission_completed = ib0_toll_of_the_rock
+			}
+			modifier = { 
+				global_prov_trade_power_modifier = 0.1
+			}
+		}
 	}
 
 	tier_3 = {
@@ -3200,6 +3215,14 @@ the_rock = {
 
 		#what effects happen when this tier is achieved
 		on_upgraded = {
+		}
+		conditional_modifier = {
+			trigger = { 
+				mission_completed = ib0_toll_of_the_rock
+			}
+			modifier = { 
+				global_prov_trade_power_modifier = 0.15
+			}
 		}
 	}
 }
@@ -4472,6 +4495,318 @@ arian_cathedral = {
 		conditional_modifier = {
 			trigger = {religion = arian }
 			modifier = {local_missionary_strength = -0.05 }
+		}
+	}
+}
+
+sweb_arian_monastery = {
+	# province it starts in
+	start = 4558 
+	# date built in real life (so anything built during game time will be there if you start a game after that date)
+	date = 1315.01.21
+	#time to build
+	time = {
+		months = 12
+	}
+	#how much to build one
+	build_cost = 1000
+	#can we move it?
+	can_be_moved = no
+	#time to move the project one unit of distance, in days
+	move_days_per_unit_distance = 10
+	#tier that the project starts at when first placed in the game (be that at game start or when built by a country as the game progresses)
+	starting_tier = 1	
+	#project type
+	type = monument
+	#can we build it?
+	build_trigger = {
+		religion = arian
+		owner = {
+			religion = arian
+		}
+	}
+	#what to do when it's built
+	on_built = {}
+	#what to do when it's destroyed
+	on_destroyed = {	}
+	#can our country use it?
+	can_use_modifiers_trigger = {
+		religion = arian
+		owner = {
+			religion = arian
+		}
+	}
+	#can our country upgrade it?
+	can_upgrade_trigger = {	
+		religion = arian
+		owner = {
+			religion = arian
+		}
+	}
+	#can our country keep it or is it destroyed when we get hold of it?
+	keep_trigger = {}
+	#tier data
+	tier_0 = {
+		#time to upgrade to this level (0 for tier 0)
+		upgrade_time = {	months = 0	}
+		#cost to upgrade to this level (0 for tier 0)
+		cost_to_upgrade = {		factor = 0	}
+		#what modifiers are added to the province when we have this project here on this tier
+		province_modifiers = {
+			
+		}
+		#what modifiers are added to the provinces in the map area when we have this project here on this tier
+		area_modifier = {	}
+		#what modifiers are added to the country when we have this project here on this tier
+		country_modifiers = {	}
+		#what effects happen when this tier is achieved
+		on_upgraded = {}
+		conditional_modifier = {
+			trigger = {religion = arian }
+			modifier = {local_missionary_strength = -0.05 }
+		}
+	}
+	tier_1 = {
+		#time to upgrade to this level (0 for tier 0)
+		upgrade_time = {
+			months = 120
+		}
+		#cost to upgrade to this level (0 for tier 0)
+		cost_to_upgrade = {
+			factor = 1000
+		}
+		#what modifiers are added to the province when we have this project here on this tier
+		province_modifiers = {
+			local_manpower_modifier = 0.15
+			local_defensiveness = 0.1
+		}
+		#what modifiers are added to the provinces in the map area when we have this project here on this tier
+		area_modifier = {
+		}
+		region_modifier = {
+		}
+		#what modifiers are added to the country when we have this project here on this tier
+		country_modifiers = {
+		}
+		#what effects happen when this tier is achieved
+		on_upgraded = {		
+			owner = {
+				change_variable = {
+					which = arian_fervor_var
+					value = 10
+				}
+			}
+		}
+		conditional_modifier = {
+			trigger = {religion = arian }
+			modifier = {local_missionary_strength = -0.05 }
+		}
+	}
+
+	tier_2 = {
+		#time to upgrade to this level (0 for tier 0)
+		upgrade_time = {
+			months = 240
+		}
+
+		#cost to upgrade to this level (0 for tier 0)
+		cost_to_upgrade = {
+			factor = 2500
+		}
+		province_modifiers = {
+			local_manpower_modifier = 0.25
+			local_defensiveness = 0.1
+		}
+		#what modifiers are added to the province when we have this project here on this tier
+		area_modifier = {	
+			local_defensiveness = 0.1
+		}
+		region_modifier = {
+		}
+		#what modifiers are added to the country when we have this project here on this tier
+		country_modifiers = {
+			global_missionary_strength = 0.01
+		}
+		#what effects happen when this tier is achieved
+		on_upgraded = {
+			owner = {
+				change_variable = {
+					which = arian_fervor_var
+					value = 15
+				}
+			}
+		}
+		conditional_modifier = {
+			trigger = {religion = arian }
+			modifier = {local_missionary_strength = -0.05 }
+		}
+	}
+
+	tier_3 = {
+		#time to upgrade to this level (0 for tier 0)
+		upgrade_time = {
+			months = 480
+		}
+		#cost to upgrade to this level (0 for tier 0)
+		cost_to_upgrade = {
+			factor = 3000
+		}
+		#what modifiers are added to the province when we have this project here on this tier
+		province_modifiers = {
+		}
+		#what modifiers are added to the provinces in the map area when we have this project here on this tier
+		area_modifier = {		
+			local_defensiveness = 0.25
+		}
+		region_modifier = {
+			local_manpower_modifier = 0.25
+		}
+		#what modifiers are added to the country when we have this project here on this tier
+		country_modifiers = {
+			global_missionary_strength = 0.03
+			missionaries = 1
+		}
+		#what effects happen when this tier is achieved
+		on_upgraded = {		
+			change_trade_goods = paper
+		}
+		conditional_modifier = {
+			trigger = {religion = arian }
+			modifier = {local_missionary_strength = -0.05 }
+		}
+	}
+}
+
+vinland_eriksbay_company = {
+	# province it starts in
+	start = 1008 
+	# date built in real life (so anything built during game time will be there if you start a game after that date)
+	date = 1777.12.04
+	#time to build
+	time = {
+		months = 12
+	}
+	#how much to build one
+	build_cost = 500
+	#can we move it?
+	can_be_moved = no
+	#time to move the project one unit of distance, in days
+	move_days_per_unit_distance = 10
+	#tier that the project starts at when first placed in the game (be that at game start or when built by a country as the game progresses)
+	starting_tier = 1	
+	#project type
+	type = monument
+	#can we build it?
+	build_trigger = {}
+	#what to do when it's built
+	on_built = {}
+	#what to do when it's destroyed
+	on_destroyed = {	}
+	#can our country use it?
+	can_use_modifiers_trigger = {	}
+	#can our country upgrade it?
+	can_upgrade_trigger = {			}
+	#can our country keep it or is it destroyed when we get hold of it?
+	keep_trigger = {}
+	#tier data
+	tier_0 = {
+		#time to upgrade to this level (0 for tier 0)
+		upgrade_time = {	months = 0	}
+		#cost to upgrade to this level (0 for tier 0)
+		cost_to_upgrade = {		factor = 0	}
+		#what modifiers are added to the province when we have this project here on this tier
+		province_modifiers = {	}
+		#what modifiers are added to the provinces in the map area when we have this project here on this tier
+		area_modifier = {	}
+		#what modifiers are added to the country when we have this project here on this tier
+		country_modifiers = {	}
+		#what effects happen when this tier is achieved
+		on_upgraded = {}
+	}
+	tier_1 = {
+		#time to upgrade to this level (0 for tier 0)
+		upgrade_time = {
+			months = 600
+		}
+		#cost to upgrade to this level (0 for tier 0)
+		cost_to_upgrade = {
+			factor = 200
+		}
+		#what modifiers are added to the province when we have this project here on this tier
+		province_modifiers = {
+		}
+		#what modifiers are added to the provinces in the map area when we have this project here on this tier
+		area_modifier = {
+		}
+		region_modifier = {
+			local_friendly_movement_speed = 0.1
+			trade_goods_size = 0.1
+		}
+		#what modifiers are added to the country when we have this project here on this tier
+		country_modifiers = {
+		}
+		#what effects happen when this tier is achieved
+		on_upgraded = {		
+		}
+	}
+
+	tier_2 = {
+		#time to upgrade to this level (0 for tier 0)
+		upgrade_time = {
+			months = 600
+		}
+
+		#cost to upgrade to this level (0 for tier 0)
+		cost_to_upgrade = {
+			factor = 500
+		}
+		province_modifiers = {
+		}
+		#what modifiers are added to the province when we have this project here on this tier
+		area_modifier = {	
+			
+		}
+		region_modifier = {
+			local_friendly_movement_speed = 0.2
+			trade_goods_size = 0.2
+			local_prosperity_growth = 0.1
+		}
+		#what modifiers are added to the country when we have this project here on this tier
+		country_modifiers = {
+			trade_efficiency = 0.1
+		}
+		#what effects happen when this tier is achieved
+		on_upgraded = {
+		}
+	}
+
+	tier_3 = {
+		#time to upgrade to this level (0 for tier 0)
+		upgrade_time = {
+			months = 600
+		}
+		#cost to upgrade to this level (0 for tier 0)
+		cost_to_upgrade = {
+			factor = 500
+		}
+		#what modifiers are added to the province when we have this project here on this tier
+		province_modifiers = {
+		}
+		#what modifiers are added to the provinces in the map area when we have this project here on this tier
+		area_modifier = {		
+		}
+		region_modifier = {
+			local_friendly_movement_speed = 0.3
+			trade_goods_size = 0.5
+			local_development_cost = -0.1
+			local_prosperity_growth = 0.1
+		}
+		#what modifiers are added to the country when we have this project here on this tier
+		country_modifiers = {
+			trade_efficiency = 0.15
+		}
+		#what effects happen when this tier is achieved
+		on_upgraded = {		
 		}
 	}
 }

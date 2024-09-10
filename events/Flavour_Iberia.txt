@@ -4,486 +4,536 @@ country_event = {
 	id = iberia.1
 	title = iberia.1.test
 	desc = iberia.1.desc
-	picture = ANGRY_MOB_eventPicture
-	
-	trigger = {
-		tag = IB0
-		is_at_war = no
-		num_of_owned_provinces_with = {
-			value = 50
-			region = iberia_region
-		}
-		adm_tech = 10
-		is_year = 1550
-	}
-	mean_time_to_happen = {
-		months = 1
-	}
-	fire_only_once = yes
+	picture = ARTWORK_eventPicture
+	is_triggered_only = yes
 	option = {
-		name = iberia.1a
-		hidden_effect = {
-			country_event = {
-				id = iberia.2
-				days = 30
+		name = iberia.1.vrankish
+		trigger = {
+			NOT = {
+				OR = {
+					primary_culture = vrankish
+					primary_culture = hispanian_vrankish
+				}
+			}
+			NOT = {
+				has_country_modifier = ib0_integrated_vrankish
+			}
+		}
+		if = {
+			limit = {
+				culture_group = iberisch
+			}
+			alb_move_iberian_culture = {
+				culture = vrankish
+			}
+			alb_change_iberian_culture_provinces_iberisch = {
+				culture = vrankish
+			}
+		}
+		else = {
+			alb_move_iberian_culture = {
+				culture = vrankish
+			}
+			alb_change_iberian_culture_provinces_hispanian = {
+				culture = vrankish
+			}
+		}
+	}
+	option = {
+		name = iberia.1.raklionne
+		trigger = {
+			NOT = {
+				primary_culture = raklionne
+			}
+			NOT = {
+				has_country_modifier = ib0_integrated_raklionne
+			}
+		}
+		if = {
+			limit = {
+				culture_group = iberisch
+			}
+			alb_move_iberian_culture = {
+				culture = raklionne
+			}
+		}
+		else = {
+			alb_move_iberian_culture = {
+				culture = raklionne
+			}
+			alb_change_iberian_culture_provinces_hispanian = {
+				culture = raklionne
+			}
+		}
+		
+	}
+	option = {
+		name = iberia.1.spaniard
+		trigger = {
+			NOT = {
+				primary_culture = spaniard
+			}
+			NOT = {
+				has_country_modifier = ib0_integrated_spaniard
+			}
+		}
+		if = {
+			limit = {
+				culture_group = iberisch
+			}
+			alb_move_iberian_culture = {
+				culture = spaniard
+			}
+			alb_change_iberian_culture_provinces_iberisch = {
+				culture = spaniard
+			}
+		}
+		else = {
+			alb_move_iberian_culture = {
+				culture = spaniard
+			}
+		}
+	}
+	option = {
+		name = iberia.1.bettian
+		trigger = {
+			NOT = {
+				primary_culture = bettian
+			}
+			NOT = {
+				has_country_modifier = ib0_integrated_bettian
+			}
+		}
+		if = {
+			limit = {
+				culture_group = iberisch
+			}
+			alb_move_iberian_culture = {
+				culture = bettian
+			}
+			alb_change_iberian_culture_provinces_iberisch = {
+				culture = bettian
+			}
+		}
+		else = {
+			alb_move_iberian_culture = {
+				culture = bettian
+			}
+		}
+	}
+	option = {
+		name = iberia.1.swebish
+		trigger = {
+			NOT = {
+				primary_culture = swebish
+			}
+			NOT = {
+				has_country_modifier = ib0_integrated_swebish
+			}
+		}
+		if = {
+			limit = {
+				culture_group = iberisch
+			}
+			alb_move_iberian_culture = {
+				culture = swebish
+			}
+		}
+		else = {
+			alb_move_iberian_culture = {
+				culture = swebish
+			}
+			alb_change_iberian_culture_provinces_hispanian = {
+				culture = swebish
+			}
+		}
+	}
+	option = {
+		name = iberia.1.burgundian
+		trigger = {
+			NOT = {
+				primary_culture = burgund
+			}
+		}
+		if = {
+			limit = {
+				culture_group = iberisch
+			}
+			alb_move_iberian_culture = {
+				culture = burgund
+			}
+		}
+		else = {
+			alb_move_iberian_culture = {
+				culture = burgund
+			}
+			alb_change_iberian_culture_provinces_hispanian = {
+				culture = burgund
+			}
+		}
+	}
+	option = {
+		name = iberia.1.basque
+		trigger = {
+			NOT = {
+				primary_culture = basque
+			}
+			NOT = {
+				has_country_modifier = ib0_integrated_basque
+			}
+		}
+		if = {
+			limit = {
+				culture_group = iberisch
+			}
+			alb_move_iberian_culture = {
+				culture = basque
+			}
+			alb_change_iberian_culture_provinces_iberisch = {
+				culture = basque
+			}
+		}
+		else = {
+			alb_move_iberian_culture = {
+				culture = basque
+			}
+		}
+	}
+	option = {
+		name = iberia.1.celtiberian
+		trigger = {
+			NOT = {
+				primary_culture = celtiberian
+			}
+			NOT = {
+				has_country_modifier = ib0_integrated_celtiberian
+			}
+		}
+		if = {
+			limit = {
+				culture_group = iberisch
+			}
+			alb_move_iberian_culture = {
+				culture = celtiberian
+			}
+			alb_change_iberian_culture_provinces_iberisch = {
+				culture = celtiberian
+			}
+		}
+		else = {
+			alb_move_iberian_culture = {
+				culture = celtiberian
 			}
 		}
 	}
 }
+
 country_event = {
 	id = iberia.2
 	title = iberia.2.test
 	desc = iberia.2.desc
-	picture = ANGRY_MOB_eventPicture
+	picture = KINGS_CHOICE_eventPicture
 	
 	is_triggered_only = yes
-	fire_only_once = yes
 	option = {
 		name = iberia.2a
-		if = {
-			limit = {
-				government = monarchy
-			}
-			random_owned_area = {
-				limit = {
-					region = iberia_region
-				}
-				spawn_rebels = {
-					size = 2
-					type = ibe_republic_rebels
-				}
-			}
-		}else = {
-			random_owned_area = {
-				limit = {
-					region = iberia_region
-				}
-				spawn_rebels = {
-					size = 2
-					type = ibe_monarch_rebels
-				}
+		custom_tooltip = alb_ib0_gothic_provs_get_tt
+		tooltip = {
+			add_province_modifier = {
+				name = ib0_self_governance_goths
+				duration = 9125
 			}
 		}
 		hidden_effect = {
-			country_event = {
-				id = iberia.3
-				days = 60
+			every_owned_province = {
+				limit = {
+					culture = goth_p
+				}
+				add_province_modifier = {
+					name = alb_no_heathens_modifier
+					duration = 9125
+				}
+			}
+		}
+	}
+	option = {
+		name = iberia.2b
+		if = {
+			limit = {
+				culture_group = iberisch
+			}
+			alb_change_iberian_culture_provinces_iberisch = {
+				culture = goth_p
+			}
+		}
+		else = {
+			alb_change_iberian_culture_provinces_hispanian = {
+				culture = goth_p
 			}
 		}
 	}
 }
+
+country_event = {
+	id = iberia.2
+	title = iberia.2.test
+	desc = iberia.2.desc
+	picture = KINGS_CHOICE_eventPicture
+	
+	is_triggered_only = yes
+	option = {
+		name = iberia.2a
+		custom_tooltip = alb_ib0_gothic_provs_get_tt
+		tooltip = {
+			add_province_modifier = {
+				name = ib0_self_governance_goths
+				duration = 9125
+			}
+		}
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					culture = goth_p
+				}
+				add_province_modifier = {
+					name = alb_no_heathens_modifier
+					duration = 9125
+				}
+			}
+		}
+	}
+	option = {
+		name = iberia.2b
+		if = {
+			limit = {
+				culture_group = iberisch
+			}
+			alb_change_iberian_culture_provinces_iberisch = {
+				culture = goth_p
+			}
+		}
+		else = {
+			alb_change_iberian_culture_provinces_hispanian = {
+				culture = goth_p
+			}
+		}
+	}
+}
+
+country_event = {
+	id = iberia.2
+	title = iberia.2.test
+	desc = iberia.2.desc
+	picture = KINGS_CHOICE_eventPicture
+	
+	is_triggered_only = yes
+	option = {
+		name = iberia.2a
+		custom_tooltip = alb_ib0_gothic_provs_get_tt
+		tooltip = {
+			add_province_modifier = {
+				name = ib0_self_governance_goths
+				duration = 9125
+			}
+		}
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					culture = goth_p
+				}
+				add_province_modifier = {
+					name = alb_no_heathens_modifier
+					duration = 9125
+				}
+			}
+		}
+	}
+	option = {
+		name = iberia.2b
+		if = {
+			limit = {
+				culture_group = iberisch
+			}
+			alb_change_iberian_culture_provinces_iberisch = {
+				culture = goth_p
+			}
+		}
+		else = {
+			alb_change_iberian_culture_provinces_hispanian = {
+				culture = goth_p
+			}
+		}
+	}
+}
+
 country_event = {
 	id = iberia.3
 	title = iberia.3.test
 	desc = iberia.3.desc
-	picture = CATHOLIC_RULERS_PRAYING_eventPicture
+	picture = HOUSE_OF_TRADE_eventPicture
 	
 	is_triggered_only = yes
-	fire_only_once = yes
 	option = {
 		name = iberia.3a
-		if = {
-			limit = {
-				government = monarchy
-			}
-			random_owned_area = {
-				limit = {
-					region = iberia_region
-				}
-				spawn_rebels = {
-					size = 2
-					type = ibe_republic_rebels
-				}
-			}
-		}else = {
-			random_owned_area = {
-				limit = {
-					region = iberia_region
-				}
-				spawn_rebels = {
-					size = 2
-					type = ibe_monarch_rebels
-				}
-			}
-		}
-		hidden_effect = {
-			country_event = {
-				id = iberia.4
-				days = 30
-			}
+		224 = {
+			move_capital_effect = yes
+			add_base_manpower = 1
+			add_base_tax = 1
+			add_base_production = 1
+			custom_tooltip = empty_line_tt
+			set_center_level_2_center_of_trade = yes
 		}
 	}
 	option = {
 		name = iberia.3b
-		add_stability = -1
-		add_adm_power = -100
-		add_dip_power = -150
-		hidden_effect = {
-			country_event = {
-				id = iberia.4
-				days = 50
-			}
+		capital_scope = {
+			add_base_manpower = 1
+			add_base_tax = 1
+			add_base_production = 1
+		}
+		custom_tooltip = empty_line_tt
+		add_prestige_or_monarch_power = {
+			amount = 20
 		}
 	}
 }
+
 country_event = {
 	id = iberia.4
 	title = iberia.4.test
 	desc = iberia.4.desc
-	picture = CROSSROAD_eventPicture
-	
-	is_triggered_only = yes
-	fire_only_once = yes
+	picture = CARIBBEAN_PIRATE_FORT_eventPicture
+	mean_time_to_happen = {
+		months = 360
+	}
+	trigger = {
+		OR = {
+			culture_group = romano_hispanian
+			culture_group = iberisch
+		}
+		NOT = {
+			is_year = 1530
+		}
+		NOT = {
+			has_global_flag = alb_banrik_hired_flag
+		}
+		OR = {
+			num_of_light_ship = 3
+			num_of_heavy_ship = 3
+		}
+		num_of_owned_provinces_with = {
+			value = 5
+			has_port = yes
+		}
+	}
 	option = {
 		name = iberia.4a
-		if = {
-			limit = {
-				government = monarchy
-			}
-			random_owned_area = {
-				limit = {
-					region = iberia_region
-				}
-				spawn_rebels = {
-					size = 2
-					type = ibe_republic_rebels
-				}
-			}
-		}else = {
-			random_owned_area = {
-				limit = {
-					region = iberia_region
-				}
-				spawn_rebels = {
-					size = 2
-					type = ibe_monarch_rebels
-				}
-			}
+		add_treasury = -100
+		set_global_flag = alb_banrik_hired_flag
+		country_event = {
+			id = iberia.5
+			days = 30
 		}
-		hidden_effect = {
-			country_event = {
-				id = iberia.5
-				days = 30
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				NOT = {
+					treasury = 100
+				}
 			}
 		}
 	}
 	option = {
 		name = iberia.4b
-		add_yearly_manpower = -2
-		hidden_effect = {
-			country_event = {
-				id = iberia.5
-				days = 50
-			}
-		}
-	}
-	option = {
-		name = iberia.4c
-		add_years_of_income = -2
-		hidden_effect = {
-			country_event = {
-				id = iberia.5
-				days = 50
-			}
-		}
+		add_prestige = 5
 	}
 }
+
 country_event = {
 	id = iberia.5
 	title = iberia.5.test
 	desc = iberia.5.desc
-	picture = COMET_SIGHTED_eventPicture
-	
+	picture = EXPLORERS_eventPicture
 	is_triggered_only = yes
-	fire_only_once = yes
+	trigger = {
+		has_global_flag = alb_banrik_hired_flag
+	}
 	option = {
 		name = iberia.5a
-		if = {
-			limit = {
-				government = monarchy
+		hidden_effect = {
+			country_event = {
+				id = iberia.6
+				days = 11
 			}
-			capital_scope = {
-				spawn_rebels = {
-					size = 5
-					type = ibe_republic_rebels
-				}
-			}
-		}
-		else = {
-			capital_scope = {
-				spawn_rebels = {
-					size = 5
-					type = ibe_monarch_rebels
-				}
-			}
-		}
-		if = {
-			limit = {
-				government = monarchy
-			}
-			add_government_reform = ibe_monarchy_reform
-		}
-		else = {
-			add_government_reform = ibe_republic_reform
 		}
 	}
 }
+
 country_event = {
 	id = iberia.6
 	title = iberia.6.test
 	desc = iberia.6.desc
-	picture = CATHOLIC_RULERS_PRAYING_eventPicture
-	
+	picture = EXPLORERS_eventPicture
 	is_triggered_only = yes
-	fire_only_once = yes
+	trigger = {
+		has_global_flag = alb_banrik_hired_flag
+	}
 	option = {
 		name = iberia.6a
-		every_owned_province = {
-			limit = {
-				region = maghreb_region
-			}
-			remove_core = ROOT
-			add_core = AF0
-			cede_province = AF0
+		west_african_coast_sea_area = {
+			discover_country = ROOT
 		}
+		1096 = {
+			discover_country = ROOT
+			create_colony_mission_reward_province = yes
+		}
+		add_treasury = -100
 		hidden_effect = {
-			AF0 = {
-				set_capital = 336
-			}
-		}
-		create_union = AF0
-		maghreb_region = {
-			add_permanent_claim = AF0
-		}
-		AF0 = {
-			add_country_modifier = {
-				name = ibe_fast_coring
-				duration = -1
+			country_event = {
+				id = iberia.7
+				days = 26
 			}
 		}
 	}
 	option = {
-		name = iberia.6b
-		add_stability = 1
-		add_prestige_or_monarch_power = {
-			amount = 15
+		name = iberia.6a
+		west_african_coast_sea_area = {
+			discover_country = ROOT
+		}
+		1096 = {
+			discover_country = ROOT
+		}
+		hidden_effect = {
+			country_event = {
+				id = iberia.7
+				days = 26
+			}
 		}
 	}
 }
+
 country_event = {
 	id = iberia.7
 	title = iberia.7.test
 	desc = iberia.7.desc
-	picture = CATHOLIC_RULERS_PRAYING_eventPicture
-	
+	picture = EXPLORERS_eventPicture
 	is_triggered_only = yes
-	fire_only_once = yes
-	option = {
-		name = iberia.7a
-		ai_chance = {
-			factor = 30
-			modifier = {
-				factor = 1.25
-				ROOT = {
-					alliance_with = IB0
-				}
-			}
-			modifier = {
-				factor = 1.25
-				ROOT = {
-					trust = {
-						who = IB0
-						value = 50
-					}
-				}
-			}
-			modifier = {
-				factor = 1.25
-				ROOT = {
-					trust = {
-						who = IB0
-						value = 75
-					}
-				}
-			}
-			modifier = {
-				factor = 2
-				ROOT = {
-					trust = {
-						who = IB0
-						value = 100
-					}
-				}
-			}
-			modifier = {
-				factor = 0
-				ROOT = {
-					is_rival = IB0
-				}
-			}
-		}
-		IB0 = {
-			create_union = ROOT
-		}
+	trigger = {
+		has_global_flag = alb_banrik_hired_flag
 	}
 	option = {
-		name = iberia.7b
-		add_stability = 1
-		add_prestige_or_monarch_power = {
-			amount = 15
+		name = iberia.6a
+		define_explorer = {
+			shock = 3
+			fire = 3
+			manuever = 6
+			siege = 2
+			name = "Banrik II"
 		}
-		ai_chance = {
-			factor = 70
-			modifier = {
-				factor = 0.9
-				ROOT = {
-					alliance_with = IB0
-				}
-			}
-			modifier = {
-				factor = 0.9
-				ROOT = {
-					trust = {
-						who = IB0
-						value = 50
-					}
-				}
-			}
-			modifier = {
-				factor = 0.9
-				ROOT = {
-					trust = {
-						who = IB0
-						value = 75
-					}
-				}
-			}
-			modifier = {
-				factor = 0.2
-				ROOT = {
-					trust = {
-						who = IB0
-						value = 100
-					}
-				}
-			}
-		}
-	}
-}
-country_event = {
-	id = iberia.8
-	title = iberia.8.test
-	desc = iberia.8.desc
-	picture = CATHOLIC_RULERS_PRAYING_eventPicture
-	
-	is_triggered_only = yes
-	fire_only_once = yes
-	option = {
-		name = iberia.8a
-		ai_chance = {
-			factor = 30
-			modifier = {
-				factor = 1.25
-				ROOT = {
-					alliance_with = IB0
-				}
-			}
-			modifier = {
-				factor = 1.25
-				ROOT = {
-					trust = {
-						who = IB0
-						value = 50
-					}
-				}
-			}
-			modifier = {
-				factor = 1.25
-				ROOT = {
-					trust = {
-						who = IB0
-						value = 75
-					}
-				}
-			}
-			modifier = {
-				factor = 2
-				ROOT = {
-					trust = {
-						who = IB0
-						value = 100
-					}
-				}
-			}
-			modifier = {
-				factor = 0
-				ROOT = {
-					is_rival = IB0
-				}
-			}
-			modifier = {
-				factor = 2
-				emperor = {
-					NOT = {
-						reverse_has_opinion = {
-							who = ROOT
-							value = -100
-						}
-					}
-				}
-			}
-		}
-		IB0 = {
-			vassalize = ROOT
-		}
-	}
-	option = {
-		name = iberia.8b
-		add_stability = 1
-		add_prestige_or_monarch_power = {
-			amount = 15
-		}
-		ai_chance = {
-			factor = 70
-			modifier = {
-				factor = 0.9
-				ROOT = {
-					alliance_with = IB0
-				}
-			}
-			modifier = {
-				factor = 0.9
-				ROOT = {
-					trust = {
-						who = IB0
-						value = 50
-					}
-				}
-			}
-			modifier = {
-				factor = 0.9
-				ROOT = {
-					trust = {
-						who = IB0
-						value = 75
-					}
-				}
-			}
-			modifier = {
-				factor = 0.2
-				ROOT = {
-					trust = {
-						who = IB0
-						value = 100
-					}
-				}
-			}
-			modifier = {
-				factor = 2
-				emperor = {
-					alliance_with = ROOT
-				}
-			}
+		add_country_modifier = {
+			name = rk0_colonial_rush
+			duration = 9125
 		}
 	}
 }

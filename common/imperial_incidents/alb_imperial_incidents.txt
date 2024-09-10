@@ -151,7 +151,7 @@ incident_turkey_petetion = {
 			NOT = {
 				exists = TR0
 			}
-			IT1 = {
+			TR0 = {
 				is_subject = yes
 			}
 		}
@@ -197,6 +197,66 @@ incident_turkey_petetion = {
 				}
 				ai_attitude = {
 					who = TR0
+					attitude = attitude_outraged
+				}
+			}
+		}
+	}
+}
+incident_spania_petetion = {
+    event = span.2
+	default_option = 1
+	
+	can_stop = {
+		OR = {
+			NOT = {
+				exists = SP0
+			}
+			SP0 = {
+				is_subject = yes
+			}
+		}
+	}
+	
+	0 = { # grant
+		factor = 1
+		modifier = {
+			factor = 1500
+			OR = {
+				tag = IT1
+				tag = PAP
+				ai_attitude = {
+					who = SP0
+					attitude = attitude_friendly
+				}
+				ai_attitude = {
+					who = SP0
+					attitude = attitude_loyal
+				}
+				ai_attitude = {
+					who = SP0
+					attitude = attitude_allied
+				}
+			}
+		}
+	}
+	
+	1 = { # deny
+		factor = 1
+		modifier = {
+			factor = 1500
+			OR = {
+				tag = VR0
+				ai_attitude = {
+					who = SP0
+					attitude = attitude_rivalry
+				}
+				ai_attitude = {
+					who = SP0
+					attitude = attitude_hostile
+				}
+				ai_attitude = {
+					who = SP0
 					attitude = attitude_outraged
 				}
 			}

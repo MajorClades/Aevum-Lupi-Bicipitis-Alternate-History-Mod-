@@ -8,6 +8,14 @@ on_startup = {
 		vedr.1
 		arian.1
 		zimmska.7
+		atlas.1
+	}
+	if = {
+		limit = {
+			OR = {
+
+			}
+		}
 	}
 }
 on_province_culture_changed = {
@@ -153,6 +161,7 @@ on_general_recruited = {
 		limit = {has_country_flag = sox_more_manpower}
 		add_army_tradition = 1
 	}
+
 }
 on_center_of_trade_upgrade = {
 	if = {
@@ -267,6 +276,30 @@ on_main_war_lost = {
 					}
 				}
 			}
+		}
+	}
+}
+on_colony_finished = {
+	if = {
+		limit = {
+			owner = {
+				has_country_flag = sweb_trade_colony_flag
+			}
+		}
+		add_province_modifier = {
+			name = sweb_trade_colony_mod
+			duration = 3650
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_country_flag = sweb_tax_colony_flag
+			}
+		}
+		add_province_modifier = {
+			name = sweb_tax_colony_mod
+			duration = 3650
 		}
 	}
 }
@@ -496,7 +529,21 @@ on_dip_development = {
 }
 
 on_mil_development = {
-
+	if = { 
+		limit = { 
+			owner = { 
+				overlord = { has_country_flag = chance_to_double_mil_a_colonial_province_tt}
+				is_colonial_nation = yes
+			}
+		}
+		random_list = {
+			50 = {
+			}
+			50 = {
+				add_base_manpower = 1
+			}
+		}
+	}
 	if = { 
 		limit = { 
 			owner = { has_country_flag = double_dev_ability }
@@ -652,7 +699,29 @@ on_siege_lost_province =  {
 		}
 	}
 }
-
+on_yearly_pulse = {
+	if ={
+		limit = {
+			OR = {
+				tag = FJ9
+				tag = FJ0
+			}
+			has_global_flag = mexican_vinland_treaty
+		}
+		country_event = {
+			id = mexic.17
+		}
+	}
+	if ={
+		limit = {
+			tag = MX0
+			has_global_flag = mexican_vinland_treaty
+		}
+		country_event = {
+			id = mexic.16
+		}
+	}
+}
 on_bi_yearly_pulse_5 = {
 	random_events = { #all these were shifted from on_bi_yearly_pulse_1
 		#Islam
@@ -681,7 +750,34 @@ on_thri_yearly_pulse_2 = {
 		25 = alb_islam_events.9
 	}
 }
-
+on_five_year_pulse = {
+	if = {
+		limit = {
+			OR = {
+				tag = FJ0
+				tag = FJ9
+			}
+			873 = {
+				owned_by = ROOT
+				has_province_modifier = vin_eastern_trade
+			}
+			1034 = {
+				OR = {
+					owned_by = ROOT
+					owner = {
+						alliance_with = ROOT
+					}
+				}
+				NOT = {
+					has_province_modifier = vin_eastern_trade_start
+				}
+			}
+		}
+		country_event = {
+			id = fjal.305
+		}
+	}
+}
 on_mil_tech_taken = {
 	if = {
 		limit = {has_country_flag = army_tradition_from_tech_flag}
@@ -699,4 +795,58 @@ on_mil_tech_taken = {
 		}
 	}
 	
+}
+
+on_added_to_trade_company = {
+	if = {
+		limit = {
+			owner = {
+				has_country_flag = gambling_herkulia_flag
+			}
+		}
+		random_list = {
+			50 = { add_base_production = 1 } 
+			45 = {}
+			5 = { add_base_production = 1 add_base_manpower = 1  } 
+		}
+	}
+}
+
+on_barrage = { #ROOT - barraging country, FROM - barraged province 
+	if = {
+		limit = {
+			has_country_flag = extra_fun_siege_forts_flag
+		}
+		FROM ={
+			random_list ={ 
+				10 = {
+					if ={
+						limit = {
+							has_building = fort_15th
+						}
+						remove_building = fort_15th
+					}
+					else_if = {
+						limit = {
+							has_building = fort_16th
+						}
+						remove_building = fort_16th
+					}
+					else_if = {
+						limit = {
+							has_building = fort_17th
+						}
+						remove_building = fort_17th
+					}
+					else_if = {
+						limit = {
+							has_building = fort_18th
+						}
+						remove_building = fort_18th
+					}
+				}
+				90 ={}
+			}
+		}
+	}
 }
