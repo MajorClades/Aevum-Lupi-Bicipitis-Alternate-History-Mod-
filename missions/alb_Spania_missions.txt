@@ -136,6 +136,12 @@ Spania_1_slot = {
 					set_country_flag = army_professionalism_expanded_flag
 				"
 			}
+			tooltip = {
+				add_country_modifier = {
+					name = mock_up_professionalism
+					duration = -1
+				}
+			}
 		}
 	}
 }
@@ -319,11 +325,11 @@ Spania_3_slot = {
 				name = spa_princeps_iberico
 				duration = 10950
 			}
-			custom_tooltip = SPANIA_TT_1
-			tooltip = {vassalize = BT0	}
 			iberia_region = {
 				add_permanent_claim = ROOT
 			}
+			custom_tooltip = SPANIA_TT_1
+			tooltip = {vassalize = BT0	}
 			hidden_effect = {
 				if = {
 					limit = {
@@ -339,7 +345,7 @@ Spania_3_slot = {
 	Spania_iberian_imperator = {
 		icon = mission_have_two_subjects
 		required_missions = {Spania_iberia }
-		position = 5
+		position = 6
 		provinces_to_highlight = {
 			region = iberia_region
 		}
@@ -435,6 +441,44 @@ Spania_4_slot = {
 			}
 		}
 	}
+	Spania_hannibal = {
+		icon = mission_have_two_subjects
+		required_missions = {Spania_iberia }
+		position = 5
+		provinces_to_highlight = {
+			OR = {
+				area = basque_country
+				area = catalonia_area
+			}
+		}
+		trigger = { 
+			basque_country = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			catalonia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+			add_prestige_or_monarch_power = {amount = 30}
+			languedoc_area = {
+				add_permanent_claim = ROOT
+			}
+			pyrenees_area = {
+				add_permanent_claim = ROOT
+			}
+			guyenne_area = {
+				add_permanent_claim = ROOT
+			}
+			provence_area = {
+				add_permanent_claim = ROOT
+			}
+
+		}
+	}
 }
 Spania_5_slot = {
 	slot = 5
@@ -483,6 +527,60 @@ Spania_5_slot = {
 			}
 			macaronesia_area = {
 				add_permanent_claim = ROOT
+			}
+		}
+	}
+	Spania_create_galleon = {
+		icon = mission_have_two_subjects
+		required_missions = { Spania_the_water }
+		position = 4
+		trigger = { 
+			years_of_income = 1
+			num_of_heavy_ship = 5
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = spa_galleon
+				duration = -1
+			}
+		}
+	}
+	Spania_sardinian_siesta = {
+		icon = mission_have_two_subjects
+		required_missions = {Spania_hannibal Spania_create_galleon}
+		position = 6
+		provinces_to_highlight = {
+			OR = {
+				is_capital_of = emperor
+				province_id = 1298
+				province_id = 1303
+				province_id = 1302
+			}
+		}
+		trigger = { 
+			is_great_power = yes
+			navy_size = emperor
+			navy_size = 100
+			1298 = {
+				heavy_ships_in_province = 3
+			}
+			1302 = {
+				heavy_ships_in_province = 3
+			}
+			1303 = {
+				heavy_ships_in_province = 3
+			}
+		}
+		
+		effect = {
+			sardinia_area = {
+				add_permanent_claim = ROOT
+				set_in_empire = no
+			}
+			corsica_sardinia_area = {
+				add_permanent_claim = ROOT
+				set_in_empire = no
 			}
 		}
 	}
