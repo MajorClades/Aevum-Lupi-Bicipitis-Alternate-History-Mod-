@@ -133,14 +133,10 @@ Spania_1_slot = {
 				"
 				second_effect = "
 					custom_tooltip = SPANIA_TT_8b
-					set_country_flag = army_professionalism_expanded_flag
+					country_event = {
+						id = profexp.1
+					}
 				"
-			}
-			tooltip = {
-				add_country_modifier = {
-					name = mock_up_professionalism
-					duration = -1
-				}
 			}
 		}
 	}
@@ -395,11 +391,18 @@ Spania_4_slot = {
 		required_missions = { Spania_dictatorate Spania_meditteranean}
 		position = 2
 		provinces_to_highlight = {
-			province_id = 1293
+			is_capital_of = RK0
 		}
 		trigger = { 
-			1293 = {
-				light_ships_in_province = 5
+			if = {
+				limit = { ai = no}
+				RK0 = {
+					NOT = {
+						num_of_light_ship = ROOT
+					}
+				}
+			}else = {
+				num_of_light_ship = 9
 			}
 		}
 		
