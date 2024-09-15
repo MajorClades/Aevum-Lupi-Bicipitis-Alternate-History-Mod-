@@ -40,5 +40,102 @@ country_decisions = {
 		}
 		ai_importance = 400
 	}
-
+	make_the_giants_move = {
+		major = yes
+		potential = {
+			any_owned_province = {
+				has_great_project = {
+					type = giant_windmills
+				}
+			}
+		}
+		provinces_to_highlight = {
+			NOT = {
+				has_great_project = {
+					type = giant_windmills
+				}
+			}
+			infantry_in_province = 25
+		}
+		allow = {
+			any_owned_province = {
+				has_great_project = {
+					type = giant_windmills
+					tier = 1
+				}
+			}
+			any_owned_province = {
+				NOT = {
+					has_great_project = {
+						type = giant_windmills
+						tier = 1
+					}
+				}
+				infantry_in_province = 25
+			}
+		}
+		effect = {
+			random_owned_province = {
+				limit = {has_great_project = {type = giant_windmills}}
+				if = {
+					limit = {
+						has_great_project = {
+							type = giant_windmills
+							tier = 1
+						}
+					}
+					owner = {set_country_flag = g_w_t1_move}
+				}
+				if = {
+					limit = {
+						has_great_project = {
+							type = giant_windmills
+							tier = 2
+						}
+					}
+					owner = {set_country_flag = g_w_t2_move}
+				}
+				if = {
+					limit = {
+						has_great_project = {
+							type = giant_windmills
+							tier = 3
+						}
+					}
+					owner = {set_country_flag = g_w_t3_move}
+				}
+				destroy_great_project = {type = giant_windmills}
+			}
+			random_owned_province = {
+				limit = {	NOT = {	has_great_project = {type = giant_windmills}}  infantry_in_province = 25}
+				if = {
+					limit = {owner = {	has_country_flag = g_w_t1_move}	}
+					add_great_project = {type = giant_windmills}
+				}
+				if = {
+					limit = {owner = {	has_country_flag = g_w_t2_move}	}
+					add_great_project = {type = giant_windmills}
+					add_great_project_tier = {
+						type = giant_windmills
+						tier = 1
+					}
+				}
+				if = {
+					limit = {owner = {	has_country_flag = g_w_t3_move}	}
+					add_great_project = {type = giant_windmills}
+					add_great_project_tier = {
+						type = giant_windmills
+						tier = 2
+					}
+				}
+			}
+			clr_country_flag = g_w_t1_move
+			clr_country_flag = g_w_t2_move
+			clr_country_flag = g_w_t3_move
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
 }
