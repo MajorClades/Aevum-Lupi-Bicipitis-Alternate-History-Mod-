@@ -142,7 +142,11 @@ Iberia_1_slot = {
 		position = 7
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			NOT = {
+				has_reform = alb_ib0_fragmented_cultures
+			}
+		} 
 
 		effect = {  } 
 	}
@@ -171,9 +175,17 @@ Iberia_2_slot = {
 		provinces_to_highlight = {  
 			province_id = 226
 			NOT = {
-				has_great_project = {
-					type = the_rock
-					tier = 2
+				OR = {
+					has_great_project = {
+						type = the_rock
+						tier = 2
+					}
+					AND = {
+						development = 20
+						num_of_units_in_province = {
+							amount = 10
+						}
+					}
 				}
 			}
 			NOT = {
@@ -183,9 +195,17 @@ Iberia_2_slot = {
 
 		trigger = {  
 			226 = {
-				has_great_project = {
-					type = the_rock
-					tier = 2
+				OR = {
+					has_great_project = {
+						type = the_rock
+						tier = 2
+					}
+					AND = {
+						development = 20
+						num_of_units_in_province = {
+							amount = 10
+						}
+					}
 				}
 			}
 			1293 ={
@@ -352,9 +372,31 @@ Iberia_3_slot = {
 		position = 7
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_owned_provinces_with = {
+				value = 50
+				region = iberia_region
+				religion = ROOT
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			simple_dynamic_effect = {
+				first_custom_tooltip = ib0_if_pormane_exists_yes_tt
+				first_limit = "
+					221 = {
+						owned_by = ROOT
+						OR = {
+							culture = hebrew
+							religion = jewish
+						}
+					}
+				"
+				first_effect = "
+
+				"
+			}
+		} 
 	}
 
 	ib0_embellish_capital = {
@@ -650,6 +692,8 @@ Iberia_5_slot = {
 		} 
 
 		effect = {  
+			custom_tooltip = ib0_unlock_prospect_decision_tt
+			custom_tooltip = empty_line_tt
 			france_region = {
 				add_permanent_claim = ROOT
 			}
