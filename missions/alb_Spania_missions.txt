@@ -533,22 +533,39 @@ Spania_5_slot = {
 		}
 
 		trigger = {
-			is_great_power = yes
-			navy_size = emperor
-			navy_size = 100
-			1298 = { heavy_ships_in_province = 3 } 
-			1302 = { heavy_ships_in_province = 3 } 
-			1303 = { heavy_ships_in_province = 3 } 
+			if = {
+				limit = {is_part_of_hre = no}
+				is_great_power = yes
+				navy_size = emperor
+				navy_size = 100
+				1298 = { heavy_ships_in_province = 3 } 
+				1302 = { heavy_ships_in_province = 3 } 
+				1303 = { heavy_ships_in_province = 3 } 
+			}else = {
+				is_emperor = yes
+				imperial_influence = 15
+			}
 		}
 
 		effect = {
-			sardinia_area = {
-				add_permanent_claim = ROOT
-				set_in_empire = no
-			}
-			corsica_sardinia_area = {
-				add_permanent_claim = ROOT
-				set_in_empire = no
+			if = {
+				limit = {is_part_of_hre = no}
+				sardinia_area = {
+					add_permanent_claim = ROOT
+					set_in_empire = no
+				}
+				corsica_sardinia_area = {
+					add_permanent_claim = ROOT
+					set_in_empire = no
+				}
+			}else = {
+				add_imperial_influence = -15
+				sardinia_area = {
+					add_core = ROOT
+				}
+				corsica_sardinia_area = {
+					add_core = ROOT
+				}
 			}
 		}
 	}
