@@ -429,9 +429,15 @@ Aldabba_1a_slot = { #Eco / Development (TAX METAAAA)
 			region = maghreb_region
 			has_port = yes
 			is_island = no
-			NOT = {
-				development = 20
+			OR = {
+				NOT = {
+					development = 20
+				}
+				NOT = {
+					owned_by = ROOT
+				}
 			}
+			
 		}
 		trigger = {
 			custom_trigger_tooltip = {
@@ -444,6 +450,13 @@ Aldabba_1a_slot = { #Eco / Development (TAX METAAAA)
 						NOT = {
 							owned_by = ROOT
 						}
+					}
+				}
+				NOT = {
+					any_province = {
+						region = maghreb_region
+						has_port = yes
+						is_island = no
 						NOT = {
 							development = 20
 						}
@@ -1335,9 +1348,15 @@ Aldabba_3_slot = {
 		position = 1
 		
 		trigger = { 
-			AF1 = {
-				OR = {
-					AND = {
+			if = {
+				limit = {
+					OR = {
+						tag = AF2
+						was_tag = AF2
+					}
+				}
+				AF1 = {
+					OR = {
 						custom_trigger_tooltip = {
 							tooltip = has_been_insulted_by_root
 							OR = {
@@ -1355,10 +1374,27 @@ Aldabba_3_slot = {
 							is_rival = ROOT
 							is_enemy = ROOT
 						}
+						exists = no
 					}
-					exists = no
 				}
-				
+			}
+			if = {
+				limit = {
+					NOT = {
+						OR = {
+							tag = AF2
+							was_tag = AF2
+						}
+					}
+				}
+				algiers_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				barbary_coast_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
 			}
 		}
 		
@@ -2042,12 +2078,23 @@ Aldabba_4a_slot = {
 			naples_area = {
 				add_permanent_claim = ROOT
 			}
-			emperor = {
-				add_country_modifier = {
-					name = alb_failure_to_save_italy
-					duration = 9125
+			custom_tooltip = " "
+			if = {
+				limit = {
+					hre_size = 1
+				}
+				add_casus_belli = {
+					type = cb_dismantle_hre_africa
+					target = emperor
+					months = 300
 				}
 			}
+			else = {
+				add_adm_power = 150
+				add_mil_power = 150
+				add_dip_power = 150
+			}
+			custom_tooltip = " "
 			add_country_modifier = {
 				name = initial_conversions_ALD
 				duration = 10950
@@ -2095,6 +2142,7 @@ Aldabba_4a_slot = {
 			}
 			custom_tooltip = " "
 			custom_tooltip = enable_third_button_aldabba_tt
+			custom_tooltip = " "
 			set_country_flag = enable_third_button_aldabba
 			if = {
 				limit = {
@@ -2154,22 +2202,6 @@ Aldabba_4a_slot = {
 				mechanic_type = aldabba_failure_mechanic
 				power_type = restoration_aldabba
 				value = 25
-			}
-			custom_tooltip = " "
-			if = {
-				limit = {
-					hre_size = 1
-				}
-				add_casus_belli = {
-					type = cb_dismantle_hre_africa
-					target = emperor
-					months = 300
-				}
-			}
-			else = {
-				add_adm_power = 150
-				add_mil_power = 150
-				add_dip_power = 150
 			}
 			custom_tooltip = " "
 			if = {
