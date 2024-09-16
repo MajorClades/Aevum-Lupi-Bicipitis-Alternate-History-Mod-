@@ -1,25 +1,23 @@
-
 Spania_1_slot = {
 	slot = 1
 	generic = no
 	ai = yes
-	potential = {	tag = SP0	}
 	has_country_shield = yes
+	potential = { tag = SP0 } 
 
 	Spania_the_atlatic = {
-		icon = mission_have_two_subjects
-		required_missions = { Spania_burgundia }
+		icon = end_the_habsburgs
 		position = 3
-		provinces_to_highlight = {
-			area = alentejo_area
-		}
-		trigger = { 
+		required_missions = { Spania_burgundia } 
+		provinces_to_highlight = { area = alentejo_area } 
+
+		trigger = {
 			alentejo_area = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
-		
+
 		effect = {
 			define_explorer = {
 				shock = 3
@@ -38,64 +36,194 @@ Spania_1_slot = {
 			}
 		}
 	}
-}
 
+	Spania_mill_and_drill = {
+		icon = prosperity_for_all
+		position = 4
+		provinces_to_highlight = {
+			has_manpower_building_trigger = no
+			owned_by = ROOT
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				has_manpower_building_trigger = yes
+			}
+		}
+
+		effect = {
+			country_event_with_insight = {
+				id = span.5
+				insight_tooltip = SPANIA_TT_5
+			}
+		}
+	}
+
+	Spania_force_limits = {
+		icon = spa_reform_tercios
+		position = 5
+		required_missions = { Spania_mill_and_drill } 
+		provinces_to_highlight = {
+			has_forcelimit_building_trigger = no
+			owned_by = ROOT
+		}
+
+		trigger = {
+			any_owned_province = { has_great_project = { type = giant_windmills }  } 
+			num_of_completed_idea_groups_mil = { amount = 1 } 
+			num_of_owned_provinces_with = {
+				value = 10
+				has_forcelimit_building_trigger = yes
+			}
+		}
+
+		effect = {
+			random_province = {
+				limit = { has_great_project = { type = giant_windmills }  } 
+				add_great_project_tier = {
+					type = giant_windmills
+					tier = 1
+				}
+			}
+		}
+	}
+
+	Spania_power_up = {
+		icon = give_him_back_his_legions
+		position = 6
+		required_missions = {
+			Spania_force_limits
+			Spania_good_army
+		}
+		provinces_to_highlight = { has_great_project = { type = giant_windmills }  } 
+
+		trigger = {
+			OR = {
+				army_tradition = 50
+				army_professionalism = 0.4
+			}
+			any_owned_province = {
+				has_great_project = {
+					type = giant_windmills
+					tier = 3
+				}
+			}
+			num_of_completed_idea_groups_mil = { amount = 2 } 
+		}
+
+		effect = {
+			simple_dynamic_effect_without_alternative = {
+				first_custom_tooltip = SPANIA_TT_7a
+				first_limit = "
+					army_tradition = 50
+					has_country_modifier = spa_millings
+				"
+				first_effect = "
+					custom_tooltip = SPANIA_TT_8a
+					set_country_flag = extra_discipline_for_at_flag
+				"
+				second_custom_tooltip = SPANIA_TT_7b
+				second_limit = "
+					army_professionalism = 0.4
+					has_country_modifier = spa_drillings
+				"
+				second_effect = "
+					custom_tooltip = SPANIA_TT_8b
+					country_event = {
+						id = profexp.1
+					}
+				"
+			}
+		}
+	}
+}
 Spania_2_slot = {
 	slot = 2
 	generic = no
 	ai = yes
-	potential = {	tag = SP0	}
 	has_country_shield = yes
+	potential = { tag = SP0 } 
 
 	Spania_burgundia = {
-		icon = mission_have_two_subjects
-		required_missions = { Spania_dictatorate }
+		icon = fra_burg_succession
 		position = 2
-		trigger = { 
+		required_missions = { Spania_dictatorate } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
 			if = {
-				limit = {ai = yes}
+				limit = { ai = yes } 
 				army_size_percentage = 0.65
 				num_of_generals = 1
-			}else = {
-				army_size_percentage = 0.95
 			}
+			else = { army_size_percentage = 0.95 } 
 		}
-		
+
 		effect = {
 			add_army_tradition = 5
-			extremadura_area = {
-				add_permanent_claim = ROOT
-			}
-			alentejo_area = {
-				add_permanent_claim = ROOT
-			}
+			extremadura_area = { add_permanent_claim = ROOT } 
+			alentejo_area = { add_permanent_claim = ROOT } 
 		}
 	}
+
 	Spania_bloody_victory = {
-		icon = mission_have_two_subjects
-		required_missions = { Spania_burgundia }
+		icon = plague_doctor_training
 		position = 3
-		provinces_to_highlight = {
-			area = extremadura_area
-		}
-		trigger = { 
+		required_missions = { Spania_burgundia } 
+		provinces_to_highlight = { area = extremadura_area } 
+
+		trigger = {
 			extremadura_area = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
-		
+
 		effect = {
 			custom_tooltip = SPANIA_TT_2
 			set_country_flag = mil_advisor_give_less_war_exhaustion_flag
-			beieras_area = {
-				add_permanent_claim = ROOT
+			beieras_area = { add_permanent_claim = ROOT } 
+			leon_area = { add_permanent_claim = ROOT } 
+			castille_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	Spania_good_army = {
+		icon = mission_roman_legions
+		position = 5
+		required_missions = { Spania_mill_and_drill } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			OR = {
+				army_tradition = 30
+				army_professionalism = 0.2
 			}
-			leon_area = {
-				add_permanent_claim = ROOT
-			}
-			castille_area = {
-				add_permanent_claim = ROOT
+		}
+
+		effect = {
+			simple_dynamic_effect_without_alternative = {
+				first_custom_tooltip = SPANIA_TT_6a
+				first_limit = "
+					army_tradition = 30
+					has_country_modifier = spa_millings
+				"
+				first_effect = "
+					custom_tooltip = GITA_TT_1
+					set_country_flag = army_tradition_from_tech_flag
+					add_army_tradition = -15
+				"
+				second_custom_tooltip = SPANIA_TT_6b
+				second_limit = "
+					army_professionalism = 0.2
+					has_country_modifier = spa_drillings
+				"
+				second_effect = "
+					custom_tooltip = SPANIA_TT_6c
+					set_country_flag = army_professionalism_from_tech_flag
+					add_army_professionalism = -0.1
+				"
 			}
 		}
 	}
@@ -104,40 +232,35 @@ Spania_3_slot = {
 	slot = 3
 	generic = no
 	ai = yes
-	potential = {	tag = SP0	}
 	has_country_shield = yes
+	potential = { tag = SP0 } 
 
 	Spania_dictatorate = {
 		icon = mission_establish_jesuit_missions
 		position = 1
+		provinces_to_highlight = {  } 
 
-		trigger = { 
-			prestige = 15	
+		trigger = {
+			prestige = 15
 			num_of_allies = 2
 		}
-		
-		effect = {
-			add_stability_or_adm_power = yes
-		}
+
+		effect = { add_stability_or_adm_power = yes } 
 	}
+
 	Spania_bettia = {
-		icon = mission_have_two_subjects
-		required_missions = { Spania_dictatorate }
+		icon = mission_reliable_allies
 		position = 2
-		provinces_to_highlight = {
-			is_capital_of = BT0
-		}
-		trigger = { 
+		required_missions = { Spania_dictatorate } 
+		provinces_to_highlight = { is_capital_of = BT0 } 
+
+		trigger = {
 			OR = {
-				BT0 = {
-					alliance_with = ROOT
-				}
-				BT0 = {
-					exists = no
-				}
-			}		
+				BT0 = { alliance_with = ROOT } 
+				BT0 = { exists = no } 
+			}
 		}
-		
+
 		effect = {
 			simple_dynamic_effect = {
 				first_custom_tooltip = SPANIA_TT_1
@@ -165,39 +288,164 @@ Spania_3_slot = {
 		}
 	}
 
+	Spania_iberia = {
+		icon = spa_universal_monarchy
+		position = 4
+		required_missions = {
+			Spania_bloody_victory
+			Spania_bettia
+			Spania_the_rock
+		}
+		provinces_to_highlight = { region = iberia_region } 
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 30
+				region = iberia_region
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "spa_princeps_iberico"
+				duration = 10950
+			}
+			iberia_region = { add_permanent_claim = ROOT } 
+			custom_tooltip = SPANIA_TT_1
+			tooltip = { vassalize = BT0 } 
+			hidden_effect = {
+				if = {
+					limit = { BT0 = { alliance_with = ROOT }  } 
+					vassalize = BT0
+				}
+			}
+		}
+	}
+
+	Spania_iberian_imperator = {
+		icon = hispaniae
+		position = 6
+		required_missions = { Spania_iberia } 
+		provinces_to_highlight = { region = iberia_region } 
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 50
+				region = iberia_region
+			}
+		}
+
+		effect = {
+			custom_tooltip = SPANIA_TT_3
+			tooltip = {
+				add_country_modifier = {
+					name = "spa_princeps_iberico_less"
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = { has_country_modifier = spa_princeps_iberico } 
+					add_country_modifier = {
+						name = "spa_princeps_iberico"
+						duration = -1
+					}
+				}
+				else = {
+					add_country_modifier = {
+						name = "spa_princeps_iberico_less"
+						duration = -1
+					}
+				}
+			}
+		}
+	}
 }
 Spania_4_slot = {
 	slot = 4
 	generic = no
 	ai = yes
-	potential = {	tag = SP0	}
 	has_country_shield = yes
+	potential = { tag = SP0 } 
 
 	Spania_raklion = {
-		icon = mission_have_two_subjects
-		required_missions = { Spania_dictatorate Spania_meditteranean}
+		icon = Burn_Wooden_Wall
 		position = 2
-		provinces_to_highlight = {
-			province_id = 1293
+		required_missions = {
+			Spania_dictatorate
+			Spania_meditteranean
 		}
-		trigger = { 
-			1293 = {
-				light_ships_in_province = 5
+		provinces_to_highlight = { is_capital_of = RK0 } 
+
+		trigger = {
+			if = {
+				limit = { ai = no } 
+				RK0 = { NOT = { num_of_light_ship = ROOT }  } 
 			}
+			else = { num_of_light_ship = 9 } 
 		}
-		
+
 		effect = {
 			define_admiral = {
 				shock = 4
 				fire = 3
 				manuever = 2
 			}
-			lower_andalucia_area = {
-				add_permanent_claim = ROOT
-			}
+			lower_andalucia_area = { add_permanent_claim = ROOT } 
+			upper_andalucia_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	Spania_the_rock = {
+		icon = mission_naval_dominance
+		position = 3
+		required_missions = { Spania_raklion } 
+		provinces_to_highlight = { area = upper_andalucia_area } 
+
+		trigger = {
 			upper_andalucia_area = {
-				add_permanent_claim = ROOT
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
 			}
+		}
+
+		effect = {
+			1293 = { add_trade_node_income = 24 } 
+			country_event_with_insight = {
+				id = span.4
+				insight_tooltip = SPANIA_TT_4
+			}
+		}
+	}
+
+	Spania_hannibal = {
+		icon = the_alpine_wall
+		position = 5
+		required_missions = { Spania_iberia } 
+		provinces_to_highlight = {
+			OR = {
+				area = basque_country
+				area = catalonia_area
+			}
+		}
+
+		trigger = {
+			basque_country = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			catalonia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_prestige_or_monarch_power = { amount = 30 } 
+			languedoc_area = { add_permanent_claim = ROOT } 
+			pyrenees_area = { add_permanent_claim = ROOT } 
+			guyenne_area = { add_permanent_claim = ROOT } 
+			provence_area = { add_permanent_claim = ROOT } 
 		}
 	}
 }
@@ -205,25 +453,102 @@ Spania_5_slot = {
 	slot = 5
 	generic = no
 	ai = yes
-	potential = {	tag = SP0	}
 	has_country_shield = yes
+	potential = { tag = SP0 } 
 
 	Spania_meditteranean = {
-		icon = mission_have_two_subjects
+		icon = mission_mediterranean_islands
 		position = 1
-		trigger = { 
+		provinces_to_highlight = {  } 
+
+		trigger = {
 			if = {
-				limit = {ai = yes}
+				limit = { ai = yes } 
 				navy_size_percentage = 0.65
-			}else = {
-				navy_size_percentage = 0.95
 			}
+			else = { navy_size_percentage = 0.95 } 
 		}
-		
+
 		effect = {
 			add_navy_tradition = 5
-			baleares_area = {
+			baleares_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	Spania_the_water = {
+		icon = mission_establish_high_seas_navy
+		position = 3
+		required_missions = { Spania_raklion } 
+		provinces_to_highlight = { area = lower_andalucia_area } 
+
+		trigger = {
+			lower_andalucia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "spa_marittime_expansion"
+				duration = 10950
+			}
+			macaronesia_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	Spania_create_galleon = {
+		icon = mission_danish_navy
+		position = 4
+		required_missions = { Spania_the_water } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			years_of_income = 1
+			num_of_heavy_ship = 5
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "spa_galleon"
+				duration = -1
+			}
+		}
+	}
+
+	Spania_sardinian_siesta = {
+		icon = seize_sardinia
+		position = 6
+		required_missions = {
+			Spania_hannibal
+			Spania_create_galleon
+		}
+		provinces_to_highlight = {
+			OR = {
+				is_capital_of = emperor
+				province_id = 1298
+				province_id = 1303
+				province_id = 1302
+			}
+		}
+
+		trigger = {
+			is_great_power = yes
+			navy_size = emperor
+			navy_size = 100
+			1298 = { heavy_ships_in_province = 3 } 
+			1302 = { heavy_ships_in_province = 3 } 
+			1303 = { heavy_ships_in_province = 3 } 
+		}
+
+		effect = {
+			sardinia_area = {
 				add_permanent_claim = ROOT
+				set_in_empire = no
+			}
+			corsica_sardinia_area = {
+				add_permanent_claim = ROOT
+				set_in_empire = no
 			}
 		}
 	}
