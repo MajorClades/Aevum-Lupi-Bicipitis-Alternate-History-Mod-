@@ -399,6 +399,77 @@ aldabban_failure_reform = {
 }
 
 #LEVEL 5 MIL
+
+at_shop_reform = {
+	allow_normal_conversion = yes
+	icon = "castle" #REPLACE_ME
+	potential = {	}
+	trigger = {
+		OR = {
+			army_tradition = 50
+			has_reform = at_shop_reform
+		}
+	}
+	modifiers = {
+		infantry_cost = -0.1
+		manpower_recovery_speed = 0.15
+	}
+	effect = {
+		set_country_flag = extra_discipline_for_at_flag
+		custom_tooltip = SPANIA_TT_8a
+	}
+	removed_effect = {
+		clr_country_flag = extra_discipline_for_at_flag
+		remove_country_modifier = at_discipline_1
+		remove_country_modifier = at_discipline_2
+		remove_country_modifier = at_discipline_3
+		remove_country_modifier = at_discipline_4
+	}
+	ai = {
+		factor = 1
+	}
+}
+
+professional_expansion_reform = {
+	allow_normal_conversion = yes
+	icon = "castle" #REPLACE_ME
+	potential = {	}
+	trigger = {
+		OR = {
+			mil_power = 250
+			has_reform = professional_expansion_reform
+		}
+	}
+	modifiers = {
+		infantry_cost = -0.1
+		manpower_recovery_speed = 0.15
+	}
+	effect = {
+		add_mil_power = -250
+		custom_tooltip = SPANIA_TT_8b
+		country_event = {
+			id = profexp.1
+		}
+	}
+	removed_effect = {
+		clr_country_flag = army_prof_exp_1a
+		clr_country_flag = army_prof_exp_1b
+		clr_country_flag = army_prof_exp_1c
+		clr_country_flag = army_prof_exp_2a
+		clr_country_flag = army_prof_exp_2b
+		clr_country_flag = army_prof_exp_2c
+		clr_country_flag = army_prof_exp_3a
+		clr_country_flag = army_prof_exp_3b
+		clr_country_flag = army_prof_exp_3c
+		clr_country_flag = army_prof_exp_4a
+		clr_country_flag = army_prof_exp_4b
+		clr_country_flag = army_prof_exp_4c
+	}
+	ai = {
+		factor = 1
+	}
+}
+
 herkulian_quantity_reform = {
 	allow_normal_conversion = yes
 	icon = "armerica_explo_reform"

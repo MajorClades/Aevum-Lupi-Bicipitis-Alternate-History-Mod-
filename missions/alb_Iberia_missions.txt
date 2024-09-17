@@ -142,7 +142,11 @@ Iberia_1_slot = {
 		position = 7
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			NOT = {
+				has_reform = alb_ib0_fragmented_cultures
+			}
+		} 
 
 		effect = {  } 
 	}
@@ -153,9 +157,27 @@ Iberia_1_slot = {
 		required_missions = { ib0_cultural_unity } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			has_global_modifier_value = {
+				which = tolerance_own
+				value = 8
+			}
+			NOT = {
+				is_in_deficit = yes
+			}
+			army_tradition = 70
+			NOT = {
+				num_of_loans = 1
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			unlock_government_reform = {
+				government_reform = ib0_templar_banking
+			}
+			unlock_holy_order = { type = knights_templar_order }
+			change_government_reform_progress = 50
+		} 
 	}
 }
 Iberia_2_slot = {
@@ -171,9 +193,17 @@ Iberia_2_slot = {
 		provinces_to_highlight = {  
 			province_id = 226
 			NOT = {
-				has_great_project = {
-					type = the_rock
-					tier = 2
+				OR = {
+					has_great_project = {
+						type = the_rock
+						tier = 2
+					}
+					AND = {
+						development = 20
+						num_of_units_in_province = {
+							amount = 10
+						}
+					}
 				}
 			}
 			NOT = {
@@ -183,9 +213,17 @@ Iberia_2_slot = {
 
 		trigger = {  
 			226 = {
-				has_great_project = {
-					type = the_rock
-					tier = 2
+				OR = {
+					has_great_project = {
+						type = the_rock
+						tier = 2
+					}
+					AND = {
+						development = 20
+						num_of_units_in_province = {
+							amount = 10
+						}
+					}
 				}
 			}
 			1293 ={
@@ -352,15 +390,65 @@ Iberia_3_slot = {
 		position = 7
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_owned_provinces_with = {
+				value = 50
+				region = iberia_region
+				religion = ROOT
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			if = {
+				limit = {
+					221 = {
+						owned_by = ROOT
+						OR = {
+							culture = hebrew
+							religion = jewish
+						}
+					}
+				}
+				custom_tooltip = ib0_if_pormane_exists_yes_tt
+				country_event = {
+					id = iberia.8
+				}
+			}
+			else = {
+				custom_tooltip = ib0_if_pormane_exists_no_tt
+				tooltip = {
+					country_event = {
+						id = iberia.8
+					}
+				}
+			}
+			custom_tooltip = empty_line_tt
+			define_advisor = {
+				type = inquisitor
+				skill = 3
+				cost_multiplier = 0.5
+			}
+			custom_tooltip = empty_line_tt
+			custom_tooltip = ib0_improved_churches_modifier_tt
+			set_country_flag = ib0_improved_churches_flag
+		} 
 	}
 
 	ib0_embellish_capital = {
 		icon = spa_new_capital
 		position = 8
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			is_capital_of = ROOT
+			NOT = {
+				num_of_times_expanded_infrastructure = 2
+			}
+			NOT = {
+				num_of_buildings_in_province = 5
+			}
+			NOT = {
+				development = 30
+			}
+		} 
 
 		trigger = {  } 
 
@@ -650,6 +738,8 @@ Iberia_5_slot = {
 		} 
 
 		effect = {  
+			custom_tooltip = ib0_unlock_prospect_decision_tt
+			custom_tooltip = empty_line_tt
 			france_region = {
 				add_permanent_claim = ROOT
 			}
