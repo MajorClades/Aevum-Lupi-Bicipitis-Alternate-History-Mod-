@@ -1,0 +1,111 @@
+namespace = papacy
+
+country_event = {
+	id = papacy.1
+	title = papacy.1.t
+	desc = papacy.1.d
+	picture = POPE_PREACHING_eventPicture
+	
+	trigger = {
+		tag = PAP
+		emperor = {
+			NOT = {
+				has_ruler_modifier = pope_likes_emperor
+			}
+			NOT = {
+				has_ruler_modifier = pope_dislikes_emperor
+			}
+		}
+	}
+
+	mean_time_to_happen = {
+		months = 2
+	}
+
+	option = {
+		name = papacy.1a
+		ai_chance = {
+			factor = 90
+			modifier = {
+				factor = 0.5
+				ruler_has_personality = sinner_personality
+			}
+			modifier = {
+				factor = 5
+				emperor = {
+					is_papal_controller = yes
+				}
+			}
+		}
+		emperor = {
+			add_ruler_modifier = {
+				name = pope_likes_emperor
+			}
+		}
+		add_5_p_a = yes
+		sinful_emperor_endorsed = yes
+		faithful_emperor_endorsed = yes	
+	}
+	option = {
+		name = papacy.1b
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 2
+				ruler_has_personality = cruel_personality
+			}
+		}
+		emperor = {
+			add_ruler_modifier = {
+				name = pope_dislikes_emperor
+			}
+			country_event = {
+				id = papacy.2
+				days = 7
+			}
+		}
+		sinful_emperor_denied = yes
+		faithful_emperor_denied = yes
+	}
+}
+
+
+country_event = {
+	id = papacy.2
+	title = papacy.2.t
+	desc = papacy.2.d
+	picture = POPE_PREACHING_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = papacy.2a
+		add_treasury = -100
+		PAP = {
+			add_treasury = 100
+		}
+		remove_country_modifier = pope_dislikes_emperor
+		add_ruler_modifier = {
+			name = pope_likes_emperor
+		}
+	}
+	option = {
+		name = papacy.2b
+		highlight = yes
+		trigger = {
+			papal_influence = 50
+		}
+		add_papal_influence = -50
+		PAP = {
+			add_papal_influence = 50
+		}
+		remove_country_modifier = pope_dislikes_emperor
+		add_ruler_modifier = {
+			name = pope_likes_emperor
+		}
+	}
+	option = {
+		name = papacy.2c
+		excommunicate = ROOT
+	}
+}

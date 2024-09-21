@@ -5,26 +5,31 @@ saints_and_sinners = {
 	powers = {
 		nice_or_naughty = {
 			max = 100
+			min = -100
 			gui = council_of_ten_gov_mech
 			show_before_interactions = yes
 			reset_on_new_ruler = yes
-			default = 50
+			default = 0
 			base_monthly_growth = 0.05
+
 			scaled_modifier = {
 				modifier = {
-					diplomatic_reputation = 1
-					liberty_desire_from_subject_development = -0.25
+					diplomatic_reputation = 2
+					liberty_desire_from_subject_development = -0.5
 				}
 			}
 			reverse_scaled_modifier = {
 				modifier = {
-					diplomatic_reputation = -1
-					liberty_desire_from_subject_development = 0.25
+					diplomatic_reputation = -2
+					liberty_desire_from_subject_development = 0.5
 				}
+				start_value = -100
+				end_value = 0
 			}
 			scaled_modifier = {
 				modifier = { 
 					can_not_declare_war = yes
+					accept_vassalization_reasons = 100
 				}
 				start_value = 60
 				end_value = 100
@@ -40,8 +45,8 @@ saints_and_sinners = {
 				modifier = {
 					monthly_nice_or_naughty = 0.5
 				}
-				start_value = 0
-				end_value = 50
+				start_value = -50
+				end_value = 0
 			}
 			is_good = yes
 		}
@@ -61,7 +66,7 @@ saints_and_sinners = {
 						has_government_power = {
 							mechanic_type = saints_and_sinners
 							power_type = nice_or_naughty
-							value = 60
+							value = 50
 						}
 					}
 					add_stability_or_adm_power = yes
@@ -72,20 +77,16 @@ saints_and_sinners = {
 							has_government_power = {
 								mechanic_type = saints_and_sinners
 								power_type = nice_or_naughty
-								value = 60
+								value = 50
 							}
 						}
 						has_government_power = {
 							mechanic_type = saints_and_sinners
 							power_type = nice_or_naughty
-							value = 40
+							value = -50
 						}
 					}
-					add_government_power = {
-						mechanic_type = saints_and_sinners
-						power_type = nice_or_naughty
-						value = 5
-					}
+					add_5_p_a = yes
 				}
 				if = {
 					limit = {
@@ -93,16 +94,12 @@ saints_and_sinners = {
 							has_government_power = {
 								mechanic_type = saints_and_sinners
 								power_type = nice_or_naughty
-								value = 40
+								value = -50
 							}
 						}
 					}
 					add_treasury = -500
-					add_government_power = {
-						mechanic_type = saints_and_sinners
-						power_type = nice_or_naughty
-						value = 5
-					}
+					add_5_p_a = yes
 				}
 			}
 		}
@@ -119,7 +116,7 @@ saints_and_sinners = {
 						has_government_power = {
 							mechanic_type = saints_and_sinners
 							power_type = nice_or_naughty
-							value = 60
+							value = 50
 						}
 					}
 					add_years_of_income = 0.5
@@ -130,13 +127,13 @@ saints_and_sinners = {
 							has_government_power = {
 								mechanic_type = saints_and_sinners
 								power_type = nice_or_naughty
-								value = 60
+								value = 50
 							}
 						}
 						has_government_power = {
 							mechanic_type = saints_and_sinners
 							power_type = nice_or_naughty
-							value = 40
+							value = -50
 						}
 					}
 					add_papal_influence = 25
@@ -147,11 +144,11 @@ saints_and_sinners = {
 							has_government_power = {
 								mechanic_type = saints_and_sinners
 								power_type = nice_or_naughty
-								value = 40
+								value = -50
 							}
 						}
 					}
-					add_reform_desire = 5
+					add_reform_desire = 0.05
 					change_government_reform_progress = 25
 				}
 			}
@@ -170,10 +167,10 @@ saints_and_sinners = {
 						has_government_power = {
 							mechanic_type = saints_and_sinners
 							power_type = nice_or_naughty
-							value = 60
+							value = 50
 						}
 					}
-					add_reform_desire = 5
+					add_reform_desire = 0.05
 					add_treasury = 1000
 					add_curia_treasury = -1000
 				}
@@ -183,16 +180,16 @@ saints_and_sinners = {
 							has_government_power = {
 								mechanic_type = saints_and_sinners
 								power_type = nice_or_naughty
-								value = 60
+								value = 50
 							}
 						}
 						has_government_power = {
 							mechanic_type = saints_and_sinners
 							power_type = nice_or_naughty
-							value = 40
+							value = -50
 						}
 					}
-					add_reform_desire = 5
+					add_reform_desire = 0.05
 					add_treasury = 500
 					add_curia_treasury = -500
 				}
@@ -202,11 +199,11 @@ saints_and_sinners = {
 							has_government_power = {
 								mechanic_type = saints_and_sinners
 								power_type = nice_or_naughty
-								value = 40
+								value = -50
 							}
 						}
 					}
-					add_reform_desire = 5
+					add_reform_desire = 0.05
 					add_curia_treasury = -500
 					random_owned_province = {
 						limit = {
