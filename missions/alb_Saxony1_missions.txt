@@ -178,7 +178,6 @@ saxon_1_slot = {
 		effect = {  
 			unlock_government_reform = {
 				government_reform = sx0_knightly_army_reform
-				tooltip = yes
 			}
 			custom_tooltip = empty_line_tt
 			add_mil_power = 100
@@ -221,7 +220,6 @@ saxon_1_slot = {
 			else = {
 				unlock_government_reform = {
 					government_reform = sx0_saxony_empire
-					tooltip = yes
 				}
 			}
 			add_splendor = 1000
@@ -564,10 +562,13 @@ saxon_2_slot = {
 			is_capital_of = LT0
 		} 
 
-		trigger = {  
-			custom_trigger_tooltip = {
-				tooltip = alb_had_valtean_wedding_tt
-				has_country_flag = had_slasmeri_union_flag
+		trigger = {
+			OR = {
+				custom_trigger_tooltip = {
+					tooltip = alb_had_valtean_wedding_tt
+					has_country_flag = had_slasmeri_union_flag
+				}
+				is_year = 1480
 			}
 			OR = {
 				LT0 = {
@@ -1154,7 +1155,7 @@ saxon_5_slot = {
 			all_owned_province = {
 				OR ={
 					AND = {
-						culture = lithuanian
+						culture = prusijan
 						num_of_times_improved = 2
 						NOT = {
 							local_autonomy = 20
@@ -1164,7 +1165,7 @@ saxon_5_slot = {
 						}
 					}
 					NOT = {
-						culture = lithuanian
+						culture = prusijan
 					}
 				}
 			}
@@ -1172,7 +1173,7 @@ saxon_5_slot = {
 
 		effect = {  
 			add_accepted_culture_or_dip_power = {
-				culture = lithuanian
+				culture = prusijan
 			}
 			custom_tooltip = alb_sx0_every_lithuanian_province_tt
 			tooltip = {
@@ -1184,7 +1185,7 @@ saxon_5_slot = {
 			hidden_effect = {
 				every_owned_province = {
 					limit = {
-						culture = lithuanian
+						culture = prusijan
 					}
 					add_province_modifier = {
 						name = sx0_south_pacified
@@ -1352,19 +1353,75 @@ saxon_5_slot = {
 
 		trigger = {  
 			moldavia_area = {
-				country_or_non_sovereign_subject_holds = ROOT
+				if = {
+					limit = {
+						SX1 = {
+							exists = yes
+							alliance_with = ROOT
+						}
+					}
+					OR = {
+						country_or_non_sovereign_subject_holds = ROOT
+						owned_by = SX2
+					}
+				}
+				else = {
+					country_or_non_sovereign_subject_holds = ROOT
+				}
 				type = all
 			}
 			wallachia_area = {
-				country_or_non_sovereign_subject_holds = ROOT
+				if = {
+					limit = {
+						SX1 = {
+							exists = yes
+							alliance_with = ROOT
+						}
+					}
+					OR = {
+						country_or_non_sovereign_subject_holds = ROOT
+						owned_by = SX2
+					}
+				}
+				else = {
+					country_or_non_sovereign_subject_holds = ROOT
+				}
 				type = all
 			}
 			transylvania_area = {
-				country_or_non_sovereign_subject_holds = ROOT
+				if = {
+					limit = {
+						SX1 = {
+							exists = yes
+							alliance_with = ROOT
+						}
+					}
+					OR = {
+						country_or_non_sovereign_subject_holds = ROOT
+						owned_by = SX2
+					}
+				}
+				else = {
+					country_or_non_sovereign_subject_holds = ROOT
+				}
 				type = all
 			}
 			southern_transylvania_area = {
-				country_or_non_sovereign_subject_holds = ROOT
+				if = {
+					limit = {
+						SX1 = {
+							exists = yes
+							alliance_with = ROOT
+						}
+					}
+					OR = {
+						country_or_non_sovereign_subject_holds = ROOT
+						owned_by = SX2
+					}
+				}
+				else = {
+					country_or_non_sovereign_subject_holds = ROOT
+				}
 				type = all
 			}
 		} 
@@ -1383,9 +1440,19 @@ saxon_5_slot = {
 						id = saxo.8
 					}
 				"
-			}
-			carpathia_region = {
-				add_permanent_claim = ROOT
+				second_limit = "
+					SX1 = {
+						OR = {
+							exists = no
+							NOT = { alliance_with = ROOT }
+						}
+					}
+				"
+				second_effect = "
+					carpathia_region = {
+						add_permanent_claim = ROOT
+					}
+				"
 			}
 		} 
 	}
