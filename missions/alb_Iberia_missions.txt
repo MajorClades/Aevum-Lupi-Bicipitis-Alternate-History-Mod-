@@ -130,11 +130,54 @@ Iberia_1_slot = {
 		icon = mission_kingdom_of_new_spain
 		position = 5
 		required_missions = { ib0_viceroyalty_of_banrika } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			trade_goods = gold
+			colonial_region = colonial_mexico
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 6
+				trade_goods = gold
+				colonial_region = colonial_mexico
+			}
+			OR = {
+				treasurer = 3
+				monthly_income = 100
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_country_modifier = {
+				name = ib0_maximum_gold
+				duration = 36500
+			}
+			add_years_of_income = 1
+			custom_tooltip = empty_line_tt
+			custom_tooltip = ib0_every_gold_province_in_mexico_tt
+			tooltip = {
+				add_province_modifier = {
+					name = ib0_expanded_gold_mines
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				every_province = {
+					limit = {
+						country_or_non_sovereign_subject_holds = ROOT
+						colonial_region = colonial_mexico
+						trade_goods = gold
+					}
+					add_province_modifier = {
+						name = ib0_expanded_gold_mines
+						duration = -1
+					}
+				}
+			}
+		} 
 	}
 
 	ib0_cultural_unity = {
@@ -148,7 +191,26 @@ Iberia_1_slot = {
 			}
 		} 
 
-		effect = {  } 
+		effect = {  
+			custom_tooltip = ib0_every_primary_culture_province_tt
+			tooltip = {
+				add_province_modifier = {
+					name = ib0_one_culture_one_nation
+					duration = 9125
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						culture_group = ROOT
+					}
+					add_province_modifier = {
+						name = ib0_one_culture_one_nation
+						duration = 9125
+					}
+				}
+			}
+		} 
 	}
 
 	ib0_hospitaller_knights = {
@@ -255,12 +317,19 @@ Iberia_2_slot = {
 		provinces_to_highlight = {  } 
 
 		trigger = {  
-			calc_true_if = {
-				amount = 7
+			num_of_owned_provinces_with = {
+				value = 7
+				OR = {
+
+				}
+				development = 20
+				has_dock_building_trigger = yes
 			}
 		} 
 
-		effect = {  } 
+		effect = {  
+
+		} 
 	}
 
 	ib0_trade_dominance = {
@@ -885,10 +954,54 @@ Iberia_5_slot = {
 	ib0_expand_molendinum_castra = {
 		icon = mission_placeholder
 		position = 7
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			province_id = 2754
+			NOT = {
+				has_great_project = {
+					type = giant_windmills
+					tier = 2
+				}
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			2754 = {
+				has_great_project = {
+					type = giant_windmills
+					tier = 2
+				}
+				base_manpower = 10
+			}
+			num_of_owned_provinces_with = {
+				value = 4
+				base_manpower = 10
+			}
+			army_tradition = 75
+		} 
 
-		effect = {  } 
+		effect = { 
+			add_army_tradition = -25
+			custom_tooltip = SOX_TT_2 
+			2754 = {
+				add_permanent_province_modifier = {
+					name = "sox_allow_legionnary"
+					duration = -1
+				}
+			}
+			add_country_modifier = {
+				name = "sox_legion_primer"
+				duration = -1
+			}
+			hidden_effect = {
+				set_variable = {
+					which = legion_recruiting_number_provinces_variable
+					value = 3
+				}
+				set_variable = {
+					which = legion_recruiting_max_var
+					value = 10
+				}
+			}
+		} 
 	}
 }
