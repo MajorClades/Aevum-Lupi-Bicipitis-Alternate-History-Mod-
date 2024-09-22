@@ -41,8 +41,12 @@ papal_vassalization_action = {
 			tag = PAP
 			was_tag = PAP
 		}
+		FROM = {
+			NOT = {
+				is_subject_of_type = papal_vassal
+			}
+		}
     }
-	require_acceptance = yes
 	is_allowed = {
 		is_at_war = no
 		FROM = {
@@ -52,8 +56,9 @@ papal_vassalization_action = {
     }
 	
 	on_accept = {
-		FROM = {
-			change_subject_type = {
+		ROOT = {
+			create_subject = {
+				who = FROM
 				subject_type = papal_vassal
 			}
 		}
@@ -64,3 +69,39 @@ papal_vassalization_action = {
     }
 }
 
+papal_integrate_action = {
+	category = influence
+
+	is_visible = {
+		OR = {
+			tag = PAP
+			was_tag = PAP
+		}
+		FROM = {
+			is_subject_of_type = papal_vassal
+		}
+    }
+	is_allowed = {
+		is_at_war = no
+		FROM = {
+			NOT = {
+				liberty_desire = 40
+			}
+			has_opinion = {
+				who = ROOT
+				value = 150
+			}
+		}
+    }
+	
+	on_accept = {
+		ROOT = {
+			lose_15_p_a = yes
+			inherit = FROM
+		}
+    }
+
+	ai_will_do = {
+		always = yes
+    }
+}

@@ -1,6 +1,6 @@
 namespace = papacy
 
-country_event = {
+country_event = { #Investiture good pope do their job
 	id = papacy.1
 	title = papacy.1.t
 	desc = papacy.1.d
@@ -70,7 +70,7 @@ country_event = {
 }
 
 
-country_event = {
+country_event = { #Investiture Emperor mad
 	id = papacy.2
 	title = papacy.2.t
 	desc = papacy.2.d
@@ -82,11 +82,9 @@ country_event = {
 		name = papacy.2a
 		add_treasury = -100
 		PAP = {
-			add_treasury = 100
-		}
-		remove_country_modifier = pope_dislikes_emperor
-		add_ruler_modifier = {
-			name = pope_likes_emperor
+			country_event = {
+				id = papacy.4
+			}
 		}
 	}
 	option = {
@@ -106,6 +104,197 @@ country_event = {
 	}
 	option = {
 		name = papacy.2c
-		excommunicate = ROOT
+		highlight = yes
+		trigger = {
+			is_papal_controller = yes
+		}
+		remove_country_modifier = pope_dislikes_emperor
+		add_ruler_modifier = {
+			name = pope_likes_emperor
+		}
+	}
+}
+
+country_event = { #promote celibacy among the clergy
+	id = papacy.3
+	title = papacy.3.t
+	desc = papacy.3.d
+	picture = POPE_PREACHING_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = papacy.3a
+		add_5_p_a = yes
+	}
+	option = {
+		name = papacy.3b
+		add_curia_treasury = 1000
+	}
+}
+
+country_event = { #reasonable response
+	id = papacy.4
+	title = papacy.4.t
+	desc = papacy.4.d
+	picture = POPE_PREACHING_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = papacy.4a
+		add_treasury = 100
+		emperor = {
+			remove_country_modifier = pope_dislikes_emperor
+			add_ruler_modifier = {
+				name = pope_likes_emperor
+			}
+		}
+	}
+	option = {
+		name = papacy.4b
+		emperor = {
+			remove_country_modifier = pope_dislikes_emperor
+			add_ruler_modifier = {
+				name = pope_likes_emperor
+			}
+		}
+	}
+	option = {
+		name = papacy.4b
+		excommunicate = emperor
+		custom_tooltip = PAP_WAR_IN_EARTH
+	}
+}
+
+country_event = { #HMM what are you doing step Pope?
+	id = papacy.5
+	title = papacy.5.t
+	desc = papacy.5.d
+	picture = POPE_PREACHING_eventPicture
+	
+	trigger = {
+		has_government_mechanic = saints_and_sinners
+		emperor = {
+			has_country_modifier = pope_dislikes_emperor
+			is_excommunicated = yes
+		}
+		OR = {
+			has_government_power = {
+				mechanic_type = saints_and_sinners
+				power_type = nice_or_naughty
+				value = 50
+			}
+			NOT = {
+				has_government_power = {
+					mechanic_type = saints_and_sinners
+					power_type = nice_or_naughty
+					value = -50
+				}
+			}
+		}
+	}
+
+	mean_time_to_happen = {
+		months = 24
+	}
+
+	option = {
+		name = papacy.5a
+		trigger = {
+			has_government_power = {
+				mechanic_type = saints_and_sinners
+				power_type = nice_or_naughty
+				value = 50
+			}
+		}
+		change_tag = PA0
+		change_religion = pontifex
+		custom_tooltip = PAP_WAR_IN_EARTH_2
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					religion = catholic
+				}
+				change_religion = pontifex
+			}
+			every_subject_country = {
+				limit = {
+					religion = catholic
+				}
+				change_religion = pontifex
+				every_owned_province = {
+					limit = {
+						religion = catholic
+					}
+					change_religion = pontifex
+				}
+			}
+			every_known_country = {
+				limit = {
+					has_opinion = {
+						who = ROOT
+						value = 130
+					}
+				}
+				change_religion = pontifex
+				every_owned_province = {
+					limit = {
+						religion = catholic
+					}
+					change_religion = pontifex
+				}
+			}
+		}
+	}
+	option = {
+		name = papacy.5b
+		trigger = {
+			NOT = {
+				has_government_power = {
+					mechanic_type = saints_and_sinners
+					power_type = nice_or_naughty
+					value = -50
+				}
+			}
+		}
+		change_tag = PA0
+		change_religion = pontifex
+		custom_tooltip = PAP_WAR_IN_EARTH_3
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					religion = catholic
+				}
+				change_religion = pontifex
+			}
+			every_subject_country = {
+				limit = {
+					religion = catholic
+				}
+				change_religion = pontifex
+				every_owned_province = {
+					limit = {
+						religion = catholic
+					}
+					change_religion = pontifex
+				}
+			}
+			every_known_country = {
+				limit = {
+					has_opinion = {
+						who = ROOT
+						value = 180
+					}
+				}
+				change_religion = pontifex
+				every_owned_province = {
+					limit = {
+						religion = catholic
+					}
+					change_religion = pontifex
+				}
+			}
+		}
 	}
 }
