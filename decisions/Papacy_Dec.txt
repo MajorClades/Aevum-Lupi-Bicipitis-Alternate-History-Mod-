@@ -1,5 +1,64 @@
 country_decisions = {
 
+	declare_imperium_sub_pontifex = {
+		major = yes
+		potential = {
+			tag = PAP
+			has_government_mechanic = saints_and_sinners
+			# mission_completed = x-wip-x
+		}
+		allow = {
+			has_government_mechanic = saints_and_sinners
+			emperor = {
+				has_country_modifier = pope_dislikes_emperor
+				is_excommunicated = yes
+			}
+			OR = {
+				has_government_power = {
+					mechanic_type = saints_and_sinners
+					power_type = nice_or_naughty
+					value = 50
+				}
+				NOT = {
+					has_government_power = {
+						mechanic_type = saints_and_sinners
+						power_type = nice_or_naughty
+						value = -50
+					}
+				}
+			}
+			has_dlc = "Art of War"
+			hre_leagues_enabled = no
+			hre_religion_locked = no
+			hre_religion_treaty = no
+			tag = PAP	
+			religion = catholic
+			NOT = { has_global_flag = evangelical_union_happened }
+			NOT = { hre_reform_passed = erbkaisertum }
+			NOT = { has_global_flag = great_peasants_war_flag }
+		}
+		effect = {
+			if = {
+				limit = {
+					has_government_power = {
+						mechanic_type = saints_and_sinners
+						power_type = nice_or_naughty
+						value = 50
+					}
+				}
+				set_country_flag = pontifex_nice_flag
+			}else = {
+				set_country_flag = pontifex_naughty_flag
+			}
+			country_event = {
+				id = religious_leagues.5
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
 
 	
 }

@@ -477,37 +477,51 @@ country_event = { #I feel like the leagues should be instant. Also, I need a goo
 	picture = RELIGIOUS_WARS_eventPicture
 	major = yes
 	fire_only_once = yes
+	is_triggered_only = yes #probably better to have a decision for this, so the player doesn't have to wait
+
+	# trigger = {
+	# 	reform_desire = 1 #placeholder
+	# 	has_dlc = "Art of War"
+	# 	NOT = { has_global_flag = evangelical_union_happened }
+	# 	hre_leagues_enabled = no
+	# 	hre_religion_locked = no
+	# 	hre_religion_treaty = no
+	# 	tag = PAP	
+	# 	religion = catholic
+	# 	NOT = { hre_reform_passed = erbkaisertum }
+	# 	NOT = { has_global_flag = great_peasants_war_flag }
+	# }
 	
-	trigger = {
-		reform_desire = 1 #placeholder
-		has_dlc = "Art of War"
-		NOT = { has_global_flag = evangelical_union_happened }
-		hre_leagues_enabled = no
-		hre_religion_locked = no
-		hre_religion_treaty = no
-		tag = PAP	
-		religion = catholic
-		NOT = { hre_reform_passed = erbkaisertum }
-		NOT = { has_global_flag = great_peasants_war_flag }
-	}
-	
-	mean_time_to_happen = {
-		months = 12
-		modifier = {
-			factor = 0.5
-			is_year = 1575
-		}
-		modifier = {
-			factor = 0.1
-			is_year = 1600
-		}		
-	}
+	# mean_time_to_happen = {
+	# 	months = 12
+	# 	modifier = {
+	# 		factor = 0.5
+	# 		is_year = 1575
+	# 	}
+	# 	modifier = {
+	# 		factor = 0.1
+	# 		is_year = 1600
+	# 	}		
+	# }
 
 	option = {
 		name = "religious_leagues.5.a"
 		change_tag = PA0
 		change_religion = pontifex
 		custom_tooltip = PAP_WAR_IN_EARTH_2
+		change_government = monarchy
+		if = {
+			limit = {
+				has_country_flag = pontifex_nice_flag
+			}
+			add_government_reform = papal_monarchy_good
+		}
+		if = {
+			limit = {
+				has_country_flag = pontifex_naughty_flag
+			}
+			add_government_reform = papal_monarchy_evil
+		}
 		hidden_effect = {
 			every_owned_province = {
 				limit = {
