@@ -469,8 +469,8 @@ country_event = {
 	}
 }
 
-# The Evangelical Union
-country_event = {
+# The Pontifexian Union
+country_event = { #I feel like the leagues should be instant. Also, I need a good trigger. Maybe make a bar like post finem with it being tensions between pope and emperor?
 	id = religious_leagues.5
 	title = "religious_leagues.5.t"
 	desc = "religious_leagues.5.d"
@@ -479,16 +479,14 @@ country_event = {
 	fire_only_once = yes
 	
 	trigger = {
+		reform_desire = 1 #placeholder
 		has_dlc = "Art of War"
 		NOT = { has_global_flag = evangelical_union_happened }
 		hre_leagues_enabled = no
 		hre_religion_locked = no
 		hre_religion_treaty = no
-		is_emperor = yes		
+		tag = PAP	
 		religion = catholic
-		PA0 = {
-			religion = pontifex
-		}
 		NOT = { hre_reform_passed = erbkaisertum }
 		NOT = { has_global_flag = great_peasants_war_flag }
 	}
@@ -507,6 +505,29 @@ country_event = {
 
 	option = {
 		name = "religious_leagues.5.a"
+		change_tag = PA0
+		change_religion = pontifex
+		custom_tooltip = PAP_WAR_IN_EARTH_2
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					religion = catholic
+				}
+				change_religion = pontifex
+			}
+			every_subject_country = {
+				limit = {
+					religion = catholic
+				}
+				change_religion = pontifex
+				every_owned_province = {
+					limit = {
+						religion = catholic
+					}
+					change_religion = pontifex
+				}
+			}
+		}
 		enable_hre_leagues = yes
 		set_global_flag = evangelical_union_happened
 	}
