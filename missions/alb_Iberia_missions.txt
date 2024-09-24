@@ -320,7 +320,15 @@ Iberia_2_slot = {
 			num_of_owned_provinces_with = {
 				value = 7
 				OR = {
-
+					province_id = 220
+					province_id = 4550
+					province_id = 213
+					province_id = 221
+					province_id = 1750
+					province_id = 226
+					province_id = 1749
+					province_id = 230
+					province_id = 2988
 				}
 				development = 20
 				has_dock_building_trigger = yes
@@ -341,9 +349,38 @@ Iberia_2_slot = {
 		}
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			trade_income_percentage = 0.3
+			1293 = {
+				is_strongest_trade_power = ROOT
+			}
+			1295 ={
+				is_strongest_trade_power = ROOT
+			}
+			OR = {
+				1516 = {
+					is_strongest_trade_power = ROOT
+				}
+				1466 = {
+					is_strongest_trade_power = ROOT
+				}
+			}
+			home_trade_node = {
+				highest_value_trade_node = yes
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_years_of_trade_income = {
+				years = 6
+				custom_tooltip = ME_add_6_years_of_trade_income
+			}
+			custom_tooltip = empty_line_tt
+			add_country_modifier = {
+				name = ib0_iberian_century
+				duration = 36500
+			}
+		} 
 	}
 
 	ib0_to_central_rausulia = {
@@ -519,9 +556,30 @@ Iberia_3_slot = {
 			}
 		} 
 
-		trigger = {  } 
+		trigger = {  
+			capital_scope = {
+				num_of_times_expanded_infrastructure = 2
+				num_of_buildings_in_province = 5
+				development = 30
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			custom_tooltip = ib0_expand_infra_capital_tt
+			hidden_effect = {
+				capital_scope = {
+					set_province_flag = ib0_expand_infra_capital_flag
+				}
+			}
+			capital_scope = {
+				add_province_modifier = {
+					name = ib0_center_of_iberia
+					duration = -1
+				}
+				add_random_development = 2
+				add_random_development = 1
+			}
+		} 
 	}
 
 	ib0_efficient_governance = {
@@ -531,11 +589,48 @@ Iberia_3_slot = {
 			ib0_found_the_local_councils
 			ib0_embellish_capital
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			owned_by = root
+			NOT = {
+				num_of_times_expanded_infrastructure = 2
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			has_final_tier_reforms_trigger = yes
+			num_of_owned_provinces_with = {
+				value = 15
+				num_of_times_expanded_infrastructure = 2
+			}
+			custom_trigger_tooltip = {
+				tooltip = 3_lvl_5_advisors_tt
+				has_mil_advisor_of_level = {
+					level = 5
+				}
+				has_adm_advisor_of_level = {
+					level = 5
+				}
+				has_dip_advisor_of_level = {
+					level = 5
+				}
+			}
+			NOT = {
+				governing_capacity_percentage = 1
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			set_country_flag = MUG_upgrade_expanding_infrastructure # I love copying from basegame
+			custom_tooltip = MUG_upgrade_expanding_infrastructure_tt
+			tooltip = {
+				add_province_modifier = {
+					name = MUG_expanded_infrastructure
+					duration = 7300
+				}
+			}
+			custom_tooltip = empty_line_tt
+			#smth to do with council gov mechanic
+		} 
 	}
 }
 Iberia_4_slot = {

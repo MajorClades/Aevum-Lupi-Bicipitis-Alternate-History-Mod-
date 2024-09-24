@@ -753,3 +753,24 @@ on_barrage = { #ROOT - barraging country, FROM - barraged province
 		}
 	}
 }
+
+on_expanded_infrastructure = {
+	if = {
+		limit = {
+			has_province_flag = ib0_expand_infra_capital_flag
+		}
+		add_base_production = 1
+		add_base_manpower = 1
+		add_base_tax = 1
+	}
+}
+on_expanded_infrastructure_removed = {
+	if = {
+		limit = {
+			has_province_flag = ib0_expand_infra_capital_flag
+		}
+		add_base_production = -1
+		add_base_manpower = -1
+		add_base_tax = -1
+	}
+}
