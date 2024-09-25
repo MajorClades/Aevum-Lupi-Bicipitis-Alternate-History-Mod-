@@ -336,7 +336,38 @@ Iberia_2_slot = {
 		} 
 
 		effect = {  
-
+			custom_tooltip = every_province_fulfilling_trigger_tt
+			tooltip = {
+				add_base_production = 2
+			}
+			custom_tooltip = ib0_2.5_eff_for_every_province_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						OR = {
+							province_id = 220
+							province_id = 4550
+							province_id = 213
+							province_id = 221
+							province_id = 1750
+							province_id = 226
+							province_id = 1749
+							province_id = 230
+							province_id = 2988
+						}
+						development = 20
+						has_dock_building_trigger = yes
+					}
+					add_province_modifier = {
+						name = ib0_epic_port
+						duration = 7300
+					}
+					add_base_production = 2
+					owner = {
+						add_dip_power = 25
+					}
+				}
+			}
 		} 
 	}
 
@@ -347,7 +378,14 @@ Iberia_2_slot = {
 			ib0_mediterranean_ports
 			ib0_iberia_rules_the_waves
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				province_id = 1293
+				province_id = 1295
+				province_id = 1516
+				province_id = 1466
+			}
+		} 
 
 		trigger = {  
 			trade_income_percentage = 0.3
@@ -387,22 +425,62 @@ Iberia_2_slot = {
 		icon = mission_new_kingdom_of_granada
 		position = 5
 		required_missions = { ib0_viceroyalty_of_banrika } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			colonial_region = colonial_jamesland
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			owns_or_non_sovereign_subject_of = 835
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 10
+				colonial_region = colonial_jamesland
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			custom_tooltip = panama_canal_buildable_tt
+			custom_tooltip = empty_line_tt
+			south_america_superregion = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	ib0_dominion_of_karibba = {
 		icon = mission_brazilian_bandeirantes
 		position = 6
 		required_missions = { ib0_to_central_rausulia } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				colonial_region = colonial_karibba
+				colonial_region = colonial_antartika
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 15
+				OR = {
+					colonial_region = colonial_karibba
+					colonial_region = colonial_antartika
+				}
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			increase_gold_discovery = yes
+			custom_tooltip = empty_line_tt
+			add_country_modifier = {
+				name = ib0_dominion_of_karibba_antartika
+				duration = -1
+			}
+		} 
 	}
 
 	ib0_found_the_local_councils = {
