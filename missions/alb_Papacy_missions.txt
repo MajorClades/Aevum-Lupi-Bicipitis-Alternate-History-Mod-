@@ -67,9 +67,12 @@ Papacy_3_slot = {
 		trigger = {
 			num_of_allies = 2
 			emperor = {
-				has_opinion = {
-					who = ROOT
-					value = 100
+				OR = {
+					has_opinion = {
+						who = ROOT
+						value = 100
+					}
+					is_rival = ROOT
 				}
 			}
 		} 
@@ -95,6 +98,43 @@ Papacy_3_slot = {
 			country_event = {
 				id = papacy.3
 			}
+		}
+	}
+	pap_greater_papacy = {
+		icon = mission_luther_theses
+		position = 3
+		required_missions = { pap_celibacy } 
+		trigger = {
+			grown_by_development = 30
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 30
+				religion = ROOT
+			}
+		}
+
+		effect = {
+			
+		}
+	}
+	pap_italian_question = {
+		icon = mission_luther_theses
+		position = 4
+		required_missions = { pap_greater_papacy } 
+		trigger = {
+			OR = {
+				grown_by_development = 70
+				num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+					value = 50
+					religion = ROOT
+				}
+			}
+		}
+
+		effect = {
+			#get event to choose the path forwar, federation of Italy, which is vassal swarm out of the HIE
+			#Pontifex good, Kingdom of God or Federation of Italy, either one
+			#Pontifex bad, Empire of God, same as kingdom of God
+			#get new missions
 		}
 	}
 }

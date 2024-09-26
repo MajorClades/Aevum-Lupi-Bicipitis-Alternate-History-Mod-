@@ -509,7 +509,6 @@ country_event = { #I feel like the leagues should be instant. Also, I need a goo
 		change_tag = PA0
 		change_religion = pontifex
 		custom_tooltip = PAP_WAR_IN_EARTH_2
-		change_government = monarchy
 		if = {
 			limit = {
 				has_country_flag = pontifex_nice_flag
@@ -521,6 +520,11 @@ country_event = { #I feel like the leagues should be instant. Also, I need a goo
 				has_country_flag = pontifex_naughty_flag
 			}
 			add_government_reform = papal_monarchy_evil
+		}
+		emperor = {
+			country_event = {
+				id = papacy.7
+			}
 		}
 		hidden_effect = {
 			every_owned_province = {
@@ -604,6 +608,16 @@ country_event = {
 	option = {
 		name = "religious_leagues.6.a"
 		set_hre_religion_locked = yes
+		hidden_effect = {
+			PA0 = {
+				every_owned_province = {
+					cede_province = PAP
+				}
+				every_core_province = {
+					add_core = PAP
+				}
+			}
+		}
 	}
 }
 
@@ -658,7 +672,18 @@ country_event = {
 
 	option = {
 		name = "religious_leagues.7.a"
+		hre_inheritable = yes
 		set_hre_religion_locked = yes
+		hidden_effect = {
+			PAP = {
+				every_owned_province = {
+					cede_province = PA0
+				}
+				every_core_province = {
+					add_core = PA0
+				}
+			}
+		}
 	}
 }
 
@@ -685,6 +710,17 @@ country_event = {
 
 	option = {
 		name = "religious_leagues.8.a"
+		hre_inheritable = yes
+		hidden_effect = {
+			PAP = {
+				every_owned_province = {
+					cede_province = PA0
+				}
+				every_core_province = {
+					add_core = PA0
+				}
+			}
+		}
 		tooltip = { 
 			set_hre_religion_locked = yes 
 		}

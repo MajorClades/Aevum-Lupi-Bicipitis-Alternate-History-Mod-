@@ -50,7 +50,7 @@ papal_vassalization_action = {
 	is_allowed = {
 		is_at_war = no
 		FROM = {
-			religion = catholic
+			religion = ROOT
 			is_subject_of = ROOT
 		}
     }
@@ -96,8 +96,72 @@ papal_integrate_action = {
 	
 	on_accept = {
 		ROOT = {
-			lose_15_p_a = yes
+			if = {
+				limit = {
+					has_government_mechanic = saints_and_sinners
+				}
+				lose_15_p_a = yes
+			}else = {
+				add_devotion = -25
+			}
 			inherit = FROM
+		}
+    }
+
+	ai_will_do = {
+		always = yes
+    }
+}
+
+
+pontifex_expansion_action = {
+	category = influence
+
+	is_visible = {
+		tag = PA0
+		hre_leagues_enabled = yes
+		FROM = {
+			is_subject = no
+			religion = catholic
+		}
+    }
+	is_allowed = {
+		is_at_war = no
+		FROM = {
+			is_emperor = no
+			is_subject = no
+			religion = catholic
+			has_opinion = {
+				who = ROOT
+				value = 180
+			}
+		}
+    }
+	
+	on_accept = {
+		FROM = {
+			join_league = pontifex
+			change_religion = pontifex
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						religion = catholic
+					}
+					change_religion = pontifex
+				}
+				every_subject_country = {
+					limit = {
+						religion = catholic
+					}
+					change_religion = pontifex
+					every_owned_province = {
+						limit = {
+							religion = catholic
+						}
+						change_religion = pontifex
+					}
+				}
+			}
 		}
     }
 

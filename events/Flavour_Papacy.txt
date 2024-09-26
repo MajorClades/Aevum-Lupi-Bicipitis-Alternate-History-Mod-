@@ -342,3 +342,141 @@ country_event = { #select the next POPE
 		}
 	}
 }
+
+country_event = { #ANTIPOPE TIME
+	id = papacy.7
+	title = papacy.7.t
+	desc = papacy.7.d
+	picture = POPE_PREACHING_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = papacy.7a
+		random_owned_province = {
+			limit = {
+				is_capital = no
+			}
+			cede_province = PAP
+			add_core = PAP
+			emperor = {
+				vassalize = PAP
+			}
+			hidden_effect = {
+				PA0 = {
+					every_core_province = {
+						add_core = PAP
+					}
+				}
+			}
+		}
+	}
+	option = {
+		name = papacy.7b
+		trigger = {
+			owns = 118
+		}
+		118 = {
+			cede_province = PAP
+			add_core = PAP
+			emperor = {
+				vassalize = PAP
+			}
+			hidden_effect = {
+				PA0 = {
+					every_core_province = {
+						add_core = PAP
+					}
+				}
+			}
+		}
+	}
+	option = {
+		name = papacy.7c
+		trigger = {
+			owns = 4951
+		}
+		4951 = {
+			cede_province = PAP
+			add_core = PAP
+			emperor = {
+				vassalize = PAP
+			}
+			hidden_effect = {
+				PA0 = {
+					every_core_province = {
+						add_core = PAP
+					}
+				}
+			}
+		}
+	}
+	option = {
+		name = papacy.7c
+		trigger = {
+			owns = 4951
+		}
+		4951 = {
+			cede_province = PAP
+			owner = {
+				vassalize = PAP
+			}
+			hidden_effect = {
+				PA0 = {
+					every_core_province = {
+						add_core = PAP
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = { #expand Pontifexian, anger the Emperor
+	id = papacy.8
+	title = papacy.8.t
+	desc = papacy.8.d
+	picture = POPE_PREACHING_eventPicture
+	
+	trigger = {
+		tag = PA0
+		hre_leagues_enabled = yes
+		hre_religion_locked = no
+		hre_religion_treaty = no
+	}
+
+	mean_time_to_happen = {
+		months = 24
+	}
+
+	option = {
+		name = papacy.8a
+		every_country = {
+			limit = {
+				religion = catholic
+				in_league = pontifex
+			}
+			custom_tooltip = PAP_TT_2
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						religion = catholic
+					}
+					change_religion = pontifex
+				}
+				every_subject_country = {
+					limit = {
+						religion = catholic
+					}
+					change_religion = pontifex
+					every_owned_province = {
+						limit = {
+							religion = catholic
+						}
+						change_religion = pontifex
+					}
+				}
+			}
+		}
+	}
+}

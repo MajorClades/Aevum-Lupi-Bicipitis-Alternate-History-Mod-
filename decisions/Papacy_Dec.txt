@@ -8,34 +8,39 @@ country_decisions = {
 			# mission_completed = x-wip-x
 		}
 		allow = {
-			has_government_mechanic = saints_and_sinners
 			emperor = {
 				has_country_modifier = pope_dislikes_emperor
 				is_excommunicated = yes
 			}
-			OR = {
-				has_government_power = {
-					mechanic_type = saints_and_sinners
-					power_type = nice_or_naughty
-					value = 50
-				}
-				NOT = {
+			custom_trigger_tooltip = {
+				tooltip = PAP_TR_1
+				OR = {
 					has_government_power = {
 						mechanic_type = saints_and_sinners
 						power_type = nice_or_naughty
-						value = -50
+						value = 50
+					}
+					NOT = {
+						has_government_power = {
+							mechanic_type = saints_and_sinners
+							power_type = nice_or_naughty
+							value = -50
+						}
 					}
 				}
 			}
-			has_dlc = "Art of War"
 			hre_leagues_enabled = no
 			hre_religion_locked = no
 			hre_religion_treaty = no
-			tag = PAP	
-			religion = catholic
-			NOT = { has_global_flag = evangelical_union_happened }
 			NOT = { hre_reform_passed = erbkaisertum }
-			NOT = { has_global_flag = great_peasants_war_flag }
+			hidden_trigger = {
+				tag = PAP	
+				religion = catholic
+				has_government_mechanic = saints_and_sinners
+				has_dlc = "Art of War"
+				NOT = { has_global_flag = evangelical_union_happened }
+				NOT = { has_global_flag = great_peasants_war_flag }
+			}
 		}
 		effect = {
 			if = {
