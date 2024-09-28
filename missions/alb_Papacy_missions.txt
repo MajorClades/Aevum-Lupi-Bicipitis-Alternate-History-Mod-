@@ -104,7 +104,11 @@ Papacy_3_slot = {
 		icon = mission_luther_theses
 		position = 3
 		required_missions = { pap_celibacy } 
+		provinces_to_highlight = {
+			province_id = 118
+		}
 		trigger = {
+			owns = 118
 			grown_by_development = 30
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
 				value = 30
@@ -113,7 +117,13 @@ Papacy_3_slot = {
 		}
 
 		effect = {
-			
+			add_curia_treasury = 1000
+			118 = {
+				add_great_project_tier = {
+					type = stpeters_cathedral
+					tier = 1
+				}
+			}
 		}
 	}
 	pap_italian_question = {
@@ -131,9 +141,28 @@ Papacy_3_slot = {
 		}
 
 		effect = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = sx0_valtean_union_tt
+				first_limit = "
+					religion = pontifex
+				"
+				first_effect = "
+					country_event = {
+						id = papacy.9
+					}
+				"
+				second_limit = "
+					religion = catholic
+				"
+				second_effect = "
+					country_event = {
+						id = papacy.10
+					}
+				"
+			}
 			#get event to choose the path forwar, federation of Italy, which is vassal swarm out of the HIE
-			#Pontifex good, Kingdom of God or Federation of Italy, either one
-			#Pontifex bad, Empire of God, same as kingdom of God
+			#Pontifex good, Kingdom of God or Federation of Italy, either one in the HIE
+			#Pontifex bad, Empire of God, same as kingdom of God, solely HIE end formable
 			#get new missions
 		}
 	}

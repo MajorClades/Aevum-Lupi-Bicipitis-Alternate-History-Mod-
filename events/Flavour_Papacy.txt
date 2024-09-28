@@ -480,3 +480,81 @@ country_event = { #expand Pontifexian, anger the Emperor
 		}
 	}
 }
+
+country_event = { #Your Papal State is Evolving?! part Pontifex
+	id = papacy.9
+	title = papacy.9.t
+	desc = papacy.9.d
+	picture = POPE_PREACHING_eventPicture
+	
+	is_triggered_only = yes
+	after = {
+		hidden_effect = {
+			swap_non_generic_missions = yes
+		}
+	}
+	option = {
+		name = papacy.9a
+		trigger = {
+			has_reform = papal_monarchy_good
+		}
+		override_country_name = ITA_FEDERATION
+		add_country_modifier = {
+			name = pap_ita_federation
+			duration = -1
+		}
+
+	}
+	option = {
+		name = papacy.9b
+		trigger = {
+			has_reform = papal_monarchy_evil
+		}
+		override_country_name = GOD_KINGDOM
+		add_country_modifier = {
+			name = pap_god_kingdom
+			duration = -1
+		}
+	}
+	option = {
+		name = papacy.9c
+		trigger = {
+			has_reform = papal_monarchy_good
+		}
+		override_country_name = GOD_KINGDOM
+		add_country_modifier = {
+			name = pap_god_kingdom
+			duration = -1
+		}
+	}
+}
+
+country_event = { #Your Papal State is Evolving?! part Catholic
+	id = papacy.10
+	title = papacy.10.t
+	desc = papacy.10.d
+	picture = POPE_PREACHING_eventPicture
+	
+	is_triggered_only = yes
+	after = {
+		hidden_effect = {
+			swap_non_generic_missions = yes
+		}
+	}
+	option = {
+		name = papacy.10a
+		override_country_name = ITA_FEDERATION
+		add_country_modifier = {
+			name = pap_ita_federation_cath
+			duration = -1
+		}
+	}
+	option = {
+		name = papacy.10b
+		override_country_name = GOD_KINGDOM
+		add_country_modifier = {
+			name = pap_god_kingdom_cath
+			duration = -1
+		}
+	}
+}
