@@ -77,8 +77,22 @@ papal_integrate_action = {
 			tag = PAP
 			was_tag = PAP
 		}
-		FROM = {
-			is_subject_of_type = papal_vassal
+		if = {
+			limit = {
+				has_country_flag = easy_integration_pap_flag
+			}
+			OR = {
+				FROM = {
+					is_subject_of = PAP
+				}
+				FROM = {
+					is_subject_of = PA0
+				}
+			}
+		}else = {
+			FROM = {
+				is_subject_of_type = papal_vassal
+			}
 		}
     }
 	is_allowed = {
@@ -90,6 +104,10 @@ papal_integrate_action = {
 			has_opinion = {
 				who = ROOT
 				value = 150
+			}
+			years_in_vassalage_under = {
+				who = ROOT
+				years = 10
 			}
 		}
     }

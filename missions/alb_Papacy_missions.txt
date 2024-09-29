@@ -3,7 +3,7 @@ Papacy_1_slot = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = PAP } 
+	potential = { OR = { tag = PAP tag = PA0} } 
 
 
 	pap_papal_grants = {
@@ -53,12 +53,12 @@ Papacy_2_slot = {
 
 }
 
-Papacy_3_slot = {
+Papacy_3a_slot = {
 	slot = 3
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = PAP } 
+	potential = { OR = { tag = PAP tag = PA0} } 
 
 	pap_duties = {
 		icon = mission_swedish_peasantry
@@ -126,6 +126,13 @@ Papacy_3_slot = {
 			}
 		}
 	}
+}
+Papacy_3b_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { OR = { tag = PAP tag = PA0} NOT = { has_country_flag = pap_mt_ita_fed  }NOT = { has_country_flag = pap_mt_god_king }} 
 	pap_italian_question = {
 		icon = mission_luther_theses
 		position = 4
@@ -142,7 +149,7 @@ Papacy_3_slot = {
 
 		effect = {
 			simple_dynamic_effect = {
-				first_custom_tooltip = sx0_valtean_union_tt
+				first_custom_tooltip = PAP_TT_10
 				first_limit = "
 					religion = pontifex
 				"
@@ -160,20 +167,15 @@ Papacy_3_slot = {
 					}
 				"
 			}
-			#get event to choose the path forwar, federation of Italy, which is vassal swarm out of the HIE
-			#Pontifex good, Kingdom of God or Federation of Italy, either one in the HIE
-			#Pontifex bad, Empire of God, same as kingdom of God, solely HIE end formable
-			#get new missions
 		}
 	}
 }
-
 Papacy_4_slot = {
 	slot = 4
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = PAP } 
+	potential = { OR = { tag = PAP tag = PA0} } 
 
 	pap_etruscan_loyalties = {
 		icon = mission_luther_theses
@@ -203,26 +205,45 @@ Papacy_5_slot = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = PAP } 
+	potential = { OR = { tag = PAP tag = PA0} } 
 
 	pap_last_crusades = {
 		icon = mission_luther_theses
 		position = 2
 		required_missions = { pap_duties } 
 		trigger = {
-			any_known_country = {
-				is_crusade_target = yes
-				war_with = ROOT
+			if = {
+				limit = {
+					NOT = {
+						religion = pontifex
+					}
+				}
+				any_known_country = {
+					is_crusade_target = yes
+					war_with = ROOT
+				}
+			}else = {
+				theologian = 5
 			}
 		}
 
 		effect = {
-			add_10_p_a = yes
-			random_known_country = {
+			if = {
 				limit = {
-					is_crusade_target = yes
+					NOT = {
+						religion = pontifex
+					}
 				}
-				add_war_exhaustion = 2
+				add_10_p_a = yes
+				random_known_country = {
+					limit = {
+						is_crusade_target = yes
+					}
+					add_war_exhaustion = 2
+				}
+			}else = {
+				add_war_exhaustion = -2
+				add_prestige = 20
 			}
 		}
 	}

@@ -94,6 +94,11 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA9075"
+		trigger = {
+			NOT = {
+				tag = PA0
+			}
+		}
 		change_tag = IT9
 		restore_country_name_effect = yes
 		add_country_modifier = {
@@ -138,6 +143,58 @@ country_event = {
 		}
 		country_event = {
 			id = roman_emp.1
+		}
+	}
+	option = {
+		name = "EVTOPTA9075"
+		trigger = {
+			tag = PA0
+		}
+		if = {
+			limit = {
+				has_country_flag = pap_mt_god_king
+			}
+			override_country_name = GOD_EMPIRE
+		}
+		add_country_modifier = {
+			name = "rome_reborn"
+			duration = -1
+		}
+		hidden_effect = {
+			every_province = {
+				limit = {
+					is_part_of_hre = yes
+					OR = {
+						owned_by = ROOT
+						owner = { is_neighbor_of = ROOT }
+					}
+					NOT = { is_core = ROOT }
+				}
+				add_core = emperor
+			}
+			every_country = {
+				limit = {
+					is_part_of_hre = yes
+					is_emperor = no
+					num_of_cities = 1
+				}
+				country_event = { id = 9076 }
+			}
+		}
+		dismantle_hre = yes
+		set_government_rank = 3
+		add_adm_power = 250
+		if = {
+			limit = {
+				government = monarchy
+			}
+			add_government_reform = HIE_united_reform
+		}
+		if = {
+			limit = {
+				has_custom_ideas = no
+			}
+			country_event = { id = ideagroups.1 } #Swap Ideas
 		}
 	}
 }
