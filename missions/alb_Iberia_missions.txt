@@ -490,11 +490,36 @@ Iberia_2_slot = {
 			ib0_religious_unity
 			ib0_cultural_unity
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			owned_by = ROOT
+			NOT = {
+				has_courthouse_building_trigger = yes
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_owned_provinces_with = {
+				value = 15
+				has_courthouse_building_trigger = yes
+			}
+			government_reform_progress = 100
+			custom_trigger_tooltip = {
+				tooltip = 3_lvl_3_advisors_tt
+				has_mil_advisor_of_level = {
+					level = 3
+				}
+				has_adm_advisor_of_level = {
+					level = 3
+				}
+				has_dip_advisor_of_level = {
+					level = 3
+				}
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_government_reform = alb_ib0_royal_council_reform
+		} 
 	}
 }
 Iberia_3_slot = {
@@ -509,20 +534,51 @@ Iberia_3_slot = {
 		position = 2
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			navy_size_percentage = 1
+			num_of_heavy_ship = 15
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_navy_tradition = 20
+			custom_tooltip = empty_line_tt
+			add_country_modifier = {
+				name = ib0_unlock_galleons
+				duration = -1
+			}
+		} 
 	}
 
 	ib0_iberia_rules_the_waves = {
 		icon = mission_spanish_armada
 		position = 3
 		required_missions = { ib0_iberian_navy } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			owned_by = ROOT
+			not = {
+				has_shipyard_building_trigger = yes
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			navy_size = 200
+			num_of_galleon = 10
+			num_of_owned_provinces_with = {
+				value = 10
+				has_shipyard_building_trigger = yes
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_country_modifier = {
+				name = ib0_expand_galleons
+				duration = -1
+			}
+			add_country_modifier = {
+				name = ib0_iberia_rules_waves
+				duration = -1
+			}
+		} 
 	}
 
 	ib0_avenging_theodoric = {
@@ -707,7 +763,7 @@ Iberia_3_slot = {
 				}
 			}
 			custom_tooltip = empty_line_tt
-			#smth to do with council gov mechanic
+			custom_tooltip = iberia_summon_council_bonuses_tt
 		} 
 	}
 }
@@ -888,11 +944,49 @@ Iberia_4_slot = {
 		icon = army_reforms
 		position = 8
 		required_missions = { ib0_expand_molendinum_castra } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			owned_by = ROOT
+			NOT = {
+				OR = {
+					has_manpower_building_trigger = yes
+					has_forcelimit_building_trigger = yes
+				}
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_owned_provinces_with = {
+				value = 20
+				OR = {
+					has_manpower_building_trigger = yes
+					has_forcelimit_building_trigger = yes
+				}
+			}
+			army_size = 100
+			OR = {
+				army_tradition = 90
+				army_professionalism = 0.5
+			}
+		} 
 
-		effect = {  } 
+		effect = {
+			custom_tooltip = alb_expand_castrum_by_10_tt  
+			hidden_effect = {
+				set_variable = {
+					which = legion_recruiting_max_var
+					value = 20
+				}
+			}
+			custom_tooltip = empty_line_tt
+			add_army_tradition_or_mil_power = {
+				amount = 20
+			}
+			custom_tooltip = empty_line_tt
+			add_country_modifier = {
+				name = ib0_tercio_system
+				duration = -1
+			}
+		} 
 	}
 }
 Iberia_5_slot = {
