@@ -43,21 +43,14 @@ country_decisions = {
 			is_nomad = no
 			is_at_war = no
 			num_of_owned_provinces_with = {
-				value = 30
+				value = 40
 				region = maghreb_region
 			}
+			adm_tech = 10
 		}
 		effect = {
 			change_tag = AF0
 			restore_country_name = yes
-			if = {
-				limit = {
-					NOT = {
-						was_tag = AF2
-					}
-				}
-				swap_non_generic_missions = yes
-			}
 			remove_non_electors_emperors_from_empire_effect = yes
 			if = {
 				limit = { NOT = { government_rank = 2 } }
@@ -80,6 +73,25 @@ country_decisions = {
 			set_country_flag = formed_africa_flag
 			add_prestige_or_monarch_power = {
 				amount = 25
+			}
+			if = {
+				limit = {
+					OR = {
+						is_or_was_tag = {
+							tag = AF2
+						}
+						is_or_was_tag = {
+							tag = AF3
+						}
+						is_or_was_tag = {
+							tag = AF4
+						}
+						is_or_was_tag = {
+							tag = AF5
+						}
+					}
+				}
+				swap_non_generic_missions = yes
 			}
 		}
 		ai_will_do = {

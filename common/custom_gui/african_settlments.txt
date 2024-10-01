@@ -1,0 +1,75 @@
+custom_button = { #Must match a scripted guiButtonType in a .gui file
+	name = african_development_button
+	potential = {
+		owner = {
+			has_country_flag = enable_african_settlers_flag
+		}
+		if = {
+			limit = {
+				owner = {
+					has_country_flag = enable_african_settlers_in_woods
+				}
+			}
+			OR = {
+				has_terrain = highlands
+				has_terrain = mountain
+				has_terrain = desert
+				has_terrain = coastal_desert
+				has_terrain = woods
+			}
+		}
+		else = {
+			OR = {
+				has_terrain = highlands
+				has_terrain = mountain
+				has_terrain = desert
+				has_terrain = coastal_desert
+			}
+		}
+		NOT = {
+			has_province_modifier = afr_settlers
+		}
+	}
+	trigger = {
+		if = {
+			limit = {
+				owner = {
+					has_country_flag = african_settlers_discount
+				}
+			}
+			num_of_units_in_province = {
+				amount = 1
+			}
+		}
+		else = {
+			num_of_units_in_province = {
+				amount = 5
+			}
+		}
+	
+	}
+	effect = {
+		if = {
+			limit = {
+				owner = {
+					has_country_flag = african_settlers_discount
+				}
+			}
+			kill_units = {
+				who = owner
+				amount = 1
+			}
+		}
+		else = {
+			kill_units = {
+				who = owner
+				amount = 5
+			}
+		}
+		add_province_modifier = {
+			name = afr_settlers
+			duration = -1
+		}
+	}
+	tooltip = "Found African Settlements"
+}
