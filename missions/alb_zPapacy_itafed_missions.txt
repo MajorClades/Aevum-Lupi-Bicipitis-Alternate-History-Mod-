@@ -118,17 +118,14 @@ Papacy_if_2_slot = {
 					}
 				}
 			}
-			western_sicily_area = {
-				add_permanent_claim = ROOT
-			}
-			sicily_area = {
-				add_permanent_claim = ROOT
-			}
-			sardinia_area = {
-				add_permanent_claim = ROOT
-			}
-			corsica_sardinia_area = {
-				add_permanent_claim = ROOT
+			if = {
+				limit = {mission_completed = pap_alpine_faith}
+				italy_region = { add_permanent_claim = ROOT }
+			}else = {
+				western_sicily_area = {add_permanent_claim = ROOT}
+				sicily_area = {add_permanent_claim = ROOT}
+				sardinia_area = {add_permanent_claim = ROOT}
+				corsica_sardinia_area = {add_permanent_claim = ROOT}
 			}
 		}
 	}
@@ -175,6 +172,24 @@ Papacy_if_3_slot = {
 			}
 		}
 	}
+	pap_italian_dominate = {
+		icon = mission_luther_theses
+		position = 5
+		required_missions = { pap_lux_islands pap_alpine_faith} 
+		provinces_to_highlight = { region = italy_region NOT = { country_or_non_sovereign_subject_holds = ROOT } } 
+		trigger = {
+			italy_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_ruler_modifier = {
+				name = pap_dominate_italy
+			}
+		}
+	}
 }
 
 Papacy_if_4_slot = {
@@ -210,20 +225,46 @@ Papacy_if_4_slot = {
 		effect = {
 			set_country_flag = papal_trade_flag
 			custom_tooltip = PAP_IF_3
-			emilia_romagna_area = {
-				add_permanent_claim = ROOT
+			if = {
+				limit = {mission_completed = pap_lux_islands}
+				italy_region = { add_permanent_claim = ROOT }
+			}else = {
+				emilia_romagna_area = {add_permanent_claim = ROOT}
+				liguria_area = {add_permanent_claim = ROOT}
+				po_valley_area = {add_permanent_claim = ROOT}
+				coradia_area = {add_permanent_claim = ROOT}
 			}
-			liguria_area = {
-				add_permanent_claim = ROOT
+		}
+	}
+
+	pap_arian_menace = {
+		icon = mission_luther_theses
+		position = 6
+		required_missions = { pap_gallic_heresies } 
+		provinces_to_highlight = { region = france_region religion = arian } 
+		trigger = {
+			france_region = {
+				type = all
+				NOT = {
+					religion = arian
+				}
 			}
-			po_valley_area = {
-				add_permanent_claim = ROOT
+		}
+
+		effect = {
+			add_devotion = 25
+			add_5_p_a = yes
+			define_advisor = {
+				type = theologian
+				skill = 3
+				cost_multiplier = 0.33
 			}
-			coradia_area = {
+			coth_old_border = {
 				add_permanent_claim = ROOT
 			}
 		}
 	}
+
 }
 
 Papacy_if_5_slot = {
@@ -265,4 +306,111 @@ Papacy_if_5_slot = {
 		}
 	}
 
+	pap_gallic_heresies = {
+		icon = mission_luther_theses
+		position = 5
+		provinces_to_highlight = { area = provence_area NOT = { country_or_non_sovereign_subject_holds = ROOT } } 
+		trigger = {
+			OR = {
+				provence_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				IT1 = {
+					is_subject_of = ROOT
+				}
+			}
+		}
+
+		effect = {
+			france_region = {
+				add_permanent_claim = ROOT
+			}
+			add_casus_belli = {
+				type = cb_vs_impotian
+				target = SO0
+				months = 360
+			}
+			add_casus_belli = {
+				type = cb_vs_impotian
+				target = CO0
+				months = 360
+			}
+		}
+	}
+
+	pap_impotian_menace = {
+		icon = mission_luther_theses
+		position = 6
+		required_missions = { pap_gallic_heresies } 
+		provinces_to_highlight = { region = france_region religion = impotian } 
+		trigger = {
+			france_region = {
+				type = all
+				NOT = {
+					religion = impotian
+				}
+			}
+		}
+
+		effect = {
+			add_devotion = 25
+			add_5_p_a = yes
+			add_country_modifier = {
+				name = papal_gallic_orders
+				duration = 10950
+			}
+			british_isles_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	pap_temporal_gallia = {
+		icon = mission_luther_theses
+		position = 7
+		required_missions = { pap_impotian_menace pap_arian_menace} 
+		provinces_to_highlight = { region = france_region NOT = { religion = ROOT} } 
+		trigger = {
+			france_region = {
+				type = all
+				religion = ROOT
+			}
+		}
+
+		effect = {
+			custom_tooltip = PAP_IF_5
+			random_province = {
+				add_province_modifier = {
+					name = pap_orders_local
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				france_region = {
+					limit = {
+						has_tax_building_trigger = yes
+					}
+					add_province_modifier = {
+						name = pap_orders_local
+						duration = -1
+					}
+				}
+				every_country = {
+					limit = { religion = impotian }
+					reverse_add_casus_belli = {
+						type = cb_vs_impotian
+						target = ROOT
+					}
+				}
+				every_country = {
+					limit = { religion = arian }
+					reverse_add_casus_belli = {
+						type = cb_vs_arian
+						target = ROOT
+					}
+				}
+			}
+		}
+	}
 }
