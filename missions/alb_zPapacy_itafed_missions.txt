@@ -62,6 +62,96 @@ Papacy_if_1_slot = {
 			}
 		}
 	}
+
+	pap_africa_landing = {
+		icon = mission_luther_theses
+		position = 5
+		provinces_to_highlight = { area = tunisia_area NOT = { country_or_non_sovereign_subject_holds = ROOT } } 
+		trigger = {
+			OR = {
+				tunisia_area = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				CR1 = {
+					is_subject_of = ROOT
+				}
+			}
+		}
+
+		effect = {
+			maghreb_region = {
+				add_permanent_claim = ROOT
+			}
+			custom_tooltip = END_HERESY_CB_EXPLANATION_1
+			add_casus_belli = {
+				type = cb_vs_indictian
+				target = AF0
+				months = 360
+			}
+			add_casus_belli = {
+				type = cb_vs_indictian
+				target = AF2
+				months = 360
+			}
+			add_casus_belli = {
+				type = cb_vs_indictian
+				target = AE0
+				months = 360
+			}
+		}
+	}
+
+	pap_berber_faiths = {
+		icon = mission_luther_theses
+		position = 6
+		required_missions = { pap_africa_landing } 
+		provinces_to_highlight = { region = maghreb_region NOT = {religion = ROOT} } 
+		trigger = {
+			maghreb_region = {
+				type = all
+				religion = ROOT
+			}
+		}
+
+		effect = {
+			add_devotion = 25
+			add_5_p_a = yes
+			add_country_modifier = {
+				name = papal_ending_indictians
+				duration = -1
+			}
+			custom_tooltip = PAP_IF_6
+			hidden_effect = {
+				every_country = {
+					limit = { religion = indictian }
+					reverse_add_casus_belli = {
+						type = cb_vs_indictian
+						target = ROOT
+					}
+				}
+			}
+		}
+	}
+	pap_egyptian_blues = {
+		icon = mission_luther_theses
+		position = 7
+		required_missions = { pap_egyptian_peaks } 
+		provinces_to_highlight = { region = egypt_region NOT = {religion = ROOT} } 
+		trigger = {
+			egypt_region = {
+				type = all
+				religion = ROOT
+			}
+		}
+
+		effect = {
+			add_devotion = 25
+			add_5_p_a = yes
+			custom_tooltip = SOX_TT_9
+			add_treasury = 2500
+		}
+	}
 }
 
 Papacy_if_2_slot = {
@@ -129,6 +219,56 @@ Papacy_if_2_slot = {
 			}
 		}
 	}
+
+	pap_egyptian_peaks = {
+		icon = mission_luther_theses
+		position = 6
+		required_missions = { pap_africa_landing } 
+		provinces_to_highlight = { area = tripolitania_area NOT = {religion = ROOT}  } 
+		trigger = {
+			tripolitania_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				religion = ROOT
+			}
+		}
+
+		effect = {
+			add_devotion = 25
+			add_5_p_a = yes
+			add_country_modifier = {
+				name = papal_crusader_spirit
+				duration = 10950
+			}
+			egypt_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	pap_islamic_undoing = {
+		icon = mission_luther_theses
+		position = 8
+		provinces_to_highlight = { region = balkan_region } 
+		trigger = {
+			OR = {
+				AND = {
+					government_rank = 3
+					total_development = 1000
+				}
+				num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+					value = 15
+					region = balkan_region 
+				}
+			}
+		}
+
+		effect = {
+			#some bs for islam and stuff
+			anatolia_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
 }
 
 Papacy_if_3_slot = {
@@ -187,6 +327,14 @@ Papacy_if_3_slot = {
 		effect = {
 			add_ruler_modifier = {
 				name = pap_dominate_italy
+			}
+			every_subject_country = {
+				every_owned_province = {
+					limit = {region = italy_region}
+					remove_core = PREV
+					add_core = ROOT
+					cede_province = ROOT
+				}
 			}
 		}
 	}
@@ -259,12 +407,47 @@ Papacy_if_4_slot = {
 				skill = 3
 				cost_multiplier = 0.33
 			}
-			coth_old_border = {
+			iberia_region = {
 				add_permanent_claim = ROOT
 			}
 		}
 	}
+	pap_iberian_situation_is_crazy = {
+		icon = mission_luther_theses
+		position = 6
+		required_missions = { pap_arian_menace } 
+		provinces_to_highlight = { region = iberia_region NOT = {religion = ROOT} } 
+		trigger = {
+			iberia_region = {
+				type = all
+				religion = ROOT
+			}
+		}
 
+		effect = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = PAP_TT_10
+				first_limit = "
+					religion = pontifex
+				"
+				first_effect = "
+					add_country_modifier = {
+						name = pap_iberian_power_1
+						duration = -1
+					}
+				"
+				second_limit = "
+					religion = catholic
+				"
+				second_effect = "
+					add_country_modifier = {
+						name = pap_iberian_power_2
+						duration = -1
+					}
+				"
+			}
+		}
+	}
 }
 
 Papacy_if_5_slot = {
@@ -326,13 +509,14 @@ Papacy_if_5_slot = {
 			france_region = {
 				add_permanent_claim = ROOT
 			}
+			custom_tooltip = END_HERESY_CB_EXPLANATION_1
 			add_casus_belli = {
 				type = cb_vs_impotian
 				target = SO0
 				months = 360
 			}
 			add_casus_belli = {
-				type = cb_vs_impotian
+				type = cb_vs_arian
 				target = CO0
 				months = 360
 			}
