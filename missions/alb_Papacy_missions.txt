@@ -23,7 +23,62 @@ Papacy_1_slot = {
 			set_country_flag = papal_funds_flag
 		}
 	}
+	pap_lux_south = {
+		icon = mission_luther_theses
+		position = 3
+		required_missions = { pap_lux_latium } 
+		provinces_to_highlight = { area = central_italy_area NOT = { country_or_non_sovereign_subject_holds = ROOT } } 
+		trigger = {
+			central_italy_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
 
+		effect = {
+			custom_tooltip = PAP_IF_1
+			tooltip = {
+				random_known_country = {
+					limit = {
+						OR = {
+							is_part_of_hre = yes
+							culture_group = latin
+						}
+					}
+					add_opinion = {
+						who = ROOT
+						modifier = pap_faithful
+					}
+				}
+			}
+			hidden_effect = {
+				every_known_country = {
+					limit = {
+						OR = {
+							is_part_of_hre = yes
+							culture_group = latin
+						}
+					}
+					add_opinion = {
+						who = ROOT
+						modifier = pap_faithful
+					}
+				}
+			}
+			calabria_area = {
+				add_permanent_claim = ROOT
+			}
+			apulia_area = {
+				add_permanent_claim = ROOT
+			}
+			molise_area = {
+				add_permanent_claim = ROOT
+			}
+			naples_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
 }
 
 Papacy_2_slot = {
@@ -248,5 +303,35 @@ Papacy_5_slot = {
 			}
 		}
 	}
+	pap_northern_republic = {
+		icon = mission_luther_theses
+		position = 3
+		required_missions = { pap_etruscan_loyalties } 
+		provinces_to_highlight = { area = tuscany_area NOT = { country_or_non_sovereign_subject_holds = ROOT } } 
+		trigger = {
+			tuscany_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
 
+		effect = {
+			add_country_modifier = {
+				name = pap_good_vassals
+				duration = 10950
+			}
+			emilia_romagna_area = {
+				add_permanent_claim = ROOT
+			}
+			liguria_area = {
+				add_permanent_claim = ROOT
+			}
+			po_valley_area = {
+				add_permanent_claim = ROOT
+			}
+			coradia_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
 }
