@@ -1,0 +1,173 @@
+namespace = sand
+
+country_event = { #Oracle of Siwa Offers Aid
+	id = sand.1
+	title = sand.1.test
+	desc = sand.1.desc
+	picture = muslimgfx_DIPLOMACY_eventPicture
+	
+	trigger = {
+		tag = RU0
+		num_of_owned_provinces_with = {
+			value = 10
+			owned_by = ROOT
+			controlled_by = AF6
+		}
+	}
+	mean_time_to_happen = {
+		days = 15
+	}
+	fire_only_once = yes
+	option = { # Do they think us incompetent!?
+		name = sand.1a
+		ai_chance = { factor = 90 }
+		add_prestige = 7
+	}
+
+	option = { # It's their lives they're throwing away...
+		name = sand.1b
+		ai_chance = { factor = 10 }
+		every_province = {
+			limit = { area = al_wahat_area }
+			add_core = SDW
+			change_religion = manich
+		}
+		release = SDW
+		SDW = {
+			change_government = theocracy
+			add_country_modifier = {
+				name = sand_countercrusade_ai
+				duration = -1
+			}
+			create_unit_forcelimit_percentage = {
+				type = infantry
+				force_limit_percentage = 0.5
+			}
+			join_all_defensive_wars_of = ROOT
+			every_owned_province = { remove_core = RU0 }
+			set_consort_flag = sand_counter
+		}
+	}
+
+	option = { # Only if I may lead their forces myself.
+		name = sand.1c
+		trigger = { ai = no }
+		every_province = {
+			limit = { area = al_wahat_area }
+			add_core = SDW
+			change_religion = manich
+		}
+		release = SDW
+		SDW = {
+			change_government = theocracy
+			add_country_modifier = {
+				name = sand_countercrusade
+				duration = -1
+			}
+			create_unit_forcelimit_percentage = {
+				type = infantry
+				force_limit_percentage = 0.5
+			}
+			join_all_defensive_wars_of = ROOT
+			every_owned_province = { remove_core = RU0 }
+			set_country_flag = sand_counter
+		}
+		switch_tag = SDW
+	}
+}
+
+# country_event = { #The Matter of Rule
+	# id = sand.2
+	# title = sand.2.test
+	# desc = sand.2.desc
+	# picture = muslimgfx_DIPLOMACY_eventPicture
+	
+	# trigger = {
+		# tag = SDW
+		# is_at_war = no
+		# has_country_flag = sand_counter 
+		# }
+
+	# }
+		# mean_time_to_happen = {
+		# days = 1
+	# }
+
+	# option = { # We will not fade quietly into the background anymore!
+		# name = sand.2a
+		# RU0 = {
+			# declare_war_with_cb = {
+				# who = SDW
+				# casus_belli = cb_annex
+			# }
+		# }
+		# set_country_flag = sand_coptic_liberation
+		# clr_country_flag = sand_counter
+	# }
+
+	# option = { # Shall we broker a deal?
+		# name = sand.2b
+		# if = {
+			# limit = {
+				# OR = {
+					# has_country_modifier = sand_countercrusade
+					# has_country_modifier = sand_countercrusade_ai
+				# }
+			# }
+			# remove_country_modifier = sand_countercrusade
+			# remove_country_modifier = sand_countercrusade_ai
+
+		# }
+		# RU0 = { create_march = ROOT }
+		# override_country_name = LIMES_LYBIANESIS
+		# clr_country_flag = sand_counter
+	# }
+
+	# option = { # Unfortunate, but It's just the way it is...
+		# name = sand.2c
+		# every_owned_province = {
+			# add_core = RU0
+			# cede_province = RU0
+		# }
+		# switch_tag = RU0
+		# clr_country_flag = sand_counter
+	# }
+# }
+
+# country_event = { #Aegyptian People Defect to our Cause
+	# id = sand.3
+	# title = sand.3.test
+	# desc = sand.3.desc
+	# picture = EYALET_REBELLION_eventPicture
+	
+	# mean_time_to_happen = {
+		# months = 60
+	# }
+	
+	# trigger = {
+		# any_province = {
+			# tag = SDW
+			# owned_by = RU0
+			# OR = {
+				# culture = copt
+				# culture = hell_egypt
+			# }
+			# controller = { has_country_flag = sand_coptic_liberation }
+		# }
+	# }
+	# option = { # Glad to find some sense left in the world!
+		# name = sand.3a
+		# random_province = {
+			# limit = {
+				# owned_by = RU0
+				# OR = {
+					# culture = copt
+					# culture = hell_egypt
+				# }
+				# controller = { has_country_flag = sand_coptic_liberation }
+			# }
+			# add_core = SDW
+			# cede_province = SDW
+		# }
+	# }
+# }
