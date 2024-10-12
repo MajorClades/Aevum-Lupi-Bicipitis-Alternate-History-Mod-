@@ -250,6 +250,22 @@ on_mil_tech_taken = {
 		add_army_professionalism = 0.05
 	}
 }
+on_religion_change = {
+	if = {
+		limit = {religion = pontifex NOT = { has_country_flag = papal_favor_var_set}}
+		
+	}
+	set_country_flag = papal_favor_var_set
+	set_variable = {
+		which = papal_favor_var
+		value = 0
+	}
+	
+	if = {
+		limit = { has_country_flag = papal_favor_var_set NOT = { religion = pontifex}}
+	}
+	clr_country_flag = papal_favor_var_set
+}
 on_monthly_pulse = {
 	##Arian Fervor
 	if = {
@@ -361,6 +377,65 @@ on_monthly_pulse = {
 			set_variable = {
 				which = caliph_authority_var
 				value = 0
+			}
+		}
+	}
+	##PAPAL FAVOR
+	if = {
+		limit = {religion = pontifex}
+		if = {
+			limit = {
+				NOT = {
+					check_variable = {
+						which = papal_favor_var
+						value = 100
+					}
+				}
+			}
+			change_variable = {
+				which = papal_favor_var
+				value = 0.25
+			}
+			if = {
+				limit = {has_country_modifier = cash_favor_button_cooldown}
+				change_variable = {
+					which = papal_favor_var
+					value = 0.25
+				}
+			}
+			if = {
+				limit = {has_country_modifier = prestige_favor_button_cooldown}
+				change_variable = {
+					which = papal_favor_var
+					value = 0.25
+				}
+			}
+			if = {
+				limit = {has_country_modifier = adm_favor_button_cooldown}
+				change_variable = {
+					which = papal_favor_var
+					value = 0.25
+				}
+			}
+			if = {
+				limit = {has_country_modifier = mil_favor_button_cooldown}
+				change_variable = {
+					which = papal_favor_var
+					value = 0.25
+				}
+			}
+			if = {
+				limit = {has_country_modifier = dip_favor_button_cooldown}
+				change_variable = {
+					which = papal_favor_var
+					value = 0.25
+				}
+			}
+		}
+		else = {
+			set_variable = {
+				which = papal_favor_var
+				value = 100
 			}
 		}
 	}

@@ -198,7 +198,16 @@ country_event = { #HMM what are you doing step Pope?
 	mean_time_to_happen = {
 		months = 24
 	}
-
+	after = {
+		hidden_effect = {
+			REB = {
+				set_variable = {
+					which = pont_cash_bank_var
+					value = 0
+				}
+			}
+		}
+	}
 	option = {
 		name = papacy.5a
 		trigger = {
@@ -212,6 +221,11 @@ country_event = { #HMM what are you doing step Pope?
 		change_religion = pontifex
 		custom_tooltip = PAP_WAR_IN_EARTH_2
 		hidden_effect = {
+			set_country_flag = papal_favor_var_set
+			set_variable = {
+				which = papal_favor_var
+				value = 0
+			}
 			every_owned_province = {
 				limit = {
 					religion = catholic
@@ -560,5 +574,56 @@ country_event = { #Your Papal State is Evolving?! part Catholic
 			duration = -1
 		}
 		set_country_flag = pap_mt_god_king
+	}
+}
+
+
+country_event = { #All papal vassals gain this modifiers
+	id = papacy.100
+	title = papacy.100.t
+	desc = papacy.100.d
+	picture = POPE_PREACHING_eventPicture
+	hidden = yes
+	trigger = {
+		ai = yes
+		overlord = {
+			mission_completed = pap_clerical_positions
+		}
+		NOT = {
+			has_country_modifier = pap_good_intentions_3
+		}
+	}
+	
+	option = {
+		name = papacy.10a
+		add_country_modifier = {
+			name = pap_good_intentions_3
+			duration = -1
+		}
+	}
+}
+
+country_event = { #All papal vassals gain this modifiers
+	id = papacy.101
+	title = papacy.101.t
+	desc = papacy.101.d
+	picture = POPE_PREACHING_eventPicture
+	hidden = yes
+	trigger = {
+		ai = yes
+		OR = {
+			NOT = {
+				overlord = {
+					mission_completed = pap_clerical_positions
+				}
+			}
+			is_free_or_tributary_trigger = yes
+		}
+		has_country_modifier = pap_good_intentions_3
+	}
+	
+	option = {
+		name = papacy.10a
+		remove_country_modifier = pap_good_intentions_3
 	}
 }

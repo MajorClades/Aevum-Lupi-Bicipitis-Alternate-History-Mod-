@@ -1,0 +1,234 @@
+custom_button = {
+	name = cash_favor_button
+	potential = {
+		religion = pontifex
+	}
+	trigger = {
+		years_of_income = 1
+		if = {
+			limit = {
+				has_country_modifier = cash_favor_button_cooldown
+			}
+			custom_trigger_tooltip = {
+				tooltip = ALB_NOT_TAKEN_IN_3_YEARS_TT
+			}
+		}
+	}
+	effect = {
+		custom_tooltip = alb_gives_0_25_papal_favor
+		add_years_of_income = -1
+		hidden_effect = {
+			export_to_variable = {
+				which = cash_to_give
+				value = years_of_income
+				who = ROOT
+			}
+			change_variable = {
+				which = pont_cash_bank_var
+				which = cash_to_give
+			}
+			add_country_modifier = {
+				name = cash_favor_button_cooldown
+				duration = 1095
+				hidden = yes
+			}
+		}
+	}
+	tooltip = arian_pacifism_tt
+}
+
+custom_button = {
+	name = prestige_favor_button
+	potential = {
+		religion = pontifex
+	}
+	trigger = {
+		prestige = 30
+		if = {
+			limit = {
+				has_country_modifier = prestige_favor_button_cooldown
+			}
+			custom_trigger_tooltip = {
+				tooltip = ALB_NOT_TAKEN_IN_3_YEARS_TT
+			}
+		}
+	}
+	effect = {
+		custom_tooltip = alb_gives_0_25_papal_favor
+		hidden_effect = {
+			add_country_modifier = {
+				name = prestige_favor_button_cooldown
+				duration = 1095
+				hidden = yes
+			}
+		}
+	}
+	tooltip = arian_clergy_mad_tt
+}
+
+custom_button = {
+	name = dip_favor_button
+	potential = {
+		religion = pontifex
+	}
+	trigger = {
+		dip_power = 200
+		if = {
+			limit = {
+				has_country_modifier = dip_favor_button_cooldown
+			}
+			custom_trigger_tooltip = {
+				tooltip = ALB_NOT_TAKEN_IN_3_YEARS_TT
+			}
+		}
+	}
+	effect = {
+		custom_tooltip = alb_gives_0_25_papal_favor
+		hidden_effect = {
+			add_country_modifier = {
+				name = dip_favor_button_cooldown
+				duration = 1095
+				hidden = yes
+			}
+		}
+	}
+	tooltip = arian_marketplace_tt
+}
+
+custom_button = {
+	name = adm_favor_button
+	potential = {
+		religion = pontifex
+		has_global_flag = pontifex_nice_flag
+	}
+	trigger = {
+		adm_power = 200
+		if = {
+			limit = {
+				has_country_modifier = adm_favor_button_cooldown
+			}
+			custom_trigger_tooltip = {
+				tooltip = ALB_NOT_TAKEN_IN_3_YEARS_TT
+			}
+		}
+	}
+	effect = {
+		custom_tooltip = alb_gives_0_25_papal_favor
+		hidden_effect = {
+			add_country_modifier = {
+				name = adm_favor_button_cooldown
+				duration = 1095
+				hidden = yes
+			}
+		}
+	}
+	tooltip = arian_diplomacy_tt
+}
+
+custom_button = {
+	name = mil_favor_button
+	potential = {
+		religion = pontifex
+		has_global_flag = pontifex_naughty_flag
+	}
+	trigger = {
+		mil_power = 200
+		if = {
+			limit = {
+				has_country_modifier = mil_favor_button_cooldown
+			}
+			custom_trigger_tooltip = {
+				tooltip = ALB_NOT_TAKEN_IN_3_YEARS_TT
+			}
+		}
+	}
+	effect = {
+		custom_tooltip = alb_gives_0_25_papal_favor
+		hidden_effect = {
+			add_country_modifier = {
+				name = mil_favor_button_cooldown
+				duration = 1095
+				hidden = yes
+			}
+		}
+	}
+	tooltip = arian_estates_tt
+}
+
+custom_button = {
+	name = big_pope_button
+	potential = {
+		religion = pontifex
+		NOT = {
+			has_country_flag = is_pontifex_pope_flag
+		}
+	}
+	trigger = {
+		stability = 3
+		check_variable = {
+			which = papal_favor_var
+			value = 100
+		}
+	}
+	effect = {
+		#become Big Pope
+	}
+	tooltip = arian_guerrilla_tt
+}
+
+custom_button = {
+	name = big_pope_tech_button
+	potential = {
+		religion = pontifex
+		has_country_flag = is_pontifex_pope_flag
+	}
+	trigger = {
+		check_variable = {
+			which = papal_favor_var
+			value = 100
+		}
+	}
+	effect = {
+		if = {
+			limit = {
+				has_global_flag = pontifex_nice_flag
+			}
+			add_adm_tech = 1
+			add_country_modifier = {
+				name = pont_adm_tech_more
+				duration = 10950
+			}
+		}else = {
+			add_mil_tech = 1
+			add_country_modifier = {
+				name = pont_mil_tech_more
+				duration = 10950
+			}
+		}
+	}
+	tooltip = arian_guerrilla_tt
+}
+
+custom_text_box = {
+    name = papal_favor_text 
+    potential = { 
+		religion = pontifex
+	} 
+	tooltip = papal_favor_text_desc
+}
+
+custom_icon = {
+    name = papal_favor_bg 
+    potential = { 
+		religion = pontifex
+	} 
+}
+
+custom_icon = {
+	name = papal_favor_bar
+	potential = {
+		religion = arian
+	}
+	tooltip = papal_favor_bar_desc
+	frame_variable = papal_favor_var
+}

@@ -5,6 +5,61 @@ Papacy_if_1_slot = {
 	has_country_shield = yes
 	potential = { OR = { tag = PAP tag = PA0} has_country_flag = pap_mt_ita_fed} 
 
+	pap_church_activities = {
+		icon = mission_luther_theses
+		position = 4
+		required_missions = { pap_lux_south } 
+		provinces_to_highlight = { country_or_non_sovereign_subject_holds = ROOT has_tax_building_trigger = no } 
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 10
+				base_tax = 5
+				has_tax_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_5_p_a = yes
+			capital_scope = {
+				add_or_upgrade_tax_building = yes
+			}
+		}
+	}
+
+	pap_clerical_positions = {
+		icon = mission_luther_theses
+		position = 5
+		required_missions = { pap_church_activities } 
+		provinces_to_highlight = { country_or_non_sovereign_subject_holds = ROOT has_tax_building_trigger = no } 
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 25
+				OR = {
+					base_tax = 10
+					NOT = {
+						owned_by = ROOT
+					}
+				}
+				has_tax_building_trigger = yes
+			}
+		}
+
+		effect = {
+			if = {
+				limit = { has_government_mechanic = saints_and_sinners 	}
+				add_country_modifier = {
+					name = pap_good_intentions
+					duration = -1
+				}
+			}else = {
+				add_country_modifier = {
+					name = pap_good_intentions_2
+					duration = -1
+				}
+			}
+			custom_tooltip = PAP_IF_7
+		}
+	}
 	pap_africa_landing = {
 		icon = mission_luther_theses
 		position = 6
@@ -43,7 +98,6 @@ Papacy_if_1_slot = {
 			}
 		}
 	}
-
 	pap_berber_faiths = {
 		icon = mission_luther_theses
 		position = 7
@@ -470,6 +524,31 @@ Papacy_if_5_slot = {
 	has_country_shield = yes
 	potential = { OR = { tag = PAP tag = PA0} has_country_flag = pap_mt_ita_fed} 
 
+
+	pap_christian_trades = {
+		icon = mission_luther_theses
+		position = 4
+		required_missions = { pap_northern_republic } 
+		provinces_to_highlight = { country_or_non_sovereign_subject_holds = ROOT has_trade_building_trigger = no } 
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 10
+				base_production = 5
+				has_trade_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_curia_treasury = 500
+			1298 = {
+				add_trade_node_income = 12
+			}
+			1304 = {
+				add_trade_node_income = 24
+			}
+		}
+	}
+
 	pap_gallic_heresies = {
 		icon = mission_luther_theses
 		position = 6
@@ -578,4 +657,5 @@ Papacy_if_5_slot = {
 			}
 		}
 	}
+
 }
