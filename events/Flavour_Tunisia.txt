@@ -268,3 +268,84 @@ country_event = {
 		}
 	}
 }
+
+country_event = {
+	id = carto.7
+	title = carto.7.test
+	desc = carto.7.desc
+	picture = ANGRY_MOB_eventPicture
+
+	is_triggered_only = yes
+
+	option = {
+		name = carto.7a
+		if = {
+			limit = {
+				exists = CR0
+			}
+			CR0 = {
+				vassalize = ROOT
+			}
+		}
+		else = {
+			CR1 = {
+				vassalize = ROOT
+			}
+		}
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 1.1
+				OR = {
+					has_opinion = {
+						who = CR1
+						value = 110
+					}
+					has_opinion = {
+						who = CR0
+						value = 110
+					}
+				}
+			}
+			modifier = {
+				factor = 1.5
+				OR = {
+					has_opinion = {
+						who = CR1
+						value = 150
+					}
+					has_opinion = {
+						who = CR0
+						value = 150
+					}
+				}
+			}
+			modifier = {
+				factor = 2
+				OR = {
+					has_opinion = {
+						who = CR1
+						value = 180
+					}
+					has_opinion = {
+						who = CR0
+						value = 180
+					}
+				}
+			}
+		}
+	}
+	option = {
+		name = carto.7b
+		ai_chance = {
+			factor = 70
+		}
+		CR0 = {
+			add_casus_belli = {
+				type = cb_vassalize_mission
+				target = ROOT
+				months = 3650
+			}
+		}
+	}
+}

@@ -15,9 +15,23 @@ tunis_carthage_shared_1_slot = {
 		position = 3
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			custom_trigger_tooltip = {
+				tooltip = CARTAGINEVSTUNISIA
+				has_country_flag = had_tunis_great_fire_flag
+			}
+			adm_power = 100
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_adm_power = -100
+			341 = {
+				add_province_modifier = {
+					name = cr0_recovery_efforts
+					duration = 3650
+				}
+			}
+		} 
 	}
 }
 tunis_carthage_shared_2_slot = {
@@ -55,9 +69,22 @@ tunis_carthage_shared_3_slot = {
 		position = 1
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			army_size_percentage = 0.9
+			num_of_generals = 1
+		} 
 
-		effect = {  } 
+		effect = {  
+			kabylia_area = {
+				add_permanent_claim = ROOT
+			}
+			ouled_nail_area = {
+				add_permanent_claim = ROOT
+			}
+			tripolitania_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	cr_crush_aldabba = {
@@ -172,11 +199,54 @@ tunis_carthage_shared_5_slot = {
 	cr_bipolitan_diplomacy = {
 		icon = mission_fire_of_london
 		position = 1
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			is_capital_of = BI0
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			OR = {
+				BI0 = {
+					has_opinion = {
+						who = ROOT
+						value = 180
+					}
+					OR = {
+						alliance_with = ROOT
+						guaranteed_by = ROOT
+					}
+				}
+				NOT = {
+					exists = BI0
+				}
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			if = {
+				limit = {
+					BI0 = {
+						has_opinion = {
+							who = ROOT
+							value = 180
+						}
+						OR = {
+							alliance_with = ROOT
+							guaranteed_by = ROOT
+						}
+					}
+				}
+				BI0 = {
+					country_event = {
+						id = carto.7
+					}
+					custom_tooltip = cr0_vassalize_bipoli_tt
+				}
+			}
+			else = {
+				add_adm_power = 250
+				add_army_tradition = 15
+			}
+		} 
 	}
 
 	cr_generals_steed = {
@@ -208,9 +278,22 @@ tunis_carthage_shared_5_slot = {
 		required_missions = { cr_generals_steed } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_hired_mercenary_companies = 3
+			OR = {
+				has_idea_group = mercenary_ideas
+				army_tradition = 80
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_country_modifier = {
+				name = cr0_mercenary_maxxing
+				duration = -1
+			}
+			set_country_flag = vog_more_professions
+			custom_tooltip = VOGADIA_TT_4
+		} 
 	}
 
 	cr_naval_buildup = {
@@ -294,11 +377,47 @@ carthage_2_slot = {
 		icon = mission_fire_of_london
 		position = 5
 		required_missions = { cr0_carthaginian_nation } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			religion = jewish
+			NOT = {
+				owned_by = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			OR = {
+				any_owned_province = {
+					religion = jewish
+				}
+				any_ally = {
+					OR = {
+						any_owned_province = {
+							religion = jewish
+						}
+						religion = jewish
+					}
+				} 
+				any_owned_province = {
+					has_building = university
+				}
+			}
+			years_of_income = 0.25
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_years_of_income = -0.25
+			custom_tooltip = empty_line_tt
+			define_advisor = {
+				type = theologian
+				skill = 3
+				cost_multiplier = 0.5
+				religion = jewish
+				culture = hebrew
+				name = "Solomon ben Jacob"
+			}
+			custom_tooltip = empty_line_tt
+			custom_tooltip = cr0_begin_work_deciphering_language_tt
+		} 
 	}
 
 	cr0_punic_revival = {
@@ -307,9 +426,40 @@ carthage_2_slot = {
 		required_missions = { cr0_invite_jewish_scholars } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			primary_culture = punic
+			has_advisor_of_type_and_level = {
+				level = 3
+				type = dip
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			custom_tooltip = alb_for_every_level_of_advisor_do_tt
+			custom_tooltip = cr0_convert_province_to_punic_tt
+			hidden_effect = {
+				alb_for_every_level_of_advisor_do = {
+					type = DIP
+					effect = "
+						cr0_convert_province_to_punic_tt
+						hidden_effect = {
+							random_owned_province = {
+								limit = {
+									NOT = {
+										culture = punic
+									}
+								}
+								change_culture = ROOT
+							}
+						}
+					"
+				}
+			}
+			add_country_modifier = {
+				name = cr0_spread_punic_culture
+				duration = 9125
+			}
+		} 
 	}
 
 	cr0_spread_new_identity = {
@@ -318,9 +468,17 @@ carthage_2_slot = {
 		required_missions = { cr0_punic_revival } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_owned_provinces_with = {
+				value = 15
+				culture = punic
+			}
+		} 
 
-		effect = {  } 
+		effect = { 
+			#over time culture convert thru hidden event
+			#also something else i guess idk
+		} 
 	}
 }
 tunisia_1_slot = {
