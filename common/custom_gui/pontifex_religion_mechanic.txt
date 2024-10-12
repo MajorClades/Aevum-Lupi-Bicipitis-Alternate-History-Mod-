@@ -5,12 +5,10 @@ custom_button = {
 	}
 	trigger = {
 		years_of_income = 1
-		if = {
-			limit = {
+		custom_trigger_tooltip = {
+			tooltip = ALB_NOT_TAKEN_IN_3_YEARS_TT
+			NOT = {
 				has_country_modifier = cash_favor_button_cooldown
-			}
-			custom_trigger_tooltip = {
-				tooltip = ALB_NOT_TAKEN_IN_3_YEARS_TT
 			}
 		}
 	}
@@ -34,7 +32,54 @@ custom_button = {
 			}
 		}
 	}
-	tooltip = arian_pacifism_tt
+	tooltip = cash_f1_tt
+}
+
+custom_button = {
+	name = cash2_favor_button
+	potential = {
+		religion = pontifex
+	}
+	trigger = {
+		check_variable = {
+			which = pont_cash_bank_var
+			which = years_of_income
+		}
+		check_variable = {
+			which = papal_favor_var
+			value = 10
+		}
+		custom_trigger_tooltip = {
+			tooltip = ALB_NOT_TAKEN_IN_3_YEARS_TT
+			NOT = {
+				has_country_modifier = cash2_favor_button_cooldown
+			}
+		}
+	}
+	effect = {
+		subtract_variable = {
+			which = papal_favor_var
+			value = -10
+		}
+		add_years_of_income = 1
+		hidden_effect = {
+			export_to_variable = {
+				which = cash_to_give
+				value = years_of_income
+				who = ROOT
+			}
+			subtract_variable = {
+				which = pont_cash_bank_var
+				which = cash_to_give
+			}
+			add_country_modifier = {
+				name = cash2_favor_button_cooldown
+				duration = 1095
+				hidden = yes
+			}
+		}
+	}
+	tooltip = cash_f2_tt
 }
 
 custom_button = {
@@ -44,12 +89,10 @@ custom_button = {
 	}
 	trigger = {
 		prestige = 30
-		if = {
-			limit = {
+		custom_trigger_tooltip = {
+			tooltip = ALB_NOT_TAKEN_IN_3_YEARS_TT
+			NOT = {
 				has_country_modifier = prestige_favor_button_cooldown
-			}
-			custom_trigger_tooltip = {
-				tooltip = ALB_NOT_TAKEN_IN_3_YEARS_TT
 			}
 		}
 	}
@@ -63,7 +106,41 @@ custom_button = {
 			}
 		}
 	}
-	tooltip = arian_clergy_mad_tt
+	tooltip = prestige_f1_tt
+}
+
+custom_button = {
+	name = prestige2_favor_button
+	potential = {
+		religion = pontifex
+	}
+	trigger = {
+		check_variable = {
+			which = papal_favor_var
+			value = 5
+		}
+		custom_trigger_tooltip = {
+			tooltip = ALB_NOT_TAKEN_IN_3_YEARS_TT
+			NOT = {
+				has_country_modifier = prestige2_favor_button_cooldown
+			}
+		}
+	}
+	effect = {
+		add_prestige_or_monarch_power = { amount = 30 }
+		subtract_variable = {
+			which = papal_favor_var
+			value = -5
+		}
+		hidden_effect = {
+			add_country_modifier = {
+				name = prestige2_favor_button_cooldown
+				duration = 1095
+				hidden = yes
+			}
+		}
+	}
+	tooltip = prestige_f2_tt
 }
 
 custom_button = {
@@ -73,16 +150,15 @@ custom_button = {
 	}
 	trigger = {
 		dip_power = 200
-		if = {
-			limit = {
+		custom_trigger_tooltip = {
+			tooltip = ALB_NOT_TAKEN_IN_3_YEARS_TT
+			NOT = {
 				has_country_modifier = dip_favor_button_cooldown
-			}
-			custom_trigger_tooltip = {
-				tooltip = ALB_NOT_TAKEN_IN_3_YEARS_TT
 			}
 		}
 	}
 	effect = {
+		add_dip_power = -200
 		custom_tooltip = alb_gives_0_25_papal_favor
 		hidden_effect = {
 			add_country_modifier = {
@@ -92,7 +168,41 @@ custom_button = {
 			}
 		}
 	}
-	tooltip = arian_marketplace_tt
+	tooltip = dip_f1_tt
+}
+
+custom_button = {
+	name = dip2_favor_button
+	potential = {
+		religion = pontifex
+	}
+	trigger = {
+		check_variable = {
+			which = papal_favor_var
+			value = 10
+		}
+		custom_trigger_tooltip = {
+			tooltip = ALB_NOT_TAKEN_IN_3_YEARS_TT
+			NOT = {
+				has_country_modifier = dip2_favor_button_cooldown
+			}
+		}
+	}
+	effect = {
+		subtract_variable = {
+			which = papal_favor_var
+			value = -10
+		}
+		add_dip_power = 100
+		hidden_effect = {
+			add_country_modifier = {
+				name = dip2_favor_button_cooldown
+				duration = 1095
+				hidden = yes
+			}
+		}
+	}
+	tooltip = dip_f2_tt
 }
 
 custom_button = {
@@ -103,16 +213,15 @@ custom_button = {
 	}
 	trigger = {
 		adm_power = 200
-		if = {
-			limit = {
+		custom_trigger_tooltip = {
+			tooltip = ALB_NOT_TAKEN_IN_3_YEARS_TT
+			NOT = {
 				has_country_modifier = adm_favor_button_cooldown
-			}
-			custom_trigger_tooltip = {
-				tooltip = ALB_NOT_TAKEN_IN_3_YEARS_TT
 			}
 		}
 	}
 	effect = {
+		add_adm_power = -200
 		custom_tooltip = alb_gives_0_25_papal_favor
 		hidden_effect = {
 			add_country_modifier = {
@@ -122,7 +231,42 @@ custom_button = {
 			}
 		}
 	}
-	tooltip = arian_diplomacy_tt
+	tooltip = adm_f1_tt
+}
+
+custom_button = {
+	name = adm2_favor_button
+	potential = {
+		religion = pontifex
+		has_global_flag = pontifex_nice_flag
+	}
+	trigger = {
+		check_variable = {
+			which = papal_favor_var
+			value = 10
+		}
+		custom_trigger_tooltip = {
+			tooltip = ALB_NOT_TAKEN_IN_3_YEARS_TT
+			NOT = {
+				has_country_modifier = adm2_favor_button_cooldown
+			}
+		}
+	}
+	effect = {
+		subtract_variable = {
+			which = papal_favor_var
+			value = -10
+		}
+		add_adm_power = 100
+		hidden_effect = {
+			add_country_modifier = {
+				name = adm2_favor_button_cooldown
+				duration = 1095
+				hidden = yes
+			}
+		}
+	}
+	tooltip = adm_f2_tt
 }
 
 custom_button = {
@@ -133,16 +277,15 @@ custom_button = {
 	}
 	trigger = {
 		mil_power = 200
-		if = {
-			limit = {
+		custom_trigger_tooltip = {
+			tooltip = ALB_NOT_TAKEN_IN_3_YEARS_TT
+			NOT = {
 				has_country_modifier = mil_favor_button_cooldown
-			}
-			custom_trigger_tooltip = {
-				tooltip = ALB_NOT_TAKEN_IN_3_YEARS_TT
 			}
 		}
 	}
 	effect = {
+		add_mil_power = -200
 		custom_tooltip = alb_gives_0_25_papal_favor
 		hidden_effect = {
 			add_country_modifier = {
@@ -152,7 +295,42 @@ custom_button = {
 			}
 		}
 	}
-	tooltip = arian_estates_tt
+	tooltip = mil_f1_tt
+}
+
+custom_button = {
+	name = mil2_favor_button
+	potential = {
+		religion = pontifex
+		has_global_flag = pontifex_naughty_flag
+	}
+	trigger = {
+		check_variable = {
+			which = papal_favor_var
+			value = 10
+		}
+		custom_trigger_tooltip = {
+			tooltip = ALB_NOT_TAKEN_IN_3_YEARS_TT
+			NOT = {
+				has_country_modifier = mil2_favor_button_cooldown
+			}
+		}
+	}
+	effect = {
+		subtract_variable = {
+			which = papal_favor_var
+			value = -10
+		}
+		add_mil_power = 100
+		hidden_effect = {
+			add_country_modifier = {
+				name = mil2_favor_button_cooldown
+				duration = 1095
+				hidden = yes
+			}
+		}
+	}
+	tooltip = mil_f2_tt
 }
 
 custom_button = {
@@ -160,7 +338,7 @@ custom_button = {
 	potential = {
 		religion = pontifex
 		NOT = {
-			has_country_flag = is_pontifex_pope_flag
+			tag = event_target:pontifex_pope_tag
 		}
 	}
 	trigger = {
@@ -171,16 +349,19 @@ custom_button = {
 		}
 	}
 	effect = {
-		#become Big Pope
+		inherit = event_target:pontifex_pope_tag
+		hidden_effect = {
+			save_global_event_target_as = pontifex_pope_tag
+		}
 	}
-	tooltip = arian_guerrilla_tt
+	tooltip = become_big_pope_tt
 }
 
 custom_button = {
 	name = big_pope_tech_button
 	potential = {
 		religion = pontifex
-		has_country_flag = is_pontifex_pope_flag
+		tag = event_target:pontifex_pope_tag
 	}
 	trigger = {
 		check_variable = {
@@ -206,29 +387,29 @@ custom_button = {
 			}
 		}
 	}
-	tooltip = arian_guerrilla_tt
+	tooltip = become_big_tech_tt
 }
 
-custom_text_box = {
-    name = papal_favor_text 
-    potential = { 
-		religion = pontifex
-	} 
-	tooltip = papal_favor_text_desc
-}
+# custom_text_box = {
+#     name = papal_favor_text 
+#     potential = { 
+# 		religion = pontifex
+# 	} 
+# 	tooltip = papal_favor_text_desc
+# }
 
-custom_icon = {
-    name = papal_favor_bg 
-    potential = { 
-		religion = pontifex
-	} 
-}
+# custom_icon = {
+#     name = papal_favor_bg 
+#     potential = { 
+# 		religion = pontifex
+# 	} 
+# }
 
-custom_icon = {
-	name = papal_favor_bar
-	potential = {
-		religion = arian
-	}
-	tooltip = papal_favor_bar_desc
-	frame_variable = papal_favor_var
-}
+# custom_icon = {
+# 	name = papal_favor_bar
+# 	potential = {
+# 		religion = arian
+# 	}
+# 	tooltip = papal_favor_bar_desc
+# 	frame_variable = papal_favor_var
+# }

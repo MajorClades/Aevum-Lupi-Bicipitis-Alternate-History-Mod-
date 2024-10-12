@@ -253,18 +253,17 @@ on_mil_tech_taken = {
 on_religion_change = {
 	if = {
 		limit = {religion = pontifex NOT = { has_country_flag = papal_favor_var_set}}
-		
+		set_country_flag = papal_favor_var_set
+		set_variable = {
+			which = papal_favor_var
+			value = 0
+		}
+			
 	}
-	set_country_flag = papal_favor_var_set
-	set_variable = {
-		which = papal_favor_var
-		value = 0
-	}
-	
 	if = {
 		limit = { has_country_flag = papal_favor_var_set NOT = { religion = pontifex}}
+		clr_country_flag = papal_favor_var_set
 	}
-	clr_country_flag = papal_favor_var_set
 }
 on_monthly_pulse = {
 	##Arian Fervor
