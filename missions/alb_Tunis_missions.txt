@@ -3,16 +3,35 @@ tunis_carthage_shared_1_slot = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = CR1 } 
+	potential = {
+		OR = {
+			tag = CR1
+			tag = CR0
+		}
+	}
 
 	cr_the_great_fire = {
 		icon = mission_fire_of_london
 		position = 3
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			custom_trigger_tooltip = {
+				tooltip = CARTAGINEVSTUNISIA
+				has_country_flag = had_tunis_great_fire_flag
+			}
+			adm_power = 100
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_adm_power = -100
+			341 = {
+				add_province_modifier = {
+					name = cr0_recovery_efforts
+					duration = 3650
+				}
+			}
+		} 
 	}
 }
 tunis_carthage_shared_2_slot = {
@@ -20,7 +39,12 @@ tunis_carthage_shared_2_slot = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = CR1 } 
+	potential = {
+		OR = {
+			tag = CR1
+			tag = CR0
+		}
+	}
 
 	cr_nundian_campaign = {
 		icon = mission_fire_of_london
@@ -38,16 +62,34 @@ tunis_carthage_shared_3_slot = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = CR1 } 
+	potential = {
+		OR = {
+			tag = CR1
+			tag = CR0
+		}
+	}
 
 	cr_build_army = {
 		icon = mission_fire_of_london
 		position = 1
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			army_size_percentage = 0.9
+			num_of_generals = 1
+		} 
 
-		effect = {  } 
+		effect = {  
+			kabylia_area = {
+				add_permanent_claim = ROOT
+			}
+			ouled_nail_area = {
+				add_permanent_claim = ROOT
+			}
+			tripolitania_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	cr_crush_aldabba = {
@@ -71,7 +113,7 @@ tunis_carthage_shared_3_slot = {
 		effect = {  } 
 	}
 
-	cr_finished_iberia = {
+	cr_restore_cartagena = {
 		icon = mission_fire_of_london
 		position = 7
 		required_missions = { cr_begin_iberian_campaign } 
@@ -87,7 +129,12 @@ tunis_carthage_shared_4_slot = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = CR1 } 
+	potential = {
+		OR = {
+			tag = CR1
+			tag = CR0
+		}
+	}
 
 	cr_crush_republic = {
 		icon = mission_fire_of_london
@@ -119,7 +166,7 @@ tunis_carthage_shared_4_slot = {
 
 	cr_steal_western_islands = {
 		icon = mission_fire_of_london
-		position = 5
+		position = 6
 		required_missions = { cr_naval_buildup } 
 		provinces_to_highlight = {  } 
 
@@ -130,7 +177,7 @@ tunis_carthage_shared_4_slot = {
 
 	cr_found_some_colonies = {
 		icon = mission_fire_of_london
-		position = 6
+		position = 7
 		required_missions = {
 			cr_steal_western_islands
 			cr_begin_iberian_campaign
@@ -147,16 +194,104 @@ tunis_carthage_shared_5_slot = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = CR1 } 
+	potential = {
+		OR = {
+			tag = CR1
+			tag = CR0
+		}
+	}
 
 	cr_bipolitan_diplomacy = {
 		icon = mission_fire_of_london
 		position = 1
+		provinces_to_highlight = {  
+			is_capital_of = BI0
+		} 
+
+		trigger = {  
+			OR = {
+				BI0 = {
+					has_opinion = {
+						who = ROOT
+						value = 180
+					}
+					OR = {
+						alliance_with = ROOT
+						guaranteed_by = ROOT
+					}
+				}
+				NOT = {
+					exists = BI0
+				}
+			}
+		} 
+
+		effect = {  
+			if = {
+				limit = {
+					exists = BI0
+				}
+				BI0 = {
+					country_event = {
+						id = carto.7
+					}
+					custom_tooltip = cr0_vassalize_bipoli_tt
+				}
+			}
+			else = {
+				add_adm_power = 250
+				add_army_tradition = 15
+			}
+		} 
+	}
+
+	cr_generals_steed = {
+		icon = mission_fire_of_london
+		position = 3
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			custom_trigger_tooltip = {
+				tooltip = alb_has_revived_elephants_tt
+				has_global_flag = revived_elephant
+			}
+			owns = 4568
+			owns = 336
+			owns = 4566
+			num_of_cavalry = 20
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_country_modifier = {
+				name = cr0_better_elephants
+				duration = -1
+			}
+			add_prestige = 25
+		} 
+	}
+
+	cr_mercmaxxing = {
+		icon = mission_fire_of_london
+		position = 4
+		required_missions = { cr_generals_steed } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			num_of_hired_mercenary_companies = 3
+			OR = {
+				has_idea_group = mercenary_ideas
+				army_tradition = 80
+			}
+		} 
+
+		effect = {  
+			add_country_modifier = {
+				name = cr0_mercenary_maxxing
+				duration = -1
+			}
+			set_country_flag = vog_more_professions
+			custom_tooltip = VOGADIA_TT_4
+		} 
 	}
 
 	cr_naval_buildup = {
@@ -171,7 +306,7 @@ tunis_carthage_shared_5_slot = {
 
 	cr_our_sea = {
 		icon = mission_fire_of_london
-		position = 5
+		position = 6
 		required_missions = { cr_naval_buildup } 
 		provinces_to_highlight = {  } 
 
@@ -182,32 +317,11 @@ tunis_carthage_shared_5_slot = {
 
 	cr_med_trade_hegemon = {
 		icon = mission_fire_of_london
-		position = 6
+		position = 7
 		required_missions = {
 			cr_steal_western_islands
 			cr_our_sea
 		}
-		provinces_to_highlight = {  } 
-
-		trigger = {  } 
-
-		effect = {  } 
-	}
-
-	cr_generals_steed = {
-		icon = mission_fire_of_london
-		position = 3
-		provinces_to_highlight = {  } 
-
-		trigger = {  } 
-
-		effect = {  } 
-	}
-
-	cr_mercmaxxing = {
-		icon = mission_fire_of_london
-		position = 4
-		required_missions = { cr_generals_steed } 
 		provinces_to_highlight = {  } 
 
 		trigger = {  } 
@@ -220,7 +334,10 @@ carthage_1_slot = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = CR1 } 
+	potential = {
+		tag = CR0
+		has_country_flag = had_tunis_great_fire_flag
+	}
 
 	cr0_carthaginian_nation = {
 		icon = mission_fire_of_london
@@ -249,17 +366,56 @@ carthage_2_slot = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = CR1 } 
+	potential = {
+		tag = CR0
+		has_country_flag = had_tunis_great_fire_flag
+	}
 
 	cr0_invite_jewish_scholars = {
 		icon = mission_fire_of_london
 		position = 5
 		required_missions = { cr0_carthaginian_nation } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			religion = jewish
+			NOT = {
+				owned_by = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			OR = {
+				any_owned_province = {
+					religion = jewish
+				}
+				any_ally = {
+					OR = {
+						any_owned_province = {
+							religion = jewish
+						}
+						religion = jewish
+					}
+				} 
+				any_owned_province = {
+					has_building = university
+				}
+			}
+			years_of_income = 0.25
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_years_of_income = -0.25
+			custom_tooltip = empty_line_tt
+			define_advisor = {
+				type = theologian
+				skill = 3
+				cost_multiplier = 0.5
+				religion = jewish
+				culture = hebrew
+				name = "Solomon ben Jacob"
+			}
+			custom_tooltip = empty_line_tt
+			custom_tooltip = cr0_begin_work_deciphering_language_tt
+		} 
 	}
 
 	cr0_punic_revival = {
@@ -268,9 +424,45 @@ carthage_2_slot = {
 		required_missions = { cr0_invite_jewish_scholars } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			primary_culture = punic
+			
+		} 
 
-		effect = {  } 
+		effect = {  
+			custom_tooltip = alb_for_every_level_of_dip_do_tt
+			custom_tooltip = cr0_convert_province_to_punic_tt
+			tooltip = {
+				random_owned_province = {
+					limit = {
+						NOT = {
+							culture = punic
+						}
+					}
+					change_culture = ROOT
+				}
+			}
+			hidden_effect = {
+				for_every_level_of_advisor_do = {
+					type = DIP
+					effect = "
+						random_owned_province = {
+							limit = {
+								NOT = {
+									culture = punic
+								}
+							}
+							change_culture = ROOT
+						}
+					"
+				}
+			}
+			custom_tooltip = empty_line_tt
+			add_country_modifier = {
+				name = cr0_spread_punic_culture
+				duration = 9125
+			}
+		} 
 	}
 
 	cr0_spread_new_identity = {
@@ -279,9 +471,17 @@ carthage_2_slot = {
 		required_missions = { cr0_punic_revival } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_owned_provinces_with = {
+				value = 15
+				culture = punic
+			}
+		} 
 
-		effect = {  } 
+		effect = { 
+			#over time culture convert thru hidden event
+			#also something else i guess idk
+		} 
 	}
 }
 tunisia_1_slot = {
@@ -289,7 +489,10 @@ tunisia_1_slot = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = CR1 } 
+	potential = {
+		tag = CR1
+		has_country_flag = had_tunis_great_fire_flag
+	}
 
 	cr1_crack_down_on_indictians = {
 		icon = mission_fire_of_london
@@ -318,7 +521,10 @@ tunisia_2_slot = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = CR1 } 
+	potential = {
+		tag = CR1
+		has_country_flag = had_tunis_great_fire_flag
+	}
 
 	cr1_imperial_relations = {
 		icon = mission_fire_of_london
@@ -358,10 +564,16 @@ placeholder_1_slot = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = CR1 } 
+	potential = {
+		OR = {
+			tag = CR1
+			tag = CR0
+		}
+		NOT = { has_country_flag = had_tunis_great_fire_flag } 
+	}
 
 	cr_placeholder_mission_1 = {
-		icon = mission_fire_of_london
+		icon = mission_unknown_mission
 		position = 4
 		required_missions = { cr_the_great_fire } 
 		provinces_to_highlight = {  } 
@@ -372,7 +584,7 @@ placeholder_1_slot = {
 	}
 
 	cr_placeholder_mission_2 = {
-		icon = mission_fire_of_london
+		icon = mission_unknown_mission
 		position = 5
 		required_missions = { cr_placeholder_mission_1 } 
 		provinces_to_highlight = {  } 
@@ -387,10 +599,16 @@ placeholder_2_slot = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = CR1 } 
+	potential = {
+		OR = {
+			tag = CR1
+			tag = CR0
+		}
+		NOT = { has_country_flag = had_tunis_great_fire_flag } 
+	}
 
 	cr_placeholder_mission_3 = {
-		icon = mission_fire_of_london
+		icon = mission_unknown_mission
 		position = 5
 		required_missions = { cr_placeholder_mission_1 } 
 		provinces_to_highlight = {  } 
@@ -401,7 +619,7 @@ placeholder_2_slot = {
 	}
 
 	cr_placeholder_mission_4 = {
-		icon = mission_fire_of_london
+		icon = mission_unknown_mission
 		position = 6
 		required_missions = { cr_placeholder_mission_3 } 
 		provinces_to_highlight = {  } 
@@ -412,7 +630,7 @@ placeholder_2_slot = {
 	}
 
 	cr_placeholder_mission_5 = {
-		icon = mission_fire_of_london
+		icon = mission_unknown_mission
 		position = 7
 		required_missions = { cr_placeholder_mission_4 } 
 		provinces_to_highlight = {  } 
