@@ -1,4 +1,4 @@
-po_last_crusade_west_europe = {
+po_last_crusade_levant = {
 	category = 6
 	power_projection = humiliated_rival
 	power_cost_base = 1.0
@@ -16,7 +16,7 @@ po_last_crusade_west_europe = {
 		concede_colonial_region = 0.0 # Ditto
 	}
 	
-	warscore_cap = 30 # Warscore cost will never go above this value. Only enabled if non-negative. This value defaults to -1.
+	warscore_cap = 20 # Warscore cost will never go above this value. Only enabled if non-negative. This value defaults to -1.
 	 # This will make the treaty mutually exclusive with other treaties that makes the giver a subject, or that explicitly frees the giver from their current overlord.
 	requires_is_allowed = yes # If set to "yes", treaty will only be visible when explicitly allowed by casus belli. If not, it will be available but cost diplomatic power.
 	
@@ -24,12 +24,18 @@ po_last_crusade_west_europe = {
 		always = yes
 	}
 	is_allowed = { # Defaults to equivalent of "always = yes"
-		
+		FROM = {
+			num_of_owned_provinces_with = {
+				value = 10
+				region = mashriq_region
+				controlled_by = ROOT
+			}
+		}
 	}
 	effect = { # Defaults to empty effect (which makes error log entry but is safe)
 		FROM = {
 			every_owned_province = {
-				limit = { OR = {superregion = europe_superregion region = balkan_region region = carpathia_region }}
+				limit = { region = mashriq_region }
 				cede_province = PA1
 				if = {
 					limit = { religion_group = muslim	}
