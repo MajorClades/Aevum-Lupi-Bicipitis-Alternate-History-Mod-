@@ -50,11 +50,47 @@ tunis_carthage_shared_2_slot = {
 		icon = mission_fire_of_london
 		position = 2
 		required_missions = { cr_build_army } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = kabylia_area
+				area = ouled_nail_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			kabylia_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			ouled_nail_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_navy_tradition = 15
+			custom_tooltip = empty_line_tt
+			create_units_of_type = {
+				custom_tooltip = cr0_spawn_african_lateens_tt
+				amount = 5
+				province = 1882
+				unit_type = voc_indiamen_light
+			}
+			custom_tooltip = empty_line_tt
+			hautes_plaines_area = {
+				add_permanent_claim = ROOT
+			}
+			algiers_area = {
+				add_permanent_claim = ROOT
+			}
+			barbary_coast_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 }
 tunis_carthage_shared_3_slot = {
@@ -96,11 +132,47 @@ tunis_carthage_shared_3_slot = {
 		icon = mission_fire_of_london
 		position = 3
 		required_missions = { cr_nundian_campaign } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = hautes_plaines_area
+				area = algiers_area
+				area = barbary_coast_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			
+		} 
 
-		trigger = {  } 
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 10
+				OR = {
+					area = hautes_plaines_area
+					area = algiers_area
+					area = barbary_coast_area
+				}
+			}
+			336 = {
+				owned_by = ROOT
+				num_of_times_improved_by_owner = 3
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			336 = {
+				add_province_modifier = {
+					name = cr0_refounding_aldabba
+					duration = -1
+				}
+				change_culture = ROOT
+				change_religion = ROOT
+			}
+			custom_tooltip = empty_line_tt
+			maghreb_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	cr_begin_iberian_campaign = {
@@ -143,11 +215,34 @@ tunis_carthage_shared_4_slot = {
 			cr_bipolitan_diplomacy
 			cr_build_army
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			area = tripolitania_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			tripolitania_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_country_modifier = {
+				name = cr0_into_the_desert
+				duration = 7300
+			}
+			add_army_tradition = 10
+			custom_tooltip = empty_line_tt
+			fezzan_area = {
+				add_permanent_claim = ROOT
+			}
+			north_saharan_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	cr_african_campaign_complete = {
@@ -157,11 +252,31 @@ tunis_carthage_shared_4_slot = {
 			cr_crush_republic
 			cr_crush_aldabba
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			region = maghreb_region
+			NOT = {
+				owned_by = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			maghreb_region = {
+				owned_by = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_ruler_personality = legendary_conqueror_personality
+			custom_tooltip = empty_line_tt
+			
+			2475 = {
+				create_colony_mission_reward_province = yes
+			}
+			1127 = {
+				create_colony_mission_reward_province = yes
+			}
+		} 
 	}
 
 	cr_steal_western_islands = {
