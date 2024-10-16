@@ -609,6 +609,216 @@ country_event = { #Your Papal State is Evolving?! part Catholic
 	}
 }
 
+country_event = { #mission to JONGWA
+	id = papacy.11
+	title = papacy.11.t
+	desc = papacy.11.d
+	picture = POPE_PREACHING_eventPicture
+	
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					tag = PAP
+				}
+				random_country = {
+					limit = { is_emperor_of_china = yes }
+					set_country_flag = Jonwa_catholic
+				}
+			}
+		}
+	}
+	option = {
+		name = papacy.11a
+		add_years_of_income = -1
+		random_country = {
+			limit = { is_emperor_of_china = yes }
+			country_event = {
+				id = papacy.12
+			}
+		}
+	}
+	option = {
+		name = papacy.11b
+		add_years_of_income = -1.5
+		random_country = {
+			limit = { is_emperor_of_china = yes }
+			set_country_flag = jonwa_high_chance_flag
+			country_event = {
+				id = papacy.12
+			}
+		}
+	}
+	option = {
+		name = papacy.11c
+		add_years_of_income = -2
+		random_country = {
+			limit = { is_emperor_of_china = yes }
+			set_country_flag = jonwa_higher_chance_flag
+			country_event = {
+				id = papacy.12
+			}
+		}
+	}
+}
+
+country_event = { #mission to JONGWA
+	id = papacy.12
+	title = papacy.12.t
+	desc = papacy.12.d
+	picture = POPE_PREACHING_eventPicture
+	
+	is_triggered_only = yes
+	after = {
+		clr_country_flag = jonwa_high_chance_flag
+		clr_country_flag = jonwa_higher_chance_flag
+		clr_country_flag = Jonwa_catholic
+	}
+	option = {
+		name = papacy.12a
+		ai_chance = {
+			factor = 0
+		}
+		if = {
+			limit = {
+				has_country_flag = Jonwa_catholic
+			}
+			change_religion = PAP
+			random_owned_province = {
+				limit = { has_port = yes}
+				change_religion = PAP
+			}
+		}else = {
+			change_religion = PA0
+			random_owned_province = {
+				limit = { has_port = yes}
+				change_religion = PA0
+			}
+		}
+	}
+	option = {
+		name = papacy.12b
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 2
+				has_country_flag = jonwa_high_chance_flag
+			}
+			modifier = {
+				factor = 4
+				has_country_flag = jonwa_higher_chance_flag
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = Jonwa_catholic
+			}
+			random_owned_province = {
+				limit = { has_port = yes}
+				change_religion = PAP
+				add_permanent_province_modifier = {
+					name = pap_jonwa_welcome
+					duration = 10950
+				}
+			}
+		}else = {
+			random_owned_province = {
+				limit = { has_port = yes}
+				change_religion = PA0
+				add_permanent_province_modifier = {
+					name = pap_jonwa_welcome
+					duration = 10950
+				}
+			}
+		}
+	}
+	option = {
+		name = papacy.12c
+		ai_chance = {
+			factor = 70
+		}
+		if = {
+			limit = {
+				has_country_flag = Jonwa_catholic
+			}
+			random_owned_province = {
+				limit = { has_port = yes}
+				change_religion = PAP
+				add_permanent_province_modifier = {
+					name = pap_jonwa_persecution
+					duration = 10950
+				}
+			}
+		}else = {
+			random_owned_province = {
+				limit = { has_port = yes}
+				change_religion = PA0
+				add_permanent_province_modifier = {
+					name = pap_jonwa_persecution
+					duration = 10950
+				}
+			}
+		}
+	}
+}
+
+
+country_event = { #mission to JONGWA
+	id = papacy.13
+	title = papacy.13.t
+	desc = papacy.13.d
+	picture = POPE_PREACHING_eventPicture
+	
+	mean_time_to_happen = {
+		months = 12
+	}
+	trigger = {
+		any_owned_province = {
+			OR = {
+				religion = PAP
+				religion = PA0
+			}
+		}
+	}
+	option = {
+		name = papacy.13a
+		ai_chance = {factor = 50}
+		if = {
+			limit = {
+				any_owned_province = {
+					religion = PAP
+				}
+			}
+			random_owned_province = {
+				limit = { 
+					any_neighbor_province = {
+						religion = PAP
+					}
+				}
+				change_religion = PAP
+			}
+		}else = {
+			random_owned_province = {
+				limit = { 
+					any_neighbor_province = {
+						religion = PA0
+					}
+				}
+				change_religion = PA0
+			}
+		}
+	}
+	option = {
+		name = papacy.13b
+		ai_chance = {factor = 50}
+		add_adm_power = -100
+	}
+}
+
+
+
+
 
 country_event = { #All papal vassals gain this modifiers
 	id = papacy.100
