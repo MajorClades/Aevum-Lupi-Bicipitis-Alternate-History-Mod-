@@ -1,0 +1,259 @@
+arabian_influence = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 17
+	available = {
+		any_province = {
+			region = arabia_region
+			owner = { culture_group = hellenic_group }
+		}
+	}
+	powers = {
+		hellenization = {
+			max = 100
+			min = 0
+			reset_on_new_ruler = no
+			scaled_modifier = {
+				trigger = {
+					culture_group = hellenic_group
+				}
+				modifier = {
+					global_trade_power = 0.5
+					production_efficiency = -0.25
+					trade_efficiency = 0.1
+					trade_company_investment_cost = -0.3
+					burghers_influence_modifier = 0.25
+					legitimacy = 2
+				}
+			}
+			scaled_modifier = {
+				trigger = {
+					NOT = {
+						culture_group = hellenic_group
+					}
+				}
+				modifier = {
+					global_trade_power = -0.5
+					production_efficiency = 0.25
+					trade_efficiency = 0.1
+					trade_company_investment_cost = 0.3
+					burghers_influence_modifier = 0.25
+				}
+			}
+			is_good = no
+		}
+	}
+	
+	interactions = {
+		sponsor_greek_colony = {
+			gui = russian_mechanics_interaction_gui
+			icon = GFX_SHEB_first
+			cost_type = hellenization
+			cost = 0
+			center = no
+			trigger = {
+				any_country = {
+					culture_group = hellenic_group
+					has_opinion = {
+						who = ROOT
+						value = 75
+					}
+				}
+				any_owned_province = {
+					has_port = yes
+					NOT = { has_province_modifier = local_greek_settlement }
+				}
+				dip_power = 50
+				treasury = 100
+			}
+			effect = {
+				add_dip_power = -50
+				add_treasury = -100
+				random_owned_province = {
+					limit = {
+						has_port = yes
+					}
+					add_province_modifier = { 
+						name = local_greek_settlement
+						duration = -1  
+					}
+					add_base_production = 1
+				}
+				add_government_power = {
+					mechanic_type = arabian_influence
+					power_type = hellenization
+					value = 10
+				}
+			}
+			ai_chance = {
+				factor = 20
+				modifier = {
+					factor = 0
+					NOT = {
+						has_government_power = {
+							mechanic_type = arabian_influence
+							power_type = hellenization
+							value = 15
+						}
+					}
+				}
+			}
+		}
+		invite_greek_advisor = {
+			gui = russian_mechanics_interaction_gui
+			icon = GFX_SHEB_second
+			cost_type = hellenization
+			cost = 5
+			trigger = { 
+				
+			}
+			effect = { 
+				add_mil_power = 100
+				
+				add_years_of_income = -0.15
+				custom_tooltip = rhoman_talent_tt
+				hidden_effect = {
+					random_list = {
+						10 = {
+							define_advisor = {
+								location = 151
+								type = treasurer
+								skill = 4
+								culture = rhoman
+								religion = islam
+							}
+						}
+						10 = {
+							define_advisor = {
+								location = 151
+								type = philosopher
+								skill = 4
+								culture = rhoman
+								religion = islam
+							}
+						}
+						10 = {
+							define_advisor = {
+								location = 151
+								type = natural_scientist
+								skill = 4
+								culture = rhoman
+								religion = islam
+							}
+						}
+						10 = {
+							define_advisor = {
+								location = 151
+								type = artist
+								skill = 4
+								culture = rhoman
+								religion = islam
+							}
+						}
+						10 = {
+							define_advisor = {
+								location = 151
+								type = theologian
+								skill = 4
+								culture = rhoman
+								religion = islam
+							}
+						}
+						10 = {
+							define_advisor = {
+								location = 151
+								type = master_of_mint
+								skill = 4
+								culture = rhoman
+								religion = islam
+							}
+						}
+						10 = {
+							define_advisor = {
+								location = 151
+								type = inquisitor
+								skill = 4
+								culture = rhoman
+								religion = islam
+							}
+						}
+					}
+				}	
+				add_government_power = {
+					mechanic_type = arabian_influence
+					power_type = hellenization
+					value = 5
+				}
+			}
+			cooldown_years = 10
+			ai_chance = {
+				factor = 20
+			}
+		}
+		promote_local_talent = {
+			gui = russian_mechanics_interaction_gui
+			icon = GFX_SHEB_third
+			cost_type = hellenization
+			cost = 15
+			trigger = {
+				years_of_income = 0.15
+			}
+			effect = { 
+				add_years_of_income = -0.15
+				custom_tooltip = local_talent_tt
+				hidden_effect = {
+					random_list = {
+						10 = {
+							define_advisor = {
+								location = 390
+								type = statesman
+								skill = 2
+								culture = ROOT
+								religion = islam
+							}
+						}
+						10 = {
+							define_advisor = {
+								location = 390
+								type = naval_reformer
+								skill = 2
+								culture = ROOT
+								religion = islam
+							}
+						}
+						20 = {
+							define_advisor = {
+								location = 390
+								type = trader
+								skill = 2
+								culture = ROOT
+								religion = islam
+							}
+						}
+						10 = {
+							define_advisor = {
+								location = 390
+								type = spymaster
+								skill = 2
+								culture = ROOT
+								religion = islam
+							}
+						}
+						20 = {
+							define_advisor = {
+								location = 390
+								type = diplomat
+								skill = 2
+								culture = ROOT
+								religion = islam
+							}
+						}
+					}
+				}	
+			}
+			cooldown_years = 20
+			ai_chance = {
+				factor = 1
+			}
+		}
+	}
+}
