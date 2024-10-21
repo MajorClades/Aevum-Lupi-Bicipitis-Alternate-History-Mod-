@@ -1,0 +1,208 @@
+country_decisions = {
+	alb_punic_revival_stage_1 = { #The Gathering of Punic Texts
+		color = { 100 50 110 }
+		major = yes
+		potential = {
+			mission_completed = cr0_invite_jewish_scholars
+			NOT = {
+				has_country_flag = completed_punic_revival_stage_1
+			}
+		}
+		provinces_to_highlight = {
+			province_id = 340
+			NOT = {
+				AND = {
+					owned_by = ROOT
+					num_of_units_in_province = {
+						amount = 3
+					}
+				}
+			}
+		}
+		allow = {
+			340 = {
+				owned_by = ROOT
+				num_of_units_in_province = {
+					amount = 3
+				}
+			}
+			years_of_income = 0.1
+		}
+		effect = {
+			add_years_of_income = -0.1
+			340 = {
+				kill_units = {
+					who = owner
+					amount = 3
+				}
+			}
+			country_event = {
+				id = carto.9
+			}
+			set_country_flag = completed_punic_revival_stage_1
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	alb_punic_revival_stage_2 = { #Translating the words
+		color = { 100 50 110 }
+		major = yes
+		potential = {
+			mission_completed = cr0_invite_jewish_scholars
+			NOT = {
+				has_country_flag = completed_punic_revival_stage_2
+			}
+		}
+		provinces_to_highlight = {
+			religion = jewish
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		allow = {
+			custom_trigger_tooltip = {
+				tooltip = cr0_completed_previous_stage_tt
+				has_country_flag = completed_punic_revival_stage_1
+			}
+			employed_advisor = {
+				type = natural_scientist
+				skill = 3
+			}
+			OR = {
+				any_owned_province = {
+					religion = jewish
+				}
+				any_ally = {
+					OR = {
+						any_owned_province = {
+							religion = jewish
+						}
+						religion = jewish
+					}
+				} 
+				any_owned_province = {
+					has_building = university
+				}
+				employed_advisor = {
+					religion = jewish
+				}
+			}
+		}
+		effect = {
+			country_event = {
+				id = carto.10
+				days = 365
+			}
+			set_country_flag = completed_punic_revival_stage_2
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	alb_punic_revival_stage_3 = { #Creating a dictionary
+		color = { 100 50 110 }
+		major = yes
+		potential = {
+			mission_completed = cr0_invite_jewish_scholars
+			NOT = {
+				has_country_flag = completed_punic_revival_stage_3
+			}
+		}
+		provinces_to_highlight = {
+			
+		}
+		allow = {
+			custom_trigger_tooltip = {
+				tooltip = cr0_completed_previous_stage_tt
+				has_country_flag = completed_punic_revival_stage_2
+			}
+			dip = 5
+		}
+		effect = {
+			country_event = {
+				id = carto.11
+				days = 1825
+			}
+			set_country_flag = completed_punic_revival_stage_3
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	alb_punic_revival_stage_4 = { #Educating the upper class
+		color = { 100 50 110 }
+		major = yes
+		potential = {
+			mission_completed = cr0_invite_jewish_scholars
+			NOT = {
+				has_country_flag = completed_punic_revival_stage_4
+			}
+		}
+		provinces_to_highlight = {
+			
+		}
+		allow = {
+			custom_trigger_tooltip = {
+				tooltip = cr0_completed_previous_stage_tt
+				has_country_flag = completed_punic_revival_stage_3
+			}
+			estate_loyalty = {
+				estate = estate_nobles
+				loyalty = 60
+			}
+			dip = 5
+		}
+		effect = {
+			change_dip = -1
+			country_event = {
+				id = carto.12
+			}
+			set_country_flag = completed_punic_revival_stage_4
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	alb_punic_revival_stage_5 = { #Promoting common use
+		color = { 100 50 110 }
+		major = yes
+		potential = {
+			mission_completed = cr0_invite_jewish_scholars
+			NOT = {
+				has_country_flag = completed_punic_revival_stage_5
+			}
+		}
+		provinces_to_highlight = {
+			owned_by = ROOT
+			trade_goods = paper
+			NOT = {
+				base_production = 10
+			}
+		}
+		allow = {
+			custom_trigger_tooltip = {
+				tooltip = cr0_completed_previous_stage_tt
+				has_country_flag = completed_punic_revival_stage_4
+			}
+			any_owned_province = {
+				trade_goods = paper
+				base_production = 10
+			}
+		}
+		effect = {
+			country_event = {
+				id = carto.13
+			}
+			set_country_flag = completed_punic_revival_stage_5
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+}

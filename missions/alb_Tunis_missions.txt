@@ -174,26 +174,121 @@ tunis_carthage_shared_3_slot = {
 			}
 		} 
 	}
+	cr_land_in_iberia = {
+		icon = mission_fire_of_london
+		position = 5
+		provinces_to_highlight = {  
+			region = iberia_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			num_of_owned_provinces_with = {
+				value = 2
+				region = iberia_region
+			}
+		} 
+
+		effect = {  
+			add_country_modifier = {
+				name = cr0_iberia_conquest
+				duration = 7300
+			}
+			valencia_area = {
+				add_permanent_claim = ROOT
+			}
+			upper_andalucia_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
 
 	cr_begin_iberian_campaign = {
 		icon = mission_fire_of_london
 		position = 6
-		provinces_to_highlight = {  } 
+		required_missions = { cr_land_in_iberia } 
+		provinces_to_highlight = {  
+			OR = {
+				area = valencia_area
+				area = upper_andalucia_area
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			valencia_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			upper_andalucia_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			1750 = {
+				owned_by = ROOT
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			iberia_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	cr_restore_cartagena = {
 		icon = mission_fire_of_london
 		position = 7
 		required_missions = { cr_begin_iberian_campaign } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			1750 = {
+				owned_by = ROOT
+			}
+			NOT = {
+				AND = {
+					owned_by = ROOT
+					development = 25
+					has_trade_building_trigger = yes
+					has_courthouse_building_trigger = yes
+				}
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			1750 = {
+				owned_by = ROOT
+			}
+			1750 = {
+				development = 25
+				num_of_times_improved_by_owner = 5
+			}
+			1750 = {
+				has_trade_building_trigger = yes
+			}
+			1750 = {
+				has_courthouse_building_trigger = yes
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			1750 = {
+				change_province_name = "Karthago-Hadasht"
+				hidden_effect = {
+					rename_capital = "Qart-Hadasht-Hadasht"
+				}			
+			}
+			custom_tooltip = empty_line_tt
+			1750 = {
+				add_province_modifier = {
+					name = cr0_second_capital
+					duration = -1
+				}	
+				center_of_trade = 1
+				custom_tooltip = empty_line_tt
+				upgrade_trade_building = yes	
+			}
+		} 
 	}
 }
 tunis_carthage_shared_4_slot = {
@@ -286,11 +381,43 @@ tunis_carthage_shared_4_slot = {
 		icon = mission_fire_of_london
 		position = 6
 		required_missions = { cr_naval_buildup } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = sardinia_area
+				area = corsica_sardinia_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 7
+				OR = {
+					area = sardinia_area
+					area = corsica_sardinia_area
+				}
+			}
+			owns = 4947
+			owns = 4735
+		} 
 
-		effect = {  } 
+		effect = {  
+			4947 = {
+				add_or_upgrade_shipyard_building = yes
+			}
+			4735 = {
+				add_or_upgrade_trade_building = yes
+			}
+			custom_tooltip = empty_line_tt
+			sicily_area = {
+				add_permanent_claim = ROOT
+			}
+			western_sicily_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	cr_found_some_colonies = {
@@ -300,11 +427,49 @@ tunis_carthage_shared_4_slot = {
 			cr_steal_western_islands
 			cr_begin_iberian_campaign
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				continent = north_america
+				continent = south_america
+			}
+			has_discovered = ROOT
+			NOT= {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			any_subject_country = {
+				is_colonial_nation_of = ROOT
+				total_development = 100
+			}
+		} 
 
-		effect = {  } 
+		effect = { 
+			define_explorer = {
+				shock = 3
+				fire = 3
+				manuever = 6
+				siege = 2
+				name = "Hanno II"
+			}
+			custom_tooltip = empty_line_tt
+			add_country_modifier = {
+				name = cr0_new_colonial_office
+				duration = 10950
+			}
+			custom_tooltip = cr0_gain_dip_for_cn_tt
+			hidden_effect = {
+				every_subject_country = {
+					limit = {
+						is_colonial_nation = yes
+					}
+					overlord = {
+						add_dip_power = 50
+					}
+				}
+			}
+		} 
 	}
 }
 tunis_carthage_shared_5_slot = {
@@ -366,17 +531,33 @@ tunis_carthage_shared_5_slot = {
 	cr_generals_steed = {
 		icon = mission_fire_of_london
 		position = 3
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				province_id = 4568
+				province_id = 336
+				province_id = 4566
+			}
+		} 
 
 		trigger = {  
-			custom_trigger_tooltip = {
-				tooltip = alb_has_revived_elephants_tt
-				has_global_flag = revived_elephant
+			if = {
+				limit = {
+					NOT = {
+						is_year = 1600
+					}
+				}
+				custom_trigger_tooltip = {
+					tooltip = alb_has_revived_elephants_tt
+					has_global_flag = revived_elephant
+				}
+				num_of_cavalry = 20
+			}
+			else = {
+				num_of_cavalry = 80
 			}
 			owns = 4568
 			owns = 336
 			owns = 4566
-			num_of_cavalry = 20
 		} 
 
 		effect = {  
@@ -448,7 +629,16 @@ tunis_carthage_shared_5_slot = {
 		required_missions = { cr_naval_buildup } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			341 = {
+				has_great_project = {
+					type = tun_cothon
+					tier = 2
+				}
+			}
+			navy_size = 100
+			navy_tradition = 80
+		} 
 
 		effect = {  
 			if = {
@@ -470,7 +660,10 @@ tunis_carthage_shared_5_slot = {
 			}
 			custom_tooltip = dip_advisors_now_give_african_lateens
 			custom_tooltip = empty_line_tt
-			#smth else
+			add_country_modifier = {
+				name = cr0_naval_hegemony
+				duration = -1
+			}
 		} 
 	}
 
@@ -481,11 +674,34 @@ tunis_carthage_shared_5_slot = {
 			cr_steal_western_islands
 			cr_our_sea
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = sardinia_area
+				area = corsica_sardinia_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 7
+				OR = {
+					area = sardinia_area
+					area = corsica_sardinia_area
+				}
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			sicily_area = {
+				add_permanent_claim = ROOT
+			}
+			western_sicily_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 }
 carthage_1_slot = {
@@ -504,9 +720,39 @@ carthage_1_slot = {
 		required_missions = { cr_the_great_fire } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			legitimacy_equivalent = 100
+			stability = 1
+			NOT = {
+				unrest = 0
+			}
+			NOT = {
+				num_of_rebel_armies = 1
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			custom_tooltip = cr0_every_primary_culture_province_tt
+			tooltip = {
+				add_devastation = -40
+				add_local_autonomy = -25
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						culture = ROOT
+					}
+					add_prosperity = 50
+					add_local_autonomy = -25
+				}
+			}
+			custom_tooltip = empty_line_tt
+			define_advisor = {
+				skill = 2
+				type = trader
+				cost_multiplier = 0.25
+			}
+		} 
 	}
 
 	cr0_religious_question = {
@@ -515,7 +761,13 @@ carthage_1_slot = {
 		required_missions = { cr0_carthaginian_nation } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			estate_loyalty = {
+				estate = estate_church
+				loyalty = 60
+			}
+			
+		} 
 
 		effect = {  } 
 	}
@@ -557,6 +809,9 @@ carthage_2_slot = {
 				any_owned_province = {
 					has_building = university
 				}
+				employed_advisor = {
+					religion = jewish
+				}
 			}
 			years_of_income = 0.25
 		} 
@@ -591,16 +846,6 @@ carthage_2_slot = {
 		effect = {  
 			custom_tooltip = alb_for_every_level_of_dip_do_tt
 			custom_tooltip = cr0_convert_province_to_punic_tt
-			tooltip = {
-				random_owned_province = {
-					limit = {
-						NOT = {
-							culture = punic
-						}
-					}
-					change_culture = ROOT
-				}
-			}
 			hidden_effect = {
 				for_every_level_of_advisor_do = {
 					type = DIP
@@ -628,18 +873,24 @@ carthage_2_slot = {
 		icon = mission_fire_of_london
 		position = 7
 		required_missions = { cr0_punic_revival } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			owned_by = ROOT
+			NOT = {
+				culture = ROOT
+			}
+		} 
 
 		trigger = {  
 			num_of_owned_provinces_with = {
 				value = 15
-				culture = punic
+				culture = ROOT
 			}
 		} 
 
 		effect = { 
 			#over time culture convert thru hidden event
 			#also something else i guess idk
+			remove_country_modifier = cr0_linguistically_insignificant
 		} 
 	}
 }
@@ -715,7 +966,9 @@ tunisia_2_slot = {
 
 		trigger = {  } 
 
-		effect = {  } 
+		effect = {  
+			#choose between being able to form italy or upgrading national ideas
+		} 
 	}
 }
 placeholder_1_slot = {
@@ -737,7 +990,9 @@ placeholder_1_slot = {
 		required_missions = { cr_the_great_fire } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			always = no
+		} 
 
 		effect = {  } 
 	}
@@ -748,7 +1003,9 @@ placeholder_1_slot = {
 		required_missions = { cr_placeholder_mission_1 } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			always = no
+		} 
 
 		effect = {  } 
 	}
@@ -772,7 +1029,9 @@ placeholder_2_slot = {
 		required_missions = { cr_placeholder_mission_1 } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = { 
+			always = no
+		 } 
 
 		effect = {  } 
 	}
@@ -783,7 +1042,9 @@ placeholder_2_slot = {
 		required_missions = { cr_placeholder_mission_3 } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			always = no
+		} 
 
 		effect = {  } 
 	}
@@ -794,7 +1055,9 @@ placeholder_2_slot = {
 		required_missions = { cr_placeholder_mission_4 } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			always = no
+		} 
 
 		effect = {  } 
 	}
