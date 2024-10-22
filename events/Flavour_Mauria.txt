@@ -4,30 +4,140 @@ country_event = {
 	id = mau.1
 	title = mau.1.test
 	desc = mau.1.desc
-	picture = ANGRY_MOB_eventPicture
-	hidden = yes
-	fire_only_once = yes
-	trigger = {
-		tag = AF1
-		AF1 = {
-			ai = yes
-			exists = yes
-			adm_tech = 7
-			num_of_colonists = 1
-		}
-		741 = {
-			is_empty = yes
-		}
-	}
-	mean_time_to_happen = {
-		months = 1
-	}
-	fire_only_once = yes
+	picture = DEBATE_REPUBLICAN_eventPicture
+	is_triggered_only = yes
 	option = {
 		name = mau.1a
-		741 = {
-			add_colonysize = 100
+		set_country_flag = mauria_to_herkulia
+		custom_tooltip = MAURIA_TT_1a
+		add_ruler_modifier = {
+			name = maurian_looking_glass
+		}
+	}
+	option = {
+		name = mau.1b
+		set_country_flag = mauria_to_africa
+		custom_tooltip = MAURIA_TT_1b
+		add_ruler_modifier = {
+			name = maurian_true_heirs
 		}
 	}
 }
 
+country_event = {
+	id = mau.2
+	title = mau.2.test
+	desc = mau.2.desc
+	picture = DEBATE_REPUBLICAN_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = mau.2a
+		add_accepted_culture_or_dip_power = {
+			culture = atlas
+		}
+		southern_morocco_area = {
+			add_base_tax = 1
+		}
+	}
+	option = {
+		name = mau.2b
+		capital_scope = {
+			add_base_tax = 2
+		}
+	}
+}
+
+country_event = {
+	id = mau.3
+	title = mau.3.test
+	desc = mau.3.desc
+	picture = DEBATE_REPUBLICAN_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = mau.3a
+		add_accepted_culture_or_dip_power = {
+			culture = atlas
+		}
+		add_years_of_income = 2
+	}
+	option = {
+		name = mau.2b
+		capital_scope = {
+			add_base_manpower = 2
+		}
+	}
+}
+
+country_event = {
+	id = mau.4
+	title = mau.4.test
+	desc = mau.4.desc
+	picture = DEBATE_REPUBLICAN_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = mau.4a
+		add_accepted_culture_or_dip_power = {
+			culture = atlas
+		}
+		southern_morocco_area = {
+			add_base_production = 1
+		}
+	}
+	option = {
+		name = mau.4b
+		capital_scope = {
+			add_base_production = 2
+		}
+	}
+}
+
+
+country_event = {
+	id = mau.5
+	title = mau.5.test
+	desc = mau.5.desc
+	picture = DEBATE_REPUBLICAN_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = mau.5a
+		add_accepted_culture_or_dip_power = {
+			culture = atlas
+		}
+		add_country_modifier = {
+			name = mau_atlas_carrier
+			duration = -1
+		}
+	}
+	option = {
+		name = mau.5b
+		custom_tooltip = MAURIA_TT_2a
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					culture = atlas
+				}
+				change_culture = ROOT
+				add_devastation = 30
+				set_local_autonomy = 50
+			}
+		}
+	}
+	option = {
+		name = mau.5c
+		custom_tooltip = MAURIA_TT_2b
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					culture = atlas
+				}
+				cede_province = ATL
+				add_devastation = -20
+				add_core = ATL
+				remove_core = AF7
+				remove_core = AF8
+				remove_core = AF9
+			}
+			create_union = ATL
+		}
+	}
+}
