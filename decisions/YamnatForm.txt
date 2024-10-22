@@ -1,0 +1,95 @@
+country_decisions = {
+
+	yamnat_nation = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			was_never_end_game_tag_trigger = yes
+			NOT = { has_country_flag = formed_yamnat_flag }
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			OR = {
+				is_free_or_tributary_trigger = yes
+				ai = no
+			}
+			culture_group = south_arabian
+			NOT = {
+				tag = RAS
+			}
+			is_colonial_nation = no
+			OR = {
+				is_former_colonial_nation = no
+				AND = {
+					is_former_colonial_nation = yes
+					ai = no
+				}
+			}
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = qataban_area
+				area = tihama_al_yemen_area
+				area = yemen_area
+				area = upper_yemen_area
+				area = hadramut_area
+				area = mahra_area
+				area = dhofar_area
+			}
+			OR = {
+				NOT = { owned_by = ROOT }
+				NOT = { is_core = ROOT }
+			}
+		}
+		allow = {
+			culture_group = south_arabian
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			is_at_war = no
+			num_of_owned_provinces_with = {
+				value = 15
+				OR = {
+					area = qataban_area
+					area = tihama_al_yemen_area
+					area = yemen_area
+					area = upper_yemen_area
+					area = hadramut_area
+					area = mahra_area
+					area = dhofar_area
+				}
+			}
+		}
+		effect = {
+			change_tag = YMM
+			restore_country_name = yes
+			if = {
+				limit = { NOT = { government_rank = 2 } }
+				set_government_rank = 2
+				}
+			if = {
+				limit = {
+					has_custom_ideas = no
+				}
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			arabia_region = {
+					add_permanent_claim = YMN
+				}
+			
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			set_country_flag = formed_yamnat_flag
+			add_prestige_or_monarch_power = {
+				amount = 25
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+
+}
