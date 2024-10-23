@@ -759,17 +759,34 @@ carthage_1_slot = {
 		icon = mission_fire_of_london
 		position = 5
 		required_missions = { cr0_carthaginian_nation } 
-		provinces_to_highlight = {  } 
-
-		trigger = {  
-			estate_loyalty = {
-				estate = estate_church
-				loyalty = 60
+		provinces_to_highlight = {  
+			province_id = 341
+			NOT = {
+				owned_by = ROOT
 			}
-			
 		} 
 
-		effect = {  } 
+		trigger = {  
+			dip_power = 100
+			OR = {
+				num_of_estate_agendas_completed = {
+					estate = estate_church
+					value = 3
+				}
+				estate_loyalty = {
+					estate = estate_church
+					loyalty = 60
+				}
+			}
+			owns = 341
+		} 
+
+		effect = {  
+			add_dip_power = -100
+			country_event = {
+				id = carto.6
+			}
+		} 
 	}
 }
 carthage_2_slot = {
@@ -840,7 +857,9 @@ carthage_2_slot = {
 
 		trigger = {  
 			primary_culture = punic
-			
+			any_owned_province = {
+				culture = punic
+			}
 		} 
 
 		effect = {  
@@ -882,7 +901,7 @@ carthage_2_slot = {
 
 		trigger = {  
 			num_of_owned_provinces_with = {
-				value = 15
+				value = 10
 				culture = ROOT
 			}
 		} 
