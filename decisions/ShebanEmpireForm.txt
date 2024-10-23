@@ -1,0 +1,58 @@
+country_decisions = {
+
+	sheban_empire = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			was_never_end_game_tag_trigger = yes
+			NOT = { has_country_flag = formed_sheban_empire_flag }
+			tag = RAS
+		}
+		provinces_to_highlight = {
+			region = arabia_region
+			NOT = { owned_by = ROOT }
+		}
+		allow = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 40 # how many provinces should be owned in the areas below
+				region = arabia_region
+				is_core = ROOT
+			}
+		}
+		effect = {
+			change_tag = SB2
+			5063 = { add_siberian_construction = 100 }
+			2341 = { add_siberian_construction = 100 }
+			if = {
+				limit = { NOT = { government_rank = 3 } }
+				set_government_rank = 3
+				}
+			if = {
+				limit = {
+					has_custom_ideas = no
+				}
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			mashriq_region = {
+				add_permanent_claim = SB2
+			}
+			horn_of_africa_region = {
+				add_permanent_claim = SB2
+			}
+			
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			set_country_flag = formed_sheban_empire_flag
+			add_prestige_or_monarch_power = {
+				amount = 25
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+
+}
