@@ -8,6 +8,9 @@ country_event = {
 	is_triggered_only = yes
 	option = {
 		name = mau.1a
+		ai_chance = {
+			factor = 75
+		}
 		set_country_flag = mauria_to_herkulia
 		custom_tooltip = MAURIA_TT_1a
 		add_ruler_modifier = {
@@ -16,6 +19,9 @@ country_event = {
 	}
 	option = {
 		name = mau.1b
+		ai_chance = {
+			factor = 25
+		}
 		set_country_flag = mauria_to_africa
 		custom_tooltip = MAURIA_TT_1b
 		add_ruler_modifier = {
@@ -32,6 +38,9 @@ country_event = {
 	is_triggered_only = yes
 	option = {
 		name = mau.2a
+		ai_chance = {
+			factor = 100
+		}
 		add_accepted_culture_or_dip_power = {
 			culture = atlas
 		}
@@ -44,6 +53,9 @@ country_event = {
 	}
 	option = {
 		name = mau.2b
+		ai_chance = {
+			factor = 0
+		}
 		capital_scope = {
 			add_base_tax = 2
 		}
@@ -58,6 +70,9 @@ country_event = {
 	is_triggered_only = yes
 	option = {
 		name = mau.3a
+		ai_chance = {
+			factor = 100
+		}
 		add_accepted_culture_or_dip_power = {
 			culture = atlas
 		}
@@ -65,6 +80,9 @@ country_event = {
 	}
 	option = {
 		name = mau.2b
+		ai_chance = {
+			factor = 0
+		}
 		capital_scope = {
 			add_base_manpower = 2
 		}
@@ -79,6 +97,9 @@ country_event = {
 	is_triggered_only = yes
 	option = {
 		name = mau.4a
+		ai_chance = {
+			factor = 100
+		}
 		add_accepted_culture_or_dip_power = {
 			culture = atlas
 		}
@@ -86,12 +107,14 @@ country_event = {
 	}
 	option = {
 		name = mau.4b
+		ai_chance = {
+			factor = 0
+		}
 		capital_scope = {
 			add_base_production = 2
 		}
 	}
 }
-
 
 country_event = {
 	id = mau.5
@@ -101,6 +124,9 @@ country_event = {
 	is_triggered_only = yes
 	option = {
 		name = mau.5a
+		ai_chance = {
+			factor = 45
+		}
 		add_accepted_culture_or_dip_power = {
 			culture = atlas
 		}
@@ -111,6 +137,9 @@ country_event = {
 	}
 	option = {
 		name = mau.5b
+		ai_chance = {
+			factor = 10
+		}
 		custom_tooltip = MAURIA_TT_2a
 		hidden_effect = {
 			every_owned_province = {
@@ -125,6 +154,9 @@ country_event = {
 	}
 	option = {
 		name = mau.5c
+		ai_chance = {
+			factor = 45
+		}
 		custom_tooltip = MAURIA_TT_2b
 		hidden_effect = {
 			every_owned_province = {
@@ -137,6 +169,61 @@ country_event = {
 				remove_core = AF9
 			}
 			create_union = ATL
+		}
+	}
+}
+
+country_event = {
+	id = mau.6
+	title = mau.6.test
+	desc = mau.6.desc
+	picture = DEBATE_REPUBLICAN_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = AF1
+		4561 = {
+			owned_by = RK0
+		}
+	}
+	mean_time_to_happen = {
+		months = 12
+	}
+	option = {
+		name = mau.6a
+		ai_chance = {
+			factor = 50
+		}
+		add_years_of_income = -0.33
+		4561 = {
+			spawn_rebels = {
+				size = 1
+				type = nationalist_rebels
+				friend = AF1
+			}
+		}
+	}
+	option = {
+		name = mau.6b
+		ai_chance = {
+			factor = 20
+		}
+		add_years_of_income = 0.5
+		RK0 = {
+			add_trust = {
+				who = THIS
+				value = 20
+				mutual = yes
+			}
+		}
+		4561 = {
+			remove_core = AF1
+			change_religion = RK0
+		}
+	}
+	option = {
+		name = mau.6c
+		ai_chance = {
+			factor = 30
 		}
 	}
 }
