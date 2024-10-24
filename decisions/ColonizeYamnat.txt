@@ -1,0 +1,54 @@
+country_decisions = {
+
+	colonize_yamnat = {
+		major = yes
+		potential = {
+			NOT = { culture_group = south_arabian }
+			OR = {
+				2342 = { owned_by = ROOT }
+				4286 = { owned_by = ROOT }
+			}
+			OR = {
+				5063 = { is_city = no }
+				2341 = { is_city = no }
+			}	
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 2342
+				province_id = 4286
+			}
+			NOT = { is_core = ROOT }
+			NOT = { owned_by = ROOT }
+		}
+		allow = {
+			2342 = {
+				owned_by = ROOT
+				is_core = ROOT
+			}
+			4286 = {
+				owned_by = ROOT
+				is_core = ROOT
+			}
+			is_nomad = no
+			is_at_war = no
+			yamnat_group = {
+				type = all
+				owned_by = ROOT
+			}
+			mil_power = 150
+			treasury = 200
+		}
+		effect = {
+			5063 = { add_siberian_construction = 100 }
+			2341 = { add_siberian_construction = 100 }
+			add_treasury = -200
+			add_mil_power = -150
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+
+}
