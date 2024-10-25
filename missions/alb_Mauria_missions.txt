@@ -27,46 +27,10 @@ Mauria_slot = {
 		}
 	}
 
-	unite_atlas_tribes = {
-		icon = mission_the_sultan_of_morocco
-		position = 3
-		required_missions = {	mauria_souther_coastline mau_above_the_atlas mau_mines_of_sand	}
-		provinces_to_highlight = {
-			OR = {
-				area = southern_morocco_area
-				area = tafilalt_area
-				area = sus_area
-			}
-		}
 
-		trigger = {
-			southern_morocco_area = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
-			}
-			tafilalt_area = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
-			}
-			sus_area = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
-			}
-		}
-
-		effect = {
-			country_event = {
-				id = mau.5
-			}
-			add_prestige_or_monarch_power = {
-				amount = 25
-			}
-		}
-	}
-	
 	tunisian_restored = {
 		icon = mission_conquer_tunisia
-		position = 4
+		position = 5
 		provinces_to_highlight = { OR = { area = tunisia_area  area = kabylia_area }} 
 
 		trigger = {
@@ -135,10 +99,46 @@ Mauria_slot = {
 
 		effect = { country_event = { id = mau.3 }} 
 	}
+	unite_atlas_tribes = {
+		icon = mission_the_sultan_of_morocco
+		position = 3
+		required_missions = {	mauria_souther_coastline mau_above_the_atlas mau_mines_of_sand	}
+		provinces_to_highlight = {
+			OR = {
+				area = southern_morocco_area
+				area = tafilalt_area
+				area = sus_area
+			}
+		}
 
+		trigger = {
+			southern_morocco_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			tafilalt_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			sus_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			country_event = {
+				id = mau.5
+			}
+			add_prestige_or_monarch_power = {
+				amount = 25
+			}
+		}
+	}
+	
 	aldabba_gone = {
 		icon = mission_conquer_algiers
-		position = 3
+		position = 4
 		provinces_to_highlight = { is_capital_of = AF2 }
 		trigger = {
 			OR = {
@@ -166,7 +166,7 @@ Mauria_slot = {
 
 	aldabba_no_more = {
 		icon = mission_west_african_ports
-		position = 4
+		position = 5
 		required_missions = { aldabba_gone } 
 		provinces_to_highlight = { is_capital_of = AF2 } 
 
@@ -187,7 +187,7 @@ Mauria_slot = {
 
 	new_lords = {
 		icon = mission_construct_a_corsair_fleet
-		position = 5
+		position = 6
 		required_missions = {
 			tunisian_restored
 			aldabba_no_more
@@ -247,7 +247,7 @@ Mauria_slot = {
 
 	destroy_bipoli = {
 		icon = mission_conquer_alexandria
-		position = 4
+		position = 5
 		provinces_to_highlight = { OR = { area = tripolitania_area area = djerba_area } } 
 
 		trigger = {
@@ -270,40 +270,14 @@ Mauria_slot = {
 		}
 	}
 
-	new_maurian_cities = {
-		icon = mission_colonise_brazil
-		position = 6
-		required_missions = {	ahead_landings	}
-		provinces_to_highlight = { province_id = 741 } 
-
-		trigger = {
-			any_subject_country = {
-				is_colonial_nation_of = ROOT
-				capital_scope = {
-					colonial_region = colonial_karibba
-				}
-			}
-			owns_or_non_sovereign_subject_of = 741
-		}
-
-		effect = {
-			741 = {
-				add_base_tax = 2
-				add_base_production = 2
-				add_base_manpower = 2
-			}
-		}
-	}
-
 	enshrine_colonial_ties = {
 		icon = colonize_brazil
 		position = 7
-		required_missions = {personal_colonies}
+		required_missions = {new_maurian_cities}
 		provinces_to_highlight = { is_capital_of = A01 } 
 
 		trigger = {
 			owns_or_non_sovereign_subject_of = 741
-			is_great_power = yes
 			741 = {
 				num_of_buildings_in_province = 4
 				development = 25
@@ -324,6 +298,28 @@ Mauria_slot = {
 	ai = yes
 	has_country_shield = yes
 	potential = { tag = AF1 } 
+
+	faith_of_mauria = {
+		icon = mission_pirate_fleet
+		position = 1
+		provinces_to_highlight = {
+			has_tax_building_trigger = no
+			owned_by = ROOT
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				has_tax_building_trigger = yes
+			}
+		}
+
+		effect = {
+			capital_scope = {
+				add_or_upgrade_tax_building = yes
+			}
+		}
+	}
 
 	black_sails_marines = {
 		icon = mission_pirate_fleet
@@ -354,11 +350,12 @@ Mauria_slot = {
 
 	african_shippings = {
 		icon = mission_plus_ultra
-		position = 5
-		required_missions = { black_sails_marines mauria_ahoy } 
+		position = 4
+		required_missions = { black_sails_marines  } 
 		provinces_to_highlight = { owned_by = ROOT has_port = yes has_shipyard_building_trigger = no } 
 
 		trigger = {
+			num_of_light_ship = 30
 			num_of_owned_provinces_with = {
 				value = 10
 				has_port = yes 
@@ -367,20 +364,43 @@ Mauria_slot = {
 		}
 
 		effect = {
-			custom_tooltip = alb_gain_access_to_african_lateen_tt
-			hidden_effect = {
-				add_country_modifier = {
-					name = atl_get_african_lateens
-					duration = -1
-				}
+			add_country_modifier = {
+				name = mauria_pirates_sails
+				duration = -1
 			}
 		}
 	}
 
-	personal_colonies = {
-		icon = mission_colonial
+	
+	new_maurian_cities = {
+		icon = mission_colonise_brazil
 		position = 6
-		required_missions = { ahead_landings } 
+		required_missions = {	ahead_landings	}
+		provinces_to_highlight = { province_id = 741 } 
+
+		trigger = {
+			any_subject_country = {
+				is_colonial_nation_of = ROOT
+				capital_scope = {
+					colonial_region = colonial_karibba
+				}
+			}
+			owns_or_non_sovereign_subject_of = 741
+		}
+
+		effect = {
+			741 = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+			}
+		}
+	}
+
+	maurian_personal_colonies = {
+		icon = mission_colonial
+		position = 7
+		required_missions = { new_maurian_cities } 
 		provinces_to_highlight = { is_capital_of = A01 } 
 
 		trigger = {
