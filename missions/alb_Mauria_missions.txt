@@ -363,12 +363,6 @@ Mauria_slot = {
 		}
 
 		effect = {
-			tooltip = {
-				add_country_modifier = {
-					name = fake_mauria_black_sails_doctrine
-					duration = -1
-				}
-			}
 			custom_tooltip = MAURIA_TT_3
 			set_country_flag = black_sails_doctrine_improved_flag
 			tooltip = {
@@ -439,7 +433,15 @@ Mauria_slot = {
 		position = 1
 		provinces_to_highlight = {  } 
 
-		trigger = { navy_size_percentage = 0.85 } 
+		trigger = { 
+			if = {
+				limit = { ai= yes }
+				navy_size_percentage = 0.8
+				num_of_admirals = 1
+			}else = {
+				navy_size_percentage = 0.9
+			}
+		 } 
 
 		effect = {
 			create_admiral = { tradition = 70 } 
