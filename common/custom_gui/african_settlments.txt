@@ -83,13 +83,23 @@ custom_button = { #Must match a scripted guiButtonType in a .gui file
 	}
 	trigger = {
 		religion = owner
-		manpower = 2
+		owner = {
+			manpower = 2
+		}
+		NOT = {
+			OR = {
+				has_province_modifier = cr0_settler_colony
+				culture = owner
+			}
+		}
 	}
 	effect = {
-		add_manpower = -2
+		owner = {
+			add_manpower = -2
+		}
 		add_province_modifier = {
 			name = cr0_settler_colony
-			duration = 10950
+			duration = 18250
 		}
 		change_culture = owner
 	}
