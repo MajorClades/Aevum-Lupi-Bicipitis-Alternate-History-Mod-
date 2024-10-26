@@ -383,3 +383,50 @@ country_event = { #stage 5
 		set_heir_culture = punic
 	}
 }
+
+country_event = { #Gallic Romans
+	id = carto.14
+	title = carto.14.test
+	desc = carto.14.desc
+	picture = COMET_SIGHTED_eventPicture
+	hidden = yes
+	trigger = {
+		any_owned_province = {
+			culture = ROOT
+		}
+		NOT = {
+			maghreb_region = {
+				type = all
+				culture = ROOT
+			}
+		}
+		has_country_flag = cr0_enable_punic_spreading_flag
+	}
+	mean_time_to_happen = {
+		months = 60
+		modifier = {
+			factor = 0.25
+			has_institution = enlightenment
+		}
+		modifier = {
+			factor = 0.75
+			full_idea_group = humanist_ideas
+		}
+		modifier = {
+			factor = 0.75
+			full_idea_group = religious_ideas
+		}
+	}
+	option = {
+		name = roman_emp.100a
+		random_owned_province = {
+			limit = {
+				region = maghreb_region
+				NOT = {
+					culture = ROOT
+				}
+			}
+			change_culture = ROOT
+		}
+	}
+}

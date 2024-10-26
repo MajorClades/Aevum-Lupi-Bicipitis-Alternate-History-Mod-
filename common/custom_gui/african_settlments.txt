@@ -1,7 +1,7 @@
 custom_button = { #Must match a scripted guiButtonType in a .gui file
 	name = african_development_button
 	potential = {
-		owner = {
+		FROM = {
 			has_country_flag = enable_african_settlers_flag
 		}
 		if = {
@@ -72,4 +72,26 @@ custom_button = { #Must match a scripted guiButtonType in a .gui file
 		}
 	}
 	tooltip = "Found African Settlements"
+}
+
+custom_button = { #Must match a scripted guiButtonType in a .gui file
+	name = tunis_colony_button
+	potential = {
+		FROM = {
+			has_country_flag = cr0_enable_tunis_colony_button_flag
+		}	
+	}
+	trigger = {
+		religion = owner
+		manpower = 2
+	}
+	effect = {
+		add_manpower = -2
+		add_province_modifier = {
+			name = cr0_settler_colony
+			duration = 10950
+		}
+		change_culture = owner
+	}
+	tooltip = "Establish Cartaroman Colony"
 }

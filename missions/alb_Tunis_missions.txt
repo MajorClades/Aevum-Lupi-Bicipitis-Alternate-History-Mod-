@@ -904,11 +904,19 @@ carthage_2_slot = {
 				value = 10
 				culture = ROOT
 			}
+			development_in_provinces = {
+				value = 200
+				culture = ROOT
+			}
 		} 
 
 		effect = { 
-			#over time culture convert thru hidden event
-			#also something else i guess idk
+			custom_tooltip = alb_begin_spreading_punic_culture_tt
+			set_country_flag = cr0_enable_punic_spreading_flag
+			add_country_modifier = {
+				name = cr0_true_heirs_of_carthage
+				duration = -1
+			}
 			remove_country_modifier = cr0_linguistically_insignificant
 		} 
 	}
@@ -927,22 +935,64 @@ tunisia_1_slot = {
 		icon = mission_fire_of_london
 		position = 4
 		required_missions = { cr_the_great_fire } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			NOT = {
+				religion = ROOT
+			}
+			owned_by = ROOT
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			religious_unity = 1
+			NOT = {
+				unrest = 0
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			custom_tooltip = alb_every_true_faith_province_tt
+			tooltip = {
+				add_province_modifier = {
+					name = cr0_true_believers
+					duration = 5475
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						religion = ROOT
+					}
+					add_province_modifier = {
+						name = cr0_true_believers
+						duration = 5475
+					}
+				}
+			}
+		} 
 	}
 
 	cr1_spread_cartaroman_culture = {
 		icon = mission_fire_of_london
 		position = 5
 		required_missions = { cr1_crack_down_on_indictians } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			owned_by = ROOT
+			NOT = {
+				culture = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_owned_provinces_with = {
+				value = 10
+				culture = ROOT
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			custom_tooltip = cr0_enable_tunis_colony_button_tt
+			set_country_flag = cr0_enable_tunis_colony_button_flag
+		} 
 	}
 }
 tunisia_2_slot = {
@@ -959,11 +1009,72 @@ tunisia_2_slot = {
 		icon = mission_fire_of_london
 		position = 5
 		required_missions = { cr1_crack_down_on_indictians } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			is_capital_of = emperor
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			OR = {
+				emperor = {
+					has_opinion = {
+						who = ROOT
+						value = 180
+					}
+					alliance_with = ROOT
+				}
+				AND = {
+					is_rival = emperor
+					calc_true_if = {
+						desc = secure_the_imperial_crown.tooltip
+						all_elector = {
+							preferred_emperor = ROOT
+							has_opinion = { who = ROOT value = 100 }
+						}
+						amount = 2
+					}
+				}
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			simple_dynamic_effect = {
+				first_custom_tooltip = cr0_if_allied_emperor_tt
+				first_limit = "
+					emperor = {
+						has_opinion = {
+							who = ROOT
+							value = 180
+						}
+						alliance_with = ROOT
+					}
+				"
+				first_effect = "
+					add_army_tradition = 15
+					add_country_modifier = {
+						name = cr0_imperial_bulwark
+						duration = -1
+						desc = as_long_as_we_stay_allies_desc
+					}
+				"
+				second_limit = "
+					is_rival = emperor
+					calc_true_if = {
+						desc = secure_the_imperial_crown.tooltip
+						all_elector = {
+							preferred_emperor = ROOT
+							has_opinion = { who = ROOT value = 100 }
+						}
+						amount = 2
+					}
+				"
+				second_effect = "
+					add_country_modifier = {
+						name = cr0_tunisian_emperor
+						duration = -1
+					}
+				"
+			}
+		} 
 	}
 
 	cr1_african_crusader = {
@@ -972,9 +1083,29 @@ tunisia_2_slot = {
 		required_missions = { cr1_imperial_relations } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			OR = {
+				num_of_forced_converted_countries = { amount = 6 }
+				num_of_converted_provinces = { amount = 30 }
+			}
+			estate_loyalty = {
+				estate = estate_church
+				loyalty = 60
+			}
+			num_of_estate_agendas_completed = {
+				estate = estate_church
+				value = 4
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			unlock_estate_privilege = {
+				estate_privilege = alb_merc_extra_grants
+			}
+			custom_tooltip = empty_line_tt
+			custom_tooltip = cr0_churches_give_missionary_strength_tt
+			set_country_flag = alb_church_missionary_strength_flag
+		} 
 	}
 
 	cr1_novo_italia = {
@@ -983,10 +1114,37 @@ tunisia_2_slot = {
 		required_missions = { cr1_african_crusader } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			maghreb_region = {
+				owned_by = ROOT
+				culture = ROOT
+			}
+			total_development = 600
+		} 
 
 		effect = {  
-			#choose between being able to form italy or upgrading national ideas
+			custom_tooltip = cr0_distribute_30_random_dev_africa_tt
+			hidden_effect = {
+				for = {
+					amount = 30
+					effect = "
+						random_owned_province = {
+							limit = {
+								region = maghreb_region
+							}
+							add_random_development = 1
+						}
+					"
+				}
+			}
+			custom_tooltip = empty_line_tt
+			override_country_name = NOVOITALIA
+			custom_tooltip = empty_line_tt
+			custom_tooltip = cr0_upgrade_national_ideas_tt
+			set_country_flag = upgrade_tunisia_ideas_flag
+			hidden_effect = {
+				swap_free_idea_group = yes
+			}
 		} 
 	}
 }
