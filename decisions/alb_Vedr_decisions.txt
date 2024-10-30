@@ -48,4 +48,64 @@ country_decisions = {
 		}
 		ai_importance = 400
 	}
+	alb_rausundian_formable = {
+		major = yes
+		potential = {
+			is_rausundian_native = yes
+			NOT = {
+				has_country_flag = formed_rausundian_union_flag
+			}
+		}
+		provinces_to_highlight = {
+			OR = {
+				region = canada_region
+				region = northeast_america_region
+			}
+		}
+		allow = {
+			num_of_owned_provinces_with = {
+				value = 30
+				OR = {
+					region = canada_region
+					region = northeast_america_region
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					culture_group = eastern_algonquian
+				}
+				override_country_name = RAU_EA_UNION
+			}
+			if = {
+				limit = {
+					culture_group = iroquoian
+				}
+				override_country_name = RAU_IROQUIA
+			}
+			if = {
+				limit = {
+					culture_group = central_algonquian
+				}
+				override_country_name = RAU_CA_UNION
+			}
+			add_country_modifier = {
+				name = rau_native_union
+				duration = -1
+			}
+			set_government_rank = 3
+			canada_region = {
+				add_permanent_claim = ROOT
+			}
+			northeast_america_region = {
+				add_permanent_claim = ROOT
+			}
+			set_country_flag = formed_rausundian_union_flag
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
 }

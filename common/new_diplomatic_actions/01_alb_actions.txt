@@ -199,7 +199,7 @@ vassalize_true_asatru_action = { #This is a little too broken lol
 }
 
 cahokia_trade_connection_action = { 
-	category = trade
+	category = cahokian_action
 	require_acceptance = no
 	is_visible = {
 		has_government_mechanic = cahokian_trade_mechanic
@@ -210,11 +210,9 @@ cahokia_trade_connection_action = {
 			treasury = 50
 		}
 		FROM = {
-			NOT = {
-				has_opinion = {
-					who = ROOT
-					value = 0
-				}
+			has_opinion = {
+				who = ROOT
+				value = 0
 			}
 		}
     }
@@ -245,7 +243,7 @@ cahokia_trade_connection_action = {
 }
 
 cahokia_tribute_to_vassal_action = { 
-	category = trade
+	category = cahokian_action
 	require_acceptance = no
 	is_visible = {
 		has_government_mechanic = cahokian_trade_mechanic
@@ -261,7 +259,7 @@ cahokia_tribute_to_vassal_action = {
 		}
 		FROM = {
 			is_subject_of_type_with_overlord = {
-				who = ROOT
+				who = CAO
 				type = tributary_state
 			}
 		}
@@ -278,9 +276,11 @@ cahokia_tribute_to_vassal_action = {
     }
 
 	ai_will_do = {
-		treasury = 50
-		any_owned_province = {
-			construction_progress = 7
+		FROM = {
+			has_opinion = {
+				who = ROOT
+				value = 180
+			}
 		}
     }
 }
