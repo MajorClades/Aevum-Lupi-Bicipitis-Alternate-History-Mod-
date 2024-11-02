@@ -108,4 +108,57 @@ country_decisions = {
 		}
 		ai_importance = 400
 	}
+	alb_wabanaki_formable = {
+		major = yes
+		potential = {
+			OR = {
+				culture = mikmaq
+				culture = abenaki
+				culture = maliseet
+			}
+			NOT = {
+				has_country_flag = formed_wabanaki_flag
+			}
+		}
+		provinces_to_highlight = {
+			OR = {
+				region = canada_region
+				region = northeast_america_region
+			}
+			OR = {
+				culture = mikmaq
+				culture = abenaki
+				culture = maliseet
+			}
+			NOT ={
+				owned_by = ROOT
+			}
+		}
+		allow = {
+			num_of_owned_provinces_with = {
+				value = 20
+				OR = {
+					culture = mikmaq
+					culture = abenaki
+					culture = maliseet
+				}
+				OR = {
+					region = canada_region
+					region = northeast_america_region
+				}
+			}
+		}
+		effect = {
+			override_country_name = WABANAKI
+			set_government_rank = 2
+			northeast_america_region = {
+				add_permanent_claim = ROOT
+			}
+			set_country_flag = formed_wabanaki_flag
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
 }
