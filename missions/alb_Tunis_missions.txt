@@ -580,25 +580,39 @@ tunis_carthage_shared_5_slot = {
 		}
 		provinces_to_highlight = {
 			OR = {
-				area = sardinia_area
-				area = corsica_sardinia_area
+				area = western_sicily_area
+				area = sicily_area
 			}
 			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 		}
 
 		trigger = {
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-				value = 7
+				value = 8
 				OR = {
-					area = sardinia_area
-					area = corsica_sardinia_area
+					area = western_sicily_area
+					area = sicily_area
 				}
+			}
+			1304 ={
+				is_strongest_trade_power = ROOT
+			}
+			341 = {
+				is_strongest_trade_power = ROOT
+			}
+			1293 = {
+				is_strongest_trade_power = ROOT
 			}
 		}
 
 		effect = {
-			sicily_area = { add_permanent_claim = ROOT } 
-			western_sicily_area = { add_permanent_claim = ROOT } 
+			add_years_of_income = 3
+			custom_tooltip = empty_line_tt
+			if = {
+				limit = { in_golden_age = yes } 
+				extend_golden_age = 50
+			}
+			else = { reset_golden_age = yes } 
 		}
 	}
 }
