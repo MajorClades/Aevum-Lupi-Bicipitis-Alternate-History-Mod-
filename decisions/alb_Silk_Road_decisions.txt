@@ -1,0 +1,100 @@
+country_decisions = {
+
+	alb_kick_the_golden_hands_estate = {
+		major = yes
+		potential = {
+			has_estate = estate_golden_hands
+			NOT = {
+				has_country_flag = kick_the_golden_hands_estate_flag
+			}
+		}
+		provinces_to_highlight = {
+			province_group = north_silk_road_all
+		}
+		allow = {
+			has_estate = estate_golden_hands
+		}
+		effect = {
+			set_country_flag = kick_the_golden_hands_estate_flag
+			custom_tooltip = kick_the_golden_hands_estate_tt
+			add_country_modifier = {
+				name = alb_no_golden_hands
+				duration = 7300
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		ai_importance = 400
+	}
+
+	alb_destroy_north_silk_road = {
+		major = yes
+		potential = {
+			NOT = {
+				has_global_flag = broken_northern_silk_road_flag
+			}
+			num_of_owned_provinces_with = {
+				value = 5
+				province_group = north_silk_road_all
+			}
+			NOT = {
+				has_estate = estate_golden_hands
+			}
+		}
+		provinces_to_highlight = {
+			province_group = north_silk_road_all
+		}
+		allow = {
+			num_of_owned_provinces_with = {
+				value = 10
+				province_group = north_silk_road_all
+			}
+		}
+		effect = {
+			set_global_flag = broken_northern_silk_road_flag
+			custom_tooltip = broken_northern_silk_road_tt
+			north_silk_road_all = {
+				add_permanent_claim = ROOT
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		ai_importance = 400
+	}
+	alb_restore_north_silk_road = {
+		major = yes
+		potential = {
+			has_global_flag = broken_northern_silk_road_flag
+			num_of_owned_provinces_with = {
+				value = 5
+				province_group = north_silk_road_all
+			}
+			NOT = {
+				has_estate = estate_golden_hands
+			}
+		}
+		provinces_to_highlight = {
+			province_group = north_silk_road_all
+		}
+		allow = {
+			stability = 2
+			num_of_owned_provinces_with = {
+				value = 20
+				province_group = north_silk_road_all
+			}
+		}
+		effect = {
+			clr_global_flag = broken_northern_silk_road_flag
+			custom_tooltip = restore_northern_silk_road_tt
+			north_silk_road_all = {
+				add_permanent_claim = ROOT
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		ai_importance = 400
+	}
+}
