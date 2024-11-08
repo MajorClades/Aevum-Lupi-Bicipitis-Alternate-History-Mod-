@@ -1,0 +1,243 @@
+namespace = voga
+
+country_event = {
+	id = voga.1
+	title = voga.1.test
+	desc = voga.1.desc
+	picture = KINGS_CHOICE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = voga.1a
+		ai_chance = {
+			factor = 75
+		}
+		add_patriarch_authority = 0.05
+		add_stability_or_adm_power = yes
+	}
+	option = {
+		name = voga.1b
+		ai_chance = {
+			factor = 25
+		}
+		change_religion = catholic
+		define_advisor = {
+			type = inquisitor
+			skill = 2
+			discount = yes
+		}
+	}
+}
+
+country_event = {
+	id = voga.2
+	title = voga.2.test
+	desc = voga.2.desc
+	picture = KINGS_CHOICE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = voga.2a
+		ai_chance = {
+			factor = 75
+		}
+		change_government = monarchy
+		if = {
+			limit = {
+				has_ruler_flag = vog_attano_flag #funny game reference
+			}
+			add_legitimacy = 10
+			define_consort = {
+				name = "Yasmina"
+				dynasty = "Kaldwin"
+				age = 34
+				adm = 5
+				dip = 5
+				mil = 5
+			}
+			define_heir = {
+				name = "Emilia"
+				adm = 6
+				dip = 4
+				mil = 3
+				age = 12
+				female = yes
+			}
+		}else = {
+			add_legitimacy = 20
+		}
+	}
+	option = {
+		name = voga.2b
+		ai_chance = {
+			factor = 25
+		}
+		add_government_reform = oligarchy_reform
+		add_republican_tradition = 40
+	}
+	option = {
+		name = voga.2c
+		ai_chance = {
+			factor = 0
+		}
+		capital_scope = {
+			spawn_rebels = {
+				size = 3
+				type = noble_rebels
+			}
+		}
+	}
+}
+
+country_event = {
+	id = voga.3
+	title = voga.3.test
+	desc = voga.3.desc
+	picture = KINGS_CHOICE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = voga.3a
+		ai_chance = {
+			factor = 75
+		}
+		add_government_reform = oligarchy_reform
+		add_stability = 1
+	}
+	option = {
+		name = voga.3b
+		ai_chance = {
+			factor = 25
+		}
+		add_government_reform = peasants_republic
+		add_stability = 1
+	}
+	option = {
+		name = voga.3c
+		ai_chance = {
+			factor = 0
+		}
+		change_government = theocracy
+		capital_scope = {
+			spawn_rebels = {
+				size = 3
+				type = leadered_peasant_rebels
+			}
+		}
+	}
+}
+
+country_event = {
+	id = voga.4
+	title = voga.4.test
+	desc = voga.4.desc
+	picture = KINGS_CHOICE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = voga.4a
+		ai_chance = {
+			factor = 75
+		}
+		add_country_modifier = {
+			name = vog_soldier_for_hire
+			duration = -1
+		}
+	}
+	option = {
+		name = voga.4b
+		ai_chance = {
+			factor = 25
+		}
+		add_country_modifier = {
+			name = vog_national_soldiers
+			duration = -1
+		}
+	}
+}
+
+country_event = {
+	id = voga.5
+	title = voga.5.test
+	desc = voga.5.desc
+	picture = KINGS_CHOICE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = voga.5a
+		ai_chance = {
+			factor = 50
+		}
+		add_country_modifier = {
+			name = vog_bad_republic
+			duration = 10950
+		}
+	}
+	option = {
+		name = voga.5b
+		ai_chance = {
+			factor = 50
+		}
+		add_country_modifier = {
+			name = vog_good_republic
+			duration = 10950
+		}
+	}
+}
+
+country_event = {
+	id = voga.6
+	title = voga.6.test
+	desc = voga.6.desc
+	picture = KINGS_CHOICE_eventPicture
+	
+	trigger = {
+		OR = {
+			has_country_modifier = vog_bad_republic
+			has_country_modifier = vog_good_republic
+		}
+	}
+	mean_time_to_happen = {
+		months = 60
+	}
+	option = {
+		name = voga.6a
+		ai_chance = {
+			factor = 50
+		}
+		add_republican_tradition = -20
+		define_ruler = {
+			name = "Corvus"
+			dynasty = "Attano"
+			adm = 4
+			dip = 4
+			mil = 6
+			age = 30
+		}
+		define_ruler_to_general = {
+			fire = 3
+			shock = 3
+			manuever = 4
+			siege = 2
+		}
+		remove_country_modifier = vog_good_republic
+		set_ruler_flag = vog_attano_flag
+	}
+	option = {
+		name = voga.6b
+		ai_chance = {
+			factor = 50
+		}
+		add_stability = -1
+		add_republican_tradition = 20
+		add_adm_power = 50
+		add_dip_power = 50
+		add_mil_power = 50
+		remove_country_modifier = vog_bad_republic
+	}
+}

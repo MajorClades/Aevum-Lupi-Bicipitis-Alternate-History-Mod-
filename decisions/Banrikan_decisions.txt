@@ -1,0 +1,328 @@
+country_decisions = {
+
+	become_banrikan_colony_dec = {
+		major = yes
+		potential = {
+			any_subject_country = {
+				capital_scope = {
+					colonial_region = colonial_the_carribean
+				}
+				is_colonial_nation = yes
+			}
+		}
+
+		allow = {
+			any_subject_country = {
+				capital_scope = {
+					colonial_region = colonial_the_carribean
+				}
+				is_subject = yes
+				is_colonial_nation = yes
+				is_at_war = no
+			}
+		}
+		effect = {
+			random_subject_country = {
+				limit = {
+					capital_scope = {
+						colonial_region = colonial_the_carribean
+					}
+				}
+				overlord = {
+					switch_tag = PREV
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	banrikan_indipendence_dec = {
+		major = yes
+		potential = {
+			capital_scope = {
+				colonial_region = colonial_the_carribean
+			}
+			is_colonial_nation = yes
+		}
+
+		allow = {
+			capital_scope = {
+				colonial_region = colonial_the_carribean
+			}
+			is_subject = yes
+			is_colonial_nation = yes
+			is_at_war = no
+			dominica_area = {
+				type = all
+				is_core = ROOT
+				owned_by = ROOT
+			}
+			hispaniola_area = {
+				type = all
+				is_core = ROOT
+				owned_by = ROOT
+			}
+		}
+		effect = {
+			change_tag = US0
+			set_capital = 488
+			add_stability = 1
+			define_general = {
+				name = "Jorgen Wasindon"
+				shock = 4
+				fire = 5
+				manuever = 4
+				siege = 4
+			}
+			custom_tooltip = empty_line_tt
+			add_government_reform = provissional_goverment_usb
+			custom_tooltip = empty_line_tt
+			declare_war_with_cb = {
+				casus_belli = cb_colonial_independence_war
+				who = overlord
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+	banrikan_united_states_dec = {
+		major = yes
+		potential = {
+			tag = US0
+		}
+		allow = {
+			government = republic
+			is_free_or_tributary_trigger = yes
+			has_reform = provissional_goverment_usb
+			is_at_war = no
+		}
+		effect = {
+			change_tag = US1
+			if = {
+				limit = {
+					general_with_name = "Jorgen Wasindon"
+				}
+				define_ruler = {
+					name = "Jorgen Wasindon"
+					culture = saxish
+					force_republican_names = yes
+					adm = 5
+					dip = 6
+					mil = 4
+				}
+			}
+			custom_tooltip = empty_line_tt
+			add_government_reform = banrikan_republic_usb
+			custom_tooltip = empty_line_tt
+			add_country_modifier = {
+				name = usb_manifest_destiny
+				duration = -1
+			}
+			custom_tooltip = empty_line_tt
+			carribeans_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	banrika_nation = {
+		major = yes
+		potential = {
+			NOT = { has_country_flag = changed_from_colonial_nation }
+			was_never_end_game_tag_trigger = yes
+			is_nomad = no
+			is_random_new_world = no
+			NOT = { tag = IT9 }
+			NOT = { tag = PAP }	
+			NOT = { tag = FJ0 }
+			NOT = { tag = FJ9 }
+			NOT = { tag = US0 }
+			NOT = { tag = US1 }
+			OR = {
+				is_former_colonial_nation = yes
+				is_colonial_nation = yes
+				AND = {
+					NOT = {
+						OR = {
+							technology_group = north_american
+							technology_group = mesoamerican
+							technology_group = andean
+							technology_group = high_american
+							technology_group = south_american
+
+						}
+					}
+					capital_scope = {
+						colonial_region = colonial_the_carribean
+						is_core = ROOT
+					}
+				}
+			}
+			colonial_the_carribean = {
+				owned_by = ROOT
+			}
+			OR = {
+				ai = no
+				AND = {
+					ai = yes
+					num_of_cities = 3	
+				}
+			}
+		}
+		provinces_to_highlight = {
+			colonial_region = colonial_the_carribean
+			OR = {
+				NOT = { owned_by = ROOT }
+				is_city = no
+			}
+		}
+		allow = {
+			adm_tech = 10
+			is_free_or_tributary_trigger = yes
+			is_at_war = no
+			NOT = { exists = US0 }
+			num_of_owned_provinces_with = {
+				value = 10
+				is_city = yes
+				colonial_region = colonial_the_carribean
+			}
+		}
+		effect = {
+			hidden_effect = {
+				if = {
+					limit = {
+						NOT = { is_former_colonial_nation = yes }
+					}
+					ROOT = { save_event_target_as = old_tag_target }
+					set_country_flag = was_not_former_colonial_nation
+				}
+			}
+			change_tag = US0
+			if = {
+				limit = {
+					NOT = { is_former_colonial_nation = yes }
+				}
+				restore_old_nation_on_formation_effect = yes
+				remove_non_electors_emperors_from_empire_effect = yes
+			}
+			if = {
+				limit = {
+					NOT = { government_rank = 2 }
+				}
+				set_government_rank = 2
+			}
+			colonial_the_carribean = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = US0
+			}
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			#can't have more than one elective monarchy in the game
+			if = {
+				limit = {
+					has_reform = elective_monarchy
+				}
+				change_government = monarchy
+				add_government_reform = feudalism_reform
+			}
+			add_prestige_or_monarch_power = {
+				amount = 25
+			}
+			set_country_flag = changed_from_colonial_nation
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	western_illness_help_usb = {
+		major = yes
+		potential = {
+			tag = US1
+			MX0 = {
+				NOT = {
+					has_country_flag = cured_mexico
+				}
+				any_owned_province = {
+					has_province_modifier = bad_time_mex
+				}
+			}
+		}
+		provinces_to_highlight = {
+			has_province_modifier = bad_time_mex
+		}
+		allow = {
+			treasury = 500
+			MX0 = {
+				has_opinion = {
+					who = ROOT
+					value = 100
+				}
+			}
+		}
+		effect = {
+			add_treasury = -500
+			add_historical_friend = MX0
+			add_truce_with = MX0
+			add_country_modifier = {
+					name = helped_mex
+					duration = 10950
+			}
+			MX0 = {
+				every_owned_province = {
+					limit = {
+						has_province_modifier = bad_time_mex
+					}
+					remove_province_modifier = bad_time_mex
+				}
+				set_country_flag = cured_mexico
+				set_country_flag = europe_help
+			}
+			set_country_flag = buy_up_mexico_flag
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	buy_mexico_usb = {
+		major = yes
+		potential = {
+			tag = US1
+			MX0 = {
+				exists = yes
+			}
+			has_country_flag = buy_up_mexico_flag
+		}
+		allow = {
+			treasury = 500
+			MX0 = {
+				exists = yes
+				owns = 893	
+				has_opinion = {
+					who = ROOT
+					value = 190
+				}
+			}
+		}
+		effect = {
+			clr_country_flag = buy_up_mexico_flag
+			add_treasury = -500
+			MX0 = {
+				change_tag = US2
+				change_religion = ROOT
+			}
+			vassalize = US2
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+}

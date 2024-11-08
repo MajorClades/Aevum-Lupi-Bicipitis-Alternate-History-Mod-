@@ -1,0 +1,94 @@
+namespace = burgu
+
+country_event = {
+	id = burgu.1
+	title = burgu.1.test
+	desc = burgu.1.desc
+	picture = KINGS_CHOICE_eventPicture
+	major = yes
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = burgu.1a
+		ai_chance = {
+			factor = 75
+		}
+		add_casus_belli = {
+			type = cb_blood_red_war
+			target = SP0
+			months = 360
+		}
+	}
+	option = {
+		name = burgu.1b
+		ai_chance = {
+			factor = 25
+		}
+		add_prestige = 10
+		add_army_tradition = 10
+		declare_war_with_cb = {
+			casus_belli = cb_blood_red_war
+			who = SP0
+		}
+	}
+}
+
+country_event = {
+	id = burgu.2
+	title = burgu.2.test
+	desc = burgu.2.desc
+	picture = KINGS_CHOICE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = burgu.2a
+		ai_chance = {
+			factor = 60
+		}
+		every_owned_province = {
+			limit = {
+				is_core = SP0
+				NOT = {
+					religion = catholic
+				}
+			}
+			add_devastation = 30
+			change_religion = catholic
+		}
+		every_owned_province = {
+			limit = {
+				is_core = SP0
+				religion = catholic
+			}
+			add_devastation = 5
+		}
+	}
+	option = {
+		name = burgu.2b
+		ai_chance = {
+			factor = 30
+		}
+		every_owned_province = {
+			limit = {
+				is_core = SP0
+			}
+			add_devastation = 30
+			add_local_autonomy = -25
+		}
+	}
+	option = {
+		name = burgu.2c
+		ai_chance = {
+			factor = 10
+		}
+		add_stability_or_adm_power = yes
+		every_owned_province = {
+			limit = {
+				is_core = SP0
+			}
+			add_devastation = 5
+		}
+	}
+}

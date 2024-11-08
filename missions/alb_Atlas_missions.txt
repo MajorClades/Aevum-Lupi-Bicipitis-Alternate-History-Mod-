@@ -1,0 +1,692 @@
+atlas_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = ATL
+			tag = AF9
+			tag = AF8
+			tag = AF7
+		}
+	} 
+
+	atl_berber_navy = {
+		icon = mission_arabian_sea_trade
+		position = 1
+		provinces_to_highlight = {  
+			owned_by = ROOT
+			has_port = yes
+			NOT = {
+				base_production = 4
+			}
+		} 
+
+		trigger = {  
+			navy_size_percentage = 1
+			num_of_owned_provinces_with = {
+				value = 3
+				base_production = 4
+				owned_by = ROOT
+				has_port = yes
+			}
+		} 
+
+		effect = {  
+			custom_tooltip = alb_gain_access_to_african_lateen_tt
+			hidden_effect = {
+				add_country_modifier = {
+					name = atl_get_african_lateens
+					duration = -1
+				}
+			}
+			custom_tooltip = empty_line_tt
+			macaronesia_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	atl_guanches_restoration = {
+		icon = mission_claim_the_canaries
+		position = 2
+		required_missions = { atl_berber_navy } 
+		provinces_to_highlight = {  
+			area = macaronesia_area
+			NOT = {
+				AND = {
+					owned_by = ROOT
+					is_core = ROOT
+				}
+			}
+		} 
+
+		trigger = {  
+			macaronesia_area = {
+				owned_by = ROOT
+				is_core = ROOT
+				type = all
+			}
+		} 
+
+		effect = {  
+			macaronesia_area = {
+				change_culture = guanche
+			}
+			add_country_modifier = {
+				name = atl_guanche_restoration
+				duration = -1
+			}
+		} 
+	}
+
+	atl_recover_from_incursion = {
+		icon = mission_raid_on_iceland
+		position = 4
+		provinces_to_highlight = {  
+			owned_by = ROOT
+			devastation = 10
+		} 
+
+		trigger = {  
+			all_owned_province = {
+				NOT = {
+					devastation = 10
+				}
+			}
+		} 
+
+		effect = {  
+			define_advisor = {
+				type = master_of_mint
+				skill = 1
+				cost_multiplier = 0.25
+			}
+			add_country_modifier = {
+				name = atl_recovery_from_incursion
+				duration = 10950
+			}
+		} 
+	}
+
+	atl_grand_fortress = {
+		icon = arb_riyadh
+		position = 5
+		required_missions = { atl_recover_from_incursion } 
+		provinces_to_highlight = {  
+			NOT = {
+				province_has_current_tech_fort_trigger = yes
+			}
+			NOT = {
+				has_manpower_building_trigger = yes
+			}
+			owned_by = ROOT
+		} 
+
+		trigger = {  
+			4568 = {
+				has_great_project = {
+					type = ait_benhaddou
+					tier = 2
+				}
+				owned_by = ROOT
+			}
+			num_of_owned_provinces_with = {
+				value = 5
+				province_has_current_tech_fort_trigger = yes
+				has_manpower_building_trigger = yes
+			}
+			monthly_mil = 10
+		} 
+
+		effect = {  
+			4568 = {
+				add_great_project_tier = {
+					type = ait_benhaddou
+					tier = 1
+				}
+			}
+			custom_tooltip = empty_line_tt
+			custom_tooltip = 5_provinces_fulfilling_requirements_tt
+			tooltip = {
+				upgrade_fort_building = yes
+				add_province_modifier = {
+					name = atl_unbreakable_forts
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				for = {
+					amount = 3
+					effect = "
+						random_owned_province = {
+							limit = {
+								province_has_current_tech_fort_trigger = yes
+								has_manpower_building_trigger = yes
+							}
+							upgrade_fort_building = yes
+							add_province_modifier = {
+								name = atl_unbreakable_forts
+								duration = -1
+							}
+						}
+					"
+				}
+			}
+		} 
+	}
+}
+atlas_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = ATL
+			tag = AF9
+			tag = AF8
+			tag = AF7
+		}
+	} 
+
+	atl_unite_west = {
+		icon = mission_pacify_the_berbers
+		position = 2
+		required_missions = { atl_rally_the_tribes } 
+		provinces_to_highlight = {  
+			OR = {
+				area = southern_morocco_area
+				province_id = 348
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		} 
+
+		trigger = {  
+			owns_all_provinces = {
+				OR = {
+					area = southern_morocco_area
+					province_id = 348
+				}
+			}
+		} 
+
+		effect = {  
+			1110 = {
+				add_trade_node_income = 48
+			}
+			1110 = {
+				add_or_upgrade_trade_building = yes
+			}
+		} 
+	}
+
+	atl_economic_recovery = {
+		icon = mission_horde_trade
+		position = 5
+		required_missions = { atl_recover_from_incursion } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			share_of_starting_income = 2
+			num_of_owned_provinces_with = {
+				value = 15
+				OR = {
+					has_trade_building_trigger = yes
+					has_production_building_trigger = yes
+				}
+			}
+		} 
+
+		effect = {  
+			add_years_of_income = 1
+			custom_tooltip = empty_line_tt
+			add_ruler_personality = great_engineer_personality
+			custom_tooltip = empty_line_tt
+			custom_tooltip = alb_distribute_10_dev_amazigh_tt
+			hidden_effect = {
+				for = {
+					amount = 10
+					effect = "
+						random_owned_province = {
+							limit = {
+								culture_group = berber_group
+							}
+							add_random_development = 1
+						}
+					"
+				}
+			}
+		} 
+	}
+}
+atlas_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = ATL
+			tag = AF9
+			tag = AF8
+			tag = AF7
+		}
+	} 
+
+	atl_rally_the_tribes = {
+		icon = mission_mansure_army
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			if = {
+				limit = {
+					ai = no
+				}
+				army_size_percentage = 0.9
+				estate_loyalty = {
+					estate = estate_nobles
+					loyalty = 55
+				}
+			}
+			else = {
+				army_size_percentage = 0.9
+			}
+		} 
+
+		effect = {  
+			sus_area = {
+				add_permanent_claim = ROOT
+			}
+			southern_morocco_area = {
+				add_permanent_claim = ROOT
+			}
+			tafilalt_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	atl_united_atlas = {
+		icon = mission_moroccan_ports
+		position = 3
+		required_missions = {
+			atl_unite_east
+			atl_unite_west
+		}
+		provinces_to_highlight = {  
+			OR = {
+				area = sus_area
+				area = southern_morocco_area
+				area = tafilalt_area
+			}
+		} 
+
+		trigger = {  
+			tag = ATL
+			sus_area = {
+				owned_by = ROOT
+				is_core = ROOT
+				type = all
+			}
+			southern_morocco_area = {
+				owned_by = ROOT
+				is_core = ROOT
+				type = all
+			}
+			tafilalt_area = {
+				owned_by = ROOT
+				is_core = ROOT
+				type = all
+			}
+		} 
+
+		effect = {
+			unlock_estate_privilege = {
+				estate_privilege = alb_rise_of_the_berbers
+			}
+			custom_tooltip = empty_line_tt
+			western_morocco_area = {
+				add_permanent_claim = ROOT
+			}
+			northern_morocco_area = {
+				add_permanent_claim = ROOT
+			}
+			marrekesh_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	atl_finish_off_mauria = {
+		icon = mam_persia
+		position = 4
+		required_missions = { atl_united_atlas } 
+		provinces_to_highlight = {  
+			OR = {
+				area = western_morocco_area
+				area = northern_morocco_area
+				area = marrekesh_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			western_morocco_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			northern_morocco_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			marrekesh_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {  
+			custom_tooltip = upgrade_alb_rise_of_the_berbers_tt
+			set_country_flag = upgrade_alb_rise_of_the_berbers_flag
+			custom_tooltip = empty_line_tt
+			343 = {
+				add_province_modifier = {
+					name = atl_holy_city_of_sero
+					duration = -1
+				}
+			}
+			marrekesh_area = {
+				change_culture = ROOT
+			}
+		} 
+	}
+}
+atlas_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = ATL
+			tag = AF9
+			tag = AF8
+			tag = AF7
+		}
+	} 
+
+	atl_unite_east = {
+		icon = mission_reclaim_morocco
+		position = 2
+		required_missions = { atl_rally_the_tribes } 
+		provinces_to_highlight = {  
+			OR = {
+				area = tafilalt_area
+				province_id = 2466
+				province_id = 2464
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		} 
+
+		trigger = {  
+			owns_all_provinces = {
+				OR = {
+					area = tafilalt_area
+					province_id = 2466
+					province_id = 2464
+				}
+			}
+		} 
+
+		effect = {  
+			hautes_plaines_area = {
+				add_permanent_claim = ROOT
+			}
+			algiers_area = {
+				add_permanent_claim = ROOT
+			}
+			barbary_coast_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	atl_end_aldabba = {
+		icon = mission_conquer_tunisia
+		position = 3
+		required_missions = { atl_unite_east } 
+		provinces_to_highlight = {  
+			OR = {
+				area = hautes_plaines_area
+				area = algiers_area
+				area = barbary_coast_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			hautes_plaines_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			algiers_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			barbary_coast_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {  
+			336 = {
+				add_great_project_tier = {
+					type = aldabba_palace
+					tier = 1
+				}
+			}
+			ouled_nail_area = {
+				add_permanent_claim = ROOT
+			}
+			kabylia_area = {
+				add_permanent_claim = ROOT
+			}
+			north_saharan_area = {
+				add_permanent_claim = ROOT
+			}
+			fezzan_area = {
+				add_permanent_claim = ROOT
+			}
+			tripolitania_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	atl_numidian_brothers = {
+		icon = mam_refine_the_furusiyya
+		position = 4
+		required_missions = { atl_end_aldabba } 
+		provinces_to_highlight = {  
+			OR = {
+				area = ouled_nail_area
+				area = kabylia_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			ouled_nail_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			kabylia_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {  
+			add_country_modifier = {
+				name = atl_restore_kabyle_culture
+				duration = 9125
+			}
+			tunisia_area = {
+				add_permanent_claim = ROOT
+			}
+			djerba_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	atl_amazigh_empire = {
+		icon = mission_the_sultan_of_morocco
+		position = 5
+		required_missions = {
+			atl_finish_off_mauria
+			atl_numidian_brothers
+			atl_garamantes_restoration
+		}
+		provinces_to_highlight = {  
+			culture_group = berber_group
+			NOT = {
+				owned_by = ROOT
+			}
+		} 
+
+		trigger = {  
+			num_of_owned_provinces_with = {
+				value = 40
+				culture_group = berber_group
+			}
+			total_development = 500
+		} 
+
+		effect = {  
+			override_country_name = AMAZIGH
+			custom_tooltip = empty_line_tt
+			if = {
+				limit = {
+					is_great_power = yes
+				}
+				custom_tooltip = atl_if_we_great_power_tt_yes
+				set_government_rank = 3
+			}
+			else = {
+				custom_tooltip = atl_if_we_great_power_tt_no
+				tooltip = {
+					set_government_rank = 3
+				}
+			}
+		} 
+	}
+}
+atlas_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = ATL
+			tag = AF9
+			tag = AF8
+			tag = AF7
+		}
+	} 
+
+	atl_flow_of_gold = {
+		icon = mission_zambezi_gold
+		position = 1
+		provinces_to_highlight = {  
+			province_id = 346
+			NOT = {
+				AND = {
+					is_core = ROOT
+					owned_by = ROOT
+					base_production = 8
+					num_of_times_expanded_infrastructure = 1
+				}
+			}
+		} 
+
+		trigger = {  
+			owns_core_province = 346
+			346 = {
+				base_production = 8
+			}
+			346 = {
+				num_of_times_expanded_infrastructure = 1
+			}
+		} 
+
+		effect = {  
+			346 = {
+				add_province_modifier = {
+					name = atl_expanded_gold_mining
+					duration = -1
+				}
+			}
+			unlock_estate_privilege = {
+				estate_privilege = estate_burghers_control_over_the_mint
+			}
+		} 
+	}
+
+	atl_garamantes_restoration = {
+		icon = mission_levantine_restoration
+		position = 4
+		required_missions = { atl_end_aldabba } 
+		provinces_to_highlight = {  
+			OR = {
+				area = north_saharan_area
+				area = fezzan_area
+				area = tripolitania_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			north_saharan_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			fezzan_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			tripolitania_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {  
+			354 = {
+				add_center_of_trade_level = 1
+				change_culture = fezzani
+			}
+			add_country_modifier = {
+				name = atl_warriors_of_dunes
+				duration = -1
+			}
+		} 
+	}
+}
