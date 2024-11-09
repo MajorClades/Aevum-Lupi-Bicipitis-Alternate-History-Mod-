@@ -1208,3 +1208,42 @@ country_event = { #for the AI otherwise this cultures would never appear
 		}
 	}
 }
+
+country_event = {
+	id = fjal.1000
+	title = fjal.1000.test
+	desc = fjal.1000.desc
+	picture = NORSE_TEMPLE_eventPicture
+	hidden = yes
+	is_triggered_only = yes
+	trigger = {
+		is_rausundian_native = yes
+		NOT = { 
+			has_country_flag = starting_feudalism_natives
+		}
+		always = no #they'll get feudalism in due time, this is for game balance. They get it way easier because they're monarchies anyways
+	}
+	option = {
+		name = fjal.1a
+		set_country_flag = starting_feudalism_natives
+		capital_scope = {
+			add_institution_embracement = {
+				which = feudalism
+				value = 100
+			}
+		}	
+		if = {
+			limit = {tag = LEN}
+			define_admiral = {
+				shock = 4
+				fire = 4
+				manuever = 5
+			}
+			random_owned_province = {
+				light_ship = ROOT
+				light_ship = ROOT
+				light_ship = ROOT
+			}
+		}
+	}
+}
