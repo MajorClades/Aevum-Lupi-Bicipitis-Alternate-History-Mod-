@@ -869,3 +869,133 @@ country_event = { #All papal vassals gain this modifiers
 		remove_country_modifier = pap_good_intentions_3
 	}
 }
+
+
+country_event = { #Pontifex flavor events
+	id = papacy.1000
+	title = papacy.1000.t
+	desc = papacy.1000.d
+	picture = POPE_PREACHING_eventPicture
+	trigger = {
+		religion = pontifex
+		NOT = {
+			tag = PA0
+		}
+	}
+	mean_time_to_happen = {
+		months = 200
+	}
+	option = {
+		name = papacy.1000a
+		add_estate_loyalty = {
+			estate = estate_burghers
+			loyalty = -5
+		}
+		add_estate_loyalty = {
+			estate = estate_nobles
+			loyalty = -5
+		}
+		change_variable = {
+			which = pont_cash_bank_var
+			which = 500
+		}
+	}
+	option = {
+		name = papacy.1000b
+		add_estate_loyalty = {
+			estate = estate_church
+			loyalty = -10
+		}
+	}
+	option = {
+		name = papacy.1000c
+		trigger = {
+			full_idea_group = religious_ideas
+		}
+		add_years_of_income = 0.3
+		change_variable = {
+			which = pont_cash_bank_var
+			which = 200
+		}
+	}
+}
+
+country_event = { #Pontifex flavor events
+	id = papacy.1001
+	title = papacy.1001.t
+	desc = papacy.1001.d
+	picture = POPE_PREACHING_eventPicture
+	trigger = {
+		religion = pontifex
+		NOT = {
+			tag = PA0
+		}
+		check_variable = {
+			which = papal_favor_var
+			value = 5
+		}
+	}
+	mean_time_to_happen = {
+		months = 200
+	}
+	option = {
+		name = papacy.1001a
+		subtract_variable = {
+			which = papal_favor_var
+			value = 5
+		}
+	}
+	option = {
+		name = papacy.1001b
+		add_adm_power = -50
+		add_dip_power = -50
+	}
+	option = {
+		name = papacy.1001c
+		trigger = {
+			full_idea_group = religious_ideas
+		}
+		change_variable = {
+			which = papal_favor_var
+			value = 5
+		}
+	}
+}
+
+country_event = { #Pontifex flavor events
+	id = papacy.1002
+	title = papacy.1002.t
+	desc = papacy.1002.d
+	picture = POPE_PREACHING_eventPicture
+	trigger = {
+		religion = pontifex
+		NOT = {
+			tag = PA0
+		}
+	}
+	mean_time_to_happen = {
+		months = 200
+	}
+	option = {
+		name = papacy.1002a
+		change_variable = {
+			which = papal_favor_var
+			value = 5
+		}
+	}
+	option = {
+		name = papacy.1002b
+		add_adm_power = 100
+	}
+	option = {
+		name = papacy.1002c
+		trigger = {
+			full_idea_group = religious_ideas
+		}
+		add_adm_power = 50
+		change_variable = {
+			which = papal_favor_var
+			value = 5
+		}
+	}
+}
