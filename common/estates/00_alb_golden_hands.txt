@@ -1,0 +1,125 @@
+estate_golden_hands = {
+	icon = 16
+	color = { 10 10 90 }
+	# If true, country will get estate
+	trigger = {
+		capital_scope = {
+			OR = {
+				superregion = china_superregion
+				superregion = tartary_superregion
+				superregion = eastern_europe_superregion
+			}
+		}
+		NOT = {
+			has_country_flag = kick_the_golden_hands_estate_flag
+		}
+		NOT = {
+			has_global_flag = broken_northern_silk_road_flag
+		}
+		num_of_owned_provinces_with = {
+			value = 5
+			province_group = north_silk_road_all
+		}
+		NOT = {
+			government = tribal
+		}
+	}
+
+	# These scale with loyalty & power
+	country_modifier_happy = {
+		development_cost_modifier = -0.1
+		global_trade_goods_size_modifier = 0.1
+		placed_merchant_power_modifier = 0.2
+	}
+	country_modifier_neutral = {
+		global_trade_goods_size_modifier = 0.1
+	}	
+	country_modifier_angry = {
+		development_cost_modifier = 0.1
+		global_trade_goods_size_modifier = -0.1
+		placed_merchant_power_modifier = -0.2
+	}
+
+	land_ownership_modifier = {
+		golden_hands_loyalty_modifier = 0.2
+	}
+
+	province_independence_weight = {
+		factor = 1
+		modifier = {
+			factor = 0.1
+			NOT = { province_trade_power = 5 }
+		}
+		modifier = {
+			factor = 0.5
+			NOT = { religion = owner }
+		}
+		modifier = {
+			factor = 0.67
+			NOT = { is_state_core = owner }
+		}
+		modifier = {
+			factor = 1.2
+			province_group = north_silk_road_all
+		}
+		modifier = {
+			factor = 1.1
+			province_group = north_silk_road_all
+			province_trade_power = 10
+		}
+	}
+
+	# Influence modifiers
+	base_influence = 10
+	influence_modifier = {
+		desc = EST_VAL_OTHER_ESTATE_IN_POWER
+		trigger = {
+			has_any_estate_disaster_active = yes
+		}
+		influence = -40
+	}
+	influence_modifier = {
+		desc = EST_VAL_MANY_PROVINCES_SILK
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 20
+				province_group = north_silk_road_all
+			}
+		}
+		influence = 10
+	}
+	loyalty_modifier = {
+		desc = EST_VAL_OTHER_ESTATE_IN_POWER_LOY
+		trigger = {
+			has_any_estate_disaster_active = yes
+			has_not_own_estate_disaster_active = { estate = estate_golden_hands }
+		}
+		loyalty = -20
+	}
+	loyalty_modifier = {
+		desc = EST_VAL_MANY_PROVINCES_SILK_LOY
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 20
+				province_group = north_silk_road_all
+			}
+		}
+		loyalty = 10
+	}
+
+	privileges = {
+		alb_golden_hands_help_wanted
+		alb_golden_hands_sil_trade_protected
+	}
+
+	agendas = {
+		estate_golden_hands_pay_off_loans
+		estate_golden_hands_increase_trade_power_in_X
+		estate_golden_hands_get_cash
+		estate_golden_hands_build_trade_building_in_y
+		estate_golden_hands_build_production_building_in_y
+		estate_golden_hands_hire_advisor
+		estate_golden_hands_fire_advisor
+	}
+	influence_from_dev_modifier = 0.1
+}

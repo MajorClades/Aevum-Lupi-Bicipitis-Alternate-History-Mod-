@@ -1,0 +1,54 @@
+namespace = silky
+
+country_event = {
+	id = silky.1
+	title = silky.1.test
+	desc = silky.1.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	hidden = yes
+	option = {
+		name = silky.1a
+		north_silk_road_all = {
+			add_permanent_province_modifier = {
+				name = alb_northern_silk_road_basic
+				duration = -1
+			}
+		}
+	}
+}
+
+country_event = {
+	id = silky.10
+	title = silky.10.test
+	desc = silky.10.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	hidden = yes
+	trigger = {
+		has_estate_privilege = alb_golden_hands_sil_trade_protected
+		any_province = {
+			province_group = north_silk_road_all
+			NOT = {
+				has_province_modifier = alb_north_silk_road_powered
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	option = {
+		name = silky.1a
+		every_owned_province = {
+			limit = {
+				province_group = north_silk_road_all
+			}
+			add_province_modifier = {
+				name = alb_north_silk_road_powered
+				duration = -1
+			}
+		}
+	}
+}

@@ -1,0 +1,87 @@
+alb_golden_hands_help_wanted = {
+	icon = privilege_army_tradition
+	max_absolutism = -5
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 2 } }
+	influence = 0.10
+	loyalty = 0.05
+	can_select = {
+	}
+	penalties = {
+		trade_efficiency = -0.15
+	}
+	benefits = {
+		trade_range_modifier = 0.2
+		merchants = 1
+	}
+	ai_will_do = {
+		factor = 2
+		modifier = {
+			factor = 3
+			NOT = {
+				trade_efficiency = 50
+			}
+		}
+		modifier = {
+			factor = 0
+			num_of_merchants = 4
+		}
+	}
+}
+
+alb_golden_hands_sil_trade_protected = {
+	icon = privilege_army_tradition
+	max_absolutism = -5
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 2 } }
+	influence = 0.10
+	loyalty = 0.05
+	can_select = {
+	}
+	on_granted = {
+		custom_tooltip = GOLDEN_HANDS_PROV_SILK_POWERED
+		tooltip = {
+			random_owned_province = {
+				limit = {
+					province_group = north_silk_road_all
+				}
+				add_province_modifier = {
+					name = alb_north_silk_road_powered
+					duration = -1
+				}
+			}
+		}
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					province_group = north_silk_road_all
+				}
+				add_province_modifier = {
+					name = alb_north_silk_road_powered
+					duration = -1
+				}
+			}
+		}
+	}
+	on_revoked = {
+		every_owned_province = {
+			remove_province_modifier = alb_north_silk_road_powered
+		}
+	}
+	penalties = {
+		development_cost_modifier = 0.1
+	}
+	benefits = {
+	}
+	ai_will_do = {
+		factor = 2
+		modifier = {
+			factor = 3
+			NOT = {
+				trade_efficiency = 50
+			}
+		}
+		modifier = {
+			factor = 0
+			num_of_merchants = 4
+		}
+	}
+}
