@@ -155,84 +155,8 @@ declarewar = {
 			FROM = { is_part_of_hre = no }
 		}
 	}
-	pre_effect = {
-		#ALB
-		if = {
-			limit = {
-				has_country_modifier = alb_unifier_of_the_east
-				NOT = {
-					FROM = {
-						is_emperor = yes
-					}
-				}
-				FROM = {
-					OR = {
-						tag = CR1
-						tag = CR0
-					}
-					
-					is_part_of_hre = yes
-				}
-				has_spy_network_in = {
-					who = emperor
-					value = 30
-				}
-			}
-			country_event = { id = aldab.6 }
-			remove_country_modifier = alb_hidden_effect_mod
-		}
-	}
 	effect = {
 		on_war_declaration_effect = yes
-		if = {
-			limit = { 
-				mission_completed = hun_the_anatolian_threat
-				NOT = {
-					has_country_flag = hun_declared_first_war_against_tur
-				}
-				FROM = { tag = TUR }
-			}
-			add_country_modifier = {
-				name = hun_avenge_varna
-				duration = -1
-			}
-			set_country_flag = hun_declared_first_war_against_tur
-		}
-		if = {
-			limit = { 
-				has_country_flag = nor_norwegian_independence_modifier
-				FROM = { tag = DAN }
-			}
-			add_country_modifier = {
-				name = nor_norwegian_independence_war_mod
-				duration = -1
-			}
-		}
-		if = {
-			limit = {
-				has_country_flag = teu_joined_the_hre
-				tag = TEU
-				is_part_of_hre = yes
-				FROM = { is_part_of_hre = yes }
-			}
-			clr_country_flag = teu_joined_the_hre
-			country_event = {
-				id = flavor_teu.33
-				days = 10
-			}
-		}
-		if = {
-			limit = {
-				has_country_flag = ned_no_stab_loss_on_independence_flag
-				war_with = BUR
-				has_casus_belli = {
-					type = cb_independence_war
-					target = FROM
-				}
-			}
-			clr_country_flag = ned_no_stab_loss_on_independence_flag
-			add_stability = 1
-		}
 		if = {
             limit = {
                 NOT = { has_global_flag = flavor_ita_7_fired }
@@ -259,7 +183,31 @@ declarewar = {
                 country_event = { id = flavor_ita.7 }
             }
         }
-		
+		#ALB
+		if = {
+			limit = {
+				has_country_modifier = alb_unifier_of_the_east
+				NOT = {
+					FROM = {
+						is_emperor = yes
+					}
+				}
+				FROM = {
+					OR = {
+						tag = CR1
+						tag = CR0
+					}
+					
+					is_part_of_hre = yes
+				}
+				has_spy_network_in = {
+					who = emperor
+					value = 30
+				}
+			}
+			country_event = { id = aldab.6 }
+			remove_country_modifier = alb_hidden_effect_mod
+		}
 	}
 }
 
