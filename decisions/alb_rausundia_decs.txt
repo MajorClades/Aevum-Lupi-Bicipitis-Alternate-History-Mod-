@@ -1,0 +1,164 @@
+country_decisions = {
+	alb_capital_vedr = {
+		major = yes
+		potential = {
+			tag = FJ1
+			has_reform = storm_horde_reform
+		}
+		provinces_to_highlight = {
+			same_continent = ROOT
+			OR = {
+				has_terrain = grasslands
+				has_terrain = steppe
+				has_terrain = savannah
+			}
+		}
+		allow = {
+			capital_scope = {
+				development = 20
+				same_continent = ROOT
+				OR = {
+					has_terrain = farmlands
+					has_terrain = grasslands
+					has_terrain = steppe
+					has_terrain = savannah
+				}
+			}
+		}
+		effect = {
+			change_government = monarchy
+			add_government_reform = storm_home_reform
+			every_tribal_land_province = {
+				limit = {
+					tribal_owner = {
+						tag = FJ1
+					}
+				}
+				settle_province = FJ1
+			}
+			capital_scope = {
+				add_province_modifier = {
+					name = storm_caller_capital
+					duration = -1
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	alb_rausundian_formable = {
+		major = yes
+		potential = {
+			is_rausundian_native = yes
+			NOT = {
+				has_country_flag = formed_rausundian_union_flag
+			}
+		}
+		provinces_to_highlight = {
+			OR = {
+				region = canada_region
+				region = northeast_america_region
+			}
+		}
+		allow = {
+			num_of_owned_provinces_with = {
+				value = 30
+				OR = {
+					region = canada_region
+					region = northeast_america_region
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					culture_group = eastern_algonquian
+				}
+				override_country_name = RAU_EA_UNION
+			}
+			if = {
+				limit = {
+					culture_group = iroquoian
+				}
+				override_country_name = RAU_IROQUIA
+			}
+			if = {
+				limit = {
+					culture_group = central_algonquian
+				}
+				override_country_name = RAU_CA_UNION
+			}
+			add_country_modifier = {
+				name = rau_native_union
+				duration = -1
+			}
+			set_government_rank = 3
+			canada_region = {
+				add_permanent_claim = ROOT
+			}
+			northeast_america_region = {
+				add_permanent_claim = ROOT
+			}
+			set_country_flag = formed_rausundian_union_flag
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	alb_wabanaki_formable = {
+		major = yes
+		potential = {
+			OR = {
+				culture = mikmaq
+				culture = abenaki
+				culture = maliseet
+			}
+			NOT = {
+				has_country_flag = formed_wabanaki_flag
+			}
+		}
+		provinces_to_highlight = {
+			OR = {
+				region = canada_region
+				region = northeast_america_region
+			}
+			OR = {
+				culture = mikmaq
+				culture = abenaki
+				culture = maliseet
+			}
+			NOT ={
+				owned_by = ROOT
+			}
+		}
+		allow = {
+			num_of_owned_provinces_with = {
+				value = 20
+				OR = {
+					culture = mikmaq
+					culture = abenaki
+					culture = maliseet
+				}
+				OR = {
+					region = canada_region
+					region = northeast_america_region
+				}
+			}
+		}
+		effect = {
+			override_country_name = WABANAKI
+			set_government_rank = 2
+			northeast_america_region = {
+				add_permanent_claim = ROOT
+			}
+			set_country_flag = formed_wabanaki_flag
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+}

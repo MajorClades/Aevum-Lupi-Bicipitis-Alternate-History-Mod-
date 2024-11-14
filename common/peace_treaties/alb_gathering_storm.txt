@@ -3,7 +3,7 @@ po_storm_gatherer = {
 	power_projection = humiliated_rival
 	power_cost_base = 1.0
 	prestige_base = 1.0 # Base factor for prestige gain and loss. Scales with war score cost.
-	ae_base = 0.4
+	ae_base = 0.3
 	warscore_cost = {
 		# Which of the giver's provinces' war score costs are included and by how much. All entries default to 0. Any combination of entries can be used. Try negative values at your own risk.
 		all_provinces = 1 # All the giver's provinces
@@ -27,10 +27,12 @@ po_storm_gatherer = {
 	}
 	effect = { # Defaults to empty effect (which makes error log entry but is safe)
 		inherit = FROM
-		# change_variable = {
-		# 	which = storm_charge_count
-		# 	value = 1
-		# }
+		add_treasury = 50
+		add_government_power = {
+			mechanic_type = thunder_dome_mechanic
+			power_type = collecting_thunder
+			value = 10
+		}
 	}
 	ai_weight = { # Defaults to always evaluate to 0
 		export_to_variable = {

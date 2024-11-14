@@ -1,0 +1,99 @@
+thunder_dome_mechanic = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 1
+	available = {	}
+	powers = {
+		collecting_thunder = {
+			max = 100
+			base_monthly_growth = 0
+			scaled_modifier = {
+				modifier = {
+					monthly_collecting_thunder = -0.5
+				}
+			}
+			scaled_modifier = {
+				trigger = {
+					cavalry_fraction = 0.2
+				}
+				modifier = {
+					cavalry_flanking = 0.5
+				}
+			}
+			scaled_modifier = {
+				trigger = {
+					cavalry_fraction = 0.4
+				}
+				modifier = {
+					cavalry_power = 0.3
+				}
+			}
+			scaled_modifier = {
+				trigger = {
+					cavalry_fraction = 0.6
+				}
+				modifier = {
+					siege_ability = 0.5
+				}
+			}
+		}
+	}
+	
+	interactions = {
+		boost_thunder = {
+			gui = militarization_gov_mech
+			cost_type = collecting_thunder
+			center = no
+			trigger = {
+				mil_power_cost = 20
+				years_of_manpower = 0.1
+				not = {
+					has_government_power = {
+						mechanic_type = thunder_dome_mechanic
+						power_type = collecting_thunder
+						value = 100
+					}
+				}
+			}
+			effect = { 
+				mil_power_cost = 20
+				add_yearly_manpower = -0.1
+				add_government_power = {
+					mechanic_type = thunder_dome_mechanic
+					power_type = collecting_thunder
+					value = 10
+				}
+			}
+			cooldown_years = 1
+			ai_chance = {
+				factor = 10
+				modifier = {
+					factor = 0
+					not = {
+						years_of_manpower = 1
+					}
+				}
+				modifier = {
+					factor = 0
+					has_government_power = {
+						mechanic_type = thunder_dome_mechanic
+						power_type = collecting_thunder
+						value = 90
+					}
+				}
+				modifier = {
+					factor = 0
+					neighbors_tech_discount = 0.05
+				}
+				modifier = {
+					factor = 0
+					not = { mil_power_cost = 300 }
+				}
+				modifier = {
+					factor = 10
+					is_at_war = yes
+				}
+			}
+		}
+	}
+
+}
