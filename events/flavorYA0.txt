@@ -1,0 +1,132 @@
+country_event = {
+	id = flavor_ya0.1
+	title = "flavor_ya0.t.1"
+	desc = "flavor_ya0.d.1"
+	picture = HORDE_ON_HORSEBACK_eventPicture
+	
+	fire_only_once = yes
+	
+	trigger = {
+		is_year = 1600
+		is_subject = no
+		is_at_war = no
+		NOT = { exists = YA0 }
+		owns_core_province = 466
+		owns_core_province = 2417
+	}
+	mean_time_to_happen = {
+		months = 600
+	}
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = {
+						capital_scope = {
+							area = astrakhan_area
+						}
+					}
+				}
+				every_owned_province = {
+					limit = {
+						area = astrakhan_area
+					}
+					add_core = YA0
+				}
+				release = YA0
+				YA0 = {
+					change_government = tribal
+					add_government_reform = steppe_horde
+					define_ruler = {
+						name  = Tygyn
+						dynasty = Darkhan
+						adm = 4 
+						dip = 3
+						mil = 6
+						age = 30
+					}
+					adopt_reform_progress = ROOT
+					capital_scope = {
+						build_to_forcelimit = {
+							infantry = 0.6
+							cavalry = 0.3
+						}
+					}
+				}
+				466 = {
+					change_religion = tengri_pagan_reformed
+					change_culture = yakut
+				}
+				2417 = {
+					change_religion = tengri_pagan_reformed
+					change_culture = yakut
+				}
+			}
+		}
+	}
+	option = {
+		name = "flavor_ya0.1.a"
+		trigger = {
+			NOT = {
+				capital_scope = {
+					area = astrakhan_area
+				}
+			}
+		}
+		create_march = YA0
+		astrakhan_area = {
+			limit = {
+				is_core = ROOT
+			}
+			remove_core = ROOT
+		}
+	}
+	option = {
+		name = "flavor_ya0.1.b"
+		trigger = {
+			NOT = {
+				capital_scope = {
+					area = astrakhan_area
+				}
+			}
+		}
+		declare_war_with_cb = {
+			who = YA0
+			casus_belli = cb_core
+			war_goal_province = 2417
+		}
+	}
+	option = {
+		name = "flavor_ya0.1.b"
+		trigger = {
+			capital_scope = {
+				area = astrakhan_area
+			}
+		}
+		2417 = {
+			spawn_rebels = {
+				type = anti_tax_rebels
+				size = 2
+			}
+		}
+	}
+	option = {
+		name = "flavor_ya0.1.c"
+		trigger = {
+			NOT = {
+				capital_scope = {
+					area = astrakhan_area
+				}
+			}
+		}
+		YA0 = {
+			declare_war_with_cb = {
+				who = root
+				casus_belli = cb_horde_vs_civ
+			}
+		}
+		switch_tag = YA0
+	}
+
+}
+	
