@@ -31,9 +31,8 @@ country_event = {
 	}
 	option = {
 		name = yamat.1a
-		add_truce_with = KM5
 		define_general = { #this guys sure is OP, would be a shame if something happened to him
-			name = "Ieharu Mimura"
+			name = "Yuuichirou Hanma"
 			shock = 5
 			fire = 4
 			manuever = 5
@@ -56,14 +55,14 @@ country_event = {
 	immediate = {
 		hidden_effect = {
 			kill_leader = { # oh no
-				type = "Ieharu Mimura"
+				type = "Yuuichirou Hanma"
 			}
 		}
 	}
 	option = {
 		name = yamat.2a
 		kill_leader = {
-			type = "Ieharu Mimura"
+			type = "Yuuichirou Hanma"
 		}
 		1835 = {
 			add_devastation = 2
@@ -81,14 +80,6 @@ country_event = {
 	desc = yamat.3.d
 	picture = FAMINE_eventPicture
 	is_triggered_only = yes
-	immediate = {
-		hidden_effect = {
-			set_country_flag = War_Ezo_Yamatai_flag
-			KM5 = {
-				set_country_flag = War_Ezo_Yamatai_flag
-			}
-		}
-	}
 	option = {
 		name = yamat.3a
 		ai_chance = {
@@ -114,6 +105,11 @@ country_event = {
 		ai_chance = {
 			factor = 30
 		}
+		add_casus_belli = {
+			type = cb_ezo_yamatai
+			target = KM5
+			months = 60
+		}
 		define_advisor = {
 			type = army_organiser 
 			skill = 2
@@ -125,6 +121,13 @@ country_event = {
 		KM5 = {
 			country_event = {
 				id = yamat.4
+			}
+		}
+		if = {
+			limit = { ai = yes}
+			declare_war_with_cb = {
+				casus_belli = cb_ezo_yamatai
+				who = KM5
 			}
 		}
 	}
@@ -192,6 +195,42 @@ country_event = {
 		add_country_modifier = {
 			name = alb_girls_are_yucky
 			duration = -1
+		}
+	}
+}
+
+country_event = {
+	id = yamat.6
+	title = yamat.6.t
+	desc = yamat.6.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.6a
+		set_country_flag = pacification_mechanic_flag
+	}
+}
+
+country_event = {
+	id = yamat.7
+	title = yamat.7.t
+	desc = yamat.7.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.7a
+		set_country_flag = pacification_mechanic_flag
+		every_owned_province = {
+			limit = {
+				culture = utari
+			}
+			change_culture = yezo
+		}
+		every_owned_province = {
+			limit = {
+				culture = ainu
+			}
+			change_culture = emishi
 		}
 	}
 }
