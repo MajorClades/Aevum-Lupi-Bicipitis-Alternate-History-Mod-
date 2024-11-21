@@ -441,7 +441,23 @@ on_monarch_death = {
 }
 
 on_adm_development = {
-
+	if = { 
+		limit = { 
+			owner = { 
+				has_country_modifier = kamuyhuci_lv1_mod
+			}
+		}
+		owner = {
+			if = {
+				limit = {NOT = {has_country_flag = no_cost_kamuy_flag}}
+				add_adm_power = -10
+			}
+			change_variable = {
+				which = kamuyhuci_variable
+				value = 1
+			}
+		}
+	}
 	if = { 
 		limit = { 
 			owner = { has_country_flag = double_dev_ability }
