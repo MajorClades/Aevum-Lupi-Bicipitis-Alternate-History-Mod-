@@ -9,17 +9,23 @@ country_event = {
 	option = {
 		name = ezo.1a
 		custom_tooltip = kamuyhuci_variable_tt
-		add_country_modifier = {
-			name = kamuyhuci_lv1_mod
-			duration = 1825
+		if = {
+			limit = {
+				has_country_flag = kamuyhuci_lv1_flag 
+			}
+			add_ruler_modifier = {
+				name = kamuyhuci_lv2_mod
+				duration = -1
+			}
+		}else = {
+			add_ruler_modifier = {
+				name = kamuyhuci_lv1_mod
+				duration = -1
+			}
 		}
 		set_variable = {
 			which = kamuyhuci_variable
 			value = 0
-		}
-		country_event = {
-			id = ezo.2
-			days = 1825
 		}
 	}
 	option = {
@@ -36,22 +42,77 @@ country_event = {
 	is_triggered_only = yes
 	option = {
 		name = ezo.2a
-		trigger = {
-			check_variable = {
-				which = kamuyhuci_variable
-				value = 10
-			}
-		}
-		set_country_flag = kamuyhuci_lv1_flag
+		remove_country_modifier = kamuyhuci_lv1_mod
+		remove_country_modifier = kamuyhuci_lv2_mod
+		remove_country_modifier = kamuyhuci_lv3_mod
+		remove_country_modifier = kamuyhuci_lv4_mod
 		if = {
 			limit = {
 				has_personal_deity = kamuyhuci_lv1
 			}
+			set_country_flag = kamuyhuci_lv1_flag
+			set_country_flag = no_effect_diety_flag
 			change_personal_deity = kamuyhuci_lv2
+		}
+		if = {
+			limit = {
+				has_personal_deity = kamuyhuci_lv2
+			}
+			set_country_flag = kamuyhuci_lv2_flag
+			set_country_flag = no_effect_diety_flag
+			change_personal_deity = kamuyhuci_lv3
+		}
+		if = {
+			limit = {
+				has_personal_deity = kamuyhuci_lv3
+			}
+			set_country_flag = kamuyhuci_lv3_flag
+			set_country_flag = no_effect_diety_flag
+			change_personal_deity = kamuyhuci_lv4
+		}
+		if = {
+			limit = {
+				has_personal_deity = kamuyhuci_lv4
+			}
+			set_country_flag = kamuyhuci_lv4_flag
+			set_country_flag = no_effect_diety_flag
+			change_personal_deity = kamuyhuci_lv5
 		}
 	}
 	option = {
 		name = ezo.2b
+		remove_country_modifier = kamuyhuci_lv1_mod
+		remove_country_modifier = kamuyhuci_lv2_mod
+		remove_country_modifier = kamuyhuci_lv3_mod
+		remove_country_modifier = kamuyhuci_lv4_mod
+		add_adm_power = 500
+	}
+}
+
+country_event = {
+	id = ezo.3
+	title = ezo.3.t
+	desc = ezo.3.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = ezo.3a
+		custom_tooltip = kamuyhuci_variable_tt
+		add_country_modifier = {
+			name = kamuyhuci_lv1_mod
+			duration = 1825
+		}
+		set_variable = {
+			which = kamuyhuci_variable
+			value = 0
+		}
+		country_event = {
+			id = ezo.2
+			days = 1825
+		}
+	}
+	option = {
+		name = ezo.3b
 		add_prestige = -1
 	}
 }
