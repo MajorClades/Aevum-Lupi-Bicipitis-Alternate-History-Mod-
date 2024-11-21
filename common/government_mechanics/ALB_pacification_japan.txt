@@ -1,0 +1,166 @@
+japan_pacification_mechanic = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 11
+	available = {
+		NOT = {
+			has_country_flag = pacification_mechanic_flag
+		}
+		OR = {
+			KM5 = {
+				exists = no
+			}
+			KM6 = {
+				exists = no
+			}
+		}
+	}
+
+	powers = {
+		pacification_rate = {
+			gui = alb_venetian_capitalism_gui
+			max = 100
+			min = 0
+			reset_on_new_ruler = no
+			scaled_modifier = {
+				modifier = {
+					stability_cost_modifier = 0.5
+					monthly_pacification_rate = -0.5
+				}
+			}
+			base_monthly_growth = 0.05
+			is_good = yes
+			on_max_reached = {
+				if = {
+					limit = {
+						num_of_owned_provinces_with = {
+							value = 1
+							has_province_modifier = nihon_revolt_lv_3
+						}
+					}
+					add_government_power = {
+						mechanic_type = japan_pacification_mechanic
+						power_type = pacification_rate
+						value = -50
+					}
+					custom_tooltip = PAC_NIH_TT_1
+					hidden_effect = {
+						every_owned_province = {
+							limit = {
+								has_province_modifier = nihon_revolt_lv_3
+							}
+							remove_province_modifier = nihon_revolt_lv_3
+							add_province_modifier = {
+								name = nihon_revolt_lv_2
+								duration = -1
+							}
+						}
+					}
+				}
+				if = {
+					limit = {
+						num_of_owned_provinces_with = {
+							value = 1
+							has_province_modifier = nihon_revolt_lv_2
+						}
+					}
+					add_government_power = {
+						mechanic_type = japan_pacification_mechanic
+						power_type = pacification_rate
+						value = -50
+					}
+					custom_tooltip = PAC_NIH_TT_2
+					hidden_effect = {
+						every_owned_province = {
+							limit = {
+								has_province_modifier = nihon_revolt_lv_2
+							}
+							remove_province_modifier = nihon_revolt_lv_2
+							add_province_modifier = {
+								name = nihon_revolt_lv_1
+								duration = -1
+							}
+						}
+					}
+				}
+				if = {
+					limit = {
+						num_of_owned_provinces_with = {
+							value = 1
+							has_province_modifier = nihon_revolt_lv_1
+						}
+					}
+					add_government_power = {
+						mechanic_type = japan_pacification_mechanic
+						power_type = pacification_rate
+						value = -50
+					}
+					custom_tooltip = PAC_NIH_TT_3
+					hidden_effect = {
+						every_owned_province = {
+							limit = {
+								has_province_modifier = nihon_revolt_lv_1
+							}
+							remove_province_modifier = nihon_revolt_lv_1
+						}
+					}
+					if = {
+						limit = {tag = KM5}
+						country_event = {
+							id = yamat.6
+						}
+					}else = {
+						country_event = {
+							id = yamat.7
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	interactions = {
+		force_pacification = {
+			gui = alb_venetian_capitalism_gui
+			cost_type = pacification_rate
+			center = no
+			trigger = {
+				adm_power = 50
+				dip_power = 50
+				mil_power = 50
+			}
+			effect = {
+				add_adm_power = -50
+				add_dip_power = -50
+				add_mil_power = -50
+				add_government_power = {
+					mechanic_type = japan_pacification_mechanic
+					power_type = pacification_rate
+					value = 5
+				}
+			}
+			ai_chance = {
+				factor = 50
+				modifier = {
+					factor = 0
+					is_at_war = yes
+				}
+				modifier = {
+					factor = 0
+					is_in_deficit = yes
+				}
+				modifier = {
+					factor = 0
+					num_of_loans = 3
+				}
+				modifier = {
+					factor = 0
+					NOT = { adm_power = 250 }
+				}
+				modifier = {
+					factor = 0
+					NOT = { stability = 0 }
+				}
+			}
+		}
+	}
+}

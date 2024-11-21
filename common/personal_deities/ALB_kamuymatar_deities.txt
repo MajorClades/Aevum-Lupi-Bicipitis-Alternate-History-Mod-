@@ -1,0 +1,157 @@
+# Do not change tags in here without changing every other reference to them.
+# If adding new dieties, make sure they are uniquely named.
+#Kamuy-huci, goddess of the hearth
+#Kim-un-kamuy, god of bears and mountains
+#Rep-un-Kamuy  (god) of the sea. 
+#Kotan-kar-kamuy, regarded as the creator of the world in the Ainu religion
+kamuyhuci_lv1 =  
+{
+	development_cost = -0.05
+	global_unrest = -1
+	
+	potential = { religion = kamuyramat NOT = {has_country_flag = kamuyhuci_lv1_flag} NOT = {has_country_flag = kamuyhuci_lv2_flag}}
+	sprite = 8
+	effect = {
+		country_event = {
+			id = ezo.1
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 2
+			personality = ai_balanced
+		}	
+		modifier = {
+			factor = 0.5
+			personality = ai_diplomat
+		}
+	}
+}
+kamuyhuci_lv2 =  
+{
+	development_cost = -0.05
+	global_unrest = -1
+	
+	potential = { religion = kamuyramat has_country_flag = kamuyhuci_lv1_flag NOT = {has_country_flag = kamuyhuci_lv2_flag}}
+	sprite = 8
+	effect = {
+		# country_event = {
+		# 	id = ezo.3
+		# }
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 2
+			personality = ai_balanced
+		}	
+		modifier = {
+			factor = 0.5
+			personality = ai_diplomat
+		}
+	}
+}
+kimunkamuy_lv1 =
+{
+	production_efficiency = 0.05
+	army_tradition = 0.25
+	
+	potential = { religion = kamuyramat NOT = {has_country_flag = kimunkamuy_lv1_up_flag} NOT = {has_country_flag = kimunkamuy_lv2_up_flag}}
+	sprite = 6
+	effect = {
+		if = {
+			limit = {
+				has_country_flag = kimunkamuy_lv1_flag
+			}
+			clr_country_flag = kimunkamuy_lv1_flag
+			set_country_flag = kimunkamuy_lv1_up_flag
+		}else = {
+			set_country_flag = kimunkamuy_lv1_flag
+		}
+	}
+
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 2
+			personality = ai_balanced
+		}	
+		modifier = {
+			factor = 0.5
+			personality = ai_diplomat
+		}
+	}
+}
+repunkamuy_lv1 =
+{
+	trade_efficiency = 0.1
+	navy_tradition = 0.25
+	
+	potential = { religion = kamuyramat NOT = {has_country_flag = repunkamuy_lv1_up_flag} NOT = {has_country_flag = repunkamuy_lv2_up_flag}}
+	sprite = 9
+	effect = {
+		if = {
+			limit = {
+				has_country_flag = repunkamuy_lv1_flag
+			}
+			clr_country_flag = repunkamuy_lv1_flag
+			set_country_flag = repunkamuy_lv1_up_flag
+		}else = {
+			set_country_flag = repunkamuy_lv1_flag
+		}
+	}
+	
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 2
+			personality = ai_militarist
+		}	
+		modifier = {
+			factor = 0.5
+			personality = ai_colonialist
+		}
+	}
+}
+kotankarkamuy_lv1 =
+{
+	core_creation = -0.05
+	
+	potential = { religion = kamuyramat NOT = {has_country_flag = kotankarkamuy_lv1_up_flag} NOT = {has_country_flag = kotankarkamuy_lv2_up_flag}}
+	sprite = 7
+	effect = {
+		if = {
+			limit = {
+				has_country_flag = kotankarkamuy_lv1_flag
+			}
+			clr_country_flag = kotankarkamuy_lv1_flag
+			set_country_flag = kotankarkamuy_lv1_up_flag
+		}else = {
+			set_country_flag = kotankarkamuy_lv1_flag
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 2
+			NOT = { num_of_cities = 5 }
+		}
+		modifier = {
+			factor = 2
+			NOT = { num_of_cities = 10 }
+		}
+		modifier = {
+			factor = 0.5
+			num_of_cities = 30
+		}
+		modifier = {
+			factor = 2
+			personality = ai_militarist
+		}	
+		modifier = {
+			factor = 0.5
+			personality = ai_capitalist
+		}		
+	}
+}

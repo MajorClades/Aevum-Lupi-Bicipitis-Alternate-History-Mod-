@@ -1,0 +1,248 @@
+namespace = yamat
+
+
+country_event = {
+	id = yamat.1
+	title = yamat.1.t
+	desc = yamat.1.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		tag = KM6
+	}
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {ai = no}
+				KM5 = {
+					override_country_name = EZO_NAME
+				}
+			}
+			manchuria_region = {
+				discover_country = KM5
+				discover_country = KM6
+			}
+			japan_region = {
+				discover_country = KM5
+				discover_country = KM6
+			}
+		}
+	}
+	option = {
+		name = yamat.1a
+		define_general = { #this guys sure is OP, would be a shame if something happened to him
+			name = "Yuuichirou Hanma"
+			shock = 5
+			fire = 4
+			manuever = 5
+			siege = 4
+			trait = strict_drillmaster_personality
+		}
+		country_event = {
+			id = yamat.2
+			days = 106
+		}
+	}
+}
+
+country_event = {
+	id = yamat.2
+	title = yamat.2.t
+	desc = yamat.2.d
+	picture = GREAT_FIRE_eventPicture
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			kill_leader = { # oh no
+				type = "Yuuichirou Hanma"
+			}
+		}
+	}
+	option = {
+		name = yamat.2a
+		kill_leader = {
+			type = "Yuuichirou Hanma"
+		}
+		1835 = {
+			add_devastation = 2
+		}
+		country_event = {
+			id = yamat.3
+			days = 5
+		}
+	}
+}
+
+country_event = {
+	id = yamat.3
+	title = yamat.3.t
+	desc = yamat.3.d
+	picture = FAMINE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.3a
+		ai_chance = {
+			factor = 70
+		}
+		add_casus_belli = {
+			type = cb_ezo_yamatai
+			target = KM5
+			months = 60
+		}
+		set_country_flag = yamatai_burned_general_flag
+		define_general = {
+			name = "Burned Commander" #hmm, there is something different about you, my man?
+			shock = 3
+			fire = 3
+			manuever = 4
+			siege = 2
+			trait = cruel_tactician_personality
+		}
+	}
+	option = {
+		name = yamat.3b
+		ai_chance = {
+			factor = 30
+		}
+		add_casus_belli = {
+			type = cb_ezo_yamatai
+			target = KM5
+			months = 60
+		}
+		define_advisor = {
+			type = army_organiser 
+			skill = 2
+			discount = yes
+			female = yes #!!!
+		}
+	}
+	after = {
+		KM5 = {
+			country_event = {
+				id = yamat.4
+			}
+		}
+		if = {
+			limit = { ai = yes}
+			declare_war_with_cb = {
+				casus_belli = cb_ezo_yamatai
+				who = KM5
+			}
+		}
+	}
+}
+
+country_event = {
+	id = yamat.4
+	title = yamat.4.t
+	desc = yamat.4.d
+	picture = FAMINE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.4a
+		add_army_tradition = 1 
+	}
+}
+
+country_event = {
+	id = yamat.5
+	title = yamat.5.t
+	desc = yamat.5.d
+	picture = GENERALS_DISCUSSING_eventPicture
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			had_country_flag = {
+				flag = yamatai_burned_general_flag
+				days = 3650
+			}
+			AND = {
+				has_country_flag = yamatai_burned_general_flag
+				NOT = {
+					general_with_name = "Burned Commander"
+				}
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 20
+	}
+	immediate = {
+		clr_country_flag = yamatai_burned_general_flag
+	}
+	option = {
+		name = yamat.5a
+		ai_chance = {
+			factor = 70
+		}
+		kill_leader = {
+			type = "Burned Commander"
+		}
+		add_country_modifier = {
+			name = alb_oni_girls
+			duration = -1
+		}
+	}
+	option = {
+		name = yamat.5b
+		ai_chance = {
+			factor = 30
+		}
+		kill_leader = {
+			type = "Burned Commander"
+		}
+		add_country_modifier = {
+			name = alb_girls_are_yucky
+			duration = -1
+		}
+	}
+}
+
+country_event = {
+	id = yamat.6
+	title = yamat.6.t
+	desc = yamat.6.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.6a
+		set_country_flag = pacification_mechanic_flag
+		every_owned_province = {
+			limit = {
+				culture = togoku
+			}
+			change_culture = sisam
+		}
+		every_owned_province = {
+			limit = {
+				culture = japanese
+			}
+			change_culture = anunisam
+		}
+	}
+}
+
+country_event = {
+	id = yamat.7
+	title = yamat.7.t
+	desc = yamat.7.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.7a
+		set_country_flag = pacification_mechanic_flag
+		every_owned_province = {
+			limit = {
+				culture = utari
+			}
+			change_culture = yezo
+		}
+		every_owned_province = {
+			limit = {
+				culture = ainu
+			}
+			change_culture = emishi
+		}
+	}
+}
