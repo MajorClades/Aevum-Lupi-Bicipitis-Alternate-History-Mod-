@@ -444,7 +444,12 @@ on_adm_development = {
 	if = { 
 		limit = { 
 			owner = { 
-				has_country_modifier = kamuyhuci_lv1_mod
+				OR = {
+					has_country_modifier = kamuyhuci_lv1_mod
+					has_country_modifier = kamuyhuci_lv2_mod
+					has_country_modifier = kamuyhuci_lv3_mod
+					has_country_modifier = kamuyhuci_lv4_mod
+				}
 			}
 		}
 		owner = {
@@ -455,6 +460,17 @@ on_adm_development = {
 			change_variable = {
 				which = kamuyhuci_variable
 				value = 1
+			}
+			if = {
+				limit = {
+					check_variable = {
+						which = kamuyhuci_variable
+						value = 10
+					}
+				}
+				country_event = {
+					id = ezo.2
+				}
 			}
 		}
 	}

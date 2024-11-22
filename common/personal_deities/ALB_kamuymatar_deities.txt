@@ -6,10 +6,10 @@
 #Kotan-kar-kamuy, regarded as the creator of the world in the Ainu religion
 kamuyhuci_lv1 =  
 {
-	development_cost = -0.05
+	global_tax_modifier = 0.15
 	global_unrest = -1
 	
-	potential = { religion = kamuyramat NOT = {has_country_flag = kamuyhuci_lv1_flag} NOT = {has_country_flag = kamuyhuci_lv2_flag}}
+	potential = { religion = kamuyramat NOT = {has_country_flag = kamuyhuci_lv1_flag} NOT = {has_country_flag = kamuyhuci_lv2_flag} NOT = {has_country_flag = kamuyhuci_lv3_flag} NOT = {has_country_flag = kamuyhuci_lv4_flag}}
 	sprite = 8
 	effect = {
 		country_event = {
@@ -30,15 +30,123 @@ kamuyhuci_lv1 =
 }
 kamuyhuci_lv2 =  
 {
-	development_cost = -0.05
-	global_unrest = -1
+	global_tax_modifier = 0.15
+	global_unrest = -2
 	
-	potential = { religion = kamuyramat has_country_flag = kamuyhuci_lv1_flag NOT = {has_country_flag = kamuyhuci_lv2_flag}}
+	potential = { religion = kamuyramat has_country_flag = kamuyhuci_lv1_flag NOT = {has_country_flag = kamuyhuci_lv2_flag} NOT = {has_country_flag = kamuyhuci_lv3_flag} NOT = {has_country_flag = kamuyhuci_lv4_flag}}
 	sprite = 8
 	effect = {
-		# country_event = {
-		# 	id = ezo.3
-		# }
+		if = {
+			limit = {
+				NOT = {
+					has_country_flag = no_effect_diety_flag
+				}
+			}
+			country_event = {
+				id = ezo.1
+			}
+		}else = {
+			clr_country_flag = no_effect_diety_flag
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 2
+			personality = ai_balanced
+		}	
+		modifier = {
+			factor = 0.5
+			personality = ai_diplomat
+		}
+	}
+}
+kamuyhuci_lv3 =  
+{
+	global_tax_modifier = 0.33
+	global_unrest = -3
+	
+	potential = { religion = kamuyramat has_country_flag = kamuyhuci_lv1_flag has_country_flag = kamuyhuci_lv2_flag NOT = {has_country_flag = kamuyhuci_lv3_flag} NOT = {has_country_flag = kamuyhuci_lv4_flag}}
+	sprite = 8
+	effect = {
+		if = {
+			limit = {
+				NOT = {
+					has_country_flag = no_effect_diety_flag
+				}
+			}
+			country_event = {
+				id = ezo.1
+			}
+		}else = {
+			clr_country_flag = no_effect_diety_flag
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 2
+			personality = ai_balanced
+		}	
+		modifier = {
+			factor = 0.5
+			personality = ai_diplomat
+		}
+	}
+}
+kamuyhuci_lv4 =  
+{
+	global_tax_modifier = 0.5
+	global_unrest = -4
+	
+	potential = { religion = kamuyramat has_country_flag = kamuyhuci_lv1_flag has_country_flag = kamuyhuci_lv2_flag has_country_flag = kamuyhuci_lv3_flag NOT = {has_country_flag = kamuyhuci_lv4_flag}}
+	sprite = 8
+	effect = {
+		if = {
+			limit = {
+				NOT = {
+					has_country_flag = no_effect_diety_flag
+				}
+			}
+			country_event = {
+				id = ezo.1
+			}
+		}else = {
+			clr_country_flag = no_effect_diety_flag
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 2
+			personality = ai_balanced
+		}	
+		modifier = {
+			factor = 0.5
+			personality = ai_diplomat
+		}
+	}
+}
+kamuyhuci_lv5 =  
+{
+	global_tax_modifier = 0.8
+	global_unrest = -5
+	
+	potential = { religion = kamuyramat has_country_flag = kamuyhuci_lv1_flag has_country_flag = kamuyhuci_lv2_flag has_country_flag = kamuyhuci_lv3_flag has_country_flag = kamuyhuci_lv4_flag}
+	sprite = 8
+	effect = {
+		if = {
+			limit = {
+				NOT = {
+					has_country_flag = no_effect_diety_flag
+				}
+			}
+			country_event = {
+				id = ezo.1
+			}
+		}else = {
+			clr_country_flag = no_effect_diety_flag
+		}
 	}
 	ai_will_do = {
 		factor = 1
