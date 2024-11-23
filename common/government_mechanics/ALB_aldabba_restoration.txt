@@ -4,22 +4,191 @@ aldabba_failure_mechanic = {
 	available = {	}
 	powers = {
 		restoration_aldabba = {
-			gui = alb_venetian_capitalism_gui
+			gui = aldabban_restoration_gov_mech
+			show_before_interactions = yes
 			max = 100
 			min = 0
 			reset_on_new_ruler = no
 			scaled_modifier = {
 				modifier = {
-					global_tax_modifier = 0.25 
-					nobles_loyalty_modifier = 0.1
-					nobles_influence_modifier = 0.1
-					legitimacy = 1 
+					state_maintenance_modifier = -0.15	
+					discipline = 0.05
+					all_estate_loyalty_equilibrium = 0.10
+					monthly_restoration_aldabba = -0.5
 				}
 			}
 			on_max_reached = {
-				add_government_reform = indictian_monarchy_reform
+				if = {
+					limit = {
+						NOT = {
+							has_country_flag = reached_max_once
+						}
+					}
+					if = {
+						limit = {
+							government = monarchy
+						}
+						add_government_reform = aldabban_restored_reform
+					}
+					if = {
+						limit = {
+							government = republic
+						}
+						add_government_reform = aldabban_republic_reform
+					}
+					if = {
+						limit = {
+							government = theocracy
+						}
+						add_government_reform = aldabban_theocracy_reform
+					}
+					set_country_flag = reached_max_once
+				}
 			}
 			is_good = yes
+		}
+	}
+	interactions = {
+		purge_weakness = {
+			icon = GFX_purge_army
+			trigger = {
+				mil_power = 100
+				years_of_manpower = 3
+			}
+			effect = { 
+				add_government_power = {
+					mechanic_type = aldabba_failure_mechanic
+					power_type = restoration_aldabba
+					value = 15
+				}
+				add_yearly_manpower = -3
+			}
+			cooldown_years = 5
+			ai_chance = {
+				factor = 5
+				modifier = {
+					factor = 0
+					not = { mil_power = 600 }
+				}
+				modifier = {
+					factor = 0
+					not = { mil = 4 }
+				}
+			}
+		}
+		purge_estates = {
+			icon = GFX_purge_estates
+			cost_type = restoration_aldabba
+			trigger = {
+				custom_trigger_tooltip = {
+					tooltip = has_enabled_purge_estates
+					has_country_flag = enable_purge_estates_button_flag
+				}
+				adm_power = 50
+				estate_loyalty = {
+					estate = all
+					loyalty = 30
+				}
+				has_government_power = {
+					mechanic_type = aldabba_failure_mechanic
+					power_type = restoration_aldabba
+					value = 15
+				}
+			}
+			effect = {
+				add_government_power = {
+					mechanic_type = aldabba_failure_mechanic
+					power_type = restoration_aldabba
+					value = -15
+				}
+				add_adm_power = -50
+				custom_tooltip = " "
+				custom_tooltip = "We will gain 5 Crownland at the expense of 15 Loyalty. This will not cause uprisings in our provinces."
+				hidden_effect = {
+					take_estate_land_share_massive = { estate = all }
+					add_estate_loyalty = {
+						estate = all
+						loyalty = -15
+					}
+				}
+				
+			}
+			ai_chance = {
+				factor = 0
+				modifier = {
+					factor = 10
+					not = {
+						has_government_power = {
+							mechanic_type = aldabba_failure_mechanic
+							power_type = restoration_aldabba
+							value = 90
+						}
+					}
+					adm_power = 500
+				}
+			}
+		}
+		purge_nonbelievers = {
+			icon = GFX_purge_nonbelievers
+			cost_type = restoration_aldabba
+			trigger = {
+				custom_trigger_tooltip = {
+					tooltip = has_enabled_purge_nonbelievers
+					has_country_flag = enable_third_button_aldabba
+				}
+				any_neighbor_country = {
+					NOT = {
+						religion = ROOT
+					}
+				}
+				has_government_power = {
+					mechanic_type = aldabba_failure_mechanic
+					power_type = restoration_aldabba
+					value = 30
+				}
+				dip_power = 50
+			}
+			effect = {
+				add_government_power = {
+					mechanic_type = aldabba_failure_mechanic
+					power_type = restoration_aldabba
+					value = -30
+				}
+				add_dip_power = -50
+				custom_tooltip = " "
+				custom_tooltip = "We will gain the Holy War Casus Belli on a Random Neighbor country that is NOT our religion."
+				random_neighbor_country = {
+					limit = {
+						NOT = {
+							religion = ROOT
+						}
+						NOT = {
+							is_subject_of = ROOT
+						}
+					}
+					ROOT = {
+						add_casus_belli = {
+							type = cb_crusade
+							target = PREV
+						}
+					}
+				}
+				
+			}
+			ai_chance = {
+				factor = 0
+				modifier = {
+					factor = 10
+					not = {
+						has_government_power = {
+							mechanic_type = aldabba_failure_mechanic
+							power_type = restoration_aldabba
+							value = 90
+						}
+					}
+					dip_power = 500
+				}
+			}
 		}
 	}
 }

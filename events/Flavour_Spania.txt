@@ -1,0 +1,191 @@
+namespace = span
+
+country_event = { #Soxony fails as being an empire
+	id = span.1
+	title = span.1.t
+	desc = span.1.d
+	picture = EMPEROR_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = SP0
+		is_free_or_tributary_trigger = yes
+		SO0 = {
+			is_free_or_tributary_trigger = yes
+			NOT = {
+				num_of_owned_provinces_with = {
+					value = 5
+				}
+			}
+		}
+		NOT = {
+			has_country_flag = left_soxony_down_flag
+		}
+	}
+	immediate = {
+		hidden_effect = {
+			set_country_flag = left_soxony_down_flag
+		}
+	}
+	mean_time_to_happen = {
+		months = 24
+	}
+	option = {
+		name = span.1a
+		ai_chance = {
+			factor = 50
+		}
+		change_religion = catholic
+		capital_scope = {
+			change_religion = catholic
+		}
+		add_country_modifier = {
+			name = spa_impotian_failures
+			duration = 10950
+		}
+		add_stability = -1
+	}
+	option = {
+		name = span.1b
+		ai_chance = {
+			factor = 10
+		}
+		create_union = SO0
+		add_stability = -1
+	}
+	option = {
+		name = span.1c
+		ai_chance = {
+			factor = 40
+		}
+	}
+}
+
+country_event = { #Event for the imperial incident
+	id = span.2
+	title = span.2.t
+	desc = span.2.d
+	picture = EMPEROR_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = span.2a
+		emperor = {
+			add_imperial_influence = 10
+		}
+		SP0 = {
+			add_stability = 1
+			set_in_empire = yes
+		}
+	}
+	option = {
+		name = span.2b
+		SP0 = {
+			country_event = {
+				id = span.3
+			}
+		}
+	}
+}
+
+country_event = { #the HIE said no
+	id = span.3
+	title = span.3.t
+	desc = span.3.d
+	picture = EMPEROR_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = span.3a
+		ai_chance = {
+			factor = 90
+		}
+		SP0 = {
+			add_stability = 1
+			change_religion = impotian
+			capital_scope = {
+				change_religion = impotian
+			}
+		}
+	}
+	option = {
+		name = span.3b
+		ai_chance = {
+			factor = 10
+		}
+		SP0 = {
+			add_stability = -3
+			change_religion = arian
+			capital_scope = {
+				change_religion = arian
+			}
+		}
+		hidden_effect = {
+			set_country_flag = arian_fervor_var_set
+			set_variable = {
+				which = arian_fervor_var
+				value = 20
+			}
+		}
+	}
+}
+
+country_event = { # expect it
+	id = span.4
+	title = span.4.t
+	desc = span.4.d
+	picture = RELIGIOUS_TURMOIL_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = span.4a
+		ai_chance = {
+			factor = 90
+		}
+		add_country_modifier_for_age = {
+			name = spa_impotian_inquisition
+			age = age_of_reformation
+		}
+	}
+	option = {
+		name = span.4b
+		ai_chance = {
+			factor = 10
+		}
+		add_country_modifier_for_age = {
+			name = spa_impotian_tolerance
+			age = age_of_reformation
+		}
+	}
+}
+country_event = { # drilling
+	id = span.5
+	title = span.5.t
+	desc = span.5.d
+	picture = MILITARY_CAMP_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = span.5a
+		ai_chance = {
+			factor = 50
+		}
+		add_country_modifier = {
+			name = spa_drillings
+			duration = -1
+		}
+	}
+	option = {
+		name = span.5b
+		ai_chance = {
+			factor = 50
+		}
+		add_country_modifier = {
+			name = spa_millings
+			duration = -1
+		}
+	}
+}

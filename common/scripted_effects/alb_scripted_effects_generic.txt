@@ -10,3 +10,42 @@ give_advisor_tech_discounts = {
 	custom_tooltip = alb_give_advisor_tech_discounts
 	set_country_flag = tech_cost_down_from_advisor_flag
 }
+
+alb_for_every_level_of_advisor_do = { #better alb version of the scripted effect
+	custom_tooltip = alb_for_every_level_of_$type$_do_tt
+	tooltip = {
+		$effect$
+	}
+	hidden_effect = {
+		if = {
+			limit = {
+				has_advisor_of_type_and_level = { type = $type$ level = 1 }
+			}
+			$effect$
+			if = {
+				limit = {
+					has_advisor_of_type_and_level = { type = $type$ level = 2 }
+				}
+				$effect$
+				if = {
+					limit = {
+						has_advisor_of_type_and_level = { type = $type$ level = 3 }
+					}
+					$effect$
+					if = {
+						limit = {
+							has_advisor_of_type_and_level = { type = $type$ level = 4 }
+						}
+						$effect$
+						if = {
+							limit = {
+								has_advisor_of_type_and_level = { type = $type$ level = 5 }
+							}
+							$effect$
+						}
+					}
+				}
+			}
+		}
+	}
+}

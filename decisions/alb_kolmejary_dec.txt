@@ -1,0 +1,97 @@
+country_decisions = {
+
+	kolm_unite_kolmejary_culture = {
+		potential = {
+			tag = KO0
+			NOT = {
+				has_country_flag = united_kolmejar_cultures
+			}
+		}
+		major = yes
+		color = {
+			200 76 222
+		}
+		provinces_to_highlight = {
+			OR = {
+				culture = komkjerkan
+				culture = alb_estonian
+				culture = alb_livonian
+				culture = moesiamaan
+			}
+			NOT = {
+				AND = {
+					owned_by = ROOT
+					grown_by_development = 1
+				}
+			}
+		}
+		allow = {
+			hidden_trigger = {
+				tag = KO0
+			}
+			NOT = {
+				has_estate_privilege = alb_kolmejary_edict_of_zetulii
+			}
+			owns_all_provinces = {
+				culture = komkjerkan
+			}
+			owns_all_provinces = {
+				culture = alb_estonian
+			}
+			owns_all_provinces = {
+				culture = alb_livonian
+			}
+			owns_all_provinces = {
+				culture = moesiamaan
+			}
+			OR = {
+				custom_trigger_tooltip = {
+					tooltip = alb_all_provinces_kolmejar_devved_1_tt
+					all_owned_province = {
+						OR = {
+							AND = {
+								OR = {
+									culture = komkjerkan
+									culture = alb_estonian
+									culture = alb_livonian
+									culture = moesiamaan
+								}
+								grown_by_development = 1
+							}
+							NOT = {
+								OR = {
+									culture = komkjerkan
+									culture = alb_estonian
+									culture = alb_livonian
+									culture = moesiamaan
+								}
+							}
+						}
+					}
+				}
+				has_institution = enlightenment
+			}
+		}
+		effect = {
+			custom_tooltip = kol_unite_cultures_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						OR = {
+							culture = komkjerkan
+							culture = alb_estonian
+							culture = alb_livonian
+							culture = moesiamaan
+						}
+					}
+					change_culture = kolmegy
+				}
+			}
+			change_primary_culture = kolmegy
+			set_country_flag = united_kolmejar_cultures
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+}

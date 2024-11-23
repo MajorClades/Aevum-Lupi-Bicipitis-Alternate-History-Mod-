@@ -655,12 +655,12 @@ country_event = {
 	}
 	trigger = {
 		OR ={
-			not = {
+			NOT = {
 				has_country_flag = has_soxony_event_19_flag
 			}
 			had_country_flag = {
 				flag = has_soxony_event_19_flag
-				days = 100
+				days = 400
 			}
 		}
 	}
@@ -715,7 +715,7 @@ country_event = {
 	option = {
 		name = soxony.21a
 		declare_war_with_cb = {
-			casus_belli = cb_disloyal_vassal
+			casus_belli = cb_vassalize_mission
 			who = event_target:sox_rebelling_vassal_target
 		}
 		if = {
@@ -767,5 +767,58 @@ country_event = {
 	}
 	after = {
 		clear_global_event_target = sox_rebelling_vassal_target
+	}
+}
+
+country_event = { # America takes charge of her uncle empire
+	id = soxony.100
+	title = soxony.100.t
+	desc = soxony.100.d
+	picture = EMPEROR_eventPicture
+	major = yes
+	fire_only_once = yes
+	trigger = {
+		tag = SO2
+		is_free_or_tributary_trigger = yes
+		dynasty = "Sozon"
+		SO0 = {
+			is_free_or_tributary_trigger = yes
+			OR = {
+				NOT = {
+					num_of_owned_provinces_with = {
+						value = 5
+					}
+				}
+				exists = no
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 24
+	}
+	option = {
+		name = soxony.100a
+		ai_chance = {
+			factor = 90
+		}
+		if = {
+			limit = {
+				SO0 = { exists = yes}
+			}
+			create_union = SO0
+		}else = {
+			SO0 = {
+				every_core_province = {
+					add_core = ROOT
+				}
+			}
+		}
+	}
+	option = {
+		name = soxony.100b
+		ai_chance = {
+			factor = 10
+		}
+		add_dip_power = 300
 	}
 }

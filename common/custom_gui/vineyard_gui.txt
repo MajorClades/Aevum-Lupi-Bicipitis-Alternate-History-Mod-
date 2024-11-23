@@ -1,0 +1,124 @@
+custom_button = { #Must match a scripted guiButtonType in a .gui file
+	name = upgrade_vineyard_button
+	potential = {
+		FROM = {
+			has_country_flag = alb_unlock_vineyards_flag
+		}
+		owned_by = FROM
+		is_core = FROM
+		trade_goods = wine
+	}
+	trigger = {
+		if = {
+			limit = {
+				NOT = {
+					OR = {
+						has_province_modifier = vineyard_lvl_1
+						has_province_modifier = vineyard_lvl_2
+						has_province_modifier = vineyard_lvl_3
+						has_province_modifier = vineyard_lvl_4
+					}
+				}
+			}
+			owner = {
+				treasury = 250
+			}
+			development = 20
+		}
+		else_if = {
+			limit = { 
+				has_province_modifier = vineyard_lvl_1
+			}
+			owner = {
+				treasury = 500
+			}
+			development = 30
+		}
+		else_if = {
+			limit = { 
+				has_province_modifier = vineyard_lvl_2
+			}
+			owner = {
+				treasury = 750
+			}
+			development = 40
+		}
+		else_if = {
+			limit = { 
+				has_province_modifier = vineyard_lvl_3
+			}
+			owner = {
+				treasury = 1000
+			}
+			development = 50
+		}
+		NOT = {
+			has_province_modifier = vineyard_lvl_4
+		}
+	}
+	effect = {
+		custom_tooltip = upgrade_vineyard_tt
+		upgrade_vineyard = yes
+	}
+	tooltip = upgrade_vineyard_tt
+}
+custom_icon = {
+    name = vineyard_bg
+    potential = { 
+		FROM = {
+			has_country_flag = alb_unlock_vineyards_flag
+		}
+		owned_by = FROM
+		is_core = FROM
+		trade_goods = wine
+	}
+}
+custom_icon = {
+    name = vineyard_bar
+    potential = { 
+		FROM = {
+			has_country_flag = alb_unlock_vineyards_flag
+		}
+		owned_by = FROM
+		is_core = FROM
+		trade_goods = wine
+	}
+	tooltip = vineyard_bar_tt
+	frame = {
+		number = 1
+		trigger = { 
+			NOT = {
+				OR = {
+					has_province_modifier = vineyard_lvl_1
+					has_province_modifier = vineyard_lvl_2
+					has_province_modifier = vineyard_lvl_3
+					has_province_modifier = vineyard_lvl_4
+				}
+			}
+		}
+	}
+	frame = {
+		number = 2
+		trigger = { 
+			has_province_modifier = vineyard_lvl_1
+		}
+	}
+	frame = {
+		number = 3
+		trigger = { 
+			has_province_modifier = vineyard_lvl_2
+		}
+	}
+	frame = {
+		number = 4
+		trigger = { 
+			has_province_modifier = vineyard_lvl_3
+		}
+	}
+	frame = {
+		number =5
+		trigger = { 
+			has_province_modifier = vineyard_lvl_4
+		}
+	}
+}
