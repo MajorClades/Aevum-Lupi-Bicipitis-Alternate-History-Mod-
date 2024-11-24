@@ -1,0 +1,74 @@
+country_decisions = {
+
+	yam_move_koreans_back = {
+		potential = {
+			tag = KM6
+			has_country_flag = not_help_the_koreans_flag
+			any_country = {
+				primary_culture = korean
+				capital_scope = {
+					region = japan_region
+				}
+			}
+		}
+		allow = {
+			any_ally = {
+				primary_culture = korean
+				has_opinion = {
+					who = ROOT
+					value = 180
+				}
+			}
+		}
+		effect = {
+			random_ally = {
+				limit = {
+					primary_culture = korean
+				}
+				ROOT = {
+					create_union = PREV
+				}
+				custom_tooltip = YAMATAI_TT_5a
+				set_country_flag = helped_the_koreans_flag
+				korea_region = {
+					add_permanent_claim = PREV
+				}
+			}
+			clr_country_flag = not_help_the_koreans_flag
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	yam_move_koreans_around = {
+		potential = {
+			tag = KM6
+			has_country_flag = not_moved_the_koreans_flag
+			any_province = {
+				culture = korean
+				region = japan_region
+			}
+		}
+		allow = {
+			owns_all_provinces = {
+				culture = korean
+				region = japan_region
+			}
+			korea_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			country_event_with_insight = {
+				id = yamat.11
+				insight_tooltip = YAMATAI_TT_5b
+			}
+			clr_country_flag = not_moved_the_koreans_flag
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+}

@@ -329,7 +329,7 @@ country_event = {
 	picture = CITY_VIEW_eventPicture
 	is_triggered_only = yes
 	option = {
-		name = yamat.8a
+		name = yamat.9a
 		hokkaido_area = {
 			cede_province = ANU
 		}
@@ -340,11 +340,247 @@ country_event = {
 		}
 	}
 	option = {
-		name = yamat.8b
+		name = yamat.9b
 		add_yearly_manpower = -7
 		hokkaido_area = {
 			add_devastation = 30
 			add_core = ROOT
+		}
+	}
+}
+
+country_event = {
+	id = yamat.10
+	title = yamat.10.t
+	desc = yamat.10.d
+	picture = CITY_VIEW_eventPicture
+	fire_only_once = yes
+	trigger = {
+		any_country = {
+			OR = {
+				culture_group = japanese_g
+				culture_group = kamchatkan_g
+			}
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 10
+				region = korea_region
+			}
+			any_subject_country = {
+				has_country_flag = helped_the_koreans_flag
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 12
+	}
+	option = {
+		name = yamat.10a
+		random_subject_country = {
+			limit = {has_country_flag = helped_the_koreans_flag}
+			korea_region = {
+				limit = {
+					OR = {
+						owned_by = ROOT
+						owned_by_subject_of = ROOT
+					}
+				}
+				cede_province = PREV
+				add_core = PREV
+			}
+			japan_region = {
+				limit = {
+					owned_by = PREV
+				}
+				cede_province = ROOT
+				add_core = ROOT
+			}
+			clr_country_flag = helped_the_koreans_flag
+		}
+	}
+}
+country_event = {
+	id = yamat.11
+	title = yamat.11.t
+	desc = yamat.11.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.11a
+		trigger = {
+			any_subject_country = {
+				primary_culture = korean
+				capital_scope = {
+					region = korea_region
+				}
+			}
+		}
+		random_subject_country = {
+			limit = {
+				primary_culture = korean
+				capital_scope = {
+					region = korea_region
+				}
+			}
+			every_owned_province = {
+				limit = {
+					NOT = {culture = korean}
+					region = korea_region
+				}
+				change_culture = korean
+			}
+		}
+		every_owned_province = {
+			limit = {
+				NOT = {culture = korean}
+				region = korea_region
+			}
+			change_culture = korean
+		}
+		every_owned_province = {
+			limit = {
+				culture = korean
+				region = japan_region
+			}
+			change_culture = ROOT
+		}
+	}
+	option = {
+		name = yamat.11b
+		every_owned_province = {
+			limit = {
+				NOT = {culture = korean}
+				region = korea_region
+			}
+			change_culture = korean
+		}
+		every_owned_province = {
+			limit = {
+				culture = korean
+				region = japan_region
+			}
+			change_culture = ROOT
+		}
+	}
+	option = {
+		name = yamat.11c
+		trigger = {
+			any_subject_country = {
+				is_colonial_nation = yes
+			}
+		}
+		every_owned_province = {
+			limit = {
+				culture = korean
+				region = japan_region
+			}
+			change_culture = ROOT
+		}
+		random_subject_country = {
+			limit = {
+				is_colonial_nation = yes
+			}
+			random_owned_province = {
+				change_culture = korean
+				add_base_manpower = 1
+			}
+			random_owned_province = {
+				change_culture = korean
+				add_base_manpower = 1
+			}
+			random_owned_province = {
+				change_culture = korean
+				add_base_manpower = 1
+			}
+			random_owned_province = {
+				change_culture = korean
+				add_base_manpower = 1
+			}
+			random_owned_province = {
+				change_culture = korean
+				add_base_manpower = 1
+			}
+		}
+	}
+}
+country_event = {
+	id = yamat.12
+	title = yamat.12.t
+	desc = yamat.12.d
+	picture = CITY_VIEW_eventPicture
+	fire_only_once = yes
+	trigger = {
+		capital_scope = {
+			region = japan_region
+		}
+		japan_region = {
+			type = all
+			country_or_non_sovereign_subject_holds = ROOT
+		}
+		NOT = {
+			has_discovered = 1235
+		}
+	}
+	mean_time_to_happen = {
+		months = 24
+	}
+	option = {
+		name = yamat.12a
+		discover_province = 1235
+		define_explorer = {
+			shock = 2
+			fire = 2
+			manuever = 3
+		}
+	}
+	option = {
+		name = yamat.12b
+		discover_province = 1235
+		1235 = {
+			add_colonysize = 500
+		}
+	}
+}
+country_event = {
+	id = yamat.13
+	title = yamat.13.t
+	desc = yamat.13.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.13a
+		vassalize = KAA
+		northern_polynesia_area = {
+			add_permanent_claim = KAA
+		}
+	}
+	option = {
+		name = yamat.13b
+		vassalize = OAH
+		northern_polynesia_area = {
+			add_permanent_claim = OAH
+		}
+	}
+	option = {
+		name = yamat.13c
+		vassalize = MAU
+		northern_polynesia_area = {
+			add_permanent_claim = MAU
+		}
+	}
+	option = {
+		name = yamat.13d
+		vassalize = HAW
+		northern_polynesia_area = {
+			add_permanent_claim = HAW
+		}
+	}
+	option = {
+		name = yamat.13e
+		1692 = {
+			add_colonysize = 500
+		}
+		northern_polynesia_area = {
+			add_permanent_claim = ROOT
 		}
 	}
 }
