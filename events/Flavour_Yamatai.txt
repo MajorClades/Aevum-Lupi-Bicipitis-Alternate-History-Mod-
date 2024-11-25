@@ -262,14 +262,23 @@ country_event = {
 	is_triggered_only = yes
 	option = {
 		name = yamat.8a
+		trigger = {
+			tag = KM5
+		}
 		custom_tooltip = YAMATAI_TT_2a
-		if = {
-			limit = {
-				tag = KM5
+		KM5 = {
+			custom_tooltip = YAMATAI_TT_2b
+			random_owned_province = {
+				limit = {
+					culture_group = japanese_g
+				}
+				add_province_modifier = {
+					name = nihon_revolt_lv_3
+					duration = -1
+				}
 			}
-			KM5 = {
-				custom_tooltip = YAMATAI_TT_2b
-				random_owned_province = {
+			hidden_effect = {
+				every_owned_province = {
 					limit = {
 						culture_group = japanese_g
 					}
@@ -278,21 +287,17 @@ country_event = {
 						duration = -1
 					}
 				}
-				hidden_effect = {
-					every_owned_province = {
-						limit = {
-							culture_group = japanese_g
-						}
-						add_province_modifier = {
-							name = nihon_revolt_lv_3
-							duration = -1
-						}
-					}
-					remove_government_reform = ezo_confederation_reform
-					add_government_reform = ezo_confederation_reform
-				}
+				remove_government_reform = ezo_confederation_reform
+				add_government_reform = ezo_confederation_reform
 			}
-		}else = {
+		}
+	}
+	option = {
+		name = yamat.8b
+		trigger = {
+			tag = KM6
+		}
+		custom_tooltip = YAMATAI_TT_2a
 			KM6 = {
 				custom_tooltip = YAMATAI_TT_2c
 				random_owned_province = {
@@ -318,7 +323,6 @@ country_event = {
 					add_government_reform = kingdom_of_yamatai_reform
 				}
 			}
-		}
 	}
 }
 
@@ -341,7 +345,7 @@ country_event = {
 	}
 	option = {
 		name = yamat.9b
-		add_yearly_manpower = -7
+		add_yearly_manpower = -1.5
 		hokkaido_area = {
 			add_devastation = 30
 			add_core = ROOT
@@ -581,6 +585,58 @@ country_event = {
 		}
 		northern_polynesia_area = {
 			add_permanent_claim = ROOT
+		}
+	}
+}
+country_event = {
+	id = yamat.14
+	title = yamat.14.t
+	desc = yamat.14.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.14a
+		discover_province = 1699
+		discover_province = 1693
+		discover_province = 1687
+		discover_province = 1556
+		country_event = {
+			id = yamat.15
+		}
+	}
+	option = {
+		name = yamat.14b
+		trigger = {
+			has_discovered = 1699
+			has_discovered = 1693
+			has_discovered = 1687
+			has_discovered = 1556
+		}
+		add_stability_or_adm_power = yes
+	}
+}
+country_event = {
+	id = yamat.15
+	title = yamat.15.t
+	desc = yamat.15.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.15a
+		vassalize = CL0
+		4637 = {
+			cede_province = ROOT
+		}
+		add_country_modifier = {
+			name = yam_hinode_colozination
+			duration = 10950
+		}
+	}
+	option = {
+		name = yamat.15b
+		add_country_modifier = {
+			name = yam_full_colozination
+			duration = 10950
 		}
 	}
 }
