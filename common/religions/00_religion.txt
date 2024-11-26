@@ -941,7 +941,39 @@ christian = {
 			tolerance_own = 2
 			tolerance_heretic = -2
 		}
-		
+		on_convert = {
+			change_religion = pontifex
+			add_prestige = -100
+			add_country_modifier = {
+				name = conversion_zeal
+				duration = 3650
+			}
+			if = {
+				limit = {
+					NOT = {
+						calc_true_if = {
+							all_province = {
+								religion = pontifex
+								is_reformation_center = yes
+							}
+							amount = 3
+						}
+					}
+				}
+				hidden_effect = {
+					random_owned_province = {
+						limit = {
+							can_have_center_of_reformation_trigger = {
+								RELIGION = pontifex
+							}
+						}
+						change_religion = pontifex
+						add_reform_center = pontifex
+					}
+				}
+				custom_tooltip = CENTER_OF_REFORMATION_POSSIBLE
+			}
+		}
 		heretic = { LUCANIANS }
 		# ancestors = yes
 		hre_heretic_religion = yes
@@ -1499,7 +1531,32 @@ muslim = {
 			add_country_modifier = {
 				name = "conversion_zeal"
 				duration = 3650
-			}			
+			}
+			if = {
+				limit = {
+					NOT = {
+						calc_true_if = {
+							all_province = {
+								religion = rashidi
+								is_reformation_center = yes
+							}
+							amount = 3
+						}
+					}
+				}
+				hidden_effect = {
+					random_owned_province = {
+						limit = {
+							can_have_center_of_reformation_trigger = {
+								RELIGION = rashidi
+							}
+						}
+						change_religion = rashidi
+						add_reform_center = rashidi
+					}
+				}
+				custom_tooltip = CENTER_OF_REFORMATION_POSSIBLE
+			}
 		}
 		heretic = { DRUZE HURUFI ZAIDI }
 		fervor = yes
