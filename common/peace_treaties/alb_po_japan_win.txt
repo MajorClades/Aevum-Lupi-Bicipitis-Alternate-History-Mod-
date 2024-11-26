@@ -28,38 +28,15 @@ po_japan_win = {
 	effect = { # Defaults to empty effect (which makes error log entry but is safe)
 		FROM = {
 			every_owned_province = {
+				limit = {
+					region = japan_region
+				}
 				cede_province = ROOT
 			}
+			set_country_flag = loser_po_japan_win_flag
 		}	
-		KM6 = {
-			every_owned_province = {
-				limit = {
-					culture_group = kamchatkan_g
-				}
-				add_province_modifier = {
-					name = nihon_revolt_lv_3
-					duration = -1
-				}
-			}
-			hidden_effect = {
-				remove_government_reform = kingdom_of_yamatai_reform
-				add_government_reform = kingdom_of_yamatai_reform
-			}
-		}
-		KM5 = {
-			every_owned_province = {
-				limit = {
-					culture_group = japanese_g
-				}
-				add_province_modifier = {
-					name = nihon_revolt_lv_3
-					duration = -1
-				}
-			}
-			hidden_effect = {
-				remove_government_reform = ezo_confederation_reform
-				add_government_reform = ezo_confederation_reform
-			}
+		country_event = {
+			id = yamat.8
 		}
 	}
 	ai_weight = { # Defaults to always evaluate to 0

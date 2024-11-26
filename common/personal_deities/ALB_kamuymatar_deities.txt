@@ -135,6 +135,52 @@ kamuyhuci_lv5 =
 	potential = { religion = kamuyramat has_country_flag = kamuyhuci_lv1_flag has_country_flag = kamuyhuci_lv2_flag has_country_flag = kamuyhuci_lv3_flag has_country_flag = kamuyhuci_lv4_flag}
 	sprite = 8
 	effect = {
+		add_adm_power = 100
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 2
+			personality = ai_balanced
+		}	
+		modifier = {
+			factor = 0.5
+			personality = ai_diplomat
+		}
+	}
+}
+kimunkamuy_lv1 =  
+{
+	production_efficiency = 0.05
+	army_tradition = 0.25
+	
+	potential = { religion = kamuyramat NOT = {has_country_flag = kimunkamuy_lv1_flag} NOT = {has_country_flag = kimunkamuy_lv2_flag} NOT = {has_country_flag = kimunkamuy_lv3_flag} NOT = {has_country_flag = kimunkamuy_lv4_flag}}
+	sprite = 7
+	effect = {
+		country_event = {
+			id = ezo.3
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 2
+			personality = ai_balanced
+		}	
+		modifier = {
+			factor = 0.5
+			personality = ai_diplomat
+		}
+	}
+}
+kimunkamuy_lv2 =  
+{
+	production_efficiency = 0.1
+	army_tradition = 0.25
+	
+	potential = { religion = kamuyramat has_country_flag = kimunkamuy_lv1_flag NOT = {has_country_flag = kimunkamuy_lv2_flag} NOT = {has_country_flag = kimunkamuy_lv3_flag} NOT = {has_country_flag = kimunkamuy_lv4_flag}}
+	sprite = 7
+	effect = {
 		if = {
 			limit = {
 				NOT = {
@@ -142,7 +188,7 @@ kamuyhuci_lv5 =
 				}
 			}
 			country_event = {
-				id = ezo.1
+				id = ezo.3
 			}
 		}else = {
 			clr_country_flag = no_effect_diety_flag
@@ -160,25 +206,27 @@ kamuyhuci_lv5 =
 		}
 	}
 }
-kimunkamuy_lv1 =
+kimunkamuy_lv3 =  
 {
-	production_efficiency = 0.05
-	army_tradition = 0.25
+	production_efficiency = 0.1
+	army_tradition = 0.5
 	
-	potential = { religion = kamuyramat NOT = {has_country_flag = kimunkamuy_lv1_up_flag} NOT = {has_country_flag = kimunkamuy_lv2_up_flag}}
-	sprite = 6
+	potential = { religion = kamuyramat has_country_flag = kimunkamuy_lv1_flag has_country_flag = kimunkamuy_lv2_flag NOT = {has_country_flag = kimunkamuy_lv3_flag} NOT = {has_country_flag = kimunkamuy_lv4_flag}}
+	sprite = 7
 	effect = {
 		if = {
 			limit = {
-				has_country_flag = kimunkamuy_lv1_flag
+				NOT = {
+					has_country_flag = no_effect_diety_flag
+				}
 			}
-			clr_country_flag = kimunkamuy_lv1_flag
-			set_country_flag = kimunkamuy_lv1_up_flag
+			country_event = {
+				id = ezo.3
+			}
 		}else = {
-			set_country_flag = kimunkamuy_lv1_flag
+			clr_country_flag = no_effect_diety_flag
 		}
 	}
-
 	ai_will_do = {
 		factor = 1
 		modifier = {
@@ -191,54 +239,212 @@ kimunkamuy_lv1 =
 		}
 	}
 }
-repunkamuy_lv1 =
+kimunkamuy_lv4 =  
 {
-	trade_efficiency = 0.1
-	navy_tradition = 0.25
+	production_efficiency = 0.15
+	army_tradition = 0.75
 	
-	potential = { religion = kamuyramat NOT = {has_country_flag = repunkamuy_lv1_up_flag} NOT = {has_country_flag = repunkamuy_lv2_up_flag}}
-	sprite = 9
+	potential = { religion = kamuyramat has_country_flag = kimunkamuy_lv1_flag has_country_flag = kimunkamuy_lv2_flag has_country_flag = kimunkamuy_lv3_flag NOT = {has_country_flag = kimunkamuy_lv4_flag}}
+	sprite = 7
 	effect = {
 		if = {
 			limit = {
-				has_country_flag = repunkamuy_lv1_flag
+				NOT = {
+					has_country_flag = no_effect_diety_flag
+				}
 			}
-			clr_country_flag = repunkamuy_lv1_flag
-			set_country_flag = repunkamuy_lv1_up_flag
+			country_event = {
+				id = ezo.3
+			}
 		}else = {
-			set_country_flag = repunkamuy_lv1_flag
+			clr_country_flag = no_effect_diety_flag
 		}
 	}
-	
 	ai_will_do = {
 		factor = 1
 		modifier = {
 			factor = 2
-			personality = ai_militarist
+			personality = ai_balanced
 		}	
 		modifier = {
 			factor = 0.5
-			personality = ai_colonialist
+			personality = ai_diplomat
+		}
+	}
+}
+kimunkamuy_lv5 =  
+{
+	production_efficiency = 0.2
+	army_tradition = 1
+	
+	potential = { religion = kamuyramat has_country_flag = kimunkamuy_lv1_flag has_country_flag = kimunkamuy_lv2_flag has_country_flag = kimunkamuy_lv3_flag has_country_flag = kimunkamuy_lv4_flag}
+	sprite = 7
+	effect = {
+		add_mil_power = 100
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 2
+			personality = ai_balanced
+		}	
+		modifier = {
+			factor = 0.5
+			personality = ai_diplomat
+		}
+	}
+}
+repunkamuy_lv1 =  
+{
+	trade_efficiency = 0.1
+	navy_tradition = 0.25
+	
+	potential = { religion = kamuyramat NOT = {has_country_flag = repunkamuy_lv1_flag} NOT = {has_country_flag = repunkamuy_lv2_flag} NOT = {has_country_flag = repunkamuy_lv3_flag} NOT = {has_country_flag = repunkamuy_lv4_flag}}
+	sprite = 3
+	effect = {
+		country_event = {
+			id = ezo.3
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 2
+			personality = ai_balanced
+		}	
+		modifier = {
+			factor = 0.5
+			personality = ai_diplomat
+		}
+	}
+}
+repunkamuy_lv2 =  
+{
+	trade_efficiency = 0.15
+	navy_tradition = 0.5
+	
+	potential = { religion = kamuyramat has_country_flag = repunkamuy_lv1_flag NOT = {has_country_flag = repunkamuy_lv2_flag} NOT = {has_country_flag = repunkamuy_lv3_flag} NOT = {has_country_flag = repunkamuy_lv4_flag}}
+	sprite = 3
+	effect = {
+		if = {
+			limit = {
+				NOT = {
+					has_country_flag = no_effect_diety_flag
+				}
+			}
+			country_event = {
+				id = ezo.3
+			}
+		}else = {
+			clr_country_flag = no_effect_diety_flag
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 2
+			personality = ai_balanced
+		}	
+		modifier = {
+			factor = 0.5
+			personality = ai_diplomat
+		}
+	}
+}
+repunkamuy_lv3 =  
+{
+	trade_efficiency = 0.2
+	navy_tradition = 0.75
+	
+	potential = { religion = kamuyramat has_country_flag = repunkamuy_lv1_flag has_country_flag = repunkamuy_lv2_flag NOT = {has_country_flag = repunkamuy_lv3_flag} NOT = {has_country_flag = repunkamuy_lv4_flag}}
+	sprite = 3
+	effect = {
+		if = {
+			limit = {
+				NOT = {
+					has_country_flag = no_effect_diety_flag
+				}
+			}
+			country_event = {
+				id = ezo.3
+			}
+		}else = {
+			clr_country_flag = no_effect_diety_flag
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 2
+			personality = ai_balanced
+		}	
+		modifier = {
+			factor = 0.5
+			personality = ai_diplomat
+		}
+	}
+}
+repunkamuy_lv4 =  
+{
+	trade_efficiency = 0.25
+	navy_tradition = 1
+	
+	potential = { religion = kamuyramat has_country_flag = repunkamuy_lv1_flag has_country_flag = repunkamuy_lv2_flag has_country_flag = repunkamuy_lv3_flag NOT = {has_country_flag = repunkamuy_lv4_flag}}
+	sprite = 3
+	effect = {
+		if = {
+			limit = {
+				NOT = {
+					has_country_flag = no_effect_diety_flag
+				}
+			}
+			country_event = {
+				id = ezo.3
+			}
+		}else = {
+			clr_country_flag = no_effect_diety_flag
+		}
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 2
+			personality = ai_balanced
+		}	
+		modifier = {
+			factor = 0.5
+			personality = ai_diplomat
+		}
+	}
+}
+repunkamuy_lv5 =  
+{
+	trade_efficiency = 0.33
+	navy_tradition = 1.25
+	
+	potential = { religion = kamuyramat has_country_flag = repunkamuy_lv1_flag has_country_flag = repunkamuy_lv2_flag has_country_flag = repunkamuy_lv3_flag has_country_flag = repunkamuy_lv4_flag}
+	sprite = 3
+	effect = {
+		add_dip_power = 100
+	}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 2
+			personality = ai_balanced
+		}	
+		modifier = {
+			factor = 0.5
+			personality = ai_diplomat
 		}
 	}
 }
 kotankarkamuy_lv1 =
 {
 	core_creation = -0.05
-	
+	#going to evolve through missions
 	potential = { religion = kamuyramat NOT = {has_country_flag = kotankarkamuy_lv1_up_flag} NOT = {has_country_flag = kotankarkamuy_lv2_up_flag}}
 	sprite = 7
-	effect = {
-		if = {
-			limit = {
-				has_country_flag = kotankarkamuy_lv1_flag
-			}
-			clr_country_flag = kotankarkamuy_lv1_flag
-			set_country_flag = kotankarkamuy_lv1_up_flag
-		}else = {
-			set_country_flag = kotankarkamuy_lv1_flag
-		}
-	}
 	ai_will_do = {
 		factor = 1
 		modifier = {

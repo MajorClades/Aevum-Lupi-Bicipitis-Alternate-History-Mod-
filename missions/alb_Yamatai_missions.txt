@@ -1,0 +1,396 @@
+Yamatai_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {tag = KM6 }
+
+	yam_army = {
+		icon = alpine_fortifications
+		position = 1
+		trigger = {
+			if = {
+				limit = {ai = yes}
+				army_size_percentage = 0.8
+				num_of_generals = 1
+			}else = {
+				army_size_percentage = 1
+			}
+		}
+
+		effect = {
+			hokuriku_area = {
+				add_permanent_claim = ROOT
+			}
+			eastern_kanto_area = {
+				add_permanent_claim = ROOT
+			}
+			thohoku_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	yam_utari_ezo = {
+		icon = mission_english_renaissance
+		position = 2
+		required_missions = { yam_army } 
+		provinces_to_highlight = { OR = { area = hokuriku_area area = eastern_kanto_area area = thohoku_area } } 
+
+		trigger = {
+			hokuriku_area = {
+				type = all
+				owned_by = ROOT
+			}
+			eastern_kanto_area = {
+				type = all
+				owned_by = ROOT
+			}
+			thohoku_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = yam_pacification_of_ezo
+				duration = 10950
+			}
+			hokkaido_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	yam_daishogun = {
+		icon = mission_english_renaissance
+		position = 3
+		required_missions = { yam_utari_ezo } 
+		provinces_to_highlight = { area = hokkaido_area } 
+
+		trigger = {
+			hokkaido_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			country_event = {
+				id = yamat.9
+			}
+		}
+	}
+}
+Yamatai_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {tag = KM6 }
+
+	yam_whaling = {
+		icon = mission_english_renaissance
+		position = 2
+		required_missions = { yam_navy } 
+		provinces_to_highlight = {
+			province_id = 2106
+		}
+
+		trigger = {
+			num_of_light_ship = 12
+			OR = {
+				owns_or_non_sovereign_subject_of = 2106
+				owns_or_non_sovereign_subject_of = 4185
+			}
+		}
+
+		effect = {
+			if = {
+				limit = {
+					owns_or_non_sovereign_subject_of = 2106
+				}
+				2106 = {
+					add_building = ramparts
+				}
+			}else = {
+				custom_tooltip = YAMATAI_TT_3
+				tooltip = {
+					2106 = {
+						add_building = ramparts
+					}
+				}
+			}
+			4185 = {
+				add_or_upgrade_shipyard_building = yes
+			}
+		}
+	}
+	yam_empire_of_nihon = {
+		icon = mission_english_renaissance
+		position = 4
+		required_missions = { yam_daishogun yam_times_of_rebirth} 
+		provinces_to_highlight = {NOT = { country_or_non_sovereign_subject_holds = ROOT } region = japan_region}
+		trigger = {
+			japan_region = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			override_country_name = NIHON
+			set_government_rank = 3
+		}
+	}
+}
+Yamatai_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {tag = KM6 }
+
+	yam_navy = {
+		icon = alpine_fortifications
+		position = 1
+		trigger = {
+			if = {
+				limit = {ai = yes}
+				navy_size_percentage = 0.7
+				num_of_admirals = 1
+			}else = {
+				navy_size_percentage = 1
+			}
+		}
+
+		effect = {
+			define_admiral = {
+				shock = 3
+				fire = 3
+				manuever = 4
+			}
+		}
+	}
+
+	yam_grand_fleet = {
+		icon = mission_english_renaissance
+		position = 2
+		required_missions = { yam_navy } 
+		provinces_to_highlight = { owned_by = ROOT has_port = yes } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				has_port = yes 
+				base_production = 5
+			}
+		}
+
+		effect = {
+			random_owned_province = { limit = {base_production = 5} add_or_upgrade_dock_building = yes}
+			random_owned_province = { limit = {base_production = 5} add_or_upgrade_dock_building = yes}
+			random_owned_province = { limit = {base_production = 5} add_or_upgrade_dock_building = yes}
+			random_owned_province = { limit = {base_production = 5} add_or_upgrade_dock_building = yes}
+			random_owned_province = { limit = {base_production = 5} add_or_upgrade_dock_building = yes}
+		}
+	}
+
+	yam_times_of_rebirth = {
+		icon = mission_english_renaissance
+		position = 3
+		required_missions = { yam_koreas } 
+
+		trigger = {
+			OR = {
+				AND = {
+					army_size = 50
+					navy_size = 50
+				}
+				has_institution = renaissance
+			}
+			grown_by_development = 50
+		}
+
+		effect = {
+			capital_scope = {
+				add_institution_embracement = {
+					which = renaissance
+					value = 100
+				}
+			}
+			add_country_modifier = {
+				name = yam_lore_and_culture
+				duration = 10950
+			}
+		}
+	}
+	yam_mandate_of_heaven = {
+		icon = mission_english_renaissance
+		position = 5
+
+		trigger = {
+			government_rank = 3
+			navy_size = 50
+		}
+
+		effect = {
+			custom_tooltip = YAMATAI_TT_6
+			set_country_flag = destroy_china_flag
+		}
+	}
+}
+Yamatai_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {tag = KM6 }
+
+	yam_koreas = {
+		icon = mission_english_renaissance
+		position = 2
+		required_missions = { yam_navy yam_southern_sights} 
+		trigger = {
+			stability = 1
+			OR = {
+				diplomat = 2
+				statesman = 2
+				any_ally = {
+					primary_culture = korean
+					has_opinion = {
+						who = ROOT
+						value = 170
+					}
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = YAMATAI_TT_4a
+			set_country_flag = not_help_the_koreans_flag
+			sanindo_area = {
+				add_permanent_claim = ROOT
+			}
+			saigoku_area = {
+				add_permanent_claim = ROOT
+			}
+			shikoku_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+}
+Yamatai_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {tag = KM6 }
+
+	yam_southern_sights = {
+		icon = mission_english_renaissance
+		position = 1
+		trigger = {
+			is_at_war = no
+			dip_power = 100
+			treasury = 100
+		}
+
+		effect = {
+			add_treasury = -100
+			add_dip_power = -100
+			remove_ruler_personality = babbling_buffoon_personality
+			add_ruler_personality = free_thinker_personality
+		}
+	}
+
+	yam_southern_islands = {
+		icon = mission_english_renaissance
+		position = 3
+		required_missions = { yam_koreas } 
+		provinces_to_highlight = {culture = korean region = japan_region}
+		trigger = {
+			owns_all_provinces = {
+				culture = korean
+				region = japan_region
+			}
+		}
+
+		effect = {
+			custom_tooltip = YAMATAI_TT_4b
+			set_country_flag = not_moved_the_koreans_flag
+			kyushu_area = {
+				add_permanent_claim = ROOT
+			}
+			northern_kyushu = {
+				add_permanent_claim = ROOT
+			}
+			korea_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	yam_the_united_realms = {
+		icon = mission_english_renaissance
+		position = 4
+		required_missions = { yam_southern_islands } 
+		provinces_to_highlight = {NOT = { country_or_non_sovereign_subject_holds = ROOT } region = korea_region}
+		trigger = {
+			korea_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_accepted_culture = korean
+			add_country_modifier = {
+				name = korean_nihon_union
+				duration = -1
+			}
+		}
+	}
+
+	yam_look_east = {
+		icon = mission_english_renaissance
+		position = 5
+
+		trigger = {
+			has_discovered = 1697
+		}
+
+		effect = {
+			discover_province = 4936 
+			discover_province = 4935 
+			discover_province = 4934 
+			discover_province = 1240 
+			country_event_with_insight = {
+				id = yamat.13
+				insight_tooltip = YAMATAI_TT_7a
+			}
+		}
+	}
+	yam_star_travellers = {
+		icon = mission_english_renaissance
+		position = 6
+		required_missions = { yam_look_east } 
+		provinces_to_highlight = {NOT = { country_or_non_sovereign_subject_holds = ROOT } area = northern_polynesia_area}
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 4
+				area = northern_polynesia_area
+			}
+		}
+
+		effect = {
+			country_event_with_insight = {
+				id = yamat.14
+				insight_tooltip = YAMATAI_TT_7b
+			}
+		}
+	}
+}
