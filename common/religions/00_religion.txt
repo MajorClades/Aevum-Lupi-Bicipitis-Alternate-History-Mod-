@@ -25,9 +25,11 @@ christian = {
 		}
 		allowed_conversion = {
 			wycliffian
+			pontifex
 		}
 		allowed_center_conversion = {
 			wycliffian
+			pontifex
 		}
 		country_as_secondary = {
 			diplomatic_reputation = 1
@@ -566,9 +568,11 @@ christian = {
 
 		allowed_center_conversion = {
 			catholic
+			pontifex
 		}
 		allowed_conversion = {
 			catholic
+			pontifex
 		}
 		country = {
 			shock_damage_received = -0.05
@@ -578,7 +582,13 @@ christian = {
 		country_as_secondary = {
 			shock_damage_received = -0.025
 		}
-		
+		will_get_center = { #Refered to even for initial CoR Spawn
+			any_owned_province = {
+				can_have_center_of_reformation_trigger = {
+					RELIGION = wycliffian
+				}
+			}
+		}
 		uses_hussite_power = yes				# Uses church power/aspect mechanics
 		date = 1520.1.1
 		aspects = {
@@ -927,7 +937,14 @@ christian = {
 	}
 
 	pontifex = {
-	
+		allowed_center_conversion = {
+			catholic
+			wycliffian
+		}
+		allowed_conversion = {
+			catholic
+			wycliffian
+		}
 		flags_with_emblem_percentage = 20
 		flag_emblem_index_range = { 1 4 }
 
@@ -940,6 +957,13 @@ christian = {
 		country_as_secondary = {
 			tolerance_own = 2
 			tolerance_heretic = -2
+		}
+		will_get_center = { #Refered to even for initial CoR Spawn
+			any_owned_province = {
+				can_have_center_of_reformation_trigger = {
+					RELIGION = pontifex
+				}
+			}
 		}
 		on_convert = {
 			change_religion = pontifex
