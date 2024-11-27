@@ -509,16 +509,17 @@ aldabban_restored_reform = {
 at_shop_reform = {
 	allow_normal_conversion = yes
 	icon = "at_shop" #REPLACE_ME
-	potential = {	}
+	potential = {	
+		has_unlocked_government_reform = { government_reform = at_shop_reform }
+	}
 	trigger = {
 		OR = {
-			army_tradition = 50
+			army_tradition = 80
 			has_reform = at_shop_reform
 		}
 	}
 	modifiers = {
-		infantry_cost = -0.1
-		manpower_recovery_speed = 0.15
+		land_maintenance_modifier = -0.05
 	}
 	effect = {
 		set_country_flag = extra_discipline_for_at_flag
@@ -539,7 +540,9 @@ at_shop_reform = {
 professional_expansion_reform = {
 	allow_normal_conversion = yes
 	icon = "professionalism" #REPLACE_ME
-	potential = {	}
+	potential = {	
+		has_unlocked_government_reform = { government_reform = professional_expansion_reform }
+	}
 	trigger = {
 		OR = {
 			mil_power = 250
@@ -547,8 +550,7 @@ professional_expansion_reform = {
 		}
 	}
 	modifiers = {
-		infantry_cost = -0.1
-		manpower_recovery_speed = 0.15
+		manpower_recovery_speed = 0.05
 	}
 	effect = {
 		add_mil_power = -250
