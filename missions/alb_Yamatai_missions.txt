@@ -314,16 +314,30 @@ Yamatai_3_slot = {
 			set_country_flag = destroy_china_flag
 		}
 	}
-	yam_ahh = {
+	yam_plunder_and_oppress = {
 		icon = mission_english_renaissance
 		position = 7
 		required_missions = { yam_chinese_opposition } 
 		trigger = {
-			
+			OR = {
+				is_emperor_of_china = yes
+				any_war_enemy_country = {
+					is_emperor_of_china = yes
+				}
+				WA0 = {
+					is_subject_of = ROOT
+					num_of_owned_provinces_with = {
+						value = 20
+						superregion = china_superregion
+					}
+				}
+			}
 		}
 
 		effect = {
-			
+			country_event = {
+				id = yamat.19
+			}
 		}
 	}
 }
