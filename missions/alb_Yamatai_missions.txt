@@ -103,9 +103,31 @@ Yamatai_1_slot = {
 			}
 		}
 	}
-	yam_makau_my_way = {
+	yam_even_more_divine_city = {
 		icon = mission_english_renaissance
 		position = 7
+		required_missions = { yam_divine_city yam_samurais} 
+		provinces_to_highlight = {province_id = 1020}
+		trigger = {
+			1020 = {
+				has_great_project = {
+					type = imperial_city_kyoto
+					tier = 3
+				}
+			}
+		}
+
+		effect = {
+			add_army_tradition_or_mil_power = {amount = 10}
+			add_country_modifier = {
+				name = yam_samurai_op
+				duration = -1
+			}
+		}
+	}
+	yam_makau_my_way = {
+		icon = mission_english_renaissance
+		position = 11
 		required_missions = { yam_starting_position } 
 		provinces_to_highlight = {province_id = 668 }
 		trigger = {
@@ -181,9 +203,46 @@ Yamatai_2_slot = {
 			set_government_rank = 3
 		}
 	}
-	yam_starting_position = {
+	yam_samurais = {
 		icon = mission_english_renaissance
 		position = 6
+		required_missions = { yam_standardize_measurements } 
+		provinces_to_highlight = { owned_by = ROOT  has_manpower_building_trigger = no} 
+		trigger = {
+			estate_loyalty = {
+				estate = estate_nobles
+				loyalty = 65
+			}
+			num_of_owned_provinces_with = {
+				value = 15
+				has_manpower_building_trigger = yes
+			}
+			num_of_completed_idea_groups_mil = {amount = 1}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = yam_elites
+				duration = -1
+			}
+			add_country_modifier = {
+				name = yam_true_samurai
+				duration = 10950
+			}
+			hidden_effect = {
+				capital_scope = {
+					add_permanent_province_modifier = {
+						name = yam_elites_local
+						duration = -1
+						hidden = yes
+					}
+				}
+			}
+		}
+	}
+	yam_starting_position = {
+		icon = mission_english_renaissance
+		position = 10
 		required_missions = { yam_mandate_of_naval_supremacy } 
 		provinces_to_highlight = {NOT = { country_or_non_sovereign_subject_holds = ROOT } area = taiwan_area }
 		trigger = {
@@ -203,7 +262,7 @@ Yamatai_2_slot = {
 	}
 	yam_the_panyupaya = {
 		icon = mission_english_renaissance
-		position = 8
+		position = 12
 		required_missions = { yam_starting_position } 
 		provinces_to_highlight = {NOT = { country_or_non_sovereign_subject_holds = ROOT } development = 10 }
 		trigger = {
@@ -300,9 +359,56 @@ Yamatai_3_slot = {
 			}
 		}
 	}
-	yam_mandate_of_naval_supremacy = {
+
+	yam_divine_gratitude = {
+		icon = mission_english_renaissance
+		position = 4
+		required_missions = { yam_times_of_rebirth } 
+		provinces_to_highlight = { owned_by = ROOT has_tax_building_trigger = no } 
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 15
+				has_tax_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_stability_or_adm_power = yes
+			add_estate_loyalty = {
+				estate = estate_church
+				loyalty = 10
+			}
+		}
+	}
+
+	yam_standardize_measurements = {
 		icon = mission_english_renaissance
 		position = 5
+		required_missions = { yam_divine_gratitude } 
+		provinces_to_highlight = { owned_by = ROOT has_trade_building_trigger = no } 
+		trigger = {
+			has_dip_advisor_2 = yes
+			num_of_owned_provinces_with = {
+				value = 10
+				has_trade_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = yam_measurements
+				duration = 10950
+			}
+			add_estate_loyalty = {
+				estate = estate_burghers
+				loyalty = 10
+			}
+		}
+	}
+
+	yam_mandate_of_naval_supremacy = {
+		icon = mission_english_renaissance
+		position = 9
 
 		trigger = {
 			government_rank = 3
@@ -316,7 +422,7 @@ Yamatai_3_slot = {
 	}
 	yam_plunder_and_oppress = {
 		icon = mission_english_renaissance
-		position = 7
+		position = 11
 		required_missions = { yam_chinese_opposition } 
 		trigger = {
 			OR = {
@@ -382,18 +488,46 @@ Yamatai_4_slot = {
 		}
 	}
 
-	yam_global_trade = {
+	yam_rice_markets = {
 		icon = mission_english_renaissance
 		position = 4
 		required_missions = { yam_times_of_rebirth } 
 		provinces_to_highlight = {
+			owned_by = ROOT has_production_building_trigger = no
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 20
+				has_production_building_trigger = yes
+			}
+		}
+
+		effect = {
+			every_owned_province = {
+				limit = {
+					region = japan_region
+				}
+				add_permanent_province_modifier = {
+					name = yam_rice_production
+					duration = 10950
+				}
+			}
+		}
+	}
+	yam_global_trade = {
+		icon = mission_english_renaissance
+		position = 6
+		required_missions = { yam_standardize_measurements } 
+		provinces_to_highlight = {
 			owned_by = ROOT NOT = {has_manufactory_trigger = yes}
 		}
 		trigger = {
-			has_institution = global_trade
-			num_of_owned_provinces_with = {
-				value = 20
-				has_manufactory_trigger = yes
+			OR = {
+				has_institution = global_trade
+				num_of_owned_provinces_with = {
+					value = 20
+					has_manufactory_trigger = yes
+				}
 			}
 		}
 
@@ -409,10 +543,26 @@ Yamatai_4_slot = {
 			}
 		}
 	}
+	yam_keep_the_sun_shine = {
+		icon = mission_english_renaissance
+		position = 8
+		required_missions = { yam_sunrise_colony yam_global_trade } 
+		provinces_to_highlight = {NOT = { country_or_non_sovereign_subject_holds = ROOT } colonial_region = colonial_california}
+		trigger = {
+			colonial_california = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
 
+		effect = {
+			custom_tooltip = YAMATAI_TT_10
+			set_country_flag = hinode_trade_goods_flag
+		}
+	}
 	yam_chinese_opposition = {
 		icon = mission_english_renaissance
-		position = 6
+		position = 10
 		required_missions = { yam_mandate_of_naval_supremacy } 
 		provinces_to_highlight = {NOT = { country_or_non_sovereign_subject_holds = ROOT } OR = {region = south_china_region region = north_china_region } }
 		trigger = {
@@ -432,7 +582,7 @@ Yamatai_4_slot = {
 
 	yam_mandate_of_heaven = {
 		icon = mission_english_renaissance
-		position = 8
+		position = 12
 		required_missions = { yam_chinese_opposition } 
 		provinces_to_highlight = {NOT = { country_or_non_sovereign_subject_holds = ROOT } superregion = china_superregion }
 		trigger = {
