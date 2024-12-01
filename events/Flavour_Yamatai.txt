@@ -752,16 +752,34 @@ country_event = { #kill China
 	is_triggered_only = yes
 	option = {
 		name = yamat.19a
-		every_country = {
+		if = {
 			limit = {
-				capital_scope = {
-					superregion = china_superregion
+				is_emperor_of_china = yes
+			}
+			every_country = {
+				limit = {
+					capital_scope = {
+						superregion = china_superregion
+					}
+				}
+				reverse_add_aggressive_expansion = {
+					who = ROOT
+					value = 5
+					apply_calc = no
 				}
 			}
-			reverse_add_aggressive_expansion = {
-				who = ROOT
-				value = 10
-				apply_calc = no
+		}else = {
+			every_country = {
+				limit = {
+					capital_scope = {
+						superregion = china_superregion
+					}
+				}
+				reverse_add_aggressive_expansion = {
+					who = ROOT
+					value = 10
+					apply_calc = no
+				}
 			}
 		}
 		add_years_of_income = 3
@@ -851,5 +869,34 @@ country_event = {
 			}
 			change_culture = emishi
 		}
+	}
+}
+
+country_event = { 
+	id = yamat.1000
+	title = yamat.1000.t
+	desc = yamat.1000.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.1000a
+		add_army_tradition = -10
+		add_government_power = {
+			mechanic_type = japan_army_navy_mechanic
+			power_type = rivalry_balance
+			value = 20
+		}
+	}
+	option = {
+		name = yamat.1000b
+		add_navy_tradition = -10
+		add_government_power = {
+			mechanic_type = japan_army_navy_mechanic
+			power_type = rivalry_balance
+			value = -20
+		}
+	}
+	option = {
+		name = yamat.1000c
 	}
 }
