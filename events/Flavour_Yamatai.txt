@@ -625,7 +625,12 @@ country_event = {
 		name = yamat.15a
 		vassalize = CL0
 		4637 = {
-			cede_province = ROOT
+			if = {
+				limit = {
+					owned_by = CL0
+				}
+				cede_province = ROOT
+			}
 		}
 		add_country_modifier = {
 			name = yam_hinode_colozination
@@ -637,6 +642,161 @@ country_event = {
 		add_country_modifier = {
 			name = yam_full_colozination
 			duration = 10950
+		}
+	}
+}
+
+country_event = { #buy macau
+	id = yamat.16
+	title = yamat.16.t
+	desc = yamat.16.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.16a
+		add_years_of_income = -1
+		668 = {
+			owner = {
+				country_event = {
+					id = yamat.17
+				}
+			}
+		}
+	}
+	option = {
+		name = yamat.16b
+		668 = {
+			add_permanent_claim = ROOT
+		}
+	}
+}
+
+country_event = { #buy macau
+	id = yamat.17
+	title = yamat.17.t
+	desc = yamat.17.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.17a
+		add_years_of_income = 2
+		668 = {
+			remove_core = ROOT
+			add_core = KM6
+			cede_province = KM6
+		}
+	}
+	option = {
+		name = yamat.17b
+		668 = {
+			add_permanent_claim = KM6
+		}
+	}
+}
+
+country_event = { #kill China
+	id = yamat.18
+	title = yamat.18.t
+	desc = yamat.18.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.18a
+		custom_tooltip = YAMATAI_TT_8
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					superregion = china_superregion
+				}
+				if = {
+					limit = {
+						is_core = owner
+					}
+					add_core = WA0
+				}
+				cede_province = WA0
+			}
+			every_subject_country = {
+				every_owned_province = {
+					limit = {
+						superregion = china_superregion
+					}
+					if = {
+						limit = {
+							is_core = owner
+						}
+						add_core = WA0
+					}
+					cede_province = WA0
+				}
+			}
+		}
+		vassalize = WA0
+		china_superregion = {
+			add_permanent_claim = WA0
+		}
+	}
+	option = {
+		name = yamat.18b
+		add_country_modifier = {
+			name = yam_conqueror_of_heaven
+			duration = 10950
+		}
+	}
+}
+country_event = { #kill China
+	id = yamat.19
+	title = yamat.19.t
+	desc = yamat.19.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.19a
+		if = {
+			limit = {
+				is_emperor_of_china = yes
+			}
+			every_country = {
+				limit = {
+					capital_scope = {
+						superregion = china_superregion
+					}
+				}
+				reverse_add_aggressive_expansion = {
+					who = ROOT
+					value = 5
+					apply_calc = no
+				}
+			}
+		}else = {
+			every_country = {
+				limit = {
+					capital_scope = {
+						superregion = china_superregion
+					}
+				}
+				reverse_add_aggressive_expansion = {
+					who = ROOT
+					value = 10
+					apply_calc = no
+				}
+			}
+		}
+		add_years_of_income = 3
+	}
+	option = {
+		name = yamat.19b
+		every_country = {
+			limit = {
+				capital_scope = {
+					superregion = china_superregion
+				}
+			}
+			reverse_add_aggressive_expansion = {
+				who = ROOT
+				value = -5
+				apply_calc = no
+			}
 		}
 	}
 }
@@ -709,5 +869,34 @@ country_event = {
 			}
 			change_culture = emishi
 		}
+	}
+}
+
+country_event = { 
+	id = yamat.1000
+	title = yamat.1000.t
+	desc = yamat.1000.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.1000a
+		add_army_tradition = -10
+		add_government_power = {
+			mechanic_type = japan_army_navy_mechanic
+			power_type = rivalry_balance
+			value = 20
+		}
+	}
+	option = {
+		name = yamat.1000b
+		add_navy_tradition = -10
+		add_government_power = {
+			mechanic_type = japan_army_navy_mechanic
+			power_type = rivalry_balance
+			value = -20
+		}
+	}
+	option = {
+		name = yamat.1000c
 	}
 }
