@@ -800,6 +800,32 @@ country_event = { #kill China
 		}
 	}
 }
+country_event = { #god of war
+	id = yamat.20
+	title = yamat.20.t
+	desc = yamat.20.d
+	picture = VILLAGE_RAIDED_eventPicture
+	fire_only_once = yes
+	trigger = {
+		religion = shinto
+		NOT = {
+			has_country_flag = powered_hachiman_flag
+		}
+		army_tradition = 80
+	}
+	mean_time_to_happen = {
+		months = 12
+	}
+	option = {
+		name = yamat.20a
+		custom_tooltip = YAMATAI_TT_16
+		set_country_flag = powered_hachiman_flag
+	}
+	option = {
+		name = yamat.20b
+		add_mil_tech = 1
+	}
+}
 country_event = {
 	id = yamat.100
 	title = yamat.100.t
@@ -898,5 +924,166 @@ country_event = {
 	}
 	option = {
 		name = yamat.1000c
+	}
+}
+
+country_event = { 
+	id = yamat.2000
+	title = yamat.2000.t
+	desc = yamat.2000.d
+	picture = FEAST_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.2000a
+		if = {
+			limit = {
+				has_church_aspect = amaterasu_omikami_aspect
+			}
+			add_legitimacy_equivalent = {amount = 10}
+		}
+		if = {
+			limit = {
+				has_church_aspect = omoikane_aspect
+			}
+			add_adm_power = 50
+		}
+		if = {
+			limit = {
+				has_church_aspect = okuninushi_aspect
+			}
+			add_years_of_income = 0.1
+		}
+		if = {
+			limit = {
+				has_church_aspect = ame_no_uzume_aspect
+			}
+			add_dip_power = 50
+		}
+		if = {
+			limit = {
+				has_church_aspect = inari_okami_aspect
+			}
+			add_years_of_owned_provinces_production_income = {
+				years = 0.3
+			}
+		}
+		if = {
+			limit = {
+				has_church_aspect = susanoo_no_mikoto_aspect
+			}
+			add_prestige = 10
+		}
+		if = {
+			limit = {
+				OR = {
+					has_church_aspect = hachiman_1_aspect
+					has_church_aspect = hachiman_2_aspect
+				}
+			}
+			add_mil_power = 50
+		}
+		if = {
+			limit = {
+				has_church_aspect = takemikazuchi_aspect
+			}
+			add_army_tradition = 5
+		}
+		if = {
+			limit = {
+				has_church_aspect = takeminakata_aspect
+			}
+			add_yearly_manpower = 0.2
+		}
+	}
+	option = {
+		name = yamat.2000b
+		trigger = {
+			has_church_aspect = amaterasu_omikami_aspect
+		}
+		add_legitimacy_equivalent = {amount = 15}
+		add_absolutism = 5
+		add_stability_or_adm_power = yes
+	}
+	option = {
+		name = yamat.2000c
+		trigger = {
+			has_church_aspect = omoikane_aspect
+		}
+		add_adm_power = 150
+		add_stability_or_adm_power = yes
+	}
+	option = {
+		name = yamat.2000d
+		trigger = {
+			has_church_aspect = okuninushi_aspect
+		}
+		add_years_of_income = 0.5
+		capital_scope = {
+			add_base_tax = 1
+		}
+	}
+	option = {
+		name = yamat.2000e
+		trigger = {
+			has_church_aspect = ame_no_uzume_aspect
+		}
+		add_dip_power = 150
+		define_advisor = {
+			type = statesman
+			skill = 3
+			cost_multiplier = 0.33
+		}
+	}
+	option = {
+		name = yamat.2000f
+		trigger = {
+			has_church_aspect = inari_okami_aspect
+		}
+		add_years_of_owned_provinces_production_income = {
+			years = 1
+		}
+		capital_scope = {
+			add_base_production = 1
+		}
+	}
+	option = {
+		name = yamat.2000g
+		trigger = {
+			has_church_aspect = susanoo_no_mikoto_aspect
+		}
+		add_prestige_or_monarch_power = {amount = 15}
+		add_power_projection = {
+			type = mission_rewards_power_projection 
+			amount = 10
+		}
+	}
+	option = {
+		name = yamat.2000h
+		trigger = {
+			OR = {
+				has_church_aspect = hachiman_1_aspect
+				has_church_aspect = hachiman_2_aspect
+			}
+		}
+		add_mil_power = 150
+		capital_scope = {
+			add_base_manpower = 1
+		}
+	}
+	option = {
+		name = yamat.2000i
+		trigger = {
+			has_church_aspect = takemikazuchi_aspect
+		}
+		add_army_tradition_or_mil_power = {amount = 10}
+		add_army_professionalism = 5
+	}
+	option = {
+		name = yamat.2000j
+		trigger = {
+			has_church_aspect = takeminakata_aspect
+		}
+		add_yearly_manpower = 0.4
+		add_yearly_sailors = 1
 	}
 }
