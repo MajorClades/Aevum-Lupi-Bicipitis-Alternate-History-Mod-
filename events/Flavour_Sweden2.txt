@@ -181,3 +181,174 @@ country_event = {
 		}
 	}
 }
+
+country_event = {
+	id = swe2.4
+	title = swe2.4.test
+	desc = swe2.4.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	trigger = {
+		is_subject = no
+		BR0 = {
+			exists = no
+		}
+		religion = norse_ragnaroked
+		240 = {
+			owned_by = ROOT
+		}
+		num_of_owned_provinces_with = {
+			value = 5
+			is_core = BR0
+		}
+		NOT = {
+			is_year = 1500
+		}
+	}
+	mean_time_to_happen = {
+		months = 12
+	}
+	option = {
+		name = swe2.4a
+		set_country_flag = hunting_the_hun_flag
+		240 = {
+			add_province_modifier = {
+				name = swe_robin_hun
+				duration = -1
+			}
+		}	
+	}
+}
+
+country_event = {
+	id = swe2.5
+	title = swe2.5.test
+	desc = swe2.5.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	trigger = {
+		has_country_flag = hunting_the_hun_flag
+		had_country_flag = {
+			flag = hunting_the_hun_flag
+			days = 365
+		}
+	}
+	mean_time_to_happen = {
+		months = 60
+	}
+	option = {
+		name = swe2.5a
+		ai_chance = {
+			factor = 67
+		}
+		random = {
+			chance = 10
+			240 = {
+				remove_province_modifier = swe_robin_hun
+			}
+			clr_country_flag = hunting_the_hun_flag
+		}
+	}
+	option = {
+		name = swe2.5b
+		ai_chance = {
+			factor = 33
+		}
+		add_yearly_manpower = -0.4
+		random = {
+			chance = 30
+			240 = {
+				remove_province_modifier = swe_robin_hun
+			}
+			clr_country_flag = hunting_the_hun_flag
+		}
+	}
+}
+
+country_event = {
+	id = swe2.6
+	title = swe2.6.test
+	desc = swe2.6.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	trigger = {
+		has_country_flag = hunting_the_hun_flag
+		had_country_flag = {
+			flag = hunting_the_hun_flag
+			days = 9125
+		}
+	}
+	mean_time_to_happen = {
+		months = 12
+	}
+	immediate = {
+		hidden_effect = {
+			240 = {
+				remove_province_modifier = swe_robin_hun
+			}
+			every_owned_province = {
+				limit = {
+					is_core = BR0
+				}
+				cede_province = BR0
+			}
+		}
+	}
+	option = {
+		name = swe2.6a
+		ai_chance = {
+			factor = 100
+		}
+		BR0 = {
+			define_ruler = {
+				name = "Robert"
+				dynasty = "Vulpus"
+				adm = 5
+				dip = 2
+				mil = 5
+				age = 50
+			}
+			hidden_effect = {
+				define_ruler_to_general = {
+					fire = 4
+					shock = 3
+					manuever = 6
+					siege = 1
+				}
+			}
+		}
+		declare_war_with_cb = {
+			casus_belli = cb_annex
+			who = BR0
+		}
+	}
+	option = {
+		name = swe2.6b
+		ai_chance = {
+			factor = 0
+		}
+		BR0 = {
+			define_ruler = {
+				name = "Robert"
+				dynasty = "Vulpus"
+				adm = 5
+				dip = 2
+				mil = 5
+				age = 50
+			}
+			hidden_effect = {
+				define_ruler_to_general = {
+					fire = 4
+					shock = 3
+					manuever = 6
+					siege = 1
+				}
+			}
+		}
+		declare_war_with_cb = {
+			casus_belli = cb_annex
+			who = BR0
+		}
+		switch_tag = BR0
+	}
+}

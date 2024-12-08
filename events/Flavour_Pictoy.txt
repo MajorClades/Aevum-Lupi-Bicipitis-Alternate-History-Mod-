@@ -1,0 +1,209 @@
+namespace = picts
+
+country_event = {
+	id = picts.1
+	title = picts.1.test
+	desc = picts.1.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	fire_only_once = yes
+	trigger = {
+		tag = PI0
+		owns = 4110
+		is_at_war = no
+	}
+	mean_time_to_happen = {
+		months = 12
+	}
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					owns = 252
+				}
+				country_event = {
+					id = picts.2
+					days = 14
+				}
+			}
+			4110 = {
+				change_religion = catholic
+				cede_province = PI1
+				add_core = PI1
+				PI1 = {
+					define_ruler = {
+						name = "Lev Ivan"
+						dynasty = "Rus"
+						adm = 1
+						dip = 2
+						mil = 6
+						age = 34
+					}
+					define_ruler_to_general = {
+						fire = 1
+						shock = 4
+						manuever = 3
+						siege = 3
+					}
+					add_country_modifier = {
+						name = pic_rus_war
+						duration = 730
+					}
+				}
+				infantry = PI1
+				infantry = PI1
+				infantry = PI1
+				infantry = PI1
+				infantry = PI1
+				infantry = PI1
+				light_ship = PI1
+				light_ship = PI1
+				light_ship = PI1
+				light_ship = PI1
+				light_ship = PI1
+				galley = PI1
+				galley = PI1
+				galley = PI1
+				galley = PI1
+			}
+		}
+	}
+	option = {
+		name = picts.1a
+		ai_chance = { factor = 75 }
+		tooltip = {
+			4110 = {
+				change_religion = catholic
+				cede_province = PI1
+				add_core = PI1
+			}
+		}
+		PI1 = {
+			country_event = {
+				id = picts.4
+				days = 3
+			}
+		}
+	}
+	option = {
+		name = picts.1b
+		ai_chance = {factor = 25 modifier = {	factor = 0	GA0 = {	ai = no	}}}
+		PI1 = {
+			country_event = {
+				id = picts.4
+				days = 3
+			}
+		}
+		switch_tag = PI1
+	}
+}
+
+country_event = {
+	id = picts.2
+	title = picts.2.test
+	desc = picts.2.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			252 = {
+				spawn_rebels = {
+					size = 1
+					type = pretender_rebels
+					religion = norse_ragnaroked
+					leader = "Gwyn"
+					leader_dynasty = "Balderson"
+				}
+			}
+		}
+	}
+	option = {
+		name = picts.2a
+		ai_chance = { factor = 75 }
+		add_stability = -1
+		change_religion = norse_ragnaroked
+		disband_rebels = pretender_rebels
+		define_general = {
+			shock = 3
+			fire = 3
+			manuever = 3
+			siege = 3
+			name = "Gwyn Balderson"
+		}
+		country_event = {
+			id = picts.3
+			days = 60
+		}
+	}
+	option = {
+		name = picts.2b
+		ai_chance = {factor = 25 modifier = {	factor = 0	GA0 = {	ai = no	}}}
+		add_stability_or_adm_power = yes
+	}
+}
+
+country_event = {
+	id = picts.3
+	title = picts.3.test
+	desc = picts.3.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	is_triggered_only = yes
+	option = {
+		name = picts.3a
+		ai_chance = { factor = 75 }
+		add_stability = -1
+		change_religion = catholic
+		kill_leader = {
+			type = "Gwyn Balderson"
+		}
+	}
+	option = {
+		name = picts.3b
+		ai_chance = {factor = 25 modifier = {	factor = 0	GA0 = {	ai = no	}}}
+		#goverment reform Highlander Republic 
+		change_religion = catholic
+		kill_leader = {
+			type = "Gwyn Balderson"
+		}
+		kill_ruler = yes
+		kill_heir = {
+			allow_new_heir = no
+		}
+	}
+	option = {
+		name = picts.3c
+		ai_chance = { factor = 0 }
+		add_stability = -2
+		change_government = theocracy
+		add_government_reform = monastic_order_reform
+		define_ruler = {
+			name = "Gwyn"
+			dynasty = "Balderson"
+			adm = 3
+			dip = 3
+			mil = 3
+			age = 56
+		}
+		add_ruler_personality = babbling_buffoon_personality
+		add_ruler_personality = zealot_personality
+		add_ruler_personality = drunkard_personality
+	}
+}
+
+country_event = {
+	id = picts.4
+	title = picts.4.test
+	desc = picts.4.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	is_triggered_only = yes
+	option = {
+		name = picts.4a
+		declare_war_with_cb = {
+			casus_belli = cb_annex
+			who = PI0
+		}
+	}
+}
