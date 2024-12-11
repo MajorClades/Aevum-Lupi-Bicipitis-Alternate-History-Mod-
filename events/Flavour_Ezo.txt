@@ -442,3 +442,126 @@ country_event = {
 		}
 	}
 }
+
+country_event = {
+	id = ezo.9
+	title = ezo.9.t
+	desc = ezo.9.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = KM5
+		KM6 = {
+			is_in_war = {
+				casus_belli = cb_ezo_yamatai
+			}
+		}
+	}
+	mean_time_to_happen = {months = 3}
+	option = {
+		name = ezo.9a
+		trigger = {KM6 = { ai = yes}}
+		ai_chance = {factor = 90}
+		1030 = {cede_province = ODA add_core = ODA}
+		1839 = {cede_province = ODA add_core = ODA}
+		4189 = {cede_province = ODA add_core = ODA}
+		4359 = {cede_province = ODA add_core = ODA}
+		4360 = {cede_province = ODA add_core = ODA}
+		ODA = {
+			capital_scope = {
+				build_to_forcelimit = {
+					infantry = 1
+				}
+			}
+			join_all_defensive_wars_of = KM5
+		}
+	}
+	option = {
+		name = ezo.9b
+		trigger = {KM6 = { ai = no}}
+		ai_chance = {factor = 70}
+		4189 = {
+			spawn_rebels = {
+				size = 0.5
+				type = nationalist_rebels
+				friend = KM5
+			}
+		}
+		1030 = {
+			spawn_rebels = {
+				size = 1
+				type = nationalist_rebels
+				friend = KM5
+			}
+		}
+		1030 = { add_core = ODA}
+		1839 = { add_core = ODA}
+		4189 = { add_core = ODA}
+		4359 = { add_core = ODA}
+		4360 = { add_core = ODA}
+	}
+	option = {
+		name = ezo.9c
+		ai_chance = {
+			factor = 10
+		}
+		add_stability = 1
+	}
+}
+
+
+country_event = {
+	id = ezo.10
+	title = ezo.10.t
+	desc = ezo.10.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = ezo.10a
+		trigger = {ODA = {exists = yes}}
+		ai_chance = {
+			factor = 100
+		}
+		vassalize = ODA
+		ODA = {add_liberty_desire = -25}
+		add_loan = {
+			duration = 3650
+			fixed_interest = 1.5
+		}
+	}
+	option = {
+		name = ezo.10b
+		add_country_modifier = {
+			name = oda_dealer_of_iwari
+			duration = 10950
+		}
+	}
+}
+
+country_event = {
+	id = ezo.11
+	title = ezo.11.t
+	desc = ezo.11.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = ezo.11a
+		set_country_flag = kotan_second_upgrade
+		set_country_flag = kotan_more_adm_eff
+		custom_tooltip = EZO_TT_3a
+		if = {
+			limit = { has_personal_deity = kotankarkamuy_lv2}
+			change_personal_deity = kotankarkamuy_lv2a
+		}
+	}
+	option = {
+		name = ezo.11b
+		set_country_flag = kotan_second_upgrade
+		set_country_flag = kotan_more_ccc
+		custom_tooltip = EZO_TT_3b
+		if = {
+			limit = { has_personal_deity = kotankarkamuy_lv2}
+			change_personal_deity = kotankarkamuy_lv2b
+		}
+	}
+}

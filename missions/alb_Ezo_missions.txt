@@ -1,0 +1,351 @@
+Ezo_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = KM5 } 
+
+	ezo_army = {
+		icon = jap_bugeijuuhappan
+		position = 1
+
+		trigger = {
+			OR = {
+				NOT = {army_size_percentage = 0.6}
+				army_size_percentage = 1
+			}
+		}
+
+		effect = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = EZO_TT_1a
+				first_limit = "NOT = {army_size_percentage = 0.6}"
+				first_effect = "
+					capital_scope = {
+						add_or_upgrade_fort_building = yes
+					}
+				"
+				second_custom_tooltip = EZO_TT_1b
+				second_limit = "army_size_percentage = 1"
+				second_effect = "
+					capital_scope = {
+						add_building_construction = {
+							building = fort_15th
+							cost = 0
+							speed = 0.5
+						}
+					}
+				"
+			}
+		}
+	}
+
+	ezo_yamatai_broke = {
+		icon = mission_japanese_samurai
+		position = 3
+		required_missions = { ezo_coastal_go } 
+		provinces_to_highlight = {
+			OR = {
+				area = kanto_area
+				area = eastern_chubu_area
+				area = chubu_area
+			}
+		}
+		trigger = {
+			kanto_area = {
+				type = all
+				owned_by = ROOT
+			}
+			eastern_chubu_area = {
+				type = all
+				owned_by = ROOT
+			}
+			chubu_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		effect = {
+			custom_tooltip = YAMATAI_TT_4a
+			set_country_flag = not_help_the_koreans_flag
+			japan_region = { add_permanent_claim = ROOT } 
+		}
+	}
+
+}
+Ezo_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = KM5 } 
+
+	ezo_coastal_go = {
+		icon = mission_japanese_samurai
+		position = 2
+		required_missions = { ezo_army yam_mountain_family} 
+		provinces_to_highlight = {area = hokuriku_area}
+
+		trigger = {
+			hokuriku_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "ezo_pacification_of_yam"
+				duration = 10950
+			}
+			kanto_area = { add_permanent_claim = ROOT } 
+			eastern_chubu_area = { add_permanent_claim = ROOT } 
+			chubu_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	ezo_iwari_deals = {
+		icon = mission_japanese_samurai
+		position = 3
+		required_missions = { ezo_coastal_go } 
+
+		trigger = {
+			OR = {
+				ODA = {
+					alliance_with = ROOT
+					has_opinion = {
+						who = ROOT
+						value = 180
+					}
+				}
+				1030 = {
+					owned_by = ROOT
+					grown_by_development = 5
+				}
+			}
+		}
+
+		effect = {
+			country_event_with_insight = {
+				id = ezo.10
+				insight_tooltip = EZO_IT_1
+			}
+		}
+	}
+
+	ezo_empire_nihon = {
+		icon = mission_japanese_samurai
+		position = 4
+		required_missions = { ezo_yamatai_broke yam_loyal_lands} 
+		provinces_to_highlight = {
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+			region = japan_region
+		}
+		trigger = {
+			japan_region = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		effect = {
+			override_country_name = "NIHON"
+			set_government_rank = 3
+		}
+	}
+}
+Ezo_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = KM5 } 
+
+	yam_mountain_family = {
+		icon = mission_japanese_samurai
+		position = 1
+		trigger = {
+			OR = {
+				has_adm_advisor_2 = yes
+				has_dip_advisor_2 = yes
+				has_mil_advisor_2 = yes
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = ezo_republic
+				duration = 10950
+			}
+			hokuriku_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	yam_loyal_lands = {
+		icon = mission_japanese_samurai
+		position = 3
+		required_missions = { ezo_coastal_go } 
+		provinces_to_highlight = { owned_by = ROOT has_tax_building_trigger = no}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				has_tax_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "yam_pacification_of_ezo"
+				duration = 10950
+			}
+			hokkaido_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+}
+Ezo_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = KM5 } 
+
+	yam_bear_fortitude = {
+		icon = mission_japanese_samurai
+		position = 1
+		provinces_to_highlight = { owned_by = ROOT religion = animism}
+		trigger = {
+			all_owned_province = {
+				NOT = {religion = animism}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = ezo_codified
+				duration = 10950
+			}
+			set_country_flag = kotan_first_upgrade
+			custom_tooltip = EZO_TT_2
+			if = {
+				limit = { has_personal_deity = kotankarkamuy_lv1}
+				change_personal_deity = kotankarkamuy_lv2
+			}
+		}
+	}
+	yam_more_people = {
+		icon = mission_japanese_samurai
+		position = 2
+		required_missions = { yam_bear_fortitude yam_mountain_family } 
+		trigger = {
+			has_adm_advisor = yes
+			has_dip_advisor = yes
+			has_mil_advisor = yes
+		}
+
+		effect = {
+			add_republican_tradition = 15
+			change_adm = 1
+			change_dip = 1
+			change_mil = 1
+		}
+	}
+}
+Ezo_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = KM5 } 
+
+	yam_less_faith = {
+		icon = mission_japanese_samurai
+		position = 2
+		required_missions = { yam_bear_fortitude } 
+		trigger = {
+			capital_scope = {
+				grown_by_development = 5
+			}
+			custom_trigger_tooltip = {
+				tooltip = EZO_CT_1
+				OR = {
+					has_country_flag = kamuyhuci_lv1_flag
+					has_country_flag = repunkamuy_lv1_flag
+					has_country_flag = kimunkamuy_lv1_flag
+				}
+			}
+		}
+
+		effect = {
+			capital_scope = {
+				add_scaled_local_adm_power = 25
+				add_scaled_local_dip_power = 25
+				add_scaled_local_mil_power = 25
+			}
+		}
+	}
+	yam_improvements = {
+		icon = mission_japanese_samurai
+		position = 3
+		required_missions = { yam_more_people yam_less_faith } 
+		trigger = {
+			has_institution = renaissance
+			stability = 2
+			OR = {
+				has_adm_advisor_3 = yes
+				has_dip_advisor_3 = yes
+				has_mil_advisor_3 = yes
+			}
+		}
+
+		effect = {
+			add_prestige_or_monarch_power = { amount = 15}
+			country_event_with_insight = {
+				id = ezo.11
+				insight_tooltip = EZO_IT_2
+			}
+		}
+	}
+	yam_kamuy_of_creation = {
+		icon = mission_japanese_samurai
+		position = 4
+		required_missions = { yam_improvements } 
+		trigger = {
+			capital_scope = {
+				development = 30
+			}
+			government_rank = 3
+			custom_trigger_tooltip = {
+				tooltip = EZO_CT_2
+				OR = {
+					has_personal_deity = kotankarkamuy_lv2a
+					has_personal_deity = kotankarkamuy_lv2b
+				}
+			}
+		}
+
+		effect = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = EZO_TT_4a
+				first_limit = "has_personal_deity = kotankarkamuy_lv2a"
+				first_effect = "
+					custom_tooltip = EZO_TT_4b
+					set_country_flag = kotan_second_upgrade
+					if = {
+						limit = { has_personal_deity = kotankarkamuy_lv2a}
+						change_personal_deity = kotankarkamuy_lv3a
+					}
+				"
+				second_limit = "has_personal_deity = kotankarkamuy_lv2b"
+				second_effect = "
+					custom_tooltip = EZO_TT_4c
+					set_country_flag = kotan_second_upgrade
+					if = {
+						limit = { has_personal_deity = kotankarkamuy_lv2b}
+						change_personal_deity = kotankarkamuy_lv3b
+					}
+				"
+			}
+		}
+	}
+}
