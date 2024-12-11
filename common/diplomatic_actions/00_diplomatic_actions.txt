@@ -155,8 +155,36 @@ declarewar = {
 			FROM = { is_part_of_hre = no }
 		}
 	}
+	pre_effect = {
+		if = {
+			limit = {
+				has_country_modifier = alb_hidden_effect_mod
+				NOT = {
+					FROM = {
+						is_emperor = yes
+					}
+				}
+				FROM = {
+					OR = {
+						tag = CR1
+						tag = CR0
+					}
+					
+					is_part_of_hre = yes
+				}
+				has_spy_network_in = {
+					who = emperor
+					value = 30
+				}
+			}
+			save_global_event_target_as = ALD_TARGET_OF_ATTACK
+			country_event = { id = aldab.6 days = 1 }
+			remove_country_modifier = alb_hidden_effect_mod
+		}
+	}
 	effect = {
 		on_war_declaration_effect = yes
+		#ALB
 		if = {
             limit = {
                 NOT = { has_global_flag = flavor_ita_7_fired }
@@ -183,31 +211,6 @@ declarewar = {
                 country_event = { id = flavor_ita.7 }
             }
         }
-		#ALB
-		if = {
-			limit = {
-				has_country_modifier = alb_unifier_of_the_east
-				NOT = {
-					FROM = {
-						is_emperor = yes
-					}
-				}
-				FROM = {
-					OR = {
-						tag = CR1
-						tag = CR0
-					}
-					
-					is_part_of_hre = yes
-				}
-				has_spy_network_in = {
-					who = emperor
-					value = 30
-				}
-			}
-			country_event = { id = aldab.6 }
-			remove_country_modifier = alb_hidden_effect_mod
-		}
 	}
 }
 
