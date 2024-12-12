@@ -153,10 +153,48 @@ susanoo_no_mikoto_aspect = {	#DIP aspect
 	}
 }
 
-hachiman_aspect = {	#MIL aspect
+hachiman_1_aspect = {	#MIL aspect
 	cost = 100
 	modifier = {
-		infantry_cost = -0.05
+		infantry_power = 0.05
+	}
+	effect = {
+		if = {
+			limit = {
+				has_country_flag = shinto_discount_power
+			}
+			add_church_power = 10
+		}
+	}
+	potential = {NOT = {has_country_flag = powered_hachiman_flag}}
+	monarch_power = mil
+	ai_will_do = {
+		factor = 10
+		modifier = {
+			factor = 2
+			is_at_war = yes
+			NOT = { manpower_percentage = 0.9 }
+		}
+		modifier = {
+			factor = 2
+			NOT = { manpower_percentage = 0.5 }
+		}
+	}
+}
+
+hachiman_2_aspect = {	#MIL aspect
+	cost = 100
+	modifier = {
+		infantry_power = 0.15
+	}
+	potential = {has_country_flag = powered_hachiman_flag}
+	effect = {
+		if = {
+			limit = {
+				has_country_flag = shinto_discount_power
+			}
+			add_church_power = 10
+		}
 	}
 	monarch_power = mil
 	ai_will_do = {
@@ -176,7 +214,7 @@ hachiman_aspect = {	#MIL aspect
 takemikazuchi_aspect = {	#MIL aspect
 	cost = 100
 	modifier = {
-		defensiveness = 0.25
+		shock_damage = 0.05
 	}
 	effect = {
 		if = {

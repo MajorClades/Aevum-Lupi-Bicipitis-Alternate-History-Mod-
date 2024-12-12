@@ -85,8 +85,21 @@ Yamatai_1_slot = {
 		provinces_to_highlight = { province_id = 1020 } 
 
 		trigger = {
-			has_institution = printing_press
-			1020 = { development = 30 } 
+			1020 = {
+				has_tax_building_trigger = yes
+			}
+			1020 = { 
+				development = 30 
+			}
+			1020 = {
+				has_production_building_trigger = yes
+			}
+			japan_region = {
+				owned_by = ROOT
+				NOT ={
+					local_autonomy = 10
+				}
+			}
 		}
 
 		effect = {
@@ -94,6 +107,10 @@ Yamatai_1_slot = {
 				add_great_project_tier = {
 					type = imperial_city_kyoto
 					tier = 1
+				}
+				add_province_modifier = {
+					name = yam_city_of_kyoto
+					duration = -1
 				}
 			}
 		}
@@ -109,12 +126,21 @@ Yamatai_1_slot = {
 		provinces_to_highlight = { province_id = 1020 } 
 
 		trigger = {
-			1020 = {
-				has_great_project = {
-					type = imperial_city_kyoto
-					tier = 3
+			any_country = {
+				capital_scope = {
+					continent = europe
+				}
+				alliance_with = ROOT
+				has_opinion = {
+					who = ROOT
+					value = 180
+				}
+				institution_difference = {
+					who = ROOT
+					value = 0
 				}
 			}
+			army_professionalism = 0.4
 		}
 
 		effect = {
@@ -123,15 +149,9 @@ Yamatai_1_slot = {
 				name = "yam_samurai_op"
 				duration = -1
 			}
-			custom_tooltip =  YAMATAI_TT_13
-			hidden_effect = {
-				japan_region = {
-					add_permanent_province_modifier = {
-						name = "yam_elites_local"
-						duration = -1
-						hidden = yes
-					}
-				}
+			add_country_modifier = {
+				name = "yam_respected_nation"
+				duration = -1
 			}
 		}
 	}
@@ -163,7 +183,12 @@ Yamatai_2_slot = {
 		icon = mission_asian_city
 		position = 2
 		required_missions = { yam_navy } 
-		provinces_to_highlight = { province_id = 2106 } 
+		provinces_to_highlight = { 
+			province_id = 2106 
+			NOT ={
+				
+			}
+		} 
 
 		trigger = {
 			num_of_light_ship = 12
@@ -171,6 +196,7 @@ Yamatai_2_slot = {
 				owns_or_non_sovereign_subject_of = 2106
 				owns_or_non_sovereign_subject_of = 4185
 			}
+
 		}
 
 		effect = {
@@ -241,16 +267,6 @@ Yamatai_2_slot = {
 				name = "yam_true_samurai"
 				duration = 10950
 			}
-			custom_tooltip = YAMATAI_TT_12
-			hidden_effect = {
-				capital_scope = {
-					add_permanent_province_modifier = {
-						name = "yam_elites_local"
-						duration = -1
-						hidden = yes
-					}
-				}
-			}
 		}
 	}
 
@@ -284,16 +300,6 @@ Yamatai_2_slot = {
 			change_government_reform_progress = 50
 			unlock_government_reform = { government_reform = yamatai_army_navy_rivalry_reform } 
 			custom_tooltip = YAMATAI_TT_14
-			tooltip = {
-				add_country_modifier = {
-					name = maxnaval_rivalry
-					duration = 1
-				}
-				add_country_modifier = {
-					name = maxland_rivalry
-					duration = 1
-				}
-			}
 		}
 	}
 
@@ -452,7 +458,7 @@ Yamatai_3_slot = {
 
 		trigger = {
 			num_of_owned_provinces_with = {
-				value = 15
+				value = 8
 				has_tax_building_trigger = yes
 			}
 		}
@@ -509,7 +515,7 @@ Yamatai_3_slot = {
 		trigger = {
 			num_of_admirals_with_traits = 1
 			num_of_owned_provinces_with = {
-				value = 10
+				value = 5
 				has_shipyard_building_trigger = yes
 			}
 		}
@@ -530,7 +536,7 @@ Yamatai_3_slot = {
 		provinces_to_highlight = {  } 
 
 		trigger = {
-			navy_size = 50
+			navy_size = 40
 			navy_tradition = 50
 		}
 
@@ -678,6 +684,12 @@ Yamatai_4_slot = {
 					has_manufactory_trigger = yes
 				}
 			}
+			num_of_owned_provinces_with = {
+				value = 3
+				has_port = yes
+				province_has_center_of_trade_of_level = 2
+				development = 20
+			}
 		}
 
 		effect = {
@@ -685,6 +697,11 @@ Yamatai_4_slot = {
 			add_years_of_owned_provinces_production_income = {
 				years = 5
 				trigger = { has_manufactory_trigger = yes } 
+				custom_tooltip = yam_from_manufactories_tt
+			}
+			add_country_modifier = {
+				name = yam_opening_up_to_trade
+				duration = 18250
 			}
 		}
 	}
