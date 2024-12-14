@@ -586,3 +586,76 @@ country_event = {
 		}
 	}
 }
+
+country_event = { #Akormosir askas Kamchadals to become vassals
+	id = ezo.12
+	title = ezo.12.t
+	desc = ezo.12.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = ezo.12a
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 1.5
+				alliance_with = KM5
+			}
+			modifier = {
+				factor = 1.5
+				has_opinion = {
+					who = KM5
+					value = 150
+				}
+			}
+			modifier = {
+				factor = 2.5
+				has_opinion = {
+					who = KM5
+					value = 180
+				}
+			}
+		}
+		KM5 = {
+			vassalize = ROOT
+		}
+	}
+	option = {
+		name = ezo.12b
+		ai_chance = {
+			factor = 80
+			modifier = {
+				factor = 1.5
+				NOT = {
+					alliance_with = KM5
+				}
+			}
+			modifier = {
+				factor = 1.5
+				NOT = {
+					has_opinion = {
+						who = KM5
+						value = 150
+					}
+				}
+			}
+			modifier = {
+				factor = 2.5
+				NOT = {
+					has_opinion = {
+						who = KM5
+						value = 80
+					}
+				}
+			}
+		}
+		add_stability = 1
+		KM5 = {
+			add_casus_belli = {
+				type = cb_vassalize_mission
+				target = ROOT
+				months = 3650
+			}
+		}
+	}
+}

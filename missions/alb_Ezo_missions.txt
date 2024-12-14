@@ -178,6 +178,30 @@ Ezo_2_slot = {
 			set_government_rank = 3
 		}
 	}
+	ezo_inward_perfection = {
+		icon = mission_japanese_samurai
+		position = 6
+		required_missions = { ezo_worthy_people } 
+		provinces_to_highlight = {
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+			has_manufactory_trigger = no
+			region = japan_region
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				region = japan_region
+				base_production = 5
+				has_manufactory_trigger = yes
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = ezo_gooder_quality
+				duration = -1
+			}
+		}
+	}
 }
 Ezo_3_slot = {
 	slot = 3
@@ -240,12 +264,14 @@ Ezo_3_slot = {
 		required_missions = { ezo_empire_nihon yam_quality_goods} 
 		provinces_to_highlight = {
 			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+			has_production_building_trigger = no
 			region = japan_region
 		}
 		trigger = {
 			num_of_owned_provinces_with = {
 				value = 10
 				region = japan_region
+				base_production = 5
 				has_production_building_trigger = yes
 			}
 		}
@@ -261,6 +287,8 @@ Ezo_3_slot = {
 			}
 		}
 	}
+
+	
 }
 Ezo_4_slot = {
 	slot = 4
@@ -330,6 +358,37 @@ Ezo_4_slot = {
 			add_years_of_income = 1
 			1030 = {
 				set_center_level_2_center_of_trade = yes
+			}
+		}
+	}
+	ezo_outward_perfection = {
+		icon = mission_japanese_samurai
+		position = 6
+		required_missions = { ezo_worthy_people } 
+		provinces_to_highlight = {
+			country_or_non_sovereign_subject_holds = ROOT
+			NOT = {	region = japan_region }
+		}
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 10
+				NOT = {	region = japan_region }
+				has_port = yes
+				OR = {
+					has_dock_building_trigger = yes
+					has_trade_building_trigger = yes
+				}
+			}
+		}
+		effect = {
+			define_explorer = {
+				shock = 2
+				fire = 2
+				manuever = 5
+			}
+			add_country_modifier = {
+				name = ezo_naval_importance
+				duration = 10950
 			}
 		}
 	}
@@ -482,11 +541,12 @@ Ezo_5_slot = {
 		trigger = {
 			OR = {
 				KMC = {
-					alliance_with = ROOT
+					exists = yes
 					has_opinion = {
 						who = ROOT
-						value = 180
+						value = 100
 					}
+					is_at_war = no
 				}
 				4658 = {
 					country_or_non_sovereign_subject_holds = ROOT
@@ -496,18 +556,9 @@ Ezo_5_slot = {
 		}
 
 		effect = {
-			simple_dynamic_effect_without_alternative = {
-				first_custom_tooltip = EZO_TT_5
-				first_limit = "
-					alliance_with = ROOT
-					has_opinion = {
-						who = ROOT
-						value = 180
-					}
-				"
-				first_effect = "
-					vassalize = KMC
-				"
+			country_event_with_insight = {
+				id = ezo.12
+				insight_tooltip = EZO_TT_5
 			}
 			furdan_area = {
 				add_permanent_claim = ROOT
@@ -517,6 +568,55 @@ Ezo_5_slot = {
 			}
 			central_jilin_area = {
 				add_permanent_claim = ROOT
+			}
+		}
+	}
+	ezo_forward_east = {
+		icon = mission_japanese_samurai
+		position = 7
+		required_missions = { ezo_outward_perfection yam_cold_shores} 
+		provinces_to_highlight = {
+			OR = {
+				region = north_east_pacific_region
+				region = north_west_pacific_region
+			}
+			NOT = {
+				has_discovered = ROOT
+			}
+		}
+		trigger = {
+			1034 = {
+				OR = {
+					is_empty = yes
+					is_city = yes
+				}
+			}
+			num_of_light_ship = 20
+			north_east_pacific_region = {
+				type = all
+				has_discovered = ROOT
+			}
+		}
+		effect = {
+			1034 = {
+				if = {
+					limit = {
+						is_empty = yes
+					}
+					cede_province = ROOT
+					change_culture = koushi
+					change_religion = kamuyramat
+					add_core = ROOT
+					add_base_manpower = 1
+				}else = {
+					add_core = ROOT
+				}
+			}
+			berring_sea_area = {discover_country = ROOT}
+			gulf_of_alaska_area = {discover_country = ROOT}
+			cascadia_region = {
+				limit = {has_port = yes}
+				discover_country = ROOT
 			}
 		}
 	}
