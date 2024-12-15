@@ -105,7 +105,9 @@ ch4_2_slot = {
 			}
 		} 
 
-		effect = {  } 
+		effect = {  
+
+		} 
 	}
 
 	ch4_legionary_tactics = {
@@ -159,20 +161,48 @@ ch4_3_slot = {
 		icon = mission_alliances
 		position = 2
 		required_missions = { ch4_military_spirit } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR= {
+				owned_by = CH2
+				province_id = 1829
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			NOT = {
+				exists = CH2
+			}
+			owns = 1829
+		} 
 
-		effect = {  } 
+		effect = {  
+			country_event = {
+				id = liqian.1
+			}
+		} 
 	}
 
 	ch4_end_manicheans = {
 		icon = mission_alliances
 		position = 3
 		required_missions = { ch4_brothers_war } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			superregion = china_superregion
+			religion = manich
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			NOT = {
+				any_province = {
+					superregion = china_superregion
+					religion = manich
+				}
+			}
+			religious_unity = 0.95
+		} 
 
 		effect = {  } 
 	}
@@ -218,11 +248,28 @@ ch4_4_slot = {
 		icon = mission_alliances
 		position = 3
 		required_missions = { ch4_brothers_war } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			region = south_china_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 40
+				region = south_china_region
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			north_china_region = {
+				add_permanent_claim = ROOT
+			}
+			custom_tooltip = empty_line_tt
+			custom_tooltip = alb_unlock_rma_sinicization_tt
+			set_country_flag = unlock_rma_sinicization_flag
+		} 
 	}
 
 	ch4_end_of_jie = {
