@@ -48,20 +48,62 @@ ch4_2_slot = {
 		icon = mission_alliances
 		position = 2
 		required_missions = { ch4_military_spirit } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = yun_gui_area
+				area = guangxi_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			yun_gui_area ={
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			guangxi_area ={
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_country_modifier = {
+				name = ch4_end_barbarian_empire
+				duration = 5475
+			}
+			xinan_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	ch4_sweep_sichuan = {
 		icon = mission_alliances
 		position = 4
 		required_missions = { ch4_barbarian_empire } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = sichuan_area
+				area = chuannan_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			sichuan_area ={
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			chuannan_area ={
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
 		effect = {  } 
 	}
@@ -90,10 +132,27 @@ ch4_3_slot = {
 		provinces_to_highlight = {  } 
 
 		trigger = {  
-			
+			army_size_percentage = 0.9
+			num_of_generals = 1
 		} 
 
-		effect = {  } 
+		effect = {  
+			custom_tooltip = ch4_cores_on_ming_provinces_tt
+			hidden_effect = {
+				CH2 = {
+					every_owned_province = {
+						add_core = ROOT
+					}
+				}
+			}
+			custom_tooltip = empty_line_tt
+			guangxi_area = {
+				add_permanent_claim = ROOT
+			}
+			yun_gui_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	ch4_brothers_war = {
