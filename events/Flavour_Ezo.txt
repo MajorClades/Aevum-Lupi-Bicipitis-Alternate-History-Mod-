@@ -457,23 +457,44 @@ country_event = {
 			}
 		}
 	}
-	mean_time_to_happen = {months = 3}
+	mean_time_to_happen = { months = 3 }
 	option = {
 		name = ezo.9a
 		trigger = {KM6 = { ai = yes}}
 		ai_chance = {factor = 90}
-		1030 = {cede_province = ODA add_core = ODA}
+		1029 = {cede_province = ODA add_core = ODA}
 		1839 = {cede_province = ODA add_core = ODA}
 		4189 = {cede_province = ODA add_core = ODA}
-		4359 = {cede_province = ODA add_core = ODA}
+		1028 = {cede_province = ODA add_core = ODA}
 		4360 = {cede_province = ODA add_core = ODA}
 		ODA = {
-			capital_scope = {
-				build_to_forcelimit = {
-					infantry = 1
-				}
+			add_trust = {
+				who = ROOT
+				value = 100
+				mutual = yes
 			}
 			join_all_defensive_wars_of = KM5
+			hidden_effect = {
+				define_ruler = {
+					name = "Hisanaga"
+					dynasty = "Oda"
+					adm = 3
+					dip = 4
+					mil = 3
+				}
+				capital_scope = {
+					build_to_forcelimit = {
+						infantry = 1
+					}
+					add_building = fort_15th
+				}
+				define_ruler_to_general = {
+					fire = 3
+					shock = 3
+					manuever = 3
+					siege = 3
+				}
+			}
 		}
 	}
 	option = {
@@ -562,6 +583,79 @@ country_event = {
 		if = {
 			limit = { has_personal_deity = kotankarkamuy_lv2}
 			change_personal_deity = kotankarkamuy_lv2b
+		}
+	}
+}
+
+country_event = { #Akormosir askas Kamchadals to become vassals
+	id = ezo.12
+	title = ezo.12.t
+	desc = ezo.12.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = ezo.12a
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 1.5
+				alliance_with = KM5
+			}
+			modifier = {
+				factor = 1.5
+				has_opinion = {
+					who = KM5
+					value = 150
+				}
+			}
+			modifier = {
+				factor = 2.5
+				has_opinion = {
+					who = KM5
+					value = 180
+				}
+			}
+		}
+		KM5 = {
+			vassalize = ROOT
+		}
+	}
+	option = {
+		name = ezo.12b
+		ai_chance = {
+			factor = 80
+			modifier = {
+				factor = 1.5
+				NOT = {
+					alliance_with = KM5
+				}
+			}
+			modifier = {
+				factor = 1.5
+				NOT = {
+					has_opinion = {
+						who = KM5
+						value = 150
+					}
+				}
+			}
+			modifier = {
+				factor = 2.5
+				NOT = {
+					has_opinion = {
+						who = KM5
+						value = 80
+					}
+				}
+			}
+		}
+		add_stability = 1
+		KM5 = {
+			add_casus_belli = {
+				type = cb_vassalize_mission
+				target = ROOT
+				months = 3650
+			}
 		}
 	}
 }
