@@ -138,7 +138,7 @@ ch4_3_slot = {
 			num_of_generals = 1
 		} 
 
-		effect = {  
+		effect = { 
 			custom_tooltip = ch4_cores_on_ming_provinces_tt
 			hidden_effect = {
 				CH2 = {
@@ -204,7 +204,9 @@ ch4_3_slot = {
 			religious_unity = 0.95
 		} 
 
-		effect = {  } 
+		effect = {  
+			
+		} 
 	}
 
 	ch4_chinese_hegemony = {
@@ -215,11 +217,45 @@ ch4_3_slot = {
 			ch4_end_of_jie
 			ch4_heirs_of_guo_hong
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {
+			superregion = china_superregion
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			OR = {
+				is_emperor_of_china = yes
+				NOT = {
+					any_country = {
+						is_emperor_of_china = yes
+					}
+				}
+			}
+			china_superregion = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = ch4_is_eoc_tt
+				first_limit = "is_emperor_of_china = yes"
+				first_effect = "
+					add_mandate = 20
+				"
+				second_limit = "NOT = {
+					any_country = {
+						is_emperor_of_china = yes
+					}
+				}"
+				second_effect = "
+
+				"
+			}
+		} 
 	}
 
 	ch4_rebirth_of_daqin = {
@@ -276,11 +312,49 @@ ch4_4_slot = {
 		icon = mission_alliances
 		position = 4
 		required_missions = { ch4_to_yangtze } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = gansu_area
+				area = west_gansu_area
+				area = shaanxi_area
+				area = shanxi_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			gansu_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			west_gansu_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			shaanxi_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			shanxi_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			698 = {
+				add_great_project_tier = {
+					type = the_great_wall_of_china
+					tier = 1
+				}
+			}
+			custom_tooltip = empty_line_tt
+			country_event = {
+				id = liqian.2
+			}
+		} 
 	}
 
 	ch4_southern_capital = {
