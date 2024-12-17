@@ -8,10 +8,11 @@ Ezo_1_slot = {
 	ezo_army = {
 		icon = jap_bugeijuuhappan
 		position = 1
+		provinces_to_highlight = {  } 
 
 		trigger = {
 			OR = {
-				NOT = {army_size_percentage = 0.6}
+				NOT = { army_size_percentage = 0.6 } 
 				army_size_percentage = 1
 			}
 		}
@@ -51,6 +52,7 @@ Ezo_1_slot = {
 				area = chubu_area
 			}
 		}
+
 		trigger = {
 			kanto_area = {
 				type = all
@@ -65,26 +67,30 @@ Ezo_1_slot = {
 				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
+
 		effect = {
 			custom_tooltip = YAMATAI_TT_4a
 			set_country_flag = not_help_the_koreans_flag
 			japan_region = { add_permanent_claim = ROOT } 
 		}
 	}
+
 	ezo_korean_help = {
-		icon = mission_japanese_samurai
+		icon = mjz_into_korea
 		position = 5
 		required_missions = { ezo_yamatai_broke } 
 		provinces_to_highlight = {
 			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 			region = korea_region
 		}
+
 		trigger = {
 			korea_region = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
+
 		effect = {
 			add_accepted_culture = korean
 			add_country_modifier = {
@@ -93,8 +99,9 @@ Ezo_1_slot = {
 			}
 		}
 	}
+
 	ezo_metal_needs = {
-		icon = mission_japanese_samurai
+		icon = mission_have_manufactories
 		position = 7
 		required_missions = { ezo_inward_perfection } 
 		provinces_to_highlight = {
@@ -102,6 +109,7 @@ Ezo_1_slot = {
 			has_manufactory_trigger = no
 			region = japan_region
 		}
+
 		trigger = {
 			num_of_owned_provinces_with = {
 				value = 10
@@ -110,9 +118,10 @@ Ezo_1_slot = {
 				has_manufactory_trigger = yes
 			}
 		}
+
 		effect = {
 			add_country_modifier = {
-				name = ezo_gooder_quality
+				name = "ezo_gooder_quality"
 				duration = -1
 			}
 		}
@@ -126,10 +135,13 @@ Ezo_2_slot = {
 	potential = { tag = KM5 } 
 
 	ezo_coastal_go = {
-		icon = mission_japanese_samurai
+		icon = mng_end_sengoku_jidai
 		position = 2
-		required_missions = { ezo_army yam_mountain_family} 
-		provinces_to_highlight = {area = hokuriku_area}
+		required_missions = {
+			ezo_army
+			yam_mountain_family
+		}
+		provinces_to_highlight = { area = hokuriku_area } 
 
 		trigger = {
 			hokuriku_area = {
@@ -155,9 +167,10 @@ Ezo_2_slot = {
 	}
 
 	ezo_iwari_deals = {
-		icon = mission_japanese_samurai
+		icon = mission_trade_with_japan
 		position = 3
 		required_missions = { ezo_coastal_go } 
+		provinces_to_highlight = {  } 
 
 		trigger = {
 			OR = {
@@ -184,78 +197,79 @@ Ezo_2_slot = {
 	}
 
 	ezo_empire_nihon = {
-		icon = mission_japanese_samurai
+		icon = mng_deal_kama_kagyu
 		position = 4
-		required_missions = { ezo_yamatai_broke yam_loyal_lands} 
+		required_missions = {
+			ezo_yamatai_broke
+			yam_loyal_lands
+		}
 		provinces_to_highlight = {
 			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 			region = japan_region
 		}
+
 		trigger = {
 			japan_region = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
+
 		effect = {
-			override_country_name = "AINUMOSIR" #overall name for the ainu people
+			override_country_name = "AINUMOSIR"
 			set_government_rank = 3
 		}
 	}
+
 	ezo_inward_perfection = {
-		icon = mission_japanese_samurai
+		icon = mission_asian_trader
 		position = 6
 		required_missions = { ezo_worthy_people } 
-		provinces_to_highlight = {area = thohoku_area}
+		provinces_to_highlight = { area = thohoku_area } 
+
 		trigger = {
 			development_in_provinces = {
 				value = 80
 				area = thohoku_area
 			}
 		}
+
 		effect = {
 			4192 = {
 				change_trade_goods = silk
 				add_or_upgrade_production_building = yes
 			}
-			4131 = {
-				change_trade_goods = iron
-			}
-			1025 = {
-				change_trade_goods = tea
-			}
+			4131 = { change_trade_goods = iron } 
+			1025 = { change_trade_goods = tea } 
 			1026 = {
 				add_permanent_province_modifier = {
-					name = ezo_better_farming
+					name = "ezo_better_farming"
 					duration = -1
 				}
 			}
 		}
 	}
+
 	ezo_prosperity_spread = {
-		icon = mission_japanese_samurai
+		icon = mission_market_place_with_asian_traders
 		position = 8
 		required_missions = { ezo_inward_perfection } 
-		provinces_to_highlight = {area = hokkaido_area }
+		provinces_to_highlight = { area = hokkaido_area } 
+
 		trigger = {
 			development_in_provinces = {
 				value = 80
 				area = hokkaido_area
 			}
 		}
+
 		effect = {
-			4193 = {
-				change_trade_goods = glass
-			}
-			1847 = {
-				change_trade_goods = dyes
-			}
-			1852 = {
-				change_trade_goods = copper
-			}
+			4193 = { change_trade_goods = glass } 
+			1847 = { change_trade_goods = dyes } 
+			1852 = { change_trade_goods = copper } 
 			1031 = {
 				add_permanent_province_modifier = {
-					name = ezo_drain_swamp
+					name = "ezo_drain_swamp"
 					duration = -1
 				}
 			}
@@ -270,8 +284,10 @@ Ezo_3_slot = {
 	potential = { tag = KM5 } 
 
 	yam_mountain_family = {
-		icon = mission_japanese_samurai
+		icon = mission_norse_faith
 		position = 1
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			OR = {
 				has_adm_advisor_2 = yes
@@ -282,7 +298,7 @@ Ezo_3_slot = {
 
 		effect = {
 			add_country_modifier = {
-				name = ezo_republic
+				name = "ezo_republic"
 				duration = 10950
 			}
 			hokuriku_area = { add_permanent_claim = ROOT } 
@@ -290,10 +306,13 @@ Ezo_3_slot = {
 	}
 
 	yam_loyal_lands = {
-		icon = mission_japanese_samurai
+		icon = mission_sufi_shrines
 		position = 3
 		required_missions = { ezo_coastal_go } 
-		provinces_to_highlight = { owned_by = ROOT has_tax_building_trigger = no}
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_tax_building_trigger = no
+		}
 
 		trigger = {
 			4192 = {
@@ -311,20 +330,23 @@ Ezo_3_slot = {
 				estate = estate_church
 				loyalty = 10
 			}
-			4192 = {
-				set_center_level_2_center_of_trade = yes
-			}
+			4192 = { set_center_level_2_center_of_trade = yes } 
 		}
 	}
+
 	ezo_worthy_people = {
-		icon = mission_japanese_samurai
+		icon = mission_colonial
 		position = 5
-		required_missions = { ezo_empire_nihon yam_quality_goods} 
+		required_missions = {
+			ezo_empire_nihon
+			yam_quality_goods
+		}
 		provinces_to_highlight = {
 			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 			has_production_building_trigger = no
 			region = japan_region
 		}
+
 		trigger = {
 			num_of_owned_provinces_with = {
 				value = 10
@@ -333,6 +355,7 @@ Ezo_3_slot = {
 				has_production_building_trigger = yes
 			}
 		}
+
 		effect = {
 			add_years_of_owned_provinces_production_income = {
 				years = 3
@@ -340,16 +363,17 @@ Ezo_3_slot = {
 				custom_tooltip = ezo_from_japan_tt
 			}
 			add_country_modifier = {
-				name = ezo_good_quality
+				name = "ezo_good_quality"
 				duration = 10950
 			}
 		}
 	}
 
 	ezo_gold_pan = {
-		icon = mission_japanese_samurai
+		icon = mission_zambezi_gold
 		position = 7
 		required_missions = { ezo_outward_perfection } 
+		provinces_to_highlight = {  } 
 
 		trigger = {
 			OR = {
@@ -364,6 +388,7 @@ Ezo_3_slot = {
 				full_idea_group = trade_ideas
 			}
 		}
+
 		effect = {
 			custom_tooltip = EZO_TT_7
 			set_country_flag = ezo_gold_find
@@ -380,32 +405,38 @@ Ezo_4_slot = {
 	potential = { tag = KM5 } 
 
 	yam_bear_fortitude = {
-		icon = mission_japanese_samurai
+		icon = mission_bear
 		position = 1
-		provinces_to_highlight = { owned_by = ROOT religion = animism}
-		trigger = {
-			all_owned_province = {
-				NOT = {religion = animism}
-			}
+		provinces_to_highlight = {
+			owned_by = ROOT
+			religion = animism
 		}
+
+		trigger = { all_owned_province = { NOT = { religion = animism }  }  } 
 
 		effect = {
 			add_country_modifier = {
-				name = ezo_codified
+				name = "ezo_codified"
 				duration = 10950
 			}
 			set_country_flag = kotan_first_upgrade
 			custom_tooltip = EZO_TT_2
 			if = {
-				limit = { has_personal_deity = kotankarkamuy_lv1}
+				limit = { has_personal_deity = kotankarkamuy_lv1 } 
 				change_personal_deity = kotankarkamuy_lv2
 			}
 		}
 	}
+
 	yam_more_people = {
-		icon = mission_japanese_samurai
+		icon = mission_alliances
 		position = 2
-		required_missions = { yam_bear_fortitude yam_mountain_family } 
+		required_missions = {
+			yam_bear_fortitude
+			yam_mountain_family
+		}
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			has_adm_advisor = yes
 			has_dip_advisor = yes
@@ -419,11 +450,15 @@ Ezo_4_slot = {
 			change_mil = 1
 		}
 	}
+
 	yam_quality_goods = {
-		icon = mission_japanese_samurai
+		icon = balance_the_estates
 		position = 4
 		required_missions = { yam_loyal_lands } 
-		provinces_to_highlight = { owned_by = ROOT has_trade_building_trigger = no}
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_trade_building_trigger = no
+		}
 
 		trigger = {
 			1028 = {
@@ -438,30 +473,30 @@ Ezo_4_slot = {
 
 		effect = {
 			add_years_of_income = 1
-			1028 = {
-				set_center_level_2_center_of_trade = yes
-			}
+			1028 = { set_center_level_2_center_of_trade = yes } 
 		}
 	}
+
 	ezo_outward_perfection = {
-		icon = mission_japanese_samurai
+		icon = mission_colonize_the_west
 		position = 6
 		required_missions = { ezo_worthy_people } 
 		provinces_to_highlight = {
 			country_or_non_sovereign_subject_holds = ROOT
-			NOT = {	region = japan_region }
+			has_port = yes
+			has_dock_building_trigger = no
+			has_trade_building_trigger = no
 		}
+
 		trigger = {
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
 				value = 10
-				NOT = {	region = japan_region }
 				has_port = yes
-				OR = {
-					has_dock_building_trigger = yes
-					has_trade_building_trigger = yes
-				}
+				has_dock_building_trigger = yes
+				has_trade_building_trigger = yes
 			}
 		}
+
 		effect = {
 			define_explorer = {
 				shock = 2
@@ -469,21 +504,21 @@ Ezo_4_slot = {
 				manuever = 5
 			}
 			add_country_modifier = {
-				name = ezo_naval_importance
+				name = "ezo_naval_importance"
 				duration = 10950
 			}
 		}
 	}
+
 	ezo_sunrise_land = {
-		icon = mission_japanese_samurai
+		icon = mission_colonize_california
 		position = 8
 		required_missions = { ezo_outward_perfection } 
 		provinces_to_highlight = {
 			colonial_region = colonial_california
-			NOT = {
-				country_or_non_sovereign_subject_holds = ROOT
-			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 		}
+
 		trigger = {
 			OR = {
 				native_policy = native_policy_coexist
@@ -496,25 +531,26 @@ Ezo_4_slot = {
 				is_core = ROOT
 			}
 		}
+
 		effect = {
 			add_country_modifier = {
-				name = ezo_sunrise_land
+				name = "ezo_sunrise_land"
 				duration = 10950
 			}
 			tooltip = {
 				custom_tooltip = EZO_TT_6d
 				add_country_modifier = {
-					name = ezo_native_policy_coexist
+					name = "ezo_native_policy_coexist"
 					duration = 10950
 				}
 				custom_tooltip = EZO_TT_6b
 				add_country_modifier = {
-					name = ezo_native_policy_trade
+					name = "ezo_native_policy_trade"
 					duration = 10950
 				}
 				custom_tooltip = EZO_TT_6c
 				add_country_modifier = {
-					name = ezo_native_policy_hostile
+					name = "ezo_native_policy_hostile"
 					duration = 10950
 				}
 			}
@@ -522,28 +558,28 @@ Ezo_4_slot = {
 				random_subject_country = {
 					limit = {
 						is_colonial_nation_of = ROOT
-						capital_scope = {colonial_region = colonial_california}
+						capital_scope = { colonial_region = colonial_california } 
 					}
 					if = {
-						limit = {overlord = {native_policy = native_policy_coexist}}
+						limit = { overlord = { native_policy = native_policy_coexist }  } 
 						add_country_modifier = {
-							name = ezo_native_policy_coexist
+							name = "ezo_native_policy_coexist"
 							duration = 10950
 						}
 						native_policy = native_policy_coexist
 					}
 					if = {
-						limit = {overlord = {native_policy = native_policy_trade}}
+						limit = { overlord = { native_policy = native_policy_trade }  } 
 						add_country_modifier = {
-							name = ezo_native_policy_trade
+							name = "ezo_native_policy_trade"
 							duration = 10950
 						}
 						native_policy = native_policy_trade
 					}
 					if = {
-						limit = {overlord = {native_policy = native_policy_hostile}}
+						limit = { overlord = { native_policy = native_policy_hostile }  } 
 						add_country_modifier = {
-							name = ezo_native_policy_hostile
+							name = "ezo_native_policy_hostile"
 							duration = 10950
 						}
 						native_policy = native_policy_hostile
@@ -552,21 +588,26 @@ Ezo_4_slot = {
 			}
 		}
 	}
+
 	ezo_colonial_master = {
-		icon = mission_japanese_samurai
+		icon = mission_empire
 		position = 9
-		required_missions = { ezo_sunrise_land ezo_golden_oppurtunity} 
+		required_missions = {
+			ezo_sunrise_land
+			ezo_golden_oppurtunity
+		}
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			calc_true_if = {
 				amount = 4
-				all_subject_country = {
-					is_colonial_nation_of = ROOT
-				}
+				all_subject_country = { is_colonial_nation_of = ROOT } 
 			}
 		}
+
 		effect = {
 			add_country_modifier = {
-				name = ezo_colonial_over
+				name = "ezo_colonial_over"
 				duration = -1
 			}
 		}
@@ -580,13 +621,13 @@ Ezo_5_slot = {
 	potential = { tag = KM5 } 
 
 	yam_less_faith = {
-		icon = mission_japanese_samurai
+		icon = mission_hands_praying
 		position = 2
 		required_missions = { yam_bear_fortitude } 
+		provinces_to_highlight = {  } 
+
 		trigger = {
-			capital_scope = {
-				grown_by_development = 5
-			}
+			capital_scope = { grown_by_development = 5 } 
 			custom_trigger_tooltip = {
 				tooltip = EZO_CT_1
 				OR = {
@@ -605,10 +646,16 @@ Ezo_5_slot = {
 			}
 		}
 	}
+
 	yam_improvements = {
-		icon = mission_japanese_samurai
+		icon = jap_five_regent_houses
 		position = 3
-		required_missions = { yam_more_people yam_less_faith } 
+		required_missions = {
+			yam_more_people
+			yam_less_faith
+		}
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			has_institution = renaissance
 			has_adm_advisor_2 = yes
@@ -617,21 +664,22 @@ Ezo_5_slot = {
 		}
 
 		effect = {
-			add_prestige_or_monarch_power = { amount = 15}
+			add_prestige_or_monarch_power = { amount = 15 } 
 			country_event_with_insight = {
 				id = ezo.11
 				insight_tooltip = EZO_IT_2
 			}
 		}
 	}
+
 	yam_kamuy_of_creation = {
-		icon = mission_japanese_samurai
+		icon = jap_train_samurai
 		position = 4
 		required_missions = { yam_improvements } 
+		provinces_to_highlight = {  } 
+
 		trigger = {
-			capital_scope = {
-				development = 30
-			}
+			capital_scope = { development = 30 } 
 			OR = {
 				has_advisor_of_type_and_level = {
 					type = ADM
@@ -681,15 +729,16 @@ Ezo_5_slot = {
 	}
 
 	yam_naval_stuff = {
-		icon = mission_japanese_samurai
+		icon = jap_deploy_atakebune
 		position = 5
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			if = {
-				limit = {ai = yes}
+				limit = { ai = yes } 
 				navy_size = 18
-			}else = {
-				navy_size_percentage = 1
 			}
+			else = { navy_size_percentage = 1 } 
 		}
 
 		effect = {
@@ -698,25 +747,18 @@ Ezo_5_slot = {
 				fire = 4
 				manuever = 5
 			}
-			4658 = {
-				add_permanent_claim = ROOT
-			}
-			sea_of_okhotsk_area = {
-				discover_country = ROOT
-			}
-			east_siberia_region = {
-				discover_country = ROOT
-			}
+			4658 = { add_permanent_claim = ROOT } 
+			sea_of_okhotsk_area = { discover_country = ROOT } 
+			east_siberia_region = { discover_country = ROOT } 
 		}
 	}
 
 	yam_cold_shores = {
-		icon = mission_japanese_samurai
+		icon = mission_amur_acquisition
 		position = 6
 		required_missions = { yam_naval_stuff } 
-		provinces_to_highlight = {
-			province_id = 4658
-		}
+		provinces_to_highlight = { province_id = 4658 } 
+
 		trigger = {
 			OR = {
 				KMC = {
@@ -727,11 +769,8 @@ Ezo_5_slot = {
 					}
 					is_at_war = no
 				}
-				4658 = {
-					country_or_non_sovereign_subject_holds = ROOT
-				}
+				4658 = { country_or_non_sovereign_subject_holds = ROOT } 
 			}
-
 		}
 
 		effect = {
@@ -739,25 +778,24 @@ Ezo_5_slot = {
 				id = ezo.12
 				insight_tooltip = EZO_TT_5
 			}
-			furdan_area = {
-				add_permanent_claim = ROOT
-			}
-			ilan_hala_area = {
-				add_permanent_claim = ROOT
-			}
-			central_jilin_area = {
-				add_permanent_claim = ROOT
-			}
+			furdan_area = { add_permanent_claim = ROOT } 
+			ilan_hala_area = { add_permanent_claim = ROOT } 
+			central_jilin_area = { add_permanent_claim = ROOT } 
 		}
 	}
+
 	ezo_forward_east = {
-		icon = mission_japanese_samurai
+		icon = mission_rb_colonise_canada
 		position = 7
-		required_missions = { ezo_outward_perfection yam_cold_shores} 
+		required_missions = {
+			ezo_outward_perfection
+			yam_cold_shores
+		}
 		provinces_to_highlight = {
 			region = north_east_pacific_region
-			NOT = {has_discovered = ROOT}
+			NOT = { has_discovered = ROOT } 
 		}
+
 		trigger = {
 			1034 = {
 				OR = {
@@ -771,38 +809,37 @@ Ezo_5_slot = {
 				has_discovered = ROOT
 			}
 		}
+
 		effect = {
 			1034 = {
 				if = {
-					limit = {
-						is_empty = yes
-					}
+					limit = { is_empty = yes } 
 					cede_province = ROOT
 				}
 				add_core = ROOT
-					change_culture = koushi
-					change_religion = kamuyramat
-					add_base_manpower = 1
+				change_culture = koushi
+				change_religion = kamuyramat
+				add_base_manpower = 1
 			}
 			custom_tooltip = empty_line_tt
-			berring_sea_area = {discover_country = ROOT}
-			gulf_of_alaska_area = {discover_country = ROOT}
+			berring_sea_area = { discover_country = ROOT } 
+			gulf_of_alaska_area = { discover_country = ROOT } 
 			cascadia_region = {
-				limit = {has_port = yes}
+				limit = { has_port = yes } 
 				discover_country = ROOT
 			}
 		}
 	}
+
 	ezo_golden_oppurtunity = {
-		icon = mission_japanese_samurai
+		icon = mission_colonize_alaska
 		position = 8
 		required_missions = { ezo_forward_east } 
 		provinces_to_highlight = {
 			colonial_region = colonial_alaska
-			NOT = {
-				country_or_non_sovereign_subject_holds = ROOT
-			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 		}
+
 		trigger = {
 			OR = {
 				native_policy = native_policy_coexist
@@ -815,25 +852,26 @@ Ezo_5_slot = {
 				is_core = ROOT
 			}
 		}
+
 		effect = {
 			add_country_modifier = {
-				name = ezo_golden_rush
+				name = "ezo_golden_rush"
 				duration = 10950
 			}
 			tooltip = {
 				custom_tooltip = EZO_TT_6a
 				add_country_modifier = {
-					name = ezo_native_policy_coexist
+					name = "ezo_native_policy_coexist"
 					duration = 10950
 				}
 				custom_tooltip = EZO_TT_6b
 				add_country_modifier = {
-					name = ezo_native_policy_trade
+					name = "ezo_native_policy_trade"
 					duration = 10950
 				}
 				custom_tooltip = EZO_TT_6c
 				add_country_modifier = {
-					name = ezo_native_policy_hostile
+					name = "ezo_native_policy_hostile"
 					duration = 10950
 				}
 			}
@@ -841,28 +879,28 @@ Ezo_5_slot = {
 				random_subject_country = {
 					limit = {
 						is_colonial_nation_of = ROOT
-						capital_scope = {colonial_region = colonial_alaska}
+						capital_scope = { colonial_region = colonial_alaska } 
 					}
 					if = {
-						limit = {overlord = {native_policy = native_policy_coexist}}
+						limit = { overlord = { native_policy = native_policy_coexist }  } 
 						add_country_modifier = {
-							name = ezo_native_policy_coexist
+							name = "ezo_native_policy_coexist"
 							duration = 10950
 						}
 						native_policy = native_policy_coexist
 					}
 					if = {
-						limit = {overlord = {native_policy = native_policy_trade}}
+						limit = { overlord = { native_policy = native_policy_trade }  } 
 						add_country_modifier = {
-							name = ezo_native_policy_trade
+							name = "ezo_native_policy_trade"
 							duration = 10950
 						}
 						native_policy = native_policy_trade
 					}
 					if = {
-						limit = {overlord = {native_policy = native_policy_hostile}}
+						limit = { overlord = { native_policy = native_policy_hostile }  } 
 						add_country_modifier = {
-							name = ezo_native_policy_hostile
+							name = "ezo_native_policy_hostile"
 							duration = 10950
 						}
 						native_policy = native_policy_hostile
