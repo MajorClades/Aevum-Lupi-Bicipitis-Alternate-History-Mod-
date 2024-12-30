@@ -1,0 +1,221 @@
+bl0_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = BL0 } 
+
+	blo_conquer_lybia = {
+		icon = mission_alliances
+		position = 1
+		provinces_to_highlight = { owned_by = AF5  } 
+
+		trigger = { 
+			army_size_percentage = 1
+		} 
+
+		effect = { 
+			tripolitania_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	blo_the_way_forward = {
+		icon = mission_alliances
+		position = 2
+		required_missions = { blo_conquer_lybia } 
+		provinces_to_highlight = { area = tripolitania_area NOT = {owned_by = ROOT} } 
+
+		trigger = {
+			tripolitania_area = {
+				type = all
+				owned_by = ROOT
+			}
+		} 
+
+		effect = {
+			country_event = {
+				id = legion.4
+			}
+		} 
+	}
+}
+
+bl0_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = BL0 } 
+
+	blo_power_within = {
+		icon = mission_alliances
+		position = 2
+
+		trigger = {
+			OR = {
+				AND = {
+					has_country_modifier = clades_acolyte
+					has_government_power = {
+						mechanic_type = marcionism_legion_mechanic
+						power_type = marc_leg_adm
+						value = 30
+					}
+				}
+				AND = {
+					has_country_modifier = sanguine_acolyte
+					has_government_power = {
+						mechanic_type = marcionism_legion_mechanic
+						power_type = marc_leg_dip
+						value = 30
+					}
+				}
+				AND = {
+					has_country_modifier = solari_acolyte
+					has_government_power = {
+						mechanic_type = marcionism_legion_mechanic
+						power_type = marc_leg_mil
+						value = 30
+					}
+				}
+				AND = {
+					has_country_modifier = above_all_acolyte
+					has_government_power = {
+						mechanic_type = marcionism_legion_mechanic
+						power_type = marc_leg_adm
+						value = 25
+					}
+					has_government_power = {
+						mechanic_type = marcionism_legion_mechanic
+						power_type = marc_leg_dip
+						value = 25
+					}
+					has_government_power = {
+						mechanic_type = marcionism_legion_mechanic
+						power_type = marc_leg_mil
+						value = 25
+					}
+				}
+			}
+		} 
+
+		effect = {
+			complex_dynamic_effect = {
+				first_custom_tooltip = BROK_LEG_TT_1a
+				first_limit = "has_country_modifier = clades_acolyte"
+				first_effect = "
+					add_country_modifier = {
+						name = clades_acolyte_up
+						duration = 10950
+					}
+				"
+				second_custom_tooltip = BROK_LEG_TT_1b
+				second_limit = "has_country_modifier = sanguine_acolyte"
+				second_effect = "
+					add_country_modifier = {
+						name = sanguine_acolyte_up
+						duration = 10950
+					}
+				"
+				third_custom_tooltip = BROK_LEG_TT_1c
+				third_limit = "has_country_modifier = solari_acolyte"
+				third_effect = "
+					add_country_modifier = {
+						name = solari_acolyte_up
+						duration = 10950
+					}
+				"
+				fourth_custom_tooltip = BROK_LEG_TT_1d
+				fourth_limit = "has_country_modifier = above_all_acolyte"
+				fourth_effect = "
+					add_country_modifier = {
+						name = above_all_acolyte_up
+						duration = 10950
+					}
+				"
+			}
+		} 
+	}
+
+}
+
+bl0_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = BL0 } 
+
+	blo_spread_marcion = {
+		icon = mission_alliances
+		position = 1
+		provinces_to_highlight = { owned_by = ROOT NOT = {religion = ROOT} } 
+		trigger = { 
+			all_owned_province = {
+				religion = ROOT
+			}
+		} 
+
+		effect = { 
+			add_country_modifier_for_age = {
+				name = cladesian_tolerance
+				age = age_of_discovery
+			}
+		} 
+	}
+
+}
+
+bl0_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = BL0 } 
+
+}
+
+bl0_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = BL0 } 
+
+	blo_starvation = {
+		icon = mission_alliances
+		position = 1
+
+		trigger = { 
+			grown_by_development = 5
+		} 
+
+		effect = {
+			remove_country_modifier = starving_army_leg
+			add_country_modifier = {
+				name = starving_army_leg_less
+				duration = 3650
+			}
+		} 
+	}
+
+	blo_no_longer_hungry = {
+		icon = mission_alliances
+		position = 2
+		required_missions = { blo_starvation } 
+		trigger = {
+			OR = {
+				NOT = {
+					has_country_modifier = starving_army_leg_less
+				}
+				grown_by_development = 25
+			}
+		} 
+
+		effect = {
+			remove_country_modifier = starving_army_leg_less
+			add_army_tradition_or_mil_power = {amount = 20}
+		} 
+	}
+}

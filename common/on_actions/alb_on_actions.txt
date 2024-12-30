@@ -264,14 +264,8 @@ on_main_war_lost = {
 			limit = {
 				ai = no
 			}
-			random_list = {
-				75 = {
-				}
-				25 = {
-					country_event = {
-						id = redleg.103
-					}
-				}
+			country_event = {
+				id = redleg.103
 			}
 		}
 	}
@@ -975,5 +969,40 @@ on_expanded_infrastructure_removed = {
 on_buy_religious_reform = {
 	events = {
 		tapui.1
+	}
+}
+
+on_mil_exploited = {
+	if = {
+		limit = {
+			owner = {
+				has_country_flag = exploited_mil_twice
+			}
+		}
+		owner = {
+			clr_country_flag = exploited_mil_twice
+			set_country_flag = exploited_mil_thrice
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_country_flag = exploited_mil_once
+			}
+		}
+		owner = {
+			clr_country_flag = exploited_mil_once
+			set_country_flag = exploited_mil_twice
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_country_modifier = starving_army_leg
+			}
+		}
+		owner = {
+			set_country_flag = exploited_mil_once
+		}
 	}
 }
