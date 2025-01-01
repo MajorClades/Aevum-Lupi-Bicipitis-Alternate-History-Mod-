@@ -57,45 +57,21 @@ bl0_2_slot = {
 			OR = {
 				AND = {
 					has_country_modifier = clades_acolyte
-					has_government_power = {
-						mechanic_type = marcionism_legion_mechanic
-						power_type = marc_leg_adm
-						value = 30
-					}
+					has_cladesian_authority = { amount = 30}
 				}
 				AND = {
 					has_country_modifier = sanguine_acolyte
-					has_government_power = {
-						mechanic_type = marcionism_legion_mechanic
-						power_type = marc_leg_dip
-						value = 30
-					}
+					has_sanguine_authority = { amount = 30}
 				}
 				AND = {
 					has_country_modifier = solari_acolyte
-					has_government_power = {
-						mechanic_type = marcionism_legion_mechanic
-						power_type = marc_leg_mil
-						value = 30
-					}
+					has_solarian_authority = { amount = 30}
 				}
 				AND = {
 					has_country_modifier = above_all_acolyte
-					has_government_power = {
-						mechanic_type = marcionism_legion_mechanic
-						power_type = marc_leg_adm
-						value = 25
-					}
-					has_government_power = {
-						mechanic_type = marcionism_legion_mechanic
-						power_type = marc_leg_dip
-						value = 25
-					}
-					has_government_power = {
-						mechanic_type = marcionism_legion_mechanic
-						power_type = marc_leg_mil
-						value = 25
-					}
+					has_cladesian_authority = { amount = 25}
+					has_sanguine_authority = { amount = 25}
+					has_solarian_authority = { amount = 25}
 				}
 			}
 		} 
@@ -152,12 +128,14 @@ bl0_3_slot = {
 		position = 1
 		provinces_to_highlight = { owned_by = ROOT NOT = {religion = ROOT} } 
 		trigger = { 
-			all_owned_province = {
+			num_of_owned_provinces_with = {
+				value = 3
 				religion = ROOT
 			}
 		} 
 
 		effect = { 
+			add_devotion = 25
 			add_country_modifier_for_age = {
 				name = cladesian_tolerance
 				age = age_of_discovery
@@ -165,6 +143,23 @@ bl0_3_slot = {
 		} 
 	}
 
+	blo_more_faithful = {
+		icon = mission_alliances
+		position = 3
+		required_missions = { blo_spread_marcion } 
+		provinces_to_highlight = { owned_by = ROOT NOT = {religion = ROOT} } 
+		trigger = { 
+			num_of_owned_provinces_with = {
+				value = 8
+				religion = ROOT
+			}
+		} 
+
+		effect = { 
+			add_devotion = 50
+			add_church_power = 100
+		} 
+	}
 }
 
 bl0_4_slot = {
@@ -174,6 +169,33 @@ bl0_4_slot = {
 	has_country_shield = yes
 	potential = { tag = BL0 } 
 
+	blo_rhoman_pax = {
+		icon = mission_alliances
+		position = 2
+		provinces_to_highlight = { is_capital_of = RU0  } 
+
+		trigger = {
+			RU0 = {
+				has_spy_network_from = {
+					who = ROOT
+					value = 30
+				}
+			}
+		} 
+
+		effect = {
+			add_spy_network_in = {
+				who = RU0
+				value = -30
+			}
+			RU0 = {
+				add_country_modifier = {
+					name = blo_pax_rhomana
+					duration = 10950
+				}
+			}
+		} 
+	}
 }
 
 bl0_5_slot = {

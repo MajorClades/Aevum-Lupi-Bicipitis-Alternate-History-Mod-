@@ -3009,7 +3009,7 @@ marcionism = { # We will kill God
 		color = { 66 6 0 }
 		country = {
 			tolerance_heathen = -1
-			tolerance_heretic = -1
+			church_power_modifier = 0.15
 		}
 		country_as_secondary = {
 			warscore_cost_vs_other_religion = 0.15
@@ -3033,25 +3033,30 @@ marcionism = { # We will kill God
 		}
 
 		celebrate = {
-			cost = 200
-			potential = {
-			}
+			cost = 100
+			potential = { religion = marcionist}
 			allow = {
-				custom_trigger_tooltip = {
-					tooltip = YAMATAI_TT_17
-					NOT = {has_country_modifier = shinto_hidden_timer}
+				OR = {
+					has_government_power = {
+						mechanic_type = marcionism_legion_mechanic
+						power_type = marc_leg_adm
+						value = 50
+					}
+					has_government_power = {
+						mechanic_type = marcionism_legion_mechanic
+						power_type = marc_leg_dip
+						value = 50
+					}
+					has_government_power = {
+						mechanic_type = marcionism_legion_mechanic
+						power_type = marc_leg_mil
+						value = 50
+					}
 				}
 			}
 			effect = {
-				# country_event = {
-				# 	id = yamat.2000
-				# }
-				hidden_effect = {
-					add_country_modifier = {
-						name = shinto_hidden_timer
-						duration = 730
-						hidden = yes
-					}
+				country_event = {
+					id = legion.1000
 				}
 			}
 			ai_will_do = {
