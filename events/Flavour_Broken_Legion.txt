@@ -20,7 +20,7 @@ country_event = { #Meet Solari
 		name = legion.1a
 		add_country_modifier = {
 			name = addarius_solari_sunshine
-			duration = 18980
+			duration = -1
 		}
 		add_government_power = {
 			mechanic_type = marcionism_legion_mechanic
@@ -32,7 +32,7 @@ country_event = { #Meet Solari
 		name = legion.1b
 		add_country_modifier = {
 			name = addarius_solari_sunshine
-			duration = 18980
+			duration = -1
 		}
 		add_government_power = {
 			mechanic_type = marcionism_legion_mechanic
@@ -54,7 +54,7 @@ country_event = { #Meet Sirius
 		name = legion.2a
 		add_country_modifier = {
 			name = syrius_bloody_handed
-			duration = 13870
+			duration = -1
 		}
 		add_government_power = {
 			mechanic_type = marcionism_legion_mechanic
@@ -66,7 +66,7 @@ country_event = { #Meet Sirius
 		name = legion.2b
 		add_country_modifier = {
 			name = syrius_bloody_handed
-			duration = 13870
+			duration = -1
 		}
 	}
 }
@@ -75,7 +75,7 @@ country_event = { #Making my way down town
 	id = legion.3
 	title = legion.3.test
 	desc = legion.3.desc
-	picture = CRUSADER_HORDE_eventPicture
+	picture = ADVISOR_eventPicture
 	
 	trigger = {
 		has_government_mechanic = marcionism_legion_mechanic
@@ -184,6 +184,117 @@ country_event = { #Lybia
 	}
 }
 
+country_event = { #Addarius Dies
+	id = legion.5
+	title = legion.5.test
+	desc = legion.5.desc
+	picture = DEATH_OF_HEIR_eventPicture
+	
+	trigger = {
+		has_country_modifier = addarius_solari_sunshine
+		is_year = 1491
+	}
+
+	mean_time_to_happen = { months = 12 }
+
+	option = {
+		name = legion.5a
+		remove_country_modifier = addarius_solari_sunshine
+		capital_scope = {
+			add_province_modifier = {
+				name = solari_stronghold
+				duration = -1
+			}
+			custom_tooltip = BROK_LEG_TT_2
+		}
+	}
+	option = {
+		name = legion.5b
+		remove_country_modifier = addarius_solari_sunshine
+		add_solarian_authority = {amount = 15}
+	}
+}
+
+country_event = { #Syrius Dies
+	id = legion.6
+	title = legion.6.test
+	desc = legion.6.desc
+	picture = DEATH_OF_HEIR_eventPicture
+	
+	trigger = {
+		has_country_modifier = syrius_bloody_handed
+		is_year = 1494
+	}
+
+	mean_time_to_happen = { months = 12 }
+
+	option = {
+		name = legion.6a
+		remove_country_modifier = syrius_bloody_handed
+		add_corruption = -4
+		add_church_power = -50
+	}
+	option = {
+		name = legion.6b
+		remove_country_modifier = syrius_bloody_handed
+		add_corruption = -4
+		add_sanguine_authority = {amount = 15}
+	}
+}
+
+country_event = { #Syrius Dies
+	id = legion.6
+	title = legion.6.test
+	desc = legion.6.desc
+	picture = DEATH_OF_HEIR_eventPicture
+	
+	trigger = {
+		has_country_modifier = syrius_bloody_handed
+		is_year = 1494
+	}
+
+	mean_time_to_happen = { months = 12 }
+
+	option = {
+		name = legion.6a
+		remove_country_modifier = syrius_bloody_handed
+		add_corruption = -4
+		add_church_power = -50
+	}
+	option = {
+		name = legion.6b
+		remove_country_modifier = syrius_bloody_handed
+		add_corruption = -4
+		add_sanguine_authority = {amount = 15}
+	}
+}
+
+country_event = { #Clades Dies
+	id = legion.7
+	title = legion.7.test
+	desc = legion.7.desc
+	picture = DEATH_OF_HEIR_eventPicture
+	
+	trigger = {
+		has_country_modifier = clades_itsame
+		is_year = 1489
+	}
+
+	mean_time_to_happen = { months = 12 }
+
+	option = {
+		name = legion.7a
+		remove_country_modifier = clades_itsame
+		add_stability_or_adm_power = yes
+		add_cladesian_authority = {amount = 10}
+	}
+	option = {
+		name = legion.7b
+		remove_country_modifier = clades_itsame
+		add_adm_power = 250
+		add_cladesian_authority = {amount = 20}
+	}
+}
 
 country_event = { #festival and council
 	id = legion.1000
@@ -202,13 +313,13 @@ country_event = { #festival and council
 	option = {
 		name = legion.1000b
 		trigger = {has_sanguine_authority = { amount = 50 }	}
-		add_adm_power = -50
+		add_dip_power = -50
 		add_sanguine_authority = { amount = -25 }		
 	}
 	option = {
 		name = legion.1000c
 		trigger = {has_solarian_authority = { amount = 50 }	}
-		add_adm_power = -50
+		add_mil_power = -50
 		add_solarian_authority = { amount = -25 }		
 	}
 	option = {
@@ -222,6 +333,30 @@ country_event = { #festival and council
 		add_cladesian_authority = { amount = 10 }	
 		add_sanguine_authority = { amount = 10 }	
 		add_solarian_authority = { amount = 10 }		
+	}
+	option = {
+		name = legion.1000f
+		trigger = {has_cladesian_authority = { amount = 50 } has_sanguine_authority = { amount = 50 }	}
+		add_adm_power = -25 
+		add_dip_power = -25
+		add_cladesian_authority = { amount = -25 }		
+		add_sanguine_authority = { amount = -25 }			
+	}
+	option = {
+		name = legion.1000g
+		trigger = {has_sanguine_authority = { amount = 50 }	has_solarian_authority = { amount = 50 }}
+		add_dip_power = -25
+		add_mil_power = -25
+		add_sanguine_authority = { amount = -25 }	
+		add_solarian_authority = { amount = -25 }	
+	}
+	option = {
+		name = legion.1000h
+		trigger = {has_solarian_authority = { amount = 50 } has_cladesian_authority = { amount = 50 }	}
+		add_adm_power = -25 
+		add_mil_power = -25
+		add_cladesian_authority = { amount = -25 }	
+		add_solarian_authority = { amount = -25 }		
 	}
 	after = {
 		hidden_effect = {

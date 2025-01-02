@@ -285,3 +285,56 @@ cahokia_tribute_to_vassal_action = {
 		}
     }
 }
+
+spy_marcionist_convert_action = {
+	category = covert
+
+	is_visible = {
+		OR = {
+			has_reform = mars_legions_reform
+			has_reform = marcionism_reform
+		}
+    }
+	require_acceptance = no
+	is_allowed = {
+		is_at_war = no
+		FROM = {
+			has_spy_network_from = {
+				who = ROOT
+				value = 30
+			}
+			is_at_war = no
+			NOT = {
+				religion = marcionist
+			}
+		}
+    }
+	on_accept = {
+		FROM = {
+			random_owned_province = {
+				limit = {
+					same_continent = FROM
+					NOT = {
+						religion = marcionist
+					}
+				}
+				change_religion = marcionist
+				add_province_modifier = {
+                    name = religious_zeal_at_conv
+                    duration = 7300
+                }
+			}
+		}
+		ROOT = {
+			add_sanguine_authority = {amount = 15}
+			add_spy_network_in = {
+				who = FROM
+				value = -30
+			}
+		}
+    }
+
+	ai_will_do = {
+		always = no
+    }
+}

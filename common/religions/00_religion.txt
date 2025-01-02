@@ -3036,27 +3036,21 @@ marcionism = { # We will kill God
 			cost = 100
 			potential = { religion = marcionist}
 			allow = {
-				OR = {
-					has_government_power = {
-						mechanic_type = marcionism_legion_mechanic
-						power_type = marc_leg_adm
-						value = 50
-					}
-					has_government_power = {
-						mechanic_type = marcionism_legion_mechanic
-						power_type = marc_leg_dip
-						value = 50
-					}
-					has_government_power = {
-						mechanic_type = marcionism_legion_mechanic
-						power_type = marc_leg_mil
-						value = 50
-					}
+				custom_trigger_tooltip = {
+					tooltip = BROK_LEG_TT_0
+					NOT = {has_country_modifier = shinto_hidden_timer}
 				}
 			}
 			effect = {
 				country_event = {
 					id = legion.1000
+				}
+				hidden_effect = {
+					add_country_modifier = {
+						name = marc_hidden_timer
+						duration = 730
+						hidden = yes
+					}
 				}
 			}
 			ai_will_do = {
