@@ -296,6 +296,218 @@ country_event = { #Clades Dies
 	}
 }
 
+country_event = { #Africa converted
+	id = legion.8
+	title = legion.8.test
+	desc = legion.8.desc
+	picture = DEATH_OF_HEIR_eventPicture
+
+	is_triggered_only = yes
+	option = {
+		name = legion.8a
+		add_cladesian_authority = {amount = 80}
+	}
+	option = {
+		name = legion.8b
+		add_sanguine_authority = {amount = 80}
+	}
+	option = {
+		name = legion.8c
+		add_solarian_authority = {amount = 80}
+	}
+	option = {
+		name = legion.8d
+		add_cladesian_authority = {amount = 50}
+		add_sanguine_authority = {amount = 50}
+		add_solarian_authority = {amount = 50}
+	}
+}
+
+country_event = { #the ascension
+	id = legion.9
+	title = legion.9.test
+	desc = legion.9.desc
+	picture = DEATH_OF_HEIR_eventPicture
+
+	is_triggered_only = yes
+	option = {
+		name = legion.9a
+		trigger = {
+			has_cladesian_authority = {amount = 90}
+		}
+		change_tag = BL2
+		add_government_reform = marcionism_cladesian_reform
+		swap_non_generic_missions = yes
+	}
+	option = {
+		name = legion.9b
+		trigger = {
+			has_sanguine_authority = {amount = 90}
+		}
+		change_tag = BL3
+		change_government = republic
+		add_government_reform = marcionism_sanguine_reform
+		swap_non_generic_missions = yes
+	}
+	option = {
+		name = legion.9c
+		trigger = {
+			has_solarian_authority = {amount = 90}
+		}
+		change_tag = BL4
+		change_government = monarchy
+		add_government_reform = marcionism_solarian_reform
+		swap_non_generic_missions = yes
+	}
+	option = {
+		name = legion.9d
+		change_tag = BL5
+		add_government_reform = marcionism_all_reform
+		swap_non_generic_missions = yes
+	}
+}
+
+country_event = { #build solar stronghol
+	id = legion.100
+	title = legion.100.test
+	desc = legion.100.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = legion.100a
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 1
+				religion = ROOT
+				has_fort_building_trigger = yes
+				NOT = {
+					has_province_modifier = solari_stronghold
+				}
+			}
+		}
+		add_years_of_income = -0.23
+		random_owned_province = {
+			limit = {
+				religion = ROOT
+				has_fort_building_trigger = yes
+				NOT = {
+					has_province_modifier = solari_stronghold
+				}
+			}
+			add_province_modifier = {
+				name = solari_stronghold
+				duration = -1
+			}
+			custom_tooltip = BROK_LEG_TT_2
+		}			
+	}
+	option = {
+		name = legion.100b
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 2
+				religion = ROOT
+				has_fort_building_trigger = yes
+				NOT = {
+					has_province_modifier = solari_stronghold
+				}
+			}
+		}
+		add_years_of_income = -0.46
+		random_owned_province = {
+			limit = {
+				religion = ROOT
+				has_fort_building_trigger = yes
+				NOT = {
+					has_province_modifier = solari_stronghold
+				}
+			}
+			add_province_modifier = {
+				name = solari_stronghold
+				duration = -1
+			}
+			custom_tooltip = BROK_LEG_TT_2
+		}	
+		random_owned_province = {
+			limit = {
+				religion = ROOT
+				has_fort_building_trigger = yes
+				NOT = {
+					has_province_modifier = solari_stronghold
+				}
+			}
+			add_province_modifier = {
+				name = solari_stronghold
+				duration = -1
+			}
+			custom_tooltip = BROK_LEG_TT_2
+		}	
+	}
+	option = {
+		name = legion.100c
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 3
+				religion = ROOT
+				has_fort_building_trigger = yes
+				NOT = {
+					has_province_modifier = solari_stronghold
+				}
+			}
+		}
+		add_years_of_income = -0.69
+		random_owned_province = {
+			limit = {
+				religion = ROOT
+				has_fort_building_trigger = yes
+				NOT = {
+					has_province_modifier = solari_stronghold
+				}
+			}
+			add_province_modifier = {
+				name = solari_stronghold
+				duration = -1
+			}
+			custom_tooltip = BROK_LEG_TT_2
+		}	
+		random_owned_province = {
+			limit = {
+				religion = ROOT
+				has_fort_building_trigger = yes
+				NOT = {
+					has_province_modifier = solari_stronghold
+				}
+			}
+			add_province_modifier = {
+				name = solari_stronghold
+				duration = -1
+			}
+			custom_tooltip = BROK_LEG_TT_2
+		}	
+		random_owned_province = {
+			limit = {
+				religion = ROOT
+				has_fort_building_trigger = yes
+				NOT = {
+					has_province_modifier = solari_stronghold
+				}
+			}
+			add_province_modifier = {
+				name = solari_stronghold
+				duration = -1
+			}
+			custom_tooltip = BROK_LEG_TT_2
+		}		
+	}
+	option = {
+		name = legion.100d
+		country_event = {
+			id = legion.100
+		}	
+	}
+}
 country_event = { #festival and council
 	id = legion.1000
 	title = legion.1000.test
@@ -367,3 +579,4 @@ country_event = { #festival and council
 		}
 	}
 }
+

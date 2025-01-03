@@ -68,6 +68,30 @@ bl0_1_slot = {
 			
 		} 
 	}
+	blo_question_of_faith = {
+		icon = mission_alliances
+		position = 6
+		required_missions = {blo_conquest} 
+		provinces_to_highlight = { region = maghreb_region NOT = {religion = ROOT} } 
+		trigger = { 
+			maghreb_region = {
+				type = all 
+				owned_by = ROOT
+				religion = ROOT
+			}
+		} 
+
+		effect = { 
+			add_stability_or_adm_power = yes
+			capital_scope = {
+				add_or_upgrade_tax_building = yes
+				add_building = university
+			}
+			country_event = {
+				id = legion.8
+			}
+		} 
+	}
 }
 
 bl0_2_slot = {
@@ -141,7 +165,78 @@ bl0_2_slot = {
 			}
 		} 
 	}
+	blo_conquest = {
+		icon = mission_alliances
+		position = 5
+		required_missions = {blo_new_nation} 
+		provinces_to_highlight = { region = maghreb_region NOT = {owned_by = ROOT} } 
+		trigger = { 
+			maghreb_region = {
+				type = all 
+				owned_by = ROOT
+			}
+		} 
 
+		effect = { 
+			complex_dynamic_effect = {
+				first_custom_tooltip = BROK_LEG_TT_1a
+				first_limit = "has_country_modifier = clades_acolyte"
+				first_effect = "
+					maghreb_region = {
+						add_province_modifier = {
+							name = clades_african_lord
+							duration = 10950
+						}
+					}
+				"
+				second_custom_tooltip = BROK_LEG_TT_1b
+				second_limit = "has_country_modifier = sanguine_acolyte"
+				second_effect = "
+					maghreb_region = {
+						add_province_modifier = {
+							name = sanguine_african_lord
+							duration = 10950
+						}
+					}
+				"
+				third_custom_tooltip = BROK_LEG_TT_1c
+				third_limit = "has_country_modifier = solari_acolyte"
+				third_effect = "
+					maghreb_region = {
+						add_province_modifier = {
+							name = solari_african_lord
+							duration = 10950
+						}
+					}
+				"
+				fourth_custom_tooltip = BROK_LEG_TT_1d
+				fourth_limit = "has_country_modifier = above_all_acolyte"
+				fourth_effect = "
+					add_country_modifier = {
+						name = above_all_african_lord
+						duration = 10950
+					}
+				"
+			}
+		} 
+	}
+	blo_temples = {
+		icon = mission_alliances
+		position = 5
+		required_missions = {blo_conquest} 
+		provinces_to_highlight = { owned_by = ROOT has_tax_building_trigger= no } 
+		trigger = { 
+			num_of_owned_provinces_with = {
+				value = 15
+				has_tax_building_trigger = yes
+			}
+		} 
+
+		effect = { 
+			add_years_of_income = 2
+			add_church_power = 100
+		} 
+	}
 }
 
 bl0_3_slot = {
@@ -208,6 +303,29 @@ bl0_3_slot = {
 			}
 		} 
 	}
+	blo_the_ascension = {
+		icon = mission_alliances
+		position = 7
+		required_missions = {blo_new_nation } 
+		provinces_to_highlight = { owned_by = ROOT NOT = {religion = ROOT} } 
+		trigger = { 
+			OR = {
+				has_cladesian_authority = { amount = 90}
+				has_sanguine_authority = { amount = 90}
+				has_solarian_authority = { amount = 90}
+			}
+			num_of_owned_provinces_with = {
+				value = 100
+				religion = ROOT
+			}
+		} 
+
+		effect = { 
+			country_event = {
+				id = legion.9
+			}
+		} 
+	}
 }
 
 bl0_4_slot = {
@@ -232,14 +350,92 @@ bl0_4_slot = {
 		} 
 
 		effect = {
-			add_spy_network_in = {
-				who = RU0
-				value = -30
+			if = {
+				limit = {
+					tag = BL0
+				}
+				add_spy_network_in = {
+					who = RU0
+					value = -30
+				}
+				RU0 = {
+					add_country_modifier = {
+						name = blo_pax_rhomana
+						duration = 10950
+					}
+				}
+			}else = {
+				add_spy_network_in = {
+					who = RU0
+					value = -30
+				}
+				RU0 = {
+					add_country_modifier = {
+						name = blo_break_rhomania
+						duration = 10950
+					}
+				}
 			}
-			RU0 = {
-				add_country_modifier = {
-					name = blo_pax_rhomana
-					duration = 10950
+		} 
+	}
+
+	blo_revenge = {
+		icon = mission_alliances
+		position = 5
+		required_missions = {blo_new_nation} 
+		provinces_to_highlight = { is_capital_of = RU0 } 
+		trigger = { 
+			OR = {
+				army_strength = {
+					who = RU0
+					value = 1
+				}
+				army_size = 50
+			}
+		} 
+
+		effect = { 
+			add_ruler_modifier = {
+				name = revenge_of_the_4th
+			}
+			egypt_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	blo_egyptian_red_nile = {
+		icon = mission_alliances
+		position = 6
+		required_missions = {blo_revenge} 
+		provinces_to_highlight = { region = egypt_region NOT = {religion = ROOT} } 
+		trigger = { 
+			358 = {
+				owned_by = ROOT
+				religion = ROOT
+			}
+			361 = {
+				owned_by = ROOT
+				religion = ROOT
+			}
+			num_of_owned_provinces_with = {
+				value = 25
+				region  = egypt_region
+				religion = ROOT
+			}
+		} 
+
+		effect = { 
+			361 = {
+				add_great_project_tier = {
+					type = pyramid_of_cheops
+					tier = 1
+				}
+			}
+			358 = {
+				add_great_project_tier = {
+					type = alexandria_library
+					tier = 1
 				}
 			}
 		} 
@@ -317,6 +513,35 @@ bl0_5_slot = {
 					add_country_modifier = {
 						name = blo_better_generals
 						duration = 10950
+					}
+				"
+			}
+		} 
+	}
+
+	blo_avengers = {
+		icon = mission_alliances
+		position = 6
+		required_missions = {blo_revenge} 
+		provinces_to_highlight = { region = egypt_region NOT = {owned_by = ROOT} } 
+		trigger = { 
+			egypt_region = {
+				type = all 
+				owned_by = ROOT
+			}
+		} 
+
+		effect = { 
+			near_east_superregion = {
+				add_permanent_claim = ROOT
+			}
+			complex_dynamic_effect = {
+				first_custom_tooltip = BROK_LEG_TT_5
+				first_limit = "has_country_modifier = revenge_of_the_4th"
+				first_effect = "
+					add_country_modifier = {
+						name = revenge_of_the_4th
+						duration = -1
 					}
 				"
 			}
