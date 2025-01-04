@@ -18,6 +18,7 @@ country_event = { #Meet Solari
 
 	option = {
 		name = legion.1a
+		custom_tooltip = BROK_LEG_TT_6a
 		add_country_modifier = {
 			name = addarius_solari_sunshine
 			duration = -1
@@ -30,6 +31,7 @@ country_event = { #Meet Solari
 	}
 	option = {
 		name = legion.1b
+		custom_tooltip = BROK_LEG_TT_6a
 		add_country_modifier = {
 			name = addarius_solari_sunshine
 			duration = -1
@@ -52,6 +54,7 @@ country_event = { #Meet Sirius
 
 	option = {
 		name = legion.2a
+		custom_tooltip = BROK_LEG_TT_6b
 		add_country_modifier = {
 			name = syrius_bloody_handed
 			duration = -1
@@ -64,6 +67,7 @@ country_event = { #Meet Sirius
 	}
 	option = {
 		name = legion.2b
+		custom_tooltip = BROK_LEG_TT_6b
 		add_country_modifier = {
 			name = syrius_bloody_handed
 			duration = -1
@@ -201,11 +205,16 @@ country_event = { #Addarius Dies
 		name = legion.5a
 		remove_country_modifier = addarius_solari_sunshine
 		capital_scope = {
-			add_province_modifier = {
-				name = solari_stronghold
-				duration = -1
+			if = {
+				limit = { has_province_modifier = solari_stronghold }
+				owner = { add_years_of_income = 1.5 }
+			}else = {
+				add_province_modifier = {
+					name = solari_stronghold
+					duration = -1
+				}
+				custom_tooltip = BROK_LEG_TT_2
 			}
-			custom_tooltip = BROK_LEG_TT_2
 		}
 	}
 	option = {
@@ -300,7 +309,7 @@ country_event = { #Africa converted
 	id = legion.8
 	title = legion.8.test
 	desc = legion.8.desc
-	picture = DEATH_OF_HEIR_eventPicture
+	picture = EMPEROR_eventPicture
 
 	is_triggered_only = yes
 	option = {
@@ -321,6 +330,12 @@ country_event = { #Africa converted
 		add_sanguine_authority = {amount = 50}
 		add_solarian_authority = {amount = 50}
 	}
+	option = {
+		name = legion.8e
+		add_cladesian_authority = {amount = -50}
+		add_sanguine_authority = {amount = -50}
+		add_solarian_authority = {amount = -50}
+	}
 }
 
 country_event = { #the ascension
@@ -330,20 +345,21 @@ country_event = { #the ascension
 	picture = DEATH_OF_HEIR_eventPicture
 
 	is_triggered_only = yes
+	immediate = {
+		set_country_flag = marcionism_not_base_flag
+	}
 	option = {
 		name = legion.9a
-		trigger = {
-			has_cladesian_authority = {amount = 90}
-		}
+		if = {limit = {has_cladesian_authority = {amount = 90}}
+		}else = {add_stability = -6}
 		change_tag = BL2
 		add_government_reform = marcionism_cladesian_reform
 		swap_non_generic_missions = yes
 	}
 	option = {
 		name = legion.9b
-		trigger = {
-			has_sanguine_authority = {amount = 90}
-		}
+		if = {limit = {has_sanguine_authority = {amount = 90}}
+		}else = {add_stability = -6}
 		change_tag = BL3
 		change_government = republic
 		add_government_reform = marcionism_sanguine_reform
@@ -351,9 +367,8 @@ country_event = { #the ascension
 	}
 	option = {
 		name = legion.9c
-		trigger = {
-			has_solarian_authority = {amount = 90}
-		}
+		if = {limit = {has_solarian_authority = {amount = 90}}
+		}else = {add_stability = -6}
 		change_tag = BL4
 		change_government = monarchy
 		add_government_reform = marcionism_solarian_reform
@@ -362,152 +377,115 @@ country_event = { #the ascension
 	option = {
 		name = legion.9d
 		change_tag = BL5
+		#another event where you choose
 		add_government_reform = marcionism_all_reform
 		swap_non_generic_missions = yes
 	}
 }
 
-country_event = { #build solar stronghol
-	id = legion.100
-	title = legion.100.test
-	desc = legion.100.desc
-	picture = CRUSADER_HORDE_eventPicture
+country_event = { #get Alexandria
+	id = legion.10
+	title = legion.10.test
+	desc = legion.10.desc
+	picture = ADVISOR_eventPicture
 	
-	is_triggered_only = yes
+	trigger = {
+		owns = 358
+		religion = marcionist
+	}
+
+	mean_time_to_happen = {
+		months = 1
+	}
 
 	option = {
-		name = legion.100a
-		trigger = {
-			num_of_owned_provinces_with = {
-				value = 1
-				religion = ROOT
-				has_fort_building_trigger = yes
-				NOT = {
-					has_province_modifier = solari_stronghold
-				}
-			}
-		}
-		add_years_of_income = -0.23
-		random_owned_province = {
-			limit = {
-				religion = ROOT
-				has_fort_building_trigger = yes
-				NOT = {
-					has_province_modifier = solari_stronghold
-				}
-			}
+		name = legion.10a
+		358 = {
+			add_devastation = 30
+			change_religion = marcionist
 			add_province_modifier = {
 				name = solari_stronghold
 				duration = -1
 			}
 			custom_tooltip = BROK_LEG_TT_2
-		}			
+		}
+		add_solarian_authority = {amount = 20}
 	}
 	option = {
-		name = legion.100b
-		trigger = {
-			num_of_owned_provinces_with = {
-				value = 2
-				religion = ROOT
-				has_fort_building_trigger = yes
-				NOT = {
-					has_province_modifier = solari_stronghold
-				}
-			}
+		name = legion.10b
+		358 = {
+			add_unrest = -10
 		}
-		add_years_of_income = -0.46
-		random_owned_province = {
-			limit = {
-				religion = ROOT
-				has_fort_building_trigger = yes
-				NOT = {
-					has_province_modifier = solari_stronghold
-				}
-			}
-			add_province_modifier = {
-				name = solari_stronghold
-				duration = -1
-			}
-			custom_tooltip = BROK_LEG_TT_2
-		}	
-		random_owned_province = {
-			limit = {
-				religion = ROOT
-				has_fort_building_trigger = yes
-				NOT = {
-					has_province_modifier = solari_stronghold
-				}
-			}
-			add_province_modifier = {
-				name = solari_stronghold
-				duration = -1
-			}
-			custom_tooltip = BROK_LEG_TT_2
-		}	
-	}
-	option = {
-		name = legion.100c
-		trigger = {
-			num_of_owned_provinces_with = {
-				value = 3
-				religion = ROOT
-				has_fort_building_trigger = yes
-				NOT = {
-					has_province_modifier = solari_stronghold
-				}
-			}
-		}
-		add_years_of_income = -0.69
-		random_owned_province = {
-			limit = {
-				religion = ROOT
-				has_fort_building_trigger = yes
-				NOT = {
-					has_province_modifier = solari_stronghold
-				}
-			}
-			add_province_modifier = {
-				name = solari_stronghold
-				duration = -1
-			}
-			custom_tooltip = BROK_LEG_TT_2
-		}	
-		random_owned_province = {
-			limit = {
-				religion = ROOT
-				has_fort_building_trigger = yes
-				NOT = {
-					has_province_modifier = solari_stronghold
-				}
-			}
-			add_province_modifier = {
-				name = solari_stronghold
-				duration = -1
-			}
-			custom_tooltip = BROK_LEG_TT_2
-		}	
-		random_owned_province = {
-			limit = {
-				religion = ROOT
-				has_fort_building_trigger = yes
-				NOT = {
-					has_province_modifier = solari_stronghold
-				}
-			}
-			add_province_modifier = {
-				name = solari_stronghold
-				duration = -1
-			}
-			custom_tooltip = BROK_LEG_TT_2
-		}		
-	}
-	option = {
-		name = legion.100d
-		country_event = {
-			id = legion.100
-		}	
 	}
 }
+
+country_event = { #get Memphis
+	id = legion.11
+	title = legion.11.test
+	desc = legion.11.desc
+	picture = ADVISOR_eventPicture
+	
+	trigger = {
+		owns = 361
+		religion = marcionist
+	}
+
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	option = {
+		name = legion.11a
+		361 = {
+			add_devastation = 30
+			change_religion = marcionist
+			add_core = ROOT
+		}
+		add_cladesian_authority = {amount = 20}
+	}
+	option = {
+		name = legion.11b
+		361 = {
+			add_unrest = -10
+		}
+	}
+}
+
+country_event = { #get Aldabba
+	id = legion.12
+	title = legion.12.test
+	desc = legion.12.desc
+	picture = ADVISOR_eventPicture
+	
+	trigger = {
+		owns = 336
+		religion = marcionist
+	}
+
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	option = {
+		name = legion.12a
+		336 = {
+			add_devastation = 30
+			change_religion = marcionist
+			destroy_great_project = {
+				type = aldabba_palace
+			}
+		}
+		add_years_of_income = 2
+		add_sanguine_authority = {amount = 20}
+	}
+	option = {
+		name = legion.12b
+		336 = {
+			add_unrest = -10
+		}
+	}
+}
+
 country_event = { #festival and council
 	id = legion.1000
 	title = legion.1000.test

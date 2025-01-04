@@ -222,7 +222,7 @@ bl0_2_slot = {
 	}
 	blo_temples = {
 		icon = mission_alliances
-		position = 5
+		position = 6
 		required_missions = {blo_conquest} 
 		provinces_to_highlight = { owned_by = ROOT has_tax_building_trigger= no } 
 		trigger = { 
@@ -306,7 +306,7 @@ bl0_3_slot = {
 	blo_the_ascension = {
 		icon = mission_alliances
 		position = 7
-		required_missions = {blo_new_nation } 
+		required_missions = {blo_question_of_faith blo_temples blo_new_nation blo_egyptian_red_nile blo_avengers} 
 		provinces_to_highlight = { owned_by = ROOT NOT = {religion = ROOT} } 
 		trigger = { 
 			OR = {
@@ -321,8 +321,15 @@ bl0_3_slot = {
 		} 
 
 		effect = { 
-			country_event = {
+			hidden_effect = {
+				change_variable = {
+					which = num_council_marcionism_var
+					value = 1
+				}
+			}
+			country_event_with_insight = {
 				id = legion.9
+				insight_tooltip = BROK_LEG_TT_7
 			}
 		} 
 	}

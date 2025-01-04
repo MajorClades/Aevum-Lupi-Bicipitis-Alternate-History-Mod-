@@ -1,5 +1,8 @@
 clades_adm_aspect = {	#ADM aspect
 	cost = 100
+	potential = {
+		NOT = { has_country_flag = marcionism_not_base_flag}
+	}
 	modifier = {
 		global_unrest = -1
 		monthly_marc_leg_adm = 0.1
@@ -12,6 +15,9 @@ clades_adm_aspect = {	#ADM aspect
 
 sanguine_adm_aspect = {	#ADM aspect
 	cost = 100
+	potential = {
+		NOT = { has_country_flag = marcionism_not_base_flag}
+	}
 	modifier = {
 		global_tax_modifier = 0.15
 		monthly_marc_leg_adm = -0.1
@@ -24,6 +30,9 @@ sanguine_adm_aspect = {	#ADM aspect
 
 solari_adm_aspect = {	#ADM aspect
 	cost = 100
+	potential = {
+		NOT = { has_country_flag = marcionism_not_base_flag}
+	}
 	modifier = {
 		core_creation = -0.05
 		monthly_marc_leg_adm = -0.1
@@ -36,6 +45,9 @@ solari_adm_aspect = {	#ADM aspect
 
 clades_dip_aspect = {	#DIP aspect
 	cost = 100
+	potential = {
+		NOT = { has_country_flag = marcionism_not_base_flag}
+	}
 	modifier = {
 		build_cost = -0.1
 		monthly_marc_leg_dip = -0.1
@@ -49,6 +61,9 @@ clades_dip_aspect = {	#DIP aspect
 
 sanguine_dip_aspect = {	#DIP aspect
 	cost = 100
+	potential = {
+		NOT = { has_country_flag = marcionism_not_base_flag}
+	}
 	modifier = {
 		diplomatic_reputation = 1
 		monthly_marc_leg_dip = 0.1
@@ -61,6 +76,9 @@ sanguine_dip_aspect = {	#DIP aspect
 
 solari_dip_aspect = {	#DIP aspect
 	cost = 100
+	potential = {
+		NOT = { has_country_flag = marcionism_not_base_flag}
+	}
 	modifier = {
 		global_prosperity_growth = 0.05
 		monthly_marc_leg_dip = -0.1
@@ -74,6 +92,9 @@ solari_dip_aspect = {	#DIP aspect
 
 clades_mil_aspect = {	#MIL aspect
 	cost = 100
+	potential = {
+		NOT = { has_country_flag = marcionism_not_base_flag}
+	}
 	modifier = {
 		morale_damage_received = -0.15
 		monthly_marc_leg_mil = -0.1
@@ -86,6 +107,9 @@ clades_mil_aspect = {	#MIL aspect
 
 sanguine_mil_aspect = {	#MIL aspect
 	cost = 100
+	potential = {
+		NOT = { has_country_flag = marcionism_not_base_flag}
+	}
 	modifier = {
 		garrison_size = 0.20
 		monthly_marc_leg_mil = -0.1
@@ -98,9 +122,300 @@ sanguine_mil_aspect = {	#MIL aspect
 
 solari_mil_aspect = {	#MIL aspect
 	cost = 100
+	potential = {
+		NOT = { has_country_flag = marcionism_not_base_flag}
+	}
 	modifier = {
 		yearly_army_professionalism = 0.005
 		monthly_marc_leg_mil = 0.1
+	}
+	monarch_power = mil
+	ai_will_do = {
+		factor = 1
+	}
+}
+
+cladesian_adm_aspect = {	#ADM aspect
+	cost = 100
+	potential = {
+		OR = {
+			has_country_flag = cladesian_rites_flag
+			tag = BL2
+		}
+	}
+	modifier = {
+		church_power_modifier = -0.15
+	}
+	effect = {
+		custom_tooltip = BROK_LEG_TT_8
+	}
+	monarch_power = adm
+	ai_will_do = {
+		factor = 1
+	}
+}
+
+sanguinar_adm_aspect = {	#ADM aspect
+	cost = 100
+	potential = {
+		OR = {
+			has_country_flag = sanguine_rites_flag
+			tag = BL3
+		}
+	}
+	modifier = {
+		core_creation = -0.1
+		church_power_modifier = -0.1
+	}
+	monarch_power = adm
+	ai_will_do = {
+		factor = 1
+	}
+}
+
+solar_adm_aspect = {	#ADM aspect
+	cost = 100
+	potential = {
+		OR = {
+			has_country_flag = solarian_rites_flag
+			tag = BL4
+		}
+	}
+	modifier = {
+		war_taxes_cost_modifier = -1
+		monthly_de_de_counter = -0.1
+	}
+	monarch_power = adm
+	ai_will_do = {
+		factor = 1
+	}
+}
+
+marxionist_1_adm_aspect = {	#ADM aspect
+	cost = 100
+	potential = {
+		OR = {
+			tag = BL2
+			tag = BL3
+			tag = BL4
+			tag = BL5
+		}
+	}
+	modifier = {
+		church_power_modifier = -0.15
+		monthly_de_de_counter = 0.1
+	}
+	monarch_power = adm
+	ai_will_do = {
+		factor = 1
+	}
+}
+
+marxionist_2_adm_aspect = {	#ADM aspect
+	cost = 100
+	potential = {
+		OR = {
+			tag = BL2
+			tag = BL3
+			tag = BL4
+			tag = BL5
+		}
+	}
+	modifier = {
+		tolerance_own = 2
+		monthly_de_de_counter = -0.05
+	}
+	monarch_power = adm
+	ai_will_do = {
+		factor = 1
+	}
+}
+
+cladesian_dip_aspect = {	#DIP aspect
+	cost = 100
+	potential = {
+		OR = {
+			has_country_flag = cladesian_rites_flag
+			tag = BL2
+		}
+	}
+	modifier = {
+		global_tax_modifier = -0.25
+		monthly_de_de_counter = 0.05
+	}
+	monarch_power = dip
+	ai_will_do = {
+		factor = 1
+	}
+}
+
+sanguinar_dip_aspect = {	#DIP aspect
+	cost = 100
+	potential = {
+		OR = {
+			has_country_flag = sanguine_rites_flag
+			tag = BL3
+		}
+	}
+	modifier = {
+		church_power_modifier = -0.15
+	}
+	effect = {
+		custom_tooltip = BROK_LEG_TT_9
+	}
+	monarch_power = dip
+	ai_will_do = {
+		factor = 1
+	}
+}
+
+solar_dip_aspect = {	#DIP aspect
+	cost = 100
+	potential = {
+		OR = {
+			has_country_flag = solarian_rites_flag
+			tag = BL4
+		}
+	}
+	modifier = {
+		diplomatic_reputation = -1
+		monthly_de_de_counter = 0.1
+	}
+	monarch_power = dip
+	ai_will_do = {
+		factor = 1
+	}
+}
+
+marxionist_1_dip_aspect = {	#DIP aspect
+	cost = 100
+	potential = {
+		OR = {
+			tag = BL2
+			tag = BL3
+			tag = BL4
+			tag = BL5
+		}
+	}
+	modifier = {
+		trade_efficiency = 0.25
+		monthly_de_de_counter = -0.05
+	}
+	monarch_power = dip
+	ai_will_do = {
+		factor = 1
+	}
+}
+
+marxionist_2_dip_aspect = {	#DIP aspect
+	cost = 100
+	potential = {
+		OR = {
+			tag = BL2
+			tag = BL3
+			tag = BL4
+			tag = BL5
+		}
+	}
+	modifier = {
+		trade_goods_size_modifier = 0.05
+		church_power_modifier = -0.15
+	}
+	monarch_power = dip
+	ai_will_do = {
+		factor = 1
+	}
+}
+
+cladesian_mil_aspect = {	#MIL aspect
+	cost = 100
+	potential = {
+		OR = {
+			has_country_flag = cladesian_rites_flag
+			tag = BL2
+		}
+	}
+	modifier = {
+		general_cost = 0.2
+		monthly_de_de_counter = 0.05
+	}
+	monarch_power = mil
+	ai_will_do = {
+		factor = 1
+	}
+}
+
+sanguinar_mil_aspect = {	#MIL aspect
+	cost = 100
+	potential = {
+		OR = {
+			has_country_flag = sanguine_rites_flag
+			tag = BL3
+		}
+	}
+	modifier = {
+		global_manpower_modifier = -0.2
+		monthly_de_de_counter = 0.05
+	}
+	monarch_power = mil
+	ai_will_do = {
+		factor = 1
+	}
+}
+
+solar_mil_aspect = {	#MIL aspect
+	cost = 100
+	potential = {
+		OR = {
+			has_country_flag = solarian_rites_flag
+			tag = BL4
+		}
+	}
+	modifier = {
+		church_power_modifier = -0.15
+	}
+	effect = {
+		custom_tooltip = BROK_LEG_TT_10
+	}
+	monarch_power = mil
+	ai_will_do = {
+		factor = 1
+	}
+}
+
+marxionist_1_mil_aspect = {	#MIL aspect
+	cost = 100
+	potential = {
+		OR = {
+			tag = BL2
+			tag = BL3
+			tag = BL4
+			tag = BL5
+		}
+	}
+	modifier = {
+		global_manpower_modifier = 0.2
+		monthly_de_de_counter = -0.05
+	}
+	monarch_power = mil
+	ai_will_do = {
+		factor = 1
+	}
+}
+
+marxionist_2_mil_aspect = {	#MIL aspect
+	cost = 100
+	potential = {
+		OR = {
+			tag = BL2
+			tag = BL3
+			tag = BL4
+			tag = BL5
+		}
+	}
+	modifier = {
+		land_forcelimit_modifier = 0.2
+		monthly_de_de_counter = -0.1
 	}
 	monarch_power = mil
 	ai_will_do = {
