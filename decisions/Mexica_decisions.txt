@@ -375,4 +375,77 @@ country_decisions = {
 			factor = 100
 		}
 	}
+	end_treaty_mex_vin = {
+		major = yes
+		potential = {
+			has_global_flag = mexican_vinland_treaty
+		}
+		allow = {
+			if = {
+				limit = {
+					tag = MX0
+				}
+				NOT = { alliance_with = FJ0 }
+				NOT = { alliance_with = FJ9 }
+			}
+			else = {
+				NOT = {
+					alliance_with = MX0
+				}
+			}
+		}
+		effect = {
+			custom_tooltip = NO_MORE_TREATY_TT
+			clr_global_flag = mexican_vinland_treaty
+		}
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				factor = 100
+				OR = {
+					NOT = {
+						MX0 = {
+							total_development = 100
+						}
+					}
+					AND = {
+						NOT = {
+							exists = FJ0
+						}
+						NOT = {
+							FJ9 = {
+								total_development = 100
+							}
+						}
+					}
+					AND = {
+						NOT = {
+							exists = FJ9
+						}
+						NOT = {
+							FJ0 = {
+								total_development = 100
+							}
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 100
+				OR = {
+					NOT = {
+						exists = MX0
+					}
+					AND = {
+						NOT = {
+							exists = FJ0
+						}
+						NOT = {
+							exists = FJ9
+						}
+					}
+				}
+			}
+		}
+	}
 }
