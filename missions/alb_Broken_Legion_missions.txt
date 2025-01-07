@@ -96,6 +96,70 @@ bl0_1_slot = {
 	}
 }
 
+bl0_1_plus_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { has_country_flag = marcionism_not_base_flag } 
+
+	blo_iberia = {
+		icon = mission_alliances
+		position = 9
+		required_missions = {blo_city_of_god } 
+		provinces_to_highlight = {region = iberia_region } 
+		trigger = { 
+			calc_true_if = {
+				amount = 20
+				all_province = {
+					region = iberia_region
+					religion = marcionist 
+				}
+			}
+		} 
+
+		effect = { 
+			if = {
+				limit = { OR = { tag = BL2 tag = BL5 }}
+				set_country_flag = de_de_more_tolerance
+				custom_tooltip = DE_DE_TT_2a
+			}
+			if = {
+				limit = { tag = BL4 }
+				set_country_flag = de_de_more_cultures
+				custom_tooltip = DE_DE_TT_2b
+			}
+			if = {
+				limit = { tag = BL3 }
+				set_country_flag = de_de_more_rebels
+				custom_tooltip = DE_DE_TT_2c
+			}
+		} 
+	}
+	blo_iberian_conquered = {
+		icon = mission_alliances
+		position = 10
+		required_missions = {blo_iberia } 
+		provinces_to_highlight = {region = iberia_region NOT = {owned_by = ROOT } }
+		trigger = { 
+			iberia_region = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					religion = marcionist
+				}
+			}
+		} 
+
+		effect = { 
+			add_demiurgic_defiance = {amount = 15}
+			iberia_region = {
+				
+			}
+		} 
+	}
+}
+
 bl0_2_slot = {
 	slot = 2
 	generic = no
@@ -241,6 +305,57 @@ bl0_2_slot = {
 	}
 }
 
+bl0_2_plus_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { has_country_flag = marcionism_not_base_flag } 
+
+	blo_italy = {
+		icon = mission_alliances
+		position = 9
+		required_missions = {blo_city_of_god } 
+		provinces_to_highlight = {region = italy_region } 
+		trigger = { 
+			calc_true_if = {
+				amount = 20
+				all_province = {
+					region = italy_region
+					religion = marcionist 
+				}
+			}
+		} 
+
+		effect = { 
+			add_demiurgic_defiance = {amount = 20}
+			dismantle_hre = yes
+		} 
+	}
+	blo_italy_conquered = {
+		icon = mission_alliances
+		position = 10
+		required_missions = {blo_italy } 
+		provinces_to_highlight = {region = italy_region NOT = {owned_by = ROOT } }
+		trigger = { 
+			owns = 118
+			italy_region = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					religion = marcionist
+				}
+			}
+		} 
+
+		effect = { 
+			# country_event = {
+			# 	id = silky.10
+			# }
+		} 
+	}
+}
+
 bl0_3_slot = {
 	slot = 3
 	generic = no
@@ -348,14 +463,19 @@ bl0_3_plus_slot = {
 		icon = mission_alliances
 		position = 8
 		required_missions = {blo_the_ascension } 
-		provinces_to_highlight = { owned_by = ROOT NOT = {religion = ROOT} } 
+		provinces_to_highlight = { province_id = 379 } 
 		trigger = { 
-			has_demiurgic_defiance = { amount = 20}
+			379 = {
+				owned_by = ROOT
+			}
 		} 
 
 		effect = { 
-			379 = {
-				
+			italy_region = {
+				add_permanent_claim = ROOT
+			}
+			country_event = {
+				id = legion.14
 			}
 		} 
 	}
@@ -476,6 +596,56 @@ bl0_4_slot = {
 	}
 }
 
+bl0_4_plus_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { has_country_flag = marcionism_not_base_flag } 
+
+	blo_anatolia = {
+		icon = mission_alliances
+		position = 9
+		required_missions = {blo_city_of_god } 
+		provinces_to_highlight = {region = anatolia_region } 
+		trigger = { 
+			calc_true_if = {
+				amount = 20
+				all_province = {
+					region = anatolia_region
+					religion = marcionist 
+				}
+			}
+		} 
+
+		effect = { 
+			#another general unlock modifiers
+			thrace_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+	blo_anatolia_conquered = {
+		icon = mission_alliances
+		position = 10
+		required_missions = {blo_anatolia } 
+		provinces_to_highlight = {region = anatolia_region NOT = {owned_by = ROOT } }
+		trigger = { 
+			anatolia_region = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					religion = marcionist
+				}
+			}
+		} 
+
+		effect = { 
+			#another general unlock modifiers
+		} 
+	}
+}
+
 bl0_5_slot = {
 	slot = 5
 	generic = no
@@ -580,6 +750,55 @@ bl0_5_slot = {
 					}
 				"
 			}
+		} 
+	}
+}
+
+
+bl0_5_plus_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { has_country_flag = marcionism_not_base_flag } 
+
+	blo_arabia = {
+		icon = mission_alliances
+		position = 9
+		required_missions = {blo_city_of_god } 
+		provinces_to_highlight = {region = arabia_region } 
+		trigger = { 
+			owns = 385
+			calc_true_if = {
+				amount = 20
+				all_province = {
+					region = arabia_region
+					religion = marcionist 
+				}
+			}
+		} 
+
+		effect = { 
+			#something to do with the Mecca
+		} 
+	}
+	blo_arabia_conquered = {
+		icon = mission_alliances
+		position = 10
+		required_missions = {blo_anatolia } 
+		provinces_to_highlight = {region = arabia_region NOT = {owned_by = ROOT } }
+		trigger = { 
+			arabia_region = {
+				type = all
+				OR = {
+					owned_by = ROOT
+					religion = marcionist
+				}
+			}
+		} 
+
+		effect = { 
+			#another general unlock modifiers
 		} 
 	}
 }

@@ -312,18 +312,39 @@ spy_marcionist_convert_action = {
 		}
     }
 	on_accept = {
-		FROM = {
-			random_owned_province = {
-				limit = {
-					same_continent = FROM
-					NOT = {
+		if = {
+			limit = {
+				ROOT = { has_country_flag = de_de_more_rebels}
+			}
+			FROM = {
+				random_owned_province = {
+					limit = {
+						same_continent = FROM
+						NOT = {
+							religion = marcionist
+						}
+					}
+					spawn_rebels = {
+						size = 2
+						type = marcionist_rebels
 						religion = marcionist
 					}
 				}
-				spawn_rebels = {
-					size = 1
-					type = marcionist_rebels
-					religion = marcionist
+			}
+		}else = {
+			FROM = {
+				random_owned_province = {
+					limit = {
+						same_continent = FROM
+						NOT = {
+							religion = marcionist
+						}
+					}
+					spawn_rebels = {
+						size = 1
+						type = marcionist_rebels
+						religion = marcionist
+					}
 				}
 			}
 		}

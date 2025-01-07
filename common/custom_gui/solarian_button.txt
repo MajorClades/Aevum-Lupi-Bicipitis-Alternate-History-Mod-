@@ -10,9 +10,7 @@ custom_button = {
 				has_country_flag = solarian_rites_flag
 			}
 		}
-		NOT = {
-			has_province_modifier = solari_stronghold
-		}
+		has_fort_building_trigger = yes
 	}
 	trigger = {
 		owner = {
@@ -23,14 +21,37 @@ custom_button = {
 		has_fort_building_trigger = yes
 	}
 	effect = {
-		owner = {
-			add_years_of_income = -0.43
+		if = {
+			limit = {
+				NOT = {
+					has_province_modifier = solari_stronghold
+				}
+			}
+			owner = {
+				add_years_of_income = -0.43
+			}
+			add_province_modifier = {
+				name = solari_stronghold
+				duration = -1
+			}
+			custom_tooltip = BROK_LEG_TT_2
+		}else = {
+			add_named_unrest = {
+				name = "Angry Solarians"
+				value = 10
+			}
+			remove_province_modifier = solari_stronghold
 		}
-		add_province_modifier = {
-			name = solari_stronghold
-			duration = -1
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					has_province_modifier = solari_stronghold
+					has_fort_building_trigger = no
+					is_capital = no
+				}
+				remove_province_modifier = solari_stronghold
+			}
 		}
-		custom_tooltip = BROK_LEG_TT_2
 	}
 	tooltip = "§Y'Fund Solarian Strongholds'§!"
 }
