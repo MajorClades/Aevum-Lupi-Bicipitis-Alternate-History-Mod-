@@ -1,0 +1,1375 @@
+cef_ea_1_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			is_former_colonial_nation = yes
+			is_colonial_nation = yes
+			tag = VRM
+			
+			tag = FLO
+		}
+		capital_scope = {
+			colonial_region = colonial_eastern_america
+			is_core = ROOT
+		}
+	} 
+
+	cef_ea_establish_plantation = {
+		icon = invest_in_the_rich_trades
+		position = 1
+		provinces_to_highlight = {
+			owned_by = ROOT
+			OR = {
+				trade_goods = tobacco
+				trade_goods = cotton
+			}
+			NOT = { base_production = 6 }
+		} 
+
+		trigger = {
+			any_owned_province = {
+				OR = {
+					trade_goods = tobacco
+					trade_goods = cotton
+				}
+				base_production = 6
+			}
+		} 
+
+		effect = {
+			custom_tooltip = cef_ea_1_random_province
+			tooltip = {
+				add_base_production = 2
+			}
+			custom_tooltip = cef_ea_upgrade_production_in_province
+			hidden_effect = {
+				random_owned_province = {
+					limit = {
+						OR = {
+							trade_goods = tobacco
+							trade_goods = cotton
+						}
+						base_production = 6
+					}
+					add_base_production = 2
+					add_or_upgrade_production_building = yes
+				}
+			}
+		}
+	}
+
+	cef_ea_invest_in_cash_crops = {
+		icon = mission_early_game_buildings
+		position = 3
+		required_missions = { cef_ea_establish_plantation } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			OR = {
+				trade_goods = tobacco
+				trade_goods = cotton
+			}
+			NOT = {
+				has_production_building_trigger = yes
+			}
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				OR = {
+					trade_goods = tobacco
+					trade_goods = cotton
+				}
+				has_production_building_trigger = yes
+			}
+		} 
+
+		effect = {
+			custom_tooltip = cef_ea_5_random_provinces
+			tooltip = {
+				add_province_modifier = {
+					name = cef_ea_plantations_flourishing
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				random_owned_province = {
+					limit = {
+						OR = {
+							trade_goods = tobacco
+							trade_goods = cotton
+						}
+						has_production_building_trigger = yes
+					}
+					add_province_modifier = {
+						name = cef_ea_plantations_flourishing
+						duration = -1
+					}
+				}
+			}
+		} 
+	}
+
+	cef_ea_slave_trade = {
+		icon = mission_establish_high_seas_navy
+		position = 4
+		required_missions = {
+			cef_ea_invest_in_cash_crops
+			cef_ea_trade_with_colonies
+		}
+		provinces_to_highlight = {
+			OR = {
+				trade_goods = tobacco
+				trade_goods = cotton
+			}
+			region = southeast_america_region
+		} 
+
+		trigger = {
+			OR = {
+				num_of_owned_provinces_with = {
+					value = 20
+					OR = {
+						trade_goods = tobacco
+						trade_goods = cotton
+					}
+					region = southeast_america_region
+				}
+				southeast_america_region = {
+					type = all
+					owned_by = ROOT
+				}
+			}
+
+			OR = {
+				any_owned_province = {
+					continent = africa
+				}
+				any_country = {
+					any_owned_province = {
+						continent = africa
+					}
+					has_opinion = {
+						who = ROOT
+						value = 100
+					}
+				}
+			}
+		} 
+
+		effect = {
+			country_event = {
+				id = cef_flavor_usa.1
+			}
+		} 
+	}
+}
+
+cef_ea_2_1 = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			is_former_colonial_nation = yes
+			is_colonial_nation = yes
+			tag = VRM
+			
+			tag = FLO
+		}
+		capital_scope = {
+			colonial_region = colonial_eastern_america
+			is_core = ROOT
+		}
+	} 
+
+	cef_ea_grow_economy = {
+		icon = mission_war_chest
+		position = 2
+		required_missions = {
+			cef_ea_establish_plantation
+			cef_ea_fur_trade
+		}
+
+		trigger = {
+			monthly_income = 12
+		} 
+
+		effect = {
+			add_years_of_income = 2
+			add_adm_power = 100
+		} 
+	}
+
+	cef_ea_trade_with_colonies = {
+		icon = mission_dominate_home_trade_node
+		position = 3
+		required_missions = { cef_ea_grow_economy } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			any_country = {
+				OR = {
+					is_colonial_nation = yes
+					is_former_colonial_nation = yes
+				}
+				has_opinion = {
+					who = ROOT
+					value = 150
+				}
+			}
+
+			monthly_trade_income = 6
+		} 
+
+		effect = {
+			add_country_modifier = {
+				name = cef_ea_trade_from_colonies
+				duration = 7300
+			}
+			add_dip_power = 150
+		} 
+	}
+
+	cef_ea_find_investors = {
+		icon = personal_diplomacy
+		position = 5
+
+		trigger = {
+			colonial_parent = {
+				any_rival_country = {
+					has_opinion = {
+						who = ROOT
+						value = 150
+					}
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = cef_ea_find_investors_tt
+			hidden_effect = {
+				colonial_parent = {
+					every_rival_country = {
+						limit = {
+							has_opinion = {
+								who = ROOT
+								value = 150
+							}
+						}
+						support_independence_of = ROOT
+					}
+				}
+			}
+		} 
+	}
+}
+
+cef_ea_3_1 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			is_former_colonial_nation = yes
+			is_colonial_nation = yes
+			tag = VRM
+			
+			tag = FLO
+		}
+		capital_scope = {
+			colonial_region = colonial_eastern_america
+			is_core = ROOT
+		}
+	}
+
+	cef_ea_fur_trade = {
+		icon = mission_control_fur_trade
+		position = 1
+		provinces_to_highlight = {
+			province_id = 1500
+		}
+
+		trigger = {
+			1500 = {
+				trade_share = {
+					country = ROOT
+					share = 20
+				}
+			}
+		} 
+
+		effect = {
+			1500 = {
+				add_trade_modifier = {
+					who = ROOT
+					duration = 7300
+					power = 25
+					key = cef_ea_trading_fur
+				}
+			}
+		} 
+	}
+
+	cef_ea_develop_cities = {
+		icon = renaissance_city
+		position = 2
+		required_missions = { cef_ea_expand_colony }
+
+		provinces_to_highlight = {
+			owned_by = ROOT
+			NOT = { development = 15 }
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				development = 15
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = cef_ea_growing_cities
+				duration = 3650
+			}
+		}
+	}
+
+	cef_ea_dominate_coast = {
+		icon = mission_invade_island
+		position = 3
+		required_missions = {
+			cef_ea_develop_cities
+			cef_ea_encourage_migration
+			cef_ea_grow_economy
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 20
+				has_port = yes
+			}
+		} 
+
+		effect = {
+			add_country_modifier = {
+				name = cef_ea_new_shipyards
+				duration = 1825
+			}
+		} 
+	}
+
+	cef_ea_push_inland = {
+		icon = mission_conquer_50_development
+		position = 4
+		required_missions = { cef_ea_dominate_coast } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 20
+				NOT = { has_port = yes }
+			}
+		} 
+
+		effect = {
+			add_country_modifier = {
+				name = cef_ea_expanding_frontier
+				duration = 3650
+			}
+		} 
+	}
+
+	cef_ea_beyond_control = {
+		icon = mission_unite_home_region
+		position = 5
+		required_missions = {
+			cef_ea_build_navy
+			cef_ea_push_inland
+		}
+
+		trigger = {
+			total_development = 300
+			monthly_income = 50
+			custom_trigger_tooltip = {
+				tooltip = cef_ea_overlord_dev_fraction
+				development_of_overlord_fraction = 0.33
+			}
+		} 
+
+		effect = {
+			add_liberty_desire = 50
+			add_mil_power = 150
+		} 
+	}
+
+	cef_ea_liberty_or_death = {
+		icon = mission_thirty_years_war
+		position = 6
+		required_missions = {
+			cef_ea_find_investors
+			cef_ea_beyond_control
+			cef_ea_prepare_war
+		}
+
+		trigger = {
+			OR = {
+				is_subject = no
+				is_in_war = {
+					attacker_leader = ROOT
+					casus_belli = cb_colonial_independence_war
+				}
+			}
+		} 
+
+		effect = {
+			custom_tooltip = cef_ea_if_in_indep_war
+			tooltip = {
+				add_manpower = 10
+				add_country_modifier = {
+					name = cef_ea_liberty_or_death
+					duration = 1825
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						is_in_war = {
+							attacker_leader = ROOT
+							casus_belli = cb_colonial_independence_war
+						}
+					}
+					add_manpower = 10
+					add_country_modifier = {
+						name = cef_ea_liberty_or_death
+						duration = 1825
+					}
+				}
+			}
+		} 
+	}
+}
+
+cef_ea_4_1 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			is_former_colonial_nation = yes
+			is_colonial_nation = yes
+			tag = VRM
+			
+			tag = FLO
+		}
+		capital_scope = {
+			colonial_region = colonial_eastern_america
+			is_core = ROOT
+		}
+	}
+
+	cef_ea_expand_colony = {
+		icon = mission_colonial
+		position = 1
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 8
+				is_city = yes
+			}
+		} 
+
+		effect = {
+			add_country_modifier = {
+				name = cef_ea_growing_colony
+				duration = 3650
+			}
+		} 
+	}
+
+	cef_ea_encourage_migration = {
+		icon = mission_settlers_north_america
+		position = 2
+		required_missions = { cef_ea_expand_colony } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 15
+				is_city = yes
+			}
+		} 
+
+		effect = {
+			custom_tooltip = cef_ea_10_manpower_in_random_province
+			hidden_effect = {
+				random_owned_province = {
+					add_base_manpower = 1
+				}
+				random_owned_province = {
+					add_base_manpower = 1
+				}
+				random_owned_province = {
+					add_base_manpower = 1
+				}
+				random_owned_province = {
+					add_base_manpower = 1
+				}
+				random_owned_province = {
+					add_base_manpower = 1
+				}
+				random_owned_province = {
+					add_base_manpower = 1
+				}
+				random_owned_province = {
+					add_base_manpower = 1
+				}
+				random_owned_province = {
+					add_base_manpower = 1
+				}
+				random_owned_province = {
+					add_base_manpower = 1
+				}
+				random_owned_province = {
+					add_base_manpower = 1
+				}
+			}
+		}
+	}
+
+	cef_ea_build_navy = {
+		icon = mission_galleys_in_port
+		position = 4
+		required_missions = { cef_ea_dominate_coast } 
+
+		trigger = {
+			naval_forcelimit = 30
+			navy_size_percentage = 1
+		} 
+
+		effect = {
+			country_event = {
+				id = cef_flavor_usa.2
+			}
+		} 
+	}
+
+	cef_ea_prepare_war = {
+		icon = mission_assemble_an_army
+		position = 5
+		required_missions = { cef_ea_build_navy } 
+
+		trigger = {
+			army_size = 40
+			manpower = 40
+			liberty_desire = 50
+			NOT = {
+				colonial_parent = {
+					tech_difference = 1
+				}
+			}
+		} 
+
+		effect = {
+			add_army_professionalism = 0.1
+			add_liberty_desire = 50
+			add_mil_power = 100
+		}
+	}
+}
+
+cef_ea_5_1 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			is_former_colonial_nation = yes
+			is_colonial_nation = yes
+			tag = VRM
+			
+			tag = FLO
+		}
+		capital_scope = {
+			colonial_region = colonial_eastern_america
+			is_core = ROOT
+		}
+	}
+
+	cef_ea_homeland_relations = {
+		icon = mission_alliances
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			colonial_parent = {
+				has_opinion = {
+					who = ROOT
+					value = 150
+				}
+			}
+		} 
+
+		effect = {
+			add_adm_power = 100
+			add_years_of_income = 1
+		} 
+	}
+
+	cef_ea_native_relations = {
+		icon = mission_diplomatic_relation
+		position = 3
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			OR = {
+				AND = {
+					calc_true_if = {
+						amount = 2
+						all_ally = {
+							technology_group = north_american
+						}
+						desc = cef_ea_two_allies
+					}
+					is_at_war = no
+				}
+				any_country = {
+					technology_group = north_american
+					defensive_war_with = ROOT
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = cef_ea_if_allied_natives
+			tooltip = {
+				add_dip_power = 100
+			}
+
+			custom_tooltip = cef_ea_if_at_war_natives
+			tooltip = {
+				add_mil_power = 100
+			}
+			
+			custom_tooltip = cef_ea_decides_mission_branch
+
+			hidden_effect = {
+				if = {
+					limit = {
+						any_country = {
+							technology_group = north_american
+							defensive_war_with = ROOT
+						}
+					}
+					add_mil_power = 100
+					set_country_flag = cef_ea_native_aggression_missions
+				}
+				else = {
+					add_dip_power = 100
+					set_country_flag = cef_ea_native_cooperation_missions
+				}
+				swap_non_generic_missions = yes
+			}
+		} 
+	}
+}
+
+cef_ea_5_unchosen = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			is_former_colonial_nation = yes
+			is_colonial_nation = yes
+			tag = VRM
+			
+			tag = FLO
+		}
+		capital_scope = {
+			colonial_region = colonial_eastern_america
+			is_core = ROOT
+		}
+		NOT = {
+			has_country_flag = cef_ea_native_cooperation_missions
+		}
+		NOT = {
+			has_country_flag = cef_ea_native_aggression_missions
+		}
+	}
+
+	cef_ea_branching_1 = {
+		icon = mission_unknown_mission
+		position = 4
+		required_missions = { cef_ea_native_relations } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			always = no
+		} 
+
+		effect = {  } 
+	}
+
+	cef_ea_branching_2 = {
+		icon = mission_unknown_mission
+		position = 5
+		required_missions = { cef_ea_branching_1 } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			always = no
+		}
+
+		effect = {  } 
+	}
+}
+
+cef_ea_5_cooperation = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			is_former_colonial_nation = yes
+			is_colonial_nation = yes
+			tag = VRM
+			
+			tag = FLO
+		}
+		capital_scope = {
+			colonial_region = colonial_eastern_america
+			is_core = ROOT
+		}
+		has_country_flag = cef_ea_native_cooperation_missions
+	}
+
+	cef_ea_native_trading = {
+		icon = trade_with_the_natives
+		position = 4
+		required_missions = { cef_ea_native_relations } 
+		provinces_to_highlight = {
+			province_id = 1500
+		} 
+
+		trigger = {
+			1500 = {
+				trade_share = {
+					country = ROOT
+					share = 40
+				}
+			}
+			trade_goods_produced_amount = {
+				trade_goods = fur
+				amount = 10
+			}
+		}
+
+		effect = {
+			custom_tooltip = cef_ea_all_fur_provinces
+			tooltip = {
+				add_province_modifier = {
+					name = cef_ea_native_fur_trading
+					duration = 7300
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						trade_goods = fur
+					}
+					add_province_modifier = {
+						name = cef_ea_native_fur_trading
+						duration = 7300
+					}
+				}
+			}
+		} 
+	}
+
+	cef_ea_native_assimilation = {
+		icon = personal_diplomacy
+		position = 5
+		required_missions = { cef_ea_native_trading } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			calc_true_if = {
+				amount = 5
+				all_ally = {
+					technology_group = north_american
+					has_opinion = {
+						who = ROOT
+						value = 190
+					}
+					trust = {
+						who = ROOT
+						value = 90
+					}
+				}
+				desc = cef_ea_native_assimilation_tt
+			}
+			is_at_war = no
+		} 
+
+		effect = {
+			add_country_modifier = {
+				name = cef_ea_natives_assimilated
+				duration = -1
+			}
+			custom_tooltip = cef_ea_natives_will_accept_vassalisation
+		} 
+	}
+}
+
+cef_ea_5_aggression = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			is_former_colonial_nation = yes
+			is_colonial_nation = yes
+			tag = VRM
+			
+			tag = FLO
+		}
+		capital_scope = {
+			colonial_region = colonial_eastern_america
+			is_core = ROOT
+		}
+		has_country_flag = cef_ea_native_aggression_missions
+	}
+
+	cef_ea_smallpox_epidemic = {
+		icon = mission_iroquois_warriors
+		position = 4
+		required_missions = { cef_ea_native_relations } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			calc_true_if = {
+				amount = 5
+				all_neighbor_country = {
+					technology_group = north_american
+				}
+				desc = cef_ea_smallpox_epidemic_tt
+			}
+			any_neighbor_country = {
+				technology_group = north_american
+				has_spy_network_from = {
+					who = ROOT
+					value = 50
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = cef_ea_every_native_neighbour
+			tooltip = {
+				add_country_modifier = {
+					name = cef_ea_ravaged_by_smallpox
+					duration = 7300
+				}
+			}
+			hidden_effect = {
+				every_neighbor_country = {
+					limit = {
+						technology_group = north_american
+					}
+					add_country_modifier = {
+						name = cef_ea_ravaged_by_smallpox
+						duration = 7300
+					}
+				}
+			}
+
+			country_event = {
+				id = cef_flavor_usa.3
+			}
+		} 
+	}
+
+	cef_ea_claim_native_lands = {
+		icon = claim_the_borderlands
+		position = 5
+		required_missions = { cef_ea_smallpox_epidemic } 
+
+		trigger = {
+			calc_true_if = {
+				amount = 10
+				any_owned_province = {
+					NOT = {
+						tribal_land_of = AAA
+					}
+				}
+				desc = cef_ea_claim_native_lands_tt
+			}
+		} 
+
+		effect = {
+			add_country_modifier = {
+				name = cef_ea_native_resettlement
+				duration = -1
+			}
+		} 
+	}
+}
+
+# cef_vrm_1 # Potentially unique 2-3 missions for each of the 3 EA formables
+
+cef_ea_2_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = VRM
+			
+			tag = FLO
+		}
+	} 
+
+	cef_ea_consolidate_atlantic = {
+		icon = mission_northumberland_coast
+		position = 8
+		required_missions = { cef_ea_independance } 
+		provinces_to_highlight = {
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			OR = {
+				area = new_york_area
+				area = delaware_valley_area
+				area = maryland_area
+				area = chesapeake_area
+				area = carolinas_area
+			}
+		}
+
+		trigger = {
+			new_york_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			delaware_valley_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			maryland_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			chesapeake_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			carolinas_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		effect = {
+			add_country_modifier = {
+				name = cef_ea_developing_the_coast
+				duration = 3650
+			}
+			add_dip_power = 100
+		} 
+	}
+
+	cef_ea_port_cities = {
+		icon = mission_develop_nevas_port
+		position = 9
+		required_missions = { cef_ea_consolidate_atlantic } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_port = yes
+			NOT = {
+				AND = {
+					development = 20
+					num_of_buildings_in_province = 4
+				}
+			}
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 8
+				has_port = yes
+				development = 20
+				num_of_buildings_in_province = 4
+			}
+		} 
+
+		effect = {
+			add_navy_tradition = 10
+			define_admiral = {
+				shock = 4
+				fire = 4
+				manuever = 5
+				siege = 3
+			}
+			add_adm_power = 100
+		} 
+	}
+}
+
+cef_ea_3_2 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = VRM
+			
+			tag = FLO
+		}
+	}
+
+	cef_ea_independance = {
+		icon = mission_settlers_north_america
+		position = 7
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = cef_ea_won_against_european
+				any_country = {
+					capital_scope = {
+						continent = europe
+					}
+					ROOT = {
+						has_won_war_against = {
+							who = PREV
+						}
+					}
+				}
+			}
+		} 
+
+		effect = {
+			add_power_projection = {
+				type = 10_permanent_power_projection
+				amount = 10
+			}
+			add_prestige_or_monarch_power = {
+				amount = 50
+			}
+		}
+	}
+
+	cef_ea_conquer_north = {
+		icon = mission_conquer_5_states
+		position = 8
+		required_missions = { cef_ea_independance } 
+		provinces_to_highlight = {
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			OR = {
+				area = connecticut_valley_area
+				area = massachusetts_bay_area
+				area = south_iroquoisia_area
+				area = great_woods_area
+				area = maine_area
+				area = eastern_maine_area
+			}
+		}
+
+		trigger = {
+			connecticut_valley_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			massachusetts_bay_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			south_iroquoisia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			great_woods_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			maine_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			eastern_maine_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			2010 = {
+				center_of_trade = 1
+			}
+			971 = {
+				center_of_trade = 1
+			}
+			968 = {
+				add_center_of_trade_lvl_or_ducats = yes
+			}
+		} 
+	}
+
+	cef_ea_control_fur_trade = {
+		icon = mission_control_fur_trade
+		position = 9
+		required_missions = { cef_ea_conquer_north } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			trade_goods = fur
+			NOT = {
+				AND = {
+					base_production = 6
+					has_production_building_trigger = yes
+				}
+			}
+		}
+
+		trigger = {
+			1500 = {
+				trade_share = {
+					country = ROOT
+					share = 80
+				}
+			}
+			num_of_owned_provinces_with = {
+				value = 15
+				trade_goods = fur
+				base_production = 6
+				has_production_building_trigger = yes
+			}
+		}
+
+		effect = {
+			change_price = {
+				trade_goods = fur
+				key = cef_ea_north_american_fur
+				value = 0.1
+				duration = 7300
+			}
+			1500 = {
+				add_trade_node_income = 12
+			}
+		} 
+	}
+
+	cef_ea_usa = {
+		icon = mission_unknown_mission
+		position = 10
+		required_missions = {
+			cef_ea_control_fur_trade
+			cef_ea_expand_plantations
+			cef_ea_port_cities
+			cef_ea_continental_army
+		}
+		provinces_to_highlight = {
+			colonial_region = colonial_eastern_america
+			NOT = {
+				owned_by = ROOT
+			}
+		} 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 75
+				colonial_region = colonial_eastern_america
+			}
+			OR = {
+				is_great_power = yes
+				total_development = 1000
+			}
+			is_state_core = 953
+		} 
+
+		effect = {
+			set_capital = 953
+			953 = {
+				change_province_name = "Washington"
+				rename_capital = "Washington"
+			}
+			if = {
+				limit = {
+					NOT = { government_rank = 3 }
+				}
+				set_government_rank = 3
+			}
+			
+			add_power_projection = {
+				type = 10_permanent_power_projection
+				amount = 10
+			}
+
+			add_country_modifier = {
+				name = cef_ea_american_empire
+				duration = -1
+			}
+		} 
+	}
+}
+
+cef_ea_4_2 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = VRM
+			
+			tag = FLO
+		}
+	}
+
+	cef_ea_secure_south = {
+		icon = mission_colonize_florida
+		position = 8
+		required_missions = { cef_ea_independance } 
+		provinces_to_highlight = {
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			OR = {
+				area = south_carolina_area
+				area = south_carolina_piedmont_area
+				area = american_georgia_area
+				area = upper_american_georgia_area
+				area = florida_area
+				area = north_florida_area
+			}
+		}
+
+		trigger = {
+			south_carolina_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			south_carolina_piedmont_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			american_georgia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			upper_american_georgia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			florida_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			north_florida_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		effect = {
+			929 = {
+				center_of_trade = 1
+			}
+			4626 = {
+				center_of_trade = 1
+			}
+			add_years_of_income = 1
+		} 
+	}
+
+	cef_ea_expand_plantations = {
+		icon = mission_dominate_home_trade_node
+		position = 9
+		required_missions = { cef_ea_secure_south } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			OR = {
+				trade_goods = tobacco
+				trade_goods = cotton
+			}
+			NOT = {
+				has_production_building_trigger = yes
+			}
+		} 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 20
+				OR = {
+					trade_goods = tobacco
+					trade_goods = cotton
+				}
+				has_production_building_trigger = yes
+			}
+		} 
+
+		effect = {
+			custom_tooltip = cef_ea_add_development_in_southeast
+			hidden_effect = {
+				southeast_america_region = {
+					limit = {
+						OR = {
+							trade_goods = tobacco
+							trade_goods = cotton
+						}
+					}
+					add_base_production = 1
+				}
+			}
+		} 
+	}
+}
+
+cef_ea_5_2 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = VRM
+			
+			tag = FLO
+		}
+	}
+
+	cef_ea_continental_army = {
+		icon = army_reforms
+		position = 9
+
+		trigger = {
+			OR = {
+				army_professionalism = 0.4
+				army_tradition = 90
+			}
+			land_forcelimit = 100
+			max_manpower = 100
+			army_size_percentage = 0.9
+		} 
+
+		effect = {
+			add_country_modifier = {
+				name = cef_ea_continental_army_modifier
+				duration = 5475
+			}
+			add_mil_power = 200
+		} 
+	}
+}

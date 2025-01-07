@@ -1,0 +1,595 @@
+uce_branch_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = CAM
+			AND = {
+				capital_scope = {
+					region = central_america_region
+					is_core = ROOT
+				}
+				OR = {
+					is_former_colonial_nation = yes
+					is_colonial_nation = yes
+				}
+			}
+		}
+	}
+
+	cef_uca_favor_trade = {
+		icon = the_shape_of_trades_to_come
+		position = 2
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			OR = {
+				trade_income_percentage = 0.3
+				mercantilism = 30
+			}
+		}
+
+		effect = {
+			add_mercantilism = 5
+			add_country_modifier = {
+				name = "cef_uca_better_merchants"
+				duration = -1
+			}
+		}
+	}
+
+	cef_uca_meracntile_navy = {
+		icon = mission_aragonese_navy
+		position = 3
+		required_missions = { cef_uca_favor_trade } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			num_of_light_ship = 20
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "cef_uca_better_light_ships"
+				duration = -1
+			}
+		}
+	}
+
+	cef_uca_develop_land = {
+		icon = mission_a_million_rice_fields
+		position = 4
+		required_missions = { cef_uca_meracntile_navy } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			AND = {
+				capital_scope = { development = 20 } 
+				total_development = 200
+			}
+		}
+
+		effect = { capital_scope = { center_of_trade = 1 }  } 
+	}
+}
+
+uce_branch_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = CAM
+			AND = {
+				capital_scope = {
+					region = central_america_region
+					is_core = ROOT
+				}
+				OR = {
+					is_former_colonial_nation = yes
+					is_colonial_nation = yes
+				}
+			}
+		}
+	}
+
+	cef_uca_colony_allies = {
+		icon = mission_alliances
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			calc_true_if = {
+				all_known_country = {
+					OR = {
+						is_former_colonial_nation = yes
+						is_colonial_nation = yes
+					}
+					has_opinion = {
+						who = ROOT
+						value = 150
+					}
+				}
+				amount = 3
+			}
+		}
+
+		effect = {
+			country_event = { id = cef_uca_flav.1 }
+			484 = { add_permanent_claim = ROOT }
+			487 = { add_permanent_claim = ROOT }
+			490 = { add_permanent_claim = ROOT }
+			492 = { add_permanent_claim = ROOT }
+			491 = { add_permanent_claim = ROOT }
+		} 
+	}
+
+	cef_uca_carib_competition = {
+		icon = mission_caribbean_cn
+		position = 3
+		required_missions = { cef_uca_colony_allies } 
+		provinces_to_highlight = {
+			province_id = 488
+		} 
+
+		trigger = { 
+			488 = {
+				has_trader = ROOT
+				OR = {
+					trade_share = {
+						country = ROOT
+						share = 40
+					}
+					privateer_power = {
+						country = ROOT
+						share = 40
+					}
+				}
+			}
+		} 
+
+		effect = {
+			eastern_polynesia_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			northern_polynesia_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+}
+
+
+
+uce_branch_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = CAM
+			AND = {
+				capital_scope = {
+					region = central_america_region
+					is_core = ROOT
+				}
+				OR = {
+					is_former_colonial_nation = yes
+					is_colonial_nation = yes
+				}
+			}
+		}
+	}
+
+	cef_uca_nation_united = {
+		icon = all_bases_covered
+		position = 2
+		required_missions = { cef_uca_jungle_colonisation } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			NOT = { average_unrest = 2 }
+			NOT = { average_autonomy = 5 }
+		} 
+
+		effect = {
+			add_country_modifier = {
+				name = "cef_uca_united"
+				duration = -1
+			}
+		} 
+	}
+
+	cef_uca_assert_sovereignty = {
+		icon = assert_our_sovereignty
+		position = 4
+		required_missions = {
+			cef_uca_push_panama
+			cef_uca_nation_united
+			cef_uca_carib_competition
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = { 
+			OR = {
+				is_former_colonial_nation = yes
+				tag = CAM
+			}
+		} 
+
+		effect = {
+			add_prestige = 40
+			add_adm_power = 100
+			add_dip_power = 100
+			add_mil_power = 100
+		} 
+	}
+}
+
+uce_branch_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = CAM
+			AND = {
+				capital_scope = {
+					region = central_america_region
+					is_core = ROOT
+				}
+				OR = {
+					is_former_colonial_nation = yes
+					is_colonial_nation = yes
+				}
+			}
+		}
+	}
+
+	cef_uca_jungle_colonisation = {
+		icon = mission_che_botanical_exports
+		position = 1
+		provinces_to_highlight = {
+			region = central_america_region
+			has_terrain = jungle
+			NOT = { owned_by = ROOT }
+		} 
+
+		trigger = {
+			calc_true_if = {
+				all_owned_province = { has_terrain = jungle } 
+				amount = 5
+			}
+		}
+
+		effect = {
+			custom_tooltip = cef_uca_jungle_colonisation_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						has_terrain = jungle
+					}
+					add_province_modifier = {
+						name = cef_uca_jungle_development
+						duration = -1
+					}
+				}
+			}
+			central_america_region = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	cef_uca_claim_central_america = {
+		icon = claim_the_borderlands
+		position = 2
+		required_missions = { cef_uca_jungle_colonisation } 
+		provinces_to_highlight = { 
+			region = central_america_region 
+			NOT = { owned_by = ROOT }
+		} 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 15
+				region = central_america_region
+			}
+		} 
+
+		effect = {  
+			panama_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	cef_uca_push_panama = {
+		icon = mission_colonize_panama
+		position = 3
+		required_missions = { cef_uca_claim_central_america } 
+		provinces_to_highlight = { 
+			area = panama_area
+			NOT = { owned_by = ROOT }
+		} 
+
+		trigger = {
+			panama_area  = {
+				type = all
+				owned_by = ROOT
+			}
+		} 
+
+		effect = { 
+			panama_area = {
+				add_province_modifier = {
+					name = "cef_uca_dev_panama"
+					duration = 3650
+				}
+			}
+		} 
+	}
+
+}
+
+uce_branch_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = CAM
+			AND = {
+				capital_scope = {
+					region = central_america_region
+					is_core = ROOT
+				}
+				OR = {
+					is_former_colonial_nation = yes
+					is_colonial_nation = yes
+				}
+			}
+		}
+	}
+
+}
+
+##indep
+
+uce_branch_cam_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = CAM
+	}
+	
+	cef_uca_company_state = {
+		icon = mission_trade_company_region_abroad
+		position = 3
+		required_missions = { cef_uca_develop_land } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			num_of_estate_privileges = {
+				estate = estate_burghers
+				value = 4
+			}
+		} 
+
+		effect = { 
+			country_event = { id = cef_uca_flav.5 }
+		} 
+	}
+}
+
+uce_branch_cam_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = CAM
+	}
+	
+	cef_uca_pacific_trade = {
+		icon = mission_rb_colonise_spice_islands
+		position = 5
+		required_missions = {
+			cef_uca_carib_competition
+			cef_uca_develop_land
+			cef_uca_assert_sovereignty
+		}
+		provinces_to_highlight = {  
+			OR = {
+				province_id = 1997
+				province_id = 2699
+			}
+		} 
+
+		trigger = {
+			OR = {
+				1997 = { is_strongest_trade_power = ROOT }
+				2699 = { is_strongest_trade_power = ROOT }
+			}
+		} 
+
+		effect = {
+			add_country_modifier = {
+				name = "cef_uca_world_trader"
+				duration = -1
+			}
+			668 = { add_permanent_claim = ROOT }
+		} 
+	}
+
+}
+
+uce_branch_cam_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = CAM
+	}
+	
+	cef_uca_challange_spain = {
+		icon = Burn_Wooden_Wall
+		position = 5
+		required_missions = { cef_uca_assert_sovereignty } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			NOT = {
+				great_power_rank = 4
+			}
+			if = {
+				limit = {
+					exists = SPA
+				}
+				SPA = { is_great_power = no }
+				navy_size = SPA
+			}
+			if = {
+				limit = {
+					exists = CAS
+				}
+				CAS = { is_great_power = no }
+				navy_size = CAS
+			}
+		} 
+
+		effect = { 
+			add_power_projection = {
+				type = 25_permanent_power_projection
+				amount = 25
+			}
+			if = {
+				limit = {
+					has_had_golden_age = yes
+				}
+				reset_golden_age = yes
+			}
+			else_if = {
+				limit = {
+					in_golden_age = yes
+				}
+				extend_golden_age = 600
+			}
+			else = {
+				add_country_modifier = {
+					name = "cef_uca_great_age"
+					duration = 18250
+				}
+			}
+		} 
+	}
+}
+
+uce_branch_cam_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = CAM
+	}
+	
+	cef_uca_panama_canal = {
+		icon = construct_the_kiel_canal
+		position = 5
+		required_missions = {
+			cef_uca_push_panama
+			cef_uca_assert_sovereignty
+		}
+		provinces_to_highlight = { 
+			AND = {
+					province_id = 835
+					NOT = {
+						owned_by = ROOT
+						if = {
+							limit = {
+								has_dlc = "Leviathan"
+							}
+							OR = {
+								has_construction = great_project 
+								has_great_project = {
+									type = panama_canal
+									tier = 0
+								} 
+							}
+						}
+						else = {
+							has_construction = panama_canal
+						}
+					}
+				}
+		} 
+
+		trigger = { 
+			835 = { 
+				owned_by = ROOT
+				OR = {
+						has_great_project = {
+							type = panama_canal
+						} 
+						development = 40
+					}
+			}
+		} 
+
+		effect = {
+			if = {
+				limit = {
+					835 = { 
+						NOT = { 
+							has_great_project = { 
+								type = panama_canal
+								tier = 1 
+							}
+						}
+					}
+					NOT = { adm_tech = 22 }
+				}
+				835 = { 
+					add_great_project = {
+						type = panama_canal
+					}
+				}
+			}
+			else = { 
+				add_years_of_income = 1
+				add_country_modifier = {
+					name = "cef_uca_panama_building"
+					duration = 7300
+				}
+				835 = {
+					if = {
+						limit = { has_construction = great_project }
+						add_construction_progress = 0.25
+					}
+				}
+			}
+		} 
+	}
+}
