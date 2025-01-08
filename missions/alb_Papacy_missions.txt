@@ -92,9 +92,19 @@ Papacy_2_slot = {
 		icon = mission_luther_theses
 		position = 2
 		required_missions = { pap_duties } 
-		provinces_to_highlight = { area = lazio_area NOT = { country_or_non_sovereign_subject_holds = ROOT } } 
+		provinces_to_highlight = { 
+			OR = {
+				area = lazio_area 
+				area = rasna_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
 		trigger = {
 			lazio_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			rasna_area = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
@@ -104,9 +114,45 @@ Papacy_2_slot = {
 			central_italy_area = {
 				add_permanent_claim = ROOT
 			}
+			tuscany_area = {
+				add_permanent_claim = ROOT
+			}
+			1298 = {
+				add_trade_node_income = 24
+			}
 		}
 	}
+	pap_northern_republic = {
+		icon = mission_luther_theses
+		position = 3
+		required_missions = { pap_lux_latium } 
+		provinces_to_highlight = { area = tuscany_area NOT = { country_or_non_sovereign_subject_holds = ROOT } } 
+		trigger = {
+			tuscany_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
 
+		effect = {
+			add_country_modifier = {
+				name = pap_good_vassals
+				duration = 10950
+			}
+			emilia_romagna_area = {
+				add_permanent_claim = ROOT
+			}
+			liguria_area = {
+				add_permanent_claim = ROOT
+			}
+			po_valley_area = {
+				add_permanent_claim = ROOT
+			}
+			coradia_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
 }
 
 Papacy_3a_slot = {
@@ -232,25 +278,42 @@ Papacy_4_slot = {
 	ai = yes
 	has_country_shield = yes
 	potential = { OR = { tag = PAP tag = PA0} } 
-
-	pap_etruscan_loyalties = {
+	
+	pap_choose_crusade = {
 		icon = mission_luther_theses
-		position = 2
-		required_missions = { pap_duties } 
-		provinces_to_highlight = { area = rasna_area NOT = { country_or_non_sovereign_subject_holds = ROOT } } 
+		position = 1 
 		trigger = {
-			rasna_area = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
+			if = {
+				limit = {
+					NOT = {
+						religion = catholic
+					}
+				}
+				OR = {
+					inquisitor = 2
+					theologian = 2 
+					has_adm_advisor_3 = yes
+				}
+			}
+			else = {
+				army_size_percentage = 0.9
+				custom_trigger_tooltip = {
+					tooltip = pap_call_crusade_tt
+					any_known_country = {
+						is_crusade_target = yes
+					}
+				}
 			}
 		}
-
 		effect = {
-			1298 = {
-				add_trade_node_income = 24
-			}
-			tuscany_area = {
-				add_permanent_claim = ROOT
+			country_event_with_effect_insight = {
+					id = flavor_pap.1003
+					effect = "
+						add_country_modifier = {
+							name = pap_new_crusade
+							duration = 5475
+						}
+					"
 			}
 		}
 	}
@@ -263,75 +326,5 @@ Papacy_5_slot = {
 	has_country_shield = yes
 	potential = { OR = { tag = PAP tag = PA0} } 
 
-	pap_last_crusades = {
-		icon = mission_luther_theses
-		position = 2
-		required_missions = { pap_duties } 
-		trigger = {
-			if = {
-				limit = {
-					NOT = {
-						religion = pontifex
-					}
-				}
-				any_known_country = {
-					is_crusade_target = yes
-					war_with = ROOT
-				}
-			}else = {
-				theologian = 5
-			}
-		}
-
-		effect = {
-			if = {
-				limit = {
-					NOT = {
-						religion = pontifex
-					}
-				}
-				add_10_p_a = yes
-				random_known_country = {
-					limit = {
-						is_crusade_target = yes
-					}
-					add_war_exhaustion = 2
-				}
-			}else = {
-				add_war_exhaustion = -2
-				add_prestige = 20
-			}
-		}
-	}
-	pap_northern_republic = {
-		icon = mission_luther_theses
-		position = 3
-		required_missions = { pap_etruscan_loyalties } 
-		provinces_to_highlight = { area = tuscany_area NOT = { country_or_non_sovereign_subject_holds = ROOT } } 
-		trigger = {
-			tuscany_area = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
-			}
-		}
-
-		effect = {
-			add_country_modifier = {
-				name = pap_good_vassals
-				duration = 10950
-			}
-			emilia_romagna_area = {
-				add_permanent_claim = ROOT
-			}
-			liguria_area = {
-				add_permanent_claim = ROOT
-			}
-			po_valley_area = {
-				add_permanent_claim = ROOT
-			}
-			coradia_area = {
-				add_permanent_claim = ROOT
-			}
-		}
-	}
+	
 }
