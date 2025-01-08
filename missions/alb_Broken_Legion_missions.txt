@@ -119,21 +119,7 @@ bl0_1_plus_slot = {
 		} 
 
 		effect = { 
-			if = {
-				limit = { OR = { tag = BL2 tag = BL5 }}
-				set_country_flag = de_de_more_tolerance
-				custom_tooltip = DE_DE_TT_2a
-			}
-			if = {
-				limit = { tag = BL4 }
-				set_country_flag = de_de_more_cultures
-				custom_tooltip = DE_DE_TT_2b
-			}
-			if = {
-				limit = { tag = BL3 }
-				set_country_flag = de_de_more_rebels
-				custom_tooltip = DE_DE_TT_2c
-			}
+			custom_tooltip = DE_DE_TT_3
 		} 
 	}
 	blo_iberian_conquered = {
@@ -153,8 +139,20 @@ bl0_1_plus_slot = {
 
 		effect = { 
 			add_demiurgic_defiance = {amount = 15}
-			iberia_region = {
-				
+			if = {
+				limit = { OR = { tag = BL2 tag = BL5 }}
+				set_country_flag = de_de_more_tolerance
+				custom_tooltip = DE_DE_TT_2a
+			}
+			if = {
+				limit = { tag = BL4 }
+				set_country_flag = de_de_more_cultures
+				custom_tooltip = DE_DE_TT_2b
+			}
+			if = {
+				limit = { tag = BL3 }
+				set_country_flag = de_de_more_rebels
+				custom_tooltip = DE_DE_TT_2c
 			}
 		} 
 	}
@@ -338,7 +336,6 @@ bl0_2_plus_slot = {
 		required_missions = {blo_italy } 
 		provinces_to_highlight = {region = italy_region NOT = {owned_by = ROOT } }
 		trigger = { 
-			owns = 118
 			italy_region = {
 				type = all
 				OR = {
@@ -610,16 +607,43 @@ bl0_4_plus_slot = {
 		provinces_to_highlight = {region = anatolia_region } 
 		trigger = { 
 			calc_true_if = {
-				amount = 20
+				amount = 30
 				all_province = {
-					region = anatolia_region
+					OR = {
+						region = anatolia_region
+						region = mashriq_region
+					}
 					religion = marcionist 
 				}
 			}
 		} 
 
 		effect = { 
-			#another general unlock modifiers
+			if = {
+				limit = { tag = BL3 }
+				set_country_flag = bl3_open_walls
+				custom_tooltip = DE_DE_TT_4a
+				add_country_modifier = {
+					name = bl3_spymancy
+					duration = -1
+				}
+			}
+			if = {
+				limit = { tag = BL4 }
+				set_country_flag = de_de_more_cultures_2
+				custom_tooltip = DE_DE_TT_4b
+				add_country_modifier = {
+					name = bl4_meritocracy
+					duration = -1
+				}
+			}
+			if = {
+				limit = { OR = { tag = BL2 tag = BL5 }}
+				add_country_modifier = {
+					name = bl2_missions
+					duration = -1
+				}
+			}
 			thrace_area = {
 				add_permanent_claim = ROOT
 			}
@@ -768,7 +792,6 @@ bl0_5_plus_slot = {
 		required_missions = {blo_city_of_god } 
 		provinces_to_highlight = {region = arabia_region } 
 		trigger = { 
-			owns = 385
 			calc_true_if = {
 				amount = 20
 				all_province = {

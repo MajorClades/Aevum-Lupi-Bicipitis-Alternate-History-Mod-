@@ -1,0 +1,36 @@
+custom_button = {
+	name = sanguine_button
+	potential = {
+		FROM = {
+			has_country_flag = bl3_open_walls
+		}
+		owner = {
+			war_with = FROM
+		}
+		has_fort_building_trigger = yes
+		controlled_by = owner
+	}
+	trigger = {
+		has_siege = yes
+		owner = {
+			FROM = {
+				has_spy_network_in = {
+					who = PREV
+					value = 30
+				}
+			}
+		}
+	}
+	effect = {
+		owner = {
+			FROM = {
+				add_spy_network_in = {
+					who = PREV
+					value = -30
+				}
+			}
+		}
+		change_siege = 50
+	}
+	tooltip = "Open the Walls!"
+}
