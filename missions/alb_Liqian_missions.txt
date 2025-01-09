@@ -106,7 +106,9 @@ ch4_2_slot = {
 		} 
 
 		effect = {  
-
+			upgrade_roman_heirs = yes
+			custom_tooltip = empty_line_tt
+			add_adm_power = 100
 		} 
 	}
 
@@ -182,6 +184,8 @@ ch4_3_slot = {
 			country_event = {
 				id = liqian.1
 			}
+			custom_tooltip = empty_line_tt
+			upgrade_roman_heirs = yes
 		} 
 	}
 
@@ -305,6 +309,8 @@ ch4_4_slot = {
 			custom_tooltip = empty_line_tt
 			custom_tooltip = alb_unlock_rma_sinicization_tt
 			set_country_flag = unlock_rma_sinicization_flag
+			custom_tooltip = empty_line_tt
+			upgrade_roman_heirs = yes
 		} 
 	}
 
@@ -400,11 +406,39 @@ ch4_5_slot = {
 		icon = mission_alliances
 		position = 4
 		required_missions = { ch4_to_yangtze } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = south_hebei_area
+				area = hebei_area
+				area = shandong_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 10
+				OR = {
+					area = south_hebei_area
+					area = hebei_area
+					area = shandong_area
+				}
+			}
+			1816 = {
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					controlled_by = ROOT
+				}
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			upgrade_roman_heirs = yes
+			custom_tooltip = empty_line_tt
+			#if yan is still EoC
+		} 
 	}
 
 	ch4_great_port_of_guangzhou = {
