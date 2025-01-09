@@ -565,14 +565,14 @@ country_event = { #get ROMe
 	}
 
 	option = {
-		name = legion.13a
+		name = legion.15a
 		118 = {
 			add_devastation = 50
 			change_religion = marcionist
 		}
 	}
 	option = {
-		name = legion.13b
+		name = legion.15b
 		118 = {
 			add_unrest = -10
 		}
@@ -595,20 +595,122 @@ country_event = { #get Mecca
 	}
 
 	option = {
-		name = legion.13a
+		name = legion.16a
 		358 = {
 			add_devastation = 50
 			change_religion = marcionist
 		}
 	}
 	option = {
-		name = legion.13b
+		name = legion.16b
 		358 = {
 			add_unrest = -10
 		}
 	}
 }
 
+country_event = { #conquered italy
+	id = legion.17
+	title = legion.17.test
+	desc = legion.17.desc
+	picture = ADVISOR_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = legion.17a
+		set_country_flag = de_de_italy_1
+		set_capital = 118
+		custom_tooltip = DE_DE_TT_5a
+	}
+	option = {
+		name = legion.17b
+		set_country_flag = de_de_italy_2
+		custom_tooltip = DE_DE_TT_5b
+	}
+}
+
+country_event = { #get cosntantinoploli
+	id = legion.18
+	title = legion.18.test
+	desc = legion.18.desc
+	picture = ADVISOR_eventPicture
+	
+	trigger = {
+		owns = 151
+		religion = marcionist
+	}
+
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	option = {
+		name = legion.18a
+		151 = {
+			add_devastation = 50
+			change_religion = marcionist
+		}
+	}
+	option = {
+		name = legion.18b
+		151 = {
+			add_unrest = -10
+		}
+	}
+}
+
+country_event = { #numberas
+	id = legion.19
+	title = legion.19.test
+	desc = legion.19.desc
+	picture = ADVISOR_eventPicture
+	
+ 	is_triggered_only = yes
+	option = {
+		name = legion.19a
+		custom_tooltip = BROK_LEG_TT_11
+	}
+}
+
+country_event = { #arabian buff
+	id = legion.20
+	title = legion.20.test
+	desc = legion.20.desc
+	picture = ADVISOR_eventPicture
+	
+ 	is_triggered_only = yes
+	option = {
+		name = legion.20a
+		tooltip = {
+			add_country_modifier = {
+				name = de_de_infantry_fake
+				duration = 1
+			}
+		}
+		set_country_flag = de_de_infantry
+	}
+	option = {
+		name = legion.20b
+		tooltip = {
+			add_country_modifier = {
+				name = de_de_cavalry_fake
+				duration = 1
+			}
+		}
+		set_country_flag = de_de_cavalry
+	}
+	option = {
+		name = legion.20c
+		tooltip = {
+			add_country_modifier = {
+				name = de_de_artillery_fake
+				duration = 1
+			}
+		}
+		set_country_flag = de_de_artillery
+	}
+}
 country_event = { #choose rites
 	id = legion.100
 	title = legion.100.test
@@ -799,7 +901,7 @@ country_event = { #festival and council
 }
 
 
-country_event = { #festival and council
+country_event = { #anti-demiurgic coalition
 	id = legion.2000
 	title = legion.2000.test
 	desc = legion.2000.desc
@@ -809,23 +911,81 @@ country_event = { #festival and council
 
 	option = {
 		name = legion.2000a
-		add_adm_power = 100
-		add_demiurgic_defiance = { amount = -25 }		
+		country_event = {
+			id = legion.2001
+		}	
 	}
 	option = {
 		name = legion.2000b
-		add_dip_power = 100
+		country_event = {
+			id = legion.2002
+		}
+	}
+}
+
+country_event = { #anti-demiurgic coalition gain wealth lose power
+	id = legion.2001
+	title = legion.2001.test
+	desc = legion.2001.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = legion.2001a
+		add_adm_power = 100
+		add_dip_power = 50
+		add_mil_power = 50
 		add_demiurgic_defiance = { amount = -25 }		
 	}
 	option = {
-		name = legion.2000d
+		name = legion.2001b
+		add_adm_power = 50
+		add_dip_power = 100
+		add_mil_power = 50
+		add_demiurgic_defiance = { amount = -25 }		
+	}
+	option = {
+		name = legion.2001c
+		add_adm_power = 50
+		add_dip_power = 50
 		add_mil_power = 100
 		add_demiurgic_defiance = { amount = -25 }		
 	}
 	option = {
-		name = legion.2000d
+		name = legion.2001d
 		add_church_power = 100
 		add_demiurgic_defiance = { amount = -25 }		
+	}
+}
+
+country_event = { #anti-demiurgic coalition gain power lose wealth
+	id = legion.2002
+	title = legion.2002.test
+	desc = legion.2002.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = legion.2002a
+		add_adm_power = -100
+		add_demiurgic_defiance = { amount = 10 }		
+	}
+	option = {
+		name = legion.2002b
+		add_dip_power = -100
+		add_demiurgic_defiance = { amount = 10 }		
+	}
+	option = {
+		name = legion.2002c
+		add_mil_power = -100
+		add_demiurgic_defiance = { amount = 10 }		
+	}
+	option = {
+		name = legion.2002d
+		add_church_power = -100
+		add_demiurgic_defiance = { amount = 10 }		
 	}
 	option = {
 		name = legion.2000e
@@ -835,4 +995,3 @@ country_event = { #festival and council
 		}		
 	}
 }
-
