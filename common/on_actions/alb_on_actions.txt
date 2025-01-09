@@ -439,9 +439,21 @@ on_thri_yearly_pulse = {
 on_monarch_death = {
 
 	if = {
-		limit = { tag = HE0 }
+		limit = { 
+			tag = HE0 
+			NOT = { has_country_flag = had_event_atro3_flag } 
+		}
 		country_event = { id = atro.3 }
 		country_event = { id = atro.1 days = 5}
+	}
+	if = {
+		limit = { 
+			tag = PM0 
+			NOT = {
+				has_ruler_modifier = complete_insanity
+			}
+		}
+		country_event = { id = rhom.1003 }
 	}
 }
 
