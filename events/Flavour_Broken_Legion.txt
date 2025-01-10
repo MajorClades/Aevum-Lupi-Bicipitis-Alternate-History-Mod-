@@ -372,6 +372,7 @@ country_event = { #the ascension
 		change_tag = BL4
 		change_government = monarchy
 		add_government_reform = marcionism_solarian_reform
+		set_dynasty = "Solari"
 		swap_non_generic_missions = yes
 	}
 	option = {
@@ -568,13 +569,23 @@ country_event = { #get ROMe
 		name = legion.15a
 		118 = {
 			add_devastation = 50
+			destroy_great_project = {
+				type = stpeters_cathedral
+			}
 			change_religion = marcionist
 		}
 	}
 	option = {
 		name = legion.15b
+		add_demiurgic_defiance = {amount = 20}
 		118 = {
-			add_unrest = -10
+			destroy_great_project = {
+				type = stpeters_cathedral
+			}
+			add_named_unrest = {
+				name = "Demiurgic Resistance"
+				value = 5
+			}
 		}
 	}
 }
@@ -649,13 +660,19 @@ country_event = { #get cosntantinoploli
 		name = legion.18a
 		151 = {
 			add_devastation = 50
+			destroy_great_project = {
+				type = hagia_sophia
+			}
 			change_religion = marcionist
 		}
 	}
 	option = {
 		name = legion.18b
 		151 = {
-			add_unrest = -10
+			add_great_project_tier = {
+				type = hippodrome_byz
+				tier = 1
+			}
 		}
 	}
 }
@@ -711,6 +728,183 @@ country_event = { #arabian buff
 		set_country_flag = de_de_artillery
 	}
 }
+
+country_event = { #sanguine studies
+	id = legion.21
+	title = legion.21.test
+	desc = legion.21.desc
+	picture = ADVISOR_eventPicture
+	trigger = {
+		tag = BL3
+		has_government_mechanic = demiurgic_defiance_mechanic
+		NOT = {
+			has_ruler_modifier = bl3_studies
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	option = {
+		name = legion.21a
+		change_adm = 2
+		add_demiurgic_defiance = {amount = -15}
+	}
+	option = {
+		name = legion.21b
+		change_dip = 2
+		add_demiurgic_defiance = {amount = -15}
+	}
+	option = {
+		name = legion.21c
+		change_mil = 2
+		add_demiurgic_defiance = {amount = -15}
+	}
+	option = {
+		name = legion.21d
+		add_demiurgic_defiance = {amount = 15}
+	}
+	after = {
+		hidden_effect = {
+			add_ruler_modifier = {
+				name = bl3_studies
+				hidden = yes
+			}
+		}
+	}
+}
+
+country_event = { #Solari Rulers
+	id = legion.22
+	title = legion.22.test
+	desc = legion.22.desc
+	picture = ADVISOR_eventPicture
+	trigger = {
+		tag = BL4
+		has_government_mechanic = demiurgic_defiance_mechanic
+		has_heir = no
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	option = {
+		name = legion.22a
+		random_list = {
+			75 = {
+				define_heir = {
+					dynasty = "Solari"
+					adm = 2
+					dip = 2
+					mil = 2
+					max_random_adm = 6
+					max_random_dip = 4
+					max_random_mil = 5
+					male = yes
+				}
+			}
+			25 = {
+				define_heir = {
+					dynasty = "Solari"
+					adm = 2
+					dip = 2
+					mil = 2
+					max_random_adm = 6
+					max_random_dip = 4
+					max_random_mil = 5
+					female = yes
+				}
+			}
+		}
+	}
+	option = {
+		name = legion.22b
+		random_list = {
+			75 = {
+				define_heir = {
+					dynasty = "Solari"
+					adm = 2
+					dip = 2
+					mil = 2
+					max_random_adm = 4
+					max_random_dip = 6
+					max_random_mil = 5
+					male = yes
+				}
+			}
+			25 = {
+				define_heir = {
+					dynasty = "Solari"
+					adm = 2
+					dip = 2
+					mil = 2
+					max_random_adm = 4
+					max_random_dip = 6
+					max_random_mil = 5
+					female = yes
+				}
+			}
+		}
+	}
+	option = {
+		name = legion.22c
+		random_list = {
+			75 = {
+				define_heir = {
+					dynasty = "Solari"
+					adm = 2
+					dip = 2
+					mil = 2
+					max_random_adm = 5
+					max_random_dip = 4
+					max_random_mil = 6
+					male = yes
+				}
+			}
+			25 = {
+				define_heir = {
+					dynasty = "Solari"
+					adm = 2
+					dip = 2
+					mil = 2
+					max_random_adm = 5
+					max_random_dip = 4
+					max_random_mil = 6
+					male = yes
+				}
+			}
+		}
+	}
+	option = {
+		name = legion.22d
+		random_list = {
+			50 = {
+				define_heir = {
+					dynasty = "Solari"
+					adm = 1
+					dip = 1
+					mil = 1
+					max_random_adm = 6
+					max_random_dip = 6
+					max_random_mil = 6
+					male = yes
+				}
+			}
+			50 = {
+				define_heir = {
+					dynasty = "Solari"
+					adm = 1
+					dip = 1
+					mil = 1
+					max_random_adm = 6
+					max_random_dip = 6
+					max_random_mil = 6
+					female = yes
+				}
+			}
+		}
+	}
+	
+}
+
 country_event = { #choose rites
 	id = legion.100
 	title = legion.100.test
@@ -734,6 +928,7 @@ country_event = { #choose rites
 	}
 	option = {
 		name = legion.100b
+		add_prestige = -30
 		country_event = {
 			id = legion.101
 		}
@@ -792,6 +987,7 @@ country_event = { #choose rites
 	}
 	option = {
 		name = legion.102b
+		add_devotion = -20
 		country_event = {
 			id = legion.103
 		}
