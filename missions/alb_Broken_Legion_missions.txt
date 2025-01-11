@@ -6,56 +6,55 @@ bl0_1_slot = {
 	potential = { mission_check_marcio = yes } 
 
 	blo_conquer_lybia = {
-		icon = mission_alliances
+		icon = mission_spoils_of_war
 		position = 1
+		provinces_to_highlight = {  } 
 
-		trigger = { 
-			army_size_percentage = 1
-		} 
+		trigger = { army_size_percentage = 1 } 
 
-		effect = { 
-			tripolitania_area = {
-				add_permanent_claim = ROOT
-			}
-		} 
+		effect = { tripolitania_area = { add_permanent_claim = ROOT }  } 
 	}
 
 	blo_the_way_forward = {
-		icon = mission_alliances
+		icon = mission_danzig_or_war
 		position = 2
 		required_missions = { blo_conquer_lybia } 
-		provinces_to_highlight = { area = tripolitania_area NOT = {owned_by = ROOT} } 
+		provinces_to_highlight = {
+			area = tripolitania_area
+			NOT = { owned_by = ROOT } 
+		}
 
 		trigger = {
 			tripolitania_area = {
 				type = all
 				owned_by = ROOT
 			}
-		} 
+		}
 
 		effect = {
 			country_event_with_insight = {
 				id = legion.4
 				insight_tooltip = BROK_LEG_TT_3
 			}
-		} 
+		}
 	}
 
 	blo_expansions = {
-		icon = mission_alliances
+		icon = africa_proconsulare
 		position = 3
 		required_missions = { blo_the_way_forward } 
-		provinces_to_highlight = { region = maghreb_region NOT = {owned_by = ROOT} } 
+		provinces_to_highlight = {
+			region = maghreb_region
+			NOT = { owned_by = ROOT } 
+		}
 
 		trigger = {
 			num_of_owned_provinces_with = {
 				value = 15
 				region = maghreb_region
 			}
-			341 = {
-				owned_by = ROOT
-			}
-		} 
+			341 = { owned_by = ROOT } 
+		}
 
 		effect = {
 			simple_dynamic_effect = {
@@ -65,37 +64,36 @@ bl0_1_slot = {
 				second_limit = "NOT = { capital_scope = { province_id = 341 } }"
 				second_effect = "capital_scope = { add_base_tax = 2 add_base_production = 2 add_base_manpower = 2 }"
 			}
-			
-		} 
+		}
 	}
+
 	blo_question_of_faith = {
-		icon = mission_alliances
+		icon = mission_the_sultan_of_morocco
 		position = 6
-		required_missions = {blo_conquest} 
-		provinces_to_highlight = { region = maghreb_region NOT = {religion = ROOT} } 
-		trigger = { 
+		required_missions = { blo_conquest } 
+		provinces_to_highlight = {
+			region = maghreb_region
+			NOT = { religion = ROOT } 
+		}
+
+		trigger = {
 			maghreb_region = {
-				type = all 
+				type = all
 				owned_by = ROOT
 				religion = ROOT
 			}
-		} 
+		}
 
-		effect = { 
-			italy_region = {
-				add_permanent_claim = ROOT
-			}
+		effect = {
+			italy_region = { add_permanent_claim = ROOT } 
 			capital_scope = {
 				add_or_upgrade_tax_building = yes
 				add_building = university
 			}
-			country_event = {
-				id = legion.8
-			}
-		} 
+			country_event = { id = legion.8 } 
+		}
 	}
 }
-
 bl0_1_plus_slot = {
 	slot = 1
 	generic = no
@@ -104,31 +102,37 @@ bl0_1_plus_slot = {
 	potential = { has_country_flag = marcionism_not_base_flag } 
 
 	blo_iberia = {
-		icon = mission_alliances
+		icon = hispaniae
 		position = 9
-		required_missions = {blo_city_of_god } 
-		provinces_to_highlight = {region = iberia_region } 
-		trigger = { 
+		required_missions = { blo_city_of_god } 
+		provinces_to_highlight = { region = iberia_region } 
+
+		trigger = {
 			calc_true_if = {
 				amount = 20
 				all_province = {
 					region = iberia_region
-					religion = marcionist 
+					religion = marcionist
 				}
 			}
-		} 
+		}
 
-		effect = { 
+		effect = {
 			add_stability_or_adm_power = yes
 			custom_tooltip = DE_DE_TT_3
-		} 
+		}
 	}
+
 	blo_iberian_conquered = {
-		icon = mission_alliances
+		icon = empower_the_junkers
 		position = 10
-		required_missions = {blo_iberia } 
-		provinces_to_highlight = {region = iberia_region NOT = {owned_by = ROOT } }
-		trigger = { 
+		required_missions = { blo_iberia } 
+		provinces_to_highlight = {
+			region = iberia_region
+			NOT = { owned_by = ROOT } 
+		}
+
+		trigger = {
 			iberia_region = {
 				type = all
 				OR = {
@@ -136,30 +140,34 @@ bl0_1_plus_slot = {
 					religion = marcionist
 				}
 			}
-		} 
+		}
 
-		effect = { 
+		effect = {
 			set_government_rank = 3
-			add_demiurgic_defiance = {amount = 15}
+			add_demiurgic_defiance = { amount = 15 } 
 			if = {
-				limit = { OR = { tag = BL2 tag = BL5 }}
+				limit = {
+					OR = {
+						tag = BL2
+						tag = BL5
+					}
+				}
 				set_country_flag = de_de_more_tolerance
 				custom_tooltip = DE_DE_TT_2a
 			}
 			if = {
-				limit = { tag = BL4 }
+				limit = { tag = BL4 } 
 				set_country_flag = de_de_more_cultures
 				custom_tooltip = DE_DE_TT_2b
 			}
 			if = {
-				limit = { tag = BL3 }
+				limit = { tag = BL3 } 
 				set_country_flag = de_de_more_rebels
 				custom_tooltip = DE_DE_TT_2c
 			}
-		} 
+		}
 	}
 }
-
 bl0_2_slot = {
 	slot = 2
 	generic = no
@@ -170,29 +178,30 @@ bl0_2_slot = {
 	blo_power_within = {
 		icon = mission_alliances
 		position = 2
+		provinces_to_highlight = {  } 
 
 		trigger = {
 			OR = {
 				AND = {
 					has_country_modifier = clades_acolyte
-					has_cladesian_authority = { amount = 30}
+					has_cladesian_authority = { amount = 30 } 
 				}
 				AND = {
 					has_country_modifier = sanguine_acolyte
-					has_sanguine_authority = { amount = 30}
+					has_sanguine_authority = { amount = 30 } 
 				}
 				AND = {
 					has_country_modifier = solari_acolyte
-					has_solarian_authority = { amount = 30}
+					has_solarian_authority = { amount = 30 } 
 				}
 				AND = {
 					has_country_modifier = above_all_acolyte
-					has_cladesian_authority = { amount = 25}
-					has_sanguine_authority = { amount = 25}
-					has_solarian_authority = { amount = 25}
+					has_cladesian_authority = { amount = 25 } 
+					has_sanguine_authority = { amount = 25 } 
+					has_solarian_authority = { amount = 25 } 
 				}
 			}
-		} 
+		}
 
 		effect = {
 			complex_dynamic_effect = {
@@ -229,21 +238,26 @@ bl0_2_slot = {
 					}
 				"
 			}
-		} 
+		}
 	}
+
 	blo_conquest = {
-		icon = mission_alliances
+		icon = mission_conquer_algiers
 		position = 5
-		required_missions = {blo_new_nation} 
-		provinces_to_highlight = { region = maghreb_region NOT = {owned_by = ROOT} } 
-		trigger = { 
+		required_missions = { blo_new_nation } 
+		provinces_to_highlight = {
+			region = maghreb_region
+			NOT = { owned_by = ROOT } 
+		}
+
+		trigger = {
 			maghreb_region = {
-				type = all 
+				type = all
 				owned_by = ROOT
 			}
-		} 
+		}
 
-		effect = { 
+		effect = {
 			complex_dynamic_effect = {
 				first_custom_tooltip = BROK_LEG_TT_1a
 				first_limit = "has_country_modifier = clades_acolyte"
@@ -284,27 +298,31 @@ bl0_2_slot = {
 					}
 				"
 			}
-		} 
+		}
 	}
+
 	blo_temples = {
-		icon = mission_alliances
+		icon = mission_reclaim_morocco
 		position = 6
-		required_missions = {blo_conquest} 
-		provinces_to_highlight = { owned_by = ROOT has_tax_building_trigger= no } 
-		trigger = { 
+		required_missions = { blo_conquest } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_tax_building_trigger = no
+		}
+
+		trigger = {
 			num_of_owned_provinces_with = {
 				value = 15
 				has_tax_building_trigger = yes
 			}
-		} 
+		}
 
-		effect = { 
+		effect = {
 			add_years_of_income = 2
 			add_church_power = 100
-		} 
+		}
 	}
 }
-
 bl0_2_plus_slot = {
 	slot = 2
 	generic = no
@@ -313,31 +331,37 @@ bl0_2_plus_slot = {
 	potential = { has_country_flag = marcionism_not_base_flag } 
 
 	blo_italy = {
-		icon = mission_alliances
+		icon = the_holy_league
 		position = 9
-		required_missions = {blo_city_of_god } 
-		provinces_to_highlight = {region = italy_region } 
-		trigger = { 
+		required_missions = { blo_city_of_god } 
+		provinces_to_highlight = { region = italy_region } 
+
+		trigger = {
 			calc_true_if = {
 				amount = 20
 				all_province = {
 					region = italy_region
-					religion = marcionist 
+					religion = marcionist
 				}
 			}
-		} 
+		}
 
-		effect = { 
-			add_demiurgic_defiance = {amount = 20}
+		effect = {
+			add_demiurgic_defiance = { amount = 20 } 
 			dismantle_hre = yes
-		} 
+		}
 	}
+
 	blo_italy_conquered = {
-		icon = mission_alliances
+		icon = answer_the_roman_question
 		position = 10
-		required_missions = {blo_italy } 
-		provinces_to_highlight = {region = italy_region NOT = {owned_by = ROOT } }
-		trigger = { 
+		required_missions = { blo_italy } 
+		provinces_to_highlight = {
+			region = italy_region
+			NOT = { owned_by = ROOT } 
+		}
+
+		trigger = {
 			italy_region = {
 				type = all
 				OR = {
@@ -345,17 +369,14 @@ bl0_2_plus_slot = {
 					religion = marcionist
 				}
 			}
-		} 
+		}
 
-		effect = { 
+		effect = {
 			set_government_rank = 3
-			country_event = {
-				id = legion.17
-			}
-		} 
+			country_event = { id = legion.17 } 
+		}
 	}
 }
-
 bl0_3_slot = {
 	slot = 3
 	generic = no
@@ -364,80 +385,105 @@ bl0_3_slot = {
 	potential = { mission_check_marcio = yes } 
 
 	blo_spread_marcion = {
-		icon = mission_alliances
+		icon = mission_impaled_soldies
 		position = 1
-		provinces_to_highlight = { owned_by = ROOT NOT = {religion = ROOT} } 
-		trigger = { 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			NOT = { religion = ROOT } 
+		}
+
+		trigger = {
 			num_of_owned_provinces_with = {
 				value = 3
 				religion = ROOT
 			}
-		} 
+		}
 
-		effect = { 
+		effect = {
 			add_devotion = 25
 			add_country_modifier_for_age = {
-				name = cladesian_tolerance
+				name = "cladesian_tolerance"
 				age = age_of_discovery
 			}
-		} 
+		}
 	}
 
 	blo_more_faithful = {
-		icon = mission_alliances
+		icon = mission_swedish_peasantry
 		position = 3
 		required_missions = { blo_spread_marcion } 
-		provinces_to_highlight = { owned_by = ROOT NOT = {religion = ROOT} } 
-		trigger = { 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			NOT = { religion = ROOT } 
+		}
+
+		trigger = {
 			num_of_owned_provinces_with = {
 				value = 8
 				religion = ROOT
 			}
-		} 
+		}
 
-		effect = { 
+		effect = {
 			add_devotion = 50
 			add_church_power = 100
-		} 
+		}
 	}
 
 	blo_new_nation = {
-		icon = mission_alliances
+		icon = mission_build_up_to_force_limit
 		position = 4
-		required_missions = {blo_expansions blo_more_faithful blo_stronger_and_stronger} 
-		provinces_to_highlight = { owned_by = ROOT NOT = {religion = ROOT} } 
-		trigger = { 
+		required_missions = {
+			blo_expansions
+			blo_more_faithful
+			blo_stronger_and_stronger
+		}
+		provinces_to_highlight = {
+			owned_by = ROOT
+			NOT = { religion = ROOT } 
+		}
+
+		trigger = {
 			num_of_owned_provinces_with = {
 				value = 20
 				religion = ROOT
 			}
-		} 
+		}
 
-		effect = { 
+		effect = {
 			change_tag = BL1
-			add_ruler_modifier = {
-				name = soldier_of_marx
-			}
-		} 
+			add_ruler_modifier = { name = "soldier_of_marx" } 
+		}
 	}
+
 	blo_the_ascension = {
-		icon = mission_alliances
+		icon = ven_scales_of_power
 		position = 7
-		required_missions = {blo_question_of_faith blo_temples blo_new_nation blo_egyptian_red_nile blo_avengers} 
-		provinces_to_highlight = { owned_by = ROOT NOT = {religion = ROOT} } 
-		trigger = { 
+		required_missions = {
+			blo_question_of_faith
+			blo_temples
+			blo_new_nation
+			blo_egyptian_red_nile
+			blo_avengers
+		}
+		provinces_to_highlight = {
+			owned_by = ROOT
+			NOT = { religion = ROOT } 
+		}
+
+		trigger = {
 			OR = {
-				has_cladesian_authority = { amount = 90}
-				has_sanguine_authority = { amount = 90}
-				has_solarian_authority = { amount = 90}
+				has_cladesian_authority = { amount = 90 } 
+				has_sanguine_authority = { amount = 90 } 
+				has_solarian_authority = { amount = 90 } 
 			}
 			num_of_owned_provinces_with = {
 				value = 100
 				religion = ROOT
 			}
-		} 
+		}
 
-		effect = { 
+		effect = {
 			hidden_effect = {
 				change_variable = {
 					which = num_council_marcionism_var
@@ -448,10 +494,9 @@ bl0_3_slot = {
 				id = legion.9
 				insight_tooltip = BROK_LEG_TT_7
 			}
-		} 
+		}
 	}
 }
-
 bl0_3_plus_slot = {
 	slot = 3
 	generic = no
@@ -460,58 +505,57 @@ bl0_3_plus_slot = {
 	potential = { has_country_flag = marcionism_not_base_flag } 
 
 	blo_city_of_god = {
-		icon = mission_alliances
+		icon = jerusalem
 		position = 8
-		required_missions = {blo_the_ascension } 
+		required_missions = { blo_the_ascension } 
 		provinces_to_highlight = { province_id = 379 } 
-		trigger = { 
-			379 = {
-				owned_by = ROOT
-			}
-		} 
 
-		effect = { 
-			italy_region = {
-				add_permanent_claim = ROOT
-			}
-			country_event = {
-				id = legion.14
-			}
-		} 
+		trigger = { 379 = { owned_by = ROOT }  } 
+
+		effect = {
+			italy_region = { add_permanent_claim = ROOT } 
+			country_event = { id = legion.14 } 
+		}
 	}
 }
-
 bl0_3_bl2_slot = {
 	slot = 3
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { has_country_flag = marcionism_not_base_flag tag = BL2 } 
+	potential = {
+		has_country_flag = marcionism_not_base_flag
+		tag = BL2
+	}
 
 	blo_marxionistism_bl2 = {
 		icon = mission_alliances
 		position = 11
-		required_missions = {blo_city_of_god } 
-		provinces_to_highlight = { NOT = {religion = marcionist} is_neighbor_of = ROOT  } 
-		trigger = { 
+		required_missions = { blo_city_of_god } 
+		provinces_to_highlight = {
+			NOT = { religion = marcionist } 
+			is_neighbor_of = ROOT
+		}
+
+		trigger = {
 			num_of_owned_provinces_with = {
 				value = 300
 				religion = marcionist
 			}
-		} 
+		}
 
-		effect = { 
+		effect = {
 			change_primary_culture = marcio_clades
 			custom_tooltip = BROK_LEG_TT_13
 			hidden_effect = {
 				every_owned_province = {
 					if = {
-						limit = { religion = marcionist }
+						limit = { religion = marcionist } 
 						change_culture = marcio_clades
 					}
 				}
 			}
-		} 
+		}
 	}
 }
 bl0_3_bl3_slot = {
@@ -519,32 +563,39 @@ bl0_3_bl3_slot = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { has_country_flag = marcionism_not_base_flag tag = BL3 } 
+	potential = {
+		has_country_flag = marcionism_not_base_flag
+		tag = BL3
+	}
 
 	blo_marxionistism_bl3 = {
 		icon = mission_alliances
 		position = 11
-		required_missions = {blo_city_of_god } 
-		provinces_to_highlight = { NOT = {religion = marcionist} is_neighbor_of = ROOT  } 
-		trigger = { 
+		required_missions = { blo_city_of_god } 
+		provinces_to_highlight = {
+			NOT = { religion = marcionist } 
+			is_neighbor_of = ROOT
+		}
+
+		trigger = {
 			num_of_owned_provinces_with = {
 				value = 300
 				religion = marcionist
 			}
-		} 
+		}
 
-		effect = { 
+		effect = {
 			change_primary_culture = marcio_sanguine
 			custom_tooltip = BROK_LEG_TT_13
 			hidden_effect = {
 				every_owned_province = {
 					if = {
-						limit = { religion = marcionist }
+						limit = { religion = marcionist } 
 						change_culture = marcio_sanguine
 					}
 				}
 			}
-		} 
+		}
 	}
 }
 bl0_3_bl4_slot = {
@@ -552,32 +603,39 @@ bl0_3_bl4_slot = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { has_country_flag = marcionism_not_base_flag tag = BL4 } 
+	potential = {
+		has_country_flag = marcionism_not_base_flag
+		tag = BL4
+	}
 
 	blo_marxionistism_bl4 = {
 		icon = mission_alliances
 		position = 11
-		required_missions = {blo_city_of_god } 
-		provinces_to_highlight = { NOT = {religion = marcionist} is_neighbor_of = ROOT  } 
-		trigger = { 
+		required_missions = { blo_city_of_god } 
+		provinces_to_highlight = {
+			NOT = { religion = marcionist } 
+			is_neighbor_of = ROOT
+		}
+
+		trigger = {
 			num_of_owned_provinces_with = {
 				value = 300
 				religion = marcionist
 			}
-		} 
+		}
 
-		effect = { 
+		effect = {
 			change_primary_culture = marcio_solaria
 			custom_tooltip = BROK_LEG_TT_13
 			hidden_effect = {
 				every_owned_province = {
 					if = {
-						limit = { religion = marcionist }
+						limit = { religion = marcionist } 
 						change_culture = marcio_solaria
 					}
 				}
 			}
-		} 
+		}
 	}
 }
 bl0_3_bl5_slot = {
@@ -585,32 +643,39 @@ bl0_3_bl5_slot = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { has_country_flag = marcionism_not_base_flag tag = BL5 } 
+	potential = {
+		has_country_flag = marcionism_not_base_flag
+		tag = BL5
+	}
 
 	blo_marxionistism_bl5 = {
-		icon = mission_alliances
+		icon = spread_piety
 		position = 11
-		required_missions = {blo_city_of_god } 
-		provinces_to_highlight = { NOT = {religion = marcionist} is_neighbor_of = ROOT  } 
-		trigger = { 
+		required_missions = { blo_city_of_god } 
+		provinces_to_highlight = {
+			NOT = { religion = marcionist } 
+			is_neighbor_of = ROOT
+		}
+
+		trigger = {
 			num_of_owned_provinces_with = {
 				value = 300
 				religion = marcionist
 			}
-		} 
+		}
 
-		effect = { 
+		effect = {
 			change_primary_culture = marcio_pauline
 			custom_tooltip = BROK_LEG_TT_13
 			hidden_effect = {
 				every_owned_province = {
 					if = {
-						limit = { religion = marcionist }
+						limit = { religion = marcionist } 
 						change_culture = marcio_pauline
 					}
 				}
 			}
-		} 
+		}
 	}
 }
 bl0_4_slot = {
@@ -621,9 +686,9 @@ bl0_4_slot = {
 	potential = { mission_check_marcio = yes } 
 
 	blo_rhoman_pax = {
-		icon = mission_alliances
+		icon = mission_mosque
 		position = 2
-		provinces_to_highlight = { is_capital_of = RU0  } 
+		provinces_to_highlight = { is_capital_of = RU0 } 
 
 		trigger = {
 			RU0 = {
@@ -632,44 +697,44 @@ bl0_4_slot = {
 					value = 30
 				}
 			}
-		} 
+		}
 
 		effect = {
 			if = {
-				limit = {
-					tag = BL0
-				}
+				limit = { tag = BL0 } 
 				add_spy_network_in = {
 					who = RU0
 					value = -30
 				}
 				RU0 = {
 					add_country_modifier = {
-						name = blo_pax_rhomana
-						duration = 10950
-					}
-				}
-			}else = {
-				add_spy_network_in = {
-					who = RU0
-					value = -30
-				}
-				RU0 = {
-					add_country_modifier = {
-						name = blo_break_rhomania
+						name = "blo_pax_rhomana"
 						duration = 10950
 					}
 				}
 			}
-		} 
+			else = {
+				add_spy_network_in = {
+					who = RU0
+					value = -30
+				}
+				RU0 = {
+					add_country_modifier = {
+						name = "blo_break_rhomania"
+						duration = 10950
+					}
+				}
+			}
+		}
 	}
 
 	blo_revenge = {
-		icon = mission_alliances
+		icon = mission_egyptian_mamluk_soldier
 		position = 5
-		required_missions = {blo_new_nation} 
+		required_missions = { blo_new_nation } 
 		provinces_to_highlight = { is_capital_of = RU0 } 
-		trigger = { 
+
+		trigger = {
 			OR = {
 				army_strength = {
 					who = RU0
@@ -677,24 +742,24 @@ bl0_4_slot = {
 				}
 				army_size = 50
 			}
-		} 
+		}
 
-		effect = { 
-			add_ruler_modifier = {
-				name = revenge_of_the_4th
-			}
-			egypt_region = {
-				add_permanent_claim = ROOT
-			}
-		} 
+		effect = {
+			add_ruler_modifier = { name = "revenge_of_the_4th" } 
+			egypt_region = { add_permanent_claim = ROOT } 
+		}
 	}
 
 	blo_egyptian_red_nile = {
-		icon = mission_alliances
+		icon = mission_rb_seize_alexandria
 		position = 6
-		required_missions = {blo_revenge} 
-		provinces_to_highlight = { region = egypt_region NOT = {religion = ROOT} } 
-		trigger = { 
+		required_missions = { blo_revenge } 
+		provinces_to_highlight = {
+			region = egypt_region
+			NOT = { religion = ROOT } 
+		}
+
+		trigger = {
 			358 = {
 				owned_by = ROOT
 				religion = ROOT
@@ -705,12 +770,12 @@ bl0_4_slot = {
 			}
 			num_of_owned_provinces_with = {
 				value = 25
-				region  = egypt_region
+				region = egypt_region
 				religion = ROOT
 			}
-		} 
+		}
 
-		effect = { 
+		effect = {
 			361 = {
 				add_great_project_tier = {
 					type = pyramid_of_cheops
@@ -723,10 +788,9 @@ bl0_4_slot = {
 					tier = 1
 				}
 			}
-		} 
+		}
 	}
 }
-
 bl0_4_plus_slot = {
 	slot = 4
 	generic = no
@@ -735,11 +799,12 @@ bl0_4_plus_slot = {
 	potential = { has_country_flag = marcionism_not_base_flag } 
 
 	blo_anatolia = {
-		icon = mission_alliances
+		icon = mission_the_third_rome
 		position = 9
-		required_missions = {blo_city_of_god } 
-		provinces_to_highlight = {region = anatolia_region } 
-		trigger = { 
+		required_missions = { blo_city_of_god } 
+		provinces_to_highlight = { region = anatolia_region } 
+
+		trigger = {
 			calc_true_if = {
 				amount = 30
 				all_province = {
@@ -747,48 +812,56 @@ bl0_4_plus_slot = {
 						region = anatolia_region
 						region = mashriq_region
 					}
-					religion = marcionist 
+					religion = marcionist
 				}
 			}
-		} 
+		}
 
-		effect = { 
+		effect = {
 			if = {
-				limit = { tag = BL3 }
+				limit = { tag = BL3 } 
 				set_country_flag = bl3_open_walls
 				custom_tooltip = DE_DE_TT_4a
 				add_country_modifier = {
-					name = bl3_spymancy
+					name = "bl3_spymancy"
 					duration = -1
 				}
 			}
 			if = {
-				limit = { tag = BL4 }
+				limit = { tag = BL4 } 
 				set_country_flag = de_de_more_cultures_2
 				custom_tooltip = DE_DE_TT_4b
 				add_country_modifier = {
-					name = bl4_meritocracy
+					name = "bl4_meritocracy"
 					duration = -1
 				}
 			}
 			if = {
-				limit = { OR = { tag = BL2 tag = BL5 }}
+				limit = {
+					OR = {
+						tag = BL2
+						tag = BL5
+					}
+				}
 				add_country_modifier = {
-					name = bl2_missions
+					name = "bl2_missions"
 					duration = -1
 				}
 			}
-			thrace_area = {
-				add_permanent_claim = ROOT
-			}
-		} 
+			thrace_area = { add_permanent_claim = ROOT } 
+		}
 	}
+
 	blo_anatolia_conquered = {
-		icon = mission_alliances
+		icon = mission_fall_of_third_rome
 		position = 10
-		required_missions = {blo_anatolia } 
-		provinces_to_highlight = {region = anatolia_region NOT = {owned_by = ROOT } }
-		trigger = { 
+		required_missions = { blo_anatolia } 
+		provinces_to_highlight = {
+			region = anatolia_region
+			NOT = { owned_by = ROOT } 
+		}
+
+		trigger = {
 			anatolia_region = {
 				type = all
 				OR = {
@@ -796,9 +869,9 @@ bl0_4_plus_slot = {
 					religion = marcionist
 				}
 			}
-		} 
+		}
 
-		effect = { 
+		effect = {
 			set_government_rank = 3
 			custom_tooltip = BROK_LEG_TT_12
 			hidden_effect = {
@@ -820,9 +893,7 @@ bl0_4_plus_slot = {
 				}
 				every_owned_province = {
 					if = {
-						limit = {
-							religion = ROOT
-						}
+						limit = { religion = ROOT } 
 						owner = {
 							change_variable = {
 								which = adm_gained_blo
@@ -840,24 +911,22 @@ bl0_4_plus_slot = {
 							add_dip_power = 5
 							add_mil_power = 5
 						}
-					}else = {
+					}
+					else = {
 						owner = {
 							change_variable = {
 								which = dede_gained_blo
 								value = 1
 							}
-							add_demiurgic_defiance = {amount = 1}
+							add_demiurgic_defiance = { amount = 1 } 
 						}
 					}
 				}
 			}
-			country_event = {
-				id = legion.19
-			}
-		} 
+			country_event = { id = legion.19 } 
+		}
 	}
 }
-
 bl0_5_slot = {
 	slot = 5
 	generic = no
@@ -866,51 +935,52 @@ bl0_5_slot = {
 	potential = { mission_check_marcio = yes } 
 
 	blo_starvation = {
-		icon = mission_alliances
+		icon = mission_rb_import_potatoes
 		position = 1
+		provinces_to_highlight = {  } 
 
-		trigger = { 
-			grown_by_development = 5
-		} 
+		trigger = { grown_by_development = 5 } 
 
 		effect = {
 			remove_country_modifier = starving_army_leg
 			add_country_modifier = {
-				name = starving_army_leg_less
+				name = "starving_army_leg_less"
 				duration = 3650
 			}
-		} 
+		}
 	}
 
 	blo_no_longer_hungry = {
-		icon = mission_alliances
+		icon = mission_plc_lifetime_of_war
 		position = 2
 		required_missions = { blo_starvation } 
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			OR = {
-				NOT = {
-					has_country_modifier = starving_army_leg_less
-				}
+				NOT = { has_country_modifier = starving_army_leg_less } 
 				grown_by_development = 25
 			}
-		} 
+		}
 
 		effect = {
 			remove_country_modifier = starving_army_leg_less
-			add_army_tradition_or_mil_power = {amount = 20}
-		} 
+			add_army_tradition_or_mil_power = { amount = 20 } 
+		}
 	}
 
 	blo_stronger_and_stronger = {
-		icon = mission_alliances
+		icon = mission_most_holy_synod
 		position = 3
 		required_missions = { blo_no_longer_hungry } 
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			OR = {
 				grown_by_development = 50
 				army_tradition = 50
 			}
-		} 
+		}
 
 		effect = {
 			add_yearly_manpower = 1.5
@@ -932,25 +1002,27 @@ bl0_5_slot = {
 					}
 				"
 			}
-		} 
+		}
 	}
 
 	blo_avengers = {
-		icon = mission_alliances
+		icon = mission_conquer_alexandria
 		position = 6
-		required_missions = {blo_revenge} 
-		provinces_to_highlight = { region = egypt_region NOT = {owned_by = ROOT} } 
-		trigger = { 
+		required_missions = { blo_revenge } 
+		provinces_to_highlight = {
+			region = egypt_region
+			NOT = { owned_by = ROOT } 
+		}
+
+		trigger = {
 			egypt_region = {
-				type = all 
+				type = all
 				owned_by = ROOT
 			}
-		} 
+		}
 
-		effect = { 
-			near_east_superregion = {
-				add_permanent_claim = ROOT
-			}
+		effect = {
+			near_east_superregion = { add_permanent_claim = ROOT } 
 			add_stability_or_adm_power = yes
 			complex_dynamic_effect = {
 				first_custom_tooltip = BROK_LEG_TT_5
@@ -962,11 +1034,9 @@ bl0_5_slot = {
 					}
 				"
 			}
-		} 
+		}
 	}
 }
-
-
 bl0_5_plus_slot = {
 	slot = 5
 	generic = no
@@ -975,32 +1045,34 @@ bl0_5_plus_slot = {
 	potential = { has_country_flag = marcionism_not_base_flag } 
 
 	blo_arabia = {
-		icon = mission_alliances
+		icon = mission_arabian_fort
 		position = 9
-		required_missions = {blo_city_of_god } 
-		provinces_to_highlight = {region = arabia_region } 
-		trigger = { 
+		required_missions = { blo_city_of_god } 
+		provinces_to_highlight = { region = arabia_region } 
+
+		trigger = {
 			calc_true_if = {
 				amount = 20
 				all_province = {
 					region = arabia_region
-					religion = marcionist 
+					religion = marcionist
 				}
 			}
-		} 
+		}
 
-		effect = { 
-			country_event = {
-				id = legion.20
-			}
-		} 
+		effect = { country_event = { id = legion.20 }  } 
 	}
+
 	blo_arabia_conquered = {
-		icon = mission_alliances
+		icon = mission_into_arabia
 		position = 10
-		required_missions = {blo_arabia } 
-		provinces_to_highlight = {region = arabia_region NOT = {owned_by = ROOT } }
-		trigger = { 
+		required_missions = { blo_arabia } 
+		provinces_to_highlight = {
+			region = arabia_region
+			NOT = { owned_by = ROOT } 
+		}
+
+		trigger = {
 			arabia_region = {
 				type = all
 				OR = {
@@ -1008,11 +1080,11 @@ bl0_5_plus_slot = {
 					religion = marcionist
 				}
 			}
-		} 
+		}
 
-		effect = { 
+		effect = {
 			set_government_rank = 3
-			add_demiurgic_defiance = {amount = 100}
-		} 
+			add_demiurgic_defiance = { amount = 100 } 
+		}
 	}
 }
