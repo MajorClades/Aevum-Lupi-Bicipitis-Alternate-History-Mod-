@@ -1,0 +1,727 @@
+#######################
+# CEF Colombia Flavor #
+#######################
+
+namespace = CEF_flavor_col
+
+#Southern Expedition
+country_event = {
+	id = CEF_flavor_col.1
+	title = "CEF_flavor_col.1.title"
+	desc = "CEF_flavor_col.1.desc"
+	picture = EXPLORERS_eventPicture
+	
+	is_triggered_only = yes
+	
+	#Fascinating!
+	option = {
+		name = "CEF_flavor_col.1.a"
+		ai_chance = {
+			factor = 100
+		}
+		popayan_area = {
+			discover_country = ROOT
+			add_permanent_claim = ROOT
+		}
+		coquivacoa_area = {
+			discover_country = ROOT
+			add_permanent_claim = ROOT
+		}
+		cordillera_occidental_area = {
+			discover_country = ROOT
+			add_permanent_claim = ROOT
+		}
+		bogota_area = {
+			discover_country = ROOT
+			add_permanent_claim = ROOT
+		}
+	}
+}
+
+#Western Expedition
+country_event = {
+	id = CEF_flavor_col.2
+	title = "CEF_flavor_col.2.title"
+	desc = "CEF_flavor_col.2.desc"
+	picture = EXPLORERS_eventPicture
+	
+	is_triggered_only = yes
+	
+	#Fascinating!
+	option = {
+		name = "CEF_flavor_col.2.a"
+		ai_chance = {
+			factor = 100
+		}
+		panama_area = {
+			discover_country = ROOT
+			add_permanent_claim = ROOT
+		}
+		quito_area = {
+			discover_country = ROOT
+			add_permanent_claim = ROOT
+		}
+	}
+}
+
+#Eastern Expedition
+country_event = {
+	id = CEF_flavor_col.3
+	title = "CEF_flavor_col.3.title"
+	desc = "CEF_flavor_col.3.desc"
+	picture = EXPLORERS_eventPicture
+	
+	is_triggered_only = yes
+	
+	#Fascinating!
+	option = {
+		name = "CEF_flavor_col.3.a"
+		ai_chance = {
+			factor = 100
+		}
+		maracaibo_area = {
+			discover_country = ROOT
+			add_permanent_claim = ROOT
+		}
+		venezuela_area = {
+			discover_country = ROOT
+			add_permanent_claim = ROOT
+		}
+		guyana_area = {
+			discover_country = ROOT
+			add_permanent_claim = ROOT
+		}
+		suriname_area = {
+			discover_country = ROOT
+			add_permanent_claim = ROOT
+		}
+	}
+}
+
+#Viceroyalty of New Granada
+country_event = {
+	id = CEF_flavor_col.4
+	title = "CEF_flavor_col.4.title"
+	desc = "CEF_flavor_col.4.desc"
+	picture = CITY_VIEW_eventPicture
+	
+	is_triggered_only = yes
+	
+	#And Bogotá shall be our capital!
+	option = {
+		name = "CEF_flavor_col.4.a"
+		trigger = { owns_core_province = 825 }
+		ai_chance = {
+			factor = 100
+		}
+		set_capital = 825
+		825 = {
+			add_base_tax = 1
+			add_base_production = 1
+			add_base_manpower = 1
+		}
+	}
+	#And Caracas shall be our capital!
+	option = {
+		name = "CEF_flavor_col.4.b"
+		trigger = { owns_core_province = 831 }
+		ai_chance = {
+			factor = 100
+			modifier = {
+				factor = 0
+				owns_core_province = 825
+			}
+		}
+		set_capital = 831
+		831 = {
+			add_base_tax = 1
+			add_base_production = 1
+			add_base_manpower = 1
+		}
+	}
+	#And Quito shall be our capital!
+	option = {
+		name = "CEF_flavor_col.4.c"
+		trigger = { owns_core_province = 820 }
+		ai_chance = {
+			factor = 100
+			modifier = {
+				factor = 0
+				owns_core_province = 825
+			}
+		}
+		set_capital = 820
+		820 = {
+			add_base_tax = 1
+			add_base_production = 1
+			add_base_manpower = 1
+		}
+	}
+	#And Demerara shall be our capital!
+	option = {
+		name = "CEF_flavor_col.4.d"
+		trigger = { owns_core_province = 744 }
+		ai_chance = {
+			factor = 100
+			modifier = {
+				factor = 0
+				owns_core_province = 825
+			}
+		}
+		set_capital = 744
+		744 = {
+			add_base_tax = 1
+			add_base_production = 1
+			add_base_manpower = 1
+		}
+	}
+	#And Panama shall be our capital!
+	option = {
+		name = "CEF_flavor_col.4.e"
+		trigger = { owns_core_province = 835 }
+		ai_chance = {
+			factor = 100
+			modifier = {
+				factor = 0
+				owns_core_province = 825
+			}
+		}
+		set_capital = 835
+		835 = {
+			add_base_tax = 1
+			add_base_production = 1
+			add_base_manpower = 1
+		}
+	}
+}
+
+#Legitimacy Questioned
+country_event = {
+	id = CEF_flavor_col.5
+	title = "CEF_flavor_col.5.title"
+	desc = "CEF_flavor_col.5.desc"
+	picture = BAD_WITH_MONARCH_eventPicture
+	
+	is_triggered_only = yes
+	
+	#These colonies need to learn their place!
+	option = {
+		name = "CEF_flavor_col.5.a"
+		ai_chance = {
+			factor = 100
+		}
+		add_legitimacy = -25
+		add_republican_tradition = -10
+		add_devotion = -25
+		add_horde_unity = -25
+		add_meritocracy = -25
+		every_subject_country = {
+			limit = { is_colonial_nation = yes }
+			add_liberty_desire = 25
+		}
+	}
+}
+
+#Panama Independence Movement
+#country_event = {
+#	id = CEF_flavor_col.6
+#	title = "CEF_flavor_col.6.title"
+#	desc = "CEF_flavor_col.6.desc"
+#	picture = BAD_WITH_MONARCH_eventPicture
+#	
+#	fire_only_once = yes
+#	
+#	trigger = {
+#		capital_scope = {
+#			colonial_region = colonial_colombia
+#		}
+#		is_colonial_nation = no
+#		panama_area = {
+#			type = all
+#			owned_by = ROOT
+#		}
+#	}
+	
+#	mean_time_to_happen = {
+#		years = 20
+#		modifier = {
+#			factor = 0.5
+#			NOT = { stability = 1 }
+#		}
+#	}
+	
+#	immediate = {
+#		hidden_effect = {
+#			panama_area = {
+#				add_core = PNM
+#			}
+#		}
+#	}
+	
+#	after = {
+#		hidden_effect = {
+#			PNM = {
+#				change_religion = ROOT
+#				change_primary_culture = ROOT
+#				add_government_reform = CEF_young_republic_reform
+#			}
+#		}
+#	}
+	
+	#Give them some autonomy.
+#	option = {
+#		name = "CEF_flavor_col.6.a"
+#		ai_chance = {
+#			factor = 100
+#		}
+#		panama_area = {
+#			tooltip = { add_core = PNM }
+#			add_local_autonomy = 25
+#		}
+#	}
+#	#Crush them.
+#	option = {
+#		name = "CEF_flavor_col.6.b"
+#		ai_chance = {
+#			factor = 100
+#		}
+#		panama_area = {
+#			tooltip = { add_core = PNM }
+#		}
+#		835 = {
+#			spawn_rebels = {
+#				type = nationalist_rebels
+#				size = 1
+#				friend = PNM
+#			}
+#		}
+#	}
+#}
+
+#Construction Commences in Panama
+country_event = {
+	id = CEF_flavor_col.7
+	title = "CEF_flavor_col.7.title"
+	desc = "CEF_flavor_col.7.desc"
+	picture = BAD_WITH_MONARCH_eventPicture
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	after = {
+		835 = {
+			add_construction_progress = 1
+		}
+	}
+	
+	#A marvel of man's unlimited capabilities!
+	option = {
+		name = "CEF_flavor_col.7.a"
+		ai_chance = {
+			factor = 100
+		}
+		hidden_effect = {
+			add_treasury = 30000
+		}
+		835 = {
+			add_great_project_tier = {
+				type = panama_canal
+				tier = 3
+			}
+			add_great_project = {
+				type = panama_canal
+			}
+		}
+		hidden_effect = {
+			add_treasury = -30000
+		}
+	}
+}
+
+#Gran Colombia Centralized
+country_event = {
+	id = CEF_flavor_col.8
+	title = "CEF_flavor_col.8.title"
+	desc = "CEF_flavor_col.8.desc"
+	picture = GOOD_WITH_MONARCH_eventPicture
+	
+	#fire_only_once = yes
+	is_triggered_only = yes
+	
+	#Let the entire system of government be strengthened, be permanent and incapable of decay.
+	option = {
+		name = "CEF_flavor_col.8.a"
+		ai_chance = {
+			factor = 100
+		}
+		add_government_reform = CEF_centralized_republic_reform
+	}
+}
+
+#Gran Colombia Shattered
+country_event = {
+	id = CEF_flavor_col.9
+	title = "CEF_flavor_col.9.title"
+	desc = "CEF_flavor_col.9.desc"
+	picture = COUNTRY_COLLAPSE_eventPicture
+	
+	#fire_only_once = yes
+	is_triggered_only = yes
+	
+	#A state too expensive in itself, or by virtue of its dependencies, ultimately falls into decay.
+	option = {
+		name = "CEF_flavor_col.9.a"
+		ai_chance = {
+			factor = 100
+		}
+		restore_country_name = yes
+		hidden_effect = {
+			every_subject_country = {
+				every_owned_province = {
+					limit = { is_core = ROOT }
+					remove_core = ROOT
+				}
+			}
+		}
+		release_all_subjects = yes
+		set_global_flag = CEF_gran_colombia_shattered_flag
+		remove_government_reform = CEF_centralizing_republic_reform
+		add_government_reform = CEF_young_republic_reform
+	}
+}
+
+#Simón Bolívar
+country_event = {
+	id = CEF_flavor_col.10
+	title = "CEF_flavor_col.10.title"
+	desc = "CEF_flavor_col.10.desc"
+	picture = GOOD_WITH_MONARCH_eventPicture
+	
+	fire_only_once = yes
+	
+	trigger = {
+		is_dynamic_tag = yes
+		capital_scope = {
+			colonial_region = colonial_karibba
+		}
+		is_in_war = {
+			attacker_leader = ROOT
+			casus_belli = cb_colonial_independence_war
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 3
+	}
+	
+	#Our President!
+	option = {
+		name = "CEF_flavor_col.10.a"
+		ai_chance = {
+			factor = 100
+		}
+		define_ruler = {
+			name = "Simon"
+			dynasty = "Bolivar"
+			adm = 4
+			dip = 5
+			mil = 6
+			age = 30
+			claim = 100
+		}
+		#add_ruler_personality = CEF_libertador_personality
+		define_ruler_to_general = {
+			fire = 4
+			shock = 5
+			manuever = 3
+			siege = 2
+		}
+		set_country_flag = CEF_had_ruler_simon_bolivar_flag
+		set_ruler_flag = CEF_is_simon_bolivar_flag
+	}
+}
+
+#The Death of Simón Bolívar
+country_event = {
+	id = CEF_flavor_col.11
+	title = "CEF_flavor_col.11.title"
+	desc = "CEF_flavor_col.11.desc"
+	picture = DEATH_OF_HEIR_eventPicture
+	
+	fire_only_once = yes
+	
+	trigger = {
+		has_country_flag = CEF_had_ruler_simon_bolivar_flag
+		NOT = { has_ruler_flag = CEF_is_simon_bolivar_flag }
+	}
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	#The whole country mourns.
+	option = {
+		name = "CEF_flavor_col.11.a"
+		ai_chance = {
+			factor = 100
+		}
+		add_stability = -1
+	}
+}
+
+#Region Demands Autonomy
+country_event = {
+	id = CEF_flavor_col.12
+	title = "CEF_flavor_col.12.title"
+	desc = "CEF_flavor_col.12.desc"
+	picture = OVEREXTENSION_eventPicture
+	
+	trigger = {
+		has_reform = CEF_centralizing_republic_reform
+		OR = {
+			AND = {
+				NOT = { exists = COL }
+				any_owned_province = {
+					OR = {
+						area = popayan_area
+						area = colombian_amazonas_area
+						area = cordillera_occidental_area
+						area = bogota_area
+						area = coquivacoa_area
+						area = western_llanos
+					}
+				}
+				NOT = { has_country_flag = CEF_refused_COL_autonomy_flag }
+			}
+			AND = {
+				NOT = { exists = VNZ }
+				any_owned_province = {
+					OR = {
+						area = maracaibo_area
+						area = central_llanos_area
+						area = venezuela_area
+						area = eastern_llanos
+						province_id = 502
+						province_id = 2803
+						province_id = 4617
+						province_id = 2811
+						province_id = 742
+						province_id = 2804
+					}
+				}
+				NOT = { has_country_flag = CEF_refused_VNZ_autonomy_flag }
+			}
+			AND = {
+				NOT = { exists = GYA }
+				any_owned_province = {
+					OR = {
+						area = suriname_area
+						province_id = 743
+						province_id = 744
+						province_id = 2931
+					}
+				}
+				NOT = { has_country_flag = CEF_refused_GYA_autonomy_flag }
+			}
+		}
+	}
+	
+	immediate = {
+		hidden_effect = {
+			random_list = {
+				1 = {
+					trigger = {
+						NOT = { exists = COL }
+						any_owned_province = {
+							OR = {
+								area = popayan_area
+								area = colombian_amazonas_area
+								area = cordillera_occidental_area
+								area = bogota_area
+								area = coquivacoa_area
+								area = western_llanos
+							}
+						}
+						NOT = { has_country_flag = CEF_refused_COL_autonomy_flag }
+					}
+					set_country_flag = CEF_COL_autonomy_questioned_flag
+				}
+				1 = {
+					trigger = {
+						NOT = { exists = VNZ }
+						any_owned_province = {
+							OR = {
+								area = maracaibo_area
+								area = central_llanos_area
+								area = venezuela_area
+								area = eastern_llanos
+								province_id = 502
+								province_id = 2803
+								province_id = 4617
+								province_id = 2811
+								province_id = 742
+								province_id = 2804
+							}
+						}
+						NOT = { has_country_flag = CEF_refused_VNZ_autonomy_flag }
+					}
+					set_country_flag = CEF_VNZ_autonomy_questioned_flag
+				}
+				1 = {
+					trigger = {
+						NOT = { exists = GYA }
+						any_owned_province = {
+							OR = {
+								area = suriname_area
+								province_id = 743
+								province_id = 744
+								province_id = 2931
+							}
+						}
+						NOT = { has_country_flag = CEF_refused_GYA_autonomy_flag }
+					}
+					set_country_flag = CEF_GYA_autonomy_questioned_flag
+				}
+			}
+		}
+	}
+	
+	mean_time_to_happen = {
+		years = 1
+	}
+	
+	#Let them self govern for a while.
+	option = {
+		name = "CEF_flavor_col.12.a"
+		ai_chance = {
+			factor = 100
+		}
+		if = {
+			limit = { has_country_flag = CEF_COL_autonomy_questioned_flag }
+			every_owned_province = {
+				limit = {
+					OR = {
+						area = popayan_area
+						area = colombian_amazonas_area
+						area = cordillera_occidental_area
+						area = bogota_area
+						area = coquivacoa_area
+						area = western_llanos
+					}
+				}
+				add_core = COL
+			}
+			create_vassal = COL
+			COL = { add_liberty_desire = -25 }
+			hidden_effect = {
+				COL = {
+					change_religion = ROOT
+					change_primary_culture = ROOT
+					add_government_reform = CEF_young_republic_reform
+					define_ruler = {
+						name = "Francisco de Paula"
+						dynasty = "Santander"
+						adm = 5
+						dip = 4
+						mil = 3
+					}
+					every_owned_province = { add_core = ROOT }
+				}
+			}
+			clr_country_flag = CEF_COL_autonomy_questioned_flag
+		}
+		if = {
+			limit = { has_country_flag = CEF_VNZ_autonomy_questioned_flag }
+			every_owned_province = {
+				limit = {
+					OR = {
+						area = maracaibo_area
+						area = central_llanos_area
+						area = venezuela_area
+						area = eastern_llanos
+						province_id = 502
+						province_id = 2803
+						province_id = 4617
+						province_id = 2811
+						province_id = 742
+						province_id = 2804
+					}
+				}
+				add_core = VNZ
+			}
+			create_vassal = VNZ
+			VNZ = { add_liberty_desire = -25 }
+			hidden_effect = {
+				VNZ = {
+					change_religion = ROOT
+					change_primary_culture = ROOT
+					add_government_reform = CEF_young_republic_reform
+					define_ruler = {
+						name = "Jose Antonio"
+						dynasty = "Paez"
+						adm = 3
+						dip = 2
+						mil = 5
+					}
+					every_owned_province = { add_core = ROOT }
+				}
+			}
+			clr_country_flag = CEF_VNZ_autonomy_questioned_flag
+		}
+		if = {
+			limit = { has_country_flag = CEF_GYA_autonomy_questioned_flag }
+			every_owned_province = {
+				limit = {
+					OR = {
+						area = suriname_area
+						province_id = 743
+						province_id = 744
+						province_id = 2931
+					}
+				}
+				add_core = GYA
+			}
+			create_vassal = GYA
+			GYA = { add_liberty_desire = -25 }
+			hidden_effect = {
+				GYA = {
+					change_religion = ROOT
+					change_primary_culture = ROOT
+					add_government_reform = CEF_young_republic_reform
+					define_ruler = {
+						#Nothing.
+					}
+					every_owned_province = { add_core = ROOT }
+				}
+			}
+			clr_country_flag = CEF_GYA_autonomy_questioned_flag
+		}
+	}
+	#No, we will manage them all from $CAPITAL$.
+	option = {
+		name = "CEF_flavor_col.12.b"
+		ai_chance = {
+			factor = 0
+		}
+		add_government_power = {
+			mechanic_type = CEF_centralization_mechanic
+			power_type = CEF_centralization_power
+			value = -10
+		}
+		if = {
+			limit = { has_country_flag = CEF_COL_autonomy_questioned_flag }
+			set_country_flag = CEF_refused_COL_autonomy_flag
+			clr_country_flag = CEF_COL_autonomy_questioned_flag
+		}
+		if = {
+			limit = { has_country_flag = CEF_VNZ_autonomy_questioned_flag }
+			set_country_flag = CEF_refused_VNZ_autonomy_flag
+			clr_country_flag = CEF_VNZ_autonomy_questioned_flag
+		}
+		if = {
+			limit = { has_country_flag = CEF_GYA_autonomy_questioned_flag }
+			set_country_flag = CEF_refused_GYA_autonomy_flag
+			clr_country_flag = CEF_GYA_autonomy_questioned_flag
+		}
+	}
+}
