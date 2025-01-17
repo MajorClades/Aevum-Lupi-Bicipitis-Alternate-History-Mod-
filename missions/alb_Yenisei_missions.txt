@@ -1,0 +1,327 @@
+YNS_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = YNS } 
+
+	yen_temples = {
+		icon = mission_colonial
+		position = 1
+		provinces_to_highlight = {	owned_by = ROOT has_tax_building_trigger = yes	}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				has_tax_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = yen_missionary
+				duration = 10950
+			}
+		}
+	}
+
+}
+YNS_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = YNS } 
+
+	yen_more_land = {
+		icon = settle_north_america
+		position = 2
+		required_missions = { yen_warhost yen_temples} 
+		provinces_to_highlight = { OR = {owned_by = SE0 area = kazakhstan_area}}
+
+		trigger = {
+			kazakhstan_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			OR = {
+				SE0 = {
+					exists = no
+				}
+				SE0 = {
+					is_subject_of = ROOT
+				}
+			}
+		}
+
+		effect = {
+			
+		}
+	}
+}
+
+YNS_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = YNS } 
+
+	yen_warhost = {
+		icon = mission_colonial
+		position = 1
+
+		trigger = {
+			army_size_percentage = 0.9
+		}
+
+		effect = {
+			custom_tooltip = claim_neighbor_province
+			hidden_effect = {
+				every_owned_province = {
+					every_neighbor_province = {
+						limit = {
+							NOT = { owned_by = ROOT }
+							NOT = { is_permanent_claim = ROOT	}
+							NOT = { is_core = ROOT	}
+						}
+						add_permanent_claim = ROOT
+					}
+				}
+			}
+		}
+		ai_weight = {
+			factor = 10 # AI will go (up to) this many percent above army budget in order to reach the army size needed
+		}
+	}
+
+	yen_war_goals = {
+		icon = settle_north_america
+		position = 2
+		required_missions = { yen_warhost } 
+		provinces_to_highlight = {is_neighbor_of = ROOT}
+
+		trigger = {
+			num_of_cavalry = 6
+			grown_by_states = 2
+		}
+
+		effect = {
+			add_mil_power = 100
+			add_country_modifier = {
+				name = yen_horse_lord
+				duration = 10950
+			}
+		}
+	}
+}
+
+YNS_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = YNS } 
+
+	yen_wealth_captured = {
+		icon = mission_colonial
+		position = 2
+		required_missions = { yen_warhost } 
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = RAZE_TT_1
+				num_of_provinces_razed = {amount = 5}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = razed_treasure
+				duration = 10950
+			}
+		}
+	}
+
+	yen_silk_road = {
+		icon = mission_colonial
+		position = 3
+		required_missions = { yen_wealth_captured } 
+		provinces_to_highlight = { has_province_modifier = alb_northern_silk_road_basic }
+
+		trigger = {
+			OR = {
+				custom_trigger_tooltip = {
+					tooltip = YEN_CT_1
+					has_global_flag = broken_northern_silk_road_flag
+				}
+				num_of_owned_provinces_with = {
+					value = 10
+					has_province_modifier = alb_northern_silk_road_basic 
+					is_core = ROOT
+				}
+			}
+		}
+
+		effect = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = YEN_TT_1a
+				first_limit = "
+					has_global_flag = broken_northern_silk_road_flag
+				"
+				first_effect = "
+					add_treasury = 2000
+					add_horde_unity = 50
+					add_estate_loyalty = {
+						estate = estate_nomadic_tribes
+						loyalty = 15
+					}
+					set_country_flag = yenisei_broke_road_flag
+					custom_tooltip = YEN_TT_1b
+				"
+				second_limit = "
+					num_of_owned_provinces_with = {
+						value = 10
+						has_province_modifier = alb_northern_silk_road_basic 
+						is_core = ROOT
+					}
+				"
+				second_effect = "
+					add_country_modifier = {
+						name = yen_golden_hands
+						duration = 10950
+					}
+				"
+			}
+		}
+	}
+}
+
+YNS_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = YNS } 
+
+	yen_tribal_call = {
+		icon = mission_colonial
+		position = 1
+
+		trigger = {
+			treasury = 300
+			has_dip_advisor_2 = yes
+		}
+
+		effect = {
+			add_treasury = -300
+			1060 = {
+				if = {
+					limit = {
+						is_empty = yes
+					}
+					cede_province = ROOT
+				}else = {
+					add_core = ROOT
+				}
+			}
+			1063 = {
+				if = {
+					limit = {
+						is_empty = yes
+					}
+					cede_province = ROOT
+				}else = {
+					add_core = ROOT
+				}
+			}
+		}
+	}
+
+	yen_home_advantage = {
+		icon = mission_colonial
+		position = 2
+		required_missions = { yen_tribal_call } 
+		provinces_to_highlight = { OR = {province_id = 1060 province_id = 1063}	}
+
+		trigger = {
+			treasury = 300
+			1060 = {
+				is_core = ROOT
+			}
+			1063 = {
+				is_core = ROOT
+			}
+		}
+
+		effect = {
+			add_treasury = -300
+			2442 = {
+				if = {
+					limit = {
+						is_empty = yes
+					}
+					cede_province = ROOT
+				}else = {
+					add_core = ROOT
+				}
+			}
+			2443 = {
+				if = {
+					limit = {
+						is_empty = yes
+					}
+					cede_province = ROOT
+				}else = {
+					add_core = ROOT
+				}
+			}
+			1062 = {
+				if = {
+					limit = {
+						is_empty = yes
+					}
+					cede_province = ROOT
+				}else = {
+					add_core = ROOT
+				}
+			}
+		}
+	}
+	yen_expansionism = {
+		icon = mission_colonial
+		position = 3
+		required_missions = { yen_home_advantage } 
+
+		trigger = {
+			num_of_completed_idea_groups_all = {amount = 2}
+			OR = {
+				has_adm_advisor_3 = yes
+				has_dip_advisor_3 = yes
+				has_mil_advisor_3 = yes
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = yen_native_expansion
+				duration = -1
+			}
+			custom_tooltip = YEN_TT_2
+			hidden_effect = {
+				tartary_superregion = {
+					limit = {
+						culture_group = evenks
+					}
+					if = {
+						limit = {
+							is_empty = yes
+						}
+						cede_province = ROOT
+						add_territorial_core = ROOT
+					}else = {
+						add_core = ROOT
+					}
+				}
+			}
+		}
+	}
+}
