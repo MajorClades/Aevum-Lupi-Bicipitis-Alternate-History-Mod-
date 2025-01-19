@@ -1,0 +1,67 @@
+cavalry_tradition = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 11
+	available = {
+
+	}
+
+	powers = {
+		cavalry_tradition_power = {
+			max = 100
+			min = 0
+			reset_on_new_ruler = no
+			scaled_modifier = {
+				modifier = {
+					cavalry_power = 0.2
+					cavalry_flanking = 0.5
+					cavalry_cost = -0.5
+					movement_speed = 0.2
+				}
+			}
+			base_monthly_growth = -0.1
+			is_good = yes
+		}
+	}
+	
+	interactions = {
+		expand_cavalry_tradition = {
+			gui = hessian_militarization_gov_mech
+			cost_type = cavalry_tradition_power
+			center = no
+			trigger = {
+				years_of_income = 0.33
+			}
+			effect = {
+				add_years_of_income = -0.33
+				add_government_power = {
+					mechanic_type = cavalry_tradition
+					power_type = cavalry_tradition_power
+					value = 5
+				}
+			}
+			ai_chance = {
+				factor = 50
+				modifier = {
+					factor = 0
+					is_at_war = yes
+				}
+				modifier = {
+					factor = 0
+					is_in_deficit = yes
+				}
+				modifier = {
+					factor = 0
+					num_of_loans = 3
+				}
+				modifier = {
+					factor = 0
+					years_of_income = 0.77
+				}
+				modifier = {
+					factor = 0
+					NOT = {cavalry_fraction = 0.30}
+				}
+			}
+		}
+	}
+}
