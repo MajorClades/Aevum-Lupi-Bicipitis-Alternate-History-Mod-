@@ -74,41 +74,85 @@ country_event = {
 	}
 }
 
-# country_event = {
-# 	id = yeni.2
-# 	title = yeni.2.test
-# 	desc = yeni.2.desc
-# 	picture = KINGS_CHOICE_eventPicture
+country_event = {
+	id = yeni.4
+	title = yeni.4.test
+	desc = yeni.4.desc
+	picture = KINGS_CHOICE_eventPicture
 	
-# 	trigger = {
-# 		tag = RU0
-# 		NOT = {
-# 			is_year = 1445
-# 		}
-# 	}
-# 	immediate = {
-# 		hidden_effect = {
-# 			save_global_event_target_as = islam_caliph_target
-# 			REB = {
-# 				set_variable = {
-# 					which = caliph_authority_var
-# 					value = 100
-# 				}
-# 			}
-# 		}
-# 	}
-# 	fire_only_once = yes
-# 	option = {
-# 		name = yeni.1a
-# 		add_government_power = {
-# 			mechanic_type = yenian_decadence_mechanic
-# 			power_type = yenian_decadence
-# 			value = 5
-# 		}
-# 		add_country_modifier = {
-# 			name = rho_naval_crisis
-# 			duration = -1
-# 		}
-# 		add_corruption = 5
-# 	}
-# }
+	is_triggered_only = yes
+	option = {
+		name = yeni.4a
+		create_marriage = MON
+		define_consort = {
+			country_of_origin = MON
+			religion = MON
+			culture = MON
+		}
+		create_union = MON
+	}
+	option = {
+		name = yeni.4b
+		create_marriage = HSI
+		define_consort = {
+			country_of_origin = HSI
+			religion = HSI
+			culture = HSI
+		}
+		create_union = HSI
+	}
+	option = {
+		name = yeni.4c
+		create_marriage = YAR
+		define_consort = {
+			country_of_origin = YAR
+			religion = YAR
+			culture = YAR
+		}
+		create_union = YAR
+	}
+}
+
+country_event = {
+	id = yeni.5
+	title = yeni.5.test
+	desc = yeni.5.desc
+	picture = KINGS_CHOICE_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = YNS
+		KLK = {
+			years_in_union_under = {
+				who = YNS
+				years = 20
+			}
+			NOT = {
+				liberty_desire = 50
+			}
+		}
+	}
+
+	mean_time_to_happen = {
+		months = 60
+	}
+
+	option = {
+		name = yeni.5a
+		inherit = KLK
+		add_accepted_culture = khalkha
+		add_country_modifier = {
+			name = yen_khalkha_loyalty
+			duration = -1
+		}
+	}
+	option = {
+		name = yeni.5b
+		KLK = {
+			add_country_modifier = {
+				name = yen_loyal_union
+				duration = -1
+			}
+		}
+	}
+
+}
