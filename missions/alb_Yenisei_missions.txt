@@ -212,12 +212,43 @@ YNS_3_slot = {
 					}
 				}
 			}
+			custom_tooltip = empty_line_tt
+			if = {
+				limit = {
+					exists = MON
+				}
+				add_casus_belli = {
+					type = cb_vassalize_mission
+					target = MON
+					months = 18250
+				}
+			}
+			if = {
+				limit = {
+					exists = YAR
+				}
+				add_casus_belli = {
+					type = cb_vassalize_mission
+					target = YAR
+					months = 18250
+				}
+			}
+			if = {
+				limit = {
+					exists = HSI
+				}
+				add_casus_belli = {
+					type = cb_vassalize_mission
+					target = HSI
+					months = 18250
+				}
+			}
 		}
 		ai_weight = {
 			factor = 10 # AI will go (up to) this many percent above army budget in order to reach the army size needed
 		}
 	}
-	yen_war_goals = {
+	yen_subjugate_mongols = {
 		icon = settle_north_america
 		position = 2
 		required_missions = { yen_warhost } 
@@ -225,7 +256,10 @@ YNS_3_slot = {
 
 		trigger = {
 			num_of_cavalry = 10
-			grown_by_states = 2
+			num_of_owned_provinces_with = {
+				value = 40
+				region = mongolia_region
+			}
 		}
 
 		effect = {
@@ -234,12 +268,37 @@ YNS_3_slot = {
 				name = yen_horse_lord
 				duration = 10950
 			}
+			custom_tooltip = yen_unite_khalka_subjects_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						any_subject_country = {
+							primary_culture = khalkha
+						}
+					}
+					random_subject_country = {
+						change_tag = KLK
+						add_liberty_desire = -100
+					}
+					every_subject_country = {
+						limit = {
+							primary_culture = khalkha
+							NOT = {
+								tag = KLK
+							}
+						}
+						KLK = {
+							inherit = prev
+						}
+					}
+				}
+			}
 		}
 	}
 	yen_war_horse = {
 		icon = settle_north_america
 		position = 3
-		required_missions = { yen_war_goals } 
+		required_missions = { yen_subjugate_mongols } 
 		provinces_to_highlight = { owned_by = ROOT has_manpower_building_trigger = no }
 
 		trigger = {
