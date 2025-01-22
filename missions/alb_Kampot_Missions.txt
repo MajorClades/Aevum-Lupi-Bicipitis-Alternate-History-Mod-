@@ -5,7 +5,7 @@ mt_cherosyne_1 = {
 	
 	potential = {
 		tag = KH1
-		has_dlc = "Leviathan"
+		
 		NOT = { map_setup = map_setup_random }
 	}
 	has_country_shield = yes
@@ -27,10 +27,11 @@ mt_cherosyne_1 = {
 		effect = {
 			capital_scope = {
 				add_province_modifier = {
-					name = small_size_capital
+					name = small_size_mandala
 					duration = -1
 				}
 			}
+			custom_tooltip = alb_modifier_move_to_new_capital_tt
 		}
 	}
 	
@@ -44,31 +45,23 @@ mt_cherosyne_1 = {
 
 		trigger = {
 			OR = {
-				 num_of_subjects = 3
-				 grown_by_states = 4
-				 }
+				num_of_subjects = 3
+				grown_by_states = 4
+			}
+			capital_scope = {
+				num_of_times_expanded_infrastructure = 2
+				has_tax_building_trigger = yes
+			}
 		}
 
 		effect = {
-			if = {
-				limit = {
-					any_subject_country={
-					has_opinion = {
-						who = ROOT
-						value = 180
-					}
-				}
-				}
-				vassalize = PREV
-				PREV = { add_liberty_desire = -25 }
-			}
 			add_subjects_development_ducats = {
-			multiplier = 3
-			trigger = { is_subject_of_type = tributary_state }
+				multiplier = 3
 			}
 			capital_scope = {
+				remove_province_modifier = small_size_mandala
 				add_province_modifier = {
-					name = cherosyne_mahaprasat
+					name = mid_size_mandala
 					duration = -1
 				}
 			}
@@ -81,12 +74,7 @@ mt_cherosyne_1 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-			if = {
-				limit = {
-					government = monarchy
-				}
-				legitimacy = 90
-			}
+			legitimacy_equivalent = 90
 			if = {
 				limit = {
 					has_estate = estate_church
@@ -96,13 +84,30 @@ mt_cherosyne_1 = {
 					loyalty = 80
 				}
 			}
+			NOT = {
+				estate_influence = {
+					estate = estate_burghers
+					influence = 50
+				}
+			}
+			NOT = {
+				estate_influence = {
+					estate = estate_nobles
+					influence = 50
+				}
+			}
+			NOT = {
+				estate_influence = {
+					estate = estate_church
+					influence = 50
+				}
+			}
 			stability = 3
 		}
 		effect = {
-			add_country_modifier = {
-					name = cherosyne_devaraja
-					duration = -1
-				}
+			country_event = {
+				id = kampot.2
+			}
 		}
 	}
 	
@@ -112,20 +117,18 @@ mt_cherosyne_1 = {
 		provinces_to_highlight = {
 		province_id = 609
 			NOT = {
-				base_tax = 10
-				base_production = 10
-				base_manpower = 10
-				has_great_project = {
-					type = angkor_wat
-					tier = 3
+				AND = {
+					development = 30
+					has_great_project = {
+						type = angkor_wat
+						tier = 3
+					}
 				}
 			}
 		}
 		trigger = {
 			609 = {
-				base_tax = 10
-				base_production = 10
-				base_manpower = 10
+				development = 30
 				has_great_project = {
 					type = angkor_wat
 					tier = 3
@@ -146,9 +149,9 @@ mt_cherosyne_1 = {
 		}
 		effect = {
 			add_country_modifier = {
-					name = cherosyne_angkorean_god_king
-					duration = -1
-				}
+				name = cherosyne_angkorean_god_king
+				duration = -1
+			}
 		}
 	}
 
@@ -160,7 +163,7 @@ mt_cherosyne_2 = {
 	
 	potential = {
 		tag = KH1
-		has_dlc = "Leviathan"
+		
 		NOT = { map_setup = map_setup_random }
 	}
 	has_country_shield = yes
@@ -182,7 +185,7 @@ mt_cherosyne_2 = {
 		}
 
 		effect = {
-		champa_area = {
+			champa_area = {
 				limit = {
 					NOT = { is_core = ROOT }
 					NOT = { is_permanent_claim = ROOT }
@@ -296,7 +299,7 @@ mt_cherosyne_3 = {
 	
 	potential = {
 		tag = KH1
-		has_dlc = "Leviathan"
+		
 		NOT = { map_setup = map_setup_random }
 	}
 	has_country_shield = yes
@@ -310,7 +313,7 @@ mt_cherosyne_3 = {
 
 		trigger = {
 			army_size_percentage = 1
-			manpower_percentage = 0.69
+			num_of_generals = 1
 		}
 
 		effect = {
@@ -346,9 +349,12 @@ mt_cherosyne_3 = {
 		}
 
 		trigger = {
-			angkor_area = {
+			cambodia_area = {
 				country_or_non_sovereign_subject_holds = ROOT
 				type = all
+			}
+			609 = {
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			NOT = { exists = KH4 }
 		}
@@ -368,10 +374,17 @@ mt_cherosyne_3 = {
 					}
 					add_permanent_claim = ROOT
 			}
+			champasak_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+					}
+					add_permanent_claim = ROOT
+			}
 			add_country_modifier = {
-					name = cherosyne_syama_vanquished
-					duration = 18250
-				}
+				name = cherosyne_syama_vanquished
+				duration = 18250
+			}
 		}
 	}
 	
@@ -435,9 +448,9 @@ mt_cherosyne_3 = {
 
 		effect = {
 			country_event = {
-				id = alb_sea.4
+				id = kampot.1
 			}
-			prestige = 10
+			add_prestige = 10
 		}
 	}
 	
@@ -513,7 +526,7 @@ mt_cherosyne_4 = {
 	
 	potential = {
 		tag = KH1
-		has_dlc = "Leviathan"
+		
 		NOT = { map_setup = map_setup_random }
 	}
 	has_country_shield = yes
@@ -521,7 +534,7 @@ mt_cherosyne_4 = {
 	cherosyne_repel_cham = {
 		icon = mission_rule_indochina
 		position = 2
-		required_missions = { cherosyne_asura_highland } 
+		required_missions = { cherosyne_sabotage_cham } 
 		provinces_to_highlight = {
 			OR = {
 				area = tay_nguyen_area
@@ -542,7 +555,7 @@ mt_cherosyne_4 = {
 		}
 
 		effect = {
-		vietnam_area = {
+			vietnam_area = {
 				limit = {
 					NOT = { is_core = ROOT }
 					NOT = { is_permanent_claim = ROOT }
@@ -553,21 +566,12 @@ mt_cherosyne_4 = {
 				limit = {
 					NOT = { is_core = ROOT }
 					NOT = { is_permanent_claim = ROOT }
-					}
-					add_permanent_claim = ROOT
+				}
+				add_permanent_claim = ROOT
 			}
 			add_country_modifier = {
-					name = cherosyne_cham_kicked
-					duration = 9125
-				}
-			every_owned_province = {
-				limit = {
-					culture = cham
-				}
-				add_province_modifier = {
-					name = local_mad_MON
-					duration = 9125
-				}
+				name = cherosyne_cham_kicked
+				duration = 9125
 			}
 		}
 	}
@@ -596,13 +600,23 @@ mt_cherosyne_4 = {
 		}
 
 		effect = {
-			every_owned_province = {
-				limit = {
-					culture = cham
-				}
+			custom_tooltip = kh1_every_cham_province_tt
+			tooltip = {
 				add_province_modifier = {
 					name = cherosyne_cham_cursed
 					duration = 9125
+				}
+				add_local_autonomy = -30
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						culture = cham
+					}
+					add_province_modifier = {
+						name = cherosyne_cham_cursed
+						duration = 9125
+					}
 				}
 			}
 		}
@@ -657,82 +671,65 @@ mt_cherosyne_5 = {
 	
 	potential = {
 		tag = KH1
-		has_dlc = "Leviathan"
+		
 		NOT = { map_setup = map_setup_random }
 	}
 	has_country_shield = yes
 	
-	cherosyne_asura_highland = {
-		icon = mission_che_the_cave_country
-		required_missions = { } 
-		provinces_to_highlight = {
-			area = tay_nguyen_area
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
-		}
-
-		trigger = {
-			tay_nguyen_area = {
-				country_or_non_sovereign_subject_holds = ROOT
-				type = all
-			}
-			
-		}
-
-		effect = {
-			add_country_modifier = {
-					name = cherosyne_asura_highland
-					duration = 9125
-				}
-		}
-	}
-	
 	cherosyne_sabotage_cham = {
 		icon = mission_malayan_viceroyalty
-		position = 3
+		position = 1
 		required_missions = { } 
-		provinces_to_highlight = {
-			
-		}
-
-		trigger = {
-			all_country = {
-					primary_culture = cham
-					has_spy_network_from = {
-					who = ROOT
-					value = 20
-					}
-				}
-		}
-
-		effect = {
-			if = {
-				limit = {
-					any_country={
-					primary_culture = cham
-					has_spy_network_from = {
-					who = ROOT
-					value = 20
-					}
-				}
-				}
-				PREV = { add_country_modifier = {
-					name = cherosyne_cham_slandered
-					duration = 18250
-				} }
-			}
-		}
-	}
-	
-	cherosyne_sought_out_maharlika = {
-		icon = mission_junk_boat
-		required_missions = { cherosyne_sabotage_cham } 
 		provinces_to_highlight = {
 			
 		}
 
 		trigger = {
 			any_country = {
-					primary_culture = maharlika
+				primary_culture = cham
+				has_spy_network_from = {
+				who = ROOT
+					value = 20
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = kh1_every_cham_spynetwork_20_tt
+			tooltip = {
+				add_country_modifier = {
+					name = cherosyne_cham_slandered
+					duration = 18250
+				} 
+			}
+			hidden_effect = {
+				every_country = {
+					limit = {
+						primary_culture = cham
+						has_spy_network_from = {
+							who = ROOT
+							value = 20
+						}
+					}
+					add_country_modifier = {
+						name = cherosyne_cham_slandered
+						duration = 18250
+					} 
+				}
+			}
+		}
+	}
+	
+	cherosyne_sought_out_maharlika = {
+		icon = mission_junk_boat
+		required_missions = { } 
+		provinces_to_highlight = {
+			
+		}
+
+		trigger = {
+			any_country = {
+					culture_group = filipino_group
 					has_opinion = {
 						who = ROOT
 						value = 150
@@ -742,9 +739,9 @@ mt_cherosyne_5 = {
 
 		effect = {
 			add_country_modifier = {
-					name = maharlika_deal
-					duration = -1
-				}
+				name = maharlika_deal
+				duration = -1
+			}
 		}
 	}
 	
