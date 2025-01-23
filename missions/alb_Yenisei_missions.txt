@@ -258,10 +258,11 @@ YNS_3_slot = {
 					months = 360
 				}
 			}
-			#country_event_with_insight = { #This feels a bit too easy to get. IMO the player should need to work for it
-			#	id = yeni.4
-			#	insight_tooltip = YEN_ET_4
-			#}
+			custom_tooltip = empty_line_tt
+			country_event_with_insight = { #changed what it does
+				id = yeni.4
+				insight_tooltip = YEN_ET_4
+			}
 		}
 		ai_weight = {
 			factor = 10 # AI will go (up to) this many percent above army budget in order to reach the army size needed
@@ -293,7 +294,7 @@ YNS_3_slot = {
 				if = {
 					limit = { any_subject_country = { primary_culture = khalkha }  } 
 					random_subject_country = {
-						limit = { junior_union_with = ROOT } 
+						limit = { has_country_flag = yenisei_flag} 
 						change_tag = KLK
 						add_liberty_desire = -100
 					}
@@ -305,6 +306,7 @@ YNS_3_slot = {
 						KLK = { inherit = prev } 
 					}
 				}
+				create_union = KLK
 			}
 		}
 	}
