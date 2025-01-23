@@ -10,9 +10,15 @@ Serbia_1_slot = {
 		position = 1
 		provinces_to_highlight = { province_id = 476 } 
 
-		trigger = { 476 = { fort_level = 2 }  } 
+		trigger = { 
+			has_government_power = {
+				mechanic_type = serbian_mech_mechanic
+				power_type = serb_urbanization_rate
+				value = 10
+			}	
+		} 
 
-		effect = { kazakhstan_area = { add_base_manpower = 1 }  } 
+		effect = { capital_scope = {add_or_upgrade_fort_building = yes} } 
 	}
 
 	1_serbia_defense_2 = {
@@ -27,8 +33,8 @@ Serbia_1_slot = {
 		}
 
 		trigger = {
-			470 = { fort_level = 2 } 
-			2444 = { fort_level = 2 } 
+			470 = { owned_by = ROOT fort_level = 2 } 
+			2444 = { owned_by = ROOT fort_level = 2 } 
 		}
 
 		effect = {
@@ -197,18 +203,7 @@ Serbia_2_slot = {
 		effect = {
 			set_country_flag = lv2_serbia_def
 			custom_tooltip = SERBIA_UP_DEF_2
-			add_country_modifier = {
-				name = "serbia_defense_focus_lv2"
-				duration = -1
-			}
-			hidden_effect = {
-				remove_country_modifier = serbia_defense_focus
-				remove_country_modifier = serbia_defense_focus_lv2
-				remove_country_modifier = serbia_neutral_focus
-				remove_country_modifier = serbia_neutral_focus_lv2
-				remove_country_modifier = serbia_offense_focus
-				remove_country_modifier = serbia_offense_focus_lv2
-			}
+			
 		}
 	}
 
@@ -227,18 +222,7 @@ Serbia_2_slot = {
 		effect = {
 			set_country_flag = lv2_serbia_neut
 			custom_tooltip = SERBIA_UP_NEUT_2
-			add_country_modifier = {
-				name = "serbia_neutral_focus_lv2"
-				duration = -1
-			}
-			hidden_effect = {
-				remove_country_modifier = serbia_defense_focus
-				remove_country_modifier = serbia_defense_focus_lv2
-				remove_country_modifier = serbia_neutral_focus
-				remove_country_modifier = serbia_neutral_focus_lv2
-				remove_country_modifier = serbia_offense_focus
-				remove_country_modifier = serbia_offense_focus_lv2
-			}
+			
 		}
 	}
 
@@ -286,6 +270,7 @@ Serbia_3_slot = {
 		trigger = { owns_all_provinces = { culture = slovene }  } 
 
 		effect = {
+			add_yearly_manpower = 0.5
 			add_accepted_culture = slovene
 			if = {
 				limit = { accepted_culture = slovene } 
@@ -304,7 +289,7 @@ Serbia_3_slot = {
 		provinces_to_highlight = {
 			OR = {
 				area = north_zungaria
-				area = yrtesh_area
+				province_id = 480
 			}
 		}
 
@@ -313,14 +298,11 @@ Serbia_3_slot = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
-			yrtesh_area = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
-			}
+			owns = 480
 		}
 
 		effect = {
-			add_manpower = 5
+			add_yearly_manpower = 0.77
 			define_advisor = {
 				type = army_reformer
 				skill = 2
@@ -414,9 +396,14 @@ Serbia_4_slot = {
 		position = 1
 		provinces_to_highlight = { province_id = 476 } 
 
-		trigger = { grown_by_development = 5 } 
+		trigger = { 476 = {grown_by_development = 3 }} 
 
 		effect = {
+			add_government_power = {
+				mechanic_type = serbian_mech_mechanic
+				power_type = serb_urbanization_rate
+				value = 5
+			}
 			nogai_area = { add_permanent_claim = ROOT } 
 			kyzylkum_area = { add_permanent_claim = ROOT } 
 			jetysuu_area = { add_permanent_claim = ROOT } 
@@ -499,9 +486,11 @@ Serbia_5_slot = {
 	5_serbia_nobel = {
 		icon = mission_noble_council
 		position = 2
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = { province_id = 1075  } 
 
 		trigger = {
+			owns = 1075
+			has_dip_advisor_2 = yes
 			estate_loyalty = {
 				estate = estate_nobles
 				loyalty = 60
@@ -509,6 +498,9 @@ Serbia_5_slot = {
 		}
 
 		effect = {
+			1075 = {
+				add_or_upgrade_production_building = yes
+			}
 			add_accepted_culture = bosnian
 			if = {
 				limit = { accepted_culture = bosnian } 
@@ -533,9 +525,12 @@ Serbia_5_slot = {
 
 		effect = {
 			add_accepted_culture = bulgarian_2
-			every_owned_province = {
-				limit = { culture = bolgar } 
-				change_culture = bulgarian_2
+			custom_tooltip = SERB_TT_1
+			hidden_effect = {	
+				every_owned_province = {
+					limit = { culture = bolgar } 
+					change_culture = bulgarian_2
+				}
 			}
 		}
 	}
@@ -570,7 +565,7 @@ Serbia_5_slot = {
 
 	3_serbia_metal_2 = {
 		icon = mission_impaled_soldies
-		position = 7
+		position = 6
 		required_missions = { 3_serbia_metal } 
 		provinces_to_highlight = {
 			owned_by = ROOT
@@ -592,26 +587,20 @@ Serbia_5_slot = {
 		}
 
 		effect = {
-			set_country_flag = lv2_serbia_atk
-			custom_tooltip = SERBIA_UP_ATK_2
 			add_country_modifier = {
-				name = "serbia_offense_focus_lv2"
+				name = serbian_artillery
 				duration = -1
 			}
-			hidden_effect = {
-				remove_country_modifier = serbia_defense_focus
-				remove_country_modifier = serbia_defense_focus_lv2
-				remove_country_modifier = serbia_neutral_focus
-				remove_country_modifier = serbia_neutral_focus_lv2
-				remove_country_modifier = serbia_offense_focus
-				remove_country_modifier = serbia_offense_focus_lv2
+			add_country_modifier = {
+				name = serbian_artillery_bad
+				duration = 7300
 			}
 		}
 	}
 
 	3_serbia_gold = {
 		icon = mission_zambezi_gold
-		position = 8
+		position = 7
 		required_missions = { 3_serbia_metal_2 } 
 		provinces_to_highlight = {
 			owned_by = ROOT
