@@ -292,11 +292,10 @@ alb_golden_hands_expanding_up = {
 	influence = 0
 	loyalty = 0.05
 	can_select = {
-		hidden_trigger = {
-			any_neighbor_province = {
-				is_empty = yes
-			}
+		any_neighbor_province = {
+			is_empty = yes
 		}
+		num_of_merchants = 1
 	}
 	on_granted = {
 		custom_tooltip = discover_nearby_uncolonized_provinces_tt
@@ -430,6 +429,100 @@ alb_golden_hands_waystations = {
 		every_owned_province = {
 			remove_province_modifier = alb_north_silk_road_fort
 		}
+	}
+	ai_will_do = {
+		factor = 0
+	}
+}
+
+alb_golden_cannons = { #legalize nuclear bombs
+	icon = privilege_artillery
+	max_absolutism = -5
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 2 } }
+	influence = 0.15
+	loyalty = 0.0
+	is_valid = {
+		mission_completed = 3_serbia_gold
+	}
+	can_select = {
+	}
+	penalties = {
+		artillery_cost = 0.2
+	}
+	benefits = {
+		backrow_artillery_damage = 0.2
+		artillery_levels_available_vs_fort = 2
+	}
+	on_granted = {
+		custom_tooltip = alb_golden_cannons_tt
+		hidden_effect = {
+			random_owned_province = {
+				limit = {
+					province_group = north_silk_road_all
+				}
+				artillery = ROOT
+			}
+			random_owned_province = {
+				limit = {
+					province_group = north_silk_road_all
+				}
+				artillery = ROOT
+			}
+			random_owned_province = {
+				limit = {
+					province_group = north_silk_road_all
+				}
+				artillery = ROOT
+			}
+			random_owned_province = {
+				limit = {
+					province_group = north_silk_road_all
+				}
+				artillery = ROOT
+			}
+			random_owned_province = {
+				limit = {
+					province_group = north_silk_road_all
+				}
+				artillery = ROOT
+			}
+		}
+	}
+	on_revoked = {
+		
+	}
+	on_invalid = {
+		
+	}
+	ai_will_do = {
+		factor = 0
+	}
+}
+
+alb_dragon_soldiers = { #legalize nuclear men
+	icon = privilege_army_tradition
+	max_absolutism = -5
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 2 } }
+	influence = 0.15
+	loyalty = 0.0
+	penalties = {
+		mercenary_cost = 0.5
+		merchants = -1
+	}
+	benefits = {
+		has_streltsy = yes
+	}
+	on_granted = {
+
+	}
+	on_revoked = {
+		
+	}
+	on_invalid = {
+		
+	}
+	can_select = {
+		num_of_merchants = 1
 	}
 	ai_will_do = {
 		factor = 0

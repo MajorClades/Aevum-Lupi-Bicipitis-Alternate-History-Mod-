@@ -46,8 +46,6 @@ serbian_mech_mechanic = {
 						id = serb.100
 						insight_tooltip = SERB_MT_1
 					}
-				}else = {
-					add_government_reform = serbia_sublime_government
 				}
 			}
 			is_good = yes
@@ -157,7 +155,7 @@ serbian_mech_mechanic = {
 					limit = {
 						has_country_flag = gain_progress_serb_ability
 					}
-					add_reform_progress_small_effect = yes
+					add_reform_progress_medium_effect = yes
 				}
 				if = {
 					limit = {
@@ -260,6 +258,89 @@ serbian_mech_mechanic = {
 					power_type = serb_urbanization_rate
 					value = 5
 				}
+			}
+		}
+	}
+}
+
+windelia_mech_mechanic_2 = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 8
+	available = {
+	
+	}
+	
+	interactions = {
+		wind_adm_interaction = {
+			icon = GFX_council_of_ten_adm_interaction_button
+			cooldown_years = 3
+			trigger = {
+				adm_power = 50
+				if = {
+					limit = {
+						has_estate = estate_church
+					}
+					estate_loyalty = {
+						estate = estate_church
+						loyalty = 50
+					}
+				}
+			}
+			effect = {
+				add_adm_power = -50
+				change_estate_land_share = {
+					estate = estate_church
+					share = 1
+				}
+				add_years_of_income = 0.5
+			}
+		}
+		wind_dip_interaction = { 
+			icon = GFX_council_of_ten_dip_interaction_button
+			cooldown_years = 3
+			trigger = {
+				dip_power = 50
+				if = {
+					limit = {
+						has_estate = estate_burghers
+					}
+					estate_loyalty = {
+						estate = estate_burghers
+						loyalty = 50
+					}
+				}
+			}
+			effect = {
+				add_dip_power = -50
+				change_estate_land_share = {
+					estate = estate_burghers
+					share = 1
+				}
+				add_reform_progress_medium_effect = yes
+			}
+		}
+		wind_mil_interaction = {
+			icon = GFX_council_of_ten_mil_interaction_button
+			cooldown_years = 3
+			trigger = {
+				mil_power = 50
+				if = {
+					limit = {
+						has_estate = estate_nobles
+					}
+					estate_loyalty = {
+						estate = estate_nobles
+						loyalty = 50
+					}
+				}
+			}
+			effect = {
+				add_mil_power = -50
+				change_estate_land_share = {
+					estate = estate_nobles
+					share = 1
+				}
+				add_yearly_manpower = 0.5
 			}
 		}
 	}
