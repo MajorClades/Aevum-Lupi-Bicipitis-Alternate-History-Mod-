@@ -119,23 +119,20 @@ Serbia_1_slot = {
 				region = russia_region
 				region = crimea_region
 			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
 		}
 
 		trigger = {
 			russia_region = {
 				type = all
-				OR = {
-					owned_by = ROOT
-					owned_by_subject_of = ROOT
-				}
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			OR = {
 				crimea_region = {
 					type = all
-					OR = {
-						owned_by = ROOT
-						owned_by_subject_of = ROOT
-					}
+					country_or_non_sovereign_subject_holds = ROOT
 				}
 				government_rank = 3
 			}
@@ -226,7 +223,12 @@ Serbia_2_slot = {
 	1_serbia_defense_3 = {
 		icon = mission_crusade_for_varna
 		position = 4
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			owned_by = ROOT
+			NOT = {
+				base_manpower = 8
+			}
+		} 
 
 		trigger = {
 			has_mil_advisor_2 = yes
@@ -244,12 +246,19 @@ Serbia_2_slot = {
 		icon = crush_heretic_strongholds
 		position = 6
 		required_missions = { 1_serbia_defense_3 } 
+		provinces_to_highlight = {
+			owned_by = root
+			NOT = {
+				has_courthouse_building_trigger = yes
+			}
+		}
 
 		trigger = {
 			has_adm_advisor_2 = yes
 			has_dip_advisor_2 = yes
 			stability = 2
-			any_owned_province = {
+			num_of_owned_provinces_with = {
+				value = 5
 				has_courthouse_building_trigger = yes
 			}
 		}
@@ -410,18 +419,12 @@ Serbia_3_slot = {
 		trigger = {
 			mongolia_region = {
 				type = all
-				OR = {
-					owned_by = ROOT
-					owned_by_subject_of = ROOT
-				}
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			OR = {
 				manchuria_region = {
 					type = all
-					OR = {
-						owned_by = ROOT
-						owned_by_subject_of = ROOT
-					}
+					country_or_non_sovereign_subject_holds = ROOT
 				}
 				government_rank = 3
 			}
