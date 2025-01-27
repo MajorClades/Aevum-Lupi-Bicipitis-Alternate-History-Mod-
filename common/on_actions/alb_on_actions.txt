@@ -433,9 +433,21 @@ on_thri_yearly_pulse = {
 on_monarch_death = {
 
 	if = {
-		limit = { tag = HE0 }
+		limit = { 
+			tag = HE0 
+			NOT = { has_country_flag = had_event_atro3_flag } 
+		}
 		country_event = { id = atro.3 }
 		country_event = { id = atro.1 days = 5}
+	}
+	if = {
+		limit = { 
+			tag = PM0 
+			NOT = {
+				has_ruler_modifier = complete_insanity
+			}
+		}
+		country_event = { id = rhom.1003 }
 	}
 }
 
@@ -923,10 +935,34 @@ on_five_year_pulse = {
 		}
 	}
 }
+on_leader_recruited = {
+	if = {
+		limit = { 
+			has_government_mechanic = CEF_centralization_mechanic
+		}
+		add_government_power = {
+			mechanic_type = CEF_centralization_mechanic
+			power_type = CEF_centralization_power
+			value = -5
+		}
+	}
+}
+on_country_released = {
+	if = {
+		limit = { 
+			has_government_mechanic = CEF_centralization_mechanic
+		}
+		add_government_power = {
+			mechanic_type = CEF_centralization_mechanic
+			power_type = CEF_centralization_power
+			value = -15
+		}
+	}
+}
 on_mil_tech_taken = {
 	if = {
 		limit = {has_country_flag = army_tradition_from_tech_flag}
-		add_army_tradition = 5
+		add_army_tradition = 15
 	}
 	if = {
 		limit = {
@@ -941,7 +977,7 @@ on_mil_tech_taken = {
 	}
 	if= {
 		limit = {has_country_flag = army_professionalism_from_tech_flag}
-		add_army_professionalism = 0.05
+		add_army_professionalism = 0.025
 	}
 }
 
@@ -1057,6 +1093,13 @@ on_mil_exploited = {
 		}
 		owner = {
 			set_country_flag = exploited_mil_once
+		}
+	}
+}
+on_colonial_nation_established = {
+	FROM = {
+		country_event = {
+			id = CEF_colonial_switch.1
 		}
 	}
 }

@@ -1,0 +1,59 @@
+namespace = CEF_colonial_switch
+
+#A New Colonial Nation
+country_event = {
+	id = CEF_colonial_switch.1
+	title = "CEF_colonial_switch.1.title"
+	desc = "CEF_colonial_switch.1.desc"
+	picture = COLONIZATION_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		any_country = {
+			is_colonial_nation_of = ROOT
+			NOT = { has_country_flag = CEF_refused_to_play_as_cn_flag }
+		}
+		ai = no
+		NOT = {
+			is_colonial_nation = yes
+		}
+	}
+	
+	immediate = {
+		random_country = {
+			limit = {
+				is_colonial_nation_of = ROOT
+				NOT = { has_country_flag = CEF_refused_to_play_as_cn_flag }
+			}
+			set_country_flag = CEF_playing_as_cn_flag
+		}
+	}
+	
+	#Continue playing as $COUNTRY$.
+	option = {
+		name = "CEF_colonial_switch.1.a"
+		ai_chance = {
+			factor = 100
+		}
+		random_country = {
+			limit = {
+				has_country_flag = CEF_playing_as_cn_flag
+			}
+			set_country_flag = CEF_refused_to_play_as_cn_flag
+			clr_country_flag = CEF_playing_as_cn_flag
+		}
+	}
+	#Play as the new Colonial Nation.
+	option = {
+		name = "CEF_colonial_switch.1.b"
+		ai_chance = {
+			factor = 0
+		}
+		random_country = {
+			limit = {
+				has_country_flag = CEF_playing_as_cn_flag
+			}
+			clr_country_flag = CEF_playing_as_cn_flag
+			ROOT = { switch_tag = PREV }
+		}
+	}
+}

@@ -33,13 +33,8 @@ country_decisions = {
 					}
 				}
 			}
-			OR = {
-				colonial_eastern_america = {
-					owned_by = ROOT
-				}
-				colonial_louisiana = {
-					owned_by = ROOT
-				}
+			colonial_north_south = {
+				owned_by = ROOT
 			}
 			OR = {
 				ai = no
@@ -50,11 +45,7 @@ country_decisions = {
 			}
 		}
 		provinces_to_highlight = {
-			OR = {
-				area = florida_area
-				area = north_florida_area
-				area = west_florida_area
-			}
+			colonial_region = colonial_north_south
 			OR = {
 				NOT = { owned_by = ROOT }
 				NOT = { is_core = ROOT }
@@ -66,19 +57,12 @@ country_decisions = {
 			is_free_or_tributary_trigger = yes
 			is_at_war = no
 			capital_scope = {
-				OR = {
-					colonial_region = colonial_eastern_america
-					colonial_region = colonial_louisiana
-				}
+				colonial_region = colonial_north_south
 				is_core = ROOT
 			}
 			num_of_owned_provinces_with = {
-				value = 3
-				OR = {
-					area = florida_area
-					area = north_florida_area
-					area = west_florida_area
-				}
+				value = 10
+				colonial_region = colonial_north_south
 				is_core = root
 				is_city = yes
 			}
@@ -108,43 +92,9 @@ country_decisions = {
 				}
 				set_government_rank = 2
 			}
-			if = {
-				limit = {
-					culture_group = romano_briton
-					NOT = { primary_culture = american }
-				}
-				change_primary_culture = american
-			}
-			if = {
-				limit = {
-					culture_group = romon
-					NOT = { primary_culture = louisianans }
-				}
-				change_primary_culture = louisianans
-			}
-			florida_area = {
-				limit = {
-					NOT = { owned_by = ROOT }
-				}
-				add_permanent_claim = FLO
-			}
-			north_florida_area = {
-				limit = {
-					NOT = { owned_by = ROOT }
-				}
-				add_permanent_claim = FLO
-			}
-			west_florida_area = {
-				limit = {
-					NOT = { owned_by = ROOT }
-				}
-				add_permanent_claim = FLO
-			}
-			lucayan_area = {
-				limit = {
-					NOT = { owned_by = ROOT }
-				}
-				add_permanent_claim = FLO
+			swap_non_generic_missions = yes
+			colonial_north_south = {
+				add_permanent_claim = ROOT
 			}
 			add_country_modifier = {
 				name = "centralization_modifier"
