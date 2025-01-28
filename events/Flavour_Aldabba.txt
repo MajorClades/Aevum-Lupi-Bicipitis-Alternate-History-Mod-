@@ -194,10 +194,19 @@ country_event = {
 	immediate = {
 		hidden_effect = {
 			white_peace = emperor
-				remove_opinion = {
-					who = ROOT
-					modifier = had_war_with_us
+			every_country = {
+				limit = {
+					NOT = {
+						alliance_with = event_target:ALD_TARGET_OF_ATTACK
+					}
+					alliance_with = emperor
 				}
+				white_peace = ROOT
+			}
+			remove_opinion = {
+				who = ROOT
+				modifier = had_war_with_us
+			}
 		}
 	}
 

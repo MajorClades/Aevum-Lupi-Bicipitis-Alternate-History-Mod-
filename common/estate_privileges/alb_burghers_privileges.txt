@@ -451,3 +451,73 @@ alb_promote_jewish_guilds = {
 		factor = 1
 	}
 }
+cef_estate_church_ala_native_integration = {
+	icon = privilege_grant_autonomy 
+	loyalty = 0.05
+	influence = 0.1
+	max_absolutism = 10
+	is_valid = {
+		has_unlocked_estate_privilege = {
+			estate_privilege = cef_estate_church_ala_native_integration
+		}
+	}
+	on_granted = {
+		custom_tooltip = cef_estate_church_ala_native_integration_granted_tt
+		tooltip = {
+			add_province_modifier = {
+				name = cef_ala_native_integrations
+				duration = -1
+			}
+		}
+	}
+	on_granted_province = {
+		if = {
+			limit = {
+				OR = {
+					culture_group = na_dene
+					culture_group = penutian
+					culture_group = sonoran
+					culture_group = plains_algonquian
+				}
+			}
+			add_province_modifier = {
+				name = cef_ala_native_integrations
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = {
+				has_province_modifier = cef_ala_native_integrations
+			}
+			remove_province_modifier = cef_ala_native_integrations
+		}
+	}
+	on_revoked_province = {
+		if = {
+			limit = {
+				has_province_modifier = cef_ala_native_integrations
+			}
+			remove_province_modifier = cef_ala_native_integrations
+		}
+	}
+	on_invalid = {
+		custom_tooltip = cef_estate_church_ala_native_integration_revoked_tt
+		tooltip = {
+			add_province_modifier = {
+				name = cef_ala_native_integrations
+				duration = -1
+			}
+		}
+	}
+	on_invalid_province = {
+		if = {
+			limit = {
+				has_province_modifier = cef_ala_native_integrations
+			}
+			remove_province_modifier = cef_ala_native_integrations
+		}
+	}
+	ai_will_do = {
+		factor = 5 #good privilege for the AI
+	}
+}

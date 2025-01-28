@@ -1,0 +1,29 @@
+#Province effect
+add_center_of_trade_lvl_or_ducats = {
+	custom_tooltip = add_center_of_trade_lvl_or_ducats_tt
+	hidden_effect = {
+		if = {
+			limit = {
+				NOT = {
+					province_has_center_of_trade_of_level = 3
+				}
+				province_has_center_of_trade_of_level = 1
+			}
+			add_center_of_trade_level = 1
+		}
+		else_if = {
+			limit = {
+				province_has_center_of_trade_of_level = 3
+			}
+			add_treasury = 500
+		}
+		else_if = {
+			limit = {
+				NOT = {
+					province_has_center_of_trade_of_level = 1
+				}
+			}
+			center_of_trade = 1
+		}
+	}
+}

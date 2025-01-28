@@ -1,0 +1,878 @@
+cef_mex_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = MEX
+			AND = {
+				capital_scope = {
+					OR ={ 
+						region = mexico_region
+						area = rio_grande_area
+						area = northeast_mexico_area
+						area = pecos_area
+						area = llano_estacado_area
+						area = chihuahua_area
+					}
+					is_core = ROOT
+				}
+				OR = {
+					is_former_colonial_nation = yes
+					is_colonial_nation = yes
+				}
+			}
+		}
+	} 
+
+	cef_mex_tradeports = {
+		icon = mission_galleys_in_port
+		position = 2
+		required_missions = { cef_mex_implement_economy } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_port = yes
+			AND = {
+				NOT = { has_building = shipyard }
+				NOT = { has_building = grand_shipyard }
+			}
+			
+		} 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				OR = {
+					has_building = shipyard
+					has_building = grand_shipyard
+				}
+			}
+		} 
+
+		effect = {
+			add_country_modifier = {
+				name = "cef_mex_good_ports"
+				duration = -1
+			}
+		} 
+	}
+
+	cef_mex_new_cities = {
+		icon = mission_colonial
+		position = 3
+		required_missions = { cef_mex_tradeports } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			NOT = { development = 15 }
+		} 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				development = 15
+			}
+		} 
+
+		effect = {
+			add_country_modifier = {
+				name = "cef_mex_city_boom"
+				duration = 18250
+			}
+		} 
+	}
+
+	cef_mex_haciendas = {
+		icon = mission_have_manufactories
+		position = 4
+		required_missions = { cef_mex_new_cities } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			OR = {
+				trade_goods = naval_supplies
+				trade_goods = fish
+				trade_goods = salt
+				trade_goods = copper
+				trade_goods = iron
+				trade_goods = wool
+				trade_goods = cloth
+				trade_goods = silk
+				trade_goods = dyes
+				trade_goods = grain
+				trade_goods = livestock
+				trade_goods = wine
+				trade_goods = paper
+				trade_goods = gems
+				trade_goods = tropical_wood
+				trade_goods = glass
+				trade_goods = chinaware
+				trade_goods = coal
+			}
+			has_manufactory_trigger = no
+		} 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 20
+				OR = {
+					has_building = mills
+					has_building = farm_estate
+					has_building = textile
+					has_building = weapons
+					has_building = wharf
+					has_building = furnace
+				}
+			}
+		} 
+
+		effect = {
+			country_event = { id = cef_mex_flav.1 }
+		} 
+	}
+
+	cef_mex_colony_plus = {
+		icon = mission_settlers_north_america
+		position = 5
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = cef_mex_colony_plus_tt
+				development_of_overlord_fraction = 0.9
+			}
+		} 
+
+		effect = {
+			add_liberty_desire = 50
+		} 
+	}
+}
+cef_mex_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = MEX
+			AND = {
+				capital_scope = {
+					OR ={ 
+						region = mexico_region
+						area = rio_grande_area
+						area = northeast_mexico_area
+						area = pecos_area
+						area = llano_estacado_area
+						area = chihuahua_area
+					}
+					is_core = ROOT
+				}
+				OR = {
+					is_former_colonial_nation = yes
+					is_colonial_nation = yes
+				}
+			}
+		}
+	} 
+
+	cef_mex_implement_economy = {
+		icon = mission_high_income
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			production_income_percentage = 0.3
+		} 
+
+		effect = {
+			country_event = { id = cef_mex_flav.2 }
+		} 
+	}
+
+	cef_mex_subjects_pacified = {
+		icon = mission_native_build_army_mission
+		position = 2
+		required_missions = { cef_mex_implement_economy } 
+		provinces_to_highlight = { 
+			owned_by = ROOT
+			unrest = 1
+		} 
+
+		trigger = {
+			NOT = { average_unrest = 1 }
+			stability = 2
+		} 
+
+		effect = {
+			add_country_modifier = {
+				name = "cef_mex_pacification"
+				duration = 7300
+			}
+		} 
+	}
+
+	cef_mex_crown_education = {
+		icon = mission_university_of_copenhagen
+		position = 4
+		required_missions = { cef_mex_subjects_pacified } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			university = 5
+		} 
+
+		effect = {
+			country_event = { id = cef_mex_flav.3 }
+		} 
+	}
+
+	cef_mex_locals_smart = {
+		icon = trade_with_the_natives
+		position = 5
+		required_missions = {
+			cef_mex_new_law
+			cef_mex_crown_education
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			all_owned_province = {
+				has_owner_accepted_culture = yes
+			}
+		} 
+
+		effect = {
+			country_event = { id = cef_mex_flav.4 }
+		} 
+	}
+}
+cef_mex_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = MEX
+			AND = {
+				capital_scope = {
+					OR ={ 
+						region = mexico_region
+						area = rio_grande_area
+						area = northeast_mexico_area
+						area = pecos_area
+						area = llano_estacado_area
+						area = chihuahua_area
+					}
+					is_core = ROOT
+				}
+				OR = {
+					is_former_colonial_nation = yes
+					is_colonial_nation = yes
+				}
+			}
+		}
+	}   
+
+	cef_mex_heaven_god = {
+		icon = spread_piety
+		position = 2
+		provinces_to_highlight = {
+			owned_by = ROOT
+			NOT = { region = ROOT }
+		} 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				religion = ROOT
+			}
+		} 
+
+		effect = {
+			add_country_modifier = {
+				name = "cef_mex_missionar"
+				duration = 3650
+			}
+		} 
+	}
+
+	cef_mex_civilise_mission = {
+		icon = mission_nah_holy_people
+		position = 3
+		required_missions = { cef_mex_heaven_god } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			NOT = { region = ROOT }
+		} 
+
+		trigger = {
+			dominant_religion = ROOT
+		} 
+
+		effect = {
+			add_country_modifier = {
+				name = "cef_mex_good_religion"
+				duration = -1
+			}
+		} 
+	}
+
+	cef_mex_new_law = {
+		icon = mission_court_education
+		position = 4
+		required_missions = { cef_mex_civilise_mission } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			overlord = {
+				has_opinion = {
+					who = ROOT
+					value = 150
+				}
+			}	
+		} 
+
+		effect = {
+			country_event = { id = cef_mex_flav.5 }
+		} 
+	}
+
+	cef_mex_people_saints = {
+		icon = guardians_of_saint_sava
+		position = 5
+		required_missions = { cef_mex_new_law } 
+		provinces_to_highlight = { 
+			owned_by = ROOT
+			NOT = { religion = ROOT }
+		} 
+
+		trigger = {
+			all_owned_province = {
+				religion = ROOT
+			}
+		} 
+
+		effect = {
+			country_event = { id = cef_mex_flav.6 }
+		} 
+	}
+
+	cef_mex_independance_act = {
+		icon = spa_tercios_system
+		position = 6
+		required_missions = {
+			cef_mex_sovereign_arms
+			cef_mex_colony_plus
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			OR = {
+				is_former_colonial_nation = yes
+				tag = MEX
+			}
+		} 
+
+		effect = {
+			add_prestige = 40
+			add_adm_power = 100
+			add_dip_power = 100
+			add_mil_power = 100
+		} 
+	}
+}
+cef_mex_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = MEX
+			AND = {
+				capital_scope = {
+					OR ={ 
+						region = mexico_region
+						area = rio_grande_area
+						area = northeast_mexico_area
+						area = pecos_area
+						area = llano_estacado_area
+						area = chihuahua_area
+					}
+					is_core = ROOT
+				}
+				OR = {
+					is_former_colonial_nation = yes
+					is_colonial_nation = yes
+				}
+			}
+		}
+	}    
+
+	cef_mex_viceroyalty_good = {
+		icon = mission_kingdom_of_new_spain
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			total_development = 100
+		}
+
+		effect = {
+			yucatan_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			east_yucatan_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			campeche_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			custom_tooltip = cef_mex_viceroyalty_good_tt
+			hidden_effect = {
+				mexico_region = {
+					limit = {
+						NOT = { owned_by = ROOT }
+						has_terrain = mountain
+					}
+					add_permanent_claim = ROOT
+				}
+			}
+		} 
+	}
+
+	cef_mex_yucatan_conq = {
+		icon = overseas_empire
+		position = 2
+		required_missions = { cef_mex_viceroyalty_good } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			yucatan_area = {
+				type = all
+				owned_by = ROOT
+			}
+			east_yucatan_area = {
+				type = all
+				owned_by = ROOT
+			}
+			campeche_area = {
+				type = all
+				owned_by = ROOT
+			}
+		} 
+
+		effect = { 
+			guatemala_lowlands_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			guatemala_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			honduras_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	cef_mex_south_jungle = {
+		icon = mission_che_the_cave_country
+		position = 4
+		required_missions = { cef_mex_yucatan_conq } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			guatemala_lowlands_area = {
+				type = all
+				owned_by = ROOT
+			}
+			guatemala_area = {
+				type = all
+				owned_by = ROOT
+			}
+			honduras_area = {
+				type = all
+				owned_by = ROOT
+			}
+		} 
+
+		effect = {
+			add_country_modifier = {
+				name = "cef_mex_jungle_culture"
+				duration = -1
+			}
+		} 
+	}
+
+	cef_mex_fraternal_communitis = {
+		icon = mission_native_reductions
+		position = 5
+		required_missions = {
+			cef_mex_south_jungle
+			cef_mex_new_law
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			calc_true_if = {
+				all_owned_province = { 
+					region = central_america_region
+					has_owner_accepted_culture = yes
+				} 
+				amount = 10
+			}
+		} 
+
+		effect = {
+			add_prestige = 10
+			add_country_modifier = {
+				name = "cef_mex_good_culture"
+				duration = -1
+			}
+		} 
+	}
+}
+cef_mex_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = MEX
+			AND = {
+				capital_scope = {
+					OR ={ 
+						region = mexico_region
+						area = rio_grande_area
+						area = northeast_mexico_area
+						area = pecos_area
+						area = llano_estacado_area
+						area = chihuahua_area
+					}
+					is_core = ROOT
+				}
+				OR = {
+					is_former_colonial_nation = yes
+					is_colonial_nation = yes
+				}
+			}
+		}
+	}    
+
+	cef_mex_mountain_riches = {
+		icon = mission_zambezi_gold
+		position = 2
+		required_missions = { cef_mex_viceroyalty_good } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				has_terrain = mountain
+			}
+			
+		} 
+
+		effect = {
+			2668 = { add_permanent_claim = ROOT }
+			2667 = { add_permanent_claim = ROOT }
+			4606 = { add_permanent_claim = ROOT }
+			864 = { add_permanent_claim = ROOT }
+			863 = { add_permanent_claim = ROOT }
+		} 
+	}
+
+	cef_mex_north_dorado = {
+		icon = mission_restore_pagodas
+		position = 3
+		required_missions = { cef_mex_mountain_riches } 
+		provinces_to_highlight = {
+			province_id = 856
+			NOT = { development = 30 }
+		} 
+
+		trigger = {
+			856 = {
+				is_core = ROOT
+				is_state = yes
+				development = 30
+			}
+		} 
+
+		effect = {
+			add_country_modifier = {
+				name = "cef_mex_el_nordorado"
+				duration = -1
+			}
+		} 
+	}
+
+	cef_mex_rio_grande = {
+		icon = mission_se_along_the_river
+		position = 4
+		required_missions = { cef_mex_north_dorado } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				OR = {
+					area = chihuahua_area
+					area = pecos_area
+					area = rio_grande_area
+					area = northeast_mexico_area
+				}
+				has_building = ramparts
+			}
+			 
+		} 
+
+		effect = {
+			rio_grande_region = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	cef_mex_sovereign_arms = {
+		icon = mission_assemble_an_army
+		position = 5
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			army_size = 30
+			army_professionalism = 0.20
+		} 
+
+		effect = {
+			add_liberty_desire = 20
+			create_general = { tradition = 100 }
+		} 
+	}
+}
+
+cef_mex_ind_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = MEX
+	}
+	
+	cef_mex_calif = {
+		icon = mission_colonize_california
+		position = 7
+		required_missions = { cef_mex_independance_act } 
+		provinces_to_highlight = {
+			region = california_region
+			NOT = { owned_by = ROOT }
+		} 
+		
+		trigger = {
+			california_region = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		
+		effect = {
+			add_dip_power = 200
+		}
+	}
+}
+
+cef_mex_ind_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = MEX
+	}
+	
+	cef_mex_pacif = {
+		icon = mission_las_islas_filipinas
+		position = 7
+		required_missions = { cef_mex_independance_act } 
+		provinces_to_highlight = { 
+			OR = {
+				area = luzon_area
+				area = southern_luzon_area
+				area = west_mindanao_area
+				area = visayas_area
+				area = mindanao_area
+			}
+			NOT = { owned_by = ROOT }
+		} 
+		
+		trigger = {
+			luzon_area = {
+				type = all
+				owned_by = ROOT
+			}
+			southern_luzon_area = {
+				type = all
+				owned_by = ROOT
+			}
+			mindanao_area = {
+				type = all
+				owned_by = ROOT
+			}
+			west_mindanao_area = {
+				type = all
+				owned_by = ROOT
+			}
+			visayas_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		
+		effect = {
+			add_mil_power = 200
+		}
+	}
+}
+
+cef_mex_ind_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = MEX
+	}
+	
+	cef_mex_texas = {
+		icon = mission_cossack_cavalry
+		position = 7
+		required_missions = { cef_mex_independance_act } 
+		provinces_to_highlight = {  
+			region = rio_grande_region
+			NOT = { owned_by = ROOT }
+		} 
+		
+		trigger = {
+			rio_grande_region = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		
+		effect = {
+			add_years_of_owned_provinces_manpower = {
+				years = 4
+				trigger = {
+					
+				}
+			}
+		}
+	}
+	
+	cef_mex_empire = {
+		icon = mission_empire_of_russia
+		position = 8
+		required_missions = { 
+			cef_mex_calif
+			cef_mex_pacif
+			cef_mex_texas
+			cef_mex_carib
+			cef_mex_south
+		} 
+		provinces_to_highlight = {  } 
+		
+		trigger = {
+			absolutism = 80
+		}
+		
+		effect = {
+			country_event = { id = cef_mex_flav.8 }
+		}
+	}
+}
+
+cef_mex_ind_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = MEX
+	}
+	
+	cef_mex_carib = {
+		icon = mission_colonize_the_caribbean
+		position = 7
+		required_missions = { cef_mex_independance_act } 
+		provinces_to_highlight = {
+			region = carribeans_region
+			NOT = { owned_by = ROOT }
+		} 
+		
+		trigger = {
+			carribeans_region = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		
+		effect = {
+			create_admiral = { tradition = 100 }
+		}
+	}
+}
+
+cef_mex_ind_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = MEX
+	}
+	
+	cef_mex_south = {
+		icon = mission_colonize_panama
+		position = 7
+		required_missions = { cef_mex_independance_act } 
+		provinces_to_highlight = {
+			area = panama_area
+			NOT = { owned_by = ROOT }
+		} 
+		
+		trigger = {
+			panama_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		
+		effect = {
+			add_adm_power = 200
+		}
+	}
+}
