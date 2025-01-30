@@ -9,11 +9,38 @@ ch4_1_slot = {
 		icon = mission_alliances
 		position = 3
 		required_missions = { ch4_barbarian_empire } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			culture_group = nanman_group
+			owned_by = ROOT
+			unrest = 2
+			local_autonomy = 10
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			owns_all_provinces = {
+				culture_group = nanman_group
+			}
+			all_owned_province = {
+				OR = {
+					AND = {
+						culture_group = nanman_group
+						NOT = {
+							unrest = 2
+						}
+						NOT = {
+							local_autonomy = 10
+						}
+					}
+					NOT = { culture_group = nanman_group }
+				}
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_yearly_manpower = 3
+			custom_tooltip = empty_line_tt
+
+		} 
 	}
 
 	ch4_roman_spirit = {
@@ -384,22 +411,87 @@ ch4_5_slot = {
 	ch4_tai_pirates = {
 		icon = mission_alliances
 		position = 1
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			is_capital_of = CGS
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			OR = {
+				owns = 658
+				CGS = {
+					has_opinion = {
+						who = ROOT
+						value = 190
+					}
+					is_subject_of = ROOT
+				}
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			vassalize = CGS
+			custom_tooltip = empty_line_tt
+			luzon_area = {
+				add_permanent_claim = ROOT
+			}
+			southern_luzon_area = {
+				add_permanent_claim = ROOT
+			}
+			eastern_luzon_area = {
+				add_permanent_claim = ROOT
+			}
+			visayas_area = {
+				add_permanent_claim = ROOT
+			}
+			eastern_visayas_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	ch4_panyupayan_protectorate = {
 		icon = mission_alliances
 		position = 2
 		required_missions = { ch4_tai_pirates } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = luzon_area
+				area = southern_luzon_area
+				area = eastern_luzon_area
+				area = visayas_area
+				area = eastern_visayas_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			luzon_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			southern_luzon_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			eastern_luzon_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			visayas_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			eastern_visayas_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			#REPLACE_ME
+		} 
 	}
 
 	ch4_heirs_of_guo_hong = {
@@ -437,7 +529,26 @@ ch4_5_slot = {
 		effect = {  
 			upgrade_roman_heirs = yes
 			custom_tooltip = empty_line_tt
-			#if yan is still EoC
+			if = {
+				limit = {
+					exists = YAN
+					YAN = {
+						is_emperor_of_china = yes
+					}
+				}
+				custom_tooltip = ch4_yan_is_eoc_yes_tt
+				country_event = {
+					id = liqian.4
+				}
+			}
+			else = {
+				custom_tooltip = ch4_yan_is_eoc_no_tt
+				tooltip = {
+					country_event = {
+						id = liqian.4
+					}
+				}
+			}
 		} 
 	}
 
