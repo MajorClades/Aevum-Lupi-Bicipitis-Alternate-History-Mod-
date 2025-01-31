@@ -1,0 +1,1316 @@
+cef_aus_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = AUS
+			tag = NZL
+			AND = {
+				capital_scope = {
+					colonial_region = colonial_australia
+					# is_core = ROOT
+				}
+				OR = {
+					is_former_colonial_nation = yes
+					is_colonial_nation = yes
+				}
+			}
+		}
+	} 
+
+	cef_aus_contact_natives = {
+		icon = mission_native_build_army_mission
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			any_neighbor_country = {
+				culture_group = aboriginal_australian
+			}
+		} 
+
+		effect = { 
+			country_event = { id = cef_aus_flav.1 }
+		} 
+	}
+}
+cef_aus_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = AUS
+			tag = NZL
+			AND = {
+				capital_scope = {
+					colonial_region = colonial_australia
+					# is_core = ROOT
+				}
+				OR = {
+					is_former_colonial_nation = yes
+					is_colonial_nation = yes
+				}
+			}
+		}
+	}
+
+	cef_aus_growing_colony = {
+		icon = mission_pol_develop_countryside
+		position = 2
+		required_missions = { cef_aus_terra_australis } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			total_development = 50
+		} 
+
+		effect = {
+			add_country_modifier = {
+				name = "cef_aus_grow"
+				duration = 7300
+			}
+		} 
+	}
+
+	cef_aus_improve_conditions = {
+		icon = mission_colonial
+		position = 3
+		required_missions = { cef_aus_growing_colony } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			calc_true_if = {
+				all_owned_province = { is_prosperous = yes } 
+				amount = 5
+			}
+		} 
+
+		effect = { 
+			remove_country_modifier = cef_aus_poor_conditions
+			add_country_modifier = {
+				name = "cef_aus_good_conditions"
+				duration = -1
+			}
+		} 
+	}
+
+	cef_aus_flourish = {
+		icon = mission_war_chest
+		position = 4
+		required_missions = {
+			cef_aus_prove_worth
+			cef_aus_improve_conditions
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			capital_scope = {
+				num_of_times_improved_by_owner = 20
+				num_of_buildings_in_province = 4
+			}
+			total_development = 50
+		} 
+
+		effect = {  
+			remove_country_modifier = cef_aus_penal_colony
+			add_country_modifier = {
+				name = "cef_aus_former_pc"
+				duration = -1
+			}
+		}
+	}
+}
+cef_aus_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = AUS
+			tag = NZL
+			AND = {
+				capital_scope = {
+					colonial_region = colonial_australia
+					# is_core = ROOT
+				}
+				OR = {
+					is_former_colonial_nation = yes
+					is_colonial_nation = yes
+				}
+			}
+		}
+	} 
+
+	cef_aus_home_politics = {
+		icon = mission_diplomatic_relation
+		position = 2
+		required_missions = { cef_aus_terra_australis } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			overlord = {
+				has_opinion = {
+					who = ROOT
+					value = 180
+				}
+			}
+		} 
+
+		effect = {
+			add_country_modifier = {
+				name = "cef_aus_good_politics"
+				duration = 36500
+			}
+			set_country_flag = cef_aus_tariffing
+		} 
+	}
+
+	cef_aus_prove_worth = {
+		icon = mission_dominate_home_trade_node
+		position = 3
+		required_missions = {
+			cef_aus_home_politics
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			tariff_value = 0.50
+			monthly_income = 30
+		} 
+
+		effect = {
+			remove_country_modifier = cef_aus_worthless_backwater
+			add_country_modifier = {
+				name = "cef_aus_worthy_enterprise"
+				duration = -1
+			}
+		} 
+	}
+}
+cef_aus_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = AUS
+			tag = NZL
+			AND = {
+				capital_scope = {
+					colonial_region = colonial_australia
+					# is_core = ROOT
+				}
+				OR = {
+					is_former_colonial_nation = yes
+					is_colonial_nation = yes
+				}
+			}
+		}
+	} 
+
+	cef_aus_terra_australis = {
+		icon = settle_austrialasia
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 6
+				region = australia_region
+			}
+		} 
+
+		effect = {
+			australia_region = {
+				limit = {
+					has_port = yes
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			country_event = { id = cef_aus_flav.4 }
+		} 
+	}
+
+	cef_aus_west_coast = {
+		icon = mission_northumberland_coast
+		position = 3
+		required_missions = { cef_aus_terra_australis } 
+		provinces_to_highlight = { 
+			OR = {
+				area = pilbara_area
+				area = western_australia_area
+			}
+			has_port = yes
+			NOT = { owned_by = ROOT }
+		} 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				OR = {
+					area = pilbara_area
+					area = western_australia_area
+				}
+				has_port = yes
+			}	
+		} 
+
+		effect = {
+			add_prestige_or_monarch_power = {
+				amount = 25
+			}
+			country_event = { id = cef_aus_flav.5 }
+		} 
+	}
+}
+cef_aus_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = AUS
+			tag = NZL
+			AND = {
+				capital_scope = {
+					colonial_region = colonial_australia
+					# is_core = ROOT
+				}
+				OR = {
+					is_former_colonial_nation = yes
+					is_colonial_nation = yes
+				}
+			}
+		}
+	} 
+
+	cef_aus_east_coast = {
+		icon = mission_control_the_barbary_coast
+		position = 2
+		required_missions = { cef_aus_terra_australis } 
+		provinces_to_highlight = { 
+			OR = {
+				area = southern_australia_area
+				area = eastern_australia_area
+				area = illawara_area
+				area = north_queensland_area
+				area = south_queensland_area
+			}
+			has_port = yes
+			NOT = { owned_by = ROOT }
+		} 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 8
+				OR = {
+					area = southern_australia_area
+					area = eastern_australia_area
+					area = illawara_area
+					area = north_queensland_area
+					area = south_queensland_area
+				}
+				has_port = yes
+			}	
+		}
+
+		effect = { 
+			australia_region = {
+				limit = {
+					has_port = no
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	cef_aus_east_lands = {
+		icon = mission_sw_yucca_plants
+		position = 3
+		required_missions = { cef_aus_east_coast } 
+		provinces_to_highlight = { 
+			OR = {
+				area = southern_australia_area
+				area = eastern_australia_area
+				area = illawara_area
+				area = north_queensland_area
+				area = south_queensland_area
+			}
+			has_port = no
+			NOT = { owned_by = ROOT }
+		} 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 8
+				OR = {
+					area = southern_australia_area
+					area = eastern_australia_area
+					area = illawara_area
+					area = north_queensland_area
+					area = south_queensland_area
+				}
+				has_port = no
+			}	
+		}
+
+		effect = {
+			te_ika_a_maui_hauauru_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			te_ika_a_maui_waho_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			te_waipounamu_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		
+		} 
+	}
+
+	cef_aus_new_zeland = {
+		icon = mission_invade_island
+		position = 4
+		required_missions = { cef_aus_east_lands } 
+		provinces_to_highlight = { 
+			OR = {
+				area = te_ika_a_maui_hauauru_area
+				area = te_ika_a_maui_waho_area
+				area = te_waipounamu_area
+			}
+			NOT = { owned_by = ROOT }
+		} 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 3
+				OR = {
+						area = te_ika_a_maui_hauauru_area
+						area = te_ika_a_maui_waho_area
+						area = te_waipounamu_area
+				}
+				owned_by = ROOT
+			}
+		} 
+
+		effect = {
+			fiji_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+}
+cef_aus_1_dummy = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = AUS
+			tag = NZL
+			AND = {
+				capital_scope = {
+					colonial_region = colonial_australia
+					# is_core = ROOT
+				}
+				OR = {
+					is_former_colonial_nation = yes
+					is_colonial_nation = yes
+				}
+			}
+		}
+		NOT = { has_country_flag = cef_aus_good_with_natives }
+		NOT = { has_country_flag = cef_aus_bad_with_natives }
+	} 
+
+	cef_aus_dummy_2 = {
+		icon = mission_unknown_mission
+		position = 2
+		required_missions = { cef_aus_contact_natives } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = selectable_mission_trigger_tt
+				always = no
+			}
+		}
+
+		effect = {  } 
+	}
+
+	cef_aus_dummy_3 = {
+		icon = mission_unknown_mission
+		position = 3
+		required_missions = { cef_aus_dummy_2 } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = selectable_mission_trigger_tt
+				always = no
+			}
+		}
+
+		effect = {  } 
+	}
+}
+
+cef_aus_1_good_natives = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = AUS
+			tag = NZL
+			AND = {
+				capital_scope = {
+					colonial_region = colonial_australia
+					# is_core = ROOT
+				}
+				OR = {
+					is_former_colonial_nation = yes
+					is_colonial_nation = yes
+				}
+			}
+		}
+		has_country_flag = cef_aus_good_with_natives
+		NOT = { has_country_flag = cef_aus_bad_with_natives }
+	} 
+
+	cef_aus_befriend_tribes = {
+		icon = mission_native_reductions
+		position = 2
+		required_missions = { cef_aus_contact_natives } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			calc_true_if ={
+				all_country = {
+					culture_group = aboriginal_australian
+					has_opinion = {
+						who = ROOT
+						value = 100
+					}
+				}
+				amount = 3
+			}
+		}
+
+		effect = {
+			custom_tooltip = cef_aus_befriend_tribes_tt
+			set_variable = {
+				which = cef_aus_tribes_integrated
+				value = 0
+			}
+			set_country_flag = cef_aus_integrating
+		} 
+	}
+
+	cef_aus_integrate_natives = {
+		icon = trade_with_the_natives
+		position = 3
+		required_missions = { cef_aus_befriend_tribes } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = cef_aus_integrate_natives_tt
+				check_variable = {
+					which = cef_aus_tribes_integrated
+					value = 8
+				}
+			}
+		}
+
+		effect = {
+			clr_country_flag = cef_aus_integrating
+			country_event = { id = cef_aus_flav.2 }
+		} 
+	}
+}
+
+cef_aus_1_bad_natives = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = AUS
+			tag = NZL
+			AND = {
+				capital_scope = {
+					colonial_region = colonial_australia
+					# is_core = ROOT
+				}
+				OR = {
+					is_former_colonial_nation = yes
+					is_colonial_nation = yes
+				}
+			}
+		}
+		NOT = { has_country_flag = cef_aus_good_with_natives }
+		has_country_flag = cef_aus_bad_with_natives
+	} 
+
+	cef_aus_go_war = {
+		icon = mission_iroquois_warriors
+		position = 2
+		required_missions = { cef_aus_contact_natives } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			army_size_percentage = 1
+			army_size = 15
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "cef_aus_native_war"
+				duration = 9125
+			}
+		} 
+	}
+
+	cef_aus_kill_natives = {
+		icon = mission_impaled_soldies
+		position = 3
+		required_missions = { cef_aus_go_war } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			NOT = {
+				australia_region = {
+					owner = {
+						culture_group = aboriginal_australian
+					}
+				}
+			}
+		}
+
+		effect = {
+			country_event = { id = cef_aus_flav.6 }
+		} 
+	}
+}
+### Australia
+cef_aus_1_free_aus = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		tag = AUS
+	}
+	
+	cef_aus_good_ally = {
+		icon = mission_alliances
+		position = 6
+		required_missions = { cef_aus_great_australia } 
+		provinces_to_highlight = {  } 
+		
+		trigger = {
+			calc_true_if = {
+				all_ally = {
+					is_great_power = yes
+				}
+				amount = 1
+			}
+		}
+
+		effect = {
+			sicily_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			western_sicily_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			corsica_sardinia_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			baleares_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			aegean_archipelago_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+	
+}
+
+cef_aus_2_free_aus = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		tag = AUS
+	}
+	
+	cef_aus_great_australia = {
+		icon = austria_prospers
+		position = 5
+		required_missions = { cef_aus_flourish } 
+		provinces_to_highlight = {  } 
+		
+		trigger = {
+			is_great_power = yes
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "cef_aus_is_great"
+				duration = -1
+			}
+			indian_ocean_islands_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+	
+	cef_aus_colonise_europe = {
+		icon = mal_trade_with_europeans
+		position = 7
+		required_missions = { 
+			cef_aus_great_australia
+			cef_aus_good_ally
+		} 
+		provinces_to_highlight = {
+			OR = {
+				area = sicily_area
+				area = western_sicily_area
+				area = corsica_sardinia_area
+				area = baleares_area
+				area = aegean_archipelago_area
+			}
+		} 
+		
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				continent = europe
+			}
+		}
+
+		effect = {
+			carpathia_region = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+	
+	cef_aus_grass_sea = {
+		icon = mission_lit_harness_steppes
+		position = 8
+		required_missions = { cef_aus_colonise_europe } 
+		provinces_to_highlight = {
+			region = carpathia_region
+			NOT = { owned_by = ROOT }
+		} 
+		
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				region = carpathia_region
+			}
+			153 = {
+				owned_by = ROOT
+				is_state = yes
+			}
+			NOT = { exists = HUN } 
+		}
+
+		effect = {
+			country_event = { id = cef_aus_flav.7 }
+		} 
+	}
+
+}
+
+cef_aus_3_free_aus = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		tag = AUS
+	}
+	
+	cef_aus_we_worth = {
+		icon = mission_establish_mint_towns
+		position = 4
+		required_missions = { cef_aus_prove_worth } 
+		provinces_to_highlight = {  } 
+	
+		trigger = {
+			prestige = 90
+		}
+	
+		effect = {
+			papua_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+	
+	cef_aus_indian_ocean = {
+		icon = mission_mediterranean_islands
+		position = 6
+		required_missions = { cef_aus_great_australia } 
+		provinces_to_highlight = { 
+			area = indian_ocean_islands_area
+			NOT = { owned_by = ROOT }
+		} 
+		
+		trigger = {
+			indian_ocean_islands_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {		
+			mascarenes_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			betsimasaraka_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			madagascar_highlands_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			southern_madagascar = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			sakalava_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+	
+	cef_aus_madagascar = {
+		icon = mission_look_west
+		position = 7
+		required_missions = { cef_aus_indian_ocean } 
+		provinces_to_highlight = {
+			region = east_africa_region
+			NOT = { owned_by = ROOT }
+		} 
+		
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 15
+				region = east_africa_region
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "cef_aus_indian_trade"
+				duration = -1
+			}
+		} 
+	}
+
+}
+
+cef_aus_4_free_aus = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		tag = AUS
+	}
+	
+	cef_aus_papua = {
+		icon = mission_rb_conquer_the_isles
+		position = 5
+		required_missions = {
+			cef_aus_we_worth
+			cef_aus_west_coast
+		} 
+		provinces_to_highlight = {
+			area = papua_area
+			NOT = { owned_by = ROOT }
+		} 
+		
+		trigger = {
+			papua_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			moluccas_region = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+	
+	cef_aus_northen_islands = {
+		icon = mission_las_islas_filipinas
+		position = 6
+		required_missions = {
+			cef_aus_papua
+		} 
+		provinces_to_highlight = { 
+			region = moluccas_region
+			NOT = { owned_by = ROOT }
+		} 
+		
+		trigger = {
+			moluccas_region = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "cef_aus_island_defender"
+				duration = -1
+			}
+		} 
+	}
+
+}
+
+cef_aus_5_free_aus = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		tag = AUS
+	}
+
+}
+
+### Zealand
+cef_aus_1_free_nzl = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		tag = NZL
+	}
+	
+}
+
+cef_aus_2_free_nzl = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		tag = NZL
+	}
+	
+	cef_aus_great_zeland = {
+		icon = austria_prospers
+		position = 5
+		required_missions = { cef_aus_flourish } 
+		provinces_to_highlight = {  } 
+		
+		trigger = {
+			is_great_power = yes
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "cef_aus_is_great"
+				duration = -1
+			}
+			indonesia_region = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+}
+
+cef_aus_3_free_nzl = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		tag = NZL
+	}
+	
+	cef_aus_indonesia = {
+		icon = indonesian_trade
+		position = 6
+		required_missions = { cef_aus_great_zeland } 
+		provinces_to_highlight = {
+			region = indonesia_region
+			NOT = { owned_by = ROOT }
+		} 
+		
+		trigger = {
+			indonesia_region = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			malaya_region = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+}
+
+cef_aus_4_free_nzl = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		tag = NZL
+	}
+	
+	cef_nzl_we_worth = {
+		icon = mission_establish_mint_towns
+		position = 4
+		required_missions = { cef_aus_prove_worth } 
+		provinces_to_highlight = {  } 
+	
+		trigger = {
+			prestige = 90
+		}
+	
+		effect = {
+			papua_area = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+	
+	cef_nzl_papua = {
+		icon = mission_rb_conquer_the_isles
+		position = 5
+		required_missions = {
+			cef_nzl_we_worth
+		} 
+		provinces_to_highlight = {
+			area = papua_area
+			NOT = { owned_by = ROOT }
+		} 
+		
+		trigger = {
+			papua_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			moluccas_region = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+	
+	cef_nzl_northen_islands = {
+		icon = mission_las_islas_filipinas
+		position = 6
+		required_missions = {
+			cef_nzl_papua
+		} 
+		provinces_to_highlight = { 
+			region = moluccas_region
+			NOT = { owned_by = ROOT }
+		} 
+		
+		trigger = {
+			moluccas_region = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "cef_aus_island_defender"
+				duration = -1
+			}
+		} 
+	}
+	
+	cef_aus_island_lord = {
+		icon = mission_invade_island
+		position = 7
+		required_missions = {
+			cef_aus_northen_islands
+			cef_aus_oceania
+			cef_aus_indonesia
+		} 
+		provinces_to_highlight = {
+			province_is_on_an_island = yes
+			NOT = { owned_by = ROOT }
+		} 
+		
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 20
+				province_is_on_an_island = yes
+			}
+		}
+
+		effect = {
+			country_event = { id = cef_aus_flav.8 }
+		} 
+	}
+
+}
+
+cef_aus_5_free_nzl = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		tag = NZL
+	}
+	
+	cef_aus_oceania = {
+		icon = mission_polynesian_navy_build
+		position = 6
+		required_missions = { cef_aus_new_zeland } 
+		provinces_to_highlight = {
+			area = fiji_area
+			NOT = { owned_by = ROOT }
+		} 
+		
+		trigger = {
+			fiji_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			oceanea_region = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+}
+
+cef_aus_3_free_emu = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		has_country_flag = cef_aus_emu_won
+	}
+	
+	cef_aus_emu_cavalry = {
+		icon = mission_invade_burma
+		position = 8
+		required_missions = {  } 
+		provinces_to_highlight = {
+			
+		} 
+		
+		trigger = {
+			num_of_cavalry = 20
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "cef_aus_emu_cav"
+				duration = -1
+			}
+		} 
+	}
+
+}
+
+cef_aus_4_free_emu = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		has_country_flag = cef_aus_emu_won
+	}
+	
+	cef_aus_kangaroo_court = {
+		icon = colonize_australia
+		position = 8
+		required_missions = {  } 
+		provinces_to_highlight = {
+			NOT = { has_building = courthouse }
+			NOT = { has_building = town_hall }
+			owned_by = ROOT
+		} 
+		
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				OR = {
+					has_building = courthouse
+					has_building = town_hall
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "cef_aus_kangcourts"
+				duration = -1
+			}
+		} 
+	}
+	
+	cef_aus_devil_deal = {
+		icon = mission_conquer_orissa_dlh
+		position = 9
+		required_missions = { 
+			cef_aus_emu_cavalry
+			cef_aus_kangaroo_court
+			cef_aus_koalition
+		} 
+		provinces_to_highlight = {
+			area = tasmania_area
+		} 
+		
+		trigger = {
+			development_in_provinces = {
+				value = 200
+				area = tasmania_area
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "cef_aus_deal_devil"
+				duration = -1
+			}
+		} 
+	}
+
+}
+
+cef_aus_5_free_emu = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		has_country_flag = cef_aus_emu_won
+	}
+	
+	cef_aus_koalition = {
+		icon = mission_amur_acquisition
+		position = 8
+		required_missions = {  } 
+		provinces_to_highlight = {
+			
+		} 
+		
+		trigger = {
+			trade_income_percentage = 0.5
+			mercantilism = 80
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "cef_aus_koala"
+				duration = -1
+			}
+		} 
+	}
+
+}

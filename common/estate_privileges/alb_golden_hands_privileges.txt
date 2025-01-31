@@ -1,17 +1,192 @@
+estate_golden_hands_land_rights = {
+	icon = privilege_grant_autonomy
+	land_share = 5
+	max_absolutism = -5
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	loyalty = 0.05
+	influence = 0.05
+	can_select = {
+		not = { has_estate_privilege = estate_burghers_land_rights }
+	}
+	on_granted = {
+	}
+	penalties = {
+	}
+	conditional_modifier = {
+		trigger = { has_country_flag = mng_increased_land_rights_flag }
+		modifier = {
+			stability_cost_modifier = -0.05
+		}
+	}
+	conditional_modifier = {
+		trigger = { has_government_attribute = BYZ_buff_dynatoi_land_grants  }
+		modifier = {
+			land_forcelimit_modifier = 0.1
+			max_absolutism = 5
+		}
+	}
+
+	benefits = {
+		governing_capacity = 100
+	}
+	conditional_modifier = {
+		trigger = { has_government_mechanic = russian_modernization_mechanic }
+		modifier = { monthly_russian_modernization = -0.05 }
+	}
+	#conditional_modifier = {
+	#	trigger = { has_government_mechanic = ottoman_decadence_mechanic }
+	#	modifier = { monthly_ottoman_decadence = 0.02 }
+	#}
+	ai_will_do = {
+		factor = 5
+		modifier = {
+			factor = 1.4
+			num_of_territories = 5
+		}
+		modifier = {
+			factor = 1.5
+			num_of_territories = 10
+		}
+		modifier = {
+			factor = 1.5
+			num_of_territories = 15
+		}
+		modifier = {
+			factor = 0
+			OR = {
+				NOT = { crown_land_share = 25 }
+				estate_influence = {
+					estate = estate_golden_hands
+					influence = 75
+				}
+			}
+			NOT = { has_estate_privilege = estate_golden_hands_land_rights }
+		}
+		modifier = {
+			factor = 3
+			OR = {
+				AND = {
+					governing_capacity_percentage = 0.9
+					NOT = { has_estate_privilege = estate_golden_hands_land_rights }
+				}
+				#The trigger below should make sure that the AI actually keeps this privilege when enacting it early game
+				AND = {
+					governing_capacity_percentage = 0.6
+					has_estate_privilege = estate_golden_hands_land_rights
+				}
+			}
+		}
+		modifier = {
+			factor = 0
+			NOT = { governing_capacity_percentage = 0.5 }
+		}
+		modifier = {
+			factor = 0.8
+			OR = {
+				NOT = { crown_land_share = 40 }
+				AND = {
+					is_absolutism_active = yes
+					NOT = { crown_land_share = 60 }
+				}
+			}
+			NOT = { has_estate_privilege = estate_golden_hands_land_rights }
+		}
+		modifier = {
+			factor = 0.8
+			OR = {
+				NOT = { crown_land_share = 30 }
+				AND = {
+					is_absolutism_active = yes
+					NOT = { crown_land_share = 50 }
+				}
+			}
+			NOT = { has_estate_privilege = estate_golden_hands_land_rights }
+		}
+		modifier = {
+			factor = 0.8
+			is_absolutism_active = yes
+		}
+		modifier = {
+			factor = 2
+			governing_capacity_percentage = 0.9
+		}
+		modifier = {
+			factor = 3
+			governing_capacity_percentage = 1
+		}
+		modifier = {
+			factor = 10
+			governing_capacity_percentage = 1.2
+		}
+		modifier = {
+			factor = 8
+			NOT = { adm_tech = 12 }
+			governing_capacity_percentage = 0.8
+		}
+		modifier = {
+			factor = 5
+			NOT = { adm_tech = 12 }
+			NOT = { government_rank = 1 }
+			governing_capacity_percentage = 0.65
+		}
+		#Has already a similar privilege active
+		modifier = {
+			factor = 0.75
+			has_estate_privilege = estate_brahmins_land_rights
+		}
+		modifier = {
+			factor = 0.75
+			has_estate_privilege = estate_church_land_rights
+		}
+		modifier = {
+			factor = 0.75
+			has_estate_privilege = estate_maratha_land_rights
+		}
+		modifier = {
+			factor = 0.75
+			has_estate_privilege = estate_burghers_land_rights
+		}
+		modifier = {
+			factor = 0.75
+			has_estate_privilege = estate_vaisyas_land_rights
+		}
+		modifier = {
+			factor = 0.75
+			has_estate_privilege = estate_cossacks_land_rights
+		}
+		modifier = {
+			factor = 0.75
+			has_estate_privilege = estate_nomadic_tribes_land_rights
+		}
+		modifier = {
+			factor = 0.75
+			has_estate_privilege = estate_dhimmi_land_rights
+		}
+		modifier = {
+			factor = 0.75
+			has_estate_privilege = estate_jains_land_rights
+		}
+		modifier = {
+			factor = 0.75
+			has_estate_privilege = estate_rajput_land_rights
+		}
+	}
+}
 alb_golden_hands_help_wanted = {
-	icon = privilege_army_tradition
+	icon = privilege_make_generous_donation
 	max_absolutism = -5
 	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 2 } }
-	influence = 0.10
-	loyalty = 0.05
+	influence = 0.05
+	loyalty = 0.1
 	can_select = {
 	}
 	penalties = {
-		trade_efficiency = -0.15
+		trade_efficiency = -0.1
 	}
 	benefits = {
 		trade_range_modifier = 0.2
-		merchants = 1
+		global_own_trade_power = 0.25
+		placed_merchant_power = 10
 	}
 	ai_will_do = {
 		factor = 2
@@ -29,24 +204,19 @@ alb_golden_hands_help_wanted = {
 }
 
 alb_golden_hands_sil_trade_protected = {
-	icon = privilege_army_tradition
+	icon = privilege_development_efficiency
 	max_absolutism = -5
 	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 2 } }
-	influence = 0.10
+	influence = 0.05
 	loyalty = 0.05
 	can_select = {
 	}
 	on_granted = {
 		custom_tooltip = GOLDEN_HANDS_PROV_SILK_POWERED
 		tooltip = {
-			random_owned_province = {
-				limit = {
-					province_group = north_silk_road_all
-				}
-				add_province_modifier = {
-					name = alb_north_silk_road_powered
-					duration = -1
-				}
+			add_province_modifier = {
+				name = alb_north_silk_road_powered
+				duration = -1
 			}
 		}
 		hidden_effect = {
@@ -62,6 +232,11 @@ alb_golden_hands_sil_trade_protected = {
 		}
 	}
 	on_revoked = {
+		every_owned_province = {
+			remove_province_modifier = alb_north_silk_road_powered
+		}
+	}
+	on_invalid = {
 		every_owned_province = {
 			remove_province_modifier = alb_north_silk_road_powered
 		}
@@ -87,7 +262,7 @@ alb_golden_hands_sil_trade_protected = {
 }
 
 alb_golden_hands_mercantile_experts = {
-	icon = privilege_army_tradition
+	icon = privilege_gold_mint
 	max_absolutism = -5
 	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 2 } }
 	influence = 0.05
@@ -111,17 +286,24 @@ alb_golden_hands_mercantile_experts = {
 }
 
 alb_golden_hands_expanding_up = {
-	icon = privilege_army_tradition
+	icon = estate_burghers_foreign_expeditions
 	max_absolutism = -5
 	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 2 } }
 	influence = 0
 	loyalty = 0.05
 	can_select = {
+		any_neighbor_province = {
+			is_empty = yes
+		}
+		num_of_merchants = 1
 	}
 	on_granted = {
-		every_owned_province = {
-			every_empty_neighbor_province = {
-				discover_country = ROOT
+		custom_tooltip = discover_nearby_uncolonized_provinces_tt
+		hidden_effect = {
+			every_owned_province = {
+				every_empty_neighbor_province = {
+					discover_country = ROOT
+				}
 			}
 		}
 	}
@@ -131,6 +313,7 @@ alb_golden_hands_expanding_up = {
 	}
 	benefits = {
 		colonists = 1
+		auto_explore_adjacent_to_colony = yes
 	}
 	ai_will_do = {
 		factor = 2
@@ -154,17 +337,18 @@ alb_golden_hands_mercs = {
 	max_absolutism = -5
 	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 2 } }
 	influence = 0.10
-	loyalty = 0.05
+	loyalty = 0
 	can_select = {
 	}
 	penalties = {
-		legitimacy = -0.3
-		republican_tradition = -0.01
-		devotion = -0.1
-		horde_unity = -0.1
+		legitimacy = -0.5
+		republican_tradition = -0.2
+		devotion = -0.5
+		horde_unity = -0.5
+		meritocracy = -0.5
 	}
 	benefits = {
-		mercenary_cost = -0.15
+		mercenary_cost = -0.1
 		merc_independent_from_trade_range = yes
 	}
 	ai_will_do = {
@@ -183,7 +367,7 @@ alb_golden_hands_mercs = {
 }
 
 alb_golden_hands_inflation = {
-	icon = privilege_army_tradition
+	icon = privilege_ducats
 	max_absolutism = -5
 	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 2 } }
 	influence = 0.10
@@ -202,19 +386,144 @@ alb_golden_hands_inflation = {
 	}
 }
 
-alb_golden_hands_stupid = {
-	icon = privilege_army_tradition
+alb_golden_hands_waystations = {
+	icon = privilege_fort
 	max_absolutism = -5
 	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 2 } }
-	influence = -0.10
+	influence = 0.05
 	loyalty = 0.1
 	can_select = {
 	}
 	penalties = {
-		can_not_build_buildings = yes
+		global_tax_modifier = -0.1
 	}
 	benefits = {
-		development_cost = -0.2
+	}
+	on_granted = {
+		custom_tooltip = GOLDEN_HANDS_PROV_SILK_POWERED_FORT
+		tooltip = {
+			add_province_modifier = {
+				name = alb_north_silk_road_fort
+				duration = -1
+			}
+		}
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					province_group = north_silk_road_all
+					has_fort_building_trigger = yes
+				}
+				add_province_modifier = {
+					name = alb_north_silk_road_fort
+					duration = -1
+				}
+			}
+		}
+	}
+	on_revoked = {
+		every_owned_province = {
+			remove_province_modifier = alb_north_silk_road_fort
+		}
+	}
+	on_invalid = {
+		every_owned_province = {
+			remove_province_modifier = alb_north_silk_road_fort
+		}
+	}
+	ai_will_do = {
+		factor = 0
+	}
+}
+
+alb_golden_cannons = { #legalize nuclear bombs
+	icon = privilege_artillery
+	max_absolutism = -5
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 2 } }
+	influence = 0.15
+	loyalty = 0.0
+	is_valid = {
+		mission_completed = 3_serbia_gold
+	}
+	can_select = {
+	}
+	penalties = {
+		artillery_cost = 0.2
+	}
+	benefits = {
+		backrow_artillery_damage = 0.2
+		artillery_levels_available_vs_fort = 1 #Slightly OP but ok I guess
+	}
+	on_granted = {
+		custom_tooltip = alb_golden_cannons_tt
+		hidden_effect = {
+			random_owned_province = {
+				limit = {
+					province_group = north_silk_road_all
+				}
+				artillery = ROOT
+			}
+			random_owned_province = {
+				limit = {
+					province_group = north_silk_road_all
+				}
+				artillery = ROOT
+			}
+			random_owned_province = {
+				limit = {
+					province_group = north_silk_road_all
+				}
+				artillery = ROOT
+			}
+			random_owned_province = {
+				limit = {
+					province_group = north_silk_road_all
+				}
+				artillery = ROOT
+			}
+			random_owned_province = {
+				limit = {
+					province_group = north_silk_road_all
+				}
+				artillery = ROOT
+			}
+		}
+	}
+	on_revoked = {
+		
+	}
+	on_invalid = {
+		
+	}
+	ai_will_do = {
+		factor = 0
+	}
+}
+
+alb_dragon_soldiers = { #legalize nuclear men
+	icon = privilege_army_tradition
+	max_absolutism = -5
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 2 } }
+	influence = 0.15
+	loyalty = 0.0
+	penalties = {
+		mercenary_cost = 0.5
+		merchants = -1
+	}
+	benefits = {
+		has_streltsy = yes
+		amount_of_streltsy = 10
+	}
+	on_granted = {
+
+	}
+	on_revoked = {
+		
+	}
+	on_invalid = {
+		
+	}
+	can_select = {
+		num_of_merchants = 1
 	}
 	ai_will_do = {
 		factor = 0

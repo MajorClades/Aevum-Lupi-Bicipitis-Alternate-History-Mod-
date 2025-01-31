@@ -1,0 +1,57 @@
+korean_empire_reform = {
+	icon = "korean_monarchy"
+	allow_normal_conversion = yes
+	valid_for_nation_designer = no
+	nation_designer_cost = 0
+	potential = {
+		tag = KR1
+		OR = {
+			has_reform = korean_monarchy
+			have_had_reform = korean_monarchy
+		}
+	}
+	monarchy = yes
+	lock_level_when_selected = yes
+	modifiers = {
+		development_cost = -0.1
+		advisor_cost = -0.1
+		global_institution_spread = 0.15
+		num_accepted_cultures = 2
+	}
+	effect = {
+		hidden_effect = {
+			if = {
+				limit = { has_dlc = "Domination" }
+				add_country_modifier = {
+					name = no_perfectionism_focus
+					duration = -1
+					desc = has_no_perfectionism_focus
+				}
+			}
+		}
+	}
+	removed_effect = {
+		remove_country_modifier = hangeul_alphabet
+		remove_country_modifier = hangeul_alphabet_revoked
+		remove_country_modifier = no_perfectionism_focus
+		remove_country_modifier = inward_focus_modifier
+		remove_country_modifier = outward_focus_modifier
+		remove_country_modifier = expansion_focus_modifier
+	}
+	conditional = {
+		allow = { has_dlc = "Domination" }
+		custom_attributes = {
+			has_hangeul_alphabet_decisions = yes
+			has_weaker_harem_events = yes
+		}
+	}
+	conditional = {
+		allow = { has_dlc = "Domination" }
+		government_abilities = {
+			perfectionism_mechanic
+		}
+	}
+	ai = {
+		factor = 100
+	}
+}
