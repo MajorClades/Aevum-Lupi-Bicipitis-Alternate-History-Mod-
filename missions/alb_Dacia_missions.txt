@@ -75,6 +75,18 @@ dac_1_slot = {
 		}
 
 		effect = {
+			hidden_effect = {
+				4128 = {
+					add_province_modifier = {
+						name = dac_allow_elite_recruits
+						duration = -1
+						hidden = yes
+					}
+				}
+			}
+			4128 = {
+				custom_tooltip = DACIA_TT_9
+			}
 			clr_country_flag = jidava_has_owner_flag
 			set_country_flag = jidava_castle_elites
 			complex_dynamic_effect = {
@@ -102,6 +114,35 @@ dac_1_slot = {
 						duration = -1
 					}
 				"
+			}
+		}
+	}
+
+	dac_stronger_elites = {
+		icon = mission_asian_city
+		position = 4
+		required_missions = { dac_castles } 
+		provinces_to_highlight = { owned_by = ROOT has_manpower_building_trigger = no } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 7
+				has_manpower_building_trigger = yes
+			}
+			owns = 4128
+			4128 = {
+				has_manpower_building_trigger = yes
+				base_manpower = 10
+				has_great_project = {
+					type = bran_castle
+					tier = 2
+				}
+			}
+		}
+
+		effect = {
+			country_event = {
+				id = dac.7
 			}
 		}
 	}
@@ -236,6 +277,7 @@ dac_3_slot = {
 
 		trigger = {
 			OR = {
+				is_great_power = yes
 				has_won_war_against = {
 					who = SX0
 				}
@@ -261,6 +303,102 @@ dac_3_slot = {
 				duration = -1
 			}
 			carpathia_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	dac_danubian_campaign = {
+		icon = qng_north_china
+		position = 4
+		required_missions = {dac_danubian_conquest } 
+		provinces_to_highlight = { region = carpathia_region NOT = { country_or_non_sovereign_subject_holds = ROOT } } 
+		trigger = {
+			owns = 154
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 30
+				region = carpathia_region
+			}
+		}
+
+		effect = {
+			154 = {
+				add_great_project_tier = {
+					type = golden_kremnica
+					tier = 1
+				}
+			}
+			balkan_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	dac_thracian_help = {
+		icon = qng_north_china
+		position = 5
+		required_missions = {dac_danubian_campaign } 
+		provinces_to_highlight = { OR = { area = vidin_area area = silistria_area area = bulgaria_area } NOT = { country_or_non_sovereign_subject_holds = ROOT } } 
+		trigger = {
+			vidin_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			silistria_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			bulgaria_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			custom_tooltip = DACIA_TT_11a
+			silistria_area = {
+				change_culture = thracian
+			}
+			5050 = {
+				change_culture = thracian
+			}
+			4703 = {
+				change_culture = thracian
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						accepted_culture = avars
+					}
+					every_owned_province = {
+						limit = {
+							culture = alb_livonian
+						}
+						change_culture = avars
+					}
+				}
+			}
+		}
+	}
+	dac_empire_capital = {
+		icon = qng_north_china
+		position = 5
+		required_missions = {dac_thracian_help } 
+		provinces_to_highlight = { area = thrace_area NOT = { country_or_non_sovereign_subject_holds = ROOT } } 
+		trigger = {
+			thrace_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			set_government_rank = 3
+			thrace_area = {
+				change_culture = thracian
+			}
+			country_event = {
+				id = dac.8
+			}
+			italy_region = {
 				add_permanent_claim = ROOT
 			}
 		}
@@ -313,7 +451,7 @@ dac_4_slot = {
 	dac_expansion_in_danubia = {
 		icon = mission_asian_city
 		position = 4
-		required_missions = {dac_danubian_conquest dac_west_slavs} 
+		required_missions = {dac_danubian_conquest } 
 		provinces_to_highlight = { area = alfold_area } 
 
 		trigger = {
@@ -325,6 +463,7 @@ dac_4_slot = {
 			OR = {
 				accepted_culture = d_west_slav
 				accepted_culture = avars
+				has_dip_advisor_3 = yes
 			}
 		}
 
@@ -342,7 +481,7 @@ dac_4_slot = {
 				dacia_culture_change_2 = yes
 				if = {
 					limit = {
-						owner = {accepted_culture = avars any_subject_country = {tag = DA3} }
+						owner = {OR = {accepted_culture = avars any_subject_country = {tag = DA3} }}
 					}
 					add_base_manpower = 1
 				}
@@ -352,7 +491,7 @@ dac_4_slot = {
 				dacia_culture_change_2 = yes
 				if = {
 					limit = {
-						owner = {accepted_culture = avars any_subject_country = {tag = DA3} }
+						owner = {OR = {accepted_culture = avars any_subject_country = {tag = DA3} }}
 					}
 					add_base_manpower = 1
 				}
@@ -476,6 +615,9 @@ dac_5_slot = {
 		}
 
 		effect = {
+			crimea_region = {
+				add_permanent_claim = ROOT
+			}
 			every_province = {
 				limit = {
 					culture = antian
@@ -489,6 +631,50 @@ dac_5_slot = {
 				second_custom_tooltip = DACIA_TT_6b
 				second_limit = "owns_all_provinces = {culture = antian}"
 				second_effect = "add_stability_or_adm_power = yes"
+			}
+		}
+	}
+	dac_slavic_workers = {
+		icon = mission_asian_city
+		position = 5
+		required_missions = {dac_expansion_in_danubia dac_east_slavs} 
+		provinces_to_highlight = { culture = dacian } 
+
+		trigger = {
+			owns_all_provinces = {
+				culture = dacian
+			}
+			OR = {
+				government_rank = 3
+				AND = {
+					accepted_culture = d_west_slav
+					accepted_culture = d_east_slav
+				}
+			}
+			has_adm_advisor_3 = yes
+			has_dip_advisor_3 = yes
+		}
+
+		effect = {
+			custom_tooltip = DACIA_TT_10
+			tooltip = {
+				capital_scope = {
+					add_province_modifier = {
+						name = protected_dacian_culture
+						duration = -1
+					}
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						culture = dacian
+					}
+					add_province_modifier = {
+						name = protected_dacian_culture
+						duration = -1
+					}
+				}
 			}
 		}
 	}

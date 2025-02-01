@@ -141,7 +141,6 @@ country_event = {
 }
 
 #van helsing -> vo waskaszyja
-#going to put a button on top of the monument to give 5 units of Elite soldiers, 3 different modifiers depending on what was chosen, no player recruitment just spawning from event
 
 country_event = {
 	id = dac.5
@@ -212,6 +211,53 @@ country_event = {
 			add_casus_belli = {
 				type = cb_vassalize_mission
 				target = ROOT
+			}
+		}
+	}
+}
+
+country_event = {
+	id = dac.7
+	title = dac.7.t
+	desc = dac.7.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = dac.7a 
+		add_country_modifier = {
+			name = dac_faster_elites
+			duration = -1
+		}
+	}
+	option = {
+		name = dac.7b 
+		add_country_modifier = {
+			name = dac_cheaper_elites
+			duration = -1
+		}
+	}
+}
+
+country_event = {
+	id = dac.8
+	title = dac.8.t
+	desc = dac.8.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = dac.7a 
+		151 = {
+			cede_province = ROOT
+			change_culture = dacian
+		}
+		set_capital = 151
+	}
+	option = {
+		name = dac.7b 
+		151 = {
+			add_province_modifier = {
+				name = dac_restored_constantine
+				duration = 10950
 			}
 		}
 	}
