@@ -1,6 +1,6 @@
 country_decisions = {
 
-	solongos_nation = {
+	khalkha_nation = {
 		major = yes
 		potential = {
 			normal_or_historical_nations = yes
@@ -14,16 +14,16 @@ country_decisions = {
 				is_free_or_tributary_trigger = yes
 				ai = no
 			}
-			NOT = { tag = KR0 }
+			NOT = { tag = KLK }
 			OR = {
 				ai = no
 				AND = {
-					NOT = { exists = KR0 }
+					NOT = { exists = KLK }
 				}
 			}
 			NOT = { tag = HLR }
 			NOT = { tag = PAP }
-			primary_culture = mongol
+			primary_culture = khalkha
 			is_colonial_nation = no
 			OR = {
 				is_former_colonial_nation = no
@@ -34,25 +34,26 @@ country_decisions = {
 			}
 		}
 		provinces_to_highlight = {
-			region = korea_region
+			culture = khalkha
 			OR = {
 				NOT = { owned_by = ROOT }
 				NOT = { is_core = ROOT }
 			}
 		}
 		allow = {
-			NOT = { exists = KR0 }
+			NOT = { exists = KLK }
 			is_at_war = no
 			is_free_or_tributary_trigger = yes
 			num_of_owned_provinces_with = {
-				value = 15
-				region = korea_region
+				is_core = ROOT
+				culture = khalkha
+				value = 17
 			}
 		}
 		effect = {
 			add_prestige = 25
-			change_tag = KR0
-			country_event = { id = kormongol.1 } #Gov Reform
+			change_tag = KLK
+			country_event = { id = khalkha.1 } #larp
 			remove_non_electors_emperors_from_empire_effect = yes
 			if = {
 				limit = { NOT = { government_rank = 2 } }
@@ -68,10 +69,10 @@ country_decisions = {
 				}
 				country_event = { id = ideagroups.1 } #Swap Ideas
 			}
-			korea_region = {
-					add_permanent_claim = KR0
+			mongolia_region = {
+					add_permanent_claim = KLK
 				}
-			set_country_flag = formed_solongos_flag
+			set_country_flag = formed_khalkha_flag
 		}
 		ai_will_do = {
 			factor = 1

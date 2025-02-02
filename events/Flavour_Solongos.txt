@@ -1,0 +1,90 @@
+country_event = {
+	id = kormongol.1
+	title = kormongol.1.test
+	desc = kormongol.1.desc
+	picture = altaic_MILITARY_CAMP_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = kormongol.1a
+		ai_chance = {
+			factor = 60
+		}
+		add_government_reform = steppe_horde
+		manchuria_region = {
+			add_permanent_claim = ROOT
+			}
+		if = {
+				limit = {
+						OR = {
+								tag = KM1
+								was_tag = KM1
+						}
+					}
+					override_country_name = JALAYIRID_STRING
+					change_country_color = {
+						country = KM1
+					}
+		}
+		if = {
+				limit = {
+						OR = {
+								tag = KM2
+								was_tag = KM2
+						}
+					}
+					override_country_name = KHONGIRID_STRING
+					change_country_color = {
+						country = KM2
+					}
+		}
+		if = {
+				limit = {
+						OR = {
+								tag = KM3
+								was_tag = KM3
+						}
+					}
+					override_country_name = OLKHONID_STRING
+					change_country_color = {
+						country = KM3
+					}
+		}
+		if = {
+				limit = {
+						OR = {
+								tag = KM4
+								was_tag = KM4
+						}
+					}
+					override_country_name = ELJIGID_STRING
+					change_country_color = {
+						country = KM4
+					}
+		}
+	}
+	option = {
+		name = kormongol.1b
+		ai_chance = {
+			factor = 40
+		}
+		restore_country_name = yes
+		change_government = monarchy
+		add_government_reform = korean_monarchy
+		change_religion = confucianism
+		add_harmonized_religion = tengri_pagan_reformed
+		add_country_modifier = {
+			name = "harmonized_tengri_pagan_reformed"
+			duration = -1
+			}
+		add_stability = 1
+		if = {
+			limit = {
+				NOT = { technology_group = chinese }
+			}
+			change_technology_group = chinese
+			change_unit_type = chinese
+		}
+
+	}
