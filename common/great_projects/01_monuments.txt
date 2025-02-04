@@ -9672,9 +9672,16 @@ bran_castle = {
 	}
 
 	can_upgrade_trigger = {
-		custom_trigger_tooltip = {
-			tooltip = DAZ_DRACULA_TT_1
-			has_province_flag = dracula_showed_up
+		if = {
+			limit = {
+				owner = {
+					is_or_was_tag = { tag = DA0}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = DAZ_DRACULA_TT_1
+				has_province_flag = dracula_showed_up
+			}
 		}
 		culture_group = dacian_group
 		province_is_or_accepts_culture = yes
@@ -9716,9 +9723,16 @@ bran_castle = {
 		country_modifiers = {
 		}
 		on_upgraded = {
-			owner = {
-				country_event = {
-					id = dac.2
+			if = {
+				limit = {
+					owner = {
+						is_or_was_tag = { tag = DA0}
+					}
+				}
+				owner = {
+					country_event = {
+						id = dac.2
+					}
 				}
 			}
 		}
