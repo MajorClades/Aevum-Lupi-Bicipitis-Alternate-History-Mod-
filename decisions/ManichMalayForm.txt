@@ -1,0 +1,119 @@
+country_decisions = {
+
+	manichmalay_nation = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			was_never_end_game_tag_trigger = yes
+			NOT = { has_country_flag = formed_manichmalay_flag }
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			OR = {
+				is_free_or_tributary_trigger = yes
+				ai = no
+			}
+			culture_group = malay
+			religion = manich
+			OR = {
+				ai = no
+				AND = {
+					ai = yes
+					num_of_cities = 4
+				}
+				AND = {
+					ai = yes
+					is_year = 1700
+				}
+			}
+			is_colonial_nation = no
+			OR = {
+				is_former_colonial_nation = no
+				AND = {
+					is_former_colonial_nation = yes
+					ai = no
+				}
+			}
+		}
+		provinces_to_highlight = {
+			OR = {
+					region = malaya_region
+					area = banjar_area
+					area = kalimantan_area
+					area = brunei_area
+					area = sabah_area
+					area = kutai_area
+					area = north_tenasserim_area
+					area = sukhothai_area
+					area = khorat_area
+								}
+			NOT = { owned_by = ROOT }
+		}
+		allow = {
+			is_nomad = no
+			is_at_war = no
+			malaya_region = {
+				type = all
+				owned_by = ROOT
+			}
+			banjar_area = {
+				type = all
+				owned_by = ROOT
+			}
+			kalimantan_area = {
+				type = all
+				owned_by = ROOT
+			}
+			brunei_area = {
+				type = all
+				owned_by = ROOT
+			}
+			sabah_area = {
+				type = all
+				owned_by = ROOT
+			}
+			kutai_area = {
+				type = all
+				owned_by = ROOT
+			}
+			north_tenasserim_area = {
+				type = all
+				owned_by = ROOT
+			}
+			sukhothai_area = {
+				type = all
+				owned_by = ROOT
+			}
+			khorat_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		effect = {
+			change_tag = MU0
+			swap_non_generic_missions = yes
+			add_prestige = 25
+			if = {
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			if = {
+				limit = {
+					NOT = { government_rank = 2 }
+				}
+				set_government_rank = 2
+			}
+			add_country_modifier = {
+				name = centralization_modifier
+				duration = 3650
+			}
+			set_country_flag = formed_manichmalay_flag
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+
+}
