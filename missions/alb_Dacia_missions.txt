@@ -485,7 +485,15 @@ dac_4_slot = {
 		icon = mission_castle_construction
 		position = 4
 		required_missions = { dac_danubian_conquest } 
-		provinces_to_highlight = { area = alfold_area } 
+		provinces_to_highlight = { 
+			OR = {
+				area = alfold_area 
+				province_id = 162
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
 		trigger = {
 			dip_power = 200
@@ -493,50 +501,42 @@ dac_4_slot = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
-			OR = {
-				accepted_culture = d_west_slav
-				accepted_culture = avars
-				has_dip_advisor_3 = yes
+			162 = {
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 
 		effect = {
-			1953 = {
-				custom_tooltip = DACIA_TT_7a
-				dacia_culture_change_1 = yes
+			country_event = {
+				id = dac.10
 			}
-			4125 = {
-				custom_tooltip = DACIA_TT_7a
-				dacia_culture_change_1 = yes
-			}
+			custom_tooltip = empty_line_tt
 			155 = {
 				custom_tooltip = DACIA_TT_7b
-				dacia_culture_change_2 = yes
-				if = {
-					limit = {
-						owner = {
-							OR = {
-								accepted_culture = avars
-								any_subject_country = { tag = DA3 } 
+				hidden_effect = {
+					if = {
+						limit = {
+							DA3 = {
+								is_subject_of = ROOT
 							}
 						}
+						cede_province = DA3
+						add_core = DA3
 					}
-					add_base_manpower = 1
 				}
 			}
 			1954 = {
 				custom_tooltip = DACIA_TT_7b
-				dacia_culture_change_2 = yes
-				if = {
-					limit = {
-						owner = {
-							OR = {
-								accepted_culture = avars
-								any_subject_country = { tag = DA3 } 
+				hidden_effect = {
+					if = {
+						limit = {
+							DA3 = {
+								is_subject_of = ROOT
 							}
 						}
+						cede_province = DA3
+						add_core = DA3
 					}
-					add_base_manpower = 1
 				}
 			}
 		}
