@@ -40,8 +40,14 @@ Kolm_1_slot = {
 		}
 
 		effect = {
-			add_accepted_culture = turk_greek
 			balkan_region = { add_permanent_claim = ROOT } 
+			simple_dynamic_effect = {
+				first_custom_tooltip = KOLM_TT_5b
+				first_limit = "accepted_culture = turk_greek"
+				first_effect = "add_casus_belli = { type = cb_restore_personal_union target = TR0 months = 360 }"
+				second_limit = "NOT = {accepted_culture = turk_greek}"
+				second_effect = "add_accepted_culture = turk_greek add_prestige = 20"
+			}
 		}
 	}
 
@@ -49,23 +55,27 @@ Kolm_1_slot = {
 		icon = illyria_mission
 		position = 5
 		required_missions = { 1_makedonia } 
-		provinces_to_highlight = { region = balkan_region } 
+		provinces_to_highlight = { region = balkan_region NOT = {owned_by = ROOT} } 
 
 		trigger = {
 			num_of_owned_provinces_with = {
-				value = 25
+				value = 30
 				region = balkan_region
 			}
 		}
 
 		effect = {
-			add_prestige_or_monarch_power = {
-				amount = 25
-			}
 			wallachia_area = { add_permanent_claim = ROOT } 
 			southern_transylvania_area = { add_permanent_claim = ROOT } 
 			croatia_area = { add_permanent_claim = ROOT } 
-			east_adriatic_coast_area = { add_permanent_claim = ROOT } 
+			east_adriatic_coast_area = { add_permanent_claim = ROOT }
+			simple_dynamic_effect = {
+				first_custom_tooltip = KOLM_TT_5a
+				first_limit = "accepted_culture = magiary"
+				first_effect = "add_casus_belli = { type = cb_restore_personal_union target = GR5 months = 360 }"
+				second_limit = "NOT = {accepted_culture = magiary}"
+				second_effect = "add_accepted_culture = magiary add_prestige = 20"
+			} 
 		}
 	}
 
