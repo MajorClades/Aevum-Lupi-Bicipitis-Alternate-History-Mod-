@@ -1,0 +1,83 @@
+country_decisions = {
+
+	khalkha_nation = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			NOT = { has_country_flag = formed_solongos_flag }
+			was_never_end_game_tag_trigger = yes
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			OR = {
+				is_free_or_tributary_trigger = yes
+				ai = no
+			}
+			NOT = { tag = KLK }
+			OR = {
+				ai = no
+				AND = {
+					NOT = { exists = KLK }
+				}
+			}
+			NOT = { tag = HLR }
+			NOT = { tag = PAP }
+			primary_culture = khalkha
+			is_colonial_nation = no
+			OR = {
+				is_former_colonial_nation = no
+				AND = {
+					is_former_colonial_nation = yes
+					ai = no
+				}
+			}
+		}
+		provinces_to_highlight = {
+			culture = khalkha
+			OR = {
+				NOT = { owned_by = ROOT }
+				NOT = { is_core = ROOT }
+			}
+		}
+		allow = {
+			NOT = { exists = KLK }
+			is_at_war = no
+			is_free_or_tributary_trigger = yes
+			num_of_owned_provinces_with = {
+				is_core = ROOT
+				culture = khalkha
+				value = 17
+			}
+		}
+		effect = {
+			add_prestige = 25
+			change_tag = KLK
+			country_event = { id = khalkha.1 } #larp
+			remove_non_electors_emperors_from_empire_effect = yes
+			if = {
+				limit = { NOT = { government_rank = 2 } }
+				set_government_rank = 2
+			}
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			if = {
+				limit = {
+					has_custom_ideas = no
+				}
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			mongolia_region = {
+					add_permanent_claim = KLK
+				}
+			set_country_flag = formed_khalkha_flag
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+
+}

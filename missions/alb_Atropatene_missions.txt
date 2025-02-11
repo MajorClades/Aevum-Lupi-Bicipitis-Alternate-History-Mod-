@@ -356,9 +356,11 @@ Atro_branch4 = {
 
 		effect = {
 			change_primary_culture = greek_new
-			every_owned_province = {
-				limit = { culture = rhoman } 
-				change_culture = greek_new
+			hidden_effect = {
+				every_owned_province = {
+					limit = { culture = rhoman } 
+					change_culture = greek_new
+				}
 			}
 			add_dip_power = -200
 			country_event = { id = atro.2 } 
@@ -1422,17 +1424,25 @@ Seleucids_branch1 = {
 		trigger = {  
 			mesopotamia_region = {
 				type = all
-					development = 10
-					has_tax_building_trigger = yes
-					has_production_building_trigger = yes
+				development = 10
+				has_tax_building_trigger = yes
+				has_production_building_trigger = yes
 			}
 		} 
 
 		effect = {  
 			mesopotamia_region = {
-				add_province_modifier = {
-					name = he0_rule_in_mesopotamia
-					duration = -1
+				tooltip = {
+					add_province_modifier = {
+						name = he0_rule_in_mesopotamia
+						duration = -1
+					}
+				}
+				hidden_effect = {
+					add_province_modifier = {
+						name = he0_rule_in_mesopotamia
+						duration = -1
+					}
 				}
 				add_prosperity = 100
 			}
