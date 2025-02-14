@@ -62,3 +62,49 @@ upgrade_vineyard = {
 		}
 	}
 }
+
+
+dacia_culture_change_1 = {
+	hidden_effect = {
+		if = {
+			limit = {
+				owner = {OR = {accepted_culture = d_west_slav any_subject_country = {tag = RA1}} }
+			}
+			change_culture = d_west_slav
+		}else = {
+			if = {
+				limit = {
+					owner = {OR = {accepted_culture = avars any_subject_country = {tag = DA3}} }
+				}
+				change_culture = avars
+			}else = {
+				change_culture = dacian
+				owner = {
+					add_dip_power = -50
+				}
+			}
+		}
+	}
+}
+
+dacia_culture_change_2 = {
+	hidden_effect = {
+		if = {
+			limit = {
+				owner = {OR = {accepted_culture = avars any_subject_country = {tag = DA3}} }
+			}
+		}else = {
+			if = {
+				limit = {
+					owner = {OR = {accepted_culture = d_west_slav any_subject_country = {tag = RA1}} }
+				}
+				change_culture = d_west_slav
+			}else = {
+				change_culture = dacian
+				owner = {
+					add_dip_power = -50
+				}
+			}
+		}
+	}
+}

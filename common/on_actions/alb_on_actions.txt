@@ -17,6 +17,51 @@ on_province_culture_changed = {
 		limit = {owner = { has_country_flag = romanization_culture_change}}
 		add_nationalism = -5
 	}
+	if = {
+		limit = {
+			has_province_modifier = sawark_minority
+			NOT = {
+				culture = dacian
+			}
+		}
+		remove_province_modifier = sawark_minority
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_province_modifier = protected_dacian_culture
+			}
+			owner = {
+				mission_completed = dac_slavic_workers
+			}
+			NOT = {
+				has_province_flag = dac_converted_bonus
+			}
+			culture = d_west_slav
+			region = carpathia_region
+		}
+		add_random_development = 1
+		add_random_development = 1
+		set_province_flag = dac_converted_bonus
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_province_modifier = protected_dacian_culture
+			}
+			owner = {
+				mission_completed = dac_slavic_workers
+			}
+			NOT = {
+				has_province_flag = dac_converted_bonus
+			}
+			culture = d_east_slav
+			region = crimea_region
+		}
+		add_random_development = 1
+		add_random_development = 1
+		set_province_flag = dac_converted_bonus
+	}
 }
 on_regiment_recruited = {
 	FROM = {

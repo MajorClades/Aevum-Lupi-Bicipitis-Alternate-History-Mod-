@@ -1,0 +1,52 @@
+green_pact_order = {
+	icon = GFX_holy_order_santiago
+    trigger = {
+		has_country_flag = unlocked_green_pact
+    }
+    localization = coordinator_office
+    cost = 50
+    cost_type = dip_power
+    per_province_effect = {
+        custom_tooltip = GREEN_PACT_TT
+        tooltip = {
+            add_province_modifier = {
+                name = hills_have_eyes
+                duration = -1
+            }  
+        }
+        hidden_effect = {
+            if = {
+                limit = {  OR = { has_terrain = grasslands has_terrain = farmlands } }
+                add_province_modifier = {
+                    name = hills_have_eyes
+                    duration = -1
+                }
+            }
+        }
+    }
+    per_province_abandon_effect = {
+        if = {
+            limit = { has_province_modifier = hills_have_eyes  }
+            remove_province_modifier = hills_have_eyes
+        }
+    }
+    modifier = {
+        local_unrest = -2
+        local_manpower_modifier = 0.1
+        local_regiment_cost = -0.15
+		regiment_recruit_speed = -0.2
+		local_build_cost = 0.25
+        local_build_time = 0.25
+        local_development_cost = 0.25
+    }
+    ai_priority = {
+        factor = 1
+        modifier = {
+            factor = 2.0
+            trade_goods = iron
+        }
+    }
+    color = {
+        50 5 100
+    }
+}
