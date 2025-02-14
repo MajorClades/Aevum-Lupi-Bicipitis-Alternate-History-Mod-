@@ -132,9 +132,13 @@ ch4_2_slot = {
 			}
 		} 
 
-		effect = {  
+		effect = {
 			upgrade_roman_heirs = yes
 			custom_tooltip = empty_line_tt
+			add_country_modifier = {
+				name = ch4_bounty_of_sichuan
+				duration = 9125
+			}
 			add_adm_power = 100
 		} 
 	}
@@ -334,8 +338,8 @@ ch4_4_slot = {
 				add_permanent_claim = ROOT
 			}
 			custom_tooltip = empty_line_tt
-			custom_tooltip = alb_unlock_rma_sinicization_tt
-			set_country_flag = unlock_rma_sinicization_flag
+			#custom_tooltip = alb_unlock_rma_sinicization_tt
+			#set_country_flag = unlock_rma_sinicization_flag
 			custom_tooltip = empty_line_tt
 			upgrade_roman_heirs = yes
 		} 
@@ -490,7 +494,31 @@ ch4_5_slot = {
 		} 
 
 		effect = {  
-			#REPLACE_ME
+			if = {
+				limit = {
+					CGS = {
+						is_subject_of = ROOT
+					}
+				}
+				custom_tooltip = ch4_lizu_subject_yes_tt
+				inherit = CGS
+			}
+			else = {
+				custom_tooltip = ch4_lizu_subject_no_tt
+				tooltip = {
+					inherit = CGS
+				}
+			}
+			custom_tooltip = empty_line_tt
+			656 ={
+				add_or_upgrade_trade_building = yes
+				set_center_level_3_center_of_trade = yes
+			}
+			custom_tooltip = empty_line_tt
+			add_country_modifier = {
+				name = ch4_panyupayan_overlord
+				duration = 10950
+			}
 		} 
 	}
 
