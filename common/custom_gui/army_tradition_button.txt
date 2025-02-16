@@ -67,6 +67,19 @@ custom_button = {
 					value = 0
 				}
 			}
+			if = {
+				limit = {
+					check_variable = {
+						which = mov_speed_tt_var
+						value = 5
+					}
+				}
+			}else = {
+				set_variable = {
+					which = mov_speed_tt_var
+					value = 0
+				}
+			}
 		}
 	}
 	tooltip = AT_button_tt
@@ -498,6 +511,148 @@ custom_button = {
 	tooltip = AT_button4_tt
 }
 
+custom_button = {
+	name = AT_button5
+	potential = {
+		has_country_flag = atm_shop_flag
+	}
+	trigger = {
+		army_tradition = 10
+		check_variable = {
+			which = war_lesson_counter
+			value = 5
+		}
+	}
+	effect = {
+		add_army_tradition = -10
+		subtract_variable = {
+			which = war_lesson_counter
+			value = 5
+		}
+		if = {
+			limit = {
+				NOT = {
+					check_variable = {
+						which = mov_speed_tt_var
+						value = 5
+					}
+				}
+			}
+			add_country_modifier = {
+				name = mov_speed_lv_1
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = mov_speed_tt_var
+					value = 5
+				}
+				NOT = {
+					check_variable = {
+						which = mov_speed_tt_var
+						value = 10
+					}
+				}
+			}
+			remove_country_modifier = mov_speed_lv_1
+			add_country_modifier = {
+				name = mov_speed_lv_2
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = mov_speed_tt_var
+					value = 10
+				}
+				NOT = {
+					check_variable = {
+						which = mov_speed_tt_var
+						value = 15
+					}
+				}
+			}
+			remove_country_modifier = mov_speed_lv_2
+			add_country_modifier = {
+				name = mov_speed_lv_3
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = mov_speed_tt_var
+					value = 15
+				}
+				NOT = {
+					check_variable = {
+						which = mov_speed_tt_var
+						value = 20
+					}
+				}
+			}
+			remove_country_modifier = mov_speed_lv_3
+			add_country_modifier = {
+				name = mov_speed_lv_4
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = mov_speed_tt_var
+					value = 20
+				}
+			}
+			remove_country_modifier = mov_speed_lv_4
+			add_country_modifier = {
+				name = mov_speed_lv_5
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = mov_speed_tt_var
+					value = 20
+				}
+			}
+			remove_country_modifier = mov_speed_lv_4
+			add_country_modifier = {
+				name = mov_speed_lv_5
+				duration = -1
+				hidden = yes
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = {
+						check_variable = {
+							which = mov_speed_tt_var
+							value = 20
+						}
+					}
+				}
+				change_variable = {
+					which = mov_speed_tt_var
+					value = 5
+				}
+			}
+		}
+		#play_sound = get_war_declare
+	}
+	tooltip = AT_button5_tt
+}
+
 custom_icon = {
     name = atm_shop_bg #Must match a scripted iconType in a .gui file
     potential = { 
@@ -556,6 +711,22 @@ custom_text_box = {
 
 custom_text_box = {
     name = morale_damage_cost_text_title #Must match a scripted instantTextBoxType in a .gui file 
+    potential = { 
+		has_country_flag = atm_shop_flag
+	} #Determines when the text is visible
+    #To localize it, use the name of the button as a key, can also use customizable localisation
+}
+
+custom_text_box = {
+    name = mov_speed_text_title #Must match a scripted instantTextBoxType in a .gui file 
+    potential = { 
+		has_country_flag = atm_shop_flag
+	} #Determines when the text is visible
+    #To localize it, use the name of the button as a key, can also use customizable localisation
+}
+
+custom_text_box = {
+    name = mov_speed_cost_text_title #Must match a scripted instantTextBoxType in a .gui file 
     potential = { 
 		has_country_flag = atm_shop_flag
 	} #Determines when the text is visible
