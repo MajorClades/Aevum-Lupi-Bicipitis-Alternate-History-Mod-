@@ -1,0 +1,1341 @@
+CEF_brazil_cn_1 = {
+
+	slot = 1
+	generic = no
+	ai = yes
+	
+	potential = {
+		OR = {
+			AND = {
+				OR = {
+					is_former_colonial_nation = yes
+					is_colonial_nation = yes
+				}
+				capital_scope = {
+					colonial_region = colonial_antartika
+				}
+			}
+			tag = BRZ
+		}
+	}
+	has_country_shield = yes
+	
+	CEF_brz_brazilwood_age = {
+		icon = mission_colonial
+		required_missions = {  }
+		position = 1
+		#completed_by = 1445.1.1
+		
+		provinces_to_highlight = {
+			colonial_region = colonial_antartika
+			is_city = yes
+			trade_goods = dyes
+		}
+		
+		trigger = {
+			OR = {
+				calc_true_if = {
+					all_owned_province = {
+						trade_goods = dyes
+						is_city = yes
+					}
+					amount = 5
+				}
+				custom_trigger_tooltip = {
+					tooltip = CEF_brz_brazilwood_age_trigger_tt
+					has_global_flag = CEF_brazilwood_overexploitation_flag
+				}
+			}
+		}
+		
+		effect = {
+			custom_tooltip = CEF_brz_brazilwood_age_tt
+			tooltip = {
+				add_province_modifier = {
+					name = CEF_brz_brazilwood_trade_modifier
+					duration = 3650
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						trade_goods = dyes
+						colonial_region = colonial_antartika
+					}
+					add_province_modifier = {
+						name = CEF_brz_brazilwood_trade_modifier
+						duration = 3650
+					}
+				}
+			}
+		}
+	
+	}
+	
+	CEF_brz_sugar_age = {
+		icon = mission_caribbean_cn
+		required_missions = { CEF_brz_brazilwood_age CEF_brz_extractivism }
+		position = 3
+		#completed_by = 1445.1.1
+		
+		provinces_to_highlight = {
+			owned_by = ROOT
+			is_city = yes
+			trade_goods = sugar
+		}
+		
+		trigger = { 
+			OR = {
+				calc_true_if = {
+					all_owned_province = {
+						trade_goods = sugar
+						is_city = yes
+						base_production = 5
+					}
+					amount = 5
+				}
+			}
+		}
+	
+		effect = {
+			custom_tooltip = CEF_brz_engenhos_tt
+			tooltip = {
+				add_province_modifier = {
+					name = CEF_brz_sugar_trade_modifier
+					duration = 3650
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						trade_goods = sugar
+						colonial_region = colonial_antartika
+					}
+					add_province_modifier = {
+						name = CEF_brz_sugar_trade_modifier
+						duration = 3650
+					}
+				}
+			}
+		}
+	}
+	
+	CEF_brz_coffee_age = {
+		icon = mission_wine_monopolies
+		required_missions = { CEF_brz_sugar_age }
+		position = 5
+		#completed_by = 1445.1.1
+		
+		provinces_to_highlight = {
+			OR = {
+				area = sao_paolo_area
+				area = west_sao_paolo_area
+				area = rio_de_janeiro_area
+			}
+			NOT = { owned_by = ROOT }
+		}
+		
+		trigger = { 
+			sao_paolo_area = {
+				type = all
+				owned_by = ROOT
+				is_city = yes
+			}
+			west_sao_paolo_area = {
+				type = all
+				owned_by = ROOT
+				is_city = yes
+			}
+			rio_de_janeiro_area = {
+				type = all
+				owned_by = ROOT
+				is_city = yes
+			}
+		}
+	
+		effect = {
+			country_event = { id = CEF_flavor_brz.4 }
+		}
+	}
+}
+
+CEF_brazil_cn_2 = {
+
+	slot = 2
+	generic = no
+	ai = yes
+	
+	potential = {
+		OR = {
+			AND = {
+				OR = {
+					is_former_colonial_nation = yes
+					is_colonial_nation = yes
+				}
+				capital_scope = {
+					colonial_region = colonial_antartika
+				}
+			}
+			tag = BRZ
+		}
+	}
+	has_country_shield = yes
+	
+	CEF_brz_extractivism = {
+		icon = mission_trade_with_japan
+		required_missions = { CEF_brz_brazilwood_age }
+		position = 2
+		#completed_by = 1445.1.1
+		
+		provinces_to_highlight = {
+			#colonial_region = colonial_antartika
+			owned_by = ROOT
+			is_city = yes
+			trade_goods = dyes
+		}
+		
+		trigger = {
+			calc_true_if = {
+				all_owned_province = {
+					trade_goods = dyes
+					base_production = 5
+				}
+				amount = 5
+			}
+		}
+		
+		effect = {
+			custom_tooltip = CEF_brz_brazilwood_age_tt
+			tooltip = {
+				add_province_modifier = {
+					name = CEF_brz_brazilwood_extractivism_modifier
+					duration = 3650
+					}
+				
+			}
+			hidden_effect = {
+				every_owned_province = {
+				limit = {
+					trade_goods = dyes
+					colonial_region = colonial_antartika
+				}
+				add_province_modifier = {
+					name = CEF_brz_brazilwood_extractivism_modifier
+					duration = 3650
+					}
+				}
+			}
+			
+			add_years_of_owned_provinces_production_income = {
+				years = 10
+				trigger = {
+					trade_goods = dyes
+				}
+			}
+		}
+	
+	}
+	
+	CEF_brz_engenhos = {
+		icon = spa_dominate_sevilla
+		required_missions = { CEF_brz_sugar_age }
+		position = 4
+		#completed_by = 1445.1.1
+		
+		provinces_to_highlight = {
+			#colonial_region = colonial_antartika
+			owned_by = ROOT
+			is_city = yes
+			trade_goods = sugar
+		}
+		
+		trigger = {
+			calc_true_if = {
+				all_owned_province = {
+					trade_goods = sugar
+					has_building = plantations
+				}
+				amount = 5
+			}
+		}
+		
+		effect = {
+			custom_tooltip = CEF_brz_engenhos_tt
+			tooltip = {
+				add_province_modifier = {
+					name = CEF_brz_sugar_engenhos_modifier
+					duration = 3650
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						trade_goods = sugar
+						colonial_region = colonial_antartika
+					}
+					add_province_modifier = {
+						name = CEF_brz_sugar_engenhos_modifier
+						duration = 3650
+					}
+				}
+			}
+			add_years_of_owned_provinces_production_income = {
+				years = 10
+				trigger = {
+					trade_goods = sugar
+				}
+			}
+		}
+	
+	}
+	
+	CEF_brz_gold_age = {
+		icon = mission_war_chest
+		required_missions = {  }
+		position = 5
+		#completed_by = 1445.1.1
+		
+		provinces_to_highlight = {
+			area = minas_gerais_area
+			NOT = { owned_by = ROOT }
+		}
+		
+		trigger = {
+			minas_gerais_area = {
+				type = all
+				owned_by = ROOT
+				is_city = yes
+			}
+			development_in_provinces = {
+				value = 50
+				area = minas_gerais_area
+			}
+		}
+	
+		effect = {
+			minas_gerais_area = {
+				change_trade_goods = gold
+			}
+			unlock_estate_privilege = {
+				estate_privilege = estate_burghers_control_over_the_mint
+			}
+		}
+	
+	}
+}
+
+CEF_brazil_cn_3 = {
+
+	slot = 3
+	generic = no
+	ai = yes
+	
+	potential = {
+		OR = {
+			AND = {
+				OR = {
+					is_former_colonial_nation = yes
+					is_colonial_nation = yes
+				}
+				capital_scope = {
+					colonial_region = colonial_antartika
+				}
+			}
+			tag = BRZ
+		}
+	}
+	has_country_shield = yes
+	
+	CEF_brz_defend_the_coast = {
+		icon = mission_retake_ceuta
+		required_missions = { CEF_brz_settle_the_coast }
+		position = 3
+		#completed_by = 1445.1.1
+		
+		trigger = {
+			calc_true_if = {
+				all_owned_province = {
+					colonial_region = colonial_antartika
+					has_port = yes
+					fort_level = 2
+				}
+				amount = 3
+			}
+			
+		}
+		
+		effect = {
+			custom_tooltip = CEF_brz_defend_the_coast_tt
+			tooltip = {
+				add_base_manpower = 1
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						colonial_region = colonial_antartika
+						has_port = yes
+						fort_level = 2
+					}
+					add_base_manpower = 1
+				}
+			}
+			set_country_flag = CEF_brz_defended_against_dutch_flag
+			custom_tooltip = CEF_brz_defended_against_dutch_tt
+		}
+	
+	}
+	
+	CEF_brz_olinda_and_recife = {
+		icon = mission_great_trading_houses
+		required_missions = {  }
+		position = 4
+		#completed_by = 1445.1.1
+		
+		provinces_to_highlight = {
+			province_id = 755
+		}
+		
+		trigger = {
+			755 = {
+				owned_by = ROOT
+				development = 15
+				has_trade_building_trigger = yes
+				has_tax_building_trigger = yes
+			}
+		}
+		
+		effect = {
+			755 = {
+				add_province_modifier = {
+					name = CEF_brz_brazilian_trading_hub_modifier
+					duration = -1
+				}
+				set_center_level_2_center_of_trade = yes
+			}
+		}
+	
+	}
+	
+	CEF_brz_salvador_da_bahia = {
+		icon = mission_guilds_of_barcelona
+		required_missions = { CEF_brz_olinda_and_recife }
+		position = 5
+		#completed_by = 1445.1.1
+		
+		provinces_to_highlight = {
+			province_id = 756
+		}
+		
+		trigger = {
+			756 = {
+				owned_by = ROOT
+				development = 20
+				OR = {
+					num_of_buildings_in_province = 4
+					has_great_project = {
+						type = salvador_da_bahia
+						tier = 1
+					}
+				}
+				province_has_center_of_trade_of_level = 2
+			}
+		}
+		
+		effect = {
+			756 = {
+				add_base_tax = 1
+				add_base_production = 1
+				add_base_manpower = 1
+				add_province_modifier = {
+					name = CEF_brz_brazilian_trading_hub_modifier
+					duration = -1
+				}
+				add_center_of_trade_lvl_or_ducats = yes
+				if = {
+					limit = {
+						has_dlc = "Leviathan"
+					}
+					if = {
+						limit = {
+							NOT = {
+								has_great_project = {
+									type = salvador_da_bahia
+									tier = 2
+								}
+							}
+						}
+						add_great_project_tier = {
+							type = salvador_da_bahia 
+							tier = 1 
+						}
+					}
+					else =  {
+						add_base_tax = 1
+					}
+				}
+				else =  {
+					add_base_tax = 1
+				}
+			}
+		}
+	
+	}
+}
+
+CEF_brazil_cn_4 = {
+
+	slot = 4
+	generic = no
+	ai = yes
+	
+	potential = {
+		OR = {
+			AND = {
+				OR = {
+					is_former_colonial_nation = yes
+					is_colonial_nation = yes
+				}
+				capital_scope = {
+					colonial_region = colonial_antartika
+				}
+			}
+			tag = BRZ
+		}
+	}
+	has_country_shield = yes
+	
+	CEF_brz_capitanias_hereditarias = {
+		icon = mission_iberian_conquistador
+		required_missions = {  }
+		position = 1
+		#completed_by = 1445.1.1
+		
+		provinces_to_highlight = {
+			colonial_region = colonial_antartika
+			NOT = { owned_by = ROOT }
+			has_discovered = ROOT
+		}
+		
+		trigger = {
+			calc_true_if = {
+				all_owned_province = {
+					colonial_region = colonial_antartika
+					is_city = yes
+				}
+				amount = 10
+			}
+		}
+		
+		effect = {
+			every_province = {
+				limit = {
+					colonial_region = colonial_antartika
+					has_port = yes
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name = CEF_brz_capitanias_hereditarias_modifier
+				duration = 5475
+			}
+		}
+	
+	}
+	
+	CEF_brz_settle_the_coast = {
+		icon = mission_colonize_the_west
+		required_missions = { CEF_brz_capitanias_hereditarias }
+		position = 2
+		#completed_by = 1445.1.1
+		
+		provinces_to_highlight = {
+			colonial_region = colonial_antartika
+			NOT = { owned_by = ROOT }
+			has_port = yes
+			has_discovered = ROOT
+		}
+		
+		trigger = {
+			calc_true_if = {
+				all_owned_province = {
+					colonial_region = colonial_antartika
+					is_city = yes
+					has_port = yes
+				}
+				amount = 15
+			}
+		}
+		
+		effect = {
+			banda_oriental_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name = CEF_brz_settling_the_interior_modifier
+				duration = 10950
+			}
+		}
+	
+	}
+	
+	CEF_brz_rogue_royal = {
+		icon = mission_intervene_in_castile
+		required_missions = { CEF_brz_settle_the_coast }
+		position = 3
+		#completed_by = 1445.1.1
+		
+		trigger = {
+			OR = {
+				AND = {
+					total_development = 300
+					monthly_income = 30
+					army_size_percentage = 0.9
+					navy_size_percentage = 0.9
+				}
+				is_subject = no
+			}
+		}
+		
+		effect = {
+			country_event = { id = CEF_flavor_brz.5 }
+		}
+	
+	}
+	
+	CEF_brz_independencia_ou_morte = {
+		icon = mission_cannons_firing
+		required_missions = { CEF_brz_rogue_royal }
+		position = 3
+		#completed_by = 1445.1.1
+		
+		trigger = {
+			is_at_war = no
+			is_subject = no
+			tag = BRZ
+		}
+		
+		effect = {
+			set_government_rank = 3
+			custom_tooltip = CEF_brz_independencia_ou_morte_tt
+			hidden_effect = {
+				every_province = {
+					limit = {
+						colonial_region = colonial_antartika
+						NOT = { is_core = ROOT }
+						NOT = { is_permanent_claim = ROOT }
+					}
+					add_permanent_claim = ROOT
+				}
+			}
+		}
+	
+	}
+}
+
+CEF_brazil_cn_5 = {
+
+	slot = 5
+	generic = no
+	ai = yes
+	
+	potential = {
+		OR = {
+			AND = {
+				OR = {
+					is_former_colonial_nation = yes
+					is_colonial_nation = yes
+				}
+				capital_scope = {
+					colonial_region = colonial_antartika
+				}
+			}
+			tag = BRZ
+		}
+	}
+	has_country_shield = yes
+	
+	CEF_brz_bandeirantes = {
+		icon = mission_brazilian_bandeirantes
+		required_missions = { CEF_brz_capitanias_hereditarias }
+		position = 2
+		#completed_by = 1445.1.1
+		
+		provinces_to_highlight = {
+			colonial_region = colonial_antartika
+			NOT = { owned_by = ROOT }
+			has_port = no
+			has_discovered = ROOT
+		}
+		
+		trigger = {
+			calc_true_if = {
+				all_owned_province = {
+					colonial_region = colonial_antartika
+					is_city = yes
+					has_port = no
+				}
+				amount = 5
+			}
+		}
+		
+		effect = {
+			create_conquistador = { tradition = 40 }
+			every_province = {
+				limit = {
+					colonial_region = colonial_antartika
+					has_port = no
+					any_neighbor_province = {
+						colonial_region = colonial_antartika
+						has_port = yes
+					}
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	
+	}
+	
+	CEF_brz_provincia_cisplatina = {
+		icon = mission_unite_home_region
+		required_missions = { CEF_brz_settle_the_coast }
+		position = 3
+		#completed_by = 1445.1.1
+		
+		provinces_to_highlight = {
+			area = banda_oriental_area
+			NOT = { owned_by = ROOT }
+		}
+		
+		trigger = {
+			banda_oriental_area = {
+				type = all
+				owned_by = ROOT
+				is_city = yes
+			}
+		}
+		
+		effect = {
+			2850 = {
+				add_base_tax = 1
+				add_base_production = 1
+				add_base_manpower = 1
+				add_province_modifier = {
+					name = CEF_brz_brazilian_trading_hub_modifier
+					duration = -1
+				}
+			}
+		}
+	
+	}
+	
+	CEF_brz_a_catholic_country = {
+		icon = mission_european_church
+		required_missions = {  }
+		position = 4
+		#completed_by = 1445.1.1
+		
+		trigger = {
+			any_owned_province = {
+				NOT = { religion = ROOT }
+			}
+		}
+		
+		effect = {
+			country_event = { id = CEF_flavor_brz.7 }
+		}
+	
+	}
+}
+
+CEF_brazil_cn_5_branch_5 = {
+
+	slot = 5
+	generic = no
+	ai = yes
+	
+	potential = {
+		OR = {
+			AND = {
+				OR = {
+					is_former_colonial_nation = yes
+					is_colonial_nation = yes
+				}
+				capital_scope = {
+					colonial_region = colonial_antartika
+				}
+			}
+			tag = BRZ
+		}
+		NOT = { has_country_flag = CEF_brz_faithful_mission_flag }
+		NOT = { has_country_flag = CEF_brz_tolerant_mission_flag }
+	}
+	has_country_shield = yes
+	
+	CEF_brz_branch_mission_5_5 = {
+		icon = mission_unknown_mission
+		required_missions = { CEF_brz_a_catholic_country }
+		position = 5
+		#completed_by = 1445.1.1
+		
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = selectable_mission_trigger_tt
+				always = no
+			}
+		}
+		
+		effect = {
+			custom_tooltip = CEF_brz_tt_branch_5_5_a
+			tooltip = {
+				add_country_modifier = {
+					name = CEF_brz_jesuit_missions_modifier
+					duration = -1
+				}
+			}
+			custom_tooltip = CEF_brz_tt_branch_5_5_b
+			tooltip = {
+				add_country_modifier = {
+					name = CEF_brz_a_diverse_country_modifier
+					duration = -1
+				}
+			}
+		}
+	
+	}
+}
+
+CEF_brazil_cn_5_branch_5_faithful = {
+
+	slot = 5
+	generic = no
+	ai = yes
+	
+	potential = {
+		OR = {
+			AND = {
+				OR = {
+					is_former_colonial_nation = yes
+					is_colonial_nation = yes
+				}
+				capital_scope = {
+					colonial_region = colonial_antartika
+				}
+			}
+			tag = BRZ
+		}
+		has_country_flag = CEF_brz_faithful_mission_flag
+	}
+	has_country_shield = yes
+	
+	CEF_brz_jesuit_missions = {
+		icon = mission_establish_jesuit_missions
+		required_missions = { CEF_brz_a_catholic_country }
+		position = 5
+		#completed_by = 1445.1.1
+		
+		trigger = {
+			calc_true_if = {
+				all_owned_province = {
+					religion = ROOT
+				}
+				amount = 50
+			}
+			religious_unity = 0.99
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = CEF_brz_jesuit_missions_modifier
+				duration = -1
+			}
+		}
+	
+	}
+}
+
+CEF_brazil_cn_5_branch_5_tolerant = {
+
+	slot = 5
+	generic = no
+	ai = yes
+	
+	potential = {
+		OR = {
+			AND = {
+				OR = {
+					is_former_colonial_nation = yes
+					is_colonial_nation = yes
+				}
+				capital_scope = {
+					colonial_region = colonial_antartika
+				}
+			}
+			tag = BRZ
+		}
+		has_country_flag = CEF_brz_tolerant_mission_flag
+	}
+	has_country_shield = yes
+	
+	CEF_brz_a_diverse_country = {
+		icon = mission_colonise_brazil
+		required_missions = { CEF_brz_a_catholic_country }
+		position = 5
+		#completed_by = 1445.1.1
+		
+		trigger = {
+			num_accepted_cultures = 3
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = CEF_brz_a_diverse_country_modifier
+				duration = -1
+			}
+		}
+	
+	}
+}
+
+CEF_brazil_cn_1_brz = {
+
+	slot = 1
+	generic = no
+	ai = yes
+	
+	potential = {
+		tag = BRZ
+	}
+	has_country_shield = yes
+	
+	CEF_brz_coffee_barons = {
+		icon = mission_arts_and_letters
+		required_missions = { CEF_brz_coffee_age }
+		position = 6
+		#completed_by = 1445.1.1
+		
+		provinces_to_highlight = {
+			owned_by = ROOT
+			is_city = yes
+			trade_goods = coffee
+		}
+		
+		trigger = { 
+			OR = {
+				calc_true_if = {
+					all_owned_province = {
+						trade_goods = coffee
+						is_city = yes
+						base_production = 10
+						has_building = plantations
+					}
+					amount = 5
+				}
+			}
+		}
+	
+		effect = {
+			every_owned_province = {
+				limit = {
+					area = sao_paolo_area
+					area = west_sao_paolo_area
+					area = rio_de_janeiro_area
+				}
+				add_province_modifier = {
+					name = CEF_brz_coffee_barons_modifier
+					duration = 7300
+				}
+			}
+			add_years_of_owned_provinces_production_income = {
+				years = 15
+				trigger = {
+					trade_goods = coffee
+				}
+			}
+		}
+	}
+}
+
+CEF_brazil_cn_2_brz = {
+
+	slot = 2
+	generic = no
+	ai = yes
+	
+	potential = {
+		tag = BRZ
+	}
+	has_country_shield = yes
+	
+	CEF_brz_minas_gerais = {
+		icon = mission_african_gold
+		required_missions = { CEF_brz_gold_age }
+		position = 6
+		#completed_by = 1445.1.1
+		
+		provinces_to_highlight = {
+			province_id = 765
+		}
+		
+		trigger = { 
+			765 = {
+				owned_by = ROOT
+				base_production = 8
+				num_of_buildings_in_province = 4
+			}
+		}
+	
+		effect = {
+			765 = {
+				add_province_modifier = {
+					name = "por_minas_gerais"
+					duration = -1
+				}
+				add_base_tax = 1
+			}
+		}
+	}
+}
+
+CEF_brazil_cn_3_brz = {
+
+	slot = 3
+	generic = no
+	ai = yes
+	
+	potential = {
+		tag = BRZ
+	}
+	has_country_shield = yes
+	
+	CEF_brz_rio_de_janeiro = {
+		icon = mission_found_havana
+		required_missions = { CEF_brz_salvador_da_bahia }
+		position = 6
+		#completed_by = 1445.1.1
+		
+		provinces_to_highlight = {
+			OR = {
+				AND = {
+					OR = {
+						province_id = 761
+						province_id = 762
+						province_id = 764
+					}
+					OR = {
+						NOT = { development = 15 }
+						NOT = { owned_by = ROOT }
+					}
+				}
+				AND = {
+					province_id = 763
+					OR = {
+						NOT = { development = 30 }
+						NOT = { owned_by = ROOT }
+						NOT = { num_of_buildings_in_province = 4 }
+						NOT = { fort_level = 2 }
+					}
+				}
+			}
+		}
+		
+		trigger = { 
+			763 = {
+				owned_by = ROOT
+				development = 30
+				num_of_buildings_in_province = 4
+				fort_level = 2
+			}
+			761 = {
+				owned_by = ROOT
+				development = 15
+			}
+			762 = {
+				owned_by = ROOT
+				development = 15
+			}
+			764 = {
+				owned_by = ROOT
+				development = 15
+			}
+		}
+	
+		effect = {
+			set_capital = 763
+			763 = {
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+				add_province_modifier = {
+					name = CEF_brz_brazilian_trading_hub_modifier
+					duration = -1
+				}
+				add_center_of_trade_lvl_or_ducats = yes
+			}
+		}
+	}
+}
+
+CEF_brazil_cn_4_brz = {
+
+	slot = 4
+	generic = no
+	ai = yes
+	
+	potential = {
+		tag = BRZ
+	}
+	has_country_shield = yes
+	
+	CEF_brz_a_brazilian_empire = {
+		icon = mission_empire
+		required_missions = { CEF_brz_independencia_ou_morte }
+		position = 6
+		#completed_by = 1445.1.1
+		
+		provinces_to_highlight = {
+			region = brazil_region
+			NOT = { owned_by = ROOT }
+			is_empty = no
+		}
+		
+		trigger = { 
+			all_province = {
+				OR = {
+					NOT = { region = brazil_region }
+					is_empty = yes
+					owned_by = ROOT
+				}
+			}
+		}
+	
+		effect = {
+			add_power_projection = {
+				type = 10_permanent_power_projection
+				amount = 10
+			}
+			custom_tooltip = CEF_brz_a_brazilian_empire_pp_tt
+		}
+	}
+	
+	CEF_brz_united_states_of_brazil = {
+		icon = dreams_of_grandeur
+		required_missions = { CEF_brz_a_brazilian_empire }
+		position = 7
+		#completed_by = 1445.1.1
+		
+		trigger = { 
+			OR = {
+				NOT = { great_power_rank = 9 }
+				NOT = {
+					any_country = {
+						capital_scope = {
+							OR = {
+								continent = north_america
+								continent = south_america
+							}
+						}
+						army_size = ROOT
+					}
+				}
+			}
+		}
+	
+		effect = {
+			country_event = { id = CEF_flavor_brz.8 }
+			add_country_modifier = {
+				name = CEF_brz_consolidated_government_modifier
+				duration = -1
+			}
+		}
+	}
+}
+
+CEF_brazil_cn_4_branch_8 = {
+
+	slot = 4
+	generic = no
+	ai = yes
+	
+	potential = {
+		tag = BRZ
+		NOT = { has_country_flag = CEF_brz_monarchy_mission_flag }
+		NOT = { has_country_flag = CEF_brz_republic_mission_flag }
+	}
+	has_country_shield = yes
+	
+	CEF_brz_branch_mission_4_8 = {
+		icon = mission_unknown_mission
+		required_missions = { CEF_brz_united_states_of_brazil }
+		position = 8
+		#completed_by = 1445.1.1
+		
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = selectable_mission_trigger_tt
+				always = no
+			}
+		}
+		
+		effect = {
+			custom_tooltip = CEF_brz_tt_branch_4_8_a
+			tooltip = {
+				add_country_modifier = {
+					name = CEF_brz_ave_gloria_ave_imperio_modifier
+					duration = -1
+				}
+				add_power_projection = {
+					type = 10_permanent_power_projection
+					amount = 10
+				}
+				custom_tooltip = CEF_brz_ordem_e_progresso_pp_tt
+			}
+			custom_tooltip = CEF_brz_tt_branch_4_8_b
+			tooltip = {
+				add_country_modifier = {
+					name = CEF_brz_milk_coffee_politics_modifier
+					duration = -1
+				}
+				add_power_projection = {
+					type = 10_permanent_power_projection
+					amount = 10
+				}
+				custom_tooltip = CEF_brz_ordem_e_progresso_pp_tt
+			}
+		}
+	
+	}
+}
+
+CEF_brazil_cn_4_branch_8_monarchy = {
+
+	slot = 4
+	generic = no
+	ai = yes
+	
+	potential = {
+		tag = BRZ
+		has_country_flag = CEF_brz_monarchy_mission_flag
+	}
+	has_country_shield = yes
+	
+	CEF_brz_ave_gloria_ave_imperio = {
+		icon = chivalry_is_not_dead
+		required_missions = { CEF_brz_united_states_of_brazil }
+		position = 8
+		#completed_by = 1445.1.1
+		
+		trigger = {
+			is_at_war = no
+			OR = {
+				calc_true_if = {
+					all_owned_province = {
+						is_prosperous = yes
+					}
+					amount = 30
+				}
+				stability = 3
+			}
+			OR = {
+				NOT = { great_power_rank = 9 }
+				NOT = {
+					any_country = {
+						capital_scope = {
+							OR = {
+								continent = north_america
+								continent = south_america
+							}
+						}
+						army_size = ROOT
+					}
+				}
+			}
+			army_size = 100
+			navy_size = 50
+			legitimacy = 100
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = CEF_brz_ave_gloria_ave_imperio_modifier
+				duration = -1
+			}
+			add_power_projection = {
+				type = 10_permanent_power_projection
+				amount = 10
+			}
+			custom_tooltip = CEF_brz_ordem_e_progresso_pp_tt
+		}
+	
+	}
+}
+
+CEF_brazil_cn_4_branch_8_republic = {
+
+	slot = 4
+	generic = no
+	ai = yes
+	
+	potential = {
+		tag = BRZ
+		has_country_flag = CEF_brz_republic_mission_flag
+	}
+	has_country_shield = yes
+	
+	CEF_brz_milk_coffee_politics = {
+		icon = mission_brazilian_bandeirantes
+		required_missions = { CEF_brz_united_states_of_brazil }
+		position = 8
+		#completed_by = 1445.1.1
+		
+		trigger = {
+			is_at_war = no
+			OR = {
+				calc_true_if = {
+					all_owned_province = {
+						is_prosperous = yes
+					}
+					amount = 30
+				}
+				stability = 3
+			}
+			OR = {
+				NOT = { great_power_rank = 9 }
+				NOT = {
+					any_country = {
+						capital_scope = {
+							OR = {
+								continent = north_america
+								continent = south_america
+							}
+						}
+						army_size = ROOT
+					}
+				}
+			}
+			army_size = 100
+			navy_size = 50
+			republican_tradition = 100
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = CEF_brz_milk_coffee_politics_modifier
+				duration = -1
+			}
+			add_power_projection = {
+				type = 10_permanent_power_projection
+				amount = 10
+			}
+			custom_tooltip = CEF_brz_ordem_e_progresso_pp_tt
+		}
+	
+	}
+}

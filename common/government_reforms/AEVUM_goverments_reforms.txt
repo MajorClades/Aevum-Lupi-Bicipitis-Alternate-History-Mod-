@@ -457,8 +457,8 @@ aldabban_republic_reform = {
 	lock_level_when_selected = yes
 	potential = {
 		OR = {
-			has_reform = aldabban_theocracy_reform
-			have_had_reform = aldabban_theocracy_reform
+			has_reform = aldabban_republic_reform
+			have_had_reform = aldabban_republic_reform
 		}
 	}
 	modifiers = {
@@ -469,8 +469,11 @@ aldabban_republic_reform = {
 	custom_attributes = {
 		generals_become_rulers = yes
 		locked_government_type = yes
+		election_on_death = no
+		has_term_election = no
 		enables_plutocratic_idea_group = yes
 		enables_aristocratic_idea_group = no
+		cannot_become_dictatorship = yes
 	}
 	government_abilities = {
 		aldabba_failure_mechanic
@@ -509,16 +512,17 @@ aldabban_restored_reform = {
 at_shop_reform = {
 	allow_normal_conversion = yes
 	icon = "at_shop" #REPLACE_ME
-	potential = {	}
+	potential = {	
+		has_unlocked_government_reform = { government_reform = at_shop_reform }
+	}
 	trigger = {
 		OR = {
-			army_tradition = 50
+			army_tradition = 80
 			has_reform = at_shop_reform
 		}
 	}
 	modifiers = {
-		infantry_cost = -0.1
-		manpower_recovery_speed = 0.15
+		land_maintenance_modifier = -0.05
 	}
 	effect = {
 		set_country_flag = extra_discipline_for_at_flag
@@ -539,7 +543,9 @@ at_shop_reform = {
 professional_expansion_reform = {
 	allow_normal_conversion = yes
 	icon = "professionalism" #REPLACE_ME
-	potential = {	}
+	potential = {	
+		has_unlocked_government_reform = { government_reform = professional_expansion_reform }
+	}
 	trigger = {
 		OR = {
 			mil_power = 250
@@ -547,8 +553,7 @@ professional_expansion_reform = {
 		}
 	}
 	modifiers = {
-		infantry_cost = -0.1
-		manpower_recovery_speed = 0.15
+		manpower_recovery_speed = 0.05
 	}
 	effect = {
 		add_mil_power = -250
@@ -608,7 +613,7 @@ herkulian_quality_reform = {
 		leader_naval_fire = 1
 	}
 	effect = {
-		remove_country_modifier = herk_big_quantity
+		remove_country_modifier = herk_big_quality
 	}
 	
 	ai = {

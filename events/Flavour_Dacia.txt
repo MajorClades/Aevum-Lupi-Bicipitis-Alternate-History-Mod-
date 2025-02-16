@@ -1,0 +1,494 @@
+namespace = dac
+
+country_event = {
+	id = dac.1
+	title = dac.1.t
+	desc = dac.1.d
+	picture = SIEGE_PRAGUE_CASTLE_eventPicture
+	fire_only_once = yes
+	trigger = {
+		is_year = 1448
+		owns = 4128
+		4128 = {
+			has_great_project = {
+				type = bran_castle
+			}
+		}
+	}
+	option = {
+		name = dac.1a
+		ai_chance = {
+			factor = 1
+		}
+		4128 = {
+			add_devastation = 50
+			set_province_flag = dracula_showed_up
+		}
+		if = {
+			limit = { ai = yes}
+			country_event = {
+				id = dac.2
+				days = 3650
+			}
+		}
+	}
+	option = {
+		name = dac.1b
+		ai_chance = {
+			factor = 0
+		}
+		add_yearly_manpower = -0.2
+		4128 = {
+			add_devastation = 10
+			set_province_flag = dracula_showed_up
+		}
+	}
+}
+
+country_event = {
+	id = dac.2
+	title = dac.2.t
+	desc = dac.2.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = dac.2a #mister Draculea Aelucard, born in Gepidia, claims the castle as family heritage 
+		ai_chance = {
+			factor = 50
+		}
+		set_country_flag = dracula_in_the_house
+		custom_tooltip = DAZ_DRACULA_TT_2a
+		country_event = {
+			id = dac.3
+			days = 30
+		}
+	}
+	option = {
+		name = dac.2b #mister belmondo, born in Italy, claims he can clear the castle for it and pay in loyalty
+		ai_chance = {
+			factor = 40
+		}
+		set_country_flag = belmondo_in_the_house
+		custom_tooltip = DAZ_DRACULA_TT_2b
+		country_event = {
+			id = dac.3
+			days = 30
+		}
+	}
+	option = {
+		name = dac.2c #the mercenary band named 'The 500 Companions' would also do it just for money, definitly not werewolfs, but Turkish
+		ai_chance = {
+			factor = 10
+		}
+		set_country_flag = turks_in_the_house
+		custom_tooltip = DAZ_DRACULA_TT_2c
+		country_event = {
+			id = dac.5
+			days = 120
+		}
+	}
+}
+
+country_event = {
+	id = dac.3
+	title = dac.3.t
+	desc = dac.3.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = dac.3a #aelucard fights belmondo, aelucard wins
+		ai_chance = {
+			factor = 30
+		}
+		set_country_flag = dracula_in_the_house
+		clr_country_flag = belmondo_in_the_house
+		custom_tooltip = DAZ_DRACULA_TT_2a
+		country_event = {
+			id = dac.4
+		}
+	}
+	option = {
+		name = dac.3b #belmondo fights aelucard, belmondo wins
+		ai_chance = {
+			factor = 70
+		}
+		set_country_flag = belmondo_in_the_house
+		clr_country_flag = dracula_in_the_house
+		custom_tooltip = DAZ_DRACULA_TT_2b
+		define_general = {
+			shock = 3
+			fire = 2
+			manuever = 3
+			siege = 4
+			name = "Raffaele Belmondo"
+			trait = inspirational_captain_personality
+		}
+		country_event = {
+			id = dac.5
+			days = 60
+		}
+	}
+	after = {
+		hidden_effect = {
+			set_country_flag = jidava_has_owner_flag
+		}
+	}
+}
+
+country_event = {
+	id = dac.4
+	title = dac.4.t
+	desc = dac.4.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = dac.4a #pay for Aelucard debt
+		ai_chance = {
+			factor = 30
+		}
+		add_treasury = -1000
+		define_general = {
+			shock = 5
+			fire = 3
+			manuever = 5
+			siege = 3
+			name = "Mathias III Aelucard"
+			trait = inspirational_captain_personality
+		}
+		4128 = {
+			add_great_project_tier = {
+				type = bran_castle
+				tier = 1
+			}
+		}
+	}
+	option = {
+		name = dac.4b #Vo Waskaszyja imprisons Aelucard for debt evasion
+		ai_chance = {
+			factor = 70
+		}
+		set_country_flag = belmondo_in_the_house
+		clr_country_flag = dracula_in_the_house
+		custom_tooltip = DAZ_DRACULA_TT_2b
+		define_advisor = {
+			type = master_of_mint
+			skill = 3
+			culture = franken
+    		religion = impotian
+			name = "Abraham vo Waskaszyja"
+			cost_multiplier = 0.75
+		}
+	}
+	after = {
+		hidden_effect = {
+			set_country_flag = jidava_has_owner_flag
+		}
+	}
+}
+
+#van helsing -> vo waskaszyja
+
+country_event = {
+	id = dac.5
+	title = dac.5.t
+	desc = dac.5.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = dac.5a 
+		ai_chance = {
+			factor = 80
+		}
+		add_treasury = -500
+		4128 = {
+			add_great_project_tier = {
+				type = bran_castle
+				tier = 1
+			}
+		}
+	}
+	option = {
+		name = dac.5b 
+		ai_chance = {
+			factor = 20
+		}
+		4128 = {
+			add_or_upgrade_fort_building = yes
+		}
+	}
+}
+
+country_event = {
+	id = dac.6
+	title = dac.6.t
+	desc = dac.6.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = dac.6a 
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 1.5
+				has_opinion = {
+					who = DA0
+					value = 100
+				}
+			}
+			modifier = {
+				factor = 1.25
+				has_opinion = {
+					who = DA0
+					value = 130
+				}
+			}
+			modifier = {
+				factor = 1.25
+				has_opinion = {
+					who = DA0
+					value = 150
+				}
+			}
+		}
+		DA0 = {
+			vassalize = ROOT
+		}
+	}
+	option = {
+		name = dac.6b 
+		ai_chance = {
+			factor = 50
+		}
+		DA0 = {
+			add_casus_belli = {
+				type = cb_vassalize_mission
+				target = ROOT
+			}
+		}
+	}
+}
+
+country_event = {
+	id = dac.7
+	title = dac.7.t
+	desc = dac.7.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = dac.7a 
+		add_country_modifier = {
+			name = dac_faster_elites
+			duration = -1
+		}
+	}
+	option = {
+		name = dac.7b 
+		add_country_modifier = {
+			name = dac_cheaper_elites
+			duration = -1
+		}
+	}
+}
+
+country_event = {
+	id = dac.8
+	title = dac.8.t
+	desc = dac.8.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = dac.8a 
+		151 = {
+			cede_province = ROOT
+			change_culture = dacian
+		}
+		set_capital = 151
+		country_event = {
+			id = dac.9
+		}
+	}
+	option = {
+		name = dac.8b 
+		151 = {
+			change_culture = greek_new
+			add_province_modifier = {
+				name = dac_restored_constantine
+				duration = 10950
+			}
+		}
+		add_accepted_culture = greek_new
+		country_event = {
+			id = dac.9
+		}
+	}
+}
+
+country_event = {
+	id = dac.9
+	title = dac.9.t
+	desc = dac.9.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = dac.9a 
+		add_ruler_modifier = {
+			name = restorer_daciarum
+		}
+		italy_region = {
+			add_permanent_claim = ROOT
+		}
+		france_region = {
+			add_permanent_claim = ROOT
+		}
+		iberia_region = {
+			add_permanent_claim = ROOT
+		}
+	}
+	option = {
+		name = dac.9b 
+		add_ruler_modifier = {
+			name = imperator_daciarum
+		}
+		poland_region = {
+			add_permanent_claim = ROOT
+		}
+		ruthenia_region = {
+			add_permanent_claim = ROOT
+		}
+		anatolia_region = {
+			add_permanent_claim = ROOT
+		}
+	}
+}
+
+country_event = {
+	id = dac.10
+	title = dac.10.t
+	desc = dac.10.d
+	picture = STRELTSY_MARCHING_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = dac.10a
+		custom_tooltip = dacia_TT_12a
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						culture = gepid
+						culture = ug_gepid
+					}
+				}
+				add_core = SX1
+			}
+			release = SX1
+			vassalize = SX1
+			SX1 = {
+				change_religion = ROOT
+				add_liberty_desire = -50
+			}
+		}
+	}
+	option = {
+		name = dac.10b 
+		custom_tooltip = dacia_TT_12b
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						culture = gepid
+						culture = ug_gepid
+					}
+				}
+				change_culture = d_west_slav
+			}
+		}
+	}
+	option = {
+		name = dac.10c
+		custom_tooltip = dacia_TT_12c
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						culture = gepid
+						culture = ug_gepid
+					}
+				}
+				change_culture = avars
+			}
+		}
+	}
+	option = {
+		name = dac.10d 
+		custom_tooltip = dacia_TT_12d
+		every_owned_province = {
+			limit = {
+				OR = {
+					culture = gepid
+					culture = ug_gepid
+				}
+			}
+			change_culture = ROOT
+		}
+	}
+}
+
+
+country_event = { #flavor
+	id = dac.11
+	title = dac.11.t
+	desc = dac.11.d
+	picture = STRELTSY_MARCHING_eventPicture
+	trigger = {
+		OR = {
+			tag = DA0
+			was_tag = DA0
+		}
+		is_year = 1530
+		owns = 4127
+	}
+	mean_time_to_happen = {
+		months = 12
+	}
+	option = {
+		name = dac.11a
+		ai_chance = {
+			factor = 80
+		}
+		4127 = {
+			add_unrest = -2
+		}
+		change_estate_land_share = {
+			estate = estate_nobles
+			share = -1
+		}
+	}
+	option = {
+		name = dac.11b 
+		ai_chance = {
+			factor = 20
+		}
+		define_advisor = {
+			type = commandant
+			skill = 3
+			female = no
+			culture = dacian
+			name = "Count Orlok"
+			age = 33
+		}
+		custom_tooltip = DACIA_TT_13
+		tooltip = {
+			add_country_modifier = {
+				name = count_orlok
+				duration = 1
+			}
+		}
+		4127 = {
+			spawn_rebels = {
+				size = 1
+				type = nationalist_rebels
+			}
+		}
+	}
+}

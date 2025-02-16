@@ -112,6 +112,7 @@ port = {
 
 in_state = {
 	local_institution_spread = 0.10
+	local_has_qizilbash = yes
 }
 
 in_capital_state = {
@@ -647,6 +648,7 @@ positive_stability = {
 	monthly_authority_power = -0.01
 	monthly_hellenization = 0.05
 	monthly_cahokian_trade = 0.02
+	monthly_CEF_centralization_power = 0.05
 }
 
 privateering = {
@@ -666,6 +668,7 @@ negative_stability = {
 	monthly_authority_power = 0.05
 	monthly_rhoman_decadence = -0.15
 	monthly_hellenization = -0.05
+	monthly_CEF_centralization_power = 0.05
 }
 
 positive_mandate = {	# 100% strength at 100 mandate, 0% at 50 mandate
@@ -1411,7 +1414,7 @@ high_army_professionalism = {
 	shock_damage = 0.1
 	siege_ability = 0.2
 	drill_decay_modifier = -0.5
-	allowed_samurai_fraction = 0.1
+	allowed_qizilbash_fraction = 0.1
 }
 
 streltsy_modifier = {
@@ -2121,6 +2124,14 @@ alexite_scholar_modifier = {
 	devotion = 1
 }
 
+bosnaci_scholar_modifier = {
+	religion_sub_modifier = yes # Will make icon placed next to religion modifier
+	religion = yes
+	is_scholar_modifier = yes # Tells the AI and will only show the alert if country has none
+	expire_message_type = "RELIGIOUS_SCHOLAR_EXPIRY"
+	global_unrest = -2
+}
+
 ########################################
 # Regiment Types Modifiers
 ########################################
@@ -2189,8 +2200,9 @@ samurai_regiment = {
 }
 
 qizilbash_regiment = {
-	fire_damage_received = -0.05
-	land_maintenance_modifier = -0.25
+	shock_damage = 0.1
+	shock_damage_received = -0.1
+	reinforce_cost_modifier = 0.15
 }
 
 mamluks_regiment = {
@@ -2310,6 +2322,7 @@ under_governing_capacity_modifier = {
 }
 #Scales with unused capacity, eing at full capacity means 0% of the modifier
 reverse_under_governing_capacity_modifier = {
+	monthly_CEF_centralization_power = 0.25
 }
 
 lost_hegemony = {

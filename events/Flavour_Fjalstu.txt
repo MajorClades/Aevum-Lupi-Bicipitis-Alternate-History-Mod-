@@ -659,6 +659,7 @@ country_event = {
 	is_triggered_only = yes
 	option = {
 		name = fjal.17a
+		set_country_flag = VINLAND_EMPIRE
 		add_government_reform = vinland_empire_reform
 	}
 }
@@ -1209,40 +1210,114 @@ country_event = { #for the AI otherwise this cultures would never appear
 	}
 }
 
-country_event = {
+country_event = { #AI Frajslundt will finally become Vinland
 	id = fjal.1000
 	title = fjal.1000.test
 	desc = fjal.1000.desc
 	picture = NORSE_TEMPLE_eventPicture
-	hidden = yes
-	is_triggered_only = yes
 	trigger = {
-		is_rausundian_native = yes
-		NOT = { 
-			has_country_flag = starting_feudalism_natives
-		}
-		always = no #they'll get feudalism in due time, this is for game balance. They get it way easier because they're monarchies anyways
+		ai = yes
+		tag = FJ0
+		is_year = 1450
+		owns = 981
+	}
+	fire_only_once = yes
+	mean_time_to_happen = {
+		months = 50
 	}
 	option = {
 		name = fjal.1a
-		set_country_flag = starting_feudalism_natives
-		capital_scope = {
-			add_institution_embracement = {
-				which = feudalism
-				value = 100
+		981 = {
+			set_seat_in_parliament = yes
+		}
+	}
+}
+
+country_event = { #AI Frajslundt will finally become Vinland
+	id = fjal.1001
+	title = fjal.1001.test
+	desc = fjal.1001.desc
+	picture = NORSE_TEMPLE_eventPicture
+	trigger = {
+		ai = yes
+		tag = FJ0
+		is_year = 1470
+		owns = 2579
+	}
+	fire_only_once = yes
+	mean_time_to_happen = {
+		months = 50
+	}
+	option = {
+		name = fjal.1a
+		add_adm_power = -150
+		add_dip_power = -150
+		add_mil_power = -150
+		2579 = {
+			add_random_development = 1
+			add_random_development = 1
+			add_random_development = 1
+			add_random_development = 1
+			add_random_development = 1
+		}
+	}
+}
+
+country_event = { #AI Frajslundt will finally become Vinland
+	id = fjal.1002
+	title = fjal.1002.test
+	desc = fjal.1002.desc
+	picture = NORSE_TEMPLE_eventPicture
+	trigger = {
+		ai = yes
+		tag = FJ0
+		is_year = 1515
+		owns = 993
+	}
+	mean_time_to_happen = {
+		months = 50
+	}
+	option = {
+		name = fjal.1a
+		993 = {
+			while = {
+				limit = { NOT = {development = 15 }}
+				add_random_development = 1
+				owner = {
+					add_adm_power = -40
+					add_dip_power = -40
+					add_mil_power = -40
+				}
 			}
-		}	
-		if = {
-			limit = {tag = LEN}
-			define_admiral = {
-				shock = 4
-				fire = 4
-				manuever = 5
-			}
-			random_owned_province = {
-				light_ship = ROOT
-				light_ship = ROOT
-				light_ship = ROOT
+		}
+	}
+}
+
+country_event = { #AI Frajslundt will finally become Vinland
+	id = fjal.1003
+	title = fjal.1003.test
+	desc = fjal.1003.desc
+	picture = NORSE_TEMPLE_eventPicture
+	trigger = {
+		ai = yes
+		tag = FJ0
+		is_year = 1535
+		owns = 993
+	}
+	mean_time_to_happen = {
+		months = 50
+	}
+	option = {
+		name = fjal.1a
+		993 = {
+			while = {
+				limit = { NOT = {development = 25 }}
+				add_random_development = 1
+				owner = {
+					add_adm_power = -40
+					add_dip_power = -40
+					add_mil_power = -40
+				}
 			}
 		}
 	}
