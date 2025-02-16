@@ -3,29 +3,71 @@ custom_button = {
 	name = AT_button
 	potential = {
 		has_country_flag = extra_discipline_for_at_flag
-		NOT = {
-			has_country_modifier = at_discipline_1
-		}
-		NOT = {
-			has_country_modifier = at_discipline_2
-		}
-		NOT = {
-			has_country_modifier = at_discipline_3
-		}
-		NOT = {
-			has_country_modifier = at_discipline_4
-		}
 	}
 	trigger = {
-		army_tradition = 20
+		
 	}
 	effect = {
-		add_army_tradition = -20
-		add_country_modifier = {
-			name = at_discipline_1
-			duration = -1
+		if = {
+			limit = {has_country_flag = atm_shop_flag}
+			clr_country_flag = atm_shop_flag
+		}else = {
+			set_country_flag = atm_shop_flag
 		}
-		#play_sound = get_war_declare
+		hidden_effect = { #this is here for the moment, would move it an hidden effect in before unlocking the mechanic for a tag
+			if = {
+				limit = {
+					check_variable = {
+						which = war_lesson_counter
+						value = 1
+					}
+				}
+			}else = {
+				set_variable = {
+					which = war_lesson_counter
+					value = 0
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						which = fire_damage_tt_var
+						value = 5
+					}
+				}
+			}else = {
+				set_variable = {
+					which = fire_damage_tt_var
+					value = 0
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						which = shock_damage_tt_var
+						value = 5
+					}
+				}
+			}else = {
+				set_variable = {
+					which = shock_damage_tt_var
+					value = 0
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						which = morale_damage_tt_var
+						value = 5
+					}
+				}
+			}else = {
+				set_variable = {
+					which = morale_damage_tt_var
+					value = 0
+				}
+			}
+		}
 	}
 	tooltip = AT_button_tt
 }
@@ -33,90 +75,497 @@ custom_button = {
 custom_button = {
 	name = AT_button2
 	potential = {
-		has_country_flag = extra_discipline_for_at_flag
-		has_country_modifier = at_discipline_1
-		NOT = {
-			has_country_modifier = at_discipline_2
-		}
-		NOT = {
-			has_country_modifier = at_discipline_3
-		}
-		NOT = {
-			has_country_modifier = at_discipline_4
-		}
+		has_country_flag = atm_shop_flag
 	}
 	trigger = {
-		army_tradition = 40
+		army_tradition = 10
+		check_variable = {
+			which = war_lesson_counter
+			value = 5
+		}
 	}
 	effect = {
-		add_army_tradition = -40
-		remove_country_modifier = at_discipline_1
-		add_country_modifier = {
-			name = at_discipline_2
-			duration = -1
+		add_army_tradition = -10
+		subtract_variable = {
+			which = war_lesson_counter
+			value = 5
+		}
+		if = {
+			limit = {
+				NOT = {
+					check_variable = {
+						which = fire_damage_tt_var
+						value = 5
+					}
+				}
+			}
+			add_country_modifier = {
+				name = fire_damage_lv_1
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = fire_damage_tt_var
+					value = 5
+				}
+				NOT = {
+					check_variable = {
+						which = fire_damage_tt_var
+						value = 10
+					}
+				}
+			}
+			remove_country_modifier = fire_damage_lv_1
+			add_country_modifier = {
+				name = fire_damage_lv_2
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = fire_damage_tt_var
+					value = 10
+				}
+				NOT = {
+					check_variable = {
+						which = fire_damage_tt_var
+						value = 15
+					}
+				}
+			}
+			remove_country_modifier = fire_damage_lv_2
+			add_country_modifier = {
+				name = fire_damage_lv_3
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = fire_damage_tt_var
+					value = 15
+				}
+				NOT = {
+					check_variable = {
+						which = fire_damage_tt_var
+						value = 20
+					}
+				}
+			}
+			remove_country_modifier = fire_damage_lv_3
+			add_country_modifier = {
+				name = fire_damage_lv_4
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = fire_damage_tt_var
+					value = 20
+				}
+			}
+			remove_country_modifier = fire_damage_lv_4
+			add_country_modifier = {
+				name = fire_damage_lv_5
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = fire_damage_tt_var
+					value = 20
+				}
+			}
+			remove_country_modifier = fire_damage_lv_4
+			add_country_modifier = {
+				name = fire_damage_lv_5
+				duration = -1
+				hidden = yes
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = {
+						check_variable = {
+							which = fire_damage_tt_var
+							value = 20
+						}
+					}
+				}
+				change_variable = {
+					which = fire_damage_tt_var
+					value = 5
+				}
+			}
 		}
 		#play_sound = get_war_declare
 	}
-	tooltip = AT_button_tt
+	tooltip = AT_button2_tt
 }
 
 custom_button = {
 	name = AT_button3
 	potential = {
-		has_country_flag = extra_discipline_for_at_flag
-		has_country_modifier = at_discipline_2
-		NOT = {
-			has_country_modifier = at_discipline_3
-		}
-		NOT = {
-			has_country_modifier = at_discipline_4
-		}
+		has_country_flag = atm_shop_flag
 	}
 	trigger = {
-		army_tradition = 60
+		army_tradition = 10
+		check_variable = {
+			which = war_lesson_counter
+			value = 5
+		}
 	}
 	effect = {
-		add_army_tradition = -60
-		remove_country_modifier = at_discipline_2
-		add_country_modifier = {
-			name = at_discipline_3
-			duration = -1
+		add_army_tradition = -10
+		subtract_variable = {
+			which = war_lesson_counter
+			value = 5
+		}
+		if = {
+			limit = {
+				NOT = {
+					check_variable = {
+						which = shock_damage_tt_var
+						value = 5
+					}
+				}
+			}
+			add_country_modifier = {
+				name = shock_damage_lv_1
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = shock_damage_tt_var
+					value = 5
+				}
+				NOT = {
+					check_variable = {
+						which = shock_damage_tt_var
+						value = 10
+					}
+				}
+			}
+			remove_country_modifier = shock_damage_lv_1
+			add_country_modifier = {
+				name = shock_damage_lv_2
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = shock_damage_tt_var
+					value = 10
+				}
+				NOT = {
+					check_variable = {
+						which = shock_damage_tt_var
+						value = 15
+					}
+				}
+			}
+			remove_country_modifier = shock_damage_lv_2
+			add_country_modifier = {
+				name = shock_damage_lv_3
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = shock_damage_tt_var
+					value = 15
+				}
+				NOT = {
+					check_variable = {
+						which = shock_damage_tt_var
+						value = 20
+					}
+				}
+			}
+			remove_country_modifier = shock_damage_lv_3
+			add_country_modifier = {
+				name = shock_damage_lv_4
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = shock_damage_tt_var
+					value = 20
+				}
+			}
+			remove_country_modifier = shock_damage_lv_4
+			add_country_modifier = {
+				name = shock_damage_lv_5
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = shock_damage_tt_var
+					value = 20
+				}
+			}
+			remove_country_modifier = shock_damage_lv_4
+			add_country_modifier = {
+				name = shock_damage_lv_5
+				duration = -1
+				hidden = yes
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = {
+						check_variable = {
+							which = shock_damage_tt_var
+							value = 20
+						}
+					}
+				}
+				change_variable = {
+					which = shock_damage_tt_var
+					value = 5
+				}
+			}
 		}
 		#play_sound = get_war_declare
 	}
-	tooltip = AT_button_tt
+	tooltip = AT_button3_tt
 }
 
 custom_button = {
 	name = AT_button4
 	potential = {
-		has_country_flag = extra_discipline_for_at_flag
-		OR = {
-			has_country_modifier = at_discipline_3
-			has_country_modifier = at_discipline_4
-		}
+		has_country_flag = atm_shop_flag
 	}
 	trigger = {
-		if = {
-			limit = {
-				has_country_modifier = at_discipline_3
-			}
-			army_tradition = 100
+		army_tradition = 10
+		check_variable = {
+			which = war_lesson_counter
+			value = 5
 		}
 	}
 	effect = {
+		add_army_tradition = -10
+		subtract_variable = {
+			which = war_lesson_counter
+			value = 5
+		}
 		if = {
 			limit = {
-				has_country_modifier = at_discipline_3
+				NOT = {
+					check_variable = {
+						which = morale_damage_tt_var
+						value = 5
+					}
+				}
 			}
-			add_army_tradition = -100
-			remove_country_modifier = at_discipline_3
+			add_country_modifier = {
+				name = morale_damage_lv_1
+				duration = -1
+				hidden = yes
+			}
 		}
-		add_country_modifier = {
-			name = at_discipline_4
-			duration = -1
+		if = {
+			limit = {
+				check_variable = {
+					which = morale_damage_tt_var
+					value = 5
+				}
+				NOT = {
+					check_variable = {
+						which = morale_damage_tt_var
+						value = 10
+					}
+				}
+			}
+			remove_country_modifier = morale_damage_lv_1
+			add_country_modifier = {
+				name = morale_damage_lv_2
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = morale_damage_tt_var
+					value = 10
+				}
+				NOT = {
+					check_variable = {
+						which = morale_damage_tt_var
+						value = 15
+					}
+				}
+			}
+			remove_country_modifier = morale_damage_lv_2
+			add_country_modifier = {
+				name = morale_damage_lv_3
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = morale_damage_tt_var
+					value = 15
+				}
+				NOT = {
+					check_variable = {
+						which = morale_damage_tt_var
+						value = 20
+					}
+				}
+			}
+			remove_country_modifier = morale_damage_lv_3
+			add_country_modifier = {
+				name = morale_damage_lv_4
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = morale_damage_tt_var
+					value = 20
+				}
+			}
+			remove_country_modifier = morale_damage_lv_4
+			add_country_modifier = {
+				name = morale_damage_lv_5
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = morale_damage_tt_var
+					value = 20
+				}
+			}
+			remove_country_modifier = morale_damage_lv_4
+			add_country_modifier = {
+				name = morale_damage_lv_5
+				duration = -1
+				hidden = yes
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = {
+						check_variable = {
+							which = morale_damage_tt_var
+							value = 20
+						}
+					}
+				}
+				change_variable = {
+					which = morale_damage_tt_var
+					value = 5
+				}
+			}
 		}
 		#play_sound = get_war_declare
 	}
-	tooltip = AT_button_tt
+	tooltip = AT_button4_tt
+}
+
+custom_icon = {
+    name = atm_shop_bg #Must match a scripted iconType in a .gui file
+    potential = { 
+		has_country_flag = atm_shop_flag
+	} #Determines when the icon is visible
+}
+
+custom_text_box = {
+    name = ATM_title #Must match a scripted instantTextBoxType in a .gui file 
+    potential = { 
+		has_country_flag = atm_shop_flag
+	} #Determines when the text is visible
+    #To localize it, use the name of the button as a key, can also use customizable localisation
+}
+
+
+custom_text_box = {
+    name = fire_damage_text_title #Must match a scripted instantTextBoxType in a .gui file 
+    potential = { 
+		has_country_flag = atm_shop_flag
+	} #Determines when the text is visible
+    #To localize it, use the name of the button as a key, can also use customizable localisation
+}
+
+custom_text_box = {
+    name = fire_damage_cost_text_title #Must match a scripted instantTextBoxType in a .gui file 
+    potential = { 
+		has_country_flag = atm_shop_flag
+	} #Determines when the text is visible
+    #To localize it, use the name of the button as a key, can also use customizable localisation
+}
+
+custom_text_box = {
+    name = shock_damage_text_title #Must match a scripted instantTextBoxType in a .gui file 
+    potential = { 
+		has_country_flag = atm_shop_flag
+	} #Determines when the text is visible
+    #To localize it, use the name of the button as a key, can also use customizable localisation
+}
+
+custom_text_box = {
+    name = shock_damage_cost_text_title #Must match a scripted instantTextBoxType in a .gui file 
+    potential = { 
+		has_country_flag = atm_shop_flag
+	} #Determines when the text is visible
+    #To localize it, use the name of the button as a key, can also use customizable localisation
+}
+
+custom_text_box = {
+    name = morale_damage_text_title #Must match a scripted instantTextBoxType in a .gui file 
+    potential = { 
+		has_country_flag = atm_shop_flag
+	} #Determines when the text is visible
+    #To localize it, use the name of the button as a key, can also use customizable localisation
+}
+
+custom_text_box = {
+    name = morale_damage_cost_text_title #Must match a scripted instantTextBoxType in a .gui file 
+    potential = { 
+		has_country_flag = atm_shop_flag
+	} #Determines when the text is visible
+    #To localize it, use the name of the button as a key, can also use customizable localisation
+}
+
+custom_text_box = {
+    name = war_lessons_text_title #Must match a scripted instantTextBoxType in a .gui file 
+    potential = { 
+		has_country_flag = atm_shop_flag
+	} #Determines when the text is visible
+    #To localize it, use the name of the button as a key, can also use customizable localisation
 }
