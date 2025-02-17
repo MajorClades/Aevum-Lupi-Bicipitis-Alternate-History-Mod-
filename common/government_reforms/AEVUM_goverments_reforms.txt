@@ -243,6 +243,123 @@ indian_manichanate_reform = {
 	#PUT SOME MECHANIC HERE FOR MANICHEASIM
 }
 
+indian_jewish_reform = {
+	icon = "indian_sultanate"
+	allow_normal_conversion = yes
+	potential = {
+		religion_group = jewish_group
+		capital_scope = {
+			superregion = india_superregion
+		}
+	}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 10
+	nation_designer_trigger = {
+		religion_group = jewish_group
+		capital_scope = {
+			superregion = india_superregion
+		}
+	}
+
+	modifiers = {
+		merchants = 1
+		placed_merchant_power = 5
+	}
+	boost_income = yes
+	conditional = {
+		allow = {
+			has_dlc = "Leviathan"
+		}
+		allow_draft_transport_ships = yes
+	}
+	conditional = {
+		allow = {
+			has_dlc = "Res Publica"
+			NOT = { has_dlc = "Mare Nostrum" }
+		}
+		can_use_trade_post = yes
+	}
+	conditional = {
+		allow = {
+			has_dlc = "Mare Nostrum"
+			NOT = { has_dlc = "Res Publica" }
+		}
+		can_form_trade_league = yes
+		trade_city_reform = trading_city
+	}
+	conditional = {
+		allow = {
+			has_dlc = "Res Publica"
+			has_dlc = "Mare Nostrum"
+		}
+		can_use_trade_post = yes
+		can_form_trade_league = yes
+		trade_city_reform = trading_city
+	}
+	custom_attributes = {
+		enables_plutocratic_idea_group = yes
+		enables_aristocratic_idea_group = no
+	}
+}
+
+indian_buddhist_reform = {
+	icon = "nayankara_system"
+	allow_normal_conversion = yes
+	potential = {
+		has_dlc = "Dharma"
+		technology_group = indian
+		OR = {
+			religion = buddhism
+			religion = vajrayana
+			religion = mahayana
+		}
+	}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 10
+	legacy_equivalent = feudal_monarchy
+	nation_designer_trigger = {
+		technology_group = indian
+		OR = {
+			religion = buddhism
+			religion = vajrayana
+			religion = mahayana
+
+		}
+	}
+	modifiers = {
+		tolerance_own = 3
+		governing_capacity = 100
+		development_cost = -0.05
+	}
+}
+
+indian_dharmic_reform = {
+	icon = "nayankara_system"
+	allow_normal_conversion = yes
+	potential = {
+		has_dlc = "Dharma"
+		technology_group = indian
+		OR = {
+			religion_group = dharmic
+		}
+	}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 10
+	legacy_equivalent = feudal_monarchy
+	nation_designer_trigger = {
+		technology_group = indian
+		OR = {
+			religion_group = dharmic
+
+		}
+	}
+	modifiers = {
+		tolerance_own = 3
+		governing_capacity = 100
+		development_cost = -0.05
+	}
+}
+
 light_empire_government = {
 	icon = "peacock_throne"
 	allow_normal_conversion = no
