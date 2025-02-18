@@ -1,0 +1,358 @@
+namespace = ayabani
+
+country_event = {
+	id = ayabani.1
+	title = ayabani.1.t
+	desc = ayabani.1.d
+	picture = east_asian_BATTLE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = ayabani.1a
+		ai_chance = {
+			factor = 50
+		}
+		add_country_modifier = {
+			name = ayb_merged_army_navy
+			duration = 10958
+		}
+		if = {
+			limit = {
+				NOT = { is_monarch_leader = yes }
+			}
+			define_ruler_to_general = {
+				fire = 2
+				shock = 2
+				manuever = 1
+				siege = 1
+			}
+		}
+	}
+	option = {
+		name  = ayabani.1b
+		ai_chance = {
+			factor = 50
+		}
+		add_estate_loyalty = {
+   			estate = estate_nobles
+   			loyalty = 5
+		}
+	}
+}
+
+country_event = {
+	id = ayabani.2
+	title = ayabani.2.t
+	desc = ayabani.2.d
+	picture = CIVIL_WAR_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = ayabani.2a
+		ai_chance = {
+			factor = 50
+		}
+		add_country_modifier = {
+			name = ayb_grand_army_embraced
+			duration = -1
+		}
+	}
+	option = {
+		name = ayabani.2b
+		ai_chance = {
+			factor = 50
+		}
+		add_country_modifier = {
+			name = ayb_grand_army_disbanded
+			duration = 3652
+		}
+}
+
+country_event = {
+	id = ayabani.3
+	title = ayabani.3.t
+	desc = ayabani.3.d
+	picture = shinto_COURT_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = ayabani.3a
+		add_opinion = {
+			who = KM6
+			modifier = ayabani_rats_refused
+		}
+	}
+}
+
+country_event = {
+	id = ayabani.4
+	title = ayabani.4.t
+	desc = ayabani.4.d
+	picture = east_asian_BATTLE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = ayabani.4a
+		if = {
+			limit = {
+				tag = KM7
+			}
+			declare_war_with_cb = {
+				who = KM8
+				casus_belli = cb_tamna_unification
+			}
+			declare_war_with_cb = {
+				who = KM9
+				casus_belli = cb_tamna_unification
+			}
+			hidden_effect = {
+				remove_historical_rival = KM8
+				remove_historical_rival = KM9
+				KM8 = { 
+					remove_historical_rival = KM7
+				}
+				KM9 = { 
+					remove_historical_rival = KM7
+				}
+				add_country_modifier = {
+					name = ayb_tamna_unification_war
+					duration = -1
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				tag = KM8
+			}
+			declare_war_with_cb = {
+				who = KM7
+				casus_belli = cb_tamna_unification
+			}
+			declare_war_with_cb = {
+				who = KM9
+				casus_belli = cb_tamna_unification
+			}
+			hidden_effect = {
+				remove_historical_rival = KM7
+				remove_historical_rival = KM9
+				KM7 = { 
+					remove_historical_rival = KM8
+				}
+				KM9 = { 
+					remove_historical_rival = KM8
+				}
+				add_country_modifier = {
+					name = ayb_tamna_unification_war
+					duration = -1
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				tag = KM9
+			}
+			declare_war_with_cb = {
+				who = KM7
+				casus_belli = cb_tamna_unification
+			}
+			declare_war_with_cb = {
+				who = KM8
+				casus_belli = cb_tamna_unification
+			}
+			hidden_effect = {
+				remove_historical_rival = KM7
+				remove_historical_rival = KM8
+				KM7 = { 
+					remove_historical_rival = KM9
+				}
+				KM8 = { 
+					remove_historical_rival = KM9
+				}
+				add_country_modifier = {
+					name = ayb_tamna_unification_war
+					duration = -1
+				}
+			}
+		}
+
+	}
+}
+
+country_event = {
+	id = ayabani.5
+	title = ayabani.5.t
+	desc = ayabani.5.d
+	picture = east_asian_BATTLE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = ayabani.5a
+		ai_chance = {
+			factor = 100	#If they get this event it means you're ready for war
+		}
+		if = {
+			limit = {
+				tag = KM7
+			}
+			declare_war_with_cb = {
+				who = KM8
+				casus_belli = cb_tamna_unification
+			}
+			declare_war_with_cb = {
+				who = KM9
+				casus_belli = cb_tamna_unification
+			}
+			hidden_effect = {
+				remove_historical_rival = KM8
+				remove_historical_rival = KM9
+				KM8 = { 
+					remove_historical_rival = KM7
+				}
+				KM9 = { 
+					remove_historical_rival = KM7
+				}
+				add_country_modifier = {
+					name = ayb_tamna_unification_war
+					duration = -1
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				tag = KM8
+			}
+			declare_war_with_cb = {
+				who = KM7
+				casus_belli = cb_tamna_unification
+			}
+			declare_war_with_cb = {
+				who = KM9
+				casus_belli = cb_tamna_unification
+			}
+			hidden_effect = {
+				remove_historical_rival = KM7
+				remove_historical_rival = KM9
+				KM7 = { 
+					remove_historical_rival = KM8
+				}
+				KM9 = { 
+					remove_historical_rival = KM8
+				}
+				add_country_modifier = {
+					name = ayb_tamna_unification_war
+					duration = -1
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				tag = KM9
+			}
+			add_country_modifier = {
+				name = ayb_tamna_unification_war
+				duration = -1
+			}
+			declare_war_with_cb = {
+				who = KM7
+				casus_belli = cb_tamna_unification
+			}
+			declare_war_with_cb = {
+				who = KM8
+				casus_belli = cb_tamna_unification
+			}
+			hidden_effect = {
+				remove_historical_rival = KM7
+				remove_historical_rival = KM8
+				KM7 = { 
+					remove_historical_rival = KM9
+				}
+				KM8 = { 
+					remove_historical_rival = KM9
+				}
+				add_country_modifier = {
+					name = ayb_tamna_unification_war
+					duration = -1
+				}
+			}
+		}
+	}
+	option = {
+		name = ayabani.5b
+		ai_chance = {
+			factor = 0	#If they get this event it means you're ready for war
+		}
+		add_prestige = -20
+		custom_tooltip =  AYABANI_TT_2
+		hidden_effect = {
+			KM7 = {
+				add_truce_with = KM8
+				add_truce_with = KM9
+				white_peace = KM8
+				white_peace = KM9
+			}
+			KM8 = {
+				add_truce_with = KM7
+				add_truce_with = KM9
+				white_peace = KM7
+				white_peace = KM9
+			}
+			KM9 = {
+				add_truce_with = KM7
+				add_truce_with = KM8
+				white_peace = KM7
+				white_peace = KM8
+			}
+		}
+	}
+}
+
+
+country_event = {
+	id = ayabani.6
+	title = ayabani.6.t
+	desc = ayabani.6.d
+	picture = ROYAL_STRESS_eventPicture
+	fire_only_once = yes
+	trigger = {
+		is_year = 1550
+		is_subject = no
+		is_at_war = no
+	}
+	mean_time_to_happen = {
+		months = 300
+	}
+	option = {
+		name = ayabani.6a
+		add_prestige = -15
+	}
+}
+
+country_event = {
+	id = ayabani.7
+	title = ayabani.7.t
+	desc = ayabani.7.d
+	picture = RELIGIOUS_TURMOIL_eventPicture
+	
+	fire_only_once = yes
+	
+	trigger = {
+		is_year = 1490
+		is_subject = no
+		is_at_war = no
+		tag = KR1
+	}
+	mean_time_to_happen = {
+		days = 100
+	}
+	option = {
+		name = ayabani.7a
+		custom_tooltip = AYABANI_TT_4
+		ai_chance = {
+			factor = 50	#The line between light and dark is so very thin
+		}
+		set_country_flag = traveler
+	}
+	option = {
+		name = ayabani.7b
+		custom_tooltip = AYABANI_TT_5
+		ai_chance = {
+			factor = 50	#The line between light and dark is so very thin
+		}
+		set_country_flag = witness
+	}
+}
