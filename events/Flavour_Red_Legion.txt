@@ -44,6 +44,9 @@ country_event = {
 				play_sound = DEUS_VULT_CRUSADE
 			}
 		}
+		capital_scope = {
+			save_global_event_target_as = SUPEREVENT_CAPITAL_TARGET
+		}
 	}
 	option = {
 		name = redleg.2a
@@ -58,17 +61,19 @@ country_event = {
 			}
 			add_permanent_claim = AF6
 		}
-		every_country = {
-			limit = {
-				capital_scope = {
-					has_discovered = PREV
+		hidden_effect = {
+			every_country = {
+				limit = {
+					has_discovered = event_target:SUPEREVENT_CAPITAL_TARGET
 				}
-				ai = no
-			}
-			country_event = {
-				id = redleg.7
+				country_event = {
+					id = redleg.7
+				}
 			}
 		}
+	}
+	after = {
+		clear_global_event_target = SUPEREVENT_CAPITAL_TARGET
 	}
 }
 
