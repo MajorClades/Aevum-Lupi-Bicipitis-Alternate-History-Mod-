@@ -1,0 +1,155 @@
+valtea_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = LT0 } 
+
+	valt_slasmeri_trade = {
+		icon = mission_sailor_boat
+		position = 1
+		provinces_to_highlight = { OR = { is_capital_of = ZL8 is_capital_of = GJ0 }  } 
+
+		trigger = {
+			OR = {
+				alliance_with = ZL8
+				has_spy_network_in = {
+					who = ZL8
+					value = 25
+				}
+			}
+			has_spy_network_in = {
+				who = GJ0
+				value = 25
+			}
+		}
+
+		effect = {
+			add_spy_network_in = {
+				who = GJ0
+				value = -25
+			}
+			
+			
+			complex_dynamic_effect = {
+				first_custom_tooltip = VALT_TT_1a
+				first_limit = "alliance_with = ZL8"
+				first_effect = "
+					1926 = {
+						add_trade_modifier = {
+							who = ROOT
+							duration = 10950
+							power = 50
+							key = VALT_TT_1c
+						}
+					}
+				"
+				second_custom_tooltip = VALT_TT_1b
+				second_limit = "has_spy_network_in = { who = ZL8 value = 25} NOT = {alliance_with = ZL8}"
+				second_effect = "
+					add_spy_network_in = {
+						who = ZL8
+						value = -25
+					}
+					add_country_modifier = {
+							name = valtea_trade_steal
+							duration = 10950
+						}
+				"
+			}
+
+
+		}
+	}
+	valt_markets = {
+		icon = mission_rb_conquer_the_isles
+		required_missions = {valt_slasmeri_trade }
+		position = 2
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_trade_building_trigger = no
+		}
+		trigger = { 
+			num_of_owned_provinces_with = {
+				value = 5
+				has_trade_building_trigger = yes
+			}
+		}
+		
+		effect = {
+			1926 = {
+				add_trade_node_income = 60
+			}
+		}
+	}
+} 
+
+valtea_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = LT0 } 
+
+
+} 
+
+valtea_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = LT0 } 
+
+	valt_head_start = {
+		icon = mission_sailor_boat
+		position = 1
+		provinces_to_highlight = { is_capital = yes owner = { is_rival = ROOT } } 
+
+		trigger = {
+			any_rival_country = {
+				has_spy_network_from = {
+					who = ROOT
+					value = 50
+				}
+			}
+		}
+
+		effect = {
+			random_rival_country = {
+				limit = {
+					has_spy_network_from = {
+						who = ROOT
+						value = 1
+					}
+				}
+				add_spy_network_from = {
+					who = ROOT
+					value = -50
+				}
+			}
+			set_country_flag = extra_spy_at_start_flag
+			custom_tooltip = extra_spy_at_start_flag_tt
+		}
+	}
+} 
+
+valtea_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = LT0 } 
+
+
+} 
+
+valtea_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = LT0 } 
+
+
+} 
