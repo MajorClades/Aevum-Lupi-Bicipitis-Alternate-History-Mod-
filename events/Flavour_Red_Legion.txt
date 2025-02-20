@@ -37,7 +37,12 @@ country_event = {
 	is_triggered_only = yes
 	immediate = {
 		hidden_effect = {
-			play_sound = DEUS_VULT_CRUSADE
+			if = {
+				limit = {
+					ai = no
+				}
+				play_sound = DEUS_VULT_CRUSADE
+			}
 		}
 	}
 	option = {
@@ -53,7 +58,13 @@ country_event = {
 			}
 			add_permanent_claim = AF6
 		}
-		RU0 = {
+		every_country = {
+			limit = {
+				capital_scope = {
+					has_discovered = PREV
+				}
+				ai = no
+			}
 			country_event = {
 				id = redleg.7
 			}
@@ -123,10 +134,17 @@ country_event = {
 	id = redleg.7
 	title = redleg.7.test
 	desc = redleg.7.desc
-	picture = ANGRY_MOB_eventPicture
-	major = yes
 	is_triggered_only = yes
-
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					ai = no
+				}
+				play_sound = DEUS_VULT_CRUSADE
+			}
+		}
+	}
 	option = {
 		name = redleg.7a
 	}
