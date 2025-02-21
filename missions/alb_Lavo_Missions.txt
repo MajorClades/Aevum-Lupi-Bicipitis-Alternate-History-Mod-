@@ -1347,11 +1347,11 @@ mt_lavo_4cont = {
 		}
 
 		trigger = {
-			
+			ivory = 8
 		}
 
 		effect = {
-			 
+			 #pls add elephants unit idk how to
 		}
 	}
 
@@ -1376,13 +1376,25 @@ mt_lavo_5 = {
 		icon = mission_mnd_khm_protect_the_cham
 		position = 1
 		provinces_to_highlight = {
-			
+			area = northern_thai_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 
-		trigger = { always = no }
+		trigger = {
+			northern_thai_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
 
 		effect = {
-			 
+			khorat_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
 		}
 	}
 	
@@ -1395,11 +1407,22 @@ mt_lavo_5 = {
 		}
 
 		trigger = {
-			
+			has_won_war_against = {
+			who = PREV
+			any_country = {
+			NOT = { religion = buddhist }
+			}
+			}
 		}
 
 		effect = {
-			 
+			 add_casus_belli = {
+					type = cb_vassalize_mission
+					target = { every_neighbor_country  = {
+			NOT = { religion = buddhist } }
+			}
+					months = 360
+				}
 		}
 	}
 	
