@@ -243,4 +243,113 @@ country_decisions = {
 		}
 		ai_importance = 400
 	}
+
+	valtea_annex_order = {
+		color = {
+			50 50 50
+		}
+		potential = {
+			is_or_was_tag = { tag = LT0}
+			ML5 = {
+				is_subject_of = LT0
+			}
+		}
+		provinces_to_highlight = {
+			is_core = ML5
+		}
+		allow = {
+			ML5 = {
+				is_subject_of = LT0
+				if = {
+					limit = {
+						LT0 = {
+							ai = yes
+						}
+						ML5 = {
+							ai = yes
+						}
+					}
+					is_year = 1477
+				}else = {
+					religion = catholic
+					NOT = {
+						liberty_desire = 20
+					}
+					has_opinion = {
+						who = LT0
+						value = 190
+					}
+				}
+			}
+		}
+		effect = {
+			country_event = {
+				id = valt.2
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	valtea_annex_cike = {
+		color = {
+			50 50 50
+		}
+		potential = {
+			is_or_was_tag = { tag = LT0}
+			ML6 = {
+				is_subject_of = LT0
+			}
+		}
+		provinces_to_highlight = {
+			is_core = ML6
+		}
+		allow = {
+			LT0 = {
+				if = {
+					limit = {
+						LT0 = {
+							ai = yes
+						}
+						ML6 = {
+							ai = yes
+						}
+					}
+					is_year = 1500
+				}else = {
+					has_mil_advisor_3 = yes
+				}
+			}
+			ML6 = {
+				is_subject_of = LT0
+				if = {
+					limit = {
+						LT0 = {
+							ai = yes
+						}
+						ML6 = {
+							ai = yes
+						}
+					}
+					is_year = 1500
+				}else = {
+					NOT = {
+						liberty_desire = 20
+					}
+					has_opinion = {
+						who = LT0
+						value = 190
+					}
+				}
+			}
+		}
+		effect = {
+			inherit = ML6
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
 }
