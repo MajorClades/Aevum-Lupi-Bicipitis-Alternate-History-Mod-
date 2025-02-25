@@ -1484,7 +1484,71 @@ muslim = {
 			republican_tradition = 0.2
 			devotion = 1
 		}
-		
+		bosnaci_school = {
+			potential_invite_scholar = {
+				OR = {
+					knows_of_scholar_country_capital_trigger = yes
+					has_country_flag = can_always_invite_bosnaci_school
+					has_country_flag = privilege_can_always_invite_bosnaci_school
+				}
+			}
+
+			# THIS = Nation wanting to invite the scholar, FROM = Nation that follows that school
+			can_invite_scholar = {
+				if = {
+					limit = {
+						NOT = { has_country_flag = no_scholar_adm_cost }
+					}
+					adm_power_cost = 50
+				}
+				if = {
+					limit = {
+						NOT = { has_country_flag = can_always_invite_bosnaci_school }
+						NOT = { has_country_flag = privilege_can_always_invite_bosnaci_school }
+					}
+					reverse_has_opinion = { who = FROM value = 150 }
+					OR = {
+						alliance_with = FROM
+						is_subject_of = FROM
+						overlord_of = FROM
+					}
+					hidden_progressive_opinion_for_scholar_trigger = yes
+				}
+				if = {
+					limit = {
+						ai = yes
+					}
+					NOT = { has_country_modifier = has_invited_scholar_recently }
+				}
+				NOT = { has_country_modifier = bosnaci_scholar_modifier }
+			}
+
+			# THIS = Nation wanting to invite the scholar, FORM = Nation that sends scholar
+			on_invite_scholar = {
+				if = {
+					limit = {
+						NOT = { has_country_flag = no_scholar_adm_cost }
+					}
+					adm_power_cost = 50
+				}
+				clear_religious_scholar_modifiers_effect = yes
+				custom_tooltip = INVITE_SCHOLAR_COUNTRY_TEXT
+				add_country_modifier = { name = bosnaci_scholar_modifier duration = 7300 }
+				if = {	#Ensures that the AI doesn't waste all of their ADM power on inviting scholars should they be able to invite them baseline
+					limit = {
+						ai = yes
+					}
+					add_country_modifier = { name = has_invited_scholar_recently duration = 7300 hidden = yes }
+				}
+			}
+			
+			# If you don't set this it will expand on_invite_scholar effect which might be super big
+			invite_scholar_modifier_display = bosnaci_scholar_modifier
+
+			picture = "GFX_icon_school_bosnaci"
+
+			global_unrest = -2
+		}
 	}
 
 	islam = {
@@ -1517,7 +1581,7 @@ muslim = {
 			}			
 		}
 		
-		heretic = { BEKTASHI AHMADI ZIKRI YAZIDI }
+		heretic = { DIYANATALAMIDIYYIN }
 		uses_piety = yes
 	}
 
@@ -1582,7 +1646,7 @@ muslim = {
 				custom_tooltip = CENTER_OF_REFORMATION_POSSIBLE
 			}
 		}
-		heretic = { DRUZE HURUFI ZAIDI }
+		heretic = { DIYANATALAMIDIYYIN ZAIDI }
 		fervor = yes
 		date = 1550.1.1
 	}
