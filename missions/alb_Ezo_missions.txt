@@ -51,6 +51,9 @@ Ezo_1_slot = {
 				area = eastern_chubu_area
 				area = chubu_area
 			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
 		}
 
 		trigger = {
@@ -124,6 +127,8 @@ Ezo_1_slot = {
 				name = "ezo_gooder_quality"
 				duration = -1
 			}
+			custom_tooltip = alb_dev_japan_is_better_tt
+			set_country_flag = alb_dev_japan_better_flag
 		}
 	}
 }
@@ -141,7 +146,12 @@ Ezo_2_slot = {
 			ezo_army
 			yam_mountain_family
 		}
-		provinces_to_highlight = { area = hokuriku_area } 
+		provinces_to_highlight = { 
+			area = hokuriku_area 
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
 		trigger = {
 			hokuriku_area = {
@@ -213,11 +223,21 @@ Ezo_2_slot = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
+			num_of_owned_provinces_with = {
+				value = 30
+				region = japan_region
+				religion = ROOT
+			}
 		}
 
 		effect = {
 			override_country_name = "AINUMOSIR"
 			set_government_rank = 3
+			custom_tooltip = empty_line_tt
+			add_power_projection = {
+				type = mission_rewards_power_projection
+				amount = 50
+			}
 		}
 	}
 
@@ -289,11 +309,7 @@ Ezo_3_slot = {
 		provinces_to_highlight = {  } 
 
 		trigger = {
-			OR = {
-				has_adm_advisor_2 = yes
-				has_dip_advisor_2 = yes
-				has_mil_advisor_2 = yes
-			}
+			has_mil_advisor = yes
 		}
 
 		effect = {
@@ -441,6 +457,7 @@ Ezo_4_slot = {
 			has_adm_advisor = yes
 			has_dip_advisor = yes
 			has_mil_advisor = yes
+			government_reform_progress = 100
 		}
 
 		effect = {
