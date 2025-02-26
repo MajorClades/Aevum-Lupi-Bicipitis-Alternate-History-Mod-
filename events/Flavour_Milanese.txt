@@ -1,0 +1,124 @@
+namespace = mila
+
+country_event = {
+	id = mila.1
+	title = mila.1.test
+	desc = mila.1.desc
+	picture = KING_SICK_IN_BED_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = MLO
+		OR = {
+			AE0 = {
+				exists = yes
+			}
+			RU0 = {
+				has_won_war_against = {
+					who = AF6
+				}
+			}
+			is_year = 1470
+		}
+	}
+
+	option = {
+		name = mila.1a
+		define_ruler = {
+			name = "Christian"
+			dynasty = "Boldi"
+			age = 43
+			adm = 2
+			dip = 2
+			mil = 6
+		}
+		add_legitimacy = 30
+		add_ruler_modifier = {
+			name = mlo_crusader_king
+		}
+		add_ruler_personality = just_personality
+	}
+	option = {
+		name = mila.1b
+		country_event = {
+			id = mila.2
+		}
+		set_country_flag = the_guilds_revolt_flag
+	}
+}
+
+country_event = {
+	id = mila.2
+	title = mila.2.test
+	desc = mila.2.desc
+	picture = KING_ASSASSINATION_eventPicture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = mila.2a
+		define_heir = {
+			name = "Brando"
+			dynasty = "de Sica"
+			birth_date = 1425.8.19
+			claim = 30
+			adm = 4
+			dip = 3
+			mil = 5
+		}
+		add_legitimacy = -10
+		custom_tooltip = MILAN_TT_1
+		add_ruler_modifier = {
+			name = mlo_couped
+		}
+	}
+}
+
+country_event = {
+	id = mila.3
+	title = mila.3.test
+	desc = mila.3.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = mila.3a
+	}
+}
+
+country_event = {
+	id = mila.4
+	title = mila.4.test
+	desc = mila.4.desc
+	picture = ADVISOR_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = MLO
+		had_country_flag = {
+			flag = the_guilds_revolt_flag
+			days = 3650
+		}
+	}
+	immediate = {
+		hidden_effect = {
+			clr_country_flag = the_guilds_revolt_flag
+		}
+	}
+
+	option = {
+		name = mila.4a
+		capital_scope = {
+			spawn_rebels = {
+				size = 2
+				type = revolutionary_rebels
+			}
+		}
+	}
+	option = {
+		name = mila.4b
+		#change gov reform to republic League of Ambrose
+		#put Berlusco Silvoni as leader
+	}
+}
