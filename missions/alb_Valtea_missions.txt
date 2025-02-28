@@ -1,0 +1,551 @@
+valtea_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = LT0 } 
+
+	valt_slasmeri_trade = {
+		icon = mission_sailor_boat
+		position = 1
+		provinces_to_highlight = { OR = { is_capital_of = ZL8 is_capital_of = GJ0 }  } 
+
+		trigger = {
+			OR = {
+				alliance_with = ZL8
+				has_spy_network_in = {
+					who = ZL8
+					value = 25
+				}
+			}
+			has_spy_network_in = {
+				who = GJ0
+				value = 25
+			}
+		}
+
+		effect = {
+			add_spy_network_in = {
+				who = GJ0
+				value = -25
+			}			
+			complex_dynamic_effect = {
+				first_custom_tooltip = VALT_TT_1a
+				first_limit = "alliance_with = ZL8"
+				first_effect = "
+					1926 = {
+						add_trade_modifier = {
+							who = ROOT
+							duration = 10950
+							power = 50
+							key = VALT_TT_1c
+						}
+					}
+				"
+				second_custom_tooltip = VALT_TT_1b
+				second_limit = "has_spy_network_in = { who = ZL8 value = 25} NOT = {alliance_with = ZL8}"
+				second_effect = "
+					add_spy_network_in = {
+						who = ZL8
+						value = -25
+					}
+					add_country_modifier = {
+							name = valtea_trade_steal
+							duration = 10950
+						}
+				"
+			}
+		}
+	}
+	valt_markets = {
+		icon = mission_rb_conquer_the_isles
+		required_missions = {valt_slasmeri_trade }
+		position = 2
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_trade_building_trigger = no
+		}
+		trigger = { 
+			num_of_owned_provinces_with = {
+				value = 5
+				has_trade_building_trigger = yes
+			}
+		}
+		
+		effect = {
+			1926 = {
+				add_trade_node_income = 60
+			}
+		}
+	}
+	valt_riga_strong = {
+		icon = mission_rb_conquer_the_isles
+		required_missions = { valt_markets valt_riga_better}
+		position = 4
+		provinces_to_highlight = {province_id = 38 }
+		trigger = { 
+			38 = {
+				development = 30
+				higher_development_than = 280
+				num_of_buildings_in_province = 5
+			}
+		}
+		
+		effect = {
+			38 = {
+				add_building = university
+			}
+			scandinavia_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	valt_naval_power = {
+		icon = mission_rb_conquer_the_isles
+		required_missions = { valt_riga_strong }
+		position = 5
+		trigger = { 
+			OR = {
+				full_idea_group = naval_ideas
+				full_idea_group = maritime_ideas
+				navy_tradition = 50
+				navy_size = 50
+			}
+			num_of_heavy_ship = 10
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = valt_slasmeri_dominion
+				duration = -1
+			}
+		}
+	}
+} 
+
+valtea_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = LT0 } 
+
+	valt_baltic_coast = {
+		icon = mission_rb_conquer_the_isles
+		required_missions = {valt_slasmeri_trade valt_riga }
+		position = 2
+		provinces_to_highlight = {
+			OR = {
+				area = curonia_area 
+				area = estonia_ingria_area
+			}
+		}
+		trigger = { 
+			curonia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			estonia_ingria_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+			39 = {
+				change_culture = valtean
+			}
+			estonia_ingria_area = {
+				change_culture = valtean
+			}
+			custom_tooltip = VALT_TT_2
+			tooltip = {
+				25 = {
+					change_culture = valtean
+				}
+				inherit = JU1
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						25 = {
+							country_or_non_sovereign_subject_holds = ROOT
+						}
+					}
+					25 = {
+						change_culture = valtean
+					}
+					inherit = JU1
+				}
+			}
+		}
+	}
+	valt_riga_better = {
+		icon = mission_rb_conquer_the_isles
+		required_missions = { valt_litvia valt_baltic_coast}
+		position = 3
+		provinces_to_highlight = {province_id = 38 }
+		trigger = { 
+			38 = {
+				has_trade_building_trigger = yes
+				has_production_building_trigger = yes
+			}
+		}
+		
+		effect = {
+			38 = {
+				add_province_modifier = {
+					name = valt_better_than_xicheng
+					duration = -1
+				}
+			}
+			country_event = {
+				id = valt.3
+			}
+		}
+	}
+
+} 
+
+valtea_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = LT0 } 
+
+	valt_riga = {
+		icon = mission_sailor_boat
+		position = 1
+		provinces_to_highlight = { province_id = 38 } 
+
+		trigger = {
+			has_adm_advisor = yes
+			38 = {
+				development = 20
+			}
+		}
+
+		effect = {
+			38 = {
+				add_or_upgrade_tax_building = yes
+			}
+			baltic_region = {
+				add_permanent_claim = ROOT
+			}
+			25 = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	valt_litvia = {
+		icon = mission_rb_conquer_the_isles
+		required_missions = { valt_riga }
+		position = 2
+		provinces_to_highlight = {
+			area = lithuania_area 
+		}
+		trigger = { 
+			lithuania_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = valt_protector
+				duration = 10950
+			}
+			ruthenia_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	valt_latveria = {
+		icon = mission_rb_conquer_the_isles
+		required_missions = {  valt_riga_better}
+		position = 4
+		provinces_to_highlight = { region = ruthenia_region NOT = {country_or_non_sovereign_subject_holds = ROOT} }
+		trigger = { 
+			ruthenia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+			poland_region = {
+				add_permanent_claim = ROOT
+			}
+			complex_dynamic_effect = {
+				first_custom_tooltip = VALT_TT_3a
+				first_limit = "senior_union_with = SX0"
+				first_effect = "
+					ruthenia_region = {
+						cede_province = SX0
+					}
+					add_country_modifier = {
+						name = valt_master_of_shadows
+						duration = -1
+					}
+				"
+				second_custom_tooltip = VALT_TT_3b
+				second_limit = "NOT = {senior_union_with = SX0}"
+				second_effect = "
+					280 = {
+						add_base_tax = -3
+						add_base_production = -3
+						add_base_manpower = -3
+					}
+					capital_scope = {
+						add_base_tax = 2
+						add_base_production = 2
+						add_base_manpower = 2
+					}
+					add_country_modifier = {
+						name = valt_gryphon_riders
+						duration = -1
+					}
+				"
+			}
+		}
+	}
+
+	valt_empire_of_the_grifon = {
+		icon = mission_rb_conquer_the_isles
+		required_missions = { valt_latveria }
+		position = 5
+		provinces_to_highlight = { OR = { region = ruthenia_region region = baltic_region region = poland_region} NOT = {country_or_non_sovereign_subject_holds = ROOT} }
+		trigger = { 
+			SX0 = {
+				exists = no
+			}
+			ruthenia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			baltic_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			poland_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+			override_country_name = GRYPHON_EMPIRE
+			set_government_rank = 3
+			#something
+			europe = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+} 
+
+valtea_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = LT0 } 
+
+	valt_gajnaka = {
+		icon = mission_rb_conquer_the_isles
+		required_missions = { valt_riga }
+		position = 2
+		provinces_to_highlight = {
+			owned_by = ROOT
+			religion = alevilik
+		}
+		trigger = { 
+			all_owned_province = {
+				NOT = {
+					religion = alevilik
+				}
+			}
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = valt_northern_crusade
+				duration = 10950
+			}
+			karelia_area = {
+				add_permanent_claim = ROOT
+			}
+			pskov_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	valt_gajnaka_beaten = {
+		icon = mission_rb_conquer_the_isles
+		required_missions = { valt_gajnaka }
+		position = 3
+		provinces_to_highlight = { OR = {area = karelia_area area = pskov_area} NOT = {country_or_non_sovereign_subject_holds = ROOT} }
+		trigger = { 
+			karelia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			pskov_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+			define_advisor = {
+				type = inquisitor
+				skill = 3
+				cost_multiplier = 0.3
+			}
+			russia_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	valt_turan = {
+		icon = mission_rb_conquer_the_isles
+		required_missions = { valt_gajnaka_beaten }
+		position = 4
+		provinces_to_highlight = { region = russia_region NOT = {country_or_non_sovereign_subject_holds = ROOT} }
+		trigger = { 
+			russia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		
+		effect = {
+			russia_region = {
+				add_province_modifier = {
+					name = valt_turan_treatment
+					duration = 10950
+				}
+			}
+			add_country_modifier = {
+				name = valt_to_the_heathen_lot
+				duration = 36500
+			}
+		}
+	}
+} 
+
+valtea_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = LT0 } 
+
+	valt_head_start = {
+		icon = mission_sailor_boat
+		position = 1
+
+		trigger = {
+			any_known_country = {
+				has_spy_network_from = {
+					who = ROOT
+					value = 50
+				}
+			}
+		}
+
+		effect = {
+			set_country_flag = extra_spy_at_start_flag
+			custom_tooltip = extra_spy_at_start_flag_tt
+		}
+	}
+
+	valt_estate_conflict = {
+		icon = mission_sailor_boat
+		position = 2
+		required_missions = { valt_head_start }
+		trigger = {
+			any_known_country = {
+				has_spy_network_from = {
+					who = ROOT
+					value = 70
+				}
+			}
+			OR = {
+				full_idea_group = spy_ideas
+				full_idea_group = court_ideas
+				full_idea_group = diplomatic_ideas
+			}
+		}
+
+		effect = {
+			set_country_flag = spy_estate_flag
+			custom_tooltip = spy_estate_flag_tt
+			tooltip = {
+				add_country_modifier = {
+					name = spy_estate_angry
+					duration =  1825
+				}
+			}
+		}
+	}
+
+	valt_rebellions = {
+		icon = mission_sailor_boat
+		position = 3
+		required_missions = { valt_estate_conflict }
+		trigger = {
+			has_dip_advisor_3 = yes
+			has_mil_advisor_3 = yes
+			calc_true_if = {
+				amount = 3
+				all_known_country = {
+					has_spy_network_from = {
+						who = ROOT
+						value = 70
+					}
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = valt_supported_rebels
+				duration = -1
+			}
+		}
+	}
+
+	valt_committee_for_state_security = {
+		icon = mission_rb_conquer_the_isles
+		required_missions = { valt_rebellions valt_turan}
+		position = 5
+
+		trigger = { 
+			calc_true_if = {
+				amount = 10
+				all_known_country = {
+					has_spy_network_from = {
+						who = ROOT
+						value = 50
+					}
+				}
+			}
+		}
+		
+		effect = {
+			set_country_flag = spy_collapse_country_flag
+			custom_tooltip = spy_collapse_country_flag_tt
+			tooltip = {
+				add_country_modifier = {
+					name = valt_complete_collapse
+					duration =  3650
+				}
+			}
+		}
+	}
+} 
