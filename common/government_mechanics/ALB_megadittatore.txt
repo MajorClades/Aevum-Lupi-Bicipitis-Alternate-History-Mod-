@@ -1,0 +1,122 @@
+megaditta_core = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 17
+	available = {}
+	powers = {
+		guild_corruption = {
+			max = 100
+			min = 0
+			gui = council_of_ten_gov_mech
+			show_before_interactions = yes
+			default = 0
+			base_monthly_growth = 0.05
+			is_good = no
+			scaled_modifier = {
+				trigger = {
+					NOT = {
+						has_country_flag = megaditta_no_corruption_flag
+					}
+				}
+				modifier = {
+					yearly_corruption = 1
+				}
+			}
+			scaled_modifier = {
+				modifier = { 
+					global_trade_goods_size_modifier = 0.5
+					trade_efficiency = 0.5
+					development_cost_modifier = -0.5
+					monthly_guild_corruption = -1
+				}
+			}
+		}
+	}
+	
+	interactions = {
+		ditta_less_corruption = {
+			icon = GFX_council_of_ten_adm_interaction_button
+			cooldown_years = 3
+			trigger = {
+				corruption = 2
+				has_government_power = {
+					mechanic_type = megaditta_core
+					power_type = guild_corruption
+					value = 5
+				}
+			}
+			effect = {
+				add_corruption = -2
+				add_government_power = {
+					mechanic_type = megaditta_core
+					power_type = guild_corruption
+					value = -5
+				}
+			}
+		}
+		ditta_consultant = { #
+			icon = GFX_council_of_ten_dip_interaction_button
+			cooldown_years = 3
+			trigger = {
+				dip_power = 50
+			}
+			effect = {
+				add_dip_power = -50
+				if = {
+					limit = {
+						has_government_power = {
+							mechanic_type = saints_and_sinners
+							power_type = nice_or_naughty
+							value = 50
+						}
+					}
+					add_years_of_income = 0.5
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_government_power = {
+								mechanic_type = saints_and_sinners
+								power_type = nice_or_naughty
+								value = 50
+							}
+						}
+						has_government_power = {
+							mechanic_type = saints_and_sinners
+							power_type = nice_or_naughty
+							value = -50
+						}
+					}
+					add_papal_influence = 25
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_government_power = {
+								mechanic_type = saints_and_sinners
+								power_type = nice_or_naughty
+								value = -50
+							}
+						}
+					}
+					add_reform_desire = 0.05
+					change_government_reform_progress = 25
+				}
+			}
+		}
+		ditta_more_corruption = {
+			icon = GFX_council_of_ten_mil_interaction_button
+			cooldown_years = 3
+			trigger = {
+			
+			}
+			effect = {
+				add_corruption = 2
+				add_government_power = {
+					mechanic_type = megaditta_core
+					power_type = guild_corruption
+					value = 5
+				}
+			}
+		}
+	}
+}

@@ -80,7 +80,9 @@ country_event = {
 	desc = mila.3.desc
 	picture = CRUSADER_HORDE_eventPicture
 	
-	is_triggered_only = yes
+	trigger = {
+		tag = MLO
+	}
 	fire_only_once = yes
 
 	option = {
@@ -98,7 +100,7 @@ country_event = {
 		tag = MLO
 		had_country_flag = {
 			flag = the_guilds_revolt_flag
-			days = 3650
+			days = 730
 		}
 	}
 	immediate = {
@@ -112,13 +114,86 @@ country_event = {
 		capital_scope = {
 			spawn_rebels = {
 				size = 2
-				type = revolutionary_rebels
+				type = leadered_peasant_rebels
 			}
 		}
 	}
 	option = {
 		name = mila.4b
-		#change gov reform to republic League of Ambrose
-		#put Berlusco Silvoni as leader
+		hidden_effect = {
+			change_government = republic
+		}
+		add_stability = -1
+		inherit = IT5
+		define_ruler = {
+			name = "Paolo Fantozzi" 
+			dynasty = "Fantozzi"
+			ADM = 2
+			DIP = 3
+			MIL = 2
+			min_age = 38
+			max_age = 44
+		}
+		add_government_reform = megaditta_reform
+		hidden_effect = {
+			add_government_reform = megaditta_reform
+			add_ruler_personality = incorruptible_personality
+			add_ruler_personality = industrious_personality
+		}
+	}
+	option = {
+		name = mila.4c
+		inherit = IT6
+		define_ruler = {
+			name = "Silvio Cavaliere" 
+			dynasty = "Cavaliere"
+			ADM = 5
+			DIP = 3
+			MIL = 2
+			min_age = 38
+			max_age = 44
+		}
+		hidden_effect = {
+			change_government = republic
+		}
+		add_government_reform = military_dictatorship_reform
+		hidden_effect = {
+			add_ruler_personality = sinner_personality
+			add_ruler_personality = silver_tongue_personality
+		}
+	}
+}
+
+country_event = {
+	id = mila.5
+	title = mila.5.test
+	desc = mila.5.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	trigger = {
+		tag = MLO
+		general_with_name = "Silvio Cavaliere"
+	}
+	mean_time_to_happen = {
+		months = 120
+	}
+	fire_only_once = yes
+
+	option = {
+		name = mila.5a
+		change_government = monarchy
+		add_government_reform = autocracy_reform
+	}
+	option = {
+		name = mila.5b
+		kill_ruler = yes
+		capital_scope = {
+			spawn_rebels = {
+				size = 2
+				type = pretender_rebels
+				leader = "Silvio"
+				leader_dynasty = "Cavaliere"
+			}
+		}
 	}
 }
