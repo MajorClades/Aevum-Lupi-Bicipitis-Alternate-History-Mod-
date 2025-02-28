@@ -162,10 +162,13 @@ mt_lavo_1cont = {
 			
 		}
 
-		trigger = { always = no }
+		trigger = {
+			army_size_percentage = 1
+			manpower_percentage = 0.50 
+		}
 
 		effect = {
-			 
+			 create_general = { tradition = 30 } 
 		}
 	}
 	
@@ -178,11 +181,11 @@ mt_lavo_1cont = {
 		}
 
 		trigger = {
-			
+			has_dip_advisor_3 = yes
 		}
 
 		effect = {
-			 
+			 #envoy travel time and improve relationship modifier
 		}
 	}
 	
@@ -195,11 +198,14 @@ mt_lavo_1cont = {
 		}
 
 		trigger = {
-			
+			num_of_owned_provinces_with = {
+				value = 7
+				has_fort_building_trigger = yes
+			}
 		}
 
 		effect = {
-			 
+			 #global defensive modifier
 		}
 	}
 	
@@ -210,10 +216,12 @@ mt_lavo_1cont = {
 			
 		}
 
-		trigger = { always = no }
+		trigger = { capital_scope = {
+				has_manpower_building_trigger = yes
+			} }
 
 		effect = {
-			 
+			 #force limit modifier
 		}
 	}
 	
@@ -225,10 +233,10 @@ mt_lavo_1cont = {
 			
 		}
 
-		trigger = { always = no }
+		trigger = { manpower_percentage = 0.85 has_mil_advisor_3 = yes }
 
 		effect = {
-			 
+			 unlock_merc_company = { merc_company = merc_forest_scout } 
 		}
 	}
 	
@@ -336,10 +344,31 @@ mt_lavo_2 = {
 			
 		}
 
-		trigger = { always = no }
+		trigger = { 
+		AND = {
+		accepted_culture = central_thai
+		accepted_culture = mon 
+		}
+		}
 
 		effect = {
-			 
+			 simple_dynamic_effect = {
+				first_custom_tooltip = LAVO_TT_2blood
+				first_limit = "primary_culture = central_thai"
+				first_effect = "define_advisor = {
+				type = recruitmaster
+				cost_multiplier = 0.5
+				skill = 3
+				culture = central_thai
+			}"
+				second_limit = "primary_culture = mon"
+				second_effect = "define_advisor = {
+				type = theologian
+				cost_multiplier = 0.5
+				skill = 2
+				culture = mon
+			}"
+			}
 		}
 	}
 	
@@ -352,11 +381,23 @@ mt_lavo_2 = {
 		}
 
 		trigger = {
-			
+			num_of_subjects = 3
 		}
 
 		effect = {
-			 
+			 if = {
+				limit = {
+					any_subject_country={
+					has_opinion = {
+						who = ROOT
+						value = 180
+					}
+				}
+				}
+				vassalize = PREV
+				PREV = { add_liberty_desire = -25 }
+			}
+			#subj forcelimit modifier
 		}
 	}
 	
@@ -579,12 +620,38 @@ mt_lavo_3 = {
 			
 		}
 
-		trigger = {
-			
+		trigger = { 
+		AND = {
+		accepted_culture = central_thai
+		accepted_culture = mon 
+		}
 		}
 
 		effect = {
-			 
+			 simple_dynamic_effect = {
+				first_custom_tooltip = LAVO_TT_reward_sem
+				first_limit = "primary_culture = central_thai"
+				first_effect = "every_owned_province = {
+					limit = { culture = central_thai } 
+					add_province_modifier = {
+						name = sem_settlement_SEA
+						duration = -1
+					}
+				}
+				every_owned_province = {
+					limit = { culture = mon } 
+					add_province_modifier = {
+						name = local_purge_SEA
+						duration = -1
+					}
+				}"
+				second_limit = "not = { primary_culture = central_thai }"
+				second_effect = "every_owned_province = {
+					limit = { culture = mon } 
+					add_unrest = -5
+					add_nationalism = -10
+				}"
+			}
 		}
 	}
 	
@@ -597,11 +664,22 @@ mt_lavo_3 = {
 		}
 
 		trigger = {
-			
+			grain = 15
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 10
+				trade_goods = grain
+				OR = {
+					has_production_building_trigger = yes
+					has_building = farm_estate
+				}
+			}
 		}
 
 		effect = {
-			 
+			 add_country_modifier = {
+				name = kwan_khao_reform
+				duration = -1
+			}
 		}
 	}
 	
@@ -851,15 +929,19 @@ mt_lavo_4 = {
 		position = 2
 		required_missions = { lavo_defeat_the_north } 
 		provinces_to_highlight = {
-			
+			area = khorat_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 
 		trigger = {
-			
+			khorat_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
 		}
 
 		effect = {
-			 
+			 #event to inflitrate or get claim on khmer
 		}
 	}
 	
@@ -872,11 +954,87 @@ mt_lavo_4 = {
 		}
 
 		trigger = {
-			
+			OR = {
+				AND = {
+			cambodia_area = {
+					country_or_non_sovereign_subject_holds = ROOT
+					type = all
+					}
+			angkor_area = {
+					country_or_non_sovereign_subject_holds = ROOT
+					type = all
+					}
+				}
+		any_country = {
+			OR = {
+				tag = KH1
+				tag = KH2
+				tag = KH4
+				tag = KH5
+				}
+				has_spy_network_from = {
+				who = ROOT
+					value = 45
+				}
+			}
+			}
 		}
 
 		effect = {
-			 
+			 simple_dynamic_effect = {
+				first_custom_tooltip = LAVO_TT_angkor
+				first_limit = "AND = {
+			cambodia_area = {
+					country_or_non_sovereign_subject_holds = ROOT
+					type = all
+					}
+			angkor_area = {
+					country_or_non_sovereign_subject_holds = ROOT
+					type = all
+					}
+				}"
+				first_effect = "mekong_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			champasak_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}"
+				second_limit = "any_country = {
+			OR = {
+				tag = KH1
+				tag = KH2
+				tag = KH4
+				tag = KH5
+				}
+				has_spy_network_from = {
+				who = ROOT
+					value = 45
+				}
+			}"
+				second_effect = "create_subject = {
+				subject_type = tributary_state
+				subject = any_country = {
+					OR = {
+				tag = KH1
+				tag = KH2
+				tag = KH4
+				tag = KH5
+				}
+				has_spy_network_from = {
+				who = ROOT
+					value = 45
+				}
+			}
+				}"
+			}
 		}
 	}
 	
@@ -889,11 +1047,91 @@ mt_lavo_4 = {
 		}
 
 		trigger = {
-			
+			OR = {
+				AND = {
+			champasak_area = {
+					country_or_non_sovereign_subject_holds = ROOT
+					type = all
+					}
+			mekong_area = {
+					country_or_non_sovereign_subject_holds = ROOT
+					type = all
+					}
+				}
+		any_country = {
+			OR = {
+				tag = KH1
+				tag = KH2
+				tag = KH4
+				tag = KH5
+				}
+				has_spy_network_from = {
+				who = ROOT
+					value = 45
+				}
+			}
+			}
 		}
 
 		effect = {
-			 
+			 simple_dynamic_effect = {
+				first_custom_tooltip = LAVO_TT_angkor
+				first_limit = "AND = {
+			champasak_area = {
+					country_or_non_sovereign_subject_holds = ROOT
+					type = all
+					}
+			mekong_area = {
+					country_or_non_sovereign_subject_holds = ROOT
+					type = all
+					}
+				}"
+				first_effect = "add_country_modifier = {
+				name = ender_of_angkor
+				duration = -1
+			}"
+				second_limit = "any_country = {
+			OR = {
+				tag = KH1
+				tag = KH2
+				tag = KH4
+				tag = KH5
+				}
+				has_spy_network_from = {
+				who = ROOT
+					value = 45
+				}
+			}"
+				second_effect = "create_subject = {
+				subject_type = tributary_state
+				subject = any_country = {
+					OR = {
+				tag = KH1
+				tag = KH2
+				tag = KH4
+				tag = KH5
+				}
+				has_spy_network_from = {
+				who = ROOT
+					value = 45
+				}
+			}
+				}"
+			}
+			north_laos_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			vientiane_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
 		}
 	}
 	
@@ -957,9 +1195,26 @@ mt_semlavo_4 = {
 			
 		}
 
-		trigger = { always = no }
+		trigger = { champasak_area = {
+					country_or_non_sovereign_subject_holds = ROOT
+					type = all
+					}
+			mekong_area = {
+					country_or_non_sovereign_subject_holds = ROOT
+					type = all
+					} }
 		effect = {
-			# custom_tooltip = complete_army_republic_to_preview_this_mission_tt
+			add_country_modifier = {
+				name = "birth_of_lavo_empire"
+				duration = 10950
+			}
+			indo_china_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
 		}
 	}
 	
@@ -971,9 +1226,13 @@ mt_semlavo_4 = {
 			
 		}
 
-		trigger = { always = no }
+		trigger = { indo_china_region = {
+					country_or_non_sovereign_subject_holds = ROOT
+					type = all
+					}
+		}
 		effect = {
-			 
+			 #pick your fav war modifiers event
 		}
 	}
 
@@ -1088,11 +1347,11 @@ mt_lavo_4cont = {
 		}
 
 		trigger = {
-			
+			ivory = 8
 		}
 
 		effect = {
-			 
+			 #pls add elephants unit idk how to
 		}
 	}
 
@@ -1117,13 +1376,25 @@ mt_lavo_5 = {
 		icon = mission_mnd_khm_protect_the_cham
 		position = 1
 		provinces_to_highlight = {
-			
+			area = northern_thai_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 
-		trigger = { always = no }
+		trigger = {
+			northern_thai_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
 
 		effect = {
-			 
+			khorat_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
 		}
 	}
 	
@@ -1136,11 +1407,19 @@ mt_lavo_5 = {
 		}
 
 		trigger = {
-			
+		has_won_war_against = {
+						who = any_country = {
+		NOT = { religion = buddhism }
+	}
+					}
 		}
 
 		effect = {
-			 
+		add_casus_belli = {
+				type = cb_spread_the_true_faith
+				target = any_country = {	capital_scope = {region = indo_china_region}	}
+				months = 360
+			}
 		}
 	}
 	

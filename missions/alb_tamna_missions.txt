@@ -1,0 +1,153 @@
+Tamna_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = KR1 }  
+
+	tmn_econ = {
+		icon = mission_asian_trader
+		position = 1
+		provinces_to_highlight = {  }
+
+		trigger = {
+			num_of_loans = 0
+            NOT = {
+                any_owned_province = {
+                    devastation = 1
+                }
+            } 
+            estate_loyalty = {
+                estate = estate_burghers
+                loyalty = 60
+            }
+		}
+		effect = {
+            add_treasury = -1 #placeholder
+            custom_tooltip = AYABANI_TT_6
+		}
+	}
+}
+Tamna_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = KR1 } 
+}
+Tamna_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = KR1 }  
+
+    tmn_stalin = {
+		icon = mng_shengshi_zhishi
+		position = 1
+		required_missions = {  } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+            corruption = 0
+            treasury = 2500
+		}
+		effect = { 
+            add_government_reform = alb_second_tier_restoration_reform
+         } 
+	}
+    tmn_nobles = {
+		icon = mng_deal_kama_kagyu
+		position = 2
+		required_missions = { 
+            tmn_stalin
+            tmn_econ
+            tmn_three_armies
+        } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+            estate_loyalty = {
+                estate = estate_nobles
+                loyalty = 60
+            }
+            NOT = {
+                	has_estate_privilege = estate_nobles_royal_court_tasks
+            }
+		}
+		effect = { 
+            add_government_reform = alb_third_tier_restoration_reform
+            add_estate_loyalty = {
+                estate = estate_nobles
+                loyalty = -20
+            }
+         } 
+	}
+	tmn_war_pacifism = {
+		icon = mng_survey_ocean_shores
+		position = 3
+		required_missions = {tmn_nobles} 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+            monthly_mil = 10
+            estate_loyalty = {
+                estate = estate_church
+                loyalty = 60
+            }
+                army_size_percentage = 1
+                prestige = 20
+		}
+		effect = { 
+            add_government_reform = alb_fourth_tier_restoration_reform
+            add_estate_loyalty = {
+                estate = estate_church
+                loyalty = -20
+            }
+        } 
+	}
+    tmn_unbreakable_union = {
+		icon = mission_cornerstone_empire
+		position = 4
+        required_missions = {tmn_war_pacifism} 
+		provinces_to_highlight = {  }
+
+		trigger = {
+            corruption = 0
+            average_autonomy = 20
+            num_of_rebel_controlled_provinces = 0
+            legitimacy = 100
+            average_unrest = 0
+		}
+		effect = {
+            add_government_reform = alb_korean_empire_reform
+		}
+	}
+}
+Tamna_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = KR1 } 
+}
+Tamna_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = KR1 }   
+
+    tmn_three_armies = {
+		icon = qng_ten_grand_campaigns
+		position = 1
+		provinces_to_highlight = {  }
+
+		trigger = {
+            manpower_percentage = 0.50
+		}
+		effect = {
+            add_manpower = -0.001 #placeholder
+		}
+	}
+}
