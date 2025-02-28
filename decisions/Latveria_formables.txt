@@ -27,8 +27,13 @@ country_decisions = {
 		provinces_to_highlight = {
 			OR = {
 				region = ruthenia_region
+				culture_group = baltic
 			}
-			NOT = { owned_by = ROOT }
+			OR = {
+				NOT = { owned_by = ROOT }
+				NOT = { is_core = ROOT }
+				NOT = {	culture = valtean }
+			}
 		}
 		allow = {
 			NOT = { exists = LT6 }
@@ -201,14 +206,14 @@ country_decisions = {
 			}
 		}
 		allow = {
-			adm_tech = 10
 			NOT = { exists = LT5 }
 			is_free_or_tributary_trigger = yes
 			is_nomad = no
 			is_at_war = no
 			num_of_owned_provinces_with = {
-				value = 15
+				value = 20
 				region = crimea_region
+				NOT = {	culture = valtean }
 			}
 		}
 		effect = {
@@ -237,115 +242,6 @@ country_decisions = {
 			add_prestige_or_monarch_power = {
 				amount = 25
 			}
-		}
-		ai_will_do = {
-			factor = 1
-		}
-		ai_importance = 400
-	}
-
-	valtea_annex_order = {
-		color = {
-			50 50 50
-		}
-		potential = {
-			is_or_was_tag = { tag = LT0}
-			ML5 = {
-				is_subject_of = LT0
-			}
-		}
-		provinces_to_highlight = {
-			is_core = ML5
-		}
-		allow = {
-			ML5 = {
-				is_subject_of = LT0
-				if = {
-					limit = {
-						LT0 = {
-							ai = yes
-						}
-						ML5 = {
-							ai = yes
-						}
-					}
-					is_year = 1477
-				}else = {
-					religion = catholic
-					NOT = {
-						liberty_desire = 20
-					}
-					has_opinion = {
-						who = LT0
-						value = 190
-					}
-				}
-			}
-		}
-		effect = {
-			country_event = {
-				id = valt.2
-			}
-		}
-		ai_will_do = {
-			factor = 1
-		}
-		ai_importance = 400
-	}
-	valtea_annex_cike = {
-		color = {
-			50 50 50
-		}
-		potential = {
-			is_or_was_tag = { tag = LT0}
-			ML6 = {
-				is_subject_of = LT0
-			}
-		}
-		provinces_to_highlight = {
-			is_core = ML6
-		}
-		allow = {
-			LT0 = {
-				if = {
-					limit = {
-						LT0 = {
-							ai = yes
-						}
-						ML6 = {
-							ai = yes
-						}
-					}
-					is_year = 1500
-				}else = {
-					has_mil_advisor_3 = yes
-				}
-			}
-			ML6 = {
-				is_subject_of = LT0
-				if = {
-					limit = {
-						LT0 = {
-							ai = yes
-						}
-						ML6 = {
-							ai = yes
-						}
-					}
-					is_year = 1500
-				}else = {
-					NOT = {
-						liberty_desire = 20
-					}
-					has_opinion = {
-						who = LT0
-						value = 190
-					}
-				}
-			}
-		}
-		effect = {
-			inherit = ML6
 		}
 		ai_will_do = {
 			factor = 1
