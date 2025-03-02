@@ -12,7 +12,7 @@ Milan_1_slot = {
 		trigger = {
 			2979 = {
 				owned_by = ROOT
-				base_production = 6
+				base_production = 8
 			}
 		}
 
@@ -22,21 +22,40 @@ Milan_1_slot = {
 			}
 			simple_dynamic_effect = {
 				first_custom_tooltip = MILAN_TT_2a
-				first_limit = "
-					government = republic
-				"
+				first_limit = "government = republic"
 				first_effect = "
-					add_mercantilism = 10
+					add_mercantilism = 5
 					add_corruption = -2
 				"
 				second_custom_tooltip = MILAN_TT_2b
-				second_limit = "
-					government = monarchy
-				"
+				second_limit = "government = monarchy"
 				second_effect = "
 					add_stability_or_adm_power = yes
 				"
 			}
+		}
+	}
+	mlo_erulian_climb = {
+		icon = mission_luther_theses
+		position = 3
+		required_missions = { mlo_erulian_defeat } 
+		provinces_to_highlight = { area = piedmont_area } 
+		trigger = {
+			piedmont_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			103 = {
+				add_or_upgrade_fort_building = yes
+			}
+			4958 = {
+				add_or_upgrade_fort_building = yes
+			}
+			custom_tooltip = MILAN_TT_3a
+			set_country_flag = unlock_mil_ditta_flag
 		}
 	}
 }
@@ -48,7 +67,51 @@ Milan_2_slot = {
 	has_country_shield = yes
 	potential = { tag = MLO } 
 
-	
+	mlo_erulian_defeat = {
+		icon = mission_luther_theses
+		position = 2
+		required_missions = { mlo_ducal_army } 
+		provinces_to_highlight = { area = coradia_area } 
+		trigger = {
+			coradia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = mlo_corrado
+				duration = 10950
+			}
+			piedmont_area = {
+				add_permanent_claim = ROOT
+			}
+			liguria_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	mlo_ligurian_descent = {
+		icon = mission_luther_theses
+		position = 4
+		required_missions = { mlo_erulian_defeat } 
+		provinces_to_highlight = { area = liguria_area } 
+		trigger = {
+			liguria_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			1298 = {
+				add_trade_node_income = 60
+			}
+			custom_tooltip = MILAN_TT_3b
+			set_country_flag = unlock_dip_ditta_flag
+		}
+	}
 }
 
 Milan_3_slot = {
@@ -107,6 +170,28 @@ Milan_3_slot = {
 			}
 		}
 	}
+	mlo_north_italian_league = {
+		icon = mission_luther_theses
+		position = 3
+		required_missions = { mlo_padanian_wars mlo_erulian_defeat} 
+		
+		trigger = {
+			total_development = 300
+			OR = {
+				is_elector = yes
+				PD0 = {
+					exists = no
+				}
+			}
+		}
+
+		effect = {
+			PD0 = {
+				elector = no
+			}
+			elector = yes
+		}
+	}
 }
 
 Milan_4_slot = {
@@ -116,7 +201,54 @@ Milan_4_slot = {
 	has_country_shield = yes
 	potential = { tag = MLO } 
 
-	
+	mlo_padanian_wars = {
+		icon = mission_luther_theses
+		position = 2
+		required_missions = { mlo_ducal_army } 
+		
+		trigger = {
+			army_size = PD0
+			army_size = 20
+		}
+
+		effect = {
+			po_valley_area = {
+				add_permanent_claim = ROOT
+			}
+			veneto_area = {
+				add_permanent_claim = ROOT
+			}
+			simple_dynamic_effect = {
+				first_custom_tooltip = MILAN_TT_2a
+				first_limit = "government = republic"
+				first_effect = "add_country_modifier = {name = mlo_good_repub duration = 10950}"
+				second_custom_tooltip = MILAN_TT_2b
+				second_limit = "government = monarchy"
+				second_effect = "add_country_modifier = {name = mlo_good_monarch duration = 10950}"
+			}
+		}
+	}
+	mlo_padanian_control = {
+		icon = mission_luther_theses
+		position = 4
+		required_missions = { mlo_padanian_wars } 
+		provinces_to_highlight = { area = po_valley_area } 
+		trigger = {
+			po_valley_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_prestige_or_monarch_power = {amount = 50}
+			emilia_romagna_area = {
+				add_permanent_claim = ROOT
+			}
+			custom_tooltip = MILAN_TT_3c
+			set_country_flag = unlock_adm_ditta_flag
+		}
+	}
 }
 
 Milan_5_slot = {
@@ -126,5 +258,58 @@ Milan_5_slot = {
 	has_country_shield = yes
 	potential = { tag = MLO } 
 
-	
+	mlo_como = {
+		icon = mission_luther_theses
+		position = 1
+		provinces_to_highlight = { province_id = 4740 } 
+		trigger = {
+			4740 = {
+				owned_by = ROOT
+				base_manpower = 6
+			}
+		}
+
+		effect = {
+			4740 = {
+				add_province_modifier = {
+					name = mlo_cavaliere_defense
+					duration = 10950
+				}
+			}	
+			simple_dynamic_effect = {
+				first_custom_tooltip = MILAN_TT_2a
+				first_limit = "government = republic"
+				first_effect = "add_years_of_income = 1"
+				second_custom_tooltip = MILAN_TT_2b
+				second_limit = "government = monarchy"
+				second_effect = "add_yearly_manpower = 1"
+			}
+		}
+	}
+	mlo_alpine_ventures = {
+		icon = mission_luther_theses
+		position = 3
+		required_missions = { mlo_padanian_wars } 
+		provinces_to_highlight = { area = veneto_area } 
+		trigger = {
+			veneto_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			110 = {
+				add_or_upgrade_fort_building = yes
+			}
+			venetia_area = {
+				add_permanent_claim = ROOT
+			}
+			add_casus_belli = {
+				type = cb_restore_personal_union
+				target = GR2
+				months = 300
+			}
+		}
+	}
 }
