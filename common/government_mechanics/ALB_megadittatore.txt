@@ -10,7 +10,7 @@ megaditta_core = {
 			show_before_interactions = yes
 			default = 0
 			base_monthly_growth = 0.05
-			is_good = no
+			is_good = yes
 			scaled_modifier = {
 				trigger = {
 					NOT = {
@@ -25,7 +25,7 @@ megaditta_core = {
 				modifier = { 
 					global_trade_goods_size_modifier = 0.5
 					trade_efficiency = 0.5
-					development_cost_modifier = -0.5
+					development_cost = -0.5
 					monthly_guild_corruption = -1
 				}
 			}
@@ -57,49 +57,25 @@ megaditta_core = {
 			icon = GFX_council_of_ten_dip_interaction_button
 			cooldown_years = 3
 			trigger = {
+				adm_power = 50
 				dip_power = 50
+				mil_power = 50
 			}
 			effect = {
+				add_adm_power = -50
 				add_dip_power = -50
-				if = {
-					limit = {
-						has_government_power = {
-							mechanic_type = saints_and_sinners
-							power_type = nice_or_naughty
-							value = 50
-						}
-					}
-					add_years_of_income = 0.5
-				}
+				add_mil_power = -50
 				if = {
 					limit = {
 						NOT = {
-							has_government_power = {
-								mechanic_type = saints_and_sinners
-								power_type = nice_or_naughty
-								value = 50
-							}
-						}
-						has_government_power = {
-							mechanic_type = saints_and_sinners
-							power_type = nice_or_naughty
-							value = -50
+							has_country_flag = megaditta_galactic_claims
 						}
 					}
-					add_papal_influence = 25
-				}
-				if = {
-					limit = {
-						NOT = {
-							has_government_power = {
-								mechanic_type = saints_and_sinners
-								power_type = nice_or_naughty
-								value = -50
-							}
-						}
-					}
-					add_reform_desire = 0.05
-					change_government_reform_progress = 25
+					custom_tooltip = MEGADITTA_TT_1a
+					set_country_flag = megaditta_galactic_claims
+				}else = {
+					custom_tooltip = MEGADITTA_TT_1b
+					clr_country_flag = megaditta_galactic_claims
 				}
 			}
 		}
@@ -107,7 +83,9 @@ megaditta_core = {
 			icon = GFX_council_of_ten_mil_interaction_button
 			cooldown_years = 3
 			trigger = {
-			
+				NOT = {
+					corruption = 4
+				}
 			}
 			effect = {
 				add_corruption = 2
