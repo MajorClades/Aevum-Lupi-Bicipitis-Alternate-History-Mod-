@@ -1,0 +1,1094 @@
+namespace = yamat
+
+
+country_event = {
+	id = yamat.1
+	title = yamat.1.t
+	desc = yamat.1.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		tag = KM6
+	}
+	immediate = {
+		hidden_effect = {
+			if = { 
+				limit = {ai = no}
+				KM5 = {
+					override_country_name = EZO_NAME
+				}
+			}
+			manchuria_region = {
+				discover_country = KM5
+				discover_country = KM6
+			}
+			japan_region = {
+				discover_country = KM5
+				discover_country = KM6
+			}
+		}
+	}
+	option = {
+		name = yamat.1a
+		add_country_modifier = {
+			name = yam_birthday_preparations
+			duration = 108
+		}
+		define_general = { #this guys sure is OP, would be a shame if something happened to him
+			name = "Yuuichirou Hanma"
+			shock = 5
+			fire = 4
+			manuever = 5
+			siege = 4
+			trait = strict_drillmaster_personality
+		}
+		country_event = {
+			id = yamat.2
+			days = 108
+		}
+	}
+}
+
+country_event = {
+	id = yamat.2
+	title = yamat.2.t
+	desc = yamat.2.d
+	picture = GREAT_FIRE_eventPicture
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			kill_leader = { # oh no
+				type = "Yuuichirou Hanma"
+			}
+		}
+	}
+	option = {
+		name = yamat.2a
+		kill_leader = {
+			type = "Yuuichirou Hanma"
+		}
+		1835 = {
+			add_devastation = 2
+		}
+		country_event = {
+			id = yamat.3
+			days = 5
+		}
+	}
+}
+
+country_event = {
+	id = yamat.3
+	title = yamat.3.t
+	desc = yamat.3.d
+	picture = FAMINE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.3a
+		ai_chance = {
+			factor = 70
+		}
+		add_casus_belli = {
+			type = cb_ezo_yamatai
+			target = KM5
+			months = 60
+		}
+		custom_tooltip = YAMATAI_TT_1a
+		set_country_flag = yamatai_burned_general_flag
+		define_general = {
+			name = "Daisho Taika" #hmm, there is something different about you, my man?
+			shock = 3
+			fire = 3
+			manuever = 4
+			siege = 2
+			trait = cruel_tactician_personality
+		}
+	}
+	option = {
+		name = yamat.3b
+		ai_chance = {
+			factor = 30
+		}
+		add_casus_belli = {
+			type = cb_ezo_yamatai
+			target = KM5
+			months = 60
+		}
+		custom_tooltip = YAMATAI_TT_1a
+		define_advisor = {
+			type = army_organiser 
+			skill = 2
+			discount = yes
+			female = yes #!!!
+		}
+	}
+	after = {
+		KM5 = {
+			country_event = {
+				id = yamat.4
+			}
+		}
+		if = {
+			limit = { ai = yes}
+			declare_war_with_cb = {
+				casus_belli = cb_ezo_yamatai
+				who = KM5
+			}
+		}
+	}
+}
+
+country_event = {
+	id = yamat.4
+	title = yamat.4.t
+	desc = yamat.4.d
+	picture = FAMINE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.4a
+		add_army_tradition = 1 
+		custom_tooltip = YAMATAI_TT_1b
+	}
+}
+
+country_event = {
+	id = yamat.5
+	title = yamat.5.t
+	desc = yamat.5.d
+	picture = GENERALS_DISCUSSING_eventPicture
+	fire_only_once = yes
+	trigger = {
+		OR = {
+			had_country_flag = {
+				flag = yamatai_burned_general_flag
+				days = 3650
+			}
+			AND = {
+				has_country_flag = yamatai_burned_general_flag
+				NOT = {
+					general_with_name = "Daisho Taika"
+				}
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 20
+	}
+	immediate = {
+		clr_country_flag = yamatai_burned_general_flag
+	}
+	option = {
+		name = yamat.5a
+		ai_chance = {
+			factor = 70
+		}
+		kill_leader = {
+			type = "Daisho Taika"
+		}
+		add_country_modifier = {
+			name = alb_oni_girls
+			duration = -1
+		}
+	}
+	option = {
+		name = yamat.5b
+		ai_chance = {
+			factor = 30
+		}
+		kill_leader = {
+			type = "Daisho Taika"
+		}
+		add_country_modifier = {
+			name = alb_girls_are_yucky
+			duration = -1
+		}
+	}
+}
+
+country_event = {
+	id = yamat.6
+	title = yamat.6.t
+	desc = yamat.6.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.6a
+		set_country_flag = pacification_mechanic_flag
+		every_owned_province = {
+			limit = {
+				culture = togoku
+			}
+			change_culture = sisam
+		}
+		every_owned_province = {
+			limit = {
+				culture = japanese
+			}
+			change_culture = anunisam
+		}
+	}
+}
+
+country_event = {
+	id = yamat.7
+	title = yamat.7.t
+	desc = yamat.7.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.7a
+		set_country_flag = pacification_mechanic_flag
+		every_owned_province = {
+			limit = {
+				culture = utari
+			}
+			change_culture = yezo
+		}
+		every_owned_province = {
+			limit = {
+				culture = ainu
+			}
+			change_culture = emishi
+		}
+	}
+}
+
+country_event = {
+	id = yamat.8
+	title = yamat.8.t
+	desc = yamat.8.d
+	picture = EMPEROR_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.8a
+		trigger = {
+			tag = KM5
+		}
+		custom_tooltip = YAMATAI_TT_2a
+		KM5 = {
+			custom_tooltip = YAMATAI_TT_2b
+			random_owned_province = {
+				limit = {
+					culture_group = japanese_g
+				}
+				add_province_modifier = {
+					name = nihon_revolt_lv_3
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						culture_group = japanese_g
+					}
+					add_province_modifier = {
+						name = nihon_revolt_lv_3
+						duration = -1
+					}
+				}
+				remove_government_reform = ezo_confederation_reform
+				add_government_reform = ezo_confederation_reform
+			}
+		}
+	}
+	option = {
+		name = yamat.8b
+		trigger = {
+			tag = KM6
+		}
+		custom_tooltip = YAMATAI_TT_2a
+			KM6 = {
+				custom_tooltip = YAMATAI_TT_2c
+				random_owned_province = {
+					limit = {
+						culture_group = kamchatkan_g
+					}
+					add_province_modifier = {
+						name = nihon_revolt_lv_3
+						duration = -1
+					}
+				}
+				hidden_effect = {
+					every_owned_province = {
+						limit = {
+							culture_group = kamchatkan_g
+						}
+						add_province_modifier = {
+							name = nihon_revolt_lv_3
+							duration = -1
+						}
+					}
+					remove_government_reform = kingdom_of_yamatai_reform
+					add_government_reform = kingdom_of_yamatai_reform
+				}
+			}
+	}
+}
+
+country_event = {
+	id = yamat.9
+	title = yamat.9.t
+	desc = yamat.9.d
+	picture = SHOGUNATE_AUTHORITY_INCIDENT_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.9a
+		hokkaido_area = {
+			cede_province = ANU
+		}
+		vassalize = ANU
+		ANU = {
+			hidden_effect = {
+				change_government = monarchy
+				add_government_reform = feudalism_reform
+			}
+			change_religion = shinto
+			override_country_name = SHOGUN_AINU
+		}
+	}
+	option = {
+		name = yamat.9b
+		add_yearly_manpower = -1.5
+		hokkaido_area = {
+			add_devastation = 30
+			add_core = ROOT
+		}
+	}
+}
+
+country_event = {
+	id = yamat.10
+	title = yamat.10.t
+	desc = yamat.10.d
+	picture = CITY_VIEW_eventPicture
+	fire_only_once = yes
+	trigger = {
+		any_country = {
+			OR = {
+				culture_group = japanese_g
+				culture_group = kamchatkan_g
+			}
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 10
+				region = korea_region
+			}
+			any_subject_country = {
+				has_country_flag = helped_the_koreans_flag
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 12
+	}
+	option = {
+		name = yamat.10a
+		random_subject_country = {
+			limit = {has_country_flag = helped_the_koreans_flag}
+			korea_region = {
+				limit = {
+					OR = {
+						owned_by = ROOT
+						owned_by_subject_of = ROOT
+					}
+				}
+				cede_province = PREV
+				add_core = PREV
+			}
+			japan_region = {
+				limit = {
+					owned_by = PREV
+				}
+				cede_province = ROOT
+				add_core = ROOT
+			}
+			clr_country_flag = helped_the_koreans_flag
+		}
+	}
+}
+country_event = {
+	id = yamat.11
+	title = yamat.11.t
+	desc = yamat.11.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.11a
+		trigger = {
+			any_subject_country = {
+				culture_group = korean_g
+				capital_scope = {
+					region = korea_region
+				}
+			}
+		}
+		random_subject_country = {
+			limit = {
+				culture_group = korean_g
+				capital_scope = {
+					region = korea_region
+				}
+			}
+			every_owned_province = {
+				limit = {
+					NOT = {culture = jeju}
+					region = korea_region
+				}
+				change_culture = korean
+			}
+		}
+		every_owned_province = {
+			limit = {
+				NOT = {culture = korean}
+				region = korea_region
+			}
+			change_culture = korean
+		}
+		every_owned_province = {
+			limit = {
+				culture = jeju
+				region = japan_region
+			}
+			change_culture = ROOT
+		}
+	}
+	option = {
+		name = yamat.11b
+		every_owned_province = {
+			limit = {
+				NOT = {culture = jeju}
+				region = korea_region
+			}
+			change_culture = korean
+		}
+		every_owned_province = {
+			limit = {
+				culture = jeju
+				region = japan_region
+			}
+			change_culture = ROOT
+		}
+	}
+	option = {
+		name = yamat.11c
+		trigger = {
+			any_subject_country = {
+				is_colonial_nation = yes
+			}
+		}
+		every_owned_province = {
+			limit = {
+				culture = jeju
+				region = japan_region
+			}
+			change_culture = ROOT
+		}
+		random_subject_country = {
+			limit = {
+				is_colonial_nation = yes
+			}
+			random_owned_province = {
+				change_culture = jeju
+				add_base_manpower = 1
+			}
+			random_owned_province = {
+				change_culture = jeju
+				add_base_manpower = 1
+			}
+			random_owned_province = {
+				change_culture = jeju
+				add_base_manpower = 1
+			}
+			random_owned_province = {
+				change_culture = jeju
+				add_base_manpower = 1
+			}
+			random_owned_province = {
+				change_culture = jeju
+				add_base_manpower = 1
+			}
+		}
+	}
+}
+country_event = {
+	id = yamat.12
+	title = yamat.12.t
+	desc = yamat.12.d
+	picture = CITY_VIEW_eventPicture
+	fire_only_once = yes
+	trigger = {
+		capital_scope = {
+			region = japan_region
+		}
+		japan_region = {
+			type = all
+			country_or_non_sovereign_subject_holds = ROOT
+		}
+		NOT = {
+			has_discovered = 1235
+		}
+	}
+	mean_time_to_happen = {
+		months = 24
+	}
+	option = {
+		name = yamat.12a
+		discover_province = 1235
+		define_explorer = {
+			shock = 2
+			fire = 2
+			manuever = 3
+		}
+	}
+	option = {
+		name = yamat.12b
+		discover_province = 1235
+		1235 = {
+			add_colonysize = 500
+		}
+	}
+}
+country_event = {
+	id = yamat.13
+	title = yamat.13.t
+	desc = yamat.13.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.13a
+		vassalize = KAA
+		northern_polynesia_area = {
+			add_permanent_claim = KAA
+		}
+	}
+	option = {
+		name = yamat.13b
+		vassalize = OAH
+		northern_polynesia_area = {
+			add_permanent_claim = OAH
+		}
+	}
+	option = {
+		name = yamat.13c
+		vassalize = MAU
+		northern_polynesia_area = {
+			add_permanent_claim = MAU
+		}
+	}
+	option = {
+		name = yamat.13d
+		vassalize = HAW
+		northern_polynesia_area = {
+			add_permanent_claim = HAW
+		}
+	}
+	option = {
+		name = yamat.13e
+		1692 = {
+			add_colonysize = 500
+		}
+		northern_polynesia_area = {
+			add_permanent_claim = ROOT
+		}
+	}
+}
+country_event = {
+	id = yamat.14
+	title = yamat.14.t
+	desc = yamat.14.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.14a
+		discover_province = 1699
+		discover_province = 1693
+		discover_province = 1687
+		discover_province = 1556
+		country_event = {
+			id = yamat.15
+		}
+	}
+	option = {
+		name = yamat.14b
+		trigger = {
+			has_discovered = 1699
+			has_discovered = 1693
+			has_discovered = 1687
+			has_discovered = 1556
+		}
+		add_stability_or_adm_power = yes
+	}
+}
+country_event = {
+	id = yamat.15
+	title = yamat.15.t
+	desc = yamat.15.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.15a
+		vassalize = CL0
+		4637 = {
+			if = {
+				limit = {
+					owned_by = CL0
+				}
+				cede_province = ROOT
+			}
+		}
+		add_country_modifier = {
+			name = yam_hinode_colozination
+			duration = 10950
+		}
+	}
+	option = {
+		name = yamat.15b
+		add_country_modifier = {
+			name = yam_full_colozination
+			duration = 10950
+		}
+	}
+}
+
+country_event = { #buy macau
+	id = yamat.16
+	title = yamat.16.t
+	desc = yamat.16.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.16a
+		add_years_of_income = -1
+		668 = {
+			owner = {
+				country_event = {
+					id = yamat.17
+				}
+			}
+		}
+	}
+	option = {
+		name = yamat.16b
+		668 = {
+			add_permanent_claim = ROOT
+		}
+	}
+}
+
+country_event = { #buy macau
+	id = yamat.17
+	title = yamat.17.t
+	desc = yamat.17.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.17a
+		add_years_of_income = 2
+		668 = {
+			remove_core = ROOT
+			add_core = KM6
+			cede_province = KM6
+		}
+	}
+	option = {
+		name = yamat.17b
+		668 = {
+			add_permanent_claim = KM6
+		}
+	}
+}
+
+country_event = { #kill China
+	id = yamat.18
+	title = yamat.18.t
+	desc = yamat.18.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.18a
+		custom_tooltip = YAMATAI_TT_8
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					superregion = china_superregion
+				}
+				if = {
+					limit = {
+						is_core = owner
+					}
+					add_core = WA0
+				}
+				cede_province = WA0
+			}
+			every_subject_country = {
+				every_owned_province = {
+					limit = {
+						superregion = china_superregion
+					}
+					if = {
+						limit = {
+							is_core = owner
+						}
+						add_core = WA0
+					}
+					cede_province = WA0
+				}
+			}
+		}
+		vassalize = WA0
+		china_superregion = {
+			add_permanent_claim = WA0
+		}
+	}
+	option = {
+		name = yamat.18b
+		add_country_modifier = {
+			name = yam_conqueror_of_heaven
+			duration = 10950
+		}
+	}
+}
+country_event = { #kill China
+	id = yamat.19
+	title = yamat.19.t
+	desc = yamat.19.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.19a
+		if = {
+			limit = {
+				is_emperor_of_china = yes
+			}
+			every_country = {
+				limit = {
+					capital_scope = {
+						superregion = china_superregion
+					}
+				}
+				reverse_add_aggressive_expansion = {
+					who = ROOT
+					value = 5
+					apply_calc = no
+				}
+			}
+		}else = {
+			every_country = {
+				limit = {
+					capital_scope = {
+						superregion = china_superregion
+					}
+				}
+				reverse_add_aggressive_expansion = {
+					who = ROOT
+					value = 10
+					apply_calc = no
+				}
+			}
+		}
+		add_years_of_income = 3
+	}
+	option = {
+		name = yamat.19b
+		every_country = {
+			limit = {
+				capital_scope = {
+					superregion = china_superregion
+				}
+			}
+			reverse_add_aggressive_expansion = {
+				who = ROOT
+				value = -5
+				apply_calc = no
+			}
+		}
+	}
+}
+country_event = { #god of war
+	id = yamat.20
+	title = yamat.20.t
+	desc = yamat.20.d
+	picture = VILLAGE_RAIDED_eventPicture
+	fire_only_once = yes
+	trigger = {
+		religion = shinto
+		NOT = {
+			has_country_flag = powered_hachiman_flag
+		}
+		army_tradition = 80
+	}
+	mean_time_to_happen = {
+		months = 12
+	}
+	option = {
+		name = yamat.20a
+		add_church_power = 100
+		custom_tooltip = YAMATAI_TT_16
+		set_country_flag = powered_hachiman_flag
+	}
+	option = {
+		name = yamat.20b
+		add_mil_tech = 1
+	}
+}
+country_event = {
+	id = yamat.100
+	title = yamat.100.t
+	desc = yamat.100.d
+	picture = CITY_VIEW_eventPicture
+	hidden = yes
+	trigger = {
+		tag = KM5
+		has_country_flag = pacification_mechanic_flag
+		any_owned_province = {
+			OR = {
+				culture = togoku
+				culture = japanese
+			}
+		}
+	}
+	mean_time_to_happen = {
+		days = 30
+	}
+	option = {
+		name = yamat.100a
+		every_owned_province = {
+			limit = {
+				culture = togoku
+			}
+			change_culture = sisam
+		}
+		every_owned_province = {
+			limit = {
+				culture = japanese
+			}
+			change_culture = anunisam
+		}
+	}
+}
+
+country_event = {
+	id = yamat.101
+	title = yamat.101.t
+	desc = yamat.101.d
+	picture = CITY_VIEW_eventPicture
+	hidden = yes
+	trigger = {
+		tag = KM6
+		has_country_flag = pacification_mechanic_flag
+		any_owned_province = {
+			OR = {
+				culture = utari
+				culture = ainu
+			}
+		}
+	}
+	mean_time_to_happen = {
+		days = 30
+	}
+	option = {
+		name = yamat.100a
+		every_owned_province = {
+			limit = {
+				culture = utari
+			}
+			change_culture = yezo
+		}
+		every_owned_province = {
+			limit = {
+				culture = ainu
+			}
+			change_culture = emishi
+		}
+	}
+}
+
+country_event = { 
+	id = yamat.1000
+	title = yamat.1000.t
+	desc = yamat.1000.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.1000a
+		add_army_tradition = -10
+		add_government_power = {
+			mechanic_type = japan_army_navy_mechanic
+			power_type = rivalry_balance
+			value = 20
+		}
+	}
+	option = {
+		name = yamat.1000b
+		add_navy_tradition = -10
+		add_government_power = {
+			mechanic_type = japan_army_navy_mechanic
+			power_type = rivalry_balance
+			value = -20
+		}
+	}
+	option = {
+		name = yamat.1000c
+	}
+}
+
+country_event = { 
+	id = yamat.2000
+	title = yamat.2000.t
+	desc = yamat.2000.d
+	picture = FEAST_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.2000a
+		if = {
+			limit = {
+				has_church_aspect = amaterasu_omikami_aspect
+			}
+			add_legitimacy_equivalent = {amount = 10}
+		}
+		if = {
+			limit = {
+				has_church_aspect = omoikane_aspect
+			}
+			add_adm_power = 50
+		}
+		if = {
+			limit = {
+				has_church_aspect = okuninushi_aspect
+			}
+			add_years_of_income = 0.1
+		}
+		if = {
+			limit = {
+				has_church_aspect = ame_no_uzume_aspect
+			}
+			add_dip_power = 50
+		}
+		if = {
+			limit = {
+				has_church_aspect = inari_okami_aspect
+			}
+			add_years_of_owned_provinces_production_income = {
+				years = 0.3
+			}
+		}
+		if = {
+			limit = {
+				has_church_aspect = susanoo_no_mikoto_aspect
+			}
+			add_prestige = 10
+		}
+		if = {
+			limit = {
+				OR = {
+					has_church_aspect = hachiman_1_aspect
+					has_church_aspect = hachiman_2_aspect
+				}
+			}
+			add_mil_power = 50
+		}
+		if = {
+			limit = {
+				has_church_aspect = takemikazuchi_aspect
+			}
+			add_army_tradition = 5
+		}
+		if = {
+			limit = {
+				has_church_aspect = takeminakata_aspect
+			}
+			add_yearly_manpower = 0.2
+		}
+	}
+	option = {
+		name = yamat.2000b
+		trigger = {
+			has_church_aspect = amaterasu_omikami_aspect
+		}
+		add_legitimacy_equivalent = {amount = 15}
+		add_absolutism = 5
+		add_stability_or_adm_power = yes
+	}
+	option = {
+		name = yamat.2000c
+		trigger = {
+			has_church_aspect = omoikane_aspect
+		}
+		add_adm_power = 150
+		add_stability_or_adm_power = yes
+	}
+	option = {
+		name = yamat.2000d
+		trigger = {
+			has_church_aspect = okuninushi_aspect
+		}
+		add_years_of_income = 0.5
+		capital_scope = {
+			add_base_tax = 1
+		}
+	}
+	option = {
+		name = yamat.2000e
+		trigger = {
+			has_church_aspect = ame_no_uzume_aspect
+		}
+		add_dip_power = 150
+		define_advisor = {
+			type = statesman
+			skill = 3
+			cost_multiplier = 0.33
+		}
+	}
+	option = {
+		name = yamat.2000f
+		trigger = {
+			has_church_aspect = inari_okami_aspect
+		}
+		add_years_of_owned_provinces_production_income = {
+			years = 1
+		}
+		capital_scope = {
+			add_base_production = 1
+		}
+	}
+	option = {
+		name = yamat.2000g
+		trigger = {
+			has_church_aspect = susanoo_no_mikoto_aspect
+		}
+		add_prestige_or_monarch_power = {amount = 15}
+		add_power_projection = {
+			type = mission_rewards_power_projection 
+			amount = 10
+		}
+	}
+	option = {
+		name = yamat.2000h
+		trigger = {
+			OR = {
+				has_church_aspect = hachiman_1_aspect
+				has_church_aspect = hachiman_2_aspect
+			}
+		}
+		add_mil_power = 150
+		capital_scope = {
+			add_base_manpower = 1
+		}
+	}
+	option = {
+		name = yamat.2000i
+		trigger = {
+			has_church_aspect = takemikazuchi_aspect
+		}
+		add_army_tradition_or_mil_power = {amount = 10}
+		add_army_professionalism = 0.05
+	}
+	option = {
+		name = yamat.2000j
+		trigger = {
+			has_church_aspect = takeminakata_aspect
+		}
+		add_yearly_manpower = 0.4
+		add_yearly_sailors = 1
+	}
+}

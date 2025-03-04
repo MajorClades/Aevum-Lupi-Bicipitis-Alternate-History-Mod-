@@ -1,0 +1,115 @@
+country_decisions = {
+
+	khas_nation = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			was_never_end_game_tag_trigger = yes
+			NOT = { has_country_flag = formed_khas_flag }
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			OR = {
+				is_free_or_tributary_trigger = yes
+				ai = no
+			}
+			OR = {
+				primary_culture = nepali
+				primary_culture = pahari
+			}
+			OR = {
+				ai = no
+				AND = {
+					ai = yes
+					num_of_cities = 4
+				}
+				AND = {
+					ai = yes
+					is_year = 1700
+				}
+			}
+			is_colonial_nation = no
+			OR = {
+				is_former_colonial_nation = no
+				AND = {
+					is_former_colonial_nation = yes
+					ai = no
+				}
+			}
+		}
+		provinces_to_highlight = {
+			OR = {
+					area = himalayan_hills_area
+					area = nepal_area
+					area = baisi_rajya_area
+					area = bhutan_area
+					area = kashmir_area
+					area = mithila_area
+					area = bihar_area
+								}
+			NOT = { owned_by = ROOT }
+		}
+		allow = {
+			is_nomad = no
+			is_at_war = no
+			himalayan_hills_area = {
+				type = all
+				owned_by = ROOT
+			}
+			nepal_area = {
+				type = all
+				owned_by = ROOT
+			}
+			baisi_rajya_area = {
+				type = all
+				owned_by = ROOT
+			}
+			bhutan_area = {
+				type = all
+				owned_by = ROOT
+			}
+			kashmir_area = {
+				type = all
+				owned_by = ROOT
+			}
+			kashmir_area = {
+				type = all
+				owned_by = ROOT
+			}
+			mithila_area = {
+				type = all
+				owned_by = ROOT
+			}
+			bihar_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		effect = {
+			change_tag = NPL
+			swap_non_generic_missions = yes
+			add_prestige = 25
+			if = {
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			if = {
+				limit = {
+					NOT = { government_rank = 2 }
+				}
+				set_government_rank = 2
+			}
+			add_country_modifier = {
+				name = centralization_modifier
+				duration = 3650
+			}
+			set_country_flag = formed_khas_flag
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+
+}

@@ -1,0 +1,266 @@
+Ayabani_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = KM7
+			tag = KM8
+			tag = KM9
+		}
+	}  
+
+	aya_navy = {
+		icon = mission_junk_boat
+		position = 1
+		provinces_to_highlight = {  }
+
+		trigger = {
+			if = {
+				limit = { ai = yes } 
+				navy_size_percentage = 0.9
+			}
+			else = { navy_size_percentage = 1 } 
+		}
+		effect = {
+			create_admiral = { tradition = 30 } 
+			define_advisor = {
+				type = naval_reformer
+				cost_multiplier = 0.5
+				skill = 2
+			}
+		}
+	}
+}
+Ayabani_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = KM7
+			tag = KM8
+			tag = KM9
+		}
+	}  
+
+	aya_merge_army_navy = {
+		icon = mng_thirteen_provinces
+		position = 2
+		required_missions = {
+			aya_navy
+			aya_army
+		} 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			if = {
+				limit = { ai = yes } 
+				navy_size_percentage = 1
+				army_size_percentage = 1
+			}
+			AND = { 
+				if = {
+					limit = { ai = no }
+					has_mil_advisor = yes 
+					has_dip_advisor = yes
+					national_focus = mil
+				}
+			}
+		}
+		effect = { country_event = { id = ayabani.1 }  } 
+	}
+	aya_unification_war = {
+		icon = qng_ten_grand_campaigns
+		position = 3
+		required_missions = { aya_merge_army_navy }
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			navy_size_percentage = 1
+			army_size_percentage = 1
+			if = {
+				limit = { ai = yes }
+				OR = {
+					AND = {
+						tag = KM7
+						KM8 = {
+							is_rival = KM7
+						}
+						KM9 = {
+							is_rival = KM7
+						}
+					}
+					AND = {
+						tag = KM8
+						KM7 = {
+							is_rival = KM8
+						}
+						KM9 = {
+							is_rival = KM8
+						}
+					}
+					AND = {
+						tag = KM9
+						KM7 = {
+							is_rival = KM9
+						}
+						KM8 = {
+							is_rival = KM9
+						}
+					}
+				}
+			}
+			OR = {
+				AND = {
+					tag = KM7
+					KM9 = {
+						has_opinion_modifier = {
+							who = ROOT
+							modifier = insulted
+						}
+					}
+					KM8 = {
+						has_opinion_modifier = {
+							who = ROOT
+							modifier = insulted
+						}
+					}
+				}
+				AND = {
+					tag = KM8
+					KM9 = {
+						has_opinion_modifier = {
+							who = ROOT
+							modifier = insulted
+						}
+					}
+					KM7 = {
+						has_opinion_modifier = {
+							who = ROOT
+							modifier = insulted
+						}
+					}
+				}
+				AND = {
+					tag = KM9
+					KM7 = {
+						has_opinion_modifier = {
+							who = ROOT
+							modifier = insulted
+						}
+					}
+					KM8 = {
+						has_opinion_modifier = {
+							who = ROOT
+							modifier = insulted
+						}
+					}
+				}
+			}
+		}
+
+		effect = {
+		custom_tooltip = AYABANI_TT_1
+			if = {
+				limit = {
+					tag = KM7
+				}
+				KM7 = {
+					country_event = { id = ayabani.4 }
+				}
+				KM8 = {
+					country_event = { id = ayabani.5 }
+				}
+				KM9 = {
+					country_event = { id = ayabani.5 }
+				}
+			}
+			else_if = {
+				limit = {
+					tag = KM8
+				}
+				KM7 = {
+					country_event = { id = ayabani.5 }
+				}
+				KM8 = {
+					country_event = { id = ayabani.4 }
+				}
+				KM9 = {
+					country_event = { id = ayabani.5 }
+				}
+			}
+			else_if = {
+				limit = {
+					tag = KM9
+				}
+				KM7 = {
+					country_event = { id = ayabani.5 }
+				}
+				KM8 = {
+					country_event = { id = ayabani.5 }
+				}
+				KM9 = {
+					country_event = { id = ayabani.4 }
+				}
+			}
+		}
+	}
+}
+Ayabani_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = KM7
+			tag = KM8
+			tag = KM9
+		}
+	}  
+
+	aya_army = {
+		icon = mission_manchu_warrior
+		position = 1
+		provinces_to_highlight = {  }
+
+		trigger = {
+			if = {
+				limit = { ai = yes } 
+				army_size_percentage = 0.9
+			}
+			else = { army_size_percentage = 1 } 
+		}
+		effect = {
+			create_general = { tradition = 30 } 
+			define_advisor = {
+				type = army_reformer
+				cost_multiplier = 0.5
+				skill = 2
+			}
+			custom_tooltip = AYABANI_TT_3
+			hidden_effect = {
+				add_country_modifier = {
+					name = ayb_pre_grand_army
+					duration = -1
+				}
+			}
+		}
+	}
+}
+Ayabani_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = KM7
+			tag = KM8
+			tag = KM9
+		}
+	}  
+}

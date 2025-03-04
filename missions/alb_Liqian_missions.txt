@@ -1,0 +1,575 @@
+ch4_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = CH4 } 
+
+	ch4_pacify_yi_lands = {
+		icon = mission_alliances
+		position = 3
+		required_missions = { ch4_barbarian_empire } 
+		provinces_to_highlight = {  
+			culture_group = nanman_group
+			owned_by = ROOT
+			unrest = 2
+			local_autonomy = 10
+		} 
+
+		trigger = {  
+			owns_all_provinces = {
+				culture_group = nanman_group
+			}
+			all_owned_province = {
+				OR = {
+					AND = {
+						culture_group = nanman_group
+						NOT = {
+							unrest = 2
+						}
+						NOT = {
+							local_autonomy = 10
+						}
+					}
+					NOT = { culture_group = nanman_group }
+				}
+			}
+		} 
+
+		effect = {  
+			add_yearly_manpower = 3
+			custom_tooltip = empty_line_tt
+
+		} 
+	}
+
+	ch4_roman_spirit = {
+		icon = mission_alliances
+		position = 5
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	ch4_western_envoys = {
+		icon = mission_alliances
+		position = 6
+		required_missions = { ch4_roman_spirit } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+}
+ch4_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = CH4 } 
+
+	ch4_barbarian_empire = {
+		icon = mission_alliances
+		position = 2
+		required_missions = { ch4_military_spirit } 
+		provinces_to_highlight = {  
+			OR = {
+				area = yun_gui_area
+				area = guangxi_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			yun_gui_area ={
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			guangxi_area ={
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {  
+			add_country_modifier = {
+				name = ch4_end_barbarian_empire
+				duration = 5475
+			}
+			xinan_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	ch4_sweep_sichuan = {
+		icon = mission_alliances
+		position = 4
+		required_missions = { ch4_barbarian_empire } 
+		provinces_to_highlight = {  
+			OR = {
+				area = sichuan_area
+				area = chuannan_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			sichuan_area ={
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			chuannan_area ={
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {  
+			upgrade_roman_heirs = yes
+			custom_tooltip = empty_line_tt
+			add_adm_power = 100
+		} 
+	}
+
+	ch4_legionary_tactics = {
+		icon = mission_alliances
+		position = 6
+		required_missions = { ch4_roman_spirit } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+}
+ch4_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = CH4 } 
+
+	ch4_military_spirit = {
+		icon = mission_alliances
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			army_size_percentage = 0.9
+			num_of_generals = 1
+		} 
+
+		effect = { 
+			custom_tooltip = ch4_cores_on_ming_provinces_tt
+			hidden_effect = {
+				CH2 = {
+					every_owned_province = {
+						add_core = ROOT
+					}
+				}
+			}
+			custom_tooltip = empty_line_tt
+			guangxi_area = {
+				add_permanent_claim = ROOT
+			}
+			yun_gui_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	ch4_brothers_war = {
+		icon = mission_alliances
+		position = 2
+		required_missions = { ch4_military_spirit } 
+		provinces_to_highlight = {  
+			OR= {
+				owned_by = CH2
+				province_id = 1829
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		} 
+
+		trigger = {  
+			NOT = {
+				exists = CH2
+			}
+			owns = 1829
+		} 
+
+		effect = {  
+			country_event = {
+				id = liqian.1
+			}
+			custom_tooltip = empty_line_tt
+			upgrade_roman_heirs = yes
+		} 
+	}
+
+	ch4_end_manicheans = {
+		icon = mission_alliances
+		position = 3
+		required_missions = { ch4_brothers_war } 
+		provinces_to_highlight = {  
+			superregion = china_superregion
+			religion = manich
+		} 
+
+		trigger = {  
+			NOT = {
+				any_province = {
+					superregion = china_superregion
+					religion = manich
+				}
+			}
+			religious_unity = 0.95
+		} 
+
+		effect = {  
+			
+		} 
+	}
+
+	ch4_chinese_hegemony = {
+		icon = mission_alliances
+		position = 5
+		required_missions = {
+			ch4_sweep_sichuan
+			ch4_end_of_jie
+			ch4_heirs_of_guo_hong
+		}
+		provinces_to_highlight = {
+			superregion = china_superregion
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			OR = {
+				is_emperor_of_china = yes
+				NOT = {
+					any_country = {
+						is_emperor_of_china = yes
+					}
+				}
+			}
+			china_superregion = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = ch4_is_eoc_tt
+				first_limit = "is_emperor_of_china = yes"
+				first_effect = "
+					add_mandate = 20
+				"
+				second_limit = "NOT = {
+					any_country = {
+						is_emperor_of_china = yes
+					}
+				}"
+				second_effect = "
+
+				"
+			}
+		} 
+	}
+
+	ch4_rebirth_of_daqin = {
+		icon = mission_alliances
+		position = 7
+		required_missions = {
+			ch4_chinese_hegemony
+			ch4_legionary_tactics
+			ch4_southern_capital
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+}
+ch4_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = CH4 } 
+
+	ch4_to_yangtze = {
+		icon = mission_alliances
+		position = 3
+		required_missions = { ch4_brothers_war } 
+		provinces_to_highlight = {  
+			region = south_china_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 40
+				region = south_china_region
+			}
+		} 
+
+		effect = {  
+			north_china_region = {
+				add_permanent_claim = ROOT
+			}
+			custom_tooltip = empty_line_tt
+			custom_tooltip = alb_unlock_rma_sinicization_tt
+			set_country_flag = unlock_rma_sinicization_flag
+			custom_tooltip = empty_line_tt
+			upgrade_roman_heirs = yes
+		} 
+	}
+
+	ch4_end_of_jie = {
+		icon = mission_alliances
+		position = 4
+		required_missions = { ch4_to_yangtze } 
+		provinces_to_highlight = {  
+			OR = {
+				area = gansu_area
+				area = west_gansu_area
+				area = shaanxi_area
+				area = shanxi_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			gansu_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			west_gansu_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			shaanxi_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			shanxi_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {  
+			698 = {
+				add_great_project_tier = {
+					type = the_great_wall_of_china
+					tier = 1
+				}
+			}
+			custom_tooltip = empty_line_tt
+			country_event = {
+				id = liqian.2
+			}
+		} 
+	}
+
+	ch4_southern_capital = {
+		icon = mission_alliances
+		position = 6
+		required_missions = { ch4_great_port_of_guangzhou } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+}
+ch4_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = CH4 } 
+
+	ch4_tai_pirates = {
+		icon = mission_alliances
+		position = 1
+		provinces_to_highlight = {  
+			is_capital_of = CGS
+		} 
+
+		trigger = {  
+			OR = {
+				owns = 658
+				CGS = {
+					has_opinion = {
+						who = ROOT
+						value = 190
+					}
+					is_subject_of = ROOT
+				}
+			}
+		} 
+
+		effect = {  
+			vassalize = CGS
+			custom_tooltip = empty_line_tt
+			luzon_area = {
+				add_permanent_claim = ROOT
+			}
+			southern_luzon_area = {
+				add_permanent_claim = ROOT
+			}
+			eastern_luzon_area = {
+				add_permanent_claim = ROOT
+			}
+			visayas_area = {
+				add_permanent_claim = ROOT
+			}
+			eastern_visayas_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	ch4_panyupayan_protectorate = {
+		icon = mission_alliances
+		position = 2
+		required_missions = { ch4_tai_pirates } 
+		provinces_to_highlight = {  
+			OR = {
+				area = luzon_area
+				area = southern_luzon_area
+				area = eastern_luzon_area
+				area = visayas_area
+				area = eastern_visayas_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			luzon_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			southern_luzon_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			eastern_luzon_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			visayas_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			eastern_visayas_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {  
+			#REPLACE_ME
+		} 
+	}
+
+	ch4_heirs_of_guo_hong = {
+		icon = mission_alliances
+		position = 4
+		required_missions = { ch4_to_yangtze } 
+		provinces_to_highlight = {  
+			OR = {
+				area = south_hebei_area
+				area = hebei_area
+				area = shandong_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 10
+				OR = {
+					area = south_hebei_area
+					area = hebei_area
+					area = shandong_area
+				}
+			}
+			1816 = {
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					controlled_by = ROOT
+				}
+			}
+		} 
+
+		effect = {  
+			upgrade_roman_heirs = yes
+			custom_tooltip = empty_line_tt
+			if = {
+				limit = {
+					exists = YAN
+					YAN = {
+						is_emperor_of_china = yes
+					}
+				}
+				custom_tooltip = ch4_yan_is_eoc_yes_tt
+				country_event = {
+					id = liqian.4
+				}
+			}
+			else = {
+				custom_tooltip = ch4_yan_is_eoc_no_tt
+				tooltip = {
+					country_event = {
+						id = liqian.4
+					}
+				}
+			}
+		} 
+	}
+
+	ch4_great_port_of_guangzhou = {
+		icon = mission_alliances
+		position = 5
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	ch4_merchant_fleet = {
+		icon = mission_alliances
+		position = 6
+		required_missions = { ch4_great_port_of_guangzhou } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+}
