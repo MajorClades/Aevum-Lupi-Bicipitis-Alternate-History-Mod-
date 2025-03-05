@@ -60,7 +60,6 @@ country_event = {
 			#set to treaty first so we can set everything else without elections being called at the wrong time
 			set_hre_religion_treaty = yes
 			set_hre_heretic_religion = catholic
-			enable_religion = pontifex
 			set_hre_religion = pontifex
 			#now set it to locked once we've completed the tasks
 			set_hre_religion_locked = yes
@@ -480,12 +479,12 @@ country_event = { #I feel like the leagues should be instant. Also, I need a goo
 
 	 trigger = {
 	 	reform_desire = 1 #placeholder
+		is_religion_enabled = wycliffian
 	 	hre_leagues_enabled = no
 		hre_religion_locked = no
 		hre_religion_treaty = no
 		NOT = { hre_reform_passed = erbkaisertum }
 		hidden_trigger = {
-			tag = PAP	
 			OR = {
 				tag = PAP	
 				AND ={
@@ -504,21 +503,14 @@ country_event = { #I feel like the leagues should be instant. Also, I need a goo
 	 }
 	
 	mean_time_to_happen = {
-	 	months = 12
-	 	modifier = {
-	 		factor = 0.5
-	 		is_year = 1575
-	 	}
-	 	modifier = {
-	 		factor = 0.1
-	 		is_year = 1600
-	 	}		
+	 	months = 12		
 	}
 
 	option = {
 		name = "religious_leagues.5.a"
 		change_tag = PA0
 		change_religion = pontifex
+		enable_religion = pontifex
 		custom_tooltip = PAP_WAR_IN_EARTH_2
 		custom_tooltip = empty_line_tt
 		random_owned_province = {
@@ -552,6 +544,22 @@ country_event = { #I feel like the leagues should be instant. Also, I need a goo
 			}
 		}
 		hidden_effect = {
+			every_country = {
+				limit = {
+					has_opinion = {
+						who = PAP
+						value = 180
+					}
+					NOT = {
+						tag = emperor
+					}
+				}
+				country_event = {
+					id = papacy.8
+				}
+			}
+		}
+		hidden_effect = {
 			every_owned_province = {
 				limit = {
 					religion = catholic
@@ -572,6 +580,7 @@ country_event = { #I feel like the leagues should be instant. Also, I need a goo
 			}
 		}
 		enable_hre_leagues = yes
+		join_league = pontifex
 		set_global_flag = evangelical_union_happened
 	}
 }
