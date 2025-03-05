@@ -1,0 +1,39 @@
+country_decisions = {
+	establish_american_frontier = {
+		potential = {
+			has_country_flag = mesoamerica_american_frontiers_flag
+		}
+		allow = {
+			government_reform_progress = 75
+			custom_trigger_tooltip = {
+				tooltip = MESOAMERICA_ANY_BORDERING_EMPTY_PROVINCE_IS_EMPTY
+				any_owned_province = {
+					is_colony = no
+					any_empty_neighbor_province = { 
+						OR = {
+							continent = north_america
+							continent = south_america
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			change_government_reform_progress = -75
+			custom_tooltip = MESOAMERICA_ESTABLISH_AMERICAN_FRONTIERS
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						is_colony = no
+					}
+					every_empty_neighbor_province = {
+						add_siberian_construction = 1
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+}
