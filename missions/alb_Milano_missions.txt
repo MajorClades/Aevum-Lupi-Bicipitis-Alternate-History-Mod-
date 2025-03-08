@@ -3,7 +3,7 @@ Milan_1_slot = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { 
+	potential = {
 		NOT = { tag = ROM } 
 		OR = {
 			tag = MLO
@@ -12,12 +12,13 @@ Milan_1_slot = {
 				was_tag = MLO
 			}
 		}
-	} 
+	}
 
 	mlo_novara = {
-		icon = mission_luther_theses
+		icon = mission_have_manufactories
 		position = 1
 		provinces_to_highlight = { province_id = 2979 } 
+
 		trigger = {
 			2979 = {
 				owned_by = ROOT
@@ -26,9 +27,7 @@ Milan_1_slot = {
 		}
 
 		effect = {
-			2979 = {
-				add_or_upgrade_production_building = yes
-			}
+			2979 = { add_or_upgrade_production_building = yes } 
 			simple_dynamic_effect = {
 				first_custom_tooltip = MILAN_TT_2a
 				first_limit = "government = republic"
@@ -44,11 +43,13 @@ Milan_1_slot = {
 			}
 		}
 	}
+
 	mlo_erulian_climb = {
-		icon = mission_luther_theses
+		icon = unify_piedmont
 		position = 3
 		required_missions = { mlo_erulian_defeat } 
 		provinces_to_highlight = { area = piedmont_area } 
+
 		trigger = {
 			piedmont_area = {
 				type = all
@@ -57,20 +58,19 @@ Milan_1_slot = {
 		}
 
 		effect = {
-			103 = {
-				add_or_upgrade_fort_building = yes
-			}
-			4958 = {
-				add_or_upgrade_fort_building = yes
-			}
+			103 = { add_or_upgrade_fort_building = yes } 
+			4958 = { add_or_upgrade_fort_building = yes } 
 			custom_tooltip = MILAN_TT_3a
 			set_country_flag = unlock_mil_ditta_flag
 		}
 	}
+
 	mlo_la_corazzata = {
-		icon = mission_luther_theses
+		icon = build_a_roman_navy
 		position = 5
 		required_missions = { mlo_ligurian_descent } 
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			has_flagship = yes
 			num_of_heavy_ship = 5
@@ -78,22 +78,24 @@ Milan_1_slot = {
 		}
 
 		effect = {
-			country_event = {
-				id = mila.7
-			}
-			sardinia_area = {
-				add_permanent_claim = ROOT
-			}
-			corsica_sardinia_area = {
-				add_permanent_claim = ROOT
-			}
+			country_event = { id = mila.7 } 
+			sardinia_area = { add_permanent_claim = ROOT } 
+			corsica_sardinia_area = { add_permanent_claim = ROOT } 
 		}
 	}
+
 	mlo_i_sardi = {
-		icon = mission_luther_theses
+		icon = seize_sardinia
 		position = 6
 		required_missions = { mlo_la_corazzata } 
-		provinces_to_highlight = { OR = { area = sardinia_area area = corsica_sardinia_area } country_or_non_sovereign_subject_holds = ROOT } 
+		provinces_to_highlight = {
+			OR = {
+				area = sardinia_area
+				area = corsica_sardinia_area
+			}
+			country_or_non_sovereign_subject_holds = ROOT
+		}
+
 		trigger = {
 			sardinia_area = {
 				type = all
@@ -108,19 +110,18 @@ Milan_1_slot = {
 		effect = {
 			add_navy_tradition = 20
 			add_country_modifier = {
-				name = alb_dreadnoughts
+				name = "alb_dreadnoughts"
 				duration = 10950
 			}
 		}
 	}
 }
-
 Milan_2_slot = {
 	slot = 2
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { 
+	potential = {
 		NOT = { tag = ROM } 
 		OR = {
 			tag = MLO
@@ -129,13 +130,14 @@ Milan_2_slot = {
 				was_tag = MLO
 			}
 		}
-	} 
+	}
 
 	mlo_erulian_defeat = {
 		icon = mission_luther_theses
 		position = 2
 		required_missions = { mlo_ducal_army } 
 		provinces_to_highlight = { area = coradia_area } 
+
 		trigger = {
 			coradia_area = {
 				type = all
@@ -145,22 +147,20 @@ Milan_2_slot = {
 
 		effect = {
 			add_country_modifier = {
-				name = mlo_corrado
+				name = "mlo_corrado"
 				duration = 10950
 			}
-			piedmont_area = {
-				add_permanent_claim = ROOT
-			}
-			liguria_area = {
-				add_permanent_claim = ROOT
-			}
+			piedmont_area = { add_permanent_claim = ROOT } 
+			liguria_area = { add_permanent_claim = ROOT } 
 		}
 	}
+
 	mlo_ligurian_descent = {
-		icon = mission_luther_theses
+		icon = mission_dominate_genoa
 		position = 4
 		required_missions = { mlo_erulian_defeat } 
 		provinces_to_highlight = { area = liguria_area } 
+
 		trigger = {
 			liguria_area = {
 				type = all
@@ -169,27 +169,20 @@ Milan_2_slot = {
 		}
 
 		effect = {
-			1298 = {
-				add_trade_node_income = 60
-			}
-			rasna_area = {
-				add_permanent_claim = ROOT
-			}
-			tuscany_area = {
-				add_permanent_claim = ROOT
-			}
+			1298 = { add_trade_node_income = 60 } 
+			rasna_area = { add_permanent_claim = ROOT } 
+			tuscany_area = { add_permanent_claim = ROOT } 
 			custom_tooltip = MILAN_TT_3b
 			set_country_flag = unlock_dip_ditta_flag
 		}
 	}
 }
-
 Milan_3_slot = {
 	slot = 3
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { 
+	potential = {
 		NOT = { tag = ROM } 
 		OR = {
 			tag = MLO
@@ -198,38 +191,34 @@ Milan_3_slot = {
 				was_tag = MLO
 			}
 		}
-	} 
+	}
 
 	mlo_ducal_army = {
-		icon = mission_luther_theses
+		icon = all_roads_lead_to_milan
 		position = 1
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			if = {
-				limit = {
-					ai = no
-				}
+				limit = { ai = no } 
 				army_size_percentage = 0.9
 			}
-			else = {
-				army_size_percentage = 0.75
-			}
+			else = { army_size_percentage = 0.75 } 
 		}
 
 		effect = {
 			add_army_tradition = 5
-			coradia_area = {
-				add_permanent_claim = ROOT
-			}
-			lombardy_area = {
-				add_permanent_claim = ROOT
-			}
+			coradia_area = { add_permanent_claim = ROOT } 
+			lombardy_area = { add_permanent_claim = ROOT } 
 		}
 	}
+
 	mlo_in_numbers = {
-		icon = mission_luther_theses
+		icon = mlo_renaissance_city
 		position = 2
 		required_missions = { mlo_ducal_army } 
 		provinces_to_highlight = { area = lombardy_area } 
+
 		trigger = {
 			all_subject_country = {
 				has_opinion = {
@@ -243,24 +232,23 @@ Milan_3_slot = {
 			}
 		}
 
-		effect = {
-			lombardy_area = {
-				add_core = ROOT
-			}
-		}
+		effect = { lombardy_area = { add_core = ROOT }  } 
 	}
+
 	mlo_north_italian_league = {
-		icon = mission_luther_theses
+		icon = milan_victorious
 		position = 3
-		required_missions = { mlo_padanian_wars mlo_erulian_defeat} 
-		
+		required_missions = {
+			mlo_padanian_wars
+			mlo_erulian_defeat
+		}
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			total_development = 300
 			OR = {
 				is_elector = yes
-				PD0 = {
-					exists = no
-				}
+				PD0 = { exists = no } 
 				is_part_of_hre = no
 			}
 		}
@@ -274,39 +262,53 @@ Milan_3_slot = {
 				second_limit = "is_part_of_hre = no"
 				second_effect = "add_yearly_manpower = 1 add_stability = 1"
 			}
-
 		}
 	}
+
 	mlo_tuscan_banks = {
-		icon = mission_luther_theses
+		icon = medici_bank_ledgers
 		position = 5
-		required_missions = { mlo_ligurian_descent mlo_padanian_control} 
-		provinces_to_highlight = { OR = { area = emilia_romagna_area area = tuscany_area area = rasna_area } country_or_non_sovereign_subject_holds = ROOT } 
+		required_missions = {
+			mlo_ligurian_descent
+			mlo_padanian_control
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = emilia_romagna_area
+				area = tuscany_area
+				area = rasna_area
+			}
+			country_or_non_sovereign_subject_holds = ROOT
+		}
+
 		trigger = {
 			num_of_provinces_owned_or_owned_by_subjects_with = {
 				value = 11
-				OR = { area = emilia_romagna_area area = tuscany_area area = rasna_area }
+				OR = {
+					area = emilia_romagna_area
+					area = tuscany_area
+					area = rasna_area
+				}
 			}
 		}
 
 		effect = {
 			add_inflation = -5
-			central_italy_area = {
-				add_permanent_claim = ROOT
-			}
-			lazio_area = {
-				add_permanent_claim = ROOT
-			}
-			unlock_estate_privilege = {
-				estate_privilege = alb_megaditta_loansharks
-			}
+			central_italy_area = { add_permanent_claim = ROOT } 
+			lazio_area = { add_permanent_claim = ROOT } 
+			unlock_estate_privilege = { estate_privilege = alb_megaditta_loansharks } 
 		}
 	}
+
 	mlo_roman_deals = {
-		icon = mission_luther_theses
+		icon = answer_the_roman_question
 		position = 6
 		required_missions = { mlo_tuscan_banks } 
-		provinces_to_highlight = { area = lazio_area country_or_non_sovereign_subject_holds = ROOT } 
+		provinces_to_highlight = {
+			area = lazio_area
+			country_or_non_sovereign_subject_holds = ROOT
+		}
+
 		trigger = {
 			lazio_area = {
 				type = all
@@ -321,13 +323,12 @@ Milan_3_slot = {
 		}
 	}
 }
-
 Milan_4_slot = {
 	slot = 4
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { 
+	potential = {
 		NOT = { tag = ROM } 
 		OR = {
 			tag = MLO
@@ -336,25 +337,22 @@ Milan_4_slot = {
 				was_tag = MLO
 			}
 		}
-	} 
+	}
 
 	mlo_padanian_wars = {
-		icon = mission_luther_theses
+		icon = padania_symbol
 		position = 2
 		required_missions = { mlo_ducal_army } 
-		
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			army_size = PD0
 			army_size = 20
 		}
 
 		effect = {
-			po_valley_area = {
-				add_permanent_claim = ROOT
-			}
-			veneto_area = {
-				add_permanent_claim = ROOT
-			}
+			po_valley_area = { add_permanent_claim = ROOT } 
+			veneto_area = { add_permanent_claim = ROOT } 
 			simple_dynamic_effect = {
 				first_custom_tooltip = MILAN_TT_2a
 				first_limit = "government = republic"
@@ -365,11 +363,13 @@ Milan_4_slot = {
 			}
 		}
 	}
+
 	mlo_padanian_control = {
-		icon = mission_luther_theses
+		icon = develop_the_po_valley
 		position = 4
 		required_missions = { mlo_padanian_wars } 
 		provinces_to_highlight = { area = po_valley_area } 
+
 		trigger = {
 			po_valley_area = {
 				type = all
@@ -378,25 +378,20 @@ Milan_4_slot = {
 		}
 
 		effect = {
-			add_prestige_or_monarch_power = {amount = 50}
-			emilia_romagna_area = {
-				add_permanent_claim = ROOT
-			}
-			tuscany_area = {
-				add_permanent_claim = ROOT
-			}
+			add_prestige_or_monarch_power = { amount = 50 } 
+			emilia_romagna_area = { add_permanent_claim = ROOT } 
+			tuscany_area = { add_permanent_claim = ROOT } 
 			custom_tooltip = MILAN_TT_3c
 			set_country_flag = unlock_adm_ditta_flag
 		}
 	}
 }
-
 Milan_5_slot = {
 	slot = 5
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { 
+	potential = {
 		NOT = { tag = ROM } 
 		OR = {
 			tag = MLO
@@ -405,12 +400,13 @@ Milan_5_slot = {
 				was_tag = MLO
 			}
 		}
-	} 
+	}
 
 	mlo_como = {
-		icon = mission_luther_theses
+		icon = mission_monarch_in_throne_room
 		position = 1
 		provinces_to_highlight = { province_id = 4740 } 
+
 		trigger = {
 			4740 = {
 				owned_by = ROOT
@@ -421,10 +417,10 @@ Milan_5_slot = {
 		effect = {
 			4740 = {
 				add_province_modifier = {
-					name = mlo_cavaliere_defense
+					name = "mlo_cavaliere_defense"
 					duration = 10950
 				}
-			}	
+			}
 			simple_dynamic_effect = {
 				first_custom_tooltip = MILAN_TT_2a
 				first_limit = "government = republic"
@@ -435,11 +431,13 @@ Milan_5_slot = {
 			}
 		}
 	}
+
 	mlo_alpine_ventures = {
-		icon = mission_luther_theses
+		icon = prosper_in_piedmont
 		position = 3
 		required_missions = { mlo_padanian_wars } 
 		provinces_to_highlight = { area = veneto_area } 
+
 		trigger = {
 			veneto_area = {
 				type = all
@@ -448,12 +446,8 @@ Milan_5_slot = {
 		}
 
 		effect = {
-			110 = {
-				add_or_upgrade_fort_building = yes
-			}
-			venetia_area = {
-				add_permanent_claim = ROOT
-			}
+			110 = { add_or_upgrade_fort_building = yes } 
+			venetia_area = { add_permanent_claim = ROOT } 
 			add_casus_belli = {
 				type = cb_restore_personal_union
 				target = GR2
@@ -461,11 +455,16 @@ Milan_5_slot = {
 			}
 		}
 	}
+
 	mlo_trade_zone = {
-		icon = mission_luther_theses
+		icon = mission_trade_company_region_abroad
 		position = 5
 		required_missions = { mlo_alpine_ventures } 
-		provinces_to_highlight = { region = italy_region province_has_center_of_trade_of_level = 1 } 
+		provinces_to_highlight = {
+			region = italy_region
+			province_has_center_of_trade_of_level = 1
+		}
+
 		trigger = {
 			num_of_owned_provinces_with = {
 				value = 5
@@ -481,11 +480,7 @@ Milan_5_slot = {
 
 		effect = {
 			custom_tooltip = MILAN_TT_6
-			tooltip = {
-				random_owned_province = {
-					add_or_upgrade_trade_building = yes
-				}
-			}
+			tooltip = { random_owned_province = { add_or_upgrade_trade_building = yes }  } 
 			hidden_effect = {
 				for = {
 					amount = 5
@@ -500,35 +495,28 @@ Milan_5_slot = {
 					"
 				}
 			}
-			
 		}
 	}
+
 	mlo_trade_empire = {
-		icon = mission_luther_theses
+		icon = mission_horde_trade
 		position = 6
 		required_missions = { mlo_trade_zone } 
+		provinces_to_highlight = {  } 
 
 		trigger = {
 			custom_trigger_tooltip = {
 				tooltip = 3_lvl_5_advisors_tt
-				has_mil_advisor_of_level = {
-					level = 5
-				}
-				has_adm_advisor_of_level = {
-					level = 5
-				}
-				has_dip_advisor_of_level = {
-					level = 5
-				}
+				has_mil_advisor_of_level = { level = 5 } 
+				has_adm_advisor_of_level = { level = 5 } 
+				has_dip_advisor_of_level = { level = 5 } 
 			}
 			treasury = 10000
 		}
 
 		effect = {
 			add_treasury = -10000
-			country_event = {
-				id = mila.8
-			}
+			country_event = { id = mila.8 } 
 		}
 	}
 }
