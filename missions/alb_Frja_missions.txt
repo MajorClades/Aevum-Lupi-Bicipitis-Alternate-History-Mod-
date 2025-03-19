@@ -26,8 +26,11 @@ Frja_1_slot = {
 		effect = {
 			add_treasury = -100
 			add_manpower = -3
-			2578 = { colonize_or_core_fj0 = yes } 
-			986 = { colonize_or_core_fj0 = yes } 
+			2578 = { 
+				add_or_upgrade_manpower_building = yes
+				add_base_manpower = 1
+			} 
+			986 = { add_core = ROOT } 
 		}
 	}
 
@@ -46,16 +49,22 @@ Frja_1_slot = {
 			else = {
 				has_adm_advisor = yes
 				adm_power = 100
-				manpower = 4
+				years_of_income = 0.8
 			}
 		}
 
 		effect = {
 			add_adm_power = -100
-			add_manpower = -4
-			996 = { colonize_or_core_fj0 = yes } 
-			2576 = { colonize_or_core_fj0 = yes } 
-			2577 = { colonize_or_core_fj0 = yes } 
+			add_years_of_income = -0.8
+			996 = { 
+				add_base_tax = 2
+			} 
+			2576 = {
+				add_base_tax = 2
+			} 
+			2577 = {
+				add_base_tax = 2
+			} 
 		}
 	}
 
@@ -74,16 +83,16 @@ Frja_1_slot = {
 			else = {
 				has_mil_advisor = yes
 				mil_power = 100
-				manpower = 5
+				manpower = 3
 			}
 		}
 
 		effect = {
 			add_mil_power = -100
-			add_manpower = -5
-			995 = { colonize_or_core_fj0 = yes } 
-			2582 = { colonize_or_core_fj0 = yes } 
-			2579 = { colonize_or_core_fj0 = yes } 
+			add_manpower = -3
+			995 = { add_base_production = 2 } 
+			2582 = { add_base_production = 2  } 
+			2579 = { add_core = ROOT } 
 		}
 	}
 
@@ -100,17 +109,23 @@ Frja_1_slot = {
 				manpower = 5
 			}
 			else = {
-				has_dip_advisor = yes
-				dip_power = 100
-				manpower = 5
+				has_adm_advisor = yes
+				has_dip_advisor_2 = yes
+				has_mil_advisor = yes
 			}
 		}
 
 		effect = {
-			add_dip_power = -100
-			add_manpower = -5
-			994 = { colonize_or_core_fj0 = yes } 
-			2583 = { colonize_or_core_fj0 = yes } 
+			MIK = {
+				add_trust = {
+					who = ROOT
+					value = 50
+					mutual = yes
+				}
+				add_liberty_desire = -20
+			}
+			994 = { add_permanent_claim = ROOT } 
+			2583 = { add_permanent_claim = ROOT} 
 		}
 	}
 
@@ -118,23 +133,23 @@ Frja_1_slot = {
 		icon = mission_se_along_the_river
 		position = 5
 		required_missions = { fj_river_mouth } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = { OR = { province_id = 994 province_id = 2583 } } 
 
 		trigger = {
-			if = {
-				limit = { ai = yes } 
-				prestige = 50
+			994 = {
+				country_or_non_sovereign_subject_holds = ROOT
 			}
-			else = {
-				treasury = 100
-				manpower = 4
+			2583 = {
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 
 		effect = {
-			add_treasury = -100
-			add_manpower = -4
-			trois_rivieres_area = { colonize_or_core_fj0 = yes } 
+			add_country_modifier = {
+				name = norse_conquerors_of_rausulia
+				duration = 10950
+			}
+			trois_rivieres_area = { add_permanent_claim = ROOT } 
 		}
 	}
 }
@@ -225,7 +240,7 @@ Frja_2_slot = {
 		icon = mission_iroquois_the_great_peacemaker
 		position = 5
 		required_missions = { fj_river_mouth } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {OR = {culture = rausundian culture = skraeling culture = verslunling} } 
 
 		trigger = {
 			if = {
@@ -233,15 +248,19 @@ Frja_2_slot = {
 				prestige = 70
 			}
 			else = {
-				treasury = 300
-				manpower = 5
+				num_of_owned_provinces_with = {
+					value = 5
+					OR = {
+						culture = rausundian
+						culture = skraeling
+						culture = verslunling
+					}
+				}
 			}
 		}
 
 		effect = {
-			add_treasury = -300
-			add_manpower = -5
-			lower_canada_area = { colonize_or_core_fj0 = yes } 
+			lower_canada_area = { add_core = ROOT } 
 		}
 	}
 }
