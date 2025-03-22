@@ -14,60 +14,6 @@ custom_button = {
 		}else = {
 			set_country_flag = atm_shop_flag
 		}
-		hidden_effect = { #this is here for the moment, would move it an hidden effect in before unlocking the mechanic for a tag
-			if = {
-				limit = {
-					check_variable = {
-						which = war_lesson_counter
-						value = 1
-					}
-				}
-			}else = {
-				set_variable = {
-					which = war_lesson_counter
-					value = 0
-				}
-			}
-			if = {
-				limit = {
-					check_variable = {
-						which = fire_damage_tt_var
-						value = 5
-					}
-				}
-			}else = {
-				set_variable = {
-					which = fire_damage_tt_var
-					value = 0
-				}
-			}
-			if = {
-				limit = {
-					check_variable = {
-						which = shock_damage_tt_var
-						value = 5
-					}
-				}
-			}else = {
-				set_variable = {
-					which = shock_damage_tt_var
-					value = 0
-				}
-			}
-			if = {
-				limit = {
-					check_variable = {
-						which = morale_damage_tt_var
-						value = 5
-					}
-				}
-			}else = {
-				set_variable = {
-					which = morale_damage_tt_var
-					value = 0
-				}
-			}
-		}
 	}
 	tooltip = AT_button_tt
 }
@@ -81,14 +27,20 @@ custom_button = {
 		army_tradition = 10
 		check_variable = {
 			which = war_lesson_counter
-			value = 5
+			which = war_lesson_cost_counter
 		}
 	}
 	effect = {
 		add_army_tradition = -10
 		subtract_variable = {
 			which = war_lesson_counter
-			value = 5
+			which = war_lesson_cost_counter
+		}
+		hidden_effect = {
+			change_variable = {
+				which = war_lesson_cost_counter
+				value = 1
+			}
 		}
 		if = {
 			limit = {
@@ -223,14 +175,20 @@ custom_button = {
 		army_tradition = 10
 		check_variable = {
 			which = war_lesson_counter
-			value = 5
+			which = war_lesson_cost_counter
 		}
 	}
 	effect = {
 		add_army_tradition = -10
 		subtract_variable = {
 			which = war_lesson_counter
-			value = 5
+			which = war_lesson_cost_counter
+		}
+		hidden_effect = {
+			change_variable = {
+				which = war_lesson_cost_counter
+				value = 1
+			}
 		}
 		if = {
 			limit = {
@@ -365,14 +323,20 @@ custom_button = {
 		army_tradition = 10
 		check_variable = {
 			which = war_lesson_counter
-			value = 5
+			which = war_lesson_cost_counter
 		}
 	}
 	effect = {
 		add_army_tradition = -10
 		subtract_variable = {
 			which = war_lesson_counter
-			value = 5
+			which = war_lesson_cost_counter
+		}
+		hidden_effect = {
+			change_variable = {
+				which = war_lesson_cost_counter
+				value = 1
+			}
 		}
 		if = {
 			limit = {
@@ -498,6 +462,597 @@ custom_button = {
 	tooltip = AT_button4_tt
 }
 
+custom_button = {
+	name = AT_button5
+	potential = {
+		has_country_flag = atm_shop_flag
+	}
+	trigger = {
+		army_tradition = 10
+		check_variable = {
+			which = war_lesson_counter
+			which = war_lesson_cost_counter
+		}
+	}
+	effect = {
+		add_army_tradition = -10
+		subtract_variable = {
+			which = war_lesson_counter
+			which = war_lesson_cost_counter
+		}
+		hidden_effect = {
+			change_variable = {
+				which = war_lesson_cost_counter
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					check_variable = {
+						which = mov_speed_tt_var
+						value = 5
+					}
+				}
+			}
+			add_country_modifier = {
+				name = mov_speed_lv_1
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = mov_speed_tt_var
+					value = 5
+				}
+				NOT = {
+					check_variable = {
+						which = mov_speed_tt_var
+						value = 10
+					}
+				}
+			}
+			remove_country_modifier = mov_speed_lv_1
+			add_country_modifier = {
+				name = mov_speed_lv_2
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = mov_speed_tt_var
+					value = 10
+				}
+				NOT = {
+					check_variable = {
+						which = mov_speed_tt_var
+						value = 15
+					}
+				}
+			}
+			remove_country_modifier = mov_speed_lv_2
+			add_country_modifier = {
+				name = mov_speed_lv_3
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = mov_speed_tt_var
+					value = 15
+				}
+				NOT = {
+					check_variable = {
+						which = mov_speed_tt_var
+						value = 20
+					}
+				}
+			}
+			remove_country_modifier = mov_speed_lv_3
+			add_country_modifier = {
+				name = mov_speed_lv_4
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = mov_speed_tt_var
+					value = 20
+				}
+			}
+			remove_country_modifier = mov_speed_lv_4
+			add_country_modifier = {
+				name = mov_speed_lv_5
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = mov_speed_tt_var
+					value = 20
+				}
+			}
+			remove_country_modifier = mov_speed_lv_4
+			add_country_modifier = {
+				name = mov_speed_lv_5
+				duration = -1
+				hidden = yes
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = {
+						check_variable = {
+							which = mov_speed_tt_var
+							value = 20
+						}
+					}
+				}
+				change_variable = {
+					which = mov_speed_tt_var
+					value = 5
+				}
+			}
+		}
+		#play_sound = get_war_declare
+	}
+	tooltip = AT_button5_tt
+}
+
+custom_button = {
+	name = AT_button6
+	potential = {
+		has_country_flag = atm_shop_flag
+	}
+	trigger = {
+		army_tradition = 10
+		check_variable = {
+			which = war_lesson_counter
+			which = war_lesson_cost_counter
+		}
+	}
+	effect = {
+		add_army_tradition = -10
+		subtract_variable = {
+			which = war_lesson_counter
+			which = war_lesson_cost_counter
+		}
+		hidden_effect = {
+			change_variable = {
+				which = war_lesson_cost_counter
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					check_variable = {
+						which = fire_defense_tt_var
+						value = 5
+					}
+				}
+			}
+			add_country_modifier = {
+				name = fire_defense_lv_1
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = fire_defense_tt_var
+					value = 5
+				}
+				NOT = {
+					check_variable = {
+						which = fire_defense_tt_var
+						value = 10
+					}
+				}
+			}
+			remove_country_modifier = fire_defense_lv_1
+			add_country_modifier = {
+				name = fire_defense_lv_2
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = fire_defense_tt_var
+					value = 10
+				}
+				NOT = {
+					check_variable = {
+						which = fire_defense_tt_var
+						value = 15
+					}
+				}
+			}
+			remove_country_modifier = fire_defense_lv_2
+			add_country_modifier = {
+				name = fire_defense_lv_3
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = fire_defense_tt_var
+					value = 15
+				}
+				NOT = {
+					check_variable = {
+						which = fire_defense_tt_var
+						value = 20
+					}
+				}
+			}
+			remove_country_modifier = fire_defense_lv_3
+			add_country_modifier = {
+				name = fire_defense_lv_4
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = fire_defense_tt_var
+					value = 20
+				}
+			}
+			remove_country_modifier = fire_defense_lv_4
+			add_country_modifier = {
+				name = fire_defense_lv_5
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = fire_defense_tt_var
+					value = 20
+				}
+			}
+			remove_country_modifier = fire_defense_lv_4
+			add_country_modifier = {
+				name = fire_defense_lv_5
+				duration = -1
+				hidden = yes
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = {
+						check_variable = {
+							which = fire_defense_tt_var
+							value = 20
+						}
+					}
+				}
+				change_variable = {
+					which = fire_defense_tt_var
+					value = 5
+				}
+			}
+		}
+		#play_sound = get_war_declare
+	}
+	tooltip = AT_button6_tt
+}
+
+custom_button = {
+	name = AT_button7
+	potential = {
+		has_country_flag = atm_shop_flag
+	}
+	trigger = {
+		army_tradition = 10
+		check_variable = {
+			which = war_lesson_counter
+			which = war_lesson_cost_counter
+		}
+	}
+	effect = {
+		add_army_tradition = -10
+		subtract_variable = {
+			which = war_lesson_counter
+			which = war_lesson_cost_counter
+		}
+		hidden_effect = {
+			change_variable = {
+				which = war_lesson_cost_counter
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					check_variable = {
+						which = shock_defense_tt_var
+						value = 5
+					}
+				}
+			}
+			add_country_modifier = {
+				name = shock_defense_lv_1
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = shock_defense_tt_var
+					value = 5
+				}
+				NOT = {
+					check_variable = {
+						which = shock_defense_tt_var
+						value = 10
+					}
+				}
+			}
+			remove_country_modifier = shock_defense_lv_1
+			add_country_modifier = {
+				name = shock_defense_lv_2
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = shock_defense_tt_var
+					value = 10
+				}
+				NOT = {
+					check_variable = {
+						which = shock_defense_tt_var
+						value = 15
+					}
+				}
+			}
+			remove_country_modifier = shock_defense_lv_2
+			add_country_modifier = {
+				name = shock_defense_lv_3
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = shock_defense_tt_var
+					value = 15
+				}
+				NOT = {
+					check_variable = {
+						which = shock_defense_tt_var
+						value = 20
+					}
+				}
+			}
+			remove_country_modifier = shock_defense_lv_3
+			add_country_modifier = {
+				name = shock_defense_lv_4
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = shock_defense_tt_var
+					value = 20
+				}
+			}
+			remove_country_modifier = shock_defense_lv_4
+			add_country_modifier = {
+				name = shock_defense_lv_5
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = shock_defense_tt_var
+					value = 20
+				}
+			}
+			remove_country_modifier = shock_defense_lv_4
+			add_country_modifier = {
+				name = shock_defense_lv_5
+				duration = -1
+				hidden = yes
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = {
+						check_variable = {
+							which = shock_defense_tt_var
+							value = 20
+						}
+					}
+				}
+				change_variable = {
+					which = shock_defense_tt_var
+					value = 5
+				}
+			}
+		}
+		#play_sound = get_war_declare
+	}
+	tooltip = AT_button7_tt
+}
+
+custom_button = {
+	name = AT_button8
+	potential = {
+		has_country_flag = atm_shop_flag
+	}
+	trigger = {
+		army_tradition = 10
+		check_variable = {
+			which = war_lesson_counter
+			which = war_lesson_cost_counter
+		}
+	}
+	effect = {
+		add_army_tradition = -10
+		subtract_variable = {
+			which = war_lesson_counter
+			which = war_lesson_cost_counter
+		}
+		hidden_effect = {
+			change_variable = {
+				which = war_lesson_cost_counter
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					check_variable = {
+						which = morale_defense_tt_var
+						value = 5
+					}
+				}
+			}
+			add_country_modifier = {
+				name = morale_defense_lv_1
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = morale_defense_tt_var
+					value = 5
+				}
+				NOT = {
+					check_variable = {
+						which = morale_defense_tt_var
+						value = 10
+					}
+				}
+			}
+			remove_country_modifier = morale_defense_lv_1
+			add_country_modifier = {
+				name = morale_defense_lv_2
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = morale_defense_tt_var
+					value = 10
+				}
+				NOT = {
+					check_variable = {
+						which = morale_defense_tt_var
+						value = 15
+					}
+				}
+			}
+			remove_country_modifier = morale_defense_lv_2
+			add_country_modifier = {
+				name = morale_defense_lv_3
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = morale_defense_tt_var
+					value = 15
+				}
+				NOT = {
+					check_variable = {
+						which = morale_defense_tt_var
+						value = 20
+					}
+				}
+			}
+			remove_country_modifier = morale_defense_lv_3
+			add_country_modifier = {
+				name = morale_defense_lv_4
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = morale_defense_tt_var
+					value = 20
+				}
+			}
+			remove_country_modifier = morale_defense_lv_4
+			add_country_modifier = {
+				name = morale_defense_lv_5
+				duration = -1
+				hidden = yes
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					which = morale_defense_tt_var
+					value = 20
+				}
+			}
+			remove_country_modifier = morale_defense_lv_4
+			add_country_modifier = {
+				name = morale_defense_lv_5
+				duration = -1
+				hidden = yes
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = {
+						check_variable = {
+							which = morale_defense_tt_var
+							value = 20
+						}
+					}
+				}
+				change_variable = {
+					which = morale_defense_tt_var
+					value = 5
+				}
+			}
+		}
+		#play_sound = get_war_declare
+	}
+	tooltip = AT_button8_tt
+}
 custom_icon = {
     name = atm_shop_bg #Must match a scripted iconType in a .gui file
     potential = { 
@@ -556,6 +1111,70 @@ custom_text_box = {
 
 custom_text_box = {
     name = morale_damage_cost_text_title #Must match a scripted instantTextBoxType in a .gui file 
+    potential = { 
+		has_country_flag = atm_shop_flag
+	} #Determines when the text is visible
+    #To localize it, use the name of the button as a key, can also use customizable localisation
+}
+
+custom_text_box = {
+    name = mov_speed_text_title #Must match a scripted instantTextBoxType in a .gui file 
+    potential = { 
+		has_country_flag = atm_shop_flag
+	} #Determines when the text is visible
+    #To localize it, use the name of the button as a key, can also use customizable localisation
+}
+
+custom_text_box = {
+    name = mov_speed_cost_text_title #Must match a scripted instantTextBoxType in a .gui file 
+    potential = { 
+		has_country_flag = atm_shop_flag
+	} #Determines when the text is visible
+    #To localize it, use the name of the button as a key, can also use customizable localisation
+}
+
+custom_text_box = {
+    name = fire_defense_text_title #Must match a scripted instantTextBoxType in a .gui file 
+    potential = { 
+		has_country_flag = atm_shop_flag
+	} #Determines when the text is visible
+    #To localize it, use the name of the button as a key, can also use customizable localisation
+}
+
+custom_text_box = {
+    name = fire_defense_cost_text_title #Must match a scripted instantTextBoxType in a .gui file 
+    potential = { 
+		has_country_flag = atm_shop_flag
+	} #Determines when the text is visible
+    #To localize it, use the name of the button as a key, can also use customizable localisation
+}
+
+custom_text_box = {
+    name = shock_defense_text_title #Must match a scripted instantTextBoxType in a .gui file 
+    potential = { 
+		has_country_flag = atm_shop_flag
+	} #Determines when the text is visible
+    #To localize it, use the name of the button as a key, can also use customizable localisation
+}
+
+custom_text_box = {
+    name = shock_defense_cost_text_title #Must match a scripted instantTextBoxType in a .gui file 
+    potential = { 
+		has_country_flag = atm_shop_flag
+	} #Determines when the text is visible
+    #To localize it, use the name of the button as a key, can also use customizable localisation
+}
+
+custom_text_box = {
+    name = morale_defense_text_title #Must match a scripted instantTextBoxType in a .gui file 
+    potential = { 
+		has_country_flag = atm_shop_flag
+	} #Determines when the text is visible
+    #To localize it, use the name of the button as a key, can also use customizable localisation
+}
+
+custom_text_box = {
+    name = morale_defense_cost_text_title #Must match a scripted instantTextBoxType in a .gui file 
     potential = { 
 		has_country_flag = atm_shop_flag
 	} #Determines when the text is visible
