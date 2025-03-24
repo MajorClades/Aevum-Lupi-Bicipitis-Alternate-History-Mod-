@@ -1,0 +1,163 @@
+namespace = pann
+
+country_event = {
+	id = pann.1
+	title = pann.1.t
+	desc = pann.1.d
+	picture = TRADEGOODS_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+	option = {
+		name = pann.1a
+		add_country_modifier = {
+			name = alb_illyrian_compromise_1
+			duration = -1
+			desc = "as long as we aren't at war with Pannonia"
+		}
+		custom_tooltip = PANN_TT_1a
+		DA2 = {
+			country_event = {
+				id = pann.2
+			}
+		}
+	}
+}
+
+country_event = {
+	id = pann.2
+	title = pann.2.t
+	desc = pann.2.d
+	picture = TRADEGOODS_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+	option = {
+		name = pann.2a
+		ai_chance = {
+			factor = 1
+		}
+		add_country_modifier = {
+			name = alb_illyrian_compromise_2
+			duration = -1
+			desc = "as long as we aren't at war with Dalmatia"
+		}
+		add_truce_with = PD2
+		tooltip = {
+			PD2 = {
+				add_opinion = {
+					who = DA2
+					modifier = illyria_trade_2_opinion
+				}
+			}
+		}
+		hidden_effect = {
+			PD2 = {
+				country_event = {
+					id = pann.3
+				}
+			}
+		}
+	}
+	option = {
+		name = pann.2a
+		ai_chance = {
+			factor = 0
+		}
+		add_stability = 1
+		tooltip = {
+			PD2 = {
+				add_opinion = {
+					who = DA2
+					modifier = illyria_trade_1_opinion
+				}
+			}
+		}
+		hidden_effect = {
+			PD2 = {
+				country_event = {
+					id = pann.4
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = pann.3
+	title = pann.3.t
+	desc = pann.3.d
+	picture = TRADEGOODS_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+	option = {
+		name = pann.3a
+		add_truce_with = DA2
+		add_opinion = {
+			who = DA2
+			modifier = illyria_trade_2_opinion
+		}
+	}
+}
+
+country_event = {
+	id = pann.4
+	title = pann.4.t
+	desc = pann.4.d
+	picture = TRADEGOODS_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+	option = {
+		name = pann.4a
+		add_opinion = {
+			who = DA2
+			modifier = illyria_trade_1_opinion
+		}
+	}
+}
+
+country_event = { #HIDDEN
+	id = pann.5
+	title = pann.5.t
+	desc = pann.5.d
+	picture = TRADEGOODS_eventPicture
+	fire_only_once = yes
+	hidden = yes
+	mean_time_to_happen = {
+		days = 10
+	}
+	trigger = {
+		OR = {
+			has_country_modifier = alb_illyrian_compromise_1
+			has_country_modifier = alb_illyrian_compromise_2
+		}
+		any_war_enemy_country = {
+			OR = {
+				has_country_modifier = alb_illyrian_compromise_1
+				has_country_modifier = alb_illyrian_compromise_2
+			}
+		}
+	}
+
+	option = {
+		name = pann.4a
+		random_known_country = {
+			limit = {
+				OR = {
+					has_country_modifier = alb_illyrian_compromise_1
+					has_country_modifier = alb_illyrian_compromise_2
+				}
+			}
+			remove_country_modifier = alb_illyrian_compromise_1
+			remove_country_modifier = alb_illyrian_compromise_2
+		}
+		random_known_country = {
+			limit = {
+				OR = {
+					has_country_modifier = alb_illyrian_compromise_1
+					has_country_modifier = alb_illyrian_compromise_2
+				}
+			}
+			remove_country_modifier = alb_illyrian_compromise_1
+			remove_country_modifier = alb_illyrian_compromise_2
+		}
+	}
+}
