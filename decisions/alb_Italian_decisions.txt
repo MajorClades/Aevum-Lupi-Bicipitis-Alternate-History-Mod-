@@ -18,6 +18,53 @@ country_decisions = {
 			factor = 0
 		}
 	}
+	alb_grainlord_dec = {
+		color = {
+			50 100 20
+		}
+		potential = {
+			has_government_attribute = enable_grain_lord_decision
+		}
+		allow = {
+			is_at_war = no
+			NOT = {
+				any_owned_province = {
+					has_province_modifier = alb_grainlord_improvements
+				}
+			}
+			estate_loyalty = {
+				estate = estate_nobles
+				loyalty = 60
+			}
+			NOT = {
+				estate_influence = {
+					estate = estate_nobles
+					influence = 90
+				}
+			}
+		}
+		effect = {
+			every_owned_province = {
+				limit = {
+					trade_goods = grain
+					NOT = {
+						has_province_modifier = pannonia_blessed_g_rain
+					}
+					NOT = {
+						has_province_modifier = global_blessed_g_rain
+					}
+				}
+				add_province_modifier = {
+					name = alb_grainlord_improvements
+					duration = 3650
+				}
+				add_province_triggered_modifier = global_blessed_g_rain
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
 	alb_restore_country_name = {
 		potential = {
 			has_country_flag = alb_overrided_country_name_cosmetic
