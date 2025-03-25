@@ -7,15 +7,23 @@ country_event = {
 	picture = TRADEGOODS_eventPicture
 	fire_only_once = yes
 	is_triggered_only = yes
+	trigger = {
+		tag = PD2
+	}
 	option = {
 		name = pann.1a
 		add_country_modifier = {
 			name = alb_illyrian_compromise_1
 			duration = -1
-			desc = "as long as we aren't at war with Pannonia"
+			desc = "as long as we aren't at war with Pannonia or they deny our help"
 		}
 		custom_tooltip = PANN_TT_1a
 		DA2 = {
+			force_remove_rival = ROOT
+			set_ai_attitude = {
+				attitude = attitude_threatened
+				who = ROOT
+			}
 			country_event = {
 				id = pann.2
 			}
@@ -43,6 +51,11 @@ country_event = {
 		add_truce_with = PD2
 		tooltip = {
 			PD2 = {
+				force_remove_rival = ROOT
+				set_ai_attitude = {
+					attitude = attitude_friendly
+					who = ROOT
+				}
 				add_opinion = {
 					who = DA2
 					modifier = illyria_trade_2_opinion
@@ -91,6 +104,11 @@ country_event = {
 	option = {
 		name = pann.3a
 		add_truce_with = DA2
+		force_remove_rival = DA2
+		set_ai_attitude = {
+			attitude = attitude_friendly
+			who = DA2
+		}
 		add_opinion = {
 			who = DA2
 			modifier = illyria_trade_2_opinion
@@ -107,6 +125,11 @@ country_event = {
 	is_triggered_only = yes
 	option = {
 		name = pann.4a
+		remove_country_modifier = alb_illyrian_compromise_1
+		set_ai_attitude = {
+			attitude = attitude_hostile
+			who = DA2
+		}
 		add_opinion = {
 			who = DA2
 			modifier = illyria_trade_1_opinion

@@ -131,6 +131,9 @@ Pannonia_4_slot = {
 			transdanubia_area = {
 				add_permanent_claim = ROOT
 			}
+			alfold_area = {
+				add_permanent_claim = ROOT
+			}
 		}
 	}
 
@@ -139,14 +142,20 @@ Pannonia_4_slot = {
 		position = 2
 		required_missions = { pann_army } 
 		provinces_to_highlight = {
-			area = transdanubia_area
+			OR = {
+				area = transdanubia_area
+				area = alfold_area
+			}
 			NOT = {country_or_non_sovereign_subject_holds = ROOT}
 		}
 
 		trigger = {
-			transdanubia_area = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 8
+				OR = {
+					area = transdanubia_area
+					area = alfold_area
+				}
 			}
 		}
 
