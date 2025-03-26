@@ -37,41 +37,31 @@ Pannonia_1_slot = {
 			custom_tooltip = PANN_TT_2
 		}
 	}
-
-	pann_grain_maxxing = {
+	pann_making_it_global = {
 		icon = mission_rb_inland_india
-		position = 3
-		required_missions = {pann_making_it_grain pann_more_grain } 
+		position = 4
+		required_missions = { pann_making_it_grain } 
 		provinces_to_highlight = {
 			trade_goods = grain
-			NOT = {base_production = 10}
-			region = carpathia_region
+			has_manufactory_trigger = no
 			country_or_non_sovereign_subject_holds = ROOT
 		}
 
 		trigger = {
+			has_institution = global_trade
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-				value = 4
-				region = carpathia_region
+				value = 12
 				trade_goods = grain
-				base_production = 10
+				has_manufactory_trigger = yes
 			}
 		}
 
 		effect = {
-			custom_tooltip = PANN_TT_3
-			hidden_effect = {
-				every_owned_province = {
-					limit = {
-						region = carpathia_region
-						OR = {
-							trade_goods = livestock
-							trade_goods = naval_supplies
-							trade_goods = wool
-						}
-					}
-					change_trade_goods = grain
-				}
+			change_price = {
+				trade_goods = grain
+				key = PANNONIA_CEREALS
+				value = 0.15
+				duration = -1
 			}
 		}
 	}
@@ -129,6 +119,13 @@ Pannonia_2_slot = {
 		}
 
 		effect = {
+			add_years_of_owned_provinces_production_income = {
+				years = 1
+				custom_tooltip = MONOPOLY_INCOME_GRAIN_DESC
+				trigger = {
+					trade_goods = grain
+				}
+			}
 			add_country_modifier = {
 				name = pannonian_beers
 				duration = 10950
@@ -136,7 +133,34 @@ Pannonia_2_slot = {
 		}
 	}
 
-	
+	pann_grain_maxxing = {
+		icon = mission_rb_inland_india
+		position = 3
+		required_missions = {pann_making_it_grain pann_more_grain } 
+		provinces_to_highlight = {
+			trade_goods = grain
+			NOT = {base_production = 10}
+			country_or_non_sovereign_subject_holds = ROOT
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 4
+				trade_goods = grain
+				base_production = 10
+			}
+		}
+
+		effect = {
+			add_years_of_owned_provinces_production_income = {
+				years = 10
+				custom_tooltip = MONOPOLY_INCOME_GRAIN_DESC
+				trigger = {
+					trade_goods = grain
+				}
+			}
+		}
+	}
 }
 
 Pannonia_3_slot = {
@@ -181,6 +205,39 @@ Pannonia_3_slot = {
 			}
 			southern_transylvania_area = {
 				add_permanent_claim = ROOT
+			}
+		}
+	}
+	pann_grain_danubia = {
+		icon = mission_rb_inland_india
+		position = 4
+		required_missions = {pann_grain_maxxing pann_danubian } 
+		provinces_to_highlight = {
+			region = carpathia_region
+			NOT = {country_or_non_sovereign_subject_holds = ROOT}
+		}
+
+		trigger = {
+			carpathia_region = {
+				type = all 
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			custom_tooltip = PANN_TT_3
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						region = carpathia_region
+						OR = {
+							trade_goods = livestock
+							trade_goods = naval_supplies
+							trade_goods = wool
+						}
+					}
+					change_trade_goods = grain
+				}
 			}
 		}
 	}
@@ -363,6 +420,70 @@ Pannonia_5_slot = {
 				add_permanent_claim = ROOT
 			}
 			bosnia_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	pann_italian_adventure = {
+		icon = mission_rb_inland_india
+		position = 4
+		required_missions = { pann_move_illyria } 
+		provinces_to_highlight = {
+			OR = {
+				area = carinthia_area
+					area = croatia_area
+			}
+			NOT = {country_or_non_sovereign_subject_holds = ROOT}
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 8
+				OR = {
+					area = carinthia_area
+					area = croatia_area
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = pannonian_boats
+				duration = 10950
+			}
+			venetia_area = {
+				add_permanent_claim = ROOT
+			}
+			veneto_area = {
+				add_permanent_claim = ROOT
+			}
+			emilia_romagna_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	pann_italian_conquest = {
+		icon = mission_rb_inland_india
+		position = 5
+		required_missions = { pann_italian_adventure } 
+		provinces_to_highlight = {
+			region = italy_region
+			NOT = {country_or_non_sovereign_subject_holds = ROOT}
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 20
+				region = italy_region
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = pannonian_italian_conquests
+				duration = 10950
+			}
+			italy_region = {
 				add_permanent_claim = ROOT
 			}
 		}

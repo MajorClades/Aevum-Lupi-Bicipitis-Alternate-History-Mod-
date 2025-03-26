@@ -24,14 +24,12 @@ country_decisions = {
 		}
 		potential = {
 			has_government_attribute = enable_grain_lord_decision
+			NOT = {
+				has_country_modifier = alb_farming_exporting
+			}
 		}
 		allow = {
 			is_at_war = no
-			NOT = {
-				any_owned_province = {
-					has_province_modifier = alb_grainlord_improvements
-				}
-			}
 			estate_loyalty = {
 				estate = estate_nobles
 				loyalty = 60
@@ -44,22 +42,26 @@ country_decisions = {
 			}
 		}
 		effect = {
-			every_owned_province = {
-				limit = {
-					trade_goods = grain
-					NOT = {
-						has_province_modifier = pannonia_blessed_g_rain
-					}
-					NOT = {
-						has_province_modifier = global_blessed_g_rain
-					}
-				}
-				add_province_modifier = {
-					name = alb_grainlord_improvements
-					duration = 3650
-				}
-				add_province_triggered_modifier = global_blessed_g_rain
+			add_country_modifier = {
+				name = alb_farming_exporting
+				duration = -1
 			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	alb_grainlord_undo_dec = {
+		color = {
+			50 100 20
+		}
+		potential = {
+			has_country_modifier = alb_farming_exporting
+		}
+		allow = {
+		}
+		effect = {
+			remove_country_modifier = alb_farming_exporting
 		}
 		ai_will_do = {
 			factor = 0
