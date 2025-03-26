@@ -13,22 +13,60 @@ korchin_1_slot = {
 	krc_sieze_furdan = {
 		icon = mission_russian_navy
 		position = 2
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			province_id = 2106
+			NOT = {
+				is_core = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			owns_core_province = 2106
+		} 
 
-		effect = {  } 
+		effect = {  
+			2106 = {
+				add_or_upgrade_trade_building = yes
+				custom_tooltip = empty_line_tt
+				change_culture = ROOT
+				change_religion = ROOT
+			}
+		} 
 	}
 
 	krc_lord_of_korea = {
 		icon = mjz_into_korea
 		position = 4
 		required_missions = { krc_encroach_on_solongos } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			region = korea_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = { 
+			korea_region = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_accepted_culture_or_dip_power = {
+				culture = mongol
+			}
+			custom_tooltip = empty_line_tt
+			custom_tooltip = change_korean_to_solongos_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						culture = korean
+					}
+					change_culture = mongol
+				}
+			}
+		} 
 	}
 
 	krc_khasarid_glory = {
@@ -70,9 +108,24 @@ korchin_2_slot = {
 		position = 1
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			army_size_percentage = 0.9
+			is_monarch_leader = yes
+		} 
 
-		effect = {  } 
+		effect = {  
+			change_mil = 1
+			add_country_modifier = {
+				name = krc_lead_from_front
+				duration = 3650
+			}
+			pyongan_area = {
+				add_permanent_claim = ROOT
+			}
+			hamgyeong_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	krc_encroach_on_solongos = {
@@ -82,11 +135,26 @@ korchin_2_slot = {
 			krc_rally_tribesmen
 			krc_sieze_furdan
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			region = korea_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 3
+				region = korea_region
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			korea_region = {
+				add_permanent_claim = ROOT
+			}
+			add_mil_power = 150
+		} 
 	}
 }
 korchin_3_slot = {
@@ -105,11 +173,47 @@ korchin_3_slot = {
 		icon = mission_horde_caravans
 		position = 3
 		required_missions = { krc_crossing_the_amur } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = heilongjiang_area
+				area = east_heilongjiang_area
+				area = central_heilongjiang_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			heilongjiang_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			east_heilongjiang_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			central_heilongjiang_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			override_country_name = KHASUDM_NUTAG
+			add_accepted_culture_or_dip_power = {
+				culture = luoravetlan
+			}
+			manchuria_region = {
+				add_permanent_claim = ROOT
+			}
+			cicigar_area = {
+				add_permanent_claim = ROOT
+			}
+			eastern_mongolia = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	krc_a_letter_to_yan = {
@@ -173,9 +277,29 @@ korchin_4_slot = {
 		position = 1
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			estate_loyalty = {
+				estate = estate_nomadic_tribes
+				loyalty = 60
+			}
+			num_of_estate_privileges = {
+				estate = estate_nomadic_tribes
+				value = 4
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_manpower = 10
+			furdan_area = {
+				add_permanent_claim = ROOT
+			}
+			ilan_hala_area = {
+				add_permanent_claim = ROOT
+			}
+			central_jilin_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	krc_crossing_the_amur = {
@@ -185,11 +309,74 @@ korchin_4_slot = {
 			krc_loyalty_of_chiefs
 			krc_rally_tribesmen
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = furdan_area
+				area = ilan_hala_area
+				area = central_jilin_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			furdan_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			ilan_hala_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			central_jilin_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {
+			add_country_modifier = {
+				name = krc_amur_conquer
+				duration = 9125
+			}
+			sakhalin_area = {
+				add_permanent_claim = ROOT
+			}
+			heilongjiang_area = {
+				add_permanent_claim = ROOT
+			}
+			east_heilongjiang_area = {
+				add_permanent_claim = ROOT
+			}
+			central_heilongjiang_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+	krc_worship_at_mt_changbai = {
+		icon = mission_manchu_warrior
+		position = 4
+		required_missions = {
+			krc_luoravetlan_conquest
+		}
+		provinces_to_highlight = {  
+			province_id = 4201
+			NOT = {
+				AND = {
+					owned_by = ROOT
+					has_tax_building_trigger = yes
+				}
+			}
+		} 
+
+		trigger = {  
+			
+		} 
+
+		effect = {
+			
+		} 
 	}
 }
 korchin_5_slot = {
@@ -208,22 +395,67 @@ korchin_5_slot = {
 		icon = mission_extent_yasak_to_the_east
 		position = 3
 		required_missions = { krc_crossing_the_amur } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			area = sakhalin_area
+			NOT =  {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			sakhalin_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			japan_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	krc_japan_expedition = {
 		icon = mission_japanese_samurai
 		position = 4
 		required_missions = { krc_sakhalin } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			region = japan_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 20
+				region = japan_region
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_country_modifier = {
+				name = krc_japanese_expedition
+				duration = -1
+			}
+			set_country_flag = shinto_secondary_bonus_flag
+			set_country_flag = kamuy_secondary_bonus_flag
+			custom_tooltip = krc_secondary_shinto_give_extra_tt
+			tooltip = {
+				add_country_modifier = {
+					name = krc_shinto_secondary_bonus
+					duration = -1
+				}
+			}
+			custom_tooltip = krc_secondary_kamuy_give_extra_tt
+			tooltip = {
+				add_country_modifier = {
+					name = krc_kamuy_secondary_bonus
+					duration = -1
+				}
+			}
+		} 
 	}
 
 	krc_khalka = {
