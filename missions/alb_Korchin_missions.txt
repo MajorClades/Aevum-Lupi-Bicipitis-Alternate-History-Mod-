@@ -72,7 +72,7 @@ korchin_1_slot = {
 	krc_khasarid_glory = {
 		icon = mission_genghis_khan
 		position = 5
-		required_missions = { krc_a_letter_to_yan } 
+		required_missions = { krc_punish_tribs } 
 		provinces_to_highlight = {  } 
 
 		trigger = {  } 
@@ -216,32 +216,81 @@ korchin_3_slot = {
 		} 
 	}
 
-	krc_a_letter_to_yan = {
-		icon = jap_fate_mandate
-		position = 4
-		required_missions = { krc_luoravetlan_conquest } 
-		provinces_to_highlight = {  } 
-
-		trigger = {  } 
-
-		effect = {  } 
-	}
-
 	krc_punish_tribs = {
 		icon = mission_conquer_5_states
+		position = 4
+		required_missions = { krc_luoravetlan_conquest } 
+		provinces_to_highlight = {  
+			OR = {
+				culture = evenk
+				culture = nivkh
+				province_id = 704
+				province_id = 726
+				province_id = 725
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 15
+				OR = {
+					culture = evenk
+					culture = nivkh
+				}
+			}
+			owns = 704
+			owns = 726
+			owns = 725
+		} 
+
+		effect = {  
+			#idk
+			mongolia_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	krc_a_letter_to_yan = {
+		icon = jap_fate_mandate
 		position = 5
-		required_missions = { krc_a_letter_to_yan } 
-		provinces_to_highlight = {  } 
+		required_missions = { krc_punish_tribs } 
+		provinces_to_highlight = { 
+			region = manchuria_region
+			NOT = {
+				owned_by = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			total_development = 300
+			manchuria_region = {
+				owned_by = ROOT
+				type = all
+			}
+			OR = {
+				YAN = {
+					has_been_insulted_by_root = yes
+				}
+				NOT = {
+					exists = YAN
+				}
+			}
+			army_size = YAN
+		} 
 
-		effect = {  } 
+		effect = {  
+
+		} 
 	}
 
 	krc_entry_into_beijing = {
 		icon = mng_outer_city_beijing
 		position = 6
-		required_missions = { krc_punish_tribs } 
+		required_missions = { krc_a_letter_to_yan } 
 		provinces_to_highlight = {  } 
 
 		trigger = {  } 
@@ -355,7 +404,7 @@ korchin_4_slot = {
 		} 
 	}
 	krc_worship_at_mt_changbai = {
-		icon = mission_manchu_warrior
+		icon = mission_buddhist_monk_praying
 		position = 4
 		required_missions = {
 			krc_luoravetlan_conquest
@@ -371,11 +420,38 @@ korchin_4_slot = {
 		} 
 
 		trigger = {  
-			
+			4201 = {
+				owned_by = ROOT
+				has_tax_building_trigger = yes
+			}
+
 		} 
 
 		effect = {
-			
+			if = {
+				limit = {
+					4201 = {
+						base_tax = 8
+					}
+				}
+				custom_tooltip = krc_changbai_tax_yes_tt
+				4201 = {
+					add_or_upgrade_tax_building = yes
+				}
+			}
+			else = {
+				custom_tooltip = krc_changbai_tax_no_tt
+				tooltip = {
+					4201 = {
+						add_or_upgrade_tax_building = yes
+					}
+				}
+			}
+			custom_tooltip = empty_line_tt
+			add_country_modifier = {
+				name = krc_mount_changabai
+				duration = -1
+			}
 		} 
 	}
 }
@@ -461,7 +537,7 @@ korchin_5_slot = {
 	krc_khalka = {
 		icon = mission_conquer_50_development
 		position = 5
-		required_missions = { krc_a_letter_to_yan } 
+		required_missions = { krc_punish_tribs } 
 		provinces_to_highlight = {  } 
 
 		trigger = {  } 
