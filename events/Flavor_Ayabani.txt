@@ -13,7 +13,7 @@ country_event = {
 		}
 		add_country_modifier = {
 			name = ayb_merged_army_navy
-			duration = 10958
+			duration = 10950
 		}
 		if = {
 			limit = {
@@ -75,10 +75,6 @@ country_event = {
 	is_triggered_only = yes
 	option = {
 		name = ayabani.3a
-		add_opinion = {
-			who = KM6
-			modifier = ayabani_rats_refused
-		}
 	}
 }
 
@@ -365,8 +361,180 @@ country_event = {
 	picture = VILLAGE_BURNING_eventPicture
 	is_triggered_only = yes
 	option = {
-		name = ayabani.1a
-		add_prestige = 100
+		name = tamna.1a
+	}
+}
+
+country_event = {
+	id = tamna.2
+	title = tamna.2.t
+	desc = tamna.2.d
+	picture = east_asian_COLONIZATION_eventPicture
+	is_triggered_only = yes
+	option = {
+		ai_chance = {
+			factor = 50
+		}
+		name = tamna.2a
+		RYU = {
+			country_event = {
+				id = tamna.3
+			}
+		}
+	}
+	option = {
+		ai_chance = {
+			factor = 50
+		}
+		name = tamna.2b
+		1015 = {
+			add_claim = ROOT
+		}
+	}
+}
+
+country_event = {
+	id = tamna.3
+	title = tamna.3.t
+	desc = tamna.3.d
+	picture = east_asian_SHIP_SAILING_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = tamna.3a
+		ai_chance = {
+			factor = 65
+		}
+		KR1 = {
+			country_event = {
+				id = tamna.4
+			}
+		}
+	}
+	option = {
+		name = tamna.3b
+		ai_chance = {
+			factor = 35
+		}
+		KR1 = {
+			country_event = {
+				id = tamna.5
+			}
+		}
+	}
+}
+
+country_event = {
+	id = tamna.4
+	title = tamna.4.t
+	desc = tamna.4.d
+	picture = east_asian_COURT_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = tamna.4a
+		inherit = RYU
+	}
+}
+
+country_event = {
+	id = tamna.5
+	title = tamna.5.t
+	desc = tamna.5.d
+	picture = shinto_NAVAL_MILITARY_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = tamna.5a
+		1015 = {
+			add_claim = ROOT
+		}
+	}
+}
+
+province_event = {
+	id = tamna.6
+	title = tamna.6.t
+	desc = tamna.6.d
+	picture = east_asian_CITY_DEVELOPMENT_eventPicture
+	
+	trigger = {
+		owner = {
+			culture_group = korean
+			has_country_flag = KR1_conversions
+		}
+		culture_group = altaic
+		AND = {
+			owner = {
+				mission_completed = tmn_hoi4
+			}
+			region = anatolia_region
+		}
+	}
+	
+	goto = ROOT
+	
+	mean_time_to_happen = {
+		months = 240
+	}
+	
+	option = {
+		name = tamna.6.a
+		ai_chance = {
+			factor = 1
+		}
+		change_culture = korean
+		any_province = { 
+			limit = {
+				region = east_siberia_region
+			}
+			change_culture = mongol
+		}
+	}
+}
+
+country_event = {
+	id = tamna.6
+	title = tamna.6.t
+	desc = tamna.6.d
+	picture = shinto_CITY_DEVELOPMENT_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = tamna.6a
+		set_country_flag = chosejapan
+	}
+	option = {
+		name = tamna.6b
+		set_country_flag = choseainu
+	}
+}
+
+country_event = {
+	id = tamna.7
+	title = tamna.7.t
+	desc = tamna.7.d
+	picture = east_asian_RELIGION_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = tamna.7a
+		set_country_flag = chosechina
+	}
+	option = {
+		name = tamna.7b
+		set_country_flag = chosedengpeng
+	}
+}
+
+country_event = {
+	id = tamna.8
+	title = tamna.8.t
+	desc = tamna.8.d
+	picture = BUDDHISM_MONASTERY_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = tamna.8a
+		set_country_flag = tookbuddha
+	}
+	option = {
+		name = tamna.8b
+		set_country_flag = tookjesus
 	}
 }
 
@@ -378,7 +546,7 @@ country_event = {
 	is_triggered_only = yes
 	option = {
 		name = hwan.1a
-		override_country_name = DAEHAN
+		override_country_name = DAETAMNA
 	}
 	option = {
 		name = hwan.1b
@@ -401,7 +569,7 @@ country_event = {
 		central_asia_region = {
 			add_permanent_claim = ROOT
 		}
-		khorasan_region_region = {
+		khorasan_region = {
 			add_permanent_claim = ROOT
 		}
 		persia_region = {
