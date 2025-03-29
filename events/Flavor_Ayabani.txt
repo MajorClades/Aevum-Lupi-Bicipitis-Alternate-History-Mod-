@@ -71,10 +71,21 @@ country_event = {
 	id = ayabani.3
 	title = ayabani.3.t
 	desc = ayabani.3.d
-	picture = shinto_COURT_eventPicture
+	picture = shinto_BAD_WITH_MONARCH_eventPicture
 	is_triggered_only = yes
 	option = {
 		name = ayabani.3a
+
+		destroy_great_project = {
+			type = imperial_city_kyoto
+		}
+		1020 - {
+			add_base_production = -3
+			add_base_tax = -3
+			add_base_manpower = -3
+			add_devastation = 50
+			add_unrest = -10
+		}
 	}
 }
 
@@ -371,24 +382,13 @@ country_event = {
 	desc = tamna.2.d
 	picture = east_asian_COLONIZATION_eventPicture
 	is_triggered_only = yes
+	fire_only_once = yes
 	option = {
-		ai_chance = {
-			factor = 50
-		}
 		name = tamna.2a
 		RYU = {
 			country_event = {
 				id = tamna.3
 			}
-		}
-	}
-	option = {
-		ai_chance = {
-			factor = 50
-		}
-		name = tamna.2b
-		1015 = {
-			add_claim = ROOT
 		}
 	}
 }
@@ -398,12 +398,12 @@ country_event = {
 	title = tamna.3.t
 	desc = tamna.3.d
 	picture = east_asian_SHIP_SAILING_eventPicture
+	fire_only_once = yes
 	is_triggered_only = yes
+
 	option = {
 		name = tamna.3a
-		ai_chance = {
-			factor = 65
-		}
+		ai_chance = { factor = 80 }
 		KR1 = {
 			country_event = {
 				id = tamna.4
@@ -412,9 +412,7 @@ country_event = {
 	}
 	option = {
 		name = tamna.3b
-		ai_chance = {
-			factor = 35
-		}
+		ai_chance = { factor = 20 }
 		KR1 = {
 			country_event = {
 				id = tamna.5
@@ -427,11 +425,15 @@ country_event = {
 	id = tamna.4
 	title = tamna.4.t
 	desc = tamna.4.d
-	picture = east_asian_COURT_eventPicture
+	picture = east_asian_COLONIZATION_eventPicture
+	fire_only_once = yes
 	is_triggered_only = yes
+
 	option = {
 		name = tamna.4a
-		inherit = RYU
+		KR1 = {
+			inherit = RYU
+		}
 	}
 }
 
@@ -439,12 +441,16 @@ country_event = {
 	id = tamna.5
 	title = tamna.5.t
 	desc = tamna.5.d
-	picture = shinto_NAVAL_MILITARY_eventPicture
+	picture = east_asian_COLONIZATION_eventPicture
+	fire_only_once = yes
 	is_triggered_only = yes
+
 	option = {
 		name = tamna.5a
-		1015 = {
-			add_claim = ROOT
+		KR1 = {
+			1015 = {
+				add_permanent_claim = ROOT
+			}
 		}
 	}
 }
@@ -539,6 +545,17 @@ country_event = {
 }
 
 country_event = {
+	id = tamna.9
+	title = tamna.9.t
+	desc = tamna.9.d
+	picture = shinto_BATTLE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = tamna.9a
+	}
+}
+
+country_event = {
 	id = hwan.1
 	title = hwan.1.t
 	desc = hwan.1.d
@@ -552,7 +569,7 @@ country_event = {
 		name = hwan.1b
 		override_country_name = HWAN
 		tibet_region = {
-			add_permanent_claim = ROOT
+			claimadd_permanent_ = ROOT
 		}
 		burma_region = {
 			add_permanent_claim = ROOT
