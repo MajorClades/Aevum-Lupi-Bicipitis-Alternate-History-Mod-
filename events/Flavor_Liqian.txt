@@ -42,6 +42,12 @@ country_event = {
 	picture = BYZ_BYZANTINE_EAGLE_eventPicture
 	is_triggered_only = yes
 	fire_only_once = yes
+	trigger = {
+		NOT = {
+			has_country_flag = had_liqian_3_flag
+		}
+		tag = CH4
+	}
 
 	option = {
 		name = liqian.3a
@@ -49,19 +55,42 @@ country_event = {
 			name = ch4_roman_heirs_0
 			duration = -1
 		}
+		set_country_flag = had_liqian_3_flag
 	}
 }
 country_event = {
 	id = liqian.4
 	title = liqian.4.t
 	desc = liqian.4.d
-	picture = BYZ_BYZANTINE_EAGLE_eventPicture
+	picture = CHINESE_GENERAL_eventPicture
 	is_triggered_only = yes
-	fire_only_once = yes
 
 	option = {
 		name = liqian.4a
-		
+		set_emperor_of_china = ROOT
+		hidden_effect = {
+			YAN = {
+				country_event = {
+					id = liqian.5
+				}
+			}
+		}
 	}
 }
+
+country_event = {
+	id = liqian.5
+	title = liqian.5.t
+	desc = liqian.5.d
+	picture = SUFFERING_CHINESE_VILLAGE_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = liqian.4a
+		add_prestige = -25
+		custom_tooltip = no_more_eoc_tt
+	}
+}
+
+
 
