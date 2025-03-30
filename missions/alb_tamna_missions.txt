@@ -8,7 +8,10 @@ Tamna_1_slot = {
 	tmn_econ = {
 		icon = mission_asian_trader
 		position = 1
-		provinces_to_highlight = {  }
+		provinces_to_highlight = { 
+			is_capital_of = ROOT
+			NOT = { num_of_times_improved = 5 }
+		 }
 
 		trigger = {
 			num_of_loans = 0
@@ -21,48 +24,91 @@ Tamna_1_slot = {
                 estate = estate_burghers
                 loyalty = 60
             }
+			capital_scope = { 
+				num_of_times_improved = 5
+			}
 		}
 		effect = {
-            add_treasury = -1 #placeholder
-            custom_tooltip = AYABANI_TT_6
+			add_country_modifier = {
+				name = ayb_fix_econ
+				duration = 7300
+			}
 		}
 	}
 	tmn_trucebreak = {
 		icon = mng_end_sengoku_jidai
 		position = 2
 		required_missions = {  }
-		provinces_to_highlight = {  }
-
+		provinces_to_highlight = { 
+			owned_by = KM6
+		}
 		trigger = {
-			ROOT = { is_rival = KM6 }
-			military_strength = {
-				who = KM6
-				value = 1
-			}
+			OR = {
+				AND = {
+					KM6 = {
+						exists = yes
+					}
+					ROOT = { is_rival = KM6 }
+					army_strength = {
+						who = KM6
+						value = 1
+					}
+				}
+				KM6 = {
+					exists = no
+				}
+				is_neighbor_of = KM5
+			}	
 		}
 		effect = {
 			custom_tooltip = AYABANI_TT_7
-			hidden_effect = {
-				kinai_area = { add_permanent_claim = ROOT } 
-				chubu_area = { add_permanent_claim = ROOT } 
-				hokuriku_area = { add_permanent_claim = ROOT }
-				eastern_chubu_area = { add_permanent_claim = ROOT }
-				kanto_area = { add_permanent_claim = ROOT }
-			}
+			kinai_area = { add_permanent_claim = ROOT } 
+			chubu_area = { add_permanent_claim = ROOT } 
+			hokuriku_area = { add_permanent_claim = ROOT }
+			eastern_chubu_area = { add_permanent_claim = ROOT }
+			kanto_area = { add_permanent_claim = ROOT }
+			sanindo_area = { add_permanent_claim = ROOT }
 		}
 	}
 	tmn_cant_spell_chrysanthemum = {
 		icon = jap_five_regent_houses
 		position = 3
 		required_missions = { tmn_trucebreak }
-		provinces_to_highlight = {  }
+		provinces_to_highlight = { 
+			or = {
+				area = kinai_area
+				area = chubu_area
+				area = hokuriku_area
+				area = eastern_chubu_area
+				area = kanto_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
 
 		trigger = {
-			KM6 = { 
-				OR = { 
-					exists = no 
-					is_subject_of = ROOT 
-				}
+			kinai_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+			chubu_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+			hokuriku_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+			eastern_chubu_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+			kanto_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+			sanindo_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT 
 			}
 		}
 		effect = {
@@ -70,28 +116,70 @@ Tamna_1_slot = {
 			add_accepted_culture = togoku
 			add_prestige = 25
 			add_legitimacy = 10
-			any_province = {
-				owner = KM5
+			country_event = { id = ayabani.3 }
+			thohoku_area = { add_permanent_claim = ROOT } 
+			eastern_kanto_area = { add_permanent_claim = ROOT } 
+			hokkaido_area = { add_permanent_claim = ROOT }
+			if = {
+				limit = {
+					KM6 = {
+						is_subject_of = ROOT
+					}
+					AND = {
+						has_opinion = {
+							who = ROOT
+							value = 125
+						}
+					}
+				}
+				inherit = KM6
 			}
-			add_permanent_claim = ROOT
 		}
 	}
 	tmn_kuomintang = {
 		icon = mission_japanese_samurai
 		position = 4
 		required_missions = { tmn_cant_spell_chrysanthemum }
-		provinces_to_highlight = {  }
+		provinces_to_highlight = { 
+			or = {
+				area = thohoku_area
+				area = eastern_kanto_area
+				area = hokkaido_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
 
 		trigger = {
-			KM5 = { 
-				OR = { 
-					exists = no 
-					is_subject_of = ROOT 
-				}
+			thohoku_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+			eastern_kanto_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+			hokkaido_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT 
 			}
 		}
 		effect = {
-			add_accepted_culture = ainu
+			custom_tooltip = AYABANI_TT_9
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						OR = {
+							culture = ainu
+							culture = utari
+							culture = kuoshi
+						}
+						culture_group = kamchatkan_g
+					}
+					add_nationalism = -5
+					add_local_autonomy = -10
+				}
+			}
+			add_core = 4192
 		}
 	}
 	tmn_nihon = {
@@ -103,21 +191,17 @@ Tamna_1_slot = {
 		}
 
 		trigger = {
-			KM6 = { 
-				OR = { 
-					exists = no 
-					is_subject_of = ROOT 
-				}
-			}
-			KM5 = { 
-				OR = { 
-					exists = no 
-					is_subject_of = ROOT 
-				}
+			japan_region = {
+				type = all
+				owned_by = ROOT
 			}
 		}
 		effect = {
-			add_prestige = 100
+			set_government_rank = 3
+			add_country_modifier = {
+				name = ayb_nihon
+				duration = 10950
+			}
 		}
 	}
 	tmn_plains = {
@@ -149,7 +233,7 @@ Tamna_1_slot = {
 			}
 		}
 		effect = {
-			add_prestige = 50
+			country_event = { id = tamna.7 }
 		}
 	}
 }
@@ -160,6 +244,56 @@ Tamna_2_slot = {
 	has_country_shield = yes
 	potential = { tag = KR1 } 
 
+	tmn_ryu = {
+		icon = mission_invade_island
+		position = 4
+		required_missions = { tmn_cant_spell_chrysanthemum }
+		provinces_to_highlight = { 
+			province_id = 1015
+		}
+
+		trigger = {
+			OR = {
+				RYU = {
+					has_opinion = {
+						who = ROOT
+						value = 180
+					}
+				}
+				RYU = {
+					has_opinion_modifier = {
+						who = ROOT
+						modifier = insulted
+					}
+					trade_embargo_by = ROOT
+				}
+			}
+		}
+		effect = {	
+			custom_tooltip = AYABANI_TT_10a
+
+			custom_tooltip = AYABANI_TT_10b
+
+			hidden_effect = {
+				if = {
+					limit = {
+						RYU = {
+							has_opinion = {
+								who = ROOT
+								value = 180
+							}
+						}
+					}
+					country_event = { id = tamna.2 }
+				}
+				else = {
+					1015 = {
+						add_permanent_claim = ROOT
+					}
+				}
+			}
+		}
+	}
 	tmn_faith = {
 		icon = mission_bear
 		position = 5
@@ -167,13 +301,16 @@ Tamna_2_slot = {
 		provinces_to_highlight = {  }
 
 		trigger = {
-			east_heilongjiang_area = {
-				type = all
-				owned_by = ROOT
+			1020 = {
+				has_matching_religion = ROOT
 			}
+			4192 = {
+				has_matching_religion = ROOT
+			}
+			religious_unity = 0.75
 		}
 		effect = {
-			add_prestige = 50
+			country_event = { id = tamna.6 }
 		}
 	}
 	tmn_frontier = {
@@ -213,7 +350,8 @@ Tamna_2_slot = {
 			}
 		}
 		effect = {
-			add_prestige = 50
+			custom_tooltip = AYABANI_TT_8
+			set_country_flag = invade_china_flag
 		}
 	}
 	tmn_wall = {
@@ -283,10 +421,13 @@ Tamna_3_slot = {
 
 		trigger = {
             corruption = 0
-            treasury = 2500
+			has_adm_advisor = yes
+			crown_land_share = 45
 		}
 		effect = { 
             add_government_reform = alb_second_tier_restoration_reform
+			change_government_reform_progress = -100
+			add_legitimacy = -15
          } 
 	}
     tmn_nobles = {
@@ -330,6 +471,7 @@ Tamna_3_slot = {
             }
                 army_size_percentage = 1
                 prestige = 20
+				stability = 2
 		}
 		effect = { 
             add_government_reform = alb_fourth_tier_restoration_reform
@@ -337,6 +479,7 @@ Tamna_3_slot = {
                 estate = estate_church
                 loyalty = -20
             }
+			add_stability = -1
         } 
 	}
     tmn_unbreakable_union = {
@@ -347,10 +490,9 @@ Tamna_3_slot = {
 
 		trigger = {
             corruption = 0
-            average_autonomy = 20
             num_of_rebel_controlled_provinces = 0
             legitimacy = 100
-            average_unrest = 0
+			crown_land_share = 60
 		}
 		effect = {
             add_government_reform = alb_korean_empire_reform
@@ -361,7 +503,6 @@ Tamna_3_slot = {
 		position = 6
 		required_missions = { 
             tmn_hoi4
-            tmn_gorg
             tmn_nihon
         } 
 		provinces_to_highlight = {  }
@@ -408,8 +549,6 @@ Tamna_3_slot = {
 		required_missions = { 
             tmn_tno
             tmn_temujin
-			tmn_jesse
-			tmn_jade
         } 
 		provinces_to_highlight = {  }
 
@@ -428,8 +567,8 @@ Tamna_4_slot = {
 	has_country_shield = yes
 	potential = { tag = KR1 } 
 
-	tmn_hoi4 = {
-		icon = mission_horde_caravans
+	tmn_need = {
+		icon = mission_junk_boat
 		position = 5
 		required_missions = { tmn_wiry }
 		provinces_to_highlight = {  }
@@ -439,9 +578,28 @@ Tamna_4_slot = {
 				type = all
 				owned_by = ROOT
 			}
+			light_ship_fraction = 0.4
+			num_of_owned_provinces_with = {
+				value = 5
+				has_port = yes
+				base_production = 5
+			}
+			1816 = { #beijing
+				trade_share = {
+					country = KR1
+					share = 30
+				}
+			}
 		}
 		effect = {
-			country_event = { id = tamna.1 }
+			735 = { #kaesong
+				add_center_of_trade_level = 1
+				add_trade_node_income = 20
+			}
+			add_country_modifier = {
+				name = ayb_trade
+				duration = -1
+			}
 		}
 	}
 	tmn_coast = {
@@ -553,38 +711,75 @@ Tamna_5_slot = {
 		provinces_to_highlight = {  }
 
 		trigger = {
-            manpower_percentage = 0.50
+            manpower_percentage = 0.75
+			army_size = 20
+			has_mil_advisor = yes
 		}
 		effect = {
-            add_manpower = -0.001 #placeholder
+			country_event = { id = ayabani.2 }
 		}
 	}
 	tmn_sos = {
 		icon = mission_steppe_warriors
 		position = 2
 		required_missions = {  }
-		provinces_to_highlight = {  }
+		provinces_to_highlight = { 
+			area = tamna_frontier_area
+		}
 
 		trigger = {
-			military_strength = {
-				who = KM3
-				value = 1
+			AND = {
+				OR = {
+					military_strength = {
+						who = KM3
+						value = 1
+					}
+					KM3 = {
+						exists = no
+					}
+				}
+				OR = {
+					military_strength = {
+						who = KM2
+						value = 1
+					}
+					KM2 = {
+						exists = no
+					}
+				}
 			}
-			military_strength = {
-				who = KM2
-				value = 1
+			custom_trigger_tooltip = {
+				tooltip = AYABANI_TT_6
+				OR = {
+					4228 = {
+						has_building = fort_15th
+					}
+					4227 = {
+						has_building = fort_15th
+					}
+					2745 = {
+						has_building = fort_15th
+					}
+				}
 			}
 		}
 		effect = {
 			south_korea_area = { add_permanent_claim = ROOT } 
 			eastern_korea_area = { add_permanent_claim = ROOT } 
+			create_general = { tradition = 40 }
 		}
 	}
 	tmn_mac = {
 		icon = mission_ilkhanate
 		position = 3
 		required_missions = { tmn_sos }
-		provinces_to_highlight = {  }
+		provinces_to_highlight = { 
+			OR = {
+				area = south_korea_area
+				area = eastern_korea_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
 
 		trigger = {
 			south_korea_area = { 
@@ -595,16 +790,28 @@ Tamna_5_slot = {
 				type = all
 				owned_by = ROOT
 			}
+			has_spy_network_in = {
+				who = KM1
+				value = 50
+			}
 		}
 		effect = {
 			western_korea_area = { add_permanent_claim = ROOT } 
+			735 = { add_core = ROOT }
+			KM1 = {
+				remove_fow = 12
+			}
+			country_event = { id = tamna.9 }
 		}
 	}
 	tmn_wiry = {
 		icon = mission_ulug_ulus
 		position = 4
 		required_missions = { tmn_mac }
-		provinces_to_highlight = {  }
+		provinces_to_highlight = { 
+			area = western_korea_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
 
 		trigger = {
 			western_korea_area = { 
@@ -615,10 +822,19 @@ Tamna_5_slot = {
 		effect = {
 			pyongan_area = { add_permanent_claim = ROOT }
 			hamgyeong_area = { add_permanent_claim = ROOT }
+			735 = {
+				add_base_tax = 1
+				add_base_production = 1
+				add_base_manpower = 1
+			}
+			add_great_project_tier = {
+				type = gyeongbok_palace
+				tier = 1
+			}
 		}
 	}
-	tmn_gorg = {
-		icon = mjz_into_korea
+	tmn_hoi4 = {
+		icon = mission_horde_caravans
 		position = 5
 		required_missions = { tmn_wiry }
 		provinces_to_highlight = {  }
@@ -630,8 +846,7 @@ Tamna_5_slot = {
 			}
 		}
 		effect = {
-			pyongan_area = { add_permanent_claim = ROOT }
-			hamgyeong_area = { add_permanent_claim = ROOT }
+			country_event = { id = tamna.1 }
 		}
 	}
 	tmn_jesse = {
@@ -647,8 +862,7 @@ Tamna_5_slot = {
 			}
 		}
 		effect = {
-			pyongan_area = { add_permanent_claim = ROOT }
-			hamgyeong_area = { add_permanent_claim = ROOT }
+			country_event = { id = tamna.8 }
 		}
 	}
 }

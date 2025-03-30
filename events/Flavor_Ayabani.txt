@@ -13,7 +13,7 @@ country_event = {
 		}
 		add_country_modifier = {
 			name = ayb_merged_army_navy
-			duration = 10958
+			duration = 10950
 		}
 		if = {
 			limit = {
@@ -71,13 +71,20 @@ country_event = {
 	id = ayabani.3
 	title = ayabani.3.t
 	desc = ayabani.3.d
-	picture = shinto_COURT_eventPicture
+	picture = shinto_BAD_WITH_MONARCH_eventPicture
 	is_triggered_only = yes
 	option = {
 		name = ayabani.3a
-		add_opinion = {
-			who = KM6
-			modifier = ayabani_rats_refused
+
+		destroy_great_project = {
+			type = imperial_city_kyoto
+		}
+		1020 - {
+			add_base_production = -3
+			add_base_tax = -3
+			add_base_manpower = -3
+			add_devastation = 50
+			add_unrest = -10
 		}
 	}
 }
@@ -365,8 +372,186 @@ country_event = {
 	picture = VILLAGE_BURNING_eventPicture
 	is_triggered_only = yes
 	option = {
-		name = ayabani.1a
-		add_prestige = 100
+		name = tamna.1a
+	}
+}
+
+country_event = {
+	id = tamna.2
+	title = tamna.2.t
+	desc = tamna.2.d
+	picture = east_asian_COLONIZATION_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = tamna.2a
+		RYU = {
+			country_event = {
+				id = tamna.3
+			}
+		}
+	}
+}
+
+country_event = {
+	id = tamna.3
+	title = tamna.3.t
+	desc = tamna.3.d
+	picture = east_asian_SHIP_SAILING_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = tamna.3a
+		ai_chance = { factor = 80 }
+		KR1 = {
+			country_event = {
+				id = tamna.4
+			}
+		}
+	}
+	option = {
+		name = tamna.3b
+		ai_chance = { factor = 20 }
+		KR1 = {
+			country_event = {
+				id = tamna.5
+			}
+		}
+	}
+}
+
+country_event = {
+	id = tamna.4
+	title = tamna.4.t
+	desc = tamna.4.d
+	picture = east_asian_COLONIZATION_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = tamna.4a
+		KR1 = {
+			inherit = RYU
+		}
+	}
+}
+
+country_event = {
+	id = tamna.5
+	title = tamna.5.t
+	desc = tamna.5.d
+	picture = east_asian_COLONIZATION_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = tamna.5a
+		KR1 = {
+			1015 = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+}
+
+province_event = {
+	id = tamna.6
+	title = tamna.6.t
+	desc = tamna.6.d
+	picture = east_asian_CITY_DEVELOPMENT_eventPicture
+	
+	trigger = {
+		owner = {
+			culture_group = korean
+			has_country_flag = KR1_conversions
+		}
+		culture_group = altaic
+		AND = {
+			owner = {
+				mission_completed = tmn_hoi4
+			}
+			region = anatolia_region
+		}
+	}
+	
+	goto = ROOT
+	
+	mean_time_to_happen = {
+		months = 240
+	}
+	
+	option = {
+		name = tamna.6.a
+		ai_chance = {
+			factor = 1
+		}
+		change_culture = korean
+		any_province = { 
+			limit = {
+				region = east_siberia_region
+			}
+			change_culture = mongol
+		}
+	}
+}
+
+country_event = {
+	id = tamna.6
+	title = tamna.6.t
+	desc = tamna.6.d
+	picture = shinto_CITY_DEVELOPMENT_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = tamna.6a
+		set_country_flag = chosejapan
+	}
+	option = {
+		name = tamna.6b
+		set_country_flag = choseainu
+	}
+}
+
+country_event = {
+	id = tamna.7
+	title = tamna.7.t
+	desc = tamna.7.d
+	picture = east_asian_RELIGION_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = tamna.7a
+		set_country_flag = chosechina
+	}
+	option = {
+		name = tamna.7b
+		set_country_flag = chosedengpeng
+	}
+}
+
+country_event = {
+	id = tamna.8
+	title = tamna.8.t
+	desc = tamna.8.d
+	picture = BUDDHISM_MONASTERY_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = tamna.8a
+		set_country_flag = tookbuddha
+	}
+	option = {
+		name = tamna.8b
+		set_country_flag = tookjesus
+	}
+}
+
+country_event = {
+	id = tamna.9
+	title = tamna.9.t
+	desc = tamna.9.d
+	picture = shinto_BATTLE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = tamna.9a
 	}
 }
 
@@ -378,13 +563,13 @@ country_event = {
 	is_triggered_only = yes
 	option = {
 		name = hwan.1a
-		override_country_name = DAEHAN
+		override_country_name = DAETAMNA
 	}
 	option = {
 		name = hwan.1b
 		override_country_name = HWAN
 		tibet_region = {
-			add_permanent_claim = ROOT
+			claimadd_permanent_ = ROOT
 		}
 		burma_region = {
 			add_permanent_claim = ROOT
@@ -401,7 +586,7 @@ country_event = {
 		central_asia_region = {
 			add_permanent_claim = ROOT
 		}
-		khorasan_region_region = {
+		khorasan_region = {
 			add_permanent_claim = ROOT
 		}
 		persia_region = {
