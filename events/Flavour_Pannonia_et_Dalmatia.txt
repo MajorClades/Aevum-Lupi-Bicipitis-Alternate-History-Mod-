@@ -207,7 +207,7 @@ country_event = {
 		custom_tooltip = PANN_TT_5b
 	}
 	option = {
-		name = pann.6a
+		name = pann.6b
  		set_country_flag = get_ducats_from_dev_grain_flag
 		custom_tooltip = PANN_TT_5c
 	}
@@ -229,10 +229,159 @@ country_event = {
 		}
 	}
 	option = {
-		name = pann.7a
+		name = pann.7b
 		add_country_modifier = {
 			name = alb_pan_culture_spam
 			duration = -1
+		}
+	}
+}
+
+country_event = { #Dalmatia Loot Boxes Mechanic
+	id = pann.100
+	title = pann.100.t
+	desc = pann.100.d
+	picture = CROSSROAD_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = pann.100a
+		set_country_flag = dalm_lv1_loot
+		add_years_of_income = -0.5
+	}
+	option = {
+		name = pann.100b
+		set_country_flag = dalm_lv2_loot
+		add_years_of_income = -0.75
+	}
+	option = {
+		name = pann.100c
+		set_country_flag = dalm_lv3_loot
+		add_years_of_income = -1
+	}
+	option = {
+		name = pann.100d
+		set_country_flag = dalm_lv4_loot
+		add_years_of_income = -1.5
+	}
+	option = {
+		name = pann.100e
+		set_country_flag = dalm_lv5_loot
+		add_years_of_income = -2
+	}
+	option = {
+		name = pann.100f
+		set_country_flag = dalm_no_loot_ops
+	}
+	after = {
+		hidden_effect = {
+			if = {
+				limit = {
+					has_country_flag = dalm_no_loot_ops
+				}
+				clr_country_flag = dalm_no_loot_ops
+			}else = {
+				add_country_modifier = {
+					name = dalm_preparation_modifier
+					duration = -1
+					hidden = yes
+				}
+			}	
+		}
+	}
+}
+
+country_event = { #Dalmatia Loot Boxes Mechanic
+	id = pann.101
+	title = pann.101.t
+	desc = pann.101.d
+	picture = CROSSROAD_eventPicture
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			clr_country_flag = dalm_lv1_loot
+			random_list = {
+				10 = {set_country_flag = loot_dalm_1}
+				10 = {set_country_flag = loot_dalm_2}
+				10 = {set_country_flag = loot_dalm_3}
+				15 = {set_country_flag = loot_dalm_4}
+				10 = {set_country_flag = loot_dalm_5}
+				10 = {set_country_flag = loot_dalm_6}
+				10 = {set_country_flag = loot_dalm_7}
+				10 = {set_country_flag = loot_dalm_8}
+				10 = {set_country_flag = loot_dalm_9}
+				5 = {set_country_flag = loot_dalm_10}
+			}
+		}
+	}
+	option = {
+		name = pann.101a
+		trigger = {has_country_flag = loot_dalm_1}
+		add_adm_power = 100
+	}
+	option = {
+		name = pann.101b
+		trigger = {has_country_flag = loot_dalm_2}
+		add_dip_power = 100
+	}
+	option = {
+		name = pann.101c
+		trigger = {has_country_flag = loot_dalm_3}
+		add_mil_power = 100
+	}
+	option = {
+		name = pann.101d
+		trigger = {has_country_flag = loot_dalm_4}
+		add_prestige_or_monarch_power = {amount = 15}
+		add_legitimacy_equivalent = { amount = 10 republican_tradition = 6 }
+	}
+	option = {
+		name = pann.101e
+		trigger = {has_country_flag = loot_dalm_5}
+		add_yearly_manpower = 0.9
+	}
+	option = {
+		name = pann.101f
+		trigger = {has_country_flag = loot_dalm_6}
+		add_years_of_income = 0.9
+	}
+	option = {
+		name = pann.101g
+		trigger = {has_country_flag = loot_dalm_7}
+		add_yearly_manpower = 0.9
+	}
+	option = {
+		name = pann.101h
+		trigger = {has_country_flag = loot_dalm_8}
+		add_years_of_income = 0.9
+	}
+	option = {
+		name = pann.101i
+		trigger = {has_country_flag = loot_dalm_9}
+		add_yearly_manpower = 0.9
+	}
+	option = {
+		name = pann.101l
+		trigger = {has_country_flag = loot_dalm_10}
+		add_adm_power = 100
+		add_dip_power = 100
+		add_mil_power = 100
+	}
+	after = {
+		hidden_effect = {
+			clr_country_flag = loot_dalm_1
+			clr_country_flag = loot_dalm_2
+			clr_country_flag = loot_dalm_3
+			clr_country_flag = loot_dalm_4
+			clr_country_flag = loot_dalm_5
+			clr_country_flag = loot_dalm_6
+			clr_country_flag = loot_dalm_7
+			clr_country_flag = loot_dalm_8
+			clr_country_flag = loot_dalm_9
+			clr_country_flag = loot_dalm_10
+			random_list = {
+				95 = {}
+				5 = {country_event = {id = pann.101}}
+			}
 		}
 	}
 }
