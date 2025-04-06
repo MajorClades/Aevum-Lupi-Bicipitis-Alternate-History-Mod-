@@ -317,7 +317,14 @@ Tamna_2_slot = {
 		icon = mission_amur_acquisition
 		position = 7
 		required_missions = { tmn_changbai }
-		provinces_to_highlight = {  }
+		provinces_to_highlight = { 
+			or = {
+				area = east_heilongjiang_area
+				area = heilongjiang_area
+				area = central_heilongjiang_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
 
 		trigger = {
 			east_heilongjiang_area = {
@@ -334,7 +341,10 @@ Tamna_2_slot = {
 			}
 		}
 		effect = {
-			add_prestige = 50
+			add_country_modifier = {
+				name = ayb_frontier
+				duration = 7300
+			}
 		}
 	}
 	tmn_heaven = {
@@ -505,26 +515,34 @@ Tamna_3_slot = {
             tmn_hoi4
             tmn_nihon
         } 
-		provinces_to_highlight = {  }
+		provinces_to_highlight = { 
+			or = {
+				area = jilin_area
+				area = ningguta_area
+				area = liaoning_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
 
 		trigger = {
-			korea_region = {
-				type = all
-				owned_by = ROOT
-			}
-			military_strength = {
-				who = KRC
-				value = 1
-			}
-			military_strength = {
-				who = CH7
-				value = 1
+			AND = {
+				jilin_area = {
+					type = all
+					owned_by = ROOT
+				}
+				ningguta_area = {
+					type = all
+					owned_by = ROOT
+				}
+				liaoning_area = {
+					type = all
+					owned_by = ROOT
+				}
 			}
 		}
 		effect = {
-			jilin_area = { add_permanent_claim = ROOT } 
-			ningguta_area = { add_permanent_claim = ROOT } 
-			liaoning_area = { add_permanent_claim = ROOT }
+			manchuria_region = { add_permanent_claim = ROOT } 
 		}
 	}
 	tmn_amur = {
@@ -534,13 +552,67 @@ Tamna_3_slot = {
             tmn_frontier
             tmn_coast
         } 
-		provinces_to_highlight = {  }
+		provinces_to_highlight = { 
+			region = manchuria_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		 }
 
 		trigger = {
-			prestige = 50
+			manchuria_region = {
+				type = all
+				owned_by = ROOT
+				core_percentage = 1
+			}
+			OR = {
+				accepted_culture = chahar
+				accepted_culture = kamchatkan
+				accepted_culture = luoravetlan
+				accepted_culture = nivkh
+			}
 		}
 		effect = {
-			add_prestige = 50
+			custom_tooltip = AYABANI_TT_11a
+
+			custom_tooltip = AYABANI_TT_11b
+
+			hidden_effect = {
+				if = {
+					limit = {
+						accepted_culture = chahar
+					}
+					add_country_modifier = {
+						name = ayb_korch
+						duration = -1
+					}
+				}
+				else_if = {
+					limit = {
+						accepted_culture = kamchatkan
+					}
+					add_country_modifier = {
+						name = ayb_kamch
+						duration = -1
+					}
+				}
+				else_if = {
+					limit = {
+						accepted_culture = luoravetlan
+					}
+					add_country_modifier = {
+						name = ayb_kuora
+						duration = -1
+					}
+				}
+				else_if = {
+					limit = {
+						accepted_culture = nivkh
+					}
+					add_country_modifier = {
+						name = ayb_kvinh
+						duration = -1
+					}
+				}
+			}
 		}
 	}
 	tmn_empire = {
@@ -606,16 +678,34 @@ Tamna_4_slot = {
 		icon = mission_invade_island
 		position = 7
 		required_missions = { tmn_changbai }
-		provinces_to_highlight = {  }
+		provinces_to_highlight = { 
+			or = {
+				area = furdan_area
+				area = central_jilin_area
+				area = ilan_hala_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
 
 		trigger = {
 			furdan_area = {
 				type = all
 				owned_by = ROOT
 			}
+			central_jilin_area = {
+				type = all
+				owned_by = ROOT
+			}
+			ilan_hala_area = {
+				type = all
+				owned_by = ROOT
+			}
 		}
 		effect = {
-			add_prestige = 50
+			add_country_modifier = {
+				name = ayb_coast
+				duration = 7300
+			}
 		}
 	}
 	tmn_steppe = {
@@ -801,7 +891,7 @@ Tamna_5_slot = {
 			KM1 = {
 				remove_fow = 12
 			}
-			country_event = { id = tamna.9 }
+			country_event = { id = tamna.10 }
 		}
 	}
 	tmn_wiry = {
