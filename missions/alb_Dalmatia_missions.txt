@@ -14,34 +14,10 @@ Dalmatia_1_slot = {
 		}
 	}
 
-	pann_making_it_grain = {
-		icon = mission_bread
-		position = 2
-		required_missions = { pann_feed_the_city } 
-		provinces_to_highlight = {
-			trade_goods = grain
-			has_manufactory_trigger = no
-			country_or_non_sovereign_subject_holds = ROOT
-		}
-
-		trigger = {
-			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-				value = 4
-				trade_goods = grain
-				has_manufactory_trigger = yes
-			}
-		}
-
-		effect = {
-			set_country_flag = get_manpower_from_dev_grain_flag
-			custom_tooltip = PANN_TT_2
-		}
-	}
-
-	pann_making_it_global = {
+	dalm_further_expansion = {
 		icon = mission_market_place_with_asian_traders
-		position = 4
-		required_missions = { pann_making_it_grain } 
+		position = 2
+		required_missions = { dalm_militia_army } 
 		provinces_to_highlight = {
 			trade_goods = grain
 			has_manufactory_trigger = no
@@ -79,6 +55,32 @@ Dalmatia_2_slot = {
 			AND = {
 				has_country_flag = generic_italy_MT
 				was_tag = PD2
+			}
+		}
+	}
+
+	dalm_militia_army = {
+		icon = mission_bread
+		position = 1
+
+		trigger = {
+			if = {
+				limit = { ai = yes } 
+				num_of_generals = 1
+				army_size_percentage = 0.6
+			}
+			else = { army_size_percentage = 1 } 
+		}
+
+		effect = {
+			carinthia_area = {
+				add_permanent_claim = ROOT
+			}
+			east_adriatic_coast_area = {
+				add_permanent_claim = ROOT
+			}
+			bosnia_area = {
+				add_permanent_claim = ROOT
 			}
 		}
 	}
@@ -137,4 +139,162 @@ Dalmatia_5_slot = {
 		}
 	}
 
+	dalm_beat_longobardy = {
+		icon = mission_bread
+		position = 1
+		provinces_to_highlight = { is_capital_of = GR2 }
+		trigger = {
+			army_strength = {
+				who = GR2
+				value = 1.25
+			}
+		}
+
+		effect = {
+			austria_proper_area = {
+				add_permanent_claim = ROOT
+			}
+			inner_austria_area = {
+				add_permanent_claim = ROOT
+			}
+			simple_dynamic_effect = {
+				first_custom_tooltip = DALMATIA_TT_1
+				first_limit = "
+					DA2 = {
+							alliance_with = ROOT
+					}
+				"
+				first_effect = "
+					add_trust = {
+						who = DA2
+						value = 30
+						mutual = yes
+					}
+					131 = {
+						remove_core = DA2
+					}
+				"
+				second_limit = "
+					DA2 = { NOT = {alliance_with = ROOT} } 
+				"
+				second_effect = "
+					
+				" #putting the casus belli inside crashes the game
+			}
+			tooltip = {
+				add_casus_belli = {
+					type = cb_restore_personal_union
+					target = DA2
+					months = 300
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						DA2 = { NOT = {alliance_with = ROOT} } 
+					}
+					add_casus_belli = {
+						type = cb_restore_personal_union
+						target = DA2
+						months = 300
+					}
+				}
+			}
+		}
+	}
+	dalm_long_overdue = {
+		icon = mission_market_place_with_asian_traders
+		position = 2
+		required_missions = { dalm_beat_longobardy } 
+		provinces_to_highlight = {
+			OR = {
+				area = austria_proper_area
+				area = inner_austria_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 12
+				OR = {
+					area = austria_proper_area
+					area = inner_austria_area
+				}
+			}
+		}
+
+		effect = {
+			remove_country_modifier = alb_illyrian_compromise_1
+			DA2 = {remove_country_modifier = alb_illyrian_compromise_2}
+			simple_dynamic_effect = {
+				first_custom_tooltip = DALMATIA_TT_2a
+				first_limit = "
+					DA2 = {alliance_with = ROOT	}
+				"
+				first_effect = "
+					create_union = DA2
+				"
+				second_custom_tooltip = DALMATIA_TT_2b
+				second_limit = "
+					DA2 = { is_subject_of = ROOT } 
+				"
+				second_effect = "
+					add_stability_or_adm_power = yes
+				" 
+			}
+		}
+	}
+	dalm_pannonia = {
+		icon = mission_market_place_with_asian_traders
+		position = 3
+		required_missions = { dalm_long_overdue } 
+		provinces_to_highlight = {
+			area = slavonia_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		trigger = {
+			slavonia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			remove_country_modifier = alb_illyrian_compromise_1
+			DA2 = {remove_country_modifier = alb_illyrian_compromise_2}
+			simple_dynamic_effect = {
+				first_custom_tooltip = DALMATIA_TT_1
+				first_limit = "
+					DA2 = {is_subject_of = ROOT	}
+				"
+				first_effect = "
+					add_country_modifier = {
+						name = dalm_illyria_grains
+						duration = -1
+					}
+					DA2 = {
+						add_country_modifier = {
+							name = dalm_illyria_grains_no
+							duration = -1
+						}
+					}
+				"
+				second_limit = "
+					DA2 = { NOT = {is_subject_of = ROOT	} } 
+				"
+				second_effect = "
+					add_country_modifier = {
+						name = dalm_illyria_grains_3
+						duration = -1
+					}
+				" 
+			}
+		}
+	}
 }
