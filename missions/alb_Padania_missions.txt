@@ -5,30 +5,34 @@ Padania_1_slot = {
 	has_country_shield = yes
 	potential = { tag = PD0 } 
 
-	1_mantua = {
-		icon = imperial_capitals
-		position = 1
-		provinces_to_highlight = { province_id = 109 } 
+	2_mantua = {
+		icon = develop_the_po_valley
+		position = 2
+		required_missions = {
+			3_rich
+		}
+		provinces_to_highlight = { area = po_valley_area } 
 
 		trigger = {
-			109 = {
-				owned_by = ROOT
-				grown_by_development = 2
+			has_institution = renaissance
+			po_valley_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 
 		effect = {
-			109 = {
-				add_or_upgrade_courthouse_building = yes
+			capital_scope = {
+				add_or_upgrade_trade_building = yes
 			}
-			4968 = { add_permanent_claim = ROOT } 
+			po_valley_area = { add_base_production = 1 } 
 		}
 	}
 
 	1_padania_rules = {
 		icon = mission_conquer_north_italy
 		position = 3
-		required_missions = { 2_mantua } 
+		required_missions = { pdo_corradia } 
 		provinces_to_highlight = { area = liguria_area } 
 
 		trigger = {
@@ -46,7 +50,7 @@ Padania_1_slot = {
 
 	1_padania_erule = {
 		icon = the_italian_league
-		position = 5
+		position = 4
 		required_missions = { 1_padania_rules } 
 		provinces_to_highlight = { area = piedmont_area } 
 
@@ -71,12 +75,12 @@ Padania_1_slot = {
 
 	1_north_italy = {
 		icon = a_real_roman_empire
-		position = 7
+		position = 6
 		required_missions = {
 			1_padania_erule
 			2_padania_emilia
 		}
-		provinces_to_highlight = { owned_by = ROOT } 
+		provinces_to_highlight = { owned_by = ROOT region = italy_region} 
 
 		trigger = {
 			development_in_provinces = {
@@ -103,7 +107,7 @@ Padania_1_slot = {
 		icon = a_place_among_the_great_powers
 		position = 9
 		required_missions = { 1_north_italy } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = { is_capital_of = emperor } 
 
 		trigger = { NOT = { hre_size = 1 }  } 
 
@@ -121,25 +125,46 @@ Padania_2_slot = {
 	has_country_shield = yes
 	potential = { tag = PD0 } 
 
-	2_mantua = {
-		icon = develop_the_po_valley
-		position = 2
-		required_missions = {
-			1_mantua
-			3_rich
-		}
-		provinces_to_highlight = { area = po_valley_area } 
+	3_rich = {
+		icon = padania_symbol
+		position = 1
+		provinces_to_highlight = { is_capital_of = ROOT } 
 
 		trigger = {
-			po_valley_area = {
+			OR = {
+				1862 = { grown_by_development = 5 } 
+				prestige = 20
+			}
+		}
+
+		effect = {
+
+			coradia_area = { add_permanent_claim = ROOT }
+			105 = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	pdo_corradia = {
+		icon = mission_alliances
+		position = 2
+		required_missions = {
+			3_rich
+		}
+		provinces_to_highlight = { area = coradia_area } 
+
+		trigger = {
+			coradia_area = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 
 		effect = {
+			add_country_modifier = {
+				name = pad_corradia_merc
+				duration = 10950
+			}
 			liguria_area = { add_permanent_claim = ROOT } 
-			po_valley_area = { add_base_production = 1 } 
 		}
 	}
 
@@ -179,7 +204,7 @@ Padania_2_slot = {
 
 	2_padania_emilia = {
 		icon = venture_captains
-		position = 6
+		position = 5
 		required_missions = { 2_padania_venice } 
 		provinces_to_highlight = { area = emilia_romagna_area } 
 
@@ -229,28 +254,32 @@ Padania_3_slot = {
 	has_country_shield = yes
 	potential = { tag = PD0 } 
 
-	3_rich = {
-		icon = padania_symbol
+	1_mantua = {
+		icon = imperial_capitals
 		position = 1
-		provinces_to_highlight = { is_capital_of = ROOT } 
+		provinces_to_highlight = { province_id = 109 } 
 
 		trigger = {
-			OR = {
-				1862 = { grown_by_development = 5 } 
-				prestige = 20
+			109 = {
+				owned_by = ROOT
+				grown_by_development = 3
 			}
 		}
 
 		effect = {
+			109 = {
+				add_or_upgrade_courthouse_building = yes
+			}
 			lombardy_area = { add_permanent_claim = ROOT } 
-			105 = { add_permanent_claim = ROOT } 
 		}
 	}
 
 	3_padania_rules = {
 		icon = mission_control_venice
 		position = 3
-		required_missions = { 3_rich } 
+		required_missions = {
+			1_mantua
+		}
 		provinces_to_highlight = { area = lombardy_area } 
 
 		trigger = {
@@ -299,11 +328,12 @@ Padania_3_slot = {
 	3_padania_condottieri = {
 		icon = mission_assemble_an_army
 		position = 7
-		provinces_to_highlight = {  } 
 
 		trigger = { army_size_percentage = 1 } 
 
-		effect = { add_manpower = 5 } 
+		effect = {
+			add_yearly_manpower = 1
+		} 
 	}
 
 	3_padania_houses = {
@@ -382,7 +412,7 @@ Padania_4_slot = {
 	4_padova_garden = {
 		icon = geneva_conventions
 		position = 2
-		required_missions = { 5_padania_trade } 
+		required_missions = {1_mantua 5_padania_trade } 
 		provinces_to_highlight = { province_id = 4729 } 
 
 		trigger = {

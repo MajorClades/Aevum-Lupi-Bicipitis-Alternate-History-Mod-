@@ -1,0 +1,596 @@
+namespace = ayabani
+
+country_event = {
+	id = ayabani.1
+	title = ayabani.1.t
+	desc = ayabani.1.d
+	picture = east_asian_BATTLE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = ayabani.1a
+		ai_chance = {
+			factor = 50
+		}
+		add_country_modifier = {
+			name = ayb_merged_army_navy
+			duration = 10950
+		}
+		if = {
+			limit = {
+				NOT = { is_monarch_leader = yes }
+			}
+			define_ruler_to_general = {
+				fire = 2
+				shock = 2
+				manuever = 1
+				siege = 1
+			}
+		}
+	}
+	option = {
+		name  = ayabani.1b
+		ai_chance = {
+			factor = 50
+		}
+		add_estate_loyalty = {
+   			estate = estate_nobles
+   			loyalty = 5
+		}
+	}
+}
+
+country_event = {
+	id = ayabani.2
+	title = ayabani.2.t
+	desc = ayabani.2.d
+	picture = CIVIL_WAR_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = ayabani.2a
+		ai_chance = {
+			factor = 50
+		}
+		add_country_modifier = {
+			name = ayb_grand_army_embraced
+			duration = -1
+		}
+	}
+	option = {
+		name = ayabani.2b
+		ai_chance = {
+			factor = 50
+		}
+		add_country_modifier = {
+			name = ayb_grand_army_disbanded
+			duration = 3652
+		}
+	}
+}
+
+country_event = {
+	id = ayabani.3
+	title = ayabani.3.t
+	desc = ayabani.3.d
+	picture = shinto_BAD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = ayabani.3a
+
+		destroy_great_project = {
+			type = imperial_city_kyoto
+		}
+		1020 = {
+			add_base_production = -3
+			add_base_tax = -3
+			add_base_manpower = -3
+			add_devastation = 50
+			add_unrest = -10
+		}
+	}
+}
+
+country_event = {
+	id = ayabani.4
+	title = ayabani.4.t
+	desc = ayabani.4.d
+	picture = east_asian_BATTLE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = ayabani.4a
+		if = {
+			limit = {
+				tag = KM7
+			}
+			declare_war_with_cb = {
+				who = KM8
+				casus_belli = cb_tamna_unification
+			}
+			declare_war_with_cb = {
+				who = KM9
+				casus_belli = cb_tamna_unification
+			}
+			hidden_effect = {
+				remove_historical_rival = KM8
+				remove_historical_rival = KM9
+				KM8 = { 
+					remove_historical_rival = KM7
+				}
+				KM9 = { 
+					remove_historical_rival = KM7
+				}
+				add_country_modifier = {
+					name = ayb_tamna_unification_war
+					duration = -1
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				tag = KM8
+			}
+			declare_war_with_cb = {
+				who = KM7
+				casus_belli = cb_tamna_unification
+			}
+			declare_war_with_cb = {
+				who = KM9
+				casus_belli = cb_tamna_unification
+			}
+			hidden_effect = {
+				remove_historical_rival = KM7
+				remove_historical_rival = KM9
+				KM7 = { 
+					remove_historical_rival = KM8
+				}
+				KM9 = { 
+					remove_historical_rival = KM8
+				}
+				add_country_modifier = {
+					name = ayb_tamna_unification_war
+					duration = -1
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				tag = KM9
+			}
+			declare_war_with_cb = {
+				who = KM7
+				casus_belli = cb_tamna_unification
+			}
+			declare_war_with_cb = {
+				who = KM8
+				casus_belli = cb_tamna_unification
+			}
+			hidden_effect = {
+				remove_historical_rival = KM7
+				remove_historical_rival = KM8
+				KM7 = { 
+					remove_historical_rival = KM9
+				}
+				KM8 = { 
+					remove_historical_rival = KM9
+				}
+				add_country_modifier = {
+					name = ayb_tamna_unification_war
+					duration = -1
+				}
+			}
+		}
+
+	}
+}
+
+country_event = {
+	id = ayabani.5
+	title = ayabani.5.t
+	desc = ayabani.5.d
+	picture = east_asian_BATTLE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = ayabani.5a
+		ai_chance = {
+			factor = 100	#If they get this event it means you're ready for war
+		}
+		if = {
+			limit = {
+				tag = KM7
+			}
+			declare_war_with_cb = {
+				who = KM8
+				casus_belli = cb_tamna_unification
+			}
+			declare_war_with_cb = {
+				who = KM9
+				casus_belli = cb_tamna_unification
+			}
+			hidden_effect = {
+				remove_historical_rival = KM8
+				remove_historical_rival = KM9
+				KM8 = { 
+					remove_historical_rival = KM7
+				}
+				KM9 = { 
+					remove_historical_rival = KM7
+				}
+				add_country_modifier = {
+					name = ayb_tamna_unification_war
+					duration = -1
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				tag = KM8
+			}
+			declare_war_with_cb = {
+				who = KM7
+				casus_belli = cb_tamna_unification
+			}
+			declare_war_with_cb = {
+				who = KM9
+				casus_belli = cb_tamna_unification
+			}
+			hidden_effect = {
+				remove_historical_rival = KM7
+				remove_historical_rival = KM9
+				KM7 = { 
+					remove_historical_rival = KM8
+				}
+				KM9 = { 
+					remove_historical_rival = KM8
+				}
+				add_country_modifier = {
+					name = ayb_tamna_unification_war
+					duration = -1
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				tag = KM9
+			}
+			add_country_modifier = {
+				name = ayb_tamna_unification_war
+				duration = -1
+			}
+			declare_war_with_cb = {
+				who = KM7
+				casus_belli = cb_tamna_unification
+			}
+			declare_war_with_cb = {
+				who = KM8
+				casus_belli = cb_tamna_unification
+			}
+			hidden_effect = {
+				remove_historical_rival = KM7
+				remove_historical_rival = KM8
+				KM7 = { 
+					remove_historical_rival = KM9
+				}
+				KM8 = { 
+					remove_historical_rival = KM9
+				}
+				add_country_modifier = {
+					name = ayb_tamna_unification_war
+					duration = -1
+				}
+			}
+		}
+	}
+	option = {
+		name = ayabani.5b
+		ai_chance = {
+			factor = 0	#If they get this event it means you're ready for war
+		}
+		add_prestige = -20
+		custom_tooltip =  AYABANI_TT_2
+		hidden_effect = {
+			KM7 = {
+				add_truce_with = KM8
+				add_truce_with = KM9
+				white_peace = KM8
+				white_peace = KM9
+			}
+			KM8 = {
+				add_truce_with = KM7
+				add_truce_with = KM9
+				white_peace = KM7
+				white_peace = KM9
+			}
+			KM9 = {
+				add_truce_with = KM7
+				add_truce_with = KM8
+				white_peace = KM7
+				white_peace = KM8
+			}
+		}
+	}
+}
+
+
+country_event = {
+	id = ayabani.6
+	title = ayabani.6.t
+	desc = ayabani.6.d
+	picture = ROYAL_STRESS_eventPicture
+	fire_only_once = yes
+	trigger = {
+		is_year = 1550
+		is_subject = no
+		is_at_war = no
+	}
+	mean_time_to_happen = {
+		months = 300
+	}
+	option = {
+		name = ayabani.6a
+		add_prestige = -15
+	}
+}
+
+country_event = {
+	id = ayabani.7
+	title = ayabani.7.t
+	desc = ayabani.7.d
+	picture = RELIGIOUS_TURMOIL_eventPicture
+	
+	fire_only_once = yes
+	
+	trigger = {
+		is_year = 1490
+		is_subject = no
+		is_at_war = no
+		tag = KR1
+	}
+	mean_time_to_happen = {
+		days = 100
+	}
+	option = {
+		name = ayabani.7a
+		custom_tooltip = AYABANI_TT_4
+		ai_chance = {
+			factor = 50	#The line between light and dark is so very thin
+		}
+		set_country_flag = traveler
+	}
+	option = {
+		name = ayabani.7b
+		custom_tooltip = AYABANI_TT_5
+		ai_chance = {
+			factor = 50	#The line between light and dark is so very thin
+		}
+		set_country_flag = witness
+	}
+}
+
+country_event = {
+	id = tamna.1
+	title = tamna.1.t
+	desc = tamna.1.d
+	picture = VILLAGE_BURNING_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = tamna.1a
+	}
+}
+
+country_event = {
+	id = tamna.2
+	title = tamna.2.t
+	desc = tamna.2.d
+	picture = east_asian_COLONIZATION_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = tamna.2a
+		RYU = {
+			country_event = {
+				id = tamna.3
+			}
+		}
+	}
+}
+
+country_event = {
+	id = tamna.3
+	title = tamna.3.t
+	desc = tamna.3.d
+	picture = east_asian_SHIP_SAILING_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = tamna.3a
+		ai_chance = { factor = 80 }
+		KR1 = {
+			country_event = {
+				id = tamna.4
+			}
+		}
+	}
+	option = {
+		name = tamna.3b
+		ai_chance = { factor = 20 }
+		KR1 = {
+			country_event = {
+				id = tamna.5
+			}
+		}
+	}
+}
+
+country_event = {
+	id = tamna.4
+	title = tamna.4.t
+	desc = tamna.4.d
+	picture = east_asian_COLONIZATION_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = tamna.4a
+		KR1 = {
+			inherit = RYU
+		}
+	}
+}
+
+country_event = {
+	id = tamna.5
+	title = tamna.5.t
+	desc = tamna.5.d
+	picture = east_asian_COLONIZATION_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = tamna.5a
+		KR1 = {
+			1015 = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+}
+
+province_event = {
+	id = tamna.6
+	title = tamna.6.t
+	desc = tamna.6.d
+	picture = east_asian_CITY_DEVELOPMENT_eventPicture
+	
+	trigger = {
+		owner = {
+			culture_group = korean_g
+			has_country_flag = KR1_conversions
+		}
+		culture_group = altaic
+		AND = {
+			owner = {
+				mission_completed = tmn_hoi4
+			}
+			region = anatolia_region
+		}
+	}
+	
+	goto = ROOT
+	
+	mean_time_to_happen = {
+		months = 240
+	}
+	
+	option = {
+		name = tamna.6a
+		ai_chance = {
+			factor = 1
+		}
+		change_culture = korean
+		random_province = { 
+			limit = {
+				region = east_siberia_region
+			}
+			change_culture = mongol
+		}
+	}
+}
+
+country_event = {
+	id = tamna.7
+	title = tamna.7.t
+	desc = tamna.7.d
+	picture = shinto_CITY_DEVELOPMENT_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = tamna.7a
+		set_country_flag = chosejapan
+	}
+	option = {
+		name = tamna.7b
+		set_country_flag = choseainu
+	}
+}
+
+country_event = {
+	id = tamna.8
+	title = tamna.8.t
+	desc = tamna.8.d
+	picture = east_asian_RELIGION_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = tamna.8a
+		set_country_flag = chosechina
+	}
+	option = {
+		name = tamna.8b
+		set_country_flag = chosedengpeng
+	}
+}
+
+country_event = {
+	id = tamna.9
+	title = tamna.9.t
+	desc = tamna.9.d
+	picture = BUDDHISM_MONASTERY_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = tamna.9a
+		set_country_flag = tookbuddha
+	}
+	option = {
+		name = tamna.9b
+		set_country_flag = tookjesus
+	}
+}
+
+country_event = {
+	id = tamna.10
+	title = tamna.10.t
+	desc = tamna.10.d
+	picture = shinto_BATTLE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = tamna.10a
+	}
+}
+
+country_event = {
+	id = hwan.1
+	title = hwan.1.t
+	desc = hwan.1.d
+	picture = VILLAGE_BURNING_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = hwan.1a
+		override_country_name = DAETAMNA
+	}
+	option = {
+		name = hwan.1b
+		override_country_name = HWAN
+		tibet_region = {
+			add_permanent_claim = ROOT
+		}
+		burma_region = {
+			add_permanent_claim = ROOT
+		}
+		indo_china_region = {
+			add_permanent_claim = ROOT
+		}
+		burma_region = {
+			add_permanent_claim = ROOT
+		}
+		xinan_region = {
+			add_permanent_claim = ROOT
+		}
+		central_asia_region = {
+			add_permanent_claim = ROOT
+		}
+		khorasan_region = {
+			add_permanent_claim = ROOT
+		}
+		persia_region = {
+			add_permanent_claim = ROOT
+		}
+	}
+}

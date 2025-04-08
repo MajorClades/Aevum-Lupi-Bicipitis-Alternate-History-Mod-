@@ -1,56 +1,111 @@
-korean_empire_reform = {
+alb_korean_empire_reform = {
 	icon = "korean_monarchy"
 	allow_normal_conversion = yes
 	valid_for_nation_designer = no
 	nation_designer_cost = 0
 	potential = {
-		tag = KR1
-		OR = {
-			has_reform = korean_monarchy
-			have_had_reform = korean_monarchy
-		}
+		culture = jeju
+		has_reform = alb_korean_empire_reform
 	}
-	monarchy = yes
 	lock_level_when_selected = yes
 	modifiers = {
-		development_cost = -0.1
-		advisor_cost = -0.1
-		global_institution_spread = 0.15
+		land_morale = 0.1
+		governing_capacity_modifier = 0.1
+		yearly_corruption = -0.05
+		global_autonomy = -0.025
 	}
-	effect = {
-		hidden_effect = {
-			if = {
-				limit = { has_dlc = "Domination" }
-				add_country_modifier = {
-					name = no_perfectionism_focus
-					duration = -1
-					desc = has_no_perfectionism_focus
-				}
-			}
+}
+
+alb_tamna_remnant_reform = {
+	icon = "chinese_soldier"
+	allow_normal_conversion = yes
+	valid_for_nation_designer = yes
+	nation_designer_cost = 100
+	potential = {
+		culture = jeju
+		OR = {
+			has_reform = alb_tamna_remnant_reform
 		}
 	}
-	removed_effect = {
-		remove_country_modifier = hangeul_alphabet
-		remove_country_modifier = hangeul_alphabet_revoked
-		remove_country_modifier = no_perfectionism_focus
-		remove_country_modifier = inward_focus_modifier
-		remove_country_modifier = outward_focus_modifier
-		remove_country_modifier = expansion_focus_modifier
+	locked_government_type
+	lock_level_when_selected = yes
+	modifiers = {
+		land_morale = 0.1
+		improve_relation_modifier = -0.2
+		global_unrest = 1
 	}
-	conditional = {
-		allow = { has_dlc = "Domination" }
-		custom_attributes = {
-			has_hangeul_alphabet_decisions = yes
-			has_weaker_harem_events = yes
-		}
+}
+
+alb_first_tier_restoration_reform = {
+	icon = "korean_monarchy"
+	allow_normal_conversion = yes
+	valid_for_nation_designer = yes
+	nation_designer_cost = 100
+	potential = {
+		culture = jeju
+		tag = KR1
+		has_reform = alb_first_tier_restoration_reform
 	}
-	conditional = {
-		allow = { has_dlc = "Domination" }
-		government_abilities = {
-			perfectionism_mechanic
-		}
+	locked_government_type
+	lock_level_when_selected = yes
+	modifiers = {
+		governing_capacity_modifier = -0.5
+		yearly_corruption = 0.05
+		global_autonomy = 0.05
+		stability_cost_to_declare_war = 1
 	}
-	ai = {
-		factor = 100
+}
+
+alb_second_tier_restoration_reform = {
+	icon = "korean_monarchy"
+	allow_normal_conversion = yes
+	valid_for_nation_designer = yes
+	nation_designer_cost = 100
+	potential = {
+		culture = jeju
+		tag = KR1
+		has_reform = alb_second_tier_restoration_reform
+	}
+	locked_government_type
+	lock_level_when_selected = yes
+	modifiers = {
+		governing_capacity_modifier = -0.5
+		global_autonomy = 0.05
+		stability_cost_to_declare_war = 1
+	}
+}
+
+alb_third_tier_restoration_reform = {
+	icon = "korean_monarchy"
+	allow_normal_conversion = yes
+	valid_for_nation_designer = yes
+	nation_designer_cost = 100
+	potential = {
+		culture = jeju
+		tag = KR1
+		has_reform = alb_third_tier_restoration_reform
+	}
+	locked_government_type
+	lock_level_when_selected = yes
+	modifiers = {
+		governing_capacity_modifier = -0.5
+		stability_cost_to_declare_war = 1
+	}
+}
+
+alb_fourth_tier_restoration_reform = {
+	icon = "korean_monarchy"
+	allow_normal_conversion = yes
+	valid_for_nation_designer = yes
+	nation_designer_cost = 100
+	potential = {
+		culture = jeju
+		tag = KR1
+		has_reform = alb_fourth_tier_restoration_reform
+	}
+	locked_government_type
+	lock_level_when_selected = yes
+	modifiers = {
+		governing_capacity_modifier = -0.5
 	}
 }
