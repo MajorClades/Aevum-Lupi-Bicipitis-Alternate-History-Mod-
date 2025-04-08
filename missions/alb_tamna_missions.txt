@@ -113,7 +113,6 @@ Tamna_1_slot = {
 		}
 		effect = {
 			add_accepted_culture = japanese
-			add_accepted_culture = togoku
 			add_prestige = 25
 			add_legitimacy = 10
 			country_event = { id = ayabani.3 }
@@ -204,36 +203,40 @@ Tamna_1_slot = {
 			}
 		}
 	}
-	tmn_plains = {
-		icon = mng_heavens_will
-		position = 11
-		required_missions = { tmn_wall }
-		provinces_to_highlight = {  }
-
-		trigger = {
-			military_strength = {
-				who = YAN
-				value = 1
-			}
-		}
-		effect = {
-			add_prestige = 50
-		}
-	}
 	tmn_jade = {
 		icon = qng_balance_mandate
-		position = 11
+		position = 12
 		required_missions = { tmn_plains }
 		provinces_to_highlight = {  }
 
 		trigger = {
-			military_strength = {
-				who = YAN
-				value = 1
+			1816 = {
+				has_matching_religion = ROOT
+			}
+			1829 = {
+				has_matching_religion = ROOT
+			}
+			1821 = {
+				has_matching_religion = ROOT
+			}
+			custom_trigger_tooltip = {
+				tooltip = AYABANI_TT_16
+				north_china_region = {
+					num_of_owned_provinces_with = {
+						value =  25
+						has_matching_religion = ROOT
+					}
+				}
+				south_china_region = {
+					num_of_owned_provinces_with = {
+						value =  25
+						has_matching_religion = ROOT
+					}
+				}
 			}
 		}
 		effect = {
-			country_event = { id = tamna.7 }
+			country_event = { id = tamna.8 }
 		}
 	}
 }
@@ -307,10 +310,15 @@ Tamna_2_slot = {
 			4192 = {
 				has_matching_religion = ROOT
 			}
-			religious_unity = 0.75
+			japan_region = {
+				num_of_owned_provinces_with = {
+					value =  30
+					has_matching_religion = ROOT
+				}
+			}
 		}
 		effect = {
-			country_event = { id = tamna.6 }
+			country_event = { id = tamna.7 }
 		}
 	}
 	tmn_frontier = {
@@ -351,12 +359,25 @@ Tamna_2_slot = {
 		icon = mission_defy_the_dragon
 		position = 9
 		required_missions = { tmn_amur }
-		provinces_to_highlight = {  }
+		provinces_to_highlight = { 
+			owner = {
+				is_emperor_of_china = yes
+			}
+		}
 
 		trigger = {
-			military_strength = {
-				who = YAN
-				value = 1
+			OR = {
+				AND = {
+					is_neighbor_of = event_target:EmperorOfChina
+					army_strength = {
+						who = event_target:EmperorOfChina
+						value = 1
+					}
+				}
+				YAN = {
+					exists = no
+				}
+				KR1 = { is_emperor_of_china = yes }
 			}
 		}
 		effect = {
@@ -368,51 +389,165 @@ Tamna_2_slot = {
 		icon = mission_great_wall
 		position = 10
 		required_missions = { tmn_heaven }
-		provinces_to_highlight = {  }
+		provinces_to_highlight = { 
+			or = {
+				area = hebei_area
+				area = shanxi_area
+				area = ordos_area
+				area = shaanxi_area
+				area = gansu_area
+				area = west_gansu_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
 
 		trigger = {
-			military_strength = {
-				who = YAN
-				value = 1
+			hebei_area = {
+				type = all
+				owned_by = ROOT
+			}
+			shanxi_area = {
+				type = all
+				owned_by = ROOT
+			}
+			ordos_area = {
+				type = all
+				owned_by = ROOT
+			}
+			shaanxi_area = {
+				type = all
+				owned_by = ROOT
+			}
+			gansu_area = {
+				type = all
+				owned_by = ROOT
+			}
+			west_gansu_area = {
+				type = all
+				owned_by = ROOT
 			}
 		}
 		effect = {
-			add_prestige = 50
+			define_advisor = {
+				type = fortification_expert
+				cost_multiplier = 0.5
+				skill = 3
+			}
+			698 = {
+				change_culture = jeju
+			}
+			add_great_project_tier = {
+				type = the_great_wall_of_china
+				tier = 1
+			}
+			add_country_modifier = {
+				name = ayb_wall
+				duration = 10950
+			}
 		}
 	}
-	tmn_river = {
-		icon = mng_tame_china_sorrow
+	tmn_plains = {
+		icon = mng_heavens_will
 		position = 11
-		required_missions = { tmn_wall }
-		provinces_to_highlight = {  }
+		required_missions = { 
+            tmn_wall
+            tmn_river
+        } 
+		provinces_to_highlight = { 
+			or = {
+				area = south_anhui_area
+				area = huguang_area
+				area = hunan_area
+				area = jiangxi_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
 
 		trigger = {
-			military_strength = {
-				who = YAN
-				value = 1
+			south_anhui_area = {
+				type = all
+				owned_by = ROOT
+			}
+			huguang_area = {
+				type = all
+				owned_by = ROOT
+			}
+			hunan_area = {
+				type = all
+				owned_by = ROOT
+			}
+			jiangxi_area = {
+				type = all
+				owned_by = ROOT
 			}
 		}
 		effect = {
-			add_prestige = 50
+			add_country_modifier = {
+				name = ayb_warlord
+				duration = 5475
+			}
 		}
 	}
 	tmn_tno = {
 		icon = mng_expand_bogue
 		position = 12
 		required_missions = { 
-            tmn_river
             tmn_plains
+            tmn_taiwan
         } 
-		provinces_to_highlight = {  }
+		provinces_to_highlight = { 
+			or = {
+				area = guangdong_area
+				area = west_guangdong_area
+				area = guangxi_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
 
 		trigger = {
-			military_strength = {
-				who = YAN
-				value = 1
+			guangdong_area = {
+				type = all
+				owned_by = ROOT
+			}
+			west_guangdong_area = {
+				type = all
+				owned_by = ROOT
+			}
+			guangxi_area = {
+				type = all
+				owned_by = ROOT
 			}
 		}
 		effect = {
-			add_prestige = 50
+			custom_tooltip = AYABANI_TT_13
+			hidden_effect = {
+				2159 = {
+					change_culture = chimin
+				}
+				2161 = {
+					change_culture = chimin
+				}
+				665 = {
+					change_culture = chimin
+				}
+				2164 = {
+					change_culture = yelang
+				}
+				2162 = {
+					change_culture = yelang
+				}
+				664 = {
+					change_culture = yelang
+				}
+				667 = {
+					change_culture = hakka
+				}
+				668 = {
+					change_culture = jeju
+					add_center_of_trade_level = 1
+					add_trade_node_income = 12
+				}
+			}
 		}
 	}
 }
@@ -561,7 +696,6 @@ Tamna_3_slot = {
 			manchuria_region = {
 				type = all
 				owned_by = ROOT
-				core_percentage = 1
 			}
 			OR = {
 				accepted_culture = chahar
@@ -615,8 +749,97 @@ Tamna_3_slot = {
 			}
 		}
 	}
+	tmn_river = {
+		icon = mng_tame_china_sorrow
+		position = 10
+		required_missions = { tmn_heaven }
+		provinces_to_highlight = { 
+			or = {
+				area = south_hebei_area
+				area = shandong_area
+				area = north_henan_area
+				area = henan_area
+				area = jiangsu_area
+				area = anhui_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			south_hebei_area = {
+				type = all
+				owned_by = ROOT
+			}
+			shandong_area = {
+				type = all
+				owned_by = ROOT
+			}
+			north_henan_area = {
+				type = all
+				owned_by = ROOT
+			}
+			henan_area = {
+				type = all
+				owned_by = ROOT
+			}
+			jiangsu_area = {
+				type = all
+				owned_by = ROOT
+			}
+			anhui_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		effect = {
+			custom_tooltip = AYABANI_TT_12
+			set_country_flag = invade_south_china_flag
+		}
+	}
+	tmn_taiwan = {
+		icon = mng_jing_hang_grand_canal
+		position = 11
+		required_missions = { tmn_river }
+		provinces_to_highlight = { 
+			or = {
+				area = south_jiangsu_area
+				area = zhejiang_area
+				area = fujian_area
+				area = taiwan_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			south_jiangsu_area = {
+				type = all
+				owned_by = ROOT
+			}
+			zhejiang_area = {
+				type = all
+				owned_by = ROOT
+			}
+			fujian_area = {
+				type = all
+				owned_by = ROOT
+			}
+			taiwan_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		effect = {
+			669 = { #fuzhou
+				add_center_of_trade_level = 1
+			}
+			add_country_modifier = {
+				name = ayb_pirate
+				duration = 10950
+			}
+		}
+	}
 	tmn_empire = {
-		icon = mission_conquer_bengal_dlh
+		icon = mission_the_tiger_triumphant
 		position = 13
 		required_missions = { 
             tmn_tno
@@ -625,10 +848,22 @@ Tamna_3_slot = {
 		provinces_to_highlight = {  }
 
 		trigger = {
-			prestige = 50
+			mongolia_region = {
+				type = all
+				owned_by = ROOT
+			}
+			north_china_region = {
+				type = all
+				owned_by = ROOT
+			}
+			south_china_region = {
+				type = all
+				owned_by = ROOT
+			}
+			is_hegemon = yes
 		}
 		effect = {
-			add_prestige = 50
+			country_event = { id = hwan.1 }
 		}
 	}
 }
@@ -712,63 +947,139 @@ Tamna_4_slot = {
 		icon = mission_central_asian_steppes
 		position = 9
 		required_missions = { tmn_amur }
-		provinces_to_highlight = {  }
+		provinces_to_highlight = { 
+			or = {
+				area = outer_mongolia_area
+				area = khamag_area
+				culture = khalkha
+				culture = evenk
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		 }
 
-		trigger = {
-			military_strength = {
-				who = YAN
-				value = 1
+		 trigger = {
+			custom_trigger_tooltip = {
+				tooltip = AYABANI_TT_15
+				outer_mongolia_area = {
+					type = all
+					owned_by = ROOT
+				}
+				khamag_area = {
+					type = all
+					owned_by = ROOT
+				}
+				cicigar_area = {
+					type = all
+					owned_by = ROOT
+				}
+				chahar_area = {
+					type = all
+					owned_by = ROOT
+				}
+				inner_mongolia_area = {
+					type = all
+					owned_by = ROOT
+				}
+				xilin_gol_area = {
+					type = all
+					owned_by = ROOT
+				}
+				720 = {
+					owned_by = ROOT
+				}
+				4221 = {
+					owned_by = ROOT
+				}
+				4669 = {
+					owned_by = ROOT
+				}
 			}
 		}
-		effect = {
-			add_prestige = 50
+		effect = { 
+			uliastai_area = { add_permanent_claim = ROOT } 
+			alxa_area = { add_permanent_claim = ROOT } 
+			altai_sayan_area = { add_permanent_claim = ROOT } 
+			tannu_uriankhai_area = { add_permanent_claim = ROOT } 
+			hidden_effect = {
+				4677 = { add_permanent_claim = ROOT }
+				2193 = { add_permanent_claim = ROOT }
+			}
 		}
 	}
 	tmn_mountain = {
 		icon = mission_hunting
 		position = 10
 		required_missions = { tmn_steppe }
-		provinces_to_highlight = {  }
+		provinces_to_highlight = { 
+			or = {
+				area = uliastai_area
+				area = alxa_area
+				area = altai_sayan_area
+				area = tannu_uriankhai_area
+				area = central_mongolia_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		 }
 
 		trigger = {
-			military_strength = {
-				who = YAN
-				value = 1
+			uliastai_area = {
+				type = all
+				owned_by = ROOT
+			}
+			alxa_area = {
+				type = all
+				owned_by = ROOT
+			}
+			altai_sayan_area = {
+				type = all
+				owned_by = ROOT
+			}
+			tannu_uriankhai_area = {
+				type = all
+				owned_by = ROOT
 			}
 		}
 		effect = {
-			add_prestige = 50	tmn_army = {
-				icon = mng_thirteen_provinces
-				position = 2
-				required_missions = {  }
-				provinces_to_highlight = {  }
-		
-				trigger = {
-					east_heilongjiang_area = {
-						type = all
-						owned_by = ROOT
-					}
-				}
-				effect = {
-					add_prestige = 50
-				}
-			}
+			zungaria_area = { add_permanent_claim = ROOT } 
+			north_zungaria = { add_permanent_claim = ROOT } 
+			turpan_kumul_area = { add_permanent_claim = ROOT } 
 		}
 	}
 	tmn_republic = {
 		icon = mission_tribute_tax
 		position = 11
 		required_missions = { tmn_mountain }
-		provinces_to_highlight = {  }
+		provinces_to_highlight = { 
+			or = {
+				area = zungaria_area
+				area = north_zungaria
+				area = turpan_kumul_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		 }
 
 		trigger = {
-			military_strength = {
-				who = YAN
-				value = 1
+			zungaria_area = {
+				type = all
+				owned_by = ROOT
+			}
+			north_zungaria = {
+				type = all
+				owned_by = ROOT
+			}
+			turpan_kumul_area = {
+				type = all
+				owned_by = ROOT
 			}
 		}
 		effect = {
-			add_prestige = 50
+			shanshan_area = { add_permanent_claim = ROOT } 
+			tarim_basin_area = { add_permanent_claim = ROOT } 
+			define_advisor = {
+				type = trader
+				cost_multiplier = 0.5
+				skill = 3
+			}
 		}
 	}
 	tmn_temujin = {
@@ -778,13 +1089,15 @@ Tamna_4_slot = {
 		provinces_to_highlight = {  }
 
 		trigger = {
-			military_strength = {
-				who = YAN
-				value = 1
+			num_of_cavalry = 30
+			prestige = 50
+			mongolia_region = {
+				type = all
+				owned_by = ROOT
 			}
 		}
 		effect = {
-			add_prestige = 50
+			country_event = { id = tamna.11 }
 		}
 	}
 }
@@ -806,7 +1119,10 @@ Tamna_5_slot = {
 			has_mil_advisor = yes
 		}
 		effect = {
-			country_event = { id = ayabani.2 }
+			turpan_kumul_area = {
+				type = all
+				owned_by = ROOT
+			}
 		}
 	}
 	tmn_sos = {
@@ -880,9 +1196,14 @@ Tamna_5_slot = {
 				type = all
 				owned_by = ROOT
 			}
-			has_spy_network_in = {
-				who = KM1
-				value = 50
+			OR = {
+				has_spy_network_in = {
+					who = KM1
+					value = 50
+				}
+				KM1 = {
+					exists = no
+				}
 			}
 		}
 		effect = {
@@ -946,13 +1267,24 @@ Tamna_5_slot = {
 		provinces_to_highlight = {  }
 
 		trigger = {
-			korea_region = {
-				type = all
-				owned_by = ROOT
+			4670 = {
+				has_matching_religion = ROOT
+			}
+			4678 = {
+				has_matching_religion = ROOT
+			}
+			4207 = {
+				has_matching_religion = ROOT
+			}
+			mongolia_region = {
+				num_of_owned_provinces_with = {
+					value =  40
+					has_matching_religion = ROOT
+				}
 			}
 		}
 		effect = {
-			country_event = { id = tamna.8 }
+			country_event = { id = tamna.9 }
 		}
 	}
 }
