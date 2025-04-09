@@ -19,26 +19,64 @@ Dalmatia_1_slot = {
 		position = 2
 		required_missions = { dalm_militia_army } 
 		provinces_to_highlight = {
-			trade_goods = grain
-			has_manufactory_trigger = no
-			country_or_non_sovereign_subject_holds = ROOT
+			area = bosnia_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
 		}
 
 		trigger = {
-			has_institution = global_trade
-			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-				value = 12
-				trade_goods = grain
-				has_manufactory_trigger = yes
+			bosnia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 
 		effect = {
-			change_price = {
-				trade_goods = grain
-				key = PANNONIA_CEREALS
-				value = 0.15
-				duration = -1
+			add_country_modifier = {
+				name = dalm_gothic_love
+				duration = 10950
+			}
+			rascia_area = {
+				add_permanent_claim = ROOT
+			}
+			serbia_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	dalm_further_expansion = {
+		icon = mission_market_place_with_asian_traders
+		position = 2
+		required_missions = { dalm_militia_army } 
+		provinces_to_highlight = {
+			OR = {
+				area = rascia_area
+				area = serbia_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 8
+				OR = {
+					area = rascia_area
+					area = serbia_area
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = dalm_haemian_wars
+				duration = 10950
+			}
+			balkan_region = {
+				add_permanent_claim = ROOT
 			}
 		}
 	}
@@ -85,6 +123,34 @@ Dalmatia_2_slot = {
 		}
 	}
 
+	dalm_the_coastline = {
+		icon = mission_market_place_with_asian_traders
+		position = 2
+		required_missions = { dalm_militia_army } 
+		provinces_to_highlight = {
+			area = east_adriatic_coast_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		trigger = {
+			east_adriatic_coast_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			east_adriatic_coast_area = {
+				change_culture = dalmatian
+			}
+			add_country_modifier = {
+				name = dalm_boat_making
+				duration = 10950
+			}
+		}
+	}
 }
 
 Dalmatia_3_slot = {
@@ -103,6 +169,67 @@ Dalmatia_3_slot = {
 		}
 	}
 
+	dalm_into_italy = {
+		icon = mission_market_place_with_asian_traders
+		position = 2
+		required_missions = { dalm_militia_army } 
+		provinces_to_highlight = {
+			area = carinthia_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		trigger = {
+			carinthia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			4738 = {
+				add_center_of_trade_level = 1
+			}
+			add_accepted_culture_or_dip_power = {
+				culture = istrian
+			}
+			venetia_area = {
+				add_permanent_claim = ROOT
+			}
+			veneto_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	dalm_westward = {
+		icon = mission_market_place_with_asian_traders
+		position = 4
+		required_missions = { dalm_into_italy } 
+		provinces_to_highlight = {
+			OR = {
+				area = venetia_area
+				area = veneto_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 8
+				OR = {
+					area = venetia_area
+					area = veneto_area
+				}
+			}
+		}
+
+		effect = {
+			
+		}
+	}
 }
 
 Dalmatia_4_slot = {
@@ -121,6 +248,50 @@ Dalmatia_4_slot = {
 		}
 	}
 
+	dalm_illyrian_militia = {
+		icon = mission_bread
+		position = 1
+		provinces_to_highlight = {
+			owned_by = ROOT
+			culture = dalmatian
+			NOT = {base_manpower = 4}
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				culture = dalmatian
+				base_manpower = 4
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = dalm_militia_morale
+				duration = -1
+			}
+		}
+	}
+	dalm_venice = {
+		icon = mission_market_place_with_asian_traders
+		position = 3
+		required_missions = { dalm_into_italy } 
+		provinces_to_highlight = {
+			province_id = 112
+		}
+
+		trigger = {
+			112 = {
+				owned_by = ROOT
+				is_core = ROOT
+			}
+		}
+
+		effect = {
+			country_event = {
+				id = pann.8
+			}
+		}
+	}
 }
 
 Dalmatia_5_slot = {
