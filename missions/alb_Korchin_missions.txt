@@ -6,7 +6,10 @@ korchin_1_slot = {
 	potential = {
 		OR = {
 			tag = KRC
-			tag = YUA
+			AND = {
+				tag = YUA
+				was_tag = KRC
+			}
 		}
 	}
 
@@ -99,7 +102,10 @@ korchin_2_slot = {
 	potential = {
 		OR = {
 			tag = KRC
-			tag = YUA
+			AND = {
+				tag = YUA
+				was_tag = KRC
+			}
 		}
 	}
 
@@ -165,7 +171,10 @@ korchin_3_slot = {
 	potential = {
 		OR = {
 			tag = KRC
-			tag = YUA
+			AND = {
+				tag = YUA
+				was_tag = KRC
+			}
 		}
 	}
 
@@ -283,7 +292,28 @@ korchin_3_slot = {
 		} 
 
 		effect = {  
-
+			if = {
+				limit = {
+					any_country = {
+						NOT = {
+							tag = ROOT
+						}
+						is_emperor_of_china = yes
+					}
+					NOT = {
+						is_emperor_of_china = yes
+					}
+				}
+				country_event = {
+					id = korchin.2
+				}
+			} 
+			else = {
+				add_prestige = 50
+				china_superregion = {
+					add_permanent_claim = ROOT
+				}
+			}
 		} 
 	}
 
@@ -291,11 +321,45 @@ korchin_3_slot = {
 		icon = mng_outer_city_beijing
 		position = 6
 		required_missions = { krc_a_letter_to_yan } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			area = hebei_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			hebei_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			set_country_flag = yens_better_razing_in_china
+			custom_tooltip = YEN_TT_4
+			custom_tooltip = empty_line_tt
+			if = {
+				limit = {
+					num_of_owned_provinces_with = {
+						value = 20
+						superregion = china_superregion
+					}
+				}
+				custom_tooltip = krc_beijing_yes_tt
+				china_superregion = {
+					add_core = ROOT
+				}
+			}
+			else = {
+				custom_tooltip = krc_beijing_no_tt
+				tooltip = {
+					china_superregion = {
+						add_core = ROOT
+					}
+				}
+			}
+		} 
 	}
 
 	krc_yuan_dynasty = {
@@ -317,7 +381,10 @@ korchin_4_slot = {
 	potential = {
 		OR = {
 			tag = KRC
-			tag = YUA
+			AND = {
+				tag = YUA
+				was_tag = KRC
+			}
 		}
 	}
 
@@ -463,7 +530,10 @@ korchin_5_slot = {
 	potential = {
 		OR = {
 			tag = KRC
-			tag = YUA
+			AND = {
+				tag = YUA
+				was_tag = KRC
+			}
 		}
 	}
 
@@ -538,21 +608,81 @@ korchin_5_slot = {
 		icon = mission_conquer_50_development
 		position = 5
 		required_missions = { krc_punish_tribs } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				culture = khalkha
+				area = chahar_area
+				area = central_mongolia_area
+				area = xilin_gol_area
+				area = khamag_area
+				area = outer_mongolia_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_owned_provinces_with = {
+				value = 14
+				OR = {
+					culture = khalkha
+					area = chahar_area
+					area = central_mongolia_area
+					area = xilin_gol_area
+					area = khamag_area
+					area = outer_mongolia_area
+				}
+			}
+			owns = 2116
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_country_modifier = {
+				name = krc_unified_mongols
+				duration = -1
+			}
+			mongolia_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	krc_expel_yenisei = {
 		icon = mission_destroy_the_horde
 		position = 6
 		required_missions = { krc_khalka } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			region = mongolia_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			NOT = {
+				exists = YNS
+			}
+			mongolia_region = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			custom_tooltip = krc_convert_yenisei_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						culture = yenisei
+					}
+					change_culture = oirats
+				}
+			}
+			add_country_modifier = {
+				name = krc_wealth_of_silk_road
+				duration = 10950
+			}
+		} 
 	}
 }
