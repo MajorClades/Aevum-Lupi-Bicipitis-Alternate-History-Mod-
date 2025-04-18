@@ -1,0 +1,127 @@
+namespace = alb_indonesia_event
+#All these events fire Day 1 to provide player with some lore context
+
+country_event = { # Indonesia/Java
+	id = alb_indonesia_event.1
+	title = alb_indonesia_event.1.t
+	desc = alb_indonesia_event.1.d
+	picture = 14_Maratha_Estate_eventPicture 
+
+	is_triggered_only = yes
+
+	trigger = {
+		NOT = { is_year = 1445 }
+		culture_group = nusantara_group
+	}
+
+	option = {
+		name = alb_indonesia_event.1.a
+	}
+}
+
+# Breaking Good
+country_event = {
+	id = alb_indonesia_event.2
+	title = "alb_indonesia_event.2.t"
+	desc = "alb_indonesia_event.2.d"
+	picture = indiangfx_ACCUSATION_eventPicture
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	
+	option = {
+		name = "alb_indonesia_event.2.a" #Hire Waltur
+		if = {
+			limit = {
+				NOT = { has_completed_all_reforms_trigger = yes }
+			}
+			add_reform_progress_small_effect = yes
+		}
+		add_ruler_modifier = {
+			name = breakingbad_walter
+		}
+	}
+	option = {
+		name = "alb_indonesia_event.2.b" #I will kill your wife. I will kill your son. I will. Kill. Your infant daughter.
+		add_ruler_modifier = {
+			name = breakingbad_gusfring
+		}
+		random_country = {
+					limit = {
+						is_neighbor_of = ROOT
+					}
+					add_opinion = {
+						who = ROOT
+						modifier = hired_gus_fring
+					}
+				}
+	}
+}
+
+# Pick your religion
+country_event = {
+	id = alb_indonesia_event.3
+	title = "alb_indonesia_event.3.t"
+	desc = "alb_indonesia_event.3.d"
+	picture = indiangfx_ACCUSATION_eventPicture
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	
+	option = {
+		name = "alb_indonesia_event.3.a" #Stay dharmic
+		ai_chance = {
+			factor = 90
+		}
+		add_country_modifier = {
+			name = lotus_of_orient
+			duration = -1
+		}
+	}
+	option = {
+		name = "alb_indonesia_event.3.b" #Become manichaen
+		ai_chance = {
+			factor = 7
+		}
+		add_stability = -1
+		change_religion = manich
+		set_ruler_religion = manich
+		random_owned_province = {
+			add_reform_center = manich
+			change_religion = manich
+			add_permanent_province_modifier = {
+				name = "religious_zeal_at_conv"
+				duration = 9000
+			}
+		}
+		add_country_modifier = {
+			name = beacon_of_orient
+			duration = -1
+		}
+	}
+	option = {
+		name = "alb_indonesia_event.3.b" #Become christian
+		ai_chance = {
+			factor = 3
+		}
+		add_stability = -2
+		change_religion = coptic
+		set_ruler_religion = coptic
+		random_owned_province = {
+			add_reform_center = coptic
+			change_religion = coptic
+			add_permanent_province_modifier = {
+				name = "religious_zeal_at_conv"
+				duration = 9000
+			}
+		}
+		add_country_modifier = {
+			name = cross_of_orient
+			duration = -1
+		}
+	}
+}
