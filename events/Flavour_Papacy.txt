@@ -42,7 +42,6 @@ country_event = { #Investiture good pope do their job
 				name = pope_likes_emperor
 			}
 		}
-		add_5_p_a = yes
 		sinful_emperor_endorsed = yes
 		faithful_emperor_endorsed = yes	
 	}
@@ -125,7 +124,7 @@ country_event = { #promote celibacy among the clergy
 
 	option = {
 		name = papacy.3a
-		add_5_p_a = yes
+		add_stability_or_adm_power = yes
 	}
 	option = {
 		name = papacy.3b
@@ -167,7 +166,7 @@ country_event = { #reasonable response
 	}
 }
 
-country_event = { #HMM what are you doing step Pope?
+country_event = { #change
 	id = papacy.5
 	title = papacy.5.t
 	desc = papacy.5.d
@@ -175,24 +174,9 @@ country_event = { #HMM what are you doing step Pope?
 	
 	trigger = {
 		always = no #Religious leagues event already does this
-		has_government_mechanic = saints_and_sinners
 		emperor = {
 			has_country_modifier = pope_dislikes_emperor
 			is_excommunicated = yes
-		}
-		OR = {
-			has_government_power = {
-				mechanic_type = saints_and_sinners
-				power_type = nice_or_naughty
-				value = 50
-			}
-			NOT = {
-				has_government_power = {
-					mechanic_type = saints_and_sinners
-					power_type = nice_or_naughty
-					value = -50
-				}
-			}
 		}
 	}
 
@@ -243,13 +227,6 @@ country_event = { #HMM what are you doing step Pope?
 	}
 	option = {
 		name = papacy.5a
-		trigger = {
-			has_government_power = {
-				mechanic_type = saints_and_sinners
-				power_type = nice_or_naughty
-				value = 50
-			}
-		}
 		change_tag = PA0
 		change_religion = pontifex
 		custom_tooltip = PAP_WAR_IN_EARTH_2
@@ -296,15 +273,6 @@ country_event = { #HMM what are you doing step Pope?
 	}
 	option = {
 		name = papacy.5b
-		trigger = {
-			NOT = {
-				has_government_power = {
-					mechanic_type = saints_and_sinners
-					power_type = nice_or_naughty
-					value = -50
-				}
-			}
-		}
 		change_tag = PA0
 		change_religion = pontifex
 		custom_tooltip = PAP_WAR_IN_EARTH_3
@@ -353,10 +321,7 @@ country_event = { #select the next POPE
 	picture = POPE_PREACHING_eventPicture
 	
 	trigger = {
-		OR = {
-			has_reform = papal_monarchy_evil
-			has_reform = papal_monarchy_good
-		}
+		has_reform = papal_monarchy_pontifex
 		has_heir = no
 	}
 
@@ -509,7 +474,7 @@ country_event = { #expand Pontifexian, anger the Emperor
 	}
 }
 
-country_event = { #Your Papal State is Evolving?! part Pontifex
+country_event = { #change
 	id = papacy.9
 	title = papacy.9.t
 	desc = papacy.9.d
@@ -523,9 +488,7 @@ country_event = { #Your Papal State is Evolving?! part Pontifex
 	}
 	option = {
 		name = papacy.9a
-		trigger = {
-			has_reform = papal_monarchy_good
-		}
+
 		override_country_name = ITA_FEDERATION
 		add_country_modifier = {
 			name = pap_ita_federation
@@ -535,9 +498,7 @@ country_event = { #Your Papal State is Evolving?! part Pontifex
 	}
 	option = {
 		name = papacy.9b
-		trigger = {
-			has_reform = papal_monarchy_evil
-		}
+
 		override_country_name = GOD_KINGDOM
 		add_country_modifier = {
 			name = pap_god_kingdom
@@ -547,9 +508,7 @@ country_event = { #Your Papal State is Evolving?! part Pontifex
 	}
 	option = {
 		name = papacy.9c
-		trigger = {
-			has_reform = papal_monarchy_good
-		}
+
 		override_country_name = GOD_KINGDOM
 		add_country_modifier = {
 			name = pap_god_kingdom
@@ -559,7 +518,7 @@ country_event = { #Your Papal State is Evolving?! part Pontifex
 	}
 }
 
-country_event = { #Your Papal State is Evolving?! part Catholic
+country_event = { #change
 	id = papacy.10
 	title = papacy.10.t
 	desc = papacy.10.d
@@ -744,114 +703,6 @@ country_event = { #mission to JONGWA
 		}
 	}
 }
-
-
-country_event = { #mission to JONGWA
-	id = papacy.13
-	title = papacy.13.t
-	desc = papacy.13.d
-	picture = POPE_PREACHING_eventPicture
-	
-	mean_time_to_happen = {
-		months = 12
-	}
-	trigger = {
-		any_owned_province = {
-			OR = {
-				religion = PAP
-				religion = PA0
-			}
-		}
-	}
-	option = {
-		name = papacy.13a
-		ai_chance = {factor = 50}
-		if = {
-			limit = {
-				any_owned_province = {
-					religion = PAP
-				}
-			}
-			random_owned_province = {
-				limit = { 
-					any_neighbor_province = {
-						religion = PAP
-					}
-				}
-				change_religion = PAP
-			}
-		}else = {
-			random_owned_province = {
-				limit = { 
-					any_neighbor_province = {
-						religion = PA0
-					}
-				}
-				change_religion = PA0
-			}
-		}
-	}
-	option = {
-		name = papacy.13b
-		ai_chance = {factor = 50}
-		add_adm_power = -100
-	}
-}
-
-
-
-
-
-country_event = { #All papal vassals gain this modifiers
-	id = papacy.100
-	title = papacy.100.t
-	desc = papacy.100.d
-	picture = POPE_PREACHING_eventPicture
-	hidden = yes
-	trigger = {
-		ai = yes
-		overlord = {
-			mission_completed = pap_clerical_positions
-		}
-		NOT = {
-			has_country_modifier = pap_good_intentions_3
-		}
-	}
-	
-	option = {
-		name = papacy.10a
-		add_country_modifier = {
-			name = pap_good_intentions_3
-			duration = -1
-		}
-	}
-}
-
-country_event = { #All papal vassals gain this modifiers
-	id = papacy.101
-	title = papacy.101.t
-	desc = papacy.101.d
-	picture = POPE_PREACHING_eventPicture
-	hidden = yes
-	trigger = {
-		ai = yes
-		OR = {
-			NOT = {
-				overlord = {
-					mission_completed = pap_clerical_positions
-				}
-			}
-			is_free_or_tributary_trigger = yes
-		}
-		has_country_modifier = pap_good_intentions_3
-	}
-	
-	option = {
-		name = papacy.10a
-		remove_country_modifier = pap_good_intentions_3
-	}
-}
-
 
 country_event = { #Pontifex flavor events
 	id = papacy.1000

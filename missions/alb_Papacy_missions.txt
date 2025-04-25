@@ -252,17 +252,13 @@ Papacy_3b_slot = {
 		effect = {
 			simple_dynamic_effect = {
 				first_custom_tooltip = PAP_TT_10
-				first_limit = "
-					religion = pontifex
-				"
+				first_limit = "religion = pontifex"
 				first_effect = "
 					country_event = {
 						id = papacy.9
 					}
 				"
-				second_limit = "
-					religion = catholic
-				"
+				second_limit = "religion = catholic"
 				second_effect = "
 					country_event = {
 						id = papacy.10
@@ -279,6 +275,45 @@ Papacy_4_slot = {
 	has_country_shield = yes
 	potential = { OR = { tag = PAP tag = PA0} } 
 
+	pap_more_churches = {
+		icon = mission_luther_theses
+		position = 2
+		required_missions = { pap_duties } 
+		provinces_to_highlight = {
+			has_tax_building_trigger = no
+			country_or_non_sovereign_subject_holds = ROOT
+		}
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 10
+				has_tax_building_trigger = yes
+			}
+		}
+
+		effect = {
+			custom_tooltip = 3_provinces_fulfilling_requirements_tt
+			tooltip = {
+				random_owned_province = {
+					upgrade_tax_building = yes
+					add_base_tax = 1
+				}
+			}
+			hidden_effect = {
+				for = {
+					amount = 3
+					effect = "
+						random_owned_province = {
+							limit = {
+								has_tax_building_trigger = yes
+							}
+							upgrade_tax_building = yes
+							add_base_tax = 1
+						}
+					"
+				}
+			}
+		}
+	}
 }
 
 Papacy_5_slot = {
@@ -288,5 +323,51 @@ Papacy_5_slot = {
 	has_country_shield = yes
 	potential = { OR = { tag = PAP tag = PA0} } 
 
-	
+	pap_roman_restoration = {
+		icon = mission_luther_theses
+		position = 1
+		provinces_to_highlight = {
+			province_id = 118
+		}
+		trigger = {
+			treasury = 200
+			118 = {
+				owned_by = ROOT
+				development = 30
+			}
+		}
+
+		effect = {
+			add_treasury = -200
+			118 = {
+				add_building_construction = {
+					building = university
+					cost = 0
+					speed = 0.5
+				}
+				add_center_of_trade_level = 1
+			}
+		}
+	}
+	pap_the_big_one = {
+		icon = mission_luther_theses
+		position = 3
+		required_missions = { pap_more_churches pap_roman_restoration} 
+		provinces_to_highlight = {
+			province_id = 118
+		}
+		trigger = {
+			118 = {
+				owned_by = ROOT
+				has_great_project = {
+					type = stpeters_cathedral
+					tier = 2
+				}
+			}
+		}
+
+		effect = {
+			add_years_of_income = 5
+		}
+	}
 }
