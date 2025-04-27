@@ -474,47 +474,59 @@ country_event = { #expand Pontifexian, anger the Emperor
 	}
 }
 
-country_event = { #change
+country_event = { #papal diplomacy
 	id = papacy.9
 	title = papacy.9.t
 	desc = papacy.9.d
 	picture = POPE_PREACHING_eventPicture
 	
 	is_triggered_only = yes
-	after = {
-		hidden_effect = {
-			swap_non_generic_missions = yes
-		}
-	}
+
 	option = {
 		name = papacy.9a
-
-		override_country_name = ITA_FEDERATION
-		add_country_modifier = {
-			name = pap_ita_federation
-			duration = -1
+		define_advisor = {
+			type = diplomat
+			skill = 3
+			cost_multiplier = 0.9
 		}
-		set_country_flag = pap_mt_ita_fed
+		custom_tooltip = PAP_IF_1
+		tooltip = {
+			random_known_country = {
+				limit = {
+					OR = {
+						is_part_of_hre = yes
+						culture_group = latin
+					}
+				}
+				add_opinion = {
+					who = ROOT
+					modifier = pap_faithful_2
+				}
+			}
+		}
+		hidden_effect = {
+			every_known_country = {
+				limit = {
+					OR = {
+						is_part_of_hre = yes
+						culture_group = latin
+					}
+				}
+				add_opinion = {
+					who = ROOT
+					modifier = pap_faithful_2
+				}
+			}
+		}
+
 	}
 	option = {
 		name = papacy.9b
-
-		override_country_name = GOD_KINGDOM
 		add_country_modifier = {
-			name = pap_god_kingdom
-			duration = -1
+			name = pap_faithful
+			duration = 10950
 		}
-		set_country_flag = pap_mt_god_king
-	}
-	option = {
-		name = papacy.9c
 
-		override_country_name = GOD_KINGDOM
-		add_country_modifier = {
-			name = pap_god_kingdom
-			duration = -1
-		}
-		set_country_flag = pap_mt_god_king
 	}
 }
 
@@ -523,30 +535,25 @@ country_event = { #change
 	title = papacy.10.t
 	desc = papacy.10.d
 	picture = POPE_PREACHING_eventPicture
-	
-	is_triggered_only = yes
-	after = {
-		hidden_effect = {
-			swap_non_generic_missions = yes
+	fire_only_once = yes
+	trigger = {
+		AP6 = {
+			is_female = yes
 		}
+	}
+	mean_time_to_happen = {
+		months = 1
 	}
 	option = {
 		name = papacy.10a
-		override_country_name = ITA_FEDERATION
-		add_country_modifier = {
-			name = pap_ita_federation_cath
-			duration = -1
+		create_subject = {
+			who = AP6
+			subject_type = papal_vassal
 		}
-		set_country_flag = pap_mt_ita_fed
 	}
 	option = {
 		name = papacy.10b
-		override_country_name = GOD_KINGDOM
-		add_country_modifier = {
-			name = pap_god_kingdom_cath
-			duration = -1
-		}
-		set_country_flag = pap_mt_god_king
+		vassalize = AP6
 	}
 }
 

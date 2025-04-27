@@ -8,8 +8,7 @@ Papacy_1_slot = {
 
 	pap_papal_grants = {
 		icon = mission_luther_theses
-		position = 2
-		required_missions = { pap_duties } 
+		position = 1
 		trigger = {
 			num_of_subjects = 2
 			any_subject_country = {
@@ -36,34 +35,8 @@ Papacy_1_slot = {
 		}
 
 		effect = {
-			custom_tooltip = PAP_IF_1
-			tooltip = {
-				random_known_country = {
-					limit = {
-						OR = {
-							is_part_of_hre = yes
-							culture_group = latin
-						}
-					}
-					add_opinion = {
-						who = ROOT
-						modifier = pap_faithful
-					}
-				}
-			}
-			hidden_effect = {
-				every_known_country = {
-					limit = {
-						OR = {
-							is_part_of_hre = yes
-							culture_group = latin
-						}
-					}
-					add_opinion = {
-						who = ROOT
-						modifier = pap_faithful
-					}
-				}
+			country_event = {
+				id = papacy.9
 			}
 			calabria_area = {
 				add_permanent_claim = ROOT
@@ -250,21 +223,7 @@ Papacy_3b_slot = {
 		}
 
 		effect = {
-			simple_dynamic_effect = {
-				first_custom_tooltip = PAP_TT_10
-				first_limit = "religion = pontifex"
-				first_effect = "
-					country_event = {
-						id = papacy.9
-					}
-				"
-				second_limit = "religion = catholic"
-				second_effect = "
-					country_event = {
-						id = papacy.10
-					}
-				"
-			}
+			override_country_name = KINGDOM_OF_GOD
 		}
 	}
 }
