@@ -38,17 +38,28 @@ Papacy_1_slot = {
 			country_event = {
 				id = papacy.9
 			}
-			calabria_area = {
+			south_italy_group = {
 				add_permanent_claim = ROOT
 			}
-			apulia_area = {
-				add_permanent_claim = ROOT
+		}
+	}
+	pap_southern_italy = {
+		icon = mission_luther_theses
+		position = 4
+		required_missions = { pap_lux_south } 
+		provinces_to_highlight = { province_group = south_italy_group NOT = { country_or_non_sovereign_subject_holds = ROOT } } 
+		trigger = {
+			south_italy_group = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
 			}
-			molise_area = {
-				add_permanent_claim = ROOT
-			}
-			naples_area = {
-				add_permanent_claim = ROOT
+		}
+
+		effect = {
+			give_papal_influence_var = { amount = 25}
+			add_country_modifier = {
+				name = pap_people_of_the_south
+				duration = 10950
 			}
 		}
 	}
@@ -112,17 +123,28 @@ Papacy_2_slot = {
 				name = pap_good_vassals
 				duration = 10950
 			}
-			emilia_romagna_area = {
+			north_italy_group = {
 				add_permanent_claim = ROOT
 			}
-			liguria_area = {
-				add_permanent_claim = ROOT
+		}
+	}
+	pap_northern_italy = {
+		icon = mission_luther_theses
+		position = 4
+		required_missions = { pap_northern_republic } 
+		provinces_to_highlight = { province_group = north_italy_group NOT = { country_or_non_sovereign_subject_holds = ROOT } } 
+		trigger = {
+			north_italy_group = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
 			}
-			po_valley_area = {
-				add_permanent_claim = ROOT
-			}
-			coradia_area = {
-				add_permanent_claim = ROOT
+		}
+
+		effect = {
+			give_papal_influence_var = { amount = 25}
+			add_country_modifier = {
+				name = pap_people_of_the_north
+				duration = 10950
 			}
 		}
 	}
@@ -184,10 +206,12 @@ Papacy_3a_slot = {
 		}
 		trigger = {
 			owns = 118
-			grown_by_development = 30
-			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-				value = 30
-				religion = ROOT
+			OR = {
+				grown_by_development = 50
+				num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+					value = 30
+					region = italy_region
+				}
 			}
 		}
 
@@ -201,28 +225,20 @@ Papacy_3a_slot = {
 			}
 		}
 	}
-}
-Papacy_3b_slot = {
-	slot = 3
-	generic = no
-	ai = yes
-	has_country_shield = yes
-	potential = { OR = { tag = PAP tag = PA0} NOT = { has_country_flag = pap_mt_ita_fed  }NOT = { has_country_flag = pap_mt_god_king }} 
 	pap_italian_question = {
 		icon = mission_luther_theses
-		position = 4
+		position = 5
 		required_missions = { pap_greater_papacy } 
+		provinces_to_highlight = {region = italy_region NOT = {country_or_non_sovereign_subject_holds = ROOT}}
 		trigger = {
-			OR = {
-				grown_by_development = 70
-				num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-					value = 50
-					religion = ROOT
-				}
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 50
+				region = italy_region
 			}
 		}
 
 		effect = {
+			country_event  = { id = catholic_flavor.2 }
 			override_country_name = KINGDOM_OF_GOD
 		}
 	}
@@ -244,7 +260,7 @@ Papacy_4_slot = {
 		}
 		trigger = {
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-				value = 10
+				value = 3
 				has_tax_building_trigger = yes
 			}
 		}
@@ -270,6 +286,30 @@ Papacy_4_slot = {
 						}
 					"
 				}
+			}
+		}
+	}
+	pap_the_papal_army = {
+		icon = mission_luther_theses
+		position = 4
+		required_missions = { pap_more_churches } 
+		provinces_to_highlight = {
+			province_id = 4951
+		}
+		trigger = {
+			4951 = {
+				country_or_non_sovereign_subject_holds = ROOT
+				development = 15
+			}
+		}
+
+		effect = {
+			4951 = {
+				change_trade_goods = iron
+			}
+			add_country_modifier = {
+				name = pap_papal_cannons
+				duration = -1
 			}
 		}
 	}
