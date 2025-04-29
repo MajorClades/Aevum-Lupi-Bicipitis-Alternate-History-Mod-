@@ -396,10 +396,12 @@ mt_syama_3 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+			stability = 2
 		}
 		effect = {
-			
+			cambodia_area = {
+				add_permanent_claim = ROOT
+			}
 		}
 	}
 	
@@ -409,10 +411,13 @@ mt_syama_3 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+			cambodia_area = {
+				type = all
+				owned_by = ROOT
+			}
 		}
 		effect = {
-			
+			#event abt radical peasentism
 		}
 	}
 	
@@ -422,10 +427,26 @@ mt_syama_3 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+			OR = {
+				AND = { any_ally = { tag = SU2 } employed_advisor = { skill = 3 category = DIP } }
+				any_ally = {
+					tag = SU2
+					has_opinion = {
+						who = ROOT
+						value = 170
+					}
+				}
+				any_subject_country={
+					tag = SU2
+					has_opinion = {
+						who = ROOT
+						value = 100
+					}
+				}
+			}
 		}
 		effect = {
-			
+			#transfer lavo land to syama event
 		}
 	}
 	
@@ -435,10 +456,20 @@ mt_syama_3 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+			owns_all_provinces = {
+				culture = central_thai
+			}
 		}
 		effect = {
-			
+			every_owned_province = {
+					limit = {
+						culture = central_thai
+					}
+				add_province_modifier = { 
+						name = sem_militarized_camp_SYA
+						duration = 29200 
+					}
+				}
 		}
 	}
 	
@@ -448,10 +479,16 @@ mt_syama_3 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+				OR = {
+				num_of_subjects = 5
+				total_development = 1000
+			}
 		}
 		effect = {
-			
+			add_country_modifier = {
+					name = big_daddy_SYA
+					duration = -1
+				}
 		}
 	}
 	
@@ -461,10 +498,11 @@ mt_syama_3 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+			stability = 3
+			NOT = { war_exhaustion = 1 }
 		}
 		effect = {
-			
+			#Unlock Asian John Brown reform
 		}
 	}
 	
@@ -474,10 +512,10 @@ mt_syama_3 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+			current_age = age_of_revolutions
 		}
 		effect = {
-			
+			#Manichean Revolutionary Republic T1 Reform
 		}
 	}
 
