@@ -867,6 +867,35 @@ on_thri_yearly_pulse_2 = {
 }
 
 on_province_religion_converted = {
+	##PAP
+	if = {
+		limit = {owner = { has_country_flag = pap_progress_with_conversion_flag }}
+		if = {
+			limit = {
+				owner = {
+					religion = ROOT
+				}
+				religion = ROOT
+			}
+			owner = {
+				change_government_reform_progress = 10
+			}
+		}
+	}
+	if = {
+		limit = {owner = { has_country_flag = pap_better_conversion_flag }}
+		if = {
+			limit = {
+				owner = {
+					religion = ROOT
+				}
+				religion = ROOT
+			}
+			owner = {
+				add_adm_power = 10
+			}
+		}
+	}
 	##wycclifism
 	if = {
 		limit = {owner = {religion = wycliffian mission_completed = germania_hegemon_of_faith_2}}

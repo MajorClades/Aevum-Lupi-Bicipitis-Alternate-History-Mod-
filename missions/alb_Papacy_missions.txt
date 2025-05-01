@@ -63,6 +63,27 @@ Papacy_1_slot = {
 			}
 		}
 	}
+	pap_faith_of_italy = {
+		icon = mission_luther_theses
+		position = 5
+		required_missions = { pap_southern_italy pap_northern_italy} 
+		provinces_to_highlight = {region = italy_region NOT = {country_or_non_sovereign_subject_holds = ROOT}}
+		trigger = {
+			italy_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			italy_region = {
+				add_permanent_province_modifier = {
+					name = pap_deus_ex_polizia
+					duration = -1
+				}
+			}
+		}
+	}
 }
 
 Papacy_2_slot = {
@@ -231,9 +252,12 @@ Papacy_3a_slot = {
 		required_missions = { pap_greater_papacy } 
 		provinces_to_highlight = {region = italy_region NOT = {country_or_non_sovereign_subject_holds = ROOT}}
 		trigger = {
-			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-				value = 50
-				region = italy_region
+			OR = {
+				num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+					value = 50
+					region = italy_region
+				}
+				is_emperor = yes
 			}
 		}
 
@@ -300,16 +324,17 @@ Papacy_4_slot = {
 			4951 = {
 				country_or_non_sovereign_subject_holds = ROOT
 				development = 15
-			}
+				artillery_in_province = 15
+			}		
 		}
 
 		effect = {
 			4951 = {
 				change_trade_goods = iron
-			}
-			add_country_modifier = {
-				name = pap_papal_cannons
-				duration = -1
+				add_permanent_province_modifier = {
+					name = pap_papal_cannons
+					duration = -1
+				}
 			}
 		}
 	}
@@ -367,6 +392,42 @@ Papacy_5_slot = {
 
 		effect = {
 			add_years_of_income = 5
+		}
+	}
+	pap_cathedrals = {
+		icon = mission_luther_theses
+		position = 4
+		required_missions = { pap_the_big_one } 
+		
+		trigger = {
+			118 = {
+				owned_by = ROOT
+				has_great_project = {
+					type = stpeters_cathedral
+					tier = 3
+				}
+			}
+			OR = {
+				full_idea_group = humanist_ideas
+				full_idea_group = religious_ideas
+			}
+		}
+
+		effect = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = PAP_TT_3a
+				first_limit = "full_idea_group = humanist_ideas"
+				first_effect = "
+					set_country_flag = pap_progress_with_conversion_flag
+					custom_tooltip = PAP_TT_3c
+				"
+				second_custom_tooltip = PAP_TT_3b
+				second_limit = "full_idea_group = religious_ideas"
+				second_effect = "
+					set_country_flag = pap_better_conversion_flag
+					custom_tooltip = PAP_TT_3d
+				"
+			}
 		}
 	}
 }
