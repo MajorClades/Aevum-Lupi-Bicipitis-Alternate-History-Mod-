@@ -24,7 +24,7 @@ help_cathkin_action = {
 		}
 		ROOT = {
 			add_curia_treasury = -500
-			add_5_p_a = yes
+			add_papal_influence = 20
 		}
     }
 
@@ -48,6 +48,17 @@ papal_vassalization_action = {
 		}
     }
 	is_allowed = {
+		if = {
+			limit = {
+				religion = catholic
+			}
+			papal_influence = 20
+		}else = {
+			check_variable = {
+				which = papal_favor_var
+				value = 20
+			}
+		}
 		is_at_war = no
 		FROM = {
 			religion = ROOT
@@ -56,10 +67,61 @@ papal_vassalization_action = {
     }
 	
 	on_accept = {
+		add_papal_influence = -20
+		subtract_variable = {
+			which = papal_favor_var
+			value = 20
+		}
 		ROOT = {
 			create_subject = {
 				who = FROM
 				subject_type = papal_vassal
+			}
+		}
+		FROM = {
+			set_country_flag = is_papal_emissary_flag
+			if = {
+				limit = {
+					FROM = {
+						tag = SO0
+					}
+				}
+				override_country_name = SOXONY_PAP_NAME
+			}
+			if = {
+				limit = {
+					FROM = {
+						tag = CO0
+					}
+				}
+				override_country_name = COTIA_PAP_NAME
+			}
+			if = {
+				limit = {
+					FROM = {
+						tag = AF0
+					}
+				}
+				override_country_name = AFRICA_MARK_NAME
+			}
+			if = {
+				limit = {
+					FROM = {
+						tag = RU0
+					}
+				}
+				override_country_name = RHOMANIA_PAP_NAME
+			}
+			if = {
+				limit = {
+					FROM = {
+						tag = AE0
+					}
+				}
+				override_country_name = BLU_EGITTO_NAME
+				change_country_color = {
+					country = LT2
+				}
 			}
 		}
     }
@@ -105,9 +167,12 @@ papal_integrate_action = {
 				who = ROOT
 				value = 150
 			}
-			years_in_vassalage_under = {
-				who = ROOT
-				years = 10
+			custom_trigger_tooltip = {
+				tooltip = PAPAL_EMISSARY_TR
+				had_country_flag = {
+					flag = is_papal_emissary_flag
+					days = 3650
+				}
 			}
 		}
     }

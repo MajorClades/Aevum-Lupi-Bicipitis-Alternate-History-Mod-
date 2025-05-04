@@ -487,7 +487,7 @@ country_event = { #papal diplomacy
 		define_advisor = {
 			type = diplomat
 			skill = 3
-			cost_multiplier = 0.9
+			cost_multiplier = 0.25
 		}
 		custom_tooltip = PAP_IF_1
 		tooltip = {
@@ -715,6 +715,68 @@ country_event = { #mission to JONGWA
 }
 
 
+country_event = { #force-conversion
+	id = papacy.13
+	title = papacy.13.t
+	desc = papacy.13.d
+	picture = POPE_PREACHING_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = papacy.13a
+		ai_chance = {
+			factor = 70
+		}
+		if = {
+			limit = {
+				PAP = {
+					religion = catholic
+				}
+			}
+			change_religion = catholic
+		}else = {
+			change_religion = pontifex
+		}
+	}
+	option = {
+		name = papacy.13b
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 100
+				tag = SO0
+			}
+			modifier = {
+				factor = 100
+				tag = AF0
+			}
+		}
+		add_stability = 1
+	}
+
+}
+
+country_event = { #advisor-special
+	id = papacy.14
+	title = papacy.14.t
+	desc = papacy.14.d
+	picture = POPE_PREACHING_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = papacy.14a
+		set_country_flag = pap_super_inquisition_flag
+		custom_tooltip = pap_super_inquisition_flag_tt
+	}
+	option = {
+		name = papacy.14b
+		add_country_modifier = {
+			name = pap_less_tax
+			duration = -1
+		}
+		set_country_flag = fin_fine_finances_flag
+		custom_tooltip = fin_every_adm_advisor_grants_5_tax_per_level
+	}
+
+}
 
 country_event = { #Pontifex flavor events
 	id = papacy.1000
