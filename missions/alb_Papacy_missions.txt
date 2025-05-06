@@ -125,6 +125,8 @@ Papacy_1_slot = {
 			europe_superregion = {
 				add_permanent_claim = ROOT
 			}
+			custom_tooltip = PAP_TT_7
+			set_country_flag = papal_march_flag
 			custom_tooltip = PAP_TT_5b
 			hidden_effect = {
 				every_country = {
@@ -142,7 +144,7 @@ Papacy_1_slot = {
 	}
 	pap_doubled_ragnarok = {
 		icon = mission_luther_theses
-		position = 11
+		position = 10
 		required_missions = {pap_break_asatru  } 
 		provinces_to_highlight = { region = british_isles_region NOT = {religion = ROOT}}
 		trigger = {
@@ -346,6 +348,27 @@ Papacy_2_slot = {
 			}
 		}
 	}
+	pap_europe_open = {
+		icon = mission_luther_theses
+		position = 11
+		required_missions = {pap_break_asatru  } 
+		trigger = {
+			calc_true_if = {
+				amount = 500
+				all_province = {
+					religion = ROOT
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = pap_unlimited_vassalization
+				duration = -1
+			}
+			custom_tooltip = PAP_TT_6
+		}
+	}
 }
 
 Papacy_3a_slot = {
@@ -459,6 +482,8 @@ Papacy_3a_slot = {
 		}
 
 		effect = {
+			custom_tooltip = PAP_IF_3
+			set_country_flag = papal_war_flag
 			custom_tooltip = PAP_TT_4
 			hidden_effect = {
 				every_province = {
@@ -518,6 +543,23 @@ Papacy_3a_slot = {
 					duration = 10950
 				}
 			}
+		}
+	}
+	pap_crush_the_moon = {
+		icon = mission_luther_theses
+		position = 12
+		required_missions = { pap_europe_open pap_crush_the_moon } 
+		trigger = {
+			calc_true_if = {
+				amount = 2500
+				all_province = {
+					religion = root
+				}
+			}		
+		}
+
+		effect = {
+			#you won, good job
 		}
 	}
 }
@@ -661,6 +703,9 @@ Papacy_4_slot = {
 			balkan_region = {
 				add_permanent_claim = ROOT
 			}
+			near_east_superregion = {
+				add_permanent_claim = ROOT
+			}
 		}
 	}
 	pap_war_of_faith = {
@@ -681,11 +726,40 @@ Papacy_4_slot = {
 
 		effect = {
 			RU0 = {
-				add_country_modifier = {
-					name = pap_beaten_the_heathen
-					duration = 10950
+				country_event = {
+					id = papacy.15
+				}
+				tooltip = {
+					add_country_modifier = {
+						name = pap_beaten_the_heathen
+						duration = 10950
+					}
 				}
 			}
+		}
+	}
+	pap_crush_the_moon = {
+		icon = mission_luther_theses
+		position = 11
+		required_missions = { pap_anatolia_lessons pap_rhomanian_crusade } 
+		provinces_to_highlight = {religion_group = muslim }
+		trigger = {
+			RU0 = {
+				exists = no
+			}
+			NOT = {
+				calc_true_if = {
+					amount = 1
+					all_province = {
+						religion_group = muslim
+					}
+				}
+			}			
+		}
+
+		effect = {
+			set_country_flag = pap_supreme_coring_flag
+			custom_tooltip = PAP_TT_8
 		}
 	}
 }
@@ -896,9 +970,7 @@ Papacy_5_slot = {
 				name = pap_crusader_fury
 				duration = -1
 			}
-			near_east_superregion = {
-				add_permanent_claim = ROOT
-			}
+			
 		}
 	}
 }
