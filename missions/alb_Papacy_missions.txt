@@ -501,7 +501,7 @@ Papacy_3a_slot = {
 
 		effect = {
 			country_event = { id = catholic_flavor.2 } 
-			override_country_name = "KINGDOM_OF_GOD"
+			override_country_name = KINGDOM_OF_GOD
 		}
 	}
 
@@ -656,10 +656,15 @@ Papacy_4_slot = {
 			hidden_effect = {
 				for = {
 					amount = 3
-					effect = random_owned_province
-					limit = { has_tax_building_trigger = yes } 
-					upgrade_tax_building = yes
-					add_base_tax = 1
+					effect = "
+						random_owned_province = {
+							limit = {
+								has_tax_building_trigger = yes
+							}
+							upgrade_tax_building = yes
+							add_base_tax = 1
+						}
+					"
 				}
 			}
 		}
@@ -894,15 +899,17 @@ Papacy_5_slot = {
 		effect = {
 			simple_dynamic_effect = {
 				first_custom_tooltip = PAP_TT_3a
-				first_limit = full_idea_group
-				humanist_ideas = first_effect
-				set_country_flag = pap_progress_with_conversion_flag
-				custom_tooltip = PAP_TT_3c
+				first_limit = "full_idea_group = humanist_ideas"
+				first_effect = "
+					set_country_flag = pap_progress_with_conversion_flag
+					custom_tooltip = PAP_TT_3c
+				"
 				second_custom_tooltip = PAP_TT_3b
-				second_limit = full_idea_group
-				religious_ideas = second_effect
-				set_country_flag = pap_better_conversion_flag
-				custom_tooltip = PAP_TT_3d
+				second_limit = "full_idea_group = religious_ideas"
+				second_effect = "
+					set_country_flag = pap_better_conversion_flag
+					custom_tooltip = PAP_TT_3d
+				"
 			}
 		}
 	}
