@@ -5,7 +5,7 @@ country_event = { #Investiture good pope do their job
 	title = papacy.1.t
 	desc = papacy.1.d
 	picture = POPE_PREACHING_eventPicture
-	
+	major = yes
 	trigger = {
 		tag = PAP
 		emperor = {
@@ -112,6 +112,19 @@ country_event = { #Investiture Emperor mad
 			name = pope_likes_emperor
 		}
 	}
+	option = {
+		name = papacy.2d
+		highlight = yes
+		trigger = {
+			army_tradition = 15
+		}
+		add_army_tradition = -15
+		PAP = {
+			country_event = {
+				id = papacy.4
+			}
+		}
+	}
 }
 
 country_event = { #promote celibacy among the clergy
@@ -152,6 +165,7 @@ country_event = { #reasonable response
 	}
 	option = {
 		name = papacy.4b
+		add_papal_influence = 25
 		emperor = {
 			remove_country_modifier = pope_dislikes_emperor
 			add_ruler_modifier = {
@@ -160,7 +174,7 @@ country_event = { #reasonable response
 		}
 	}
 	option = {
-		name = papacy.4b
+		name = papacy.4c
 		excommunicate = emperor
 		custom_tooltip = PAP_WAR_IN_EARTH
 	}
@@ -332,9 +346,9 @@ country_event = { #select the next POPE
 	option = {
 		name = papacy.6a
 		define_heir = {
-			max_random_adm = 3
+			max_random_adm = 6
 			max_random_dip = 5
-			max_random_mil = 6
+			max_random_mil = 3
 		}
 	}
 	option = {
@@ -348,9 +362,9 @@ country_event = { #select the next POPE
 	option = {
 		name = papacy.6c
 		define_heir = {
-			max_random_adm = 6
+			max_random_adm = 3
 			max_random_dip = 5
-			max_random_mil = 3
+			max_random_mil = 6
 		}
 	}
 }
@@ -526,7 +540,6 @@ country_event = { #papal diplomacy
 			name = pap_faithful
 			duration = 10950
 		}
-
 	}
 }
 
