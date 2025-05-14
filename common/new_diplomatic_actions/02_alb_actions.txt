@@ -24,7 +24,6 @@ help_cathkin_action = {
 		}
 		ROOT = {
 			add_curia_treasury = -500
-			add_papal_influence = 20
 		}
     }
 
@@ -52,7 +51,7 @@ papal_vassalization_action = {
 			limit = {
 				religion = catholic
 			}
-			papal_influence = 20
+			stability = 1
 		}else = {
 			check_variable = {
 				which = papal_favor_var
@@ -67,10 +66,16 @@ papal_vassalization_action = {
     }
 	
 	on_accept = {
-		add_papal_influence = -20
-		subtract_variable = {
-			which = papal_favor_var
-			value = 20
+		if = {
+			limit = {
+				religion = catholic
+			}
+			add_stability = -1
+		}else = {			
+			subtract_variable = {
+				which = papal_favor_var
+				value = 20
+			}
 		}
 		ROOT = {
 			create_subject = {
