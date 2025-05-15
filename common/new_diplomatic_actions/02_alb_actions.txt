@@ -12,6 +12,10 @@ help_cathkin_action = {
 		FROM = {
 			religion = catholic
 			at_war_with_religious_enemy = yes
+			custom_trigger_tooltip = {
+				tooltip = "Wasn't helped in the last 10 years."
+				has_country_modifier = pap_given_ducats
+			}
 		}
     }
 	on_accept = {
@@ -21,6 +25,13 @@ help_cathkin_action = {
 				who = ROOT
 				value = 10
 			}
+			hidden_effect = {
+				add_country_modifier = {
+					name = pap_given_ducats
+					duration = 3650
+					hidden = yes
+				}
+			}
 		}
 		ROOT = {
 			add_curia_treasury = -500
@@ -28,7 +39,12 @@ help_cathkin_action = {
     }
 
 	ai_will_do = {
-		always = yes
+		ROOT = {
+			has_opinion = {
+				who = FROM
+				value = 50
+			}
+		}
     }
 }
 

@@ -182,56 +182,10 @@ country_event = { #change
 	
 	trigger = {
 		always = no #Religious leagues event already does this
-		emperor = {
-			has_country_modifier = pope_dislikes_emperor
-			is_excommunicated = yes
-		}
 	}
 
 	mean_time_to_happen = {
 		months = 24
-	}
-	after = {
-		hidden_effect = {
-			REB = {
-				if = {
-					limit = { curia_treasury_size = 100 }
-					set_variable = { which = pont_cash_bank_var value = 100 }
-				}
-				if = {
-					limit = { curia_treasury_size = 1000 }
-					set_variable = { which = pont_cash_bank_var value = 1000 }
-				}
-				if = {
-					limit = { curia_treasury_size = 2000 }
-					set_variable = { which = pont_cash_bank_var value = 2000 }
-				}
-				if = {
-					limit = { curia_treasury_size = 3000 }
-					set_variable = { which = pont_cash_bank_var value = 3000 }
-				}
-				if = {
-					limit = { curia_treasury_size = 4000 }
-					set_variable = { which = pont_cash_bank_var value = 4000 }
-				}
-				if = {
-					limit = { curia_treasury_size = 5000 }
-					set_variable = { which = pont_cash_bank_var value = 5000 }
-				}
-				if = {
-					limit = { curia_treasury_size = 6000 }
-					set_variable = { which = pont_cash_bank_var value = 6000 }
-				}
-				if = {
-					limit = { curia_treasury_size = 7000 }
-					set_variable = { which = pont_cash_bank_var value = 7000 }
-				}
-				if = {
-					limit = { curia_treasury_size = 10000 }
-					set_variable = { which = pont_cash_bank_var value = 10000 }
-				}
-			}
-		}
 	}
 	option = {
 		name = papacy.5a
@@ -351,7 +305,7 @@ country_event = { #select the next POPE
 			max_random_adm = 5
 			max_random_dip = 6
 			max_random_mil = 3
-		}
+		}	
 	}
 	option = {
 		name = papacy.6c
@@ -360,6 +314,7 @@ country_event = { #select the next POPE
 			max_random_dip = 5
 			max_random_mil = 6
 		}
+
 	}
 }
 
@@ -943,3 +898,19 @@ country_event = { #Pontifex flavor events
 	}
 }
 
+country_event = { #peace or war pope
+	id = papacy.1003
+	title = papacy.1003.t
+	desc = papacy.1003.d
+	picture = POPE_PREACHING_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = papacy.1003a
+		set_ruler_flag = pontifex_nice_flag
+	}
+	option = {
+		name = papacy.1003b
+		set_ruler_flag = pontifex_naughty_flag
+	}
+
+}

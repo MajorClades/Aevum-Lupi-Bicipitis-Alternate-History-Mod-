@@ -209,7 +209,7 @@ custom_button = {
 	name = adm_favor_button
 	potential = {
 		religion = pontifex
-		has_global_flag = pontifex_nice_flag
+		has_country_flag = pontifex_nice_flag
 	}
 	trigger = {
 		adm_power = 200
@@ -238,7 +238,7 @@ custom_button = {
 	name = adm2_favor_button
 	potential = {
 		religion = pontifex
-		has_global_flag = pontifex_nice_flag
+		has_country_flag = pontifex_nice_flag
 	}
 	trigger = {
 		check_variable = {
@@ -273,7 +273,7 @@ custom_button = {
 	name = mil_favor_button
 	potential = {
 		religion = pontifex
-		has_global_flag = pontifex_naughty_flag
+		has_country_flag = pontifex_naughty_flag
 	}
 	trigger = {
 		mil_power = 200
@@ -302,7 +302,7 @@ custom_button = {
 	name = mil2_favor_button
 	potential = {
 		religion = pontifex
-		has_global_flag = pontifex_naughty_flag
+		has_country_flag = pontifex_naughty_flag
 	}
 	trigger = {
 		check_variable = {
@@ -347,11 +347,19 @@ custom_button = {
 			which = papal_favor_var
 			value = 100
 		}
+		event_target:pontifex_pope_tag = {
+			exists = yes
+		}
 	}
 	effect = {
-		inherit = event_target:pontifex_pope_tag
-		hidden_effect = {
-			save_global_event_target_as = pontifex_pope_tag
+		if = {
+			limit = { senior_union_with = event_target:pontifex_pope_tag}
+			inherit = event_target:pontifex_pope_tag
+			hidden_effect = {
+				save_global_event_target_as = pontifex_pope_tag
+			}
+		}else = {
+			create_union = event_target:pontifex_pope_tag
 		}
 	}
 	tooltip = become_big_pope_tt
@@ -372,7 +380,7 @@ custom_button = {
 	effect = {
 		if = {
 			limit = {
-				has_global_flag = pontifex_nice_flag
+				has_country_flag = pontifex_nice_flag
 			}
 			add_adm_tech = 1
 			add_country_modifier = {
@@ -390,26 +398,26 @@ custom_button = {
 	tooltip = become_big_tech_tt
 }
 
-# custom_text_box = {
-#     name = papal_favor_text 
-#     potential = { 
-# 		religion = pontifex
-# 	} 
-# 	tooltip = papal_favor_text_desc
-# }
+custom_text_box = {
+    name = papal_favor_text 
+    potential = { 
+		religion = pontifex
+	} 
+	tooltip = papal_favor_text_desc
+}
 
-# custom_icon = {
-#     name = papal_favor_bg 
-#     potential = { 
-# 		religion = pontifex
-# 	} 
-# }
+custom_icon = {
+    name = papal_favor_bg 
+    potential = { 
+		religion = pontifex
+	} 
+}
 
-# custom_icon = {
-# 	name = papal_favor_bar
-# 	potential = {
-# 		religion = arian
-# 	}
-# 	tooltip = papal_favor_bar_desc
-# 	frame_variable = papal_favor_var
-# }
+custom_icon = {
+	name = papal_favor_bar
+	potential = {
+		religion = arian
+	}
+	tooltip = papal_favor_bar_desc
+	frame_variable = papal_favor_var
+}
