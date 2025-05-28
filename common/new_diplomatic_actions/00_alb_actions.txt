@@ -542,6 +542,7 @@ ger_annex_duchy = {
 	is_visible = {
 		has_subject_of_type = ger_vassal
 		FROM = {
+			is_subject_of = ROOT
 			is_subject_of_type = ger_vassal
 		}
 	}
@@ -579,6 +580,107 @@ ger_annex_duchy = {
 	}
 
 	ai_will_do = { # this is a trigger
+		OR = {
+			always = no
+			tag = GR0
+		}
+	}
+}
+
+ger_ask_for_off_war = {
+	category = influence
+	
+	alert_index = 55
+	alert_tooltip = "Annex Duchy"
+	require_acceptance = no # Whether the recipient gets an option to decline
+	is_visible = {
+		has_subject_of_type = ger_vassal
+		FROM = {
+			is_subject_of = ROOT
+			is_subject_of_type = ger_vassal
+		}
+	}
+	is_allowed = {
+		is_in_war = {
+			attacker_leader = ROOT
+		}
+		years_of_income = 0.15
+		FROM = {
+			is_at_war = no
+			NOT = {
+				liberty_desire = 40
+			}
+		}
+	}
+	on_accept = {
+		add_years_of_income = -0.15
+		FROM = {
+			join_all_offensive_wars_of = ROOT
+			add_liberty_desire = 15
+		}
+	}
+	on_decline = {
+	}
+	
+	ai_acceptance = { # This works similarly to variable_arithmetic_trigger, but does not support triggers generally. Instead, "limit" will be evaluated first and the rest ignored if it isn't passed.
+	}
+
+	ai_will_do = { # this is a trigger
+		FROM = {
+			NOT = {
+				liberty_desire = 30
+			}
+		}
+		OR = {
+			always = no
+			tag = GR0
+		}
+	}
+}
+
+ger_ask_for_def_war = {
+	category = influence
+	
+	alert_index = 55
+	alert_tooltip = "Annex Duchy"
+	require_acceptance = no # Whether the recipient gets an option to decline
+	is_visible = {
+		has_subject_of_type = ger_vassal
+		FROM = {
+			is_subject_of = ROOT
+			is_subject_of_type = ger_vassal
+		}
+	}
+	is_allowed = {
+		is_in_war = {
+			defender_leader = ROOT
+		}
+		years_of_income = 0.15
+		FROM = {
+			is_at_war = no
+			NOT = {
+				liberty_desire = 40
+			}
+		}
+	}
+	on_accept = {
+		add_years_of_income = -0.15
+		FROM = {
+			join_all_defensive_wars_of = ROOT
+		}
+	}
+	on_decline = {
+	}
+	
+	ai_acceptance = { # This works similarly to variable_arithmetic_trigger, but does not support triggers generally. Instead, "limit" will be evaluated first and the rest ignored if it isn't passed.
+	}
+
+	ai_will_do = { # this is a trigger
+		FROM = {
+			NOT = {
+				liberty_desire = 30
+			}
+		}
 		OR = {
 			always = no
 			tag = GR0
