@@ -641,6 +641,16 @@ on_adm_development = {
 		owner = {add_treasury = 15}
 	}
 	if = { 
+		limit = { owner = { has_government_mechanic = bav_councils }	}
+		owner = {
+			add_government_power = {
+				mechanic_type = bav_councils
+				power_type = bavarian_governance
+				value = 1
+			}
+		}
+	}
+	if = { 
 		limit = { 
 			owner = { has_country_flag = megaditta_galactic_claims 	
 			has_government_mechanic = megaditta_core
@@ -698,6 +708,16 @@ on_dip_development = {
 	if = { 
 		limit = { owner = { has_country_flag = get_ducats_from_dev_grain_flag } trade_goods = grain }
 		owner = {add_treasury = 15}
+	}
+	if = { 
+		limit = { owner = { has_government_mechanic = bav_councils }	}
+		owner = {
+			add_government_power = {
+				mechanic_type = bav_councils
+				power_type = bavarian_governance
+				value = 1
+			}
+		}
 	}
 	if = { 
 		limit = { 
@@ -788,6 +808,16 @@ on_mil_development = {
 	if = { 
 		limit = { owner = { has_country_flag = get_ducats_from_dev_grain_flag } trade_goods = grain }
 		owner = {add_treasury = 15}
+	}
+	if = { 
+		limit = { owner = { has_government_mechanic = bav_councils }	}
+		owner = {
+			add_government_power = {
+				mechanic_type = bav_councils
+				power_type = bavarian_governance
+				value = 1
+			}
+		}
 	}
 	if = { 
 		limit = { 
@@ -1272,3 +1302,30 @@ on_colonial_nation_established = {
 	}
 }
 
+on_parliament_debate_succeeded = {
+	if = {
+		limit = {
+			has_government_mechanic = bav_councils
+		}
+		add_government_power = {
+				mechanic_type = bav_councils
+				power_type = bavarian_governance
+				value = 5
+			}
+	}
+}
+
+on_parliament_seat_given = {
+	if = {
+		limit = {
+			owner = {has_government_mechanic = bav_councils}
+		}
+		owner = {
+			add_government_power = {
+				mechanic_type = bav_councils
+				power_type = bavarian_governance
+				value = 2
+			}
+		}
+	}
+}
