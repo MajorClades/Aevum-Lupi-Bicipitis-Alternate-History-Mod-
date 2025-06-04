@@ -1,7 +1,7 @@
 bav_councils = {
 	alert_icon_gfx = GFX_alerticons_government_mechanics
 	alert_icon_index = 11
-	available = {	}
+	available = { }
 	powers = {
 		bavarian_governance = {
 			gui = alb_venetian_capitalism_gui
@@ -29,7 +29,10 @@ bav_councils = {
 			center = no
 			trigger = {
 				capital_scope = {
-					culture = bavarian_new
+					OR = {
+						culture = bavarian_new
+						culture = ug_bavarian
+					}
 				}
 				
 			}
@@ -37,7 +40,14 @@ bav_councils = {
 				capital_scope = {
 					add_random_development = 1
 				}
-
+				if = {
+					limit = {
+						has_country_flag = bav_two_random
+					}
+					capital_scope = {
+						add_random_development = 1
+					}
+				}
 			}
 			cooldown_years = 1
 			ai_chance = {
