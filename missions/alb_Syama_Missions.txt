@@ -60,10 +60,13 @@ mt_syama_1 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+			NOT = { exists = KH1 }
 		}
 		effect = {
-			
+			add_country_modifier = {
+					name = old_master_demise_SYA
+					duration = 10950
+				}
 		}
 	}
 	
@@ -73,10 +76,22 @@ mt_syama_1 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+			NOT = {
+                any_owned_province = {
+                    devastation = 1
+                }
+            }
 		}
 		effect = {
-			
+			capital_scope = {
+				add_prosperity = 50
+			}
+			khorat_area = {
+				add_permanent_claim = ROOT
+			}
+			vientiane_area = {
+				add_permanent_claim = ROOT
+			}
 		}
 	}
 	
@@ -86,10 +101,25 @@ mt_syama_1 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+			khorat_area = {
+				type = all
+				owned_by = ROOT
+			}
+			vientiane_area = {
+				type = all
+				owned_by = ROOT
+			}
+			num_of_owned_provinces_with = {
+				value = 5
+				OR = { area = khorat_area area = vientiane_area }
+				has_manpower_building_trigger = yes
+			}
 		}
 		effect = {
-			
+			add_country_modifier = {
+					name = commandery_of_ishana_SYA
+					duration = 7300
+				}
 		}
 	}
 	
@@ -99,10 +129,18 @@ mt_syama_1 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+			has_great_project = {
+					type = angkor_wat
+					tier = 3
+				}
 		}
 		effect = {
-			
+			609 = {
+				add_province_modifier = {
+					name = people_palisade_SYA
+					duration = -1
+				}
+			}
 		}
 	}
 	
@@ -112,10 +150,13 @@ mt_syama_1 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+			government_rank = 3
 		}
 		effect = {
-			
+			add_country_modifier = {
+					name = slayer_of_leviathan_SYA
+					duration = -1
+				}
 		}
 	}
 
@@ -138,10 +179,27 @@ mt_syama_2 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+			army_size_percentage = 1
 		}
 		effect = {
-			
+			if = {
+				limit = {
+				OR = {
+					navy_size_percentage = 0.7
+					
+					}
+				}
+				add_country_modifier = {
+					name = land_and_sea_SYA
+					duration = -1
+				}
+			}
+			else = {
+				add_country_modifier = {
+					name = soldier_of_struggle_SYA
+					duration = -1
+				}
+			}
 		}
 	}
 	
@@ -151,10 +209,17 @@ mt_syama_2 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+			capital_scope = { 
+				num_of_times_improved = 5
+			}
 		}
 		effect = {
-			
+			609 = {
+				add_province_modifier = {
+					name = revitalize_angkor_SYA
+					duration = -1
+				}
+			}
 		}
 	}
 	
@@ -164,10 +229,30 @@ mt_syama_2 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+			NOT = {
+			exists = KH1
+			exists = KH2
+			exists = KH3
+			exists = KH5
+			}
 		}
 		effect = {
-			
+			add_country_modifier = {
+				name = cambodia_consolidation_SYA
+				duration = 7300
+			}
+			mekong_area = {
+				add_permanent_claim = ROOT
+			}
+			tay_nguyen_area = {
+				add_permanent_claim = ROOT
+			}
+			champa_area = {
+				add_permanent_claim = ROOT
+			}
+			vietnam_area = {
+				add_permanent_claim = ROOT
+			}
 		}
 	}
 	
@@ -177,10 +262,46 @@ mt_syama_2 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+			mekong_area = {
+				type = all
+				owned_by = ROOT
+			}
+			tay_nguyen_area = {
+				type = all
+				owned_by = ROOT
+			}
+			champa_area = {
+				type = all
+				owned_by = ROOT
+			}
+			vietnam_area = {
+				type = all
+				owned_by = ROOT
+			}
 		}
 		effect = {
-			
+		add_country_modifier = {
+				name = conqueror_of_cham_SYA
+				duration = 9125
+			}
+			champa_area = {
+				add_province_modifier = {
+					name = "po_nagar_pact_SYA"
+					duration = 18980
+				}
+			}
+			mekong_area = {
+				add_province_modifier = {
+					name = "po_nagar_pact_SYA"
+					duration = 18980
+				}
+			}
+			vietnam_area = {
+				add_province_modifier = {
+					name = "po_nagar_pact_SYA"
+					duration = 18980
+				}
+			}
 		}
 	}
 	
@@ -190,10 +311,27 @@ mt_syama_2 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+			red_river_delta_area = {
+				type = all
+				owned_by = ROOT
+			}
+			NOT = {
+			exists = DAI
+			}
 		}
 		effect = {
-			
+			indo_china_region = {
+				add_province_modifier = {
+					name = "daibinh_bastion_SYA"
+					duration = 18980
+				}
+			}
+			xinan_region = {
+				add_permanent_claim = ROOT
+			}
+			south_china_region = {
+				add_permanent_claim = ROOT
+			}
 		}
 	}
 	
@@ -203,10 +341,38 @@ mt_syama_2 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+			xinan_region = {
+				type = all
+				owned_by = ROOT
+			}
+			south_china_region = {
+				type = all
+				owned_by = ROOT
+			}
 		}
 		effect = {
-			
+			#sigma culture conversion
+			custom_tooltip = mr_xinan_culture_will_move_culture_group_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						culture_group = new_yue
+					}
+					#change_culture = khmer_yue
+				}
+				every_owned_province = {
+					limit = {
+						culture_group = nanman_group
+					}
+					#change_culture = khmer_nanman
+				}
+				every_owned_province = {
+					limit = {
+						culture_group = east_asian
+					}
+					#change_culture = khmer_chinese
+				}
+			}
 		}
 	}
 
@@ -230,10 +396,12 @@ mt_syama_3 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+			stability = 2
 		}
 		effect = {
-			
+			cambodia_area = {
+				add_permanent_claim = ROOT
+			}
 		}
 	}
 	
@@ -243,10 +411,13 @@ mt_syama_3 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+			cambodia_area = {
+				type = all
+				owned_by = ROOT
+			}
 		}
 		effect = {
-			
+			#event abt radical peasentism
 		}
 	}
 	
@@ -256,10 +427,26 @@ mt_syama_3 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+			OR = {
+				AND = { any_ally = { tag = SU2 } employed_advisor = { skill = 3 category = DIP } }
+				any_ally = {
+					tag = SU2
+					has_opinion = {
+						who = ROOT
+						value = 170
+					}
+				}
+				any_subject_country={
+					tag = SU2
+					has_opinion = {
+						who = ROOT
+						value = 100
+					}
+				}
+			}
 		}
 		effect = {
-			
+			#transfer lavo land to syama event
 		}
 	}
 	
@@ -269,10 +456,20 @@ mt_syama_3 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+			owns_all_provinces = {
+				culture = central_thai
+			}
 		}
 		effect = {
-			
+			every_owned_province = {
+					limit = {
+						culture = central_thai
+					}
+				add_province_modifier = { 
+						name = sem_militarized_camp_SYA
+						duration = 29200 
+					}
+				}
 		}
 	}
 	
@@ -282,10 +479,16 @@ mt_syama_3 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+				OR = {
+				num_of_subjects = 5
+				total_development = 1000
+			}
 		}
 		effect = {
-			
+			add_country_modifier = {
+					name = big_daddy_SYA
+					duration = -1
+				}
 		}
 	}
 	
@@ -295,10 +498,11 @@ mt_syama_3 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+			stability = 3
+			NOT = { war_exhaustion = 1 }
 		}
 		effect = {
-			
+			#Unlock Asian John Brown reform
 		}
 	}
 	
@@ -308,10 +512,10 @@ mt_syama_3 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+			current_age = age_of_revolutions
 		}
 		effect = {
-			
+			#Manichean Revolutionary Republic T1 Reform
 		}
 	}
 
