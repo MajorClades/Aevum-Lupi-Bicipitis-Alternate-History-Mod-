@@ -502,7 +502,9 @@ mt_syama_3 = {
 			NOT = { war_exhaustion = 1 }
 		}
 		effect = {
-			#Unlock Asian John Brown reform
+			 unlock_government_reform = {
+				government_reform = soveriegn_of_the_emancipated_reform
+			}
 		}
 	}
 	
@@ -515,7 +517,9 @@ mt_syama_3 = {
 			current_age = age_of_revolutions
 		}
 		effect = {
-			#Manichean Revolutionary Republic T1 Reform
+			 unlock_government_reform = {
+				government_reform = revolutionary_mandala_reform
+			}
 		}
 	}
 
@@ -539,10 +543,21 @@ mt_syama_4 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+			num_of_trusted_allies = 1
 		}
 		effect = {
-			
+			add_country_modifier = {
+				name = "influential_diplomacy"
+				duration = 9125 #25 years
+			}
+			custom_tooltip = SYA_historical_friendship_with_allies_tooltips
+			hidden_effect = {
+			every_ally = {
+					limit = { trust = { who = ROOT value = 100 } }
+					add_historical_friend = ROOT
+				}
+			ROOT = {add_historical_friend = PREV}
+			}
 		}
 	}
 	
@@ -553,10 +568,13 @@ mt_syama_4 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+			army_professionalism = 0.25
 		}
 		effect = {
-			
+			add_country_modifier = {
+					name = wild_tiger_scouts_SYA #Drill bonus and prestige gains
+					duration = -1
+				}
 		}
 	}
 	
@@ -566,10 +584,13 @@ mt_syama_4 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+			cavalry_fraction = 0.4
 		}
 		effect = {
-			
+			add_country_modifier = {
+					name = tusked_riders_SYA #Cav combat and cost or fraction
+					duration = -1
+				}
 		}
 	}
 	
@@ -579,10 +600,17 @@ mt_syama_4 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+			num_of_owned_provinces_with = {
+				value = 4
+				culture_group = new_cham
+				has_shipyard_building_trigger = yes
+			}
 		}
 		effect = {
-			
+			add_country_modifier = {
+					name = asa_cham_SYA #Sailor bonus
+					duration = -1
+				}
 		}
 	}
 	
@@ -590,12 +618,20 @@ mt_syama_4 = {
 		icon = mission_new_army
 		required_missions = { mt_syama_cham_volunteer mt_syama_mekong_great_market }
 		provinces_to_highlight = {
+		indo_china_region = {
+				type = all
+				has_owner_accepted_culture = no
+			}
 		}
 		trigger = {
-
+			indo_china_region = {
+				type = all
+				owned_by = ROOT
+				has_owner_accepted_culture = yes
+			}
 		}
 		effect = {
-			
+			#Event for army specialization and tribe favors
 		}
 	}
 
@@ -619,10 +655,17 @@ mt_syama_5 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+			4830 = {
+			has_trade_building_trigger = yes
+			}
 		}
 		effect = {
-			
+		4830 = {
+				add_province_modifier = {
+					name = si_mahosot_forge_SYA #sailor and good produced bonus
+					duration = -1
+				}
+			}	
 		}
 	}
 	
@@ -632,10 +675,16 @@ mt_syama_5 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+		OR = {
+			accepted_culture = central_thai
+			any_ally = { tag = SU2 }
+		}
 		}
 		effect = {
-			
+			add_country_modifier = {
+					name = sem_in_army_SYA #Infantry combat ability
+					duration = -1
+				}
 		}
 	}
 	
@@ -645,10 +694,15 @@ mt_syama_5 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+		owns_all_provinces = {
+				culture = lao
+			}
 		}
 		effect = {
-			
+			add_country_modifier = {
+					name = laotian_liberaator_SYA #Lanxang Regiments more cav defence
+					duration = -1
+				}
 		}
 	}
 	
@@ -659,10 +713,24 @@ mt_syama_5 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+			mekong_area = {
+				type = all
+				owned_by = ROOT
+				has_shipyard_building_trigger = yes
+				has_trade_building_trigger = yes
+			}
 		}
 		effect = {
-			
+		mekong_area = {
+				add_province_modifier = {
+					name = mekong_market_SYA #Build slot and temp trade
+					duration = -1
+				}
+			}
+		add_country_modifier = {
+					name = mekong_grand_opening_SYA
+					duration = 10950
+				}
 		}
 	}
 	
@@ -672,10 +740,13 @@ mt_syama_5 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+			has_dip_advisor_3 = yes
 		}
 		effect = {
-			
+			add_country_modifier = {
+					name = liberalism_SYA #Global trade good bonus and institution spread but trade good cost down
+					duration = 10950
+				}
 		}
 	}
 	
@@ -685,10 +756,35 @@ mt_syama_5 = {
 		provinces_to_highlight = {
 		}
 		trigger = {
-
+			has_institution = manufactories
 		}
 		effect = {
-			
+		custom_tooltip = river_based_industry_tooltips
+			tooltip = {
+				add_province_modifier = {
+					name = waterway_industry_site_SYA #good produced and trade power
+					duration = 14600
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						region = indo_china_region
+						country_or_non_sovereign_subject_holds = ROOT
+						has_tax_building_trigger = yes
+					}
+					add_province_modifier = {
+						name = waterway_industry_site_SYA
+						duration = 14600
+					}
+				add_trade_modifier = {
+					who = ROOT
+					duration = 14600
+					power = 5
+					key = connected_through_waterwork_network
+					}
+				}
+			}
 		}
 	}
 
