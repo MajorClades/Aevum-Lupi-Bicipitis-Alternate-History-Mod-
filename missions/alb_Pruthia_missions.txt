@@ -1,4 +1,4 @@
-Pruthia_1_slot = {
+Pruthia_1_pre_a_slot = {
 	slot = 1
 	generic = no
 	ai = yes
@@ -8,6 +8,49 @@ Pruthia_1_slot = {
 			tag = PU0
 			AND = {
 				tag = GR0
+				was_tag = PU0
+				has_country_flag = prussian_germany_flag
+			}
+		}
+	}
+
+	swardian_fortress = {
+		icon = mission_cossack_cavalry
+		position = 1
+		provinces_to_highlight = { province_id = 59 } 
+
+		trigger = {
+			if = {
+				limit = { ai = yes } 
+				59 = { grown_by_development = 2 } 
+			}
+			else = { 59 = { base_manpower = 7 }  } 
+		}
+
+		effect = {
+			59 = {
+				add_permanent_province_modifier = {
+					name = "swardian_force"
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				complete_mission = teutonic_frankfurt
+			}
+		}
+	}
+}
+Pruthia_1_pre_b_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = GE7
+			AND = {
+				tag = GR0
+				was_tag = GE7
 				has_country_flag = prussian_germany_flag
 			}
 		}
@@ -33,13 +76,34 @@ Pruthia_1_slot = {
 					duration = -1
 				}
 			}
+			hidden_effect = {
+				complete_mission = undo_the_huns
+			}
 		}
 	}
+}
+
+Pruthia_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = PU0
+			tag = GE7
+			AND = {
+				tag = GR0
+				has_country_flag = prussian_germany_flag
+			}
+		}
+	}
+
 
 	prut_willofgott = {
 		icon = mission_hands_praying
 		position = 2
-		required_missions = { teutonic_frankfurt } 
+		required_missions = { teutonic_frankfurt swardian_fortress } 
 		provinces_to_highlight = {
 			owned_by = ROOT
 			can_build = temple
@@ -126,6 +190,7 @@ Pruthia_2_slot = {
 	potential = {
 		OR = {
 			tag = PU0
+			tag = GE7
 			AND = {
 				tag = GR0
 				has_country_flag = prussian_germany_flag
@@ -160,6 +225,7 @@ Pruthia_3_slot = {
 	potential = {
 		OR = {
 			tag = PU0
+			tag = GE7
 			AND = {
 				tag = GR0
 				has_country_flag = prussian_germany_flag
@@ -251,7 +317,7 @@ Pruthia_3b_slot = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = PU0 } 
+	potential = { OR = {tag = PU0 tag = GE7} } 
 
 	germania_for_all = {
 		icon = encroach_on_the_germans
@@ -280,6 +346,7 @@ Pruthia_4_slot = {
 	potential = {
 		OR = {
 			tag = PU0
+			tag = GE7
 			AND = {
 				tag = GR0
 				has_country_flag = prussian_germany_flag
@@ -290,7 +357,7 @@ Pruthia_4_slot = {
 	bring_into_the_fold = {
 		icon = mission_have_two_subjects
 		position = 2
-		required_missions = { undo_the_huns } 
+		required_missions = { undo_the_huns undo_the_mongols} 
 		provinces_to_highlight = { is_capital_of = GR3 } 
 
 		trigger = {
@@ -338,7 +405,7 @@ Pruthia_4_slot = {
 		}
 	}
 }
-Pruthia_5_slot = {
+Pruthia_5_pre_a_slot = {
 	slot = 5
 	generic = no
 	ai = yes
@@ -348,6 +415,52 @@ Pruthia_5_slot = {
 			tag = PU0
 			AND = {
 				tag = GR0
+				was_tag = PU0
+				has_country_flag = prussian_germany_flag
+			}
+		}
+	}
+
+	undo_the_mongols = {
+		icon = mission_cossack_cavalry
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			if = {
+				limit = { ai = yes } 
+				num_of_generals = 2
+			}
+			else = {
+				num_of_generals = 1
+				OR = {
+					prestige = 20
+					has_mil_advisor = yes
+				}
+			}
+		}
+
+		effect = {
+			neumark_area = { add_permanent_claim = ROOT } 
+			wielkopolska_area = { add_permanent_claim = ROOT } 
+			hinter_pommern_area = { add_permanent_claim = ROOT } 
+			hidden_effect = {
+				complete_mission = undo_the_huns
+			}
+		}
+	}
+}
+Pruthia_5_pre_b_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = GE7
+			AND = {
+				tag = GR0
+				was_tag = GE7
 				has_country_flag = prussian_germany_flag
 			}
 		}
@@ -376,13 +489,33 @@ Pruthia_5_slot = {
 			palatinate_area = { add_permanent_claim = ROOT } 
 			alsace_area = { add_permanent_claim = ROOT } 
 			lower_swabia_area = { add_permanent_claim = ROOT } 
+			hidden_effect = {
+				complete_mission = undo_the_mongols
+			}
 		}
 	}
+}
+Pruthia_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = PU0
+			tag = GE7
+			AND = {
+				tag = GR0
+				has_country_flag = prussian_germany_flag
+			}
+		}
+	}
+
 
 	drag_in_sterm = {
 		icon = mission_cannons_firing
 		position = 2
-		required_missions = { undo_the_huns } 
+		required_missions = { undo_the_huns undo_the_mongols } 
 		provinces_to_highlight = { is_capital_of = GR4 } 
 
 		trigger = {
@@ -441,6 +574,7 @@ Pruthia_5_slot = {
 		provinces_to_highlight = { is_capital_of = GR1 } 
 
 		trigger = {
+			is_great_power = yes
 			if = {
 				limit = {ai = yes}
 				GR1 = {
