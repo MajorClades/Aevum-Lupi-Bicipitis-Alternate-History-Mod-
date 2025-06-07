@@ -12,6 +12,9 @@ on_startup = {
 		fjal.1000
 		mila.3
 		pann.1
+		silky.1
+		yamat.1
+		liqian.3
 	}
 }
 on_province_culture_changed = {
@@ -662,6 +665,39 @@ on_adm_development = {
 			}
 		}
 	}
+	if = {
+		limit = { 
+			owner = { 
+				OR = {
+					has_country_modifier = kamuyhuci_lv1_mod
+					has_country_modifier = kamuyhuci_lv2_mod
+					has_country_modifier = kamuyhuci_lv3_mod
+					has_country_modifier = kamuyhuci_lv4_mod
+				}
+			}
+		}
+		owner = {
+			if = {
+				limit = {NOT = {has_country_flag = no_cost_kamuy_flag}}
+				add_adm_power = -10
+			}
+			change_variable = {
+				which = kamuyhuci_variable
+				value = 1
+			}
+			if = {
+				limit = {
+					check_variable = {
+						which = kamuyhuci_variable
+						value = 10
+					}
+				}
+				country_event = {
+					id = ezo.2
+				}
+			}
+		}
+	}
 	if = { 
 		limit = { 
 			owner = { has_country_flag = double_dev_ability }
@@ -683,7 +719,17 @@ on_adm_development = {
 			}
 		}
 	}
-
+	if = {
+		limit = {
+			has_country_flag = alb_dev_japan_better_flag
+		}
+		random_list = {
+			15 = {
+				add_base_tax = 1
+			}
+			85 = {}
+		}
+	}
 }
 
 on_dip_development = {
@@ -718,6 +764,39 @@ on_dip_development = {
 			}
 			50 = {
 				add_base_production = 1
+			}
+		}
+	}
+	if = {
+		limit = { 
+			owner = { 
+				OR = {
+					has_country_modifier = repunkamuy_lv1_mod
+					has_country_modifier = repunkamuy_lv2_mod
+					has_country_modifier = repunkamuy_lv3_mod
+					has_country_modifier = repunkamuy_lv4_mod
+				}
+			}
+		}
+		owner = {
+			if = {
+				limit = {NOT = {has_country_flag = no_cost_kamuy_flag}}
+				add_dip_power = -10
+			}
+			change_variable = {
+				which = repunkamuy_variable
+				value = 1
+			}
+			if = {
+				limit = {
+					check_variable = {
+						which = repunkamuy_variable
+						value = 10
+					}
+				}
+				country_event = {
+					id = ezo.6
+				}
 			}
 		}
 	}
@@ -774,6 +853,17 @@ on_dip_development = {
 			}
 		}
 	}
+	if = {
+		limit = {
+			has_country_flag = alb_dev_japan_better_flag
+		}
+		random_list = {
+			15 = {
+				add_base_production = 1
+			}
+			85 = {}
+		}
+	}
 }
 
 on_mil_development = {
@@ -814,6 +904,39 @@ on_mil_development = {
 	if = { 
 		limit = { 
 			owner = { 
+				OR = {
+					has_country_modifier = kimunkamuy_lv1_mod
+					has_country_modifier = kimunkamuy_lv2_mod
+					has_country_modifier = kimunkamuy_lv3_mod
+					has_country_modifier = kimunkamuy_lv4_mod
+				}
+			}
+		}
+		owner = {
+			if = {
+				limit = {NOT = {has_country_flag = no_cost_kamuy_flag}}
+				add_mil_power = -10
+			}
+			change_variable = {
+				which = kimunkamuy_variable
+				value = 1
+			}
+			if = {
+				limit = {
+					check_variable = {
+						which = kimunkamuy_variable
+						value = 10
+					}
+				}
+				country_event = {
+					id = ezo.4
+				}
+			}
+		}
+	}
+	if = { 
+		limit = { 
+			owner = { 
 				overlord = { has_country_flag = chance_to_double_mil_a_colonial_province_tt}
 				is_colonial_nation = yes
 			}
@@ -845,6 +968,17 @@ on_mil_development = {
 				power_type = restoration_aldabba
 				value = 0.25
 			}
+		}
+	}
+	if = {
+		limit = {
+			has_country_flag = alb_dev_japan_better_flag
+		}
+		random_list = {
+			15 = {
+				add_base_manpower = 1
+			}
+			85 = {}
 		}
 	}
 }
@@ -1264,11 +1398,10 @@ on_expanded_infrastructure_removed = {
 		add_base_tax = -1
 	}
 }
-on_colonial_nation_established = {
-	FROM = {
-		country_event = {
-			id = CEF_colonial_switch.1
-		}
+
+on_buy_religious_reform = {
+	events = {
+		tapui.1
 	}
 }
 

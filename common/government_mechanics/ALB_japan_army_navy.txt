@@ -1,0 +1,90 @@
+japan_army_navy_mechanic = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 1
+	available = {}
+	
+	powers = {
+		rivalry_balance = {
+			max = 100
+			min = -100
+			scaled_modifier = {
+				modifier = {
+					land_morale = 0.2
+					infantry_power = 0.2
+					artillery_power = 0.2
+					land_maintenance_modifier = -0.2
+					leader_cost = -0.2
+					monthly_rivalry_balance = -0.2
+				}
+				start_value = 0
+				end_value = 100
+			}
+			scaled_modifier = {
+				modifier = {
+					naval_morale = 0.2
+					heavy_ship_power = 0.2
+					artillery_power = 0.2
+					naval_maintenance_modifier = -0.2
+					admiral_cost = -0.2
+					monthly_rivalry_balance = 0.2
+				}
+				start_value = 0
+				end_value = -100
+			}
+		}
+	}
+	
+	interactions = {
+		JAV_uno = {
+			gui = russian_mechanics_interaction_gui
+			icon = GFX_russian_ability_ADM
+			effect = {
+				add_government_power = {
+					mechanic_type = japan_army_navy_mechanic
+					power_type = rivalry_balance
+					value = 10
+				}
+				add_country_modifier = {
+					name = yam_go_to_army
+					duration = 365
+				}
+			}
+			cooldown_years = 1
+			ai_chance = {
+				factor = 10
+			}
+		}
+		JAV_due = {
+			gui = russian_mechanics_interaction_gui
+			icon = GFX_russian_ability_DIP
+			effect = { 
+				country_event = {
+					id = yamat.1000
+				}
+			}
+			cooldown_years = 1
+			ai_chance = {
+				factor = 0
+			}
+		}
+		JAV_tre = {
+			gui = russian_mechanics_interaction_gui
+			icon = GFX_russian_ability_MIL
+			effect = { 
+				add_government_power = {
+					mechanic_type = japan_army_navy_mechanic
+					power_type = rivalry_balance
+					value = -10
+				}
+				add_country_modifier = {
+					name = yam_go_to_navy
+					duration = 365
+				}
+			}
+			cooldown_years = 1
+			ai_chance = {
+				factor = 0
+			}
+		}
+	}
+}

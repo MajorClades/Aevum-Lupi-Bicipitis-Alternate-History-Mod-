@@ -1,0 +1,286 @@
+country_decisions = {
+
+	yam_move_koreans_back = {
+		potential = {
+			has_country_flag = not_help_the_koreans_flag
+		}
+		allow = {
+			any_ally = {
+				primary_culture = jeju
+				has_opinion = {
+					who = ROOT
+					value = 180
+				}
+			}
+		}
+		effect = {
+			random_ally = {
+				limit = {
+					primary_culture = jeju
+				}
+				ROOT = {
+					create_union = PREV
+				}
+				custom_tooltip = YAMATAI_TT_5a
+				set_country_flag = helped_the_koreans_flag
+				korea_region = {
+					add_permanent_claim = PREV
+				}
+			}
+			clr_country_flag = not_help_the_koreans_flag
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	yam_move_koreans_around = {
+		potential = {
+			tag = KM6
+			has_country_flag = not_moved_the_koreans_flag
+			any_province = {
+				culture = jeju
+				region = japan_region
+			}
+		}
+		allow = {
+			owns_all_provinces = {
+				culture = jeju
+				region = japan_region
+			}
+			korea_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			country_event_with_insight = {
+				id = yamat.11
+				insight_tooltip = YAMATAI_TT_5b
+			}
+			clr_country_flag = not_moved_the_koreans_flag
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	hinode_trade_grain = {
+		potential = {
+			has_country_flag = hinode_trade_goods_flag
+			870 = {
+				country_or_non_sovereign_subject_holds = ROOT
+				NOT = {trade_goods = grain}
+			}
+			2478 = {
+				country_or_non_sovereign_subject_holds = ROOT
+				NOT = {trade_goods = grain}
+			}
+		}
+		allow = {
+			dip_power = 100
+			870 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			2478 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			add_dip_power = -100
+			870 = {
+				change_trade_goods = grain
+				add_base_production = 2
+			}
+			2478 = {
+				change_trade_goods = grain
+				add_base_production = 2
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	hinode_trade_tea = {
+		potential = {
+			has_country_flag = hinode_trade_goods_flag
+			4638 = {
+				country_or_non_sovereign_subject_holds = ROOT
+				NOT = {trade_goods = tea}
+			}
+			2480 = {
+				country_or_non_sovereign_subject_holds = ROOT
+				NOT = {trade_goods = tea}
+			}
+		}
+		allow = {
+			dip_power = 100
+			4638 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			2480 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			add_dip_power = -100
+			4638 = {
+				change_trade_goods = tea
+				add_base_production = 2
+			}
+			2480 = {
+				change_trade_goods = tea
+				add_base_production = 2
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	hinode_trade_paper_silk = {
+		potential = {
+			has_country_flag = hinode_trade_goods_flag
+			4637 = {
+				country_or_non_sovereign_subject_holds = ROOT
+				NOT = {trade_goods = silk}
+			}
+			2021 = {
+				country_or_non_sovereign_subject_holds = ROOT
+				NOT = {trade_goods = paper}
+			}
+		}
+		allow = {
+			dip_power = 100
+			4637 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			2021 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			add_dip_power = -100
+			4637 = {
+				change_trade_goods = silk
+				add_base_production = 2
+			}
+			2021 = {
+				change_trade_goods = paper
+				add_base_production = 2
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	hinode_trade_chinaware = {
+		potential = {
+			has_country_flag = hinode_trade_goods_flag
+			4637 = {
+				country_or_non_sovereign_subject_holds = ROOT
+				NOT = {trade_goods = chinaware}
+			}
+		}
+		allow = {
+			4637 = {
+				development = 20
+				trade_goods = silk
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			4637 = {
+				change_trade_goods = chinaware
+			}
+			change_price = {
+				trade_goods = chinaware
+				key = get_money_ware
+				value = 0.2
+				duration = -1
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	ezo_more_gold_aound_here = {
+		potential = {
+			has_country_flag = ezo_gold_find
+			OR = {
+				976 = {
+					country_or_non_sovereign_subject_holds = ROOT
+					NOT = {trade_goods = gold}
+				}
+				977 = {
+					country_or_non_sovereign_subject_holds = ROOT
+					NOT = {trade_goods = gold}
+				}
+			}
+		}
+		color = { 222 244 40 }
+		allow = {
+			years_of_income = 1
+			976 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			977 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			add_years_of_income = -1
+			976 = {
+				change_trade_goods = gold
+			}
+			977 = {
+				change_trade_goods = gold
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	ezo_more_gold_aound_here_2 = {
+		potential = {
+			has_country_flag = ezo_gold_find
+			OR = {
+				974 = {
+					country_or_non_sovereign_subject_holds = ROOT
+					NOT = {trade_goods = gold}
+				}
+				2610 = {
+					country_or_non_sovereign_subject_holds = ROOT
+					NOT = {trade_goods = gold}
+				}
+			}
+		}
+		color = { 222 244 40 }
+		allow = {
+			years_of_income = 1
+			974 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			2610 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			add_years_of_income = -1
+			974 = {
+				change_trade_goods = gold
+			}
+			2610 = {
+				change_trade_goods = gold
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+}

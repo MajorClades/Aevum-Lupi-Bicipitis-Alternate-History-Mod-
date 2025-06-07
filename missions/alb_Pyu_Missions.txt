@@ -1,0 +1,2031 @@
+mt_pyu_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	
+	potential = {
+		OR = {
+			tag = PY5
+			tag = PY1
+		}
+	}
+	has_country_shield = yes
+	
+	pyu_welcome_defector = {
+		icon = qng_north_china
+		position = 2
+		required_missions = { pyu_amass_levies } 
+		provinces_to_highlight = {
+			
+		}
+
+		trigger = {
+		OR = {
+				TA1 = {
+					has_spy_network_from = {
+					who = ROOT
+					value = 20
+					}
+				}
+				NOT = { exists = TA1 }
+			}
+		}
+
+		effect = {
+			TA1 = {
+				add_country_modifier = {
+					name = mongtai_disorder
+					duration = 7200
+				}
+			}
+			add_years_of_owned_provinces_manpower = {
+			years = 1
+			trigger = {
+				religion = ROOT
+				culture = ROOT
+				}
+				custom_tooltip = pyu_defector_welcomed_tt
+			}
+		}
+	}
+	
+	pyu_tiger_flea = {
+		icon = mission_upper_burma_campaign
+		required_missions = { pyu_welcome_defector } 
+		provinces_to_highlight = {
+			
+		}
+
+		trigger = {
+			OR = {
+				offensive_war_with = TA1
+				NOT = { exists = TA1 }
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = pyu_pathfinder
+				duration = 7200
+			}
+			TA1 = {
+				remove_country_modifier = mongtai_disorder
+				add_country_modifier = {
+					name = mongtai_end
+					duration = 3650
+				}
+			}
+		}
+	}
+
+}
+
+mt_pyu_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	
+	potential = {
+		OR = {
+			tag = PY5
+			tag = PY1
+		}
+	}
+	has_country_shield = yes
+	
+	pyu_amass_levies = {
+		icon = mission_subdue_the_afghans
+		required_missions = {  }
+		provinces_to_highlight = {
+			
+		}
+
+		trigger = {
+			army_size_percentage = 1
+			manpower_percentage = 0.7
+		}
+
+		effect = {
+			upper_burma_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			central_burma_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	pyu_formidable_conqueror = {
+		icon = mission_rajendras_ambition
+		required_missions = { pyu_amass_levies } 
+		provinces_to_highlight = {
+			OR = {
+				area = upper_burma_area
+				area = central_burma_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			upper_burma_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			central_burma_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+
+		effect = {
+			shan_hill_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			karenni_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+	
+	pyu_end_of_tai_pyu_war = {
+		icon = mission_kanbawzathadi_palace
+		required_missions = { pyu_formidable_conqueror } 
+		provinces_to_highlight = {
+			OR = {
+				area = shan_hill_area
+				area = karenni_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			shan_hill_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			karenni_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+
+		effect = {
+			burma_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_mil_power = 100
+		} 
+	}
+
+}
+
+mt_pyu_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	
+	potential = {
+		OR = {
+			tag = PY5
+			tag = PY1
+		}
+	}
+	has_country_shield = yes
+	
+	pyu_remnant = {
+		icon = mission_kanbawzathadi_palace
+		required_missions = {  } 
+		provinces_to_highlight = {
+			
+		}
+
+		trigger = {
+			if = {
+				limit = {
+					has_estate = estate_nobles
+				}
+				estate_loyalty = {
+					estate = estate_nobles
+					loyalty = 60
+				}
+			}
+			stability = 1
+		}
+
+		effect = {
+			set_estate_privilege = estate_nobles_pyu_reclaimer
+		}
+	}
+	
+	pyu_mon_integration = {
+		icon = mission_rajput_trade_guilds
+		required_missions = { pyu_remnant } 
+		provinces_to_highlight = {
+			OR = {
+			area = lower_burma_area
+			area = north_tenasserim_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			lower_burma_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			north_tenasserim_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+
+		effect = {
+			custom_tooltip = pyu_all_mon_provinces_tt
+			tooltip = {
+				add_province_modifier = {
+					name = mon_integration
+					duration = 9125
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						culture_group = new_mon
+					}
+					add_province_modifier = {
+						name = mon_integration
+						duration = 9125
+					}
+				}
+			}
+		} 
+	}
+	
+	pyu_encourage_intermarriage = {
+		icon = mission_che_the_cave_country
+		required_missions = { pyu_mon_integration } 
+		provinces_to_highlight = {
+			
+		}
+
+		trigger = {
+			NOT = {
+				all_owned_province = {
+					culture_group = new_mon
+					has_province_modifier = mon_integration
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = pyu_all_mon_provinces_tt
+			tooltip = {
+				add_base_manpower = 1
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						culture_group = new_mon
+					}
+					add_base_manpower = 1
+				}
+			}
+			custom_tooltip = empty_line_tt
+			add_dip_power = 100
+		} 
+	}
+
+}
+
+mt_pyu_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	
+	potential = {
+		OR = {
+			tag = PY5
+			tag = PY1
+		}
+	}
+	has_country_shield = yes
+	
+	pyu_teaching_of_ari = {
+		icon = mission_protect_jain_communities
+		required_missions = {  } 
+		provinces_to_highlight = {
+			
+		}
+
+		trigger = {
+			if = {
+				limit = {
+					has_estate = estate_church
+				}
+				estate_loyalty = {
+					estate = estate_church
+					loyalty = 60
+				}
+			}
+			stability = 1
+		}
+
+		effect = {
+			remove_estate_privilege = estate_church_lax_sangha_rule
+		} 
+	}
+	
+	pyu_safe_haven_for_sangha = {
+		icon = mission_end_manipuri_raids
+		required_missions = { pyu_teaching_of_ari } 
+		provinces_to_highlight = {
+			
+		}
+
+		trigger = {
+			if = {
+				limit = {
+					has_estate = estate_church
+				}
+				estate_loyalty = {
+					estate = estate_church
+					loyalty = 60
+				}
+			}
+			stability = 2
+		}
+
+		effect = {
+			remove_estate_privilege = estate_church_devastated_sangha
+		}
+	}
+	
+	pyu_great_sangayana = {
+		icon = mission_protect_lankan_buddhism
+		required_missions = { pyu_safe_haven_for_sangha } 
+		provinces_to_highlight = {
+			
+		}
+
+		trigger = {
+			if = {
+				limit = {
+					has_estate = estate_church
+				}
+				estate_loyalty = {
+					estate = estate_church
+					loyalty = 90
+				}
+				OR = {
+					num_of_estate_agendas_completed = {
+						estate = estate_church
+						value = 4
+					}
+					estate_influence = {
+						estate = estate_church
+						influence = 80
+					}
+				}
+			}
+			stability = 2
+		}
+
+		effect = {
+			complex_dynamic_effect = {
+				first_custom_tooltip = between_33_and_33_karma_tt
+				first_limit = "
+					AND = {
+							karma = -33
+							NOT = { karma = 33 }
+						}
+				"
+				first_effect = "
+					add_country_modifier = {
+						name = PYU_loka_teaching
+						duration = -1
+					}
+					change_adm = 1
+				"
+				second_custom_tooltip = above_33_karma_tt
+				second_limit = "
+					karma = 34
+				"
+				second_effect = "
+					add_country_modifier = {
+						name = PYU_shwegyin_teaching
+						duration = -1
+					}
+						change_dip = 1 
+				"
+				third_custom_tooltip = below_33_karma_tt
+				third_limit = "
+					NOT = { karma = -34 }
+				"
+				third_effect = "
+					add_country_modifier = {
+						name = PYU_ari_teaching
+						duration = -1
+					}
+					change_mil = 1 
+				"
+			}
+		}
+	}
+
+}
+
+mt_pyu_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	
+	potential = {
+		OR = {
+			tag = PY5
+			tag = PY1
+		}
+	}
+	has_country_shield = yes
+	
+	pyu_jade_mine = {
+		icon = mission_zambezi_gold
+		required_missions = {  } 
+		provinces_to_highlight = {
+			province_id = 2396
+			NOT ={
+				has_production_building_trigger = yes
+			}
+			NOT ={
+				base_production = 6
+			}
+		}
+
+		trigger = {
+			2396 = {
+				owned_by = ROOT
+				has_production_building_trigger = yes
+				base_production = 6
+			}
+		}
+
+		effect = {
+			2396 = {
+				add_province_modifier = {
+					name = SEA_kachin_jade_mine
+					duration = -1
+				}
+			}
+		} 
+	}
+	
+	pyu_teakwood_trade = {
+		icon = mission_the_tiger_triumphant
+		required_missions = {  } 
+		provinces_to_highlight = {
+			trade_goods = tropical_wood
+			NOT = {
+				base_production = 5
+			}
+			owned_by = ROOT
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+			trade_goods = tropical_wood
+			base_production = 5
+				value = 10
+			}
+		}
+
+		effect = {
+			custom_tooltip = 10_provinces_fulfilling_requirements_tt
+			tooltip = {
+				add_province_modifier = {
+					name = SEA_teakwood_trade
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				for = {
+					amount = 10
+					effect = "
+					random_owned_province = {
+						limit = {
+							trade_goods = tropical_wood
+							base_production = 5
+						}
+						add_province_modifier = {
+							name = SEA_teakwood_trade
+							duration = -1
+						}
+					}
+					"
+				}
+			}
+		} 
+	}
+	
+	pyu_relics_of_buddha = {
+		icon = mission_conquer_lower_burma_tau
+		required_missions = {  } 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 2399
+				province_id = 609
+				province_id = 4399
+			}
+		}
+
+		trigger = {
+		AND = {
+			2399 = {
+				owned_by = ROOT
+				has_great_project = {
+					type = bagan_temples
+					tier = 2
+				}
+			}
+			4399 = {
+				owned_by = ROOT
+				has_great_project = {
+					type = shwedagon_pagoda
+					tier = 2
+				}
+			}
+			609 = {
+				owned_by = ROOT
+				has_great_project = {
+					type = angkor_wat
+					tier = 2
+				}
+			}
+		}
+		}
+
+		effect = {
+			add_country_modifier = {
+					name = PYU_land_of_temple
+					duration = -1
+				}
+			add_estate_loyalty = {
+				estate = estate_church
+				loyalty = 20
+			}
+		} 
+	}
+
+}
+
+mt_pyu_1_expanded = {
+	slot = 1
+	generic = no
+	ai = yes
+	potential = {
+		tag = PY1
+	}
+	has_country_shield = yes
+	
+	pyu_fortify_shan = {
+		icon = mission_end_the_shan_domination
+		required_missions = { pyu_end_of_tai_pyu_war } 
+		provinces_to_highlight = {
+			area = shan_hill_area
+			owned_by = ROOT
+			NOT = {
+				fort_level = 2
+			}
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				fort_level = 2
+				area = shan_hill_area
+				value = 3
+			}
+		}
+
+		effect = {
+			shan_hill_area = {
+				add_province_modifier = {
+					name = PYU_shan_hill_fortified
+					duration = -1
+				}
+			}
+		} 
+	}
+	
+	pyu_saopha_fate = {
+		icon = mission_suppress_the_saophasa
+		required_missions = { pyu_fortify_shan } 
+		provinces_to_highlight = {
+			
+		}
+
+		trigger = {
+			OR = {
+				owns_all_provinces = {
+					culture = shan
+				}
+				AND = {
+					shan_hill_area = {
+						country_or_non_sovereign_subject_holds = ROOT
+						type = all
+					}
+					karenni_area = {
+						country_or_non_sovereign_subject_holds = ROOT
+						type = all
+					}
+					yun_gui_borderland_area = {
+						country_or_non_sovereign_subject_holds = ROOT
+						type = all
+					}
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = PYU_saopha_curtailed
+				duration = 7300
+			}
+		} 
+	}
+	
+	pyu_meitei = {
+		icon = mission_subdue_rajputana
+		required_missions = { pyu_saopha_fate } 
+		provinces_to_highlight = {
+			
+		}
+
+		trigger = {
+			chindwin_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			tripura_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			naga_hills_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+
+		effect = {
+			assam_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			east_bengal_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			west_bengal_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			north_bengal_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			gaur_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name = PYU_manipuri_raid_end
+				duration = 9125
+			}
+		}
+	}
+	
+	pyu_karen = {
+		icon = mission_hills_of_gondwana
+		required_missions = { pyu_meitei } 
+		provinces_to_highlight = {
+			area = karenni_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		trigger = {
+			karenni_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			any_owned_province = {
+				area = karenni_area
+				fort_level = 2
+			}
+		}
+
+		effect = {
+			karenni_area = {
+				add_province_modifier = {
+					name = PYU_karenni_obedience
+					duration = -1
+				}
+			}
+		} 
+	}
+	
+	pyu_yun = {
+		icon = mission_restore_pagodas
+		required_missions = { pyu_karen }
+		provinces_to_highlight = {
+			area = northern_thai_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			northern_thai_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+
+		effect = {
+			country_event = { id = alb_sea.2 }
+		} 
+	}
+	
+	pyu_lavo = {
+		icon = mission_restore_the_pagan_kingdom
+		position = 10
+		required_missions = { pyu_cherosyne } 
+		provinces_to_highlight = {
+		OR = {
+			area = central_thai_area
+			area = sukhothai_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			central_thai_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			sukhothai_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+
+		effect = {
+		country_event = { id = alb_sea.5 }#event about lavo
+		}
+	}
+	
+}
+
+mt_pyu_2_expanded = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential = {
+		tag = PY1
+	}
+	has_country_shield = yes
+	
+	pyu_waithali = {
+		icon = mission_conquer_arakan
+		required_missions = { pyu_end_of_tai_pyu_war } 
+		provinces_to_highlight = {
+			area = arakan_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			arakan_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = PYU_pirate_remover
+				duration = 18250
+			}
+		} 
+	}
+	
+	pyu_kachin = {
+		icon = mission_a_million_rice_fields
+		required_missions = { pyu_meitei } 
+		position = 7
+		provinces_to_highlight = {
+			OR = {
+				culture = kachin
+				area = kachin_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		trigger = {
+			OR = {
+			owns_all_provinces = {
+				culture = kachin
+			}
+			kachin_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = PYU_kachin_auxilaries
+				duration = 18250
+			}
+		}
+	}
+	
+	pyu_ailao = {
+		icon = mission_a_million_elephants
+		required_missions = { pyu_kachin } 
+		provinces_to_highlight = {
+		OR = {
+			area = north_laos_area
+			area = vientiane_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			north_laos_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			vientiane_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+
+		effect = {
+			add_accepted_culture = lao
+			add_country_modifier = {
+				name = PYU_ailao_crushed
+				duration = 9125
+			}
+		}
+	}
+	
+	pyu_cherosyne = {
+		icon = mission_rule_indochina
+		required_missions = { pyu_yun pyu_ailao } 
+		provinces_to_highlight = {
+		region = indo_china_region
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				region = indo_china_region
+				value = 15
+			}
+		}
+
+		effect = {
+			indo_china_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+	
+	pyu_khmer = {
+		icon = mission_mnd_khm_city_of_temples
+		required_missions = { pyu_cherosyne } 
+		provinces_to_highlight = {
+			OR = {
+				area = cambodia_area
+				area = angkor_area
+				area = champasak_area
+				area = mekong_area
+				area = north_laos_area
+				area = khorat_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			cambodia_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			angkor_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			champasak_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			mekong_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			north_laos_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			khorat_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+
+		effect = {
+			capital_scope = {
+				add_base_manpower = 1
+				add_base_production = 2
+				add_base_tax = 2
+			}
+			custom_tooltip = empty_line_tt
+			champa_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			tay_nguyen_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+	
+	pyu_cham = {
+		icon = mng_expand_bogue
+		required_missions = { pyu_khmer } 
+		provinces_to_highlight = {
+			OR = {
+				area = champa_area
+				area = tay_nguyen_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			champa_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			tay_nguyen_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+		effect = {
+			tenasserim_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			malaya_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			johor_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			north_malaya_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			malacca_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	pyu_malay = {
+		icon = mission_south_indian_trade
+		required_missions = { pyu_cham } 
+		provinces_to_highlight = {
+		OR = {
+				area = tenasserim_area
+				area = malaya_area
+				area = johor_area
+				area = north_malaya_area
+				area = malacca_area
+			}
+		NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			tenasserim_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			malaya_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			johor_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			north_malaya_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			malacca_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+
+		effect = {
+		add_country_modifier = {
+				name = malay_rich
+				duration = -1
+			}
+		} 
+	}
+	
+	pyu_golden_hammer = {
+		icon = mission_mnd_siam_revolution
+		required_missions = { pyu_malay } 
+		provinces_to_highlight = {
+			
+		}
+
+		trigger = {
+			owns_all_provinces = {
+				region = indo_china_region
+			}
+			owns_all_provinces = {
+				region = burma_region
+			}
+			north_tenasserim_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			tenasserim_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			malaya_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			johor_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			north_malaya_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			malacca_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+
+		effect = {
+		add_country_modifier = {
+				name = glided_empire
+				duration = -1
+			}
+		} 
+	}
+	
+}
+
+mt_pyu_3_expanded = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential = {
+		tag = PY1
+	}
+	has_country_shield = yes
+	
+	pyu_repopulate_pyu = {
+		icon = mission_mnd_dai_universities
+		required_missions = { pyu_encourage_intermarriage } 
+		provinces_to_highlight = {
+			OR = {
+				area = upper_burma_area
+				area = central_burma_area
+				area = lower_burma_area
+			}
+			NOT = {
+				AND = {
+					owned_by = ROOT
+					is_core = ROOT
+					num_of_times_improved = 3
+				}
+			}
+		}
+
+		trigger = {
+			upper_burma_area = {
+				owned_by = ROOT
+				is_core = ROOT
+				num_of_times_improved = 3
+				type = all
+			}
+			central_burma_area = {
+				owned_by = ROOT
+				is_core = ROOT
+				num_of_times_improved = 3
+				type = all
+			}
+			lower_burma_area = {
+				owned_by = ROOT
+				is_core = ROOT
+				num_of_times_improved = 3
+				type = all
+			}
+		}
+
+		effect = {
+			upper_burma_area = {
+				add_local_autonomy = -100
+				add_prosperity = 100
+				add_province_modifier = {
+					name = PYU_repopulation
+					duration = 9125
+				}
+			}
+			central_burma_area = {
+				add_local_autonomy = -100
+				add_prosperity = 100
+				add_province_modifier = {
+					name = PYU_repopulation
+					duration = 9125
+				}
+			}
+			lower_burma_area = {
+				add_local_autonomy = -100
+				add_prosperity = 100
+				add_province_modifier = {
+					name = PYU_repopulation
+					duration = 9125
+				}
+			}
+		}
+	}
+	
+	pyu_pike_n_plough = {
+		icon = mission_mnd_khm_protect_the_cham
+		required_missions = { pyu_repopulate_pyu } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			OR = {
+				area = upper_burma_area
+				area = central_burma_area
+				area = lower_burma_area
+			}
+			NOT = { culture = ROOT }
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				OR = {
+					area = upper_burma_area
+					area = central_burma_area
+					area = lower_burma_area
+				}
+				culture = ROOT
+				value = 10
+			}
+		}
+
+		effect = {
+			custom_tooltip = pyu_mian_repopulate_buff_tt
+			tooltip = {
+				add_province_modifier = {
+					name = PYU_loyal_subject_good_taxes
+					duration = 9125
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						culture = ROOT
+						OR = {
+							area = upper_burma_area
+							area = central_burma_area
+							area = lower_burma_area
+						}
+					}
+					add_province_modifier = {
+						name = PYU_repopulation
+						duration = 9125
+					}
+				}
+			}
+		} 
+	}
+	
+	pyu_field_feed_nation = {
+		icon = mission_a_million_rice_fields
+		required_missions = { pyu_pike_n_plough } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			trade_goods = grain
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 10
+				trade_goods = grain
+				OR = {
+					has_production_building_trigger = yes
+					has_building = farm_estate
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = 10_provinces_fulfilling_requirements_tt
+			tooltip = {
+				add_province_modifier = {
+					name = PYU_farmland
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						trade_goods = grain
+						OR = {
+							has_production_building_trigger = yes
+							has_building = farm_estate
+						}
+					}
+					add_province_modifier = {
+						name = PYU_farmland
+						duration = -1
+					}
+				}
+			}
+		} 
+	}
+	
+	pyu_irrawaddy_wtc = {
+		icon = mission_pow_just_around_the_riverbend
+		position = 8
+		required_missions = { pyu_pyu_renaissance } 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 584
+				province_id = 586
+			}
+		}
+
+		trigger = {
+			584 = {
+				owned_by = ROOT
+				province_has_center_of_trade_of_level = 2
+				has_production_building_trigger = yes
+			}
+			586 = {
+				owned_by = ROOT
+				province_has_center_of_trade_of_level = 2
+				has_trade_building_trigger = yes
+				has_dock_building_trigger = yes
+			}
+		}
+
+		effect = {
+			584 = {
+				add_trade_node_income = 50
+				add_trade_modifier = {
+					who = ROOT
+					duration = 10950
+					power = 20
+					key = PYU_merchants_of_the_irrawaddy
+				}
+			}
+			586 = {
+				add_base_production = 2
+				add_or_upgrade_trade_building = yes
+			}
+		} 
+	}
+	
+	pyu_jiaozhi = {
+		icon = mission_mnd_dai_imperial_citadel
+		position = 10
+		required_missions = { pyu_cherosyne } 
+		provinces_to_highlight = {
+			OR = {
+				area = red_river_delta_area
+				area = vietnam_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			red_river_delta_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			vietnam_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+					name = SEM_conquer_frenzy
+					duration = 7300
+				}
+		} 
+	}
+	
+	pyu_orissa = {
+		icon = mission_conquer_orissa_vij
+		position = 12
+		required_missions = { pyu_raid_bengal } 
+		provinces_to_highlight = {
+			OR = {
+				area = orissa_area
+				area = andhra_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			orissa_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			andhra_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+					name = PYU_orissa_landing
+					duration = 7300
+				}
+		} 
+	}
+	
+}
+
+mt_pyu_4_expanded = {
+	slot = 4
+	generic = no
+	ai = yes
+	potential = {
+		tag = PY1
+	}
+	has_country_shield = yes
+	
+	pyu_remember_inwa = {
+		icon = mission_kanbawzathadi_palace
+		required_missions = {  }
+		provinces_to_highlight = {
+			province_id = 584
+		}
+
+		trigger = {
+			584 = {
+				development = 25
+				has_tax_building_trigger = yes
+				has_production_building_trigger = yes
+			}
+		}
+
+		effect = {
+			584 = {
+				remove_province_modifier = mid_size_mandala
+				add_province_modifier = {
+					name = large_size_mandala
+					duration = -1
+				}
+				custom_tooltip = alb_modifier_move_to_new_capital_tt
+				move_capital_effect = yes
+			}
+		} 
+	}
+	
+	pyu_mong_in = {
+		icon = mission_a_great_mandala
+		required_missions = { pyu_remember_inwa } 
+		provinces_to_highlight = {
+			province_id = 584
+		}
+
+		trigger = {
+			584 = {
+				num_of_times_improved_by_owner = 10
+				num_of_times_expanded_infrastructure = 2
+			}
+			num_of_times_used_transfer_development = 5
+		}
+
+		effect = {
+			584 = {
+				remove_province_modifier = mid_size_mandala
+				add_province_modifier = {
+					name = largest_size_mandala
+					duration = -1
+				}
+			}
+			custom_tooltip = alb_modifier_move_to_new_capital_tt
+		} 
+	}
+	
+	pyu_employ_court_poet = {
+		icon = mission_vedic_education
+		required_missions = { pyu_mong_in } 
+		provinces_to_highlight = {
+			
+		}
+
+		trigger = {
+			OR = {
+				employed_advisor = {
+					culture = burmese
+					type = artist
+					skill = 3
+				}
+				employed_advisor = {
+					culture = burmese
+					type = inquisitor
+					skill = 3
+				}
+				employed_advisor = {
+					culture = burmese
+					type = philosopher
+					skill = 3
+				}
+				employed_advisor = {
+					culture = burmese
+					type = theologian
+					skill = 3
+				}
+			}
+			adm_power = 200
+		}
+
+		effect = {
+			add_adm_power = -200
+			complex_dynamic_effect = {
+				first_custom_tooltip = artist_advisor_employed_tt
+				first_limit = "
+					employed_advisor = {
+						type = artist
+					}
+				"
+				first_effect = "
+					add_country_modifier = {
+						name = PYU_poet_artist
+						duration = 36500
+					}
+				"
+				second_custom_tooltip = inquisitor_advisor_employed_tt
+				second_limit = "
+					employed_advisor = {
+						type = inquisitor
+					}
+				"
+				second_effect = "
+					add_country_modifier = {
+						name = PYU_poet_inquisitor
+						duration = 36500
+					}
+				"
+				third_custom_tooltip = philosopher_advisor_employed_tt
+				third_limit = "
+					employed_advisor = {
+						type = philosopher
+					}
+				"
+				third_effect = "
+					add_country_modifier = {
+						name = PYU_poet_philosopher
+						duration = 36500
+					}
+				"
+				fourth_custom_tooltip = theologian_advisor_employed_tt
+				fourth_limit = "
+					employed_advisor = {
+						type = theologian
+					}
+				"
+				fourth_effect = "
+					add_country_modifier = {
+						name = PYU_poet_theologian
+						duration = 36500
+					}
+				"
+			}
+		}
+	}
+	
+	pyu_pyu_renaissance = {
+		icon = mission_patronize_sufi_scholars
+		required_missions = { pyu_field_feed_nation pyu_employ_court_poet pyu_barter_bengal } 
+		provinces_to_highlight = {
+			
+		}
+
+		trigger = {
+			is_ahead_of_time_in_technology = { tech = mil }
+			is_ahead_of_time_in_technology = { tech = dip }
+			is_ahead_of_time_in_technology = { tech = adm }
+			is_lacking_institutions = no
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = PYU_scholarly_hub
+				duration = -1
+			}
+			add_innovativeness_or_monarch_power = {
+				amount = 10
+			}
+		} 
+	}
+	
+	pyu_silk_road_routes = {
+		icon = mission_riches_of_golconda
+		required_missions = { pyu_pyu_renaissance } 
+		provinces_to_highlight = {
+			OR = { 
+				region = indo_china_region 
+				region = burma_region 
+			}
+			NOT = {
+				has_trade_building_trigger = yes
+			}
+			owned_by = ROOT
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				OR = { 
+				region = indo_china_region 
+				region = burma_region 
+				}
+				has_trade_building_trigger = yes
+				value = 10
+			}
+			num_of_owned_provinces_with = {
+				value = 4
+				trade_goods = silk
+			}
+		}
+
+		effect = {
+			custom_tooltip = 5_provinces_fulfilling_requirements_tt
+			tooltip = {
+				upgrade_trade_building = yes
+				add_base_production = 1
+			}
+			custom_tooltip = empty_line_tt
+			custom_tooltip = pyu_3_silk_in_burma_tt
+			hidden_effect = {
+				for = {
+					amount = 3
+					effect = "random_owned_province = {
+						limit = {
+							region = burma_region
+							NOT = {
+								trade_goods = silk
+							}
+							NOT = { province_id = 2396 }
+						}
+						change_trade_goods = silk
+					}"
+				}
+				for = {
+					amount = 5
+					effect = "random_owned_province = {
+						limit = {
+							OR = { 
+							region = indo_china_region 
+							region = burma_region 
+							}
+							has_trade_building_trigger = yes
+						}
+						upgrade_trade_building = yes
+						add_base_production = 1
+					}"
+				}
+			}
+		} 
+	}
+	
+	pyu_thiha_company = {
+		icon = mission_entrepot_of_india
+		required_missions = { pyu_irrawaddy_wtc pyu_silk_road_routes pyu_foster_merchant_class } 
+		provinces_to_highlight = {
+			area = palawan_area
+			area = mindanao_area
+			area = west_mindanao_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+		4815 = {
+				is_strongest_trade_power = ROOT
+			}
+			4815 = {
+				owner = {
+					OR = {
+					has_spy_network_from = {
+					who = ROOT
+					value = 75
+							}
+					has_opinion = {
+						who = ROOT
+						value = 150
+					}
+						}
+					}
+			
+			}
+			
+		}
+		effect = {
+			add_country_modifier = {
+				name = singha_company_deal
+				duration = -1
+			}
+			4815 = {
+				add_province_modifier = {
+					name = singha_company
+					duration = -1
+				}
+			}
+		}
+	}
+	
+	pyu_raid_bengal = {
+		icon = mission_end_arakan_piracy
+		position = 11
+		required_missions = { } 
+		provinces_to_highlight = {
+			OR = {
+				area = assam_area
+				area = east_bengal_area
+				area = west_bengal_area
+				area = north_bengal_area
+				area = gaur_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			assam_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			east_bengal_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			north_bengal_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+					name = PYU_raid_bengal
+					duration = 7300
+				}
+			bengal_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			coromandel_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	pyu_chola = {
+		icon = mission_the_chola_campaigns
+		required_missions = { pyu_raid_bengal } 
+		provinces_to_highlight = {
+			region = coromandel_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			coromandel_region = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+					name = PYU_chola_crushed
+					duration = 7300
+				}
+			deccan_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	pyu_empire_of_light = {
+		icon = mission_persianate_empire
+		required_missions = { pyu_orissa pyu_chola pyu_bengal } 
+		provinces_to_highlight = {
+			owned_by = LE0
+		}
+
+		trigger = {
+			OR = {
+				AND = {
+					has_won_war_against = {
+						who = LE0
+					}
+					is_rival = LE0
+				}
+				NOT = { exists = LE0 }
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+					name = PYU_to_dim_the_light
+					duration = -1
+				}
+			hindusthan_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			west_india_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+	
+}
+
+mt_pyu_5_expanded = {
+	slot = 5
+	generic = no
+	ai = yes
+	potential = {
+		tag = PY1
+	}
+	has_country_shield = yes
+	
+	pyu_rebuild_valley = {
+		icon = mission_mnd_maj_candi_shrines
+		position = 5
+		required_missions = { pyu_remember_inwa } 
+		provinces_to_highlight = {
+			OR = {
+				area = upper_burma_area
+				area = central_burma_area
+				area = lower_burma_area
+			}
+			NOT = {
+				AND = {
+					owned_by = ROOT
+					is_core = ROOT
+					has_tax_building_trigger = yes
+				}
+			}
+		}
+
+		trigger = {
+			upper_burma_area = {
+				owned_by = ROOT
+				is_core = ROOT
+				has_tax_building_trigger = yes
+				type = all
+			}
+			central_burma_area = {
+				owned_by = ROOT
+				is_core = ROOT
+				has_tax_building_trigger = yes
+				type = all
+			}
+			lower_burma_area = {
+				owned_by = ROOT
+				is_core = ROOT
+				has_tax_building_trigger = yes
+				type = all
+			}
+		}
+
+		effect = {
+			add_years_of_owned_provinces_production_income = {
+				years = 5
+				trigger = {
+					OR = {
+						area = upper_burma_area
+						area = central_burma_area
+						area = lower_burma_area
+					}
+					has_tax_building_trigger = yes
+				}
+				custom_tooltip = PYU_first_tax_season_TT
+			}
+		}
+	}
+	pyu_barter_bengal = {
+		icon = mission_malayan_viceroyalty
+		required_missions = { pyu_rebuild_valley } 
+		provinces_to_highlight = {
+		province_id = 563
+		}
+
+		trigger = {
+			563 = {
+				is_strongest_trade_power = ROOT
+			}
+		}
+
+		effect = {
+			add_mercantilism = 5
+			586 = {
+				add_trade_modifier = {
+					who = root
+					duration = 7300
+					power = 20
+					key = bengal_route
+				}
+			}
+			4399 = {
+				add_trade_modifier = {
+					who = root
+					duration = 7300
+					power = 20
+					key = bengal_route
+				}
+			}
+			568 = {
+				add_trade_modifier = {
+					who = root
+					duration = 7300
+					power = 20
+					key = bengal_route
+				}
+			}
+			584 = {
+				add_trade_modifier = {
+					who = root
+					duration = 7300
+					power = 20
+					key = bengal_route
+				}
+			}
+		}
+	}
+	
+	pyu_foster_merchant_class = {
+		icon = mission_establish_mint_towns
+		position = 8
+		required_missions = { pyu_pyu_renaissance } 
+		provinces_to_highlight = {
+			
+		}
+
+		trigger = {
+			if = {
+				limit = {
+					has_estate = estate_burghers
+				}
+				estate_loyalty = {
+					estate = estate_burghers
+					loyalty = 60
+				}
+				num_of_estate_agendas_completed = {
+					estate = estate_burghers
+					value = 4
+				}
+			}
+			share_of_starting_income = 5
+		}
+
+		effect = {
+			set_estate_privilege = estate_burghers_pyu_jade_zeya
+		}
+	}
+	
+	pyu_bengal = {
+		icon = mission_unite_bengal
+		position = 12
+		required_missions = { pyu_raid_bengal } 
+		provinces_to_highlight = {
+		region = bengal_region
+		NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		NOT = { has_tax_building_trigger = yes }
+		}
+
+		trigger = {
+			bengal_region = {
+				owned_by = ROOT
+				is_core = ROOT
+				type = all
+			}
+		}
+
+		effect = {
+			add_years_of_owned_provinces_production_income = {
+				years = 10
+				trigger = {
+					region = bengal_region
+				}
+				custom_tooltip = PYU_bled_bengal_dry_TT
+			}
+		}
+	}
+
+}

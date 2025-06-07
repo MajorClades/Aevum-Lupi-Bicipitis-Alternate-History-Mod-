@@ -1,0 +1,81 @@
+country_decisions = {
+	KH0_decision = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			NOT = { has_country_flag = formed_KH0 }
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			was_never_end_game_tag_trigger = yes
+			AND = {
+				culture_group = southeastasian_group
+				NOT = { primary_culture = khom }
+			}
+			NOT = { exists = KH0 }
+			NOT = { tag = KH1 }
+		}
+		provinces_to_highlight = {
+			OR = {
+					area = angkor_area
+					area = cambodia_area
+					area = mekong_area
+					area = champasak_area
+					area = champa_area
+					area = khorat_area
+					area = vientiane_area
+								}
+			NOT = { owned_by = ROOT }
+		}
+		allow = {
+			is_nomad = no
+			is_at_war = no
+			angkor_area = {
+				owned_by = ROOT
+			}
+			cambodia_area = {
+				owned_by = ROOT
+			}
+			mekong_area = {
+				owned_by = ROOT
+			}
+			champa_area = {
+				owned_by = ROOT
+			}
+			khorat_area = {
+				owned_by = ROOT
+			}
+			champasak_area = {
+				owned_by = ROOT
+			}
+			vientiane_area = {
+				owned_by = ROOT
+			}
+		}
+		effect = {
+			change_tag = KH0
+			swap_non_generic_missions = yes
+			add_prestige = 25
+			if = {
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			if = {
+				limit = {
+					NOT = { government_rank = 2 }
+				}
+				set_government_rank = 2
+			}
+			add_country_modifier = {
+				name = centralization_modifier
+				duration = 3650
+			}
+			set_country_flag = formed_KH0
+		}		
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+}
