@@ -1146,18 +1146,22 @@ christian = {
 					}
 				}
 			}
-			forgiveness_for_usury = {
+			pont_more_taxation = {
 				cost = 50
 				potential = {
 					NOT = { tag = PA0 }
 				}
 				allow = {
 					NOT = { war_with = PA0 }
-					NOT = { has_country_modifier = usury_forgiven }
+					NOT = { has_country_modifier = pont_more_monetary_tax }
 				}
 				effect = {
+					define_advisor = {
+						type = treasurer
+						skill = 3
+					}
 					add_country_modifier = {
-						name = "usury_forgiven"
+						name = "pont_more_monetary_tax"
 						duration = 7300
 					}
 				}
@@ -1169,7 +1173,7 @@ christian = {
 					}
 				}
 			}			
-			proclaim_holy_war = {
+			pont_proclaim_holy_war = {
 				cost = 50
 				potential = {
 					NOT = { tag = PA0 }
@@ -1177,11 +1181,11 @@ christian = {
 				allow = {
 					is_at_war = yes
 					NOT = { war_with = PA0 }
-					NOT = { has_country_modifier = papal_sanction_for_holy_war }
+					NOT = { has_country_modifier = pont_war_front_priests }
 				}
 				effect = {
 					add_country_modifier = {
-						name = "papal_sanction_for_holy_war"
+						name = "pont_war_front_priests"
 						duration = 7300
 					}
 				}
@@ -1213,24 +1217,24 @@ christian = {
 					factor = 1
 				}
 			}	
-			sanction_commercial_monopoly = {
-				cost = 50
+			pont_cathedral_city = {
+				cost = 100
 				potential = {
 					NOT = { tag = PA0 }
 				}
 				allow = {
 					NOT = { war_with = PA0 }
-					NOT = { mercantilism = 100 }
+					capital_scope = {
+						controlled_by = owner
+					}
 				}
 				effect = {
-					add_mercantilism = 1
+					capital_scope = {
+						add_or_upgrade_tax_building = yes
+					}
 				}
 				ai_will_do = {
 					factor = 1
-					modifier = {
-						factor = 0
-						NOT = { has_idea_group = trade_ideas }
-					}
 				}
 			}
 			pont_increase_influence = { #it say it's an error but it does work
