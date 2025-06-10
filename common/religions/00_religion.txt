@@ -1067,37 +1067,39 @@ christian = {
 			}
 			# Papal Actions below!
 			
-			levy_church_tax = {
+			pont_get_direct_payment = {
 				cost = 50
 				potential = {
 					NOT = { tag = PA0 }
 				}
 				allow = {
 					NOT = { war_with = PA0 }
-					NOT = { has_country_modifier = papal_sanction_for_church_taxes }
+					NOT = { has_country_modifier = pontifex_got_money }
 				}
 				effect = {
+					add_years_of_income = 1
 					add_country_modifier = {
-						name = "papal_sanction_for_church_taxes"
+						name = "pontifex_got_money"
 						duration = 7300
+						hidden = yes
 					}
 				}
 				ai_will_do = {
 					factor = 1
 				}				
 			}			
-			bless_monarch = {
+			pont_influence_government = {
 				cost = 50
 				potential = {
 					NOT = { tag = PA0 }
 				}
 				allow = {
 					NOT = { war_with = PA0 }
-					NOT = { has_country_modifier = papal_blessing }
+					NOT = { has_country_modifier = papal_advisory_pont }
 				}
 				effect = {
 					add_country_modifier = {
-						name = "papal_blessing"
+						name = "papal_advisory_pont"
 						duration = 7300
 					}
 				}
@@ -1240,9 +1242,20 @@ christian = {
 				}
 				allow = {
 					is_papal_controller = yes
+					custom_trigger_tooltip = {
+						tooltip = "Last used 10 years ago"
+						NOT = { has_country_modifier = pontifex_got_money }
+					}
 				}
 				effect = {
 					add_imperial_influence = 5
+					hidden_effect = {
+						add_country_modifier = {
+							name = "pontifex_got_money"
+							duration = 3650
+							hidden = yes
+						}
+					}
 				}
 				ai_will_do = {
 					factor = 0
