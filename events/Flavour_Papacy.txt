@@ -174,108 +174,6 @@ country_event = { #reasonable response
 	}
 }
 
-country_event = { #change
-	id = papacy.5
-	title = papacy.5.t
-	desc = papacy.5.d
-	picture = POPE_PREACHING_eventPicture
-	
-	trigger = {
-		always = no #Religious leagues event already does this
-	}
-
-	mean_time_to_happen = {
-		months = 24
-	}
-	option = {
-		name = papacy.5a
-		change_tag = PA0
-		change_religion = pontifex
-		custom_tooltip = PAP_WAR_IN_EARTH_2
-		hidden_effect = {
-			set_country_flag = papal_favor_var_set
-			set_variable = {
-				which = papal_favor_var
-				value = 0
-			}
-			every_owned_province = {
-				limit = {
-					religion = catholic
-				}
-				change_religion = pontifex
-			}
-			every_subject_country = {
-				limit = {
-					religion = catholic
-				}
-				change_religion = pontifex
-				every_owned_province = {
-					limit = {
-						religion = catholic
-					}
-					change_religion = pontifex
-				}
-			}
-			every_known_country = {
-				limit = {
-					has_opinion = {
-						who = ROOT
-						value = 130
-					}
-				}
-				change_religion = pontifex
-				every_owned_province = {
-					limit = {
-						religion = catholic
-					}
-					change_religion = pontifex
-				}
-			}
-		}
-	}
-	option = {
-		name = papacy.5b
-		change_tag = PA0
-		change_religion = pontifex
-		custom_tooltip = PAP_WAR_IN_EARTH_3
-		hidden_effect = {
-			every_owned_province = {
-				limit = {
-					religion = catholic
-				}
-				change_religion = pontifex
-			}
-			every_subject_country = {
-				limit = {
-					religion = catholic
-				}
-				change_religion = pontifex
-				every_owned_province = {
-					limit = {
-						religion = catholic
-					}
-					change_religion = pontifex
-				}
-			}
-			every_known_country = {
-				limit = {
-					has_opinion = {
-						who = ROOT
-						value = 180
-					}
-				}
-				change_religion = pontifex
-				every_owned_province = {
-					limit = {
-						religion = catholic
-					}
-					change_religion = pontifex
-				}
-			}
-		}
-	}
-}
-
 country_event = { #select the next POPE
 	id = papacy.6
 	title = papacy.6.t
@@ -414,23 +312,28 @@ country_event = { #expand Pontifexian, anger the Emperor
 			}
 			custom_tooltip = PAP_TT_2
 			hidden_effect = {
-				every_owned_province = {
+				if = {
 					limit = {
 						religion = catholic
 					}
 					change_religion = pontifex
+				}
+				every_owned_province = {
+					limit = {
+						religion = catholic
+					}
+					random_list = {
+						75 = {}
+						25 = {
+							change_religion = pontifex
+						}
+					}
 				}
 				every_subject_country = {
 					limit = {
 						religion = catholic
 					}
 					change_religion = pontifex
-					every_owned_province = {
-						limit = {
-							religion = catholic
-						}
-						change_religion = pontifex
-					}
 				}
 			}
 		}
@@ -829,20 +732,14 @@ country_event = { #Pontifex flavor events
 		NOT = {
 			tag = PA0
 		}
-		check_variable = {
-			which = papal_favor_var
-			value = 5
-		}
+		papal_influence = 25
 	}
 	mean_time_to_happen = {
 		months = 200
 	}
 	option = {
 		name = papacy.1001a
-		subtract_variable = {
-			which = papal_favor_var
-			value = 5
-		}
+		add_papal_influence = -25
 	}
 	option = {
 		name = papacy.1001b
@@ -856,10 +753,7 @@ country_event = { #Pontifex flavor events
 		}
 		add_adm_power = -25
 		add_dip_power = -25
-		change_variable = {
-			which = papal_favor_var
-			value = 5
-		}
+		add_papal_influence = 25
 	}
 }
 
@@ -873,16 +767,14 @@ country_event = { #Pontifex flavor events
 		NOT = {
 			tag = PA0
 		}
+		
 	}
 	mean_time_to_happen = {
 		months = 200
 	}
 	option = {
 		name = papacy.1002a
-		change_variable = {
-			which = papal_favor_var
-			value = 5
-		}
+		add_papal_influence = 25
 	}
 	option = {
 		name = papacy.1002b
@@ -894,26 +786,7 @@ country_event = { #Pontifex flavor events
 			full_idea_group = religious_ideas
 		}
 		add_adm_power = 50
-		change_variable = {
-			which = papal_favor_var
-			value = 5
-		}
+		add_papal_influence = 25
 	}
 }
 
-country_event = { #peace or war pope
-	id = papacy.1003
-	title = papacy.1003.t
-	desc = papacy.1003.d
-	picture = POPE_PREACHING_eventPicture
-	is_triggered_only = yes
-	option = {
-		name = papacy.1003a
-		set_ruler_flag = pontifex_nice_flag
-	}
-	option = {
-		name = papacy.1003b
-		set_ruler_flag = pontifex_naughty_flag
-	}
-
-}
