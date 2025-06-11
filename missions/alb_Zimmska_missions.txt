@@ -1005,12 +1005,8 @@ ZL0_second_2_slot = {
 				}
 				crown_land_share = 70
 			}
-			NOT = {
-				any_owned_province = {
-					NOT = {
-						development = 7
-					}
-				}
+			all_owned_province = {
+				development = 7
 			}
 		} 
 
@@ -1214,30 +1210,62 @@ ZL0_second_3_slot = {
 			complex_dynamic_effect = {
 				first_custom_tooltip = alb_zim_friends_with_serb_tt
 				first_limit = "
-					SE0 = {
-						has_opinion = {
-							who = ROOT
-							value = 180
-						}	
+					OR = {
+						SE9 = {
+							has_opinion = {
+								who = ROOT
+								value = 180
+							}	
+						}
+						SE0 = {
+							has_opinion = {
+								who = ROOT
+								value = 180
+							}	
+						}
 					}
 				"
 				first_effect = "
-					add_historical_friend = SE0
+					if = {
+						limit = {
+							exists = SE9
+						}
+						add_historical_friend = SE9
+						SE9 = {
+							add_historical_friend = ROOT
+							add_country_modifier = {
+								name = alb_zim_slav_brothers
+								duration = -1
+							}
+						} 
+					}
+					else = {
+						add_historical_friend = SE0
+						SE0 = {
+							add_historical_friend = ROOT
+							add_country_modifier = {
+								name = alb_zim_slav_brothers
+								duration = -1
+							}
+						}
+					}
 					add_country_modifier = {
 						name = alb_zim_slav_brothers
 						duration = -1
 					}
-					SE0 = {
-						add_historical_friend = ROOT
-						add_country_modifier = {
-							name = alb_zim_slav_brothers
-							duration = -1
-						}
-					} 
 				"
 				second_custom_tooltip = alb_zim_enemies_with_serb_tt
 				second_limit = "
-					AND = {
+					if = {
+						limit = {
+							exists = SE9
+						}
+						is_rival = SE9
+						SE9 = {
+							has_been_insulted_by_root = yes
+						}
+					}
+					else = {
 						is_rival = SE0
 						SE0 = {
 							has_been_insulted_by_root = yes
@@ -1245,15 +1273,30 @@ ZL0_second_3_slot = {
 					}
 				"
 				second_effect = "
-					add_casus_belli = {
-						type = cb_claim_throne
-						target = SE0
-						months = 360
+					if = {
+						limit = {
+							exists = SE9
+						}
+						add_casus_belli = {
+							type = cb_claim_throne
+							target = SE9
+							months = 360
+						}
+					}
+					else = {
+						add_casus_belli = {
+							type = cb_claim_throne
+							target = SE0
+							months = 360
+						}
 					}
 				"
 				third_custom_tooltip = alb_zim_no_serb_tt
 				third_limit = "
 					SE0 = {
+						exists = no
+					}
+					SE9 = {
 						exists = no
 					}
 				"
@@ -1522,10 +1565,8 @@ ZL0_second_4_slot = {
 		effect = {  
 			if = {
 				limit = {
-					NOT = {
-						any_great_power = {
-							navy_size = ROOT
-						}
+					any_great_power = { #test
+						navy_size = ROOT
 					}
 				}
 				custom_tooltip = alb_zim_nogp_bettr_navy_yes_tt

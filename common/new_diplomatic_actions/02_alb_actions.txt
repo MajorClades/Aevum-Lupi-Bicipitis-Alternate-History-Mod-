@@ -1,0 +1,620 @@
+
+help_cathkin_action = {
+	category = relation
+
+	is_visible = {
+		has_reform = papacy_reform
+    }
+	require_acceptance = no
+	is_allowed = {
+		curia_treasury_size = 500
+		is_at_war = no
+		FROM = {
+			religion = catholic
+			at_war_with_religious_enemy = yes
+			custom_trigger_tooltip = {
+				tooltip = "Wasn't helped in the last 10 years."
+				has_country_modifier = pap_given_ducats
+			}
+		}
+    }
+	on_accept = {
+		FROM = {
+			add_treasury = 500
+			add_trust = {
+				who = ROOT
+				value = 10
+			}
+			hidden_effect = {
+				add_country_modifier = {
+					name = pap_given_ducats
+					duration = 3650
+					hidden = yes
+				}
+			}
+		}
+		ROOT = {
+			add_curia_treasury = -500
+		}
+    }
+
+	ai_will_do = {
+		ROOT = {
+			has_opinion = {
+				who = FROM
+				value = 50
+			}
+		}
+    }
+}
+
+papal_vassalization_action = {
+	category = influence
+
+	is_visible = {
+		OR = {
+			tag = PAP
+			was_tag = PAP
+		}
+		FROM = {
+			NOT = {
+				is_subject_of_type = papal_vassal
+			}
+		}
+    }
+	is_allowed = {
+		if = {
+			limit = {
+				religion = catholic
+			}
+			stability = 1
+		}else = {
+			check_variable = {
+				which = papal_favor_var
+				value = 20
+			}
+		}
+		is_at_war = no
+		FROM = {
+			religion = ROOT
+			is_subject_of = ROOT
+		}
+    }
+	
+	on_accept = {
+		if = {
+			limit = {
+				religion = catholic
+			}
+			add_stability = -1
+		}else = {			
+			subtract_variable = {
+				which = papal_favor_var
+				value = 20
+			}
+		}
+		ROOT = {
+			create_subject = {
+				who = FROM
+				subject_type = papal_vassal
+			}
+		}
+		FROM = {
+			set_country_flag = is_papal_emissary_flag
+			if = {
+				limit = {
+					FROM = {
+						tag = SO0
+					}
+				}
+				override_country_name = SOXONY_PAP_NAME
+			}
+			if = {
+				limit = {
+					FROM = {
+						tag = CO0
+					}
+				}
+				override_country_name = COTIA_PAP_NAME
+			}
+			if = {
+				limit = {
+					FROM = {
+						tag = AF0
+					}
+				}
+				override_country_name = AFRICA_MARK_NAME
+			}
+			if = {
+				limit = {
+					FROM = {
+						tag = RU0
+					}
+				}
+				override_country_name = RHOMANIA_PAP_NAME
+			}
+			if = {
+				limit = {
+					FROM = {
+						tag = AE0
+					}
+				}
+				override_country_name = BLU_EGITTO_NAME
+				change_country_color = {
+					country = LT2
+				}
+			}
+		}
+    }
+
+	ai_will_do = {
+		always = yes
+    }
+}
+
+papal_integrate_action = {
+	category = influence
+
+	is_visible = {
+		OR = {
+			tag = PAP
+			was_tag = PAP
+		}
+		if = {
+			limit = {
+				has_country_flag = easy_integration_pap_flag
+			}
+			OR = {
+				FROM = {
+					is_subject_of = PAP
+				}
+				FROM = {
+					is_subject_of = PA0
+				}
+			}
+		}else = {
+			FROM = {
+				is_subject_of_type = papal_vassal
+			}
+		}
+    }
+	is_allowed = {
+		stability = 1
+		is_at_war = no
+		FROM = {
+			NOT = {
+				liberty_desire = 40
+			}
+			has_opinion = {
+				who = ROOT
+				value = 150
+			}
+			custom_trigger_tooltip = {
+				tooltip = PAPAL_EMISSARY_TR
+				had_country_flag = {
+					flag = is_papal_emissary_flag
+					days = 3650
+				}
+			}
+		}
+    }
+	
+	on_accept = {
+		ROOT = {
+			add_stability = -1
+			add_devotion = -25
+			inherit = FROM
+		}
+    }
+
+	ai_will_do = {
+		always = yes
+    }
+}
+
+
+pontifex_expansion_action = {
+	category = influence
+
+	is_visible = {
+		tag = PA0
+		hre_leagues_enabled = yes
+		FROM = {
+			is_subject = no
+			religion = catholic
+		}
+    }
+	is_allowed = {
+		is_at_war = no
+		FROM = {
+			is_emperor = no
+			is_subject = no
+			religion = catholic
+			has_opinion = {
+				who = ROOT
+				value = 180
+			}
+		}
+    }
+	
+	on_accept = {
+		FROM = {
+			join_league = pontifex
+			change_religion = pontifex
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						religion = catholic
+					}
+					change_religion = pontifex
+				}
+				every_subject_country = {
+					limit = {
+						religion = catholic
+					}
+					change_religion = pontifex
+					every_owned_province = {
+						limit = {
+							religion = catholic
+						}
+						change_religion = pontifex
+					}
+				}
+			}
+		}
+    }
+
+	ai_will_do = {
+		always = yes
+    }
+}
+
+alb_export_grain = {
+	category = economy
+
+	require_acceptance = yes
+
+	alert_index = 63
+	alert_tooltip = export_grain_alert_tooltip
+
+	is_visible = {
+		has_country_flag = pannonia_enable_export_grain_dip_action_flag
+	}
+	is_allowed = {
+		if = {
+			limit = {
+				NOT = {
+					OR = {
+						alliance_with = FROM 
+						FROM = { is_subject_of = ROOT }
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = REQUIRES_ALLIANCE_OR_SUBJECT_TT
+				OR = {
+					alliance_with = FROM 
+					FROM = { is_subject_of = ROOT }
+				}
+			}
+		}
+		if = {
+			limit = {
+				FROM = { has_ruler_flag = trading_grain_exports_flag }
+			}
+			custom_trigger_tooltip = {
+				tooltip = is_already_trading_grain_tt
+				FROM = { 
+					NOT = { has_ruler_flag = trading_grain_exports_flag }
+				}
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					any_owned_province = {
+						province_distance = {
+							who = FROM
+							distance = 150
+						}
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = must_be_within_distance_tt
+				any_owned_province = {
+					province_distance = {
+						who = FROM
+						distance = 150
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				calc_true_if = {
+					all_country = {
+						has_ruler_flag = trading_grain_exports_flag
+					}
+					amount = 4
+				}
+				NOT = { has_country_flag = increase_exports_to_6_flag }
+			}
+			custom_trigger_tooltip = {
+				tooltip = mam_no_more_than_4_trades_tt
+				NOT = {
+					calc_true_if = {
+						all_country = {
+							has_ruler_flag = trading_grain_exports_flag
+						}
+						amount = 4
+					}
+				}
+			}
+		}
+		else = {
+			custom_trigger_tooltip = {
+				tooltip = mam_no_more_than_6_trades_tt
+				NOT = {
+					calc_true_if = {
+						all_country = {
+							has_ruler_flag = trading_grain_exports_flag
+						}
+						amount = 6
+					}
+				}
+			}
+		}
+		if = {
+			limit = { 
+				NOT = { adm_power = 50 }
+			}
+			custom_trigger_tooltip = {
+				tooltip = NOT_ENOUGH_RESOURCES
+				adm_power = 50
+			}
+		}
+	}
+	on_accept = {
+		FROM = {
+			set_ruler_flag = trading_grain_exports_flag
+			add_ruler_modifier = {
+				name = grain_trade_imports_modifier
+				duration = -1
+			}
+			add_opinion = {
+				who = ROOT
+				modifier = engaged_in_grain_trade_modifier
+			}
+		}
+		if = {
+			limit = {
+				NOT = { has_country_flag = exported_grain_in_europe }
+				FROM = {
+					capital_scope = {
+						continent = europe 
+					}
+				}
+			}
+			set_country_flag = exported_grain_in_europe
+		}
+		if = {
+			limit = {
+				NOT = { has_country_flag = exported_grain_in_oceania }
+				FROM = {
+					capital_scope = {
+						continent = oceania 
+					}
+				}
+			}
+			set_country_flag = exported_grain_in_oceania
+		}
+		if = {
+			limit = {
+				NOT = { has_country_flag = exported_grain_in_north_america }
+				FROM = {
+					capital_scope = {
+						continent = north_america 
+					}
+				}
+				
+			}
+			set_country_flag = exported_grain_in_north_america
+		}
+		if = {
+			limit = {
+				NOT = { has_country_flag = exported_grain_in_south_america }
+				FROM = {
+					capital_scope = {
+						continent = south_america 
+					}
+				}
+				
+			}
+			set_country_flag = exported_grain_in_south_america
+		}
+		if = {
+			limit = {
+				NOT = { has_country_flag = exported_grain_in_africa }
+				FROM = {
+					capital_scope = {
+						continent = africa 
+					}
+				}
+			}
+			set_country_flag = exported_grain_in_africa
+		}
+		if = {
+			limit = {
+				NOT = { has_country_flag = exported_grain_in_asia }
+				FROM = {
+					capital_scope = {
+						continent = asia 
+					}
+				}
+			}
+			set_country_flag = exported_grain_in_asia
+		}
+		add_adm_power = -50
+		add_mercantilism = 2
+	}
+	on_decline = {
+		add_prestige_or_monarch_power = { amount = -10 }
+		FROM = {
+			add_country_modifier = {
+				name = just_asked_to_convert_timer
+				duration = 18250
+			}
+		}
+	}
+
+	ai_will_do = { # this is a trigger
+		NOT = {
+			FROM = {
+				has_country_modifier = just_asked_to_convert_timer
+			}
+		}
+		OR = {
+			ai_attitude = {
+				who = FROM
+				attitude = attitude_friendly
+			}
+			ai_attitude = {
+				who = FROM
+				attitude = attitude_loyal
+			}
+			ai_attitude = {
+				who = FROM
+				attitude = attitude_allied
+			}
+			ai_attitude = {
+				who = FROM
+				attitude = attitude_protective
+			}
+		}
+		NOT = {
+			ai_attitude = {
+				who = FROM
+				attitude = attitude_domineering
+			}
+		}
+		NOT = {
+			ai_attitude = {
+				who = FROM
+				attitude = attitude_hostile
+			}
+		}
+		NOT = {
+			ai_attitude = {
+				who = FROM
+				attitude = attitude_outraged
+			}
+		}
+		has_opinion = {
+			who = FROM
+			value = 50
+		}
+	}
+
+	ai_acceptance = {
+        add_entry = {
+            name = DIPLO_OPPINION
+			export_to_variable = {
+				variable_name = ai_value
+				value = opinion
+				who = FROM
+				with = ROOT
+			}
+			multiply_variable = {
+				which = ai_value 
+				value = 0.125
+			}
+        }
+		add_entry = {
+			name = AI_TRUST_TOWARDS_ROOT
+			export_to_variable = {
+				variable_name = ai_value
+				value = trust
+				who = FROM
+				with = ROOT
+			}			
+			subtract_variable = { 
+				which = ai_value
+				value = 50
+			}
+			#1 trust = +4 ai points
+			multiply_variable = {
+				which = ai_value
+				value = 0.4
+			}
+		}
+		add_entry = {
+			name = AI_DIPLOMATIC_REPUTATION
+			export_to_variable = {
+				variable_name = ai_value
+				value = trigger_value:diplomatic_reputation
+			}
+			#1 rep = 3
+			multiply_variable = {
+				which = ai_value
+				value = 3
+			}
+		}
+		add_entry = {
+			name = attitude_neutral_DIPLO_ATTITUDE_TT
+			limit = { FROM = { ai_attitude = { who = ROOT attitude = attitude_neutral } } }
+			export_to_variable = { variable_name = ai_value value = 1 }
+			multiply_variable = { which = ai_value value = -10 }
+		}
+		add_entry = {
+			name = attitude_rivalry_DIPLO_ATTITUDE_TT
+			limit = { FROM = { ai_attitude = { who = ROOT attitude = attitude_rivalry } } }
+			export_to_variable = { variable_name = ai_value value = 1 }
+			multiply_variable = { which = ai_value value = -1000 }
+		}
+		add_entry = {
+			name = attitude_hostile_DIPLO_ATTITUDE_TT
+			limit = { FROM = { ai_attitude = { who = ROOT attitude = attitude_hostile } } }
+			export_to_variable = { variable_name = ai_value value = 1 }
+			multiply_variable = { which = ai_value value = -1000 }
+		}
+		add_entry = {
+			name = attitude_friendly_DIPLO_ATTITUDE_TT
+			limit = { FROM = { ai_attitude = { who = ROOT attitude = attitude_friendly } } }
+			export_to_variable = { variable_name = ai_value value = 1 }
+			multiply_variable = { which = ai_value value = 20 }
+		}
+		add_entry = {
+			name = attitude_threatened_DIPLO_ATTITUDE_TT
+			limit = { FROM = { ai_attitude = { who = ROOT attitude = attitude_threatened } } }
+			export_to_variable = { variable_name = ai_value value = 1 }
+			multiply_variable = { which = ai_value value = 20 }
+		}
+		add_entry = {
+			name = attitude_outraged_DIPLO_ATTITUDE_TT
+			limit = { FROM = { ai_attitude = { who = ROOT attitude = attitude_outraged } } }
+			export_to_variable = { variable_name = ai_value value = 1 }
+			multiply_variable = { which = ai_value value = -1000 }
+		}
+		add_entry = {
+			name = attitude_domineering_DIPLO_ATTITUDE_TT
+			limit = { FROM = { ai_attitude = { who = ROOT attitude = attitude_domineering } } }
+			export_to_variable = { variable_name = ai_value value = 1 }
+			multiply_variable = { which = ai_value value = -1000 }
+		}
+		add_entry = {
+			name = DIPLO_BORDER_DISTANCE_TT
+			export_to_variable = {
+				variable_name = ai_value
+				value = border_distance
+				who = FROM
+				with = ROOT
+			}
+			#5 units = -1
+			multiply_variable = {
+				which = ai_value
+				value = -0.2
+			}
+		}
+	}
+}
