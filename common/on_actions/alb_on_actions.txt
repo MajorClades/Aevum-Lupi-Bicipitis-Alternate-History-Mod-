@@ -1364,6 +1364,31 @@ on_buy_religious_reform = {
 	}
 }
 
+
+on_secondary_religion_change = {
+	remove_country_modifier = krc_shinto_secondary_bonus
+	remove_country_modifier = krc_kamuy_secondary_bonus
+	if = {
+		limit = {
+			has_country_flag = shinto_secondary_bonus_flag
+			secondary_religion = shinto
+		}
+		add_country_modifier = {
+			name = krc_shinto_secondary_bonus
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			has_country_flag = kamuy_secondary_bonus_flag
+			secondary_religion = kamuyramat
+		}
+		add_country_modifier = {
+			name = krc_kamuy_secondary_bonus
+			duration = -1
+		}
+	}
+}
 on_parliament_debate_succeeded = {
 	if = {
 		limit = {

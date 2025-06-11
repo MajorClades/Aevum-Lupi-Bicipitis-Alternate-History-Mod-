@@ -2,59 +2,739 @@ korchin_1_slot = {
 	slot = 1
 	generic = no
 	ai = yes
+	has_country_shield = yes
 	potential = {
 		OR = {
 			tag = KRC
-			tag = YUA
+			AND = {
+				tag = YUA
+				was_tag = KRC
+			}
 		}
 	}
-	has_country_shield = yes
+
+	krc_sieze_furdan = {
+		icon = mission_russian_navy
+		position = 2
+		provinces_to_highlight = {  
+			province_id = 2106
+			NOT = {
+				is_core = ROOT
+			}
+		} 
+
+		trigger = {  
+			owns_core_province = 2106
+		} 
+
+		effect = {  
+			2106 = {
+				add_or_upgrade_trade_building = yes
+				custom_tooltip = empty_line_tt
+				change_culture = ROOT
+				change_religion = ROOT
+			}
+		} 
+	}
+
+	krc_lord_of_korea = {
+		icon = mjz_into_korea
+		position = 4
+		required_missions = { krc_encroach_on_solongos } 
+		provinces_to_highlight = {  
+			region = korea_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = { 
+			korea_region = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {  
+			add_accepted_culture_or_dip_power = {
+				culture = mongol
+			}
+			custom_tooltip = empty_line_tt
+			custom_tooltip = change_korean_to_solongos_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						culture = korean
+					}
+					change_culture = mongol
+				}
+			}
+		} 
+	}
+
+	krc_khasarid_glory = {
+		icon = mission_genghis_khan
+		position = 5
+		required_missions = { krc_punish_tribs } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			total_development = 700
+			OR = {
+				in_golden_age = yes
+				has_had_golden_age = yes
+			}
+			prestige = 75
+			num_of_battles = {
+				amount = 50
+			}
+			legitimacy_equivalent = 100
+		} 
+
+		effect = {  
+			add_power_projection = {
+				type = mission_rewards_power_projection
+				amount = 25
+			}
+			custom_tooltip = empty_line_tt
+			custom_tooltip = RHO_TT_4
+			hidden_effect = {
+				if = {
+					limit = { in_golden_age = yes } 
+					extend_golden_age = 50
+				}
+				else = {
+					if = {
+						limit = { has_had_golden_age = yes } 
+						reset_golden_age = yes
+					}
+				}
+			}
+		} 
+	}
+
+	krc_temurid_reforms = {
+		icon = reform_the_state
+		position = 6
+		required_missions = { krc_khasarid_glory } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			NOT = { corruption = 1 } 
+			has_adm_advisor_3 = yes 
+			has_dip_advisor_3 = yes 
+			has_mil_advisor_3 = yes 
+			stability = 3 
+			NOT = { average_unrest = -2 } 
+			num_of_owned_provinces_with = { 
+				has_courthouse_building_trigger = yes 
+				value = 15 
+			}
+		} 
+
+		effect = {  
+			define_advisor = {
+				type = statesman
+				name = "Yesün Temür"
+				skill = 3
+				cost_multiplier = 0.25
+			}
+			custom_tooltip = empty_line_tt
+			country_event = {
+				id = korchin.6
+			}
+		} 
+	}
 }
 korchin_2_slot = {
 	slot = 2
 	generic = no
 	ai = yes
+	has_country_shield = yes
 	potential = {
 		OR = {
 			tag = KRC
-			tag = YUA
+			AND = {
+				tag = YUA
+				was_tag = KRC
+			}
 		}
 	}
-	has_country_shield = yes
+
+	krc_rally_tribesmen = {
+		icon = mission_noble_tribes
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			army_size_percentage = 0.9
+			is_monarch_leader = yes
+		} 
+
+		effect = {  
+			change_mil = 1
+			add_country_modifier = {
+				name = krc_lead_from_front
+				duration = 3650
+			}
+			pyongan_area = {
+				add_permanent_claim = ROOT
+			}
+			hamgyeong_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	krc_encroach_on_solongos = {
+		icon = mission_ilkhanate
+		position = 3
+		required_missions = {
+			krc_rally_tribesmen
+			krc_sieze_furdan
+		}
+		provinces_to_highlight = {  
+			region = korea_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 3
+				region = korea_region
+			}
+		} 
+
+		effect = {  
+			korea_region = {
+				add_permanent_claim = ROOT
+			}
+			add_mil_power = 150
+		} 
+	}
 }
 korchin_3_slot = {
 	slot = 3
 	generic = no
 	ai = yes
+	has_country_shield = yes
 	potential = {
 		OR = {
 			tag = KRC
-			tag = YUA
+			AND = {
+				tag = YUA
+				was_tag = KRC
+			}
 		}
 	}
-	has_country_shield = yes
+
+	krc_luoravetlan_conquest = {
+		icon = mission_horde_caravans
+		position = 3
+		required_missions = { krc_crossing_the_amur } 
+		provinces_to_highlight = {  
+			OR = {
+				area = heilongjiang_area
+				area = east_heilongjiang_area
+				area = central_heilongjiang_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			heilongjiang_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			east_heilongjiang_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			central_heilongjiang_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {  
+			override_country_name = KHASUDM_NUTAG
+			add_accepted_culture_or_dip_power = {
+				culture = luoravetlan
+			}
+			manchuria_region = {
+				add_permanent_claim = ROOT
+			}
+			cicigar_area = {
+				add_permanent_claim = ROOT
+			}
+			eastern_mongolia = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	krc_punish_tribs = {
+		icon = mission_conquer_5_states
+		position = 4
+		required_missions = { krc_luoravetlan_conquest } 
+		provinces_to_highlight = {  
+			OR = {
+				culture = evenk
+				culture = nivkh
+				province_id = 704
+				province_id = 726
+				province_id = 725
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 15
+				OR = {
+					culture = evenk
+					culture = nivkh
+				}
+			}
+			owns = 704
+			owns = 726
+			owns = 725
+		} 
+
+		effect = {  
+			#idk
+			mongolia_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	krc_a_letter_to_yan = {
+		icon = jap_fate_mandate
+		position = 5
+		required_missions = { krc_punish_tribs } 
+		provinces_to_highlight = { 
+			region = manchuria_region
+			NOT = {
+				owned_by = ROOT
+			}
+		} 
+
+		trigger = {  
+			total_development = 300
+			manchuria_region = {
+				owned_by = ROOT
+				type = all
+			}
+			OR = {
+				YAN = {
+					has_been_insulted_by_root = yes
+				}
+				NOT = {
+					exists = YAN
+				}
+			}
+			army_size = YAN
+		} 
+
+		effect = {  
+			if = {
+				limit = {
+					any_country = {
+						NOT = {
+							tag = ROOT
+						}
+						is_emperor_of_china = yes
+					}
+					NOT = {
+						is_emperor_of_china = yes
+					}
+				}
+				country_event = {
+					id = korchin.2
+				}
+			} 
+			else = {
+				add_prestige = 50
+				china_superregion = {
+					add_permanent_claim = ROOT
+				}
+			}
+		} 
+	}
+
+	krc_entry_into_beijing = {
+		icon = mng_outer_city_beijing
+		position = 6
+		required_missions = { krc_a_letter_to_yan } 
+		provinces_to_highlight = {  
+			area = hebei_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			hebei_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {  
+			set_country_flag = yens_better_razing_in_china
+			custom_tooltip = YEN_TT_4
+			custom_tooltip = empty_line_tt
+			if = {
+				limit = {
+					num_of_owned_provinces_with = {
+						value = 20
+						superregion = china_superregion
+					}
+				}
+				custom_tooltip = krc_beijing_yes_tt
+				china_superregion = {
+					add_core = ROOT
+				}
+			}
+			else = {
+				custom_tooltip = krc_beijing_no_tt
+				tooltip = {
+					china_superregion = {
+						add_core = ROOT
+					}
+				}
+			}
+		} 
+	}
+
+	krc_yuan_dynasty = {
+		icon = mission_beijing
+		position = 7
+		required_missions = { krc_entry_into_beijing } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
 }
 korchin_4_slot = {
 	slot = 4
 	generic = no
 	ai = yes
+	has_country_shield = yes
 	potential = {
 		OR = {
 			tag = KRC
-			tag = YUA
+			AND = {
+				tag = YUA
+				was_tag = KRC
+			}
 		}
 	}
-	has_country_shield = yes
+
+	krc_loyalty_of_chiefs = {
+		icon = mission_tatar_tribes
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			estate_loyalty = {
+				estate = estate_nomadic_tribes
+				loyalty = 60
+			}
+			num_of_estate_privileges = {
+				estate = estate_nomadic_tribes
+				value = 4
+			}
+		} 
+
+		effect = {  
+			add_manpower = 10
+			furdan_area = {
+				add_permanent_claim = ROOT
+			}
+			ilan_hala_area = {
+				add_permanent_claim = ROOT
+			}
+			central_jilin_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	krc_crossing_the_amur = {
+		icon = mission_manchu_warrior
+		position = 2
+		required_missions = {
+			krc_loyalty_of_chiefs
+			krc_rally_tribesmen
+		}
+		provinces_to_highlight = {  
+			OR = {
+				area = furdan_area
+				area = ilan_hala_area
+				area = central_jilin_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			furdan_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			ilan_hala_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			central_jilin_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {
+			add_country_modifier = {
+				name = krc_amur_conquer
+				duration = 9125
+			}
+			sakhalin_area = {
+				add_permanent_claim = ROOT
+			}
+			heilongjiang_area = {
+				add_permanent_claim = ROOT
+			}
+			east_heilongjiang_area = {
+				add_permanent_claim = ROOT
+			}
+			central_heilongjiang_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+	krc_worship_at_mt_changbai = {
+		icon = mission_buddhist_monk_praying
+		position = 4
+		required_missions = {
+			krc_luoravetlan_conquest
+		}
+		provinces_to_highlight = {  
+			province_id = 4201
+			NOT = {
+				AND = {
+					owned_by = ROOT
+					has_tax_building_trigger = yes
+				}
+			}
+		} 
+
+		trigger = {  
+			4201 = {
+				owned_by = ROOT
+				has_tax_building_trigger = yes
+			}
+
+		} 
+
+		effect = {
+			if = {
+				limit = {
+					4201 = {
+						base_tax = 8
+					}
+				}
+				custom_tooltip = krc_changbai_tax_yes_tt
+				4201 = {
+					add_or_upgrade_tax_building = yes
+				}
+			}
+			else = {
+				custom_tooltip = krc_changbai_tax_no_tt
+				tooltip = {
+					4201 = {
+						add_or_upgrade_tax_building = yes
+					}
+				}
+			}
+			custom_tooltip = empty_line_tt
+			add_country_modifier = {
+				name = krc_mount_changabai
+				duration = -1
+			}
+		} 
+	}
 }
 korchin_5_slot = {
 	slot = 5
 	generic = no
 	ai = yes
+	has_country_shield = yes
 	potential = {
 		OR = {
 			tag = KRC
-			tag = YUA
+			AND = {
+				tag = YUA
+				was_tag = KRC
+			}
 		}
 	}
-	has_country_shield = yes
+
+	krc_sakhalin = {
+		icon = mission_extent_yasak_to_the_east
+		position = 3
+		required_missions = { krc_crossing_the_amur } 
+		provinces_to_highlight = {  
+			area = sakhalin_area
+			NOT =  {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			sakhalin_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {  
+			japan_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	krc_japan_expedition = {
+		icon = mission_japanese_samurai
+		position = 4
+		required_missions = { krc_sakhalin } 
+		provinces_to_highlight = {  
+			region = japan_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 20
+				region = japan_region
+			}
+		} 
+
+		effect = {  
+			add_country_modifier = {
+				name = krc_japanese_expedition
+				duration = -1
+			}
+			set_country_flag = shinto_secondary_bonus_flag
+			set_country_flag = kamuy_secondary_bonus_flag
+			custom_tooltip = krc_secondary_shinto_give_extra_tt
+			tooltip = {
+				add_country_modifier = {
+					name = krc_shinto_secondary_bonus
+					duration = -1
+				}
+			}
+			custom_tooltip = krc_secondary_kamuy_give_extra_tt
+			tooltip = {
+				add_country_modifier = {
+					name = krc_kamuy_secondary_bonus
+					duration = -1
+				}
+			}
+		} 
+	}
+
+	krc_khalka = {
+		icon = mission_conquer_50_development
+		position = 5
+		required_missions = { krc_punish_tribs } 
+		provinces_to_highlight = {  
+			OR = {
+				culture = khalkha
+				area = chahar_area
+				area = central_mongolia_area
+				area = xilin_gol_area
+				area = khamag_area
+				area = outer_mongolia_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			num_of_owned_provinces_with = {
+				value = 14
+				OR = {
+					culture = khalkha
+					area = chahar_area
+					area = central_mongolia_area
+					area = xilin_gol_area
+					area = khamag_area
+					area = outer_mongolia_area
+				}
+			}
+			owns = 2116
+		} 
+
+		effect = {  
+			add_country_modifier = {
+				name = krc_unified_mongols
+				duration = -1
+			}
+			mongolia_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	krc_expel_yenisei = {
+		icon = mission_destroy_the_horde
+		position = 6
+		required_missions = { krc_khalka } 
+		provinces_to_highlight = {  
+			region = mongolia_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			NOT = {
+				exists = YNS
+			}
+			mongolia_region = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {  
+			custom_tooltip = krc_convert_yenisei_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						culture = yenisei
+					}
+					change_culture = oirats
+				}
+			}
+			add_country_modifier = {
+				name = krc_wealth_of_silk_road
+				duration = 10950
+			}
+		} 
+	}
 }
