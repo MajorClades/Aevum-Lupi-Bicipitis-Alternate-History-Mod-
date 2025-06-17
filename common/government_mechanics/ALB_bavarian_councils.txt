@@ -28,26 +28,45 @@ bav_councils = {
 			cost = 5
 			center = no
 			trigger = {
-				capital_scope = {
+				any_owned_province = {
 					OR = {
 						culture = bavarian_new
 						culture = ug_bavarian
 					}
 				}
-				
 			}
 			effect = {
-				capital_scope = {
-					add_random_development = 1
-				}
-				if = {
-					limit = {
-						has_country_flag = bav_two_random
+				random_owned_province = {
+					random_list = {
+						33 = {
+							add_base_tax = 1
+						}
+						33 = {
+							add_base_production = 1
+						}
+						33 = {
+							add_base_manpower = 1
+						}
 					}
-					capital_scope = {
-						add_random_development = 1
+					if = {
+						limit = {
+							owner = {
+								has_country_flag = bav_two_random
+							}
+						}
+						random_list = {
+							33 = {
+								add_base_tax = 1
+							}
+							33 = {
+								add_base_production = 1
+							}
+							33 = {
+								add_base_manpower = 1
+							}
+						}
 					}
-				}
+				}	
 			}
 			cooldown_years = 1
 			ai_chance = {
