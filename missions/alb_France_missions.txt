@@ -1,0 +1,310 @@
+Ellan_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = FR2
+	}
+
+	fra_more_boats = {
+		icon = mission_establish_high_seas_navy
+		position = 5
+		required_missions = { 1_ellan_navy_power fra_le_marines } 
+
+		trigger = {
+			OR = {
+				num_of_marines = 20
+				navy_tradition = 60
+			}
+			OR = {
+				num_of_light_ship = 50
+				num_of_heavy_ship = 30
+			}
+		}
+
+		effect = {
+			country_event = {
+				id = france_2.2
+			}
+		}
+	}
+
+	fra_robust_gorillaman = {
+		icon = mission_have_two_subjects
+		position = 7
+		required_missions = { fra_operation_ultramar } 
+
+		trigger = {
+			is_at_war = no
+			army_tradition = 50
+			navy_tradition = 50
+			NOT = {
+				has_country_modifier = fra_ultramarine_training
+			}
+		}
+
+		effect = {
+			capital_scope = {
+				marine_infantry = ROOT
+				marine_infantry = ROOT
+				marine_infantry = ROOT
+				marine_infantry = ROOT
+				marine_infantry = ROOT
+			}
+			add_country_modifier = {
+				name = fra_ultramarines
+				duration = -1
+			}
+		}
+	}
+}
+Ellan_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = FR2
+	}
+
+	fra_le_marines = {
+		icon = mission_establish_high_seas_navy
+		position = 4
+		required_missions = { 1_ellan_navy } 
+		provinces_to_highlight = { owned_by = ROOT has_shipyard_building_trigger = no } 
+
+		trigger = {
+			mil_power = 150
+			has_mil_advisor_3 = yes
+			OR = {
+				naval_reformer = 3
+				navy_tradition = 35
+			}
+		}
+
+		effect = {
+			add_mil_power = -150
+			add_country_modifier = {
+				name = fra_marines_good
+				duration = -1
+			}
+		}
+	}
+
+	fra_operation_ultramar = {
+		icon = mission_have_two_subjects
+		position = 6
+		required_missions = { fra_lord_of_frankia fra_le_marines} 
+
+		trigger = {
+			has_mil_advisor_3 = yes
+			capital_scope = {
+				infantry_in_province = 20
+			}
+			calc_true_if = {
+				amount = 3
+				all_subject_country = {
+					is_colonial_nation_of = ROOT
+				}
+			}
+		}
+
+		effect = {
+			capital_scope = {
+				kill_units = {
+					who = ROOT
+					type = infantry
+					amount = 20
+				}
+			}
+			add_country_modifier = {
+				name = fra_ultramarine_training
+				duration = 7300
+			}
+		}
+	}
+}
+Ellan_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = FR2
+	}
+
+	fra_lord_of_frankia = {
+		icon = reclaim_our_ancestral_lands
+		position = 5
+		required_missions = { 3_elland_power } 
+		provinces_to_highlight = { region = low_countries_region } 
+
+		trigger = {
+			OR = {
+				low_countries_region = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+					value = 10
+					NOT = {
+						continent = europe
+					}
+				}
+			}
+		}
+
+		effect = {
+			set_government_rank = 3
+			set_country_flag = buy_protectorate_into_vassals_flag
+		}
+	}
+}
+Ellan_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = FR2
+	}
+
+	fra_le_gendarmerie = {
+		icon = mission_have_two_subjects
+		position = 4
+		required_missions = { 5_ellan_army_power 4_ellan_conf} 
+		provinces_to_highlight = { owned_by = ROOT culture = ellan has_manpower_building_trigger = no} 
+
+		trigger = {
+			num_of_completed_idea_groups_mil = {amount = 1}
+			all_province = {
+				owned_by = ROOT
+				culture = ellan
+				region = low_countries_region
+				has_manpower_building_trigger = yes
+			}
+		}
+
+		effect = {
+			custom_tooltip = FRANCE_TT_2
+			random_owned_province = {
+				limit = {
+						culture = ellan
+						region = low_countries_region
+					}
+				add_province_modifier = {
+					name = fra_gendarmerie
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						culture = ellan
+						region = low_countries_region
+					}
+					add_province_modifier = {
+						name = fra_gendarmerie
+						duration = -1
+					}
+				}
+			}
+		}
+	}
+
+	fra_operation_oltremer = {
+		icon = mission_have_two_subjects
+		position = 6
+		required_missions = { fra_lord_of_frankia fra_colonial_expansionism} 
+
+		trigger = {
+			years_of_income = 2.5
+			calc_true_if = {
+				amount = 3
+				all_subject_country = {
+					OR = {
+						is_colonial_nation_of = ROOT
+						is_subject_of_type = trade_protectorate 
+					}
+				}
+			}
+		}
+
+		effect = {
+			add_years_of_income = -2.5
+			add_country_modifier = {
+				name = fra_empire_of_trade
+				duration = 10950
+			}
+		}
+	}
+}
+Ellan_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		tag = FR2
+	}
+
+	fra_colonial_expansionism = {
+		icon = mission_have_two_subjects
+		position = 5
+		required_missions = {  } 
+
+		trigger = {
+			OR = {
+				full_idea_group = exploration_ideas
+				AND = {
+					any_active_trade_node = {
+						is_strongest_trade_power = PREV
+						highest_value_trade_node = yes
+					}
+				}
+			}
+		}
+
+		effect = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = FRANCE_TT_3
+				first_limit = "full_idea_group = exploration_ideas"
+				first_effect = "
+					add_country_modifier = {
+						name = fra_extra_colonists
+						duration = 10950
+					}
+				"
+				second_limit = " NOT = {full_idea_group = exploration_ideas}"
+				second_effect = "
+					add_country_modifier = {
+						name = fra_extra_colonist
+						duration = -1
+					}
+				"
+			}
+		}
+	}
+
+	fra_over_sea_under_sea = {
+		icon = mission_have_two_subjects
+		position = 7
+		required_missions = {fra_operation_oltremer  } 
+
+		trigger = {
+			has_adm_advisor_of_level = { level = 5 }
+			calc_true_if = {
+				amount = 4
+				all_subject_country = {
+					is_subject_of_type = trade_protectorate 
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip =  buy_protectorate_into_vassals_flag_tt
+			set_country_flag = buy_protectorate_into_vassals_flag
+		}
+	}
+}

@@ -101,6 +101,93 @@ friendship_action = {
     }
 }
 
+buy_protectorate_into_vassal_action = {
+	category = influence
+	require_acceptance = no
+	is_visible = {
+		ROOT = {
+			has_country_flag = buy_protectorate_into_vassals_flag
+		}
+		FROM = {
+			is_subject_of = ROOT
+			is_subject_of_type = trade_protectorate
+		}
+    }
+
+	is_allowed = {
+		is_at_war = no
+		FROM = {
+			is_at_war = no
+			NOT = {
+				liberty_desire = 40
+			}
+		}
+    }
+	on_accept = {
+		FROM = {
+			if = { limit = { total_development = 25} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 50} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 75} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 100} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 125} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 150} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 175} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 200} ROOT = { add_treasury = -500 } }
+		}
+		ROOT = {
+			vassalize = FROM
+		}
+		FROM = {
+			add_liberty_desire = -50
+		}
+    }
+	ai_will_do = {
+        always = no
+    }
+}
+
+buy_protectorate_into_annex_action = {
+	category = influence
+	require_acceptance = no
+	is_visible = {
+		ROOT = {
+			has_country_flag = buy_protectorate_into_vassals_flag
+		}
+		FROM = {
+			is_subject_of = ROOT
+			is_subject_of_type = trade_protectorate
+		}
+    }
+
+	is_allowed = {
+		is_at_war = no
+		FROM = {
+			is_at_war = no
+			NOT = {
+				liberty_desire = 40
+			}
+		}
+    }
+	on_accept = {
+		FROM = {
+			if = { limit = { total_development = 25} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 50} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 75} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 100} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 125} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 150} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 175} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 200} ROOT = { add_treasury = -500 } }
+			every_owned_province = {
+				cede_province = ROOT
+			}
+		}
+    }
+	ai_will_do = {
+        always = no
+    }
+}
+
 # Shamely copied from Anbennar
 make_autonomous_vassal = {
 	category = influence
