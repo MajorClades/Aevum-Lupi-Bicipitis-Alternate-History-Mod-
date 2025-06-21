@@ -255,3 +255,131 @@ country_event = { #something just work weird
 		}
 	}
 }
+
+country_event = {
+	id = prut.20
+	title = prut.20.test
+	desc = prut.20.desc
+	picture = GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = prut.2a
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 1.1
+				has_opinion = {
+					who = GE7
+					value = 110
+				}
+			}
+			modifier = {
+				factor = 1.5
+				has_opinion = {
+					who = GE7
+					value = 150
+				}
+			}
+			modifier = {
+				factor = 2
+				has_opinion = {
+					who = GE7
+					value = 180
+				}
+			}
+			modifier = {
+				factor = 2
+				alliance_with = GE7
+			}
+		}
+		PU0 = {
+			create_subject = {
+				subject_type = ger_vassal
+				subject = ROOT
+			}
+		}
+	}
+	option = {
+		name = prut.2b
+		ai_chance = {
+			factor = 70
+			modifier = {
+				factor = 0.5
+				alliance_with = GE7
+			}
+		}
+		add_stability = 1
+	}
+}
+
+country_event = {
+	id = prut.30
+	title = prut.30.test
+	desc = prut.30.desc
+	picture = GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = prut.3a
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 1.1
+				has_opinion = {
+					who = GE7
+					value = 110
+				}
+			}
+			modifier = {
+				factor = 1.5
+				has_opinion = {
+					who = GE7
+					value = 150
+				}
+			}
+			modifier = {
+				factor = 2
+				has_opinion = {
+					who = GE7
+					value = 180
+				}
+			}
+			modifier = {
+				factor = 2
+				alliance_with = GE7
+			}
+		}
+		if = {
+			limit = {ai = yes}
+			GE7 = {
+				create_union = GR1
+			}
+		}else = {
+			GR1 = {
+				define_heir = {
+					mil = 5
+					dynasty = GE7
+				}
+			}
+		}
+	}
+	option = {
+		name = prut.3b
+		ai_chance = {
+			factor = 70
+			modifier = {
+				factor = 0.5
+				alliance_with = GE7
+			}
+		}
+		add_stability = 1
+		GE7 = {
+			add_casus_belli = {
+				type = cb_restore_personal_union
+				target = ROOT
+				months = 360
+			}
+		}
+	}
+}
