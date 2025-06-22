@@ -1287,6 +1287,27 @@ on_added_to_trade_company = {
 	}
 }
 
+on_added_to_trade_company = {
+	if = {
+		limit = {
+			FROM = {has_country_flag = stronger_trade_companies_flag}
+		}
+		add_province_modifier = {
+			name = stronger_trade_companies_mod
+			duration = -1
+		}
+	}
+}
+
+on_removed_from_company = {
+	if = {
+		limit = {
+			FROM = {has_country_flag = stronger_trade_companies_flag}
+		}
+		remove_province_modifier = stronger_trade_companies_mod
+	}
+}
+
 on_barrage = { #ROOT - barraging country, FROM - barraged province 
 	if = {
 		limit = {
