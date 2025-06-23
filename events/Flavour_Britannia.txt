@@ -5,30 +5,24 @@ country_event = {
 	title = britt.1.test
 	desc = britt.1.desc
 	picture = ANGRY_MOB_eventPicture
-	
-	trigger = {
-		tag = BR0
-		is_year = 1445
-		is_at_war = no
-		alliance_with = JU0
-		JU0 = {
-			is_at_war = no
-		}
-	}
-	major = yes
-	mean_time_to_happen = {
-		months = 2
-	}
-	fire_only_once = yes
+	is_triggered_only = yes
 	option = {
 		name = britt.1a
 		ai_chance = {
 			factor = 90
 		}
-		JU0 = {
-			country_event = {
-				id = britt.2
-			}
+		241 = {
+			add_base_manpower = -1
+		}
+		4375 = {
+			remove_core = SW2
+			change_religion = impotian
+		}
+		240 = {
+			remove_core = SW2
+		}
+		239 = {
+			remove_core = SW2
 		}
 	}
 	option = {
@@ -36,64 +30,71 @@ country_event = {
 		ai_chance = {
 			factor = 10
 		}
-		add_stability = 1
-	}
-}
-
-country_event = {
-	id = britt.2
-	title = britt.2.test
-	desc = britt.2.desc
-	picture = ANGRY_MOB_eventPicture
-	
-	is_triggered_only = yes
-
-	option = {
-		name = britt.2a
-		ai_chance = {
-			factor = 80
-		}
-		if = {
+		every_owned_province = {
 			limit = {
-				BR0 = {
-					ai = yes
-				}
+				is_core = SW2
 			}
-			if = {
-				limit = {
-					JU0 = {
-						ai = yes
-					}
-				}
-				BR0 = {
-					create_union = JU0
-				}
-			}
-			else = {
-				JU0 = {
-					create_union = BR0
-				}
-			}
+			add_base_manpower = -1
+			remove_core = SW2
+			change_religion = impotian
 		}
-		else = {
-			BR0 = {
-				create_union = JU0
-			}
-		}
-		SW2 = {
-			country_event = {
-				id = britt.3
-			}
-		}
-	}
-	option = {
-		name = britt.2b
-		ai_chance = {
-			factor = 20
-		}
-		add_stability = 1
 	}
 }
+
+# country_event = {
+# 	id = britt.2
+# 	title = britt.2.test
+# 	desc = britt.2.desc
+# 	picture = ANGRY_MOB_eventPicture
+	
+# 	is_triggered_only = yes
+
+# 	option = {
+# 		name = britt.2a
+# 		ai_chance = {
+# 			factor = 80
+# 		}
+# 		if = {
+# 			limit = {
+# 				BR0 = {
+# 					ai = yes
+# 				}
+# 			}
+# 			if = {
+# 				limit = {
+# 					JU0 = {
+# 						ai = yes
+# 					}
+# 				}
+# 				BR0 = {
+# 					create_union = JU0
+# 				}
+# 			}
+# 			else = {
+# 				JU0 = {
+# 					create_union = BR0
+# 				}
+# 			}
+# 		}
+# 		else = {
+# 			BR0 = {
+# 				create_union = JU0
+# 			}
+# 		}
+# 		SW2 = {
+# 			country_event = {
+# 				id = britt.3
+# 			}
+# 		}
+# 	}
+# 	option = {
+# 		name = britt.2b
+# 		ai_chance = {
+# 			factor = 20
+# 		}
+# 		add_stability = 1
+# 	}
+# }
 country_event = {
 	id = britt.3
 	title = britt.3.test
@@ -107,6 +108,7 @@ country_event = {
 	}
 	is_triggered_only = yes
 	major = yes
+	fire_only_once = yes
 	option = {
 		name = britt.3a
 		ai_chance = {

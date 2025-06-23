@@ -73,4 +73,74 @@ country_decisions = {
 		}
 		ai_importance = 400
 	}
+
+	arthurian_road_wales_to_london = {
+		major = yes
+		potential = {
+			OR = {
+				tag = BR0
+				tag = JU0
+			}
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 236
+				province_id = 237
+				province_id = 239
+				province_id = 241
+			}
+		}
+		allow = {
+			years_of_income = 0.9
+			OR = {
+				statesman = 2
+				fortification_expert = 2
+			}
+			owns = 236
+			owns = 237
+			owns = 239
+			owns = 241
+		}
+		effect = {
+			add_years_of_income = -0.9
+			236 = {
+				add_province_modifier = {
+					name = via_arthuriana
+					duration = -1
+				}
+			}
+			237 = {
+				if = {
+					limit = {owner = {tag = BR0}}	
+					change_culture = briton
+				}
+				add_province_modifier = {
+					name = via_arthuriana
+					duration = -1
+				}
+			}
+			239 = {
+				if = {
+					limit = {owner = {tag = JU0}}	
+					change_culture = juts
+				}
+				add_province_modifier = {
+					name = via_arthuriana
+					duration = -1
+				}
+			}
+			241 = {
+				center_of_trade = 1
+				add_province_modifier = {
+					name = via_arthuriana
+					duration = -1
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+
 }
