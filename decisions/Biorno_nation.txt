@@ -75,12 +75,18 @@ country_decisions = {
 	}
 
 	arthurian_road_wales_to_london = {
-		major = yes
+		color = {
+			200 0 0
+		}
 		potential = {
 			OR = {
 				tag = BR0
 				tag = JU0
 			}
+			NOT = { 236 = {	has_province_modifier = via_arthuriana	}}
+			NOT = { 237 = {	has_province_modifier = via_arthuriana	}}
+			NOT = { 239 = {	has_province_modifier = via_arthuriana	}}
+			NOT = { 241 = {	has_province_modifier = via_arthuriana	}}
 		}
 		provinces_to_highlight = {
 			OR = {
@@ -142,5 +148,36 @@ country_decisions = {
 		}
 		ai_importance = 400
 	}
-
+	fold_fonlod_the_bastard = {
+		color = {
+			170 0 0
+		}
+		potential = {
+			has_country_flag = folding_fonlod_flag
+			FR1 = {
+				exists = yes
+				is_free_or_tributary_trigger = yes
+				ai = yes
+			}
+		}
+		provinces_to_highlight = {
+			is_capital_of = FR1
+		}
+		allow = {
+			treasury = 1000
+			FR1 = {
+				exists = yes
+				is_at_war = no
+			}
+		}
+		effect = {
+			add_treasury = -1000
+			vassalize = FR1
+			clr_country_flag = folding_fonlod_flag
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
 }

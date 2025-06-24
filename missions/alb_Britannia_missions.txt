@@ -23,6 +23,35 @@ Britannia_1_slot = {
 			}
 		}
 	}
+
+	britannia_swedish_suffering = {
+		icon = mission_rb_scottish_conquer_london
+		position = 3
+		required_missions = { brit_union_of_roses } 
+		provinces_to_highlight = { culture = svede region = british_isles_region } 
+
+		trigger = {
+			owns_all_provinces = {
+				culture = svede
+				region = british_isles_region
+			}
+		}
+
+		effect = {
+			if = {
+				limit = { accepted_culture = svede } 
+				add_accepted_culture = svevish
+				remove_accepted_culture = svede
+			}
+			custom_tooltip = alb_brit_move_swedish_culture_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = { culture = svede } 
+					change_culture = svevish
+				}
+			}
+		}
+	}
 }
 Britannia_2_slot = {
 	slot = 2
@@ -35,7 +64,7 @@ Britannia_2_slot = {
 		icon = mission_conquer_50_development
 		position = 2
 		required_missions = {brit_restoring_the_realm britannia_not_yet_lost } 
-		provinces_to_highlight = { is_capital_of = JU0 } 
+		provinces_to_highlight = { is_core = JU0 } 
 
 		trigger = { 
 			JU0 = {
@@ -117,6 +146,7 @@ Britannia_3_slot = {
 	britannia_justice_for_the_juts = {
 		icon = mission_rb_scottish_conquer_london
 		position = 3
+		required_missions = { brit_union_of_roses } 
 		provinces_to_highlight = { culture = juts region = british_isles_region } 
 
 		trigger = {
@@ -139,8 +169,6 @@ Britannia_3_slot = {
 					change_culture = jutlander
 				}
 			}
-			1861 = { change_culture = briton } 
-			4785 = { change_culture = briton } 
 		}
 	}
 
@@ -152,6 +180,47 @@ Britannia_4_slot = {
 	has_country_shield = yes
 	potential = { tag = BR0 } 
 
+	britannia_a_navy_perhaps = {
+		icon = mission_rb_scottish_conquer_london
+		position = 2
+		required_missions = { britannia_recruit_a_legion_worth } 
+		provinces_to_highlight = {province_id = 241}
+		trigger = {
+			owns = 241
+			navy_size = 17
+		}
+
+		effect = {
+			241 = {
+				add_permanent_province_modifier = {
+					name = augustan_port_royal
+					duration = -1
+				}
+			}
+		}
+	}
+
+	britannia_the_channel_pass = {
+		icon = mission_rb_scottish_conquer_london
+		position = 3
+		required_missions = { britannia_the_protector_city britannia_a_navy_perhaps } 
+		provinces_to_highlight = {province_id = 236}
+		trigger = {
+			236 = {
+				country_or_non_sovereign_subject_holds = ROOT
+				has_dock_building_trigger = yes
+				has_trade_building_trigger = yes
+			}
+		}
+
+		effect = {
+			236 = {
+				upgrade_trade_building = yes
+			}
+			custom_tooltip = folding_fonlod_flag_tt
+			set_country_flag = folding_fonlod_flag
+		}
+	}
 }
 Britannia_5_slot = {
 	slot = 5
@@ -160,5 +229,68 @@ Britannia_5_slot = {
 	has_country_shield = yes
 	potential = { tag = BR0 } 
 
+	britannia_recruit_a_legion_worth = {
+		icon = mission_rb_scottish_conquer_london
+		position = 1
 
+		trigger = {
+			if = {
+				limit = { ai = no } 
+				army_size_percentage = 0.9
+			}
+			else = {
+				army_size_percentage = 0.7
+				num_of_generals = 1
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = resist_sweden
+				duration = 10950
+			}
+		}
+	}
+
+	britannia_expand_the_corps = {
+		icon = mission_rb_scottish_conquer_london
+		position = 2
+		required_missions = { britannia_recruit_a_legion_worth } 
+		trigger = {
+			OR = {
+				army_tradition = 20
+				has_estate_privilege = estate_nobles_officer_corp
+			}
+		}
+
+		effect = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = BRIT_TT_1
+				first_limit = "has_estate_privilege = estate_nobles_officer_corp"
+				first_effect = " add_patriarch_authority = 0.05 add_army_professionalism = 0.005"
+				second_limit = "NOT = {has_estate_privilege = estate_nobles_officer_corp}"
+				second_effect = " add_army_tradition = -10 set_estate_privilege = estate_nobles_officer_corp "
+			}
+		}
+	}
+
+	britannia_the_tabula_rotunda = {
+		icon = mission_rb_scottish_conquer_london
+		position = 4
+		required_missions = { britannia_expand_the_corps } 
+		trigger = {
+			num_of_completed_idea_groups_mil = {amount = 1}
+			army_tradition = 50
+		}
+
+		effect = {
+			add_army_tradition = -30
+			add_country_modifier = {
+				name = knights_of_the_round_table
+				duration = -1
+			}
+			custom_tooltip = BRIT_TT_2
+			brittannia_knight_of_the_round_table = yes
+		}
+	}
 }
