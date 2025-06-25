@@ -80,6 +80,7 @@ country_decisions = {
 		}
 		potential = {
 			OR = {
+				was_tag = BR0
 				tag = BR0
 				tag = JU0
 			}
@@ -164,16 +165,56 @@ country_decisions = {
 			is_capital_of = FR1
 		}
 		allow = {
-			treasury = 1000
+			treasury = 500
 			FR1 = {
 				exists = yes
 				is_at_war = no
 			}
 		}
 		effect = {
-			add_treasury = -1000
+			add_treasury = -500
 			vassalize = FR1
 			clr_country_flag = folding_fonlod_flag
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+
+	restore_frisian_dominion = {
+		color = {
+			200 0 0
+		}
+		potential = {
+			OR = {
+				tag = BR0
+				was_tag = BR0
+				tag = JU0
+			}
+			NOT = {
+				has_country_flag = restore_frisian_dominion_flag
+			}
+		}
+		provinces_to_highlight = {
+			area = wessex_area
+		}
+		allow = {
+			accepted_culture = frislander
+			wessex_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		effect = {
+			wessex_area = {
+				change_culture = frislander
+				add_province_modifier = {
+					name = brit_frisian_auxillia
+					duration = -1
+				}
+			}
+			set_country_flag = restore_frisian_dominion_flag
 		}
 		ai_will_do = {
 			factor = 1

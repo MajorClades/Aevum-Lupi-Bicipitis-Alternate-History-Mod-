@@ -31,6 +31,9 @@ Britannia_1_slot = {
 		provinces_to_highlight = { culture = svede region = british_isles_region } 
 
 		trigger = {
+			SW2 = {
+				exists = no
+			}
 			owns_all_provinces = {
 				culture = svede
 				region = british_isles_region
@@ -81,6 +84,53 @@ Britannia_2_slot = {
 		}
 	}
 
+	brit_impotian_spreading = {
+		icon = mission_conquer_50_development
+		position = 3
+		required_missions = {brit_union_of_roses  } 
+		provinces_to_highlight = { region = british_isles_region NOT = {country_or_non_sovereign_subject_holds = ROOT} } 
+
+		trigger = { 
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 30
+				region = british_isles_region
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		effect = {
+			add_country_modifier = {
+				name = brit_jolly_good_time
+				duration = 10950
+			}
+		}
+	}
+
+	brit_greater_britannia = {
+		icon = mission_conquer_50_development
+		position = 4
+		required_missions = {brit_impotian_spreading  } 
+		provinces_to_highlight = { region = british_isles_region OR = { NOT = {religion = impotian}  NOT = { owned_by = ROOT} } } 
+
+		trigger = { 
+			OR = {
+				total_development = 300
+				development_in_provinces = {
+					value = 200
+					religion = impotian
+					region = british_isles_region
+				}
+			}
+		} 
+
+		effect = {
+			add_stability_or_adm_power = yes
+			capital_scope = {
+				add_or_upgrade_courthouse_building = yes
+			}
+			override_country_name = REGNUM_BRITANNUM
+		}
+	}
 }
 Britannia_3_slot = {
 	slot = 3
@@ -200,25 +250,65 @@ Britannia_4_slot = {
 		}
 	}
 
-	britannia_the_channel_pass = {
+	britannia_the_little_republic = {
 		icon = mission_rb_scottish_conquer_london
 		position = 3
 		required_missions = { britannia_the_protector_city britannia_a_navy_perhaps } 
-		provinces_to_highlight = {province_id = 236}
+
 		trigger = {
-			236 = {
-				country_or_non_sovereign_subject_holds = ROOT
-				has_dock_building_trigger = yes
-				has_trade_building_trigger = yes
+			trader = 3
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 2
+				province_has_center_of_trade_of_level = 2
 			}
 		}
 
-		effect = {
-			236 = {
-				upgrade_trade_building = yes
-			}
+		effect = {		
 			custom_tooltip = folding_fonlod_flag_tt
 			set_country_flag = folding_fonlod_flag
+		}
+	}
+
+	britannia_scotlandia = {
+		icon = mission_rb_scottish_conquer_london
+		position = 4
+		provinces_to_highlight = { province_group = ireland_provinces  NOT = {country_or_non_sovereign_subject_holds = ROOT}}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 3
+				province_group = ireland_provinces
+			}
+		}
+
+		effect = {	
+			country_event = {
+				id = britt.2
+			}
+		}
+	}
+
+	britannia_emerald_sword = {
+		icon = mission_rb_scottish_conquer_london
+		position = 5
+		required_missions = { britannia_scotlandia } 
+		provinces_to_highlight = { province_group = ireland_provinces  NOT = {country_or_non_sovereign_subject_holds = ROOT}}
+		trigger = {
+			OR = {
+				accepted_culture = scotian
+				accepted_culture = belgian
+				commandant = 5
+			}
+			ireland_provinces = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {	
+			country_event = {
+				id = britt.6
+			}	
 		}
 	}
 }
