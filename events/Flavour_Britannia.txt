@@ -271,6 +271,182 @@ country_event = {
 	}
 }
 country_event = {
+	id = britt.8
+	title = britt.8.test
+	desc = britt.8.desc
+	picture = MERCHANTS_TALKING_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = britt.8a
+		ai_chance = {factor = 60}
+		custom_tooltip = BRIT_TT_4
+		hidden_effect = {
+			every_owned_province = {
+				limit = { region = low_countries_region }
+				if = { limit = { is_core = ROOT } add_core = FR2 }
+				cede_province = FR2
+			}
+			every_subject_country = {
+				every_owned_province = {
+					limit = { region = low_countries_region }
+					if = { limit = { is_core = ROOT } add_core = FR2 }
+					cede_province = FR2
+				}
+			}
+			every_subject_country = {
+				limit = { primary_culture = ellan }
+				every_owned_province = {
+					if = { limit = { is_core = ROOT } add_core = FR2 }
+					cede_province = FR2
+				}
+			}
+		}
+		create_union = FR2
+		low_countries_region = { add_permanent_claim = FR2 }
+		hidden_effect = {FR2 = {complete_mission = 3_elland}}
+	}
+	option = {
+		name = britt.8b
+		ai_chance = {factor = 40}
+		add_country_modifier = {
+			name = brit_continental_trade
+			duration = -1
+		}
+	}
+}
+country_event = {
+	id = britt.9
+	title = britt.9.test
+	desc = britt.9.desc
+	picture = BYZANTINE_EMPEROR_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = britt.9a
+		trigger = { has_government_power = { mechanic_type = brit_imperial_heir power_type = imperial_favor_brit value = 15 } }
+		random_list = {
+			15 = { create_union = SO0 }
+			85 = { add_government_power = { mechanic_type = brit_imperial_heir power_type = imperial_favor_brit value = -15 } }
+		}
+	}
+	option = {
+		name = britt.9b
+		trigger = { has_government_power = { mechanic_type = brit_imperial_heir power_type = imperial_favor_brit value = 25 } }
+		random_list = {
+			25 = { create_union = SO0 }
+			75 = { add_government_power = { mechanic_type = brit_imperial_heir power_type = imperial_favor_brit value = -25 } }
+		}
+	}
+	option = {
+		name = britt.9c
+		trigger = { has_government_power = { mechanic_type = brit_imperial_heir power_type = imperial_favor_brit value = 45 } }
+		random_list = {
+			45 = { create_union = SO0 }
+			55 = { add_government_power = { mechanic_type = brit_imperial_heir power_type = imperial_favor_brit value = -45 } }
+		}
+	}
+	option = {
+		name = britt.9d
+		trigger = { has_government_power = { mechanic_type = brit_imperial_heir power_type = imperial_favor_brit value = 75 } }
+		random_list = {
+			75 = { create_union = SO0 }
+			25 = { add_government_power = { mechanic_type = brit_imperial_heir power_type = imperial_favor_brit value = -75 } }
+		}
+	}
+	option = {
+		name = britt.9e
+		trigger = { has_government_power = { mechanic_type = brit_imperial_heir power_type = imperial_favor_brit value = 100 } }
+		create_union = SO0 
+	}
+	option = {
+		name = britt.9f
+		add_stability_or_adm_power = yes
+	}
+	after = {
+		hidden_effect = {
+			if = {
+				limit = {any_subject_country = {tag = SO0 ai = yes}}
+				country_event = {
+					id = britt.10
+				}
+			}
+		}
+	}
+}
+country_event = {
+	id = britt.10
+	title = britt.10.test
+	desc = britt.10.desc
+	picture = BYZANTINE_EMPEROR_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = britt.10a
+		remove_government_reform = britannia_imperial_heir
+		inherit = SO0
+		set_government_rank = 3
+	}
+}
+
+country_event = {
+	id = britt.11
+	title = britt.11.test
+	desc = britt.11.desc
+	picture = BYZANTINE_EMPEROR_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = britt.11a
+		change_tag = WR0
+		italy_region = {
+			add_permanent_claim = ROOT
+		}
+		balkan_region = {
+			add_permanent_claim = ROOT
+		}
+		anatolia_region = {
+			add_permanent_claim = ROOT
+		}
+	}
+	option = {
+		name = britt.11b
+		override_country_name = ATLANTIC_EMPIRE
+		change_country_color = {
+			color = {
+				50 170 165
+			}
+		}
+		iberia_region = {
+			add_permanent_claim = ROOT
+		}
+		scandinavia_region = {
+			add_permanent_claim = ROOT
+		}
+		north_german_region = {
+			limit = { has_port = yes}
+			add_permanent_claim = ROOT
+		}
+		northern_morocco_area = {
+			add_permanent_claim = ROOT
+		}
+		western_morocco_area = {
+			add_permanent_claim = ROOT
+		}
+		southern_morocco_area = {
+			add_permanent_claim = ROOT
+		}
+		macaronesia_area = {
+			add_permanent_claim = ROOT
+		}
+		add_country_modifier = {
+			name = brit_atlantic_empire
+			duration = -1
+		}
+	}
+}
+
+country_event = {
 	id = britt.100
 	title = britt.100.test
 	desc = britt.100.desc
@@ -355,6 +531,45 @@ country_event = {
 					add_base_manpower = 1
 				}
 			}
+		}
+	}
+}
+
+country_event = {
+	id = britt.333
+	title = britt.333.test
+	desc = britt.333.desc
+	picture = COLONIZATION_eventPicture
+	
+	is_triggered_only = yes
+	option = {
+		name = britt.333a
+		change_country_color = {
+			color = { 50 170 165 }
+		}
+	}
+	option = {
+		name = britt.333b
+		change_country_color = {
+			country = WR0
+		}
+	}
+	option = {
+		name = britt.333c
+		change_country_color = {
+			country = ROM
+		}
+	}
+	option = {
+		name = britt.333d
+		change_country_color = {
+			country = SO0
+		}
+	}
+	option = {
+		name = britt.333e
+		change_country_color = {
+			color = { 193  26  14 }
 		}
 	}
 }

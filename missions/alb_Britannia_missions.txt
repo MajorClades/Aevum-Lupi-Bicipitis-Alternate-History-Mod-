@@ -55,6 +55,33 @@ Britannia_1_slot = {
 			}
 		}
 	}
+
+	brit_colonial_lead = {
+		icon = mission_conquer_50_development
+		position = 6
+		provinces_to_highlight = {is_capital_of = ICE}
+
+		trigger = { 
+			OR = {
+				ICE = { has_opinion = { who = ROOT value = 190} }
+				num_of_explorers = 1
+			}
+		} 
+
+		effect = {
+
+			simple_dynamic_effect = {
+				first_custom_tooltip = BRIT_TT_5
+				first_limit = "ICE = { has_opinion = { who = ROOT value = 190} }"
+				first_effect = "american_east_coast_region = {discover_country = ROOT} north_atlantic_region = {discover_country = ROOT}"
+				second_limit = "NOT = {ICE = { has_opinion = { who = ROOT value = 190} }}"
+				second_effect = "add_country_modifier = {
+					name = brit_explore_more
+					duration = 10950
+				}"
+			}
+		}
+	}
 }
 Britannia_2_slot = {
 	slot = 2
@@ -131,6 +158,7 @@ Britannia_2_slot = {
 			override_country_name = REGNUM_BRITANNUM
 		}
 	}
+	
 	brit_imperial_heir = {
 		icon = mission_conquer_50_development
 		position = 5
@@ -140,6 +168,7 @@ Britannia_2_slot = {
 		trigger = { 
 			SO0 = {
 				OR = {
+					NOT = { total_development = 200 }
 					exists = no
 					AND = {
 						alliance_with = ROOT
@@ -155,10 +184,27 @@ Britannia_2_slot = {
 		effect = {
 			simple_dynamic_effect = {
 				first_custom_tooltip = BRIT_TT_3
-				first_limit = "SO0 = {exists = yes}"
-				first_effect = "add_government_reform = britannia_imperial_heir"
-				second_limit = "SO0 = {exists = no}"
+				first_limit = "SO0 = {exists = yes total_development = 200 }"
+				first_effect = "add_government_reform = britannia_imperial_heir custom_tooltip = BRIT_TT_3a"
+				second_limit = "SO0 = {OR = {exists = no NOT = { total_development = 200 } }}"
 				second_effect = "france_region = {add_permanent_claim = ROOT}"
+			}
+		}
+	}
+
+	brit_imperium_britannum = {
+		icon = mission_conquer_50_development
+		position = 6
+		required_missions = {brit_imperial_heir  } 
+
+		trigger = { 
+			government_rank = 3
+			total_development = 1000
+		} 
+
+		effect = {
+			country_event = {
+				id = britt.11
 			}
 		}
 	}
@@ -253,6 +299,48 @@ Britannia_3_slot = {
 		}
 	}
 
+	britannia_scotlandia = {
+		icon = mission_rb_scottish_conquer_london
+		position = 5
+		provinces_to_highlight = { province_group = ireland_provinces  NOT = {country_or_non_sovereign_subject_holds = ROOT}}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 3
+				province_group = ireland_provinces
+			}
+		}
+
+		effect = {	
+			country_event = {
+				id = britt.2
+			}
+		}
+	}
+
+	britannia_emerald_sword = {
+		icon = mission_rb_scottish_conquer_london
+		position = 6
+		required_missions = { britannia_scotlandia } 
+		provinces_to_highlight = { province_group = ireland_provinces  NOT = {country_or_non_sovereign_subject_holds = ROOT}}
+		trigger = {
+			OR = {
+				accepted_culture = scotian
+				accepted_culture = belgian
+				commandant = 5
+			}
+			ireland_provinces = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {	
+			country_event = {
+				id = britt.6
+			}	
+		}
+	}
 }
 Britannia_4_slot = {
 	slot = 4
@@ -300,48 +388,93 @@ Britannia_4_slot = {
 		}
 	}
 
-	britannia_scotlandia = {
-		icon = mission_rb_scottish_conquer_london
+	brit_the_great_channel = {
+		icon = mission_conquer_50_development
 		position = 4
-		provinces_to_highlight = { province_group = ireland_provinces  NOT = {country_or_non_sovereign_subject_holds = ROOT}}
+		required_missions = { britannia_the_little_republic } 
+		provinces_to_highlight = { province_id = 1269 } 
 
-		trigger = {
-			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-				value = 3
-				province_group = ireland_provinces
+		trigger = { 
+			OR = {
+				1269 = {
+					trade_share = {
+						country = ROOT
+						share = 30
+					}
+				}
+				calc_true_if = {
+					amount = 3
+					all_ally = {
+						primary_culture = ellan
+					}
+				}
 			}
-		}
 
-		effect = {	
-			country_event = {
-				id = britt.2
+		} 
+
+		effect = {
+			add_country_modifier = {
+				name = brit_power_from_trade
+				duration = 10950
+			}
+			flanders_area = {
+				add_permanent_claim = ROOT
+			}
+			frisia_area = {
+				add_permanent_claim = ROOT
+			}
+			holland_area = {
+				add_permanent_claim = ROOT
+			}
+			north_brabant_area = {
+				add_permanent_claim = ROOT
 			}
 		}
 	}
-
-	britannia_emerald_sword = {
-		icon = mission_rb_scottish_conquer_london
+	brit_we_love_france = {
+		icon = mission_conquer_50_development
 		position = 5
-		required_missions = { britannia_scotlandia } 
-		provinces_to_highlight = { province_group = ireland_provinces  NOT = {country_or_non_sovereign_subject_holds = ROOT}}
-		trigger = {
+		required_missions = { brit_the_great_channel } 
+		provinces_to_highlight = { OR = { area = flanders_area area = frisia_area area = holland_area area = north_brabant_area } } 
+
+		trigger = { 
 			OR = {
-				accepted_culture = scotian
-				accepted_culture = belgian
-				commandant = 5
+				accepted_culture = ellan
+				government_rank = 3
 			}
+			num_of_owned_provinces_with = {
+				value = 10
+				OR = { area = flanders_area area = frisia_area area = holland_area area = north_brabant_area }
+			}
+		} 
+
+		effect = {
+			country_event = {
+				id = britt.8
+			}
+		}
+	}
+	britannia_scotian_troops = {
+		icon = mission_rb_scottish_conquer_london
+		position = 6
+		required_missions = { britannia_scotlandia } 
+		provinces_to_highlight = { province_group = ireland_provinces  unrest = 1}
+		trigger = {
 			ireland_provinces = {
 				type = all
 				owned_by = ROOT
+				NOT = {unrest = 1}
 			}
 		}
 
 		effect = {	
-			country_event = {
-				id = britt.6
+			add_country_modifier = {
+				name = brit_scottian_aux
+				duration = 10950
 			}	
 		}
 	}
+
 }
 Britannia_5_slot = {
 	slot = 5
@@ -415,24 +548,30 @@ Britannia_5_slot = {
 		}
 	}
 
-	britannia_scotian_troops = {
+	britannia_universities = {
 		icon = mission_rb_scottish_conquer_london
-		position = 5
-		required_missions = { britannia_scotlandia } 
-		provinces_to_highlight = { province_group = ireland_provinces  unrest = 1}
+		position = 7
+		provinces_to_highlight = {province_id = 237}
 		trigger = {
-			ireland_provinces = {
-				type = all
-				owned_by = ROOT
-				NOT = {unrest = 1}
+			owns = 237
+			OR = {
+				num_of_completed_idea_groups_adm = {amount = 1}
+				num_of_completed_idea_groups_dip = {amount = 1}
 			}
+			has_adm_advisor_3 = yes
+			has_dip_advisor_3 = yes
+			has_mil_advisor_3 = yes
 		}
 
-		effect = {	
+		effect = {
 			add_country_modifier = {
-				name = brit_scottian_aux
+				name = brit_oxforda
 				duration = 10950
-			}	
+			}
+			237 = {
+				add_building = university
+			}
 		}
 	}
+
 }
