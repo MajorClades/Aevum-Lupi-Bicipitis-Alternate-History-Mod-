@@ -131,6 +131,37 @@ Britannia_2_slot = {
 			override_country_name = REGNUM_BRITANNUM
 		}
 	}
+	brit_imperial_heir = {
+		icon = mission_conquer_50_development
+		position = 5
+		required_missions = {brit_greater_britannia  } 
+		provinces_to_highlight = { is_capital_of = SO0 } 
+
+		trigger = { 
+			SO0 = {
+				OR = {
+					exists = no
+					AND = {
+						alliance_with = ROOT
+						owes_favors = {
+							who = ROOT
+							value = 90
+						}
+					}
+				}
+			}
+		} 
+
+		effect = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = BRIT_TT_3
+				first_limit = "SO0 = {exists = yes}"
+				first_effect = "add_government_reform = britannia_imperial_heir"
+				second_limit = "SO0 = {exists = no}"
+				second_effect = "france_region = {add_permanent_claim = ROOT}"
+			}
+		}
+	}
 }
 Britannia_3_slot = {
 	slot = 3
@@ -381,6 +412,27 @@ Britannia_5_slot = {
 			}
 			custom_tooltip = BRIT_TT_2
 			brittannia_knight_of_the_round_table = yes
+		}
+	}
+
+	britannia_scotian_troops = {
+		icon = mission_rb_scottish_conquer_london
+		position = 5
+		required_missions = { britannia_scotlandia } 
+		provinces_to_highlight = { province_group = ireland_provinces  unrest = 1}
+		trigger = {
+			ireland_provinces = {
+				type = all
+				owned_by = ROOT
+				NOT = {unrest = 1}
+			}
+		}
+
+		effect = {	
+			add_country_modifier = {
+				name = brit_scottian_aux
+				duration = 10950
+			}	
 		}
 	}
 }

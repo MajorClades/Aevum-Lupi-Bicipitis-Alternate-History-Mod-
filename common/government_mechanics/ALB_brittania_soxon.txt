@@ -1,0 +1,45 @@
+brit_imperial_heir = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 11
+	available = {
+
+	}
+
+	powers = {
+		imperial_favor_brit = {
+			max = 100
+			min = 0
+			reset_on_new_ruler = no
+			development_scaled_monthly_growth = 0.2
+			base_monthly_growth = -0.1
+			is_good = yes
+		}
+	}
+	
+	interactions = {
+		make_imperial_favor_brit = {
+			gui = hessian_militarization_gov_mech
+			cost_type = imperial_favor_brit
+			center = no
+			trigger = {
+				adm_power = 50
+				dip_power = 50
+				mil_power = 50
+			}
+			effect = {
+				add_adm_power = -50
+				add_dip_power = -50
+				add_mil_power = -50
+				add_government_power = {
+					mechanic_type = brit_imperial_heir
+					power_type = imperial_favor_brit
+					value = 5
+				}
+			}
+			ai_chance = {
+				factor = 1
+			}
+			cooldown_years = 1
+		}
+	}
+}

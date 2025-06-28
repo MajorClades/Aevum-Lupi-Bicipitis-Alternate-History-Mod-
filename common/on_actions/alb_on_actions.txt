@@ -503,7 +503,44 @@ on_thri_yearly_pulse = {
 	}
 }
 on_monarch_death = {
-
+	if = {
+		limit = { 
+			tag = SO0 
+			has_country_flag = brit_become_emperor
+		}
+		if = {
+			limit = { check_variable = { which = britannia_heir_var value = 20 } NOT = {check_variable = { which = britannia_heir_var value = 40 }}}
+			random_list = {
+				20 = {BR0 = {create_union = SO0}}
+				80 = {}
+			}
+		}
+		if = {
+			limit = { check_variable = { which = britannia_heir_var value = 40 } NOT = {check_variable = { which = britannia_heir_var value = 60 }}}
+			random_list = {
+				40 = {BR0 = {create_union = SO0}}
+				60 = {}
+			}
+		}
+		if = {
+			limit = { check_variable = { which = britannia_heir_var value = 60 } NOT = {check_variable = { which = britannia_heir_var value = 80 }}}
+			random_list = {
+				60 = {BR0 = {create_union = SO0}}
+				40 = {}
+			}
+		}
+		if = {
+			limit = { check_variable = { which = britannia_heir_var value = 80 } NOT = {check_variable = { which = britannia_heir_var value = 99 }}}
+			random_list = {
+				80 = {BR0 = {create_union = SO0}}
+				20 = {}
+			}
+		}
+		if = {
+			limit = { check_variable = { which = britannia_heir_var value = 99 }}
+			BR0 = {create_union = SO0}
+		}
+	}
 	if = {
 		limit = { 
 			tag = HE0 
@@ -1148,7 +1185,30 @@ on_siege_lost_province =  {
 	}
 }
 on_yearly_pulse = {
-	if ={
+	if = {
+		limit = { 
+			tag = SO0 
+			alliance_with = BR0
+			has_country_flag = brit_become_emperor
+		}
+		change_variable = {
+			which = britannia_heir_var
+			value = 2
+		}
+	}
+	if = {
+		limit = { 
+			tag = SO0 
+			NOT = {alliance_with = BR0}
+			has_country_flag = brit_become_emperor
+		}
+		change_variable = {
+			which = britannia_heir_var
+			value = -2
+		}
+	}
+
+	if = {
 		limit = {
 			OR = {
 				tag = FJ9
