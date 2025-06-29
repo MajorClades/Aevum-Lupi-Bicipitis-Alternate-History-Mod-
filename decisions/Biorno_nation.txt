@@ -221,51 +221,44 @@ country_decisions = {
 		}
 		ai_importance = 400
 	}
-	brit_the_last_highlander = {
+
+	brit_atlantic_empire_dec = {
 		color = {
 			200 0 0
 		}
 		potential = {
-			OR = {
-				tag = BR0
-				was_tag = BR0
-			}
+			has_country_modifier = brit_atlantic_empire
 			NOT = {
-				has_country_flag = brit_the_last_highlander_flag
+				has_country_flag = brit_atlantic_empire_dec_flag
 			}
-			highlands_area = {
-				type = any
-				owned_by = ROOT
-				culture = pictish
+			any_subject_country = {
+				is_colonial_nation_of = ROOT
 			}
 		}
 		provinces_to_highlight = {
-			OR = {
-				area = highlands_area
-				province_id = 251
-				province_id = 253
-				province_id = 4364
-			}
+			province_id = 965
 		}
 		allow = {
-			dip_power = 150
-			highlands_area = {
-				type = all
-				owned_by = ROOT
-			}
-			owns = 251
-			owns = 253
-			owns = 4364
+			owns_or_non_sovereign_subject_of = 965
 		}
 		effect = {
-			add_dip_power = -150
-			country_event = {
-				id = britt.7
+			965 = {
+				cede_province = ROOT
+				add_core = ROOT
 			}
-			set_country_flag = brit_the_last_highlander_flag
+			set_capital = 965
+			every_subject_country = {
+				limit = {
+					is_colonial_nation_of = ROOT
+				}
+				overlord = {
+					inherit = PREV
+				}
+			}
+			set_country_flag = brit_atlantic_empire_dec_flag
 		}
 		ai_will_do = {
-			factor = 1
+			factor = 0
 		}
 		ai_importance = 400
 	}

@@ -56,6 +56,31 @@ Britannia_1_slot = {
 		}
 	}
 
+	britannia_the_last_highlander = {
+		icon = mission_rb_scottish_conquer_london
+		position = 4
+		required_missions = { britannia_swedish_suffering } 
+		provinces_to_highlight = { OR = { area = highlands_area province_id = 251 province_id = 253 province_id = 4364 } } 
+
+		trigger = {
+			dip_power = 150
+			highlands_area = {
+				type = all
+				owned_by = ROOT
+			}
+			owns = 251
+			owns = 253
+			owns = 4364
+		}
+
+		effect = {
+			add_dip_power = -150
+			country_event = {
+				id = britt.7
+			}
+		}
+	}
+
 	brit_colonial_lead = {
 		icon = mission_conquer_50_development
 		position = 6
@@ -69,16 +94,81 @@ Britannia_1_slot = {
 		} 
 
 		effect = {
-
 			simple_dynamic_effect = {
 				first_custom_tooltip = BRIT_TT_5
 				first_limit = "ICE = { has_opinion = { who = ROOT value = 190} }"
-				first_effect = "american_east_coast_region = {discover_country = ROOT} north_atlantic_region = {discover_country = ROOT}"
+				first_effect = "american_east_coast_region = {discover_country = ROOT} north_atlantic_region = {discover_country = ROOT} canada_region = { discover_country = ROOT} northeast_america_region = { discover_country = ROOT}"
 				second_limit = "NOT = {ICE = { has_opinion = { who = ROOT value = 190} }}"
 				second_effect = "add_country_modifier = {
 					name = brit_explore_more
 					duration = 10950
 				}"
+			}
+		}
+	}
+	brit_enter_vinland = {
+		icon = mission_conquer_50_development
+		position = 7
+		required_missions = { brit_colonial_lead } 
+		provinces_to_highlight = {	has_port = yes OR = { region = canada_region region = northeast_america_region } }
+		trigger = { 
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 5
+				has_port = yes OR = { region = canada_region region = northeast_america_region }
+			}
+		} 
+
+		effect = {
+			add_country_modifier = {
+				name = brit_continue_norse_kill
+				duration = 10950
+			}
+			canada_region = {
+				add_permanent_claim = ROOT
+			}
+			northeast_america_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	brit_exit_vinland = {
+		icon = mission_conquer_50_development
+		position = 8
+		required_missions = { brit_enter_vinland } 
+		provinces_to_highlight = {	region = canada_region NOT = {country_or_non_sovereign_subject_holds = ROOT} }
+		trigger = { 
+			canada_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		effect = {
+			add_years_of_income = 1.5
+			tooltip = {
+				custom_tooltip = BRIT_TT_6
+				capital_scope = {
+					add_permanent_province_modifier = {
+						name = brit_end_of_norse
+						duration = -1
+					}
+				}
+			}
+			hidden_effect = {
+				random_subject_country = {
+				limit = {
+					is_colonial_nation_of = ROOT
+					capital_scope = {
+						region = canada_region
+					}
+				}
+				capital_scope = {
+					add_permanent_province_modifier = {
+						name = brit_end_of_norse
+						duration = -1
+					}
+				}
+			}
 			}
 		}
 	}
@@ -208,6 +298,57 @@ Britannia_2_slot = {
 			}
 		}
 	}
+
+	brit_enter_rausulia = {
+		icon = mission_conquer_50_development
+		position = 8
+		required_missions = { brit_enter_vinland } 
+		provinces_to_highlight = {	colonial_region = colonial_eastern_america NOT = {country_or_non_sovereign_subject_holds = ROOT} }
+		trigger = { 
+			colonial_eastern_america = {
+				type = all
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					owned_by = IRO
+				}
+			}
+		} 
+
+		effect = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = BRIT_TT_7
+				first_limit = "alliance_with = IRO"
+				first_effect = "IRO = { capital_scope = { add_permanent_province_modifier = { name = brit_natives_trading duration = -1}}}"
+				second_limit = "NOT = {alliance_with = IRO}"
+				second_effect = "add_yearly_manpower = 2"
+			}
+			tooltip = {
+				custom_tooltip = BRIT_TT_6
+				capital_scope = {
+					add_permanent_province_modifier = {
+						name = brit_natives_trading
+						duration = -1
+					}
+				}
+			}
+			hidden_effect = {
+				random_subject_country = {
+						limit = {
+							is_colonial_nation_of = ROOT
+							capital_scope = {
+								colonial_region = colonial_eastern_america
+							}
+						}
+					capital_scope = {
+						add_permanent_province_modifier = {
+							name = brit_natives_trading
+							duration = -1
+						}
+					}
+				}
+			}
+		}
+	}
 }
 Britannia_3_slot = {
 	slot = 3
@@ -222,7 +363,12 @@ Britannia_3_slot = {
 		provinces_to_highlight = { is_capital_of = JU0 } 
 
 		trigger = { 
-			diplomat = 1
+			if = {
+				limit = {ai = yes}
+				dip_power = 220
+			}else = {
+				diplomat = 1
+			}
 			JU0 = {
 				junior_union_with = ROOT
 			}
@@ -547,6 +693,39 @@ Britannia_5_slot = {
 			brittannia_knight_of_the_round_table = yes
 		}
 	}
+
+	britannia_frankish_hammers = {
+		icon = mission_rb_scottish_conquer_london
+		position = 6
+		required_missions = { britannia_the_tabula_rotunda brit_we_love_france} 
+		trigger = {
+			num_of_completed_idea_groups_mil = {amount = 2}
+			OR = {
+				FR2 = {
+					years_in_union_under = {
+						who = ROOT
+						years = 25
+					}
+				}
+				AND = {
+					accepted_culture = franken
+					accepted_culture = ellan
+					development_in_provinces = {
+						value = 150
+						culture_group = frankish
+					}
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = angevin_forces
+				duration = -1
+			}
+		}
+	}
+
 
 	britannia_universities = {
 		icon = mission_rb_scottish_conquer_london
