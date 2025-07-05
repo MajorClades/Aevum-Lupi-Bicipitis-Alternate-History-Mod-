@@ -408,6 +408,12 @@ country_event = {
 		anatolia_region = {
 			add_permanent_claim = ROOT
 		}
+		iberia_region = {
+			add_permanent_claim = ROOT
+		}
+		mashriq_region = {
+			add_permanent_claim = ROOT
+		}
 	}
 	option = {
 		name = britt.11b
@@ -443,6 +449,7 @@ country_event = {
 			name = brit_atlantic_empire
 			duration = -1
 		}
+		custom_tooltip = ATLANTIC_EMPIRE_TT_1
 	}
 }
 
@@ -472,7 +479,181 @@ country_event = {
 	}
 }
 
+country_event = { #some guy steals Excalibur
+	id = britt.13
+	title = britt.13.test
+	desc = britt.13.desc
+	picture = SPY_eventPicture
+	
+	trigger = {
+		owns = 241
+		OR = {
+			culture_group = romano_briton
+			culture_group = romon
+		}
+		religion = impotian
+		is_year = 1620
+	}
+	fire_only_once = yes
+	mean_time_to_happen = {
+		months = 12
+	}
+	option = {
+		name = britt.13a
+		if = {
+			limit = {
+				OR = {
+					tag = BR0
+					was_tag = BR0
+				}
+			}
+			add_prestige = -25
+			add_stability = -1
+		}else = {
+			add_prestige = -10
+		}
+		set_country_flag = lupin_the_3rd_flag
+		country_event = {
+			id = britt.14
+			days = 7
+		}
+	}
+}
 
+country_event = { #some guy steals Excalibur, some people gotta find him
+	id = britt.14
+	title = britt.14.test
+	desc = britt.14.desc
+	picture = SPY_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = britt.14a
+		define_advisor = {
+			type = natural_scientist
+			skill = 3
+			name = "Moaier Domus" #Sherlock Holmes - Fair Hair House - Moai Hier
+		}
+		define_advisor = {
+			type = spymaster
+			skill = 3
+			name = "Agatha Christi" 
+			female = yes
+		}
+		define_advisor = {
+			type = commandant
+			skill = 3
+			name = "Jaomus Bond" # 007
+		}
+	}
+	option = {
+		name = britt.14b
+		define_advisor = {
+			type = natural_scientist
+			skill = 3
+			name = "Moaier Domus" #Sherlock Holmes - Fair Hair House - Moai Hier
+			cost_multiplier = 0.5
+		}
+	}
+	option = {
+		name = britt.14c
+		define_advisor = {
+			type = spymaster
+			skill = 3
+			name = "Agatha Christi" 
+			female = yes
+			cost_multiplier = 0.5
+		}
+	}
+	option = {
+		name = britt.14d
+		define_advisor = {
+			type = commandant
+			skill = 3
+			name = "Jaomus Bond" # 007
+			cost_multiplier = 0.5
+		}
+	}
+}
+
+country_event = { #some guy steals Excalibur
+	id = britt.15
+	title = britt.15.test
+	desc = britt.15.desc
+	picture = SPY_eventPicture
+	
+	trigger = {
+		has_country_flag = lupin_the_3rd_flag
+		NOT = {
+			is_year = 1680
+		}
+	}
+	fire_only_once = yes
+	mean_time_to_happen = {
+		months = 900
+		modifier = {
+			factor = 0.8
+			employed_advisor = { name = "Moaier Domus"}
+		}
+		modifier = {
+			factor = 0.7
+			employed_advisor = { name = "Agatha Christi" }
+		}
+		modifier = {
+			factor = 0.8
+			employed_advisor = { name = "Jaomus Bond"}
+		}
+		modifier = {
+			factor = 0.5
+			employed_advisor = { name = "Zenigata"}
+		}
+	}
+	option = {
+		name = britt.15a
+		if = {
+			limit = {
+				OR = {
+					tag = BR0
+					was_tag = BR0
+				}
+			}
+			add_prestige = 25
+			add_stability = 1
+			add_country_modifier = {
+				name = captured_the_thief_real
+				duration = 10950
+			}
+		}else = {
+			add_prestige = 10
+		}
+		clr_country_flag = lupin_the_3rd_flag
+	}
+}
+
+country_event = { #some guy steals Excalibur
+	id = britt.16
+	title = britt.16.test
+	desc = britt.16.desc
+	picture = SPY_eventPicture
+	
+	trigger = {
+		has_country_flag = lupin_the_3rd_flag
+		NOT = {
+			is_year = 1680
+		}
+	}
+	fire_only_once = yes
+	mean_time_to_happen = {
+		months = 120
+	}
+	option = {
+		name = britt.16a
+		define_advisor = {
+			type = trader
+			skill = 1
+			name = "Zenigata" 
+		}
+	}
+}
 
 country_event = {
 	id = britt.100
