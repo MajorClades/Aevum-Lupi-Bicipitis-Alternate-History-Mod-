@@ -166,35 +166,35 @@ country_event = {
 	}
 }
 
-country_event = {
-	id = britt.5
-	title = britt.5.test
-	desc = britt.5.desc
-	picture = COLONIZATION_eventPicture
+# country_event = {
+# 	id = britt.5
+# 	title = britt.5.test
+# 	desc = britt.5.desc
+# 	picture = COLONIZATION_eventPicture
 	
-	is_triggered_only = yes
-	fire_only_once = yes
-	option = {
-		name = britt.5a
-		ai_chance = {
-			factor = 80
-		}
-		add_country_modifier = {
-			name = culture_brit_1
-			duration = -1
-		}
-	}
-	option = {
-		name = britt.5b
-		ai_chance = {
-			factor = 20
-		}
-		add_country_modifier = {
-			name = culture_brit_2
-			duration = -1
-		}
-	}
-}
+# 	is_triggered_only = yes
+# 	fire_only_once = yes
+# 	option = {
+# 		name = britt.5a
+# 		ai_chance = {
+# 			factor = 80
+# 		}
+# 		add_country_modifier = {
+# 			name = culture_brit_1
+# 			duration = -1
+# 		}
+# 	}
+# 	option = {
+# 		name = britt.5b
+# 		ai_chance = {
+# 			factor = 20
+# 		}
+# 		add_country_modifier = {
+# 			name = culture_brit_2
+# 			duration = -1
+# 		}
+# 	}
+# }
 country_event = {
 	id = britt.6
 	title = britt.6.test
@@ -369,6 +369,7 @@ country_event = {
 		hidden_effect = {
 			if = {
 				limit = {any_subject_country = {tag = SO0 ai = yes}}
+				remove_government_reform = britannia_imperial_heir
 				country_event = {
 					id = britt.10
 				}
@@ -384,8 +385,13 @@ country_event = {
 	is_triggered_only = yes
 	option = {
 		name = britt.10a
-		remove_government_reform = britannia_imperial_heir
 		inherit = SO0
+		set_government_rank = 3
+	}
+	option = {
+		name = britt.10b
+		inherit = SO0
+		override_country_name = WR0
 		set_government_rank = 3
 	}
 }

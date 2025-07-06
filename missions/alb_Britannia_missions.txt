@@ -17,7 +17,7 @@ Britannia_1_slot = {
 			}
 		}
 
-		effect = { country_event = { id = britt.1 }  } 
+		effect = { country_event = { id = britt.1 } custom_tooltip = BRIT_ET_1 } 
 	}
 
 	britannia_swedish_suffering = {
@@ -80,6 +80,7 @@ Britannia_1_slot = {
 		effect = {
 			add_dip_power = -150
 			country_event = { id = britt.7 } 
+			custom_tooltip = BRIT_ET_4
 		}
 	}
 
@@ -480,7 +481,7 @@ Britannia_3_slot = {
 			}
 		}
 
-		effect = { country_event = { id = britt.2 }  } 
+		effect = { country_event = { id = britt.2 } custom_tooltip = BRIT_ET_2 } 
 	}
 
 	britannia_emerald_sword = {
@@ -504,7 +505,7 @@ Britannia_3_slot = {
 			}
 		}
 
-		effect = { country_event = { id = britt.6 }  } 
+		effect = { country_event = { id = britt.6 } custom_tooltip = BRIT_ET_3  } 
 	}
 
 	britannia_our_britannia = {
@@ -678,7 +679,16 @@ Britannia_4_slot = {
 			}
 		}
 
-		effect = { country_event = { id = britt.8 }  } 
+		effect = { 
+			country_event = { id = britt.8 }
+			custom_tooltip =  BRIT_ET_5 
+			tooltip = {
+				add_country_modifier = {
+					name = brit_continental_trade
+					duration = -1
+				}
+			}
+		} 
 	}
 
 	britannia_scotian_troops = {
@@ -827,13 +837,10 @@ Britannia_5_slot = {
 
 		trigger = {
 			owns = 237
-			OR = {
-				num_of_completed_idea_groups_adm = { amount = 1 } 
-				num_of_completed_idea_groups_dip = { amount = 1 } 
+			237 = {
+				has_tax_building_trigger = yes
 			}
-			has_adm_advisor_3 = yes
-			has_dip_advisor_3 = yes
-			has_mil_advisor_3 = yes
+			has_institution = renaissance
 		}
 
 		effect = {
@@ -856,10 +863,11 @@ Britannia_5_slot = {
 				owned_by = ROOT
 				development = 25
 			}
-			OR = {
-				num_of_completed_idea_groups_adm = { amount = 2 } 
-				num_of_completed_idea_groups_dip = { amount = 2 } 
-			}
+			num_of_completed_idea_groups_adm = { amount = 1 } 
+			num_of_completed_idea_groups_dip = { amount = 1 } 
+			has_adm_advisor_3 = yes
+			has_dip_advisor_3 = yes
+			has_mil_advisor_3 = yes
 		}
 
 		effect = { country_event = { id = britt.12 }  } 
