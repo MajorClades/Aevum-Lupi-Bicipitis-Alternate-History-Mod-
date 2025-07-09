@@ -1,0 +1,90 @@
+Frisia_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {tag = FR0}
+
+	fris_forces_of_power = {
+		icon = mission_landsknecht_soldier
+		position = 1
+		required_missions = { dalm_grain_silo } 
+
+		trigger = {
+			if = {
+				limit = { ai = no } 
+				OR = {
+					army_size_percentage = 0.9
+					mercenary_fraction = 0.25
+				}
+			}
+			else = {
+				army_size_percentage = 0.7
+				num_of_generals = 1
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = fris_merc_iron
+				duration = 10950
+			}
+		}
+	}
+}
+Frisia_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {tag = FR0}
+
+	fris_working_iron = {
+		icon = mission_landsknecht_soldier
+		position = 2
+		required_missions = { fris_forces_of_power } 
+		provinces_to_highlight = { OR = {province_id = 233 province_id = 4986}	}
+
+		trigger = {
+			OR = {
+				faction_in_power = mr_guilds
+				has_dip_advisor_2 = yes
+			}
+			owns = 233
+			owns = 4986
+			manpower = 3	
+		}
+
+		effect = {
+			add_manpower = -3
+			233 = {
+				add_base_production = 1
+			}
+			4986 = {
+				remove_core = BR0
+				add_base_production = 1
+			}
+		}
+	}
+}
+Frisia_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {tag = FR0}
+}
+Frisia_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {tag = FR0}
+}
+Frisia_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {tag = FR0}
+}
