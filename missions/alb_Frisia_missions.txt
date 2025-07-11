@@ -8,7 +8,6 @@ Frisia_1_slot = {
 	fris_forces_of_power = {
 		icon = mission_landsknecht_soldier
 		position = 1
-		required_missions = { dalm_grain_silo } 
 
 		trigger = {
 			if = {
@@ -47,7 +46,10 @@ Frisia_2_slot = {
 
 		trigger = {
 			OR = {
-				faction_in_power = mr_guilds
+				faction_influence = {
+					faction = mr_guilds
+					influence = 55
+				}
 				has_dip_advisor_2 = yes
 			}
 			owns = 233
@@ -73,6 +75,53 @@ Frisia_3_slot = {
 	ai = yes
 	has_country_shield = yes
 	potential = {tag = FR0}
+
+	fris_crush_fonlod = {
+		icon = mission_landsknecht_soldier
+		position = 1
+		trigger = {
+			OR = {
+				faction_influence = {
+					faction = mr_traders
+					influence = 55
+				}
+				prestige = 20
+			}	
+		}
+
+		effect = {
+			wessex_area = {
+				add_permanent_claim = ROOT
+			}
+			home_counties_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	fris_restore_dominion = {
+		icon = mission_landsknecht_soldier
+		position = 2
+		required_missions = { fris_crush_fonlod } 
+		provinces_to_highlight = { OR = {area = wessex_area  area = home_counties_area }}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 8
+				OR = {area = wessex_area  area = home_counties_area }
+			}
+			wessex_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = fris_restored_dominance
+				duration = 10950
+			}
+		}
+	}
 }
 Frisia_4_slot = {
 	slot = 4
@@ -87,4 +136,46 @@ Frisia_5_slot = {
 	ai = yes
 	has_country_shield = yes
 	potential = {tag = FR0}
+
+	fris_shipping_lanes = {
+		icon = mission_landsknecht_soldier
+		position = 1
+		trigger = {
+			if = {
+				limit = { ai = no } 
+				navy_size_percentage = 0.9
+			}
+			else = {
+				navy_size_percentage = 0.7
+				num_of_admirals = 1
+			}	
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = fris_good_ship
+				duration = 10950
+			}
+		}
+	}
+	fris_merchant_fleet = {
+		icon = mission_landsknecht_soldier
+		position = 2
+		required_missions = { fris_shipping_lanes } 
+		provinces_to_highlight = { is_capital_of = ROOT	}
+		trigger = {
+			capital_scope = {
+				has_port = yes
+			}
+			sailors_percentage = 0.9
+		}
+
+		effect = {
+			add_sailors = -0.5
+			capital_scope = {
+				add_or_upgrade_naval_defense_building = yes
+				add_or_upgrade_shipyard_building = yes
+			}
+		}
+	}
 }
