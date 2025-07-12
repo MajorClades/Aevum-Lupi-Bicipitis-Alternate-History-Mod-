@@ -68,6 +68,39 @@ Frisia_1_slot = {
 			}
 		}
 	}
+	fris_work_the_sweds = {
+		icon = mission_swedish_peasantry
+		position = 5
+		required_missions = { fris_work_the_juts } 
+		provinces_to_highlight = {
+			culture = svede
+			region = british_isles_region
+		}
+
+		trigger = {
+			years_of_manpower = 2
+			owns_all_provinces = {
+				culture = svede
+				region = british_isles_region
+			}
+		}
+
+		effect = {
+			add_yearly_manpower = -2
+			if = {
+				limit = { accepted_culture = svede } 
+				add_accepted_culture = svevish
+				remove_accepted_culture = svede
+			}
+			custom_tooltip = alb_brit_move_swedish_culture_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = { culture = svede } 
+					change_culture = svevish
+				}
+			}
+		}
+	}
 }
 Frisia_2_slot = {
 	slot = 2
@@ -141,39 +174,7 @@ Frisia_2_slot = {
 			}
 		}
 	}
-	fris_work_the_sweds = {
-		icon = mission_swedish_peasantry
-		position = 5
-		required_missions = { fris_work_the_juts } 
-		provinces_to_highlight = {
-			culture = svede
-			region = british_isles_region
-		}
-
-		trigger = {
-			years_of_manpower = 2
-			owns_all_provinces = {
-				culture = svede
-				region = british_isles_region
-			}
-		}
-
-		effect = {
-			add_yearly_manpower = -2
-			if = {
-				limit = { accepted_culture = svede } 
-				add_accepted_culture = svevish
-				remove_accepted_culture = svede
-			}
-			custom_tooltip = alb_brit_move_swedish_culture_tt
-			hidden_effect = {
-				every_owned_province = {
-					limit = { culture = svede } 
-					change_culture = svevish
-				}
-			}
-		}
-	}
+	
 }
 Frisia_3_slot = {
 	slot = 3
@@ -260,6 +261,33 @@ Frisia_3_slot = {
 			}
 		}
 	}
+	fris_mining_bois = {
+		icon = mission_landsknecht_soldier
+		position = 5
+		provinces_to_highlight = { region = british_isles_region OR = { trade_goods = iron trade_goods = copper }  }
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 5
+				region = british_isles_region 
+				OR = { trade_goods = iron trade_goods = copper } 
+				base_production = 5
+			}
+		}
+
+		effect = {
+			add_years_of_owned_provinces_production_income = {
+				years = 8
+				trigger = {
+					OR = {
+						trade_goods = iron
+						trade_goods = copper
+					}
+				}
+				custom_tooltip = MONOPOLY_INCOME_IRON_AND_COPPER_DESC
+			}
+		}
+	}
 }
 Frisia_4_slot = {
 	slot = 4
@@ -309,12 +337,56 @@ Frisia_4_slot = {
 		trigger = {
 			ireland_provinces = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 
 		effect = {
-			
+			ireland_provinces = {
+				add_province_modifier = {
+					name = fris_ireland_under_control
+					duration = 10950
+				}
+			}
+		}
+	}
+	fris_commercial_success = {
+		icon = mission_landsknecht_soldier
+		position = 6
+		required_missions = { fris_mining_bois fris_cornish_tin } 
+
+		trigger = {
+			monthly_income = 150
+			has_adm_advisor = yes
+			has_dip_advisor = yes
+			has_mil_advisor = yes
+		}
+
+		effect = {
+			add_years_of_income = -1
+			add_country_modifier = {
+				name = fris_commercial_council
+				duration = -1
+			}
+		}
+	}
+	fris_infinite_growth = {
+		icon = mission_landsknecht_soldier
+		position = 7
+		required_missions = { fris_commercial_success } 
+
+		trigger = {
+			num_of_completed_idea_groups_adm = {amount = 1}
+			num_of_completed_idea_groups_dip = {amount = 1}
+			OR = {
+				has_institution = global_trade
+				trader = 5
+			}
+		}
+
+		effect = {
+			custom_tooltip = manpower_for_dev_flag_tt_c
+			set_country_flag = late_stage_frisians
 		}
 	}
 }
@@ -389,6 +461,39 @@ Frisia_5_slot = {
 				add_great_project_tier = {
 					type = dutch_port
 					tier = 1
+				}
+			}
+		}
+	}
+	fris_cornish_tin = {
+		icon = mission_landsknecht_soldier
+		position = 5
+		provinces_to_highlight = { province_id = 233 }
+
+		trigger = {
+			has_dip_advisor_3 = yes
+			OR = {
+				estate_loyalty = {
+					estate = estate_burghers
+					loyalty = 65
+				}
+				faction_influence = {
+					faction = mr_guilds
+					influence = 80
+				}
+			}
+			233 = {
+				owned_by = ROOT
+				base_production = 7
+			}
+		}
+
+		effect = {
+			233 = {
+				add_base_production = -2
+				add_permanent_province_modifier = {
+					name = fris_tin_mining
+					duration = -1
 				}
 			}
 		}
