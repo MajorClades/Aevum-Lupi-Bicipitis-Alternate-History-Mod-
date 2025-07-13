@@ -1128,6 +1128,32 @@ on_province_religion_converted = {
 	}
 }
 
+on_siege_won_country = {
+	if = {
+		limit = {
+			OR = {
+				OR = {
+					tag = FR0 
+					was_tag = FR0 
+				}
+				is_in_war = { participants = FR0 } 
+			}
+			FR0 = {
+				any_hired_mercenary_company = {
+					template = merc_minecrafters
+					location = { province_id = FROM }
+				}
+			}
+		}
+		FR0 = { 
+			change_variable = {
+				which = miners_siege_counter
+				value = 1
+			}
+		}
+	}
+}
+
 # province
 # root = location, from = losing country
 on_siege_won_province = {
