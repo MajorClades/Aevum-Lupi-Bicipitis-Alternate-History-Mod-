@@ -74,9 +74,6 @@ kenalv_2_slot = {
 					duration = 7300
 				}
 			}
-			east_midlands_area = {
-				add_permanent_claim = ROOT
-			}
 		} 
 	}
 
@@ -87,11 +84,36 @@ kenalv_2_slot = {
 			fa0_swedish_bulwark
 			fa0_cross_the_thames
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = home_counties_area
+				area = west_midlands_area
+				province_id = 4376
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			owns = 4376
+			home_counties_area = {
+				owned_by = ROOT
+				type = all
+			}
+			west_midlands_area = {
+				owned_by = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			country_event = {
+				id = kenalv.1
+			}
+			custom_tooltip = empty_line_tt
+			add_country_modifier = {
+				name = fa0_restored_kingdom
+				duration = -1
+			}
+		} 
 	}
 }
 kenalv_3_slot = {
@@ -105,22 +127,80 @@ kenalv_3_slot = {
 		icon = fortify_malta
 		position = 2
 		required_missions = { fa0_bolster_fleet } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			province_id = 243
+			OR = {
+				NOT = { owned_by = ROOT }
+				NOT = { num_of_times_improved = 2 }
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			243 = {
+				owned_by = ROOT
+				num_of_times_improved = 2
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			243 = {
+				set_center_level_2_center_of_trade = yes
+			}
+			custom_tooltip = empty_line_tt
+			define_advisor = {
+				type = fortification_expert
+				skill = 2
+				cost_multiplier = 0.5
+			}
+			custom_tooltip = empty_line_tt
+			yorkshire_area = {
+				add_permanent_claim = ROOT
+			}
+			scottish_marches_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	fa0_northern_sweden = {
 		icon = mission_northumberland_coast
 		position = 3
 		required_missions = { fa0_seafort_gurem } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			OR = {
+				area = yorkshire_area
+				area = scottish_marches_area
+				area = east_midlands_area
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			yorkshire_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			scottish_marches_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			east_midlands_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_accepted_culture_or_dip_power = {
+				culture = svede
+			}
+			british_isles_region = {
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name = fa0_wipe_out_pagans
+				duration = 10950
+			}
+		} 
 	}
 }
 kenalv_4_slot = {
@@ -135,9 +215,16 @@ kenalv_4_slot = {
 		position = 1
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			navy_size_percentage = 1
+		} 
 
-		effect = {  } 
+		effect = {  
+			east_midlands_area = {
+				add_permanent_claim = ROOT
+			}
+			add_navy_tradition = 15
+		} 
 	}
 }
 kenalv_5_slot = {
@@ -151,10 +238,27 @@ kenalv_5_slot = {
 		icon = mission_control_the_channel
 		position = 2
 		required_missions = { fa0_bolster_fleet } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {
+			province_id = 1269
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			1269 = {
+				trade_share = {
+					country = ROOT
+					share = 20
+				}
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			capital_scope = {
+				add_or_upgrade_trade_building = yes
+			}
+			custom_tooltip = empty_line_tt
+			holland_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 }
