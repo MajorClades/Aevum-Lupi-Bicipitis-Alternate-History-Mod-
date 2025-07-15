@@ -1,0 +1,124 @@
+france_trade_mechanic = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 11
+	available = {	}
+	powers = {
+		fra_monetary_bank = {
+			gui = alb_venetian_capitalism_gui
+			max = 100
+			min = 0
+			reset_on_new_ruler = no
+			scaled_modifier = {
+				modifier = {
+					development_cost_in_primary_culture = -0.2
+				}
+			}
+			scaled_modifier = {
+				trigger = {
+					government = monarchy
+				}
+				modifier = {
+					land_forcelimit_modifier = 0.2
+					naval_forcelimit_modifier = 0.2
+					army_tradition = 1
+					navy_tradition = 1
+				}
+			}
+			scaled_modifier = {
+				trigger = {
+					government = republic
+				}
+				modifier = {
+					trade_range_modifier = 0.5
+					diplomatic_reputation = 4
+					improve_relation_modifier = 0.5
+					caravan_power = 0.5
+				}
+			}
+			scaled_modifier = {
+				trigger = {
+					government = theocracy
+				}
+				modifier = {
+					idea_cost = -0.15
+					adm_tech_cost_modifier = -0.2
+					tolerance_own = 4
+					yearly_patriarch_authority = 0.005
+				}
+			}
+			on_min_reached = {
+				country_event = {
+					id = france_2.100
+				}
+			}
+			on_max_reached = {
+				country_event = {
+					id = france_2.101
+				}
+			}
+			is_good = yes
+		}
+	}
+	
+	interactions = {
+		contain_fra_monetary_bank = {
+			gui = alb_venetian_capitalism_gui
+			cost_type = fra_monetary_bank
+			center = no
+			trigger = {
+				adm_power = 50
+			}
+			effect = {
+				add_adm_power = -50
+				if = {
+					limit = {
+						has_government_power = {
+							mechanic_type = france_trade_mechanic
+							power_type = fra_monetary_bank
+							value = 0
+						}
+						NOT = {
+							has_government_power = {
+								mechanic_type = france_trade_mechanic
+								power_type = fra_monetary_bank
+								value = 50
+							}
+						}
+					}
+					add_government_power = {
+						mechanic_type = france_trade_mechanic
+						power_type = fra_monetary_bank
+						value = 10
+					}
+				}else = {
+					add_government_power = {
+						mechanic_type = france_trade_mechanic
+						power_type = fra_monetary_bank
+						value = -10
+					}
+				}
+			}
+			ai_chance = {
+				factor = 50
+				modifier = {
+					factor = 0
+					is_in_deficit = no
+				}
+				modifier = {
+					factor = 0
+					num_of_loans = 3
+				}
+				modifier = {
+					factor = 0
+					NOT = {
+						has_government_power = {
+							mechanic_type = france_trade_mechanic
+							power_type = fra_monetary_bank
+							value = 75
+						}
+					}
+				}
+			}
+		}
+	}
+}

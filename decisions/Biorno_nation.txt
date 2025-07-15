@@ -4,6 +4,7 @@ country_decisions = {
 		major = yes
 		potential = {
 			culture_group = bionan
+			religion = norse_ragnaroked
 			capital_scope = {
 				region = british_isles_region
 			}
@@ -70,6 +71,290 @@ country_decisions = {
 		}
 		ai_will_do = {
 			factor = 1
+		}
+		ai_importance = 400
+	}
+
+	bretland_nation = {
+		major = yes
+		potential = {
+			culture_group = bionan
+			NOT = {
+				religion = norse_ragnaroked
+			}
+			capital_scope = {
+				region = british_isles_region
+			}
+			NOT = { has_country_flag = biorno_flag }
+			NOT = { tag = JU2 }
+			NOT = { tag = AR1 }
+			was_never_end_game_tag_trigger = yes
+			normal_or_historical_nations = yes
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			OR = {
+				is_free_or_tributary_trigger = yes
+				ai = no
+			}
+			is_colonial_nation = no
+			OR = {
+				is_former_colonial_nation = no
+				AND = {
+					is_former_colonial_nation = yes
+					ai = no
+				}
+			}
+		}
+		provinces_to_highlight = {
+			region = british_isles_region
+			OR = {
+				NOT = { owned_by = ROOT }
+				NOT = { is_core = ROOT }
+			}
+		}
+		allow = {
+			adm_tech = 10
+			num_of_owned_provinces_with = {
+				value = 40
+				region = british_isles_region
+			}
+			owns = 1861
+			owns = 248
+			owns = 241
+			NOT = { exists = JU2 }
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			is_at_war = no
+		}
+		effect = {
+			change_tag = JU2
+			restore_country_name = yes
+			remove_non_electors_emperors_from_empire_effect = yes
+			british_isles_region = {
+				add_permanent_claim = JU2
+			}
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			set_country_flag = bretland_flag
+			add_prestige_or_monarch_power = {
+				amount = 25
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+
+	arthurian_road_wales_to_london = {
+		color = {
+			200 0 0
+		}
+		potential = {
+			OR = {
+				was_tag = BR0
+				tag = BR0
+				tag = JU0
+			}
+			NOT = { 236 = {	has_province_modifier = via_arthuriana	}}
+			NOT = { 237 = {	has_province_modifier = via_arthuriana	}}
+			NOT = { 239 = {	has_province_modifier = via_arthuriana	}}
+			NOT = { 241 = {	has_province_modifier = via_arthuriana	}}
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 236
+				province_id = 237
+				province_id = 239
+				province_id = 241
+			}
+		}
+		allow = {
+			years_of_income = 1.9
+			OR = {
+				statesman = 2
+				fortification_expert = 2
+			}
+			owns = 236
+			owns = 237
+			owns = 239
+			owns = 241
+		}
+		effect = {
+			add_years_of_income = -0.9
+			236 = {
+				add_province_modifier = {
+					name = via_arthuriana
+					duration = -1
+				}
+			}
+			237 = {
+				if = {
+					limit = {owner = {tag = BR0}}	
+					change_culture = briton
+				}
+				add_province_modifier = {
+					name = via_arthuriana
+					duration = -1
+				}
+			}
+			239 = {
+				if = {
+					limit = {owner = {tag = JU0}}	
+					change_culture = juts
+				}
+				add_province_modifier = {
+					name = via_arthuriana
+					duration = -1
+				}
+			}
+			241 = {
+				center_of_trade = 1
+				add_province_modifier = {
+					name = via_arthuriana
+					duration = -1
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	fold_fonlod_the_bastard = {
+		color = {
+			170 0 0
+		}
+		potential = {
+			has_country_flag = folding_fonlod_flag
+			FR1 = {
+				exists = yes
+				is_free_or_tributary_trigger = yes
+				ai = yes
+			}
+		}
+		provinces_to_highlight = {
+			is_capital_of = FR1
+		}
+		allow = {
+			treasury = 500
+			FR1 = {
+				exists = yes
+				is_at_war = no
+			}
+		}
+		effect = {
+			add_treasury = -500
+			vassalize = FR1
+			clr_country_flag = folding_fonlod_flag
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+
+	restore_frisian_dominion = {
+		color = {
+			200 0 0
+		}
+		potential = {
+			OR = {
+				tag = BR0
+				was_tag = BR0
+				tag = JU0
+			}
+			NOT = {
+				has_country_flag = restore_frisian_dominion_flag
+			}
+		}
+		provinces_to_highlight = {
+			area = wessex_area
+		}
+		allow = {
+			accepted_culture = frislander
+			wessex_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		effect = {
+			wessex_area = {
+				change_culture = frislander
+				add_province_modifier = {
+					name = brit_frisian_auxillia
+					duration = -1
+				}
+			}
+			set_country_flag = restore_frisian_dominion_flag
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+
+	brit_atlantic_empire_dec = {
+		color = {
+			200 0 0
+		}
+		potential = {
+			has_country_modifier = brit_atlantic_empire
+			NOT = {
+				has_country_flag = brit_atlantic_empire_dec_flag
+			}
+			any_subject_country = {
+				is_colonial_nation_of = ROOT
+			}
+		}
+		provinces_to_highlight = {
+			province_id = 965
+		}
+		allow = {
+			owns_or_non_sovereign_subject_of = 965
+		}
+		effect = {
+			965 = {
+				cede_province = ROOT
+				add_core = ROOT
+			}
+			set_capital = 965
+			every_subject_country = {
+				limit = {
+					is_colonial_nation_of = ROOT
+				}
+				overlord = {
+					inherit = PREV
+				}
+			}
+			set_country_flag = brit_atlantic_empire_dec_flag
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		ai_importance = 400
+	}
+	brit_change_color = {
+		color = {
+			200 0 0
+		}
+		potential = {
+			government_rank = 3
+		}
+		allow = {
+			government_rank = 3
+		}
+		effect = {
+			country_event = {
+				id = britt.333
+			}
+		}
+		ai_will_do = {
+			factor = 0
 		}
 		ai_importance = 400
 	}

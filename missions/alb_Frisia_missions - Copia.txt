@@ -1,0 +1,559 @@
+Frisia_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {tag = FR0}
+
+	fris_forces_of_power = {
+		icon = mission_landsknecht_soldier
+		position = 1
+
+		trigger = {
+			if = {
+				limit = { ai = no } 
+				OR = {
+					army_size_percentage = 0.9
+					mercenary_fraction = 0.25
+				}
+			}
+			else = {
+				army_size_percentage = 0.7
+				num_of_generals = 1
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = fris_merc_iron
+				duration = 10950
+			}
+		}
+	}
+	fris_hired_guns = {
+		icon = mission_landsknecht_soldier
+		position = 2
+		required_missions = { fris_forces_of_power } 
+		provinces_to_highlight = { OR = {province_id = 233 province_id = 4986}	}
+
+		trigger = {
+			years_of_manpower = 2
+			has_mil_advisor_3 = yes
+		}
+
+		effect = {
+			add_yearly_manpower = -2
+			unlock_merc_company = {
+				merc_company = merc_frisian_loyals
+			}
+		}
+	}
+	fris_force_of_coin = {
+		icon = mission_landsknecht_soldier
+		position = 3
+		required_missions = { fris_hired_guns } 
+
+		trigger = {
+			years_of_income = 2
+			army_tradition = 50
+			num_of_completed_idea_groups_mil = {amount = 1}
+		}
+
+		effect = {
+			add_years_of_income = -2
+			add_army_tradition = -25
+			country_event = {
+				id = frisa.2
+			}
+		}
+	}
+	fris_work_the_sweds = {
+		icon = mission_swedish_peasantry
+		position = 5
+		required_missions = { fris_work_the_juts } 
+		provinces_to_highlight = {
+			culture = svede
+			region = british_isles_region
+		}
+
+		trigger = {
+			years_of_manpower = 2
+			owns_all_provinces = {
+				culture = svede
+				region = british_isles_region
+			}
+		}
+
+		effect = {
+			add_yearly_manpower = -2
+			if = {
+				limit = { accepted_culture = svede } 
+				add_accepted_culture = svevish
+				remove_accepted_culture = svede
+			}
+			custom_tooltip = alb_brit_move_swedish_culture_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = { culture = svede } 
+					change_culture = svevish
+				}
+			}
+		}
+	}
+}
+Frisia_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {tag = FR0}
+
+	fris_working_iron = {
+		icon = mission_landsknecht_soldier
+		position = 2
+		required_missions = { fris_forces_of_power } 
+		provinces_to_highlight = { OR = {province_id = 233 province_id = 4986}	}
+
+		trigger = {
+			OR = {
+				faction_influence = {
+					faction = mr_guilds
+					influence = 55
+				}
+				has_dip_advisor_2 = yes
+			}
+			owns = 233
+			owns = 4986
+			manpower = 3	
+		}
+
+		effect = {
+			add_manpower = -3
+			233 = {
+				add_base_production = 1
+			}
+			4986 = {
+				remove_core = BR0
+				add_base_production = 1
+			}
+		}
+	}
+	fris_work_the_juts = {
+		icon = mission_landsknecht_soldier
+		position = 4
+		required_missions = { fris_working_iron fris_expand_dominion} 
+		provinces_to_highlight = {
+			culture = juts
+			region = british_isles_region
+		}
+
+		trigger = {
+			owns_all_provinces = {
+				culture = juts
+				region = british_isles_region
+			}
+		}
+
+		effect = {
+			4371 = {change_culture = frislander}
+			234 = {change_culture = frislander}
+			235 = {change_culture = frislander}
+			4130 = {change_culture = frislander}
+			if = {
+				limit = { accepted_culture = juts } 
+				add_accepted_culture = jutlander
+				remove_accepted_culture = juts
+			}
+			custom_tooltip = alb_brit_move_jutish_culture_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = { culture = juts } 
+					change_culture = jutlander
+				}
+			}
+		}
+	}
+	fris_miners = {
+		icon = mission_landsknecht_soldier
+		position = 6
+		required_missions = { fris_mining_bois  } 
+		provinces_to_highlight = { region = british_isles_region OR = { trade_goods = iron trade_goods = copper }  }
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 7
+				region = british_isles_region 
+				OR = { trade_goods = iron trade_goods = copper } 
+			}
+			num_of_completed_idea_groups_mil = {amount = 1}
+			years_of_income = 1
+		}
+
+		effect = {
+			add_years_of_income = -1
+			every_owned_province = {
+				limit = {
+					region = british_isles_region 
+					OR = { trade_goods = iron trade_goods = copper } 
+				}
+				add_province_modifier = {
+					name = fris_miners_requested
+					duration = 10950
+				}
+			}
+			unlock_merc_company = {
+				merc_company = merc_minecrafters
+			}
+			hidden_effect = {
+				set_variable = {
+					which = miners_siege_counter
+					value = 0
+				}
+			}
+		}
+	}
+	fris_i_hate_miners = {
+		icon = mission_landsknecht_soldier
+		position = 7
+		required_missions = { fris_miners  } 
+		trigger = {
+			any_hired_mercenary_company = {
+				template = merc_minecrafters
+				hired_for_months = 6
+			}
+			check_variable = {
+				which = miners_siege_counter
+				value = 10
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = fris_minecrafters
+				duration = -1
+			}
+		}
+	}
+}
+Frisia_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {tag = FR0}
+
+	fris_crush_fonlod = {
+		icon = mission_landsknecht_soldier
+		position = 1
+		trigger = {
+			OR = {
+				faction_influence = {
+					faction = mr_traders
+					influence = 55
+				}
+				prestige = 20
+			}	
+		}
+
+		effect = {
+			wessex_area = {
+				add_permanent_claim = ROOT
+			}
+			home_counties_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	fris_restore_dominion = {
+		icon = mission_landsknecht_soldier
+		position = 2
+		required_missions = { fris_crush_fonlod } 
+		provinces_to_highlight = { OR = {area = wessex_area  area = home_counties_area }}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 8
+				OR = {area = wessex_area  area = home_counties_area }
+			}
+			wessex_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = fris_restored_dominance
+				duration = 10950
+			}
+			wales_area = {
+				add_permanent_claim = ROOT
+			}
+			east_anglia_area = {
+				add_permanent_claim = ROOT
+			}
+			west_midlands_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	fris_expand_dominion = {
+		icon = mission_landsknecht_soldier
+		position = 3
+		required_missions = { fris_restore_dominion } 
+		provinces_to_highlight = { OR = {area = wales_area  area = west_midlands_area area = east_anglia_area }}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 10
+				OR = {area = wales_area  area = west_midlands_area area = east_anglia_area }
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = fris_destiny_of_frisland
+				duration = -1
+			}
+			british_isles_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	fris_mining_bois = {
+		icon = mission_landsknecht_soldier
+		position = 5
+		provinces_to_highlight = { region = british_isles_region OR = { trade_goods = iron trade_goods = copper }  }
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 5
+				region = british_isles_region 
+				OR = { trade_goods = iron trade_goods = copper } 
+				base_production = 5
+			}
+		}
+
+		effect = {
+			add_years_of_owned_provinces_production_income = {
+				years = 8
+				trigger = {
+					OR = {
+						trade_goods = iron
+						trade_goods = copper
+					}
+				}
+				custom_tooltip = MONOPOLY_INCOME_IRON_AND_COPPER_DESC
+			}
+		}
+	}
+}
+Frisia_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {tag = FR0}
+
+	fris_belgian_pirates = {
+		icon = mission_landsknecht_soldier
+		position = 2
+		required_missions = { fris_crush_fonlod fris_shipping_lanes } 
+		provinces_to_highlight = { is_capital_of = BE0	}
+
+		trigger = {
+			OR = {
+				faction_influence = {
+					faction = mr_aristocrats
+					influence = 55
+				}
+				stability = 2
+			}
+			BE0 = {
+				OR = {
+					exists = no
+					is_rival = ROOT
+					alliance_with = ROOT
+				}
+			}
+		}
+
+		effect = {
+			BE0 = {country_event = {id = frisa.1}}
+			custom_tooltip = FRISIA_TT_1b
+			munster_area = {add_permanent_claim = ROOT}
+		}
+	}
+	fris_scotian_falls = {
+		icon = mission_landsknecht_soldier
+		position = 4
+		required_missions = { fris_expand_dominion fris_belgian_pirates } 
+		provinces_to_highlight = {
+			province_group = ireland_provinces
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			ireland_provinces = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			ireland_provinces = {
+				add_province_modifier = {
+					name = fris_ireland_under_control
+					duration = 10950
+				}
+			}
+		}
+	}
+	fris_commercial_success = {
+		icon = mission_landsknecht_soldier
+		position = 6
+		required_missions = { fris_mining_bois fris_cornish_tin } 
+
+		trigger = {
+			monthly_income = 150
+			has_adm_advisor = yes
+			has_dip_advisor = yes
+			has_mil_advisor = yes
+		}
+
+		effect = {
+			add_years_of_income = -1
+			add_country_modifier = {
+				name = fris_commercial_council
+				duration = -1
+			}
+		}
+	}
+	fris_infinite_growth = {
+		icon = mission_landsknecht_soldier
+		position = 7
+		required_missions = { fris_commercial_success } 
+
+		trigger = {
+			num_of_completed_idea_groups_adm = {amount = 1}
+			num_of_completed_idea_groups_dip = {amount = 1}
+			OR = {
+				has_institution = global_trade
+				trader = 5
+			}
+		}
+
+		effect = {
+			custom_tooltip = manpower_for_dev_flag_tt_c
+			set_country_flag = late_stage_frisians
+		}
+	}
+}
+Frisia_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {tag = FR0}
+
+	fris_shipping_lanes = {
+		icon = mission_landsknecht_soldier
+		position = 1
+		trigger = {
+			if = {
+				limit = { ai = no } 
+				navy_size_percentage = 0.9
+			}
+			else = {
+				navy_size_percentage = 0.7
+				num_of_admirals = 1
+			}	
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = fris_good_ship
+				duration = 10950
+			}
+		}
+	}
+	fris_merchant_fleet = {
+		icon = mission_landsknecht_soldier
+		position = 2
+		required_missions = { fris_shipping_lanes } 
+		provinces_to_highlight = { is_capital_of = ROOT	}
+		trigger = {
+			capital_scope = {
+				has_port = yes
+			}
+			sailors_percentage = 0.9
+		}
+
+		effect = {
+			add_sailors = -0.5
+			capital_scope = {
+				add_or_upgrade_naval_defense_building = yes
+				add_or_upgrade_shipyard_building = yes
+			}
+		}
+	}
+	fris_trading_stuff = {
+		icon = mission_landsknecht_soldier
+		position = 3
+		required_missions = { fris_merchant_fleet } 
+		provinces_to_highlight = { province_id = 4130 }
+		trigger = {
+			4130 = {
+				owned_by = ROOT
+				has_great_project = {
+					type = dutch_port
+					tier = 2
+				} 
+			}
+		}
+
+		effect = {
+			1269 = {
+				add_trade_node_income = 30
+			}
+			4130 = {
+				add_great_project_tier = {
+					type = dutch_port
+					tier = 1
+				}
+			}
+		}
+	}
+	fris_cornish_tin = {
+		icon = mission_landsknecht_soldier
+		position = 5
+		provinces_to_highlight = { province_id = 233 }
+
+		trigger = {
+			has_dip_advisor_3 = yes
+			OR = {
+				estate_loyalty = {
+					estate = estate_burghers
+					loyalty = 65
+				}
+				faction_influence = {
+					faction = mr_guilds
+					influence = 80
+				}
+			}
+			233 = {
+				owned_by = ROOT
+				base_production = 7
+			}
+		}
+
+		effect = {
+			233 = {
+				add_base_production = -2
+				add_permanent_province_modifier = {
+					name = fris_tin_mining
+					duration = -1
+				}
+			}
+		}
+	}
+}

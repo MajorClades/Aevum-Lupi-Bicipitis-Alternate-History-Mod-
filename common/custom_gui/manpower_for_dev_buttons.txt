@@ -1,0 +1,218 @@
+custom_button = {
+	name = man_to_dev_button
+	potential = {
+		FROM = {
+			has_country_flag = late_stage_frisians
+		}
+		owned_by = FROM
+		is_core = FROM
+	}
+	trigger = {
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = manpower_for_dev_flag
+				}
+			}
+			
+		}else = {
+			is_at_war = no
+			stability = 2
+		}
+	}
+	effect = {
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = manpower_for_dev_flag
+				}
+			}
+			custom_tooltip = manpower_for_dev_flag_tt_a
+			FROM = {
+				clr_country_flag = manpower_for_dev_flag
+			}
+		}else = {
+			custom_tooltip = manpower_for_dev_flag_tt_b
+			FROM = {
+				set_country_flag = manpower_for_dev_flag
+			}
+		}
+		#play_sound = get_war_declare
+	}
+	tooltip = man_to_dev_button_tt
+}
+
+custom_button = {
+	name = man_to_adm_button
+	potential = {
+		FROM = {
+			has_country_flag = manpower_for_dev_flag
+		}
+		owned_by = FROM
+		is_core = FROM
+	}
+	trigger = {
+		if = {
+			limit = {
+				development = 30
+			}
+			FROM = {
+				manpower = 5
+			}
+		}else = {
+			if = {
+				limit = {
+					development = 20
+				}
+				FROM = {
+					manpower = 2.5
+				}
+			}else = {
+				FROM = {
+					manpower = 1
+				}
+			}
+		}
+	}
+	effect = {
+		add_base_tax = 1
+		if = {
+			limit = {
+				development = 30
+			}
+			FROM = {
+				add_manpower = -5
+			}
+		}else = {
+			if = {
+				limit = {
+					development = 20
+				}
+				FROM = {
+					add_manpower = -2.5
+				}
+			}else = {
+				FROM = {
+					add_manpower = -1
+				}
+			}
+		}
+	}
+	tooltip = man_to_adm_button_tt
+}
+custom_button = {
+	name = man_to_dip_button
+	potential = {
+		FROM = {
+			has_country_flag = manpower_for_dev_flag
+		}
+		owned_by = FROM
+		is_core = FROM
+	}
+	trigger = {
+		if = {
+			limit = {
+				development = 30
+			}
+			FROM = {
+				manpower = 5
+			}
+		}else = {
+			if = {
+				limit = {
+					development = 20
+				}
+				FROM = {
+					manpower = 2.5
+				}
+			}else = {
+				FROM = {
+					manpower = 1
+				}
+			}
+		}
+	}
+	effect = {
+		add_base_production = 1
+		if = {
+			limit = {
+				development = 30
+			}
+			FROM = {
+				add_manpower = -5
+			}
+		}else = {
+			if = {
+				limit = {
+					development = 20
+				}
+				FROM = {
+					add_manpower = -2.5
+				}
+			}else = {
+				FROM = {
+					add_manpower = -1
+				}
+			}
+		}
+	}
+	tooltip = man_to_dip_button_tt
+}
+custom_button = {
+	name = man_to_mil_button
+	potential = {
+		FROM = {
+			has_country_flag = manpower_for_dev_flag
+		}
+		owned_by = FROM
+		is_core = FROM
+	}
+	trigger = {
+		if = {
+			limit = {
+				development = 30
+			}
+			FROM = {
+				manpower = 5
+			}
+		}else = {
+			if = {
+				limit = {
+					development = 20
+				}
+				FROM = {
+					manpower = 2.5
+				}
+			}else = {
+				FROM = {
+					manpower = 1
+				}
+			}
+		}
+	}
+	effect = {
+		add_base_manpower = 1
+		if = {
+			limit = {
+				development = 30
+			}
+			FROM = {
+				add_manpower = -5
+			}
+		}else = {
+			if = {
+				limit = {
+					development = 20
+				}
+				FROM = {
+					add_manpower = -2.5
+				}
+			}else = {
+				FROM = {
+					add_manpower = -1
+				}
+			}
+		}
+	}
+	tooltip = man_to_mil_button_tt
+}

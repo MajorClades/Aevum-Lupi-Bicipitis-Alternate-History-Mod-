@@ -1,0 +1,160 @@
+kenalv_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = FA0 } 
+
+	fa0_cross_the_thames = {
+		icon = mission_rb_scottish_conquer_london
+		position = 2
+		provinces_to_highlight = {  
+			area = home_counties_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			home_counties_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {  
+			236 = {
+				set_center_level_2_center_of_trade = yes #smth else?
+			}
+			wales_area = {
+				add_permanent_claim = ROOT
+			}
+			west_midlands_area = {
+				add_permanent_claim = ROOT
+			}
+			wessex_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+}
+kenalv_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = FA0 } 
+
+	fa0_swedish_bulwark = {
+		icon = per_establish_western_defenses
+		position = 1
+		provinces_to_highlight = {  
+			province_id = 4370
+			NOT = {
+				num_of_times_improved = 2
+			}
+		} 
+
+		trigger = {  
+			army_size_percentage = 0.8
+			if = {
+				limit = {
+					ai  = no
+				}
+				4370 = {
+					num_of_times_improved = 2
+				}
+			}
+		} 
+
+		effect = {  
+			4370 = {
+				add_province_modifier = {
+					name = fa0_bogged_down
+					duration = 7300
+				}
+			}
+			east_midlands_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	fa0_restore_kingdom_borders = {
+		icon = mission_kenalv_k
+		position = 3
+		required_missions = {
+			fa0_swedish_bulwark
+			fa0_cross_the_thames
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+}
+kenalv_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = FA0 } 
+
+	fa0_seafort_gurem = {
+		icon = fortify_malta
+		position = 2
+		required_missions = { fa0_bolster_fleet } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	fa0_northern_sweden = {
+		icon = mission_northumberland_coast
+		position = 3
+		required_missions = { fa0_seafort_gurem } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+}
+kenalv_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = FA0 } 
+
+	fa0_bolster_fleet = {
+		icon = mission_rb_a_mighty_fleet
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+}
+kenalv_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = FA0 } 
+
+	fa0_control_the_manicum = {
+		icon = mission_control_the_channel
+		position = 2
+		required_missions = { fa0_bolster_fleet } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+}
