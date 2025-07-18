@@ -1,0 +1,196 @@
+Scotia_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = SC0 }
+
+	sco_clash_of_clans = {
+		icon = mission_court_education
+		position = 1
+
+		trigger = {
+			OR = {
+				has_government_power = { mechanic_type = scot_clans_mechanic power_type = scot_single_power value = 55 } 
+				prestige = 30
+			}
+		}
+
+		effect = { 
+			ireland_provinces = {
+				add_permanent_claim = ROOT
+			}
+			add_casus_belli = {
+				type = cb_vassalize_mission
+				target = TYR
+				months = 300
+			}
+			add_casus_belli = {
+				type = cb_vassalize_mission
+				target = ULS
+				months = 300
+			}
+			add_casus_belli = {
+				type = cb_vassalize_mission
+				target = LEI
+				months = 300
+			}
+			add_casus_belli = {
+				type = cb_vassalize_mission
+				target = BE0
+				months = 300
+			}
+		} 
+	}
+
+
+}
+Scotia_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = SC0 }
+
+	sco_lord_of_the_isle = {
+		icon = alpine_fortifications
+		position = 2
+		required_missions = { sco_clash_of_clans sco_higness} 
+		provinces_to_highlight = {
+			province_group = ireland_provinces
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			ireland_provinces = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = scot_emerald_lord
+				duration = 10950
+			}
+		}
+	}
+}
+
+Scotia_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = SC0 }
+
+	sco_higness = {
+		icon = mission_court_education
+		position = 1
+		provinces_to_highlight = {
+			province_id = 4120
+		}
+		trigger = {
+			4120 = {
+				development = 15
+				province_has_center_of_trade_of_level = 2
+			}
+		}
+
+		effect = { 
+			4120 = {
+				add_great_project_tier = {
+					type = sco_palace_of_the_high_king
+					tier = 1
+				}
+			}
+		} 
+	}
+}
+
+Scotia_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = SC0 }
+
+	sco_irish_goods = {
+		icon = mission_court_education
+		position = 1
+		provinces_to_highlight = {
+			OR = {
+				province_id = 4377
+				province_id = 373
+				province_id = 374
+			}
+		}
+		trigger = {
+			4377 = {
+				owned_by = ROOT
+				has_tax_building_trigger = yes
+			}
+			373 = {
+				owned_by = ROOT
+				has_trade_building_trigger = yes
+			}
+			374 = {
+				owned_by = ROOT
+				has_fort_building_trigger = yes
+			}
+		}
+
+		effect = { 
+			4377 = {
+				change_trade_goods = wine
+			}
+			373 = {
+				change_trade_goods = cloth
+			}
+			374 = {
+				add_building = coastal_defence
+			}
+		} 
+	}
+}
+
+Scotia_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = SC0 }
+
+	sco_woods_of_plenty = {
+		icon = mission_court_education
+		position = 1
+		provinces_to_highlight = {
+			province_group = ireland_provinces
+			owned_by = ROOT
+			has_terrain = woods
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				province_group = ireland_provinces
+				has_terrain = woods
+				development = 9
+			}
+		}
+
+		effect = { 
+			add_years_of_owned_provinces_production_income = {
+				years = 5
+				trigger = {
+					has_terrain = woods
+				}
+				custom_tooltip = FROM_SCOTIA
+			}
+			add_government_power = {
+				mechanic_type = scot_clans_mechanic
+				power_type = scot_single_power
+				value = 5
+			}
+		} 
+	}
+}
