@@ -37,6 +37,43 @@ kenalv_1_slot = {
 			}
 		} 
 	}
+	fa0_scraps_of_empire = {
+		icon = mission_rb_scottish_conquer_london
+		position = 3
+		required_missions = {
+			fa0_cross_the_thames
+		}
+		provinces_to_highlight = {  
+			OR = {
+				culture = briton
+				culture = frislander
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		} 
+
+		trigger = {  
+			owns_all_provinces = {
+				OR = {
+					culture = briton
+					culture = frislander
+				}
+			}
+		} 
+
+		effect = {  
+			custom_tooltip = fa0_move_briton_frislander_cultures_tt
+			hidden_effect = {
+				update_entire_culture_foreign = {
+					culture = briton
+				}
+				update_entire_culture_foreign = {
+					culture = frislander
+				}
+			}
+		} 
+	}
 }
 kenalv_2_slot = {
 	slot = 2
@@ -226,6 +263,63 @@ kenalv_4_slot = {
 			add_navy_tradition = 15
 		} 
 	}
+	fa0_ganden_union = {
+		icon = mission_swe_union
+		position = 4
+		required_missions = {
+			fa0_northern_sweden
+		}
+		provinces_to_highlight = { 
+			OR = {
+				area = lowlands_area
+				province_id = 4363
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			lowlands_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			4363 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		effect = {  
+			248 = {
+				add_base_tax = 1
+				add_province_modifier = {
+					name = fa0_ganden_no_more
+					duration = 18250
+				}
+			}
+			249 = {
+				add_base_tax = 1
+				add_province_modifier = {
+					name = fa0_ganden_no_more
+					duration = 18250
+				}
+			}
+			251 = {
+				add_base_tax = 1
+				add_province_modifier = {
+					name = fa0_ganden_no_more
+					duration = 18250
+				}
+			}
+			4363 = {
+				add_base_tax = 1
+				add_province_modifier = {
+					name = fa0_ganden_no_more
+					duration = 18250
+				}
+			}
+		} 
+	}
 }
 kenalv_5_slot = {
 	slot = 5
@@ -257,6 +351,64 @@ kenalv_5_slot = {
 			}
 			custom_tooltip = empty_line_tt
 			holland_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	fa0_making_more_markets = {
+		icon = mission_control_the_channel
+		position = 4
+		required_missions = { fa0_control_the_manicum } 
+		provinces_to_highlight = {
+			province_id = 1269
+		} 
+
+		trigger = {  
+			OR = {
+				1269 = {
+					trade_share = {
+						country = ROOT
+						share = 50
+					}
+				}
+				num_of_owned_provinces_with = {
+					value = 2
+					area = holland_area
+				}
+			}
+			num_of_light_ship = 20
+			num_of_owned_provinces_with = {
+				value = 3
+				has_trade_building_trigger = yes
+			}
+		} 
+
+		effect = {  
+			1269 = {
+				add_trade_node_income = 48
+			}
+			1975 = {
+				add_trade_modifier = {
+					who = ROOT
+					duration = 10950
+					power = 50
+					key = "Kenalv Market Control"
+				}
+			}
+			45 = {
+				add_trade_modifier = {
+					who = ROOT
+					duration = 10950
+					power = 50
+					key = "Kenalv Market Control"
+				}
+			}
+			custom_tooltip = empty_line_tt
+			north_brabant_area = {
+				add_permanent_claim = ROOT
+			}
+			frisia_area = {
 				add_permanent_claim = ROOT
 			}
 		} 
