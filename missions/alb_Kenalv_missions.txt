@@ -414,3 +414,155 @@ kenalv_5_slot = {
 		} 
 	}
 }
+
+kenalv_locked_2_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		tag = FA0 
+		NOT = {
+			OR = {
+				has_country_flag = fa0_monarchy_path
+				has_country_flag = fa0_republic_path
+			}
+		}
+	} 
+	fa0_dummy_1 = {
+		icon = mission_locked_mission
+		position = 4
+		required_missions = {fa0_restore_kingdom_borders } 
+		provinces_to_highlight = {
+		} 
+		trigger = {
+			always = no
+		}
+		effect = {
+
+		}
+	}
+
+	fa0_dummy_2 = {
+		icon = mission_locked_mission
+		position = 5
+		required_missions = { fa0_dummy_1 } 
+		provinces_to_highlight = {
+			province_id = 1269
+		} 
+		trigger = {
+			always = no
+		}
+		effect = {
+
+		}
+	}
+}
+
+kenalv_republic_2_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		tag = FA0 
+		has_country_flag = fa0_republic_path
+	} 
+	fa0_empower_merchant_class = {
+		icon = mission_establish_mint_towns
+		position = 4
+		required_missions = { 
+			fa0_restore_kingdom_borders
+		} 
+		trigger = {
+			OR = {
+				estate_loyalty = {
+					estate = estate_burghers
+					loyalty = 70
+				}
+				num_of_estate_agendas_completed = {
+					estate = estate_burghers
+					value = 5
+				}
+			}
+			trade_income_percentage = 0.4
+		}
+		effect = {
+			add_mercantilism = 15
+			custom_tooltip = fa0_empower_private_trade_fleets_tt
+			set_country_flag = BYZ_private_trade_fleet_buff
+			custom_tooltip = empty_line_tt
+			custom_tooltip = fa0_more_free_enterprise_tt
+			set_country_flag = ned_buffed_free_enterprises
+		}
+	}
+
+	fa0_john_locke_reference = {
+		icon = mission_establish_mint_towns
+		position = 5
+		required_missions = { fa0_empower_merchant_class } 
+		provinces_to_highlight = {
+			
+		} 
+		trigger = {
+			
+		}
+		effect = {
+
+		}
+	}
+}
+
+kenalv_monarchy_2_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		tag = FA0 
+		has_country_flag = fa0_republic_path
+	} 
+	fa0_legitimize_the_king = {
+		icon = mission_establish_mint_towns
+		position = 4
+		required_missions = { 
+			fa0_restore_kingdom_borders
+		} 
+		trigger = {
+			OR = {
+				estate_loyalty = {
+					estate = estate_burghers
+					loyalty = 70
+				}
+				num_of_estate_agendas_completed = {
+					estate = estate_burghers
+					value = 5
+				}
+			}
+			trade_income_percentage = 0.4
+		}
+		effect = {
+			add_mercantilism = 15
+			custom_tooltip = fa0_empower_private_trade_fleets_tt
+			set_country_flag = BYZ_private_trade_fleet_buff
+			custom_tooltip = empty_line_tt
+			custom_tooltip = fa0_more_free_enterprise_tt
+			set_country_flag = ned_buffed_free_enterprises
+		}
+	}
+
+	fa0_form_the_riksdag = {
+		icon = mission_establish_mint_towns
+		position = 5
+		required_missions = { fa0_empower_merchant_class } 
+		provinces_to_highlight = {
+			
+		} 
+		trigger = {
+			
+		}
+		effect = {
+
+		}
+	}
+}
