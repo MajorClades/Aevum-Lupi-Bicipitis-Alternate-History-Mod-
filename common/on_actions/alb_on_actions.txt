@@ -1152,6 +1152,63 @@ on_siege_won_country = {
 			}
 		}
 	}
+	if = {
+		limit = {
+			any_hired_mercenary_company = {
+				template = merc_angr_warband
+				location = { province_id = FROM }
+			}
+			any_war_enemy_country = {
+				owns = FROM
+			}
+		}
+		FROM = {
+			add_devastation = 50
+		}
+		ROOT = {
+			every_war_enemy_country = {
+				add_aggressive_expansion = {
+					who = ROOT
+					value = 5
+					apply_calc = no
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			ROOT = {
+				is_or_was_tag = {tag = KO4}
+			}
+		}
+		FROM = {
+			add_base_manpower = -1
+			if = {
+					limit = {
+						has_building = fort_15th
+					}
+					remove_building = fort_15th
+					}
+					else_if = {
+						limit = {
+							has_building = fort_16th
+						}
+						remove_building = fort_16th
+					}
+					else_if = {
+						limit = {
+							has_building = fort_17th
+						}
+						remove_building = fort_17th
+					}
+					else_if = {
+						limit = {
+							has_building = fort_18th
+						}
+						remove_building = fort_18th
+					}
+		}
+	}
 }
 
 # province
