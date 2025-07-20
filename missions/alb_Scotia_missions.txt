@@ -42,7 +42,26 @@ Scotia_1_slot = {
 			}
 		} 
 	}
+	sco_little_clans = {
+		icon = mission_court_education
+		position = 3
+		required_missions = { sco_clash_of_clans } 
+		trigger = {
+			has_government_power = { mechanic_type = scot_clans_mechanic power_type = scot_single_power value = 65 } 
+			estate_loyalty = {
+				estate = estate_church
+				loyalty = 60
+			}
+		}
 
+		effect = { 
+			add_government_power = { mechanic_type = scot_clans_mechanic power_type = scot_single_power value = -15 } 
+			add_country_modifier = {
+				name = scotian_true_king
+				duration = 10950
+			}
+		} 
+	}
 
 }
 Scotia_2_slot = {
@@ -106,6 +125,48 @@ Scotia_3_slot = {
 			}
 		} 
 	}
+	sco_big_palace = {
+		icon = mission_court_education
+		position = 2
+		required_missions = { sco_higness} 
+		provinces_to_highlight = {
+			province_id = 4120
+		}
+		trigger = {
+			4120 = {
+				development = 20
+				province_has_center_of_trade_of_level = 2
+			}
+		}
+
+		effect = { 
+			add_government_power = {
+				mechanic_type = scot_clans_mechanic
+				power_type = scot_single_power
+				value = 15
+			}
+		} 
+	}
+	sco_scotian_words = {
+		icon = mission_court_education
+		position = 3
+		required_missions = { sco_lord_of_the_isle } 
+		provinces_to_highlight = {
+			province_group = ireland_provinces NOT = {is_core = ROOT}
+		}
+		trigger = {
+			ireland_provinces = {
+				type = all
+				is_core = ROOT
+			}
+		}
+
+		effect = { 
+			ireland_provinces = {
+				change_culture = scotian
+			}
+		} 
+	}
 }
 
 Scotia_4_slot = {
@@ -152,6 +213,40 @@ Scotia_4_slot = {
 			}
 		} 
 	}
+	sco_in_ports = {
+		icon = mission_court_education
+		position = 3
+		required_missions = { sco_irish_goods sco_big_palace } 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 4120
+				province_id = 373
+			}
+		}
+		trigger = {
+			4120 = {
+				owned_by = ROOT
+				num_of_buildings_in_province = 4
+			}
+			373 = {
+				owned_by = ROOT
+				has_dock_building_trigger = yes
+			}
+		}
+
+		effect = { 
+			4120 = {
+				upgrade_tax_building = yes
+				upgrade_trade_building = yes
+			}
+			373 = {
+				add_province_modifier = {
+					name = sco_royal_port
+					duration = 10950
+				}
+			}
+		} 
+	}
 }
 
 Scotia_5_slot = {
@@ -168,10 +263,11 @@ Scotia_5_slot = {
 			province_group = ireland_provinces
 			owned_by = ROOT
 			has_terrain = woods
+			NOT = {development = 9}
 		}
 		trigger = {
 			num_of_owned_provinces_with = {
-				value = 10
+				value = 5
 				province_group = ireland_provinces
 				has_terrain = woods
 				development = 9
@@ -192,5 +288,92 @@ Scotia_5_slot = {
 				value = 5
 			}
 		} 
+	}
+	sco_wooded_building = {
+		icon = mission_court_education
+		position = 2
+		required_missions = { sco_woods_of_plenty sco_irish_goods} 
+		provinces_to_highlight = {
+			province_group = ireland_provinces
+			owned_by = ROOT
+			has_terrain = woods
+			NOT = {num_of_buildings_in_province = 3}
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 14
+				province_group = ireland_provinces
+				has_terrain = woods
+				num_of_buildings_in_province = 1
+			}
+		}
+
+		effect = { 
+			custom_tooltip = ONLY_WOODS
+			ireland_provinces = {
+				limit = { has_terrain = woods }
+				add_province_modifier = {
+					name = emerald_forest
+					duration = -1
+				}
+			}
+		}
+	}
+	sco_infinite_growth = {
+		icon = mission_court_education
+		position = 3
+		required_missions = { sco_wooded_building } 
+		provinces_to_highlight = {
+			province_group = ireland_provinces
+			owned_by = ROOT
+			has_terrain = woods
+			NOT = {base_production = 8}
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 4
+				province_group = ireland_provinces
+				has_terrain = woods
+				base_production = 8
+			}
+		}
+
+		effect = { 
+			custom_tooltip = ONLY_WOODS
+			ireland_provinces = {
+				limit = { has_terrain = woods }
+				add_province_modifier = {
+					name = sco_using_wood
+					duration = 7300
+				}
+				add_building = workshop
+			}
+		}
+	}
+	sco_infinite_growth_2 = {
+		icon = mission_court_education
+		position = 4
+		required_missions = { sco_infinite_growth sco_in_ports} 
+		provinces_to_highlight = {
+			province_group = ireland_provinces
+			owned_by = ROOT
+			has_terrain = woods
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 14
+				province_group = ireland_provinces
+				has_terrain = woods
+				NOT = {
+					has_province_modifier = sco_using_wood
+				}
+			}
+		}
+
+		effect = { 
+			country_event = {
+				id = scotii.1
+			}
+		}
 	}
 }
