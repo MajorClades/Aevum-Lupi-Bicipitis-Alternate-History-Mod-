@@ -192,6 +192,93 @@ friendship_action = {
     }
 }
 
+buy_protectorate_into_vassal_action = {
+	category = influence
+	require_acceptance = no
+	is_visible = {
+		ROOT = {
+			has_country_flag = buy_protectorate_into_vassals_flag
+		}
+		FROM = {
+			is_subject_of = ROOT
+			is_subject_of_type = trade_protectorate
+		}
+    }
+
+	is_allowed = {
+		is_at_war = no
+		FROM = {
+			is_at_war = no
+			NOT = {
+				liberty_desire = 40
+			}
+		}
+    }
+	on_accept = {
+		FROM = {
+			if = { limit = { total_development = 25} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 50} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 75} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 100} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 125} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 150} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 175} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 200} ROOT = { add_treasury = -500 } }
+		}
+		ROOT = {
+			vassalize = FROM
+		}
+		FROM = {
+			add_liberty_desire = -50
+		}
+    }
+	ai_will_do = {
+        always = no
+    }
+}
+
+buy_protectorate_into_annex_action = {
+	category = influence
+	require_acceptance = no
+	is_visible = {
+		ROOT = {
+			has_country_flag = buy_protectorate_into_vassals_flag
+		}
+		FROM = {
+			is_subject_of = ROOT
+			is_subject_of_type = trade_protectorate
+		}
+    }
+
+	is_allowed = {
+		is_at_war = no
+		FROM = {
+			is_at_war = no
+			NOT = {
+				liberty_desire = 40
+			}
+		}
+    }
+	on_accept = {
+		FROM = {
+			if = { limit = { total_development = 25} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 50} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 75} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 100} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 125} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 150} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 175} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 200} ROOT = { add_treasury = -500 } }
+			every_owned_province = {
+				cede_province = ROOT
+			}
+		}
+    }
+	ai_will_do = {
+        always = no
+    }
+}
+
 # Shamely copied from Anbennar
 make_autonomous_vassal = {
 	category = influence
@@ -384,6 +471,400 @@ alb_charter_colony_ports =  {
 	ai_will_do = {
 		FROM = { # They must have low liberty desire
 			liberty_desire = 0
+		}
+	}
+}
+
+# german duchies
+
+ger_request_overlord_money = {
+	category = influence
+	
+	alert_index = 53
+	alert_tooltip = "Demand Monetary aid"
+	require_acceptance = yes # Whether the recipient gets an option to decline
+	is_visible = {
+		is_subject_of_type = ger_vassal
+		FROM = {
+			overlord_of = ROOT
+		}
+	}
+	is_allowed = {
+		hidden_trigger = {
+			is_subject_of_type = ger_vassal
+			FROM = {
+				overlord_of = ROOT
+			}
+		}
+		custom_trigger_tooltip = {
+			tooltip = "Not requested aid in less than 1 year"
+			NOT = {has_country_modifier = got_helped_by_over_germ_flag}
+		}
+	}
+	on_accept = {
+		FROM = {
+			add_treasury = -50
+			add_government_power = {
+				mechanic_type = germ_conf_mechanic
+				power_type = confederation_power
+				value = 2
+			}
+		}
+		ROOT = {
+			add_years_of_income = 0.5
+		}
+		hidden_effect = {
+			add_country_modifier = {
+				name = got_helped_by_over_germ_flag
+				duration = 365
+				hidden = yes
+			}
+		}
+	}
+	on_decline = {
+		hidden_effect = {
+			add_country_modifier = {
+				name = got_helped_by_over_germ_flag
+				duration = 365
+				hidden = yes
+			}
+		}
+	}
+	
+	ai_acceptance = { # This works similarly to variable_arithmetic_trigger, but does not support triggers generally. Instead, "limit" will be evaluated first and the rest ignored if it isn't passed.
+		add_entry = {
+			name = OPINION
+			export_to_variable = {
+				variable_name = ai_value
+				value = opinion
+				who = FROM
+				with = ROOT
+			}
+			subtract_variable = { 
+				which = ai_value
+				value = 25
+			}
+			multiply_variable = {
+				which = ai_value 
+				value = 0.2
+			}
+			
+		}
+	}
+
+	ai_will_do = { # this is a trigger
+		overlord = {
+				is_in_deficit = no
+			}
+		OR = {
+			is_in_deficit = yes
+			num_of_rebel_controlled_provinces = 1
+			overlord = {
+				years_of_income = 2
+			}
+		}
+	}
+}
+
+ger_request_overlord_manpower = {
+	category = influence
+	
+	alert_index = 49
+	alert_tooltip = "Demand Manpower"
+	require_acceptance = yes # Whether the recipient gets an option to decline
+	is_visible = {
+		is_subject_of_type = ger_vassal
+		FROM = {
+			overlord_of = ROOT
+		}
+	}
+	is_allowed = {
+		hidden_trigger = {
+			is_subject_of_type = ger_vassal
+			FROM = {
+				overlord_of = ROOT
+			}
+		}
+		custom_trigger_tooltip = {
+			tooltip = "Not requested aid in less than 1 year"
+			NOT = {has_country_modifier = got_helped_by_over_germ_flag}
+		}
+	}
+	on_accept = {
+		FROM = {
+			add_manpower = -1
+			add_government_power = {
+				mechanic_type = germ_conf_mechanic
+				power_type = confederation_power
+				value = 2
+			}
+		}
+		ROOT = {
+			add_manpower = 1
+		}
+		hidden_effect = {
+			add_country_modifier = {
+				name = got_helped_by_over_germ_flag
+				duration = 365
+				hidden = yes
+			}
+		}
+	}
+	on_decline = {
+		hidden_effect = {
+			add_country_modifier = {
+				name = got_helped_by_over_germ_flag
+				duration = 365
+				hidden = yes
+			}
+		}
+	}
+	
+	ai_acceptance = { # This works similarly to variable_arithmetic_trigger, but does not support triggers generally. Instead, "limit" will be evaluated first and the rest ignored if it isn't passed.
+		add_entry = {
+			name = OPINION
+			export_to_variable = {
+				variable_name = ai_value
+				value = opinion
+				who = FROM
+				with = ROOT
+			}
+			subtract_variable = { 
+				which = ai_value
+				value = 25
+			}
+			multiply_variable = {
+				which = ai_value 
+				value = 0.2
+			}
+			
+		}
+	}
+
+	ai_will_do = { # this is a trigger
+		overlord = {
+				manpower = 1
+			}
+		OR = {
+			NOT = {
+				manpower_percentage = 0.3
+			}
+			num_of_rebel_controlled_provinces = 1
+			overlord = {
+				years_of_manpower = 2
+			}
+		}
+	}
+}
+
+ger_war_on_others = { #for the AI to do stuff
+	category = influence
+	
+	alert_index = 49
+	alert_tooltip = "Demand Manpower"
+	require_acceptance = yes # Whether the recipient gets an option to decline
+	is_visible = {
+		is_subject_of = overlord
+		is_subject_of_type = ger_vassal
+		FROM = {
+			is_subject_of = overlord
+			is_subject_of_type = ger_vassal
+		}
+		ai = yes
+		is_year = 1445
+	}
+	is_allowed = {
+		NOT = {
+			has_country_modifier = ger_war_on_others_timer
+		}
+	}
+	on_accept = {
+		declare_war_with_cb = {
+			casus_belli = cb_humiliate
+			who = FROM
+		}
+		add_country_modifier = {
+			name = ger_war_on_others_timer
+			duration = 3650
+		}
+	}
+	on_decline = {
+
+	}
+	
+	ai_acceptance = { # This works similarly to variable_arithmetic_trigger, but does not support triggers generally. Instead, "limit" will be evaluated first and the rest ignored if it isn't passed.
+
+	}
+
+	ai_will_do = { # this is a trigger
+		manpower_percentage = 0.9
+		years_of_income = 0.5
+		is_in_deficit = no
+		NOT = {num_of_rebel_controlled_provinces = 1}
+		is_at_war = no
+		NOT = {
+			ruler_has_personality = just_personality
+		}
+		NOT = {
+			ruler_has_personality = craven_personality
+		}
+	}
+}
+
+ger_annex_duchy = {
+	category = influence
+	
+	alert_index = 55
+	alert_tooltip = "Annex Duchy"
+	require_acceptance = no # Whether the recipient gets an option to decline
+	is_visible = {
+		has_subject_of_type = ger_vassal
+		FROM = {
+			is_subject_of = ROOT
+			is_subject_of_type = ger_vassal
+		}
+	}
+	is_allowed = {
+		stability = 1
+		adm_power = 100
+		FROM = {
+			NOT = {
+				liberty_desire = 40
+			}
+			has_opinion = {
+				who = ROOT
+				value = 150
+			}
+		}
+	}
+	on_accept = {
+		add_stability = -1
+		FROM = {
+			every_core_province = {
+				add_territorial_core = ROOT
+			}
+			every_owned_province = {
+				ROOT = {
+					add_adm_power = -25
+				}
+				cede_province = ROOT
+			}
+		}
+	}
+	on_decline = {
+	}
+	
+	ai_acceptance = { # This works similarly to variable_arithmetic_trigger, but does not support triggers generally. Instead, "limit" will be evaluated first and the rest ignored if it isn't passed.
+	}
+
+	ai_will_do = { # this is a trigger
+		OR = {
+			always = no
+			tag = GR0
+		}
+	}
+}
+
+ger_ask_for_off_war = {
+	category = influence
+	
+	alert_index = 55
+	alert_tooltip = "Annex Duchy"
+	require_acceptance = no # Whether the recipient gets an option to decline
+	is_visible = {
+		has_subject_of_type = ger_vassal
+		FROM = {
+			is_subject_of = ROOT
+			is_subject_of_type = ger_vassal
+		}
+	}
+	is_allowed = {
+		is_in_war = {
+			attacker_leader = ROOT
+		}
+		years_of_income = 0.15
+		FROM = {
+			is_at_war = no
+			NOT = {
+				liberty_desire = 40
+			}
+		}
+	}
+	on_accept = {
+		add_years_of_income = -0.15
+		FROM = {
+			join_all_offensive_wars_of = ROOT
+			add_liberty_desire = 15
+		}
+	}
+	on_decline = {
+	}
+	
+	ai_acceptance = { # This works similarly to variable_arithmetic_trigger, but does not support triggers generally. Instead, "limit" will be evaluated first and the rest ignored if it isn't passed.
+	}
+
+	ai_will_do = { # this is a trigger
+		FROM = {
+			NOT = {
+				liberty_desire = 30
+			}
+		}
+		OR = {
+			always = no
+			tag = GR0
+		}
+	}
+}
+
+ger_ask_for_def_war = {
+	category = influence
+	
+	alert_index = 55
+	alert_tooltip = "Annex Duchy"
+	require_acceptance = no # Whether the recipient gets an option to decline
+	is_visible = {
+		has_subject_of_type = ger_vassal
+		FROM = {
+			is_subject_of = ROOT
+			is_subject_of_type = ger_vassal
+		}
+	}
+	is_allowed = {
+		is_in_war = {
+			defender_leader = ROOT
+		}
+		years_of_income = 0.15
+		FROM = {
+			is_at_war = no
+			NOT = {
+				liberty_desire = 40
+			}
+		}
+	}
+	on_accept = {
+		add_years_of_income = -0.15
+		FROM = {
+			join_all_defensive_wars_of = ROOT
+		}
+	}
+	on_decline = {
+	}
+	
+	ai_acceptance = { # This works similarly to variable_arithmetic_trigger, but does not support triggers generally. Instead, "limit" will be evaluated first and the rest ignored if it isn't passed.
+	}
+
+	ai_will_do = { # this is a trigger
+		FROM = {
+			NOT = {
+				liberty_desire = 30
+			}
+		}
+		OR = {
+			always = no
+			tag = GR0
+			NOT = {
+				war_score = -10
+			}
 		}
 	}
 }

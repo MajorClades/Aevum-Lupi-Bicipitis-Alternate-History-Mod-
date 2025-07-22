@@ -1,0 +1,65 @@
+cb_ezo_yamatai = {
+	valid_for_subject = no 
+	is_triggered_only = yes
+	prerequisites_self = {
+		tag = KM6
+	}
+
+	prerequisites = { 
+		FROM = {
+			tag = KM5
+		}
+	}
+	war_goal = japan_death_war
+	ai_peace_desire = -30 
+}
+
+cb_yamatai_in_china = {
+	valid_for_subject = no 
+	prerequisites_self = {
+		tag = KM6
+		has_country_flag = destroy_china_flag
+	}
+
+	prerequisites = { 
+		FROM = {
+			any_owned_province = {
+				has_port = yes
+				OR = {
+					region = north_china_region
+					region = south_china_region
+				}
+			}
+			capital_scope = {
+				OR = {
+					region = north_china_region
+					region = south_china_region
+				}
+			}
+		}
+	}
+	war_goal = yamatai_in_china_war
+	ai_peace_desire = -30 
+}
+
+cb_yamatai_in_philippines = {
+	valid_for_subject = no 
+	prerequisites_self = {
+		tag = KM6
+		has_country_flag = destroy_philip_flag
+	}
+
+	prerequisites = { 
+		FROM = {
+			any_owned_province = {
+				has_port = yes
+				superregion = east_indies_superregion
+			}
+			capital_scope = {
+				superregion = east_indies_superregion
+			}
+		}
+	}
+	war_goal = yamatai_in_philip_war
+	ai_peace_desire = -30 
+}

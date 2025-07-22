@@ -88,12 +88,26 @@ country_decisions = {
 				}
 				set_government_rank = 2
 			}
-			swap_non_generic_missions = yes
 			colonial_alaska = {
 				limit = {
 					NOT = { owned_by = ROOT }
 				}
 				add_permanent_claim = CSC
+			}
+			
+			if = {
+				limit = {
+					is_iberian_grouped_trigger = yes
+					NOT = { primary_culture = mexican }
+				}
+				change_primary_culture = mexican
+			}
+			if = {
+				limit = {
+					culture_group = romon
+					NOT = { primary_culture = quebecois }
+				}
+				change_primary_culture = quebecois
 			}
 			add_country_modifier = {
 				name = "centralization_modifier"

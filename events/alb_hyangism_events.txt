@@ -1,0 +1,134 @@
+namespace = hyang_event
+
+country_event = {
+	id = hyang_event.1
+	title = hyang_event.1.t
+	desc = hyang_event.1.d
+	picture = indiangfx_RELIGION_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = hyang_event.1.a
+		add_prestige = 5
+		add_to_alb_worldliness_vs_godliness = {
+			amount = 0.5
+		}
+		custom_tooltip = random_galungan_results_tt
+	hidden_effect = {
+		random_list = {
+					5 = {
+					add_country_modifier = {
+					name = galungan_celebration_1 #Lucky
+					duration = 7200
+						}
+					}
+					15 = {
+					add_country_modifier = {
+					name = galungan_celebration_2 #Great
+					duration = 7200
+						}
+					}
+					20 = {
+					add_country_modifier = {
+					name = galungan_celebration_3 #Good
+					duration = 3600
+						}
+					}
+					30 = {
+					add_country_modifier = {
+					name = galungan_celebration_4 #Mildly positive
+					duration = 3600
+						}
+					}
+					15 = {
+					add_country_modifier = {
+					name = galungan_celebration_5 #Bad
+					duration = 3600
+						}	
+					}
+					15 = {
+					add_country_modifier = {
+					name = galungan_celebration_6 #Worst
+					duration = 3600
+						}	
+					}
+				}
+		}
+	}
+	
+}
+
+country_event = {
+	id = hyang_event.2
+	title = hyang_event.2.t
+	desc = hyang_event.2.d
+	picture = indiangfx_CULTURE_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = hyang_event.2.a
+		define_consort = {
+			adm = 2
+			dip = 5
+			mil = 1
+			country_of_origin = ROOT
+			religion = ROOT
+			culture = ROOT
+		}
+	}
+}
+country_event = {
+	id = hyang_event.3
+	title = hyang_event.3.t
+	desc = hyang_event.3.d
+	picture = 11_Jain_Estate_eventPicture 
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = hyang_event.3.a
+		add_country_modifier = {
+			name = tolerant_sage_alb
+			duration = 9125
+		}
+		random_province = {
+			limit = {
+				AND = {
+					is_core = ROOT
+					owned_by = ROOT
+				}
+			}
+			add_institution_embracement = {
+				value = 25
+				which = renaissance
+			}
+		}
+	}
+	
+	option = {
+		name = hyang_event.3.b
+		random_list = {
+			30 = {
+				change_adm = 1
+			}
+			30 = {
+				change_dip = 1
+			}
+			30 = {
+				change_mil = 1
+			}
+		}
+		add_adm_power = 25
+		add_dip_power = 25
+		add_mil_power = 25
+		hidden_effect = {
+			add_country_modifier = {
+				name = traditional_sage_alb
+				duration = 9125
+				hidden = yes
+			}
+		}
+	}
+}
