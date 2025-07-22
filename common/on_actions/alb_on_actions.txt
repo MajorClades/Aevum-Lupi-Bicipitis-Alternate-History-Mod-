@@ -503,7 +503,17 @@ on_thri_yearly_pulse = {
 	}
 }
 on_monarch_death = {
-
+	if = {
+		limit = { 
+			tag = SO0 
+			BR0 = { has_government_mechanic = brit_imperial_heir }
+		}
+		BR0 = {
+			country_event = {
+				id = britt.9
+			}
+		}
+	}
 	if = {
 		limit = { 
 			tag = HE0 
@@ -1118,6 +1128,89 @@ on_province_religion_converted = {
 	}
 }
 
+on_siege_won_country = {
+	if = {
+		limit = {
+			OR = {
+				OR = {
+					tag = FR0 
+					was_tag = FR0 
+				}
+				is_in_war = { participants = FR0 } 
+			}
+			FR0 = {
+				any_hired_mercenary_company = {
+					template = merc_minecrafters
+					location = { province_id = FROM }
+				}
+			}
+		}
+		FR0 = { 
+			change_variable = {
+				which = miners_siege_counter
+				value = 1
+			}
+		}
+	}
+	if = {
+		limit = {
+			any_hired_mercenary_company = {
+				template = merc_angr_warband
+				location = { province_id = FROM }
+			}
+			any_war_enemy_country = {
+				owns = FROM
+			}
+		}
+		FROM = {
+			add_devastation = 50
+		}
+		ROOT = {
+			every_war_enemy_country = {
+				add_aggressive_expansion = {
+					who = ROOT
+					value = 5
+					apply_calc = no
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			ROOT = {
+				is_or_was_tag = {tag = KO4}
+			}
+		}
+		FROM = {
+			add_base_manpower = -1
+			if = {
+					limit = {
+						has_building = fort_15th
+					}
+					remove_building = fort_15th
+					}
+					else_if = {
+						limit = {
+							has_building = fort_16th
+						}
+						remove_building = fort_16th
+					}
+					else_if = {
+						limit = {
+							has_building = fort_17th
+						}
+						remove_building = fort_17th
+					}
+					else_if = {
+						limit = {
+							has_building = fort_18th
+						}
+						remove_building = fort_18th
+					}
+		}
+	}
+}
+
 # province
 # root = location, from = losing country
 on_siege_won_province = {
@@ -1148,7 +1241,7 @@ on_siege_lost_province =  {
 	}
 }
 on_yearly_pulse = {
-	if ={
+	if = {
 		limit = {
 			OR = {
 				tag = FJ9
@@ -1284,6 +1377,27 @@ on_added_to_trade_company = {
 			45 = {}
 			5 = { add_base_production = 1 add_base_manpower = 1  } 
 		}
+	}
+}
+
+on_added_to_trade_company = {
+	if = {
+		limit = {
+			FROM = {has_country_flag = stronger_trade_companies_flag}
+		}
+		add_province_modifier = {
+			name = stronger_trade_companies_mod
+			duration = -1
+		}
+	}
+}
+
+on_removed_from_company = {
+	if = {
+		limit = {
+			FROM = {has_country_flag = stronger_trade_companies_flag}
+		}
+		remove_province_modifier = stronger_trade_companies_mod
 	}
 }
 

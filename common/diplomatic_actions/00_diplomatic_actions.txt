@@ -632,6 +632,24 @@ integrationaction = {
 			}
 		}
 	}
+	effect = {
+		if = {
+			limit = {
+				ROOT = {
+					tag = BR0
+				}
+				FROM = {
+					tag = JU0
+				}
+			}
+			SW2 = {
+				country_event = {
+					id = britt.3
+					days = 1
+				}
+			}
+		}
+	}
 }
 
 vassalaction = {
@@ -795,5 +813,23 @@ ask_for_tributary_state_action = {
 break_alliance = {
 	effect = {
 		on_alliance_broken_effect = yes
+	}
+}
+
+spy_network = {
+	effect = {
+		if = {
+			limit = {
+				has_country_flag = extra_spy_at_start_flag
+			}
+			add_spy_network_in = {
+				who = FROM
+				value = -10
+			}
+			add_spy_network_in = {
+				who = FROM
+				value = 10
+			}
+		}
 	}
 }

@@ -5,30 +5,24 @@ country_event = {
 	title = britt.1.test
 	desc = britt.1.desc
 	picture = ANGRY_MOB_eventPicture
-	
-	trigger = {
-		tag = BR0
-		is_year = 1445
-		is_at_war = no
-		alliance_with = JU0
-		JU0 = {
-			is_at_war = no
-		}
-	}
-	major = yes
-	mean_time_to_happen = {
-		months = 2
-	}
-	fire_only_once = yes
+	is_triggered_only = yes
 	option = {
 		name = britt.1a
 		ai_chance = {
 			factor = 90
 		}
-		JU0 = {
-			country_event = {
-				id = britt.2
-			}
+		241 = {
+			add_base_manpower = -1
+		}
+		4375 = {
+			remove_core = SW2
+			change_religion = impotian
+		}
+		240 = {
+			remove_core = SW2
+		}
+		239 = {
+			remove_core = SW2
 		}
 	}
 	option = {
@@ -36,7 +30,14 @@ country_event = {
 		ai_chance = {
 			factor = 10
 		}
-		add_stability = 1
+		every_owned_province = {
+			limit = {
+				is_core = SW2
+			}
+			add_base_manpower = -1
+			remove_core = SW2
+			change_religion = impotian
+		}
 	}
 }
 
@@ -50,48 +51,19 @@ country_event = {
 
 	option = {
 		name = britt.2a
-		ai_chance = {
-			factor = 80
-		}
-		if = {
-			limit = {
-				BR0 = {
-					ai = yes
-				}
-			}
-			if = {
-				limit = {
-					JU0 = {
-						ai = yes
-					}
-				}
-				BR0 = {
-					create_union = JU0
-				}
-			}
-			else = {
-				JU0 = {
-					create_union = BR0
-				}
-			}
-		}
-		else = {
-			BR0 = {
-				create_union = JU0
-			}
-		}
-		SW2 = {
-			country_event = {
-				id = britt.3
+		ai_chance = {factor = 80}
+		ireland_provinces = {
+			add_permanent_province_modifier = {
+				name = brit_hibernia
+				duration = 10950
 			}
 		}
 	}
 	option = {
 		name = britt.2b
-		ai_chance = {
-			factor = 20
-		}
-		add_stability = 1
+		ai_chance = {factor = 20}
+		add_army_tradition = 15
+		add_navy_tradition = 15
 	}
 }
 country_event = {
@@ -107,6 +79,7 @@ country_event = {
 	}
 	is_triggered_only = yes
 	major = yes
+	fire_only_once = yes
 	option = {
 		name = britt.3a
 		ai_chance = {
@@ -193,33 +166,535 @@ country_event = {
 	}
 }
 
+# country_event = {
+# 	id = britt.5
+# 	title = britt.5.test
+# 	desc = britt.5.desc
+# 	picture = COLONIZATION_eventPicture
+	
+# 	is_triggered_only = yes
+# 	fire_only_once = yes
+# 	option = {
+# 		name = britt.5a
+# 		ai_chance = {
+# 			factor = 80
+# 		}
+# 		add_country_modifier = {
+# 			name = culture_brit_1
+# 			duration = -1
+# 		}
+# 	}
+# 	option = {
+# 		name = britt.5b
+# 		ai_chance = {
+# 			factor = 20
+# 		}
+# 		add_country_modifier = {
+# 			name = culture_brit_2
+# 			duration = -1
+# 		}
+# 	}
+# }
 country_event = {
-	id = britt.5
-	title = britt.5.test
-	desc = britt.5.desc
-	picture = COLONIZATION_eventPicture
+	id = britt.6
+	title = britt.6.test
+	desc = britt.6.desc
+	picture = ANGRY_MOB_eventPicture
 	
 	is_triggered_only = yes
-	fire_only_once = yes
+
 	option = {
-		name = britt.5a
-		ai_chance = {
-			factor = 80
-		}
-		add_country_modifier = {
-			name = culture_brit_1
-			duration = -1
+		name = britt.6a
+		ai_chance = {factor = 40}
+		trigger = { accepted_culture = scotian }
+		ireland_provinces = { change_culture = scotian }
+		
+	}
+	option = {
+		name = britt.6b
+		ai_chance = {factor = 40}
+		trigger = { accepted_culture = belgian }
+		ireland_provinces = { change_culture = belgian }
+	}
+	option = {
+		name = britt.6c
+		ai_chance = {factor = 40}
+		trigger = { commandant = 5 }
+		ireland_provinces = { 
+			add_province_modifier = {
+				name = brit_potato
+				duration = 18250
+			}
 		}
 	}
 	option = {
-		name = britt.5b
-		ai_chance = {
-			factor = 20
+		name = britt.6d
+		ai_chance = {factor = 40}
+		ireland_provinces = {
+			add_named_unrest = {
+				name = "Divided and Conquered"
+				value = -5
+			}
 		}
+	}
+}
+country_event = {
+	id = britt.7
+	title = britt.7.test
+	desc = britt.7.desc
+	picture = ANGRY_MOB_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = britt.7a
+		ai_chance = {factor = 60}
+		highlands_area = {
+			change_culture = pictish
+		}
+		251 = {
+			change_culture = pictish
+		}
+	}
+	option = {
+		name = britt.7b
+		ai_chance = {factor = 40}
+		highlands_area = {
+			change_culture = norwegian
+		}
+		253 = {
+			change_culture = norwegian
+		}
+		4364 = {
+			change_culture = norwegian
+		}
+	}
+}
+country_event = {
+	id = britt.8
+	title = britt.8.test
+	desc = britt.8.desc
+	picture = MERCHANTS_TALKING_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = britt.8a
+		ai_chance = {factor = 60}
+		custom_tooltip = BRIT_TT_4
+		hidden_effect = {
+			every_owned_province = {
+				limit = { region = low_countries_region }
+				if = { limit = { is_core = ROOT } add_core = FR2 }
+				cede_province = FR2
+			}
+			every_subject_country = {
+				every_owned_province = {
+					limit = { region = low_countries_region }
+					if = { limit = { is_core = ROOT } add_core = FR2 }
+					cede_province = FR2
+				}
+			}
+			every_subject_country = {
+				limit = { primary_culture = ellan }
+				every_owned_province = {
+					if = { limit = { is_core = ROOT } add_core = FR2 }
+					cede_province = FR2
+				}
+			}
+		}
+		create_union = FR2
+		low_countries_region = { add_permanent_claim = FR2 }
+		hidden_effect = {FR2 = {complete_mission = 3_elland}}
+	}
+	option = {
+		name = britt.8b
+		ai_chance = {factor = 40}
 		add_country_modifier = {
-			name = culture_brit_2
+			name = brit_continental_trade
 			duration = -1
 		}
+	}
+}
+country_event = {
+	id = britt.9
+	title = britt.9.test
+	desc = britt.9.desc
+	picture = BYZANTINE_EMPEROR_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = britt.9a
+		trigger = { has_government_power = { mechanic_type = brit_imperial_heir power_type = imperial_favor_brit value = 15 } }
+		random_list = {
+			15 = { create_union = SO0 }
+			85 = { add_government_power = { mechanic_type = brit_imperial_heir power_type = imperial_favor_brit value = -15 } }
+		}
+	}
+	option = {
+		name = britt.9b
+		trigger = { has_government_power = { mechanic_type = brit_imperial_heir power_type = imperial_favor_brit value = 25 } }
+		random_list = {
+			25 = { create_union = SO0 }
+			75 = { add_government_power = { mechanic_type = brit_imperial_heir power_type = imperial_favor_brit value = -25 } }
+		}
+	}
+	option = {
+		name = britt.9c
+		trigger = { has_government_power = { mechanic_type = brit_imperial_heir power_type = imperial_favor_brit value = 45 } }
+		random_list = {
+			45 = { create_union = SO0 }
+			55 = { add_government_power = { mechanic_type = brit_imperial_heir power_type = imperial_favor_brit value = -45 } }
+		}
+	}
+	option = {
+		name = britt.9d
+		trigger = { has_government_power = { mechanic_type = brit_imperial_heir power_type = imperial_favor_brit value = 75 } }
+		random_list = {
+			75 = { create_union = SO0 }
+			25 = { add_government_power = { mechanic_type = brit_imperial_heir power_type = imperial_favor_brit value = -75 } }
+		}
+	}
+	option = {
+		name = britt.9e
+		trigger = { has_government_power = { mechanic_type = brit_imperial_heir power_type = imperial_favor_brit value = 100 } }
+		create_union = SO0 
+	}
+	option = {
+		name = britt.9f
+		add_stability_or_adm_power = yes
+	}
+	after = {
+		hidden_effect = {
+			if = {
+				limit = {any_subject_country = {tag = SO0 ai = yes}}
+				remove_government_reform = britannia_imperial_heir
+				country_event = {
+					id = britt.10
+				}
+			}
+		}
+	}
+}
+country_event = {
+	id = britt.10
+	title = britt.10.test
+	desc = britt.10.desc
+	picture = BYZANTINE_EMPEROR_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = britt.10a
+		inherit = SO0
+		set_government_rank = 3
+	}
+	option = {
+		name = britt.10b
+		inherit = SO0
+		override_country_name = WR0
+		set_government_rank = 3
+	}
+}
+
+country_event = {
+	id = britt.11
+	title = britt.11.test
+	desc = britt.11.desc
+	picture = BYZANTINE_EMPEROR_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = britt.11a
+		change_tag = WR0
+		italy_region = {
+			add_permanent_claim = ROOT
+		}
+		balkan_region = {
+			add_permanent_claim = ROOT
+		}
+		anatolia_region = {
+			add_permanent_claim = ROOT
+		}
+		iberia_region = {
+			add_permanent_claim = ROOT
+		}
+		mashriq_region = {
+			add_permanent_claim = ROOT
+		}
+	}
+	option = {
+		name = britt.11b
+		override_country_name = ATLANTIC_EMPIRE
+		change_country_color = {
+			color = {
+				50 170 165
+			}
+		}
+		iberia_region = {
+			add_permanent_claim = ROOT
+		}
+		scandinavia_region = {
+			add_permanent_claim = ROOT
+		}
+		north_german_region = {
+			limit = { has_port = yes}
+			add_permanent_claim = ROOT
+		}
+		northern_morocco_area = {
+			add_permanent_claim = ROOT
+		}
+		western_morocco_area = {
+			add_permanent_claim = ROOT
+		}
+		southern_morocco_area = {
+			add_permanent_claim = ROOT
+		}
+		macaronesia_area = {
+			add_permanent_claim = ROOT
+		}
+		add_country_modifier = {
+			name = brit_atlantic_empire
+			duration = -1
+		}
+		custom_tooltip = ATLANTIC_EMPIRE_TT_1
+	}
+}
+
+country_event = {
+	id = britt.12
+	title = britt.12.test
+	desc = britt.12.desc
+	picture = BYZANTINE_EMPEROR_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = britt.12a
+		237 = {
+			add_province_triggered_modifier = brit_oxford_university_adm
+		}
+	}
+	option = {
+		name = britt.12b
+		237 = {
+			add_province_triggered_modifier = brit_oxford_university_dip
+		}
+	}
+	option = {
+		name = britt.12c
+		237 = {
+			add_province_triggered_modifier = brit_oxford_university_mil
+		}
+	}
+}
+
+country_event = { #some guy steals Excalibur
+	id = britt.13
+	title = britt.13.test
+	desc = britt.13.desc
+	picture = SPY_eventPicture
+	
+	trigger = {
+		owns = 241
+		OR = {
+			culture_group = romano_briton
+			culture_group = romon
+		}
+		religion = impotian
+		is_year = 1620
+	}
+	fire_only_once = yes
+	mean_time_to_happen = {
+		months = 12
+	}
+	option = {
+		name = britt.13a
+		if = {
+			limit = {
+				OR = {
+					tag = BR0
+					was_tag = BR0
+				}
+			}
+			add_prestige = -25
+			add_stability = -1
+		}else = {
+			add_prestige = -10
+		}
+		set_country_flag = lupin_the_3rd_flag
+		country_event = {
+			id = britt.14
+			days = 7
+		}
+	}
+}
+
+country_event = { #some guy steals Excalibur, some people gotta find him
+	id = britt.14
+	title = britt.14.test
+	desc = britt.14.desc
+	picture = SPY_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = britt.14a
+		define_advisor = {
+			type = natural_scientist
+			skill = 3
+			name = "Moaier Domus" #Sherlock Holmes - Fair Hair House - Moai Hier
+		}
+		define_advisor = {
+			type = spymaster
+			skill = 3
+			name = "Agatha Christi" 
+			female = yes
+		}
+		define_advisor = {
+			type = commandant
+			skill = 3
+			name = "Jaomus Bond" # 007
+		}
+		custom_tooltip = BRIT_TT_8
+	}
+	option = {
+		name = britt.14b
+		define_advisor = {
+			type = natural_scientist
+			skill = 3
+			name = "Moaier Domus" #Sherlock Holmes - Fair Hair House - Moai Hier
+			cost_multiplier = 0.5
+		}
+		define_advisor = {
+			type = spymaster
+			skill = 1
+			name = "Agatha Christi" 
+			female = yes
+		}
+		define_advisor = {
+			type = commandant
+			skill = 1
+			name = "Jaomus Bond" # 007
+		}
+		custom_tooltip = BRIT_TT_8
+	}
+	option = {
+		name = britt.14c
+		define_advisor = {
+			type = natural_scientist
+			skill = 1
+			name = "Moaier Domus" #Sherlock Holmes - Fair Hair House - Moai Hier
+		}
+		define_advisor = {
+			type = spymaster
+			skill = 3
+			name = "Agatha Christi" 
+			female = yes
+			cost_multiplier = 0.5
+		}
+		define_advisor = {
+			type = commandant
+			skill = 1
+			name = "Jaomus Bond" # 007
+		}
+		custom_tooltip = BRIT_TT_8
+	}
+	option = {
+		name = britt.14d
+		define_advisor = {
+			type = natural_scientist
+			skill = 1
+			name = "Moaier Domus" #Sherlock Holmes - Fair Hair House - Moai Hier
+		}
+		define_advisor = {
+			type = spymaster
+			skill = 1
+			name = "Agatha Christi" 
+			female = yes
+		}
+		define_advisor = {
+			type = commandant
+			skill = 3
+			name = "Jaomus Bond" # 007
+			cost_multiplier = 0.5
+		}
+		custom_tooltip = BRIT_TT_8
+	}
+}
+
+country_event = { #some guy steals Excalibur
+	id = britt.15
+	title = britt.15.test
+	desc = britt.15.desc
+	picture = SPY_eventPicture
+	
+	trigger = {
+		has_country_flag = lupin_the_3rd_flag
+		NOT = {
+			is_year = 1680
+		}
+	}
+	fire_only_once = yes
+	mean_time_to_happen = {
+		months = 900
+		modifier = {
+			factor = 0.8
+			employed_advisor = { name = "Moaier Domus"}
+		}
+		modifier = {
+			factor = 0.7
+			employed_advisor = { name = "Agatha Christi" }
+		}
+		modifier = {
+			factor = 0.8
+			employed_advisor = { name = "Jaomus Bond"}
+		}
+		modifier = {
+			factor = 0.5
+			employed_advisor = { name = "Zenigata"}
+		}
+	}
+	option = {
+		name = britt.15a
+		if = {
+			limit = {
+				OR = {
+					tag = BR0
+					was_tag = BR0
+				}
+			}
+			add_prestige = 25
+			add_stability = 1
+			add_country_modifier = {
+				name = captured_the_thief_real
+				duration = 10950
+			}
+		}else = {
+			add_prestige = 10
+		}
+		clr_country_flag = lupin_the_3rd_flag
+	}
+}
+
+country_event = { #some guy steals Excalibur
+	id = britt.16
+	title = britt.16.test
+	desc = britt.16.desc
+	picture = SPY_eventPicture
+	
+	trigger = {
+		has_country_flag = lupin_the_3rd_flag
+		NOT = {
+			is_year = 1680
+		}
+	}
+	fire_only_once = yes
+	mean_time_to_happen = {
+		months = 120
+	}
+	option = {
+		name = britt.16a
+		define_advisor = {
+			type = trader
+			skill = 1
+			name = "Zenigata" 
+		}
+		custom_tooltip = BRIT_TT_8a
 	}
 }
 
@@ -291,20 +766,96 @@ country_event = {
 		name = britt.100a
 		random_list = {
 			33 = {
+				add_adm_power = -50
 				236 = {
 					add_base_tax = 1
 				}
 			}
 			33 = {
+				add_dip_power = -50
 				236 = {
 					add_base_production = 1
 				}
 			}
 			33 = {
+				add_mil_power = -50
 				236 = {
 					add_base_manpower = 1
 				}
 			}
+		}
+	}
+}
+
+country_event = {
+	id = britt.102
+	title = britt.102.test
+	desc = britt.102.desc
+	picture = COLONIZATION_eventPicture
+	
+	trigger = {
+		tag = BR0
+		owns = 236
+		ai = yes
+		is_great_power = no
+		is_at_war = no
+		OR = {
+			manpower_percentage = 0.2
+			manpower = 2
+		}
+		NOT = {
+			army_size_percentage = 0.9
+		}
+	}
+	mean_time_to_happen = {
+		months = 6
+	}
+	hidden = yes
+	option = {
+		name = britt.100a
+		add_manpower = -2
+		236 = {
+			infantry = ROOT
+			infantry = ROOT
+		}
+	}
+}
+
+country_event = {
+	id = britt.333
+	title = britt.333.test
+	desc = britt.333.desc
+	picture = COLONIZATION_eventPicture
+	
+	is_triggered_only = yes
+	option = {
+		name = britt.333a
+		change_country_color = {
+			color = { 50 170 165 }
+		}
+	}
+	option = {
+		name = britt.333b
+		change_country_color = {
+			country = WR0
+		}
+	}
+	option = {
+		name = britt.333c
+		change_country_color = {
+			country = ROM
+		}
+	}
+	option = {
+		name = britt.333d
+		change_country_color = {
+			country = SO0
+		}
+	}
+	option = {
+		name = britt.333e
+		change_country_color = {
+			color = { 193  26  14 }
 		}
 	}
 }

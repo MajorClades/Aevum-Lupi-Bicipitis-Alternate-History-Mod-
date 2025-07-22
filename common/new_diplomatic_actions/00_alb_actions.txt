@@ -54,6 +54,97 @@ valtea_event_action = {
     }
 }
 
+spy_estate_action = {
+	category = covert
+	require_acceptance = no
+	is_visible = {
+		has_country_flag = spy_estate_flag
+    }
+
+	is_allowed = {
+		FROM = {
+			has_spy_network_from = {
+				who = ROOT
+				value = 35
+			}
+			if = {
+				limit = {
+					has_country_modifier = spy_estate_defense_mod
+				}
+				custom_trigger_tooltip = {
+					tooltip = NOT_DONE_SPY_ESTATE_ACTION_IN_COUNTRY
+					NOT = {
+						has_country_modifier = spy_estate_defense_mod
+					}
+				}
+			}
+		}
+    }
+	on_accept = {
+		ROOT = {
+			add_spy_network_in = {
+				who = FROM
+				value = -35
+			}
+		}	
+		FROM = {
+			add_country_modifier = {
+				name = spy_estate_defense_mod
+				duration =  1825
+			}
+			add_country_modifier = {
+				name = spy_estate_angry
+				duration =  1825
+			}
+		}
+    }
+
+	ai_will_do = {
+        always = yes
+    }
+}
+
+
+spy_collapse_country_action = {
+	category = covert
+	require_acceptance = no
+	is_visible = {
+		has_country_flag = spy_collapse_country_flag
+		FROM = {
+			NOT = {
+				has_country_flag = collapse_already_flag
+			}
+		}
+    }
+
+	is_allowed = {
+		FROM = {
+			has_spy_network_from = {
+				who = ROOT
+				value = 100
+			}
+		}
+    }
+	on_accept = {
+		ROOT = {
+			add_spy_network_in = {
+				who = FROM
+				value = -100
+			}
+		}	
+		FROM = {
+			add_country_modifier = {
+				name = valt_complete_collapse
+				duration = 3650
+			}
+			set_country_flag = collapse_already_flag
+		}
+    }
+
+	ai_will_do = {
+        always = yes
+    }
+}
 friendship_action = {
 	category = influence
 	require_acceptance = no
@@ -93,6 +184,93 @@ friendship_action = {
 						add_core = ROOT
 					}
 				}
+			}
+		}
+    }
+	ai_will_do = {
+        always = no
+    }
+}
+
+buy_protectorate_into_vassal_action = {
+	category = influence
+	require_acceptance = no
+	is_visible = {
+		ROOT = {
+			has_country_flag = buy_protectorate_into_vassals_flag
+		}
+		FROM = {
+			is_subject_of = ROOT
+			is_subject_of_type = trade_protectorate
+		}
+    }
+
+	is_allowed = {
+		is_at_war = no
+		FROM = {
+			is_at_war = no
+			NOT = {
+				liberty_desire = 40
+			}
+		}
+    }
+	on_accept = {
+		FROM = {
+			if = { limit = { total_development = 25} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 50} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 75} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 100} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 125} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 150} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 175} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 200} ROOT = { add_treasury = -500 } }
+		}
+		ROOT = {
+			vassalize = FROM
+		}
+		FROM = {
+			add_liberty_desire = -50
+		}
+    }
+	ai_will_do = {
+        always = no
+    }
+}
+
+buy_protectorate_into_annex_action = {
+	category = influence
+	require_acceptance = no
+	is_visible = {
+		ROOT = {
+			has_country_flag = buy_protectorate_into_vassals_flag
+		}
+		FROM = {
+			is_subject_of = ROOT
+			is_subject_of_type = trade_protectorate
+		}
+    }
+
+	is_allowed = {
+		is_at_war = no
+		FROM = {
+			is_at_war = no
+			NOT = {
+				liberty_desire = 40
+			}
+		}
+    }
+	on_accept = {
+		FROM = {
+			if = { limit = { total_development = 25} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 50} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 75} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 100} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 125} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 150} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 175} ROOT = { add_treasury = -500 } }
+			if = { limit = { total_development = 200} ROOT = { add_treasury = -500 } }
+			every_owned_province = {
+				cede_province = ROOT
 			}
 		}
     }
