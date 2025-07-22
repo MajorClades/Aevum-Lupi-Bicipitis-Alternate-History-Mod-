@@ -83,23 +83,100 @@ Scotia_1_slot = {
 
 		effect = { 
 			simple_dynamic_effect = {
-				first_custom_tooltip = BETTIA_TT_1a
+				first_custom_tooltip = SCOTIA_TT_1
 				first_limit = "
 					PI0 = {
 							alliance_with = ROOT
 					}
 				"
 				first_effect = "
-					
+					vassalize = PI0
+					add_country_modifier = {
+						name = sco_more_clans
+						duration = 7300
+					}
 				"
 				second_limit = "
 					PI0 = { exists = no } 
 				"
 				second_effect = "
-					
+					highlands_area = {
+						add_permanent_claim = ROOT
+					}
+					lowlands_area = {
+						add_permanent_claim = ROOT
+					}
+					kingdom_of_the_isles_area = {
+						add_permanent_claim = ROOT
+					}
 				"
 			}
 		} 
+	}
+	sco_lord_of_the_highlands = {
+		icon = alpine_fortifications
+		position = 4
+		required_missions = { sco_pitcs } 
+		provinces_to_highlight = {
+			OR = {area = highlands_area area = lowlands_area area = kingdom_of_the_isles_area}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			highlands_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			lowlands_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			kingdom_of_the_isles_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			highlands_area = {
+				change_culture = pictish
+			}
+			lowlands_area = {
+				change_culture = pictish
+			}
+			249 = {
+				change_culture = scotian
+			}
+			4362 = {
+				change_culture = scotian
+			}
+			south_atlantic_islands_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	sco_iceland = {
+		icon = alpine_fortifications
+		position = 5
+		required_missions = { sco_lord_of_the_highlands } 
+		provinces_to_highlight = {
+			area = south_atlantic_islands_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			south_atlantic_islands_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = sco_exploration
+				duration = 10950
+			}
+		}
 	}
 }
 Scotia_2_slot = {
@@ -129,6 +206,26 @@ Scotia_2_slot = {
 			add_country_modifier = {
 				name = scot_emerald_lord
 				duration = 10950
+			}
+		}
+	}
+	sco_highlanders = {
+		icon = alpine_fortifications
+		position = 5
+		required_missions = { sco_lord_of_the_highlands } 
+
+		trigger = {
+			accepted_culture = pictish
+			development_in_provinces = {
+				value = 100
+				culture = pictish
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = sco_highlander_hounds
+				duration = -1
 			}
 		}
 	}
@@ -309,6 +406,46 @@ Scotia_4_slot = {
 					name = sco_royal_port
 					duration = 10950
 				}
+			}
+		} 
+	}
+	sco_into_britannia = {
+		icon = mission_court_education
+		position = 5
+		provinces_to_highlight = {
+			region = british_isles_region
+			NOT = {
+				province_group = ireland_provinces
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 15
+				region = british_isles_region
+				NOT = {
+					province_group = ireland_provinces
+				}
+			}
+
+		}
+
+		effect = { 
+			simple_dynamic_effect = {
+				first_custom_tooltip = SCOTIA_TT_2
+				first_limit = "
+					WL0 = {
+						is_subject_of = ROOT
+						mission_completed = bry_break_the_roman
+					}
+				"
+				first_effect = "
+					
+				"
+				second_limit = "NOT = {WL0 = {is_subject_of = ROOT}}"
+				second_effect = "
+					
+				"
 			}
 		} 
 	}
