@@ -160,12 +160,12 @@ Scotia_1_slot = {
 		position = 5
 		required_missions = { sco_lord_of_the_highlands } 
 		provinces_to_highlight = {
-			area = south_atlantic_islands_area
+			area = subarctic_islands_area
 			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 		}
 
 		trigger = {
-			south_atlantic_islands_area = {
+			subarctic_islands_area = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
@@ -329,6 +329,29 @@ Scotia_3_slot = {
 			}
 		} 
 	}
+	sco_wales_and_sweden = {
+		icon = alpine_fortifications
+		position = 6
+		required_missions = { sco_highlanders sco_into_britannia} 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 241
+				province_id = 236
+				province_id = 245
+			}
+		}
+		trigger = {
+			owns_or_subject_of = 241
+			owns_or_subject_of = 236
+			owns_or_subject_of = 245
+		}
+
+		effect = {
+			country_event = {
+					id = scotii.3
+				}
+		}
+	}
 }
 
 Scotia_4_slot = {
@@ -420,6 +443,7 @@ Scotia_4_slot = {
 			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 		}
 		trigger = {
+			owns = 4365
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
 				value = 15
 				region = british_isles_region
@@ -431,6 +455,12 @@ Scotia_4_slot = {
 		}
 
 		effect = { 
+			4365 = {
+				add_province_modifier = {
+					name = sco_isle_of_man
+					duration = -1
+				}
+			}
 			simple_dynamic_effect = {
 				first_custom_tooltip = SCOTIA_TT_2
 				first_limit = "
@@ -440,11 +470,67 @@ Scotia_4_slot = {
 					}
 				"
 				first_effect = "
-					
+					add_country_modifier = {
+						name = sco_war_on_the_big_island
+						duration = 10950
+					}
 				"
 				second_limit = "NOT = {WL0 = {is_subject_of = ROOT}}"
 				second_effect = "
-					
+					british_isles_region = {add_permanent_claim = ROOT}
+				"
+			}
+		} 
+	}
+	sco_lords_of_britannia = {
+		icon = mission_court_education
+		position = 6
+		required_missions = { sco_into_britannia  } 
+		provinces_to_highlight = {
+			region = british_isles_region
+			NOT = {
+				province_group = ireland_provinces
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 30
+				region = british_isles_region
+				NOT = {
+					province_group = ireland_provinces
+				}
+			}
+
+		}
+
+		effect = { 		
+			simple_dynamic_effect = {
+				first_custom_tooltip = SCOTIA_TT_3
+				first_limit = "
+					WL0 = {
+						is_subject_of = ROOT
+						mission_completed = bry_full_bryddania
+					}
+				"
+				first_effect = "
+					WL0 = {
+						country_event = {
+							id = scotii.2
+						}
+					}
+				"
+				second_limit = " NOT = { WL0 = { is_subject_of = ROOT } } "
+				second_effect = "
+					wales_area = {
+						change_culture = brytonic
+					}
+					wessex_area = {
+						change_culture = brytonic
+					}
+					west_midlands_area = {
+						change_culture = brytonic
+					}
 				"
 			}
 		} 
