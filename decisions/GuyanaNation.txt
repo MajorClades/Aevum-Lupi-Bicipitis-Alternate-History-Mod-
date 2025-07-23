@@ -1,0 +1,179 @@
+country_decisions = {
+
+	CEF_guyana_nation_decision = {
+		major = yes
+		potential = {
+			NOT = { has_country_flag = changed_from_colonial_nation }
+			was_never_end_game_tag_trigger = yes
+			is_nomad = no
+			is_random_new_world = no
+			NOT = { tag = HLR }
+			NOT = { tag = PAP }
+			OR = {
+				is_former_colonial_nation = yes
+				is_colonial_nation = yes
+				AND = {
+					NOT = {
+						OR = {
+							technology_group = north_american
+							technology_group = mesoamerican
+							technology_group = andean
+							technology_group = high_american
+							technology_group = south_american
+						}
+					}
+					capital_scope = {
+						colonial_region = colonial_karibba
+						is_core = ROOT
+					}
+				}
+			}
+			colonial_karibba = {
+				owned_by = ROOT
+			}
+			OR = {
+				ai = no
+				AND = {
+					ai = yes
+					num_of_cities = 3	
+				}
+			}
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = suriname_area
+				province_id = 743
+				province_id = 744
+				province_id = 2931
+			}
+			OR = {
+				NOT = { owned_by = ROOT }
+				NOT = { is_core = ROOT }
+				is_city = no
+			}
+		}
+		allow = {
+			adm_tech = 10
+			is_free_or_tributary_trigger = yes
+			is_at_war = no
+			NOT = { exists = GYA }
+			num_of_owned_provinces_with = {
+				value = 5
+				OR = {
+					area = suriname_area
+					area = amapa_area
+					area = amazon_area
+					province_id = 743
+					province_id = 744
+					province_id = 2931
+				}
+				is_city = yes
+			}
+			owns_core_province = 744
+		}
+		effect = {
+			hidden_effect = {
+				if = {
+					limit = {
+						NOT = { is_former_colonial_nation = yes }
+					}
+					ROOT = { save_event_target_as = old_tag_target }
+					set_country_flag = was_not_former_colonial_nation
+				}
+			}
+			change_tag = GYA
+			on_change_tag_effect = yes
+			swap_non_generic_missions = yes
+			if = {
+				limit = {
+					owns_core_province = 744
+					NOT = { capital = 744 }
+				}
+				set_capital = 744
+			}
+			if = {
+				limit = {
+					NOT = { is_former_colonial_nation = yes }
+				}
+				restore_old_nation_on_formation_effect = yes
+				remove_non_electors_emperors_from_empire_effect = yes
+			}
+			if = {
+				limit = {
+					NOT = { government_rank = 2 }
+				}
+				set_government_rank = 2
+			}
+			remove_non_electors_emperors_from_empire_effect = yes
+			if = {
+				limit = { NOT = { government_rank = 2 } }
+				set_government_rank = 2
+			}
+			colonial_karibba = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = GYA
+			}
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			if = {
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			#can't have more than one elective monarchy in the game
+			if = {
+				limit = {
+					has_reform = elective_monarchy
+				}
+				change_government = monarchy
+				add_government_reform = feudalism_reform
+			}
+			add_prestige = 25
+			set_country_flag = changed_from_colonial_nation
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {	#Prioritize Colombia
+				factor = 0
+				num_of_owned_provinces_with = {
+					value = 10
+					OR = {
+						area = grao_para_area
+						area = pontal_area
+						area = maranhao_area
+						area = piaui_area
+						area = ceara_area
+					}
+					is_city = yes
+				}
+				owns_core_province = 825
+				NOT = { exists = COL }
+			}
+			modifier = {	#Prioritize Venezuela
+				factor = 0
+				num_of_owned_provinces_with = {
+					value = 10
+					OR = {
+						area = venezuela_area
+						area = maracaibo_area
+						area = central_llanos_area
+						area = eastern_llanos
+						province_id = 502
+						province_id = 2803
+						province_id = 4617
+						province_id = 2811
+						province_id = 742
+						province_id = 2804
+					}
+					is_city = yes
+				}
+				owns_core_province = 831
+				NOT = { exists = VNZ }
+			}
+		}
+	}
+
+}
