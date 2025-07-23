@@ -23,14 +23,22 @@ Brytt_1_slot = {
 		}
 
 		effect = {
-			wales_area = {
-				limit = {
-					culture = briton
+			tooltip = {
+				wales_area = {
+					change_culture = brytonic
 				}
-				change_culture = brytonic
-				add_named_unrest = {
-					name = "Roman Nationalism"
-					value = 5
+			}
+			custom_tooltip = brittia_romans_5_unrest_tt  #clear things up
+			hidden_effect = {
+				wales_area = {
+					limit = {
+						culture = briton
+					}
+					change_culture = brytonic
+					add_named_unrest = {
+						name = "Roman Nationalism"
+						value = 5
+					}
 				}
 			}
 			wessex_area = {
@@ -83,8 +91,13 @@ Brytt_2_slot = {
 		position = 1
 
 		trigger = {
-			BR0 = {
-				is_at_war = yes
+			OR = {
+				BR0 = {
+					is_at_war = yes
+				}
+				NOT = {
+					exists = BR0
+				}
 			}
 		}
 
@@ -194,11 +207,10 @@ Brytt_3_slot = {
 			scottish_marches_area = {
 				change_culture = brytonic
 			}
-			east_midlands_area = {
-				add_permanent_claim = ROOT
-			}
-			yorkshire_area = {
-				add_permanent_claim = ROOT
+			override_country_name = BRYDAIN
+			add_country_modifier = {
+				name = brydd_restore_brythonia
+				duration = -1
 			}
 		}
 	}
@@ -221,9 +233,13 @@ Brytt_4_slot = {
 				value = 100
 				culture = brytonic
 			}
+			religious_unity = 0.9
 		}
 
 		effect = {
+			add_prestige_or_monarch_power = {
+				amount = 25
+			}
 			add_years_of_income = 1
 			overlord = {
 				custom_tooltip = SCOT_OVERLORD
@@ -307,12 +323,32 @@ Brytt_5_slot = {
 				value = 5
 				has_manpower_building_trigger = yes
 			}
+			242 = {
+				development = 20
+			}
 		}
 
 		effect = {
 			add_yearly_manpower = 1
 			overlord = {
 				add_yearly_manpower = 0.5
+			}
+			custom_tooltip = empty_line_tt
+			242 = {
+				add_or_upgrade_manpower_building = yes
+			}
+			custom_tooltip = empty_line_tt
+			custom_tooltip = brydd_10_dev_in_manpower_provinces_tt
+			for = {
+				amount = 10
+				effect = "
+					random_owned_province = {
+						limit = {
+							has_manpower_building_trigger = yes
+						}
+						add_random_development = 1
+					}
+				"
 			}
 		}
 	}
