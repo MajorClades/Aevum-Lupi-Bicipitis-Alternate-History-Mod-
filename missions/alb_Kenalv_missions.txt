@@ -8,83 +8,62 @@ kenalv_1_slot = {
 	fa0_cross_the_thames = {
 		icon = mission_rb_scottish_conquer_london
 		position = 2
-		provinces_to_highlight = {  
+		provinces_to_highlight = {
 			area = home_counties_area
-			NOT = {
-				country_or_non_sovereign_subject_holds = ROOT
-			}
-		} 
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
 
-		trigger = {  
+		trigger = {
 			home_counties_area = {
 				country_or_non_sovereign_subject_holds = ROOT
 				type = all
 			}
-		} 
-
-		effect = {  
-			236 = {
-				set_center_level_2_center_of_trade = yes #smth else?
-			}
-			wales_area = {
-				add_permanent_claim = ROOT
-			}
-			west_midlands_area = {
-				add_permanent_claim = ROOT
-			}
-			wessex_area = {
-				add_permanent_claim = ROOT
-			}
-		} 
-	}
-	fa0_scraps_of_empire = {
-		icon = mission_rb_scottish_conquer_london
-		position = 3
-		required_missions = {
-			fa0_cross_the_thames
 		}
-		provinces_to_highlight = {  
+
+		effect = {
+			236 = { set_center_level_2_center_of_trade = yes } 
+			wales_area = { add_permanent_claim = ROOT } 
+			west_midlands_area = { add_permanent_claim = ROOT } 
+			wessex_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	fa0_scraps_of_empire = {
+		icon = a_real_roman_empire
+		position = 3
+		required_missions = { fa0_cross_the_thames } 
+		provinces_to_highlight = {
 			OR = {
 				culture = briton
 				culture = frislander
 			}
-			NOT = {
-				owned_by = ROOT
-			}
-		} 
+			NOT = { owned_by = ROOT } 
+		}
 
-		trigger = {  
+		trigger = {
 			owns_all_provinces = {
 				OR = {
 					culture = briton
 					culture = frislander
 				}
 			}
-		} 
+		}
 
-		effect = {  
+		effect = {
 			custom_tooltip = fa0_move_briton_frislander_cultures_tt
 			hidden_effect = {
-				update_entire_culture_foreign = {
-					culture = briton
-				}
-				update_entire_culture_foreign = {
-					culture = frislander
-				}
+				update_entire_culture_foreign = { culture = briton } 
+				update_entire_culture_foreign = { culture = frislander } 
 			}
-		} 
-	}
-	fa0_talking_to_soxony = {
-		icon = mission_rb_scottish_conquer_london
-		position = 5
-		required_missions = {
-			
 		}
-		provinces_to_highlight = {  
-			
-		} 
+	}
 
-		trigger = {  
+	fa0_talking_to_soxony = {
+		icon = mission_autocephalous_archbishopric
+		position = 5
+		provinces_to_highlight = {  } 
+
+		trigger = {
 			OR = {
 				reverse_has_opinion = {
 					who = SO0
@@ -93,14 +72,14 @@ kenalv_1_slot = {
 				alliance_with = SO0
 			}
 			patriarch_authority = 0.4
-		} 
+		}
 
-		effect = {  
+		effect = {
 			add_country_modifier = {
-				name = fa0_sponsorship_of_bishop
+				name = "fa0_sponsorship_of_bishop"
 				duration = 10950
 			}
-		} 
+		}
 	}
 }
 kenalv_2_slot = {
@@ -113,33 +92,27 @@ kenalv_2_slot = {
 	fa0_swedish_bulwark = {
 		icon = per_establish_western_defenses
 		position = 1
-		provinces_to_highlight = {  
+		provinces_to_highlight = {
 			province_id = 4370
-			NOT = {
-				num_of_times_improved = 2
-			}
-		} 
+			NOT = { num_of_times_improved = 2 } 
+		}
 
-		trigger = {  
+		trigger = {
 			army_size_percentage = 0.8
 			if = {
-				limit = {
-					ai  = no
-				}
-				4370 = {
-					num_of_times_improved = 2
-				}
+				limit = { ai = no } 
+				4370 = { num_of_times_improved = 2 } 
 			}
-		} 
+		}
 
-		effect = {  
+		effect = {
 			4370 = {
 				add_province_modifier = {
-					name = fa0_bogged_down
+					name = "fa0_bogged_down"
 					duration = 7300
 				}
 			}
-		} 
+		}
 	}
 
 	fa0_restore_kingdom_borders = {
@@ -149,15 +122,15 @@ kenalv_2_slot = {
 			fa0_swedish_bulwark
 			fa0_cross_the_thames
 		}
-		provinces_to_highlight = {  
+		provinces_to_highlight = {
 			OR = {
 				area = home_counties_area
 				area = west_midlands_area
 				province_id = 4376
 			}
-		} 
+		}
 
-		trigger = {  
+		trigger = {
 			owns = 4376
 			home_counties_area = {
 				owned_by = ROOT
@@ -167,18 +140,16 @@ kenalv_2_slot = {
 				owned_by = ROOT
 				type = all
 			}
-		} 
+		}
 
-		effect = {  
-			country_event = {
-				id = kenalv.1
-			}
+		effect = {
+			country_event = { id = kenalv.1 } 
 			custom_tooltip = empty_line_tt
 			add_country_modifier = {
-				name = fa0_restored_kingdom
+				name = "fa0_restored_kingdom"
 				duration = -1
 			}
-		} 
+		}
 	}
 }
 kenalv_3_slot = {
@@ -192,25 +163,23 @@ kenalv_3_slot = {
 		icon = fortify_malta
 		position = 2
 		required_missions = { fa0_bolster_fleet } 
-		provinces_to_highlight = {  
+		provinces_to_highlight = {
 			province_id = 243
 			OR = {
-				NOT = { owned_by = ROOT }
-				NOT = { num_of_times_improved = 2 }
+				NOT = { owned_by = ROOT } 
+				NOT = { num_of_times_improved = 2 } 
 			}
-		} 
+		}
 
-		trigger = {  
+		trigger = {
 			243 = {
 				owned_by = ROOT
 				num_of_times_improved = 2
 			}
-		} 
+		}
 
-		effect = {  
-			243 = {
-				set_center_level_2_center_of_trade = yes
-			}
+		effect = {
+			243 = { set_center_level_2_center_of_trade = yes } 
 			custom_tooltip = empty_line_tt
 			define_advisor = {
 				type = fortification_expert
@@ -218,28 +187,24 @@ kenalv_3_slot = {
 				cost_multiplier = 0.5
 			}
 			custom_tooltip = empty_line_tt
-			yorkshire_area = {
-				add_permanent_claim = ROOT
-			}
-			scottish_marches_area = {
-				add_permanent_claim = ROOT
-			}
-		} 
+			yorkshire_area = { add_permanent_claim = ROOT } 
+			scottish_marches_area = { add_permanent_claim = ROOT } 
+		}
 	}
 
 	fa0_northern_sweden = {
 		icon = mission_northumberland_coast
 		position = 3
 		required_missions = { fa0_seafort_gurem } 
-		provinces_to_highlight = {  
+		provinces_to_highlight = {
 			OR = {
 				area = yorkshire_area
 				area = scottish_marches_area
 				area = east_midlands_area
 			}
-		} 
+		}
 
-		trigger = {  
+		trigger = {
 			yorkshire_area = {
 				country_or_non_sovereign_subject_holds = ROOT
 				type = all
@@ -252,20 +217,16 @@ kenalv_3_slot = {
 				country_or_non_sovereign_subject_holds = ROOT
 				type = all
 			}
-		} 
+		}
 
-		effect = {  
-			add_accepted_culture_or_dip_power = {
-				culture = svede
-			}
-			british_isles_region = {
-				add_permanent_claim = ROOT
-			}
+		effect = {
+			add_accepted_culture_or_dip_power = { culture = svede } 
+			british_isles_region = { add_permanent_claim = ROOT } 
 			add_country_modifier = {
-				name = fa0_wipe_out_pagans
+				name = "fa0_wipe_out_pagans"
 				duration = 10950
 			}
-		} 
+		}
 	}
 }
 kenalv_4_slot = {
@@ -280,91 +241,79 @@ kenalv_4_slot = {
 		position = 1
 		provinces_to_highlight = {  } 
 
-		trigger = {  
-			navy_size_percentage = 1
-		} 
+		trigger = { navy_size_percentage = 1 } 
 
-		effect = {  
-			east_midlands_area = {
-				add_permanent_claim = ROOT
-			}
+		effect = {
+			east_midlands_area = { add_permanent_claim = ROOT } 
 			add_navy_tradition = 15
-		} 
+		}
 	}
+
 	fa0_ganden_union = {
 		icon = mission_swe_union
 		position = 4
-		required_missions = {
-			fa0_northern_sweden
-		}
-		provinces_to_highlight = { 
+		required_missions = { fa0_northern_sweden } 
+		provinces_to_highlight = {
 			OR = {
 				area = lowlands_area
 				province_id = 4363
 			}
-			NOT = {
-				country_or_non_sovereign_subject_holds = ROOT
-			}
-		} 
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
 
-		trigger = {  
+		trigger = {
 			lowlands_area = {
 				country_or_non_sovereign_subject_holds = ROOT
 				type = all
 			}
-			4363 = {
-				country_or_non_sovereign_subject_holds = ROOT
-			}
-		} 
+			4363 = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
 
-		effect = {  
+		effect = {
 			248 = {
 				add_base_tax = 1
 				add_province_modifier = {
-					name = fa0_ganden_no_more
+					name = "fa0_ganden_no_more"
 					duration = 18250
 				}
 			}
 			249 = {
 				add_base_tax = 1
 				add_province_modifier = {
-					name = fa0_ganden_no_more
+					name = "fa0_ganden_no_more"
 					duration = 18250
 				}
 			}
 			251 = {
 				add_base_tax = 1
 				add_province_modifier = {
-					name = fa0_ganden_no_more
+					name = "fa0_ganden_no_more"
 					duration = 18250
 				}
 			}
 			4363 = {
 				add_base_tax = 1
 				add_province_modifier = {
-					name = fa0_ganden_no_more
+					name = "fa0_ganden_no_more"
 					duration = 18250
 				}
 			}
-		} 
+		}
 	}
+
 	fa0_sweep_the_highlands = {
 		icon = mission_rb_rein_in_the_highland_clans
 		position = 4
-		required_missions = {
-			fa0_northern_sweden
-		}
-		provinces_to_highlight = { 
+		required_missions = { fa0_northern_sweden } 
+		provinces_to_highlight = {
 			OR = {
 				area = highlands_area
 				area = kingdom_of_the_isles_area
 			}
-			NOT = {
-				country_or_non_sovereign_subject_holds = ROOT
-			}
-		} 
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
 
-		trigger = {  
+		trigger = {
 			highlands_area = {
 				country_or_non_sovereign_subject_holds = ROOT
 				type = all
@@ -373,7 +322,7 @@ kenalv_4_slot = {
 				country_or_non_sovereign_subject_holds = ROOT
 				type = all
 			}
-		} 
+		}
 
 		effect = {
 			custom_tooltip = fa0_picts_convert_tt
@@ -385,10 +334,10 @@ kenalv_4_slot = {
 			}
 			custom_tooltip = empty_line_tt
 			add_country_modifier = {
-				name = fa0_finished_biono
+				name = "fa0_finished_biono"
 				duration = -1
 			}
-		} 
+		}
 	}
 }
 kenalv_5_slot = {
@@ -402,39 +351,31 @@ kenalv_5_slot = {
 		icon = mission_control_the_channel
 		position = 2
 		required_missions = { fa0_bolster_fleet } 
-		provinces_to_highlight = {
-			province_id = 1269
-		} 
+		provinces_to_highlight = { province_id = 1269 } 
 
-		trigger = {  
+		trigger = {
 			1269 = {
 				trade_share = {
 					country = ROOT
 					share = 20
 				}
 			}
-		} 
+		}
 
-		effect = {  
-			capital_scope = {
-				add_or_upgrade_trade_building = yes
-			}
+		effect = {
+			capital_scope = { add_or_upgrade_trade_building = yes } 
 			custom_tooltip = empty_line_tt
-			holland_area = {
-				add_permanent_claim = ROOT
-			}
-		} 
+			holland_area = { add_permanent_claim = ROOT } 
+		}
 	}
 
 	fa0_making_more_markets = {
 		icon = mission_control_the_channel
 		position = 4
 		required_missions = { fa0_control_the_manicum } 
-		provinces_to_highlight = {
-			province_id = 1269
-		} 
+		provinces_to_highlight = { province_id = 1269 } 
 
-		trigger = {  
+		trigger = {
 			OR = {
 				1269 = {
 					trade_share = {
@@ -452,12 +393,10 @@ kenalv_5_slot = {
 				value = 3
 				has_trade_building_trigger = yes
 			}
-		} 
+		}
 
-		effect = {  
-			1269 = {
-				add_trade_node_income = 48
-			}
+		effect = {
+			1269 = { add_trade_node_income = 48 } 
 			1975 = {
 				add_trade_modifier = {
 					who = ROOT
@@ -475,75 +414,64 @@ kenalv_5_slot = {
 				}
 			}
 			custom_tooltip = empty_line_tt
-			north_brabant_area = {
-				add_permanent_claim = ROOT
-			}
-			frisia_area = {
-				add_permanent_claim = ROOT
-			}
-		} 
+			north_brabant_area = { add_permanent_claim = ROOT } 
+			frisia_area = { add_permanent_claim = ROOT } 
+		}
 	}
 }
-
 kenalv_locked_2_slot = {
 	slot = 2
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { 
-		tag = FA0 
+	potential = {
+		tag = FA0
 		NOT = {
 			OR = {
 				has_country_flag = fa0_monarchy_path
 				has_country_flag = fa0_republic_path
 			}
 		}
-	} 
+	}
+
 	fa0_dummy_1 = {
 		icon = mission_locked_mission
 		position = 4
-		required_missions = {fa0_restore_kingdom_borders } 
-		provinces_to_highlight = {
-		} 
-		trigger = {
-			always = no
-		}
-		effect = {
+		required_missions = { fa0_restore_kingdom_borders } 
+		provinces_to_highlight = {  } 
 
-		}
+		trigger = { always = no } 
+
+		effect = {  } 
 	}
 
 	fa0_dummy_2 = {
 		icon = mission_locked_mission
 		position = 5
 		required_missions = { fa0_dummy_1 } 
-		provinces_to_highlight = {
-			province_id = 1269
-		} 
-		trigger = {
-			always = no
-		}
-		effect = {
+		provinces_to_highlight = { province_id = 1269 } 
 
-		}
+		trigger = { always = no } 
+
+		effect = {  } 
 	}
 }
-
 kenalv_republic_2_slot = {
 	slot = 2
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { 
-		tag = FA0 
+	potential = {
+		tag = FA0
 		has_country_flag = fa0_republic_path
-	} 
+	}
+
 	fa0_empower_merchant_class = {
-		icon = mission_establish_mint_towns
+		icon = fra_develop_trade
 		position = 4
-		required_missions = { 
-			fa0_restore_kingdom_borders
-		} 
+		required_missions = { fa0_restore_kingdom_borders } 
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			OR = {
 				estate_loyalty = {
@@ -557,6 +485,7 @@ kenalv_republic_2_slot = {
 			}
 			trade_income_percentage = 0.4
 		}
+
 		effect = {
 			add_mercantilism = 15
 			custom_tooltip = fa0_empower_private_trade_fleets_tt
@@ -568,7 +497,7 @@ kenalv_republic_2_slot = {
 	}
 
 	fa0_colonialism = {
-		icon = mission_establish_mint_towns
+		icon = mission_rb_the_thirteen_colonies
 		position = 5
 		required_missions = { fa0_empower_merchant_class } 
 		provinces_to_highlight = {
@@ -576,7 +505,8 @@ kenalv_republic_2_slot = {
 				colonial_region = colonial_canada
 				colonial_region = colonial_eastern_america
 			}
-		} 
+		}
+
 		trigger = {
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
 				value = 10
@@ -586,19 +516,18 @@ kenalv_republic_2_slot = {
 				}
 			}
 		}
+
 		effect = {
 			add_country_modifier = {
-				name = fa0_colonize_more
+				name = "fa0_colonize_more"
 				duration = 10950
 			}
 			custom_tooltip = fa0_colonies_also_get
 			hidden_effect = {
 				every_subject_country = {
-					limit = {
-						is_colonial_nation = yes
-					}
+					limit = { is_colonial_nation = yes } 
 					add_country_modifier = {
-						name = fa0_colonize_more
+						name = "fa0_colonize_more"
 						duration = -1
 					}
 				}
@@ -606,80 +535,63 @@ kenalv_republic_2_slot = {
 		}
 	}
 }
-
 kenalv_monarchy_2_slot = {
 	slot = 2
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { 
-		tag = FA0 
+	potential = {
+		tag = FA0
 		has_country_flag = fa0_monarchy_path
-	} 
+	}
+
 	fa0_legitimize_the_king = {
-		icon = mission_establish_mint_towns
+		icon = mission_empire
 		position = 4
-		required_missions = { 
-			fa0_restore_kingdom_borders
-		} 
+		required_missions = { fa0_restore_kingdom_borders } 
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			legitimacy_equivalent = 100
 			custom_trigger_tooltip = {
 				tooltip = 3_lvl_3_advisors_tt
-				has_mil_advisor_of_level = {
-					level = 3
-				}
-				has_adm_advisor_of_level = {
-					level = 3
-				}
-				has_dip_advisor_of_level = {
-					level = 3
-				}
+				has_mil_advisor_of_level = { level = 3 } 
+				has_adm_advisor_of_level = { level = 3 } 
+				has_dip_advisor_of_level = { level = 3 } 
 			}
 			if = {
-				limit = {
-					has_estate = estate_nobles
-				}
+				limit = { has_estate = estate_nobles } 
 				estate_loyalty = {
 					estate = estate_nobles
 					loyalty = 60
 				}
 			}
 		}
+
 		effect = {
 			change_dip = 1
 			change_adm = 1
-			add_ruler_modifier = {
-				name = fa0_legitimized_king
-			}
+			add_ruler_modifier = { name = "fa0_legitimized_king" } 
 		}
 	}
 
 	fa0_restore_camn = {
-		icon = mission_establish_mint_towns
+		icon = fra_crown_seat_capital
 		position = 5
 		required_missions = { fa0_legitimize_the_king } 
-		provinces_to_highlight = {
-			province_id = 238
-		} 
+		provinces_to_highlight = { province_id = 238 } 
+
 		trigger = {
-			238 = {
-				development = 25
-			}
-			238 = {
-				has_tax_building_trigger = yes
-			}
-			238 = {
-				has_manpower_building_trigger = yes
-			}
-			238 = {
-				has_production_building_trigger = yes
-			}
+			238 = { development = 25 } 
+			238 = { has_tax_building_trigger = yes } 
+			238 = { has_manpower_building_trigger = yes } 
+			238 = { has_production_building_trigger = yes } 
 		}
+
 		effect = {
 			238 = {
 				add_province_modifier = {
-					name = fa0_restored_kenalv_capital
+					name = "fa0_restored_kenalv_capital"
 					duration = -1
 				}
 			}
