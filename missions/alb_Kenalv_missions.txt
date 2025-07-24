@@ -74,6 +74,34 @@ kenalv_1_slot = {
 			}
 		} 
 	}
+	fa0_talking_to_soxony = {
+		icon = mission_rb_scottish_conquer_london
+		position = 5
+		required_missions = {
+			
+		}
+		provinces_to_highlight = {  
+			
+		} 
+
+		trigger = {  
+			OR = {
+				reverse_has_opinion = {
+					who = SO0
+					value = 190
+				}
+				alliance_with = SO0
+			}
+			patriarch_authority = 0.4
+		} 
+
+		effect = {  
+			add_country_modifier = {
+				name = fa0_sponsorship_of_bishop
+				duration = 10950
+			}
+		} 
+	}
 }
 kenalv_2_slot = {
 	slot = 2
@@ -320,6 +348,48 @@ kenalv_4_slot = {
 			}
 		} 
 	}
+	fa0_sweep_the_highlands = {
+		icon = mission_rb_rein_in_the_highland_clans
+		position = 4
+		required_missions = {
+			fa0_northern_sweden
+		}
+		provinces_to_highlight = { 
+			OR = {
+				area = highlands_area
+				area = kingdom_of_the_isles_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			highlands_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			kingdom_of_the_isles_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {
+			custom_tooltip = fa0_picts_convert_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = { culture = pictish } 
+					change_culture = norgael
+				}
+			}
+			custom_tooltip = empty_line_tt
+			add_country_modifier = {
+				name = fa0_finished_biono
+				duration = -1
+			}
+		} 
+	}
 }
 kenalv_5_slot = {
 	slot = 5
@@ -497,18 +567,42 @@ kenalv_republic_2_slot = {
 		}
 	}
 
-	fa0_john_locke_reference = {
+	fa0_colonialism = {
 		icon = mission_establish_mint_towns
 		position = 5
 		required_missions = { fa0_empower_merchant_class } 
 		provinces_to_highlight = {
-			
+			OR = {
+				colonial_region = colonial_canada
+				colonial_region = colonial_eastern_america
+			}
 		} 
 		trigger = {
-			
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 10
+				OR = {
+					colonial_region = colonial_canada
+					colonial_region = colonial_eastern_america
+				}
+			}
 		}
 		effect = {
-
+			add_country_modifier = {
+				name = fa0_colonize_more
+				duration = 10950
+			}
+			custom_tooltip = fa0_colonies_also_get
+			hidden_effect = {
+				every_subject_country = {
+					limit = {
+						is_colonial_nation = yes
+					}
+					add_country_modifier = {
+						name = fa0_colonize_more
+						duration = -1
+					}
+				}
+			}
 		}
 	}
 }
@@ -561,18 +655,34 @@ kenalv_monarchy_2_slot = {
 		}
 	}
 
-	fa0_form_the_riksdag = {
+	fa0_restore_camn = {
 		icon = mission_establish_mint_towns
 		position = 5
-		required_missions = { fa0_empower_merchant_class } 
+		required_missions = { fa0_legitimize_the_king } 
 		provinces_to_highlight = {
-			
+			province_id = 238
 		} 
 		trigger = {
-			
+			238 = {
+				development = 25
+			}
+			238 = {
+				has_tax_building_trigger = yes
+			}
+			238 = {
+				has_manpower_building_trigger = yes
+			}
+			238 = {
+				has_production_building_trigger = yes
+			}
 		}
 		effect = {
-
+			238 = {
+				add_province_modifier = {
+					name = fa0_restored_kenalv_capital
+					duration = -1
+				}
+			}
 		}
 	}
 }
