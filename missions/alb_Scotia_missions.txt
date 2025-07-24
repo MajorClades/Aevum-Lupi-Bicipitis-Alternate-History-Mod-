@@ -535,6 +535,81 @@ Scotia_4_slot = {
 			}
 		} 
 	}
+	sco_gallia = {
+		icon = mission_court_education
+		position = 7
+		required_missions = { sco_lords_of_britannia  } 
+		provinces_to_highlight = { is_capital_of = SO0 }
+		trigger = {
+			SO0 = {
+				OR = {
+					exists = no
+					has_spy_network_from = {
+						who = ROOT
+						value = 50
+					}
+				}
+			}
+		}
+
+		effect = { 		
+			normandy_area = {
+				add_permanent_claim = ROOT
+			}
+			brittany_area = {
+				add_permanent_claim = ROOT
+			}
+			picardy_area = {
+				add_permanent_claim = ROOT
+			}
+			if = {
+				limit = {
+						SO0 = {
+							exists = yes
+						}
+				}
+				add_spy_network_in = {
+						who = SO0
+						value = -50
+					}
+				custom_tooltip = SCOTIA_TT_4
+				tooltip = {
+					168 = {
+						add_province_modifier = {
+							name = sco_invade_gaul
+							duration = 1825
+						}
+					}
+				}
+			}
+			hidden_effect = {
+				if = {
+				limit = { SO0 = { has_spy_network_from = { who = ROOT value = 50 } } }
+				normandy_area = {
+					limit = { has_port = yes NOT = { country_or_non_sovereign_subject_holds = ROOT } }
+					add_province_modifier = {
+						name = sco_invade_gaul
+						duration = 1825
+					}
+				}
+				brittany_area = {
+					limit = { has_port = yes NOT = { country_or_non_sovereign_subject_holds = ROOT } }
+					add_province_modifier = {
+						name = sco_invade_gaul
+						duration = 1825
+					}
+				}
+				picardy_area = {
+					limit = { has_port = yes NOT = { country_or_non_sovereign_subject_holds = ROOT } }
+					add_province_modifier = {
+						name = sco_invade_gaul
+						duration = 1825
+					}
+				}
+			}
+			}
+		} 
+	}
 }
 
 Scotia_5_slot = {

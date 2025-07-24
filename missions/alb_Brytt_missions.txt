@@ -146,6 +146,29 @@ Brytt_2_slot = {
 			}
 		}
 	}
+	bry_war_on_scotia = {
+		icon = mission_court_education
+		position = 5
+		required_missions = { bry_full_bryddania } 
+		provinces_to_highlight = {
+			province_group = ireland_provinces
+			NOT = {country_or_non_sovereign_subject_holds = ROOT}
+		}
+
+		trigger = {
+			ireland_provinces = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_yearly_manpower = 2
+			ireland_provinces = {
+				add_nationalism = -10
+			}
+		}
+	}
 }
 Brytt_3_slot = {
 	slot = 3
@@ -208,6 +231,9 @@ Brytt_3_slot = {
 			add_country_modifier = {
 				name = brydd_restore_brythonia
 				duration = -1
+			}
+			british_isles_region = {
+				add_permanent_claim = ROOT
 			}
 		}
 	}
