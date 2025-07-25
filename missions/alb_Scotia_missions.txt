@@ -533,12 +533,24 @@ Scotia_4_slot = {
 					}
 				"
 			}
+			hidden_effect = {
+				complete_mission = bry_lords_of_britannia
+			}
 		} 
 	}
+
+}
+Scotia_4b_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {OR = { tag = SC0  tag = WL0 } }
+
 	sco_gallia = {
 		icon = mission_court_education
 		position = 7
-		required_missions = { sco_lords_of_britannia  } 
+		required_missions = { sco_lords_of_britannia bry_lords_of_britannia } 
 		provinces_to_highlight = { is_capital_of = SO0 }
 		trigger = {
 			SO0 = {
@@ -610,8 +622,8 @@ Scotia_4_slot = {
 			}
 		} 
 	}
-}
 
+}
 Scotia_5_slot = {
 	slot = 5
 	generic = no
@@ -742,6 +754,44 @@ Scotia_5_slot = {
 		effect = { 
 			country_event = {
 				id = scotii.1
+			}
+		}
+	}
+}
+Scotia_4b_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {OR = { tag = SC0  tag = WL0 } }
+
+	sco_restore_gallia = {
+		icon = mission_court_education
+		position = 8
+		required_missions = { sco_gallia } 
+		provinces_to_highlight = {
+			OR = {area = normandy_area area = brittany_area area = picardy_area }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			normandy_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			brittany_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			picardy_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			france_region = {
+				add_permanent_claim = ROOT
 			}
 		}
 	}
