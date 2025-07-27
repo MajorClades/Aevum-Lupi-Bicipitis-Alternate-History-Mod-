@@ -1,0 +1,170 @@
+dalm_loot_boxes = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 11
+	available = {}
+	powers = {
+		dalm_preparation_for_the_feast = {
+			max = 100
+			min = 0
+			reset_on_new_ruler = no
+			scaled_modifier = {
+				modifier = {
+					monthly_dalm_preparation_for_the_feast = -1
+				}
+			}
+			scaled_modifier = {
+				trigger = {
+					has_country_flag = dalm_lv4_loot
+				}
+				modifier = {
+					monthly_dalm_preparation_for_the_feast = -0.15
+				}
+			}
+			scaled_modifier = {
+				trigger = {
+					has_country_flag = dalm_lv5_loot
+				}
+				modifier = {
+					monthly_dalm_preparation_for_the_feast = -0.5
+				}
+			}
+			is_good = yes
+			on_max_reached = {
+				if = {
+					limit = {
+						has_country_flag = dalm_lv1_loot
+					}
+					country_event = {id = pann.101}
+				}else = {
+					if = {
+						limit = {
+							has_country_flag = dalm_lv2_loot
+						}
+						country_event = {id = pann.102}
+					}else = {
+						if = {
+							limit = {
+								has_country_flag = dalm_lv3_loot
+							}
+							country_event = {id = pann.103}
+						}else = {
+							if = {
+								limit = {
+									has_country_flag = dalm_lv4_loot
+								}
+								country_event = {id = pann.104}
+							}else = {
+								if = {
+									limit = {
+										has_country_flag = dalm_lv5_loot
+									}
+									country_event = {id = pann.105}
+								}
+							}
+						}
+					}
+				}
+				hidden_effect = {
+					add_government_power = {
+						mechanic_type = dalm_loot_boxes
+						power_type = dalm_preparation_for_the_feast
+						value = -100
+					}
+					remove_country_modifier = dalm_preparation_modifier
+				}
+			}
+		}
+	}
+	interactions = {
+		dalm_start_preparation = {
+			gui = hessian_militarization_gov_mech
+			cost_type = dalm_preparation_for_the_feast
+			center = no
+			trigger = {
+				if = { 
+					limit = { total_development = 500 }
+					years_of_income = 2
+				}else = {
+					if = {
+						limit = { total_development = 300 }
+						years_of_income = 1.5
+					}else = {
+						if = {
+							limit = { total_development = 200 }
+							years_of_income = 1
+						}else = {
+							if = {
+								limit = { total_development = 100 }
+								years_of_income = 0.75 
+							}else = {
+								if = {
+									limit = { total_development = 40 }
+									years_of_income = 0.5 
+								}
+							}
+						}
+					}
+				}
+			}
+			effect = {
+				if = {
+					limit = {has_country_modifier = dalm_preparation_modifier}
+					add_government_power = {
+						mechanic_type = dalm_loot_boxes
+						power_type = dalm_preparation_for_the_feast
+						value = 5
+					}
+					if = { 
+						limit = { total_development = 500 }
+						add_years_of_income = -2
+					}else = {
+						if = {
+							limit = { total_development = 300 }
+							add_years_of_income = -1.5
+						}else = {
+							if = {
+								limit = { total_development = 200 }
+								add_years_of_income = -1
+							}else = {
+								if = {
+									limit = { total_development = 100 }
+									add_years_of_income = -0.75 
+								}else = {
+									if = {
+										limit = { total_development = 50 }
+										add_years_of_income = -0.5 
+									}
+								}
+							}
+						}
+					}
+				}else = {
+					custom_tooltip = DALM_LB_1
+					country_event = {
+						id = pann.100
+					}
+					custom_tooltip = DALM_LB_8
+				}
+			}
+			ai_chance = {
+				factor = 10
+				modifier = {
+					factor = 0
+					is_in_deficit = yes
+				}
+				modifier = {
+					factor = 0
+					num_of_loans = 3
+				}
+				modifier = {
+					factor = 0
+					NOT = { adm_power = 150 }
+				}
+				modifier = {
+					factor = 0
+					NOT = { stability = 0 }
+				}
+			}
+		}
+	}
+}

@@ -184,7 +184,28 @@ declarewar = {
 	}
 	effect = {
 		on_war_declaration_effect = yes
-		#ALB
+		if = {
+			limit = { 
+				has_country_flag = nor_norwegian_independence_modifier
+				FROM = { tag = DAN }
+			}
+			add_country_modifier = {
+				name = nor_norwegian_independence_war_mod
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = ned_no_stab_loss_on_independence_flag
+				war_with = BUR
+				has_casus_belli = {
+					type = cb_independence_war
+					target = FROM
+				}
+			}
+			clr_country_flag = ned_no_stab_loss_on_independence_flag
+			add_stability = 1
+		}
 		if = {
             limit = {
                 NOT = { has_global_flag = flavor_ita_7_fired }
@@ -210,6 +231,20 @@ declarewar = {
                 }
                 country_event = { id = flavor_ita.7 }
             }
+        }
+		if = {
+            limit = {
+				tag = YNS
+                FROM = {
+                    has_country_flag = yenisei_flag
+                }
+            }
+			YNS = {
+				add_stability = 1
+			}
+			FROM = {
+				add_war_exhaustion = 5
+			}
         }
 	}
 }
@@ -381,11 +416,13 @@ royal_marriage = {
 guaranteeaction = {
 	effect = {
 		change_asha_vahishta = { value = 1 }
+		
 	}
 }
 threaten_war = {
 	effect = {
 		change_asha_vahishta = { value = -10 }
+		
 	}
 }
 insultaction = {
@@ -396,11 +433,13 @@ insultaction = {
 giftaction = {
 	effect = {
 		change_asha_vahishta = { value = 1 }
+		
 	}
 }
 fabricate_claim = {
 	effect = {
 		change_asha_vahishta = { value = -1 }
+		
 	}
 }
 break_marriage = {
@@ -425,6 +464,7 @@ break_marriage = {
 takeondebt = {
 	effect = {
 		change_asha_vahishta = { value = 2 }
+		
 	}
 }
 influence_nation = {
@@ -592,6 +632,24 @@ integrationaction = {
 			}
 		}
 	}
+	effect = {
+		if = {
+			limit = {
+				ROOT = {
+					tag = BR0
+				}
+				FROM = {
+					tag = JU0
+				}
+			}
+			SW2 = {
+				country_event = {
+					id = britt.3
+					days = 1
+				}
+			}
+		}
+	}
 }
 
 vassalaction = {
@@ -608,6 +666,17 @@ vassalaction = {
 				}
 			}
 			FROM = { is_at_war = no }
+		}
+	}
+	effect = {
+		if = {
+			limit = {
+				has_country_modifier = pap_unlimited_vassalization
+			}
+			add_country_modifier = {
+				name = pap_limited_vassalization
+				duration = 3650
+			}
 		}
 	}
 }

@@ -1,0 +1,691 @@
+mt_isan_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	potential_on_load = {
+		
+	}
+	potential = {
+		OR = {
+		tag = KH3
+		tag = KH6
+		}
+		
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+
+	mt_isan_sanctify_capital = {
+		icon = mission_mnd_khm_protect_the_cham
+		required_missions = {  }
+		provinces_to_highlight = {
+			is_capital = yes 
+			owned_by = ROOT
+		}
+		trigger = {
+			capital_scope = {
+				num_of_times_improved = 5
+			}
+		}
+		effect = {
+			capital_scope = {
+				add_province_modifier = {
+					name = small_size_mandala
+					duration = -1
+				}
+			}
+			custom_tooltip = alb_modifier_move_to_new_capital_tt
+		}
+	}
+	mt_isan_rebuild_our_kingdom = {
+		icon = mission_se_birdmen
+		required_missions = { mt_isan_sanctify_capital }
+		provinces_to_highlight = {
+			
+		}
+		trigger = {
+				 num_of_subjects = 3
+		}
+		effect = {
+			if = {
+				limit = {
+					any_subject_country={
+					has_opinion = {
+						who = ROOT
+						value = 180
+					}
+				}
+				}
+				vassalize = PREV
+				PREV = { add_liberty_desire = -25 }
+			}
+			add_subjects_development_ducats = {
+			multiplier = 3
+			trigger = { is_subject_of_type = tributary_state }
+			}
+		}
+	}
+	mt_isan_epicenter_of_sem = {
+		icon = mission_buddhist_monk_praying
+		required_missions = { mt_isan_rebuild_our_kingdom }
+		provinces_to_highlight = {
+		is_capital = yes 
+		owned_by = ROOT
+		}
+		trigger = {
+			capital_scope = {
+				has_trade_building_trigger = yes
+				has_tax_building_trigger = yes
+				num_free_building_slots = 1
+			}
+		}
+		effect = {
+		capital_scope = {
+				add_building_construction = {
+						building = courthouse
+						speed = 0.5
+						cost = 0.25
+					}
+				add_random_development = 3
+				remove_province_modifier = small_size_mandala
+				add_province_modifier = {
+					name = mid_size_mandala
+					duration = -1
+				}
+			}
+			
+		}
+	}
+	mt_isan_great_monthon_reform = {
+		icon = mission_mnd_khm_restored_empire
+		required_missions = { mt_isan_epicenter_of_sem }
+		provinces_to_highlight = {
+			
+		}
+		trigger = {
+			courthouse = 15
+		}
+		effect = {
+			capital_scope = {
+				remove_province_modifier = mid_size_mandala
+				add_province_modifier = {
+					name = large_size_mandala
+					duration = -1
+				}
+			}
+			custom_tooltip = alb_modifier_move_to_new_capital_tt
+		}
+	}
+}
+
+mt_isan_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential_on_load = {
+		
+	}
+	potential = {
+		OR = {
+		tag = KH3
+		tag = KH6
+		}
+		
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	mt_isan_jongwa = {
+		icon = mission_japanese_samurai
+		position = 2
+		required_missions = { mt_isan_sanctify_capital }
+		provinces_to_highlight = {
+			
+		}
+		trigger = {
+			any_country = {
+					capital_scope = {
+						superregion = china_superregion
+					}
+					has_opinion = {
+						who = ROOT
+						value = 150
+					}
+					}
+		}
+		effect = {
+			add_country_modifier = {
+					name = SEA_jongwa_trade
+					duration = -1
+				}
+		}
+	}
+	
+	mt_isan_devaraja = {
+		icon = mission_mnd_khm_restored_empire
+		required_missions = { mt_isan_rebuild_our_kingdom }
+		provinces_to_highlight = {
+		}
+		position = 3
+		trigger = {
+			if = {
+				limit = {
+					government = monarchy
+				}
+				legitimacy = 90
+			}
+			if = {
+				limit = {
+					has_estate = estate_church
+				}
+				estate_loyalty = {
+					estate = estate_church
+					loyalty = 65
+				}
+			}
+			stability = 3
+		}
+		effect = {
+			add_country_modifier = {
+					name = devaraja_KPJ
+					duration = -1
+				}
+		}
+	}
+	mt_isan_angkor_restored = {
+		icon = mission_mnd_khm_resurgence
+		required_missions = { mt_isan_devaraja }
+		provinces_to_highlight = {
+		province_id = 609
+			NOT = {
+				base_tax = 10
+				base_production = 10
+				base_manpower = 10
+				has_great_project = {
+					type = angkor_wat
+					tier = 3
+				}
+			}
+		}
+		trigger = {
+			609 = {
+				base_tax = 10
+				base_production = 10
+				base_manpower = 10
+				has_great_project = {
+					type = angkor_wat
+					tier = 3
+				}
+			}
+			if = {
+				limit = {
+					is_revolutionary = no
+				}
+				absolutism = 75
+			}
+			has_regency = no
+			is_at_war = no
+			indo_china_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			add_country_modifier = {
+					name = angkorean_god_king_KBJ
+					duration = -1
+				}
+		}
+	}
+	mt_isan_raja_suwannaphum = {
+		icon = mission_kowtow
+		required_missions = { mt_isan_angkor_restored }
+		provinces_to_highlight = {
+		}
+		trigger = {
+			total_development = 1000
+			if = {
+				limit = {
+					is_revolutionary = no
+				}
+				absolutism = 100
+			}
+			has_regency = no
+			is_at_war = no
+		}
+		effect = {
+			add_country_modifier = {
+					name = glided_empire
+					duration = -1
+				}
+		}
+	}
+}
+
+mt_isan_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential_on_load = {
+		
+	}
+	potential = {
+		OR = {
+		tag = KH3
+		tag = KH6
+		}
+		
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	mt_isan_glorious_victory = {
+		icon = mission_mnd_dai_control_the_army
+		required_missions = {  }
+		provinces_to_highlight = {
+		}
+		trigger = {
+			army_size_percentage = 1
+			manpower_percentage = 0.50 
+		}
+		effect = {
+			khorat_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			vientiane_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	mt_isan_isan_feud = {
+		icon = mission_unite_home_region
+		required_missions = { mt_isan_glorious_victory }
+		provinces_to_highlight = {
+			OR = {
+				area = khorat_area
+				area = vientiane_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			khorat_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			vientiane_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+		effect = {
+			cambodia_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			angkor_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			mekong_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			champasak_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			north_laos_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+					}
+					add_permanent_claim = ROOT
+			}
+			tay_nguyen_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			champa_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	mt_isan_put_down_syama = {
+		icon = mission_mnd_maj_prepare_eastern_campaigns
+		required_missions = { mt_isan_isan_feud }
+		provinces_to_highlight = {
+		owned_by = KH4
+		}
+		trigger = {
+			NOT = { exists = KH4 }
+		}
+		effect = {
+			add_casus_belli = {
+				type = cb_restore_personal_union
+				target = SU2
+			}
+		}
+	}
+	mt_isan_fall_of_lavo = {
+		icon = mission_mnd_maj_subjugate_makassar
+		required_missions = { mt_isan_put_down_syama }
+		provinces_to_highlight = {
+			owned_by = SU2
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+		OR = {
+			SU2 = {
+			is_subject_of = ROOT
+			}
+			AND = {
+			4832 = {
+				owned_by = ROOT
+			}
+			NOT = { exists = SU2 }
+			}
+			}
+		}
+		effect = {
+			country_event = {
+				id = kampot.1
+			}
+			add_prestige = 10
+		}
+	}
+	mt_isan_triumphant_march_home = {
+		icon = mission_mnd_dai_control_the_army
+		required_missions = { mt_isan_fall_of_lavo }
+		provinces_to_highlight = {
+		}
+		trigger = {
+			army_size_percentage = 0.9
+			manpower_percentage = 0.8
+		}
+		effect = {
+			add_country_modifier = {
+					name = SEM_conquer_frenzy
+					duration = 5475
+				}
+		}
+	}
+	mt_isan_golden_subcontinent = {
+		icon = mission_great_wall
+		required_missions = { mt_isan_triumphant_march_home mt_isan_capitalize_mekong_trade }
+		provinces_to_highlight = {
+			
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				NOT = { region = indo_china_region }
+				value = 35
+			}
+		}
+		effect = {
+			add_country_modifier = {
+					name = SEM_emboldened_conqueror
+					duration = 9125
+				}
+		}
+	}
+	mt_isan_glided_subcontinent = {
+		icon = mission_scholar_officials
+		required_missions = { mt_isan_golden_subcontinent }
+		provinces_to_highlight = {
+			
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				NOT = { region = indo_china_region }
+				value = 50
+			}
+		}
+		effect = {
+			add_country_modifier = {
+					name = SEM_legendary_conquest
+					duration = 9125
+				}
+		}
+	}
+}
+
+mt_isan_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	potential_on_load = {
+		
+	}
+	potential = {
+		OR = {
+		tag = KH3
+		tag = KH6
+		}
+		
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	mt_isan_deal_with_the_laos = {
+		icon = mission_mnd_khm_avenge_angkor
+		required_missions = {  }
+		provinces_to_highlight = {
+			area = north_laos_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+		north_laos_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+		effect = {
+			northern_thai_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+					}
+					add_permanent_claim = ROOT
+			}
+		}
+	}
+	mt_isan_subjugate_haripunjaya = {
+		icon = mission_che_the_cave_country
+		required_missions = { mt_isan_deal_with_the_laos }
+		provinces_to_highlight = {
+			area = northern_thai_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			northern_thai_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+		effect = {
+			country_event = {
+				id = alb_sea.2
+			}
+			prestige = 10
+		}
+	}
+	mt_isan_capitalize_mekong_trade = {
+		icon = mission_junk_boat
+		required_missions = { mt_isan_fall_of_lavo }
+		position = 5
+		provinces_to_highlight = {
+			province_id = 605
+			NOT = {
+			has_trade_building_trigger = yes
+			has_tax_building_trigger = yes
+			num_free_building_slots = 1
+			}
+		}
+		trigger = {
+			605	 = {
+				has_trade_building_trigger = yes
+				has_tax_building_trigger = yes
+				num_free_building_slots = 1
+			}
+		}
+		effect = {
+			mekong_area = {
+				add_province_modifier = {
+					name = mekong_trade_KPJ
+					duration = -1
+				}
+			}
+		}
+	}
+}
+
+mt_isan_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	potential_on_load = {
+		
+	}
+	potential = {
+		OR = {
+		tag = KH3
+		tag = KH6
+		}
+		
+		NOT = { map_setup = map_setup_random }
+	}
+	has_country_shield = yes
+	
+	mt_isan_conquer_kra = {
+		icon = mission_junk_boat
+		required_missions = {  }
+		provinces_to_highlight = {
+		OR = {
+			area = north_tenasserim_area
+			area = tenasserim_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			north_tenasserim_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			tenasserim_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+		effect = {
+		north_malaya_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+					}
+					add_permanent_claim = ROOT
+			}
+		}
+	}
+	
+	mt_isan_foothold_in_malaya = {
+		icon = mission_invade_island
+		required_missions = { mt_isan_conquer_kra }
+		provinces_to_highlight = {
+			area = north_malaya_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+		north_malaya_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+		effect = {
+			malaya_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+					}
+					add_permanent_claim = ROOT
+			}
+			johor_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+					}
+					add_permanent_claim = ROOT
+			}
+			malacca_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+					}
+					add_permanent_claim = ROOT
+			}
+		}
+	}
+	mt_isan_tradehold_in_singhapura = {
+		icon = mission_market_place_with_asian_traders
+		required_missions = { mt_isan_foothold_in_malaya }
+		provinces_to_highlight = {
+		province_id = 4815
+			NOT = {
+			has_trade_building_trigger = yes
+			has_tax_building_trigger = yes
+			fort_level = 1
+			}
+		}
+		trigger = {
+			4815	 = {
+				has_trade_building_trigger = yes
+				has_tax_building_trigger = yes
+				fort_level = 1
+			}
+		}
+		effect = {
+			4815 = {
+				add_base_production = 4
+				center_of_trade = 3
+			}
+			johor_area = {
+				add_province_modifier = {
+					name = sihapur_fort_KPJ
+					duration = -1
+				}
+			}
+			malacca_area = {
+				add_province_modifier = {
+					name = sihapur_fort_KPJ
+					duration = -1
+				}
+			}
+		}
+	}
+}

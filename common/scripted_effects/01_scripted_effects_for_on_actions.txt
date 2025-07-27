@@ -4377,6 +4377,57 @@ on_capital_moved_effect = {
 			}
 		}
 	}
+	if = {
+		limit = { 
+			FROM = {
+				has_mandala_modifier = yes
+			}
+		}
+		ROOT = {
+			if = {
+				limit = {
+					FROM = { has_province_modifier = small_size_mandala }
+				}
+				add_province_modifier = {
+					name = small_size_mandala
+					duration = -1
+				}
+			}
+			else_if = {
+				limit = {
+					FROM = { has_province_modifier = mid_size_mandala }
+				}
+				add_province_modifier = {
+					name = mid_size_mandala
+					duration = -1
+				}
+			}
+			else_if = {
+				limit = {
+					FROM = { has_province_modifier = large_size_mandala }
+				}
+				add_province_modifier = {
+					name = large_size_mandala
+					duration = -1
+				}
+			}
+			else_if = {
+				limit = {
+					FROM = { has_province_modifier = largest_size_mandala }
+				}
+				add_province_modifier = {
+					name = largest_size_mandala
+					duration = -1
+				}
+			}
+		}
+		FROM = { 
+			remove_province_modifier = largest_size_mandala
+			remove_province_modifier = small_size_mandala
+			remove_province_modifier = mid_size_mandala
+			remove_province_modifier = large_size_mandala
+		}
+	}
 }
 
 on_government_change_effect = {

@@ -1,0 +1,111 @@
+country_decisions = {
+
+	cheongug_nation = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			NOT = { has_country_flag = formed_cheongug_flag }
+			was_never_end_game_tag_trigger = yes
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			OR = {
+				is_free_or_tributary_trigger = yes
+				ai = no
+			}
+			NOT = { tag = KR1 }
+			OR = {
+				ai = no
+				AND = {
+					NOT = { exists = KR1 }
+				}
+			}
+			NOT = { tag = HLR }
+			NOT = { tag = PAP }
+			primary_culture = jeju
+			is_colonial_nation = no
+			OR = {
+				is_former_colonial_nation = no
+				AND = {
+					is_former_colonial_nation = yes
+					ai = no
+				}
+			}
+		}
+		provinces_to_highlight = {
+				province_id = 1818	#Chukjeon
+				province_id = 1825	#Anun
+				province_id = 1819	#Tojwa
+			OR = {
+				NOT = { owned_by = ROOT }
+				NOT = { is_core = ROOT }
+			}
+		}
+		allow = {
+			NOT = { exists = KR1 }
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			is_at_war = no
+			owns_core_province = 1818 	#Chukjeon
+			owns_core_province = 1825 	#Anun
+			owns_core_province = 1819 	#Tojwa
+			custom_trigger_tooltip = {
+				tooltip = AYABANI_TT_14
+				OR = {
+					AND = {
+						tag = KM7
+						KM9 = {
+							exists = no
+						}
+						KM8 = {
+							exists = no
+						}
+					}
+					AND = {
+						tag = KM8
+						KM9 = {
+							exists = no
+						}
+						KM7 = {
+							exists = no
+						}
+					}
+					AND = {
+						tag = KM9
+						KM7 = {
+							exists = no
+						}
+						KM8 = {
+							exists = no
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			change_tag = KR1
+			swap_non_generic_missions = yes
+			remove_non_electors_emperors_from_empire_effect = yes
+			set_estate_privilege = estate_nobles_royal_court_tasks
+			if = {
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			if = {
+				limit = {
+					government = monarchy
+				}
+				add_government_reform = alb_first_tier_restoration_reform
+			}
+			set_country_flag = formed_cheongug_flag
+			add_prestige_or_monarch_power = {
+				amount = 10
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+}	

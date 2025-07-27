@@ -34,6 +34,11 @@ country_event = {
 		NOT = {
 			has_country_flag = alb_revolted_from_soxony_flag
 		}
+		NOT = {
+			any_country = {
+				has_country_flag = alb_currently_revolted_from_soxony_flag
+			}
+		}
 		if= {
 			limit = {
 				ai = yes
@@ -47,6 +52,7 @@ country_event = {
 		hidden_effect = {
 			save_global_event_target_as = sox_rebelling_vassal_target
 			set_country_flag = alb_revolted_from_soxony_flag
+			set_country_flag = alb_currently_revolted_from_soxony_flag
 		}
 	}
 
@@ -704,6 +710,12 @@ country_event = {
 		}
 		add_treasury = 100
 	}
+	after = {
+		event_target:sox_rebelling_vassal_target = {
+			clr_country_flag = alb_currently_revolted_from_soxony_flag
+		}
+		clear_global_event_target = sox_rebelling_vassal_target
+	}
 }
 
 country_event = {
@@ -766,6 +778,9 @@ country_event = {
 		}
 	}
 	after = {
+		event_target:sox_rebelling_vassal_target = {
+			clr_country_flag = alb_currently_revolted_from_soxony_flag
+		}
 		clear_global_event_target = sox_rebelling_vassal_target
 	}
 }

@@ -1,0 +1,87 @@
+bav_councils = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 11
+	available = { }
+	powers = {
+		bavarian_governance = {
+			gui = alb_bav_council_gui
+			max = 100
+			min = 0
+			reset_on_new_ruler = no
+			scaled_modifier = {
+				modifier = {
+					advisor_cost = -0.3
+					stability_cost_modifier = -0.5
+					governing_capacity_modifier = 0.25
+					nobles_influence_modifier = 0.5
+					max_absolutism = -50
+				}
+			}
+			is_good = yes
+		}
+	}
+	
+	interactions = {
+		expand_bav_gov = {
+			gui = alb_bav_council_gui
+			cost_type = bavarian_governance
+			cost = 5
+			center = no
+			trigger = {
+				any_owned_province = {
+					OR = {
+						culture = bavarian_new
+						culture = ug_bavarian
+					}
+				}
+			}
+			effect = {
+				random_owned_province = {
+					limit = {
+						OR = {
+							culture = bavarian_new
+							culture = ug_bavarian
+						}
+					}
+					random_list = {
+						33 = {
+							add_base_tax = 1
+						}
+						33 = {
+							add_base_production = 1
+						}
+						33 = {
+							add_base_manpower = 1
+						}
+					}
+					if = {
+						limit = {
+							owner = {
+								has_country_flag = bav_two_random
+							}
+						}
+						random_list = {
+							33 = {
+								add_base_tax = 1
+							}
+							33 = {
+								add_base_production = 1
+							}
+							33 = {
+								add_base_manpower = 1
+							}
+						}
+					}
+				}	
+			}
+			cooldown_years = 1
+			ai_chance = {
+				factor = 50
+				modifier = {
+					factor = 0
+					is_in_deficit = no
+				}
+			}
+		}
+	}
+}

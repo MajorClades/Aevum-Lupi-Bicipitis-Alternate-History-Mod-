@@ -1,0 +1,196 @@
+namespace = scotii
+
+country_event = {
+	id = scotii.1
+	title = scotii.1.test
+	desc = scotii.1.desc
+	picture = KINGS_CHOICE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = scotii.1a
+		add_country_modifier = {
+			name = sco_super_ships
+			duration = -1
+		}
+	}
+	option = {
+		name = scotii.1b
+		add_country_modifier = {
+			name = sco_super_dev
+			duration = -1
+		}
+	}
+}
+
+country_event = {
+	id = scotii.2
+	title = scotii.2.test
+	desc = scotii.2.desc
+	picture = KINGS_CHOICE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = scotii.2a
+		ai_chance = {
+			factor = 1
+		}
+		every_owned_province = {
+			limit = {
+				culture = brytonic
+			}
+			add_core = SC0
+		}
+	}
+	option = {
+		name = scotii.2b
+		ai_chance = {
+			factor = 0
+		}
+		add_stability = 1
+		declare_war_with_cb = {
+			casus_belli = cb_independence_war
+			who = SC0
+		}
+	}
+}
+
+country_event = {
+	id = scotii.3
+	title = scotii.3.test
+	desc = scotii.3.desc
+	picture = KINGS_CHOICE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = scotii.3a
+		add_government_power = {
+				mechanic_type = scot_clans_mechanic
+				power_type = scot_single_power
+				value = -15
+			}
+		add_country_modifier = {
+			name = sco_berserkers
+			duration = -1
+		}
+	}
+	option = {
+		name = scotii.3b
+		add_government_power = {
+				mechanic_type = scot_clans_mechanic
+				power_type = scot_single_power
+				value = -15
+			}
+		add_country_modifier = {
+			name = sco_gladiators
+			duration = -1
+		}
+	}
+	option = {
+		name = scotii.3c
+		add_country_modifier = {
+			name = sco_home_hounds
+			duration = -1
+		}
+	}
+	option = {
+		name = scotii.3d
+		add_government_power = {
+				mechanic_type = scot_clans_mechanic
+				power_type = scot_single_power
+				value = -50
+			}
+		add_country_modifier = {
+			name = sco_berserkers
+			duration = -1
+		}
+		add_country_modifier = {
+			name = sco_gladiators
+			duration = -1
+		}
+	}
+}
+
+
+country_event = { #Scottia gives Brydd provicnes
+	id = scotii.10
+	title = scotii.10.test
+	desc = scotii.10.desc
+	picture = KINGS_CHOICE_eventPicture
+	hidden = yes
+	trigger = {
+		SCO = {
+			ai = yes
+			any_owned_province = {
+				region = british_isles_region
+				is_permanent_claim = WL0
+				NOT = {
+					province_group = ireland_provinces
+				}
+			}
+		}
+		WL0 = {
+			ai = no
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	option = {
+		name = scotii.10a
+		every_owned_province = {
+			limit = {
+				region = british_isles_region
+				is_permanent_claim = WL0
+				NOT = {
+					province_group = ireland_provinces
+				}
+			}
+			cede_province = WL0
+		}
+	}
+	
+}
+country_event = {
+	id = scotii.11
+	title = scotii.11.test
+	desc = scotii.11.desc
+	picture = KINGS_CHOICE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = scotii.11a
+		ai_chance = {
+			factor = 1
+		}
+		set_capital = 234
+		234 = {
+			change_culture = brytonic
+		}
+	}
+	option = {
+		name = scotii.11b
+		ai_chance = {
+			factor = 1
+		}
+		set_capital = 236
+		236 = {
+			change_culture = brytonic
+		}
+	}
+	option = {
+		name = scotii.11c
+		ai_chance = {
+			factor = 1
+		}
+		set_capital = 241
+		241 = {
+			change_culture = brytonic
+		}
+	}
+}

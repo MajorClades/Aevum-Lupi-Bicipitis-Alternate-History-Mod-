@@ -1,0 +1,113 @@
+country_decisions = {
+
+	alb_yuan_dynasty_nation = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			was_never_end_game_tag_trigger = yes
+			NOT = { has_country_flag = formed_yuan_flag }
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			OR = {
+				is_free_or_tributary_trigger = yes
+				ai = no
+			}
+			NOT = { exists = YUA }
+			NOT = { tag = MUG }
+			NOT = { tag = QNG }
+			NOT = { tag = MNG }
+			NOT = { tag = MCH }
+			OR ={
+				culture = khalkha
+				culture = mongol
+				culture = chahar
+			}
+			OR = {
+				ai = no
+				AND = {
+					ai = yes
+					num_of_cities = 8
+				}
+			}
+			is_colonial_nation = no
+			OR = {
+				is_former_colonial_nation = no
+				AND = {
+					is_former_colonial_nation = yes
+					ai = no
+				}
+			}
+		}
+		provinces_to_highlight = {
+			superregion = china_superregion
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		allow = {
+			is_free_or_tributary_trigger = yes
+			is_at_war = no
+			owns_core_province = 1816
+			OR = {
+				is_emperor_of_china = yes
+				NOT = {
+					any_country = {		
+						is_emperor_of_china = yes
+					}
+				}
+			}
+			num_of_owned_provinces_with = {
+				value = 20
+				superregion = china_superregion
+			}
+		}
+		effect = {
+			change_tag = YUA
+			remove_non_electors_emperors_from_empire_effect = yes
+			china_superregion = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = YUA
+			}
+			manchuria_region = {
+				limit = {
+					NOT = { owned_by = ROOT }
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = YUA
+			}
+			mongolia_region = {
+				limit = {
+					NOT = { owned_by = ROOT }
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = YUA
+			}
+			tibet_region = {
+				limit = {
+					NOT = { owned_by = ROOT }
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = YUA
+			}
+			add_prestige = 20
+			set_country_flag = formed_yuan_flag
+			if = {
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			swap_non_generic_missions = yes
+			on_change_tag_effect = yes
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+}

@@ -5,127 +5,343 @@ serbian_mech_mechanic = {
 	
 	}
 	
+	powers = {
+		serb_urbanization_rate = {
+			max = 100
+			gui = council_of_ten_gov_mech
+			show_before_interactions = yes
+			reset_on_new_ruler = no
+			base_monthly_growth = 0.05
+			scaled_modifier = {
+				modifier = {
+					build_cost = -0.15
+					defensiveness = 0.5
+				}
+			}
+			scaled_modifier = {
+				trigger = {NOT = { has_country_flag = serb_no_loss_administrative}}
+				modifier = {administrative_efficiency = -0.05 }
+			}
+			scaled_modifier = {
+				trigger = {NOT = { has_country_flag = serb_no_loss_time}}
+				modifier = {build_time = 0.5 }
+			}
+			scaled_modifier = {
+				trigger = {NOT = { has_country_flag = serb_no_loss_urb}}
+				modifier = {monthly_serb_urbanization_rate = -0.2 }
+			}
+			scaled_modifier = {
+				trigger = {NOT = { has_country_flag = serb_no_loss_cav}}
+				modifier = {cavalry_power = -0.5}
+			}
+			on_max_reached = {
+				if = {
+					limit = {
+						has_country_flag = serb_no_loss_administrative
+						has_country_flag = serb_no_loss_time
+						has_country_flag = serb_no_loss_urb
+						has_country_flag = serb_no_loss_cav
+					}
+				}else = {
+					country_event_with_insight = {
+						id = serb.100
+						insight_tooltip = SERB_MT_1
+					}
+				}
+			}
+			is_good = yes
+		}
+	}
+	
 	interactions = {
-		defense_focus = {
-			icon = GFX_defense_focus
+		serb_adm_interaction = {
+			icon = GFX_council_of_ten_adm_interaction_button
+			cooldown_years = 2
 			trigger = {
-				custom_trigger_tooltip = {
-					tooltip = SERBIA_DEF_FOCUS 
-					is_in_war = {
-						defenders = ROOT
+				OR = {
+					AND = {
+						estate_loyalty = {
+							estate = estate_church
+							loyalty = 60
+						}
+						religious_unity = 1
+						adm_power = 50
+					}
+					AND = {
+						OR = {
+							estate_loyalty = {
+								estate = estate_church
+								loyalty = 60
+							}
+							religious_unity = 1
+						} 
+						adm_power = 100
+					}
+					adm_power = 150
+				}
+			}
+			effect = {
+				if = {
+					limit = {
+						has_country_flag = gain_tax_serb_ability
+					}
+					add_years_of_income = 0.5
+				}
+				if = {
+					limit = {
+						estate_loyalty = {
+							estate = estate_church
+							loyalty = 60
+						}
+						religious_unity = 1
+					}
+					add_adm_power = -50
+				}else = {
+					if = {
+						limit = {
+							OR = {
+								estate_loyalty = {
+									estate = estate_church
+									loyalty = 60
+								}
+								religious_unity = 1
+							} 
+						}
+						add_adm_power = -100
+					}else = {
+						add_adm_power = -150
+					}
+				}
+				add_government_power = {
+					mechanic_type = serbian_mech_mechanic
+					power_type = serb_urbanization_rate
+					value = 5
+				}
+			}
+		}
+		serb_dip_interaction = { #
+			icon = GFX_council_of_ten_dip_interaction_button
+			cooldown_years = 2
+			trigger = {
+				OR = {
+					AND = {
+						estate_loyalty = {
+							estate = estate_burghers
+							loyalty = 60
+						}
+						estate_loyalty = {
+							estate = estate_golden_hands
+							loyalty = 60
+						}
+						dip_power = 50
+					}
+					AND = {
+						OR = {
+							estate_loyalty = {
+								estate = estate_burghers
+								loyalty = 60
+							}
+							estate_loyalty = {
+								estate = estate_golden_hands
+								loyalty = 60
+							}
+						} 
+						dip_power = 100
+					}
+					dip_power = 150
+				}
+			}
+			effect = {
+				if = {
+					limit = {
+						has_country_flag = gain_progress_serb_ability
+					}
+					add_reform_progress_medium_effect = yes
+				}
+				if = {
+					limit = {
+						estate_loyalty = {
+							estate = estate_burghers
+							loyalty = 60
+						}
+						estate_loyalty = {
+							estate = estate_golden_hands
+							loyalty = 60
+						}
+					}
+					add_dip_power = -50
+				}else = {
+					if = {
+						limit = {
+							OR = {
+								estate_loyalty = {
+									estate = estate_burghers
+									loyalty = 60
+								}
+								estate_loyalty = {
+									estate = estate_golden_hands
+									loyalty = 60
+								}
+							} 
+						}
+						add_dip_power = -100
+					}else = {
+						add_dip_power = -150
+					}
+				}
+				add_government_power = {
+					mechanic_type = serbian_mech_mechanic
+					power_type = serb_urbanization_rate
+					value = 5
+				}
+			}
+		}
+		serb_mil_interaction = {
+			icon = GFX_council_of_ten_mil_interaction_button
+			cooldown_years = 2
+			trigger = {
+				OR = {
+					AND = {
+						estate_loyalty = {
+							estate = estate_nobles
+							loyalty = 60
+						}
+						army_tradition = 50
+						mil_power = 50
+					}
+					AND = {
+						OR = {
+							estate_loyalty = {
+								estate = estate_nobles
+								loyalty = 60
+							}
+							army_tradition = 50
+						} 
+						mil_power = 100
+					}
+					mil_power = 150
+				}
+			}
+			effect = {
+				if = {
+					limit = {
+						has_country_flag = gain_manpower_serb_ability
+					}
+					add_yearly_manpower = 0.5
+				}
+				if = {
+					limit = {
+						estate_loyalty = {
+							estate = estate_nobles
+							loyalty = 60
+						}
+						army_tradition = 50
+					}
+					add_mil_power = -50
+				}else = {
+					if = {
+						limit = {
+							OR = {
+								estate_loyalty = {
+									estate = estate_nobles
+									loyalty = 60
+								}
+								army_tradition = 50
+							} 
+						}
+						add_mil_power = -100
+					}else = {
+						add_mil_power = -150
+					}
+				}
+				add_government_power = {
+					mechanic_type = serbian_mech_mechanic
+					power_type = serb_urbanization_rate
+					value = 5
+				}
+			}
+		}
+	}
+}
+
+windelia_mech_mechanic_2 = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 8
+	available = {
+	
+	}
+	
+	interactions = {
+		wind_adm_interaction = {
+			icon = GFX_council_of_ten_adm_interaction_button
+			cooldown_years = 3
+			trigger = {
+				adm_power = 50
+				if = {
+					limit = {
+						has_estate = estate_church
+					}
+					estate_loyalty = {
+						estate = estate_church
+						loyalty = 50
 					}
 				}
 			}
 			effect = {
-				hidden_effect = {
-					remove_country_modifier = serbia_defense_focus
-					remove_country_modifier = serbia_defense_focus_lv2
-					remove_country_modifier = serbia_neutral_focus
-					remove_country_modifier = serbia_neutral_focus_lv2
-					remove_country_modifier = serbia_offense_focus
-					remove_country_modifier = serbia_offense_focus_lv2
+				add_adm_power = -50
+				change_estate_land_share = {
+					estate = estate_church
+					share = 1
 				}
-				if = {
-					limit = {
-						has_country_flag = lv2_serbia_def
-					}
-					add_country_modifier = {
-						name = serbia_defense_focus_lv2
-						duration = -1
-						desc = until_different_focus_tt
-					}
-				}else = {
-					add_country_modifier = {
-						name = serbia_defense_focus
-						duration = -1
-						desc = until_different_focus_tt
-					}
-				}
-			}
-			cooldown_years = 5
-			ai_chance = {
-				factor = 0
+				add_years_of_income = 0.5
 			}
 		}
-		neutral_focus = {
-			icon = GFX_neutral_focus
-			trigger = { 
-				is_at_war = no
-				NOT = {
-					has_country_modifier = serbia_neutral_focus
-				}
-			}
-			effect = { 
-				hidden_effect = {
-					remove_country_modifier = serbia_defense_focus
-					remove_country_modifier = serbia_defense_focus_lv2
-					remove_country_modifier = serbia_neutral_focus
-					remove_country_modifier = serbia_neutral_focus_lv2
-					remove_country_modifier = serbia_offense_focus
-					remove_country_modifier = serbia_offense_focus_lv2
-				}
-				if = {
-					limit = {
-						has_country_flag = lv2_serbia_neut
-					}
-					add_country_modifier = {
-						name = serbia_neutral_focus_lv2
-						duration = -1
-						desc = until_different_focus_tt
-					}
-				}else = {
-					add_country_modifier = {
-						name = serbia_neutral_focus
-						duration = -1
-						desc = until_different_focus_tt
-					}
-				}
-			}
-			cooldown_years = 5
-			ai_chance = {
-				factor = 0
-			}
-		}
-		offense_focus = {
-			icon = GFX_offense_focus
+		wind_dip_interaction = { 
+			icon = GFX_council_of_ten_dip_interaction_button
+			cooldown_years = 3
 			trigger = {
-				custom_trigger_tooltip = {
-					tooltip = SERBIA_ATK_FOCUS 
-					is_in_war = {
-						attackers = ROOT
-					}
-				}
-			}
-			effect = { 
-				hidden_effect = {
-					remove_country_modifier = serbia_defense_focus
-					remove_country_modifier = serbia_defense_focus_lv2
-					remove_country_modifier = serbia_neutral_focus
-					remove_country_modifier = serbia_neutral_focus_lv2
-					remove_country_modifier = serbia_offense_focus
-					remove_country_modifier = serbia_offense_focus_lv2
-				}
+				dip_power = 50
 				if = {
 					limit = {
-						has_country_flag = lv2_serbia_atk
+						has_estate = estate_burghers
 					}
-					add_country_modifier = {
-						name = serbia_offense_focus_lv2
-						duration = -1
-						desc = until_different_focus_tt
-					}
-				}else = {
-					add_country_modifier = {
-						name = serbia_offense_focus
-						duration = -1
-						desc = until_different_focus_tt
+					estate_loyalty = {
+						estate = estate_burghers
+						loyalty = 50
 					}
 				}
-				
 			}
-			cooldown_years = 5
-			ai_chance = {
-				factor = 0
+			effect = {
+				add_dip_power = -50
+				change_estate_land_share = {
+					estate = estate_burghers
+					share = 1
+				}
+				add_reform_progress_medium_effect = yes
+			}
+		}
+		wind_mil_interaction = {
+			icon = GFX_council_of_ten_mil_interaction_button
+			cooldown_years = 3
+			trigger = {
+				mil_power = 50
+				if = {
+					limit = {
+						has_estate = estate_nobles
+					}
+					estate_loyalty = {
+						estate = estate_nobles
+						loyalty = 50
+					}
+				}
+			}
+			effect = {
+				add_mil_power = -50
+				change_estate_land_share = {
+					estate = estate_nobles
+					share = 1
+				}
+				add_yearly_manpower = 0.5
 			}
 		}
 	}

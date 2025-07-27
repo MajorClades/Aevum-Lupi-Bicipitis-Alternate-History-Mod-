@@ -1,0 +1,105 @@
+country_decisions = {
+	alb_sinicize_qiang_culture = {
+		potential = {
+			OR ={
+				primary_culture = rma
+				has_country_flag = unlock_rma_sinicization_flag
+			}
+		}
+		provinces_to_highlight = {
+			culture = rma
+			NOT = { continent = north_america }
+			NOT = { continent = south_america }
+			NOT = { continent = oceania }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		allow = {
+			if = {
+				limit = {
+					primary_culture = rma
+				}
+				OR = {
+					development_in_provinces = {
+						culture_group = east_asian
+						value = 300
+					}
+					is_emperor_of_china = yes
+					
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = sinicize_qiang_culture_tt
+				owns_all_provinces = {
+					culture = rma
+					NOT = {
+						OR = {
+							continent = north_america
+							continent = south_america
+							continent = oceania
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			update_entire_culture_foreign = {
+				culture = rma
+			}
+			custom_tooltip = alb_sinicize_qiang_tt
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	alb_sinicize_meng_culture = {
+		potential = {
+			OR ={
+				culture_group = nanman_group
+				has_country_flag = unlock_meng_sinicization_flag
+			}
+		}
+		provinces_to_highlight = {
+			culture_group = nanman_group
+			NOT = { continent = north_america }
+			NOT = { continent = south_america }
+			NOT = { continent = oceania }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		allow = {
+			if = {
+				limit = {
+					culture_group = nanman_group
+				}
+				OR = {
+					development_in_provinces = {
+						culture_group = east_asian
+						value = 300
+					}
+					is_emperor_of_china = yes
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = sinicize_culture_tt
+				owns_all_provinces = {
+					culture_group = nanman_group
+					NOT = {
+						OR = {
+							continent = north_america
+							continent = south_america
+							continent = oceania
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			update_entire_culture_foreign = {
+				culture = rma
+			}
+			custom_tooltip = alb_sinicize_qiang_tt
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}

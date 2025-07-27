@@ -1,0 +1,661 @@
+Dalmatia_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { tag = ROM } 
+		OR = {
+			tag = PD2
+			AND = {
+				has_country_flag = generic_italy_MT
+				was_tag = PD2
+			}
+		}
+	}
+
+	dalm_further_expansion = {
+		icon = fight_bosnian_heresies
+		position = 2
+		required_missions = { dalm_militia_army } 
+		provinces_to_highlight = {
+			area = bosnia_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			bosnia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "dalm_gothic_love"
+				duration = 10950
+			}
+			rascia_area = { add_permanent_claim = ROOT } 
+			serbia_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	dalm_down_the_balkans = {
+		icon = illyria_mission
+		position = 3
+		required_missions = { dalm_further_expansion } 
+		provinces_to_highlight = {
+			OR = {
+				area = rascia_area
+				area = serbia_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 8
+				OR = {
+					area = rascia_area
+					area = serbia_area
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "dalm_haemian_wars"
+				duration = 10950
+			}
+			balkan_region = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	dalm_the_constantinople = {
+		icon = mission_city_of_the_world's_desire
+		position = 5
+		required_missions = { dalm_down_the_balkans } 
+		provinces_to_highlight = { province_id = 151 } 
+
+		trigger = {
+			army_strength = {
+				who = RU0
+				value = 1.2
+			}
+			151 = {
+				owned_by = ROOT
+				is_core = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "dalm_imperial_power"
+				duration = -1
+			}
+		}
+	}
+}
+Dalmatia_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { tag = ROM } 
+		OR = {
+			tag = PD2
+			AND = {
+				has_country_flag = generic_italy_MT
+				was_tag = PD2
+			}
+		}
+	}
+
+	dalm_militia_army = {
+		icon = mission_assemble_an_army
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			if = {
+				limit = { ai = yes } 
+				num_of_generals = 1
+				army_size_percentage = 0.6
+			}
+			else = { army_size_percentage = 1 } 
+		}
+
+		effect = {
+			carinthia_area = { add_permanent_claim = ROOT } 
+			east_adriatic_coast_area = { add_permanent_claim = ROOT } 
+			bosnia_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	dalm_the_coastline = {
+		icon = adriatic_access
+		position = 2
+		required_missions = { dalm_militia_army } 
+		provinces_to_highlight = {
+			area = east_adriatic_coast_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			east_adriatic_coast_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			east_adriatic_coast_area = { change_culture = dalmatian } 
+			add_country_modifier = {
+				name = "dalm_boat_making"
+				duration = 10950
+			}
+		}
+	}
+
+	dalm_venice = {
+		icon = mission_raid_on_venice
+		position = 3
+		required_missions = { dalm_into_italy } 
+		provinces_to_highlight = { province_id = 112 } 
+
+		trigger = {
+			112 = {
+				owned_by = ROOT
+				is_core = ROOT
+			}
+		}
+
+		effect = { country_event = { id = pann.8 }  } 
+	}
+
+	dalm_athens = {
+		icon = mission_rb_weather_the_reformation
+		position = 4
+		required_missions = { dalm_down_the_balkans } 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 146
+				culture = turk_greek
+			}
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				culture = turk_greek
+			}
+			146 = {
+				owned_by = ROOT
+				is_core = ROOT
+			}
+		}
+
+		effect = {
+			146 = {
+				add_great_project_tier = {
+					type = parthenon
+					tier = 1
+				}
+			}
+			country_event = { id = pann.9 } 
+		}
+	}
+}
+Dalmatia_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { tag = ROM } 
+		OR = {
+			tag = PD2
+			AND = {
+				has_country_flag = generic_italy_MT
+				was_tag = PD2
+			}
+		}
+	}
+
+	dalm_into_italy = {
+		icon = protect_against_austria
+		position = 2
+		required_missions = { dalm_militia_army } 
+		provinces_to_highlight = {
+			area = carinthia_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			carinthia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			4738 = { add_center_of_trade_level = 1 } 
+			add_accepted_culture_or_dip_power = { culture = istrian } 
+			venetia_area = { add_permanent_claim = ROOT } 
+			veneto_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	dalm_westward = {
+		icon = humiliate_austria
+		position = 4
+		required_missions = { dalm_into_italy } 
+		provinces_to_highlight = {
+			OR = {
+				area = venetia_area
+				area = veneto_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 8
+				OR = {
+					area = venetia_area
+					area = veneto_area
+				}
+			}
+		}
+
+		effect = {
+			add_years_of_income = 1
+			north_italy_group = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	dalm_the_river = {
+		icon = mission_se_along_the_river
+		position = 4
+		required_missions = { dalm_westward } 
+		provinces_to_highlight = {
+			province_group = north_italy_group
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 25
+				province_group = north_italy_group
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "dalmatian_reneissance"
+				duration = 10950
+			}
+			italy_region = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	dalm_rome = {
+		icon = mission_empire
+		position = 5
+		required_missions = { dalm_the_river } 
+		provinces_to_highlight = { area = lazio_area } 
+
+		trigger = {
+			lazio_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_core = 118
+			country_event = { id = gen_ita.100 } 
+		}
+	}
+}
+Dalmatia_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { tag = ROM } 
+		OR = {
+			tag = PD2
+			AND = {
+				has_country_flag = generic_italy_MT
+				was_tag = PD2
+			}
+		}
+	}
+
+	dalm_illyrian_militia = {
+		icon = mission_great_wall
+		position = 1
+		provinces_to_highlight = {
+			owned_by = ROOT
+			culture = dalmatian
+			NOT = { base_manpower = 4 } 
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				culture = dalmatian
+				base_manpower = 4
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "dalm_militia_morale"
+				duration = -1
+			}
+		}
+	}
+
+	dalm_practice = {
+		icon = mission_crusade_for_varna
+		position = 3
+		required_missions = { dalm_illyrian_militia } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_manpower_building_trigger = no
+		}
+
+		trigger = {
+			army_tradition = 30
+			num_of_owned_provinces_with = {
+				value = 5
+				has_manpower_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_army_tradition = -20
+			add_country_modifier = {
+				name = "dalm_teaching_defense"
+				duration = 10950
+			}
+			add_country_modifier = {
+				name = "dalm_better_militia"
+				duration = -1
+			}
+		}
+	}
+
+	dalm_grain_silo = {
+		icon = mission_italian_condottiere
+		position = 4
+		required_missions = { dalm_practice } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			NOT = { base_manpower = 5 } 
+			has_manpower_building_trigger = no
+		}
+
+		trigger = {
+			num_of_completed_idea_groups_mil = { amount = 1 } 
+			num_of_owned_provinces_with = {
+				value = 10
+				base_manpower = 6
+			}
+			num_of_owned_provinces_with = {
+				value = 15
+				has_manpower_building_trigger = yes
+			}
+		}
+
+		effect = {
+			custom_tooltip = DALMATIA_TT_4
+			add_country_modifier = {
+				name = "dalm_militia_police"
+				duration = -1
+			}
+		}
+	}
+
+	dalm_rambo_but_venetian = {
+		icon = mission_wine_monopolies
+		position = 6
+		required_missions = { dalm_grain_silo } 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 136
+				province_id = 1826
+				province_id = 5014
+			}
+		}
+
+		trigger = {
+			army_tradition = 70
+			136 = {
+				base_manpower = 6
+				has_manpower_building_trigger = yes
+				infantry_in_province = 2
+			}
+			1826 = {
+				base_manpower = 6
+				has_manpower_building_trigger = yes
+				infantry_in_province = 2
+			}
+			5014 = {
+				base_manpower = 6
+				has_manpower_building_trigger = yes
+				infantry_in_province = 2
+			}
+		}
+
+		effect = {
+			add_army_tradition = -50
+			136 = { change_trade_goods = wine } 
+			1826 = { change_trade_goods = wine } 
+			5014 = { change_trade_goods = wine } 
+			add_country_modifier = {
+				name = "dalm_ramboso"
+				duration = -1
+			}
+		}
+	}
+}
+Dalmatia_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { tag = ROM } 
+		OR = {
+			tag = PD2
+			AND = {
+				has_country_flag = generic_italy_MT
+				was_tag = PD2
+			}
+		}
+	}
+
+	dalm_beat_longobardy = {
+		icon = boh_humiliate_austria
+		position = 1
+		provinces_to_highlight = { is_capital_of = GR2 } 
+
+		trigger = {
+			army_strength = {
+				who = GR2
+				value = 1.25
+			}
+		}
+
+		effect = {
+			austria_proper_area = { add_permanent_claim = ROOT } 
+			inner_austria_area = { add_permanent_claim = ROOT } 
+			simple_dynamic_effect = {
+				first_custom_tooltip = DALMATIA_TT_1
+				first_limit = "
+					DA2 = {
+							alliance_with = ROOT
+					}
+				"
+				first_effect = "
+					add_trust = {
+						who = DA2
+						value = 30
+						mutual = yes
+					}
+					131 = {
+						remove_core = DA2
+					}
+				"
+				second_limit = "
+					DA2 = { NOT = {alliance_with = ROOT} } 
+				"
+				second_effect = "
+					
+				" #putting the casus belli inside crashes the game
+			}
+			tooltip = {
+				add_casus_belli = {
+					type = cb_restore_personal_union
+					target = DA2
+					months = 300
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = { DA2 = { NOT = { alliance_with = ROOT }  }  } 
+					add_casus_belli = {
+						type = cb_restore_personal_union
+						target = DA2
+						months = 300
+					}
+				}
+			}
+		}
+	}
+
+	dalm_long_overdue = {
+		icon = longobardy_iron_crown
+		position = 2
+		required_missions = { dalm_beat_longobardy } 
+		provinces_to_highlight = {
+			OR = {
+				area = austria_proper_area
+				area = inner_austria_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 9
+				OR = {
+					area = austria_proper_area
+					area = inner_austria_area
+				}
+			}
+		}
+
+		effect = {
+			remove_country_modifier = alb_illyrian_compromise_1
+			DA2 = {remove_country_modifier = alb_illyrian_compromise_2}
+			simple_dynamic_effect = {
+				first_custom_tooltip = DALMATIA_TT_2a
+				first_limit = "
+					DA2 = {alliance_with = ROOT	}
+				"
+				first_effect = "
+					create_union = DA2
+				"
+				second_custom_tooltip = DALMATIA_TT_2b
+				second_limit = "
+					DA2 = { is_subject_of = ROOT } 
+				"
+				second_effect = "
+					add_stability_or_adm_power = yes
+					add_years_of_income = 1
+				" 
+			}
+		}
+	}
+
+	dalm_pannonia = {
+		icon = mission_alliances
+		position = 3
+		required_missions = { dalm_long_overdue } 
+		provinces_to_highlight = {
+			area = slavonia_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			slavonia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			remove_country_modifier = alb_illyrian_compromise_1
+			DA2 = { remove_country_modifier = alb_illyrian_compromise_2 } 
+			simple_dynamic_effect = {
+				first_custom_tooltip = DALMATIA_TT_2b
+				first_limit = "
+					DA2 = {is_subject_of = ROOT	}
+				"
+				first_effect = "
+					add_country_modifier = {
+						name = dalm_illyria_grains
+						duration = -1
+					}
+					DA2 = {
+						add_country_modifier = {
+							name = dalm_illyria_grains_no
+							duration = -1
+						}
+					}
+				"
+				second_limit = "
+					DA2 = { NOT = {is_subject_of = ROOT	} } 
+				"
+				second_effect = "
+					add_country_modifier = {
+						name = dalm_illyria_grains_3
+						duration = -1
+					}
+				" 
+			}
+		}
+	}
+
+	dalm_police_force = {
+		icon = mission_landsknecht_soldier
+		position = 5
+		required_missions = { dalm_grain_silo } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			NOT = { has_building = soldier_households } 
+		}
+
+		trigger = {
+			num_of_completed_idea_groups_mil = { amount = 2 } 
+			num_of_owned_provinces_with = {
+				value = 10
+				base_manpower = 7
+				has_building = soldier_households
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "dalm_strong_police"
+				duration = 10950
+			}
+		}
+	}
+}
