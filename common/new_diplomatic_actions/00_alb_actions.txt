@@ -868,3 +868,38 @@ ger_ask_for_def_war = {
 		}
 	}
 }
+
+sco_make_model_colony = {
+	category = influence
+	
+	alert_index = 55
+	require_acceptance = no # Whether the recipient gets an option to decline
+	is_visible = {
+		has_country_flag = power_colonial_action_flag
+	}
+	is_allowed = {
+		any_subject_country = {
+				is_colonial_nation_of = ROOT
+			}
+		FROM = {
+			is_colonial_nation_of = ROOT
+		}
+	}
+	on_accept = {
+		clr_country_flag = power_colonial_action_flag
+		FROM = {
+			add_country_modifier = {
+					name = sco_model_colony
+					duration = -1
+				}
+		}
+	}
+	on_decline = {
+	}
+	
+	ai_acceptance = { # This works similarly to variable_arithmetic_trigger, but does not support triggers generally. Instead, "limit" will be evaluated first and the rest ignored if it isn't passed.
+	}
+
+	ai_will_do = { # this is a trigger
+	}
+}

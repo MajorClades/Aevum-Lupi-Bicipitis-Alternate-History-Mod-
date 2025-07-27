@@ -114,6 +114,124 @@ country_event = {
 	}
 }
 
+country_event = { 
+	id = scotii.4
+	title = scotii.4.test
+	desc = scotii.4.desc
+	picture = KINGS_CHOICE_eventPicture
+	fire_only_once = yes
+	trigger = {
+		has_government_mechanic = scot_clans_mechanic
+		NOT = {
+			has_government_power = { mechanic_type = scot_clans_mechanic power_type = scot_single_power value = 30 } 
+		}
+
+	}
+	mean_time_to_happen = {
+		months = 12
+	}
+
+	option = {
+		name = scotii.4a
+		add_government_power = { mechanic_type = scot_clans_mechanic power_type = scot_single_power value = -10 } 
+		if = {
+			limit = {
+				owns = 4119
+			}
+			4119 = {
+				spawn_rebels = {
+					size = 3
+					type = pretender_rebels
+					win = yes 
+					leader = "Angus"
+					leader_dynasty = "McFife"
+				}
+			}
+		}else = {
+			random_owned_province = {
+				limit = {
+					culture = scotian
+				}
+				spawn_rebels = {
+					size = 3
+					type = pretender_rebels
+					win = yes 
+					leader = "Angus"
+					leader_dynasty = "McFife"
+				}
+			}
+		}
+
+	}
+
+	option = {
+		name = scotii.4b
+		add_government_power = { mechanic_type = scot_clans_mechanic power_type = scot_single_power value = 30 } 
+		define_ruler = {
+			name = "Angus"
+			dynasty = "McFife"
+			adm = 2
+			dip = 4
+			mil = 6
+		}
+		define_ruler_to_general = {
+			fire = 3
+			shock = 6
+			manuever = 3
+			siege = 3
+		}
+		hidden_effect = {
+			kill_consort = yes
+			kill_heir = {
+				allow_new_heir = no
+			}
+		}
+	}	
+}
+
+province_event = { 
+	id = scotii.5
+	title = scotii.5.test
+	desc = scotii.5.desc
+	picture = KINGS_CHOICE_eventPicture
+	trigger = {
+		owner = {
+			has_country_flag = sco_slow_cultural_revolution
+		}
+		OR = {
+			culture = soxon
+			culture = acutanian
+			culture = armerican
+		}
+	}
+	mean_time_to_happen = {
+		months = 120
+	}
+
+	option = {
+		name = scotii.5a
+		owner = {
+			add_dip_power = -30
+		}
+		add_base_manpower = -1
+		change_culture = gallic
+	}
+	option = {
+		name = scotii.5b
+		owner = {
+			add_dip_power = -30
+		}
+		add_province_modifier = {
+			name = sco_gallic_revolution
+			duration = 7300
+		}
+		change_culture = gallic
+	}
+	option = {
+		name = scotii.5c
+	}
+	
+}
 
 country_event = { #Scottia gives Brydd provicnes
 	id = scotii.10
@@ -193,4 +311,30 @@ country_event = {
 			change_culture = brytonic
 		}
 	}
+}
+
+country_event = { 
+	id = scotii.100
+	title = scotii.100.test
+	desc = scotii.100.desc
+	picture = KINGS_CHOICE_eventPicture
+	hidden = yes
+	trigger = {
+		has_country_modifier = sco_two_cultures
+		NOT = {
+			accepted_culture = celtiberian
+		}
+		NOT = {
+			accepted_culture = basque
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	option = {
+		name = scotii.10a
+		remove_country_modifier = sco_two_cultures
+	}
+	
 }
