@@ -12,6 +12,33 @@ scot_clans_mechanic = {
 			min = 0
 			base_monthly_growth = -0.1
 			reverse_scaled_modifier = {
+				trigger = {
+					government = theocracy
+				}
+				modifier = {
+					governing_capacity_modifier = -0.2
+					nobles_loyalty_modifier = -0.15
+					church_loyalty_modifier = -0.15
+				}
+				start_value = 0
+				end_value = 50
+			}
+			scaled_modifier = {
+				trigger = {
+					government = theocracy
+				}
+				modifier = {
+					governing_capacity_modifier = 0.2
+					nobles_loyalty_modifier = 0.15
+					church_loyalty_modifier = 0.2
+				}
+				start_value = 50
+				end_value = 100
+			}
+			reverse_scaled_modifier = {
+				trigger = {
+					government = monarchy
+				}
 				modifier = {
 					core_creation = 0.1
 					nobles_loyalty_modifier = -0.15
@@ -21,6 +48,9 @@ scot_clans_mechanic = {
 				end_value = 50
 			}
 			scaled_modifier = {
+				trigger = {
+					government = monarchy
+				}
 				modifier = {
 					core_creation = -0.1
 					nobles_loyalty_modifier = 0.15
@@ -53,9 +83,16 @@ scot_clans_mechanic = {
 				
 			}
 			effect = {
-				add_yearly_manpower = 0.5
-				capital_scope = {
-					qizilbash_infantry = ROOT
+				if = {
+					limit = {
+						government = monarchy
+					}
+					add_yearly_manpower = 0.5
+					capital_scope = {
+						qizilbash_infantry = ROOT
+					}
+				}else = {
+					add_yearly_manpower = 1
 				}
 			}
 			cooldown_years = 3
@@ -72,9 +109,19 @@ scot_clans_mechanic = {
 				
 			}
 			effect = { 
-				add_adm_power = 50
-				add_dip_power = 50
-				add_mil_power = 50		
+				if = {
+					limit = {
+						government = monarchy
+					}
+						add_adm_power = 50
+						add_dip_power = 50
+						add_mil_power = 50	
+				}else = {
+					add_years_of_income = 0.55
+					add_adm_power = 30
+					add_dip_power = 30
+					add_mil_power = 30	
+				}
 			}
 			cooldown_years = 3
 			ai_chance = {

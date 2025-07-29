@@ -161,7 +161,10 @@ country_event = {
 				}
 			}
 		}
-
+		add_ruler_modifier = {
+			name = sco_loyal_few
+			duration = 10950
+		}
 	}
 
 	option = {
@@ -231,6 +234,96 @@ province_event = {
 		name = scotii.5c
 	}
 	
+}
+
+country_event = { 
+	id = scotii.6
+	title = scotii.6.test
+	desc = scotii.6.desc
+	picture = KINGS_CHOICE_eventPicture
+	fire_only_once = yes
+	trigger = {
+		has_government_mechanic = scot_clans_mechanic
+		NOT = {
+			has_government_power = { mechanic_type = scot_clans_mechanic power_type = scot_single_power value = 30 } 
+		}
+		dynasty = McFife
+		NOT = {
+			is_year = 1500
+		}
+	}
+	mean_time_to_happen = {
+		months = 12
+	}
+
+	option = {
+		name = scotii.6a
+		add_government_power = { mechanic_type = scot_clans_mechanic power_type = scot_single_power value = 15 } 
+		change_estate_land_share = {
+			estate = estate_church
+			share = 2
+		}
+		change_estate_land_share = {
+			estate = estate_nobles
+			share = 2
+		}
+		change_estate_land_share = {
+			estate = estate_burghers
+			share = 1
+		}
+		if = {
+			limit = {
+				owns = 376
+			}
+			376 = {
+				spawn_rebels = {
+					size = 1
+					type = druid_rebels
+				}
+			}
+		}else = {
+			random_owned_province = {
+				limit = {
+					culture = scotian
+				}
+				376 = {
+					spawn_rebels = {
+							size = 1
+							type = druid_rebels
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = scotii.6b
+		if = {
+			limit = {
+				owns = 376
+			}
+			376 = {
+				spawn_rebels = {
+					size = 3
+					type = druid_rebels
+					win = yes 
+				}
+			}
+		}else = {
+			random_owned_province = {
+				limit = {
+					culture = scotian
+				}
+				376 = {
+					spawn_rebels = {
+							size = 3
+							type = druid_rebels
+							win = yes 
+					}
+				}
+			}
+		}
+	}	
 }
 
 country_event = { #Scottia gives Brydd provicnes

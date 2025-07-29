@@ -355,11 +355,19 @@ Scotia_2b_slot = {
 
 		effect = {
 			if = {
-				limit = { is_or_was_tag = { tag = SC0 }  } 
-				add_government_reform = celtic_empire_sco_reform
-				custom_tooltip = SCOTIA_TT_6
+				limit = {
+					government = monarchy
+				}
+				if = {
+					limit = { is_or_was_tag = { tag = SC0 }  } 
+					add_government_reform = celtic_empire_sco_reform
+					custom_tooltip = SCOTIA_TT_6
+				}
+				else = { add_government_reform = celtic_empire_reform } 
+			}else = {
+				change_government_reform_progress = 150
+				add_years_of_income = 1
 			}
-			else = { add_government_reform = celtic_empire_reform } 
 		}
 	}
 

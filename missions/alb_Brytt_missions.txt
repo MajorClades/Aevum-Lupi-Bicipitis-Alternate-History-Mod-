@@ -3,10 +3,10 @@ Brytt_1_slot = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = WL0 }
+	potential = { tag = WL0 } 
 
 	bry_restore_bryttani = {
-		icon = mission_court_education
+		icon = defeat_the_english
 		position = 2
 		required_missions = { bry_true_bryttons } 
 		provinces_to_highlight = {
@@ -23,17 +23,11 @@ Brytt_1_slot = {
 		}
 
 		effect = {
-			tooltip = {
-				wales_area = {
-					change_culture = brytonic
-				}
-			}
-			custom_tooltip = brittia_romans_5_unrest_tt  #clear things up
+			tooltip = { wales_area = { change_culture = brytonic }  } 
+			custom_tooltip = brittia_romans_5_unrest_tt
 			hidden_effect = {
 				wales_area = {
-					limit = {
-						culture = briton
-					}
+					limit = { culture = briton } 
 					change_culture = brytonic
 					add_named_unrest = {
 						name = "Roman Nationalism"
@@ -41,50 +35,45 @@ Brytt_1_slot = {
 					}
 				}
 			}
-			wessex_area = {
-				add_permanent_claim = ROOT
-			}
-			west_midlands_area = {
-				add_permanent_claim = ROOT
-			}
+			wessex_area = { add_permanent_claim = ROOT } 
+			west_midlands_area = { add_permanent_claim = ROOT } 
 		}
 	}
+
 	bry_gaelic_west_brydd = {
 		icon = mission_court_education
 		position = 4
 		required_missions = { bry_break_the_roman } 
 		provinces_to_highlight = {
-			OR = {area = wessex_area area = west_midlands_area}
+			OR = {
+				area = wessex_area
+				area = west_midlands_area
+			}
 			NOT = { is_core = ROOT } 
 		}
 
 		trigger = {
 			wessex_area = {
 				type = all
-				is_core = ROOT 
+				is_core = ROOT
 			}
 			west_midlands_area = {
 				type = all
-				is_core = ROOT 
+				is_core = ROOT
 			}
 		}
 
 		effect = {
-			wessex_area = {
-				change_culture = brytonic
-			}
-			west_midlands_area = {
-				change_culture = brytonic
-			}
+			wessex_area = { change_culture = brytonic } 
+			west_midlands_area = { change_culture = brytonic } 
 		}
 	}
+
 	bry_switcheroo = {
-		icon = mission_court_education
+		icon = mission_rb_renovate_oxbridge
 		position = 6
 		required_missions = { bry_war_on_scotia } 
-		provinces_to_highlight = {
-			province_id = 4120
-		}
+		provinces_to_highlight = { province_id = 4120 } 
 
 		trigger = {
 			years_of_income = 1
@@ -97,9 +86,7 @@ Brytt_1_slot = {
 
 		effect = {
 			4120 = {
-				add_great_project = {
-					type = sco_palace_of_the_high_king
-				}
+				add_great_project = { type = sco_palace_of_the_high_king } 
 				add_unrest = -10
 			}
 		}
@@ -110,38 +97,38 @@ Brytt_2_slot = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = WL0 }
+	potential = { tag = WL0 } 
 
 	bry_true_bryttons = {
-		icon = mission_court_education
+		icon = mission_rb_conquer_the_highlands
 		position = 1
+		provinces_to_highlight = {  } 
 
 		trigger = {
 			OR = {
-				BR0 = {
-					is_at_war = yes
-				}
-				NOT = {
-					exists = BR0
-				}
+				BR0 = { is_at_war = yes } 
+				NOT = { exists = BR0 } 
 			}
 		}
 
-		effect = { 
-			wales_area = {
-				add_permanent_claim = ROOT
-			}
-			scottish_marches_area = {
-				add_permanent_claim = ROOT
-			}
-		} 
+		effect = {
+			wales_area = { add_permanent_claim = ROOT } 
+			scottish_marches_area = { add_permanent_claim = ROOT } 
+		}
 	}
+
 	bry_break_the_roman = {
-		icon = mission_court_education
+		icon = mission_rb_unite_the_clans
 		position = 3
-		required_missions = { bry_restore_bryttani bry_sneak_the_swed} 
+		required_missions = {
+			bry_restore_bryttani
+			bry_sneak_the_swed
+		}
 		provinces_to_highlight = {
-			OR = {area = wessex_area area = west_midlands_area}
+			OR = {
+				area = wessex_area
+				area = west_midlands_area
+			}
 			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 		}
 
@@ -157,28 +144,23 @@ Brytt_2_slot = {
 		}
 
 		effect = {
-			capital_scope = {
-				add_base_manpower = 3
-			}
+			capital_scope = { add_base_manpower = 3 } 
 			add_country_modifier = {
-				name = brydd_the_first
+				name = "brydd_the_first"
 				duration = 10950
 			}
-			home_counties_area = {
-				add_permanent_claim = ROOT
-			}
-			east_anglia_area = {
-				add_permanent_claim = ROOT
-			}
+			home_counties_area = { add_permanent_claim = ROOT } 
+			east_anglia_area = { add_permanent_claim = ROOT } 
 		}
 	}
+
 	bry_war_on_scotia = {
-		icon = mission_court_education
+		icon = mission_rb_conquer_ireland
 		position = 5
 		required_missions = { bry_full_bryddania } 
 		provinces_to_highlight = {
 			province_group = ireland_provinces
-			NOT = {country_or_non_sovereign_subject_holds = ROOT}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 		}
 
 		trigger = {
@@ -190,25 +172,20 @@ Brytt_2_slot = {
 
 		effect = {
 			add_yearly_manpower = 2
-			ireland_provinces = {
-				add_nationalism = -10
-			}
-			hidden_effect = {
-				complete_mission = sco_wales_and_sweden
-			}
+			ireland_provinces = { add_nationalism = -10 } 
+			hidden_effect = { complete_mission = sco_wales_and_sweden } 
 		}
 	}
-
 }
 Brytt_3_slot = {
 	slot = 3
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = WL0 }
+	potential = { tag = WL0 } 
 
 	bry_sneak_the_swed = {
-		icon = mission_court_education
+		icon = mission_rb_into_england
 		position = 2
 		required_missions = { bry_true_bryttons } 
 		provinces_to_highlight = {
@@ -225,23 +202,24 @@ Brytt_3_slot = {
 		}
 
 		effect = {
-			scottish_marches_area = {
-				change_culture = brytonic
-			}
-			east_midlands_area = {
-				add_permanent_claim = ROOT
-			}
-			yorkshire_area = {
-				add_permanent_claim = ROOT
-			}
+			scottish_marches_area = { change_culture = brytonic } 
+			east_midlands_area = { add_permanent_claim = ROOT } 
+			yorkshire_area = { add_permanent_claim = ROOT } 
 		}
 	}
+
 	bry_full_bryddania = {
-		icon = mission_court_education
+		icon = mission_rb_angevin_kingdom
 		position = 4
-		required_missions = { bry_break_the_roman bry_break_the_swed} 
+		required_missions = {
+			bry_break_the_roman
+			bry_break_the_swed
+		}
 		provinces_to_highlight = {
-			OR = {area = home_counties_area area = east_anglia_area}
+			OR = {
+				area = home_counties_area
+				area = east_anglia_area
+			}
 			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 		}
 
@@ -257,14 +235,12 @@ Brytt_3_slot = {
 		}
 
 		effect = {
-			override_country_name = BRYDAIN
+			override_country_name = "BRYDAIN"
 			add_country_modifier = {
-				name = free_byrdd
+				name = "free_byrdd"
 				duration = 10950
 			}
-			british_isles_region = {
-				add_permanent_claim = ROOT
-			}
+			british_isles_region = { add_permanent_claim = ROOT } 
 		}
 	}
 }
@@ -273,13 +249,13 @@ Brytt_4_slot = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = WL0 }
+	potential = { tag = WL0 } 
 
 	brydd_returned_pride = {
-		icon = mission_court_education
+		icon = mission_rb_rein_in_the_highland_clans
 		position = 2
 		required_missions = { bry_humble_defeat } 
-		provinces_to_highlight = { culture = brytonic }
+		provinces_to_highlight = { culture = brytonic } 
 
 		trigger = {
 			development_in_provinces = {
@@ -290,9 +266,7 @@ Brytt_4_slot = {
 		}
 
 		effect = {
-			add_prestige_or_monarch_power = {
-				amount = 25
-			}
+			add_prestige_or_monarch_power = { amount = 25 } 
 			add_years_of_income = 1
 			overlord = {
 				custom_tooltip = SCOT_OVERLORD
@@ -300,12 +274,16 @@ Brytt_4_slot = {
 			}
 		}
 	}
+
 	bry_break_the_swed = {
-		icon = mission_court_education
+		icon = mission_rb_war_of_the_roses
 		position = 3
 		required_missions = { bry_sneak_the_swed } 
 		provinces_to_highlight = {
-			OR = {area = east_midlands_area area = yorkshire_area}
+			OR = {
+				area = east_midlands_area
+				area = yorkshire_area
+			}
 			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 		}
 
@@ -326,19 +304,16 @@ Brytt_4_slot = {
 				add_base_production = 1
 			}
 			add_country_modifier = {
-				name = brydd_another_invader
+				name = "brydd_another_invader"
 				duration = 10950
 			}
-			home_counties_area = {
-				add_permanent_claim = ROOT
-			}
-			east_anglia_area = {
-				add_permanent_claim = ROOT
-			}
+			home_counties_area = { add_permanent_claim = ROOT } 
+			east_anglia_area = { add_permanent_claim = ROOT } 
 		}
 	}
+
 	bry_home_of_the_gaelic = {
-		icon = mission_court_education
+		icon = the_london_steelyard
 		position = 5
 		required_missions = { bry_full_bryddania } 
 		provinces_to_highlight = {
@@ -348,51 +323,43 @@ Brytt_4_slot = {
 				province_id = 234
 			}
 		}
+
 		trigger = {
 			owns_or_subject_of = 241
 			owns_or_subject_of = 236
 			owns_or_subject_of = 234
 		}
 
-		effect = {
-			country_event = {
-				id = scotii.11
-			}
-		}
+		effect = { country_event = { id = scotii.11 }  } 
 	}
+
 	bry_lords_of_britannia = {
-		icon = mission_court_education
+		icon = mission_english_reformation
 		position = 6
-		required_missions = { bry_home_of_the_gaelic  } 
+		required_missions = { bry_home_of_the_gaelic } 
 		provinces_to_highlight = {
 			region = british_isles_region
-			NOT = {
-				province_group = ireland_provinces
-			}
+			NOT = { province_group = ireland_provinces } 
 			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 		}
+
 		trigger = {
 			is_free_or_tributary_trigger = yes
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
 				value = 30
 				region = british_isles_region
-				NOT = {
-					province_group = ireland_provinces
-				}
+				NOT = { province_group = ireland_provinces } 
 			}
-
 		}
 
-		effect = { 		
+		effect = {
 			add_stability_or_adm_power = yes
 			add_country_modifier = {
-				name = brydd_restore_brythonia
+				name = "brydd_restore_brythonia"
 				duration = -1
 			}
-			hidden_effect = {
-				complete_mission = sco_lords_of_britannia
-			}
-		} 
+			hidden_effect = { complete_mission = sco_lords_of_britannia } 
+		}
 	}
 }
 Brytt_5_slot = {
@@ -400,53 +367,50 @@ Brytt_5_slot = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { tag = WL0 }
+	potential = { tag = WL0 } 
 
 	bry_humble_defeat = {
-		icon = mission_court_education
+		icon = mission_rb_control_state_religion
 		position = 1
+		provinces_to_highlight = {  } 
 
 		trigger = {
 			OR = {
 				army_size = 15
-				overlord = {
-					army_size = 25
-				}
+				overlord = { army_size = 25 } 
 			}
 		}
 
 		effect = {
 			add_country_modifier = {
-				name = brydd_gaelic_forces
+				name = "brydd_gaelic_forces"
 				duration = 10950
 			}
 		}
 	}
+
 	brydd_fortress = {
-		icon = mission_court_education
+		icon = mission_rb_increase_our_reach
 		position = 2
 		required_missions = { bry_humble_defeat } 
-		provinces_to_highlight = { 	owned_by = ROOT has_manpower_building_trigger = no	}
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_manpower_building_trigger = no
+		}
 
 		trigger = {
 			num_of_owned_provinces_with = {
 				value = 5
 				has_manpower_building_trigger = yes
 			}
-			242 = {
-				development = 20
-			}
+			242 = { development = 20 } 
 		}
 
 		effect = {
 			add_yearly_manpower = 1
-			overlord = {
-				add_yearly_manpower = 0.5
-			}
+			overlord = { add_yearly_manpower = 0.5 } 
 			custom_tooltip = empty_line_tt
-			242 = {
-				add_or_upgrade_manpower_building = yes
-			}
+			242 = { add_or_upgrade_manpower_building = yes } 
 			custom_tooltip = empty_line_tt
 			custom_tooltip = brydd_10_dev_in_manpower_provinces_tt
 			for = {
@@ -462,10 +426,12 @@ Brytt_5_slot = {
 			}
 		}
 	}
+
 	brydd_sword_and_sorcery = {
-		icon = mission_court_education
+		icon = influence_the_church
 		position = 4
 		required_missions = { brydd_fortress } 
+		provinces_to_highlight = {  } 
 
 		trigger = {
 			OR = {
@@ -473,23 +439,23 @@ Brytt_5_slot = {
 				is_papal_controller = yes
 			}
 			prestige = 50
-			num_of_completed_idea_groups_mil = { amount = 1}
+			num_of_completed_idea_groups_mil = { amount = 1 } 
 		}
 
 		effect = {
 			add_country_modifier = {
-				name = brydd_war_priests
+				name = "brydd_war_priests"
 				duration = -1
 			}
 		}
 	}
+
 	bry_city_of_the_gaelic = {
-		icon = mission_court_education
+		icon = mission_guilds_of_barcelona
 		position = 6
 		required_missions = { bry_home_of_the_gaelic } 
-		provinces_to_highlight = {
-			is_capital_of = ROOT
-		}
+		provinces_to_highlight = { is_capital_of = ROOT } 
+
 		trigger = {
 			capital_scope = {
 				development = 20
