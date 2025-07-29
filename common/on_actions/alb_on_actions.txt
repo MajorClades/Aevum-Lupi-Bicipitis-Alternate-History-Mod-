@@ -536,6 +536,16 @@ on_monarch_death = {
 	}
 }
 on_new_monarch = {
+	if = { #Wasn't triggering for repeat elections (where one country gets elected for consecutive rulers)
+		limit = {
+			tag = emperor
+		}
+		PAP = {
+			country_event = {
+				id = papacy.1
+			}
+		}
+	}
 	if = {
 		limit = {
 			tag = AP6
