@@ -149,25 +149,18 @@ gain_consort_aspect = {
 	}
 }
 
-dissolve_monasteries_aspect = {
+save_monasteries_aspect = {
 	sprite = "GFX_dissolve_monasteries_icon"
 	cost = 100
 	trigger = {
 		has_estate = estate_church
 	}
 	effect = {
-		custom_tooltip = dissolve_monasteries_aspect_tt
-		hidden_effect = {
-			add_estate_influence_modifier = {
-				estate = estate_church
-				influence = -10
-				duration = 5475
-				desc = dissolve_monasteries_aspect_ct
-			}
-		}
+		add_adm_power = 50
+		add_years_of_income = 0.5
 		change_estate_land_share = {
 		   estate = estate_church
-		   share = -3
+		   share = 3
 	    }
 	}
 	ai_will_do = {
@@ -272,36 +265,21 @@ innovativeness_aspect = {
 	}
 }
 
-expel_heretics_aspect = {
+more_development_to_you = {
 	sprite = "GFX_expel_heretics_aspect"
 	cost = 100
 	trigger = {}
 	effect = {
-		custom_tooltip = expel_heretics_aspect_tt
+		custom_tooltip = ITA_3_random_dev_distribution
 		hidden_effect = {
 			random_owned_province = {
-				limit = {
-					is_colony = yes
-				}
-				add_colonysize = 100
-				random_list = {
-					67 = {}
-					11 = {
-						change_religion = catholic
-					}
-					11 = {
-						trigger = { is_religion_enabled = protestant }
-						change_religion = protestant
-					}
-					11 = {
-						trigger = { is_religion_enabled = reformed }
-						change_religion = reformed
-					}
-				}
+				add_random_development = 1
 			}
-			add_country_modifier = {
-				name = expelling_heretics
-				duration = 5475
+			random_owned_province = {
+				add_random_development = 1
+			}
+			random_owned_province = {
+				add_random_development = 1
 			}
 		}
 	}
@@ -322,35 +300,22 @@ expel_heretics_aspect = {
 	}
 }
 
-diplomats_of_the_reformation_aspect = {
+stabilize_the_clans = {
 	sprite = "GFX_diplomats_of_the_reformation_aspect"
 	cost = 100
-	trigger = {}
+	trigger = {
+		has_government_mechanic = scot_clans_mechanic
+	}
 	effect = {
-		custom_tooltip = diplomats_of_the_reformation_aspect_tt
-		hidden_effect = {
-			every_known_country = {
-				limit = {
-					OR = {
-						religion = protestant
-						religion = reformed
-						religion = anglican
-						religion = hussite
-					}
-				}
-				add_opinion = {
-					who = ROOT
-					modifier = anglican_reformation_diplomacy
-				}
-				reverse_add_opinion = {
-					who = ROOT
-					modifier = anglican_reformation_diplomacy
-				}
-			}
+		add_prestige_or_monarch_power = { amount = 10}
+		add_government_power = {
+			mechanic_type = scot_clans_mechanic
+			power_type = scot_single_power
+			value = 15
 		}
 	}
 	ai_will_do = {
-		factor = 0
+		factor = 1
 	}
 }
 
