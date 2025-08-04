@@ -329,6 +329,40 @@ make_autonomous_vassal = {
 	}
 }
 
+make_me_autonomous_vassal = {
+	category = influence
+	
+	alert_index = 40
+	alert_tooltip = demand_dummy_alert_tooltip
+	require_acceptance = no # Whether the recipient gets an option to decline
+	is_visible = {
+		ai = no
+		is_subject = yes
+		ROOT = {
+			is_subject_of_type = vassal
+			is_subject_of = FROM		
+		}
+	}
+	is_allowed = {
+		stability = 1
+		ROOT = {
+				is_subject_of_type = vassal
+				is_subject_of = FROM		
+			}
+	}
+	on_accept = {
+		FROM = {
+			create_subject = {
+				subject_type = autonomous_vassal
+				subject = ROOT 
+			}
+		}
+	}
+	ai_will_do = { # this is a trigger
+		always = no
+	}
+}
+
 cancel_autonomous_vassal =  {
 	category = influence
 	require_acceptance = no
