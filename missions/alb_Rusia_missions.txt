@@ -411,6 +411,29 @@ Rusia_4_slot = {
 		}
 	}
 
+	rus_royal_navy = {
+		icon = mission_court_education
+		position = 4
+		required_missions = { rus_gaelic_ships rus_kingdom_of_alba } 
+
+		trigger = {
+			naval_reformer = 3
+			OR = {
+				navy_tradition = 40
+				has_estate_privilege = estate_burghers_admirals
+			}
+			num_of_heavy_ship = 10
+		}
+
+		effect = {
+			add_navy_tradition = -30
+			add_country_modifier = {
+				name = pict_navy_buff
+				duration = -1
+			} 
+		}
+	}
+
 	rus_south_push = {
 		icon = mission_court_education
 		position = 5
@@ -512,6 +535,9 @@ Rusia_5_slot = {
 		}
 
 		effect = {
+			country_event = {
+				id = pictii.14
+			}
 			add_adm_power = 100
 			add_dip_power = 100
 			add_mil_power = 100
