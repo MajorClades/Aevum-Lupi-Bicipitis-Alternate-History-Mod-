@@ -152,7 +152,7 @@ country_event = {
 		}
 		if = {
 			limit = {
-				has_country_flag = pap_mt_god_king
+				mission_completed = pap_italian_question
 			}
 			override_country_name = GOD_EMPIRE
 		}
@@ -170,7 +170,7 @@ country_event = {
 					}
 					NOT = { is_core = ROOT }
 				}
-				add_core = emperor
+				add_core = PA0
 			}
 			every_country = {
 				limit = {
@@ -210,8 +210,17 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA9076"
-		IT9 = {
-			inherit = ROOT
+		if = {
+			limit = {
+				IT9 = { exists = yes}
+			}
+			IT9 = {
+				inherit = ROOT
+			}
+		}else = {
+			PA0 = {
+				inherit = ROOT
+			}
 		}
 	}
 }
