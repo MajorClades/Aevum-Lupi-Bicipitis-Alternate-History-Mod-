@@ -134,12 +134,25 @@ country_event = {
 	picture = SAD_MERCHANT_eventPicture
 	is_triggered_only = yes
 	fire_only_once = yes
-
+	immediate = {
+		hidden_effect = {
+			add_ruler_personality = conqueror_personality
+			add_ruler_personality = sinner_personality
+			add_ruler_personality = strict_personality
+		}
+	}
 	option = {
 		name = pictii.12a
 		add_treasury = -50
 		capital_scope = {
 			change_culture = rusian
+		}
+		define_ruler_to_general = {
+			fire = 1
+			shock = 6
+			manuever = 4
+			siege = 3
+			trait = space_wolves_personality
 		}
 	}
 }
@@ -205,5 +218,40 @@ country_event = {
 	option = {
 		name = pictii.14c
 		add_stability_or_adm_power = yes
+	}
+}
+
+country_event = {
+	id = pictii.15
+	title = pictii.15.test
+	desc = pictii.15.desc
+	picture = NORSE_TEMPLE_eventPicture
+	
+	trigger = {
+		any_owned_province = {
+			is_core = ROOT
+			religion = norse_ragnaroked
+		}
+		primary_culture = rusian
+	}
+
+	fire_only_once = yes
+
+	mean_time_to_happen = {
+		months = 12
+	}
+
+	option = {
+		name = pictii.15a
+		add_stability = -1
+		change_religion = norse_ragnaroked
+		capital_scope = {
+			change_religion = norse_ragnaroked
+		}
+	}
+	option = {
+		name = pictii.15b
+		add_papal_influence = 25
+		add_prestige_or_monarch_power = { amount = 15}
 	}
 }
