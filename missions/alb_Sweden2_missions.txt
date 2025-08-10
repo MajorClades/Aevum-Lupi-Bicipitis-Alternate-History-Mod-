@@ -28,25 +28,32 @@ SWE2_1_slot = {
 		}
 		
 		effect = {
-			if = {
-				limit = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = SWED_TT_1
+				first_limit = "
 					OR = {
 						is_rival = GA0
 						GA0 = {
 							is_rival = ROOT
 						}
 					}
-				}
-				lowlands_area = {
-					add_permanent_claim = ROOT
-				}
-			}else = {
-				highlands_area = {
-					add_permanent_claim = GA0
-				}
-				add_prestige_or_monarch_power = {
-					amount = 15
-				}
+				"
+				first_effect = "
+					lowlands_area = {
+						add_permanent_claim = ROOT
+					}
+				"
+				second_limit = "
+					alliance_with = GA0
+				"
+				second_effect = "
+					highlands_area = {
+						add_permanent_claim = GA0
+					}
+					add_prestige_or_monarch_power = {
+						amount = 15
+					}
+				"
 			}
 		}
 	}
@@ -73,20 +80,30 @@ SWE2_1_slot = {
 		}
 		
 		effect = {
-			if = {
-				limit = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = SWED_TT_2
+				first_limit = "
 					alliance_with = GA0
-				}
-				GA0 = {
-					country_event = {
-						id = swe2.1
-						days = 1
+				"
+				first_effect = "
+					GA0 = {
+						country_event = {
+							id = swe2.1
+							days = 1
+						}
 					}
-				}
-			}else = {
-				highlands_area = {
-					add_permanent_claim = ROOT
-				}
+				"
+				second_limit = "
+					NOT = { alliance_with = GA0 }
+				"
+				second_effect = "
+					lowlands_area = {
+						add_unrest = -5
+					}
+					highlands_area = {
+						add_permanent_claim = ROOT
+					}
+				"
 			}
 		}
 	}
@@ -108,21 +125,31 @@ SWE2_1_slot = {
 		}
 		
 		effect = {
-			if = {
-				limit = {
-					NOT = {
-						highlands_area = {
-							type = all
-							owned_by = ROOT
-						}
-					}
+			simple_dynamic_effect = {
+				first_custom_tooltip = SWED_TT_3
+				first_limit = "
 					NOT = {
 						senior_union_with = GA0
 					}
-				}
-				highlands_area = {
-					add_permanent_claim = ROOT
-				}
+				"
+				first_effect = "
+					add_stability = 1
+					GA0 = {
+						add_stability = 1
+					}
+				"
+				second_limit = "
+					highlands_area = {
+						type = all
+						owned_by = ROOT
+					}
+				"
+				second_effect = "
+					add_adm_power = 75
+					highlands_area = {
+						add_unrest = -5
+					}
+				"
 			}
 			subarctic_islands_area = {
 				add_permanent_claim = ROOT
@@ -132,31 +159,22 @@ SWE2_1_slot = {
 	swe_union_q = {
 		icon = mission_naval_kingdom
 		required_missions = {swe_union_t }
-		position = 6
+		position = 5
 		provinces_to_highlight = {
 			OR = {
 				area = highlands_area
 				area = subarctic_islands_area
 			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		trigger = { 
 			subarctic_islands_area = {
 				type = all
-				OR = {
-					owned_by = ROOT
-					owner = {
-						is_subject_of = ROOT
-					}
-				}
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			highlands_area = {
 				type = all
-				OR = {
-					owned_by = ROOT
-					owner = {
-						is_subject_of = ROOT
-					}
-				}
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 		
@@ -165,51 +183,6 @@ SWE2_1_slot = {
 				name = north_sea_market
 				duration = 10950
 			}
-		}
-	}
-	swe_northern_light = {
-		icon = mission_conquer_norway
-		required_missions = {swe_norway}
-		position = 8
-		provinces_to_highlight = {
-			area = northern_norway
-		}
-		trigger = { 
-			northern_norway = {
-				type = all
-				is_core = ROOT
-				owned_by = ROOT
-			}
-		}
-		
-		effect = {
-			add_country_modifier = {
-				name = snow_storms
-				duration = 10950
-			}
-		}
-	}
-	swe_norse_scandinavia = {
-		icon = mission_norse_faith
-		required_missions = {swe_scandinavia}
-		position = 10
-		provinces_to_highlight = {
-			region = scandinavia_region
-		}
-		trigger = { 
-			num_of_owned_provinces_with = {
-				value = 25
-				region = scandinavia_region
-				religion = ROOT
-			}
-		}
-		
-		effect = {
-			add_country_modifier = {
-				name = norse_ragnanot
-				duration = -1
-			}
-			custom_tooltip = NORSE_SCAND
 		}
 	}
 }
@@ -223,14 +196,19 @@ SWE2_2_slot = {
 
 	swe_kenalv = {
 		icon = mission_junk_boat
-		required_missions = { }
 		position = 1
-		
+		provinces_to_highlight = {
+			province_id = 243
+		}
 		trigger = { 
 			has_mil_advisor = yes
+			owns = 243
 		}
 		
 		effect = {
+			243 = {
+				carolean_infantry = ROOT
+			}
 			east_anglia_area = {
 				add_permanent_claim = ROOT
 			}
@@ -243,16 +221,19 @@ SWE2_2_slot = {
 		
 		provinces_to_highlight = {
 			area = east_anglia_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		trigger = { 
 			east_anglia_area = {
 				type = all
-				is_core = ROOT
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 		
 		effect = {
+			add_accepted_culture_or_dip_power = {
+				culture = juts
+			}
 			add_legitimacy = 15
 			add_army_tradition = 15
 		}
@@ -273,20 +254,79 @@ SWE2_2_slot = {
 			custom_tooltip = SWE_MARINE
 			hidden_effect = {
 				capital_scope = {
-					marine_infantry = ROOT
-					marine_infantry = ROOT
-					marine_infantry = ROOT
-					marine_infantry = ROOT
-					marine_infantry = ROOT
+					carolean_infantry = ROOT
+					carolean_infantry = ROOT
+					carolean_infantry = ROOT
+					carolean_infantry = ROOT
+					carolean_infantry = ROOT
 				}
 			}
 			
 		}
 	}
+	sweden_press_the_sailors = {
+		icon = control_coromandel
+		required_missions = {swe_navy}
+		position = 4
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_port = yes
+			has_manpower_building_trigger = no
+		}
+		trigger = { 
+			num_of_owned_provinces_with = {
+				value = 10
+				has_port = yes
+				has_manpower_building_trigger = yes
+			}
+		}
+		
+		effect = {
+			custom_tooltip = SWED_TT_4a
+			tooltip = {
+				add_province_modifier = {
+						name = swe_recruitment_zone
+						duration = -1
+					}
+			}
+			custom_tooltip = SWED_TT_4b
+			hidden_effect = {
+				for = {
+					amount = 5
+					effect = "
+						random_owned_province = {
+							limit = { has_port = yes has_manpower_building_trigger = yes }
+							add_province_modifier = {
+								name = swe_recruitment_zone
+								duration = -1
+							}
+						}
+					"
+				}
+			}
+		}
+	}
+	sweden_rules_the_waves = {
+		icon = mission_vasa_ship
+		required_missions = {sweden_press_the_sailors}
+		position = 6
+		trigger = { 		
+			is_great_power = yes
+			has_flagship = yes
+			navy_size = 100
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = swe_rule_waves
+				duration = -1
+			}
+		}
+	}
 	swe_back_home = {
 		icon = mission_conquer_norway
-		required_missions = {swe_navy swe_union_t}
-		position = 5
+		required_missions = { }
+		position = 9
 		trigger = { 
 			OR = {
 				any_owned_province = {
@@ -311,7 +351,7 @@ SWE2_2_slot = {
 	swe_norway = {
 		icon = mission_conquer_norway
 		required_missions = {swe_back_home}
-		position = 7
+		position = 11
 		provinces_to_highlight = {
 			area = western_norway
 		}
@@ -333,104 +373,6 @@ SWE2_2_slot = {
 			}
 		}
 	}
-	swe_saxangl = {
-		icon = mission_conquer_norway
-		required_missions = {swe_norway}
-		position = 8
-		provinces_to_highlight = {
-			area = eastern_norway
-		}
-		trigger = { 
-			eastern_norway = {
-				type = all
-				is_core = ROOT
-				owned_by = ROOT
-			}
-		}
-		
-		effect = {
-			add_adm_power = 50
-			add_mil_power = 150
-			jutland_area = {
-				add_permanent_claim = ROOT
-			}
-			vastra_gotaland_area = {
-				add_permanent_claim = ROOT
-			}
-			ostra_svealand_area = {
-				add_permanent_claim = ROOT
-			}
-		}
-	}
-	swe_scandinavia = {
-		icon = mission_conquer_norway
-		required_missions = {swe_saxangl swe_northern_light}
-		position = 9
-		provinces_to_highlight = {
-			region = scandinavia_region
-		}
-		trigger = { 
-			num_of_owned_provinces_with = {
-				value = 20
-				region = scandinavia_region
-			}
-		}
-		
-		effect = {
-			scandinavia_region = {
-				add_permanent_claim = ROOT
-			}
-		}
-	}
-	swe_our_scandinavia = {
-		icon = mission_unite_scandinavia
-		required_missions = {swe_scandinavia}
-		position = 10
-		provinces_to_highlight = {
-			region = scandinavia_region
-		}
-		trigger = { 
-			scandinavia_region = {
-				type = all
-				owned_by = ROOT
-			}
-		}
-		
-		effect = {
-			custom_tooltip = SWE_START_G
-			1 = {
-				add_unrest = 10
-				change_culture = zladian
-			}
-		}
-	}
-	swe_scadian = {
-		icon = mission_baltic_empire
-		required_missions = {swe_our_scandinavia swe_norse_scandinavia}
-		position = 11
-		provinces_to_highlight = {
-			region = scandinavia_region
-		}
-		trigger = { 
-			scandinavia_region = {
-				type = all
-				NOT = {
-					culture_group = zladinian
-				}
-			}
-		}
-		
-		effect = {
-			set_government_rank = 3
-			1 = {
-				change_culture = ROOT
-				add_permanent_province_modifier = {
-					name = swedish_home
-					duration = -1
-				}
-			}
-		}
-	}
 }
 
 SWE2_3_slot = {
@@ -442,22 +384,29 @@ SWE2_3_slot = {
 
 	swe_frisia = {
 		icon = mission_war_chest
-		required_missions = { swe_wales}
+		required_missions = { sweden_take_on_britannia}
 		position = 2
 		provinces_to_highlight = {
 			area = wessex_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		trigger = { 
 			wessex_area = {
 				type = all
-				is_core = ROOT
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 		
 		effect = {
 			add_treasury = 350
 			add_dip_power = 100
+			wessex_area = {
+				change_culture = frislander_new
+				add_province_modifier = {
+					name = swe_frisian_dominion
+					duration = 10950
+				}
+			}
 		}
 	}
 	swe_sea = {
@@ -477,93 +426,51 @@ SWE2_3_slot = {
 	}
 	swe_ports = {
 		icon = imperial_navy
-		required_missions = {swe_sea}
+		required_missions = {sweden_press_the_sailors}
 		position = 5
 		provinces_to_highlight = {
 			owned_by = ROOT
 			has_port = yes
+			has_dock_building_trigger = no
+			has_manpower_building_trigger = no
 		}
 		trigger = { 
 			num_of_owned_provinces_with = {
 				value = 10
-				OR = {
-					has_building = dock
-					has_building = drydock
-				}
+				has_dock_building_trigger = yes
+				has_manpower_building_trigger = yes
 			}
 		}
 		
 		effect = {
 			add_country_modifier = {
-				name = swe_marine_power
+				name = swe_magni_power
 				duration = -1
 			}
 		}
 	}
-	swe_portss = {
-		icon = control_coromandel
+	swe_sealand = {
+		icon = mission_longships
 		required_missions = {swe_ports}
 		position = 6
-		provinces_to_highlight = {
-			owned_by = ROOT
-			has_port = yes
-		}
 		trigger = { 
-			num_of_owned_provinces_with = {
-				value = 25
-				has_port = yes
+			sailors_percentage = 0.7
+			has_leader_with = {
+				general = yes
+				total_pips = 10
 			}
+			num_of_carolean = 10
 		}
 		
 		effect = {
-			add_sailors = 5000
-			every_owned_province = {
-				limit = {
-					has_port = yes
-				}
-				add_devastation = -30
-			}
-		}
-	}
-	swe_portsss = {
-		icon = mission_vasa_ship
-		required_missions = {swe_portss}
-		position = 8
-		trigger = { 		
-			is_great_power = yes
-			has_flagship = yes
-			navy_size = 100
-		}
-		
-		effect = {
+			add_sailors = -0.7
 			add_country_modifier = {
-				name = swe_rule_waves
+				name = huscarls_swe
 				duration = -1
 			}
 		}
 	}
-	swe_portssss = {
-		icon = mission_rb_a_mighty_fleet
-		required_missions = {swe_portsss swe_oversea_south}
-		position = 10
-		trigger = { 		
-			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-				value = 50
-				OR = {
-					continent = north_america
-					continent = south_america
-				}
-			}
-		}
-		
-		effect = {
-			remove_country_modifier = swe_rule_waves
-			add_country_modifier = {
-				name = swe_rule_waves_2
-				duration = -1
-			}
-		}
-	}
+	
 }
 
 SWE2_4_slot = {
@@ -573,13 +480,19 @@ SWE2_4_slot = {
 	potential = {	tag = SW2	}
 	has_country_shield = yes
 	
-	swe_wales = {
+	sweden_take_on_britannia = {
 		icon = mission_rb_conquer_wales
 		required_missions = { }
 		position = 1
 		
 		trigger = { 
-			army_size_percentage = 0.9
+			if = {
+				limit = { ai = yes}
+				army_size_percentage = 0.65
+				num_of_generals = 1
+			}else = {
+				army_size_percentage = 0.9
+			}
 		}
 		
 		effect = {
@@ -594,9 +507,9 @@ SWE2_4_slot = {
 			}
 		}
 	}
-	swe_wales_s = {
+	sweden_beat_britannia = {
 		icon = mission_rb_control_state_religion
-		required_missions = { swe_wales}
+		required_missions = { sweden_take_on_britannia}
 		position = 2
 		provinces_to_highlight = {
 			area = wales_area
@@ -623,7 +536,7 @@ SWE2_4_slot = {
 	}
 	swe_scot = {
 		icon = mission_rb_into_ireland
-		required_missions = { swe_wales_s}
+		required_missions = { sweden_beat_britannia}
 		position = 3
 		provinces_to_highlight = {
 			is_capital_of = SC0
@@ -710,55 +623,7 @@ SWE2_4_slot = {
 			}
 		}
 	}
-	swe_sealand = {
-		icon = mission_longships
-		required_missions = {swe_portss}
-		position = 7
-		trigger = { 
-			has_leader_with = {
-				general = yes
-				total_pips = 10
-			}
-			num_of_marines = 10
-		}
-		
-		effect = {
-			add_sailors = -3000
-			add_country_modifier = {
-				name = huscarls_swe
-				duration = -1
-			}
-		}
-	}
-	swe_oversea_south = {
-		icon = imperial_navy
-		required_missions = {swe_oversea}
-		position = 9
-		trigger = { 
-			any_subject_country = {
-				num_of_owned_provinces_with = {
-					value = 10
-					continent = south_america
-				}
-			}
-		}
-		
-		effect = {
-			random_subject_country = {
-				limit = {
-					num_of_owned_provinces_with = {
-						value = 10
-						continent = south_america
-					}
-				}
-				capital_scope = {
-					add_base_manpower = 3
-					change_trade_goods = cloth
-				}
-			}
 
-		}
-	}
 }
 
 SWE2_5_slot = {
@@ -772,7 +637,7 @@ SWE2_5_slot = {
 
 	swe_london_s = {
 		icon = mission_rb_scottish_conquer_london
-		required_missions = { swe_wales}
+		required_missions = { sweden_take_on_britannia}
 		position = 2
 		provinces_to_highlight = {
 			area = home_counties_area
@@ -794,7 +659,7 @@ SWE2_5_slot = {
 	}
 	swe_land_return = {
 		icon = mission_pol_develop_countryside
-		required_missions = { swe_london_s swe_wales_s }
+		required_missions = { swe_london_s sweden_beat_britannia }
 		position = 3
 		provinces_to_highlight = {
 			owned_by = ROOT
@@ -831,78 +696,6 @@ SWE2_5_slot = {
 		effect = {
 			capital_scope = {
 				add_base_tax = 2
-			}
-			random_owned_province = {
-				limit = {
-					OR = {
-						has_building = temple
-						has_building = cathedral
-					}
-				}
-				add_base_tax = 1
-			}
-			random_owned_province = {
-				limit = {
-					OR = {
-						has_building = temple
-						has_building = cathedral
-					}
-				}
-				add_base_tax = 1
-			}
-			random_owned_province = {
-				limit = {
-					OR = {
-						has_building = temple
-						has_building = cathedral
-					}
-				}
-				add_base_tax = 1
-			}
-			random_owned_province = {
-				limit = {
-					OR = {
-						has_building = temple
-						has_building = cathedral
-					}
-				}
-				add_base_tax = 1
-			}
-			random_owned_province = {
-				limit = {
-					OR = {
-						has_building = temple
-						has_building = cathedral
-					}
-				}
-				add_base_tax = 1
-			}
-			random_owned_province = {
-				limit = {
-					OR = {
-						has_building = temple
-						has_building = cathedral
-					}
-				}
-				add_base_tax = 1
-			}
-			random_owned_province = {
-				limit = {
-					OR = {
-						has_building = temple
-						has_building = cathedral
-					}
-				}
-				add_base_tax = 1
-			}
-			random_owned_province = {
-				limit = {
-					OR = {
-						has_building = temple
-						has_building = cathedral
-					}
-				}
-				add_base_tax = 1
 			}
 		}
 	}
@@ -963,96 +756,4 @@ SWE2_5_slot = {
 			add_years_of_income = 4.5
 		}
 	}	
-	swe_oversea = {
-		icon = imperial_navy
-		required_missions = {}
-		position = 8
-		trigger = { 
-			any_subject_country = {
-				num_of_owned_provinces_with = {
-					value = 10
-					continent = north_america
-				}
-			}
-		}
-		
-		effect = {
-			random_subject_country = {
-				limit = {
-					num_of_owned_provinces_with = {
-						value = 10
-						continent = north_america
-					}
-				}
-				capital_scope = {
-					add_base_manpower = 3
-					change_trade_goods = cloth
-				}
-			}
-
-		}
-	}
-	swe_coloni = {
-		icon = imperial_navy
-		required_missions = {swe_oversea}
-		position = 9
-		trigger = { 
-			dip_power = 200
-			has_institution = global_trade
-		}
-		
-		effect = {
-			every_subject_country = {
-				limit = {
-					capital_scope = {
-						OR = {
-							continent = north_america
-							continent = south_america
-						}
-					}
-				}
-				add_treasury = 1000
-				capital_scope = {
-					add_base_tax = 2
-
-				}
-			}
-		}
-	}
-	swe_extreme_colonisation = {
-		icon = mission_invade_island
-		required_missions = {swe_coloni swe_oversea_south }
-		position = 10
-		trigger = { 
-			years_of_income = 5
-			any_subject_country = {
-				capital_scope = {
-					OR = {
-						continent = north_america
-						continent = south_america
-					}
-				}
-				total_development = 200
-			}
-		}
-		
-		effect = {
-			add_years_of_income = -5
-			every_subject_country = {
-				limit = {
-					capital_scope = {
-						OR = {
-							continent = north_america
-							continent = south_america
-						}
-					}
-				}
-				add_country_modifier = {
-					name = swe_control_colony
-					duration = -1
-				}
-			}
-
-		}
-	}
 }
