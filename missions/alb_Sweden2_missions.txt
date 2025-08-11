@@ -513,12 +513,12 @@ SWE2_4_slot = {
 		position = 2
 		provinces_to_highlight = {
 			area = wales_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		trigger = { 
 			wales_area = {
 				type = all
-				is_core = ROOT
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 		
@@ -553,6 +553,9 @@ SWE2_4_slot = {
 		}
 		
 		effect = { 
+			SC0 = {
+				add_stability = -1
+			}
 			leinster_area = {
 				add_permanent_claim = ROOT
 			} 
@@ -567,21 +570,20 @@ SWE2_4_slot = {
 		position = 4
 		provinces_to_highlight = {
 			area = leinster_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
 		}
 		trigger = { 
-			any_owned_province = {
-				area = leinster_area
+			leinster_area = {
+				type = any
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 		
 		effect = {
-			munster_area = {
-				add_permanent_claim = ROOT
-			}
-			connacht_area = {
-				add_permanent_claim = ROOT
-			} 
-			ulster_area = {
+			add_navy_tradition = 15
+			ireland_provinces = {
 				add_permanent_claim = ROOT
 			}
 		}
@@ -591,29 +593,12 @@ SWE2_4_slot = {
 		required_missions = { swe_scotia}
 		position = 5
 		provinces_to_highlight = {
-			OR = {
-				area = leinster_area
-				area = munster_area
-				area = connacht_area
-				area = ulster_area
-			}
+			province_group = ireland_provinces
 		}
 		trigger = { 
-			munster_area = {
+			ireland_provinces = {
 				type = all
-				owned_by = ROOT
-			}
-			connacht_area = {
-				type = all
-				owned_by = ROOT
-			}
-			ulster_area = {
-				type = all
-				owned_by = ROOT
-			}
-			leinster_area = {
-				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 		
@@ -633,20 +618,18 @@ SWE2_5_slot = {
 	potential = {	tag = SW2	}
 	has_country_shield = yes
 
-	
-
 	swe_london_s = {
 		icon = mission_rb_scottish_conquer_london
 		required_missions = { sweden_take_on_britannia}
 		position = 2
 		provinces_to_highlight = {
 			area = home_counties_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		trigger = { 
 			home_counties_area = {
 				type = all
-				is_core = ROOT
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 		
@@ -663,15 +646,28 @@ SWE2_5_slot = {
 		position = 3
 		provinces_to_highlight = {
 			owned_by = ROOT
+			culture = briton
 			NOT = {
 				religion = ROOT
 			}
 		}
 		trigger = { 
-			religious_unity = 0.95
+			num_of_owned_provinces_with = {
+				value = 7
+				culture = briton
+				religion = ROOT
+			}
 		}
 		
 		effect = {
+			remove_accepted_culture = briton
+			add_accepted_culture = briton_new
+			every_owned_province = {
+				limit = {
+					culture = briton
+				}
+				change_culture = briton_new
+			}
 			add_country_modifier = {
 				name = swe_construcion
 				duration = 10950
@@ -682,20 +678,37 @@ SWE2_5_slot = {
 		icon = mission_castle_construction
 		required_missions = { swe_land_return }
 		position = 4
-		
+		provinces_to_highlight = {
+			OR = {
+				area = east_midlands_area
+				province_id = 4372
+				province_id = 4375
+			}
+			has_tax_building_trigger = no
+		}
 		trigger = { 
-			num_of_owned_provinces_with = {
-				value = 10
-				OR = {
-					has_building = temple
-					has_building = cathedral
-				}
+			east_midlands_area = {
+				type = all
+				has_tax_building_trigger = yes
+			}
+			4372 = {
+				has_tax_building_trigger = yes
+			}
+			4375 = {
+				has_tax_building_trigger = yes
 			}
 		}
 		
 		effect = {
-			capital_scope = {
-				add_base_tax = 2
+			add_estate_loyalty = {
+				estate = estate_church
+				loyalty = 10
+			}
+			1861 = {
+				add_great_project_tier = {
+					type = baldr_temple
+					tier = 1
+				}
 			}
 		}
 	}
@@ -709,14 +722,13 @@ SWE2_5_slot = {
 				trade_goods = copper
 				trade_goods = iron
 			}
+			has_production_building_trigger = no
+			NOT = { base_production = 5 }
 		}
 		trigger = { 
 			num_of_owned_provinces_with = {
 				value = 5
-				OR = {
-					has_building = workshop
-					has_building = counting_house
-				}
+				has_production_building_trigger = yes
 				OR = {
 					trade_goods = copper
 					trade_goods = iron
@@ -726,17 +738,31 @@ SWE2_5_slot = {
 		}
 		
 		effect = {
-			every_owned_province = {
-				limit = {
-					OR = {
-						trade_goods = grain
-						trade_goods = wool
-						trade_goods = livestock
+			custom_tooltip = SWED_TT_5
+			tooltip = {
+				random_owned_province = {
+					limit = {
+						OR = { trade_goods = grain trade_goods = wool trade_goods = livestock }
+					}
+					add_province_modifier = {
+						name = swe_better_farming
+						duration = 10950
 					}
 				}
-				add_province_modifier = {
-					name = swe_better_farming
-					duration = 10950
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						OR = {
+							trade_goods = grain
+							trade_goods = wool
+							trade_goods = livestock
+						}
+					}
+					add_province_modifier = {
+						name = swe_better_farming
+						duration = 10950
+					}
 				}
 			}
 		}
