@@ -63,13 +63,18 @@ SWE2_1_slot = {
 		position = 3
 		provinces_to_highlight = {
 			area = lowlands_area
+			OR = {
+				owned_by = ROOT
+				owned_by = GA0
+			}
 		}
 		trigger = { 
 			OR = {
 				AND = {
 					alliance_with = GA0
-					PI0 = {
-						exists = no
+					highlands_area = {
+						type = all
+						owned_by = GA0
 					}
 				}
 				lowlands_area = {
@@ -179,9 +184,65 @@ SWE2_1_slot = {
 		}
 		
 		effect = {
+			british_isles_region = {
+				add_permanent_claim = ROOT
+			}
 			add_country_modifier = {
 				name = north_sea_market
 				duration = 10950
+			}
+		}
+	}
+	swe_back_home = {
+		icon = mission_conquer_norway
+		position = 6
+		provinces_to_highlight = {
+			OR = {
+				is_capital_of = ZL0
+				is_capital_of = ZL1
+			}
+		}
+		trigger = { 
+			OR = {
+				AND = {
+					exists = ZL0
+					navy_size = ZL0
+				}
+				AND = {
+					exists = ZL1
+					navy_size = ZL1
+				}
+			}
+		}
+		
+		effect = {
+			western_norway = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	swe_norway = {
+		icon = mission_conquer_norway
+		required_missions = {swe_back_home}
+		position = 7
+		provinces_to_highlight = {
+			area = western_norway
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = { 
+			western_norway = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+		}
+		
+		effect = {
+			add_navy_tradition = 15
+			eastern_norway = {
+				add_permanent_claim = ROOT
+			}
+			northern_norway = {
+				add_permanent_claim = ROOT
 			}
 		}
 	}
@@ -283,27 +344,7 @@ SWE2_2_slot = {
 		
 		effect = {
 			custom_tooltip = SWED_TT_4a
-			tooltip = {
-				add_province_modifier = {
-						name = swe_recruitment_zone
-						duration = -1
-					}
-			}
-			custom_tooltip = SWED_TT_4b
-			hidden_effect = {
-				for = {
-					amount = 5
-					effect = "
-						random_owned_province = {
-							limit = { has_port = yes has_manpower_building_trigger = yes }
-							add_province_modifier = {
-								name = swe_recruitment_zone
-								duration = -1
-							}
-						}
-					"
-				}
-			}
+			set_country_flag = swe_recruitment_zone_flag		
 		}
 	}
 	sweden_rules_the_waves = {
@@ -323,56 +364,7 @@ SWE2_2_slot = {
 			}
 		}
 	}
-	swe_back_home = {
-		icon = mission_conquer_norway
-		required_missions = { }
-		position = 9
-		trigger = { 
-			OR = {
-				any_owned_province = {
-					area = western_norway
-				}
-				full_idea_group = maritime_ideas
-				full_idea_group = naval_ideas
-				navy_tradition = 50
-				has_leader_with = {
-					admiral = yes
-					total_pips = 7
-				}
-			}
-		}
-		
-		effect = {
-			western_norway = {
-				add_permanent_claim = ROOT
-			}
-		}
-	}
-	swe_norway = {
-		icon = mission_conquer_norway
-		required_missions = {swe_back_home}
-		position = 11
-		provinces_to_highlight = {
-			area = western_norway
-		}
-		trigger = { 
-			western_norway = {
-				type = all
-				is_core = ROOT
-				owned_by = ROOT
-			}
-		}
-		
-		effect = {
-			add_navy_tradition = 15
-			eastern_norway = {
-				add_permanent_claim = ROOT
-			}
-			northern_norway = {
-				add_permanent_claim = ROOT
-			}
-		}
-	}
+	
 }
 
 SWE2_3_slot = {
@@ -603,12 +595,67 @@ SWE2_4_slot = {
 		}
 		
 		effect = {
+			ireland_provinces = {
+				add_nationalism = -5
+			}
 			country_event = {
 				id = swe2.2
 			}
 		}
 	}
-
+	swe_spin_the_wheel = {
+		icon = show_piety
+		position = 6
+		provinces_to_highlight = {
+			OR = {
+				area = east_midlands_area
+				province_id = 4372
+				province_id = 4375
+			}
+			has_tax_building_trigger = yes
+			NOT = { base_tax = 5 }
+		}
+		trigger = { 
+			east_midlands_area = {
+				type = all
+				has_tax_building_trigger = yes
+				has_courthouse_building_trigger = yes
+				base_tax = 5
+			}
+			4372 = {
+				has_tax_building_trigger = yes
+				has_courthouse_building_trigger = yes
+				base_tax = 5
+			}
+			4375 = {
+				has_tax_building_trigger = yes
+				has_courthouse_building_trigger = yes
+				base_tax = 5
+			}
+		}
+		
+		effect = {
+			custom_tooltip = SWED_TT_6
+			east_midlands_area = {
+				add_province_modifier = {
+					name = swe_sun_wheel
+					duration = -1
+				}
+			}
+			4372 = {
+				add_province_modifier = {
+					name = swe_sun_wheel
+					duration = -1
+				}
+			}
+			4375 = {
+				add_province_modifier = {
+					name = swe_sun_wheel
+					duration = -1
+				}	
+			}
+		}
+	}
 }
 
 SWE2_5_slot = {
@@ -771,10 +818,17 @@ SWE2_5_slot = {
 		icon = dominant_economy
 		required_missions = { swe_works }
 		position = 6
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_manufactory_trigger = no
+			trade_goods = grain
+		}
+
 		trigger = { 
 			num_of_owned_provinces_with = {
-				value = 5
+				value = 10
 				has_manufactory_trigger = yes
+				trade_goods = grain
 			}
 		}
 		
@@ -783,3 +837,7 @@ SWE2_5_slot = {
 		}
 	}	
 }
+
+
+# custom_tooltip = ASATRU_ORDERS_CT
+# set_country_flag = asatru_order_unlocked
