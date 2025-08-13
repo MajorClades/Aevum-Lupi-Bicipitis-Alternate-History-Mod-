@@ -279,6 +279,45 @@ buy_protectorate_into_annex_action = {
     }
 }
 
+make_trade_league_into_vassal = {
+	category = influence
+	
+	alert_index = 40
+	alert_tooltip = demand_dummy_alert_tooltip
+	require_acceptance = no # Whether the recipient gets an option to decline
+	is_visible = {
+		is_subject = no
+		FROM = {
+			is_subject = no
+			is_in_trade_league_with = ROOT		
+		}
+	}
+	is_allowed = {
+		years_of_income = 0.5
+		is_at_war = no
+		is_subject = no
+		FROM = {
+			is_subject = no
+			is_at_war = no
+			is_in_trade_league_with = ROOT	
+			has_opinion = {
+				who = ROOT
+				value = 190
+			}
+		}
+	}
+	on_accept = {
+		add_years_of_income = -0.5
+		vassalize = FROM
+	}
+	on_decline = 	{
+	}
+
+	ai_will_do = { # this is a trigger
+		always = no
+	}
+}
+
 # Shamely copied from Anbennar
 make_autonomous_vassal = {
 	category = influence
