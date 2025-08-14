@@ -191,6 +191,7 @@ SWE2_1_slot = {
 				name = north_sea_market
 				duration = 10950
 			}
+			custom_tooltip = SWED_TT_6
 		}
 	}
 	swe_back_home = {
@@ -203,6 +204,7 @@ SWE2_1_slot = {
 			}
 		}
 		trigger = { 
+			total_development = 200
 			OR = {
 				AND = {
 					exists = ZL0
@@ -216,6 +218,11 @@ SWE2_1_slot = {
 		}
 		
 		effect = {
+			define_admiral = {
+				shock = 3
+				fire = 4
+				manuever = 3
+			}
 			western_norway = {
 				add_permanent_claim = ROOT
 			}
@@ -242,6 +249,31 @@ SWE2_1_slot = {
 				add_permanent_claim = ROOT
 			}
 			northern_norway = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	swe_more_iceland = {
+		icon = mission_conquer_norway
+		required_missions = { swe_norway }
+		position = 9
+		provinces_to_highlight = {
+			OR = { area = eastern_norway area = northern_norway }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = { 
+			eastern_norway = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+			northern_norway = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+		}
+		
+		effect = {
+			scandinavia_region = {
 				add_permanent_claim = ROOT
 			}
 		}
@@ -364,7 +396,7 @@ SWE2_2_slot = {
 			}
 		}
 	}
-	
+
 }
 
 SWE2_3_slot = {
@@ -462,7 +494,44 @@ SWE2_3_slot = {
 			}
 		}
 	}
-	
+	swe_edict_of_haraldson = {
+		icon = mission_conquer_norway
+
+		position = 7
+		trigger = { 
+			OR = {
+				theologian = 3
+				inquisitor = 3
+			}
+			OR = {
+				full_idea_group = humanist_ideas
+				full_idea_group = religious_ideas
+			}
+		}
+		
+		effect = {
+			country_event = {
+				id = swe2.5
+			}
+		}
+	}
+	swe_syncretism_with = {
+		icon = dominant_economy
+		required_missions = { swe_edict_of_haraldson swe_spin_the_wheel }
+		position = 8
+		provinces_to_highlight = {
+			country_or_non_sovereign_subject_holds = ROOT
+			NOT = { religion = norse_ragnaroked }
+		}
+
+		trigger = { 
+			
+		}
+		
+		effect = {
+			
+		}
+	}
 }
 
 SWE2_4_slot = {
@@ -635,7 +704,6 @@ SWE2_4_slot = {
 		}
 		
 		effect = {
-			custom_tooltip = SWED_TT_6
 			east_midlands_area = {
 				add_province_modifier = {
 					name = swe_sun_wheel
@@ -653,6 +721,47 @@ SWE2_4_slot = {
 					name = swe_sun_wheel
 					duration = -1
 				}	
+			}
+		}
+	}
+	swe_great_allthing = {
+		icon = dominant_economy
+		required_missions = { swe_spread_religion }
+		position = 9
+		provinces_to_highlight = {
+			country_or_non_sovereign_subject_holds = ROOT
+			NOT = {
+				OR = {
+					holy_order = ast_adm_order
+					holy_order = ast_dip_order
+					holy_order = ast_mil_order
+				}
+			}
+		}
+
+		trigger = { 
+			num_of_owned_provinces_with = {
+				value = 50
+				OR = {
+					holy_order = ast_adm_order
+					holy_order = ast_dip_order
+					holy_order = ast_mil_order
+				}
+			}
+		}
+		
+		effect = {
+			east_midlands_area = {
+				add_or_upgrade_tax_building = yes
+				add_building = university
+			}
+			4372 = {
+				add_or_upgrade_tax_building = yes
+				add_building = university
+			}
+			4375 = {
+				add_or_upgrade_tax_building = yes
+				add_building = university
 			}
 		}
 	}
@@ -836,8 +945,29 @@ SWE2_5_slot = {
 			add_years_of_income = 4.5
 		}
 	}	
+	swe_spread_religion = {
+		icon = dominant_economy
+		required_missions = { swe_spin_the_wheel }
+		position = 8
+		provinces_to_highlight = {
+			country_or_non_sovereign_subject_holds = ROOT
+			NOT = { religion = norse_ragnaroked }
+		}
+
+		trigger = { 
+			calc_true_if = {
+				amount = 200
+				all_province = {
+					religion = norse_ragnaroked
+				}
+			}
+		}
+		
+		effect = {
+			custom_tooltip = ASATRU_ORDERS_CT
+			set_country_flag = asatru_order_unlocked
+		}
+	}
 }
 
 
-# custom_tooltip = ASATRU_ORDERS_CT
-# set_country_flag = asatru_order_unlocked

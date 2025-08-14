@@ -479,5 +479,84 @@ country_decisions = {
 		}
 		ai_importance = 400
 	}
+	swe_vinland_saga = {
+		color = {
+			130 30 30
+		}
+		provinces_to_highlight = {
+			OR = {
+				is_capital_of = FJ0
+				is_capital_of = FJ9
+			}
+		}
+		potential = {
+			mission_completed = swe_union_q
+		}
+
+		allow = {
+			OR = {
+				AND = {
+					OR = {
+						tag = FJ0
+						tag = FJ9
+					}
+					owes_favors = {
+						who = ROOT
+						value = 50
+					}
+				}
+				AND = {
+					FJ0 = {
+						exists = no
+					}
+					FJ9 = {
+						exists = no
+					}
+				}
+			}
+		}
+		effect = {
+			add_favors = {
+				who = FJ0
+				amount = -50
+			}
+			add_favors = {
+				who = FJ9
+				amount = -50
+			}
+			if = {
+				limit = {
+					FJ0 = {
+						exists = yes
+					}
+				}
+				create_subject = {
+					subject_type = crown_colony
+					who = FJ0
+				}
+			}else = {
+				if = {
+					limit = {
+						FJ9 = {
+							exists = yes
+						}
+					}
+					create_subject = {
+						subject_type = crown_colony
+						who = FJ9
+					}
+				}else = {
+					canada_region = {
+						add_permanent_claim = ROOT
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+
 
 }

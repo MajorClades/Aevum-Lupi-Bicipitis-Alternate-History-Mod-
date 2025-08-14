@@ -192,19 +192,14 @@ country_event = {
 
 	option = {
 		name = swe2.4a
-		trigger = {
-			sailors = 1000
-		}
+		if = { limit = { has_idea = enforced_service } add_treasury = -9 }else = { add_treasury = -10 }
 		add_sailors = -1000
-		capital_scope = {
-			carolean_infantry = ROOT
-		}
+		capital_scope = { carolean_infantry = ROOT }
 	}
 	option = {
 		name = swe2.4b
-		trigger = {
-			sailors = 2000
-		}
+		trigger = { sailors = 2000 }
+		if = { limit = { has_idea = enforced_service } add_treasury = -18 }else = { add_treasury = -20 }
 		add_sailors = -2000
 		capital_scope = {
 			carolean_infantry = ROOT
@@ -213,9 +208,8 @@ country_event = {
 	}
 	option = {
 		name = swe2.4c
-		trigger = {
-			sailors = 3000
-		}
+		trigger = { sailors = 3000 }
+		if = { limit = { has_idea = enforced_service } add_treasury = -27 }else = { add_treasury = -30 }
 		add_sailors = -3000
 		capital_scope = {
 			carolean_infantry = ROOT
@@ -225,9 +219,8 @@ country_event = {
 	}
 	option = {
 		name = swe2.4d
-		trigger = {
-			sailors = 4000
-		}
+		trigger = { sailors = 4000 }
+		if = { limit = { has_idea = enforced_service } add_treasury = -36 }else = { add_treasury = -40 }
 		add_sailors = -4000
 		capital_scope = {
 			carolean_infantry = ROOT
@@ -238,9 +231,8 @@ country_event = {
 	}
 	option = {
 		name = swe2.4e
-		trigger = {
-			sailors = 5000
-		}
+		trigger = { sailors = 5000 }
+		if = { limit = { has_idea = enforced_service } add_treasury = -45 }else = { add_treasury = -50 }
 		add_sailors = -5000
 		capital_scope = {
 			carolean_infantry = ROOT
@@ -252,9 +244,8 @@ country_event = {
 	}
 	option = {
 		name = swe2.4f
-		trigger = {
-			sailors = 10000
-		}
+		trigger = { sailors = 10000 }
+		if = { limit = { has_idea = enforced_service } add_treasury = -90 }else = { add_treasury = -100 }
 		add_sailors = -10000
 		capital_scope = {
 			carolean_infantry = ROOT
@@ -267,6 +258,42 @@ country_event = {
 			carolean_infantry = ROOT
 			carolean_infantry = ROOT
 			carolean_infantry = ROOT
+		}
+	}
+}
+
+country_event = {
+	id = swe2.5
+	title = swe2.5.test
+	desc = swe2.5.desc
+	picture = RELIGIOUS_CONVERSION_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = swe2.5a
+		custom_tooltip = SWED_TT_7a
+		set_country_flag = norse_faith_tolerance
+		tooltip = {
+			capital_scope = {
+				add_province_modifier = {
+					name = swe_tolerant_conquest
+					duration = 3650
+				}
+			}
+		}
+	}
+	option = {
+		name = swe2.5b
+		custom_tooltip = SWED_TT_7a
+		set_country_flag = norse_faith_intolerance
+		tooltip = {
+			capital_scope = {
+				add_province_modifier = {
+					name = swe_intolerant_conquest
+					duration = 3650
+				}
+			}
 		}
 	}
 }
