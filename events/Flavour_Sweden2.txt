@@ -297,3 +297,57 @@ country_event = {
 		}
 	}
 }
+
+country_event = {
+	id = swe2.6
+	title = swe2.6.test
+	desc = swe2.6.desc
+	picture = RELIGIOUS_CONVERSION_eventPicture
+	
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			ZL0 = {
+				override_country_name = ZLANDINAVIA_TAG
+				change_country_color = {
+					country = SW2
+				}
+			}
+		}
+	}
+	option = {
+		name = swe2.6a
+		scandinavia_region = {
+			limit = {
+				NOT = {
+					area = denmark_area
+				}
+			}
+			cede_province = ZL0
+			add_core = ZL0
+			if = {
+				limit = {
+					culture = jari
+				}
+				change_culture = zladian
+			}
+		}
+		ZL0 = {
+			add_country_modifier = {
+				name = swe_double_crown
+				duration = -1
+			}
+			change_primary_culture = zladian
+		}
+		create_union = ZL0
+	}
+	option = {
+		name = swe2.6b
+		scandinavia_region = {
+			add_province_modifier = {
+				name = swe_crush_the_slavs
+				duration = 36500
+			}
+		}
+	}
+}

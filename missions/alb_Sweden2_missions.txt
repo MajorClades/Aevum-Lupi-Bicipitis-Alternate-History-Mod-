@@ -273,8 +273,76 @@ SWE2_1_slot = {
 		}
 		
 		effect = {
+			eastern_norway = {
+				random = {
+					chance = 50
+					change_religion = norse_ragnaroked
+				}
+			}
+			northern_norway	= {
+				random = {
+					chance = 50
+					change_religion = norse_ragnaroked
+				}
+			}
 			scandinavia_region = {
 				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	swe_free_zladinia = {
+		icon = mission_conquer_norway
+		required_missions = { swe_more_iceland swe_scandinavia_old_tales }
+		position = 10
+		provinces_to_highlight = {
+			region = scandinavia_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = { 
+			custom_trigger_tooltip = {
+				tooltip = SWED_TR_1
+				ZL0 = {
+					NOT = {
+						num_of_owned_provinces_with = {
+							value = 1
+							continent = europe
+						}
+					}
+				}
+				ZL1 = {
+					NOT = {
+						num_of_owned_provinces_with = {
+							value = 1
+							continent = europe
+						}
+					}
+				}
+			}
+			scandinavia_region = {
+				type = all
+				NOT = {
+					area = denmark_area
+				}
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+		}
+		
+		effect = {
+			hidden_effect = {
+				ZL0 = {
+					every_owned_province = {
+						cede_province = ROOT
+					}
+				}
+				ZL1 = {
+					every_owned_province = {
+						cede_province = ROOT
+					}
+				}
+			}
+			country_event = {
+				id = swe2.6
 			}
 		}
 	}
@@ -396,7 +464,33 @@ SWE2_2_slot = {
 			}
 		}
 	}
+	swe_scandinavia_old_tales = {
+		icon = dominant_economy
+		required_missions = { swe_norway swe_syncretism_with }
+		position = 9
+		provinces_to_highlight = {
+			area = western_norway
+			NOT = { religion = norse_ragnaroked }
+		}
 
+		trigger = { 
+			western_norway = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				OR = {
+					religion = norse_ragnaroked
+					has_province_modifier = swe_tolerant_conquest
+				}
+			}
+		}
+		
+		effect = {
+			add_accepted_culture = jari
+			western_norway = {
+				add_base_tax = 1
+			}
+		}
+	}
 }
 
 SWE2_3_slot = {
@@ -510,8 +604,9 @@ SWE2_3_slot = {
 		}
 		
 		effect = {
-			country_event = {
+			country_event_with_insight = {
 				id = swe2.5
+				insight_tooltip = SWED_TT_7b
 			}
 		}
 	}
@@ -520,16 +615,86 @@ SWE2_3_slot = {
 		required_missions = { swe_edict_of_haraldson swe_spin_the_wheel }
 		position = 8
 		provinces_to_highlight = {
-			country_or_non_sovereign_subject_holds = ROOT
+			region = british_isles_region
 			NOT = { religion = norse_ragnaroked }
 		}
 
 		trigger = { 
-			
+			british_isles_region = {
+				type = all
+				owned_by = ROOT
+				OR = {
+					religion = norse_ragnaroked
+					has_province_modifier = swe_tolerant_conquest
+				}
+			}
 		}
 		
 		effect = {
-			
+			simple_dynamic_effect = {
+				first_custom_tooltip = SWED_TT_8a
+				first_limit = "has_country_flag = norse_faith_tolerance"
+				first_effect = "
+					east_midlands_area = {
+						add_or_upgrade_trade_building = yes
+					}
+					4372 = {
+						add_or_upgrade_trade_building = yes
+					}
+					4375 = {
+						add_or_upgrade_trade_building = yes	
+					}
+				"
+				second_custom_tooltip = SWED_TT_8b
+				second_limit = "has_country_flag = norse_faith_intolerance"
+				second_effect = "
+					east_midlands_area = {
+						add_or_upgrade_manpower_building = yes
+					}
+					4372 = {
+						add_or_upgrade_manpower_building = yes
+					}
+					4375 = {
+						add_or_upgrade_manpower_building = yes	
+					}
+				"
+			}
+		}
+	}
+	swe_baldr_rises = {
+		icon = dominant_economy
+		required_missions = { swe_syncretism_with swe_great_allthing }
+		position = 10
+		provinces_to_highlight = {
+			OR = {
+				area = east_midlands_area
+				province_id = 4372
+				province_id = 4375
+			}
+		}
+		trigger = { 
+			development_in_provinces = {
+				value = 120
+				OR = {
+					area = east_midlands_area
+					province_id = 4372
+					province_id = 4375
+				}
+				has_manufactory_trigger = yes
+			}
+		}
+		
+		effect = {
+			1861 = {
+				add_province_modifier = {
+					name = swe_let_there_be_light
+					duration = -1
+				}
+			}
+			add_country_modifier = {
+				name = swe_faithful_warriors
+				duration = -1
+			}
 		}
 	}
 }
