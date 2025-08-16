@@ -1,9 +1,9 @@
 ######################################################################
 # Revolutionary rebels. Civil War factions.
 ######################################################################
-rusian_rebels = {
+robin_hood_rebels = {
 
-	color = { 150 185 210 }
+	color = { 250 185 210 }
 
 	area = nation 					# Stays within the nation
 	government = monarchy			
@@ -19,8 +19,8 @@ rusian_rebels = {
 	smart = yes
 	
 	artillery = 0
-	infantry = 0.9
-	cavalry = 0.1
+	infantry = 1
+	cavalry = 0
 	
 	morale = 1.5
 	
@@ -47,32 +47,30 @@ rusian_rebels = {
 			controlled_by = REB
 		}
 		modifier = {
-			factor = 10
+			factor = 0.001
 			is_capital = yes
 		}
 		modifier = {
 			factor = 10
-			is_core = PI0
+			culture = briton
 		}
 		modifier = {
-			factor = 1.5
-			unrest = 2
-		}
-		modifier = {
-			factor = 1.5
-			unrest = 4
-		}
-		modifier = {
-			factor = 1.5
-			unrest = 6
+			factor = 10
+			religion = impotian
 		}
 	}
  
  	# Province Scope
  	siege_won_trigger = {
+
  	}
 	siege_won_effect = {
-		add_core = BE1
+		if = {
+			limit = {
+				culture = swedish
+			}
+			add_devastation = 25
+		}
 	}
 	
 	# Country scope
@@ -86,40 +84,44 @@ rusian_rebels = {
 	}
 	
 	# Localisation for their demands
-	demands_description = "rusian_demand"
+	demands_description = "robert_hun_demands"
 	
 	# Country Scope	
 	demands_enforced_effect = {
-		
-		kill_heir = { allow_new_heir = no }
-		kill_consort = yes
-		change_tag = BE1
-		hidden_effect = {
-			swap_non_generic_missions = yes
-		}
-		change_primary_culture = rusian	
-		define_ruler = {
-			name = "Lev Ivan"
-			dynasty = "Rus"
-			adm = 3
-			dip = 0
-			mil = 6
-			age = 35
-			claim = 95
-		}
-		hidden_effect = {		
-			swap_free_idea_group = yes
-			define_heir = {
-				name = "Leman"
-				dynasty = "Rus"
-				adm = 1
-				dip = 2
-				mil = 6
-				age = 4
+		release = BR0
+		BR0 = {
+			change_primary_culture = hunnic_fra
+			add_accepted_culture = briton
+			define_ruler = {
+				name = "Robert"
+				dynasty = "of Unnland"
+				adm = 0
+				dip = 5
+				mil = 5
+				age = 58
+			}
+			add_country_modifier = {
+				name = britannia_hunnic_horses
+				duration = -1
+			}
+			hidden_effect = {
+				define_heir = {
+					name = "Vilhelm"
+					dynasty = "of Unnland"
+					adm = 4
+					dip = 4
+					mil = 4
+					age = 27
+				}
+				define_ruler_to_general = {
+					fire = 3
+					shock = 3
+					manuever = 3
+					siege = 3
+				}
+				add_government_reform = feudalism_reform
 			}
 		}
-		country_event = {
-			id = pictii.12
-		}
+		switch_tag = BR0
 	}
 }

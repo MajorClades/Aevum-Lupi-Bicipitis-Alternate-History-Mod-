@@ -1133,6 +1133,43 @@ SWE2_5_slot = {
 			set_country_flag = asatru_order_unlocked
 		}
 	}
+	swe_coloni = {
+		icon = dominant_economy
+		required_missions = { swe_spread_religion }
+		position = 10
+		provinces_to_highlight = {
+			country_or_non_sovereign_subject_holds = ROOT
+			owner = {
+				is_colonial_nation_of = ROOT
+			}
+		}
+
+		trigger = { 
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 30
+				owner = {
+					is_colonial_nation_of = ROOT
+				}
+			}
+		}
+		
+		effect = {
+			custom_tooltip = SWED_TT_9
+			add_country_modifier = {
+				name = swe_new_sagas
+				duration = -1
+			}
+			every_subject_country = {
+				limit = {
+					is_colonial_nation_of = ROOT
+				}
+				add_country_modifier = {
+					name = swe_new_sagas
+					duration = -1
+				}
+			}
+		}
+	}
 }
 
 
