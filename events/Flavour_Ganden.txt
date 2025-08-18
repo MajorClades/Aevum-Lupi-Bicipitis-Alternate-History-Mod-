@@ -13,8 +13,8 @@ country_event = {
 		ai_chance = {
 			factor = 30
 		}
-		set_capital = 234
-		234 = {
+		set_capital = 1024
+		1024 = {
 			add_base_tax = 2
 			add_base_production = 2
 			add_base_manpower = 2
@@ -25,8 +25,8 @@ country_event = {
 		ai_chance = {
 			factor = 20
 		}
-		set_capital = 236
-		236 = {
+		set_capital = 1026
+		1026 = {
 			add_base_tax = 2
 			add_base_production = 2
 			add_base_manpower = 2
@@ -65,6 +65,26 @@ country_event = {
 			add_base_tax = 3
 			add_base_production = 3
 			add_base_manpower = 3
+		}
+	}
+}
+
+country_event = {
+	id = gand.2
+	title = gand.2.test
+	desc = gand.2.desc
+	picture = SOLDIERS_FREEZING_eventPicture
+	
+	is_triggered_only = yes
+	option = {
+		name = gand.2a
+		4380 = {
+			change_religion = ROOT
+			add_base_manpower = 2
+			add_province_modifier = {
+				name = ga0_fortify_kogern
+				duration = 10950
+			}
 		}
 	}
 }
@@ -194,6 +214,117 @@ country_event = {
 				who = ROOT
 				modifier = union_of_roses
 			}
+		}
+	}
+}
+
+country_event = {
+	id = gand.102 # Election
+	title = gand.102.test
+	desc = gand.102.desc
+	picture = ELECTION_REPUBLICAN_eventPicture
+
+    is_triggered_only = yes
+	
+	trigger = {
+		ai = no
+		has_reform = ganden_union_reform
+	}
+	option = { #Kadlen
+		name = gand.102e
+		if = {
+			limit = {
+				dynasty = "Adeler"
+			}
+			change_variable = {
+				which = num_kadlen_elections
+				value = 1
+			}
+		} else_if = {
+			limit = {
+				dynasty = "Ytra"
+			}
+			change_variable = {
+				which = num_gettrike_elections
+				value = 1
+			}
+		} else_if = {
+			limit = {
+				dynasty = "af Løvendal"
+			}
+			change_variable = {
+				which = num_bylandr_elections
+				value = 1
+			}
+		} else_if = {
+			limit = {
+				dynasty = "af Egilsfjord"
+			}
+			change_variable = {
+				which = num_tonin_elections
+				value = 1
+			}
+		}
+		add_legitimacy = 10
+	}
+
+	option = { #Kadlen
+		name = gand.102a
+		define_ruler = {
+			dynasty = "Adeler"
+		}
+		set_capital = 4363
+		change_variable = {
+			which = num_kadlen_elections
+			value = 1
+		}
+		trigger = {
+			owns = 4363
+		}
+	}
+
+	option = { #Gettrike
+		name = gand.102b
+		define_ruler = {
+			dynasty = "Ytra"
+		}
+		set_capital = 249
+		change_variable = {
+			which = num_gettrike_elections
+			value = 1
+		}
+		trigger = {
+			owns = 249
+		}
+	}
+
+	option = { #Bylandr
+		name = gand.102c
+		define_ruler = {
+			dynasty = "af Løvendal"
+		}
+		set_capital = 251
+		change_variable = {
+			which = num_bylandr_elections
+			value = 1
+		}
+		trigger = {
+			owns = 251
+		}
+	}
+
+	option = { #Tonin
+		name = gand.102d
+		define_ruler = {
+			dynasty = "af Egilsfjord"
+		}
+		change_variable = {
+			which = num_tonin_elections
+			value = 1
+		}
+		set_capital = 248
+		trigger = {
+			owns = 248
 		}
 	}
 }

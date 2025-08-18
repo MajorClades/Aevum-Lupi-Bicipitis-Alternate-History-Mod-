@@ -17,6 +17,30 @@ on_startup = {
 		liqian.3
 		pictii.10
 	}
+	if = {
+		limit = {
+			NOT = {
+				is_year = 1445
+				tag = GA0
+			}
+		}
+		set_variable = {
+			which = num_kadlen_elections
+			value = 1
+		}
+		set_variable = {
+			which = num_gettrike_elections
+			value = 0
+		}
+		set_variable = {
+			which = num_bylandr_elections
+			value = 0
+		}
+		set_variable = {
+			which = num_tonin_elections
+			value = 0
+		}
+	}
 }
 on_province_culture_changed = {
 	if = {
@@ -528,6 +552,9 @@ on_thri_yearly_pulse = {
 	}
 }
 on_monarch_death = {
+	events = {
+		gand.102
+	}
 	if = {
 		limit = { 
 			tag = SO0 
@@ -547,18 +574,18 @@ on_monarch_death = {
 		country_event = { id = atro.3 }
 		country_event = { id = atro.1 days = 5}
 	}
-	if = {
-		limit = { 
-			NOT = {
-				war_with = RU0
-			}
-			tag = PM0 
-			NOT = {
-				has_ruler = "Hakimos"
-			}
-		}
-		country_event = { id = rhom.1003 }
-	}
+	#if = {
+	#	limit = { 
+	#		NOT = {
+	#			war_with = RU0
+	#		}
+	#		tag = PM0 
+	#		NOT = {
+	#			has_ruler = "Hakimos"
+	#		}
+	#	}
+	#	country_event = { id = rhom.1003 }
+	#}
 }
 on_new_monarch = {
 	if = { #Wasn't triggering for repeat elections (where one country gets elected for consecutive rulers)
