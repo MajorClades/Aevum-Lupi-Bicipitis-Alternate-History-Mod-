@@ -8,6 +8,9 @@ sie_council_mechanic = {
 	powers = {
 		sie_single_power = {
 			max = 100
+			gui = council_of_ten_gov_mech
+			show_before_interactions = yes
+			reset_on_new_ruler = no
 			base_monthly_growth = -0.25
 			scaled_modifier = {
 				trigger = {
@@ -29,14 +32,17 @@ sie_council_mechanic = {
 	
 	interactions = {
 		SIE_uno = {
-			gui = russian_mechanics_interaction_gui
-			icon = GFX_russian_ability_ADM
-			cost_type = sie_single_power
-			cost = -5
+			icon = GFX_council_of_ten_adm_interaction_button
+			cooldown_years = 2
 			trigger = {
 				owns = 280
 			}
 			effect = {
+				add_government_power = {
+					mechanic_type = sie_council_mechanic
+					power_type = sie_single_power
+					value = 5
+				}
 				if = {
 					limit = {
 						ai = no
@@ -76,20 +82,22 @@ sie_council_mechanic = {
 					}
 				}
 			}
-			cooldown_years = 1
 			ai_chance = {
 				factor = 10
 			}
 		}
-		SIE_due= {
-			gui = russian_mechanics_interaction_gui
-			icon = GFX_russian_ability_DIP
-			cost_type = sie_single_power
-			cost = -5
-			trigger = { 
+		SIE_due = {
+			icon = GFX_council_of_ten_dip_interaction_button
+			cooldown_years = 2
+			trigger = {
 				num_of_subjects = 1
 			}
-			effect = { 
+			effect = {
+				add_government_power = {
+					mechanic_type = sie_council_mechanic
+					power_type = sie_single_power
+					value = 5
+				}
 				random_subject_country = {
 					random_owned_province = {
 						limit = {
@@ -104,16 +112,13 @@ sie_council_mechanic = {
 					add_liberty_desire = 15
 				}
 			}
-			cooldown_years = 1
 			ai_chance = {
 				factor = 0
 			}
 		}
 		SIE_tre = {
-			gui = russian_mechanics_interaction_gui
-			icon = GFX_russian_ability_MIL
-			cost_type = sie_single_power
-			cost = -5
+			icon = GFX_council_of_ten_mil_interaction_button
+			cooldown_years = 2
 			trigger = {
 				if = {
 					limit = {
@@ -129,8 +134,12 @@ sie_council_mechanic = {
 					years_of_income = 0.5
 				}
 			}
-			effect = { 
-
+			effect = {
+				add_government_power = {
+					mechanic_type = sie_council_mechanic
+					power_type = sie_single_power
+					value = 5
+				}
 				if = {
 					limit = {
 						NOT = {
@@ -145,7 +154,6 @@ sie_council_mechanic = {
 					add_years_of_income = -0.5
 				}
 			}
-			cooldown_years = 1
 			ai_chance = {
 				factor = 0
 			}
