@@ -166,7 +166,6 @@ Sie_1_2_slot = {
 				value = -5
 			}
 			280 = {
-				custom_tooltip = SIE_POPULATION
 				remove_building = courthouse
 				remove_building = regimental_camp
 				add_permanent_province_modifier = {
@@ -192,7 +191,7 @@ Sie_1_2_slot = {
 			has_government_power = {
 				mechanic_type = sie_council_mechanic
 				power_type = sie_single_power
-				value = 10
+				value = 20
 			}
 		}
 
@@ -200,10 +199,9 @@ Sie_1_2_slot = {
 			add_government_power = {
 				mechanic_type = sie_council_mechanic
 				power_type = sie_single_power
-				value = -10
+				value = -5
 			}
 			280 = {
-				custom_tooltip = SIE_POPULATION
 				remove_building = courthouse
 				remove_building = regimental_camp
 				remove_province_modifier = camp_district_sie
@@ -231,12 +229,79 @@ Sie_1_2_slot = {
 
 		effect = {
 			280 = {
-				custom_tooltip = SIE_POPULATION_2
 				remove_building = town_hall
 				remove_building = regimental_camp
 				remove_province_modifier = camp_district_sie_2
 				add_permanent_province_modifier = {
 					name = "camp_district_sie_3"
+					duration = -1
+				}
+			}
+		}
+	}
+
+	sie_outwall_out_mind = {
+		icon = mission_african_gold
+		position = 7
+		provinces_to_highlight = {
+			is_capital = yes
+			has_manpower_building_trigger = no
+			owner = {
+				is_subject_of_type = outside_sie_vassal
+			}
+		}
+		trigger = {
+			calc_true_if = {
+				amount = 3
+				all_subject_country = {
+					capital_scope = {
+						has_manpower_building_trigger = yes
+					}
+				}
+			}
+		}
+
+		effect = {
+			set_country_flag = sie_buff_outwall_1_flag
+			custom_tooltip = SIE_TT_1
+			tooltip = {
+				add_country_modifier = {
+					name = sie_buff_outwall_1
+					duration = -1
+				}
+			}
+		}
+	}
+
+	sie_outwall_economy = {
+		icon = mission_african_gold
+		position = 8
+		required_missions = { sie_outwall_out_mind } 
+		provinces_to_highlight = {
+			has_tax_building_trigger = no
+			owner = {
+				is_subject_of_type = outside_sie_vassal
+			}
+		}
+		trigger = {
+			num_of_completed_idea_groups_adm = { amount = 1}
+			calc_true_if = {
+				amount = 3
+				all_subject_country = {
+					num_of_owned_provinces_with = {
+						value = 5
+						has_tax_building_trigger = yes
+					}
+				}
+			}
+		}
+
+		effect = {
+			set_country_flag = sie_buff_outwall_2_flag
+			custom_tooltip = SIE_TT_2
+			tooltip = {
+				add_country_modifier = {
+					name = sie_buff_outwall_2
 					duration = -1
 				}
 			}
@@ -259,7 +324,7 @@ Sie_2_slot = {
 			has_government_power = {
 				mechanic_type = sie_council_mechanic
 				power_type = sie_single_power
-				value = 10
+				value = 25
 			}
 		}
 
@@ -284,7 +349,7 @@ Sie_2_a_slot = {
 			has_government_power = {
 				mechanic_type = sie_council_mechanic
 				power_type = sie_single_power
-				value = 5
+				value = 10
 			}
 		}
 
@@ -328,7 +393,7 @@ Sie_2_b_slot = {
 			has_government_power = {
 				mechanic_type = sie_council_mechanic
 				power_type = sie_single_power
-				value = 10
+				value = 20
 			}
 		}
 
@@ -336,7 +401,7 @@ Sie_2_b_slot = {
 			add_government_power = {
 				mechanic_type = sie_council_mechanic
 				power_type = sie_single_power
-				value = -10
+				value = -5
 			}
 			280 = {
 				custom_tooltip = SIE_MARKET
@@ -372,7 +437,7 @@ Sie_2_c_slot = {
 			has_government_power = {
 				mechanic_type = sie_council_mechanic
 				power_type = sie_single_power
-				value = 10
+				value = 20
 			}
 		}
 
@@ -380,7 +445,7 @@ Sie_2_c_slot = {
 			add_government_power = {
 				mechanic_type = sie_council_mechanic
 				power_type = sie_single_power
-				value = -10
+				value = -5
 			}
 			280 = {
 				custom_tooltip = SIE_MARKET_2
@@ -425,7 +490,7 @@ Sie_2_d_slot = {
 			add_government_power = {
 				mechanic_type = sie_council_mechanic
 				power_type = sie_single_power
-				value = -20
+				value = -5
 			}
 			280 = {
 				custom_tooltip = SIE_MARKET_3
@@ -517,7 +582,7 @@ Sie_3_a_slot = {
 			has_government_power = {
 				mechanic_type = sie_council_mechanic
 				power_type = sie_single_power
-				value = 5
+				value = 15
 			}
 		}
 
@@ -562,7 +627,7 @@ Sie_3_b_slot = {
 			has_government_power = {
 				mechanic_type = sie_council_mechanic
 				power_type = sie_single_power
-				value = 10
+				value = 20
 			}
 		}
 
@@ -570,7 +635,7 @@ Sie_3_b_slot = {
 			add_government_power = {
 				mechanic_type = sie_council_mechanic
 				power_type = sie_single_power
-				value = -10
+				value = -5
 			}
 			280 = {
 				custom_tooltip = SIE_WORK
@@ -636,7 +701,7 @@ Sie_3_2_slot = {
 			has_government_power = {
 				mechanic_type = sie_council_mechanic
 				power_type = sie_single_power
-				value = 20
+				value = 30
 			}
 		}
 
@@ -834,7 +899,7 @@ Sie_4_c_slot = {
 			has_government_power = {
 				mechanic_type = sie_council_mechanic
 				power_type = sie_single_power
-				value = 10
+				value = 20
 			}
 		}
 
@@ -842,7 +907,7 @@ Sie_4_c_slot = {
 			add_government_power = {
 				mechanic_type = sie_council_mechanic
 				power_type = sie_single_power
-				value = -10
+				value = -5
 			}
 			280 = {
 				custom_tooltip = SIE_BARRACK_2
@@ -893,7 +958,6 @@ Sie_4_2_slot = {
 		}
 	}
 }
-
 Sie_5_slot = {
 	slot = 5
 	generic = no
@@ -1010,7 +1074,7 @@ Sie_5_b_slot = {
 			has_government_power = {
 				mechanic_type = sie_council_mechanic
 				power_type = sie_single_power
-				value = 10
+				value = 20
 			}
 		}
 
@@ -1018,7 +1082,7 @@ Sie_5_b_slot = {
 			add_government_power = {
 				mechanic_type = sie_council_mechanic
 				power_type = sie_single_power
-				value = -10
+				value = -5
 			}
 			278 = {
 				remove_building = fort_15th
@@ -1065,7 +1129,7 @@ Sie_5_b_slot = {
 	}
 
 }
-Sie_5_c_slot = {
+Sie_5_2_slot = {
 	slot = 5
 	generic = no
 	ai = yes
@@ -1122,6 +1186,65 @@ Sie_5_c_slot = {
 				fire = 5
 				manuever = 5
 				siege = 5
+			}
+		}
+	}
+
+	sie_dragons_scales = {
+		icon = mission_noble_council
+		position = 6
+		trigger = {
+			army_size_percentage = 0.5
+			is_at_war = yes
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = sie_training_guards
+				duration = 3650
+			}
+			add_country_modifier = {
+				name = sie_dragon_guard
+				duration = -1
+			}
+		}
+	}
+	sie_dragons_scaled = {
+		icon = mission_great_wall
+		position = 7
+		required_missions = { sie_dragons_scales }
+
+		trigger = {
+			OR = {
+				army_tradition = 25
+				army_professionalism = 0.2
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = sie_power_scale
+				duration = -1
+			}
+		}
+	}
+	sie_imagine_dragons = {
+		icon = mission_great_wall
+		position = 8
+		required_missions = { sie_dragons_scaled }
+
+		trigger = {
+			num_of_completed_idea_groups_mil = { amount = 1}
+			OR = {
+				army_tradition = 45
+				army_professionalism = 0.45
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = sie_power_scale
+				duration = -1
 			}
 		}
 	}
