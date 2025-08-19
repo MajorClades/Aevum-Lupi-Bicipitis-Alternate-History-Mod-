@@ -54,6 +54,97 @@ valtea_event_action = {
     }
 }
 
+spy_estate_action = {
+	category = covert
+	require_acceptance = no
+	is_visible = {
+		has_country_flag = spy_estate_flag
+    }
+
+	is_allowed = {
+		FROM = {
+			has_spy_network_from = {
+				who = ROOT
+				value = 35
+			}
+			if = {
+				limit = {
+					has_country_modifier = spy_estate_defense_mod
+				}
+				custom_trigger_tooltip = {
+					tooltip = NOT_DONE_SPY_ESTATE_ACTION_IN_COUNTRY
+					NOT = {
+						has_country_modifier = spy_estate_defense_mod
+					}
+				}
+			}
+		}
+    }
+	on_accept = {
+		ROOT = {
+			add_spy_network_in = {
+				who = FROM
+				value = -35
+			}
+		}	
+		FROM = {
+			add_country_modifier = {
+				name = spy_estate_defense_mod
+				duration =  1825
+			}
+			add_country_modifier = {
+				name = spy_estate_angry
+				duration =  1825
+			}
+		}
+    }
+
+	ai_will_do = {
+        always = yes
+    }
+}
+
+
+spy_collapse_country_action = {
+	category = covert
+	require_acceptance = no
+	is_visible = {
+		has_country_flag = spy_collapse_country_flag
+		FROM = {
+			NOT = {
+				has_country_flag = collapse_already_flag
+			}
+		}
+    }
+
+	is_allowed = {
+		FROM = {
+			has_spy_network_from = {
+				who = ROOT
+				value = 100
+			}
+		}
+    }
+	on_accept = {
+		ROOT = {
+			add_spy_network_in = {
+				who = FROM
+				value = -100
+			}
+		}	
+		FROM = {
+			add_country_modifier = {
+				name = valt_complete_collapse
+				duration = 3650
+			}
+			set_country_flag = collapse_already_flag
+		}
+    }
+
+	ai_will_do = {
+        always = yes
+    }
+}
 friendship_action = {
 	category = influence
 	require_acceptance = no
@@ -188,6 +279,45 @@ buy_protectorate_into_annex_action = {
     }
 }
 
+make_trade_league_into_vassal = {
+	category = influence
+	
+	alert_index = 40
+	alert_tooltip = demand_dummy_alert_tooltip
+	require_acceptance = no # Whether the recipient gets an option to decline
+	is_visible = {
+		is_subject = no
+		FROM = {
+			is_subject = no
+			is_in_trade_league_with = ROOT		
+		}
+	}
+	is_allowed = {
+		years_of_income = 0.5
+		is_at_war = no
+		is_subject = no
+		FROM = {
+			is_subject = no
+			is_at_war = no
+			is_in_trade_league_with = ROOT	
+			has_opinion = {
+				who = ROOT
+				value = 190
+			}
+		}
+	}
+	on_accept = {
+		add_years_of_income = -0.5
+		vassalize = FROM
+	}
+	on_decline = 	{
+	}
+
+	ai_will_do = { # this is a trigger
+		always = no
+	}
+}
+
 # Shamely copied from Anbennar
 make_autonomous_vassal = {
 	category = influence
@@ -232,11 +362,41 @@ make_autonomous_vassal = {
 	}
 	on_decline = 	{
 	}
-	
-	ai_acceptance = { # This works similarly to variable_arithmetic_trigger, but does not support triggers generally. Instead, "limit" will be evaluated first and the rest ignored if it isn't passed.
-  	
-	}
 
+	ai_will_do = { # this is a trigger
+		always = no
+	}
+}
+
+make_me_autonomous_vassal = {
+	category = influence
+	
+	alert_index = 40
+	alert_tooltip = demand_dummy_alert_tooltip
+	require_acceptance = no # Whether the recipient gets an option to decline
+	is_visible = {
+		ai = no
+		is_subject = yes
+		ROOT = {
+			is_subject_of_type = vassal
+			is_subject_of = FROM		
+		}
+	}
+	is_allowed = {
+		stability = 1
+		ROOT = {
+				is_subject_of_type = vassal
+				is_subject_of = FROM		
+			}
+	}
+	on_accept = {
+		FROM = {
+			create_subject = {
+				subject_type = autonomous_vassal
+				subject = ROOT 
+			}
+		}
+	}
 	ai_will_do = { # this is a trigger
 		always = no
 	}
@@ -600,10 +760,6 @@ ger_war_on_others = { #for the AI to do stuff
 	on_decline = {
 
 	}
-	
-	ai_acceptance = { # This works similarly to variable_arithmetic_trigger, but does not support triggers generally. Instead, "limit" will be evaluated first and the rest ignored if it isn't passed.
-
-	}
 
 	ai_will_do = { # this is a trigger
 		manpower_percentage = 0.9
@@ -662,10 +818,6 @@ ger_annex_duchy = {
 	}
 	on_decline = {
 	}
-	
-	ai_acceptance = { # This works similarly to variable_arithmetic_trigger, but does not support triggers generally. Instead, "limit" will be evaluated first and the rest ignored if it isn't passed.
-	}
-
 	ai_will_do = { # this is a trigger
 		OR = {
 			always = no
@@ -707,9 +859,6 @@ ger_ask_for_off_war = {
 		}
 	}
 	on_decline = {
-	}
-	
-	ai_acceptance = { # This works similarly to variable_arithmetic_trigger, but does not support triggers generally. Instead, "limit" will be evaluated first and the rest ignored if it isn't passed.
 	}
 
 	ai_will_do = { # this is a trigger
@@ -758,9 +907,6 @@ ger_ask_for_def_war = {
 	}
 	on_decline = {
 	}
-	
-	ai_acceptance = { # This works similarly to variable_arithmetic_trigger, but does not support triggers generally. Instead, "limit" will be evaluated first and the rest ignored if it isn't passed.
-	}
 
 	ai_will_do = { # this is a trigger
 		FROM = {
@@ -775,5 +921,37 @@ ger_ask_for_def_war = {
 				war_score = -10
 			}
 		}
+	}
+}
+
+sco_make_model_colony = {
+	category = influence
+	
+	alert_index = 55
+	require_acceptance = no # Whether the recipient gets an option to decline
+	is_visible = {
+		has_country_flag = power_colonial_action_flag
+	}
+	is_allowed = {
+		any_subject_country = {
+				is_colonial_nation_of = ROOT
+			}
+		FROM = {
+			is_colonial_nation_of = ROOT
+		}
+	}
+	on_accept = {
+		clr_country_flag = power_colonial_action_flag
+		FROM = {
+			add_country_modifier = {
+					name = sco_model_colony
+					duration = -1
+				}
+		}
+	}
+	on_decline = {
+	}
+
+	ai_will_do = { # this is a trigger
 	}
 }

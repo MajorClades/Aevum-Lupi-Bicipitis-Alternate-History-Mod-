@@ -15,6 +15,31 @@ on_startup = {
 		silky.1
 		yamat.1
 		liqian.3
+		pictii.10
+	}
+	if = {
+		limit = {
+			NOT = {
+				is_year = 1445
+				tag = GA0
+			}
+		}
+		set_variable = {
+			which = num_kadlen_elections
+			value = 1
+		}
+		set_variable = {
+			which = num_gettrike_elections
+			value = 0
+		}
+		set_variable = {
+			which = num_bylandr_elections
+			value = 0
+		}
+		set_variable = {
+			which = num_tonin_elections
+			value = 0
+		}
 	}
 }
 on_province_culture_changed = {
@@ -153,6 +178,30 @@ on_battle_won_country = {
 	}
 }
 on_province_owner_change = {
+	if = {
+		limit = {
+			owner = {
+				has_country_flag = norse_faith_tolerance
+			}
+			religion_group = christian
+		}
+		add_province_modifier = {
+			name = swe_tolerant_conquest
+			duration = 3650
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_country_flag = norse_faith_intolerance
+			}
+			religion_group = christian
+		}
+		add_province_modifier = {
+			name = swe_intolerant_conquest
+			duration = 3650
+		}
+	}
 	if = {
 		limit = {
 			owner = {
@@ -503,6 +552,9 @@ on_thri_yearly_pulse = {
 	}
 }
 on_monarch_death = {
+	events = {
+		gand.102
+	}
 	if = {
 		limit = { 
 			tag = SO0 
@@ -522,20 +574,30 @@ on_monarch_death = {
 		country_event = { id = atro.3 }
 		country_event = { id = atro.1 days = 5}
 	}
-	if = {
-		limit = { 
-			NOT = {
-				war_with = RU0
-			}
-			tag = PM0 
-			NOT = {
-				has_ruler = "Hakimos"
-			}
-		}
-		country_event = { id = rhom.1003 }
-	}
+	#if = {
+	#	limit = { 
+	#		NOT = {
+	#			war_with = RU0
+	#		}
+	#		tag = PM0 
+	#		NOT = {
+	#			has_ruler = "Hakimos"
+	#		}
+	#	}
+	#	country_event = { id = rhom.1003 }
+	#}
 }
 on_new_monarch = {
+	if = { #Wasn't triggering for repeat elections (where one country gets elected for consecutive rulers)
+		limit = {
+			tag = emperor
+		}
+		PAP = {
+			country_event = {
+				id = papacy.1
+			}
+		}
+	}
 	if = {
 		limit = {
 			tag = AP6
@@ -551,20 +613,19 @@ on_new_monarch = {
 			}
 		}
 	}
-	if = {
-		limit = {
-			has_reform = papal_monarchy_pontifex
-		}
-		country_event = {
-				id = papacy.1003
-			}
-	}
+	#if = {
+		#limit = {
+		#	has_reform = papal_monarchy_pontifex
+		#}
+		#country_event = {
+		#	id = papacy.1003
+		#}
+	#}
 }
 on_emperor_elected = {
 	PAP = {
 		country_event = {
 			id = papacy.1
-			random = 12
 		}
 	}
 }
@@ -1152,6 +1213,63 @@ on_siege_won_country = {
 			}
 		}
 	}
+	if = {
+		limit = {
+			any_hired_mercenary_company = {
+				template = merc_angr_warband
+				location = { province_id = FROM }
+			}
+			any_war_enemy_country = {
+				owns = FROM
+			}
+		}
+		FROM = {
+			add_devastation = 50
+		}
+		ROOT = {
+			every_war_enemy_country = {
+				add_aggressive_expansion = {
+					who = ROOT
+					value = 5
+					apply_calc = no
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			ROOT = {
+				is_or_was_tag = {tag = KO4}
+			}
+		}
+		FROM = {
+			add_base_manpower = -1
+			if = {
+					limit = {
+						has_building = fort_15th
+					}
+					remove_building = fort_15th
+					}
+					else_if = {
+						limit = {
+							has_building = fort_16th
+						}
+						remove_building = fort_16th
+					}
+					else_if = {
+						limit = {
+							has_building = fort_17th
+						}
+						remove_building = fort_17th
+					}
+					else_if = {
+						limit = {
+							has_building = fort_18th
+						}
+						remove_building = fort_18th
+					}
+		}
+	}
 }
 
 # province
@@ -1405,7 +1523,7 @@ on_expanded_infrastructure = {
 	}
 }
 on_expanded_infrastructure_removed = {
-	if = {
+	if = { #no clue why error
 		limit = {
 			has_province_flag = ib0_expand_infra_capital_flag
 		}
@@ -1471,5 +1589,13 @@ on_parliament_seat_given = {
 				value = 2
 			}
 		}
+	}
+}
+
+on_harmonized_postroman_group = {
+	on_harmonized_effect = yes
+	on_harmonized_religion_estate_privileges_effect = yes
+	events = {
+		ephesian.1 #cofnusion harmonize
 	}
 }

@@ -63,36 +63,24 @@ papal_vassalization_action = {
 		}
     }
 	is_allowed = {
-		if = {
-			limit = {
-				religion = catholic
-			}
-			stability = 1
-		}else = {
-			check_variable = {
-				which = papal_favor_var
-				value = 20
-			}
-		}
+		stability = 1
 		is_at_war = no
 		FROM = {
 			religion = ROOT
 			is_subject_of = ROOT
 		}
+		NOT = {
+			calc_true_if = {
+				amount = 10
+				all_subject_country = {
+					is_subject_of_type = papal_vassal
+				}
+			}
+		}
     }
 	
 	on_accept = {
-		if = {
-			limit = {
-				religion = catholic
-			}
-			add_stability = -1
-		}else = {			
-			subtract_variable = {
-				which = papal_favor_var
-				value = 20
-			}
-		}
+		add_stability = -1
 		ROOT = {
 			create_subject = {
 				who = FROM
@@ -160,22 +148,8 @@ papal_integrate_action = {
 			tag = PAP
 			was_tag = PAP
 		}
-		if = {
-			limit = {
-				has_country_flag = easy_integration_pap_flag
-			}
-			OR = {
-				FROM = {
-					is_subject_of = PAP
-				}
-				FROM = {
-					is_subject_of = PA0
-				}
-			}
-		}else = {
-			FROM = {
-				is_subject_of_type = papal_vassal
-			}
+		FROM = {
+			is_subject_of_type = papal_vassal
 		}
     }
 	is_allowed = {
@@ -228,6 +202,7 @@ pontifex_expansion_action = {
 		is_at_war = no
 		FROM = {
 			is_emperor = no
+			is_elector = no
 			is_subject = no
 			religion = catholic
 			has_opinion = {
@@ -265,7 +240,7 @@ pontifex_expansion_action = {
     }
 
 	ai_will_do = {
-		always = yes
+		always = no
     }
 }
 

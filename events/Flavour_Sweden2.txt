@@ -61,9 +61,6 @@ country_event = {
 			limit = {
 				culture = belgian
 			}
-			owner = {
-				add_dip_power = -50
-			}
 			change_culture = scotian
 		}
 	}
@@ -74,9 +71,6 @@ country_event = {
 		every_owned_province = {
 			limit = {
 				culture = scotian
-			}
-			owner = {
-				add_dip_power = -50
 			}
 			change_culture = belgian
 		}
@@ -133,15 +127,17 @@ country_event = {
 	title = swe2.3.test
 	desc = swe2.3.desc
 	picture = ANGRY_MOB_eventPicture
-	
+	fire_only_once = yes
 	trigger = {
-		num_of_owned_provinces_with = {
-			value = 1
-			culture = zladian
+		tag = SW2
+		BR0 = {
+			exists = no
 		}
-		num_of_owned_provinces_with = {
-			value = 1
-			culture_group = zladinian
+		NOT = {
+			is_year = 1490
+		}
+		any_owned_province = {
+			culture = briton
 		}
 	}
 	mean_time_to_happen = {
@@ -150,34 +146,197 @@ country_event = {
 	option = {
 		name = swe2.3a
 		random_owned_province = {
-			limit = {
-				culture_group = zladinian
+			limit = { culture = briton }
+			spawn_rebels = {
+				size = 2
+				type = robin_hood_rebels
 			}
-			add_unrest = 10
-			change_culture = zladian
-		}
-		random_owned_province = {
-			limit = {
-				culture_group = zladinian
-			}
-			add_unrest = 10
-			change_culture = zladian
-		}
-		random_owned_province = {
-			limit = {
-				culture_group = zladinian
-			}
-			add_unrest = 10
-			change_culture = zladian
 		}
 	}
 	option = {
 		name = swe2.3b
+		add_years_of_income = -0.9
 		random_owned_province = {
-			limit = {
-				culture_group = zladinian
+			limit = { culture = briton }
+			spawn_rebels = {
+				size = 1
+				type = robin_hood_rebels
 			}
-			change_culture = zladian
+		}
+	}
+}
+
+country_event = {
+	id = swe2.4
+	title = swe2.4.test
+	desc = swe2.4.desc
+	picture = DISCIPLINED_SOLDIERS_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = swe2.4a
+		if = { limit = { has_idea = enforced_service } add_treasury = -9 }else = { add_treasury = -10 }
+		add_sailors = -1000
+		capital_scope = { carolean_infantry = ROOT }
+	}
+	option = {
+		name = swe2.4b
+		trigger = { sailors = 2000 }
+		if = { limit = { has_idea = enforced_service } add_treasury = -18 }else = { add_treasury = -20 }
+		add_sailors = -2000
+		capital_scope = {
+			carolean_infantry = ROOT
+			carolean_infantry = ROOT
+		}
+	}
+	option = {
+		name = swe2.4c
+		trigger = { sailors = 3000 }
+		if = { limit = { has_idea = enforced_service } add_treasury = -27 }else = { add_treasury = -30 }
+		add_sailors = -3000
+		capital_scope = {
+			carolean_infantry = ROOT
+			carolean_infantry = ROOT
+			carolean_infantry = ROOT
+		}
+	}
+	option = {
+		name = swe2.4d
+		trigger = { sailors = 4000 }
+		if = { limit = { has_idea = enforced_service } add_treasury = -36 }else = { add_treasury = -40 }
+		add_sailors = -4000
+		capital_scope = {
+			carolean_infantry = ROOT
+			carolean_infantry = ROOT
+			carolean_infantry = ROOT
+			carolean_infantry = ROOT
+		}
+	}
+	option = {
+		name = swe2.4e
+		trigger = { sailors = 5000 }
+		if = { limit = { has_idea = enforced_service } add_treasury = -45 }else = { add_treasury = -50 }
+		add_sailors = -5000
+		capital_scope = {
+			carolean_infantry = ROOT
+			carolean_infantry = ROOT
+			carolean_infantry = ROOT
+			carolean_infantry = ROOT
+			carolean_infantry = ROOT
+		}
+	}
+	option = {
+		name = swe2.4f
+		trigger = { sailors = 10000 }
+		if = { limit = { has_idea = enforced_service } add_treasury = -90 }else = { add_treasury = -100 }
+		add_sailors = -10000
+		capital_scope = {
+			carolean_infantry = ROOT
+			carolean_infantry = ROOT
+			carolean_infantry = ROOT
+			carolean_infantry = ROOT
+			carolean_infantry = ROOT
+			carolean_infantry = ROOT
+			carolean_infantry = ROOT
+			carolean_infantry = ROOT
+			carolean_infantry = ROOT
+			carolean_infantry = ROOT
+		}
+	}
+}
+
+country_event = {
+	id = swe2.5
+	title = swe2.5.test
+	desc = swe2.5.desc
+	picture = RELIGIOUS_CONVERSION_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = swe2.5a
+		custom_tooltip = SWED_TT_7a
+		set_country_flag = norse_faith_tolerance
+		tooltip = {
+			capital_scope = {
+				add_province_modifier = {
+					name = swe_tolerant_conquest
+					duration = 3650
+				}
+			}
+		}
+	}
+	option = {
+		name = swe2.5b
+		custom_tooltip = SWED_TT_7a
+		set_country_flag = norse_faith_intolerance
+		tooltip = {
+			capital_scope = {
+				add_province_modifier = {
+					name = swe_intolerant_conquest
+					duration = 3650
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = swe2.6
+	title = swe2.6.test
+	desc = swe2.6.desc
+	picture = RELIGIOUS_CONVERSION_eventPicture
+	
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			ZL0 = {
+				override_country_name = ZLANDINAVIA_TAG
+				change_country_color = {
+					country = SW2
+				}
+			}
+		}
+	}
+	option = {
+		name = swe2.6a
+		scandinavia_region = {
+			limit = {
+				NOT = {
+					area = denmark_area
+				}
+			}
+			cede_province = ZL0
+			add_core = ZL0
+			if = {
+				limit = {
+					culture = jari
+				}
+				change_culture = zladian
+			}
+		}
+		ZL0 = {
+			add_country_modifier = {
+				name = swe_double_crown
+				duration = -1
+			}
+			change_primary_culture = zladian
+		}
+		create_union = ZL0
+	}
+	option = {
+		name = swe2.6b
+		scandinavia_region = {
+			limit = {
+				NOT = {
+					area = denmark_area
+				}
+			}
+			add_province_modifier = {
+				name = swe_crush_the_slavs
+				duration = 36500
+			}
 		}
 	}
 }
