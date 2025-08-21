@@ -842,6 +842,63 @@ Sie_3_2_slot = {
 
 		} 
 	}
+
+	sie_council_armies = {
+		icon = mission_great_wall
+		position = 9
+		required_missions = { sie_big_armies sie_outwall_out_mind}
+		provinces_to_highlight = {
+			NOT = {
+				base_manpower = 4
+			}
+			owner = {
+				is_subject_of_type = outside_sie_vassal
+			}
+		}
+		trigger = {
+			calc_true_if = {
+				amount = 4
+				all_subject_country = {
+					num_of_owned_provinces_with = {
+						value = 10
+						base_manpower = 5
+					}
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = sie_liberty_above
+				duration = -1
+			}
+			every_subject_country = {
+				limit = {
+					is_subject_of_type = outside_sie_vassal
+				}
+				capital_scope = {
+					change_culture = xichenger
+				}
+			}
+		}
+	}
+	sie_council_empire= {
+		icon = mission_great_wall
+		position = 10
+		required_missions = { sie_council_armies }
+
+		trigger = {
+			government_rank = 3
+			NOT = {
+				great_power_rank = 2
+			}
+		}
+
+		effect = {
+			custom_tooltip = SIE_TT_7
+			set_country_flag = sie_allow_more_outer_councils
+		}
+	}
 }
 Sie_4_slot = {
 	slot = 4
@@ -1034,13 +1091,7 @@ Sie_4_2_slot = {
 		icon = mission_great_wall
 		position = 8
 		required_missions = { sie_dragons_scaled }
-		provinces_to_highlight = {
-			area = pripyat_area
-		}
 		trigger = {
-			pripyat_area = {
-				country_or_non_sovereign_subject_holds = ROOT
-			}
 			manpower_percentage = 0.9
 			army_size = 30
 		}
@@ -1050,6 +1101,14 @@ Sie_4_2_slot = {
 			add_country_modifier = {
 				name = sie_liberty_not_given
 				duration = 10950
+			}
+			set_country_flag = sie_buff_outwall_5_flag
+			custom_tooltip = SIE_TT_6
+			tooltip = {
+				add_country_modifier = {
+					name = sie_buff_outwall_4
+					duration = -1
+				}
 			}
 		}
 	}
@@ -1330,15 +1389,15 @@ Sie_5_2_slot = {
 		required_missions = { sie_dragons_scaled }
 
 		trigger = {
+			num_of_streltsy = 15
+			has_mil_advisor_3 = yes
 			num_of_completed_idea_groups_mil = { amount = 1}
-			OR = {
-				army_tradition = 45
-				army_professionalism = 0.45
-			}
 		}
 
 		effect = {
-			
+			country_event = {
+				id = siec.28
+			}
 		}
 	}
 	sie_imagine_dragonite = {
