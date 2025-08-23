@@ -2,6 +2,7 @@ country_decisions = {
 
 	sie_saxony_vassal = {
 		major = yes
+		color = { 5 5 100 }
 		potential = {
 			NOT = {
 				has_country_flag = sax_sie_1
@@ -41,6 +42,7 @@ country_decisions = {
 	}
 	sie_saxony_vassal_2 = {
 		major = yes
+		color = { 5 5 100 }
 		potential = {
 			NOT = {
 				has_country_flag = sax_sie_2
@@ -66,6 +68,7 @@ country_decisions = {
 	}
 	sie_saxony_vassal_3 = {
 		major = yes
+		color = { 5 5 100 }
 		potential = {
 			NOT = {
 				has_country_flag = sax_sie_3
@@ -110,6 +113,7 @@ country_decisions = {
 	}
 	sie_saxony_vassal_4 = {
 		major = yes
+		color = { 5 5 100 }
 		potential = {
 			NOT = {
 				has_country_flag = sax_sie_4
@@ -147,152 +151,9 @@ country_decisions = {
 		}
 		ai_importance = 400
 	}
-	sie_harmony_islam = {
-		major = yes
-		potential = {
-			NOT = {
-				has_country_flag = sie_flag_harm_islam
-			}
-			NOT = {
-				has_harmonized_with = islam
-			}
-			tag = SI0
-			ai = no
-		}
-		allow = {
-			if = {
-				limit = {
-					full_idea_group = humanist_ideas
-				}
-				harmony = 50
-			}else = {
-				harmony = 100
-			}
-			any_subject_country = {
-				num_of_owned_provinces_with = {
-					value = 1
-					religion_group = muslim
-				}
-			}
-		}
-		effect = {
-			set_country_flag = sie_flag_harm_islam
-			add_harmonized_religion = islam
-			if = {
-				limit = {
-					full_idea_group = humanist_ideas
-				}
-				add_harmony = -50
-			}else = {
-				add_harmony = -100
-			}
-			every_subject_country = {
-				add_harmonized_religion = islam
-			}
-		}
-		ai_will_do = {
-			factor = 1
-		}
-		ai_importance = 400
-	}
-	sie_harmony_pagan = {
-		major = yes
-		potential = {
-			NOT = {
-				has_country_flag = sie_flag_harm_pagan
-			}
-			NOT = {
-				has_harmonized_with = tengri_pagan_reformed
-			}
-			tag = SI0
-			ai = no
-		}
-		allow = {
-			if = {
-				limit = {
-					full_idea_group = humanist_ideas
-				}
-				harmony = 50
-			}else = {
-				harmony = 100
-			}
-			any_subject_country = {
-				num_of_owned_provinces_with = {
-					value = 1
-					religion_group = pagan
-				}
-			}
-		}
-		effect = {
-			set_country_flag = sie_flag_harm_pagan
-			add_harmonized_religion = tengri_pagan_reformed
-			if = {
-				limit = {
-					full_idea_group = humanist_ideas
-				}
-				add_harmony = -50
-			}else = {
-				add_harmony = -100
-			}
-			every_subject_country = {
-				add_harmonized_religion = tengri_pagan_reformed
-			}
-		}
-		ai_will_do = {
-			factor = 1
-		}
-		ai_importance = 400
-	}
-	sie_harmony_zoro = {
-		major = yes
-		potential = {
-			NOT = {
-				has_country_flag = sie_flag_harm_zoro
-			}
-			NOT = {
-				has_harmonized_with = zoroastrian
-			}
-			tag = SI0
-			ai = no
-		}
-		allow = {
-			if = {
-				limit = {
-					full_idea_group = humanist_ideas
-				}
-				harmony = 50
-			}else = {
-				harmony = 100
-			}
-			any_subject_country = {
-				num_of_owned_provinces_with = {
-					value = 1
-					religion_group = zoroastrian_group
-				}
-			}
-		}
-		effect = {
-			set_country_flag = sie_flag_harm_zoro
-			add_harmonized_religion = zoroastrian
-			if = {
-				limit = {
-					full_idea_group = humanist_ideas
-				}
-				add_harmony = -50
-			}else = {
-				add_harmony = -100
-			}
-			every_subject_country = {
-				add_harmonized_religion = zoroastrian
-			}
-		}
-		ai_will_do = {
-			factor = 1
-		}
-		ai_importance = 400
-	}
 	sie_spread_harmony = {
 		major = yes
+		color = { 5 5 100 }
 		potential = {
 			any_subject_country = {
 				num_of_owned_provinces_with = {
@@ -401,10 +262,27 @@ country_decisions = {
 				SI4 = {
 					restore_country_color = yes
 				}
+				SI5 = {
+					restore_country_color = yes
+				}
+				SI6 = {
+					restore_country_color = yes
+				}
+				SI7 = {
+					restore_country_color = yes
+				}
+				SI8 = {
+					restore_country_color = yes
+				}
+				SI9 = {
+					restore_country_color = yes
+				}
 				clr_country_flag = sie_remove_color
 			}else = {
 				set_country_flag = sie_remove_color
-				SI1 = {
+				custom_tooltip = "Give your subjects distint colors."
+				hidden_effect = {
+					SI1 = {
 					change_country_color = {
 						color = {
 							250 250 250
@@ -457,6 +335,7 @@ country_decisions = {
 						country = PER
 					}
 				}
+				}
 			}	
 		}
 		ai_will_do = {
@@ -464,38 +343,33 @@ country_decisions = {
 		}
 		ai_importance = 400
 	}
-	sie_get_province_1 = {
+	sie_get_provinces = {
 		color = { 5 5 100 }
 		potential = {
-			25 = {
-				NOT = {
-					has_province_flag = reserved_to_siescheng_flag
-				}
-				country_or_non_sovereign_subject_holds = ROOT
-			}
-			tag = SI0
 			ai = no
+			tag = SI0
+			NOT = {
+				siescheng_provinces_reserved = {
+					type = all
+					owned_by = ROOT
+				}
+			}
 		}
 		allow = {
-			25 = {
-				country_or_non_sovereign_subject_holds = ROOT
+			siescheng_provinces_reserved = {
+				type = any
+				owned_by_subject_of = ROOT
 			}
 		}
 		effect = {
-			25 = {
-				if = {
-					limit = {
-						is_core = owner
-					}
-					add_core = SI0
-				}
-				set_province_flag = reserved_to_siescheng_flag
-				cede_province = SI0		
- 			}
+			country_event = { 
+				id = siec.29
+			}
 		}
 		ai_will_do = {
 			factor = 1
 		}
 		ai_importance = 400
 	}
+
 }
