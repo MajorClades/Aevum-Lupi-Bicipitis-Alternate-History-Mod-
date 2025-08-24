@@ -1,0 +1,121 @@
+namespace = guo_smal
+
+country_event = {
+	id = guo_smal.1
+	title = guo_smal.1.test
+	desc = guo_smal.1.desc
+	picture = GREAT_FIRE_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = SI0
+		has_government_mechanic = sie_council_mechanic
+		NOT = {
+			has_government_power = {
+					mechanic_type = sie_council_mechanic
+					power_type = sie_single_power
+					value = 5
+			}
+		}
+		is_year = 1450
+		NOT = {
+			exists = GU9
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	option = {
+		name = guo_smal.1a
+		change_tag = GU9
+		hidden_effect = {
+			change_government = monarchy
+		}
+		add_government_reform = shells_of_dragon_reform
+		swap_free_idea_group = yes
+		swap_non_generic_missions = yes
+		country_event = {
+			id = guo_smal.2
+		}
+	}
+	option = {
+		name = guo_smal.1b
+		add_stability = -2
+		add_government_power = {
+					mechanic_type = sie_council_mechanic
+					power_type = sie_single_power
+					value = 5
+			}
+	}
+
+}
+
+country_event = {
+	id = guo_smal.2
+	title = guo_smal.2.test
+	desc = guo_smal.2.desc
+	picture = EVENT_PICTURE_guo_hong
+	is_triggered_only = yes
+	option = {
+		name = guo_smal.2a
+		add_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = 35
+			}
+		define_ruler = {
+			name = "Zhu"
+			dynasty = "Guo"
+			adm = 4
+			dip = 5
+			mil = 6
+			age = 34
+		}
+		hidden_effect = {
+			add_ruler_personality = guo_hong_child_personality
+			add_ruler_personality = well_connected_personality
+			add_ruler_personality = greedy_personality
+		}
+	}
+	option = {
+		name = guo_smal.2b
+		add_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = 55
+			}
+		define_ruler = {
+			name = "Song"
+			dynasty = "Guo"
+			adm = 4
+			dip = 4
+			mil = 4
+			age = 16
+		}
+		hidden_effect = {
+			add_ruler_personality = guo_hong_child_personality
+			add_ruler_personality = well_connected_personality
+			add_ruler_personality = midas_touched_personality
+		}
+	}
+	option = {
+		name = guo_smal.2b
+		add_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = 15
+			}
+		define_ruler = {
+			name = "Hong"
+			dynasty = "Guo"
+			adm = 6
+			dip = 6
+			mil = 6
+			age = 47
+		}
+		hidden_effect = {
+			add_ruler_personality = guo_hong_child_personality
+			add_ruler_personality = inspiring_leader_personality
+			add_ruler_personality = midas_touched_personality
+		}
+	}
+}
