@@ -955,3 +955,47 @@ sco_make_model_colony = {
 	ai_will_do = { # this is a trigger
 	}
 }
+
+create_more_outer_councils = {
+	category = influence
+	
+	alert_index = 40
+	alert_tooltip = demand_dummy_alert_tooltip
+	require_acceptance = no # Whether the recipient gets an option to decline
+	is_visible = {
+		tag = SI0
+		FROM = {
+			is_subject = yes
+			NOT = {
+				is_subject_of_type = outside_sie_vassal
+			}
+		}
+		has_country_flag = sie_allow_more_outer_councils
+	}
+	is_allowed = {
+		is_at_war = no
+		FROM = {
+			is_subject = yes
+			num_of_owned_provinces_with = {
+				value = 25
+			}
+			total_development = 100
+		}
+	}
+	on_accept = {
+		create_subject = {
+			subject_type = outside_sie_vassal
+			who = FROM
+		}
+		FROM = {
+			change_government = republic
+			add_government_reform = outside_city_reform
+		}
+	}
+	on_decline = 	{
+	}
+
+	ai_will_do = { # this is a trigger
+		always = no
+	}
+}

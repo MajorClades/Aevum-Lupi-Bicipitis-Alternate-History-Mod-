@@ -68,9 +68,35 @@ Ganden_1_slot = {
 		required_missions = { ga0_fair_investments } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			total_development = 250
+			OR = {
+				check_variable = {
+					which = num_bylandr_elections
+					value = 4
+				}
+				check_variable = {
+					which = num_gettrike_elections
+					value = 4
+				}
+				check_variable = {
+					which = num_tonin_elections
+					value = 4
+				}
+				check_variable = {
+					which = num_kadlen_elections
+					value = 4
+				}
+			}
+			estate_loyalty = {
+				estate = estate_nobles
+				loyalty = 60
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+
+		} 
 	}
 
 	ga0_centralize_question = {
@@ -197,10 +223,15 @@ Ganden_2_slot = {
 					custom_tooltip = unlock_mittavia_dec_tt
 					set_country_flag = integrate_mittavia_flag
 				"
-			}
-			add_country_modifier = {
-				name = ga0_sweden_conquest
-				duration = 9125
+				second_limit = "
+					NOT = {senior_union_with = SW2}
+				"
+				second_effect = "
+					add_country_modifier = {
+						name = ga0_sweden_conquest
+						duration = 9125
+					}
+				"
 			}
 			east_anglia_area = {
 				add_permanent_claim = ROOT
