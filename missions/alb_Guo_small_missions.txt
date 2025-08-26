@@ -5,171 +5,6 @@ Guo_1_slot = {
 	has_country_shield = yes
 	potential = { tag = GU9 } 
 
-	1_si5_control = {
-		icon = mission_luther_theses
-		position = 1
-		provinces_to_highlight = { 
-			OR = {
-					region = south_german_region
-					region = low_countries_region
-					region = british_isles_region
-					area = hesse_area
-					area = normandy_area
-					area = alsace_area
-					area = lorraine_area
-					area = ile_de_france_area
-					area = champagne_area
-					area = picardy_area
-				}
-		} 
-
-		trigger = { 
-			num_of_owned_provinces_with = {
-				value = 10
-				OR = {
-					region = south_german_region
-					region = low_countries_region
-					region = british_isles_region
-					area = hesse_area
-					area = normandy_area
-					area = alsace_area
-					area = lorraine_area
-					area = ile_de_france_area
-					area = champagne_area
-					area = picardy_area
-				}
-				is_core = ROOT
-			}
-		} 
-
-		effect = {
-			south_german_region = {
-				add_permanent_claim = ROOT
-			}
-			low_countries_region = {
-				add_permanent_claim = ROOT
-			}
-			british_isles_region = {
-				add_permanent_claim = ROOT
-			}
-			hesse_area = {
-				add_permanent_claim = ROOT
-			}
-			normandy_area = {
-				add_permanent_claim = ROOT
-			}
-			alsace_area = {
-				add_permanent_claim = ROOT
-			}
-			lorraine_area = {
-				add_permanent_claim = ROOT
-			}
-			ile_de_france_area = {
-				add_permanent_claim = ROOT
-			}
-			champagne_area = {
-				add_permanent_claim = ROOT
-			}
-			picardy_area = {
-				add_permanent_claim = ROOT
-			}
-		}
-	}
-
-	1_si5_conquest = {
-		icon = public_works
-		position = 2
-		required_missions = { 1_si5_control } 
-		provinces_to_highlight = {
-			OR = {
-					region = south_german_region
-					region = low_countries_region
-					region = british_isles_region
-					area = hesse_area
-					area = normandy_area
-					area = alsace_area
-					area = lorraine_area
-					area = ile_de_france_area
-					area = champagne_area
-					area = picardy_area
-				}
-			NOT = {
-				owned_by = ROOT
-			}
-		  } 
-
-		trigger = {
-			num_of_owned_provinces_with = {
-				value = 30
-				OR = {
-					region = south_german_region
-					region = low_countries_region
-					region = british_isles_region
-					area = hesse_area
-					area = normandy_area
-					area = alsace_area
-					area = lorraine_area
-					area = ile_de_france_area
-					area = champagne_area
-					area = picardy_area
-				}
-			}
-		}
-
-		effect = {
-			add_adm_power = 200
-			add_dip_power = 200
-			add_mil_power = 200
-			capital_scope = { 
-				add_base_tax = 1
-				add_base_production = 1
-				add_base_manpower = 1
-			} 
-			overlord = {
-				capital_scope = { 
-					add_base_tax = 1
-					add_base_production = 1
-					add_base_manpower = 1
-				} 
-			} 
-		}
-	}
-
-	1_si5_power = {
-		icon = mission_pf_soldier
-		position = 3
-		required_missions = { 1_si5_conquest } 
-		provinces_to_highlight = {
-			OR = {
-					region = south_german_region
-					region = low_countries_region
-					region = british_isles_region
-					area = hesse_area
-					area = normandy_area
-					area = alsace_area
-					area = lorraine_area
-					area = ile_de_france_area
-					area = champagne_area
-					area = picardy_area
-				}
-			NOT = {
-				owned_by = ROOT
-			}
-		  } 
-
-		trigger = {
-			total_development = 1000
-			coal
-		}
-
-		effect = {
-			add_country_modifier = {
-				name = si5_lord_of_war
-				duration = -1
-			}
-		}
-	}
-
 }
 
 Guo_2_slot = {
@@ -179,7 +14,53 @@ Guo_2_slot = {
 	has_country_shield = yes
 	potential = { tag = GU9 } 
 
+	guo_dardarian_command = {
+		icon = public_works
+		position = 2
+		required_missions = { guo_legacy_of_dragons } 
+		provinces_to_highlight = { 
+			is_capital_of = DR0
+		} 
 
+		trigger = {
+			DR0 = {
+				OR = {
+					exists = no
+					has_opinion = {
+						who = ROOT
+						value = 190
+					}
+					has_been_insulted_by_root = yes
+				}
+			}
+		}
+
+		effect = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = GUO_TT_2a
+				first_limit = " DR0 = { has_opinion = { who = ROOT value = 190 } }"
+				first_effect = "
+					inherit = DR0
+					DR0 = {
+						random_core_province = {
+							spawn_rebels = {
+								size = 2
+								type = nationalist_rebels
+							}
+						}
+					}"
+				second_custom_tooltip = GUO_TT_2b
+				second_limit = "DR0 = {	OR = { exists = no has_been_insulted_by_root = yes } }"
+				second_effect = "
+					DR0 = {
+						every_core_province = {
+							add_core = GU9
+						}
+					}
+				"
+			}
+		}
+	}
 }
 
 Guo_3_slot = {
@@ -189,6 +70,52 @@ Guo_3_slot = {
 	has_country_shield = yes
 	potential = { tag = GU9 } 
 
+	guo_legacy_of_dragons = {
+		icon = mission_luther_theses
+		position = 1
+
+		trigger = { 
+			army_size_percentage = 1
+		} 
+
+		effect = {
+			pripyat_area = {
+				add_permanent_claim = ROOT
+			}
+			country_event = {
+				id = guo_smal.4
+			}
+		}
+	}
+
+	guo_the_capital = {
+		icon = public_works
+		position = 2
+		required_missions = { guo_legacy_of_dragons } 
+		provinces_to_highlight = { 
+			area = pripyat_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {
+			pripyat_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			pripyat_area = {
+				change_culture = xichenger
+			}
+			1941 = { change_province_name = "Nanmen" } 
+			278 = { change_province_name = "Beimen" } 
+			4982 = { change_province_name = "Ximen" } 
+			4545 = { change_province_name = "Dongmen" } 
+		}
+	}
 
 }
 
@@ -199,6 +126,34 @@ Guo_4_slot = {
 	ai = yes
 	has_country_shield = yes
 	potential = { tag = GU9 } 
+
+	guo_war_masters = {
+		icon = public_works
+		position = 2
+		required_missions = { guo_legacy_of_dragons } 
+
+		trigger = {
+			any_army = {
+				is_ruler_commanding_unit = yes
+				location = {
+					is_capital = yes
+					owner = {
+						NOT = {
+							war_score_against = {
+								who = ROOT
+								value = -50
+							}
+						}
+					}
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = GUO_TT_3
+			set_country_flag = guo_hong_reason_for_war_flag
+		}
+	}
 
 
 }

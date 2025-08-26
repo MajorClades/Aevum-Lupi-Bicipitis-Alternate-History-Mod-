@@ -16,7 +16,9 @@ country_event = {
 					value = 5
 			}
 		}
-		is_year = 1450
+		NOT = {
+			is_year = 1450	
+		}
 		NOT = {
 			exists = GU9
 		}
@@ -117,5 +119,159 @@ country_event = {
 			add_ruler_personality = inspiring_leader_personality
 			add_ruler_personality = midas_touched_personality
 		}
+	}
+	after = {
+		hidden_effect = {
+			if = {
+				limit = {ai = yes}
+				capital_scope = {
+					build_to_forcelimit = {
+						infantry = 1
+					}
+				}
+			}
+			country_event = {
+				id = guo_smal.3
+			}
+		}
+	}
+}
+
+
+country_event = {
+	id = guo_smal.3
+	title = guo_smal.3.test
+	desc = guo_smal.3.desc
+	picture = RELIGIOUS_CONVERSION_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = guo_smal.3a
+		add_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = 10
+			}
+	}
+	option = {
+		name = guo_smal.3b
+		add_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = -5
+			}
+		change_religion = turan_buddha
+
+	}
+	option = {
+		name = guo_smal.3c
+		add_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = -5
+			}
+		change_religion = alevilik
+		
+	}
+	option = {
+		name = guo_smal.3d
+		add_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = -5
+			}
+		change_religion = catholic
+		
+	}
+	option = {
+		name = guo_smal.3e
+		add_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = -15
+			}
+		change_religion = islam
+		
+	}
+}
+
+
+country_event = {
+	id = guo_smal.4
+	title = guo_smal.4.test
+	desc = guo_smal.4.desc
+	picture = COSSACK_ESTATE_RAIDERS_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = guo_smal.4a
+		add_country_modifier = {
+			name = guo_normal_legacy
+			duration = 7300
+		}
+	}
+	option = {
+		name = guo_smal.4b
+		add_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = 5
+			}
+		add_country_modifier = {
+			name = guo_insane_legacy
+			duration = 7300
+		}
+		custom_tooltip = GUO_TT_1
+		country_event = {
+			id = guo_smal.5
+			days = 7300
+		}
+	}
+}
+
+country_event = {
+	id = guo_smal.5
+	title = guo_smal.5.test
+	desc = guo_smal.5.desc
+	picture = COSSACK_ESTATE_RAIDERS_eventPicture
+	is_triggered_only = yes	
+
+	option = {
+		name = guo_smal.5a
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 30
+				OR = {
+					region = russia_region
+					region = ruthenia_region
+					region = poland_region
+					region = baltic_region
+				}
+			}
+		}
+		add_country_modifier = {
+			name = guo_insane_legacy_w
+			duration = -1
+		}
+	}
+	option = {
+		name = guo_smal.5b
+		trigger = {
+			NOT = {
+				num_of_owned_provinces_with = {
+					value = 30
+					OR = {
+						region = russia_region
+						region = ruthenia_region
+						region = poland_region
+						region = baltic_region
+					}
+				}
+			}
+		}
+		add_stability = -1
+		add_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = -15
+			}
 	}
 }
