@@ -5,6 +5,45 @@ Guo_1_slot = {
 	has_country_shield = yes
 	potential = { tag = GU9 } 
 
+	guo_old_vassals = {
+		icon = public_works
+		position = 3
+		required_missions = { guo_dardarian_command } 
+
+		trigger = {
+			has_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = 25
+			}
+			diplomat = 2
+			is_at_war = no
+		}
+
+		effect = {
+			SV0 = {
+				country_event = {
+					id = guo_smal.6
+				}
+			}
+			CT0 = {
+				country_event = {
+					id = guo_smal.6
+				}
+			}
+			AT0 = {
+				country_event = {
+					id = guo_smal.6
+				}
+			}
+			CT1 = {
+				country_event = {
+					id = guo_smal.6
+				}
+			}
+			
+		}
+	}
 }
 
 Guo_2_slot = {
@@ -58,6 +97,42 @@ Guo_2_slot = {
 						}
 					}
 				"
+			}
+		}
+	}
+	guo_old_dominions = {
+		icon = public_works
+		position = 3
+		required_missions = { guo_dardarian_command } 
+		provinces_to_highlight = {
+			OR = {
+					region = russia_region 
+					region = ruthenia_region 
+					region = ural_region 
+					region = baltic_region 
+				}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 15
+				OR = {
+					region = russia_region 
+					region = ruthenia_region 
+					region = ural_region 
+					region = baltic_region 
+				}
+			}
+		}
+
+		effect = {
+			add_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = 15
 			}
 		}
 	}
@@ -166,5 +241,19 @@ Guo_5_slot = {
 	has_country_shield = yes
 	potential = { tag = GU9 } 
 
+	guo_old_wars = {
+		icon = public_works
+		position = 3
+		required_missions = { guo_war_masters } 
+
+		trigger = {
+			num_of_streltsy = 10
+			army_tradition = 25
+		}
+
+		effect = {
+			
+		}
+	}
 
 }
