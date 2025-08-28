@@ -295,6 +295,18 @@ on_battle_won_country = {
 on_battle_won_unit = {
 	if = {
 		limit = {
+			has_government_mechanic = guo_loyalist_mechanic
+			is_monarch_leader = yes
+			is_ruler_commanding_unit = yes
+		}
+		add_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = 3
+			}
+	}
+	if = {
+		limit = {
 			OR = {
 				tag = MO0
 				was_tag = MO0
@@ -589,6 +601,19 @@ on_monarch_death = {
 	#}
 }
 on_new_monarch = {
+	if = {
+		limit = {
+			dynasty = "Guo"
+			NOT = {
+				has_country_flag = no_exams_for_now
+			}
+			has_government_mechanic = guo_loyalist_mechanic
+		}
+		country_event = {
+				id = guo_smal.7
+			}
+	}
+
 	if = { #Wasn't triggering for repeat elections (where one country gets elected for consecutive rulers)
 		limit = {
 			tag = emperor
