@@ -1281,3 +1281,89 @@ country_event = {
 		set_country_flag = yes_special_colonies
 	}
 }
+
+country_event = {
+	id = colonial_s.1000
+	title = colonial_s.1000.test
+	desc = colonial_s.1000.desc
+	picture = COLONIZATION_eventPicture
+
+	trigger = {
+		NOT = {
+			has_country_flag = has_declined_colonial_culture_flag 
+		}
+		is_colonial_nation = yes
+		culture_group = iberisch
+		capital_scope = {
+			OR = {
+				continent = north_america	
+				continent = south_america
+			}
+		}
+		NOT = {
+			primary_culture = meschikaner
+		}
+		NOT = {
+			primary_culture = rojter
+		}
+	}
+	mean_time_to_happen = {
+		months = 120
+	}
+
+	option = {
+		name = colonial_s.100a
+		trigger = {
+			capital_scope = {
+				continent = north_america	
+			}
+		}
+		change_primary_culture = meschikaner
+		capital_scope = {
+			change_culture = meschikaner
+		}
+	}
+	option = {
+		name = colonial_s.100b
+		trigger = {
+			capital_scope = {
+				continent = south_america	
+			}
+		}
+		change_primary_culture = rojter
+		capital_scope = {
+			change_culture = rojter
+		}
+	}
+	option = {
+		name = colonial_s.100c
+		set_country_flag = has_declined_colonial_culture_flag
+	}
+}
+
+country_event = {
+	id = colonial_s.1001
+	title = colonial_s.1001.test
+	desc = colonial_s.1001.desc
+	picture = COLONIZATION_eventPicture
+	hidden = yes
+	is_triggered_only = yes
+	trigger = {
+		OR = {
+			primary_culture = meschikaner
+			primary_culture = rojter
+		}
+		any_owned_province = {
+			culture_group = iberisch
+		}
+	}
+	option = {
+		name = colonial_s.100a
+		random_owned_province = {
+			limit = {
+				culture_group = iberisch
+			}
+			change_culture = ROOT
+		}
+	}
+}
