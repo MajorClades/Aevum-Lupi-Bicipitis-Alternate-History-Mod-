@@ -1281,7 +1281,7 @@ country_event = {
 		set_country_flag = yes_special_colonies
 	}
 }
-
+#Colonial Cultures
 country_event = {
 	id = colonial_s.1000
 	title = colonial_s.1000.test
@@ -1312,7 +1312,7 @@ country_event = {
 	}
 
 	option = {
-		name = colonial_s.100a
+		name = colonial_s.1000a
 		trigger = {
 			capital_scope = {
 				continent = north_america	
@@ -1324,7 +1324,7 @@ country_event = {
 		}
 	}
 	option = {
-		name = colonial_s.100b
+		name = colonial_s.1000b
 		trigger = {
 			capital_scope = {
 				continent = south_america	
@@ -1336,7 +1336,7 @@ country_event = {
 		}
 	}
 	option = {
-		name = colonial_s.100c
+		name = colonial_s.1000c
 		set_country_flag = has_declined_colonial_culture_flag
 	}
 }
@@ -1358,9 +1358,129 @@ country_event = {
 		}
 	}
 	option = {
-		name = colonial_s.100a
+		name = colonial_s.1001a
 		random_owned_province = {
 			limit = {
+				OR = {
+					continent = north_america
+					continent = south_america
+				}
+				culture_group = iberisch
+			}
+			change_culture = ROOT
+		}
+	}
+}
+
+country_event = {
+	id = colonial_s.1002
+	title = colonial_s.1002.test
+	desc = colonial_s.1002.desc
+	picture = COLONIZATION_eventPicture
+
+	trigger = {
+		NOT = {
+			has_country_flag = has_declined_colonial_culture_flag 
+		}
+		is_colonial_nation = yes
+		culture_group = romano_briton
+		capital_scope = {
+			OR = {
+				continent = north_america	
+				continent = south_america
+			}
+		}
+		NOT = {
+			primary_culture = avalonian
+		}
+		NOT = {
+			primary_culture = artorian
+		}
+		NOT = {
+			primary_culture = hybrasilian
+		}
+	}
+	mean_time_to_happen = {
+		months = 120
+	}
+
+	option = {
+		name = colonial_s.1002a
+		trigger = {
+			capital_scope = {
+				OR = {
+					colonial_region = colonial_north_south
+					colonial_region = colonial_louisiana
+					colonial_region = colonial_mexico
+				}
+			}
+		}
+		change_primary_culture = avalonian
+		capital_scope = {
+			change_culture = avalonian
+		}
+	}
+	option = {
+		name = colonial_s.1002b
+		trigger = {
+			capital_scope = {
+				OR = {
+					colonial_region = colonial_eastern_america
+					colonial_region = colonial_canada
+				}
+			}
+		}
+		change_primary_culture = artorian
+		capital_scope = {
+			change_culture = artorian
+		}
+	}
+	option = {
+		name = colonial_s.1002c
+		trigger = {
+			capital_scope = {
+				OR = {
+					colonial_region = colonial_the_carribean
+					continent = south_america
+				}
+			}
+		}
+		change_primary_culture = hybrasilian
+		capital_scope = {
+			change_culture = hybrasilian
+		}
+	}
+	option = {
+		name = colonial_s.1002d
+		set_country_flag = has_declined_colonial_culture_flag
+	}
+}
+
+country_event = {
+	id = colonial_s.1003
+	title = colonial_s.1003.test
+	desc = colonial_s.1003.desc
+	picture = COLONIZATION_eventPicture
+	hidden = yes
+	is_triggered_only = yes
+	trigger = {
+		OR = {
+			primary_culture = avalonian
+			primary_culture = artorian
+			primary_culture = hybrasilian
+		}
+		any_owned_province = {
+			culture_group = romano_briton
+		}
+	}
+	option = {
+		name = colonial_s.1003a
+		random_owned_province = {
+			limit = {
+				OR = {
+					continent = north_america
+					continent = south_america
+				}
 				culture_group = iberisch
 			}
 			change_culture = ROOT
