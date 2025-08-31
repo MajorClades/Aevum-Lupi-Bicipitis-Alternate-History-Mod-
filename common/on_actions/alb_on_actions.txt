@@ -135,28 +135,6 @@ on_battle_lost_country = {
 }
 on_battle_won_country = {
 	if = {
-		limit = {has_country_flag = extra_discipline_for_at_flag}
-		change_variable = {
-			which = war_lesson_counter
-			value = 1
-		}
-	}
-}
-on_war_won = {
-	if = {
-		limit = { 
-				tag = RU0
-				has_government_mechanic = rhoman_decadence_mechanic
-			}
-			add_government_power = {
-				mechanic_type = rhoman_decadence_mechanic
-				power_type = rhoman_decadence
-				value = -5
-			}
-	}
-}
-on_battle_won_country = {
-	if = {
 		limit = { 
 				tag = RU0
 				has_government_mechanic = rhoman_decadence_mechanic
@@ -176,6 +154,69 @@ on_battle_won_country = {
 			power_type = restoration_aldabba 
 			value = 0.5
 		}
+	}
+	if = {
+		limit = {has_country_flag = extra_discipline_for_at_flag}
+		change_variable = {
+			which = war_lesson_counter
+			value = 1
+		}
+	}
+	if = {
+		limit = {
+			has_government_mechanic = guo_loyalist_mechanic
+			is_monarch_leader = yes
+			is_ruler_commanding_unit = yes
+		}
+		add_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = 3
+			}
+			if = {
+				limit = {
+					NOT = {
+						check_variable = {
+							which = guo_battle_won_var
+							value = 10
+						}
+					}
+				}
+				change_variable = {
+					which = guo_battle_won_var
+					value = 1
+				}
+			}
+	}
+	if = {
+		limit = {
+			OR = {
+				tag = MO0
+				was_tag = MO0
+			}
+			NOT = {
+				has_country_flag = mol_iron_fist
+			}
+			is_monarch_leader = yes
+			is_ruler_commanding_unit = yes
+		}
+		country_event = {
+			id = molis.100
+		}
+		set_country_flag = mol_iron_fist
+	}
+}
+on_war_won = {
+	if = {
+		limit = { 
+				tag = RU0
+				has_government_mechanic = rhoman_decadence_mechanic
+			}
+			add_government_power = {
+				mechanic_type = rhoman_decadence_mechanic
+				power_type = rhoman_decadence
+				value = -5
+			}
 	}
 }
 on_province_owner_change = {
@@ -293,49 +334,7 @@ on_battle_won_country = {
 }
 
 on_battle_won_unit = {
-	if = {
-		limit = {
-			has_government_mechanic = guo_loyalist_mechanic
-			is_monarch_leader = yes
-			is_ruler_commanding_unit = yes
-		}
-		add_government_power = {
-				mechanic_type = guo_loyalist_mechanic
-				power_type = guo_loyal_favor
-				value = 3
-			}
-			if = {
-				limit = {
-					NOT = {
-						check_variable = {
-							which = guo_battle_won_var
-							value = 10
-						}
-					}
-				}
-				change_variable = {
-					which = guo_battle_won_var
-					value = 1
-				}
-			}
-	}
-	if = {
-		limit = {
-			OR = {
-				tag = MO0
-				was_tag = MO0
-			}
-			NOT = {
-				has_country_flag = mol_iron_fist
-			}
-			is_monarch_leader = yes
-			is_ruler_commanding_unit = yes
-		}
-		country_event = {
-			id = molis.100
-		}
-		set_country_flag = mol_iron_fist
-	}
+
 }
 
 on_main_war_won = {
