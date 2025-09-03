@@ -1,0 +1,425 @@
+Bavaria_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = GR1
+			AND = {
+				tag = GR0
+				was_tag = GR1
+			}
+		}
+	}
+
+	bav_kronster = {
+		icon = mission_court_education
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			OR = {
+				theologian = 1
+				inquisitor = 1
+			}
+		}
+
+		effect = { country_event = { id = bavar.2 }  } 
+	}
+
+	bav_stermic = {
+		icon = alpine_fortifications
+		position = 3
+		required_missions = { bav_old_rules } 
+		provinces_to_highlight = {
+			region = south_german_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 30
+				region = south_german_region
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "bavarian_lords_of_the_mountains"
+				duration = 10950
+			}
+		}
+	}
+}
+Bavaria_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = GR1
+			AND = {
+				tag = GR0
+				was_tag = GR1
+			}
+		}
+	}
+
+	bav_old_rules = {
+		icon = mission_unite_home_region
+		position = 2
+		required_missions = { bav_starting_up } 
+		provinces_to_highlight = {
+			OR = {
+				area = east_bavaria_area
+				area = lower_bavaria_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			east_bavaria_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			lower_bavaria_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			east_bavaria_area = {
+				add_province_modifier = {
+					name = "bav_danubian_fair"
+					duration = 10950
+				}
+			}
+			lower_bavaria_area = {
+				add_province_modifier = {
+					name = "bav_danubian_fair"
+					duration = 10950
+				}
+			}
+			south_german_region = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	bav_new_rules = {
+		icon = imperial_ascendancy
+		position = 4
+		required_missions = { bav_old_rules } 
+		provinces_to_highlight = { is_capital_of = DA5 } 
+
+		trigger = {
+			DA5 = {
+				OR = {
+					exists = no
+					AND = {
+						alliance_with = ROOT
+						has_opinion = {
+							who = ROOT
+							value = 190
+						}
+					}
+				}
+			}
+		}
+
+		effect = {
+			vassalize = DA5
+			slovakia_area = { add_permanent_claim = ROOT } 
+			transdanubia_area = { add_permanent_claim = ROOT } 
+		}
+	}
+}
+Bavaria_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = GR1
+			AND = {
+				tag = GR0
+				was_tag = GR1
+			}
+		}
+	}
+
+	bav_starting_up = {
+		icon = mission_colonial
+		position = 1
+		provinces_to_highlight = {
+			OR = {
+				area = bohemia_area
+				area = erzgebirge_area
+			}
+			NOT = { grown_by_development = 2 } 
+		}
+
+		trigger = {
+			bohemia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				grown_by_development = 2
+			}
+			erzgebirge_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				grown_by_development = 2
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "bavarian_pride"
+				duration = 10950
+			}
+			east_bavaria_area = { add_permanent_claim = ROOT } 
+			lower_bavaria_area = { add_permanent_claim = ROOT } 
+			lusatia_area = { add_permanent_claim = ROOT } 
+			silesia_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	bav_councils_power = {
+		icon = bohemian_crystal
+		position = 2
+		required_missions = { bav_starting_up } 
+		provinces_to_highlight = { province_id = 266 } 
+
+		trigger = {
+			estate_loyalty = {
+				estate = estate_nobles
+				loyalty = 65
+			}
+			266 = { development = 25 } 
+		}
+
+		effect = {
+			country_event = { id = bavar.1 } 
+			266 = { add_province_triggered_modifier = bav_europe_capital } 
+		}
+	}
+
+	bav_city_masters = {
+		icon = renovate_berlin
+		position = 3
+		required_missions = { bav_councils_power } 
+		provinces_to_highlight = { province_id = 266 } 
+
+		trigger = {
+			has_adm_advisor_3 = yes
+			OR = {
+				full_idea_group = infrastructure_ideas
+				full_idea_group = innovativeness_ideas
+				full_idea_group = quantity_ideas
+				full_idea_group = quality_ideas
+				full_idea_group = trade_ideas
+				full_idea_group = diplomatic_ideas
+			}
+			266 = {
+				development = 30
+				has_tax_building_trigger = yes
+				has_trade_building_trigger = yes
+				has_manpower_building_trigger = yes
+			}
+		}
+
+		effect = {
+			266 = {
+				remove_building = temple
+				remove_building = marketplace
+				remove_building = barracks
+				add_permanent_province_modifier = {
+					name = "capital_of_europe_bav"
+					duration = -1
+				}
+			}
+		}
+	}
+
+	bav_beacon_of_germania = {
+		icon = ger_kaiserreich
+		position = 4
+		required_missions = { bav_city_masters } 
+		provinces_to_highlight = {
+			OR = {
+				area = bohemia_area
+				area = erzgebirge_area
+			}
+			NOT = { grown_by_development = 4 } 
+		}
+
+		trigger = {
+			266 = {
+				development = 35
+				has_tax_building_trigger = yes
+				has_trade_building_trigger = yes
+				has_manpower_building_trigger = yes
+			}
+			bohemia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				grown_by_development = 4
+			}
+			erzgebirge_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				grown_by_development = 4
+			}
+		}
+
+		effect = {
+			266 = {
+				add_great_project_tier = {
+					type = bavarian_royal_palace
+					tier = 1
+				}
+			}
+			country_event = { id = bavar.3 } 
+			if = {
+				limit = {
+					NOT = {tag = GR0}
+				}
+				custom_tooltip = BAV_TT_2
+			}else = {
+				custom_tooltip = BAV_TT_3
+			}
+			hidden_effect = { complete_mission = german_capital_conf_4 } 
+		}
+	}
+}
+Bavaria_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = GR1
+			AND = {
+				tag = GR0
+				was_tag = GR1
+			}
+		}
+	}
+
+	bav_bavarian_lands = {
+		icon = duchy_of_bavaria
+		position = 2
+		required_missions = { bav_starting_up } 
+		provinces_to_highlight = {
+			OR = {
+				area = lusatia_area
+				area = silesia_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			lusatia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			silesia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_government_power = {
+				mechanic_type = bav_councils
+				power_type = bavarian_governance
+				value = 10
+			}
+			north_german_region = { add_permanent_claim = ROOT } 
+		}
+	}
+}
+Bavaria_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = GR1
+			AND = {
+				tag = GR0
+				was_tag = GR1
+			}
+		}
+	}
+
+	bav_hire_arms = {
+		icon = mission_assemble_an_army
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			manpower_percentage = 0.9
+			army_size_percentage = 0.9
+		}
+
+		effect = {
+			define_general = {
+				shock = 2
+				fire = 3
+				manuever = 2
+				siege = 1
+			}
+		}
+	}
+
+	bav_war_front = {
+		icon = mission_hessian_jaeger_corps
+		position = 2
+		required_missions = { bav_hire_arms } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			NOT = { mercenary_fraction = 0.1 } 
+			army_size = 25
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "bavarian_prowess"
+				duration = 10950
+			}
+		}
+	}
+
+	bav_swardians = {
+		icon = mission_conquer_prussia
+		position = 3
+		required_missions = {
+			bav_bavarian_lands
+			bav_war_front
+		}
+		provinces_to_highlight = {
+			region = north_german_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 30
+				region = north_german_region
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "bavarian_lords_of_germania"
+				duration = 10950
+			}
+		}
+	}
+}

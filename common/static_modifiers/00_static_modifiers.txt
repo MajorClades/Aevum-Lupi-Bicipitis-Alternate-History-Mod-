@@ -308,6 +308,7 @@ patriarch_authority_local = {
 patriarch_authority_global = {
 	global_missionary_strength = 0.02
 	church_influence_modifier = 0.10
+	monthly_imperial_favor_brit = 0.2
 }
 
 pasha_state = {
@@ -416,6 +417,7 @@ non_accepted_culture = {
 	local_manpower_modifier = -0.33
 	local_sailors_modifier = -0.2
 	local_unrest = 2					#1% revolt risk!
+	monthly_scot_single_power = -0.02
 }
 
 accepted_culture_demoted = {
@@ -628,6 +630,7 @@ stability = {
 	monthly_cultural_unity = 0.1
 	monthly_iberian_cultural_unity = 0.15
 	monthly_divine_authority = 0.05			#-15 to +15% modifier
+	monthly_scot_single_power = 0.1
 }
 
 positive_stability = {
@@ -672,6 +675,7 @@ negative_stability = {
 	monthly_alb_worldliness_vs_godliness = -0.02
 	monthly_hellenization = -0.05
 	monthly_CEF_centralization_power = 0.05
+	monthly_confederation_power = -0.1
 }
 
 positive_mandate = {	# 100% strength at 100 mandate, 0% at 50 mandate
@@ -710,6 +714,7 @@ cancelled_loan = {
 
 bank_loan = {
 	#no effects
+	monthly_fra_monetary_bank = 0.01
 }
 
 inflation = {
@@ -736,6 +741,7 @@ inflation = {
 	state_maintenance_modifier = 0.01					#1% for each inflation step
 	monthly_russian_modernization = -0.01
 	monthly_venetian_capitalism = -0.01
+	monthly_fra_monetary_bank = -0.01
 }
 
 bankruptcy = {
@@ -764,6 +770,7 @@ bankruptcy = {
 	monthly_venetian_capitalism = -0.2
 	monthly_authority_power = 0.25
 	monthly_alb_worldliness_vs_godliness = -0.01
+	monthly_fra_monetary_bank = -0.25
 }
 
 
@@ -775,11 +782,12 @@ war = {
 	monthly_blood = 0.3
 	monthly_authority_power = -0.05
 	monthly_alb_worldliness_vs_godliness = -0.01
+	monthly_fervor_increase = 1
+	monthly_sie_single_power = -0.1
 }
 
 peace = {
 	war_exhaustion = -0.1
-	monthly_fervor_increase = 1
 	global_autonomy = -0.1
 	global_institution_spread = 0.1
 	rr_girondists_influence = -0.1
@@ -825,6 +833,7 @@ war_exhaustion = {
 	monthly_cultural_unity = -0.05
 	monthly_iberian_cultural_unity = -0.05
 	monthly_authority_power = 0.01
+	monthly_fra_monetary_bank = -0.5
 }
 
 doom = {
@@ -847,6 +856,7 @@ regency_council = {
 trade_efficiency = {
 	allowed_voc_indiamen_fraction = 0.25	#At 100% Trade Efficiency you get 25% available VOC Indiamen
 	monthly_venetian_capitalism = 0.5
+	monthly_fra_monetary_bank = 0.2
 }
 
 production_efficiency = {
@@ -997,10 +1007,10 @@ church_power = {
 
 # Multiplied by the amount of Fervor
 fervor = {
-	build_cost = -0.001
-	stability_cost_modifier = -0.001
-	years_of_nationalism = -0.05
-	improve_relation_modifier = 0.001
+	cavalry_cost = -0.001
+	yearly_corruption  = -0.001
+	tolerance_own = 0.05
+	caravan_power = 0.001
 }
 
 # Multiplied by the amount of Karma
@@ -1107,6 +1117,7 @@ corruption = {
 	monthly_venetian_capitalism = -5
 	monthly_arabic_trade_influence_power = -0.5
 	monthly_authority_power = 0.5
+	monthly_imperial_favor_brit = -5
 }
 
 root_out_corruption = {
@@ -1181,7 +1192,7 @@ prestige = {
 	monthly_heir_claim_increase = 0.05
 
 	monthly_persian_influence = 0.25
-
+ 	monthly_imperial_favor_brit = 0.5
 	brahmins_hindu_loyalty_modifier = 0.05
 	brahmins_muslim_loyalty_modifier = 0.05
 	brahmins_other_loyalty_modifier = 0.05
@@ -1378,6 +1389,7 @@ trade_protectorate_low_development_subject_modifier = {
 }
 
 trade_protectorate_overlord_modifier = {
+	monthly_fra_monetary_bank = 0.02
 	global_trade_power = 0.05
 	global_trade_goods_size_modifier = 0.02
 }
@@ -1391,6 +1403,8 @@ is_great_power = {						#Only works with Rights of Man DLC enabled
 	prestige_decay = -0.01
 	embracement_cost = -0.1
 	max_absolutism = 5
+	monthly_imperial_favor_brit = 0.1
+	monthly_fervor_increase = 2
 }
 
 in_golden_era = {
@@ -1401,6 +1415,7 @@ in_golden_era = {
 	max_absolutism = 5
 	max_revolutionary_zeal = 10
 	monthly_arabic_trade_influence_power = 0.25
+	monthly_fervor_increase = 1
 }
 
 absolutism = {
@@ -1474,6 +1489,7 @@ power_projection = {
 	republican_tradition = 0.2
 	monthly_divine_authority = 0.05
 	monthly_authority_power = -0.1
+	monthly_imperial_favor_brit = 0.5
 }
 
 power_projection_25 = {
@@ -1554,6 +1570,19 @@ march_subject = {
 
 vassal_subject = {
 	land_forcelimit = 1
+}
+
+papal_subject_1 = {
+	global_tax_modifier = 0.05
+}
+
+papal_subject_2 = {
+	land_forcelimit = 5
+}
+
+papal_subject_3 = {
+	land_forcelimit_modifier = 0.15
+	manpower_in_true_faith_provinces = 0.15
 }
 
 daimyo_subject = {
@@ -2259,7 +2288,8 @@ cossacks_regiment = {
 
 carolean_regiment = {
 	morale_damage = 0.05
-	drill_decay_modifier = -0.25
+	regiment_disembark_speed = 1
+	drill_decay_modifier = -0.15
 }
 
 revolutionary_guard_regiment = {
@@ -2556,4 +2586,40 @@ reverse_sailors_percentage = {
 may_dynastic_influence_modifier = {
 	legitimacy = 0.25 
 	land_forcelimit = 3
+}
+
+sie_buff_outwall_1 = {
+	land_forcelimit_modifier = 0.15
+	manpower_in_accepted_culture_provinces = 0.1
+}
+
+sie_buff_outwall_2 = {
+	global_tax_modifier = 0.33
+	num_accepted_cultures = 2
+}
+
+sie_buff_outwall_3 = {
+	overlord_naval_forcelimit = 20
+	army_tradition = 0.5
+	yearly_army_professionalism = 0.001
+}
+
+sie_buff_outwall_4 = {
+	global_unrest = -4
+}
+
+sie_tribute_to_the_city = {
+	monthly_sie_single_power = 0.05
+}
+
+sie_manpower_to_the_city = {
+	manpower_recovery_speed = 0.15
+}
+
+sie_taxes_to_the_city = {
+	global_tax_modifier = 0.25
+}
+
+sie_more_dragons_to_the_city = {
+	amount_of_streltsy = 10
 }

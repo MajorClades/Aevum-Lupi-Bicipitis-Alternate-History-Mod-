@@ -103,6 +103,25 @@ herkulan_naval_defenses = {
 	local_own_coast_naval_combat_bonus = 1
 }
 
+pannonia_blessed_g_rain = {
+	potential = {
+		owner = {
+			OR = {
+				is_or_was_tag = {tag = DA2}
+				is_or_was_tag = {tag = PD2}
+			}
+		}
+	}
+	trigger = {
+		trade_goods = grain
+		NOT = {
+			devastation = 50
+		}
+		has_siege = no
+	}
+	trade_goods_size = 1
+	local_manpower_modifier = 0.15
+}
 black_pyramid = {
 	potential = {
 		owner = {
@@ -115,4 +134,85 @@ black_pyramid = {
 	local_development_cost = -0.1
 	allowed_num_of_buildings = 1
 	local_governing_cost_increase = -10
+}
+bav_europe_capital = {
+	potential = {
+		owner = {
+			capital_scope = {
+				has_province_modifier = bav_europe_capital
+			}
+		}
+	}
+	trigger = {
+		owner = {
+			if = {
+				limit = {
+					has_estate = estate_nobles
+				}
+				estate_loyalty = {
+					estate = estate_nobles
+					loyalty = 60
+				}
+				NOT = {
+					estate_influence = {
+						estate = estate_nobles
+						influence = 80
+					}
+				}
+			}else = {
+				stability = 3
+				legitimacy = 80
+			}
+		}
+	}
+	
+	local_development_cost_modifier = -0.25
+	local_governing_cost_increase = -100
+}
+
+brit_oxford_university_adm = {
+	potential = {
+		
+	}
+	trigger = {
+		owner = {
+			adm_power = 600
+			has_adm_advisor_of_level = { level = 5 }
+		}
+	}
+	
+	adm_tech_cost_modifier = -0.15
+	idea_cost = -0.1
+}
+
+
+brit_oxford_university_dip = {
+	potential = {
+		
+	}
+	trigger = {
+		owner = {
+			dip_power = 600
+			has_dip_advisor_of_level = { level = 5 }
+		}
+	}
+	
+	dip_tech_cost_modifier = -0.15
+	idea_cost = -0.1
+}
+
+
+brit_oxford_university_mil = {
+	potential = {
+		
+	}
+	trigger = {
+		owner = {
+			mil_power = 600
+			has_mil_advisor_of_level = { level = 5 }
+		}
+	}
+	
+	mil_tech_cost_modifier = -0.15
+	idea_cost = -0.1
 }

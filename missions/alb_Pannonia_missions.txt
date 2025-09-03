@@ -1,0 +1,595 @@
+Pannonia_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { tag = ROM } 
+		OR = {
+			tag = DA2
+			AND = {
+				has_country_flag = generic_italy_MT
+				was_tag = DA2
+			}
+		}
+	}
+
+	pann_making_it_grain = {
+		icon = mission_bread
+		position = 2
+		required_missions = { pann_feed_the_city } 
+		provinces_to_highlight = {
+			trade_goods = grain
+			OR = {
+				AND = {
+					NOT = {base_production = 6}
+					has_production_building_trigger = no
+				}
+				has_manufactory_trigger = no
+			}
+			country_or_non_sovereign_subject_holds = ROOT
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 4
+				trade_goods = grain
+				OR = {
+					AND = {
+						base_production = 6
+						has_production_building_trigger = yes
+					}
+					has_manufactory_trigger = yes
+				}
+			}
+		}
+
+		effect = {
+			set_country_flag = get_manpower_from_dev_grain_flag
+			custom_tooltip = PANN_TT_2
+			custom_tooltip = empty_line_tt
+			add_country_modifier = {
+				name = pannonian_grain_soliders
+				duration = 9125
+			}
+		}
+	}
+
+	pann_making_it_global = {
+		icon = mission_market_place_with_asian_traders
+		position = 4
+		required_missions = { pann_making_it_grain } 
+		provinces_to_highlight = {
+			trade_goods = grain
+			has_manufactory_trigger = no
+			country_or_non_sovereign_subject_holds = ROOT
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 12
+				trade_goods = grain
+				has_manufactory_trigger = yes
+			}
+		}
+
+		effect = {
+			change_price = {
+				trade_goods = grain
+				key = PANNONIA_CEREALS
+				value = 0.15
+				duration = -1
+			}
+			custom_tooltip = empty_line_tt
+			custom_tooltip = enable_export_grain_dip_action_tt
+			set_country_flag = pannonia_enable_export_grain_dip_action_flag 
+		}
+	}
+}
+Pannonia_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { tag = ROM } 
+		OR = {
+			tag = DA2
+			AND = {
+				has_country_flag = generic_italy_MT
+				was_tag = DA2
+			}
+		}
+	}
+
+	pann_feed_the_city = {
+		icon = mission_rice_field
+		position = 1
+		provinces_to_highlight = { province_id = 1864 } 
+
+		trigger = {
+			treasury = 200
+			owns = 1864
+		}
+
+		effect = {
+			add_treasury = -200
+			1864 = {
+				change_trade_goods = grain
+				add_province_triggered_modifier = pannonia_blessed_g_rain
+			}
+		}
+	}
+
+	pann_more_grain = {
+		icon = mission_vodka_monopoly
+		position = 2
+		required_missions = { pann_feed_the_city } 
+		provinces_to_highlight = {
+			trade_goods = grain
+			country_or_non_sovereign_subject_holds = ROOT
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 10
+				trade_goods = grain
+			}
+		}
+
+		effect = {
+			add_years_of_owned_provinces_production_income = {
+				years = 1
+				custom_tooltip = MONOPOLY_INCOME_GRAIN_DESC
+				trigger = { trade_goods = grain } 
+			}
+			add_country_modifier = {
+				name = "pannonian_beers"
+				duration = 10950
+			}
+		}
+	}
+
+	pann_grain_maxxing = {
+		icon = mission_entrepot_of_india
+		position = 3
+		required_missions = {
+			pann_making_it_grain
+			pann_more_grain
+		}
+		provinces_to_highlight = {
+			trade_goods = grain
+			NOT = { base_production = 10 } 
+			country_or_non_sovereign_subject_holds = ROOT
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 4
+				trade_goods = grain
+				base_production = 10
+			}
+		}
+
+		effect = {
+			add_years_of_owned_provinces_production_income = {
+				years = 10
+				custom_tooltip = MONOPOLY_INCOME_GRAIN_DESC
+				trigger = { trade_goods = grain } 
+			}
+		}
+	}
+
+	pann_grand_granary = {
+		icon = mission_high_income
+		position = 5
+		required_missions = {
+			pann_making_it_global
+			pann_grain_danubia
+		}
+		provinces_to_highlight = {
+			trade_goods = grain
+			owned_by = ROOT
+		}
+
+		trigger = {
+			development_in_provinces = {
+				value = 300
+				trade_goods = grain
+			}
+		}
+
+		effect = {
+			country_event_with_insight = {
+				id = pann.6
+				insight_tooltip = PANN_TT_5a
+			}
+		}
+	}
+}
+Pannonia_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { tag = ROM } 
+		OR = {
+			tag = DA2
+			AND = {
+				has_country_flag = generic_italy_MT
+				was_tag = DA2
+			}
+		}
+	}
+
+	pann_greater_pannonia = {
+		icon = mission_unite_home_region
+		position = 2
+		required_missions = { pann_army } 
+		provinces_to_highlight = {
+			area = alfold_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			alfold_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_prestige_or_monarch_power = { amount = 15 } 
+			country_event = {
+				id = pann.7
+			}
+			slovakia_area = { add_permanent_claim = ROOT } 
+			transylvania_area = { add_permanent_claim = ROOT } 
+			southern_transylvania_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	pann_grain_danubia = {
+		icon = mission_pol_breadbasket_europe
+		position = 4
+		required_missions = {
+			pann_grain_maxxing
+			pann_danubian
+		}
+		provinces_to_highlight = {
+			region = carpathia_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			carpathia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			custom_tooltip = PANN_TT_3
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						region = carpathia_region
+						OR = {
+							trade_goods = livestock
+							trade_goods = naval_supplies
+							trade_goods = wool
+						}
+					}
+					change_trade_goods = grain
+				}
+			}
+			custom_tooltip = empty_line_tt
+			add_stability_or_adm_power = yes
+		}
+	}
+
+	pann_grain_europe = {
+		icon = mission_empire
+		position = 6
+		required_missions = { pann_grain_danubia } 
+		provinces_to_highlight = {
+			region = carpathia_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			OR = {
+				tag = DN0
+				tag = ITA
+			}
+			development_in_provinces = {
+				value = 500
+				region = carpathia_region
+			}
+		}
+
+		effect = {
+			set_government_rank = 3
+			simple_dynamic_effect = {
+				first_custom_tooltip = PANN_TT_6a
+				first_limit = "
+					tag = DN0
+				"
+				first_effect = "
+					carpathia_region = {
+						add_permanent_province_modifier = {
+							name = alb_pannonian_farmings
+							duration = -1
+						}
+					}
+				"
+				second_custom_tooltip = PANN_TT_6b
+				second_limit = "
+					OR = {
+						tag = ITA
+						tag = IT9
+					}
+				"
+				second_effect = "
+					carpathia_region = {
+						add_permanent_province_modifier = {
+							name = alb_pannonian_restoration
+							duration = -1
+						}
+					}
+				"
+			}
+		}
+	}
+}
+Pannonia_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { tag = ROM } 
+		OR = {
+			tag = DA2
+			AND = {
+				has_country_flag = generic_italy_MT
+				was_tag = DA2
+			}
+		}
+	}
+
+	pann_army = {
+		icon = mission_build_up_to_force_limit
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			if = {
+				limit = { ai = yes } 
+				army_size_percentage = 0.6
+				num_of_generals = 1
+			}
+			else = { army_size_percentage = 1 } 
+		}
+
+		effect = {
+			transdanubia_area = { add_permanent_claim = ROOT } 
+			alfold_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	pann_noria = {
+		icon = mission_secure_khandesh
+		position = 2
+		required_missions = { pann_army } 
+		provinces_to_highlight = { province_id = 4751 } 
+
+		trigger = {
+			OR = {
+				DA4 = {
+					trust = {
+						who = ROOT
+						value = 90
+					}
+					owes_favors = {
+						who = ROOT
+						value = 50
+					}
+				}
+				4751 = { country_or_non_sovereign_subject_holds = ROOT } 
+			}
+		}
+
+		effect = {
+			vassalize = DA4
+			4751 = { add_or_upgrade_tax_building = yes } 
+		}
+	}
+
+	pann_danubian = {
+		icon = mission_wine_monopolies
+		position = 3
+		required_missions = {
+			pann_greater_pannonia
+			pann_greater_illyria
+		}
+		provinces_to_highlight = {
+			region = carpathia_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 25
+				region = carpathia_region
+			}
+		}
+
+		effect = {
+			change_government_reform_progress = 50
+			set_country_flag = grainlords_reform_flag
+			custom_tooltip = PANN_TT_4
+			tooltip = { add_government_reform = grainlords_of_pannonia } 
+			carpathia_region = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	pann_italian_conquest = {
+		icon = mission_conquer_north_italy
+		position = 5
+		required_missions = { pann_italian_adventure } 
+		provinces_to_highlight = {
+			region = italy_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 20
+				region = italy_region
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "pannonian_italian_conquests"
+				duration = 10950
+			}
+			italy_region = { add_permanent_claim = ROOT } 
+		}
+	}
+}
+Pannonia_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		NOT = { tag = ROM } 
+		OR = {
+			tag = DA2
+			AND = {
+				has_country_flag = generic_italy_MT
+				was_tag = DA2
+			}
+		}
+	}
+
+	pann_greater_illyria = {
+		icon = confront_the_lombards
+		position = 2
+		required_missions = { pann_army } 
+		provinces_to_highlight = {
+			area = transdanubia_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			transdanubia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			1864 = { add_or_upgrade_production_building = yes } 
+			austria_proper_area = { add_permanent_claim = ROOT } 
+			inner_austria_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	pann_move_illyria = {
+		icon = kingdom_of_lombardy
+		position = 3
+		required_missions = { pann_greater_illyria } 
+		provinces_to_highlight = {
+			OR = {
+				area = austria_proper_area
+				area = inner_austria_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 8
+				OR = {
+					area = austria_proper_area
+					area = inner_austria_area
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "pannonian_crowns"
+				duration = 10950
+			}
+			carinthia_area = { add_permanent_claim = ROOT } 
+			croatia_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	pann_italian_adventure = {
+		icon = capture_adriatic_ports
+		position = 4
+		required_missions = { pann_move_illyria } 
+		provinces_to_highlight = {
+			OR = {
+				area = carinthia_area
+				area = croatia_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 8
+				OR = {
+					area = carinthia_area
+					area = croatia_area
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "pannonian_boats"
+				duration = 10950
+			}
+			venetia_area = { add_permanent_claim = ROOT } 
+			veneto_area = { add_permanent_claim = ROOT } 
+			emilia_romagna_area = { add_permanent_claim = ROOT } 
+			bosnia_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	pann_austrian_overture = {
+		icon = protect_against_austria
+		position = 5
+		required_missions = { pann_italian_adventure } 
+		provinces_to_highlight = {
+			area = bosnia_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			bosnia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_casus_belli = {
+				type = cb_restore_personal_union
+				target = KO1
+				months = 300
+			}
+			serbia_area = { add_permanent_claim = ROOT } 
+			rascia_area = { add_permanent_claim = ROOT } 
+			east_adriatic_coast_area = { add_permanent_claim = ROOT } 
+		}
+	}
+}
