@@ -1,0 +1,282 @@
+namespace = mila
+
+country_event = {
+	id = mila.1
+	title = mila.1.test
+	desc = mila.1.desc
+	picture = KING_SICK_IN_BED_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = MLO
+		OR = {
+			AE0 = {
+				exists = yes
+			}
+			RU0 = {
+				has_won_war_against = {
+					who = AF6
+				}
+			}
+			is_year = 1470
+		}
+	}
+
+	option = {
+		name = mila.1a
+		define_ruler = {
+			name = "Christian"
+			dynasty = "Boldi"
+			age = 43
+			adm = 2
+			dip = 2
+			mil = 6
+		}
+		add_legitimacy = 30
+		add_ruler_modifier = {
+			name = mlo_crusader_king
+		}
+		add_ruler_personality = just_personality
+	}
+	option = {
+		name = mila.1b
+		country_event = {
+			id = mila.2
+		}
+		set_country_flag = the_guilds_revolt_flag
+	}
+}
+
+country_event = {
+	id = mila.2
+	title = mila.2.test
+	desc = mila.2.desc
+	picture = KING_ASSASSINATION_eventPicture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = mila.2a
+		define_heir = {
+			name = "Brando"
+			dynasty = "de Sica"
+			birth_date = 1425.8.19
+			claim = 30
+			adm = 4
+			dip = 3
+			mil = 5
+		}
+		add_legitimacy = -10
+		custom_tooltip = MILAN_TT_1
+		add_ruler_modifier = {
+			name = mlo_couped
+		}
+	}
+}
+
+country_event = {
+	id = mila.3
+	title = mila.3.test
+	desc = mila.3.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	trigger = {
+		tag = MLO
+	}
+	fire_only_once = yes
+
+	option = {
+		name = mila.3a
+	}
+}
+
+country_event = {
+	id = mila.4
+	title = mila.4.test
+	desc = mila.4.desc
+	picture = ADVISOR_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = MLO
+		had_country_flag = {
+			flag = the_guilds_revolt_flag
+			days = 730
+		}
+	}
+	immediate = {
+		hidden_effect = {
+			clr_country_flag = the_guilds_revolt_flag
+		}
+	}
+
+	option = {
+		name = mila.4a
+		capital_scope = {
+			spawn_rebels = {
+				size = 2
+				type = leadered_peasant_rebels
+			}
+		}
+	}
+	option = {
+		name = mila.4b
+		hidden_effect = {
+			change_government = republic
+		}
+		add_stability = -1
+		inherit = IT5
+		define_ruler = {
+			name = "Paolo Fantozzi" 
+			dynasty = "Fantozzi"
+			ADM = 2
+			DIP = 3
+			MIL = 2
+			min_age = 38
+			max_age = 44
+		}
+		add_government_reform = megaditta_reform
+		hidden_effect = {
+			add_government_reform = megaditta_reform
+			add_ruler_personality = incorruptible_personality
+			add_ruler_personality = industrious_personality
+		}
+	}
+	option = {
+		name = mila.4c
+		inherit = IT6
+		define_ruler = {
+			name = "Silvio Cavaliere" 
+			dynasty = "Cavaliere"
+			ADM = 5
+			DIP = 3
+			MIL = 2
+			min_age = 38
+			max_age = 44
+		}
+		hidden_effect = {
+			change_government = republic
+		}
+		add_government_reform = military_dictatorship_reform
+		hidden_effect = {
+			add_ruler_personality = sinner_personality
+			add_ruler_personality = silver_tongue_personality
+		}
+	}
+}
+
+country_event = {
+	id = mila.5
+	title = mila.5.test
+	desc = mila.5.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	trigger = {
+		tag = MLO
+		has_ruler = "Silvio Cavaliere"
+	}
+	mean_time_to_happen = {
+		months = 120
+	}
+	fire_only_once = yes
+
+	option = {
+		name = mila.5a
+		change_government = monarchy
+		add_government_reform = autocracy_reform
+	}
+	option = {
+		name = mila.5b
+		kill_ruler = yes
+		capital_scope = {
+			spawn_rebels = {
+				size = 2
+				type = pretender_rebels
+				leader = "Silvio"
+				leader_dynasty = "Cavaliere"
+			}
+		}
+	}
+}
+
+country_event = {
+	id = mila.6
+	title = mila.6.test
+	desc = mila.6.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	trigger = {
+		tag = MLO
+		has_ruler = "Paolo Fantozzi" 
+	}
+	mean_time_to_happen = {
+		months = 120
+	}
+	fire_only_once = yes
+
+	option = {
+		name = mila.6a
+		define_ruler = {
+			name = "Gigi Filini" 
+			dynasty = "Filini"
+			ADM = 1
+			DIP = 1
+			MIL = 1
+			age = 40
+		}
+	}
+	option = {
+		name = mila.6b
+		capital_scope = {
+			add_devastation = 50
+		}
+	}
+}
+
+country_event = {
+	id = mila.7
+	title = mila.7.test
+	desc = mila.7.desc
+	picture = VASA_eventPicture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = mila.7a
+		add_country_modifier = {
+			name = alb_92_minutes
+			duration = -1
+		}
+	}
+	option = {
+		name = mila.7b
+		add_country_modifier = {
+			name = alb_guidobaldo 
+			duration = -1
+		}
+	}
+}
+
+
+country_event = {
+	id = mila.8
+	title = mila.8.test
+	desc = mila.8.desc
+	picture = GOLDEN_CITY_eventPicture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = mila.8a
+		add_adm_tech = 1
+	}
+	option = {
+		name = mila.8b
+		add_dip_tech = 1
+	}
+	option = {
+		name = mila.8c
+		add_mil_tech = 1
+	}
+}

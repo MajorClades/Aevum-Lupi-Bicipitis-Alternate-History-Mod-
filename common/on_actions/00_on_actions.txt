@@ -480,20 +480,6 @@ on_battle_won_unit = {
 	}
 	if = {
 		limit = {
-			general_with_name = "Damarwulan"
-			unit_owner = {
-				check_variable = {
-					which = DamarwulanWinVariable
-					value = 5
-				}
-			}
-		}
-		unit_owner = {
-			country_event = { id = majapahit.2 days = 2 }
-		}
-	}
-	if = {
-		limit = {
 			unit_owner = {
 				mission_completed = son_military_expertise
 				NOT = { mission_completed = son_win_battles }
@@ -1013,7 +999,6 @@ on_monarch_death = {
 		flavor_sax.8 # Treaty of Leipzig
 		flavor_pap.16 # Borgia Pope
 		flavor_pap.19 # death of borgia pope
-		majapahit.8 # Majapahit pretenders
 		flavor_mal.11 # Mali pretenders
 		flavor_mal.47 # Pilgrimage ends prematurely
 		government_events.3	# Election of a new Ruler
@@ -2062,14 +2047,8 @@ on_bi_yearly_pulse_3 = {
 
 	events = {
 		muslim_school_events.20 #Pick School
-		promoting_art_events.2	#Art finished!
 	}
 	random_events = {
-		100 = promoting_art_events.3
-		100 = promoting_art_events.4
-		100 = promoting_art_events.5
-		100 = promoting_art_events.6
-		50 = promoting_art_events.7
 		100 = new_court_flavour_events.25 #blood is thicker than water
 		200 = 0
 	}
@@ -4082,7 +4061,7 @@ on_convert_by_trade_policy = {
 # FROM = old owner
 on_province_owner_change = {
 	events = {
-		japan.1			#Fall of the current Shogun
+
 	}
 	on_province_owner_change_government_effect = yes
 
@@ -4102,7 +4081,7 @@ on_province_owner_change = {
 		}
 		remove_province_modifier = sufi_shrine
 	}
-	f = {
+	if = {
 		limit = {
 			OR = {
 				religion_group = christian
@@ -4729,7 +4708,7 @@ on_culture_demoted = {
 	judaism_on_culture_country_effect = yes
 	imperial_modifiers_on_culture_country_effect = yes
 	on_culture_demoted_effect = yes
-	on_culture_demoted_effect_remove_all_free_slots = yes
+	#on_culture_demoted_effect_remove_all_free_slots = yes
 }
 
 on_primary_culture_changed = {
@@ -4801,7 +4780,20 @@ on_create_vassal = {
 # ROOT = Country establishing it
 # First province in state is set
 on_holy_order_established = {
-
+	if = {
+		limit = {
+			ROOT = {
+				has_government_mechanic = megaditta_core
+			}
+		}
+		ROOT = {
+			add_government_power = {
+				mechanic_type = megaditta_core
+				power_type = guild_corruption
+				value = 5
+			}
+		}
+	}
 }
 
 # When a minority is expelled to a colony

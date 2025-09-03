@@ -602,22 +602,27 @@ Seleucids_branch5 = {
 				}
 			}
 			hidden_effect = {
-				every_owned_province = {
-					limit = {
-						OR = {
-							culture_group = hellenic_group
-							culture = yunani
+				for = {
+					amount = 20
+					effect = "
+						random_owned_province = {
+							limit = {
+								OR = {
+									culture_group = hellenic_group
+									culture = yunani
+								}
+								OR = {
+									region = khorasan_region
+									region = persia_region
+								}
+								NOT = { culture = sirian }
+							}
+							add_province_modifier = {
+								name = greek_military_town
+								duration = -1
+							}
 						}
-						OR = {
-							region = khorasan_region
-							region = persia_region
-						}
-						NOT = { culture = sirian }
-					}
-					add_province_modifier = {
-						name = greek_military_town
-						duration = -1
-					}
+					"
 				}
 			}
 		} 
@@ -990,6 +995,7 @@ Seleucids_branch3 = {
 
 		trigger = {  
 			151 = {
+				owned_by = ROOT
 				has_trade_building_trigger = yes
 				has_production_building_trigger = yes
 				development = 30
@@ -1153,6 +1159,7 @@ Seleucids_branch2 = {
 		icon = mission_se_along_the_river
 		position = 10
 		provinces_to_highlight = {  
+			owned_by = ROOT
 			NOT = {
 				OR = {
 					has_terrain = desert
@@ -1172,6 +1179,7 @@ Seleucids_branch2 = {
 		trigger = {  
 			mission_completed = new_pharoahs
 			egypt_region = {
+				owned_by = ROOT
 				OR = {
 					has_terrain = desert
 					has_terrain = coastal_desert
@@ -1210,7 +1218,7 @@ Seleucids_branch2 = {
 
 		trigger = {  
 			NOT = {
-				average_unrest = 1
+				unrest = 0.1
 			}
 			if = {
 				limit = {
@@ -1424,6 +1432,7 @@ Seleucids_branch1 = {
 		trigger = {  
 			mesopotamia_region = {
 				type = all
+				owned_by = ROOT
 				development = 10
 				has_tax_building_trigger = yes
 				has_production_building_trigger = yes
@@ -1432,17 +1441,9 @@ Seleucids_branch1 = {
 
 		effect = {  
 			mesopotamia_region = {
-				tooltip = {
-					add_province_modifier = {
-						name = he0_rule_in_mesopotamia
-						duration = -1
-					}
-				}
-				hidden_effect = {
-					add_province_modifier = {
-						name = he0_rule_in_mesopotamia
-						duration = -1
-					}
+				add_province_modifier = {
+					name = he0_rule_in_mesopotamia
+					duration = -1
 				}
 				add_prosperity = 100
 			}

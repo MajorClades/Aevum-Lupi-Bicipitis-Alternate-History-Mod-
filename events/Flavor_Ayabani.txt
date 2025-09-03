@@ -1,4 +1,6 @@
 namespace = ayabani
+namespace = tamna
+namespace = hwan
 
 country_event = {
 	id = ayabani.1
@@ -120,7 +122,7 @@ country_event = {
 				}
 				add_country_modifier = {
 					name = ayb_tamna_unification_war
-					duration = -1
+					duration = 7300
 				}
 			}
 		}
@@ -320,13 +322,14 @@ country_event = {
 		is_year = 1550
 		is_subject = no
 		is_at_war = no
+		tag = KR1
 	}
 	mean_time_to_happen = {
 		months = 300
 	}
 	option = {
 		name = ayabani.6a
-		add_prestige = -15
+		add_prestige = -10
 	}
 }
 
@@ -335,9 +338,9 @@ country_event = {
 	title = ayabani.7.t
 	desc = ayabani.7.d
 	picture = RELIGIOUS_TURMOIL_eventPicture
-	
+
 	fire_only_once = yes
-	
+
 	trigger = {
 		is_year = 1490
 		is_subject = no
@@ -349,19 +352,102 @@ country_event = {
 	}
 	option = {
 		name = ayabani.7a
+		hidden_effect = {
+			country_event = {
+				id = ayabani.8
+				days = 14
+			}
+		}
+	}
+}
+
+country_event = {
+	id = ayabani.8
+	title = ayabani.8.t
+	desc = ayabani.8.d
+	picture = RELIGIOUS_TURMOIL_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = ayabani.8a
+		hidden_effect = {
+			country_event = {
+				id = ayabani.9
+				days = 14
+			}
+		}
+	}
+}
+
+country_event = {
+	id = ayabani.9
+	title = ayabani.9.t
+	desc = ayabani.9.d
+	picture = RELIGIOUS_TURMOIL_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = ayabani.9a
 		custom_tooltip = AYABANI_TT_4
 		ai_chance = {
 			factor = 50	#The line between light and dark is so very thin
 		}
-		set_country_flag = traveler
+		hidden_effect = {
+			country_event = {
+				id = ayabani.10
+				days = 200
+			}
+		}
 	}
 	option = {
-		name = ayabani.7b
+		name = ayabani.9b
 		custom_tooltip = AYABANI_TT_5
 		ai_chance = {
 			factor = 50	#The line between light and dark is so very thin
 		}
+		hidden_effect = {
+			country_event = {
+				id = ayabani.11
+				days = 200
+			}
+		}
+	}
+}
+
+country_event = {
+	id = ayabani.10
+	title = ayabani.10.t
+	desc = ayabani.10.d
+	picture = RELIGIOUS_TURMOIL_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = ayabani.10a
+		set_country_flag = traveler_enabled
+		add_stability = 1
+		capital = {
+			add_prosperity = 1
+		}
+	}
+}
+
+country_event = {
+	id = ayabani.11
+	title = ayabani.11.t
+	desc = ayabani.11.d
+	picture = RELIGIOUS_TURMOIL_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = ayabani.11a
 		set_country_flag = witness
+		capital_scope = {
+			add_province_triggered_modifier = black_pyramid
+		}
 	}
 }
 
@@ -371,8 +457,15 @@ country_event = {
 	desc = tamna.1.d
 	picture = VILLAGE_BURNING_eventPicture
 	is_triggered_only = yes
+	fire_only_once = yes
+	
+	trigger = {
+		tag = KR1
+	}
+
 	option = {
 		name = tamna.1a
+		custom_tooltip = resettlement_tt
 	}
 }
 
@@ -388,8 +481,10 @@ country_event = {
 		RYU = {
 			country_event = {
 				id = tamna.3
+				days = 5
 			}
 		}
+		set_country_flag = ryukyu
 	}
 }
 
@@ -401,12 +496,17 @@ country_event = {
 	fire_only_once = yes
 	is_triggered_only = yes
 
+	trigger = {
+		has_country_flag = ryukyu
+	}
+
 	option = {
 		name = tamna.3a
 		ai_chance = { factor = 80 }
 		KR1 = {
 			country_event = {
 				id = tamna.4
+				days = 5
 			}
 		}
 	}
@@ -416,6 +516,7 @@ country_event = {
 		KR1 = {
 			country_event = {
 				id = tamna.5
+				days = 5
 			}
 		}
 	}
@@ -429,10 +530,14 @@ country_event = {
 	fire_only_once = yes
 	is_triggered_only = yes
 
+	trigger = {
+		has_country_flag = ryukyu
+	}
+
 	option = {
 		name = tamna.4a
 		KR1 = {
-			inherit = RYU
+			vassalize = RYU
 		}
 	}
 }
@@ -444,6 +549,10 @@ country_event = {
 	picture = east_asian_COLONIZATION_eventPicture
 	fire_only_once = yes
 	is_triggered_only = yes
+
+	trigger = {
+		has_country_flag = ryukyu
+	}
 
 	option = {
 		name = tamna.5a
@@ -466,12 +575,12 @@ province_event = {
 			culture_group = korean_g
 			has_country_flag = KR1_conversions
 		}
-		culture_group = altaic
+		culture = mongol
 		AND = {
 			owner = {
 				mission_completed = tmn_hoi4
 			}
-			region = anatolia_region
+			region = korea_region
 		}
 	}
 	
@@ -486,12 +595,30 @@ province_event = {
 		ai_chance = {
 			factor = 1
 		}
-		change_culture = korean
 		random_province = { 
 			limit = {
-				region = east_siberia_region
+				region = korea_region
+				NOT = {
+					culture = korean
+				}
 			}
-			change_culture = mongol
+			change_culture = korean
+		}
+		hidden_effect = {
+			random_province = { 
+				limit = {
+					OR = {
+						area = okhotsk_area
+						area = yakutia_area
+						area = buryatia_area
+						area = sakha_area
+					}
+					NOT = {
+						culture = mongol
+					}
+				}
+				change_culture = mongol
+			}
 		}
 	}
 }
@@ -556,11 +683,86 @@ country_event = {
 }
 
 country_event = {
+	id = tamna.11
+	title = tamna.11.t
+	desc = tamna.11.d
+	picture = MONGOL_BANNERS_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = tamna.11a
+		custom_tooltip = unite_khalkha_culture_tt
+		add_accepted_culture = khalkha
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						culture = evenk
+						culture = oirats
+					}
+				}
+				change_culture = khalkha
+			}
+		}
+	}
+	option = {
+		name = tamna.11b
+		custom_tooltip = unite_evenk_culture_tt
+		add_accepted_culture = evenk
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						culture = khalkha
+						culture = oirats
+					}
+				}
+				change_culture = evenk
+			}
+		}
+	}
+	option = {
+		name = tamna.11c
+		custom_tooltip = unite_oirat_culture_tt
+		add_accepted_culture = oirats
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						culture = evenk
+						culture = khalkha
+					}
+				}
+				change_culture = oirats
+			}
+		}
+	}
+	option = {
+		name = tamna.11d
+		custom_tooltip = unite_yen_culture_tt
+		add_accepted_culture = yenisei
+		add_stability = -1
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						culture = oirats
+					}
+				}
+				change_culture = yenisei
+				add_unrest = 5
+			}
+		}
+	}
+}
+
+country_event = {
 	id = hwan.1
 	title = hwan.1.t
 	desc = hwan.1.d
 	picture = VILLAGE_BURNING_eventPicture
+	fire_only_once = yes
 	is_triggered_only = yes
+	
 	option = {
 		name = hwan.1a
 		override_country_name = DAETAMNA
@@ -591,6 +793,11 @@ country_event = {
 		}
 		persia_region = {
 			add_permanent_claim = ROOT
+		}
+		hidden_effect = {
+			change_country_color = {
+				country = KOR
+			}
 		}
 	}
 }

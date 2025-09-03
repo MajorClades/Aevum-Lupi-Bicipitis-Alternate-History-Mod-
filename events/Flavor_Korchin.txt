@@ -1,0 +1,190 @@
+namespace = korchin
+
+country_event = {
+	id = korchin.1
+	title = korchin.1.t
+	desc = korchin.1.d
+	picture = NOMAD_ESTATE_eventPicture
+
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+
+	option = {
+		name = korchin.1.a
+		add_prestige = -10
+		2106 = {
+			remove_core = ROOT
+		}
+		ai_chance = {
+			factor = 70
+			modifier = {
+				factor = 0.1
+				navy_size = 30
+			}
+		}
+	}
+	option = {
+		name = korchin.1.b
+		declare_war_with_cb = {
+			casus_belli = cb_core
+			war_goal_province = 2106
+			who = KRC
+		}
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 0.1
+				is_at_war = yes
+			}
+		}
+	}
+}
+
+country_event = {
+	id = korchin.2
+	title = korchin.2.t
+	desc = korchin.2.d
+	picture = NOMAD_ESTATE_eventPicture
+
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+	immediate = {
+		save_global_event_target_as = sending_letter_target
+	}
+	option = {
+		name = korchin.2.a
+		event_target:EmperorOfChina = {
+			country_event = {
+				id = korchin.3
+			}
+		}
+		custom_tooltip = krc_letter_to_yan_tt
+	}
+}
+
+country_event = {
+	id = korchin.3
+	title = korchin.3.t
+	desc = korchin.3.d
+	picture = NOMAD_ESTATE_eventPicture
+
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+
+	option = {
+		name = korchin.3.a
+		event_target:sending_letter_target = {
+			country_event = {
+				id = korchin.4
+			}
+		}
+		custom_tooltip = krc_they_angry_ooh_tt
+		add_prestige = 20
+		ai_chance = {
+			factor = 70
+			modifier = {
+				factor = 0.7
+				has_disaster = empire_of_china_nomadic_border
+			}
+			modifier = {
+				factor = 0.7
+				event_target:sending_letter_target = {
+					army_size = ROOT
+				}
+			}
+			modifier = {
+				factor = 0.7
+				NOT ={ stability = -1}
+			}
+			modifier = {
+				factor = 0.7
+				has_any_disaster = yes
+			}
+		}
+	}
+	option = {
+		name = korchin.3.b
+		event_target:sending_letter_target = {
+			country_event = {
+				id = korchin.5
+			}
+		}
+		add_prestige = -50
+		add_stability = -1
+		ai_chance = {
+			factor = 30
+		}
+	}
+	after = {
+		clear_global_event_target = sending_letter_target
+	}
+}
+country_event = {
+	id = korchin.4
+	title = korchin.4.t
+	desc = korchin.4.d
+	picture = NOMAD_ESTATE_eventPicture
+
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+
+	option = {
+		name = korchin.4.a
+		add_historical_rival = event_target:EmperorOfChina
+		event_target:EmperorOfChina = {
+			add_historical_rival = ROOT
+		}
+	}
+}
+country_event = {
+	id = korchin.5
+	title = korchin.5.t
+	desc = korchin.5.d
+	picture = NOMAD_ESTATE_eventPicture
+
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+
+	option = {
+		name = korchin.5.a
+		set_emperor_of_china = ROOT
+	}
+}
+
+country_event = {
+	id = korchin.6
+	title = korchin.6.t
+	desc = korchin.6.d
+	picture = REFORM_eventPicture
+
+	is_triggered_only = yes
+	
+	fire_only_once = yes
+
+	option = {
+		name = korchin.6.a
+		add_stability = -1
+		add_country_modifier = {
+			name = krc_ministry_of_bureaucratic_oversight
+			duration = -1
+		}
+	}
+	option = {
+		name = korchin.6.b
+		add_stability = -1
+		add_country_modifier = {
+			name = krc_ministry_of_external_affairs
+			duration = -1
+		}
+	}
+	option = {
+		name = korchin.6.c
+		add_stability = 1
+		change_government_reform_progress = 100
+	}
+}

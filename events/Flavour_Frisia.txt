@@ -1,0 +1,139 @@
+namespace = frisa
+
+country_event = { 
+	id = frisa.1
+	title = frisa.1.t
+	desc = frisa.1.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = frisa.1a
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 1.5
+				alliance_with = FR0
+			}
+			modifier = {
+				factor = 1.5
+				has_opinion = {
+					who = FR0
+					value = 150
+				}
+			}
+			modifier = {
+				factor = 2.5
+				has_opinion = {
+					who = FR0
+					value = 180
+				}
+			}
+		}
+		FR0 = {
+			vassalize = ROOT
+			add_government_reform = oligarchy_reform
+		}
+	}
+	option = {
+		name = frisa.1b
+		ai_chance = {
+			factor = 80
+			modifier = {
+				factor = 1.5
+				NOT = {
+					alliance_with = FR0
+				}
+			}
+			modifier = {
+				factor = 1.5
+				NOT = {
+					has_opinion = {
+						who = FR0
+						value = 150
+					}
+				}
+			}
+			modifier = {
+				factor = 2.5
+				NOT = {
+					has_opinion = {
+						who = FR0
+						value = 80
+					}
+				}
+			}
+		}
+		add_stability = 1
+		FR0 = {
+			add_casus_belli = {
+				type = cb_vassalize_mission
+				target = ROOT
+				months = 3650
+			}
+		}
+	}
+}
+
+country_event = { 
+	id = frisa.2
+	title = frisa.2.t
+	desc = frisa.2.d
+	picture = WAR_OF_THE_ROSES_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = frisa.2a
+		add_country_modifier = {
+			name = fris_mercenary_goods
+			duration = -1
+		}
+	}
+	option = {
+		name = frisa.2b
+		add_country_modifier = {
+			name = fris_war_no_peace
+			duration = -1
+		}
+	}
+	option = {
+		name = frisa.2c
+		add_country_modifier = {
+			name = fris_money_option
+			duration = -1
+		}
+	}
+}
+
+country_event = { 
+	id = frisa.3
+	title = frisa.3.t
+	desc = frisa.3.d
+	picture = DEBATE_REPUBLICAN_eventPicture
+	trigger = {
+		is_year = 1455
+		tag = FR0
+	}
+	fire_only_once = yes
+	option = {
+		name = frisa.3a
+		define_ruler = {
+			name = "Aegidius Sozon"
+			adm = 6
+			dip = 1
+			mil = 6
+			age = 32
+		}
+		add_ruler_modifier = {
+			name = fris_sozon_conspiracy
+		}
+		hidden_effect = {
+			add_ruler_personality = cruel_personality
+			add_ruler_personality = sinner_personality
+			add_ruler_personality = well_connected_personality
+		}
+	}
+	option = {
+		name = frisa.3b
+		add_stability = -1
+		add_republican_tradition = 25
+	}
+}

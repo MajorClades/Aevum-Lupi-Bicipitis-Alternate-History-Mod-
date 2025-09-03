@@ -612,8 +612,6 @@ ZL0_second_1_slot = {
 				area = denmark_area
 				area = jutland_area
 				area = holstein_area
-				culture = anglish
-				culture = saxish
 			}
 
 			NOT = {
@@ -1005,12 +1003,8 @@ ZL0_second_2_slot = {
 				}
 				crown_land_share = 70
 			}
-			NOT = {
-				any_owned_province = {
-					NOT = {
-						development = 7
-					}
-				}
+			all_owned_province = {
+				development = 7
 			}
 		} 
 
@@ -1167,99 +1161,197 @@ ZL0_second_3_slot = {
 		} 
 
 		trigger = { 
-			OR = {
-				if = {
-					limit = {
-						SE0 = {
-							exists = no
+			if = {
+				limit = {
+					SE0 = {
+						exists = no
+					}
+					SE9 = {
+						exists = yes
+					}
+				}
+				OR = {
+					SE9 = {
+						has_opinion = {
+							who = ROOT
+							value = 180
 						}
+					}
+					AND = {
+						is_rival = SE9
 						SE9 = {
-							exists = yes
-						}
-					}
-					SE9 = {
-						has_opinion = {
-							who = ROOT
-							value = 180
+							has_been_insulted_by_root = yes
 						}
 					}
 					SE9 = {
 						exists = no
 					}
-				}
-				else = {
-					SE0 = {
-						has_opinion = {
-							who = ROOT
-							value = 180
-						}
-					}
-					SE0 = {
-						exists = no
-					}
-				}
-				AND = {
-					is_rival = SE0
-					SE0 = {
-						has_been_insulted_by_root = yes
-					}
-				}
-				SE0 = {
-					exists = no
 				}
 			}
-		} 
-
-		effect = { 
-			complex_dynamic_effect = {
-				first_custom_tooltip = alb_zim_friends_with_serb_tt
-				first_limit = "
+			else = {
+				OR = {
 					SE0 = {
 						has_opinion = {
 							who = ROOT
 							value = 180
-						}	
-					}
-				"
-				first_effect = "
-					add_historical_friend = SE0
-					add_country_modifier = {
-						name = alb_zim_slav_brothers
-						duration = -1
-					}
-					SE0 = {
-						add_historical_friend = ROOT
-						add_country_modifier = {
-							name = alb_zim_slav_brothers
-							duration = -1
 						}
-					} 
-				"
-				second_custom_tooltip = alb_zim_enemies_with_serb_tt
-				second_limit = "
+					}
 					AND = {
 						is_rival = SE0
 						SE0 = {
 							has_been_insulted_by_root = yes
 						}
 					}
-				"
-				second_effect = "
+					SE0 = {
+						exists = no
+					}
+				}
+			}
+		} 
+
+		effect = { 
+			if = {
+				limit = {
+					OR = {
+						reverse_has_opinion = {
+							who = SE9
+							value = 180
+						}
+						reverse_has_opinion = {
+							who = SE0
+							value = 180
+						}
+					}
+				}
+				custom_tooltip = alb_zim_friends_with_serb_yes_tt
+				if = {
+						limit = {
+							exists = SE9
+						}
+						add_historical_friend = SE9
+						SE9 = {
+							add_historical_friend = ROOT
+							add_country_modifier = {
+								name = alb_zim_slav_brothers
+								duration = -1
+							}
+						} 
+					}
+					else = {
+						add_historical_friend = SE0
+						SE0 = {
+							add_historical_friend = ROOT
+							add_country_modifier = {
+								name = alb_zim_slav_brothers
+								duration = -1
+							}
+						}
+					}
+					add_country_modifier = {
+						name = alb_zim_slav_brothers
+						duration = -1
+					}
+			} else = {
+				custom_tooltip = alb_zim_friends_with_serb_no_tt
+				tooltip = {
+					if = {
+						limit = {
+							exists = SE9
+						}
+						add_historical_friend = SE9
+						SE9 = {
+							add_historical_friend = ROOT
+							add_country_modifier = {
+								name = alb_zim_slav_brothers
+								duration = -1
+							}
+						} 
+					}
+					else = {
+						add_historical_friend = SE0
+						SE0 = {
+							add_historical_friend = ROOT
+							add_country_modifier = {
+								name = alb_zim_slav_brothers
+								duration = -1
+							}
+						}
+					}
+					add_country_modifier = {
+						name = alb_zim_slav_brothers
+						duration = -1
+					}
+				}
+			}
+			custom_tooltip = empty_line_tt
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							is_rival = SE9
+							SE9 = {
+								has_been_insulted_by_root = yes
+							}
+						}
+						AND = {
+							is_rival = SE0
+							SE0 = {
+								has_been_insulted_by_root = yes
+							}
+						}
+					}
+				}
+				custom_tooltip = alb_zim_enemies_with_serb_yes_tt
+				if = {
+					limit = {
+						exists = SE9
+					}
+					add_casus_belli = {
+						type = cb_claim_throne
+						target = SE9
+						months = 360
+					}
+				}
+				else = {
 					add_casus_belli = {
 						type = cb_claim_throne
 						target = SE0
 						months = 360
 					}
-				"
-				third_custom_tooltip = alb_zim_no_serb_tt
-				third_limit = "
-					SE0 = {
-						exists = no
+				}
+			} else = {
+				custom_tooltip = alb_zim_enemies_with_serb_no_tt
+				tooltip = {
+					if = {
+						limit = {
+							exists = SE9
+						}
+						add_casus_belli = {
+							type = cb_claim_throne
+							target = SE9
+							months = 360
+						}
 					}
-				"
-				third_effect = "
-					add_adm_power = 300
-				"
+					else = {
+						add_casus_belli = {
+							type = cb_claim_throne
+							target = SE0
+							months = 360
+						}
+					}
+				}
+			}
+			custom_tooltip = empty_line_tt
+			if = {
+				limit = {
+					NOT = { exists = SE0 }
+					NOT = { exists = SE9 }
+				}
+				custom_tooltip = zim_serb_dead_yes_tt
+				add_adm_power = 300
+			} else = {
+				custom_tooltip = zim_serb_dead_no_tt
+				add_adm_power = 300
 			}
 		} 
 	}
@@ -1522,10 +1614,8 @@ ZL0_second_4_slot = {
 		effect = {  
 			if = {
 				limit = {
-					NOT = {
-						any_great_power = {
-							navy_size = ROOT
-						}
+					any_great_power = { #test
+						navy_size = ROOT
 					}
 				}
 				custom_tooltip = alb_zim_nogp_bettr_navy_yes_tt

@@ -48,6 +48,106 @@
 #
 # --------------------------------------------------------------
 
+war_goal_restore_guo_empire = {
+	type = take_capital
+	
+	attacker = {
+		badboy_factor = 1
+		prestige_factor = 1
+		peace_cost_factor = 0.75	
+		
+		
+		allowed_provinces = {
+			OR = {
+				region = russia_region 
+				region = ruthenia_region 
+				region = ural_region 
+				region = baltic_region 
+			}
+		}
+		
+		peace_options = {
+			po_demand_provinces
+		}
+		
+		country_desc = ALL_PARTS
+		prov_desc = ALL_REQUIRED
+	}
+	
+	defender = {
+		badboy_factor = 0.75
+		prestige_factor = 1
+		peace_cost_factor = 0.75	
+		
+		
+		allowed_provinces = {
+			always = yes
+		}
+		
+		peace_options = {
+			po_demand_provinces
+		}
+		
+		country_desc = ALL_COUNTRIES
+		prov_desc = ALL_PROVS
+	}	
+	
+	war_name = IMPERIAL_WAR_NAME
+}
+
+
+german_unification_war_goal = {
+	type = take_capital
+	
+	attacker = {
+		badboy_factor = 0.5
+		prestige_factor = 0.5
+		peace_cost_factor = 1
+		deny_annex = yes
+		peace_options = {
+			po_german_unification
+		}
+	}
+	
+	defender = {
+		badboy_factor = 0.5
+		prestige_factor = 0.5
+		peace_cost_factor = 1
+
+		peace_options = {
+			po_german_unification
+		}
+	}
+
+	war_name = WAR_GERMAN_UNIFICATION
+}
+
+germ_duchies_war_goal = {
+	type = take_capital
+	
+	attacker = {
+		badboy_factor = 0.8
+		prestige_factor = 0.8
+		peace_cost_factor = 1
+		deny_annex = yes
+		peace_options = {
+			po_ger_duchy_win
+		}
+	}
+	
+	defender = {
+		badboy_factor = 0.5
+		prestige_factor = 1
+		peace_cost_factor = 1
+
+		peace_options = {
+			po_demand_provinces
+		}
+	}
+
+	war_name = WAR_FOR_GER_DUCHY
+}
+
 baldr_mercy_war_goal = {
 	type = take_capital
 	
@@ -576,9 +676,9 @@ tamna_china = {
 	type = take_province
 	
 	attacker = {
-		badboy_factor = 0.75
+		badboy_factor = 0.50
 		prestige_factor = 1.25
-		peace_cost_factor = 1.0	
+		peace_cost_factor = 0.7	
 		
 		allowed_provinces = {
 			region = north_china_region
@@ -589,14 +689,52 @@ tamna_china = {
 			po_demand_provinces
 		}
 
-		deny_annex = yes
 		
 	}
 	
 	defender = {
-		badboy_factor = 0.75
+		badboy_factor = 0.50
 		prestige_factor = 1.25
-		peace_cost_factor = 1.0	
+		peace_cost_factor = 0.7
+		
+		allowed_provinces = {
+			always = yes
+		}
+		
+		peace_options = {
+			po_demand_provinces
+		}
+
+		prov_desc = ALL_PROVS
+	}	
+	
+	war_name = TAMNA_CHINA_WAR_NAME
+}
+
+tamna_south_china = {
+	type = take_province
+	
+	attacker = {
+		badboy_factor = 0.5
+		prestige_factor = 1.25
+		peace_cost_factor = 0.7
+		
+		allowed_provinces = {
+			region = south_china_region
+        }
+        allowed_provinces_are_eligible = yes
+		
+		peace_options = {
+			po_demand_provinces
+		}
+
+		
+	}
+	
+	defender = {
+		badboy_factor = 0.5
+		prestige_factor = 1.25
+		peace_cost_factor = 0.7	
 		
 		allowed_provinces = {
 			always = yes
