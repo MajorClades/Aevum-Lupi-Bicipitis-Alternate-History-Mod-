@@ -15,11 +15,8 @@ Tamna_1_slot = {
 
 		trigger = {
 			num_of_loans = 0
-            NOT = {
-                any_owned_province = {
-                    devastation = 1
-                }
-            } 
+			grown_by_development = 30
+			marketplace = 3 
             estate_loyalty = {
                 estate = estate_burghers
                 loyalty = 60
@@ -170,7 +167,7 @@ Tamna_1_slot = {
 						OR = {
 							culture = ainu
 							culture = utari
-							culture = koushi
+							culture = kuoshi
 						}
 						culture_group = kamchatkan_g
 					}
@@ -211,25 +208,27 @@ Tamna_1_slot = {
 
 		trigger = {
 			1816 = {
-				religion = ROOT
+				religion = musok
 			}
 			1829 = {
-				religion = ROOT
+				religion = musok
 			}
 			1821 = {
-				religion = ROOT
+				religion = musok
 			}
 			custom_trigger_tooltip = {
 				tooltip = AYABANI_TT_16
-				num_of_owned_provinces_with = {
-					value =  25
-					religion = ROOT
-					region = north_china_region
+				north_china_region = {
+					num_of_owned_provinces_with = {
+						value =  25
+						religion = musok
+					}
 				}
-				num_of_owned_provinces_with = {
-					value =  25
-					religion = ROOT
-					region = south_china_region
+				south_china_region = {
+					num_of_owned_provinces_with = {
+						value =  25
+						religion = musok
+					}
 				}
 			}
 		}
@@ -306,15 +305,16 @@ Tamna_2_slot = {
 
 		trigger = {
 			1020 = {
-				religion = ROOT
+				religion = musok
 			}
 			4192 = {
-				religion = ROOT
+				religion = musok
 			}
-			num_of_owned_provinces_with = {
-				value =  30
-				religion = ROOT
-				region = japan_region
+			japan_region = {
+				num_of_owned_provinces_with = {
+					value =  30
+					religion = musok
+				}
 			}
 		}
 		effect = {
@@ -337,15 +337,15 @@ Tamna_2_slot = {
 		trigger = {
 			east_heilongjiang_area = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			heilongjiang_area = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			central_heilongjiang_area = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 		effect = {
@@ -404,27 +404,27 @@ Tamna_2_slot = {
 		trigger = {
 			hebei_area = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			shanxi_area = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			ordos_area = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			shaanxi_area = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			gansu_area = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			west_gansu_area = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 		effect = {
@@ -435,10 +435,10 @@ Tamna_2_slot = {
 			}
 			698 = {
 				change_culture = jeju
-				add_great_project_tier = {
-					type = the_great_wall_of_china
-					tier = 1
-				}
+			}
+			add_great_project_tier = {
+				type = the_great_wall_of_china
+				tier = 1
 			}
 			add_country_modifier = {
 				name = ayb_wall
@@ -466,19 +466,19 @@ Tamna_2_slot = {
 		trigger = {
 			south_anhui_area = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			huguang_area = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			hunan_area = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			jiangxi_area = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 		effect = {
@@ -519,17 +519,21 @@ Tamna_2_slot = {
 			}
 		}
 		effect = {
-			every_owned_province = {
-				limit = {
-					culture = new_cantonese
+			custom_tooltip = AYABANI_TT_20
+			custom_tooltip = AYABANI_TT_21
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						culture = vietnamese
+					}
+					change_culture = yelang
 				}
-				change_culture = hakka
-			}
-			every_owned_province = {
-				limit = {
-					culture = vietnamese
+				every_owned_province = {
+					limit = {
+						culture = new_cantonese
+					}
+					change_culture = hakka
 				}
-				change_culture = yelang
 			}
 			668 = {
 				change_culture = jeju
@@ -632,7 +636,9 @@ Tamna_3_slot = {
 		provinces_to_highlight = {  }
 
 		trigger = {
-            corruption = 0
+			NOT = {
+				corruption = 1
+			}
             num_of_rebel_controlled_provinces = 0
             legitimacy = 100
 			crown_land_share = 60
@@ -662,15 +668,15 @@ Tamna_3_slot = {
 			AND = {
 				jilin_area = {
 					type = all
-					owned_by = ROOT
+					country_or_non_sovereign_subject_holds = ROOT
 				}
 				ningguta_area = {
 					type = all
-					owned_by = ROOT
+					country_or_non_sovereign_subject_holds = ROOT
 				}
 				liaoning_area = {
 					type = all
-					owned_by = ROOT
+					country_or_non_sovereign_subject_holds = ROOT
 				}
 			}
 		}
@@ -843,7 +849,13 @@ Tamna_3_slot = {
             tmn_tno
             tmn_temujin
         } 
-		provinces_to_highlight = {  }
+		provinces_to_highlight = { 
+			or = {
+				region = mongolia_region
+				area = north_china_region
+				area = south_china_region
+			}
+		 }
 
 		trigger = {
 			mongolia_region = {
@@ -923,15 +935,15 @@ Tamna_4_slot = {
 		trigger = {
 			furdan_area = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			central_jilin_area = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			ilan_hala_area = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 		effect = {
@@ -960,36 +972,36 @@ Tamna_4_slot = {
 				tooltip = AYABANI_TT_15
 				outer_mongolia_area = {
 					type = all
-					owned_by = ROOT
+					country_or_non_sovereign_subject_holds = ROOT
 				}
 				khamag_area = {
 					type = all
-					owned_by = ROOT
+					country_or_non_sovereign_subject_holds = ROOT
 				}
 				cicigar_area = {
 					type = all
-					owned_by = ROOT
+					country_or_non_sovereign_subject_holds = ROOT
 				}
 				chahar_area = {
 					type = all
-					owned_by = ROOT
+					country_or_non_sovereign_subject_holds = ROOT
 				}
 				inner_mongolia_area = {
 					type = all
-					owned_by = ROOT
+					country_or_non_sovereign_subject_holds = ROOT
 				}
 				xilin_gol_area = {
 					type = all
-					owned_by = ROOT
+					country_or_non_sovereign_subject_holds = ROOT
 				}
 				720 = {
-					owned_by = ROOT
+					country_or_non_sovereign_subject_holds = ROOT
 				}
 				4221 = {
-					owned_by = ROOT
+					country_or_non_sovereign_subject_holds = ROOT
 				}
 				4669 = {
-					owned_by = ROOT
+					country_or_non_sovereign_subject_holds = ROOT
 				}
 			}
 		}
@@ -1022,19 +1034,19 @@ Tamna_4_slot = {
 		trigger = {
 			uliastai_area = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			alxa_area = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			altai_sayan_area = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			tannu_uriankhai_area = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 		effect = {
@@ -1059,15 +1071,15 @@ Tamna_4_slot = {
 		trigger = {
 			zungaria_area = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			north_zungaria = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 			turpan_kumul_area = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 		effect = {
@@ -1084,7 +1096,11 @@ Tamna_4_slot = {
 		icon = mission_tribe_management
 		position = 12
 		required_missions = { tmn_republic }
-		provinces_to_highlight = {  }
+		provinces_to_highlight = { 
+			or = {
+				region = mongolia_region
+			}
+		 }
 
 		trigger = {
 			num_of_cavalry = 30
@@ -1232,10 +1248,10 @@ Tamna_5_slot = {
 				add_base_tax = 1
 				add_base_production = 1
 				add_base_manpower = 1
-				add_great_project_tier = {
-					type = gyeongbok_palace
-					tier = 1
-				}
+			}
+			add_great_project_tier = {
+				type = gyeongbok_palace
+				tier = 1
 			}
 		}
 	}
@@ -1243,7 +1259,11 @@ Tamna_5_slot = {
 		icon = mission_horde_caravans
 		position = 5
 		required_missions = { tmn_wiry }
-		provinces_to_highlight = {  }
+		provinces_to_highlight = { 
+			or = {
+				region = korea_region
+			}
+		 }
 
 		trigger = {
 			korea_region = {
@@ -1263,18 +1283,19 @@ Tamna_5_slot = {
 
 		trigger = {
 			4670 = {
-				religion = ROOT
+				religion = musok
 			}
 			4678 = {
-				religion = ROOT
+				religion = musok
 			}
 			4207 = {
-				religion = ROOT
+				religion = musok
 			}
-			num_of_owned_provinces_with = {
-				value =  40
-				religion = ROOT
-				region = mongolia_region
+			mongolia_region = {
+				num_of_owned_provinces_with = {
+					value =  40
+					religion = musok
+				}
 			}
 		}
 		effect = {
