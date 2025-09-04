@@ -584,14 +584,17 @@ country_event = { #I feel like the leagues should be instant. Also, I need a goo
 		}
 		hidden_effect = {
 			set_ruler_flag = pontifex_naughty_flag
-			every_country = {
+			every_country = { #make them all choose
 				limit = {
-					has_opinion = {
-						who = PAP
-						value = 180
+					is_part_of_hre = yes
+					NOT = {
+						tag = PA0
 					}
 					NOT = {
 						tag = emperor
+					}
+					NOT = {
+						is_subject_of = emperor
 					}
 				}
 				country_event = {
