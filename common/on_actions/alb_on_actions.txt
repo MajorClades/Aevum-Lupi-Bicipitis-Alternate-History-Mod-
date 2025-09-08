@@ -1344,6 +1344,60 @@ on_siege_lost_province =  {
 			}
 		}
 	}
+	if = {
+			limit = {
+				owner = {
+					war_with = FROM
+					FROM = {
+						has_country_flag = easy_province_conquest_flag
+					}
+				}
+			}
+			random_neighbor_province = {
+					limit = {
+						NOT = {
+							owned_by = FROM
+						}
+						NOT = {
+							controlled_by = TH1
+						}
+						owner = {
+							war_with = FROM
+						}
+						NOT = {
+							fort_level = 1
+						}
+					}
+					change_controller = FROM
+				}
+		}
+	if = {
+		limit = {
+			owner = {
+				war_with = FROM
+				FROM = {
+					has_country_flag = easy_castle_conquest_flag
+				}
+			}
+		}
+		every_neighbor_province = {
+				limit = {
+					NOT = {
+						owned_by = FROM
+					}
+					NOT = {
+						controlled_by = TH1
+					}
+					owner = {
+						war_with = FROM
+						}
+					NOT = {
+							fort_level = 1
+						}
+					}
+					change_controller = FROM
+				}
+		}
 }
 on_yearly_pulse = {
 	if = {

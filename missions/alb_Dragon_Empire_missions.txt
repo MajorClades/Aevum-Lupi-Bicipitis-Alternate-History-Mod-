@@ -26,20 +26,41 @@ Dragon_Empire_1_slot = {
 
 		trigger = {
 			army_tradition = 25
-			num_of_completed_idea_groups_mil = { amount = 1 }
+			num_of_completed_idea_groups_mil = { amount = 2 }
 			had_recent_war = 1
 		}
 
 		effect = {
 			add_army_tradition = -25
-			add_country_modifier = {
-				name = "guo_new_training"
-				duration = -1
-			}
+			
 		}
 	}
 
+	drem_conquest_eternal = {
+		icon = mission_noble_council
+		position = 4
+		required_missions = { drem_future_of_war  } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_forcelimit_building_trigger = no
+			has_manpower_building_trigger = no
+			has_fort_building_trigger = no
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 7
+				infantry_in_province = 25
+				has_forcelimit_building_trigger = yes
+				has_manpower_building_trigger = yes
+				has_fort_building_trigger = yes
+			}
+		}
 
+		effect = {
+			custom_tooltip = DR_EMP_TT_3
+			set_country_flag = easy_castle_conquest_flag
+		}
+	}
 }
 
 Dragon_Empire_2_slot = {
@@ -131,6 +152,8 @@ Dragon_Empire_3_slot = {
 				name = drem_easy_war
 				duration = -1
 			}
+			custom_tooltip = DR_EMP_TT_2
+			set_country_flag = easy_province_conquest_flag
 		}
 	}
 }
