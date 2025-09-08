@@ -59,7 +59,13 @@ Ganden_1_slot = {
 			}
 		} 
 
-		effect = {  } 
+		effect = {  
+			add_country_modifier = {
+				name = ga0_balanced_factionalism
+				duration = 10950
+			}
+			add_stability_or_adm_power = yes
+		} 
 	}
 
 	ga0_union_of_states = {
@@ -95,7 +101,7 @@ Ganden_1_slot = {
 		} 
 
 		effect = {  
-
+			
 		} 
 	}
 
@@ -300,11 +306,31 @@ Ganden_2_slot = {
 	ga0_temples_to_the_gods = {
 		icon = hungarian_union
 		position = 5
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			owned_by = ROOT
+			NOT = {
+				has_tax_building_trigger = yes
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_owned_provinces_with = {
+				value = 5
+				has_tax_building_trigger = yes
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			define_advisor = {
+				type = theologian
+				skill = 2
+				cost_multiplier = 0.25
+			}
+			add_country_modifier = {
+				name = ga0_praising_balder
+				duration = 7300
+			}
+		} 
 	}
 
 	ga0_formalize_priesthood = {
@@ -313,9 +339,31 @@ Ganden_2_slot = {
 		required_missions = { ga0_temples_to_the_gods } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_estate_agendas_completed = {
+				estate = estate_church
+				value = 3
+			}
+			num_of_estate_privileges = {
+				estate = estate_church
+				value = 5
+			}
+			estate_loyalty = {
+				estate = estate_church
+				loyalty = 60
+			}
+			stability = 2
+		} 
 
-		effect = {  } 
+		effect = {  
+			change_estate_land_share = {
+				estate = estate_church
+				share = 10.0
+			}
+			unlock_estate_privilege = {
+				estate_privilege = alb_centralized_norse_priesthood
+			}
+		} 
 	}
 
 	ga0_3rd_great_allthing = {
@@ -471,11 +519,23 @@ Ganden_3_slot = {
 		icon = hungarian_union
 		position = 6
 		required_missions = { ga0_temples_to_the_gods } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			owned_by = ROOT
+			NOT = {
+				religion = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_converted_provinces = {
+				amount = 15
+			}
+			religious_unity = 0.85
+		} 
 
-		effect = {  } 
+		effect = {  
+			
+		} 
 	}
 }
 Ganden_4_slot = {
