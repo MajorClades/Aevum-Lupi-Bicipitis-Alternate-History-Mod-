@@ -36,31 +36,7 @@ Dragon_Empire_1_slot = {
 		}
 	}
 
-	drem_conquest_eternal = {
-		icon = mission_noble_council
-		position = 4
-		required_missions = { drem_future_of_war  } 
-		provinces_to_highlight = {
-			owned_by = ROOT
-			has_forcelimit_building_trigger = no
-			has_manpower_building_trigger = no
-			has_fort_building_trigger = no
-		}
-		trigger = {
-			num_of_owned_provinces_with = {
-				value = 7
-				infantry_in_province = 25
-				has_forcelimit_building_trigger = yes
-				has_manpower_building_trigger = yes
-				has_fort_building_trigger = yes
-			}
-		}
 
-		effect = {
-			custom_tooltip = DR_EMP_TT_3
-			set_country_flag = easy_castle_conquest_flag
-		}
-	}
 }
 
 Dragon_Empire_2_slot = {
@@ -156,6 +132,31 @@ Dragon_Empire_3_slot = {
 			set_country_flag = easy_province_conquest_flag
 		}
 	}
+	drem_conquest_eternal = {
+		icon = mission_noble_council
+		position = 4
+		required_missions = { drem_future_of_war drem_too_much_manpower } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_forcelimit_building_trigger = no
+			has_manpower_building_trigger = no
+			has_fort_building_trigger = no
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 7
+				infantry_in_province = 25
+				has_forcelimit_building_trigger = yes
+				has_manpower_building_trigger = yes
+				has_fort_building_trigger = yes
+			}
+		}
+
+		effect = {
+			custom_tooltip = DR_EMP_TT_3
+			set_country_flag = easy_castle_conquest_flag
+		}
+	}
 }
 
 Dragon_Empire_4_slot = {
@@ -193,6 +194,23 @@ Dragon_Empire_4_slot = {
 			}
 		}
 	}
+
+	drem_too_much_manpower = {
+		icon = mission_plc_lifetime_of_war
+		position = 3
+		required_missions = { drem_too_many_armies  } 
+		trigger = {
+			years_of_manpower = 1.5
+		}
+
+		effect = {
+			add_yearly_manpower = -1.5
+			add_country_modifier = {
+				name = drem_infinite_armies
+				duration = -1
+			}
+		}
+	}
 }
 
 Dragon_Empire_5_slot = {
@@ -224,7 +242,61 @@ Dragon_Empire_5_slot = {
 				name = drem_multicultural_army
 				duration = -1
 			}
+			eastern_europe_superregion = {
+				add_permanent_claim = ROOT
+			}
+			tartary_superregion = {
+				add_permanent_claim = ROOT
+			}
 		}
 	}
 
+	drem_true_empire = {
+		icon = mission_plc_lifetime_of_war
+		position = 3
+		required_missions = { drem_multiculturalism  } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			NOT = {
+				is_core = ROOT
+			}
+		} 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 130
+				is_core = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = drem_just_a_spoonful
+				duration = 10950
+			}
+		}
+	}
+
+	drem_eastern_europe_superregion = {
+		icon = mission_plc_lifetime_of_war
+		position = 4
+		required_missions = { drem_true_empire  } 
+		provinces_to_highlight = {
+			superregion = eastern_europe_superregion
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {
+			eastern_europe_superregion = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			
+		}
+	}
 }
