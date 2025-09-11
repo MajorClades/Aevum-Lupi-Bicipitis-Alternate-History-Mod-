@@ -32,11 +32,62 @@ Dragon_Empire_1_slot = {
 
 		effect = {
 			add_army_tradition = -25
-			
+			country_event = {
+				id = drag_on.3
+			}
 		}
 	}
 
+	drem_latverian_overture = {
+		icon = mission_plc_lifetime_of_war
+		position = 4
+		provinces_to_highlight = {
+			region = ruthenia_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
+		trigger = {
+			ruthenia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				infantry_in_province = 2
+			}
+		}
+
+		effect = {
+			ruthenia_region = {
+				add_unrest = -5
+				custom_tooltip = DR_EMP_TT_5
+				if = {
+					limit = {
+						province_group = north_silk_road_all
+					}
+					add_base_production = 1
+				}
+				add_province_modifier = {
+					name = drem_thousand_resistance
+					duration = 10950
+				}
+			}
+			capital_scope = {
+				add_base_tax = 1
+				add_base_manpower = 1
+				if = {
+					limit = {
+						province_id = 280
+					}
+					add_base_production = 1
+				}else = {
+					custom_tooltip = DR_EMP_TT_4
+					tooltip = {
+						add_base_production = 1
+					}
+				}
+			}
+		}
+	}
 }
 
 Dragon_Empire_2_slot = {
@@ -67,6 +118,37 @@ Dragon_Empire_2_slot = {
 			add_country_modifier = {
 				name = dragon_cannons_drem
 				duration = -1
+			}
+		}
+	}
+	drem_valtean_overture = {
+		icon = mission_plc_lifetime_of_war
+		position = 5
+		provinces_to_highlight = {
+			region = baltic_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {
+			baltic_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				infantry_in_province = 2
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = drem_culture_maxxing_1
+				duration = -1
+			}
+			baltic_region = {
+				add_province_modifier = {
+					name = drem_thousand_resistance
+					duration = 10950
+				}
 			}
 		}
 	}
@@ -211,6 +293,44 @@ Dragon_Empire_4_slot = {
 			}
 		}
 	}
+
+	drem_krimea_overture = {
+		icon = mission_plc_lifetime_of_war
+		position = 5
+		provinces_to_highlight = {
+			OR = {
+				region = crimea_region
+				region = ural_region
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {
+			crimea_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			ural_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = drem_culture_maxxing_2
+				duration = -1
+			}
+			crimea_region = {
+				add_province_modifier = {
+					name = drem_thousand_resistance
+					duration = 10950
+				}
+			}
+		}
+	}
 }
 
 Dragon_Empire_5_slot = {
@@ -253,7 +373,7 @@ Dragon_Empire_5_slot = {
 
 	drem_true_empire = {
 		icon = mission_plc_lifetime_of_war
-		position = 3
+		position = 2
 		required_missions = { drem_multiculturalism  } 
 		provinces_to_highlight = {
 			owned_by = ROOT
@@ -277,26 +397,54 @@ Dragon_Empire_5_slot = {
 		}
 	}
 
-	drem_eastern_europe_superregion = {
+	drem_turan_overture = {
 		icon = mission_plc_lifetime_of_war
 		position = 4
-		required_missions = { drem_true_empire  } 
 		provinces_to_highlight = {
-			superregion = eastern_europe_superregion
+			region = russia_region
 			NOT = {
 				country_or_non_sovereign_subject_holds = ROOT
 			}
 		} 
 
 		trigger = {
-			eastern_europe_superregion = {
+			russia_region = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
+				infantry_in_province = 2
 			}
 		}
 
 		effect = {
-			
+			russia_region = {
+				add_unrest = -5
+				custom_tooltip = DR_EMP_TT_5
+				if = {
+					limit = {
+						province_group = north_silk_road_all
+					}
+					add_base_production = 1
+				}
+				add_province_modifier = {
+					name = drem_thousand_resistance
+					duration = 10950
+				}
+			}
+			capital_scope = {
+				add_base_tax = 1
+				add_base_manpower = 1
+				if = {
+					limit = {
+						province_id = 280
+					}
+					add_base_production = 1
+				}else = {
+					custom_tooltip = DR_EMP_TT_4
+					tooltip = {
+						add_base_production = 1
+					}
+				}
+			}
 		}
 	}
 }
