@@ -111,7 +111,10 @@ Ganden_1_slot = {
 		required_missions = { ga0_union_of_states } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			stability = 3
+			legitimacy_equivalent = 90
+		} 
 
 		effect = {  } 
 	}
@@ -374,11 +377,23 @@ Ganden_2_slot = {
 			ga0_convert_christians
 			ga0_embrace_lysa
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			province_id = 1861
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			owns = 1861
+			estate_loyalty = {
+				estate = estate_church
+				loyalty = 60
+			}
+			estate_influence = {
+				estate = estate_church
+				influence = 60
+			}
+		} 
 
-		effect = {  } 
+		effect = {  } #event chain that can lead to allfathers realm
 	}
 }
 Ganden_3_slot = {
@@ -534,7 +549,10 @@ Ganden_3_slot = {
 		} 
 
 		effect = {  
-			
+			add_country_modifier = {
+				name = ga0_norse_crusading
+				duration = 7300
+			}
 		} 
 	}
 }
