@@ -88,6 +88,72 @@ Dragon_Empire_1_slot = {
 			}
 		}
 	}
+
+	drem_saxons_doom = {
+		icon = mission_plc_lifetime_of_war
+		position = 5
+		required_missions = { drem_latverian_overture } 
+		provinces_to_highlight = {
+			region = poland_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {
+			poland_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 5
+				has_fort_building_trigger = yes
+				infantry_in_province = 10
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = drem_german_knights
+				duration = -1
+			}
+			poland_region = {
+				add_permanent_province_modifier = {
+					name = drem_return_of_the_dragon
+					duration = -1
+				}
+			}
+		}
+	}
+	drem_over_germania = {
+		icon = mission_plc_lifetime_of_war
+		position = 6
+		required_missions = { drem_saxons_doom } 
+		provinces_to_highlight = {
+			OR = {
+				region = north_german_region
+				region = south_german_region
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 50
+				OR = {
+					region = north_german_region
+					region = south_german_region
+				}
+				infantry_in_province = 2
+			}
+		}
+
+		effect = {
+
+		}
+	}
 }
 
 Dragon_Empire_2_slot = {
@@ -150,6 +216,31 @@ Dragon_Empire_2_slot = {
 					duration = 10950
 				}
 			}
+			europe_superregion = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	drem_zladinian_wars = {
+		icon = mission_plc_lifetime_of_war
+		position = 6
+		required_missions = { drem_valtean_overture } 
+		provinces_to_highlight = {
+			region = scandinavia_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {
+			scandinavia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+
 		}
 	}
 }
@@ -237,6 +328,28 @@ Dragon_Empire_3_slot = {
 		effect = {
 			custom_tooltip = DR_EMP_TT_3
 			set_country_flag = easy_castle_conquest_flag
+		}
+	}
+	drem_danubian_swims = {
+		icon = mission_plc_lifetime_of_war
+		position = 6
+		required_missions = { drem_valtean_overture } 
+		provinces_to_highlight = {
+			region = carpathia_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {
+			carpathia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			
 		}
 	}
 }
@@ -329,6 +442,32 @@ Dragon_Empire_4_slot = {
 					duration = 10950
 				}
 			}
+			persia_superregion = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	drem_persian_heir = {
+		icon = mission_plc_lifetime_of_war
+		position = 6
+		required_missions = { drem_krimea_overture } 
+		provinces_to_highlight = {
+			region = persia_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {
+			persia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+
 		}
 	}
 }
@@ -445,6 +584,64 @@ Dragon_Empire_5_slot = {
 					}
 				}
 			}
+		}
+	}
+
+	drem_serbian_two = {
+		icon = mission_plc_lifetime_of_war
+		position = 5
+		required_missions = { drem_turan_overture  } 
+		provinces_to_highlight = {
+			culture = serbian
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {
+			owns_all_provinces = {
+				culture = serbian
+			}
+			num_of_owned_provinces_with = {
+				value = 5
+				culture = serbian
+				infantry_in_province = 15
+			}		
+		}
+
+		effect = {
+			country_event = {
+				id = drag_on.4
+			}
+			far_east_superregion = {
+				add_permanent_claim = ROOT
+			}
+			china_superregion = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	drem_restore_mandate = {
+		icon = mission_plc_lifetime_of_war
+		position = 7
+		required_missions = { drem_serbian_two } 
+		provinces_to_highlight = {
+			region = north_china_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {
+			north_china_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+
 		}
 	}
 }
