@@ -1,0 +1,240 @@
+Cathay_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = CT0 } 
+
+	cath_defense_in_depth = {
+		icon = mission_plc_lifetime_of_war
+		position = 1
+		provinces_to_highlight = {
+			owned_by = ROOT
+			development = 9
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 4
+				development = 12
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = cathay_security
+				duration = 10950
+			}
+		}
+	}
+
+	cath_for_home_defense = {
+		icon = mission_plc_lifetime_of_war
+		position = 2
+		required_missions = { cath_defense_in_depth } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_fort_building_trigger = no
+		}
+
+		trigger = {
+			quartermaster = 3
+			num_of_owned_provinces_with = {
+				value = 4
+				has_fort_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = cathay_security_power
+				duration = -1
+			}
+		}
+	}
+
+	cath_canal_of_wealth = {
+		icon = mission_plc_lifetime_of_war
+		position = 3
+		required_missions = { cath_for_home_defense cath_allied_di } 
+		provinces_to_highlight = {
+			province_id = 1971
+		}
+
+		trigger = {
+			1971 = {
+				owned_by = ROOT
+				development = 10
+				has_forcelimit_building_trigger = yes
+			}
+		}
+
+		effect = {
+			1971 = {
+				remove_building = fort_15th
+				remove_building = fort_16th
+				remove_building = fort_17th
+				remove_building = fort_18th
+				center_of_trade = 1
+				add_permanent_province_modifier = {
+					name = cathay_canaly
+					duration = -1
+				}
+			}
+		}
+	}
+
+	cath_canal_of_wealth_2 = {
+		icon = mission_plc_lifetime_of_war
+		position = 4
+		required_missions = { cath_canal_of_wealth } 
+		provinces_to_highlight = {
+			province_id = 1971
+		}
+
+		trigger = {
+			1971 = {
+				owned_by = ROOT
+				development = 15
+				has_forcelimit_building_trigger = yes
+				province_has_center_of_trade_of_level = 2
+			}
+		}
+
+		effect = {
+			1971 = {
+				change_trade_goods = silk
+				add_permanent_province_modifier = {
+					name = cathay_canaly_2
+					duration = -1
+				}
+			}
+		}
+	}
+}
+Cathay_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = CT0 } 
+
+	cath_allied_di = {
+		icon = mission_plc_lifetime_of_war
+		position = 2
+		required_missions = { cath_trying_again } 
+		provinces_to_highlight = {
+			is_capital_of = CT1
+		}
+		trigger = {
+			CT1 = {
+				OR = {
+					exists = no
+					has_opinion = {
+						who = ROOT
+						value = 190
+					}
+				}
+			}
+		}
+
+		effect = {
+			CT1 = {
+				country_event = {
+					id = catha.2
+				}
+			}
+			crimea_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+}
+Cathay_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = CT0 } 
+
+	cath_trying_again = {
+		icon = mission_noble_council
+		position = 1 
+
+		trigger = { 
+			if = {
+				limit = { ai = yes}
+				army_size_percentage = 0.6
+				num_of_generals = 1
+			}else = {
+				army_size_percentage = 0.9
+			}
+		} 
+
+		effect = {
+			country_event = {
+				id = catha.1
+			}
+		}
+	}
+}
+Cathay_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = CT0 } 
+
+	cath_allied_atilon = {
+		icon = mission_plc_lifetime_of_war
+		position = 2
+		required_missions = { cath_trying_again } 
+		provinces_to_highlight = {
+			is_capital_of = AT0
+		}
+		trigger = {
+			AT0 = {
+				OR = {
+					exists = no
+					has_opinion = {
+						who = ROOT
+						value = 190
+					}
+				}
+			}
+		}
+
+		effect = {
+			AT0 = {
+				country_event = {
+					id = catha.2
+				}
+			}
+			ural_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+}
+Cathay_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = CT0 } 
+
+	cath_question_of_faith = {
+		icon = mission_plc_lifetime_of_war
+		position = 1
+
+		trigger = {
+			stability = 1
+		}
+
+		effect = {
+			country_event = {
+					id = catha.3
+				}
+		}
+	}
+}

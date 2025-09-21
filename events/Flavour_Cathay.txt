@@ -1,0 +1,111 @@
+namespace = catha
+
+country_event = {
+	id = catha.1
+	title = catha.1.test
+	desc = catha.1.desc
+	picture = CONQUEROR_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = catha.1a
+		ai_chance = {
+			factor = 1
+		}
+		change_government = republic
+		add_government_reform = cathay_republic_reform
+	}
+	option = {
+		name = catha.1b
+		ai_chance = {
+			factor = 1
+		}
+		custom_tooltip = GUO_TT_3
+		set_country_flag = guo_hong_reason_for_war_flag
+	}
+
+}
+
+country_event = {
+	id = catha.2
+	title = catha.2.test
+	desc = catha.2.desc
+	picture = DIPLOMACY_SIGNING_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = catha.2a
+		trigger = {
+			ai = yes
+		}
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 0
+				NOT = {
+					has_opinion = {
+						who = ROOT
+						value = -50
+					}
+				}
+			}
+		}
+		CT0 = {
+			inherit = ROOT
+		}
+	}
+	option = {
+		name = catha.2b
+		trigger = {
+			ai = no
+		}
+		CT1 = {
+			inherit = ROOT
+		}
+	}
+	option = {
+		name = catha.2c
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 100
+				NOT = {
+					has_opinion = {
+						who = ROOT
+						value = -50
+					}
+				}
+			}
+		}
+		add_stability_or_adm_power = yes
+	}
+}
+
+
+country_event = {
+	id = catha.3
+	title = catha.3.test
+	desc = catha.3.desc
+	picture = CONQUEROR_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = catha.1a
+		ai_chance = {
+			factor = 1
+		}
+		change_religion = alevilik
+		add_country_modifier = {
+			name = cathay_olisani_conversion
+			duration = 10950
+		}
+	}
+	option = {
+		name = catha.1b
+		ai_chance = {
+			factor = 1
+		}
+		add_country_modifier = {
+			name = cathay_remain_guptaka
+			duration = 10950
+		}
+	}
+
+}
