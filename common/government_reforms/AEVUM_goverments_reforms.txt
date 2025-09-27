@@ -161,7 +161,6 @@ serican_principality = {
 				culture_group = west_serican
 				culture_group = turkic
 			}
-			
 			AND = {
 				is_playing_custom_nation = yes
 				have_had_reform = serican_principality
@@ -172,13 +171,16 @@ serican_principality = {
 	nation_designer_cost = 5
 	nation_designer_trigger = {
 		is_serican_trigger = yes
-		religion_group = muslim
 	}
 	modifiers = {
 		infantry_cost = -0.1
 		cavalry_cost = -0.1
+		mercenary_cost = 0.1
 		global_regiment_recruit_speed = 0.1
 		governing_capacity = 100
+	}
+	custom_attributes = {
+		more_25_tax_in_true_faith_provinces = yes
 	}
 }
 serican_tsardom = {
@@ -695,6 +697,28 @@ herkulian_quality_reform = {
 	
 	ai = {
 		factor = 1
+	}
+}
+
+marching_empire_reform = {
+	icon = "religious_permanent_revolution_reform"
+	allow_normal_conversion = yes
+	potential = {
+		OR = {
+			has_reform = marching_empire_reform
+			have_had_reform = marching_empire_reform
+			tag = TH1
+		}
+	}
+	trigger = {}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 200
+	modifiers = {
+		mercenary_manpower = -0.5
+		global_regiment_cost = 0.1
+	}
+	government_abilities = {
+		marching_empire_tactics
 	}
 }
 

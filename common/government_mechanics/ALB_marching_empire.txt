@@ -1,0 +1,91 @@
+marching_empire_tactics = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 11
+	available = {
+
+	}
+
+	powers = {
+		artofwar_2 = {
+			max = 100
+			min = 0
+			reset_on_new_ruler = no
+			base_monthly_growth = -0.05
+			scaled_modifier = {
+				trigger = {
+					has_country_flag = marching_empire_infantry_focus
+				}
+				modifier = { 
+					infantry_power = 0.2
+					infantry_cost = -0.2
+					global_manpower_modifier = 0.2
+					fire_damage_received = -0.2
+				}
+			}
+			scaled_modifier = {
+				trigger = {
+					has_country_flag = marching_empire_cavalry_focus
+				}
+				modifier = { 
+					cavalry_power = 0.2
+					cavalry_cost = -0.2
+					cavalry_flanking = 0.5
+					cav_to_inf_ratio = 0.5
+					global_manpower_modifier = 0.1
+					shock_damage_received = -0.2
+				}
+			}
+			scaled_modifier = {
+				trigger = {
+					has_country_flag = marching_empire_artillery_focus
+				}
+				modifier = { 
+					artillery_power = 0.2
+					artillery_cost = -0.2
+					artillery_barrage_cost = -0.2
+					backrow_artillery_damage = 0.4
+					siege_ability = 0.2
+				}
+			}
+			is_good = yes
+		}
+	}
+	
+	interactions = {
+		make_artofwar_2 = {
+			gui = hessian_militarization_gov_mech
+			cost_type = artofwar_2
+			center = no
+			trigger = {
+				
+			}
+			effect = {
+				custom_tooltip = tt_change_artofwar_focus
+				if = {
+					limit = {
+						has_country_flag = marching_empire_infantry_focus
+					}
+					custom_tooltip = tt_focus_infantry
+					clr_country_flag = marching_empire_infantry_focus
+					set_country_flag = marching_empire_cavalry_focus
+				}else = {
+					if = {
+						limit = {
+							has_country_flag = marching_empire_cavalry_focus
+						}
+						custom_tooltip = tt_focus_cavalry
+						clr_country_flag = marching_empire_cavalry_focus
+						set_country_flag = marching_empire_artillery_focus
+					}else = {
+						custom_tooltip = tt_focus_artillery
+						clr_country_flag = marching_empire_artillery_focus
+						set_country_flag = marching_empire_infantry_focus
+					}
+				}
+			}
+			ai_chance = {
+				factor = 1
+			}
+		}
+	}
+}

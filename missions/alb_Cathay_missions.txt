@@ -86,7 +86,7 @@ Cathay_1_slot = {
 
 	cath_canal_of_wealth_2 = {
 		icon = mission_plc_lifetime_of_war
-		position = 4
+		position = 5
 		required_missions = { cath_canal_of_wealth } 
 		provinces_to_highlight = {
 			province_id = 1971
@@ -149,6 +149,26 @@ Cathay_2_slot = {
 			}
 		}
 	}
+	cath_crimeariver = {
+		icon = mission_plc_lifetime_of_war
+		position = 4
+		required_missions = { cath_all_sides } 
+		provinces_to_highlight = {
+			region = crimea_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			crimea_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_navy_tradition = 25
+			#something finnish or something else
+		}
+	}
 }
 Cathay_3_slot = {
 	slot = 3
@@ -174,6 +194,145 @@ Cathay_3_slot = {
 		effect = {
 			country_event = {
 				id = catha.1
+			}
+			ruthenia_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	cath_true_enemy = {
+		icon = mission_plc_lifetime_of_war
+		position = 2
+		required_missions = { cath_trying_again } 
+		provinces_to_highlight = {
+			is_capital_of = GJ0
+		}
+		trigger = {
+			OR = {
+				army_strength = {
+					who = GJ0
+					value = 1.25
+				}
+				GJ0 = {
+					exists = no
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier_for_age = {
+				name = cathay_beat_gajanka
+				age = age_of_discovery
+			}
+			russia_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	cath_all_sides = {
+		icon = mission_plc_lifetime_of_war
+		position = 3
+		required_missions = {cath_allied_di cath_true_enemy cath_allied_atilon} 
+		provinces_to_highlight = {
+			OR = {
+				region = ural_region
+				region = crimea_region
+				region = russia_region
+				region = ruthenia_region
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 35
+				OR = {
+					region = ural_region
+					region = crimea_region
+					region = russia_region
+					region = ruthenia_region
+				}
+			}
+		}
+
+		effect = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = CATHAY_TT_1a
+				first_limit = " government = monarchy "
+				first_effect = "
+					add_government_reform = marching_empire_reform
+					set_country_flag = marching_empire_infantry_focus
+				"
+				second_custom_tooltip = CATHAY_TT_1b
+				second_limit = " government = republic "
+				second_effect = "
+					set_country_flag = cath_build_button_flag
+					custom_tooltip = CATHAY_TT_2
+				"
+			}
+		}
+	}
+	cath_roaring_dragons = {
+		icon = mission_plc_lifetime_of_war
+		position = 4
+		required_missions = {cath_all_sides} 
+		provinces_to_highlight = {
+			OR = {
+				region = ural_region
+				region = crimea_region
+				region = russia_region
+				region = ruthenia_region
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 60
+				OR = {
+					region = ural_region
+					region = crimea_region
+					region = russia_region
+					region = ruthenia_region
+				}
+			}
+		}
+
+		effect = {
+			change_government_reform_progress = 50
+			simple_dynamic_effect = {
+				first_custom_tooltip = CATHAY_TT_1a
+				first_limit = " government = monarchy "
+				first_effect = "
+					add_army_tradition = 20
+					add_army_professionalism = 0.02
+				"
+				second_custom_tooltip = CATHAY_TT_1b
+				second_limit = " government = republic "
+				second_effect = "
+					add_years_of_income = 4
+				"
+			}
+		}
+	}
+	cath_back_in_power = {
+		icon = mission_plc_lifetime_of_war
+		position = 5
+		required_missions = {cath_all_sides} 
+		trigger = {
+			tag = TH1
+		}
+
+		effect = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = CATHAY_TT_1a
+				first_limit = " government = monarchy "
+				first_effect = "
+					
+				"
+				second_custom_tooltip = CATHAY_TT_1b
+				second_limit = " government = republic "
+				second_effect = "
+				
+				"
 			}
 		}
 	}
@@ -215,6 +374,28 @@ Cathay_4_slot = {
 			}
 		}
 	}
+	cath_ural_calls = {
+		icon = mission_plc_lifetime_of_war
+		position = 4
+		required_missions = { cath_all_sides } 
+		provinces_to_highlight = {
+			region = ural_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			ural_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			north_silk_road_all = {
+				add_permanent_claim = ROOT
+			}
+			#something money
+		}
+	}
 }
 Cathay_5_slot = {
 	slot = 5
@@ -235,6 +416,30 @@ Cathay_5_slot = {
 			country_event = {
 					id = catha.3
 				}
+		}
+	}
+	cath_atilon_source = {
+		icon = mission_plc_lifetime_of_war
+		position = 3
+		required_missions = { cath_allied_atilon } 
+		provinces_to_highlight = {
+			province_id = 1082
+		}
+
+		trigger = {
+			1082 = {
+				owned_by = ROOT
+				development = 15
+				province_has_center_of_trade_of_level = 2
+				is_core = ROOT
+			}
+		}
+
+		effect = {
+			1082 = {
+				add_center_of_trade_level = 1
+				add_trade_node_income = 60
+			}
 		}
 	}
 }
