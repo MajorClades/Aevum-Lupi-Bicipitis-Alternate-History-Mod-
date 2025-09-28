@@ -47,7 +47,14 @@ country_decisions = {
 			}
 		}
 		allow = {
-			owns = 280
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = not_need_to_own_siescheng
+					}
+				}
+				owns = 280
+			}
 			NOT = { exists = TH1 }
 			is_free_or_tributary_trigger = yes
 			is_nomad = no
@@ -148,6 +155,36 @@ country_decisions = {
 			custom_tooltip = ROM_TT_1
 			swap_non_generic_missions = yes
 			set_country_flag = no_missions_th1_flag
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		ai_importance = 400
+	}
+	cathay_new_siescheng_decision = {
+		major = yes
+		potential = {
+			tag = CT0
+		}
+		allow = {
+			4255 = {
+				is_capital_of = ROOT
+				development = 20
+				all_neighbor_province = {
+					fort_level = 2
+				}
+			}
+		}
+		effect = {
+			4255 = {
+				center_of_trade = 1
+				add_permanent_province_modifier = {
+					name = cathay_new_capital
+					duration = -1
+				}
+			}
+			custom_tooltip = CATHAY_TT_5
+			set_country_flag = not_need_to_own_siescheng
 		}
 		ai_will_do = {
 			factor = 0
