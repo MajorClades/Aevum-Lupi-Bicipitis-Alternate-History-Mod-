@@ -321,6 +321,19 @@ Cathay_3_slot = {
 		trigger = { tag = TH1 } 
 
 		effect = {
+			if = {
+				limit = {
+					personal_union = 1
+				}
+				every_subject_country = {
+					limit = {
+						is_subject_of_type = personal_union
+					}
+					TH1 = {
+						inherit = THIS
+					}
+				}
+			}
 			simple_dynamic_effect = {
 				first_custom_tooltip = CATHAY_TT_3a
 				first_limit = " NOT = { is_year = 1500 } "
