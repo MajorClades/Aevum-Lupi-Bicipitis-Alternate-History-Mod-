@@ -8,7 +8,9 @@ Gajna_1_slot = {
 	1_serica_expansion = {
 		icon = mission_impaled_soldies
 		position = 1
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = { 
+			is_capital_of = LT0
+		 } 
 
 		trigger = {
 			OR = {
@@ -118,7 +120,7 @@ Gajna_1_slot = {
 				duration = -1
 			}
 		}
-	}
+	}	
 
 	1_neva = {
 		icon = mission_dominate_home_trade_node
@@ -132,42 +134,113 @@ Gajna_1_slot = {
 
 		effect = {
 			33 = {
-				if = {
-					limit = { has_building = marketplace } 
-					add_base_production = 2
-				}
-				else = { add_building = marketplace } 
+				add_or_upgrade_trade_building = yes
 			}
 		}
 	}
 
-	1_neva_port = {
-		icon = mission_war_chest
-		position = 9
-		required_missions = {
-			1_neva
-			2_neva
+	gajnakan_trade_changes = {
+		icon = mission_asian_trader
+		position = 8
+		required_missions = { 1_neva  } 
+		provinces_to_highlight = {
+			is_capital_of = ZL8
 		}
-		provinces_to_highlight = { province_id = 33 } 
+		trigger = { 
+			treasury = 500
+			ZL8 = {
+				hidden_trigger = {
+					ai = yes
+				}
+				OR = {
+					AND = {
+						truce_with = ROOT
+						alliance_with = ROOT
+					}
+					exists = no
+					33 = {
+						has_province_modifier = silesian_trade_pact_3
+					}
+				}
+			}
+		} 
 
-		trigger = {
-			owns = 33
-			33 = {
-				development = 30
-				province_has_center_of_trade_of_level = 3
-				NOT = { has_province_modifier = western_trade_flow } 
+		effect = {	
+			simple_dynamic_effect = {
+				first_custom_tooltip = GAJNAKA_TT_1a
+				first_limit = " ZL8 = { alliance_with = ROOT } "
+				first_effect = "
+					add_treasury = -500
+					ZL8 = {
+						add_treasury = 500
+						add_trust = {
+							who = ROOT
+							value = 10
+						}
+					}
+					30 = {
+						cede_province = ROOT
+						set_local_autonomy = 50
+					}
+					custom_tooltip = GAJNAKA_TT_1c
+				"
+				second_custom_tooltip = GAJNAKA_TT_1b
+				second_limit = " 33 = { has_province_modifier = silesian_trade_pact_3 }"
+				second_effect = "
+					finland_area = {
+						add_permanent_claim = ROOT
+					}
+				"
 			}
 		}
+	}
+	gajnakan_silesian_buyout = {
+		icon = mission_asian_trader
+		position = 10
+		required_missions = { gajnakan_trade_changes  } 
+		provinces_to_highlight = {
+			area = finland_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		trigger = { 
+			ZL8 = {
+				OR = {
+					is_subject_of = ROOT
+					exists = no
+				}
+			}
+			finland_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
 		effect = {
-			33 = {
-				add_permanent_province_modifier = {
-					name = "western_trade_flow_2"
-					duration = -1
-				}
+			simple_dynamic_effect = {
+				first_custom_tooltip = GAJNAKA_TT_2a
+				first_limit = " ZL8 = { is_subject_of = ROOT } "
+				first_effect = "
+					ZL8 = {
+						change_religion = ROOT
+						capital_scope = {
+							change_religion = ROOT
+						}
+					}
+				"
+				second_custom_tooltip = GAJNAKA_TT_2b
+				second_limit = " ZL8 = { exists = no }"
+				second_effect = "
+					finland_area = {
+						add_unrest = -5
+					}
+				"
 			}
 		}
 	}
+
 }
 Gajna_2_slot = {
 	slot = 2
@@ -175,6 +248,59 @@ Gajna_2_slot = {
 	ai = yes
 	has_country_shield = yes
 	potential = { tag = GJ0 } 
+
+	gajnaka_culture_expansion = {
+		icon = mission_impaled_soldies
+		position = 1
+		provinces_to_highlight = { 
+			owned_by = ROOT
+			culture = chuvash
+		} 
+
+		trigger = {
+			owns = 4148
+			accepted_culture = chuvash
+		}
+
+		effect = {
+			4148 = {
+				add_base_production = 1
+				add_base_manpower = 1
+			}
+			define_general = {
+				shock = 3
+				fire = 2
+				manuever = 6
+				siege = 1
+			}
+		}
+	}
+
+	gajnaka_baltic_quest = {
+		icon = mission_impaled_soldies
+		position = 2
+		required_missions = { 1_serica_expansion gajnaka_culture_expansion} 
+		provinces_to_highlight = {
+			is_core = ROOT
+			NOT = { owned_by = ROOT }
+		}
+		trigger = {
+			all_core_province = {
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			add_stability_or_adm_power = yes
+			274 = {
+				add_core = ROOT
+			}
+			baltic_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
 
 	2_iron_army = {
 		icon = revenge_for_nicopolis
@@ -272,6 +398,31 @@ Gajna_2_slot = {
 			}
 		}
 	}
+	
+	1_neva_port = {
+		icon = mission_war_chest
+		position = 9
+		required_missions = { 2_neva }
+		provinces_to_highlight = { province_id = 33 } 
+
+		trigger = {
+			owns = 33
+			33 = {
+				development = 30
+				province_has_center_of_trade_of_level = 3
+				NOT = { has_province_modifier = western_trade_flow } 
+			}
+		}
+
+		effect = {
+			33 = {
+				add_permanent_province_modifier = {
+					name = "western_trade_flow_2"
+					duration = -1
+				}
+			}
+		}
+	}
 }
 Gajna_3_slot = {
 	slot = 3
@@ -283,7 +434,7 @@ Gajna_3_slot = {
 	3_serica_expansion = {
 		icon = friends_in_high_places
 		position = 1
-		provinces_to_highlight = {  } 
+
 
 		trigger = {
 			OR = {
@@ -305,7 +456,7 @@ Gajna_3_slot = {
 		position = 2
 		required_missions = { 3_serica_expansion } 
 		provinces_to_highlight = {
-			NOT = { owned_by = ROOT } 
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 			OR = {
 				area = perm_area
 				area = galich_area
@@ -340,14 +491,14 @@ Gajna_3_slot = {
 		position = 3
 		required_missions = { 3_serica_rival } 
 		provinces_to_highlight = {
-			NOT = { owned_by = ROOT } 
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 			region = ural_region
 		}
 
 		trigger = {
 			ural_region = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 
@@ -370,6 +521,20 @@ Gajna_3_slot = {
 				add_permanent_claim = ROOT
 			}
 		}
+	}
+
+	4_serica_south = {
+		icon = mission_iron_and_copper
+		position = 4
+		required_missions = { 3_serica_south } 
+		provinces_to_highlight = { province_id = 1078 } 
+
+		trigger = {
+			has_dip_advisor_2 = yes
+			1078 = { owned_by = ROOT } 
+		}
+
+		effect = { 1078 = { change_trade_goods = iron }  } 
 	}
 
 	3_cathay_buildings = {
@@ -545,18 +710,59 @@ Gajna_4_slot = {
 	has_country_shield = yes
 	potential = { tag = GJ0 } 
 
-	4_serica_south = {
-		icon = mission_iron_and_copper
-		position = 4
-		required_missions = { 3_serica_south } 
-		provinces_to_highlight = { province_id = 1078 } 
-
-		trigger = {
-			has_dip_advisor_2 = yes
-			1078 = { owned_by = ROOT } 
+	gajnakan_religion_focus = {
+		icon = mission_asian_trader
+		position = 2
+		required_missions = {  5_muslim_faith } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			NOT = { religion = ROOT }
 		}
 
-		effect = { 1078 = { change_trade_goods = iron }  } 
+		trigger = { 
+			grown_by_development = 75
+			religious_unity = 0.95
+		} 
+
+		effect = {
+			auto_complete_estate_agenda = { estate = estate_church }
+			add_estate_loyalty = {
+				estate = estate_church
+				loyalty = 10
+			}
+		}
+	}
+
+	5_serica_east = {
+		icon = assert_our_sovereignty
+		position = 4
+		required_missions = {
+			3_serica_south
+		}
+		provinces_to_highlight = {
+			NOT = { owned_by = ROOT } 
+			OR = {
+				region = west_siberia_region
+				region = central_asia_region
+			}
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 40
+				OR = {
+					region = west_siberia_region
+					region = central_asia_region
+				}
+			}
+		}
+
+		effect = {
+			add_years_of_income = 1.5
+			add_yearly_manpower = 1.5
+			east_siberia_region = { add_permanent_claim = ROOT } 
+			mongolia_region = { add_permanent_claim = ROOT } 
+		}
 	}
 
 	4_serica_farther_east = {
@@ -684,18 +890,25 @@ Gajna_5_slot = {
 	5_muslim_faith = {
 		icon = mission_mosque
 		position = 1
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_tax_building_trigger = no
+		} 
 
 		trigger = {
-			OR = {
-				temple = 5
-				cathedral = 5
+			num_of_owned_provinces_with = {
+				value = 5
+				has_tax_building_trigger = yes
 			}
 		}
 
 		effect = {
+			define_advisor = {
+				type = inquisitor
+				skill = 2
+				cost_multiplier = 0.5
+			}
 			add_years_of_income = 2
-			add_adm_power = 100
 		}
 	}
 
@@ -703,7 +916,6 @@ Gajna_5_slot = {
 		icon = mission_asian_trader
 		position = 2
 		required_missions = { 5_muslim_faith } 
-		provinces_to_highlight = {  } 
 
 		trigger = { has_institution = renaissance } 
 
@@ -722,193 +934,39 @@ Gajna_5_slot = {
 			5_serica_expansion
 			3_serica_rival
 		}
-		provinces_to_highlight = { province_id = 1082 } 
+		provinces_to_highlight = { 
+			is_capital_of = AT0
+		} 
 
-		trigger = { owns = 1082 } 
+		trigger = { 
+			AT0 = {
+				OR = {
+					exists = no
+					is_subject_of = ROOT
+				}
+			}
+		} 
 
 		effect = {
-			custom_tooltip = ATILON_HUMILITY
-			if = {
-				limit = { any_owned_province = { is_core = AT0 }  } 
-				AT0 = {
-					every_core_province = {
-						limit = { owned_by = ROOT } 
-						add_province_modifier = {
-							name = "atilon_humiliated"
+			simple_dynamic_effect = {
+				first_custom_tooltip = GAJNAKA_TT_3a
+				first_limit = " AT0 = { is_subject_of = ROOT } "
+				first_effect = "
+					AT0 = {
+						add_country_modifier = {
+							name = atilon_humiliated
 							duration = 7300
 						}
 					}
-				}
-			}
-			else = {
-				1082 = {
-					add_province_modifier = {
-						name = "atilon_humiliated"
-						duration = 7300
-					}
-				}
-			}
-		}
-	}
-
-	5_serica_east = {
-		icon = assert_our_sovereignty
-		position = 4
-		required_missions = {
-			5_atilon
-			3_serica_south
-		}
-		provinces_to_highlight = {
-			NOT = { owned_by = ROOT } 
-			OR = {
-				region = west_siberia_region
-				region = central_asia_region
-			}
-		}
-
-		trigger = {
-			num_of_owned_provinces_with = {
-				value = 40
-				OR = {
-					region = west_siberia_region
-					region = central_asia_region
-				}
-			}
-		}
-
-		effect = {
-			east_siberia_region = { add_permanent_claim = ROOT } 
-			mongolia_region = { add_permanent_claim = ROOT } 
-			custom_tooltip = REWARD_8_EAST
-			hidden_effect = {
-				random_owned_province = {
-					limit = {
-						OR = {
-							region = west_siberia_region
-							region = central_asia_region
+				"
+				second_custom_tooltip = GAJNAKA_TT_3b
+				second_limit = " AT0 = { exists = no } "
+				second_effect = "
+					add_country_modifier = {
+							name = atilon_humiliated_2
+							duration = 10950
 						}
-					}
-					random_list = {
-						33 = { change_culture = ROOT } 
-						33 = {
-							add_base_tax = 1
-							add_base_production = 1
-						}
-						33 = { add_base_manpower = 2 } 
-					}
-				}
-				random_owned_province = {
-					limit = {
-						OR = {
-							region = west_siberia_region
-							region = central_asia_region
-						}
-					}
-					random_list = {
-						33 = { change_culture = ROOT } 
-						33 = {
-							add_base_tax = 1
-							add_base_production = 1
-						}
-						33 = { add_base_manpower = 2 } 
-					}
-				}
-				random_owned_province = {
-					limit = {
-						OR = {
-							region = west_siberia_region
-							region = central_asia_region
-						}
-					}
-					random_list = {
-						33 = { change_culture = ROOT } 
-						33 = {
-							add_base_tax = 1
-							add_base_production = 1
-						}
-						33 = { add_base_manpower = 2 } 
-					}
-				}
-				random_owned_province = {
-					limit = {
-						OR = {
-							region = west_siberia_region
-							region = central_asia_region
-						}
-					}
-					random_list = {
-						33 = { change_culture = ROOT } 
-						33 = {
-							add_base_tax = 1
-							add_base_production = 1
-						}
-						33 = { add_base_manpower = 2 } 
-					}
-				}
-				random_owned_province = {
-					limit = {
-						OR = {
-							region = west_siberia_region
-							region = central_asia_region
-						}
-					}
-					random_list = {
-						33 = { change_culture = ROOT } 
-						33 = {
-							add_base_tax = 1
-							add_base_production = 1
-						}
-						33 = { add_base_manpower = 2 } 
-					}
-				}
-				random_owned_province = {
-					limit = {
-						OR = {
-							region = west_siberia_region
-							region = central_asia_region
-						}
-					}
-					random_list = {
-						33 = { change_culture = ROOT } 
-						33 = {
-							add_base_tax = 1
-							add_base_production = 1
-						}
-						33 = { add_base_manpower = 2 } 
-					}
-				}
-				random_owned_province = {
-					limit = {
-						OR = {
-							region = west_siberia_region
-							region = central_asia_region
-						}
-					}
-					random_list = {
-						33 = { change_culture = ROOT } 
-						33 = {
-							add_base_tax = 1
-							add_base_production = 1
-						}
-						33 = { add_base_manpower = 2 } 
-					}
-				}
-				random_owned_province = {
-					limit = {
-						OR = {
-							region = west_siberia_region
-							region = central_asia_region
-						}
-					}
-					random_list = {
-						33 = { change_culture = ROOT } 
-						33 = {
-							add_base_tax = 1
-							add_base_production = 1
-						}
-						33 = { add_base_manpower = 2 } 
-					}
-				}
+				"
 			}
 		}
 	}
