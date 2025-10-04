@@ -73,14 +73,14 @@ Gajna_1_slot = {
 		position = 3
 		required_missions = { 1_serica_rival } 
 		provinces_to_highlight = {
-			NOT = { owned_by = ROOT } 
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 			region = russia_region
 		}
 
 		trigger = {
 			russia_region = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 
@@ -93,6 +93,31 @@ Gajna_1_slot = {
 			}
 			ruthenia_region = { add_permanent_claim = ROOT } 
 			crimea_region = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	gajnaka_return_lord = {
+		icon = mission_the_russian_tsardom
+		position = 3
+		required_missions = { 1_serica_south } 
+		provinces_to_highlight = {
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+			region = ruthenia_region
+		}
+
+		trigger = {
+			ruthenia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = gaj_lord_of_latveria
+				duration = -1
+			}
+			poland_region = { add_permanent_claim = ROOT } 
 		}
 	}
 
@@ -301,22 +326,20 @@ Gajna_2_slot = {
 		}
 	}
 
-
 	2_iron_army = {
 		icon = revenge_for_nicopolis
 		position = 4
-		required_missions = {
-			1_serica_south
-			3_serica_south
-		}
 		provinces_to_highlight = {
-			owned_by = ROOT
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			superregion = eastern_europe_superregion
 			trade_goods = iron
 		}
 
 		trigger = {
-			num_of_owned_provinces_with = {
-				value = 10
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 7
 				trade_goods = iron
 				base_production = 5
 				infantry_in_province = 10
@@ -370,8 +393,6 @@ Gajna_2_slot = {
 				name = "1000_strong"
 				duration = -1
 			}
-			poland_region = { add_permanent_claim = ROOT } 
-			baltic_region = { add_permanent_claim = ROOT } 
 		}
 	}
 
@@ -498,28 +519,19 @@ Gajna_3_slot = {
 		trigger = {
 			ural_region = {
 				type = all
-				country_or_non_sovereign_subject_holds = ROOT
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					is_empty = yes
+				}
 			}
 		}
 
 		effect = {
-			define_advisor = {
-				type = army_organiser
-				skill = 3
-				discount = yes
-			}
+			increase_trade_goods_discovery = { trade_goods = iron }
+			increase_trade_goods_discovery = { trade_goods = gold }
+			increase_trade_goods_discovery = { trade_goods = gems }
+			kazakhstan_area = { add_permanent_claim = ROOT } 
 			west_siberia_region = { add_permanent_claim = ROOT } 
-			central_asia_region = {
-				limit = {
-					OR = {
-						culture = serbian
-						culture = slovene
-						culture = bosnian
-						culture = uralic
-					}
-				}
-				add_permanent_claim = ROOT
-			}
 		}
 	}
 
@@ -566,12 +578,15 @@ Gajna_3_slot = {
 	3_working = {
 		icon = mission_rb_import_potatoes
 		position = 8
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = { 
+			owned_by = ROOT
+			has_production_building_trigger = no
+		 } 
 
 		trigger = {
-			OR = {
-				workshop = 5
-				counting_house = 5
+			num_of_owned_provinces_with = {
+				value = 5
+				has_production_building_trigger = yes
 			}
 		}
 
@@ -592,17 +607,21 @@ Gajna_3_slot = {
 			3_working
 			4_navy
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = { 
+			owned_by = ROOT
+			has_production_building_trigger = no
+			NOT = {
+				base_production = 5
+			}
+			has_manufactory_trigger = no
+		} 
 
 		trigger = {
 			monthly_income = 100
 			num_of_owned_provinces_with = {
 				value = 10
 				base_production = 5
-				OR = {
-					has_building = workshop
-					has_building = counting_house
-				}
+				has_production_building_trigger = yes
 				has_manufactory_trigger = yes
 			}
 		}
@@ -616,10 +635,7 @@ Gajna_3_slot = {
 			every_owned_province = {
 				limit = {
 					base_production = 5
-					OR = {
-						has_building = workshop
-						has_building = counting_house
-					}
+					has_production_building_trigger = yes
 					has_manufactory_trigger = yes
 				}
 				add_province_modifier = {
@@ -634,16 +650,20 @@ Gajna_3_slot = {
 		icon = mission_state_manufactories
 		position = 10
 		required_missions = { 3_working_hard } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_production_building_trigger = no
+			NOT = {
+				base_production = 5
+			}
+			has_manufactory_trigger = no
+		} 
 
 		trigger = {
 			num_of_owned_provinces_with = {
 				value = 5
 				base_production = 10
-				OR = {
-					has_building = workshop
-					has_building = counting_house
-				}
+				has_production_building_trigger = yes
 				has_manufactory_trigger = yes
 			}
 		}
@@ -653,10 +673,7 @@ Gajna_3_slot = {
 			every_owned_province = {
 				limit = {
 					base_production = 10
-					OR = {
-						has_building = workshop
-						has_building = counting_house
-					}
+					has_production_building_trigger = yes
 					has_manufactory_trigger = yes
 				}
 				add_province_modifier = {
@@ -749,7 +766,7 @@ Gajna_4_slot = {
 
 		trigger = {
 			num_of_owned_provinces_with = {
-				value = 40
+				value = 25
 				OR = {
 					region = west_siberia_region
 					region = central_asia_region
@@ -860,15 +877,15 @@ Gajna_4_slot = {
 		icon = mission_fish_markets
 		position = 8
 		required_missions = { 5_navy } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = { 
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+			has_dock_building_trigger = no
+		} 
 
 		trigger = {
 			num_of_provinces_owned_or_owned_by_subjects_with = {
 				value = 5
-				OR = {
-					has_building = dock
-					has_building = drydock
-				}
+				has_dock_building_trigger = yes
 			}
 		}
 
