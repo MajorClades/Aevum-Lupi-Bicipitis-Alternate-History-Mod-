@@ -68,4 +68,114 @@ country_decisions = {
 		ai_importance = 400
 	}
 
+	ozrania_nation = {
+		major = yes
+		potential = {
+			NOT = { has_country_flag = formed_ozrania_flag }
+			OR = {
+				tag = ZL7
+				tag = ZL8
+			}
+		}
+		allow = {
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			is_at_war = no
+			num_of_owned_provinces_with = {
+				value = 10
+				OR = {
+					area = bothnia_area
+					area = finland_area
+					culture = samitan
+					culture = nogaybak
+				}
+			}
+		}
+		effect = {
+			override_country_name = OZRANIA_TAG
+			add_stability_or_adm_power = yes
+			set_country_flag = formed_ozrania_flag
+			add_prestige_or_monarch_power = {
+				amount = 25
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+
+	suomeya_bizzarre_adventures = {
+		major = yes
+		potential = {
+			NOT = { has_country_flag = suom_advanture }
+			tag = SM0
+		}
+		allow = {
+			if = {
+				limit = {
+					ai = yes
+				}
+				army_size_percentage = 0.75
+				is_year = 1445
+			}else = {
+				army_size_percentage = 1
+			}
+		}
+		effect = {
+			set_country_flag = suom_advanture
+			country_event = {
+				id =  finneya.1
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		ai_importance = 400
+	}
+
+	suomeya_bizzarre_adventures_2 = {
+		major = yes
+		potential = {
+			tag = SM4
+			carpathia_region = {
+				type = any
+				NOT = {
+					culture_group = ugaric
+				}
+			}
+		}
+		allow = {
+			any_owned_province = {
+				region = carpathia_region
+				NOT = {
+					culture_group = ugaric
+				}
+			}
+		}
+		effect = {
+			every_owned_province = {
+				limit = {
+					region = carpathia_region
+					NOT = {
+						culture_group = ugaric
+					}
+				}
+				owner = {
+					add_dip_power = -30
+				}
+				change_culture = suomy
+			}
+		}
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				factor = 0
+				NOT = {
+					dip_power = 500
+				}
+			}
+		}
+		ai_importance = 400
+	}
 }
