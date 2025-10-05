@@ -215,6 +215,7 @@ country_event = {  #going west by land
 			add_historical_rival = SM0
 		}
 		set_country_flag = not_let_finn_pass
+		custom_tooltip = "War will likely break out with Finnavaria."
 		SM0 = {
 			country_event = {
 				id = finneya.5
@@ -240,6 +241,7 @@ country_event = {  #creating Finnavaria
 		SM0 = {
 			add_accepted_culture = avars
 			change_tag = SM4
+			swap_free_idea_group = yes
 			inherit = DA3
 		}
 	}
@@ -251,6 +253,7 @@ country_event = {  #creating Finnavaria
 		DA3 = {
 			add_accepted_culture = suomy
 			change_tag = SM4
+			swap_free_idea_group = yes
 			inherit = SM0
 		}
 	}
@@ -320,10 +323,13 @@ country_event = {  #creating Finnavaria
 						has_country_flag = not_let_finn_pass
 					}
 				}
-				declare_war_with_cb = {
-					casus_belli = cb_imperial
-					who = SM4
-				}
+					DA0 = {
+						declare_war_with_cb = {
+							casus_belli = cb_imperial
+							who = SM4
+						}
+					}
+				
 			}
 		}
 	}
@@ -353,6 +359,7 @@ country_event = {  #Dacia said no
 			factor = 70
 		}
 		add_treasury = -300
+		custom_tooltip = "Dacia will declare war on you."
 		DA3 = {
 			country_event = {
 				id = finneya.4
