@@ -61,4 +61,53 @@ country_decisions = {
 		}
 		ai_importance = 100
 	}
+	ar1_form_hringhorni = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			NOT = { has_country_flag = formed_hringhorni_flag }
+			NOT = { tag = AR1}
+			NOT = { tag = GA0} #they have a more flavorful way to form it
+			NOT = { tag = PAP}
+			NOT = { tag = IT9}
+			NOT = { tag = RU0}
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			OR = {
+				is_free_or_tributary_trigger = yes
+				ai = no
+			}
+			religion = norse_ragnaroked
+			has_reform = bards_of_baldr_reform
+		}
+		provinces_to_highlight = {
+			
+		}
+		allow = {
+			NOT = { exists = AR1 }
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			is_at_war = no
+			estate_influence = {
+				estate = estate_church
+				influence = 80
+			}
+			has_government_power = {
+				mechanic_type = baldrlight_mechanic
+				power_type = lightness_power
+				value = 90
+			}
+		}
+		effect = {
+			country_event = {
+				id = gand.100
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
 }
