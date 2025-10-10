@@ -10,7 +10,7 @@ scot_clans_mechanic = {
 			max = 100
 			is_good = yes
 			min = 0
-			base_monthly_growth = -0.1
+			base_monthly_growth = -0.2 #make it harder to keep up, require 3 stab to be positive
 			reverse_scaled_modifier = {
 				trigger = {
 					government = theocracy
@@ -87,7 +87,7 @@ scot_clans_mechanic = {
 					limit = {
 						government = monarchy
 					}
-					add_yearly_manpower = 0.5
+					add_yearly_manpower = 0.25
 					capital_scope = {
 						qizilbash_infantry = ROOT
 					}
@@ -97,7 +97,7 @@ scot_clans_mechanic = {
 			}
 			cooldown_years = 3
 			ai_chance = {
-				factor = 0
+				factor = 1
 			}
 		}
 		SCOT_second = {
@@ -109,23 +109,51 @@ scot_clans_mechanic = {
 				
 			}
 			effect = { 
-				if = {
-					limit = {
-						government = monarchy
+				random_list = { #mana is good, 150 every three years is really really good
+				#if you got 50 per year, that works out to a little over 1 per month in each category
+				#this makes it more powerful in 1 category but less powerful overall
+					33 = {
+						add_adm_power = 75
+						custom_tooltip = sco_random_goods_produced_prov_tt
+						hidden_effect = {
+							random_owned_province = {
+								add_province_modifier = {
+									name = sc0_random_goods_prod
+									duration = 1825
+								}
+							}
+						}
 					}
-						add_adm_power = 50
-						add_dip_power = 50
-						add_mil_power = 50	
-				}else = {
-					add_years_of_income = 0.55
-					add_adm_power = 30
-					add_dip_power = 30
-					add_mil_power = 30	
+					33 = {
+						add_mil_power = 75
+						custom_tooltip = sco_random_manpower_prov_tt
+						hidden_effect = {
+							random_owned_province = {
+								add_province_modifier = {
+									name = sc0_random_manpower
+									duration = 1825
+								}
+							}
+						}
+					}
+					33 = {
+						add_dip_power = 75
+						custom_tooltip = sco_random_buildcost_prov_tt
+						hidden_effect = {
+							random_owned_province = {
+								add_province_modifier = {
+									name = sc0_random_buildcost
+									duration = 1825
+								}
+							}
+						}
+					}
 				}
+				custom_tooltip = empty_line_tt
 			}
 			cooldown_years = 3
 			ai_chance = {
-				factor = 0
+				factor = 1
 			}
 		}
 		SCOT_three = {
@@ -134,17 +162,17 @@ scot_clans_mechanic = {
 			cost_type = scot_single_power
 			cost = 0
 			trigger = {
-				years_of_income = 0.15
+				years_of_income = 0.2
 			}
 			effect = { 
-				add_years_of_income = -0.15
+				add_years_of_income = -0.2
 				add_government_power = {
 					mechanic_type = scot_clans_mechanic
 					power_type = scot_single_power
 					value = 5
 				}
 			}
-			cooldown_years = 1
+			# cooldown_years = 1 #not needed, let them spend money
 			ai_chance = {
 				factor = 1
 			}
