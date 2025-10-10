@@ -323,7 +323,7 @@ merc_minecrafters = {
 		}
 	}
 	modifier = {
-		siege_ability = 0.25
+		assault_fort_ability = 1
 		shock_damage_received = 0.2
 		fire_damage_received = 0.2
 		can_bypass_forts = yes
@@ -342,6 +342,13 @@ merc_angr_warband = {
 	sprites = { dlc056_lan_sprite_pack sav_base_sprite_pack westerngfx_sprite_pack }
 	cost_modifier = 0.25
     trigger = {
+		capital_scope = {
+			OR = {
+				region = british_isles_region
+				region = scandinavia_region
+				region = low_countries_region
+			}
+		}
 		hidden_trigger = {
 			1861 = {
 				NOT = {
@@ -351,11 +358,16 @@ merc_angr_warband = {
 			KO4 = {
 				exists = no
 			}
+			NOT = {
+				is_year = 1600
+			}
 		}
 	}
+	
 	modifier = {
-		siege_ability = 1
-		land_morale = -0.33
+		assault_fort_ability = 1
+		land_attrition = -0.25
+		land_morale = -0.2
 		leader_siege = 2
 	}
 	min_size = 12

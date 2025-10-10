@@ -291,50 +291,137 @@ country_event = { #expand Pontifexian, anger the Emperor
 	title = papacy.8.t
 	desc = papacy.8.d
 	picture = POPE_PREACHING_eventPicture
-	
-	trigger = {
-		tag = PA0
-		hre_leagues_enabled = yes
-		hre_religion_locked = no
-		hre_religion_treaty = no
-	}
 
-	mean_time_to_happen = {
-		months = 24
-	}
+	is_triggered_only = yes
 
 	option = {
 		name = papacy.8a
-		every_country = {
-			limit = {
-				religion = catholic
-				in_league = pontifex
+		change_religion = pontifex
+		join_league = pontifex
+		add_imperial_influence = -2.5
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					religion = catholic
+				}
+				random_list = {
+					75 = {}
+					25 = {
+						change_religion = pontifex
+					}
+				}
 			}
-			custom_tooltip = PAP_TT_2
-			hidden_effect = {
-				if = {
-					limit = {
-						religion = catholic
-					}
-					change_religion = pontifex
-				}
-				every_owned_province = {
-					limit = {
-						religion = catholic
-					}
-					random_list = {
-						75 = {}
-						25 = {
-							change_religion = pontifex
-						}
+		}
+		ai_chance = {
+			factor = 25
+			modifier = {
+				factor = 1.5
+				NOT = {
+					has_opinion = {
+						who = emperor
+						value = 0
 					}
 				}
-				every_subject_country = {
-					limit = {
-						religion = catholic
+			}
+			modifier = {
+				factor = 1.1
+				NOT = {
+					has_opinion = {
+						who = emperor
+						value = 50
 					}
-					change_religion = pontifex
 				}
+			}
+			modifier = {
+				factor = 1.1
+				has_opinion = {
+					who = PA0
+					value = 50
+				}
+			}
+			modifier = {
+				factor = 1.1
+				has_opinion = {
+					who = PA0
+					value = 100
+				}
+			}
+			modifier = {
+				factor = 1.1
+				has_opinion = {
+					who = PA0
+					value = 150
+				}
+			}
+			modifier = {
+				factor = 1.1
+				has_opinion = {
+					who = PA0
+					value = 190
+				}
+			}
+			modifier = {
+				factor = 0.5
+				invested_papal_influence = 50
+			}
+		}
+	}
+	option = {
+		name = papacy.8b
+		add_prestige = 10
+		join_league = catholic
+		add_imperial_influence = 2.5
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 1.5
+				NOT = {
+					has_opinion = {
+						who = PA0
+						value = 0
+					}
+				}
+			}
+			modifier = {
+				factor = 1.1
+				NOT = {
+					has_opinion = {
+						who = PA0
+						value = 50
+					}
+				}
+			}
+			modifier = {
+				factor = 1.1
+				has_opinion = {
+					who = emperor
+					value = 50
+				}
+			}
+			modifier = {
+				factor = 1.1
+				has_opinion = {
+					who = emperor
+					value = 100
+				}
+			}
+			modifier = {
+				factor = 1.1
+				has_opinion = {
+					who = emperor
+					value = 150
+				}
+			}
+			modifier = {
+				factor = 1.1
+				has_opinion = {
+					who = emperor
+					value = 190
+				}
+			}
+			modifier = {
+				factor = 2
+				has_country_modifier = the_statue_in_restraint_of_appeals
 			}
 		}
 	}
@@ -597,6 +684,7 @@ country_event = { #force-conversion
 		if = {
 			limit = {
 				PAP = {
+					exists = yes
 					religion = catholic
 				}
 			}

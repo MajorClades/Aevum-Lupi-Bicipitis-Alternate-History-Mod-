@@ -167,4 +167,103 @@ country_decisions = {
 			factor = 0
 		}
 	}
+	alb_mexico_and_forza = {
+		major = yes
+		potential = {
+			capital_scope = {
+				colonial_region = colonial_mexico
+			}
+			is_colonial_nation = yes
+			culture_group = latin
+			NOT = {
+				exists = MX2
+			}
+		}
+		allow = {
+			OR = {
+				liberty_desire = 60
+				is_free_or_tributary_trigger = yes
+			}
+		}
+		effect = {
+			change_tag = MX2
+			swap_free_idea_group = yes
+			swap_non_generic_missions = yes
+			set_country_flag = changed_from_colonial_nation
+			hidden_effect = {
+				change_government = monarchy
+				add_government_reform = kingdom_of_deforza
+				define_ruler = {
+					name = "Federico"
+					dynasty = "De'Forza"
+					age = 36
+					adm = 3
+					dip = 0 
+					mil = 5
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	alb_mexico_and_forza_2 = {
+		major = yes
+		potential = {
+			any_subject_country = {
+				capital_scope = {
+					colonial_region = colonial_mexico
+				}
+				is_colonial_nation = yes
+			}		
+			has_country_flag = forza_missions_flag
+		}
+		allow = {
+			any_subject_country = {
+				capital_scope = {
+					colonial_region = colonial_mexico
+				}
+				is_colonial_nation = yes
+			}
+		}
+		effect = {
+			random_subject_country = {
+				limit = {
+					capital_scope = {
+						colonial_region = colonial_mexico
+					}
+					is_colonial_nation = yes
+				}
+				ROOT = {
+					switch_tag = PREV
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	alb_mexico_and_forza_3 = {
+		major = yes
+		potential = {
+			tag = MX2
+		}
+		allow = {
+		}
+		effect = {
+			if = {
+				limit = {
+					NOT = { has_country_flag = def_changed_name }
+				}
+				override_country_name = DEFORZA_EMPIRE
+				set_country_flag = def_changed_name
+			}else = {
+				restore_country_name = yes
+				clr_country_flag = def_changed_name
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
 }

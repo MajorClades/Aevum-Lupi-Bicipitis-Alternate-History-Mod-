@@ -321,6 +321,10 @@ country_decisions = {
 			owns_or_non_sovereign_subject_of = 965
 		}
 		effect = {
+			add_country_modifier = {
+				name = atlantic_empire_mod
+				duration = -1
+			}
 			965 = {
 				cede_province = ROOT
 				add_core = ROOT
@@ -347,6 +351,7 @@ country_decisions = {
 		}
 		potential = {
 			government_rank = 3
+			is_or_was_tag = {tag = BR0}
 		}
 		allow = {
 			government_rank = 3
@@ -384,4 +389,178 @@ country_decisions = {
 		}
 		ai_importance = 400
 	}
+	brytt_war_on_brittania = {
+		color = {
+			100 20 30
+		}
+		potential = {
+			tag = WL0
+			ai = no
+			is_subject_of = SC0
+			NOT = {
+				owns = 4369
+			}
+		}
+		allow = {
+			is_subject_of = SC0
+			SC0 = {
+				is_at_war = no
+			}
+		}
+		effect = {
+			declare_war_with_cb = {
+					casus_belli = cb_core
+					war_goal_province = 4369
+					who = BR0
+				}
+			add_country_modifier = {
+				name = bry_restorations
+				duration = 7300
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		ai_importance = 400
+	}
+	rus_ask_for_help = {
+		color = {
+			200 20 130
+		}
+		potential = {
+			tag = BE1
+			ai = no
+			ZL1 = {
+				ai = yes
+			}
+		}
+		allow = {
+			ZL1 = {
+				has_opinion = {
+					who = BE1
+					value = 150
+				}
+				is_at_war = no
+			}
+		}
+		effect = {
+			ZL1 = {
+				create_subject = {
+					subject_type = autonomous_vassal
+					who = BE1
+				}
+				every_owned_province = {
+					limit = {
+						region = british_isles_region
+					}
+					cede_province = BE1
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		ai_importance = 400
+	}
+	swe_sailors_for_magni = {
+		color = {
+			130 30 30
+		}
+		potential = {
+			has_country_flag = swe_recruitment_zone_flag
+		}
+
+		allow = {
+			sailors = 1000
+		}
+		effect = {
+			country_event = {
+				id = swe2.4
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	swe_vinland_saga = {
+		color = {
+			130 30 30
+		}
+		provinces_to_highlight = {
+			OR = {
+				is_capital_of = FJ0
+				is_capital_of = FJ9
+			}
+		}
+		potential = {
+			mission_completed = swe_union_q
+		}
+
+		allow = {
+			OR = {
+				AND = {
+					OR = {
+						tag = FJ0
+						tag = FJ9
+					}
+					owes_favors = {
+						who = ROOT
+						value = 50
+					}
+				}
+				AND = {
+					FJ0 = {
+						exists = no
+					}
+					FJ9 = {
+						exists = no
+					}
+				}
+			}
+		}
+		effect = {
+			add_favors = {
+				who = FJ0
+				amount = -50
+			}
+			add_favors = {
+				who = FJ9
+				amount = -50
+			}
+			if = {
+				limit = {
+					FJ0 = {
+						exists = yes
+					}
+				}
+				create_subject = {
+					subject_type = crown_colony
+					who = FJ0
+				}
+			}else = {
+				if = {
+					limit = {
+						FJ9 = {
+							exists = yes
+						}
+					}
+					create_subject = {
+						subject_type = crown_colony
+						who = FJ9
+					}
+				}else = {
+					canada_region = {
+						add_permanent_claim = ROOT
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+
+
 }

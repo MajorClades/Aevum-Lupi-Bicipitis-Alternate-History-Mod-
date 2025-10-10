@@ -216,7 +216,7 @@ Belgia_1_slot = {
 			add_country_modifier = {
 				name = belgian_united_biorno
 				duration = -1
-			}	
+			}
 		}
 	}
 }
@@ -274,12 +274,14 @@ Belgia_2_slot = {
 		trigger = { 
 			OR = {
 				373 = {
+					owned_by = ROOT
 					OR = {
 						has_building = marketplace
 						base_production = 5
 					}
 				}
 				374 = {
+					owned_by = ROOT
 					OR = {
 						has_building = marketplace
 						base_production = 5
@@ -289,10 +291,23 @@ Belgia_2_slot = {
 		}
 		
 		effect = {
+			add_years_of_owned_provinces_production_income = {
+				years = 3
+				trigger = {
+					OR = {
+						province_id = 373
+						province_id = 374
+					}
+					OR = {
+						has_building = marketplace
+						base_production = 5
+					}
+				}
+				custom_tooltip = BELGIA_TT_1
+			}
 			4365 = {
 				add_permanent_claim = ROOT
 			}
-			
 		}
 	}
 	bel_main_island_a = {
@@ -434,7 +449,10 @@ Belgia_3_slot = {
 		position = 2
 		
 		trigger = { 
-			num_of_light_ship = 20		
+			OR = {
+				num_of_light_ship = 20	
+				num_of_galley = 20
+			}	
 		}
 		
 		effect = {
@@ -448,7 +466,10 @@ Belgia_3_slot = {
 		position = 4
 		
 		trigger = { 
-			naval_forcelimit = 30	
+			OR = {
+				navy_size = 35
+				num_of_light_ship = 30	
+			}
 			has_flagship = yes
 		}
 		
@@ -465,8 +486,13 @@ Belgia_3_slot = {
 		position = 5
 		
 		trigger = { 
-			num_of_total_ports = 20
-			naval_forcelimit = 100	
+			navy_size = 55
+			navy_tradition = 50
+			OR = {
+				full_idea_group = maritime_ideas
+				full_idea_group = naval_ideas
+				num_of_heavy_ship = 15
+			}
 		}
 		
 		effect = {
@@ -516,21 +542,24 @@ Belgia_3_slot = {
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
 				value = 5
 				colonial_region = colonial_canada
-				is_city = yes
+				owned_by_subject_of = ROOT
 			}
 		}
 		
 		effect = {		
-			every_province = {
+			random_subject_country = {
 				limit = {
-					colonial_region = colonial_canada
-					owner = {
-						is_subject_of = ROOT
+					is_colonial_nation_of = ROOT
+					capital_scope = {
+						colonial_region = colonial_canada
 					}
 				}
-				add_base_manpower = 1
-				add_base_production = 1
-				add_base_tax = 1
+				capital_scope = {
+					add_base_manpower = 1
+					add_base_production = 1
+					add_base_tax = 1
+					add_or_upgrade_fort_building = yes
+				}
 			}
 		}
 	}
@@ -552,7 +581,7 @@ Belgia_4_slot = {
 			num_of_provinces_owned_or_owned_by_subjects_with = {
 				value = 3
 				has_port = yes
-				has_building = marketplace
+				has_trade_building_trigger = yes
 			}
 		}
 		
@@ -567,17 +596,18 @@ Belgia_4_slot = {
 		position = 3
 		
 		trigger = { 
+			owns = 4997
 			num_of_owned_provinces_with = {
 				value = 5
-				OR = {
-					has_building = workshop
-					has_building = counting_house
-				}
+				has_production_building_trigger = yes
 			}
 		}
 		
 		effect = {		
 			add_mercantilism = 10
+			4997 = {
+				change_trade_goods = paper
+			}
 		}
 	}
 	bel_dutch_trades = {
@@ -588,11 +618,7 @@ Belgia_4_slot = {
 		trigger = { 
 			num_of_owned_provinces_with = {
 				value = 5
-				OR = {
-					has_building = marketplace
-					has_building = trade_depot
-					has_building = stock_exchange
-				}
+				has_trade_building_trigger = yes
 				base_production = 7
 			}
 		}
@@ -617,10 +643,7 @@ Belgia_4_slot = {
 			}
 			num_of_owned_provinces_with = {
 				value = 25
-				OR = {
-					has_building = workshop
-					has_building = counting_house
-				}
+				has_production_building_trigger = yes
 			}
 		}
 		
@@ -630,10 +653,7 @@ Belgia_4_slot = {
 				limit = {
 					OR = {
 						base_production = 10
-						OR = {
-							has_building = workshop
-							has_building = counting_house
-						}
+						has_production_building_trigger = yes
 					}
 				}
 				add_scaled_local_adm_power = 1
@@ -687,21 +707,24 @@ Belgia_4_slot = {
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
 				value = 5
 				colonial_region = colonial_eastern_america
-				is_city = yes
+				owned_by_subject_of = ROOT
 			}
 		}
 		
 		effect = {		
-			every_province = {
+			random_subject_country = {
 				limit = {
-					colonial_region = colonial_eastern_america
-					owner = {
-						is_subject_of = ROOT
+					is_colonial_nation_of = ROOT
+					capital_scope = {
+						colonial_region = colonial_eastern_america
 					}
 				}
-				add_base_manpower = 1
-				add_base_production = 1
-				add_base_tax = 1
+				capital_scope = {
+					add_base_manpower = 1
+					add_base_production = 1
+					add_base_tax = 1
+					add_or_upgrade_fort_building = yes
+				}
 			}
 		}
 	}
@@ -764,20 +787,23 @@ Belgia_5_slot = {
 		
 		effect = {
 			add_dip_power = -100
-			
-			if = {
-				limit = {
-					has_reform = pirate_republic_reform
-				}
-				add_country_modifier = {
-					name = bel_pirate_letter
-					duration = 7300
-				}
-			} else = {
-				add_country_modifier = {
-					name = bel_queen_letter
-					duration = 7300
-				}
+			simple_dynamic_effect = {
+				first_custom_tooltip = BELGIA_TT_2a
+				first_limit = " has_reform = pirate_republic_reform "
+				first_effect = "
+					add_country_modifier = {
+						name = bel_pirate_letter
+						duration = 7300
+					}
+				"
+				second_custom_tooltip = BELGIA_TT_2b
+				second_limit = "NOT = { has_reform = pirate_republic_reform }"
+				second_effect = "
+					add_country_modifier = {
+						name = bel_queen_letter
+						duration = 7300
+					}
+				"
 			}
 		}
 	}
@@ -861,21 +887,24 @@ Belgia_5_slot = {
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
 				value = 5
 				colonial_region = colonial_the_carribean
-				is_city = yes
+				owned_by_subject_of = ROOT
 			}
 		}
 		
 		effect = {		
-			every_province = {
+			random_subject_country = {
 				limit = {
-					colonial_region = colonial_the_carribean
-					owner = {
-						is_subject_of = ROOT
+					is_colonial_nation_of = ROOT
+					capital_scope = {
+						colonial_region = colonial_the_carribean
 					}
 				}
-				add_base_manpower = 1
-				add_base_production = 1
-				add_base_tax = 1
+				capital_scope = {
+					add_base_manpower = 1
+					add_base_production = 1
+					add_base_tax = 1
+					add_or_upgrade_fort_building = yes
+				}
 			}
 		}
 	}

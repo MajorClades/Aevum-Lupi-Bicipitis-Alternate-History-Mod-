@@ -312,3 +312,54 @@ has_mandala_modifier = {
 		has_province_modifier = largest_size_mandala
 	}
 }
+
+ganden_one_city_more_powerful = { #check if specified city has been elected the most
+	custom_trigger_tooltip = {  #$city$ - expected values are either bylandr, gettrike, tonin, kadlen
+		tooltip = ganden_$city$_elected_most_tt
+		AND = {
+			check_variable = {
+				which = num_$city$_elections
+				which = num_bylandr_elections
+			}
+			check_variable = {
+				which = num_$city$_elections
+				which = num_gettrike_elections
+			}
+			check_variable = {
+				which = num_$city$_elections
+				which = num_tonin_elections
+			}
+			check_variable = {
+				which = num_$city$_elections
+				which = num_kadlen_elections
+			}
+			calc_true_if = {
+				amount = 3
+				NOT = {
+					is_variable_equal = {
+						which = num_$city$_elections
+						which = num_bylandr_elections
+					}
+				}
+				NOT = {
+					is_variable_equal = {
+						which = num_$city$_elections
+						which = num_gettrike_elections
+					}
+				}
+				NOT = {
+					is_variable_equal = {
+						which = num_$city$_elections
+						which = num_kadlen_elections
+					}
+				}
+				NOT = {
+					is_variable_equal = {
+						which = num_$city$_elections
+						which = num_tonin_elections
+					}
+				}
+			}
+		}
+	}
+}

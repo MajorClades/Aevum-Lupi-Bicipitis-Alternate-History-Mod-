@@ -79,7 +79,7 @@ plutocratic_reform = {
 	potential = {
 		OR = {
 			technology_group = indian
-			technology_group = muslim
+			technology_group = iranian
 			technology_group = chinese
 			technology_group = east_african
 		}
@@ -87,7 +87,7 @@ plutocratic_reform = {
 	nation_designer_trigger = {
 		OR = {
 			technology_group = indian
-			technology_group = muslim
+			technology_group = iranian
 			technology_group = chinese
 			technology_group = east_african
 		}
@@ -368,6 +368,7 @@ absolutist_france_reform = {
 	icon = "absolutist_france_reform"
 	allow_normal_conversion = no
 	potential = {
+		always = no
 		has_dlc = "Domination" 
 		OR = {
 			AND = { 
@@ -382,7 +383,6 @@ absolutist_france_reform = {
 				is_playing_custom_nation = yes
 				have_had_reform = absolutist_france_reform
 			}
-			mission_completed = fra_movement_centralization
 		}
 	}
 	trigger = {
@@ -2113,9 +2113,6 @@ eyalet_government = {
 					NOT = { is_subject_of_type = eyalet }
 					NOT = { is_subject_of_type = core_eyalet }
 				}
-				country_event = {
-					id = flavor_tur.1000
-				}
 			}
 		}
 	}
@@ -2164,9 +2161,6 @@ barbary_eyalet_government = {
 				limit = {
 					NOT = { is_subject_of_type = eyalet }
 					NOT = { is_subject_of_type = core_eyalet }
-				}
-				country_event = {
-					id = flavor_tur.1000
 				}
 			}
 		}
@@ -2251,10 +2245,6 @@ prussian_monarchy = {
 		OR = {
 			AND = {
 				tag = PRU
-				OR = {
-					has_mission = emp_brapru_army_reforms_2
-					has_mission = emp_brapru_army_reforms_3
-				}
 				NOT = { map_setup = map_setup_random }
 			}
 			has_unlocked_government_reform = { government_reform = prussian_monarchy }
@@ -2266,8 +2256,8 @@ prussian_monarchy = {
 		OR = {
 			religion = protestant
 			religion = reformed
-			religion = hussite
-			religion = anglican
+			
+			
 			has_unlocked_government_reform = { government_reform = prussian_monarchy }
 		}
 	}
@@ -2311,8 +2301,6 @@ prussian_monarchy_base = {
 		NOT = { have_had_reform = prussian_monarchy }
 		OR = {
 			NOT = { has_dlc = "Domination" }
-			NOT = { has_mission = emp_brapru_army_reforms_2 }
-			NOT = { has_mission = emp_brapru_army_reforms_3 }
 		}
 		OR = {
 			AND = {
@@ -2351,8 +2339,8 @@ prussian_monarchy_base = {
 		OR = {
 			religion = protestant
 			religion = reformed
-			religion = hussite
-			religion = anglican
+			
+			
 			AND = {
 				is_playing_custom_nation = yes
 				OR = {
@@ -2430,8 +2418,9 @@ principality = {
 	icon = "russian_principality"
 	allow_normal_conversion = yes
 	potential = {
+		always = no
 		NOT = { has_reform = tsardom }
-		religion = orthodox
+		religion = impotian
 		OR = {
 			culture_group = east_slavic
 			culture_group = slavic
@@ -2450,7 +2439,7 @@ principality = {
 			culture_group = east_slavic
 			culture_group = slavic
 		}
-		religion = orthodox
+		religion = impotian
 	}
 	modifiers = {
 		global_unrest = -1
@@ -2479,7 +2468,7 @@ tsardom = {
 	icon = "tsardom"
 	allow_normal_conversion = yes
 	potential = {
-		religion = orthodox
+		religion = impotian
 		OR = {
 			culture_group = east_slavic
 			culture_group = slavic
@@ -2513,7 +2502,7 @@ tsardom = {
 		}
 		NOT = { primary_culture = ruthenian }
 		NOT = { primary_culture = byelorussian }
-		religion = orthodox
+		religion = impotian
 	}
 
 	modifiers = {
@@ -2551,7 +2540,7 @@ ruthenian_tsardom = {
 	icon = "ruthenia_tsardom"
 	allow_normal_conversion = yes
 	potential = {
-		religion = orthodox
+		religion = impotian
 		OR = {
 			primary_culture = ruthenian
 			primary_culture = byelorussian
@@ -2571,7 +2560,7 @@ ruthenian_tsardom = {
 	}
 	fixed_rank = 3
 	nation_designer_trigger = {
-		religion = orthodox
+		religion = impotian
 		OR = {
 			primary_culture = ruthenian
 			primary_culture = byelorussian
@@ -2589,7 +2578,7 @@ ruthenian_tsardom = {
 			primary_culture = ruthenian_new
 			primary_culture = byelorussian_new
 		}
-		religion = orthodox
+		religion = impotian
 	}
 
 	modifiers = {
@@ -3783,6 +3772,7 @@ lithuanian_grand_empire = {
 	icon = "peasants"
 	allow_normal_conversion = yes
 	potential = {
+		always = no
 		OR = {
 			AND = {
 				is_playing_custom_nation = yes
@@ -3790,7 +3780,6 @@ lithuanian_grand_empire = {
 			}
 			has_reform = lithuanian_grand_empire
 			AND = {
-				mission_completed = sca_mission_lit_polish_union
 				total_development = 1000 
 			}
 		}
@@ -4577,7 +4566,7 @@ merchant_aristocracy_reform = {
 		}
 	}
 	nation_designer_trigger = {
-		primary_culture = goths
+		primary_culture = gothic_ger
 	}
 	valid_for_nation_designer = yes
 	nation_designer_cost = 10
@@ -4951,7 +4940,7 @@ enforce_trader_privileges_reform = {
 		is_reform_available = plutocratic_reform
 		OR = {
 			technology_group = indian
-			technology_group = muslim
+			technology_group = iranian
 			technology_group = chinese
 			technology_group = east_african
 		}
@@ -6223,9 +6212,6 @@ court_of_art_and_culture_reform = {
 		can_enforce_primary_culture = yes
 	}
 	removed_effect = {
-		country_event = {
-			id = persian_influence_events.3000
-		}
 	}
 	ai = {
 		factor = 5
@@ -6965,13 +6951,11 @@ mng_seal_of_the_emperor_reform = {
 	potential = {
 		OR = { 
 			has_reform = mng_seal_of_the_emperor_reform
-			mission_completed = mng_crisis_ming_dynasty
 		}
 	}
 	trigger = {
 		OR = { 
 			has_reform = mng_seal_of_the_emperor_reform
-			mission_completed = mng_crisis_ming_dynasty
 		}
 	}
 	modifiers = {
@@ -6989,7 +6973,6 @@ qng_grand_council_reform = {
 	allow_normal_conversion = no
 	potential = {
 		OR = { 
-			mission_completed = qng_junji_chu
 			has_reform = qng_grand_council_reform
 		}
 	}
@@ -7012,7 +6995,6 @@ absolute_shogunate_reform = {
 				has_reform = absolute_shogunate_reform
 			}
 			have_had_reform = absolute_shogunate_reform
-			mission_completed = jap_restoration
 		}
 	}
 	valid_for_nation_designer = yes
@@ -7042,7 +7024,7 @@ japanese_divine_empire = {
 			}
 			has_country_flag = JPE_gov_flag
 			have_had_reform = japanese_divine_empire
-			mission_completed = jap_restoration
+			always = no
 		}
 		NOT = { has_reform = absolute_shogunate_reform }
 	}
@@ -7095,7 +7077,6 @@ land_christian_sun_reform = {
 				is_playing_custom_nation = yes
 			}
 			have_had_reform = land_christian_sun_reform
-			mission_completed = jap_spread_the_christian_faith
 			has_reform = land_christian_sun_reform
 		}
 	}
@@ -7138,13 +7119,11 @@ strengthen_bakuhan_system_reform = {
 	potential = {
 		OR = { 
 			have_had_reform = strengthen_bakuhan_system_reform
-			mission_completed = jap_strengthen_bakuhan_system
 		}
 	}
 	trigger = {
 		OR = {
 			have_had_reform = strengthen_bakuhan_system_reform
-			mission_completed = jap_strengthen_bakuhan_system
 		}
 	}
 	modifiers = {
@@ -7157,9 +7136,9 @@ system_of_councils_reform = {
 	icon = "hispanic_monarchy"
 	allow_normal_conversion = no
 	potential = {
+		always = no
 		OR = { 
 			has_reform = system_of_councils_reform
-			mission_completed = spa_system_councils
 			AND = { 
 				religion_group = christian 
 				culture_group = iberian 
@@ -7169,7 +7148,6 @@ system_of_councils_reform = {
 	trigger = {
 		OR = { 
 			has_reform = system_of_councils_reform
-			mission_completed = spa_system_councils
 		}
 	}
 	government_abilities = {
@@ -7278,7 +7256,6 @@ gothic_monarchy_reform = {
 	} 
 	nation_designer_trigger = {
 		OR = {
-			primary_culture = goths
 			primary_culture = gothic_ger 
 		}
 	}

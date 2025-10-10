@@ -279,6 +279,45 @@ buy_protectorate_into_annex_action = {
     }
 }
 
+make_trade_league_into_vassal = {
+	category = influence
+	
+	alert_index = 40
+	alert_tooltip = demand_dummy_alert_tooltip
+	require_acceptance = no # Whether the recipient gets an option to decline
+	is_visible = {
+		is_subject = no
+		FROM = {
+			is_subject = no
+			is_in_trade_league_with = ROOT		
+		}
+	}
+	is_allowed = {
+		years_of_income = 0.5
+		is_at_war = no
+		is_subject = no
+		FROM = {
+			is_subject = no
+			is_at_war = no
+			is_in_trade_league_with = ROOT	
+			has_opinion = {
+				who = ROOT
+				value = 190
+			}
+		}
+	}
+	on_accept = {
+		add_years_of_income = -0.5
+		vassalize = FROM
+	}
+	on_decline = 	{
+	}
+
+	ai_will_do = { # this is a trigger
+		always = no
+	}
+}
+
 # Shamely copied from Anbennar
 make_autonomous_vassal = {
 	category = influence
@@ -323,11 +362,41 @@ make_autonomous_vassal = {
 	}
 	on_decline = 	{
 	}
-	
-	ai_acceptance = { # This works similarly to variable_arithmetic_trigger, but does not support triggers generally. Instead, "limit" will be evaluated first and the rest ignored if it isn't passed.
-  	
-	}
 
+	ai_will_do = { # this is a trigger
+		always = no
+	}
+}
+
+make_me_autonomous_vassal = {
+	category = influence
+	
+	alert_index = 40
+	alert_tooltip = demand_dummy_alert_tooltip
+	require_acceptance = no # Whether the recipient gets an option to decline
+	is_visible = {
+		ai = no
+		is_subject = yes
+		ROOT = {
+			is_subject_of_type = vassal
+			is_subject_of = FROM		
+		}
+	}
+	is_allowed = {
+		stability = 1
+		ROOT = {
+				is_subject_of_type = vassal
+				is_subject_of = FROM		
+			}
+	}
+	on_accept = {
+		FROM = {
+			create_subject = {
+				subject_type = autonomous_vassal
+				subject = ROOT 
+			}
+		}
+	}
 	ai_will_do = { # this is a trigger
 		always = no
 	}
@@ -691,10 +760,6 @@ ger_war_on_others = { #for the AI to do stuff
 	on_decline = {
 
 	}
-	
-	ai_acceptance = { # This works similarly to variable_arithmetic_trigger, but does not support triggers generally. Instead, "limit" will be evaluated first and the rest ignored if it isn't passed.
-
-	}
 
 	ai_will_do = { # this is a trigger
 		manpower_percentage = 0.9
@@ -753,10 +818,6 @@ ger_annex_duchy = {
 	}
 	on_decline = {
 	}
-	
-	ai_acceptance = { # This works similarly to variable_arithmetic_trigger, but does not support triggers generally. Instead, "limit" will be evaluated first and the rest ignored if it isn't passed.
-	}
-
 	ai_will_do = { # this is a trigger
 		OR = {
 			always = no
@@ -772,6 +833,7 @@ ger_ask_for_off_war = {
 	alert_tooltip = "Annex Duchy"
 	require_acceptance = no # Whether the recipient gets an option to decline
 	is_visible = {
+		always = no #not needed
 		has_subject_of_type = ger_vassal
 		FROM = {
 			is_subject_of = ROOT
@@ -799,9 +861,6 @@ ger_ask_for_off_war = {
 	}
 	on_decline = {
 	}
-	
-	ai_acceptance = { # This works similarly to variable_arithmetic_trigger, but does not support triggers generally. Instead, "limit" will be evaluated first and the rest ignored if it isn't passed.
-	}
 
 	ai_will_do = { # this is a trigger
 		FROM = {
@@ -823,6 +882,7 @@ ger_ask_for_def_war = {
 	alert_tooltip = "Annex Duchy"
 	require_acceptance = no # Whether the recipient gets an option to decline
 	is_visible = {
+		always = no #not needed
 		has_subject_of_type = ger_vassal
 		FROM = {
 			is_subject_of = ROOT
@@ -849,9 +909,6 @@ ger_ask_for_def_war = {
 	}
 	on_decline = {
 	}
-	
-	ai_acceptance = { # This works similarly to variable_arithmetic_trigger, but does not support triggers generally. Instead, "limit" will be evaluated first and the rest ignored if it isn't passed.
-	}
 
 	ai_will_do = { # this is a trigger
 		FROM = {
@@ -866,5 +923,81 @@ ger_ask_for_def_war = {
 				war_score = -10
 			}
 		}
+	}
+}
+
+sco_make_model_colony = {
+	category = influence
+	
+	alert_index = 55
+	require_acceptance = no # Whether the recipient gets an option to decline
+	is_visible = {
+		has_country_flag = power_colonial_action_flag
+	}
+	is_allowed = {
+		any_subject_country = {
+				is_colonial_nation_of = ROOT
+			}
+		FROM = {
+			is_colonial_nation_of = ROOT
+		}
+	}
+	on_accept = {
+		clr_country_flag = power_colonial_action_flag
+		FROM = {
+			add_country_modifier = {
+					name = sco_model_colony
+					duration = -1
+				}
+		}
+	}
+	on_decline = {
+	}
+
+	ai_will_do = { # this is a trigger
+	}
+}
+
+create_more_outer_councils = {
+	category = influence
+	
+	alert_index = 40
+	alert_tooltip = demand_dummy_alert_tooltip
+	require_acceptance = no # Whether the recipient gets an option to decline
+	is_visible = {
+		tag = SI0
+		FROM = {
+			is_subject = yes
+			NOT = {
+				is_subject_of_type = outside_sie_vassal
+			}
+		}
+		has_country_flag = sie_allow_more_outer_councils
+	}
+	is_allowed = {
+		is_at_war = no
+		FROM = {
+			is_subject = yes
+			num_of_owned_provinces_with = {
+				value = 25
+			}
+			total_development = 100
+		}
+	}
+	on_accept = {
+		create_subject = {
+			subject_type = outside_sie_vassal
+			who = FROM
+		}
+		FROM = {
+			change_government = republic
+			add_government_reform = outside_city_reform
+		}
+	}
+	on_decline = 	{
+	}
+
+	ai_will_do = { # this is a trigger
+		always = no
 	}
 }

@@ -9,6 +9,12 @@ country_decisions = {
 			NOT = {
 				tag = SI0
 			}
+			NOT = {
+				tag = CV0
+			}
+			NOT = {
+				tag = AT1
+			}
 			OR = {
 				ai = no
 				is_playing_custom_nation = no
@@ -17,12 +23,15 @@ country_decisions = {
 				is_free_or_tributary_trigger = yes
 				ai = no
 			}
-			OR = {
+			OR = { #With new lore it's not really culture-based, more on legitimacy and stuff ig
 				culture_group = west_serican
-				culture_group = turkic
-			}
-			NOT = {
-				culture = bolgar
+				tag = CT1
+				tag = CT0
+				tag = DR0
+				tag = SV0
+				tag = AT0
+				tag = GJ4
+				tag = GOL
 			}
 			is_colonial_nation = no
 			OR = {
@@ -34,11 +43,11 @@ country_decisions = {
 			}
 		}
 		provinces_to_highlight = {
-			
 			OR = {
 				region = russia_region 
 				region = ruthenia_region 
 				region = ural_region 
+				region = baltic_region 
 			}
 			OR = {
 				NOT = { owned_by = ROOT }
@@ -46,7 +55,14 @@ country_decisions = {
 			}
 		}
 		allow = {
-			owns = 280
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = not_need_to_own_siescheng
+					}
+				}
+				owns = 280
+			}
 			NOT = { exists = TH1 }
 			is_free_or_tributary_trigger = yes
 			is_nomad = no
@@ -57,6 +73,7 @@ country_decisions = {
 					region = russia_region 
 					region = ruthenia_region 
 					region = ural_region 
+					region = baltic_region 
 				}
 			}
 		}
@@ -66,9 +83,19 @@ country_decisions = {
 			remove_non_electors_emperors_from_empire_effect = yes
 			if = {
 				limit = {
+					NOT = {
+						has_government_mechanic = guo_loyalist_mechanic
+					}
 					government = monarchy
 				}
 				add_government_reform = serican_tsardom
+			}
+			if = {
+				limit = {
+					government = republic
+					was_tag = CT0
+				}
+				add_government_reform = great_wall_republic_reform
 			}
 			if = {
 				limit = { NOT = { government_rank = 3 } }
@@ -79,17 +106,17 @@ country_decisions = {
 					has_custom_ideas = no
 				}
 					country_event = { id = ideagroups.1 } #Swap Ideas
-				}
-				russia_region = {
+			}
+			russia_region = {
 					add_permanent_claim = TH1
 				}
-				ruthenia_region = {
+			ruthenia_region = {
 					add_permanent_claim = TH1
 				}
-				ural_region = {
+			ural_region = {
 					add_permanent_claim = TH1
 				}
-				baltic_region = {
+			baltic_region = {
 					add_permanent_claim = TH1
 				}
 			add_country_modifier = {
@@ -106,5 +133,77 @@ country_decisions = {
 		}
 		ai_importance = 400
 	}
-
+	dragon_empire_name_change = {
+		color = {
+			200 20 20
+		}
+		potential = {
+			tag = TH1
+			ai = no
+		}
+		allow = {
+		}
+		effect = {
+			country_event = {
+				id = guohong.1
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		ai_importance = 400
+	}
+	dragon_empire_mission_activate = {
+		color = {
+			200 20 20
+		}
+		potential = {
+			tag = TH1
+			ai = no
+			NOT = {
+				has_country_flag = no_missions_th1_flag
+			}
+		}
+		allow = {
+		}
+		effect = {
+			custom_tooltip = ROM_TT_1
+			swap_non_generic_missions = yes
+			set_country_flag = no_missions_th1_flag
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		ai_importance = 400
+	}
+	cathay_new_siescheng_decision = {
+		major = yes
+		potential = {
+			tag = CT0
+		}
+		allow = {
+			4255 = {
+				is_capital_of = ROOT
+				development = 20
+				all_neighbor_province = {
+					fort_level = 2
+				}
+			}
+		}
+		effect = {
+			4255 = {
+				center_of_trade = 1
+				add_permanent_province_modifier = {
+					name = cathay_new_capital
+					duration = -1
+				}
+			}
+			custom_tooltip = CATHAY_TT_5
+			set_country_flag = not_need_to_own_siescheng
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		ai_importance = 400
+	}
 }

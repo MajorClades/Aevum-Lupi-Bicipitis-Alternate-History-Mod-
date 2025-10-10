@@ -1,0 +1,505 @@
+namespace = finneya
+
+country_event = { #Start
+	id = finneya.1
+	title = finneya.1.test
+	desc = finneya.1.desc
+	picture = HORDE_ON_HORSEBACK_eventPicture
+	major = yes
+	major_trigger = {
+		OR = {
+			tag = RU0
+			SM0 = {
+				is_rival = ROOT 
+			}
+			is_rival = SM0
+			capital_scope = {
+				OR = {
+					region = carpathia_region
+					region = crimea_region
+					region = anatolia_region
+				}
+			}
+		}
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = finneya.1a
+		ai_chance = {
+			factor = 13
+		}
+		disband_all_ships = yes
+		add_treasury = 500
+		add_manpower = 5
+		DA0 = {
+			country_event = {
+				id = finneya.3
+			}
+		}
+	}
+	option = {
+		name = finneya.1b
+		ai_chance = {
+			factor = 12
+		}
+		add_army_tradition = 25
+		SM0 = {
+			override_country_name = FINN_TAG
+		}
+		RU0 = {
+			country_event = {
+				id = finneya.2
+			}
+		}
+	}
+	option = {
+		name = finneya.1c
+		ai_chance = {
+			factor = 75 #should be rare but not too rare
+		}
+		add_stability_or_adm_power = yes
+	}
+}
+
+country_event = {  #going south by boat
+	id = finneya.2
+	title = finneya.2.test
+	desc = finneya.2.desc
+	picture = HORDE_ON_HORSEBACK_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = finneya.2a
+		ai_chance = {
+			factor = 1
+		}
+		330 = {
+			cede_province = SM0
+			add_core = SM0
+			change_culture = suomy	
+		}
+		erzurum_area = {
+			cede_province = SM0
+			add_core = SM0
+			change_culture = suomy
+		}
+		if = {
+			limit = {
+				ai = no
+			}
+			create_subject = { #not just reg vassal
+				subject_type = autonomous_vassal
+				who = SM0
+			}
+		}
+		else = { #ai need help
+			vassalize = SM0
+		}
+		SM0 = {
+			change_religion = islam
+		}
+	}
+	option = {
+		name = finneya.2b
+		ai_chance = {
+			factor = 100
+			modifier = {
+				factor = 0
+				SM0 = {
+					ai = yes
+				}
+			}
+		}
+		330 = {
+			cede_province = SM0
+			add_core = SM0
+			change_culture = suomy	
+		}
+		erzurum_area = {
+			cede_province = SM0
+			add_core = SM0
+			change_culture = suomy
+		}
+		create_subject = {
+			subject_type = autonomous_vassal
+			who = SM0
+		}
+		SM0 = {
+			change_religion = islam
+		}
+	}
+	after = {
+		hidden_effect = {
+			SM0 = {
+				add_country_modifier = {
+					name = suomy_migration_buff
+					duration = 18250
+				}
+			}
+			2406 = {
+				change_culture = prusijan
+			}
+			2413 = {
+				cede_province = SM1
+				add_core = SM1
+			}
+			2412 = {
+				cede_province = SV0
+				add_core = SV0
+				change_culture = savist
+			}
+			2411 = {
+				cede_province = SV0
+				add_core = SV0
+				change_culture = savist
+			}
+			1974 = {
+				cede_province = ML1
+				add_core = ML1
+				change_culture = greek_new
+			}
+			283 = {
+				cede_province = LT3
+				add_core = LT3
+				change_culture = prusijan
+			}
+			284 = {
+				cede_province = DA7
+				add_core = DA7
+				change_culture = khazar
+			}
+			285 = {
+				cede_province = DA7
+				add_core = DA7	
+				change_culture = khazar
+			}
+			2410 = {
+				cede_province = DA7
+				add_core = DA7	
+			}
+			DA7 = {
+				change_religion = jewish
+			}
+		}
+	}
+}
+
+
+country_event = {  #going west by land
+	id = finneya.3
+	title = finneya.3.test
+	desc = finneya.3.desc
+	picture = HORDE_ON_HORSEBACK_eventPicture
+	major = yes
+	major_trigger = {
+		OR = {
+			tag = SM4
+			tag = SM0
+			tag = DA3
+		}
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = finneya.3a
+		ai_chance = {
+			factor = 80
+		}
+		wallachia_area = {
+			add_devastation = 15
+		}
+		DA3 = {
+			country_event = {
+				id = finneya.4
+			}
+		}
+		custom_tooltip = "Will gain a vassal in Krimina Area."
+		set_country_flag = let_finn_pass
+	}
+	option = {
+		name = finneya.3b
+		ai_chance = {
+			factor = 20
+		}
+		DA0 = {
+			add_historical_rival = SM0
+		}
+		set_country_flag = not_let_finn_pass
+		custom_tooltip = "War will likely break out with Finnavaria."
+		SM0 = {
+			country_event = {
+				id = finneya.5
+			}
+		}
+	}
+	
+}
+
+country_event = {  #creating Finnavaria
+	id = finneya.4
+	title = finneya.4.test
+	desc = finneya.4.desc
+	picture = HORDE_ON_HORSEBACK_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = finneya.4a
+		ai_chance = {
+			factor = 1
+		}
+		SM0 = {
+			add_accepted_culture = avars
+			change_tag = SM4
+			swap_free_idea_group = yes
+			inherit = DA3
+		}
+	}
+	option = {
+		name = finneya.4b
+		ai_chance = {
+			factor = 0
+		}
+		DA3 = {
+			add_accepted_culture = suomy
+			change_tag = SM4
+			swap_free_idea_group = yes
+			inherit = SM0
+		}
+	}
+	after = {
+		hidden_effect = {
+			SM0 = {
+				add_country_modifier = {
+					name = suomy_migration_buff
+					duration = 18250
+				}
+			}
+			2406 = {
+				change_culture = prusijan
+			}
+			2413 = {
+				cede_province = SM1
+				add_core = SM1
+			}
+			2412 = {
+				cede_province = SV0
+				add_core = SV0
+				change_culture = savist
+			}
+			2411 = {
+				cede_province = SV0
+				add_core = SV0
+				change_culture = savist
+			}
+			1974 = {
+				cede_province = ML1
+				add_core = ML1
+				change_culture = greek_new
+			}
+			283 = {
+				cede_province = LT3
+				add_core = LT3
+				change_culture = prusijan
+			}
+			284 = {
+				cede_province = DA7
+				add_core = DA7
+				change_culture = khazar
+			}
+			285 = {
+				cede_province = DA7
+				add_core = DA7	
+				change_culture = khazar
+			}
+			2410 = {
+				cede_province = DA7
+				add_core = DA7	
+			}
+			DA7 = {
+				change_religion = jewish
+			}
+			if = {
+				limit = {
+					DA0 = {
+						has_country_flag = let_finn_pass
+					}
+				}
+				vassalize = DA7
+			}
+			if = {
+				limit = {
+					DA0 = {
+						has_country_flag = not_let_finn_pass
+					}
+				}
+					DA0 = {
+						declare_war_with_cb = {
+							casus_belli = cb_imperial
+							who = SM4
+						}
+					}
+				
+			}
+		}
+	}
+}
+
+country_event = {  #Dacia said no
+	id = finneya.5
+	title = finneya.5.test
+	desc = finneya.5.desc
+	picture = HORDE_ON_HORSEBACK_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = finneya.5a
+		ai_chance = {
+			factor = 10
+		}
+		add_stability_or_adm_power = yes
+		SM0 = {
+			add_historical_rival = DA0
+		}	
+	}
+	option = {
+		name = finneya.5b
+		ai_chance = {
+			factor = 70
+		}
+		add_treasury = -300
+		custom_tooltip = "Dacia will declare war on you."
+		DA3 = {
+			country_event = {
+				id = finneya.4
+			}
+		}
+	}
+	option = {
+		name = finneya.5c
+		ai_chance = {
+			factor = 20
+		}
+		SM0 = {
+			override_country_name = FINN_2_TAG
+		}
+		SX0 = {
+			country_event = {
+				id = finneya.6
+			}
+		}
+	}
+}
+
+country_event = {  #going further north
+	id = finneya.6
+	title = finneya.6.test
+	desc = finneya.6.desc
+	picture = HORDE_ON_HORSEBACK_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = finneya.6a
+		ai_chance = {
+			factor = 1
+		}
+		every_owned_province = {
+			limit = {
+				area = red_ruthenia_area
+			}
+			change_culture = suomy
+			cede_province = SM0
+			add_core = SM0
+		}
+		vassalize = SM0
+		SM0 = {
+			change_religion = catholic
+		}
+	}
+	option = {
+		name = finneya.6b
+		ai_chance = {
+			factor = 100
+			modifier = {
+				factor = 0
+				SM0 = {
+					ai = yes
+				}
+			}
+		}
+		every_owned_province = {
+			limit = {
+				area = red_ruthenia_area
+			}
+			change_culture = suomy
+			cede_province = SM0
+			add_core = SM0
+		}
+		create_subject = {
+			subject_type = autonomous_vassal
+			who = SM0
+		}
+		SM0 = {
+			change_religion = catholic
+		}
+	}
+	after = {
+		hidden_effect = {
+			SM0 = {
+				add_country_modifier = {
+					name = suomy_migration_buff
+					duration = 18250
+				}
+			}
+			2406 = {
+				change_culture = prusijan
+			}
+			2413 = {
+				cede_province = SM1
+				add_core = SM1
+			}
+			2412 = {
+				cede_province = SV0
+				add_core = SV0
+				change_culture = savist
+			}
+			2411 = {
+				cede_province = SV0
+				add_core = SV0
+				change_culture = savist
+			}
+			1974 = {
+				cede_province = ML1
+				add_core = ML1
+				change_culture = greek_new
+			}
+			283 = {
+				cede_province = LT3
+				add_core = LT3
+				change_culture = prusijan
+			}
+			284 = {
+				cede_province = DA7
+				add_core = DA7
+				change_culture = khazar
+			}
+			285 = {
+				cede_province = DA7
+				add_core = DA7	
+				change_culture = khazar
+			}
+			2410 = {
+				cede_province = DA7
+				add_core = DA7	
+			}
+			DA7 = {
+				change_religion = jewish
+			}
+		}
+	}
+}
+

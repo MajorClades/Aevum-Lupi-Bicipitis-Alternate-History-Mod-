@@ -17,7 +17,7 @@ ger_vassal = {
 	can_use_claims = yes
 	forms_trade_companies = no
 	can_concentrate_development = no
-	joins_overlords_wars = no
+	joins_overlords_wars = yes #TEST
 	joins_colonial_wars = no
 	overlord_protects_external = yes
 	counts_for_borders = yes
@@ -213,8 +213,72 @@ outside_sie_vassal = {
 	modifier_subject = {
 		modifier = subject_nation
 	}
+	modifier_subject = {
+		modifier = sie_buff_outwall_1
+		trigger = {
+			overlord = {
+				has_country_flag = sie_buff_outwall_1_flag
+			}
+		}
+	}
+	modifier_subject = {
+		modifier = sie_buff_outwall_2
+		trigger = {
+			overlord = {
+				has_country_flag = sie_buff_outwall_2_flag
+			}
+		}
+	}
+	modifier_subject = {
+		modifier = sie_buff_outwall_3
+		trigger = {
+			overlord = {
+				has_country_flag = sie_buff_outwall_4_flag
+				army_size_percentage = 0.75
+			}
+		}
+	}
+	modifier_subject = {
+		modifier = sie_buff_outwall_4
+		trigger = {
+			overlord = {
+				has_country_flag = sie_buff_outwall_5_flag
+				prestige = 70
+			}
+		}
+	}
 	modifier_overlord = {
 		modifier = vassal_subject
+	}
+	modifier_overlord = {
+		modifier = sie_tribute_to_the_city
+		trigger = {
+			total_development = 100
+		}
+	}
+	modifier_overlord = {
+		modifier = sie_more_dragons_to_the_city
+		trigger = {
+			army_size = 20
+		}
+	}
+	modifier_overlord = {
+		modifier = sie_manpower_to_the_city
+		trigger = {
+			overlord = {
+				has_country_flag = sie_buff_outwall_1_flag
+				stability = 3
+			}
+			is_at_war = no
+		}
+	}
+	modifier_overlord = {
+		modifier = sie_taxes_to_the_city
+		trigger = {
+			overlord = {
+				has_country_flag = sie_buff_outwall_3_flag
+			}
+		}
 	}
 }
 
