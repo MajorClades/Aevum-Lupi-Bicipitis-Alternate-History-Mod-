@@ -85,9 +85,17 @@ country_event = {  #going south by boat
 			add_core = SM0
 			change_culture = suomy
 		}
-		create_subject = { #not just reg vassal
-			subject_type = autonomous_vassal
-			who = SM0
+		if = {
+			limit = {
+				ai = no
+			}
+			create_subject = { #not just reg vassal
+				subject_type = autonomous_vassal
+				who = SM0
+			}
+		}
+		else = { #ai need help
+			vassalize = SM0
 		}
 		SM0 = {
 			change_religion = islam
