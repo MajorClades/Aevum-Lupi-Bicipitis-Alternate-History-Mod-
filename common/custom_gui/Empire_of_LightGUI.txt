@@ -2,9 +2,9 @@ custom_button = { #Must match a scripted guiButtonType in a .gui file
 	name = open_eol_base_button
 	potential = {
 		OR = {
-			tag = LE0
+			tag = event_target:light_empire_shield_target
 			is_subject_of_type_with_overlord = {
-				who = LE0
+				who = event_target:light_empire_shield_target
 				type = light_empire_vassal
 			}
 		}
@@ -33,34 +33,20 @@ custom_button = { #the actual button that does the effect
 		}
 	}
 	trigger = {
-		tag = LE0
+		tag = event_target:light_empire_shield_target
 		prestige = 20
-		if = {
-			limit = {
-				has_institution = renaissance
+		has_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = 30
 			}
-			adm_power = 500
-			dip_power = 500 
-			mil_power = 500
-		}else = {
-			adm_power = 1000
-			dip_power = 1000 
-			mil_power = 1000
-		}
 	}
 	effect = {
-		if = {
-			limit = {
-				has_institution = renaissance
+		add_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = -30
 			}
-			add_adm_power = -500
-			add_dip_power = -500 
-			add_mil_power = -500
-		}else = {
-			add_adm_power = -1000
-			add_dip_power = -1000
-			add_mil_power = -1000
-		}
 		set_global_flag = decree_eol_1_done
 		custom_tooltip = get_cool_modifier_from_light_vassals
 	}
@@ -90,18 +76,11 @@ custom_button = { #Must match a scripted guiButtonType in a .gui file
 	}
 	trigger = {
 		stability = 1
-		if = {
-			limit = {
-				has_institution = renaissance
+		has_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = 30
 			}
-			adm_power = 500
-			dip_power = 500 
-			mil_power = 500
-		}else = {
-			adm_power = 1000
-			dip_power = 1000 
-			mil_power = 1000
-		}
 	}
 	effect = {
 		if = {
@@ -144,20 +123,13 @@ custom_button = { #the actual button that does the effect
 		}
 	}
 	trigger = {
-		tag = LE0
+		tag = event_target:light_empire_shield_target
 		prestige = 40
-		if = {
-			limit = {
-				has_institution = new_world_i
+		has_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = 30
 			}
-			adm_power = 500
-			dip_power = 500 
-			mil_power = 500
-		}else = {
-			adm_power = 1000
-			dip_power = 1000 
-			mil_power = 1000
-		}
 	}
 	effect = {
 		if = {
@@ -200,20 +172,13 @@ custom_button = { #the actual button that does the effect
 		}
 	}
 	trigger = {
-		tag = LE0
+		tag = event_target:light_empire_shield_target
 		stability = 2
-		if = {
-			limit = {
-				has_institution = new_world_i
+		has_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = 30
 			}
-			adm_power = 500
-			dip_power = 500 
-			mil_power = 500
-		}else = {
-			adm_power = 1000
-			dip_power = 1000 
-			mil_power = 1000
-		}
 	}
 	effect = {
 		if = {
@@ -256,20 +221,13 @@ custom_button = { #the actual button that does the effect
 		}
 	}
 	trigger = {
-		tag = LE0
+		tag = event_target:light_empire_shield_target
 		prestige = 60
-		if = {
-			limit = {
-				has_institution = printing_press
+		has_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = 30
 			}
-			adm_power = 500
-			dip_power = 500 
-			mil_power = 500
-		}else = {
-			adm_power = 1000
-			dip_power = 1000 
-			mil_power = 1000
-		}
 	}
 	effect = {
 		if = {
@@ -312,20 +270,13 @@ custom_button = { #the actual button that does the effect
 		}
 	}
 	trigger = {
-		tag = LE0
+		tag = event_target:light_empire_shield_target
 		stability = 3
-		if = {
-			limit = {
-				has_institution = printing_press
+		has_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = 30
 			}
-			adm_power = 500
-			dip_power = 500 
-			mil_power = 500
-		}else = {
-			adm_power = 1000
-			dip_power = 1000 
-			mil_power = 1000
-		}
 	}
 	effect = {
 		if = {
@@ -359,7 +310,7 @@ custom_button = { #a fake button that does nothing, just for the visuals
 	tooltip = make_big_army_for_vassals_and_overlord
 } 
 
-custom_button = { #a fake button that does nothing, just for the visuals
+custom_button = { 
 	name = eol_form_empire_button
 	potential = {
 		has_country_flag = open_eol_menu_flag
