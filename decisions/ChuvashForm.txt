@@ -7,9 +7,24 @@ country_decisions = {
 			was_never_end_game_tag_trigger = yes
 			NOT = { has_country_flag = formed_chuvash_flag }
 			culture = chuvash
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			OR = {
+				is_free_or_tributary_trigger = yes
+				ai = no
+			}
+			is_colonial_nation = no
+			OR = {
+				is_former_colonial_nation = no
+				AND = {
+					is_former_colonial_nation = yes
+					ai = no
+				}
+			}
 		}
         provinces_to_highlight = {
-			
 			OR = {
 				region = russia_region 
 				region = ruthenia_region 
@@ -23,11 +38,7 @@ country_decisions = {
 		}
 		allow = {
 			NOT = {
-				AND = {
-					exists = AT1
-					exists = CV0
-					exists = TH1 
-				}
+				exists = CV0
 			}
 			is_free_or_tributary_trigger = yes
 			is_at_war = no
