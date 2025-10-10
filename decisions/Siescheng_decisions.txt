@@ -2,6 +2,7 @@ country_decisions = {
 
 	sie_saxony_vassal = {
 		major = yes
+		color = { 5 5 100 }
 		potential = {
 			NOT = {
 				has_country_flag = sax_sie_1
@@ -41,6 +42,7 @@ country_decisions = {
 	}
 	sie_saxony_vassal_2 = {
 		major = yes
+		color = { 5 5 100 }
 		potential = {
 			NOT = {
 				has_country_flag = sax_sie_2
@@ -66,6 +68,7 @@ country_decisions = {
 	}
 	sie_saxony_vassal_3 = {
 		major = yes
+		color = { 5 5 100 }
 		potential = {
 			NOT = {
 				has_country_flag = sax_sie_3
@@ -110,6 +113,7 @@ country_decisions = {
 	}
 	sie_saxony_vassal_4 = {
 		major = yes
+		color = { 5 5 100 }
 		potential = {
 			NOT = {
 				has_country_flag = sax_sie_4
@@ -144,6 +148,285 @@ country_decisions = {
 		}
 		ai_will_do = {
 			factor = 0
+		}
+		ai_importance = 400
+	}
+	sie_spread_harmony = {
+		major = yes
+		color = { 5 5 100 }
+		potential = {
+			any_subject_country = {
+				num_of_owned_provinces_with = {
+					value = 1
+					province_is_or_accepts_religion = no
+				}
+			}
+			tag = SI0
+			ai = no
+		}
+		allow = {
+			any_subject_country = {
+				num_of_owned_provinces_with = {
+					value = 1
+					province_is_or_accepts_religion = no
+				}
+			}
+		}
+		effect = {
+			custom_tooltip = SIE_HARMONY
+			if = {
+				limit = {
+					has_harmonized_with = zoroastrian
+				}
+				every_subject_country = {
+					limit = {
+						NOT = {
+							has_harmonized_with = zoroastrian
+						}
+					}
+					add_harmonized_religion = zoroastrian
+				}
+			}
+			if = {
+				limit = {
+					has_harmonized_with = catholic
+				}
+				every_subject_country = {
+					limit = {
+						NOT = {
+							has_harmonized_with = catholic
+						}
+					}
+					add_harmonized_religion = zoroastrian
+				}
+			}
+			if = {
+				limit = {
+					has_harmonized_with = islam
+				}
+				every_subject_country = {
+					limit = {
+						NOT = {
+							has_harmonized_with = islam
+						}
+					}
+					add_harmonized_religion = islam
+				}
+			}
+			if = {
+				limit = {
+					has_harmonized_with = suomi_pagan
+				}
+				every_subject_country = {
+					limit = {
+						NOT = {
+							has_harmonized_with = suomi_pagan
+						}
+					}
+					add_harmonized_religion = suomi_pagan
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	sie_coloring_vassals = {
+		major = yes
+		color = {
+			111 11 211
+		}
+		potential = {
+			tag = SI0
+			num_of_subjects = 1
+			ai = no
+		}
+		allow = {
+			num_of_subjects = 1
+		}
+		effect = {
+			if = {
+				limit = {
+					has_country_flag = sie_remove_color
+				}
+				SI1 = {
+					restore_country_color = yes
+				}
+				SI2 = {
+					restore_country_color = yes
+				}
+				SI3 = {
+					restore_country_color = yes
+				}
+				SI4 = {
+					restore_country_color = yes
+				}
+				SI5 = {
+					restore_country_color = yes
+				}
+				SI6 = {
+					restore_country_color = yes
+				}
+				SI7 = {
+					restore_country_color = yes
+				}
+				SI8 = {
+					restore_country_color = yes
+				}
+				SI9 = {
+					restore_country_color = yes
+				}
+				clr_country_flag = sie_remove_color
+			}else = {
+				set_country_flag = sie_remove_color
+				custom_tooltip = "Give your subjects distint colors."
+				hidden_effect = {
+					SI1 = {
+					change_country_color = {
+						color = {
+							250 250 250
+						}
+					}
+				}
+				SI2 = {
+					change_country_color = {
+						color = {
+							17 100 180
+						}
+					}
+				}
+				SI3 = {
+					change_country_color = {
+						color = {
+							3 3 3
+						}
+					}
+				}
+				SI4 = {
+					change_country_color = {
+						color = {
+							220 56 30
+						}
+					}
+				}
+				SI5 = {
+					change_country_color = {
+						country = SO0
+					}
+				}
+				SI6 = {
+					change_country_color = {
+						country = SE0
+					}
+				}
+				SI7 = {
+					change_country_color = {
+						country = ROM
+					}
+				}
+				SI8 = {
+					change_country_color = {
+						country = RU0
+					}
+				}
+				SI9 = {
+					change_country_color = {
+						country = PER
+					}
+				}
+				}
+			}	
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		ai_importance = 400
+	}
+	sie_get_provinces = {
+		color = { 5 5 100 }
+		potential = {
+			ai = no
+			tag = SI0
+			NOT = {
+				siescheng_provinces_reserved = {
+					type = all
+					owned_by = ROOT
+				}
+			}
+		}
+		allow = {
+			siescheng_provinces_reserved = {
+				type = any
+				owned_by_subject_of = ROOT
+			}
+		}
+		effect = {
+			country_event = { 
+				id = siec.29
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	sie_navy_transports = {
+		color = { 5 5 100 }
+		potential = {
+			ai = no
+			tag = SI0
+			NOT = {
+				num_of_transport = 50
+			}
+		}
+		allow = {
+			NOT = {
+				num_of_transport = 50
+			}
+			years_of_income = 0.15
+			any_subject_country = {
+				sailors = 5000
+				num_of_provinces_owned_or_owned_by_subjects_with = {
+					value = 1
+					has_port = yes
+				}
+			}
+		}
+		effect = {
+			add_years_of_income = -0.15
+			add_sailors = 5000
+			custom_tooltip = "Create 10 Transports in the following province,"
+			random_subject_country = {
+				limit = {
+					num_of_provinces_owned_or_owned_by_subjects_with = {
+						value = 1
+						has_port = yes
+					}
+				}
+				add_sailors = -5000
+				random_owned_province = {
+					limit = {
+						has_port = yes
+					}
+					hidden_effect = {
+						transport = SI0
+						transport = SI0
+						transport = SI0
+						transport = SI0
+						transport = SI0
+
+						transport = SI0
+						transport = SI0
+						transport = SI0
+						transport = SI0
+						transport = SI0
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
 		}
 		ai_importance = 400
 	}

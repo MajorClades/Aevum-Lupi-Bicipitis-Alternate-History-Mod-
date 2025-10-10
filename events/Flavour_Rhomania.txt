@@ -8,6 +8,9 @@ country_event = {
 	
 	trigger = {
 		tag = RU0
+		NOT = {
+			is_year = 1445
+		}
 	}
 	immediate = {
 		hidden_effect = {
@@ -62,7 +65,11 @@ country_event = {
 	picture = BANKRUPTCY_eventPicture
 	
 	trigger = {
+		is_at_war = no
 		tag = RU0
+		AF6 = {
+			exists = no
+		}
 		aleppo_area = {
 			type = all
 			owned_by = RU0
@@ -75,6 +82,18 @@ country_event = {
 			mechanic_type = rhoman_decadence_mechanic
 			power_type = rhoman_decadence
 			value = 50
+		}
+	}
+	major = yes
+	major_trigger = {
+		capital_scope = {
+			OR = {
+				superregion = eastern_europe_superregion
+				superregion = near_east_superregion
+				superregion = persia_superregion
+				region = italy_region
+				region = maghreb_region
+			}
 		}
 	}
 	mean_time_to_happen = {
@@ -115,7 +134,6 @@ country_event = {
 				}
 			}
 			aleppo_area = {
-				infantry = PM0
 				infantry = PM0
 				infantry = PM0
 				infantry = PM0
@@ -175,7 +193,6 @@ country_event = {
 				infantry = PM0
 				infantry = PM0
 				infantry = PM0
-				infantry = PM0
 			}
 			syria_area = {
 				cavalry = PM0
@@ -199,6 +216,9 @@ country_event = {
 		}
 		add_treasury = 2000
 		add_manpower = 20
+		add_ruler_modifier = {
+			name = complete_insanity
+		}
 		RU0 = {
 			random_owned_province = {
 				limit = {
@@ -290,6 +310,9 @@ country_event = {
 	fire_only_once = yes
 	trigger = {
 		tag = RX0
+		NOT = {
+			is_year = 1445
+		}
 	}
 
 	option = {
@@ -586,14 +609,7 @@ country_event = { #fire good
 	desc = rhom.13.desc
 	picture = COUNTRY_COLLAPSE_eventPicture
 	
-	trigger = {
-		tag = RU0
-		mission_completed = rho_more_fire
-		is_at_war = yes
-	}
-	mean_time_to_happen = {
-		months = 120
-	}
+	is_triggered_only = yes
 	fire_only_once = yes
 	option = {
 		name = rhom.13a
@@ -922,6 +938,7 @@ country_event = {
 			factor = 90
 		}
 		add_truce_with = RU0
+		white_peace = RU0
 		add_treasury = -100
 		RU0 = {
 			add_treasury = 100
@@ -988,3 +1005,17 @@ country_event = { #Slavery is banned, idiot!
 		}
 	}
 }
+
+#country_event = { #broken for some reason
+#	id = rhom.1003
+#	title = rhom.1003.test
+#	desc = rhom.1003.desc
+#	picture = MARCHING_PEASANTS_eventPicture
+#	fire_only_once = yes
+#	hidden = yes
+#	is_triggered_only = yes
+#	option = {
+#		name = rhom.1003a
+#		override_country_name = PALMYRA_SYRIA
+#	}
+#}

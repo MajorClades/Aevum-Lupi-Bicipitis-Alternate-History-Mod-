@@ -1,0 +1,143 @@
+# Romance of Lavo by T
+
+
+namespace = flavor_sya
+normal_or_historical_nations = yes
+
+country_event = {
+	id = flavor_sya.1
+	title = flavor_sya.1.t
+	desc = flavor_sya.1.d
+	picture = BUDDHA_eventPicture
+	
+	is_triggered_only = yes # on_monarch_death
+	fire_only_once = yes
+	
+	trigger = {
+	}
+
+	option = {
+		name = flavor_sya.1.a
+		grant_independence = yes
+		vassalize = SU2
+		sukhothai_area = {
+			limit = {
+				owned_by = SU2
+				controlled_by = SU2
+			}
+			cede_province = ROOT
+		}
+		khorat_area = {
+			limit = {
+				owned_by = SU2
+				controlled_by = SU2
+			}
+			cede_province = ROOT
+		}
+		if = {
+			limit = {
+				603 = {
+					owned_by = SU2
+					controlled_by = SU2
+				}
+			}
+			603 = {
+				cede_province = ROOT
+			}
+		}
+		if = {
+			limit = {
+				4830 = {
+					owned_by = SU2
+					controlled_by = SU2
+				}
+			}
+			4830 = {
+				cede_province = ROOT
+			}
+		}
+	}
+	option = { # let player SU2 decide
+		name = flavor_sya.1.b
+		trigger = {
+			SU2 = {
+				ai = no
+			}
+		}
+		SU2 = {
+			country_event = {
+				id = flavor_sya.2
+			}
+		}
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 0
+				KH4 = {
+					ai = yes
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_sya.2
+	title = flavor_sya.1.t
+	desc = flavor_sya.1.d
+	picture = BUDDHA_eventPicture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = flavor_sya.2.a #Nah I'd win
+		vassalize = KH4
+		KH4 = {
+			define_ruler = {
+				dynasty = ROOT
+			}
+		}
+	}
+}
+
+country_event = {
+	id = flavor_sya.3
+	title = flavor_sya.3.t
+	desc = flavor_sya.3.d
+	picture = BUDDHA_eventPicture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = flavor_sya.3.a #
+		hidden_effect = {
+			set_country_flag = sya_maoism_flag
+		}
+		add_country_modifier = {
+			name = maoism_SYA
+			duration = -1
+		}
+	}
+	option = {
+		name = flavor_sya.3.b #
+		hidden_effect = {
+			set_country_flag = sya_stalinism_flag
+		}
+		add_country_modifier = {
+			name = stalinism_SYA
+			duration = -1
+		}
+	}
+	option = {
+		name = flavor_sya.3.c #
+		hidden_effect = {
+			set_country_flag = sya_angkar_flag
+		}
+		add_country_modifier = {
+			name = angkar_SYA
+			duration = -1
+		}
+	}
+}

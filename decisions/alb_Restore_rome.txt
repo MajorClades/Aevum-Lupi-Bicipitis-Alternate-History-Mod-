@@ -3,8 +3,6 @@ country_decisions = {
 	alb_restore_rome = {
 		major = yes
 		potential = {
-			normal_or_historical_nations = yes
-			NOT = { has_country_flag = restored_rome_flag }
 			OR = {
 				owns = 118
 				is_emperor = yes
@@ -13,7 +11,15 @@ country_decisions = {
 				tag = SO0
 				tag = IB0
 				tag = BR0
+				tag = AF0
 			}
+			OR = {
+				religion_group = christian
+				religion_group = pagan
+				religion_group = muslim
+			}
+			normal_or_historical_nations = yes
+			NOT = { has_country_flag = restored_rome_flag }
 			OR = {
 				ai = no
 				is_playing_custom_nation = no
@@ -26,11 +32,6 @@ country_decisions = {
 			NOT = { tag = ROM }
 			NOT = { tag = PAP }
 			NOT = { exists = ROM }
-			OR = {
-				religion_group = christian
-				religion_group = pagan
-				religion_group = muslim
-			}
 		}
 		provinces_to_highlight = {
 			Roman_empire_required_provinces_decision = yes
@@ -47,33 +48,23 @@ country_decisions = {
 			is_at_war = no
 			is_free_or_tributary_trigger = yes
 			is_nomad = no
-			118 = {
-				is_state = yes
-			}
+			owns = 118
 		}
 		effect = {
 			# 118 = {
 			# 	move_capital_effect = yes
 			# }
-			restore_country_name = yes
-			change_tag = ROM
-			on_change_tag_effect = yes
-			custom_tooltip = restore_roman_empire_tt
-			hidden_effect = {
-				every_owned_province = {
-					limit = {
-						is_part_of_hre = yes
-					}
-					set_in_empire = no
-				}
-			}
-			set_government_rank = 3
-			add_prestige_or_monarch_power = { amount = 50 }
 			if = {
 				limit = {
 					has_dlc = "Domination"
 					NOT = {
 						tag = SO0
+					}
+					NOT = {
+						tag = WR0
+					}
+					NOT = {
+						tag = RU0
 					}
 				}
 				if = {
@@ -116,6 +107,20 @@ country_decisions = {
 					}
 				}
 			}
+			restore_country_name = yes
+			change_tag = ROM
+			on_change_tag_effect = yes
+			custom_tooltip = restore_roman_empire_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						is_part_of_hre = yes
+					}
+					set_in_empire = no
+				}
+			}
+			set_government_rank = 3
+			add_prestige_or_monarch_power = { amount = 50 }
 			add_core = 118 # Rome
 			#if = {
 			#	limit = {

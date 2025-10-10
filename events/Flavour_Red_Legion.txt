@@ -37,7 +37,15 @@ country_event = {
 	is_triggered_only = yes
 	immediate = {
 		hidden_effect = {
-			play_sound = DEUS_VULT_CRUSADE
+			if = {
+				limit = {
+					ai = no
+				}
+				play_sound = DEUS_VULT_CRUSADE
+			}
+		}
+		capital_scope = {
+			save_global_event_target_as = SUPEREVENT_CAPITAL_TARGET
 		}
 	}
 	option = {
@@ -53,11 +61,19 @@ country_event = {
 			}
 			add_permanent_claim = AF6
 		}
-		RU0 = {
-			country_event = {
-				id = redleg.7
+		hidden_effect = {
+			every_country = {
+				limit = {
+					has_discovered = event_target:SUPEREVENT_CAPITAL_TARGET
+				}
+				country_event = {
+					id = redleg.7
+				}
 			}
 		}
+	}
+	after = {
+		clear_global_event_target = SUPEREVENT_CAPITAL_TARGET
 	}
 }
 
@@ -123,10 +139,17 @@ country_event = {
 	id = redleg.7
 	title = redleg.7.test
 	desc = redleg.7.desc
-	picture = ANGRY_MOB_eventPicture
-	major = yes
 	is_triggered_only = yes
-
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					ai = no
+				}
+				play_sound = DEUS_VULT_CRUSADE
+			}
+		}
+	}
 	option = {
 		name = redleg.7a
 	}
@@ -278,7 +301,7 @@ country_event = { #lose 4th crusade
 
 	option = {
 		name = redleg.103a
-		change_religion = nothing #it should be nothing dont worry
+		#change_religion = nothing #can comment this out for now Ig since red legion might be getting stuff
 		add_government_reform = mars_legions_reform 
 		hidden_effect = {
 			add_government_reform = mars_legions_reform 

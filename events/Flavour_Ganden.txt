@@ -13,8 +13,8 @@ country_event = {
 		ai_chance = {
 			factor = 30
 		}
-		set_capital = 234
-		234 = {
+		set_capital = 1024
+		1024 = {
 			add_base_tax = 2
 			add_base_production = 2
 			add_base_manpower = 2
@@ -25,8 +25,8 @@ country_event = {
 		ai_chance = {
 			factor = 20
 		}
-		set_capital = 236
-		236 = {
+		set_capital = 1026
+		1026 = {
 			add_base_tax = 2
 			add_base_production = 2
 			add_base_manpower = 2
@@ -68,52 +68,291 @@ country_event = {
 		}
 	}
 }
+
+country_event = {
+	id = gand.2
+	title = gand.2.test
+	desc = gand.2.desc
+	picture = SOLDIERS_FREEZING_eventPicture
+	
+	is_triggered_only = yes
+	option = {
+		name = gand.2a
+		4380 = {
+			change_religion = ROOT
+			add_base_manpower = 2
+			add_province_modifier = {
+				name = ga0_fortify_kogern
+				duration = 10950
+			}
+		}
+	}
+}
+
+country_event = { #divinity of Baldr
+	id = gand.3
+	title = gand.3.test
+	desc = gand.3.desc
+	picture = PROTESTANT_CATHOLIC_DEBATE_eventPicture
+	major = yes
+	major_trigger = {
+		religion = norse_ragnaroked
+	}
+	is_triggered_only = yes
+	option = {
+		name = gand.3a
+		country_event = {
+			id = gand.4
+		}
+		custom_tooltip = every_nyrethir_gets_tt
+		tooltip = {
+			add_country_modifier = {
+				name = ga0_baldr_henotheism
+				duration = -1
+			}
+		}
+		hidden_effect = {
+			every_country = {
+				limit = {
+					religion = norse_ragnaroked
+				}
+				add_country_modifier = {
+					name = ga0_baldr_henotheism
+					duration = -1
+				}
+			}
+		}
+	}
+	option = {
+		name = gand.3b
+		country_event = {
+			id = gand.4
+		}
+		custom_tooltip = every_nyrethir_gets_tt
+		tooltip = {
+			add_country_modifier = {
+				name = ga0_baldr_allfather
+				duration = -1
+			}
+		}
+		hidden_effect = {
+			every_country = {
+				limit = {
+					religion = norse_ragnaroked
+				}
+				add_country_modifier = {
+					name = ga0_baldr_allfather
+					duration = -1
+				}
+			}
+		}
+	}
+}
+
+country_event = { #role of priesthood
+	id = gand.4
+	title = gand.4.test
+	desc = gand.4.desc
+	picture = PROTESTANT_CATHOLIC_DEBATE_eventPicture
+	major = yes
+	major_trigger = {
+		religion = norse_ragnaroked
+	}
+	is_triggered_only = yes
+	option = {
+		name = gand.4a
+		country_event = {
+			id = gand.5
+		}
+		custom_tooltip = every_nyrethir_gets_tt
+		tooltip = {
+			add_country_modifier = {
+				name = ga0_landholding_clergy
+				duration = -1
+			}
+		}
+		hidden_effect = {
+			every_country = {
+				limit = {
+					religion = norse_ragnaroked
+				}
+				add_country_modifier = {
+					name = ga0_landholding_clergy
+					duration = -1
+				}
+			}
+		}
+	}
+	option = {
+		name = gand.4b
+		country_event = {
+			id = gand.5
+		}
+		custom_tooltip = every_nyrethir_gets_tt
+		tooltip = {
+			add_country_modifier = {
+				name = ga0_no_landholding_clergy
+				duration = -1
+			}
+		}
+		hidden_effect = {
+			every_country = {
+				limit = {
+					religion = norse_ragnaroked
+				}
+				add_country_modifier = {
+					name = ga0_no_landholding_clergy
+					duration = -1
+				}
+			}
+		}
+	}
+}
+
+country_event = { #baldr on earth?
+	id = gand.5
+	title = gand.5.test
+	desc = gand.5.desc
+	picture = PROTESTANT_CATHOLIC_DEBATE_eventPicture
+	major = yes
+	major_trigger = {
+		religion = norse_ragnaroked
+	}
+	is_triggered_only = yes
+	option = {
+		name = gand.5a
+		custom_tooltip = ASATRU_ORDERS_CT
+		set_country_flag = asatru_order_unlocked
+		custom_tooltip = every_nyrethir_gets_tt
+		tooltip = {
+			add_country_modifier = {
+				name = ga0_divine_monarchy
+				duration = -1
+			}
+		}
+		hidden_effect = {
+			every_country = {
+				limit = {
+					religion = norse_ragnaroked
+				}
+				add_country_modifier = {
+					name = ga0_divine_monarchy
+					duration = -1
+				}
+			}
+		}
+	}
+	option = {
+		name = gand.5b
+		custom_tooltip = ASATRU_ORDERS_CT
+		set_country_flag = asatru_order_unlocked
+		custom_tooltip = every_nyrethir_gets_tt
+		tooltip = {
+			add_country_modifier = {
+				name = ga0_restricted_monarchy
+				duration = -1
+			}
+		}
+		hidden_effect = {
+			every_country = {
+				limit = {
+					religion = norse_ragnaroked
+				}
+				add_country_modifier = {
+					name = ga0_restricted_monarchy
+					duration = -1
+				}
+			}
+		}
+	}
+	option = {
+		name = gand.5c
+		trigger = {
+			has_reform = bards_of_baldr_reform
+		}
+		highlight = yes
+		country_event = {
+			id = gand.100
+		}
+	}
+}
+
+country_event = { #intro ig
+	id = gand.6
+	title = gand.6.test
+	desc = gand.6.desc
+	picture = PROTESTANT_CATHOLIC_DEBATE_eventPicture
+	major = yes
+	major_trigger = {
+		religion = norse_ragnaroked
+	}
+	is_triggered_only = yes
+	option = {
+		name = gand.6a
+		country_event = {
+			id = gand.3
+		}
+	}
+}
+
+country_event = { #geatland or no
+	id = gand.7
+	title = gand.7.test
+	desc = gand.7.desc
+	picture = ELECTION_REPUBLICAN_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = gand.7a
+		custom_tooltip = ga0_debate_resumes_tt_2
+		add_government_reform = geatland_kingdom_reform
+		set_country_flag = geatland_kingdom_flag
+		override_country_name = GEATLAND
+		define_ruler = {
+			dynasty = "Olafsson"
+		}
+	}
+	option = {
+		name = gand.7b
+		custom_tooltip = ga0_debate_resumes_tt
+		add_government_reform = ganden_union_max_reform
+		set_country_flag = ganden_union_max_flag
+	}
+}
+
 country_event = {
 	id = gand.100
 	title = gand.100.test
 	desc = gand.100.desc
 	picture = ANGRY_MOB_eventPicture
 
-	trigger = {
-		has_government_mechanic = baldrlight_mechanic
-		NOT = {
-			exists = AR1
-		}
-		estate_influence = {
-			estate = estate_church
-			influence = 80
-		}
-		NOT = {
-			estate_loyalty = {
-				estate = estate_church
-				loyalty = 80
-			}
-		}
-	}
-	mean_time_to_happen = {
-		months = 20
-	}
+	is_triggered_only = yes
 	option = {
 		name = gand.100a
 		ai_chance = {
-			factor = 30
+			factor = 90 #it's more fun lol
 		}
 		change_tag = AR1
+		restore_country_name = yes
+		remove_non_electors_emperors_from_empire_effect = yes
+		custom_tooltip = empty_line_tt
+		set_country_flag = formed_hringhorni_flag
 		change_government = theocracy
 		add_government_reform = allfatherrealm_reform
+		custom_tooltip = empty_line_tt
 		custom_tooltip = ASATRU_ORDERS_CT
 		set_country_flag = asatru_order_unlocked
+		custom_tooltip = empty_line_tt
 		if = {
-				limit = {
-					has_custom_ideas = no
-				}
-				country_event = { id = ideagroups.1 } #Swap Ideas
+			limit = {
+				has_custom_ideas = no
 			}
+			country_event = { id = ideagroups.1 } #Swap Ideas
+		}
 	}
 	option = {
 		name = gand.100b
 		ai_chance = {
-			factor = 20
+			factor = 5
 		}
 		add_stability = -1
 		add_estate_loyalty = {
@@ -124,7 +363,7 @@ country_event = {
 	option = {
 		name = gand.100c
 		ai_chance = {
-			factor = 30
+			factor = 5
 		}
 		add_estate_loyalty = {
 			estate = estate_church
@@ -142,4 +381,169 @@ country_event = {
 		}
 	}
 
+}
+
+country_event = {
+	id = gand.101
+	title = gand.101.test
+	desc = gand.101.desc
+	picture = DIPLOMACY_SIGNING_eventPicture
+
+	is_triggered_only = yes
+	
+	option = {
+		name = gand.101a
+		ai_chance = {
+			factor = 40
+			modifier = {
+				factor = 1.5
+				has_opinion = {
+					who = GA0
+					value = 180
+				}
+			}
+			modifier = {
+				factor = 1.5
+				has_opinion = {
+					who = GA0
+					value = 190
+				}
+			}
+			modifier = {
+				factor = 1.5
+				has_opinion = {
+					who = GA0
+					value = 200
+				}
+			}
+		}
+		GA0 = {
+			create_union = ROOT
+		}
+		add_liberty_desire = -20
+	}
+	option = {
+		name = gand.101b
+		ai_chance = {
+			factor = 60
+		}
+		add_prestige = 10
+		GA0 = {
+			add_opinion = {
+				who = ROOT
+				modifier = union_of_roses
+			}
+		}
+	}
+}
+
+country_event = {
+	id = gand.102 # Election
+	title = gand.102.test
+	desc = gand.102.desc
+	picture = ELECTION_REPUBLICAN_eventPicture
+
+    is_triggered_only = yes
+	
+	trigger = {
+		ai = no
+		has_reform = ganden_union_reform
+	}
+	option = { #Kadlen
+		name = gand.102e
+		if = {
+			limit = {
+				dynasty = "Adeler"
+			}
+			change_variable = {
+				which = num_kadlen_elections
+				value = 1
+			}
+		} else_if = {
+			limit = {
+				dynasty = "Ytra"
+			}
+			change_variable = {
+				which = num_gettrike_elections
+				value = 1
+			}
+		} else_if = {
+			limit = {
+				dynasty = "af Løvendal"
+			}
+			change_variable = {
+				which = num_bylandr_elections
+				value = 1
+			}
+		} else_if = {
+			limit = {
+				dynasty = "af Egilsfjord"
+			}
+			change_variable = {
+				which = num_tonin_elections
+				value = 1
+			}
+		}
+		add_legitimacy = 10
+	}
+
+	option = { #Kadlen
+		name = gand.102a
+		define_ruler = {
+			dynasty = "Adeler"
+		}
+		set_capital = 4363
+		change_variable = {
+			which = num_kadlen_elections
+			value = 1
+		}
+		trigger = {
+			owns = 4363
+		}
+	}
+
+	option = { #Gettrike
+		name = gand.102b
+		define_ruler = {
+			dynasty = "Ytra"
+		}
+		set_capital = 249
+		change_variable = {
+			which = num_gettrike_elections
+			value = 1
+		}
+		trigger = {
+			owns = 249
+		}
+	}
+
+	option = { #Bylandr
+		name = gand.102c
+		define_ruler = {
+			dynasty = "af Løvendal"
+		}
+		set_capital = 251
+		change_variable = {
+			which = num_bylandr_elections
+			value = 1
+		}
+		trigger = {
+			owns = 251
+		}
+	}
+
+	option = { #Tonin
+		name = gand.102d
+		define_ruler = {
+			dynasty = "af Egilsfjord"
+		}
+		change_variable = {
+			which = num_tonin_elections
+			value = 1
+		}
+		set_capital = 248
+		trigger = {
+			owns = 248
+		}
+	}
 }

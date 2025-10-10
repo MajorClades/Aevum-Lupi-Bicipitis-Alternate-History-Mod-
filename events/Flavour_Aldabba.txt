@@ -147,3 +147,248 @@ country_event = {
 		
 	}
 }
+country_event = {
+	id = aldab.5
+	title = aldab.5.test
+	desc = aldab.5.desc
+	picture = DISCIPLINED_SOLDIERS_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = aldab.5.a
+		add_country_modifier = {
+			name = alb_converting_iberia
+			duration = 10950
+		}
+		custom_tooltip = at_least_30_provinces_iberia_in_30
+		hidden_effect = {
+			set_country_flag = must_convert_30_provinces_in_30_years
+		}
+	}
+	option = {
+		name = aldab.5.b
+		add_country_modifier = {
+			name = alb_conquering_iberia
+			duration = 10950
+		}
+		custom_tooltip = must_conquer_iberia_30_years
+		hidden_effect = {
+			set_country_flag = must_conquer_iberia_in_30_years
+		}
+	}
+	option = {
+		name = aldab.5.c
+		add_prestige_or_monarch_power = {
+			amount = 15
+		}
+	}
+}
+country_event = {
+	id = aldab.6
+
+	is_triggered_only = yes
+
+	hidden = yes
+
+	immediate = {
+		hidden_effect = {
+			white_peace = emperor
+			every_country = {
+				limit = {
+					NOT = {
+						alliance_with = event_target:ALD_TARGET_OF_ATTACK
+					}
+					alliance_with = emperor
+				}
+				white_peace = ROOT
+			}
+			remove_opinion = {
+				who = ROOT
+				modifier = had_war_with_us
+			}
+		}
+	}
+
+	option = {
+		name = aldab.6
+	}
+}
+country_event = {
+	id = aldab.7
+	title = aldab.7.t
+	desc = aldab.7.d
+	picture = muslimgfx_SIEGE_eventPicture
+
+	is_triggered_only = yes
+	
+	option = {
+		name = aldab.7.a
+		custom_tooltip = every_holy_site_indictian_tt
+		tooltip = {
+			add_province_modifier = {
+				name = alb_source_of_the_faith
+				duration = -1
+			}
+		}
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						province_id = 343
+						province_id = 336
+						province_id = 341
+						province_id = 358
+						province_id = 379
+					}
+				}
+				add_province_modifier = {
+					name = alb_source_of_the_faith
+					duration = -1
+				}
+			}
+		}
+		
+	}
+
+}
+country_event = {
+	id = aldab.8
+	title = aldab.8.t
+	desc = aldab.8.d
+	picture = muslimgfx_CULTURE_eventPicture
+
+	is_triggered_only = yes
+
+	option = {
+		name = aldab.8.a
+		custom_tooltip = sardinian_culture_shift_tt
+		add_accepted_culture = sardinian_african
+		hidden_effect = {
+			every_province = {
+				limit = {
+					OR = {
+						area = sardinia_area
+						area = corsica_sardinia_area
+					}
+				}
+				change_culture = sardinian_african
+			}
+			every_subject_country = {
+				limit = {
+					primary_culture = sardinian
+				}
+				change_primary_culture = sardinian_african
+			}
+		}
+	}
+}
+country_event = {
+	id = aldab.9
+	title = aldab.9.t
+	desc = aldab.9.d
+	picture = muslimgfx_GOOD_WITH_MONARCH_eventPicture
+
+	is_triggered_only = yes
+
+	major = yes
+
+	option = {
+		name = aldab.9.a
+		add_years_of_income = 5
+		change_price = {
+			trade_goods = cloth
+			key = cloth_scheme
+			value = 0.25
+			duration = 18250
+		}
+		add_country_modifier = {
+			name = protectionist_policy_ALD
+			duration = -1
+		}
+		custom_tooltip = every_country_with_cloth_gets_event_AFR
+		hidden_effect = {
+			every_country = {
+				limit = {
+					capital_scope = {
+						continent = europe
+						continent = africa
+					}
+					NOT = { tag = ROOT }
+					any_owned_province = {
+						trade_goods = cloth
+					}
+				}
+				country_event = {
+					id = aldab.10
+					random = 60
+					days = 10
+				}
+			}
+			
+		}
+	}
+}
+country_event = {
+	id = aldab.10
+	title = aldab.10.t
+	desc = aldab.10.d
+	picture = OVEREXTENSION_eventPicture
+
+	is_triggered_only = yes
+
+	major = yes
+	major_trigger = {
+		any_owned_province = {
+			trade_goods = cloth
+		}
+		capital_scope = {
+			continent = europe
+			continent = africa
+		}
+	}
+
+	option = {
+		name = aldab.10.a
+		add_stability = -1
+		add_inflation = 5
+		every_owned_province = {
+			limit = {
+				trade_goods = cloth
+			}
+			add_province_modifier = {
+				name = cloth_crash_ald
+				duration = 18250
+			}
+		}
+	}
+}
+
+country_event = {
+	id = aldab.11
+	title = aldab.11.t
+	desc = aldab.11.d
+	picture = RELIGIOUS_WARS_eventPicture
+
+	is_triggered_only = yes
+
+	option = {
+		name = aldab.11.a
+		custom_tooltip = focus_on_gallia_tt
+		set_country_flag = focus_on_gallia
+		add_country_modifier = {
+			name = focus_on_gallia_1
+			duration = 3650
+		}
+	}
+
+	option = {
+		name = aldab.11.b
+		custom_tooltip = focus_on_rhomania_tt
+		set_country_flag = focus_on_rhomania
+		add_country_modifier = {
+			name = focus_on_rhomania_1
+			duration = 3650
+		}
+	}
+}

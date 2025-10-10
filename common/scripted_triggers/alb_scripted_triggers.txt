@@ -1,3 +1,77 @@
+vinland_treaty_land = {
+	if ={
+		limit = {
+			NOT = {
+				has_global_flag = fj9_more_south_border_flag
+			}
+		}
+		NOT = {
+			area = maryland_area
+		}
+		OR = {
+			region = hudson_bay_region 
+			region = canada_region 
+			region = cascadia_region 
+			region = northeast_america_region  			
+			region = scandinavia_region  
+			region = british_isles_region  
+			area = lake_superior_area
+			area = michigan_area
+			area = wisconsin_area
+		}
+	}
+	else = {
+		NOT = {
+			area = maryland_area
+		}
+		OR = {
+			region = hudson_bay_region 
+			region = canada_region 
+			region = cascadia_region 
+			region = northeast_america_region  			
+			region = scandinavia_region  
+			region = british_isles_region  
+			region = great_lakes_region
+		}
+	}
+}
+
+mexican_treaty_land = {
+	if ={
+		limit = {
+			NOT = {
+				has_global_flag = fj9_more_south_border_flag
+			}
+		}
+		OR = {
+			region = great_plains_region 
+			region = mississippi_region 
+			region = southeast_america_region 
+			region = california_region  
+			region = rio_grande_region  
+			region = mexico_region  
+			region = central_america_region  
+			area = maryland_area
+			area = ohio_country_area
+			area = illinois_country_area
+			area = southern_illinois_area
+			area = miami_river_area
+		}
+	}
+	else = {
+		OR = {
+			region = great_plains_region 
+			region = mississippi_region 
+			region = southeast_america_region 
+			region = california_region  
+			region = rio_grande_region  
+			region = mexico_region  
+			region = central_america_region  
+			area = maryland_area
+		}
+	}
+}
+
 is_serican_trigger = {
     AND = {
 		OR = {
@@ -41,6 +115,16 @@ is_special_colony_tag_trigger = {
 		tag = A37
 		tag = A38
 		tag = A39
+		tag = A40
+		tag = A42
+		tag = A44
+		tag = A45
+		tag = A46
+		tag = A47
+		tag = A48
+		tag = A49
+		tag = A41
+		tag = A43
 	}
 }
 
@@ -111,7 +195,6 @@ is_german_confederated_duchy = {
 		tag = GE4 
 		tag = GE5
 		tag = GE6
-		tag = GE7
 		tag = GE8
 		tag = GE9
 	}
@@ -126,7 +209,6 @@ was_german_confederated_duchy = {
 		was_tag = GE4 
 		was_tag = GE5
 		was_tag = GE6
-		was_tag = GE7
 		was_tag = GE8
 		was_tag = GE9
 	}
@@ -183,5 +265,101 @@ italy_coastal_defense = {
 		province_id = 1934
 		province_id = 4733
 		province_id = 2986
+	}
+}
+
+is_rausundian_native = {
+	OR = {
+		tag = IRO
+		tag = MIK
+		tag = MLS
+		tag = PEQ
+		tag = LEN
+		tag = HUR
+		tag = AGQ
+		tag = OSH
+		tag = WAM
+		tag = STA
+		tag = MAH
+		tag = INN
+		tag = ABE
+		tag = PEN
+		tag = SUS
+		tag = CAO
+		has_country_flag = rausundian_feudalism_flag
+	}
+}
+
+celestial_empire_reform = {
+	OR ={
+		has_reform = celestial_empire
+		#add custom celestial empire stuff here
+	}
+}
+
+num_of_provinces_razed = {
+	check_variable = {
+		which = HordeProvincesRazed
+		value = $amount$
+	}
+}
+
+has_mandala_modifier = {
+	OR = {
+		has_province_modifier = small_size_mandala
+		has_province_modifier = mid_size_mandala
+		has_province_modifier = large_size_mandala
+		has_province_modifier = largest_size_mandala
+	}
+}
+
+ganden_one_city_more_powerful = { #check if specified city has been elected the most
+	custom_trigger_tooltip = {  #$city$ - expected values are either bylandr, gettrike, tonin, kadlen
+		tooltip = ganden_$city$_elected_most_tt
+		AND = {
+			check_variable = {
+				which = num_$city$_elections
+				which = num_bylandr_elections
+			}
+			check_variable = {
+				which = num_$city$_elections
+				which = num_gettrike_elections
+			}
+			check_variable = {
+				which = num_$city$_elections
+				which = num_tonin_elections
+			}
+			check_variable = {
+				which = num_$city$_elections
+				which = num_kadlen_elections
+			}
+			calc_true_if = {
+				amount = 3
+				NOT = {
+					is_variable_equal = {
+						which = num_$city$_elections
+						which = num_bylandr_elections
+					}
+				}
+				NOT = {
+					is_variable_equal = {
+						which = num_$city$_elections
+						which = num_gettrike_elections
+					}
+				}
+				NOT = {
+					is_variable_equal = {
+						which = num_$city$_elections
+						which = num_kadlen_elections
+					}
+				}
+				NOT = {
+					is_variable_equal = {
+						which = num_$city$_elections
+						which = num_tonin_elections
+					}
+				}
+			}
+		}
 	}
 }

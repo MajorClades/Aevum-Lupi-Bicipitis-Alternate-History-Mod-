@@ -53,6 +53,10 @@ country_event = {
 				tag = PD0
 			}
 			modifier = {
+				factor = 0
+				tag = emperor
+			}
+			modifier = {
 				factor = 5
 				has_opinion = {
 					who = PD0
@@ -61,9 +65,6 @@ country_event = {
 			}
 		}
 		custom_tooltip = PAD_1_TT
-		italy_region = {
-			add_core = PD0
-		}
 		PD0 = {
 			country_event = {
 				id = padan.3
@@ -87,13 +88,10 @@ country_event = {
 			}
 			modifier = {
 				factor = 100
-				is_emperor = yes
+				tag = emperor
 			}
 		}
 		custom_tooltip = PAD_2_TT
-		italy_region = {
-			add_core = emperor
-		}
 		PD0 = {
 			country_event = {
 				id = padan.3
@@ -119,13 +117,14 @@ country_event = {
 				tag = PD0
 			}
 		}
-		declare_war_with_cb = {
-			casus_belli = cb_annex
-			who = emperor
-		}
 		set_country_flag = italian_war_pad_emp
 		emperor = {
 			set_country_flag = italian_war_pad_emp
+		}
+		declare_war_with_cb = {
+			casus_belli = cb_hie_padania_war
+			who = emperor
+			war_goal_province = 4733
 		}
 		custom_tooltip = PAD_3_TT
 		hidden_effect = {
@@ -254,6 +253,7 @@ country_event = {
 					region = italy_region
 				}
 				cede_province = PD0
+				add_core = PD0
 			}
 		}
 		dismantle_hre = yes
@@ -282,17 +282,6 @@ country_event = {
 		name = padan.6a
 		inherit = PD0
 		add_imperial_influence = 100
-		every_country = {
-			limit = {
-				has_country_flag = Emp_align
-			}
-			every_owned_province = {
-				limit = {
-					region = italy_region
-				}
-				cede_province = emperor
-			}
-		}
 	}
 }
 

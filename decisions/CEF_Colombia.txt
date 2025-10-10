@@ -1,0 +1,70 @@
+country_decisions = {
+
+	CEF_formalize_the_republic_decision = {
+		major = yes
+		potential = {
+			has_reform = CEF_young_republic_reform
+		}
+		allow = {
+			is_at_war = no
+			is_subject = no
+			stability = 1
+			adm_power = 50
+		}
+		effect = {
+			add_adm_power = -50
+			remove_government_reform = CEF_young_republic_reform
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	CEF_proclaim_gran_colombia_decision = {
+		major = yes
+		potential = {
+			has_country_flag = CEF_decision_proclaim_gran_colombia_enabled_flag
+			NOT = { has_country_flag = CEF_proclaimed_gran_colombia_flag }
+			NOT = { has_global_flag = CEF_gran_colombia_shattered_flag }
+		}
+		allow = {
+			is_at_war = no
+			OR = {
+				tag = COL
+				tag = VNZ	
+			}
+			num_of_owned_provinces_with = {
+				value = 3
+				OR = {
+					province_id = 741	#Bogota
+					province_id = 744	#Demerara
+					province_id = 749	#Panama
+				}
+				is_core = ROOT
+				is_city = yes
+			}
+			NOT = {
+				any_country = {
+					capital_scope = {
+						colonial_region = colonial_karibba
+					}
+					total_development = ROOT
+				}
+			}
+		}
+		effect = {
+			override_country_name = GRAN_COLOMBIA
+			if = {
+				limit = {
+					NOT = { government = republic }
+				}
+				change_government = republic
+			}
+			add_government_reform = CEF_centralizing_republic_reform
+			set_country_flag = CEF_proclaimed_gran_colombia_flag
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}

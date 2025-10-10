@@ -1,0 +1,397 @@
+upgrade_vineyard = {
+	if = {
+		limit = {
+			NOT = {
+				OR = {
+					has_province_modifier = vineyard_lvl_1
+					has_province_modifier = vineyard_lvl_2
+					has_province_modifier = vineyard_lvl_3
+					has_province_modifier = vineyard_lvl_4
+				}
+			}
+		}
+		add_province_modifier = {
+			name = vineyard_lvl_1
+			duration = -1
+			hidden = yes
+		}
+		owner = {
+			add_treasury = -250
+		}
+	}
+	else_if = {
+		limit = {
+			has_province_modifier = vineyard_lvl_1
+		}
+		add_province_modifier = {
+			name = vineyard_lvl_2
+			duration = -1
+			hidden = yes
+		}
+		remove_province_modifier = vineyard_lvl_1
+		owner = {
+			add_treasury = -500
+		}
+	}
+	else_if = {
+		limit = {
+			has_province_modifier = vineyard_lvl_2
+		}
+		add_province_modifier = {
+			name = vineyard_lvl_3
+			duration = -1
+			hidden = yes
+		}
+			remove_province_modifier = vineyard_lvl_2
+		owner = {
+			add_treasury = -750
+		}
+	}
+	else_if = {
+		limit = {
+			has_province_modifier = vineyard_lvl_3
+		}
+		add_province_modifier = {
+			name = vineyard_lvl_4
+			duration = -1
+			hidden = yes
+		}
+			remove_province_modifier = vineyard_lvl_3
+		owner = {
+			add_treasury = -1000
+		}
+	}
+}
+
+upgrade_roman_heirs ={
+	if = {
+		limit = {
+			has_country_modifier = ch4_roman_heirs_0
+		}
+		hidden_effect = {
+			remove_country_modifier = ch4_roman_heirs_0
+			add_country_modifier = {
+				name = ch4_roman_heirs_1
+				duration = -1
+			}
+		}
+		custom_tooltip = upgrade_roman_heir_0to1_tt
+	}
+	else_if = {
+		limit = {
+			has_country_modifier = ch4_roman_heirs_1
+		}
+		hidden_effect = {
+			remove_country_modifier = ch4_roman_heirs_1
+			add_country_modifier = {
+				name = ch4_roman_heirs_2
+				duration = -1
+			}
+		}
+		custom_tooltip = upgrade_roman_heir_1to2_tt
+	}
+	else_if = {
+		limit = {
+			has_country_modifier = ch4_roman_heirs_2
+		}
+		hidden_effect = {
+			remove_country_modifier = ch4_roman_heirs_2
+			add_country_modifier = {
+				name = ch4_roman_heirs_3
+				duration = -1
+			}
+		}
+		custom_tooltip = upgrade_roman_heir_2to3_tt
+	}
+	else_if = {
+		limit = {
+			has_country_modifier = ch4_roman_heirs_3
+		}
+		hidden_effect = {
+			remove_country_modifier = ch4_roman_heirs_3
+			add_country_modifier = {
+				name = ch4_roman_heirs_4
+				duration = -1
+			}
+		}
+		custom_tooltip = upgrade_roman_heir_3to4_tt
+	}
+}
+
+dacia_culture_change_1 = {
+	hidden_effect = {
+		if = {
+			limit = {
+				owner = {OR = {accepted_culture = d_west_slav any_subject_country = {tag = RA1}} }
+			}
+			change_culture = d_west_slav
+		}else = {
+			if = {
+				limit = {
+					owner = {OR = {accepted_culture = avars any_subject_country = {tag = DA3}} }
+				}
+				change_culture = avars
+			}else = {
+				change_culture = dacian
+				owner = {
+					add_dip_power = -50
+				}
+			}
+		}
+	}
+}
+
+dacia_culture_change_2 = {
+	hidden_effect = {
+		if = {
+			limit = {
+				owner = {OR = {accepted_culture = avars any_subject_country = {tag = DA3}} }
+			}
+		}else = {
+			if = {
+				limit = {
+					owner = {OR = {accepted_culture = d_west_slav any_subject_country = {tag = RA1}} }
+				}
+				change_culture = d_west_slav
+			}else = {
+				change_culture = dacian
+				owner = {
+					add_dip_power = -50
+				}
+			}
+		}
+	}
+}
+
+atm_set_up = {
+	set_variable = {
+		which = war_lesson_counter
+		value = 0
+	}
+	set_variable = {
+		which = war_lesson_cost_counter
+		value = 5
+	}
+	set_variable = {
+		which = fire_damage_tt_var
+		value = 0
+	}
+	set_variable = {
+		which = shock_damage_tt_var
+		value = 0
+	}
+	set_variable = {
+		which = morale_damage_tt_var
+		value = 0
+	}
+	set_variable = {
+		which = mov_speed_tt_var
+		value = 0
+	}
+	set_variable = {
+		which = fire_defense_tt_var
+		value = 0
+	}
+	set_variable = {
+		which = shock_defense_tt_var
+		value = 0
+	}
+	set_variable = {
+		which = morale_defense_tt_var
+		value = 0
+	}
+}
+
+atm_set_down = {
+	remove_country_modifier = fire_damage_lv_1
+	remove_country_modifier = fire_damage_lv_2
+	remove_country_modifier = fire_damage_lv_3
+	remove_country_modifier = fire_damage_lv_4
+	remove_country_modifier = fire_damage_lv_5
+	remove_country_modifier = shock_damage_lv_1
+	remove_country_modifier = shock_damage_lv_2
+	remove_country_modifier = shock_damage_lv_3
+	remove_country_modifier = shock_damage_lv_4
+	remove_country_modifier = shock_damage_lv_5
+	remove_country_modifier = morale_damage_lv_1
+	remove_country_modifier = morale_damage_lv_2
+	remove_country_modifier = morale_damage_lv_3
+	remove_country_modifier = morale_damage_lv_4
+	remove_country_modifier = morale_damage_lv_5
+	remove_country_modifier = mov_speed_lv_1
+	remove_country_modifier = mov_speed_lv_2
+	remove_country_modifier = mov_speed_lv_3
+	remove_country_modifier = mov_speed_lv_4
+	remove_country_modifier = mov_speed_lv_5
+	remove_country_modifier = fire_defense_lv_1
+	remove_country_modifier = fire_defense_lv_2
+	remove_country_modifier = fire_defense_lv_3
+	remove_country_modifier = fire_defense_lv_4
+	remove_country_modifier = fire_defense_lv_5
+	remove_country_modifier = shock_defense_lv_1
+	remove_country_modifier = shock_defense_lv_2
+	remove_country_modifier = shock_defense_lv_3
+	remove_country_modifier = shock_defense_lv_4
+	remove_country_modifier = shock_defense_lv_5
+	remove_country_modifier = morale_defense_lv_1
+	remove_country_modifier = morale_defense_lv_2
+	remove_country_modifier = morale_defense_lv_3
+	remove_country_modifier = morale_defense_lv_4
+	remove_country_modifier = morale_defense_lv_5
+}
+
+give_ducats_per_dev = {
+	if = {
+		limit = {
+			development = $amount$
+		}
+		ROOT = {
+			add_treasury = -$amount$
+		}
+	}
+}
+
+brittannia_knight_of_the_round_table = {
+	if = {
+			limit = {
+				has_idea_group = aristocracy_ideas
+			}
+			if = {
+				limit = {
+					full_idea_group = aristocracy_ideas
+				}
+				custom_tooltip = YES_MARK
+			}else = {
+				custom_tooltip = NOT_MARK
+			}
+			tooltip = {
+				add_country_modifier = {
+					name = knights_of_aristocracy_ideas
+					duration = -1
+				}
+			}
+		}
+	if = {
+			limit = {
+				has_idea_group = offensive_ideas
+			}
+			if = {
+				limit = {
+					full_idea_group = offensive_ideas
+				}
+				custom_tooltip = YES_MARK
+			}else = {
+				custom_tooltip = NOT_MARK
+			}
+			tooltip = {
+				add_country_modifier = {
+					name = knights_of_offensive_ideas
+					duration = -1
+				}
+			}
+		}
+	if = {
+			limit = {
+				has_idea_group = defensive_ideas
+			}
+			if = {
+				limit = {
+					full_idea_group = defensive_ideas
+				}
+				custom_tooltip = YES_MARK
+			}else = {
+				custom_tooltip = NOT_MARK
+			}
+			tooltip = {
+				add_country_modifier = {
+					name = knights_of_defensive_ideas
+					duration = -1
+				}
+			}
+		}
+	if = {
+			limit = {
+				has_idea_group = quality_ideas
+			}
+			if = {
+				limit = {
+					full_idea_group = quality_ideas
+				}
+				custom_tooltip = YES_MARK
+			}else = {
+				custom_tooltip = NOT_MARK
+			}
+			tooltip = {
+				add_country_modifier = {
+					name = knights_of_quality_ideas
+					duration = -1
+				}
+			}
+		}
+	if = {
+			limit = {
+				has_idea_group = quantity_ideas
+			}
+			if = {
+				limit = {
+					full_idea_group = quantity_ideas
+				}
+				custom_tooltip = YES_MARK
+			}else = {
+				custom_tooltip = NOT_MARK
+			}
+			tooltip = {
+				add_country_modifier = {
+					name = knights_of_quantity_ideas
+					duration = -1
+				}
+			}
+		}
+	hidden_effect = {
+	if = {
+			limit = {
+				full_idea_group = aristocracy_ideas
+			}
+			add_country_modifier = {
+					name = knights_of_aristocracy_ideas
+					duration = -1
+				}
+		}
+	if = {
+			limit = {
+				full_idea_group = offensive_ideas
+			}
+			add_country_modifier = {
+					name = knights_of_offensive_ideas
+					duration = -1
+				}
+		}
+	if = {
+			limit = {
+				full_idea_group = defensive_ideas
+			}
+			add_country_modifier = {
+					name = knights_of_defensive_ideas
+					duration = -1
+				}
+		}
+	if = {
+			limit = {
+				full_idea_group = quality_ideas
+			}
+			add_country_modifier = {
+					name = knights_of_quality_ideas
+					duration = -1
+				}
+		}
+	if = {
+			limit = {
+				full_idea_group = quantity_ideas
+			}
+			add_country_modifier = {
+					name = knights_of_quantity_ideas
+					duration = -1
+				}
+		}
+	}
+}

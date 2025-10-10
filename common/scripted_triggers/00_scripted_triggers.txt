@@ -484,9 +484,10 @@ can_have_center_of_reformation_trigger = { #Province Scope
 	}
 	OR = {
 		religion = wycliffian
+		religion = rashidi
+		religion = pontifex
 		religion = catholic
 	}
-	NOT = { province_id = 118 }
 	is_in_capital_area = yes
 	is_reformation_center = no
 	is_island = no
@@ -608,6 +609,8 @@ was_never_end_game_tag_trigger = {	#Country Scope
 				NOT = { was_tag = SL1 }
 				NOT = { was_tag = IT9 }
 				NOT = { was_tag = AR1 }
+				NOT = { was_tag = AT1 }
+				NOT = { was_tag = CV0 }
 				NOT = { tag = FRA }
 				NOT = { tag = MUG }
 				NOT = { tag = PER }
@@ -658,6 +661,8 @@ was_never_end_game_tag_trigger = {	#Country Scope
 				NOT = { tag = SL1 }
 				NOT = { tag = IT9 }
 				NOT = { tag = AR1 }
+				NOT = { tag = AT1 }
+				NOT = { tag = CV0 }
 			}
 		}
 	}
@@ -1168,18 +1173,18 @@ num_of_age_rewards_taken = {
 	}
 }
 
-has_orthodox_religious_icon_trigger = {
-	custom_trigger_tooltip = {
-		tooltip = BYZ_has_religious_icon
-		OR = {
-			current_icon = icon_michael
-			current_icon = icon_eleusa
-			current_icon = icon_pancreator
-			current_icon = icon_nicholas
-			current_icon = icon_climacus
-		}
-	}
-}
+#has_orthodox_religious_icon_trigger = {
+#	custom_trigger_tooltip = {
+#		tooltip = BYZ_has_religious_icon
+#		OR = {
+#			current_icon = icon_michael
+#			current_icon = icon_eleusa
+#			current_icon = icon_pancreator
+#			current_icon = icon_nicholas
+#			current_icon = icon_climacus
+#		}
+#	}
+#}
 
 
 unlocked_holy_order = {
@@ -2179,7 +2184,7 @@ has_religion_of_increased_opinion_for_scope = {
 		AND = { religion = inti $who$ = { has_country_flag = has_increased_inti_opinion } }
 		AND = { religion = nahuatl $who$ = { has_country_flag = has_increased_nahuatl_opinion } }
 		AND = { religion = mesoamerican_religion $who$ = { has_country_flag = has_increased_mesoamerican_religion_opinion } }
-		AND = { religion = norse_pagan_reformed $who$ = { has_country_flag = has_increased_norse_pagan_reformed_opinion } }
+		AND = { religion = norse_ragnaroked $who$ = { has_country_flag = has_increased_norse_ragnaroked_opinion } }
 		AND = { religion = tengri_pagan_reformed $who$ = { has_country_flag = has_increased_tengri_pagan_reformed_opinion } }
 		AND = { religion = dreamtime $who$ = { has_country_flag = has_increased_dreamtime_opinion } }
 		AND = { religion = jewish $who$ = { has_country_flag = has_increased_jewish_opinion } }
@@ -2212,7 +2217,7 @@ reverse_has_religion_of_increased_opinion_for_scope = {
 		AND = { $who$ = { religion = inti } has_country_flag = has_increased_inti_opinion }
 		AND = { $who$ = { religion = nahuatl } has_country_flag = has_increased_nahuatl_opinion }
 		AND = { $who$ = { religion = mesoamerican_religion } has_country_flag = has_increased_mesoamerican_religion_opinion }
-		AND = { $who$ = { religion = norse_pagan_reformed } has_country_flag = has_increased_norse_pagan_reformed_opinion }
+		AND = { $who$ = { religion = norse_ragnaroked } has_country_flag = has_increased_norse_ragnaroked_opinion }
 		AND = { $who$ = { religion = tengri_pagan_reformed } has_country_flag = has_increased_tengri_pagan_reformed_opinion }
 		AND = { $who$ = { religion = dreamtime } has_country_flag = has_increased_dreamtime_opinion }
 		AND = { $who$ = { religion = jewish } has_country_flag = has_increased_jewish_opinion }
@@ -2533,6 +2538,11 @@ province_is_buddhist_or_accepts_buddhism = {
 		custom_trigger_tooltip = {
 			tooltip = province_is_buddhist_or_accepts_buddhism_dt
 			religion = shinto
+			has_owner_religion = yes
+		}
+		custom_trigger_tooltip = {
+			tooltip = province_is_buddhist_or_accepts_buddhism_guptaka
+			religion = turan_buddha
 			has_owner_religion = yes
 		}
 		custom_trigger_tooltip = {
@@ -3067,10 +3077,10 @@ has_points_for_livonian_trade_monarchy = {
 	}
 }
 has_points_for_livonian_constitutional_monarchy = {
-	is_variable_equal = {
-		which = liv_adm
-		value = 3
-	}
+	#is_variable_equal = {
+	#	which = liv_adm
+	#	value = 3
+	#}
 }
 has_points_for_livonian_theocratic_monarchy = {
 	check_variable = {
@@ -3170,7 +3180,7 @@ has_no_religion_specific_government_available = {
 	NOT = { religion_group = eastern }
 	NOT = { religion = tengri_pagan_reformed }
 	NOT = { religion = shamanism }
-	NOT = { religion = norse_pagan_reformed }
+	NOT = { religion = norse_ragnaroked }
 }
 
 #Province scope

@@ -92,7 +92,19 @@ Molise_1_slot = {
 		provinces_to_highlight = { area = lazio_area } 
 
 		trigger = {
-			papal_influence = 80
+			if = {
+				limit = {
+					ai = yes
+				}
+				is_year = 1600 #Stops molise from obliterating any chance of pontifexians if they get good papal relations in 1450
+			}
+			OR = {
+				papal_influence = 80
+				AND = {
+					stability = 3
+					adm_power = 200
+				}
+			}
 			OR = {
 				AND = {
 					alliance_with = PAP
@@ -111,44 +123,27 @@ Molise_1_slot = {
 		}
 
 		effect = {
-			tooltip = {
-				if = {
-					limit = { alliance_with = PAP } 
-					custom_tooltip = MOL_TT_3a
-				}
-				else = { custom_tooltip = MOL_TT_3b } 
-				add_papal_influence = -80
-				vassalize = PAP
-				PAP = { add_liberty_desire = -25 } 
-				lazio_area = { add_permanent_claim = ROOT } 
-				custom_tooltip = MOL_TT_3c
-				add_papal_influence = -50
-				set_capital = 118
-				118 = {
-					add_permanent_province_modifier = {
-						name = "mol_imperial_seat"
-						duration = -1
-					}
-				}
-			}
-			hidden_effect = {
-				if = {
-					limit = { alliance_with = PAP } 
+			simple_dynamic_effect = {
+				first_custom_tooltip = MOL_TT_3a
+				first_limit = "alliance_with = PAP"
+				first_effect = "
 					add_papal_influence = -80
 					vassalize = PAP
 					PAP = { add_liberty_desire = -25 } 
 					lazio_area = { add_permanent_claim = ROOT } 
-				}
-				else = {
+				"
+				second_custom_tooltip = MOL_TT_3c
+				second_limit = "NOT = {alliance_with = PAP }"
+				second_effect = "
 					add_papal_influence = -50
 					set_capital = 118
 					118 = {
 						add_permanent_province_modifier = {
-							name = "mol_imperial_seat"
+							name = mol_imperial_seat
 							duration = -1
 						}
 					}
-				}
+				"
 			}
 		}
 	}
@@ -376,6 +371,7 @@ Molise_2_slot = {
 						reverse_add_casus_belli = {
 							type = cb_vassalize_mission
 							target = ROOT
+							months = 360
 						}
 					}
 				}
@@ -397,6 +393,7 @@ Molise_2_slot = {
 							reverse_add_casus_belli = {
 								type = cb_vassalize_mission
 								target = ROOT
+								months = 360
 							}
 						}
 					}
@@ -853,6 +850,7 @@ Molise_3_slot = {
 				add_casus_belli = {
 					type = cb_hie_rhoman_war
 					target = RU0
+					months = 360
 				}
 			}
 			else = {
@@ -945,6 +943,7 @@ Molise_4_slot = {
 			add_casus_belli = {
 				type = cb_vassalize_mission
 				target = NAP
+				months = 360
 			}
 			custom_tooltip = empty_line_tt
 			naples_area = { add_permanent_claim = ROOT } 

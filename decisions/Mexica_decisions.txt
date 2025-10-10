@@ -23,6 +23,7 @@ country_decisions = {
 				OR= {
 					full_idea_group = exploration_ideas
 					tag = FJ0
+					tag = FJ9
 				}
 				has_opinion = {
 					who = ROOT
@@ -103,25 +104,104 @@ country_decisions = {
 	vinland_mexica_alliance = {
 		major = yes
 		potential = {
-			tag = MX0
-			NOT = {has_country_flag = mexican_vinland_treaty}
-			exists = FJ0
+			OR = {
+				AND = {
+					tag = MX0
+					NOT = {has_global_flag = mexican_vinland_treaty}
+					OR = {
+						exists = FJ0
+						exists = FJ9
+					}
+				}
+				AND = {
+					OR = {
+						tag = FJ0
+						tag = FJ9
+					}
+					exists = MX0
+					NOT = {has_global_flag = mexican_vinland_treaty}
+				}
+			}
 		}
 		provinces_to_highlight = {
-			is_capital_of = FJ0
+			OR = {
+				is_capital_of = FJ0
+				is_capital_of = FJ9
+				is_capital_of = MX0
+			}
 		}
 		allow = {
-			alliance_with = FJ0
-			trust = {
-				who = FJ0
-				value = 90
+			if = {
+				limit = {
+					exists = FJ9
+					tag = MX0
+				}
+				alliance_with = FJ9
+				FJ9 = {
+					trust = {
+						who = ROOT
+						value = 90
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					tag = MX0
+					NOT ={
+						exists = FJ9
+					}
+				}
+				alliance_with = FJ0
+				FJ0 = {
+					trust = {
+						who = ROOT
+						value = 90
+					}
+				}
+			}
+			else = {
+				alliance_with = MX0
+				MX0 = {
+					trust = {
+						who = ROOT
+						value = 90
+					}
+				}
 			}
 		}
 		effect = {
 			custom_tooltip = MV_TREATY
-			FJ0 = {
-				country_event = {
-					id = mexic.15
+			custom_tooltip = empty_line_tt
+			custom_tooltip = MV_MEET_YEARLY_BORDERS_TT
+			if ={
+				limit = {
+					exists = FJ9
+					tag = MX0
+				}
+				FJ9 = {
+					country_event = {
+						id = mexic.15
+					}
+				}
+			}
+			else_if = {
+				limit = { 
+					tag = MX0
+					NOT ={
+						exists = FJ9
+					}
+				}
+				FJ0 = {
+					country_event = {
+						id = mexic.15
+					}
+				}
+			}
+			else = {
+				MX0 = {
+					country_event = {
+						id = mexic.15
+					}
 				}
 			}
 		}
@@ -132,29 +212,21 @@ country_decisions = {
 	treaty_land_mexica = {
 		major = yes
 		potential = {
-			has_country_flag = mexican_vinland_treaty
+			has_global_flag = mexican_vinland_treaty
+			OR = {
+				tag = MX0
+				tag = FJ9
+				tag = FJ0
+			}
 		}
 		provinces_to_highlight = {
-			OR = {
-				region = great_plains_region 
-				region = mississippi_region 
-				region = southeast_america_region 
-				region = california_region  
-				region = rio_grande_region  
-				region = mexico_region  
-				region = central_america_region  
-				area = maryland_area
-				area = ohio_country_area
-				area = illinois_country_area
-				area = southern_illinois_area
-				area = miami_river_area
-			}
+			mexican_treaty_land = yes
 		}
 		allow = {
 			always = no
 		}
 		effect = {
-
+			custom_tooltip = MV_MEET_YEARLY_BORDERS_TT
 		}
 		ai_will_do = {
 			factor = 100
@@ -163,29 +235,21 @@ country_decisions = {
 	treaty_land_vinland = {
 		major = yes
 		potential = {
-			has_country_flag = mexican_vinland_treaty
+			has_global_flag = mexican_vinland_treaty
+			OR = {
+				tag = MX0
+				tag = FJ9
+				tag = FJ0
+			}
 		}
 		provinces_to_highlight = {
-			NOT = {
-				area = maryland_area
-			}
-			OR = {
-				region = hudson_bay_region 
-				region = canada_region 
-				region = cascadia_region 
-				region = northeast_america_region  			
-				region = scandinavia_region  
-				region = british_isles_region  
-				area = lake_superior_area
-				area = michigan_area
-				area = wisconsin_area
-			}
+			vinland_treaty_land = yes
 		}
 		allow = {
 			always = no
 		}
 		effect = {
-
+			custom_tooltip = MV_MEET_YEARLY_BORDERS_TT
 		}
 		ai_will_do = {
 			factor = 100
@@ -237,7 +301,7 @@ country_decisions = {
 				tag = FJ0
 				tag = FJ9
 			}
-			has_country_flag = mexican_vinland_treaty
+			has_global_flag = mexican_vinland_treaty
 			if = {
 				limit = {
 					ai = yes
@@ -254,7 +318,7 @@ country_decisions = {
 			}
 			custom_trigger_tooltip = {
 				tooltip = ALLIANCE_MEX_VIN
-				had_country_flag = {
+				had_global_flag = {
 					flag = mexican_vinland_treaty
 					days = 54750
 				}
@@ -280,7 +344,7 @@ country_decisions = {
 				limit = {
 					OR = {
 						tag = FJ0
-						tag = FJ9
+					tag = FJ9
 					}
 				}
 				inherit = MX0
@@ -319,6 +383,84 @@ country_decisions = {
 		}
 		ai_will_do = {
 			factor = 100
+		}
+	}
+	end_treaty_mex_vin = {
+		major = yes
+		potential = {
+			has_global_flag = mexican_vinland_treaty
+			OR = {
+				tag = MX0
+				tag = FJ9
+				tag = FJ0
+			}
+		}
+		allow = {
+			if = {
+				limit = {
+					tag = MX0
+				}
+				NOT = { alliance_with = FJ0 }
+				NOT = { alliance_with = FJ9 }
+			}
+			else = {
+				NOT = {
+					alliance_with = MX0
+				}
+			}
+		}
+		effect = {
+			custom_tooltip = NO_MORE_TREATY_TT
+			clr_global_flag = mexican_vinland_treaty
+		}
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				factor = 100
+				OR = {
+					NOT = {
+						MX0 = {
+							total_development = 100
+						}
+					}
+					AND = {
+						NOT = {
+							exists = FJ0
+						}
+						NOT = {
+							FJ9 = {
+								total_development = 100
+							}
+						}
+					}
+					AND = {
+						NOT = {
+							exists = FJ9
+						}
+						NOT = {
+							FJ0 = {
+								total_development = 100
+							}
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 100
+				OR = {
+					NOT = {
+						exists = MX0
+					}
+					AND = {
+						NOT = {
+							exists = FJ0
+						}
+						NOT = {
+							exists = FJ9
+						}
+					}
+				}
+			}
 		}
 	}
 }

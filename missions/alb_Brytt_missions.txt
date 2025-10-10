@@ -1,0 +1,476 @@
+Brytt_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = WL0 } 
+
+	bry_restore_bryttani = {
+		icon = defeat_the_english
+		position = 2
+		required_missions = { bry_true_bryttons } 
+		provinces_to_highlight = {
+			area = wales_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			wales_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				is_core = ROOT
+			}
+		}
+
+		effect = {
+			tooltip = { wales_area = { change_culture = brytonic }  } 
+			custom_tooltip = brittia_romans_5_unrest_tt
+			hidden_effect = {
+				wales_area = {
+					limit = { culture = briton } 
+					change_culture = brytonic
+					add_named_unrest = {
+						name = "Roman Nationalism"
+						value = 5
+					}
+				}
+			}
+			wessex_area = { add_permanent_claim = ROOT } 
+			west_midlands_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	bry_gaelic_west_brydd = {
+		icon = mission_court_education
+		position = 4
+		required_missions = { bry_break_the_roman } 
+		provinces_to_highlight = {
+			OR = {
+				area = wessex_area
+				area = west_midlands_area
+			}
+			NOT = { is_core = ROOT } 
+		}
+
+		trigger = {
+			wessex_area = {
+				type = all
+				is_core = ROOT
+			}
+			west_midlands_area = {
+				type = all
+				is_core = ROOT
+			}
+		}
+
+		effect = {
+			wessex_area = { change_culture = brytonic } 
+			west_midlands_area = { change_culture = brytonic } 
+		}
+	}
+
+	bry_switcheroo = {
+		icon = mission_rb_renovate_oxbridge
+		position = 6
+		required_missions = { bry_war_on_scotia } 
+		provinces_to_highlight = { province_id = 4120 } 
+
+		trigger = {
+			years_of_income = 1
+			accepted_culture = scotian
+			4120 = {
+				owned_by = ROOT
+				development = 20
+			}
+		}
+
+		effect = {
+			4120 = {
+				add_great_project = { type = sco_palace_of_the_high_king } 
+				add_unrest = -10
+			}
+		}
+	}
+}
+Brytt_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = WL0 } 
+
+	bry_true_bryttons = {
+		icon = mission_rb_conquer_the_highlands
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			OR = {
+				BR0 = { is_at_war = yes } 
+				NOT = { exists = BR0 } 
+			}
+		}
+
+		effect = {
+			wales_area = { add_permanent_claim = ROOT } 
+			scottish_marches_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	bry_break_the_roman = {
+		icon = mission_rb_unite_the_clans
+		position = 3
+		required_missions = {
+			bry_restore_bryttani
+			bry_sneak_the_swed
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = wessex_area
+				area = west_midlands_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			wessex_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			west_midlands_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			capital_scope = { add_base_manpower = 3 } 
+			add_country_modifier = {
+				name = "brydd_the_first"
+				duration = 10950
+			}
+			home_counties_area = { add_permanent_claim = ROOT } 
+			east_anglia_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	bry_war_on_scotia = {
+		icon = mission_rb_conquer_ireland
+		position = 5
+		required_missions = { bry_full_bryddania } 
+		provinces_to_highlight = {
+			province_group = ireland_provinces
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			ireland_provinces = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_yearly_manpower = 2
+			ireland_provinces = { add_nationalism = -10 } 
+			hidden_effect = { complete_mission = sco_wales_and_sweden complete_mission = bry_war_on_scotia complete_mission = pic_scotian_lord } 
+		}
+	}
+}
+Brytt_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = WL0 } 
+
+	bry_sneak_the_swed = {
+		icon = mission_rb_into_england
+		position = 2
+		required_missions = { bry_true_bryttons } 
+		provinces_to_highlight = {
+			area = scottish_marches_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			scottish_marches_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				is_core = ROOT
+			}
+		}
+
+		effect = {
+			scottish_marches_area = { change_culture = brytonic } 
+			east_midlands_area = { add_permanent_claim = ROOT } 
+			yorkshire_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	bry_full_bryddania = {
+		icon = mission_rb_angevin_kingdom
+		position = 4
+		required_missions = {
+			bry_break_the_roman
+			bry_break_the_swed
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = home_counties_area
+				area = east_anglia_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			home_counties_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			east_anglia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			override_country_name = "BRYDAIN"
+			add_country_modifier = {
+				name = "free_byrdd"
+				duration = 10950
+			}
+			british_isles_region = { add_permanent_claim = ROOT } 
+		}
+	}
+}
+Brytt_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = WL0 } 
+
+	brydd_returned_pride = {
+		icon = mission_rb_rein_in_the_highland_clans
+		position = 2
+		required_missions = { bry_humble_defeat } 
+		provinces_to_highlight = { culture = brytonic } 
+
+		trigger = {
+			development_in_provinces = {
+				value = 100
+				culture = brytonic
+			}
+			religious_unity = 0.9
+		}
+
+		effect = {
+			add_prestige_or_monarch_power = { amount = 25 } 
+			add_years_of_income = 1
+			overlord = {
+				custom_tooltip = SCOT_OVERLORD
+				add_years_of_income = 0.5
+			}
+		}
+	}
+
+	bry_break_the_swed = {
+		icon = mission_rb_war_of_the_roses
+		position = 3
+		required_missions = { bry_sneak_the_swed } 
+		provinces_to_highlight = {
+			OR = {
+				area = east_midlands_area
+				area = yorkshire_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			east_midlands_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			yorkshire_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			capital_scope = {
+				add_base_tax = 2
+				add_base_production = 1
+			}
+			add_country_modifier = {
+				name = "brydd_another_invader"
+				duration = 10950
+			}
+			home_counties_area = { add_permanent_claim = ROOT } 
+			east_anglia_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	bry_home_of_the_gaelic = {
+		icon = the_london_steelyard
+		position = 5
+		required_missions = { bry_full_bryddania } 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 241
+				province_id = 236
+				province_id = 234
+			}
+		}
+
+		trigger = {
+			owns_or_subject_of = 241
+			owns_or_subject_of = 236
+			owns_or_subject_of = 234
+		}
+
+		effect = { country_event = { id = scotii.11 }  } 
+	}
+
+	bry_lords_of_britannia = {
+		icon = mission_english_reformation
+		position = 6
+		required_missions = { bry_home_of_the_gaelic } 
+		provinces_to_highlight = {
+			region = british_isles_region
+			NOT = { province_group = ireland_provinces } 
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			is_free_or_tributary_trigger = yes
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 30
+				region = british_isles_region
+				NOT = { province_group = ireland_provinces } 
+			}
+		}
+
+		effect = {
+			add_stability_or_adm_power = yes
+			add_country_modifier = {
+				name = "brydd_restore_brythonia"
+				duration = -1
+			}
+			hidden_effect = { complete_mission = sco_lords_of_britannia complete_mission = pic_full_albion complete_mission = bry_lords_of_britannia} 
+		}
+	}
+}
+Brytt_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = WL0 } 
+
+	bry_humble_defeat = {
+		icon = mission_rb_control_state_religion
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			OR = {
+				army_size = 15
+				overlord = { army_size = 25 } 
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "brydd_gaelic_forces"
+				duration = 10950
+			}
+		}
+	}
+
+	brydd_fortress = {
+		icon = mission_rb_increase_our_reach
+		position = 2
+		required_missions = { bry_humble_defeat } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_manpower_building_trigger = no
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				has_manpower_building_trigger = yes
+			}
+			242 = { development = 20 } 
+		}
+
+		effect = {
+			add_yearly_manpower = 1
+			overlord = { custom_tooltip = SCOT_OVERLORD add_yearly_manpower = 0.5 } 
+			custom_tooltip = empty_line_tt
+			242 = { add_or_upgrade_manpower_building = yes } 
+			custom_tooltip = empty_line_tt
+			custom_tooltip = brydd_10_dev_in_manpower_provinces_tt
+			for = {
+				amount = 10
+				effect = "
+					random_owned_province = {
+						limit = {
+							has_manpower_building_trigger = yes
+						}
+						add_random_development = 1
+					}
+				"
+			}
+		}
+	}
+
+	brydd_sword_and_sorcery = {
+		icon = influence_the_church
+		position = 4
+		required_missions = { brydd_fortress } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			OR = {
+				papal_influence = 50
+				is_papal_controller = yes
+			}
+			prestige = 50
+			num_of_completed_idea_groups_mil = { amount = 1 } 
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "brydd_war_priests"
+				duration = -1
+			}
+		}
+	}
+
+	bry_city_of_the_gaelic = {
+		icon = mission_guilds_of_barcelona
+		position = 6
+		required_missions = { bry_home_of_the_gaelic } 
+		provinces_to_highlight = { is_capital_of = ROOT } 
+
+		trigger = {
+			capital_scope = {
+				development = 20
+				num_of_buildings_in_province = 3
+			}
+		}
+
+		effect = {
+			add_adm_power = 100
+			add_dip_power = 100
+			add_mil_power = 100
+			capital_scope = {
+				add_or_upgrade_tax_building = yes
+				add_or_upgrade_manpower_building = yes
+			}
+		}
+	}
+}

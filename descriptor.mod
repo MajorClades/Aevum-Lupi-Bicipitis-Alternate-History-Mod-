@@ -11,5 +11,8 @@ tags={
 	"Trade"
 	"Gameplay"
 }
+replace_path="common/bookmarks"
+replace_path="gfx/loadingscreens"
 name="Aevum Lupi Bicipitis"
-supported_version="1.37.*"
+supported_version="v1.37.5.0"
+remote_file_id="3288644137"

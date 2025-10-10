@@ -1,10 +1,11 @@
 german_cofederation_monarchy = {
-	icon = "prussian_monarchy"
-	allow_normal_conversion = yes
+	icon = "prussian_monarchy" #REPLACE_ME
+	allow_normal_conversion = no
 	potential = {
 		OR = {
 			tag = GR0
 			tag = PU0
+			tag = GE7
 		}
 		NOT = {
 			has_reform = great_germany_reform
@@ -18,37 +19,46 @@ german_cofederation_monarchy = {
 			have_had_reform = german_cofederation_monarchy
 		}
 	}
+	lock_level_when_selected = yes
 	valid_for_nation_designer = yes
 	nation_designer_cost = 100
 	government_abilities = {
 		germ_conf_mechanic
 	}
 	modifiers = {
-		vassal_income = -0.20
-		num_accepted_cultures = 2
-		max_absolutism = 10
-		monarch_military_power = 1
-		nobles_loyalty_modifier = 0.1
+		num_accepted_cultures = 1
+		max_absolutism = -10
+		nobles_influence_modifier = 0.1
 	}
-	custom_attributes = {
-		allow_vassal_war = yes
-		allow_vassal_alliance = yes
-	}
+
 }
 
 kongrevy_reform = {
-	icon = "prussian_monarchy"
+	icon = "prussian_monarchy" #REPLACE_ME
 	allow_normal_conversion = yes
 	potential = {
 		OR = {
+			culture_group = central_germanic
+			culture_group = saxonic
+			culture = eruli
+			culture = melitan
+			culture = ostrian
 			hidden_trigger = {
 				has_reform = kongrevy_reform
 			}
 			have_had_reform = kongrevy_reform
 		}
+		NOT = {
+			has_reform = german_cofederation_monarchy
+		}
 	}
 	trigger = {
 		OR = {
+			culture_group = central_germanic
+			culture_group = saxonic
+			culture = eruli
+			culture = melitan
+			culture = ostrian
 			hidden_trigger = {
 				has_reform = kongrevy_reform
 			}
@@ -65,18 +75,51 @@ kongrevy_reform = {
 
 }
 
+bavarian_councils_reform = {
+	icon = "prussian_monarchy" #REPLACE_ME
+	allow_normal_conversion = yes
+	potential = {
+		OR = {
+			tag = GR1
+			was_tag = GR1
+		}
+	}
+	trigger = {}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 100
+	modifiers = {
+		governing_capacity = -50
+		global_trade_goods_size_modifier = 0.05
+		development_cost_in_primary_culture = -0.1
+	}
+	government_abilities = {
+		bav_councils
+	}
+	conditional = {
+		allow = {
+			OR = {
+				has_dlc = "Common Sense"
+				has_dlc = "Domination"
+			}
+		}
+		has_parliament = yes
+	}
+}
+
+
 great_germany_reform = {
-	icon = "prussian_monarchy"
+	icon = "prussian_monarchy" #REPLACE_ME
 	allow_normal_conversion = yes
 	potential = {
 		tag = GR0
 	}
 	trigger = {
-		OR = {
-			hidden_trigger = {
+		hidden_trigger = {
+			OR = {
 				has_reform = great_germany_reform
-			}
-			have_had_reform = great_germany_reform
+				tag = GR0
+				have_had_reform = great_germany_reform
+			}	
 		}
 	}
 	valid_for_nation_designer = yes
@@ -84,16 +127,14 @@ great_germany_reform = {
 	modifiers = {
 		num_accepted_cultures = 2
 		max_absolutism = 10
-		monarch_military_power = 1
 		nobles_loyalty_modifier = 0.1
 		manpower_in_culture_group_provinces = 0.15
-		manpower_in_accepted_culture_provinces = 0.2
 	}
 
 }
 
 german_efficient_governing = {
-	icon = "prussian_monarchy"
+	icon = "prussian_monarchy" #REPLACE_ME
 	allow_normal_conversion = yes
 	potential = {
 		has_unlocked_government_reform = { government_reform = german_efficient_governing }
@@ -113,7 +154,7 @@ german_efficient_governing = {
 }
 
 pruthian_professional_army = {
-	icon = "prussian_monarchy"
+	icon = "prussian_monarchy" #REPLACE_ME
 	allow_normal_conversion = yes
 	potential = {
 		has_unlocked_government_reform = { government_reform = pruthian_professional_army }

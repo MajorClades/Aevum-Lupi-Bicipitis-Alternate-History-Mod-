@@ -1,0 +1,269 @@
+country_decisions = {
+
+	go_the_north_way = {
+		major = yes
+		color = {255 255 255}
+		potential = {
+			NOT = {
+				has_country_flag = climb_route_vin
+			}
+			has_country_flag = choose_the_route_vin
+		}
+		provinces_to_highlight = { province_group = vinland_upper_route }
+		allow = {
+			years_of_income = 0.3
+			years_of_manpower = 0.5
+			hidden_trigger = {
+				has_country_flag = north_route_vin
+			}
+		}
+		effect = {
+			add_yearly_manpower = -0.5
+			add_years_of_income = -0.3
+			vinland_upper_route = {
+				colonize_or_core_fj9 = yes
+			}
+			clr_country_flag = choose_the_route_vin
+			clr_country_flag = climb_route_vin
+			clr_country_flag = north_route_vin
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	go_the_climb_way = {
+		major = yes
+		color = {255 255 255}
+		potential = {
+			NOT = {
+				has_country_flag = north_route_vin
+			}
+			has_country_flag = choose_the_route_vin
+		}
+		provinces_to_highlight = { province_group = vinland_higher_route }
+		allow = {
+			years_of_income = 0.3
+			years_of_manpower = 0.5
+			hidden_trigger = {
+				has_country_flag = climb_route_vin
+			}
+		}
+		effect = {
+			add_yearly_manpower = -0.5
+			add_years_of_income = -0.3
+			vinland_higher_route = {
+				colonize_or_core_fj9 = yes
+			}
+			clr_country_flag = choose_the_route_vin
+			clr_country_flag = climb_route_vin
+			clr_country_flag = north_route_vin
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	vin_sell_that_useless_port = {
+		major = yes	
+		potential = {
+			religion = norse_ragnaroked
+			1034 = {
+				owned_by = ROOT
+			}
+		}
+		provinces_to_highlight = { province_id = 1034 }
+		allow = {
+			any_ally = {
+				capital_scope = {
+					superregion = far_east_superregion
+				}
+			}
+			1034 = {
+				owned_by = ROOT
+				NOT = {
+					has_province_modifier = vin_eastern_trade_start
+				}
+			}
+		}
+		effect = {
+			add_treasury = 500
+			random_ally = {
+				limit = {
+					capital_scope = {
+						superregion = far_east_superregion
+					}
+				} 
+				1034 = {
+					cede_province = PREV
+					add_core = PREV
+					remove_core = FJ9
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		ai_importance = 400
+	}
+	vin_change_goods_1 = {
+		color = {
+			155 107 107
+		}
+		potential = {
+			has_country_flag = vinland_trade_goods_flag
+			NOT = {
+				AND = {
+					968 = {
+						trade_goods = cloth
+					}
+					965 = {
+						trade_goods = cloth
+					}
+					957 = {
+						trade_goods = cloth
+					}
+				}
+			}
+		}
+		provinces_to_highlight = {	OR = { province_id = 968 province_id = 965 province_id = 957  }}
+		allow = {
+			968 = {
+				owned_by = ROOT
+				has_trade_building_trigger = yes
+				has_production_building_trigger = yes
+			}
+			965 = {
+				owned_by = ROOT
+				has_trade_building_trigger = yes
+				has_production_building_trigger = yes
+			}
+			957 = {
+				owned_by = ROOT
+				has_trade_building_trigger = yes
+				has_production_building_trigger = yes
+			}
+		}
+		effect = {
+			968 = {
+				change_trade_goods = cloth
+			}
+			965 = {
+				change_trade_goods = paper
+			}
+			957 = {
+				change_trade_goods = cloth
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	vin_change_goods_2 = {
+		color = {
+			155 107 107
+		}
+		potential = {
+			has_country_flag = vinland_trade_goods_flag
+			NOT = {
+				AND = {
+					970 = {
+						trade_goods = wine
+					}
+					2013 = {
+						trade_goods = wine
+					}
+					971 = {
+						trade_goods = wine
+					}
+				}
+				
+			}
+		}
+		provinces_to_highlight = {	OR = { province_id = 970 province_id = 2013 province_id = 971  }}
+		allow = {
+			970 = {
+				owned_by = ROOT
+				has_trade_building_trigger = yes
+				has_production_building_trigger = yes
+			}
+			2013 = {
+				owned_by = ROOT
+				has_trade_building_trigger = yes
+				has_production_building_trigger = yes
+			}
+			971 = {
+				owned_by = ROOT
+				has_trade_building_trigger = yes
+				has_production_building_trigger = yes
+			}
+		}
+		effect = {
+			970 = {
+				change_trade_goods = wine
+			}
+			2013 = {
+				change_trade_goods = dyes
+			}
+			971 = {
+				change_trade_goods = wine
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	vin_change_goods_3 = {
+		color = {
+			155 107 107
+		}
+		potential = {
+			has_country_flag = vinland_trade_goods_flag
+			NOT = {
+				AND = {
+					4912 = {
+						trade_goods = cloth
+					}
+					987 = {
+						trade_goods = cloth
+					}
+					988 = {
+						trade_goods = cloth
+					}
+				}
+			}
+		}
+		provinces_to_highlight = {	OR = { province_id = 4912 province_id = 987  province_id = 988 }}
+		allow = {
+			4912 = {
+				owned_by = ROOT
+				has_trade_building_trigger = yes
+				has_production_building_trigger = yes
+			}
+			988 = {
+				owned_by = ROOT
+				has_trade_building_trigger = yes
+				has_production_building_trigger = yes
+			}
+			4912 = {
+				owned_by = ROOT
+				has_trade_building_trigger = yes
+				has_production_building_trigger = yes
+			}
+		}
+		effect = {
+			4892 = {
+				change_trade_goods = cloth
+			}
+			4912 = {
+				change_trade_goods = cloth
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+}

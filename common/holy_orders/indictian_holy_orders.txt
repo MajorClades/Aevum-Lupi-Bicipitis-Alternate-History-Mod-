@@ -7,10 +7,30 @@ ind_1_order = {
     cost = 50
     cost_type = adm_power
     per_province_effect = {
-        add_base_tax = 1
+        if = {
+            limit = {
+                FROM = {
+                    has_country_flag = alb_crusade_successful_flag
+                }
+            }
+            add_base_tax = 2
+        }
+        else = {
+            add_base_tax = 1
+        }
     }
     per_province_abandon_effect = {
-        add_base_tax = -1
+        if = {
+            limit = {
+               FROM = {
+                    has_country_flag = alb_crusade_successful_flag
+                }
+            }
+            add_base_tax = -2
+        }
+        else = {
+            add_base_tax = -1
+        }
     }
     modifier = {
         local_missionary_strength = 0.015
@@ -73,10 +93,30 @@ ind_3_order = {
     cost = 50
     cost_type = mil_power
     per_province_effect = {
-        add_base_manpower = 1
+        if = {
+            limit = {
+                FROM = {
+                    has_country_flag = alb_campaign_successful_flag
+                }
+            }
+            add_base_manpower = 2
+        }
+        else = {
+            add_base_manpower = 1
+        }
     }
     per_province_abandon_effect = {
-        add_base_manpower = -1
+        if = {
+            limit = {
+                 FROM = {
+                    has_country_flag = alb_campaign_successful_flag
+                }
+            }
+            add_base_manpower = -2
+        }
+        else = {
+            add_base_manpower = -1
+        }
     }
     modifier = {
         local_unrest = -1

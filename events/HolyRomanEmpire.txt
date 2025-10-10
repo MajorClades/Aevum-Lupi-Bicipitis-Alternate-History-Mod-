@@ -94,8 +94,13 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA9075"
+		trigger = {
+			NOT = {
+				tag = PA0
+			}
+		}
 		change_tag = IT9
-		restore_country_name_effect = yes
+		restore_country_name = yes
 		add_country_modifier = {
 			name = "rome_reborn"
 			duration = -1
@@ -140,6 +145,46 @@ country_event = {
 			id = roman_emp.1
 		}
 	}
+	option = {
+		name = "EVTOPTA9075"
+		trigger = {
+			tag = PA0
+		}
+		if = {
+			limit = {
+				mission_completed = pap_italian_question
+			}
+			override_country_name = GOD_EMPIRE
+		}
+		add_country_modifier = {
+			name = "rome_reborn"
+			duration = -1
+		}
+		hidden_effect = {
+			every_province = {
+				limit = {
+					is_part_of_hre = yes
+					OR = {
+						owned_by = ROOT
+						owner = { is_neighbor_of = ROOT }
+					}
+					NOT = { is_core = ROOT }
+				}
+				add_core = PA0
+			}
+			every_country = {
+				limit = {
+					is_part_of_hre = yes
+					is_emperor = no
+					num_of_cities = 1
+				}
+				country_event = { id = 9076 }
+			}
+		}
+		dismantle_hre = yes
+		set_government_rank = 3
+		add_adm_power = 250
+	}
 }
 
 # ...and for member states
@@ -153,8 +198,17 @@ country_event = {
 	
 	option = {
 		name = "EVTOPTA9076"
-		IT9 = {
-			inherit = ROOT
+		if = {
+			limit = {
+				IT9 = { exists = yes}
+			}
+			IT9 = {
+				inherit = ROOT
+			}
+		}else = {
+			PA0 = {
+				inherit = ROOT
+			}
 		}
 	}
 }

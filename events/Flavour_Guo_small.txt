@@ -1,0 +1,690 @@
+namespace = guo_smal
+
+country_event = {
+	id = guo_smal.1
+	title = guo_smal.1.test
+	desc = guo_smal.1.desc
+	picture = GREAT_FIRE_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = SI0
+		has_government_mechanic = sie_council_mechanic
+		NOT = {
+			has_government_power = {
+					mechanic_type = sie_council_mechanic
+					power_type = sie_single_power
+					value = 5
+			}
+		}
+		NOT = {
+			is_year = 1450	
+		}
+		NOT = {
+			exists = GU9
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	option = {
+		name = guo_smal.1a
+		change_tag = GU9
+		hidden_effect = {
+			change_government = monarchy
+			set_country_flag = no_exams_for_now
+		}
+		add_government_reform = shells_of_dragon_reform
+		swap_free_idea_group = yes
+		swap_non_generic_missions = yes
+		country_event = {
+			id = guo_smal.2
+		}
+	}
+	option = {
+		name = guo_smal.1b
+		change_mil = 2
+		add_manpower = -3
+		add_government_power = {
+					mechanic_type = sie_council_mechanic
+					power_type = sie_single_power
+					value = 5
+			}
+	}
+
+}
+
+country_event = {
+	id = guo_smal.2
+	title = guo_smal.2.test
+	desc = guo_smal.2.desc
+	picture = EVENT_PICTURE_guo_hong
+	is_triggered_only = yes
+	option = {
+		name = guo_smal.2a
+		define_ruler = {
+			name = "Zhu"
+			dynasty = "Guo"
+			adm = 4
+			dip = 5
+			mil = 6
+			age = 34
+		}
+		add_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = 35
+			}
+		hidden_effect = {
+			add_ruler_personality = guo_hong_child_personality
+			add_ruler_personality = well_connected_personality
+			add_ruler_personality = greedy_personality
+			define_consort = {
+				adm = 2
+				dip = 5
+				mil = 5
+				age = 30
+			}
+			define_heir = {
+				adm = 3
+				dip = 5
+				mil = 5
+				age = 6
+			}
+		}
+	}
+	option = {
+		name = guo_smal.2b
+		define_ruler = {
+			name = "Song"
+			dynasty = "Guo"
+			adm = 4
+			dip = 4
+			mil = 4
+			age = 16
+		}
+		add_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = 55
+			}
+		hidden_effect = {
+			add_ruler_personality = guo_hong_child_personality
+			add_ruler_personality = well_connected_personality
+			add_ruler_personality = midas_touched_personality
+		}
+	}
+	option = {
+		name = guo_smal.2c
+		define_ruler = {
+			name = "Hong"
+			dynasty = "Guo"
+			adm = 6
+			dip = 6
+			mil = 6
+			age = 47
+		}
+		add_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = 15
+			}
+		hidden_effect = {
+			add_ruler_personality = guo_hong_child_personality
+			add_ruler_personality = inspiring_leader_personality
+			add_ruler_personality = midas_touched_personality
+			define_heir = {
+				adm = 6
+				dip = 3
+				mil = 5
+				age = 20
+			}
+		}
+	}
+	after = {
+		hidden_effect = {
+			if = {
+				limit = {ai = yes}
+				capital_scope = {
+					build_to_forcelimit = {
+						infantry = 1
+					}
+				}
+			}
+			clr_country_flag = no_exams_for_now
+			country_event = {
+				id = guo_smal.3
+			}
+		}
+	}
+}
+
+
+country_event = {
+	id = guo_smal.3
+	title = guo_smal.3.test
+	desc = guo_smal.3.desc
+	picture = RELIGIOUS_CONVERSION_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = guo_smal.3a
+		add_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = 10
+			}
+	}
+	option = {
+		name = guo_smal.3b
+		add_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = -5
+			}
+		change_religion = turan_buddha
+
+	}
+	option = {
+		name = guo_smal.3c
+		add_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = -5
+			}
+		change_religion = alevilik
+		
+	}
+	option = {
+		name = guo_smal.3d
+		add_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = -5
+			}
+		change_religion = catholic
+		
+	}
+	option = {
+		name = guo_smal.3e
+		add_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = -15
+			}
+		change_religion = islam
+		
+	}
+}
+
+
+country_event = {
+	id = guo_smal.4
+	title = guo_smal.4.test
+	desc = guo_smal.4.desc
+	picture = COSSACK_ESTATE_RAIDERS_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = guo_smal.4a
+		add_country_modifier = {
+			name = guo_normal_legacy
+			duration = 7300
+		}
+	}
+	option = {
+		name = guo_smal.4b
+		add_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = 5
+			}
+		add_country_modifier = {
+			name = guo_insane_legacy
+			duration = 7300
+		}
+		country_event = {
+			id = guo_smal.5
+			days = 7300
+		}
+		custom_tooltip = GUO_TT_1
+	}
+}
+
+country_event = {
+	id = guo_smal.5
+	title = guo_smal.5.test
+	desc = guo_smal.5.desc
+	picture = COSSACK_ESTATE_RAIDERS_eventPicture
+	is_triggered_only = yes	
+
+	option = {
+		name = guo_smal.5a
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 30
+				OR = {
+					region = russia_region
+					region = ruthenia_region
+					region = poland_region
+					region = baltic_region
+				}
+			}
+		}
+		add_country_modifier = {
+			name = guo_insane_legacy_w
+			duration = -1
+		}
+	}
+	option = {
+		name = guo_smal.5b
+		trigger = {
+			NOT = {
+				num_of_owned_provinces_with = {
+					value = 30
+					OR = {
+						region = russia_region
+						region = ruthenia_region
+						region = poland_region
+						region = baltic_region
+					}
+				}
+			}
+		}
+		add_stability = -1
+		add_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = -15
+			}
+	}
+}
+
+country_event = {
+	id = guo_smal.6
+	title = guo_smal.6.test
+	desc = guo_smal.6.desc
+	picture = CARAVAN_EVENT_Picture
+	is_triggered_only = yes	
+
+	option = {
+		name = guo_smal.6a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				religion = GU9
+				factor = 1.5
+			}
+			modifier = {
+				has_opinion = {
+					who = GU9
+					value = 100
+				}
+				factor = 1.5
+			}
+			modifier = {
+				has_opinion = {
+					who = GU9
+					value = 170
+				}
+				factor = 1.5
+			}
+		}
+		GU9 = {
+			vassalize = ROOT
+		}
+	}
+	option = {
+		name = guo_smal.6b
+		ai_chance = {
+			factor = 2
+			modifier = {
+				GU9 = {
+					has_won_war_against = {
+						who = ROOT
+					}
+				}
+				factor = 1.5
+			}
+			modifier = {
+				NOT = {
+					has_opinion = {
+						who = GU9
+						value = -50
+					}
+				}
+				factor = 2
+			}
+		}
+		capital_scope = {
+			spawn_rebels = {
+				size = 2
+				type = noble_rebels
+				friend = GU9
+			}
+		}
+	}
+}
+
+country_event = { #heir Guo
+	id = guo_smal.7
+	title = guo_smal.7.test
+	desc = guo_smal.7.desc
+	picture = IMPERIAL_EXAMINATION_eventPicture
+	is_triggered_only = yes	
+
+	option = {
+		name = guo_smal.7a
+		if = {
+			limit = {
+				has_ruler_flag = guo_first_exam_passed_flag
+			}
+			add_adm_power = 100
+			add_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = 5
+			}
+		}
+		if = {
+			limit = {
+				has_ruler_flag = guo_second_exam_passed_flag
+			}
+			add_dip_power = 100
+			add_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = 5
+			}
+		}
+		if = {
+			limit = {
+				has_ruler_flag = guo_third_exam_passed_flag
+			}
+			add_mil_power = 100
+			add_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = 5
+			}
+		}
+	}
+	option = {
+		name = guo_smal.7b
+		if = {
+			limit = {
+				has_ruler_flag = guo_first_exam_passed_flag
+			}
+			add_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = 15
+			}
+		}
+		if = {
+			limit = {
+				has_ruler_flag = guo_second_exam_passed_flag
+			}
+			add_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = 15
+			}
+		}
+		if = {
+			limit = {
+				has_ruler_flag = guo_third_exam_passed_flag
+			}
+			add_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = 15
+			}
+		}
+	}
+	option = {
+		name = guo_smal.7c
+		add_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = 15
+			}
+	}
+}
+
+country_event = {
+	id = guo_smal.8
+	title = guo_smal.8.test
+	desc = guo_smal.8.desc
+	picture = IMPERIAL_EXAMINATION_eventPicture
+
+	trigger = {
+		has_government_mechanic = guo_loyalist_mechanic
+		heir_age = 10
+		NOT = {
+			has_heir_flag = guo_first_exam_flag
+		}
+	}
+	mean_time_to_happen = {
+		months = 12
+	}
+	option = {
+		name = guo_smal.8a
+		trigger = {
+			NOT = { heir_adm = 6 }
+		}
+		add_adm_power = -50
+		random_list = {
+			50 = {
+				change_heir_adm = 1
+				set_heir_flag = guo_first_exam_passed_flag
+			}
+			50 = {
+				add_adm_power = -50
+			}
+		}
+	}
+	option = {
+		name = guo_smal.8b
+		trigger = {
+			NOT = { heir_adm = 6 }
+		}
+		add_adm_power = -100
+		random_list = {
+			75 = {
+				change_heir_adm = 1
+				set_heir_flag = guo_first_exam_passed_flag
+			}
+			25 = {
+			}
+		}
+	}
+	option = {
+		name = guo_smal.8c
+		trigger = {
+			NOT = { heir_adm = 2 }
+		}
+		add_adm_power = -50
+		change_heir_adm = 1
+	}
+	option = {
+		name = guo_smal.8d
+		trigger = {
+			heir_adm = 6
+		}
+		set_heir_flag = guo_first_exam_passed_flag
+		add_adm_power = 50
+	}
+	after = {
+		hidden_effect = {
+			set_heir_flag = guo_first_exam_flag
+		}
+	}
+}
+
+country_event = {
+	id = guo_smal.9
+	title = guo_smal.9.test
+	desc = guo_smal.9.desc
+	picture = IMPERIAL_EXAMINATION_eventPicture
+
+	trigger = {
+		has_government_mechanic = guo_loyalist_mechanic
+		heir_age = 15
+		NOT = {
+			has_heir_flag = guo_second_exam_flag
+		}
+	}
+	mean_time_to_happen = {
+		months = 12
+	}
+	option = {
+		name = guo_smal.9a
+		trigger = {
+			NOT = { heir_dip = 6 }
+		}
+		add_dip_power = -50
+		random_list = {
+			50 = {
+				change_heir_dip = 1
+				set_heir_flag = guo_second_exam_passed_flag
+			}
+			50 = {
+				add_dip_power = -50
+			}
+		}
+	}
+	option = {
+		name = guo_smal.9b
+		trigger = {
+			NOT = { heir_dip = 6 }
+		}
+		add_dip_power = -100
+		random_list = {
+			75 = {
+				change_heir_dip = 1
+				set_heir_flag = guo_second_exam_passed_flag
+			}
+			25 = {
+			}
+		}
+	}
+	option = {
+		name = guo_smal.9c
+		trigger = {
+			NOT = { heir_dip = 2 }
+		}
+		add_dip_power = -50
+		change_heir_dip = 1
+	}
+	option = {
+		name = guo_smal.9d
+		trigger = {
+			heir_dip = 6
+		}
+		set_heir_flag = guo_second_exam_passed_flag
+		add_dip_power = 50
+	}
+	after = {
+		hidden_effect = {
+			set_heir_flag = guo_second_exam_flag
+		}
+	}
+}
+
+country_event = {
+	id = guo_smal.10
+	title = guo_smal.10.test
+	desc = guo_smal.10.desc
+	picture = IMPERIAL_EXAMINATION_eventPicture
+
+	trigger = {
+		has_government_mechanic = guo_loyalist_mechanic
+		heir_age = 20
+		NOT = {
+			has_heir_flag = guo_third_exam_flag
+		}
+	}
+	mean_time_to_happen = {
+		months = 12
+	}
+	option = {
+		name = guo_smal.10a
+		trigger = {
+			NOT = { heir_mil = 6 }
+		}
+		add_mil_power = -50
+		random_list = {
+			50 = {
+				change_heir_mil = 1
+				set_heir_flag = guo_third_exam_passed_flag
+			}
+			50 = {
+				add_mil_power = -50
+			}
+		}
+	}
+	option = {
+		name = guo_smal.10b
+		trigger = {
+			NOT = { heir_mil = 6 }
+		}
+		add_mil_power = -100
+		random_list = {
+			75 = {
+				change_heir_mil = 1
+				set_heir_flag = guo_third_exam_passed_flag
+			}
+			25 = {
+			}
+		}
+	}
+	option = {
+		name = guo_smal.10c
+		trigger = {
+			NOT = { heir_mil = 2 }
+		}
+		add_mil_power = -50
+		change_heir_mil = 1
+	}
+	option = {
+		name = guo_smal.10d
+		trigger = {
+			heir_mil = 6
+		}
+		set_heir_flag = guo_third_exam_passed_flag
+		add_mil_power = 50
+	}
+	after = {
+		hidden_effect = {
+			set_heir_flag = guo_third_exam_flag
+		}
+	}
+}
+
+country_event = {
+	id = guo_smal.11
+	title = guo_smal.11.test
+	desc = guo_smal.11.desc
+	picture = IMPERIAL_EXAMINATION_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = guo_smal.11a
+		add_country_modifier = {
+			name = guo_fire_dragon_guards
+			duration = -1
+		}
+	}
+	option = {
+		name = guo_smal.11b
+		add_country_modifier = {
+			name = guo_fire_dragon_guards_1
+			duration = -1
+		}
+	}
+	option = {
+		name = guo_smal.11c
+		add_country_modifier = {
+			name = guo_fire_dragon_guards_2
+			duration = -1
+		}
+	}
+
+}

@@ -1,0 +1,144 @@
+vinland_rebellion_nobles_disaster = {
+
+	potential = {
+		tag = FJ9
+		NOT = {
+			has_country_flag = VINLAND_EMPIRE 
+		}
+	}
+	
+	can_start = {
+		is_subject = no
+		AND = {
+			NOT = {
+				stability = 3
+			}
+			NOT = {
+				estate_loyalty = {
+					estate = estate_nobles
+					loyalty = 90
+				}
+			}
+		}
+	}
+	
+	can_stop = {
+		has_any_disaster = yes
+	}
+	
+	down_progress = {
+		factor = 0.1
+	}
+	
+	progress = {
+		modifier = {
+			factor = 0.5
+			NOT = {
+				stability = -2
+			}
+		}	
+		modifier = {
+			factor = 0.25
+			NOT = {
+				stability = -1
+			}
+		}	
+		modifier = {
+			factor = 0.5
+			unrest = 2	
+		}	
+		modifier = {
+			factor = 0.2
+			is_at_war = yes
+			war_exhaustion = 3
+		}
+		modifier = {
+			factor = 2
+			NOT = {
+				estate_loyalty = {
+					estate = estate_nobles
+					loyalty = 10
+				}
+			}
+		}
+		modifier = {
+			factor = 1
+			NOT = {
+				estate_loyalty = {
+					estate = estate_nobles
+					loyalty = 30
+				}
+			}
+		}
+		modifier = {
+			factor = 0.5
+			NOT = {
+				estate_loyalty = {
+					estate = estate_nobles
+					loyalty = 45
+				}
+			}
+		}
+		modifier = {
+			factor = 0.5
+			estate_influence = {
+				estate = estate_nobles
+				influence = 30
+			}
+		}
+		modifier = {
+			factor = 0.5
+			estate_influence = {
+				estate = estate_nobles
+				influence = 40
+			}
+		}
+		modifier = {
+			factor = 0.5
+			estate_influence = {
+				estate = estate_nobles
+				influence = 50
+			}
+		}
+		modifier = {
+			factor = 1
+			estate_influence = {
+				estate = estate_nobles
+				influence = 90
+			}
+		}
+	}
+	
+	can_end = {
+		NOT = { num_of_rebel_armies = 1 }
+		NOT = { num_of_rebel_controlled_provinces = 1 }
+		stability = 1
+		custom_trigger_tooltip = {
+			tooltip = been_in_disaster_for_10_yrs_tt
+			had_country_flag = { flag = vinland_in_rebellion days = 3650 }
+		}
+		OR = {
+			NOT = {
+				estate_territory = {
+					estate = estate_nobles
+					territory = 5
+				}
+			}
+			estate_loyalty = {
+				estate = estate_nobles
+				loyalty = 60
+			}
+		}
+		
+	}
+	on_monthly = {
+        random_events = { 
+                1000 = 0
+                50 = fjal.13
+                50 = fjal.14
+				50 = fjal.15	
+        }
+}
+	on_start = fjal.12
+	on_end = fjal.17
+}

@@ -1,0 +1,1304 @@
+CH0_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = CH0 } 
+
+	1_secured_homefront = {
+		icon = mng_nomadic_frontier
+		required_missions = { } 
+		provinces_to_highlight = { 
+			if = {
+				limit = {
+					ZHG = {
+						exists = no
+					}
+				}
+				province_id = 2182
+				NOT = {
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+			}
+		} 
+
+		trigger = {
+			OR = {
+				AND = {
+					ZHG = {
+						exists = yes
+						owns = 2182
+					}
+					alliance_with = ZHG
+				}
+				owns_or_non_sovereign_subject_of = 2182
+			}
+		}
+
+		effect = {
+		add_casus_belli = {
+				type = cb_force_tributary
+				target = KAS
+				months = 360
+			}
+		add_casus_belli = {
+				type = cb_force_tributary
+				target = YNS
+				months = 360
+			}
+		add_casus_belli = {
+				type = cb_force_tributary
+				target = HSI
+				months = 360
+			}
+		add_casus_belli = {
+				type = cb_force_tributary
+				target = MON
+				months = 360
+			}
+		add_casus_belli = {
+				type = cb_force_tributary
+				target = YAR
+				months = 360
+			}
+		}
+	}
+
+	1_gatekeep_nomad = {
+		icon = mission_tumu_crisis
+		position = 2
+		required_missions = { 1_secured_homefront } 
+		provinces_to_highlight = { }
+
+		trigger = {
+			num_of_subjects = 6
+			OR = {
+				truce_with = KAS
+				truce_with = YNS
+				truce_with = HSI
+				truce_with = MON
+				truce_with = YAR
+				}
+		}
+
+		effect = {
+		every_owned_province = {
+				limit = {
+					culture = xibei
+					OR = {
+						area = gansu_area
+						area = west_gansu_area
+						}
+				}
+				add_random_development = 1
+			}
+			shanxi_area = {
+				add_permanent_province_modifier = {
+					name = china_nomad_gatekeeped
+					duration = -1
+				}
+			}
+			shaanxi_area = {
+				add_permanent_province_modifier = {
+					name = china_nomad_gatekeeped
+					duration = -1
+				}
+			}
+			hebei_area = {
+				add_permanent_province_modifier = {
+					name = china_nomad_gatekeeped
+					duration = -1
+				}
+			}
+		}
+	}
+
+	1_break_barbarians = {
+		icon = qng_north_china
+		position = 4
+		required_missions = { 1_gatekeep_nomad 2_cross_the_river }
+		provinces_to_highlight = { } 
+
+		trigger = {
+			NOT = {
+			any_neighbor_country = {
+			is_subject = no
+			NOT = { truce_with = ROOT }
+			NOT = { alliance_with = ROOT }
+			custom_trigger_tooltip = {
+				tooltip = empire_of_china_nomadic_border_tt
+				OR = {
+					has_reform = steppe_horde
+					has_reform = great_mongol_state_reform
+				}
+				total_own_and_non_tributary_subject_development = 300
+			}
+			#NOT = { is_subject_of = ROOT }
+		}
+			}
+		}
+
+		effect = {
+			remove_estate_privilege = estate_burghers_burdened_by_barbarian
+		}
+	}
+
+	1_command_jiaozhi = {
+		icon = mng_survey_ocean_shores
+		position = 5
+		required_missions = { 2_subdue_southern_princes } 
+		provinces_to_highlight = { 
+		OR = {
+				area = red_river_delta_area
+				area = vietnam_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		} 
+
+		trigger = {
+			red_river_delta_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			vietnam_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+					name = china_yue_subjugated
+					duration = 7300
+				}
+		}
+	}
+	
+	1_imperial_army = {
+		icon = qng_ten_grand_campaigns
+		position = 6
+		required_missions = { 1_command_jiaozhi 2_crack_down_cultists } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			if = {
+				limit = { ai = yes } 
+				num_of_generals = 2
+			}
+			else = {
+				has_mil_advisor_3 = yes
+				num_of_generals = 2
+			}
+			army_tradition = 30
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "china_imperial_army"
+				duration = 10950
+			}
+		}
+	}
+	
+	1_the_jie_empire = {
+		icon = qng_balance_mandate
+		position = 8
+		required_missions = { 1_imperial_army 3_son_o_heaven } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			is_emperor_of_china = yes
+			empire_of_china_has_active_decree = issue_the_great_warnings_decree
+		}
+
+		effect = {
+			amdo_area = { 
+				limit = { 
+					NOT = { is_core = ROOT } 
+					NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+				}
+				add_permanent_claim = ROOT 
+			}
+			kham_area = { 
+				limit = { 
+					NOT = { is_core = ROOT } 
+					NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+				}
+				add_permanent_claim = ROOT 
+			}
+		}
+	}
+	
+	1_team_up_on_tibet = {
+		icon = mng_thirteen_provinces
+		position = 9
+		required_missions = { 1_the_jie_empire 3_once_divided } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			amdo_area = { 
+				type = all 
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+			kham_area = { 
+				type = all 
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+		}
+
+		effect = {
+			utsang_area = { 
+				limit = { 
+					NOT = { is_core = ROOT } 
+					NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+				}
+				add_permanent_claim = ROOT 
+			}
+			tsang_area = { 
+				limit = { 
+					NOT = { is_core = ROOT } 
+					NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+				}
+				add_permanent_claim = ROOT 
+			}
+			ngari_area = { 
+				limit = { 
+					NOT = { is_core = ROOT } 
+					NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+				}
+				add_permanent_claim = ROOT 
+			}
+		}
+	}
+	
+	1_administrate_another_empire = {
+		icon = mng_shengshi_zhishi
+		position = 10
+		required_missions = { 1_team_up_on_tibet 2_vanquish_nomad } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			utsang_area = { 
+				type = all 
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+			tsang_area = { 
+				type = all 
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+			ngari_area = { 
+				type = all 
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+		}
+
+		effect = {
+		add_mandate = 20
+		tibet_region = {
+				add_permanent_province_modifier = {
+					name = unruly_tibetan
+					duration = -1
+				}
+			}
+		}
+	}
+	
+	1_ensure_safe_pilgrimage = {
+		icon = mng_inward_perfection
+		position = 11
+		required_missions = { 1_administrate_another_empire } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			if = { 
+				limit = { has_dlc = "Leviathan" }
+				677 = {
+					num_of_buildings_in_province = 3
+					has_production_building_trigger = yes 
+					num_of_times_expanded_infrastructure = 1 
+				}
+			}
+			else = { 
+				677 = { num_of_times_improved = 5 }
+			} 
+			if = {
+				limit = { has_dlc = "Mandate of Heaven" }
+				677 = {
+					NOT = { devastation = 1 } 
+				}
+			}
+			else = { 
+				677 = {
+					NOT = { local_autonomy_above_min = 5 } 
+				}
+			}
+		}
+
+		effect = {
+			change_ruler_stat = {
+				type = dip
+				amount = 1
+			}
+			tibet_region = {
+				add_permanent_province_modifier = {
+					name = unruly_tibetan
+					duration = -1
+				}
+			}
+		}
+	}
+	
+	1_trouble_in_tocharian_town = {
+		icon = qng_end_yuan
+		position = 12
+		required_missions = { 1_ensure_safe_pilgrimage } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			mongolia_region = { 
+				type = all 
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+		}
+
+		effect = {
+			central_asia_region = { 
+				limit = { 
+					NOT = { is_core = ROOT } 
+					NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+				}
+				add_permanent_claim = ROOT 
+			}
+		}
+	}
+	
+	1_who_the_frick_is_guo_hong = {
+		icon = mng_form_depots
+		position = 13
+		required_missions = { 1_trouble_in_tocharian_town } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			central_asia_region = { 
+				type = all 
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+		}
+
+		effect = {
+			ural_region = { 
+				limit = { 
+					NOT = { is_core = ROOT } 
+					NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+				}
+				add_permanent_claim = ROOT 
+			}
+		}
+	}
+	
+	1_chart_traitor_trails = {
+		icon = mission_tumu_crisis
+		position = 14
+		required_missions = { 1_who_the_frick_is_guo_hong } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			ural_region = { 
+				type = all 
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+		}
+
+		effect = {
+			russia_region = { 
+				limit = { 
+					NOT = { is_core = ROOT } 
+					NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+				}
+				add_permanent_claim = ROOT 
+			}
+			ruthenia_region = { 
+				limit = { 
+					NOT = { is_core = ROOT } 
+					NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+				}
+				add_permanent_claim = ROOT 
+			}
+			baltic_region = { 
+				limit = { 
+					NOT = { is_core = ROOT } 
+					NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+				}
+				add_permanent_claim = ROOT 
+			}
+		}
+	}
+}
+CH0_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = CH0 } 
+
+	2_eyes_in_the_south = {
+		icon = mng_deal_kama_kagyu
+		required_missions = { } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			stability = 3
+			republican_tradition = 100
+		}
+
+		effect = {
+			
+		}
+	}
+
+	2_abyss_stared_back = {
+		icon = mjz_for_the_horde
+		position = 2
+		required_missions = { 2_eyes_in_the_south } 
+		provinces_to_highlight = { province_id = 280 } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+
+	2_cross_the_river = {
+		icon = mng_inward_perfection
+		position = 3
+		required_missions = { 1_gatekeep_nomad 2_abyss_stared_back 3_unbreakable_will } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+
+	2_subdue_southern_princes = {
+		icon = qng_modernize_the_banners
+		position = 4
+		required_missions = { 2_cross_the_river } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	2_crack_down_cultists = {
+		icon = mission_the_chola_campaigns
+		position = 5
+		required_missions = { 2_subdue_southern_princes } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	2_people_of_the_empire = {
+		icon = mnd_dai_universities
+		position = 6
+		required_missions = { 4_an_imperial_capital } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	2_vanquish_nomad = {
+		icon = mission_tribal_wargames
+		position = 9
+		required_missions = { 3_once_divided } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	2_ruinborn_command = {
+		icon = mnd_dai_control_the_army
+		position = 10
+		required_missions = { 2_vanquish_nomad } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	2_chase_heavenly_horse = {
+		icon = mission_ulug_ulus
+		position = 11
+		required_missions = { 2_ruinborn_command } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	2_wildfolk_no_more = {
+		icon = mission_tribal_allegiance
+		position = 12
+		required_missions = { 2_chase_heavenly_horse 3_grail_of_wine } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	2_literate_barbarian = {
+		icon = mission_tatar_tribes
+		position = 13
+		required_missions = { 2_wildfolk_no_more 3_print_literatures } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	2_sinify_barbarian = {
+		icon = mng_deal_kama_kagyu
+		position = 14
+		required_missions = { 2_literate_barbarian } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	2_march_west_as_one = {
+		icon = mission_horde_caravans
+		position = 15
+		required_missions = { 2_sinify_barbarian } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+}
+
+CH0_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = CH0 } 
+	
+	3_impressive_army = {
+		icon = mission_hunting
+		required_missions = { } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			stability = 3
+			republican_tradition = 100
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	3_unbreakable_will = {
+		icon = qng_balance_mandate
+		position = 2
+		required_missions = { 3_impressive_army } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	3_crush_song = {
+		icon = qng_north_china
+		position = 3
+		required_missions = { 3_unbreakable_will } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	3_secure_kaifeng = {
+		icon = mng_outer_city_beijing
+		position = 4
+		required_missions = { 3_crush_song } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	3_traitor_lurking = {
+		icon = jap_restoration
+		position = 6
+		required_missions = { 4_an_imperial_capital } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	3_son_o_heaven = {
+		icon = jap_fate_mandate
+		position = 7
+		required_missions = { 3_traitor_lurking } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	3_once_divided = {
+		icon = mng_pure_land
+		position = 8
+		required_missions = { 3_son_o_heaven } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	3_taxes_break = {
+		icon = mng_expand_bogue
+		position = 9
+		required_missions = { 3_once_divided } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	3_five_peck_of_rice = {
+		icon = mng_jing_hang_grand_canal
+		position = 10
+		required_missions = { 3_taxes_break } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	3_grail_of_wine = {
+		icon = qng_high_qing_era
+		position = 11
+		required_missions = { 3_five_peck_of_rice } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	3_print_literatures = {
+		icon = mng_expand_yongle_dadian
+		position = 12
+		required_missions = { 3_grail_of_wine } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	3_many_prayer_1_emperor = {
+		icon = qng_balance_mandate
+		position = 13
+		required_missions = { 2_wildfolk_no_more 3_print_literatures } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	3_jongwa_renaissance = {
+		icon = mng_inward_perfection
+		position = 14
+		required_missions = { 2_literate_barbarian 3_many_prayer_1_emperor } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	3_1001th_army = {
+		icon = qng_ten_grand_campaigns
+		position = 16
+		required_missions = { 2_march_west_as_one 4_fuel_our_industry } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	3_govern_turan = {
+		icon = mng_shengshi_zhishi
+		position = 17
+		required_missions = { 3_1001th_army } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	3_burn_siescheng = {
+		icon = mission_abolish_mestnichestvo
+		position = 18
+		required_missions = { 3_govern_turan } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	3_true_dragon = {
+		icon = jap_conquer_north_china
+		position = 19
+		required_missions = { 3_burn_siescheng } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+}
+
+CH0_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = CH0 } 
+	
+	4_order_in_court = {
+		icon = qng_balance_mandate
+		required_missions = { } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			if = {
+				limit = {
+					has_estate = estate_nobles
+				}
+				estate_loyalty = {
+					estate = estate_nobles
+					loyalty = 45
+				}
+			}
+			stability = 2
+		}
+
+		effect = {
+			remove_estate_privilege = estate_nobles_irrevelent_qinwang
+			set_estate_privilege = estate_nobles_disloyal_qinwang
+		}
+	}
+	
+	4_proclaim_mandate = {
+		icon = mng_expand_yongle_dadian
+		position = 2
+		required_missions = { 4_order_in_court } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	4_protect_datong = {
+		icon = mission_tumu_crisis
+		position = 3
+		required_missions = { 4_proclaim_mandate } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	4_regulate_qinwang = {
+		icon = mng_shengshi_zhishi
+		position = 4
+		required_missions = { 4_protect_datong } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	4_an_imperial_capital = {
+		icon = mng_outer_city_beijing
+		position = 5
+		required_missions = { 3_secure_kaifeng 4_regulate_qinwang 5_wa_tribute } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	4_restore_jongwa_trade = {
+		icon = mng_tame_china_sorrow
+		position = 6
+		required_missions = { 4_an_imperial_capital } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	4_heavenly_host = {
+		icon = mission_to_the_south_china_sea
+		position = 9
+		required_missions = { 3_once_divided } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	4_maharlika_tribute = {
+		icon = mnd_maj_gaja_madas_oath
+		position = 10
+		required_missions = { 4_heavenly_host } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	4_empower_artrisan = {
+		icon = mnd_khm_protect_the_cham
+		position = 11
+		required_missions = { 4_maharlika_tribute } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	4_empire_of_rice = {
+		icon = mission_a_million_rice_fields
+		position = 12
+		required_missions = { 3_grail_of_wine } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	4_starve_sindh = {
+		icon = mission_reclaim_lost_territory
+		position = 13
+		required_missions = { 4_empire_of_rice } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	4_indiantured_economic_servitude = {
+		icon = mission_expand_textile_industry2
+		position = 14
+		required_missions = { 4_starve_sindh } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	4_fuel_our_industry = {
+		icon = mission_rb_prospect_for_coal
+		position = 15
+		required_missions = { 4_indiantured_economic_servitude } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+}
+
+CH0_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = CH0 } 
+	
+	5_qing_disloyal = {
+		icon = qng_junji_chu 
+		position = 2
+		required_missions = { 4_order_in_court } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	5_solongo_sailors = {
+		icon = mjz_into_korea
+		position = 3
+		required_missions = { 5_qing_disloyal } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	5_wa_tribute = {
+		icon = mng_end_sengoku_jidai
+		position = 4
+		required_missions = { 5_solongo_sailors } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	5_realm_census = {
+		icon = mission_scholar_officials
+		position = 6
+		required_missions = { 4_an_imperial_capital } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	5_must_unite = {
+		icon = mng_heavens_will
+		position = 8
+		required_missions = { 5_realm_census } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	5_horse_and_tea = {
+		icon = qng_high_qing_era
+		position = 9
+		required_missions = { 5_must_unite } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	5_zhengla_campaign = {
+		icon = qng_modernize_the_banners
+		position = 10
+		required_missions = { 5_horse_and_tea } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	5_sianlofu_subjugation = {
+		icon = qng_ten_grand_campaigns
+		position = 11
+		required_missions = { 5_zhengla_campaign } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	5_zhengmian_insubordination = {
+		icon = mng_thirteen_provinces
+		position = 12
+		required_missions = { 5_sianlofu_subjugation } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	5_loot_liangshu = {
+		icon = qng_conquer_south_china
+		position = 13
+		required_missions = { 5_zhengmian_insubordination } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	5_meet_the_rhoman = {
+		icon = mjz_for_the_horde
+		position = 14
+		required_missions = { 5_loot_liangshu } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+	5_donghai_discovery = {
+		icon = mng_survey_ocean_shores
+		position = 15
+		required_missions = { 5_meet_the_rhoman } 
+		provinces_to_highlight = { } 
+
+		trigger = {
+			
+		}
+
+		effect = {
+			
+		}
+	}
+	
+}

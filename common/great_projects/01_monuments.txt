@@ -2821,7 +2821,11 @@ mount_fuji = {
 	build_trigger = {
 		custom_trigger_tooltip = {
 			tooltip = mount_fuji_tt
-			OR = {		
+			OR = {	
+				AND = {
+					religion = kamuyramat
+					has_owner_religion = yes
+				}	
 				AND = {
 					religion = shinto
 					has_owner_religion = yes
@@ -3887,8 +3891,13 @@ mesa_verde = {
 
 	#can we build it?
 	build_trigger = {
-		province_is_or_accepts_religion = {
-			religion = totemism
+		OR = {
+			province_is_or_accepts_religion = {
+				religion = totemism
+			}
+			province_is_or_accepts_religion = {
+				religion = mexicos
+			}
 		}
 	}
 
@@ -3904,15 +3913,25 @@ mesa_verde = {
 
 	#can our country use it?
 	can_use_modifiers_trigger = {
-		province_is_or_accepts_religion = {
-			religion = totemism
+		OR = {
+			province_is_or_accepts_religion = {
+				religion = totemism
+			}
+			province_is_or_accepts_religion = {
+				religion = mexicos
+			}
 		}
 	}
 
 	#can our country upgrade it?
 	can_upgrade_trigger = {
-		province_is_or_accepts_religion = {
-			religion = totemism
+		OR = {
+			province_is_or_accepts_religion = {
+				religion = totemism
+			}
+			province_is_or_accepts_religion = {
+				religion = mexicos
+			}
 		}
 	}
 
@@ -4974,9 +4993,7 @@ registan_square = {
 
 	#can we build it?
 	build_trigger = {
-		province_is_or_accepts_religion_group = {
-			religion_group = muslim
-		}
+		
 	}
 
 	#what to do when it's built
@@ -4991,16 +5008,12 @@ registan_square = {
 
 	#can our country use it?
 	can_use_modifiers_trigger = {
-		province_is_or_accepts_religion_group = {
-			religion_group = muslim
-		}
+		
 	}
 
 	#can our country upgrade it?
 	can_upgrade_trigger = {
-		province_is_or_accepts_religion_group = {
-			religion_group = muslim
-		}
+		
 	}
 
 	#can our country keep it or is it destroyed when we get hold of it?
@@ -7547,7 +7560,7 @@ fire_temple_of_ateshgah = {
 # 	}
 # }
 
-#pena_palace = { #Replaced by Belém Tower, as requested by community
+#pena_palace = { #Replaced by Belï¿½m Tower, as requested by community
 	# province it starts in
 	# start = 227
 	
@@ -9100,7 +9113,7 @@ great_mosque_djenne = {
 
 imperial_city_hue = {
 	# province it starts in
-	start = 2373
+	start = 613
 	
 	# date built in real life (so anything built during game time will be there if you start a game after that date)
 	date = 1444.01.01 #1804.01.01
@@ -9631,25 +9644,18 @@ bara_katra = {
 }
 
 bran_castle = {
-	start = 4128 #Királyföld
+	start = 4128 #Kirï¿½lyfï¿½ld
 	date = 1357.01.01
 	time = { months = 0	}
 	build_cost = 0
 	can_be_moved = no
 	move_days_per_unit_distance = 10
-	starting_tier = 1
+	starting_tier = 0
 	type = monument
 
 	build_trigger = {
-		if = {
-			limit = {
-				owner = {
-					NOT = { has_country_flag = teu_can_utilize_bran_castle }
-				}
-			}
-			culture_group = dacian_group
-			province_is_or_accepts_culture = yes
-		}
+		culture_group = dacian_group
+		province_is_or_accepts_culture = yes
 	}
 
 	on_built = {
@@ -9659,27 +9665,24 @@ bran_castle = {
 	}
 
 	can_use_modifiers_trigger = {
-		if = {
-			limit = {
-				owner = {
-					NOT = { has_country_flag = teu_can_utilize_bran_castle }
-				}
-			}
-			culture_group = dacian_group
-			province_is_or_accepts_culture = yes
-		}
+		culture_group = dacian_group
+		province_is_or_accepts_culture = yes
 	}
 
 	can_upgrade_trigger = {
 		if = {
 			limit = {
 				owner = {
-					NOT = { has_country_flag = teu_can_utilize_bran_castle }
+					is_or_was_tag = { tag = DA0}
 				}
 			}
-			culture_group = dacian_group
-			province_is_or_accepts_culture = yes
+			custom_trigger_tooltip = {
+				tooltip = DAZ_DRACULA_TT_1
+				has_province_flag = dracula_showed_up
+			}
 		}
+		culture_group = dacian_group
+		province_is_or_accepts_culture = yes
 	}
 
 	keep_trigger = {
@@ -9693,32 +9696,43 @@ bran_castle = {
 			factor = 0
 		}
 		province_modifiers = {
+			local_defensiveness = -0.5
 		}
 		area_modifier = {
 		}
 		country_modifiers = {
 		}
-		on_upgraded = {
+		on_upgraded = {	
 		}
 	}
 
 	tier_1 = {
 		upgrade_time = {
-			months = 120
+			months = 12
 		}
 		cost_to_upgrade = {
-			factor = 1000
+			factor = 250
 		}
 		province_modifiers = {
-			local_defensiveness = 0.15
+			local_defensiveness = 0.2
 		}
 		area_modifier = {
 		}
 		country_modifiers = {
-			rival_border_fort_maintenance = -0.15
-			global_garrison_growth = 0.1
 		}
 		on_upgraded = {
+			if = {
+				limit = {
+					owner = {
+						is_or_was_tag = { tag = DA0}
+					}
+				}
+				owner = {
+					country_event = {
+						id = dac.2
+					}
+				}
+			}
 		}
 	}
 
@@ -9747,7 +9761,7 @@ bran_castle = {
 			months = 480
 		}
 		cost_to_upgrade = {
-			factor = 5000
+			factor = 2500
 		}
 		province_modifiers = {
 		}
@@ -9774,8 +9788,13 @@ cahokia = {
 	type = monument
 
 	build_trigger = {
-		province_is_or_accepts_religion = {
-			religion = totemism
+		OR = {
+			province_is_or_accepts_religion = {
+				religion = totemism
+			}
+			province_is_or_accepts_religion = {
+				religion = mexicos
+			}
 		}
 	}
 
@@ -9786,14 +9805,24 @@ cahokia = {
 	}
 
 	can_use_modifiers_trigger = {
-		province_is_or_accepts_religion = {
-			religion = totemism
+		OR = {
+			province_is_or_accepts_religion = {
+				religion = totemism
+			}
+			province_is_or_accepts_religion = {
+				religion = mexicos
+			}
 		}
 	}
 
 	can_upgrade_trigger = {
-		province_is_or_accepts_religion = {
-			religion = totemism
+		OR = {
+			province_is_or_accepts_religion = {
+				religion = totemism
+			}
+			province_is_or_accepts_religion = {
+				religion = mexicos
+			}
 		}
 	}
 
@@ -9826,11 +9855,12 @@ cahokia = {
 		}
 		province_modifiers = {
 			local_monthly_devastation = -0.25
+			local_development_cost_modifier = -0.1
 		}
 		area_modifier = {
 		}
 		country_modifiers = {
-			tribal_development_growth = 0.01			
+			diplomatic_reputation = 1		
 		}
 		on_upgraded = {
 		}
@@ -9845,11 +9875,12 @@ cahokia = {
 		}
 		province_modifiers = {
 			local_monthly_devastation = -0.5
+			local_development_cost_modifier = -0.1
 		}
 		area_modifier = {
 		}
 		country_modifiers = {
-			tribal_development_growth = 0.02
+			diplomatic_reputation = 1	
 			global_manpower_modifier = 0.1
 		}
 		on_upgraded = {
@@ -9867,9 +9898,10 @@ cahokia = {
 		}
 		area_modifier = {
 			local_monthly_devastation = -1
+			local_development_cost_modifier = -0.1
 		}
 		country_modifiers = {
-			tribal_development_growth = 0.03
+			diplomatic_reputation = 2	
 			global_manpower_modifier = 0.2
 		}
 		on_upgraded = {
@@ -10614,7 +10646,10 @@ erdene_zuu = {
 				religion = tengri_pagan_reformed
 				has_owner_religion = yes
 			}
-			province_is_buddhist_or_accepts_buddhism = yes
+			AND = {
+				religion = manich
+				has_owner_religion = yes
+			}
 		}
 	}
 
@@ -10624,7 +10659,10 @@ erdene_zuu = {
 				religion = tengri_pagan_reformed
 				has_owner_religion = yes
 			}
-			province_is_buddhist_or_accepts_buddhism = yes
+			AND = {
+				religion = manich
+				has_owner_religion = yes
+			}
 		}
 	}
 
@@ -10663,7 +10701,7 @@ erdene_zuu = {
 		country_modifiers = {
 			religious_unity = 0.1
 			church_loyalty_modifier = 0.05
-			yearly_karma_decay = 0.01
+			global_missionary_strength = 0.01
 		}
 		on_upgraded = {
 		}
@@ -10685,7 +10723,7 @@ erdene_zuu = {
 			horde_unity = 0.5
 			religious_unity = 0.2
 			church_loyalty_modifier = 0.1
-			yearly_karma_decay = 0.025
+			global_missionary_strength = 0.02
 		}
 		on_upgraded = {
 		}
@@ -10707,7 +10745,7 @@ erdene_zuu = {
 			horde_unity = 1
 			religious_unity = 0.3
 			church_loyalty_modifier = 0.15
-			yearly_karma_decay = 0.05
+			global_missionary_strength = 0.03
 		}
 		on_upgraded = {
 		}
@@ -11195,6 +11233,7 @@ gyeongbok_palace = {
 		OR = {
 			culture = korean_new
 			culture = korean
+			culture = jeju
 		}
 		province_is_or_accepts_culture = yes
 		province_is_or_accepts_religion = {
@@ -13857,7 +13896,7 @@ swayambhunath = {
 
 
 tikal = {
-	start = 842 #Petén
+	start = 842 #Petï¿½n
 	date = 10.01.01
 	time = { months = 0	}
 	build_cost = 0
@@ -16451,5 +16490,445 @@ citadel_of_aleppo = {
 		country_modifiers = {
 		}
 		on_upgraded = {}
+	}
+}
+
+grand_canal_1 = {
+	start = 684 #Hangzhou
+	date = 1427.01.09
+	time = { months = 0	}
+	build_cost = 0
+	can_be_moved = no
+	move_days_per_unit_distance = 10
+	starting_tier = 1
+	type = monument
+
+	build_trigger = {
+	}
+
+	on_built = {
+	}
+
+	on_destroyed = {
+	}
+
+	can_use_modifiers_trigger = {
+	}
+
+	can_upgrade_trigger = {
+	}
+
+	keep_trigger = {
+	}
+
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+		cost_to_upgrade = {
+			factor = 0
+		}
+		province_modifiers = {
+		}
+		area_modifier = {
+		}
+		country_modifiers = {
+		}
+		on_upgraded = {
+		}
+	}
+
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+		cost_to_upgrade = {
+			factor = 1000
+		}
+		province_modifiers = {
+			trade_goods_size = 0.5
+			trade_value_modifier = 0.1
+		}
+		area_modifier = {
+			local_monthly_devastation = -0.1
+			local_development_cost = -0.025
+		}
+	}
+
+	tier_2 = {
+		upgrade_time = {
+			months = 240
+		}
+		cost_to_upgrade = {
+			factor = 2500
+		}
+		province_modifiers = {
+			trade_goods_size = 1
+			trade_value_modifier = 0.15
+		}
+		area_modifier = {
+			local_monthly_devastation = -0.25
+			local_development_cost = -0.05
+		}
+		region_modifier = { 
+			
+		}
+		country_modifiers = { } 
+	}
+
+	tier_3 = {
+		upgrade_time = {
+			months = 480
+		}
+		cost_to_upgrade = {
+			factor = 5000
+		}
+		province_modifiers = {
+			trade_goods_size = 1
+			trade_value_modifier = 0.25
+		}
+		area_modifier = {
+			local_monthly_devastation = -0.33
+			local_development_cost = -0.1
+		}
+		region_modifier = { 
+			
+		}
+		country_modifiers = { eunuchs_loyalty_modifier = 0.05 } 
+		on_upgraded = {
+			add_base_tax = 1 
+			add_base_production = 1 
+			add_base_manpower = 1 
+		}
+	}
+}
+
+grand_canal_2 = {
+	start = 1822 #Suzhou
+	date = 1427.01.09
+	time = { months = 0	}
+	build_cost = 0
+	can_be_moved = no
+	move_days_per_unit_distance = 10
+	starting_tier = 1
+	type = monument
+
+	build_trigger = {
+	}
+
+	on_built = {
+	}
+
+	on_destroyed = {
+	}
+
+	can_use_modifiers_trigger = {
+	}
+
+	can_upgrade_trigger = {
+	}
+
+	keep_trigger = {
+	}
+
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+		cost_to_upgrade = {
+			factor = 0
+		}
+		province_modifiers = {
+		}
+		area_modifier = {
+		}
+		country_modifiers = {
+		}
+		on_upgraded = {
+		}
+	}
+
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+		cost_to_upgrade = {
+			factor = 1000
+		}
+		province_modifiers = {
+			trade_goods_size = 0.5
+			trade_value_modifier = 0.1
+		}
+		area_modifier = {
+			local_monthly_devastation = -0.1
+			local_development_cost = -0.025
+		}
+	}
+
+	tier_2 = {
+		upgrade_time = {
+			months = 240
+		}
+		cost_to_upgrade = {
+			factor = 2500
+		}
+		province_modifiers = {
+			trade_goods_size = 1
+			trade_value_modifier = 0.15
+		}
+		area_modifier = {
+			local_monthly_devastation = -0.25
+			local_development_cost = -0.05
+		}
+		region_modifier = { 
+			
+		}
+		country_modifiers = { } 
+	}
+
+	tier_3 = {
+		upgrade_time = {
+			months = 480
+		}
+		cost_to_upgrade = {
+			factor = 5000
+		}
+		province_modifiers = {
+			trade_goods_size = 1
+			trade_value_modifier = 0.25
+		}
+		area_modifier = {
+			local_monthly_devastation = -0.33
+			local_development_cost = -0.1
+		}
+		region_modifier = { 
+			
+		}
+		country_modifiers = { eunuchs_loyalty_modifier = 0.05 } 
+		on_upgraded = {
+			add_base_tax = 1 
+			add_base_production = 1 
+			add_base_manpower = 1 
+		}
+	}
+}
+
+grand_canal_3 = {
+	start = 2145 #Zhenjiang
+	date = 1427.01.09
+	time = { months = 0	}
+	build_cost = 0
+	can_be_moved = no
+	move_days_per_unit_distance = 10
+	starting_tier = 1
+	type = monument
+
+	build_trigger = {
+	}
+
+	on_built = {
+	}
+
+	on_destroyed = {
+	}
+
+	can_use_modifiers_trigger = {
+	}
+
+	can_upgrade_trigger = {
+	}
+
+	keep_trigger = {
+	}
+
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+		cost_to_upgrade = {
+			factor = 0
+		}
+		province_modifiers = {
+		}
+		area_modifier = {
+		}
+		country_modifiers = {
+		}
+		on_upgraded = {
+		}
+	}
+
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+		cost_to_upgrade = {
+			factor = 1000
+		}
+		province_modifiers = {
+			trade_goods_size = 0.5
+			trade_value_modifier = 0.1
+		}
+		area_modifier = {
+			local_monthly_devastation = -0.1
+			local_development_cost = -0.025
+		}
+	}
+
+	tier_2 = {
+		upgrade_time = {
+			months = 240
+		}
+		cost_to_upgrade = {
+			factor = 2500
+		}
+		province_modifiers = {
+			trade_goods_size = 1
+			trade_value_modifier = 0.15
+		}
+		area_modifier = {
+			local_monthly_devastation = -0.25
+			local_development_cost = -0.05
+		}
+		region_modifier = { 
+			
+		}
+		country_modifiers = { } 
+	}
+
+	tier_3 = {
+		upgrade_time = {
+			months = 480
+		}
+		cost_to_upgrade = {
+			factor = 5000
+		}
+		province_modifiers = {
+			trade_goods_size = 1
+			trade_value_modifier = 0.25
+		}
+		area_modifier = {
+			local_monthly_devastation = -0.33
+			local_development_cost = -0.1
+		}
+		region_modifier = { 
+			
+		}
+		country_modifiers = { eunuchs_loyalty_modifier = 0.05 } 
+		on_upgraded = {
+			add_base_tax = 1 
+			add_base_production = 1 
+			add_base_manpower = 1 
+		}
+	}
+}
+
+grand_canal_4 = {
+	start = 1821 #Nanjing
+	date = 1427.01.09
+	time = { months = 0	}
+	build_cost = 0
+	can_be_moved = no
+	move_days_per_unit_distance = 10
+	starting_tier = 1
+	type = monument
+
+	build_trigger = {
+	}
+
+	on_built = {
+	}
+
+	on_destroyed = {
+	}
+
+	can_use_modifiers_trigger = {
+	}
+
+	can_upgrade_trigger = {
+	}
+
+	keep_trigger = {
+	}
+
+	tier_0 = {
+		upgrade_time = {
+			months = 0
+		}
+		cost_to_upgrade = {
+			factor = 0
+		}
+		province_modifiers = {
+		}
+		area_modifier = {
+		}
+		country_modifiers = {
+		}
+		on_upgraded = {
+		}
+	}
+
+	tier_1 = {
+		upgrade_time = {
+			months = 120
+		}
+		cost_to_upgrade = {
+			factor = 1000
+		}
+		province_modifiers = {
+			trade_goods_size = 0.5
+			trade_value_modifier = 0.1
+		}
+		area_modifier = {
+			local_monthly_devastation = -0.1
+			local_development_cost = -0.025
+		}
+	}
+
+	tier_2 = {
+		upgrade_time = {
+			months = 240
+		}
+		cost_to_upgrade = {
+			factor = 2500
+		}
+		province_modifiers = {
+			trade_goods_size = 1
+			trade_value_modifier = 0.15
+		}
+		area_modifier = {
+			local_monthly_devastation = -0.25
+			local_development_cost = -0.05
+		}
+		region_modifier = { 
+			
+		}
+		country_modifiers = { } 
+	}
+
+	tier_3 = {
+		upgrade_time = {
+			months = 480
+		}
+		cost_to_upgrade = {
+			factor = 5000
+		}
+		province_modifiers = {
+			trade_goods_size = 1
+			trade_value_modifier = 0.25
+		}
+		area_modifier = {
+			local_monthly_devastation = -0.33
+			local_development_cost = -0.1
+		}
+		region_modifier = { 
+			
+		}
+		country_modifiers = { eunuchs_loyalty_modifier = 0.05 } 
+		on_upgraded = {
+			add_base_tax = 1 
+			add_base_production = 1 
+			add_base_manpower = 1 
+		}
 	}
 }

@@ -4,6 +4,9 @@ dacian_kingdom = {
 	allow_normal_conversion = yes
 	potential = {
 		culture = dacian
+		NOT = {
+			has_reform = lycan_kingdom
+		}
 	}
 	trigger = {
 		OR = {
@@ -15,9 +18,34 @@ dacian_kingdom = {
 	valid_for_nation_designer = no
 	nation_designer_cost = 100
 	modifiers = {
+		nobles_influence_modifier = 0.05
 		defensiveness = 0.1
 		rival_border_fort_maintenance = -0.33
 		max_general_shock = 1
+	}
+}
+
+lycan_kingdom = {
+	icon = "zoroastrian_theocracy"
+	allow_normal_conversion = yes
+	potential = {
+		mission_completed = dac_danubian_campaign
+		OR = {
+			tag = DA0
+			was_tag = DA0
+		}
+	}
+	valid_for_nation_designer = no
+	nation_designer_cost = 100
+	modifiers = {
+		nobles_influence_modifier = 0.05
+		defensiveness = 0.15
+		fort_maintenance_modifier = -0.15
+		leader_land_shock = 1
+		max_general_shock = 2
+	}
+	custom_attributes = {
+		recruiting_general_gives_army_tradition = yes
 	}
 }
 
@@ -36,9 +64,34 @@ kolmegary_three_kingdoms = {
 	valid_for_nation_designer = no
 	nation_designer_cost = 100
 	modifiers = {
-		tolerance_heathen = 1
-		siege_ability = 0.1
+		num_accepted_cultures = 2
+		diplomatic_annexation_cost = -0.15
 		nobles_loyalty_modifier = 0.05
 		nobles_influence_modifier = 0.1
+	}
+}
+
+kolmegary_birodalomary = {
+	icon = "horde_riding"
+	allow_normal_conversion = yes
+	potential = {
+		OR = {
+			tag = KO9
+			was_tag = KO9
+		}
+	}
+	trigger = {
+	}
+	valid_for_nation_designer = no
+	nation_designer_cost = 100
+	modifiers = {
+		num_accepted_cultures = 3
+		diplomatic_annexation_cost = -0.25
+		nobles_loyalty_modifier = 0.05
+		nobles_influence_modifier = 0.1
+		# amount_of_hussars = 10
+	}
+	custom_attributes = {
+		manpower_from_defeating_armies = yes
 	}
 }

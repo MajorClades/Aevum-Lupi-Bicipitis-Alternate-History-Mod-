@@ -18,19 +18,252 @@ country_decisions = {
 			factor = 0
 		}
 	}
+	alb_greater_pannonia_dec = {
+		color = {
+			225 173 31
+		}
+		potential = {
+			OR = {
+				primary_culture = pannonian
+				is_or_was_tag = {tag = DA2}
+			}
+		}
+		allow = {
+			NOT = {
+				has_country_modifier = alb_pan_culture_spam
+			}
+			OR = {
+				primary_culture = pannonian
+				accepted_culture = pannonian
+			}
+			alfold_area = {
+				type = all
+				culture = pannonian
+			}
+			transdanubia_area = {
+				type = all
+				culture = pannonian
+			}
+		}
+		effect = {
+			add_dip_power = 300
+			add_stability_or_adm_power = yes
+			add_prestige_or_monarch_power = {amount = 50}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
 	alb_restore_country_name = {
 		potential = {
-			has_country_flag = alb_overrided_country_name_cosmetic
+			has_country_flag = alb_overrided_country_name_cosmetic	
 		}
 		allow = {
 			is_at_war = no
 		}
 		effect = {
-			restore_country_name_effect = yes
+			restore_country_name = yes
 			clr_country_flag = alb_overrided_country_name_cosmetic
 		}
 		ai_will_do = {
 			factor = 1
+		}
+	}
+	alb_dalm_sylvester = {
+		color = {
+			225 222 191
+		}
+		potential = {
+			is_or_was_tag = {tag = PD2}
+		}
+		provinces_to_highlight = {
+			region = carpathia_region
+		}
+		allow = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 15
+				region = carpathia_region
+				is_core = owner
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = dalm_stallone
+				duration = -1
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	alb_pap_mission_to_china = {
+		color = {
+			1 1 1
+		}
+		potential = {
+			is_or_was_tag = {tag = PAP}
+		}
+		provinces_to_highlight = {
+			superregion = china_superregion
+		}
+		allow = {
+			any_country = {
+				is_emperor_of_china = yes
+			}
+			OR = {
+				any_province = {
+					superregion = china_superregion
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				any_country = {
+					capital_scope = {
+						superregion = china_superregion
+					}
+					has_opinion = {
+						who = ROOT
+						value = 100
+					}
+				}
+			}
+		}
+		effect = {
+			country_event = {
+				id = papacy.11
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	alb_erulia_egypts = {
+		major = yes
+		potential = {
+			is_or_was_tag = {tag = TU0}
+			AE0 = {
+				exists = yes
+			}
+			NOT = {
+				has_country_flag = italians_stole_abunchofsand_flag
+			}
+		}
+		provinces_to_highlight = {
+			is_capital_of = AE0
+		}
+		allow = {
+			government_rank = 3
+			AE0 = {
+				exists = yes
+			}
+		}
+		effect = {
+			add_casus_belli = {
+				type = cb_restore_personal_union
+				target = AE0
+				months = 300
+			}
+			set_country_flag = italians_stole_abunchofsand_flag
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	alb_mexico_and_forza = {
+		major = yes
+		potential = {
+			capital_scope = {
+				colonial_region = colonial_mexico
+			}
+			is_colonial_nation = yes
+			culture_group = latin
+			NOT = {
+				exists = MX2
+			}
+		}
+		allow = {
+			OR = {
+				liberty_desire = 60
+				is_free_or_tributary_trigger = yes
+			}
+		}
+		effect = {
+			change_tag = MX2
+			swap_free_idea_group = yes
+			swap_non_generic_missions = yes
+			set_country_flag = changed_from_colonial_nation
+			hidden_effect = {
+				change_government = monarchy
+				add_government_reform = kingdom_of_deforza
+				define_ruler = {
+					name = "Federico"
+					dynasty = "De'Forza"
+					age = 36
+					adm = 3
+					dip = 0 
+					mil = 5
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	alb_mexico_and_forza_2 = {
+		major = yes
+		potential = {
+			any_subject_country = {
+				capital_scope = {
+					colonial_region = colonial_mexico
+				}
+				is_colonial_nation = yes
+			}		
+			has_country_flag = forza_missions_flag
+		}
+		allow = {
+			any_subject_country = {
+				capital_scope = {
+					colonial_region = colonial_mexico
+				}
+				is_colonial_nation = yes
+			}
+		}
+		effect = {
+			random_subject_country = {
+				limit = {
+					capital_scope = {
+						colonial_region = colonial_mexico
+					}
+					is_colonial_nation = yes
+				}
+				ROOT = {
+					switch_tag = PREV
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	alb_mexico_and_forza_3 = {
+		major = yes
+		potential = {
+			tag = MX2
+		}
+		allow = {
+		}
+		effect = {
+			if = {
+				limit = {
+					NOT = { has_country_flag = def_changed_name }
+				}
+				override_country_name = DEFORZA_EMPIRE
+				set_country_flag = def_changed_name
+			}else = {
+				restore_country_name = yes
+				clr_country_flag = def_changed_name
+			}
+		}
+		ai_will_do = {
+			factor = 0
 		}
 	}
 }

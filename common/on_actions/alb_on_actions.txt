@@ -9,12 +9,90 @@ on_startup = {
 		arian.1
 		zimmska.7
 		light_emp.1
+		atlas.1
+		fjal.1000
+		mila.3
+		pann.1
+		silky.1
+		yamat.1
+		liqian.3
+		pictii.10
+		siec.27
+	}
+	if = {
+		limit = {
+			NOT = {
+				is_year = 1445
+				tag = GA0
+			}
+		}
+		set_variable = {
+			which = num_kadlen_elections
+			value = 1
+		}
+		set_variable = {
+			which = num_gettrike_elections
+			value = 0
+		}
+		set_variable = {
+			which = num_bylandr_elections
+			value = 0
+		}
+		set_variable = {
+			which = num_tonin_elections
+			value = 0
+		}
 	}
 }
 on_province_culture_changed = {
 	if = {
 		limit = {owner = { has_country_flag = romanization_culture_change}}
 		add_nationalism = -5
+	}
+	if = {
+		limit = {
+			has_province_modifier = sawark_minority
+			NOT = {
+				culture = dacian
+			}
+		}
+		remove_province_modifier = sawark_minority
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_province_modifier = protected_dacian_culture
+			}
+			owner = {
+				mission_completed = dac_slavic_workers
+			}
+			NOT = {
+				has_province_flag = dac_converted_bonus
+			}
+			culture = d_west_slav
+			region = carpathia_region
+		}
+		add_random_development = 1
+		add_random_development = 1
+		set_province_flag = dac_converted_bonus
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_province_modifier = protected_dacian_culture
+			}
+			owner = {
+				mission_completed = dac_slavic_workers
+			}
+			NOT = {
+				has_province_flag = dac_converted_bonus
+			}
+			culture = d_east_slav
+			region = crimea_region
+		}
+		add_random_development = 1
+		add_random_development = 1
+		set_province_flag = dac_converted_bonus
 	}
 }
 on_regiment_recruited = {
@@ -26,6 +104,18 @@ on_regiment_recruited = {
 			random = {
 				chance = 5
 				add_army_tradition = 1
+			}
+		}
+	}
+	FROM = {
+		if = {
+			limit = {
+				has_government_mechanic = marching_empire_tactics
+			}
+			add_government_power = {
+				mechanic_type = marching_empire_tactics
+				power_type = artofwar_2
+				value = -0.5
 			}
 		}
 	}
@@ -56,6 +146,79 @@ on_battle_lost_country = {
 			}
 	}
 }
+on_battle_won_country = {
+	if = {
+		limit = { 
+				tag = RU0
+				has_government_mechanic = rhoman_decadence_mechanic
+			}
+			add_government_power = {
+				mechanic_type = rhoman_decadence_mechanic
+				power_type = rhoman_decadence
+				value = -1
+			}
+	}
+	if = {
+		limit = { 
+			has_government_mechanic = aldabba_failure_mechanic
+		}
+		add_government_power = {
+			mechanic_type = aldabba_failure_mechanic
+			power_type = restoration_aldabba 
+			value = 0.5
+		}
+	}
+	if = {
+		limit = {has_country_flag = extra_discipline_for_at_flag}
+		change_variable = {
+			which = war_lesson_counter
+			value = 1
+		}
+	}
+	if = {
+		limit = {
+			has_government_mechanic = guo_loyalist_mechanic
+			is_monarch_leader = yes
+			is_ruler_commanding_unit = yes
+		}
+		add_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = 3
+			}
+			if = {
+				limit = {
+					NOT = {
+						check_variable = {
+							which = guo_battle_won_var
+							value = 10
+						}
+					}
+				}
+				change_variable = {
+					which = guo_battle_won_var
+					value = 1
+				}
+			}
+	}
+	if = {
+		limit = {
+			OR = {
+				tag = MO0
+				was_tag = MO0
+			}
+			NOT = {
+				has_country_flag = mol_iron_fist
+			}
+			is_monarch_leader = yes
+			is_ruler_commanding_unit = yes
+		}
+		country_event = {
+			id = molis.100
+		}
+		set_country_flag = mol_iron_fist
+	}
+}
 on_war_won = {
 	if = {
 		limit = { 
@@ -69,20 +232,31 @@ on_war_won = {
 			}
 	}
 }
-on_battle_won_country = {
-	if = {
-		limit = { 
-				tag = RU0
-				has_government_mechanic = rhoman_decadence_mechanic
-			}
-			add_government_power = {
-				mechanic_type = rhoman_decadence_mechanic
-				power_type = rhoman_decadence
-				value = -1
-			}
-	}
-}
 on_province_owner_change = {
+	if = {
+		limit = {
+			owner = {
+				has_country_flag = norse_faith_tolerance
+			}
+			religion_group = christian
+		}
+		add_province_modifier = {
+			name = swe_tolerant_conquest
+			duration = 3650
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_country_flag = norse_faith_intolerance
+			}
+			religion_group = christian
+		}
+		add_province_modifier = {
+			name = swe_intolerant_conquest
+			duration = 3650
+		}
+	}
 	if = {
 		limit = {
 			owner = {
@@ -96,6 +270,24 @@ on_province_owner_change = {
 		add_permanent_province_modifier = {
 			name = rho_conquerors
 			duration = 3650
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_country_flag = indictian_emergence_africa
+			}
+			OR = {
+				province_id = 343
+				province_id = 336
+				province_id = 341
+				province_id = 358
+				province_id = 379
+			}
+		}
+		add_province_modifier = {
+			name = alb_source_of_the_faith
+			duration = -1
 		}
 	}
 }
@@ -126,18 +318,7 @@ on_general_recruited = {
 		limit = {has_country_flag = sox_more_manpower}
 		add_army_tradition = 1
 	}
-}
-on_war_won = {
 
-	if = {
-		limit = {
-			has_country_flag = italian_war_pad_emp
-		}
-		ROOT = {
-			clr_country_flag = italian_war_pad_emp
-			set_country_flag = italian_war_pad_emp_won
-		}
-	}
 }
 on_center_of_trade_upgrade = {
 	if = {
@@ -166,23 +347,7 @@ on_battle_won_country = {
 }
 
 on_battle_won_unit = {
-	if = {
-		limit = {
-			OR = {
-				tag = MO0
-				was_tag = MO0
-			}
-			NOT = {
-				has_country_flag = mol_iron_fist
-			}
-			is_monarch_leader = yes
-			is_ruler_commanding_unit = yes
-		}
-		country_event = {
-			id = molis.100
-		}
-		set_country_flag = mol_iron_fist
-	}
+
 }
 
 on_main_war_won = {
@@ -208,6 +373,7 @@ on_main_war_won = {
 					value = 10
 				}
 			}else = {
+
 				set_variable = {
 					which = arian_fervor_var
 					value = 100
@@ -225,7 +391,11 @@ on_main_war_won = {
 		}
 		remove_country_modifier = redleg_prepare_for_crusade
 		remove_country_modifier = redleg_prepare_for_crusade_AI
-
+		MLO = {
+			country_event = {
+				id = mila.1
+			}
+		}
 	}
 }
 
@@ -239,6 +409,11 @@ on_main_war_lost = {
 		}
 		remove_country_modifier = redleg_prepare_for_crusade
 		remove_country_modifier = redleg_prepare_for_crusade_AI
+		MLO = {
+			country_event = {
+				id = mila.1
+			}
+		}
 		if = {
 			limit = {
 				ai = no
@@ -252,6 +427,30 @@ on_main_war_lost = {
 					}
 				}
 			}
+		}
+	}
+}
+on_colony_finished = {
+	if = {
+		limit = {
+			owner = {
+				has_country_flag = sweb_trade_colony_flag
+			}
+		}
+		add_province_modifier = {
+			name = sweb_trade_colony_mod
+			duration = 3650
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_country_flag = sweb_tax_colony_flag
+			}
+		}
+		add_province_modifier = {
+			name = sweb_tax_colony_mod
+			duration = 3650
 		}
 	}
 }
@@ -317,6 +516,9 @@ on_monthly_pulse = {
 			set_variable = {
 				which = arian_fervor_var
 				value = 100
+			}
+			country_event = {
+				id = arian.4
 			}
 		}
 	}
@@ -389,16 +591,180 @@ on_thri_yearly_pulse = {
 	}
 }
 on_monarch_death = {
-
+	events = {
+		gand.102
+	}
 	if = {
-		limit = { tag = HE0 }
+		limit = { 
+			tag = SO0 
+			BR0 = { has_government_mechanic = brit_imperial_heir }
+		}
+		BR0 = {
+			country_event = {
+				id = britt.9
+			}
+		}
+	}
+	if = {
+		limit = { 
+			tag = HE0 
+			NOT = { has_country_flag = had_event_atro3_flag } 
+		}
 		country_event = { id = atro.3 }
 		country_event = { id = atro.1 days = 5}
+	}
+	#if = {
+	#	limit = { 
+	#		NOT = {
+	#			war_with = RU0
+	#		}
+	#		tag = PM0 
+	#		NOT = {
+	#			has_ruler = "Hakimos"
+	#		}
+	#	}
+	#	country_event = { id = rhom.1003 }
+	#}
+}
+on_new_monarch = {
+	if = {
+		limit = {
+			has_regency = no
+			dynasty = "Guo"
+			NOT = {
+				has_country_flag = no_exams_for_now
+			}
+			has_government_mechanic = guo_loyalist_mechanic
+		}
+		country_event = {
+				id = guo_smal.7
+		}
+		set_variable = {
+				which = guo_battle_won_var
+				value = 0
+		}
+	}
+
+	if = { #Wasn't triggering for repeat elections (where one country gets elected for consecutive rulers)
+		limit = {
+			tag = emperor
+		}
+		PAP = {
+			country_event = {
+				id = papacy.1
+			}
+		}
+	}
+	if = {
+		limit = {
+			tag = AP6
+			NOT = {
+				has_country_flag = papal_vassal_time
+			}
+			is_female = yes
+			dynasty = "Baglioni"
+		}
+		PAP = {
+			country_event = {
+				id = papacy.10
+			}
+		}
+	}
+	#if = {
+		#limit = {
+		#	has_reform = papal_monarchy_pontifex
+		#}
+		#country_event = {
+		#	id = papacy.1003
+		#}
+	#}
+}
+on_emperor_elected = {
+	PAP = {
+		country_event = {
+			id = papacy.1
+		}
 	}
 }
 
 on_adm_development = {
-
+	if = { 
+		limit = { owner = { has_country_flag = get_manpower_from_dev_grain_flag } trade_goods = grain }
+		owner = {add_manpower = 0.1}
+	}
+	if = { 
+		limit = { owner = { has_country_flag = get_more_manpower_from_dev_grain_flag } trade_goods = grain }
+		owner = {add_manpower = 0.25}
+	}
+	if = { 
+		limit = { owner = { has_country_flag = get_ducats_from_dev_grain_flag } trade_goods = grain }
+		owner = {add_treasury = 15}
+	}
+	if = { 
+		limit = { owner = { has_government_mechanic = bav_councils }	}
+		owner = {
+			add_government_power = {
+				mechanic_type = bav_councils
+				power_type = bavarian_governance
+				value = 1
+			}
+		}
+	}
+	if = { 
+		limit = { 
+			owner = { has_country_flag = megaditta_galactic_claims 	
+			has_government_mechanic = megaditta_core
+		}
+		}
+		owner = {
+			add_corruption = 0.25
+			add_government_power = {
+				mechanic_type = megaditta_core
+				power_type = guild_corruption
+				value = 1
+			}
+		}
+		random_list = {
+			50 = {
+			}
+			50 = {
+				add_base_tax = 1
+			}
+		}
+	}
+	if = {
+		limit = { 
+			owner = { 
+				OR = {
+					has_country_modifier = kamuyhuci_lv1_mod
+					has_country_modifier = kamuyhuci_lv2_mod
+					has_country_modifier = kamuyhuci_lv3_mod
+					has_country_modifier = kamuyhuci_lv4_mod
+				}
+			}
+		}
+		owner = {
+			if = {
+				limit = {NOT = {has_country_flag = no_cost_kamuy_flag}}
+				add_adm_power = -10
+			}
+			change_variable = {
+				which = kamuyhuci_variable
+				value = 1
+			}
+			if = {
+				limit = {
+					check_variable = {
+						which = kamuyhuci_variable
+						value = 10
+					}
+				}
+				country_event = {
+					id = ezo.2
+				}
+			}
+		}
+	}
 	if = { 
 		limit = { 
 			owner = { has_country_flag = double_dev_ability }
@@ -408,11 +774,109 @@ on_adm_development = {
 		}
 		add_base_tax = 1
 	}
-
+	if = {
+		limit = {
+			owner = { has_country_flag = aldabban_restoration_dev_flag }
+		}
+		owner = {
+			add_government_power = {
+				mechanic_type = aldabba_failure_mechanic
+				power_type = restoration_aldabba
+				value = 0.25
+			}
+		}
+	}
+	if = {
+		limit = {
+			has_country_flag = alb_dev_japan_better_flag
+		}
+		random_list = {
+			15 = {
+				add_base_tax = 1
+			}
+			85 = {}
+		}
+	}
 }
 
 on_dip_development = {
-
+	if = { 
+		limit = { owner = { has_country_flag = get_manpower_from_dev_grain_flag } trade_goods = grain }
+		owner = {add_manpower = 0.1}
+	}
+	if = { 
+		limit = { owner = { has_country_flag = get_more_manpower_from_dev_grain_flag } trade_goods = grain }
+		owner = {add_manpower = 0.25}
+	}
+	if = { 
+		limit = { owner = { has_country_flag = get_ducats_from_dev_grain_flag } trade_goods = grain }
+		owner = {add_treasury = 15}
+	}
+	if = { 
+		limit = { owner = { has_government_mechanic = bav_councils }	}
+		owner = {
+			add_government_power = {
+				mechanic_type = bav_councils
+				power_type = bavarian_governance
+				value = 1
+			}
+		}
+	}
+	if = { 
+		limit = { 
+			owner = { has_country_flag = megaditta_galactic_claims 	
+			has_government_mechanic = megaditta_core
+		}
+		}
+		owner = {
+			add_corruption = 0.25
+			add_government_power = {
+				mechanic_type = megaditta_core
+				power_type = guild_corruption
+				value = 1
+			}
+		}
+		random_list = {
+			50 = {
+			}
+			50 = {
+				add_base_production = 1
+			}
+		}
+	}
+	if = {
+		limit = { 
+			owner = { 
+				OR = {
+					has_country_modifier = repunkamuy_lv1_mod
+					has_country_modifier = repunkamuy_lv2_mod
+					has_country_modifier = repunkamuy_lv3_mod
+					has_country_modifier = repunkamuy_lv4_mod
+				}
+			}
+		}
+		owner = {
+			if = {
+				limit = {NOT = {has_country_flag = no_cost_kamuy_flag}}
+				add_dip_power = -10
+			}
+			change_variable = {
+				which = repunkamuy_variable
+				value = 1
+			}
+			if = {
+				limit = {
+					check_variable = {
+						which = repunkamuy_variable
+						value = 10
+					}
+				}
+				country_event = {
+					id = ezo.6
+				}
+			}
+		}
+	}
 	if = { 
 		limit = { 
 			owner = { has_country_modifier = pru_victory_lower_saxony_modifier }
@@ -454,10 +918,124 @@ on_dip_development = {
 		}
 		add_base_production = 1
 	}
+	if = {
+		limit = {
+			owner = { has_country_flag = aldabban_restoration_dev_flag }
+		}
+		owner = {
+			add_government_power = {
+				mechanic_type = aldabba_failure_mechanic
+				power_type = restoration_aldabba
+				value = 0.25
+			}
+		}
+	}
+	if = {
+		limit = {
+			has_country_flag = alb_dev_japan_better_flag
+		}
+		random_list = {
+			15 = {
+				add_base_production = 1
+			}
+			85 = {}
+		}
+	}
 }
 
 on_mil_development = {
-
+	if = { 
+		limit = { owner = { has_country_flag = get_manpower_from_dev_grain_flag } trade_goods = grain }
+		owner = {add_manpower = 0.1}
+	}
+	if = { 
+		limit = { owner = { has_country_flag = get_more_manpower_from_dev_grain_flag } trade_goods = grain }
+		owner = {add_manpower = 0.25}
+	}
+	if = { 
+		limit = { owner = { has_country_flag = get_ducats_from_dev_grain_flag } trade_goods = grain }
+		owner = {add_treasury = 15}
+	}
+	if = { 
+		limit = { owner = { has_government_mechanic = bav_councils }	}
+		owner = {
+			add_government_power = {
+				mechanic_type = bav_councils
+				power_type = bavarian_governance
+				value = 1
+			}
+		}
+	}
+	if = { 
+		limit = { 
+			owner = { has_country_flag = megaditta_galactic_claims 	
+			has_government_mechanic = megaditta_core
+		}
+		}
+		owner = {
+			add_corruption = 0.25
+			add_government_power = {
+				mechanic_type = megaditta_core
+				power_type = guild_corruption
+				value = 1
+			}
+		}
+		random_list = {
+			50 = {
+			}
+			50 = {
+				add_base_manpower = 1
+			}
+		}
+	}
+	if = { 
+		limit = { 
+			owner = { 
+				OR = {
+					has_country_modifier = kimunkamuy_lv1_mod
+					has_country_modifier = kimunkamuy_lv2_mod
+					has_country_modifier = kimunkamuy_lv3_mod
+					has_country_modifier = kimunkamuy_lv4_mod
+				}
+			}
+		}
+		owner = {
+			if = {
+				limit = {NOT = {has_country_flag = no_cost_kamuy_flag}}
+				add_mil_power = -10
+			}
+			change_variable = {
+				which = kimunkamuy_variable
+				value = 1
+			}
+			if = {
+				limit = {
+					check_variable = {
+						which = kimunkamuy_variable
+						value = 10
+					}
+				}
+				country_event = {
+					id = ezo.4
+				}
+			}
+		}
+	}
+	if = { 
+		limit = { 
+			owner = { 
+				overlord = { has_country_flag = chance_to_double_mil_a_colonial_province_tt}
+				is_colonial_nation = yes
+			}
+		}
+		random_list = {
+			50 = {
+			}
+			50 = {
+				add_base_manpower = 1
+			}
+		}
+	}
 	if = { 
 		limit = { 
 			owner = { has_country_flag = double_dev_ability }
@@ -466,6 +1044,61 @@ on_mil_development = {
 			add_treasury = -100
 		}
 		add_base_manpower = 1
+	}
+	if = {
+		limit = {
+			owner = { has_country_flag = aldabban_restoration_dev_flag }
+		}
+		owner = {
+			add_government_power = {
+				mechanic_type = aldabba_failure_mechanic
+				power_type = restoration_aldabba
+				value = 0.25
+			}
+		}
+	}
+	if = {
+		limit = {
+			has_country_flag = alb_dev_japan_better_flag
+		}
+		random_list = {
+			15 = {
+				add_base_manpower = 1
+			}
+			85 = {}
+		}
+	}
+}
+
+on_adm_exploited = {
+	if = { 
+		limit = { owner = { has_government_attribute = may_not_reduce_tax_on_exploitation_of_grain } trade_goods = grain }
+		random_list = {
+			50 = {
+				add_base_tax = 1
+				owner = {
+					add_estate_loyalty = {
+						estate = estate_nobles
+						loyalty = -2
+					}
+				}
+			}
+			50 = {}
+		}
+	}
+}
+
+on_mil_exploited = {
+	if = {
+		limit = {owner = {has_country_modifier = dalm_militia_police}}
+		random_list = {
+			50 = {
+				qizilbash_infantry = ROOT
+			}
+			50 = {
+				
+			}
+		}
 	}
 }
 
@@ -488,6 +1121,47 @@ on_thri_yearly_pulse_2 = {
 }
 
 on_province_religion_converted = {
+	##PAP
+	if = {
+		limit = {owner = { has_country_flag = pap_supreme_coring_flag }}
+		if = {
+			limit = {
+				owner = {
+					religion = ROOT
+				}
+				religion = ROOT
+			}
+			add_core = ROOT
+		}
+	}
+	if = {
+		limit = {owner = { has_country_flag = pap_progress_with_conversion_flag }}
+		if = {
+			limit = {
+				owner = {
+					religion = ROOT
+				}
+				religion = ROOT
+			}
+			owner = {
+				change_government_reform_progress = 10
+			}
+		}
+	}
+	if = {
+		limit = {owner = { has_country_flag = pap_better_conversion_flag }}
+		if = {
+			limit = {
+				owner = {
+					religion = ROOT
+				}
+				religion = ROOT
+			}
+			owner = {
+				add_adm_power = 10
+			}
+		}
+	}
 	##wycclifism
 	if = {
 		limit = {owner = {religion = wycliffian mission_completed = germania_hegemon_of_faith_2}}
@@ -545,6 +1219,114 @@ on_province_religion_converted = {
 			}
 		}
 	}
+	if = {
+		limit = { 
+			owner = {
+				has_government_mechanic = aldabba_failure_mechanic
+				has_country_flag = build_churches_flag_ALD
+			}
+			
+		}
+		owner = {
+			add_government_power = {
+				mechanic_type = aldabba_failure_mechanic
+				power_type = restoration_aldabba 
+				value = 0.5
+			}
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_country_flag = converting_religion_AFR_bonus
+			}
+			culture = rhoman
+		}
+		add_nationalism = -5
+	}
+}
+
+on_siege_won_country = {
+	if = {
+		limit = {
+			OR = {
+				OR = {
+					tag = FR0 
+					was_tag = FR0 
+				}
+				is_in_war = { participants = FR0 } 
+			}
+			FR0 = {
+				any_hired_mercenary_company = {
+					template = merc_minecrafters
+					location = { province_id = FROM }
+				}
+			}
+		}
+		FR0 = { 
+			change_variable = {
+				which = miners_siege_counter
+				value = 1
+			}
+		}
+	}
+	if = {
+		limit = {
+			any_hired_mercenary_company = {
+				template = merc_angr_warband
+				location = { province_id = FROM }
+			}
+			any_war_enemy_country = {
+				owns = FROM
+			}
+		}
+		FROM = {
+			add_devastation = 50
+		}
+		ROOT = {
+			every_war_enemy_country = {
+				add_aggressive_expansion = {
+					who = ROOT
+					value = 5
+					apply_calc = no
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			ROOT = {
+				is_or_was_tag = {tag = KO4}
+			}
+		}
+		FROM = {
+			add_base_manpower = -1
+			if = {
+					limit = {
+						has_building = fort_15th
+					}
+					remove_building = fort_15th
+					}
+					else_if = {
+						limit = {
+							has_building = fort_16th
+						}
+						remove_building = fort_16th
+					}
+					else_if = {
+						limit = {
+							has_building = fort_17th
+						}
+						remove_building = fort_17th
+					}
+					else_if = {
+						limit = {
+							has_building = fort_18th
+						}
+						remove_building = fort_18th
+					}
+		}
+	}
 }
 
 # province
@@ -575,8 +1357,84 @@ on_siege_lost_province =  {
 			}
 		}
 	}
+	if = {
+			limit = {
+				owner = {
+					war_with = FROM
+					FROM = {
+						has_country_flag = easy_province_conquest_flag
+					}
+				}
+			}
+			random_neighbor_province = {
+					limit = {
+						NOT = {
+							owned_by = FROM
+						}
+						NOT = {
+							controlled_by = TH1
+						}
+						owner = {
+							war_with = FROM
+						}
+						NOT = {
+							fort_level = 1
+						}
+					}
+					change_controller = FROM
+				}
+		}
+	if = {
+		limit = {
+			owner = {
+				war_with = FROM
+				FROM = {
+					has_country_flag = easy_castle_conquest_flag
+				}
+			}
+		}
+		every_neighbor_province = {
+				limit = {
+					NOT = {
+						owned_by = FROM
+					}
+					NOT = {
+						controlled_by = TH1
+					}
+					owner = {
+						war_with = FROM
+						}
+					NOT = {
+							fort_level = 1
+						}
+					}
+					change_controller = FROM
+				}
+		}
 }
-
+on_yearly_pulse = {
+	if = {
+		limit = {
+			OR = {
+				tag = FJ9
+				tag = FJ0
+			}
+			has_global_flag = mexican_vinland_treaty
+		}
+		country_event = {
+			id = mexic.17
+		}
+	}
+	if ={
+		limit = {
+			tag = MX0
+			has_global_flag = mexican_vinland_treaty
+		}
+		country_event = {
+			id = mexic.16
+		}
+	}
+}
 on_bi_yearly_pulse_5 = {
 	random_events = { #all these were shifted from on_bi_yearly_pulse_1
 		#Islam
@@ -605,10 +1463,250 @@ on_thri_yearly_pulse_2 = {
 		25 = alb_islam_events.9
 	}
 }
-
+on_five_year_pulse = {
+	if = {
+		limit = {
+			OR = {
+				tag = FJ0
+				tag = FJ9
+			}
+			873 = {
+				owned_by = ROOT
+				has_province_modifier = vin_eastern_trade
+			}
+			1034 = {
+				OR = {
+					owned_by = ROOT
+					owner = {
+						alliance_with = ROOT
+					}
+				}
+				NOT = {
+					has_province_modifier = vin_eastern_trade_start
+				}
+			}
+		}
+		country_event = {
+			id = fjal.305
+		}
+	}
+}
+on_leader_recruited = {
+	# if = {
+	# 	limit = { 
+	# 		has_government_mechanic = CEF_centralization_mechanic
+	# 	}
+	# 	add_government_power = {
+	# 		mechanic_type = CEF_centralization_mechanic
+	# 		power_type = CEF_centralization_power
+	# 		value = -5
+	# 	}
+	# }
+}
+on_country_released = {
+	# if = {
+	# 	limit = { 
+	# 		has_government_mechanic = CEF_centralization_mechanic
+	# 	}
+	# 	add_government_power = {
+	# 		mechanic_type = CEF_centralization_mechanic
+	# 		power_type = CEF_centralization_power
+	# 		value = -15
+	# 	}
+	# }
+}
 on_mil_tech_taken = {
 	if = {
 		limit = {has_country_flag = army_tradition_from_tech_flag}
-		add_army_tradition = 5
+		add_army_tradition = 15
+	}
+	if = {
+		limit = {
+			has_country_flag = taking_mil_tech_ald
+			has_government_mechanic = aldabba_failure_mechanic
+		}
+		add_government_power = {
+			mechanic_type = aldabba_failure_mechanic
+			power_type = restoration_aldabba 
+			value = 15
+		}
+	}
+	if= {
+		limit = {has_country_flag = army_professionalism_from_tech_flag}
+		add_army_professionalism = 0.025
+	}
+}
+
+on_added_to_trade_company = {
+	if = {
+		limit = {
+			owner = {
+				has_country_flag = gambling_herkulia_flag
+			}
+		}
+		random_list = {
+			50 = { add_base_production = 1 } 
+			45 = {}
+			5 = { add_base_production = 1 add_base_manpower = 1  } 
+		}
+	}
+}
+
+on_added_to_trade_company = {
+	if = {
+		limit = {
+			FROM = {has_country_flag = stronger_trade_companies_flag}
+		}
+		add_province_modifier = {
+			name = stronger_trade_companies_mod
+			duration = -1
+		}
+	}
+}
+
+on_removed_from_company = {
+	if = {
+		limit = {
+			FROM = {has_country_flag = stronger_trade_companies_flag}
+		}
+		remove_province_modifier = stronger_trade_companies_mod
+	}
+}
+
+on_barrage = { #ROOT - barraging country, FROM - barraged province 
+	if = {
+		limit = {
+			has_country_flag = barrage_lower_defenses_flag
+		}
+		FROM ={
+			add_province_modifier = {
+				name = pap_heaven_calls
+				duration = 365
+			}
+		}
+	}
+	if = {
+		limit = {
+			has_country_flag = extra_fun_siege_forts_flag
+		}
+		FROM ={
+			random_list ={ 
+				10 = {
+					if ={
+						limit = {
+							has_building = fort_15th
+						}
+						remove_building = fort_15th
+					}
+					else_if = {
+						limit = {
+							has_building = fort_16th
+						}
+						remove_building = fort_16th
+					}
+					else_if = {
+						limit = {
+							has_building = fort_17th
+						}
+						remove_building = fort_17th
+					}
+					else_if = {
+						limit = {
+							has_building = fort_18th
+						}
+						remove_building = fort_18th
+					}
+				}
+				90 ={}
+			}
+		}
+	}
+}
+
+on_expanded_infrastructure = {
+	if = {
+		limit = {
+			has_province_flag = ib0_expand_infra_capital_flag
+		}
+		add_base_production = 1
+		add_base_manpower = 1
+		add_base_tax = 1
+	}
+}
+on_expanded_infrastructure_removed = {
+	if = { #no clue why error
+		limit = {
+			has_province_flag = ib0_expand_infra_capital_flag
+		}
+		add_base_production = -1
+		add_base_manpower = -1
+		add_base_tax = -1
+	}
+}
+
+on_buy_religious_reform = {
+	events = {
+		tapui.1
+	}
+}
+
+
+on_secondary_religion_change = {
+	remove_country_modifier = krc_shinto_secondary_bonus
+	remove_country_modifier = krc_kamuy_secondary_bonus
+	if = {
+		limit = {
+			has_country_flag = shinto_secondary_bonus_flag
+			secondary_religion = shinto
+		}
+		add_country_modifier = {
+			name = krc_shinto_secondary_bonus
+			duration = -1
+		}
+	}
+	if = {
+		limit = {
+			has_country_flag = kamuy_secondary_bonus_flag
+			secondary_religion = kamuyramat
+		}
+		add_country_modifier = {
+			name = krc_kamuy_secondary_bonus
+			duration = -1
+		}
+	}
+}
+on_parliament_debate_succeeded = {
+	if = {
+		limit = {
+			has_government_mechanic = bav_councils
+		}
+		add_government_power = {
+				mechanic_type = bav_councils
+				power_type = bavarian_governance
+				value = 5
+			}
+	}
+}
+
+on_parliament_seat_given = {
+	if = {
+		limit = {
+			owner = {has_government_mechanic = bav_councils}
+		}
+		owner = {
+			add_government_power = {
+				mechanic_type = bav_councils
+				power_type = bavarian_governance
+				value = 2
+			}
+		}
+	}
+}
+
+on_harmonized_postroman_group = {
+	on_harmonized_effect = yes
+	on_harmonized_religion_estate_privileges_effect = yes
+	events = {
+		ephesian.1 #cofnusion harmonize
 	}
 }

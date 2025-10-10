@@ -224,7 +224,10 @@ Aqui_3_slot = {
 			capital_scope = { 
 				has_tax_building_trigger = yes 
 			}
-			has_estate_privilege = alb_capitalism_make_money
+			OR = {
+				has_estate_privilege = alb_capitalism_make_money
+				stability = 1
+			}
 		} 
 
 		effect = {
@@ -286,16 +289,17 @@ Aqui_3_slot = {
 				}
 			}
 			else = { stability = 3 } 
-			num_of_completed_idea_groups_all = { amount = 4 } 
+			num_of_completed_idea_groups_all = { amount = 3 } 
 		}
 
 		effect = {
 			hidden_effect = { unlock_government_reform = { government_reform = greater_aquilean_kingdom }  } 
 			add_government_reform = greater_aquilean_kingdom
 			custom_tooltip = empty_line_tt
-			unlock_government_reform = { government_reform = capitanolista_burocrazia } 
-			custom_tooltip = unlock_government_reform_tooltip
-			tooltip = { add_government_reform = capitanolista_burocrazia } 
+			hidden_effect = {
+				unlock_government_reform = { government_reform = capitanolista_burocrazia } 
+			}
+			add_government_reform = capitanolista_burocrazia
 		}
 	}
 
@@ -346,7 +350,7 @@ Aqui_4_slot = {
 		trigger = {
 			OR = {
 				1769 = {
-					owned_by = ROOT
+					country_or_non_sovereign_subject_holds = ROOT
 					grown_by_development = 2
 				}
 				accepted_culture = istrian

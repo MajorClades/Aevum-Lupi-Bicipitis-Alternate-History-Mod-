@@ -1,6 +1,7 @@
 country_decisions = {
 
 	sax_move_capital_dec = {
+		major = yes
 		potential = {
 			tag = SX0
 			OR = {
@@ -38,6 +39,14 @@ country_decisions = {
 			}
 		}
 		effect = {
+			set_country_flag = sax_moved_capital_flag
+			set_capital = 280
+			280 = {
+				add_province_modifier = {
+					name = sx0_restructuring_siescheng
+					duration = 3650
+				}
+			}
 			if = {
 				limit = {
 					subject_owns = 280
@@ -49,14 +58,6 @@ country_decisions = {
 					save_event_target_as = siescheng_owner
 				}
 				inherit = event_target:siescheng_owner
-			}
-			set_country_flag = sax_moved_capital_flag
-			280 = {
-				move_capital_effect = yes
-				add_province_modifier = {
-					name = sx0_restructuring_siescheng
-					duration = 3650
-				}
 			}
 		}
 		ai_will_do = {
@@ -74,6 +75,11 @@ country_decisions = {
 		potential = {
 			tag = SX0
 			capital = 280
+			280 ={
+				NOT = {
+					has_province_modifier = sx0_kesars_palace
+				}
+			}
 		}
 		allow = {
 			280 = {

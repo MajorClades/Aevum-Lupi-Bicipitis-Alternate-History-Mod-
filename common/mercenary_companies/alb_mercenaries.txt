@@ -3,7 +3,7 @@ padania_doge_company = {
 	mercenary_desc_key = FREE_OF_ARMY_PROFESSIONALISM_COST
     regiments_per_development = 0.04
 	cost_modifier = 0.75
-    home_province = 4728 # Pavia
+    home_province = 1862 # Pavia
 	cavalry_weight = 0.2
 	artillery_weight = 0.4 
 	cavalry_cap = 6
@@ -24,6 +24,50 @@ padania_doge_company = {
 	manpower_pool = 30 
 }
 
+vrancish_knights_of_rhodes = {
+    regiments_per_development = 0.03 #1 regiment every 10 dev. Reaches max at 100.
+	max_size = 40
+	cost_modifier = 1
+	counts_towards_force_limit = no 
+    home_province = 213 # Rhodes
+	cavalry_weight = 0
+	artillery_weight = 0
+	cavalry_cap = 6
+	sprites = { dlc040_kni_sprite_pack westerngfx_sprite_pack }
+    trigger = {
+		has_country_flag = vr0_hosting_knights
+		NOT = { has_country_flag = vr0_knights_merc_expansion }
+		capital_scope = { continent = europe }
+		religion_group = christian
+	}
+	modifier = { 
+		shock_damage = 0.05
+		morale_damage = 0.05
+	}
+}
+
+vrancish_knights_of_rhodes_marines = {
+    regiments_per_development = 0.06 #1 regiment every 10 dev. Reaches max at 100.
+	max_size = 40
+	cost_modifier = 0.5
+	counts_towards_force_limit = no 
+    home_province = 213 # Rhodes
+	cavalry_weight = 0
+	artillery_weight = 0
+	cavalry_cap = 6
+	sprites = { dlc040_kni_sprite_pack westerngfx_sprite_pack }
+    trigger = {
+		has_country_flag = vr0_knights_merc_expansion
+		capital_scope = { continent = europe }
+		religion_group = christian
+	}
+	modifier = { 
+		shock_damage = 0.05
+		morale_damage = 0.05
+		regiment_disembark_speed = 0.33
+		landing_penalty = -2
+	}
+}
 khitan_italian_company = {
     regiments_per_development = 0.04
 	cost_modifier = 1
@@ -48,4 +92,306 @@ khitan_italian_company = {
 	min_size = 6
 	max_size = 30
 	manpower_pool = 30 
+}
+red_legion_company = {
+	regiments_per_development = 0.01
+	mercenary_desc_key = FREE_OF_ARMY_PROFESSIONALISM_COST
+	home_province = 356
+	cavalry_weight = 0.5
+	cost_modifier = 0.25
+	sprites = { dlc040_kni_sprite_pack westerngfx_sprite_pack }
+    trigger = {
+		is_allowed_to_recruit_mercenaries = yes
+		has_unlocked_merc_company = {
+			merc_company = red_legion_company
+		}
+	}
+	modifier = { 
+		cavalry_shock = 0.5
+		movement_speed = 0.10
+		leader_land_shock = 1
+	}
+	min_size = 6
+	max_size = 30
+	manpower_pool = 30 
+}
+# Iberian mercenari
+merc_argentine_company = {
+    regiments_per_development = 0.1
+    home_province = 215 
+	cavalry_cap = 0
+	artillery_weight = 0.1
+	sprites = { dlc056_lan_sprite_pack sav_base_sprite_pack westerngfx_sprite_pack }
+    trigger = {
+		is_allowed_to_recruit_mercenaries = yes
+		OR = {
+			capital_scope = { 
+				region = iberia_region
+			}
+			has_country_modifier = mercenaries_to_the_standard
+			has_country_modifier = glut_of_mercs
+		}
+	}
+	modifier = {
+		can_bypass_forts = yes
+	}
+	min_size = 6
+	max_size = 30   
+	manpower_pool = 30
+}
+
+merc_vogadia_loyals = {
+    regiments_per_development = 0.5
+    home_province = 215 
+	cavalry_cap = 6
+	cavalry_weight = 0.2
+	artillery_weight = 0.3
+	sprites = { dlc056_lan_sprite_pack sav_base_sprite_pack westerngfx_sprite_pack }
+    trigger = {
+		has_unlocked_merc_company = {
+			merc_company = merc_vogadia_loyals
+		}
+	}
+	modifier = {
+		land_morale = 0.1
+		morale_damage_received = -0.1
+		recover_army_morale_speed = 0.1
+		leader_land_shock = 1
+	}
+	min_size = 12
+	max_size = 32   
+	manpower_pool = 50
+}
+
+merc_the_rock = {
+    regiments_per_development = 0.1
+    home_province = 226 
+	cavalry_cap = 0
+	artillery_weight = 0.2
+	sprites = { dlc056_lan_sprite_pack sav_base_sprite_pack westerngfx_sprite_pack }
+    trigger = {
+		is_allowed_to_recruit_mercenaries = yes
+		OR = {
+			capital_scope = { 
+				OR = {
+					region = iberia_region
+					region = maghreb_region
+				}
+			}
+			has_country_modifier = mercenaries_to_the_standard
+			has_country_modifier = glut_of_mercs
+		}
+	}
+	modifier = {
+		land_attrition = -0.1
+		leader_siege = 1
+		max_general_siege = 2
+	}
+	min_size = 6
+	max_size = 20   
+	manpower_pool = 20
+}
+
+# Biono mercenari
+valkyr_boudicca_company = {
+    regiments_per_development = 0.1
+    home_province = 1860 
+	cavalry_cap = 0
+	artillery_weight = 0.1
+	sprites = { dlc056_lan_sprite_pack sav_base_sprite_pack westerngfx_sprite_pack }
+    trigger = {
+		is_allowed_to_recruit_mercenaries = yes
+		NOT = {tag = BR0}
+		NOT = {tag = SO0}
+		NOT = {tag = WR0}
+		NOT = {tag = ROM}
+		OR = {
+			capital_scope = { 
+				region = british_isles_region
+			}
+			has_country_modifier = mercenaries_to_the_standard
+			has_country_modifier = glut_of_mercs
+		}
+	}
+	modifier = {
+		may_recruit_female_generals = yes
+        female_advisor_chance = 1.0
+        shock_damage = 0.1
+        shock_damage_received = -0.1
+	}
+	min_size = 6
+	max_size = 20   
+	manpower_pool = 10
+}
+
+merc_frisian_company = {
+    regiments_per_development = 0.02
+	cavalry_weight = 0.1
+	artillery_weight = 0.3
+	cavalry_cap = 2
+    home_province = 4373
+	sprites = { dlc068_jap_sprite_pack jap_base_sprite_pack }
+    trigger = {
+		is_allowed_to_recruit_mercenaries = yes
+		OR = {
+			capital_scope = { 
+				region = british_isles_region
+			}
+			has_country_modifier = mercenaries_to_the_standard
+			has_country_modifier = glut_of_mercs
+		}
+	}
+	modifier = {
+		infantry_power = 0.1
+        discipline = 0.025
+	}
+	min_size = 6
+	max_size = 30   
+}
+
+merc_baldr_defenders = {
+    regiments_per_development = 0.02
+	artillery_weight = 0.3
+    home_province = 1861
+	sprites = { dlc068_jap_sprite_pack jap_base_sprite_pack }
+    trigger = {
+		is_allowed_to_recruit_mercenaries = yes
+		religion = norse_ragnaroked
+		capital_scope = { 
+			region = british_isles_region
+		}
+	}
+	modifier = {
+		movement_speed = -0.2
+		shock_damage_received = -0.1
+        discipline = 0.1
+		artillery_power = 0.1
+	}
+	min_size = 10
+	max_size = 10   
+}
+
+merc_thunder_guns = {
+    regiments_per_development = 0.02
+	artillery_weight = 1
+    home_province = 234
+	sprites = { dlc068_jap_sprite_pack jap_base_sprite_pack }
+    trigger = {
+		is_allowed_to_recruit_mercenaries = yes
+		mil_tech = 7
+		capital_scope = { 
+			region = british_isles_region
+		}
+	}
+	modifier = {
+		artillery_shock = 0.2
+		shock_damage_received = -0.1
+	}
+	min_size = 10
+	max_size = 30   
+}
+
+merc_frisian_loyals = {
+    regiments_per_development = 0.5
+    home_province = 4373 
+	cavalry_cap = 6
+	cavalry_weight = 0.2
+	artillery_weight = 0.3
+	sprites = { dlc056_lan_sprite_pack sav_base_sprite_pack westerngfx_sprite_pack }
+    trigger = {
+		has_unlocked_merc_company = {
+			merc_company = merc_frisian_loyals
+		}
+	}
+	modifier = {
+		morale_damage_received = -0.1
+		recover_army_morale_speed = 0.1
+	}
+	min_size = 12
+	max_size = 32   
+	manpower_pool = 50
+	counts_towards_force_limit = no
+}
+
+merc_minecrafters = {
+    regiments_per_development = 0.5
+    home_province = 233 
+	sprites = { dlc056_lan_sprite_pack sav_base_sprite_pack westerngfx_sprite_pack }
+    trigger = {
+		has_unlocked_merc_company = {
+			merc_company = merc_minecrafters
+		}
+	}
+	modifier = {
+		assault_fort_ability = 1
+		shock_damage_received = 0.2
+		fire_damage_received = 0.2
+		can_bypass_forts = yes
+	}
+	min_size = 12
+	max_size = 32   
+	manpower_pool = 50
+	counts_towards_force_limit = no
+}
+
+merc_angr_warband = {
+    regiments_per_development = 0.15
+	artillery_weight = 0.1
+    home_province = 1861 
+	mercenary_desc_key = ANGRY_ANGRON_DESC
+	sprites = { dlc056_lan_sprite_pack sav_base_sprite_pack westerngfx_sprite_pack }
+	cost_modifier = 0.25
+    trigger = {
+		capital_scope = {
+			OR = {
+				region = british_isles_region
+				region = scandinavia_region
+				region = low_countries_region
+			}
+		}
+		hidden_trigger = {
+			1861 = {
+				NOT = {
+					owned_by = SW2
+				}
+			}
+			KO4 = {
+				exists = no
+			}
+			NOT = {
+				is_year = 1600
+			}
+		}
+	}
+	
+	modifier = {
+		assault_fort_ability = 1
+		land_attrition = -0.25
+		land_morale = -0.2
+		leader_siege = 2
+	}
+	min_size = 12
+	max_size = 32   
+	manpower_pool = 50
+}
+
+#SEA mercenaries
+merc_forest_scout = {
+    regiments_per_development = 0.05
+    artillery_weight = 0.1
+    home_province = 4832
+	sprites = { dlc090_south_east_asian_elephant_sprite_pack ayu_base_sprite_pack asiangfx_sprite_pack }
+	cost_modifier = 1.1
+    trigger = {
+		is_allowed_to_recruit_mercenaries = yes
+		OR = {
+			has_unlocked_merc_company = {
+			merc_company = merc_forest_scout
+		}
+		}
+	}
+    modifier = {
+		land_attrition = -0.3
+		reinforce_speed = 0.15
+	}
 }

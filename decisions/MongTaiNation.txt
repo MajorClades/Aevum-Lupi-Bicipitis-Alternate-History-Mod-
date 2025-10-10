@@ -1,0 +1,77 @@
+country_decisions = {
+	TH8_decision = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			NOT = { has_country_flag = formed_TH8 }
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			was_never_end_game_tag_trigger = yes
+			primary_culture = shan
+			NOT = { exists = TH8 }
+		}
+		provinces_to_highlight = {
+			OR = {
+					area = upper_burma_area
+					area = central_burma_area
+					area = lower_burma_area
+					area = shan_hill_area
+					area = karenni_area
+					area = chindwin_area
+					area = kachin_area
+								}
+			NOT = { owned_by = ROOT }
+		}
+		allow = {
+			is_nomad = no
+			is_at_war = no
+			upper_burma_area = {
+				owned_by = ROOT
+			}
+			central_burma_area = {
+				owned_by = ROOT
+			}
+			lower_burma_area = {
+				owned_by = ROOT
+			}
+			shan_hill_area = {
+				owned_by = ROOT
+			}
+			karenni_area = {
+				owned_by = ROOT
+			}
+			chindwin_area = {
+				owned_by = ROOT
+			}
+			kachin_area = {
+				owned_by = ROOT
+			}
+		}
+		effect = {
+			change_tag = TH8
+			swap_non_generic_missions = yes
+			add_prestige = 25
+			if = {
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			if = {
+				limit = {
+					NOT = { government_rank = 2 }
+				}
+				set_government_rank = 2
+			}
+			add_country_modifier = {
+				name = centralization_modifier
+				duration = 3650
+			}
+			set_country_flag = formed_TH8
+		}		
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+}

@@ -49,6 +49,18 @@ marketplace = {
 			}
 			add_prosperity = 5
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
 	}
 	on_destroyed = {
 		remove_development_from_building = {
@@ -65,6 +77,18 @@ marketplace = {
 				
 			}
 			add_prosperity = -5
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
 		}
 	}
 
@@ -91,12 +115,36 @@ workshop = {
 			type = production
 			value = 1
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
 	}
 	on_destroyed = {
 		remove_development_from_building = {
 			building = workshop
 			type = production
 			value = 1
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
 		}
 	}
 	on_obsolete = {
@@ -188,7 +236,42 @@ temple = {
 				hidden = yes
 			}
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
+		if ={
+			limit = {
+				FROM = {
+					has_country_flag = ib0_improved_churches_flag
+				}
+			}
+			add_province_modifier = {
+				name = ib0_improved_churches_mod
+				duration = -1
+			}
+		}
+		if ={
+			limit = {
+				FROM = {
+					has_country_flag = alb_church_missionary_strength_flag
+				}
+			}
+			add_province_modifier = {
+				name = cr0_church_missionary_strength
+				duration = -1
+			}
+		}
 	}
+
 	on_destroyed = {
 		on_province_tax_building_destroyed_estate_privileges_effect = yes
 		remove_development_from_building = {
@@ -203,6 +286,22 @@ temple = {
 				}
 			}
 			remove_province_modifier = turkoman_peaceful_worshipping
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = ib0_improved_churches_flag
+				}
+			}
+			remove_province_modifier = ib0_improved_churches_mod
+		}
+		if ={
+			limit = {
+				FROM = {
+					has_country_flag = alb_church_missionary_strength_flag
+				}
+			}
+			remove_province_modifier = cr0_church_missionary_strength
 		}
 		if = {
 			limit = {
@@ -244,6 +343,18 @@ temple = {
 				has_province_modifier = azt_religious_classes
 			}
 			remove_province_modifier = azt_religious_classes
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
 		}
 	}
 	on_obsolete = {
@@ -290,6 +401,18 @@ barracks = {
 				hidden = yes
 			}
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
 	}
 	on_destroyed = {
 		if = {
@@ -312,9 +435,27 @@ barracks = {
 		}
 		if = {
 			limit = {
+				has_province_modifier = kolm_god_men
+			}
+			remove_province_modifier = kolm_god_men
+		}
+		if = {
+			limit = {
 				has_province_modifier = azt_barracks_households
 			}
 			remove_province_modifier = azt_barracks_households
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
 		}
 	}
 	on_obsolete = {
@@ -367,6 +508,18 @@ shipyard = {
 			type = production
 			value = 1
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
 	}
 	on_destroyed = {
 		remove_development_from_building = {
@@ -377,6 +530,18 @@ shipyard = {
 		if = {
 			limit = { has_province_modifier = sca_swe_danish_shipyard }
 			remove_province_modifier = sca_swe_danish_shipyard
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
 		}
 	}
 	on_obsolete = {
@@ -438,6 +603,7 @@ fort_15th = {
 				}
 			}
 		}
+		
 		if = {
 			limit = {
 				owner = {
@@ -517,6 +683,18 @@ fort_15th = {
 				duration = -1
 			}
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
 	}
 
 	# THIS = Province, FROM = Destroyer, Will not be called on buildings made obsolete!
@@ -557,6 +735,18 @@ fort_15th = {
 			}
 			remove_province_modifier = ned_low_countries_fort_buff_buffed
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
+		}
 	}
 
 	# THIS = Province, FROM = Destroyer, Will not be called on buildings destroyed!
@@ -582,6 +772,36 @@ coastal_defence = {
 		blockade_force_required = 0.5
 		hostile_disembark_speed = 1.0
 		block_slave_raid = yes
+	}
+
+	on_built = {
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
+	}
+
+	on_destroyed = {
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
+		}
 	}
 
 	ai_will_do = {
@@ -617,6 +837,18 @@ courthouse = {
 				duration = -1 
 			}
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
 	}
 	on_destroyed = {
 		remove_development_from_building = {
@@ -625,6 +857,18 @@ courthouse = {
 			value = 1
 		}
 		remove_province_modifier = fra_improved_court_houses_modifier
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
+		}
 	}
 	on_obsolete = {
 	}
@@ -717,6 +961,18 @@ dock = {
 			type = production
 			value = 1
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
 	}
 	
 	on_destroyed = {
@@ -734,6 +990,18 @@ dock = {
 			building = dock
 			type = production
 			value = 1
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
 		}
 	}
 	on_obsolete = {
@@ -838,6 +1106,18 @@ regimental_camp = {
 				hidden = yes
 			}
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
 	}
 	on_destroyed = {
 		remove_development_from_building = {
@@ -850,9 +1130,27 @@ regimental_camp = {
 		}
 		if = {
 			limit = {
+				has_province_modifier = kolm_god_men
+			}
+			remove_province_modifier = kolm_god_men
+		}
+		if = {
+			limit = {
 				has_province_modifier = azt_conscription_households
 			}
 			remove_province_modifier = azt_conscription_households
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
 		}
 	}
 	on_obsolete = {
@@ -989,6 +1287,18 @@ fort_16th = {
 			}
 			remove_province_modifier = ned_low_countries_fort_buff_buffed
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
 	}
 
 	# THIS = Province, FROM = Destroyer, Will not be called on buildings made obsolete!
@@ -998,6 +1308,18 @@ fort_16th = {
 				has_province_modifier = estate_nobles_development_of_castles_mod
 			}
 			remove_province_modifier = estate_nobles_development_of_castles_mod
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
 		}
 	}
 
@@ -1027,6 +1349,34 @@ naval_battery = {
 		hostile_disembark_speed = 2.0
 		hostile_fleet_attrition = 5
 		block_slave_raid = yes
+	}
+	on_built = {
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
+	}
+	on_destroyed = {
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
+		}
 	}
 
 	ai_will_do = {
@@ -1065,6 +1415,28 @@ cathedral = {
 					estate = estate_church
 					loyalty = 5
 				}
+			}
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = ib0_improved_churches_flag
+				}
+			}
+			add_province_modifier = {
+				name = ib0_improved_churches_mod
+				duration = -1
+			}
+		}
+		if ={
+			limit = {
+				FROM = {
+					has_country_flag = alb_church_missionary_strength_flag
+				}
+			}
+			add_province_modifier = {
+				name = cr0_church_missionary_strength
+				duration = -1
 			}
 		}
 		if = {
@@ -1116,6 +1488,18 @@ cathedral = {
 			duration = -1
 			hidden = yes
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
 	}
 	on_destroyed = {
 		on_province_tax_building_destroyed_estate_privileges_effect = yes
@@ -1131,6 +1515,22 @@ cathedral = {
 				}
 			}
 			remove_province_modifier = turkoman_peaceful_worshipping
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = ib0_improved_churches_flag
+				}
+			}
+			remove_province_modifier = ib0_improved_churches_mod
+		}
+		if ={
+			limit = {
+				FROM = {
+					has_country_flag = alb_church_missionary_strength_flag
+				}
+			}
+			remove_province_modifier = cr0_church_missionary_strength
 		}
 		if = {
 			limit = {
@@ -1173,6 +1573,18 @@ cathedral = {
 			}
 			remove_province_modifier = azt_religious_classes
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
+		}
 	}
 	on_obsolete = {
 	}
@@ -1208,6 +1620,18 @@ university = {
 				duration = -1
 			}
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
 	}
 	on_destroyed = {
 		remove_development_from_building = {
@@ -1220,6 +1644,18 @@ university = {
 				has_province_modifier = gita_advanced_universities
 			}
 			remove_province_modifier = gita_advanced_universities
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
 		}
 	}
 	on_obsolete = {
@@ -1310,12 +1746,36 @@ trade_depot = {
 			value = 2
 			upgrade_value = 1
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
 	}
 	on_destroyed = {
 		remove_development_from_building = {
 			building = trade_depot
 			type = production
 			value = 2
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
 		}
 	}
 	on_obsolete = {
@@ -1351,6 +1811,18 @@ grand_shipyard = {
 			value = 2
 			upgrade_value = 1
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
 	}
 	on_destroyed = {
 		remove_development_from_building = {
@@ -1361,6 +1833,18 @@ grand_shipyard = {
 		if = {
 			limit = { has_province_modifier = sca_swe_danish_shipyard }
 			remove_province_modifier = sca_swe_danish_shipyard
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
 		}
 	}
 	on_obsolete = {
@@ -1445,6 +1929,18 @@ training_fields = {
 				hidden = yes
 			}
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
 	}
 	on_destroyed = {
 		if = {
@@ -1467,9 +1963,27 @@ training_fields = {
 		}
 		if = {
 			limit = {
+				has_province_modifier = kolm_god_men
+			}
+			remove_province_modifier = kolm_god_men
+		}
+		if = {
+			limit = {
 				has_province_modifier = azt_barracks_households
 			}
 			remove_province_modifier = azt_barracks_households
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
 		}
 	}
 	on_obsolete = {
@@ -1583,6 +2097,18 @@ fort_17th = {
 				duration = -1
 			}
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
 	}
 
 	# THIS = Province, FROM = Destroyer, Will not be called on buildings made obsolete!
@@ -1610,6 +2136,18 @@ fort_17th = {
 				has_province_modifier = ned_low_countries_fort_buff_buffed
 			}
 			remove_province_modifier = ned_low_countries_fort_buff_buffed
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
 		}
 	}
 
@@ -1673,12 +2211,36 @@ stock_exchange = {
 				value = 3
 			}
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
 	}
 	on_destroyed = {
 		remove_development_from_building = {
 			building = stock_exchange
 			type = production
 			value = 3
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
 		}
 	}
 	on_obsolete = {
@@ -1706,12 +2268,36 @@ counting_house = {
 			value = 2
 			upgrade_value = 1
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
 	}
 	on_destroyed = {
 		remove_development_from_building = {
 			building = counting_house
 			type = production
 			value = 2
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
 		}
 	}
 	on_obsolete = {
@@ -1758,6 +2344,18 @@ town_hall = {
 				duration = -1 
 			}
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
 	}
 	on_destroyed = {
 		remove_development_from_building = {
@@ -1766,6 +2364,18 @@ town_hall = {
 			value = 2
 		}
 		remove_province_modifier = fra_improved_court_houses_modifier 
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
+		}
 	}
 	on_obsolete = {
 	}
@@ -1868,6 +2478,18 @@ drydock = {
 			value = 2
 			upgrade_value = 1
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
 	}
 	
 	on_destroyed = {
@@ -1885,6 +2507,18 @@ drydock = {
 			building = drydock
 			type = production
 			value = 2
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
 		}
 	}
 	on_obsolete = {
@@ -1952,6 +2586,18 @@ conscription_center = {
 				hidden = yes
 			}
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
 	}
 	on_destroyed = {
 		remove_development_from_building = {
@@ -1964,9 +2610,27 @@ conscription_center = {
 		}
 		if = {
 			limit = {
+				has_province_modifier = kolm_god_men
+			}
+			remove_province_modifier = kolm_god_men
+		}
+		if = {
+			limit = {
 				has_province_modifier = azt_conscription_households
 			}
 			remove_province_modifier = azt_conscription_households
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
 		}
 	}
 	on_obsolete = {
@@ -2090,6 +2754,18 @@ fort_18th = {
 				duration = -1
 			}
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
 	}
 
 	# THIS = Province, FROM = Destroyer, Will not be called on buildings made obsolete!
@@ -2117,6 +2793,18 @@ fort_18th = {
 				has_province_modifier = ned_low_countries_fort_buff_buffed
 			}
 			remove_province_modifier = ned_low_countries_fort_buff_buffed
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
 		}
 	}
 
@@ -2165,6 +2853,18 @@ wharf = {
 			type = production 
 			value = 1 
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
 		
 	}
 	on_destroyed = {
@@ -2177,6 +2877,18 @@ wharf = {
 			building = manufactory 
 			type = production 
 			value = 1
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
 		}
 	}
 	on_obsolete = {
@@ -2229,6 +2941,18 @@ weapons = {
 			type = manpower 
 			value = 1 
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
 	}
 	on_destroyed = {
 		remove_development_from_building = {
@@ -2240,6 +2964,18 @@ weapons = {
 			building = manufactory 
 			type = manpower 
 			value = 1
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
 		}
 	}
 	on_obsolete = {
@@ -2269,6 +3005,18 @@ textile = {
 			type = production 
 			value = 1 
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
 	}
 	on_destroyed = {
 		remove_development_from_building = {
@@ -2280,6 +3028,18 @@ textile = {
 			building = manufactory 
 			type = production 
 			value = 1
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
 		}
 	}
 	on_obsolete = {
@@ -2311,6 +3071,18 @@ plantations = {
 			type = production 
 			value = 1 
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
 	}
 	on_destroyed = {
 		remove_development_from_building = {
@@ -2322,6 +3094,18 @@ plantations = {
 			building = manufactory 
 			type = production 
 			value = 1
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
 		}
 	}
 	on_obsolete = {
@@ -2353,6 +3137,18 @@ tradecompany = {
 			type = production 
 			value = 1 
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
 	}
 	on_destroyed = {
 		remove_development_from_building = {
@@ -2364,6 +3160,18 @@ tradecompany = {
 			building = manufactory 
 			type = production 
 			value = 1
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
 		}
 	}
 	on_obsolete = {
@@ -2400,6 +3208,18 @@ farm_estate = {
 			}
 			add_base_production = 1
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
 	}
 	on_destroyed = {
 		remove_development_from_building = {
@@ -2419,6 +3239,18 @@ farm_estate = {
 				}
 			}
 			add_base_production = -1
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
 		}
 	}
 	on_obsolete = {
@@ -2449,6 +3281,18 @@ mills = {
 			type = production 
 			value = 1 
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
 	}
 	on_destroyed = {
 		remove_development_from_building = {
@@ -2460,6 +3304,18 @@ mills = {
 			building = manufactory 
 			type = production 
 			value = 1
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
 		}
 	}
 	on_obsolete = {
@@ -2490,12 +3346,36 @@ furnace = {
 			type = production
 			value = 2
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
 	}
 	on_destroyed = {
 		remove_development_from_building = {
 			building = manufactory
 			type = production
 			value = 2
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
 		}
 	}
 	on_obsolete = {
@@ -2552,6 +3432,18 @@ ramparts = {
 				duration = -1
 			}
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
 	}
 	
 	on_destroyed = {
@@ -2573,6 +3465,18 @@ ramparts = {
 				has_province_modifier = estate_nobles_development_of_castles_ramparts_mod
 			}
 			remove_province_modifier = estate_nobles_development_of_castles_ramparts_mod
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
 		}
 	}
 	ai_will_do = {
@@ -2634,6 +3538,18 @@ soldier_households = {
 				duration = -1
 			}
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
 	}
 	on_destroyed = {
 		remove_development_from_building = {
@@ -2651,6 +3567,18 @@ soldier_households = {
 				has_province_modifier = wei_suo_system_reform_soldier_households_modifier
 			}
 			remove_province_modifier = wei_suo_system_reform_soldier_households_modifier
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
 		}
 	}
 	on_obsolete = {
@@ -2700,6 +3628,18 @@ impressment_offices = {
 			type = manpower 
 			value = 1 
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
 	}
 	on_destroyed = {
 		remove_development_from_building = {
@@ -2711,6 +3651,18 @@ impressment_offices = {
 			building = impressment_offices 
 			type = manpower 
 			value = 1 
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
 		}
 	}
 	on_obsolete = {
@@ -2794,6 +3746,18 @@ state_house = {
 				duration = -1
 			}
 		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = 1
+		}
 	}
 	on_destroyed = {
 		remove_development_from_building = {
@@ -2806,6 +3770,18 @@ state_house = {
 				has_province_modifier = rom_extra_administration
 			}
 			remove_province_modifier = rom_extra_administration
+		}
+		if = {
+			limit = {
+				FROM = {
+					has_country_flag = buildings_in_livestock_or_grain_flag
+				}
+				OR = {
+					trade_goods = livestock
+					trade_goods = grain
+				}
+			}
+			add_base_tax = -1
 		}
 	}
 	on_obsolete = {

@@ -6,71 +6,290 @@ germ_conf_mechanic = {
 	}
 	powers = {	
 		confederation_power = {
-			gui = parliament_vs_monarchy_gov_mech
-			max = 100	#Centralized
-			min = -100	#Decentralized direction
-			base_monthly_growth = 0.1
-			scaled_modifier = {
-				modifier = {
-					vassal_manpower_bonus = 2
-					vassal_forcelimit_bonus = 1
-					reduced_liberty_desire_on_same_continent = -33
+			max = 100	#Unification
+			min = -100	#Explosion
+			base_monthly_growth = -0.25
+			range_modifier = {
+				trigger = {
+					OR = {
+						war_with = GE7
+						war_with = PU0
+					}
 				}
-				start_value = 0
+				modifier = {
+					monthly_confederation_power = -1
+				}
+				start_value = -100
 				end_value = 100
 			}
-			reverse_scaled_modifier = {
-				modifier = {
-					vassal_manpower_bonus = -1
-					vassal_forcelimit_bonus = -0.5
-					reduced_liberty_desire_on_same_continent = 33
-				}
-				start_value = 0
-				end_value = -100
-			}
 			on_max_reached = {
-				custom_tooltip = german_confederation_max
-				hidden_effect = {
-					every_subject_country = {
-						limit = {
-							is_subject_of_type = ger_vassal
-							NOT = {
-								liberty_desire = 50
-							}
-						}
-						every_owned_province = {
-							add_core = ROOT
-							cede_province = ROOT
-						}
+				if = {
+					limit = {
+						tag = PU0 
 					}
-					every_subject_country = {
-						limit = {
-							is_subject_of_type = ger_vassal
-							liberty_desire = 50
-						}
-						grant_independence = yes
-					}
-					change_tag = GR0
-					restore_country_name_effect = yes
-					set_government_rank = 3			
-					add_country_modifier = {
-						name = "centralization_modifier"
-						duration = 7300
-					}
-					add_prestige_or_monarch_power = {
-						amount = 25
-					}
-					set_country_flag = formed_germany_flag
 					if = {
 						limit = {
-							has_custom_ideas = no
+							GE7 = {
+								has_government_power = {
+									mechanic_type = germ_conf_mechanic
+									power_type = confederation_power
+									value = 95
+								}
+							}
 						}
-						country_event = { id = ideagroups.1 } #Swap Ideas
+						custom_tooltip = GERM_CONF_TT_6
+					}else = {
+						if = {
+							limit = {
+								GE7 = {
+									has_government_power = {
+										mechanic_type = germ_conf_mechanic
+										power_type = confederation_power
+										value = 90
+									}
+								}
+							}
+							custom_tooltip = GERM_CONF_TT_5
+						}else = {
+						if = {
+							limit = {
+								GE7 = {
+									has_government_power = {
+										mechanic_type = germ_conf_mechanic
+										power_type = confederation_power
+										value = 80
+									}
+								}
+							}
+							custom_tooltip = GERM_CONF_TT_4
+						}else = {
+						if = {
+							limit = {
+								GE7 = {
+									has_government_power = {
+										mechanic_type = germ_conf_mechanic
+										power_type = confederation_power
+										value = 75
+									}
+								}
+							}
+							custom_tooltip = GERM_CONF_TT_3
+						}else = {
+						if = {
+							limit = {
+								GE7 = {
+									has_government_power = {
+										mechanic_type = germ_conf_mechanic
+										power_type = confederation_power
+										value = 50
+									}
+								}
+							}
+							custom_tooltip = GERM_CONF_TT_2
+						}else = {
+						if = {
+							limit = {
+								GE7 = {
+									has_government_power = {
+										mechanic_type = germ_conf_mechanic
+										power_type = confederation_power
+										value = 25
+									}
+								}
+							}
+							custom_tooltip = GERM_CONF_TT_1
+						}
 					}
-					add_government_reform = great_germany_reform
-				}				
+					}
+					}
+					}
+					}
+				}
+				if = {
+					limit = {
+						tag = GE7 
+					}
+					if = {
+						limit = {
+							PU0 = {
+								has_government_power = {
+									mechanic_type = germ_conf_mechanic
+									power_type = confederation_power
+									value = 95
+								}
+							}
+						}
+						custom_tooltip = GERM_CONF_TT_6a
+					}else = {
+						if = {
+							limit = {
+								PU0 = {
+									has_government_power = {
+										mechanic_type = germ_conf_mechanic
+										power_type = confederation_power
+										value = 90
+									}
+								}
+							}
+							custom_tooltip = GERM_CONF_TT_5a
+						}else = {
+						if = {
+							limit = {
+								PU0 = {
+									has_government_power = {
+										mechanic_type = germ_conf_mechanic
+										power_type = confederation_power
+										value = 80
+									}
+								}
+							}
+							custom_tooltip = GERM_CONF_TT_4a
+						}else = {
+						if = {
+							limit = {
+								PU0 = {
+									has_government_power = {
+										mechanic_type = germ_conf_mechanic
+										power_type = confederation_power
+										value = 75
+									}
+								}
+							}
+							custom_tooltip = GERM_CONF_TT_3a
+						}else = {
+						if = {
+							limit = {
+								PU0 = {
+									has_government_power = {
+										mechanic_type = germ_conf_mechanic
+										power_type = confederation_power
+										value = 50
+									}
+								}
+							}
+							custom_tooltip = GERM_CONF_TT_2a
+						}else = {
+						if = {
+							limit = {
+								PU0 = {
+									has_government_power = {
+										mechanic_type = germ_conf_mechanic
+										power_type = confederation_power
+										value = 25
+									}
+								}
+							}
+							custom_tooltip = GERM_CONF_TT_1a
+						}
+					}
+					}
+					}
+					}
+					}
+				}
+				if = {
+					limit = {
+						tag = PU0
+					}
+					if = {
+						limit = {
+							GE7 = {ai = yes}
+						}
+						inherit = GE7
+						hidden_effect = {
+							change_tag = GR0
+							restore_country_name = yes
+							set_government_rank = 3			
+							set_country_flag = formed_germany_flag
+							if = {
+								limit = {
+									has_custom_ideas = no
+								}
+								country_event = { id = ideagroups.1 } #Swap Ideas
+							}
+							add_government_reform = great_germany_reform	
+						}	
+					}else = {
+						hidden_effect = {
+							GE7 = {
+								set_government_power = {
+									mechanic_type = germ_conf_mechanic
+									power_type = confederation_power
+									value = 0
+								}
+								freeze_government_power = {
+									mechanic_type = germ_conf_mechanic
+									power_type = confederation_power
+								}
+							}
+							set_government_power = {
+								mechanic_type = germ_conf_mechanic
+								power_type = confederation_power
+								value = 0
+							}
+							freeze_government_power = {
+								mechanic_type = germ_conf_mechanic
+								power_type = confederation_power
+							}
+							country_event = {
+								id = prut.5
+							}
+						}
+					}
+				}
+				if = {
+					limit = {
+						tag = GE7
+					}
+					if = {
+						limit = {
+							PU0 = {ai = yes}
+						}
+						inherit = PU0
+						hidden_effect = {
+							change_tag = GR0
+							restore_country_name = yes
+							set_government_rank = 3			
+							set_country_flag = formed_germany_flag
+							if = {
+								limit = {
+									has_custom_ideas = no
+								}
+								country_event = { id = ideagroups.1 } #Swap Ideas
+							}
+							add_government_reform = great_germany_reform	
+						}	
+					}else = {
+						hidden_effect = {
+							PU0 = {
+								set_government_power = {
+									mechanic_type = germ_conf_mechanic
+									power_type = confederation_power
+									value = 0
+								}
+								freeze_government_power = {
+									mechanic_type = germ_conf_mechanic
+									power_type = confederation_power
+								}
+							}
+							set_government_power = {
+								mechanic_type = germ_conf_mechanic
+								power_type = confederation_power
+								value = 0
+							}
+							freeze_government_power = {
+								mechanic_type = germ_conf_mechanic
+								power_type = confederation_power
+							}
+							country_event = {
+								id = prut.5
+							}
+						}
+					}
+				}		
 			}
 			on_min_reached = {
+				release_all_possible_countries = yes
 				release_all_subjects = yes
 			}
 		}
@@ -79,169 +298,116 @@ germ_conf_mechanic = {
 		germ_vassal_1 = {
 			icon = GFX_table_of_ranks_adm_button
 			trigger = {
+				years_of_income = 0.33
 			}
 			effect = {
-				custom_tooltip = GAIN_5_GERM
-				hidden_effect = {
+				add_years_of_income = -0.33
+				GE7 = {
 					add_government_power = {
 						mechanic_type = germ_conf_mechanic
 						power_type = confederation_power
-						value = -5
+						value = 5
 					}
 				}
-				add_subjects_development_ducats = {
-					multiplier = 1.33
+				PU0 = {
+					add_government_power = {
+						mechanic_type = germ_conf_mechanic
+						power_type = confederation_power
+						value = 5
+					}
 				}
 			}
-			cooldown_years = 5
+			cooldown_years = 3
 			cooldown_token = germ_vassallage_action
 			cooldown_desc = ACTION_GERM_CONF
 			ai_chance = {
 				factor = 20
 				modifier = {
-					factor = 0
-					NOT = { num_of_loans = 1 }
-				}
-				modifier = {
-					factor = 0.5
-					is_in_deficit = no
-				}
-				modifier = {
-					factor = 1.25
-					has_any_disaster = yes
+					factor = 10
+					years_of_income = 1.33
 				}
 				modifier = {
 					factor = 1.5
-					num_of_loans = 2
-					is_in_deficit = yes
-				}
-				modifier = {
-					factor = 20
-					num_of_loans = 1
-				}
-				modifier = {
-					factor = 100
-					num_of_loans = 3
-				}
-				modifier = {
-					factor = 100
-					num_of_loans = 5
-				}
-				modifier = {
-					factor = 100
-					num_of_loans = 7
-				}
-				modifier = {
-					factor = 0.2
-					has_government_power = { 
-						mechanic_type = germ_conf_mechanic 
-						power_type = confederation_power 
-						value = 10
-					}
+					is_in_deficit = no
 				}
 				modifier = {
 					factor = 0
-					NOT = {
-						num_of_subjects = 1
-					}
+					num_of_loans = 2
+					is_in_deficit = yes
 				}
 			}
 		}
 		germ_vassal_2 = {
 			icon = GFX_table_of_ranks_dip_button
 			trigger = { 
+				years_of_manpower = 0.33
 			}
 			effect = { 
-				custom_tooltip = GAIN_5_GERM
-				hidden_effect = {
+				add_yearly_manpower = -0.33
+				GE7 = {
 					add_government_power = {
 						mechanic_type = germ_conf_mechanic
 						power_type = confederation_power
-						value = -5
+						value = 5
 					}
 				}
-				add_subjects_development_manpower = {
-					multiplier = 0.05
+				PU0 = {
+					add_government_power = {
+						mechanic_type = germ_conf_mechanic
+						power_type = confederation_power
+						value = 5
+					}
 				}
 			}
-			cooldown_years = 5
+			cooldown_years = 3
 			cooldown_token = germ_vassallage_action
 			cooldown_desc = ACTION_GERM_CONF
 			ai_chance = {
 				factor = 20
 				modifier = {
-					factor = 20
-					not = { manpower_percentage = 0.3 }
+					factor = 1.5
+					manpower_percentage = 0.3
 				}
 				modifier = {
-					factor = 20
-					not = { manpower_percentage = 0.2 }
+					factor = 10
+					manpower_percentage = 0.6
 				}
 				modifier = {
-					factor = 20
-					not = { manpower_percentage = 0.1 }
+					factor = 10
+					manpower_percentage = 1
 				}
 				modifier = {
-					factor = 100
+					factor = 0
 					is_in_important_war = yes
 				}
 				modifier = {
-					factor = 30
+					factor = 0
 					is_at_war = yes
 					is_in_deficit = no
-				}
-				modifier = {
-					factor = 0
-					is_at_war = no
-					OR = {
-						NOT = {
-							any_neighbor_country = {
-								NOT = { truce_with = ROOT }
-							}
-						}
-						manpower_percentage = 0.9
-					}
-				}
-				modifier = {
-					factor = 0.2
-					has_government_power = { 
-						mechanic_type = germ_conf_mechanic 
-						power_type = confederation_power 
-						value = 10
-					}
-				}
-				modifier = {
-					factor = 0
-					NOT = {
-						num_of_subjects = 1
-					}
 				}
 			}
 		}
 		germ_vassal_3 = {
 			icon = GFX_table_of_ranks_mil_button
 			trigger = {
+				stability = 2
 			}
 			effect = { 	
-				custom_tooltip = GAIN_10_GERM
-				hidden_effect = {
-					add_government_power = {
+				add_stability = -1
+				add_government_power = {
 						mechanic_type = germ_conf_mechanic
 						power_type = confederation_power
-						value = 10
+						value = 5
 					}
-				}
 			}
-			cooldown_years = 5
+			cooldown_years = 3
 			cooldown_token = germ_vassallage_action
 			cooldown_desc = ACTION_GERM_CONF
 			ai_chance = {
 				factor = 10
 				modifier = {
 					factor = 0
-					any_subject_country = {
-						liberty_desire = 45
-					}
+					is_at_war = yes
 				}
 			}
 		}

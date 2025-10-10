@@ -1,0 +1,247 @@
+country_decisions = {
+
+	latveria_nation = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			was_never_end_game_tag_trigger = yes
+			NOT = { has_country_flag = formed_latveria_flag }
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			OR = {
+				is_free_or_tributary_trigger = yes
+				ai = no
+			}
+			culture_group = baltic
+			is_colonial_nation = no
+			OR = {
+				is_former_colonial_nation = no
+				AND = {
+					is_former_colonial_nation = yes
+					ai = no
+				}
+			}
+		}
+		provinces_to_highlight = {
+			OR = {
+				region = ruthenia_region
+			}
+			NOT = { owned_by = ROOT }
+		}
+		allow = {
+			NOT = { exists = LT6 }
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			is_at_war = no
+			owns = 272
+			num_of_owned_provinces_with = {
+				value = 30
+				region = ruthenia_region
+			}
+		}
+		effect = {
+			change_tag = LT6
+			restore_country_name = yes
+			remove_non_electors_emperors_from_empire_effect = yes
+			set_government_rank = 3
+			if = { #TODO - add ideas
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			ruthenia_region = {
+				add_permanent_claim = ROOT
+			}
+			if = {
+				limit = {
+					government = monarchy
+				}
+				add_government_reform = latverian_empire_reform
+			}
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			set_country_flag = formed_latveria_flag
+			add_prestige_or_monarch_power = {
+				amount = 25
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	slasmeria_nation = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			was_never_end_game_tag_trigger = yes
+			NOT = { has_country_flag = formed_slasmeria_flag }
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			OR = {
+				is_free_or_tributary_trigger = yes
+				ai = no
+			}
+			capital_scope = {
+				same_trade_node_as = 1926
+			}
+			NOT = {
+				tag = LT0
+			}
+			NOT = {
+				tag = A99
+			}
+			is_colonial_nation = no
+			OR = {
+				is_former_colonial_nation = no
+				AND = {
+					is_former_colonial_nation = yes
+					ai = no
+				}
+			}
+		}
+		provinces_to_highlight = {
+			same_trade_node_as = 1926
+			OR = {
+				NOT = { owned_by = ROOT }
+				NOT = { is_core = ROOT }
+			}
+		}
+		allow = {
+			adm_tech = 10
+			NOT = { exists = ML3 }
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			is_at_war = no
+			num_of_owned_provinces_with = {
+				value = 30
+				custom_trigger_tooltip = {
+					tooltip = SLASMERIA_FORM_TT
+					same_trade_node_as = 1926
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						tag = JU1
+					}
+				}
+				government = republic
+			}
+		}
+		effect = {
+			change_tag = ML3
+			restore_country_name = yes
+			remove_non_electors_emperors_from_empire_effect = yes
+			set_government_rank = 3
+			#if = { #TODO - add ideas
+			#	limit = { has_custom_ideas = no }
+			#	country_event = { id = ideagroups.1 } #Swap Ideas
+			#}
+			scandinavia_region = {
+				add_permanent_claim = ROOT
+			}
+			baltic_region = {
+				add_permanent_claim = ROOT
+			}
+			if = {
+				limit = {
+					government = republic
+				}
+				add_government_reform = slamerian_republic_reform
+			}
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			set_country_flag = formed_slasmeria_flag
+			add_prestige_or_monarch_power = {
+				amount = 25
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	prusija_nation = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			was_never_end_game_tag_trigger = yes
+			NOT = { has_country_flag = formed_prusija_flag }
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			OR = {
+				is_free_or_tributary_trigger = yes
+				ai = no
+			}
+			culture = prusijan
+			is_colonial_nation = no
+			OR = {
+				is_former_colonial_nation = no
+				AND = {
+					is_former_colonial_nation = yes
+					ai = no
+				}
+			}
+		}
+		provinces_to_highlight = {
+			region = crimea_region
+			OR = {
+				NOT = { owned_by = ROOT }
+				NOT = { is_core = ROOT }
+			}
+		}
+		allow = {
+			adm_tech = 10
+			NOT = { exists = LT5 }
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			is_at_war = no
+			num_of_owned_provinces_with = {
+				value = 15
+				region = crimea_region
+			}
+		}
+		effect = {
+			change_tag = LT5
+			restore_country_name = yes
+			remove_non_electors_emperors_from_empire_effect = yes
+			set_government_rank = 2
+			if = { #TODO - add ideas
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			ruthenia_region = {
+				add_permanent_claim = ROOT
+			}
+			if = {
+				limit = {
+					government = monarchy
+				}
+				add_government_reform = vurozian_marching_duchy_reform
+			}
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			set_country_flag = formed_prusija_flag
+			add_prestige_or_monarch_power = {
+				amount = 25
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+
+}

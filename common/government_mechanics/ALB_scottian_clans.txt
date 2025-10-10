@@ -10,30 +10,65 @@ scot_clans_mechanic = {
 			max = 100
 			is_good = yes
 			min = 0
-			base_monthly_growth = -0.25
+			base_monthly_growth = -0.2 #make it harder to keep up, require 3 stab to be positive
 			reverse_scaled_modifier = {
-				modifier = {
-					core_creation = 0.2
-					nobles_loyalty_modifier = -0.2
-					stability_cost_modifier = 0.5
+				trigger = {
+					government = theocracy
 				}
+				modifier = {
+					governing_capacity_modifier = -0.2
+					nobles_loyalty_modifier = -0.15
+					church_loyalty_modifier = -0.15
+				}
+				start_value = 0
+				end_value = 50
 			}
 			scaled_modifier = {
+				trigger = {
+					government = theocracy
+				}
 				modifier = {
-					core_creation = -0.2
-					nobles_loyalty_modifier = 0.2
-					stability_cost_modifier = 0.5
+					governing_capacity_modifier = 0.2
+					nobles_loyalty_modifier = 0.15
+					church_loyalty_modifier = 0.2
 				}
 				start_value = 50
 				end_value = 100
 			}
-			on_min_reached = {
-				capital_scope = {
-					spawn_rebels = {
-						size = 3
-						type = noble_rebels
-					}
+			reverse_scaled_modifier = {
+				trigger = {
+					government = monarchy
 				}
+				modifier = {
+					core_creation = 0.1
+					nobles_loyalty_modifier = -0.15
+					stability_cost_modifier = 0.2
+				}
+				start_value = 0
+				end_value = 50
+			}
+			scaled_modifier = {
+				trigger = {
+					government = monarchy
+				}
+				modifier = {
+					core_creation = -0.1
+					nobles_loyalty_modifier = 0.15
+					stability_cost_modifier = -0.2
+				}
+				start_value = 50
+				end_value = 100
+			}
+			scaled_modifier = {
+				trigger = {
+					has_reform = celtic_empire_sco_reform
+				}
+				modifier = {
+					max_absolutism = 20
+					land_morale = 0.2
+				}
+				start_value = 50
+				end_value = 100
 			}
 		}
 	}
@@ -41,55 +76,105 @@ scot_clans_mechanic = {
 	interactions = {
 		SCOT_first = {
 			gui = russian_mechanics_interaction_gui
-			icon = GFX_russian_ability_ADM
+			icon = GFX_SCOT_first
 			cost_type = scot_single_power
 			cost = 5
 			trigger = {
 				
 			}
 			effect = {
-				add_yearly_manpower = 0.75
+				if = {
+					limit = {
+						government = monarchy
+					}
+					add_yearly_manpower = 0.25
+					capital_scope = {
+						qizilbash_infantry = ROOT
+					}
+				}else = {
+					add_yearly_manpower = 1
+				}
 			}
-			cooldown_years = 1
+			cooldown_years = 3
 			ai_chance = {
-				factor = 0
+				factor = 1
 			}
 		}
 		SCOT_second = {
 			gui = russian_mechanics_interaction_gui
-			icon = GFX_russian_ability_DIP
+			icon = GFX_SCOT_second
 			cost_type = scot_single_power
 			cost = 5
 			trigger = { 
 				
 			}
 			effect = { 
-				add_mil_power = 100
+				random_list = { #mana is good, 150 every three years is really really good
+				#if you got 50 per year, that works out to a little over 1 per month in each category
+				#this makes it more powerful in 1 category but less powerful overall
+					33 = {
+						add_adm_power = 75
+						custom_tooltip = sco_random_goods_produced_prov_tt
+						hidden_effect = {
+							random_owned_province = {
+								add_province_modifier = {
+									name = sc0_random_goods_prod
+									duration = 1825
+								}
+							}
+						}
+					}
+					33 = {
+						add_mil_power = 75
+						custom_tooltip = sco_random_manpower_prov_tt
+						hidden_effect = {
+							random_owned_province = {
+								add_province_modifier = {
+									name = sc0_random_manpower
+									duration = 1825
+								}
+							}
+						}
+					}
+					33 = {
+						add_dip_power = 75
+						custom_tooltip = sco_random_buildcost_prov_tt
+						hidden_effect = {
+							random_owned_province = {
+								add_province_modifier = {
+									name = sc0_random_buildcost
+									duration = 1825
+								}
+							}
+						}
+					}
+				}
+				custom_tooltip = empty_line_tt
 			}
-			cooldown_years = 1
+			cooldown_years = 3
 			ai_chance = {
-				factor = 0
+				factor = 1
 			}
 		}
 		SCOT_three = {
 			gui = russian_mechanics_interaction_gui
-			icon = GFX_russian_ability_MIL
+			icon = GFX_SCOT_three
 			cost_type = scot_single_power
 			cost = 0
 			trigger = {
-				years_of_income = 0.25
+				years_of_income = 0.2
 			}
 			effect = { 
-				add_years_of_income = -0.25
+				add_years_of_income = -0.2
 				add_government_power = {
 					mechanic_type = scot_clans_mechanic
 					power_type = scot_single_power
 					value = 5
 				}
 			}
-			cooldown_years = 1
+			# cooldown_years = 1 #not needed, let them spend money
 			ai_chance = {
-				factor = 0
+				factor = 1
 			}
 		}
 	}

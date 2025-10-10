@@ -219,7 +219,7 @@ age_of_discovery = {
 				on_age_ability_taken = { age = age_of_discovery }
 			}
 			modifier = {
-				technology_cost = -0.05
+				technology_cost = -0.1
 				num_of_age_rewards = 1
 			}
 			ai_will_do = {
@@ -301,6 +301,7 @@ age_of_reformation = {
 		obj_wycliffian_resurgence = {
 			OR = {
 				religion = wycliffian
+				religion = rashidi
 			}
 		}
 		
@@ -582,8 +583,10 @@ age_of_absolutism = {
 		}
 		
 		obj_HIE_power = {
-			is_part_of_hre = yes
-			total_development = 500
+			AND = {
+				is_part_of_hre = yes
+				total_development = 500
+			}
 		}
 	}	
 	
@@ -690,7 +693,10 @@ age_of_absolutism = {
 				on_age_ability_taken = { age = age_of_absolutism }
 			}
 			allow = {
-				tag = SO0
+				OR = {
+					tag = SO0
+					was_tag = SO0					
+				}
 			}
 			modifier = {
 				max_absolutism_effect = 0.25
@@ -944,6 +950,7 @@ age_of_revolutions = {
 			allow = {
 				OR = {
 					tag = FJ0
+					tag = FJ9
 					tag = MX0
 				}
 			}

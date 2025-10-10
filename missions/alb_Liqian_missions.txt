@@ -1,0 +1,661 @@
+ch4_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = CH4 } 
+
+	ch4_pacify_yi_lands = {
+		icon = mng_deal_kama_kagyu
+		position = 3
+		required_missions = { ch4_barbarian_empire } 
+		provinces_to_highlight = {
+			culture_group = nanman_group
+			owned_by = ROOT
+			unrest = 2
+			local_autonomy = 10
+		}
+
+		trigger = {
+			owns_all_provinces = { culture_group = nanman_group } 
+			all_owned_province = {
+				OR = {
+					AND = {
+						culture_group = nanman_group
+						NOT = { unrest = 2 } 
+						NOT = { local_autonomy = 10 } 
+					}
+					NOT = { culture_group = nanman_group } 
+				}
+			}
+		}
+
+		effect = {
+			add_yearly_manpower = 3
+			custom_tooltip = empty_line_tt
+			add_country_modifier = {
+				name = "ch4_pacified_yi"
+				duration = 10950
+			}
+		}
+	}
+
+	ch4_roman_spirit = {
+		icon = mission_roman_legions
+		position = 5
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			army_professionalism = 0.2
+			army_size = 40
+			monthly_mil = 10
+			num_of_battles = { amount = 15 } 
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "ch4_new_breed_of_warfare"
+				duration = 10950
+			}
+			create_general = { tradition = 100 } 
+		}
+	}
+
+	ch4_western_envoys = {
+		icon = personal_diplomacy
+		position = 6
+		required_missions = { ch4_roman_spirit } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			any_country = {
+				technology_group = western
+				OR = {
+					alliance_with = ROOT
+					has_opinion = {
+						who = ROOT
+						value = 190
+					}
+				}
+				NOT = { tech_difference = 1 } 
+			}
+		}
+
+		effect = { unlock_estate_privilege = { estate_privilege = alb_ch4_chinese_western_commanders }  } 
+	}
+}
+ch4_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = CH4 } 
+
+	ch4_barbarian_empire = {
+		icon = mng_end_sengoku_jidai
+		position = 2
+		required_missions = { ch4_military_spirit } 
+		provinces_to_highlight = {
+			OR = {
+				area = yun_gui_area
+				area = guangxi_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			yun_gui_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			guangxi_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "ch4_end_barbarian_empire"
+				duration = 5475
+			}
+			xinan_region = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	ch4_sweep_sichuan = {
+		icon = mng_expand_bogue
+		position = 4
+		required_missions = { ch4_barbarian_empire } 
+		provinces_to_highlight = {
+			OR = {
+				area = sichuan_area
+				area = chuannan_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			sichuan_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			chuannan_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+
+		effect = {
+			upgrade_roman_heirs = yes
+			custom_tooltip = empty_line_tt
+			add_country_modifier = {
+				name = "ch4_bounty_of_sichuan"
+				duration = 9125
+			}
+			add_adm_power = 100
+		}
+	}
+
+	ch4_legionary_tactics = {
+		icon = army_reforms
+		position = 6
+		required_missions = { ch4_roman_spirit } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			NOT = { has_manpower_building_trigger = yes } 
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 20
+				has_manpower_building_trigger = yes
+			}
+			army_professionalism = 0.5
+			army_size = 100
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "ch4_chinese_conscription"
+				duration = -1
+			}
+		}
+	}
+}
+ch4_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = CH4 } 
+
+	ch4_military_spirit = {
+		icon = mng_thirteen_provinces
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			army_size_percentage = 0.9
+			num_of_generals = 1
+		}
+
+		effect = {
+			custom_tooltip = ch4_cores_on_ming_provinces_tt
+			hidden_effect = { CH2 = { every_owned_province = { add_core = ROOT }  }  } 
+			custom_tooltip = empty_line_tt
+			guangxi_area = { add_permanent_claim = ROOT } 
+			yun_gui_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	ch4_brothers_war = {
+		icon = mission_defy_the_dragon
+		position = 2
+		required_missions = { ch4_military_spirit } 
+		provinces_to_highlight = {
+			OR = {
+				owned_by = CH2
+				province_id = 1829
+			}
+			NOT = { owned_by = ROOT } 
+		}
+
+		trigger = {
+			NOT = { exists = CH2 } 
+			owns = 1829
+		}
+
+		effect = {
+			country_event = { id = liqian.1 } 
+			custom_tooltip = empty_line_tt
+			upgrade_roman_heirs = yes
+		}
+	}
+
+	ch4_end_manicheans = {
+		icon = mng_inward_perfection
+		position = 3
+		required_missions = { ch4_brothers_war } 
+		provinces_to_highlight = {
+			superregion = china_superregion
+			religion = manich
+		}
+
+		trigger = {
+			NOT = {
+				any_province = {
+					superregion = china_superregion
+					religion = manich
+				}
+			}
+			religious_unity = 0.95
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "ch4_ended_manicheaism"
+				duration = -1
+			}
+		}
+	}
+
+	ch4_chinese_hegemony = {
+		icon = qng_ten_grand_campaigns
+		position = 5
+		required_missions = {
+			ch4_sweep_sichuan
+			ch4_end_of_jie
+			ch4_heirs_of_guo_hong
+		}
+		provinces_to_highlight = {
+			superregion = china_superregion
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			OR = {
+				is_emperor_of_china = yes
+				NOT = { any_country = { is_emperor_of_china = yes }  } 
+			}
+			china_superregion = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+
+		effect = {
+			country_event = { id = liqian.6 } 
+			custom_tooltip = empty_line_tt
+			simple_dynamic_effect = {
+				first_custom_tooltip = ch4_is_eoc_tt
+				first_limit =" is_emperor_of_china = yes"
+				first_effect = "
+					add_country_modifier = {
+						name = ch4_southern_emperors
+						duration = -1
+					}
+					add_mandate = 20
+				"
+				second_custom_tooltip = ch4_no_eoc_tt
+				second_limit = "NOT = {
+					any_country = {
+						is_emperor_of_china = yes
+					}
+				}"
+				second_effect = "
+					add_country_modifier = {
+						name = ch4_no_mandate_destroyed
+						duration = -1
+					}
+				"
+			}
+			custom_tooltip = empty_line_tt
+			118 = { add_core = ROOT } 
+		}
+	}
+
+	ch4_rebirth_of_daqin = {
+		icon = give_him_back_his_legions
+		position = 7
+		required_missions = {
+			ch4_chinese_hegemony
+			ch4_legionary_tactics
+			ch4_southern_capital
+		}
+		provinces_to_highlight = {
+			province_id = 118
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = { owns = 118 } 
+
+		effect = {
+			add_country_modifier = {
+				name = "ch4_daqin_restored"
+				duration = -1
+			}
+			italy_region = { add_permanent_claim = ROOT } 
+		}
+	}
+}
+ch4_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = CH4 } 
+
+	ch4_to_yangtze = {
+		icon = mission_invade_island
+		position = 3
+		required_missions = { ch4_brothers_war } 
+		provinces_to_highlight = {
+			region = south_china_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 40
+				region = south_china_region
+			}
+		}
+
+		effect = {
+			north_china_region = { add_permanent_claim = ROOT } 
+			custom_tooltip = empty_line_tt
+			custom_tooltip = empty_line_tt
+			upgrade_roman_heirs = yes
+		}
+	}
+
+	ch4_end_of_jie = {
+		icon = qng_conquer_south_china
+		position = 4
+		required_missions = { ch4_to_yangtze } 
+		provinces_to_highlight = {
+			OR = {
+				area = gansu_area
+				area = west_gansu_area
+				area = shaanxi_area
+				area = shanxi_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			gansu_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			west_gansu_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			shaanxi_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			shanxi_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+
+		effect = {
+			698 = {
+				add_great_project_tier = {
+					type = the_great_wall_of_china
+					tier = 1
+				}
+			}
+			custom_tooltip = empty_line_tt
+			country_event = { id = liqian.2 } 
+		}
+	}
+
+	ch4_southern_capital = {
+		icon = mng_outer_city_beijing
+		position = 6
+		required_missions = { ch4_great_port_of_guangzhou } 
+		provinces_to_highlight = {
+			province_id = 667
+			any_province = {
+				superregion = china_superregion
+				development = 667
+			}
+			num_free_building_slots = 1
+			NOT = {
+				AND = {
+					has_production_building_trigger = yes
+					has_manufactory_trigger = yes
+				}
+			}
+		}
+
+		trigger = {
+			NOT = {
+				any_province = {
+					superregion = china_superregion
+					development = 667
+				}
+			}
+			667 = { NOT = { num_free_building_slots = 1 }  } 
+			667 = { has_production_building_trigger = yes } 
+			667 = { has_manufactory_trigger = yes } 
+		}
+
+		effect = {
+			667 = {
+				remove_province_modifier = ch4_port_of_guangzhou
+				add_province_modifier = {
+					name = "ch4_imperial_capital_of_south"
+					duration = -1
+				}
+				upgrade_production_building = yes
+				set_center_level_3_center_of_trade = yes
+			}
+		}
+	}
+}
+ch4_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = CH4 } 
+
+	ch4_tai_pirates = {
+		icon = mission_pirate_fleet
+		position = 1
+		provinces_to_highlight = { is_capital_of = CGS } 
+
+		trigger = {
+			OR = {
+				owns = 658
+				CGS = {
+					has_opinion = {
+						who = ROOT
+						value = 190
+					}
+					is_subject_of = ROOT
+				}
+			}
+		}
+
+		effect = {
+			vassalize = CGS
+			custom_tooltip = empty_line_tt
+			luzon_area = { add_permanent_claim = ROOT } 
+			southern_luzon_area = { add_permanent_claim = ROOT } 
+			eastern_luzon_area = { add_permanent_claim = ROOT } 
+			visayas_area = { add_permanent_claim = ROOT } 
+			eastern_visayas_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	ch4_panyupayan_protectorate = {
+		icon = mission_las_islas_filipinas
+		position = 2
+		required_missions = { ch4_tai_pirates } 
+		provinces_to_highlight = {
+			OR = {
+				area = luzon_area
+				area = southern_luzon_area
+				area = eastern_luzon_area
+				area = visayas_area
+				area = eastern_visayas_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			luzon_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			southern_luzon_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			eastern_luzon_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			visayas_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			eastern_visayas_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+
+		effect = {
+			if = {
+				limit = { CGS = { is_subject_of = ROOT }  } 
+				custom_tooltip = ch4_lizu_subject_yes_tt
+				inherit = CGS
+			}
+			else = {
+				custom_tooltip = ch4_lizu_subject_no_tt
+				tooltip = { inherit = CGS } 
+			}
+			custom_tooltip = empty_line_tt
+			656 = {
+				add_or_upgrade_trade_building = yes
+				set_center_level_3_center_of_trade = yes
+			}
+			custom_tooltip = empty_line_tt
+			add_country_modifier = {
+				name = "ch4_panyupayan_overlord"
+				duration = 10950
+			}
+		}
+	}
+
+	ch4_heirs_of_guo_hong = {
+		icon = qng_junji_chu
+		position = 4
+		required_missions = { ch4_to_yangtze } 
+		provinces_to_highlight = {
+			OR = {
+				area = south_hebei_area
+				area = hebei_area
+				area = shandong_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 10
+				OR = {
+					area = south_hebei_area
+					area = hebei_area
+					area = shandong_area
+				}
+			}
+			1816 = {
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					controlled_by = ROOT
+				}
+			}
+		}
+
+		effect = {
+			upgrade_roman_heirs = yes
+			custom_tooltip = empty_line_tt
+			if = {
+				limit = {
+					exists = YAN
+					YAN = { is_emperor_of_china = yes } 
+				}
+				custom_tooltip = ch4_yan_is_eoc_yes_tt
+				country_event = { id = liqian.4 } 
+			}
+			else = {
+				custom_tooltip = ch4_yan_is_eoc_no_tt
+				tooltip = { country_event = { id = liqian.4 }  } 
+			}
+		}
+	}
+
+	ch4_great_port_of_guangzhou = {
+		icon = ven_capital_of_europe
+		position = 5
+		provinces_to_highlight = {
+			province_id = 667
+			NOT = {
+				AND = {
+					has_dock_building_trigger = yes
+					has_trade_building_trigger = yes
+					num_of_times_expanded_infrastructure = 1
+				}
+			}
+		}
+
+		trigger = {
+			667 = {
+				owned_by = ROOT
+				is_core = ROOT
+			}
+			667 = { has_dock_building_trigger = yes } 
+			667 = { has_trade_building_trigger = yes } 
+			667 = { num_of_times_expanded_infrastructure = 1 } 
+		}
+
+		effect = {
+			667 = {
+				add_province_modifier = {
+					name = "ch4_port_of_guangzhou"
+					duration = -1
+				}
+				upgrade_trade_building = yes
+			}
+		}
+	}
+
+	ch4_merchant_fleet = {
+		icon = mission_merchant_of_gujarat
+		position = 6
+		required_missions = { ch4_great_port_of_guangzhou } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			navy_size_percentage = 1
+			navy_size = 50
+			num_of_light_ship = 30
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "ch4_chinese_merchant_fleet"
+				duration = -1
+			}
+		}
+	}
+}
