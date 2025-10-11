@@ -1,0 +1,180 @@
+namespace = catha
+
+country_event = {
+	id = catha.1
+	title = catha.1.test
+	desc = catha.1.desc
+	picture = CONQUEROR_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = catha.1a
+		ai_chance = {
+			factor = 1
+		}
+		change_government = republic
+		add_government_reform = cathay_republic_reform
+		kill_ruler = yes
+	}
+	option = {
+		name = catha.1b
+		ai_chance = {
+			factor = 1
+		}
+		custom_tooltip = GUO_TT_3
+		set_country_flag = guo_hong_reason_for_war_flag
+	}
+
+}
+
+country_event = {
+	id = catha.2
+	title = catha.2.test
+	desc = catha.2.desc
+	picture = DIPLOMACY_SIGNING_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = catha.2a
+		trigger = {
+			ai = yes
+		}
+		ai_chance = {
+			factor = 7
+			modifier = {
+				factor = 0
+				NOT = {
+					has_opinion = {
+						who = ROOT
+						value = -50
+					}
+				}
+			}
+			modifier = {
+				factor = 1.2
+				has_opinion = {
+						who = ROOT
+						value = 100
+				}
+			}
+			modifier = {
+				factor = 0.8
+				NOT = {
+					religion = CT0
+				}
+			}
+		}
+		CT0 = {
+			create_union = ROOT
+		}
+	}
+	option = {
+		name = catha.2b
+		trigger = {
+			ai = no
+		}
+		create_union = CT0
+	}
+	option = {
+		name = catha.2c
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 100
+				NOT = {
+					has_opinion = {
+						who = ROOT
+						value = -50
+					}
+				}
+			}
+			modifier = {
+				factor = 4
+				NOT = {
+					has_opinion = {
+						who = ROOT
+						value = 0
+					}
+				}
+			}
+		}
+		add_stability_or_adm_power = yes
+	}
+}
+
+
+country_event = {
+	id = catha.3
+	title = catha.3.test
+	desc = catha.3.desc
+	picture = CONQUEROR_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = catha.3a
+		ai_chance = {
+			factor = 1
+		}
+		change_religion = alevilik
+		add_country_modifier = {
+			name = cathay_olisani_conversion
+			duration = 10950
+		}
+	}
+	option = {
+		name = catha.3b
+		ai_chance = {
+			factor = 1
+		}
+		add_country_modifier = {
+			name = cathay_remain_guptaka
+			duration = 10950
+		}
+	}
+
+}
+
+
+
+country_event = {
+	id = catha.4
+	title = catha.4.test
+	desc = catha.4.desc
+	picture = CONQUEROR_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = catha.4a
+		ai_chance = {
+			factor = 1
+		}
+		286 = {
+			cede_province = ROOT
+			heavy_ship = ROOT
+			heavy_ship = ROOT
+			heavy_ship = ROOT
+			add_permanent_province_modifier = {
+				name = cathay_dragon_port
+				duration = -1
+			}
+		}
+		add_accepted_culture = suomy
+	}
+	option = {
+		name = catha.4b
+		ai_chance = {
+			factor = 1
+		}
+		add_accepted_culture = suomy
+		add_country_modifier = {
+			name = cathay_suomeyan_cavalry
+			duration = -1
+		}
+	}
+	option = {
+		name = catha.4c
+		ai_chance = {
+			factor = 1
+		}
+		every_owned_province = {
+			limit = { culture = suomy }
+			change_culture = khazar
+		}
+	}
+}
