@@ -191,13 +191,13 @@ custom_button = { #a fake button that does nothing, just for the visuals
 	name = eol_button_4_done
 	potential = {
 		has_country_flag = open_eol_menu_flag
-		has_global_flag = decree_eol_4_done
+		has_global_flag = decree_eol_6_done
 	}
 	trigger = {
 	}
 	effect = {	
 	}
-	tooltip = make_war_illegal_in_eol
+	tooltip = make_big_army_for_vassals_and_overlord
 } 
 
 custom_button = { #the actual button that does the effect
@@ -280,13 +280,13 @@ custom_button = { #a fake button that does nothing, just for the visuals
 	name = eol_button_6_done
 	potential = {
 		has_country_flag = open_eol_menu_flag
-		has_global_flag = decree_eol_6_done
+		has_global_flag = decree_eol_4_done
 	}
 	trigger = {
 	}
 	effect = {	
 	}
-	tooltip = make_big_army_for_vassals_and_overlord
+	tooltip = make_war_illegal_in_eol
 } 
 
 custom_button = { 
@@ -844,7 +844,38 @@ custom_shield = {
 			always = yes
 		}
 	} #Determines when the shield is clickable
-    effect = { } #Effect for clicking
+    effect = { 
+		if = {
+			limit = {
+				NOT = {
+					tag = event_target:light_empire_shield_target
+				}
+			}
+			if = {
+			limit = {
+				
+				calc_true_if = {
+					amount = 7
+					has_country_modifier = eol_1_vassal_mod
+					has_country_modifier = eol_2_vassal_mod
+					has_country_modifier = eol_3_vassal_mod
+					has_country_modifier = eol_4_vassal_mod
+					has_country_modifier = eol_5_vassal_mod
+					has_country_modifier = eol_6_vassal_mod
+					has_country_modifier = eol_7_vassal_mod
+					has_country_modifier = eol_8_vassal_mod
+					has_country_modifier = eol_9_vassal_mod
+					has_country_modifier = eol_10_vassal_mod
+				}
+			}
+				country_event = {
+					id = light_emp.5
+				}
+			}else = {
+				custom_tooltip = EOL_TT_1
+			}
+		}
+	} #Effect for clicking
     tooltip = is_light_empire_shield_target_tt #Can use customizable localisation
     global_event_target = light_empire_shield_target
     open_country = yes #If clicking opens the country view
