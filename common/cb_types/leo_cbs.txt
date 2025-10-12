@@ -9,18 +9,20 @@ cb_leo_unite_empire = {
 		}
 	}
 	war_goal = leo_unite_war
-	ai_peace_desire = -30
+	ai_peace_desire = -10
 }
 
 cb_leo_expand_empire = {
 	prerequisites_self = {
 		has_global_flag = decree_eol_3_done
-		tag = LE0
+		tag = event_target:light_empire_shield_target
 	}
 
 	prerequisites = { 
 		FROM = {
-			is_subject = no
+			NOT = {
+				is_subject_of = ROOT
+			}
 		}
 	}
 	war_goal = leo_expand_empire
