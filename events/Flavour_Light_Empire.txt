@@ -1,0 +1,235 @@
+namespace = light_emp
+
+country_event = {
+	id = light_emp.1
+	title = light_emp.1.test
+	desc = light_emp.1.desc
+	picture = CRUSADER_HORDE_eventPicture
+	trigger = {
+		tag = LE0
+	}
+	fire_only_once = yes
+	hidden = yes
+	option = {
+		name = redleg.1a
+		save_global_event_target_as = light_empire_shield_target
+	}
+}
+
+
+country_event = {
+	id = light_emp.2
+	title = light_emp.2.test
+	desc = light_emp.2.desc
+	picture = CRUSADER_HORDE_eventPicture
+	trigger = {
+		OR = {
+			tag = LE0
+			is_subject_of_type_with_overlord = {
+				who = LE0
+				type = light_empire_vassal
+			}
+		}
+		religion = manich
+		has_global_flag = decree_eol_2_done
+	}
+	hidden = yes
+	option = {
+		name = redleg.1a
+		random_owned_province = {
+			limit = {
+				NOT = {
+					religion = manich
+				}
+			}
+			change_religion = manich
+		}
+	}
+}
+
+country_event = {
+	id = light_emp.3
+	title = light_emp.3.test
+	desc = light_emp.3.desc
+	picture = CRUSADER_HORDE_eventPicture
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = redleg.1a
+		event_target:light_empire_shield_target = {
+			inherit = ROOT
+		}
+	}
+}
+
+country_event = {
+	id = light_emp.4
+	title = light_emp.4.test
+	desc = light_emp.4.desc
+	picture = CRUSADER_HORDE_eventPicture
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = redleg.1a
+		every_core_province = {
+			add_core = event_target:light_empire_shield_target
+		}
+		overlord = {
+			free_vassal = ROOT
+		}
+	}
+}
+
+country_event = { #Challenge emperor how you want it
+	id = light_emp.5
+	title = light_emp.5.test
+	desc = light_emp.5.desc
+	picture = CRUSADER_HORDE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = light_emp.5a
+		save_global_event_target_as = light_empire_challenger_target
+		event_target:light_empire_shield_target = {
+			country_event = {
+				id = light_emp.6
+			}
+		}
+		
+	}
+	option = {
+		name = light_emp.5b
+		if = {
+			limit = {
+				has_government_power = {
+					mechanic_type = emp_of_light_point_mechanic
+					power_type = enlightened_prestige_points
+					value = 30
+				}
+			}
+			add_government_power = {
+					mechanic_type = emp_of_light_point_mechanic
+					power_type = enlightened_prestige_points
+					value = -30
+				}
+				save_global_event_target_as = light_empire_challenger_target
+			event_target:light_empire_shield_target = {
+				set_country_flag = medium_bias_eol
+				country_event = {
+					id = light_emp.6
+				}
+			}
+		}else = {
+			custom_tooltip = EOL_TT_2a
+		}
+	}
+	option = {
+		name = light_emp.5c
+		if = {
+			limit = {
+				has_government_power = {
+					mechanic_type = emp_of_light_point_mechanic
+					power_type = enlightened_prestige_points
+					value = 50
+				}
+			}
+			add_government_power = {
+					mechanic_type = emp_of_light_point_mechanic
+					power_type = enlightened_prestige_points
+					value = -50
+				}
+				save_global_event_target_as = light_empire_challenger_target
+			event_target:light_empire_shield_target = {
+				set_country_flag = easy_bias_eol
+				country_event = {
+					id = light_emp.6
+				}
+			}
+		}else = {
+			custom_tooltip = EOL_TT_2b
+		}
+	}
+	option = {
+		name = light_emp.5d
+		
+	}
+}
+
+country_event = { #Emperor has to respong
+	id = light_emp.6
+	title = light_emp.6.test
+	desc = light_emp.6.desc
+	picture = CRUSADER_HORDE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = light_emp.6a
+		ai_chance = {
+			factor = 10
+		}
+		event_target:light_empire_challenger_target = {
+			country_event = {
+				id = light_emp.7
+			}
+		}
+	}
+	option = {
+		name = light_emp.6b
+		trigger = {
+			has_country_flag = medium_bias_eol
+		}
+		ai_chance = {
+			factor = 50
+		}
+		event_target:light_empire_challenger_target = {
+			country_event = {
+				id = light_emp.7
+			}
+		}
+	}
+	option = {
+		name = light_emp.6c
+		trigger = {
+			has_country_flag = easy_bias_eol
+		}
+		ai_chance = {
+			factor = 70
+		}
+		event_target:light_empire_challenger_target = {
+			country_event = {
+				id = light_emp.7
+			}
+		}
+	}
+	option = {
+		name = light_emp.6d
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0.5
+				has_country_flag = easy_bias_eol
+			}
+		}
+		declare_war_with_cb = {
+			casus_belli = cb_leo_expand_empire
+			who = event_target:light_empire_challenger_target
+		}
+	}
+}
+
+country_event = { #response back to player
+	id = light_emp.7
+	title = light_emp.7.test
+	desc = light_emp.7.desc
+	picture = CRUSADER_HORDE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = light_emp.7a
+		inherit = event_target:light_empire_shield_target
+		save_global_event_target_as = light_empire_shield_target
+		override_country_name = LE0
+		hidden_effect = {
+			change_country_color = {
+				country = LE0
+			}
+		}
+	}
+}

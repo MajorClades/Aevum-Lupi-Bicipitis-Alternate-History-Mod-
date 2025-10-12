@@ -1,0 +1,76 @@
+emp_of_light_point_mechanic = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 1
+	available = {
+		religion = manich
+		OR = {
+			is_subject_of = LE0
+			tag = LE0
+		}
+	}
+	
+	powers = {
+		enlightened_prestige_points = {
+			max = 100
+			min = 0
+			gui = council_of_ten_gov_mech
+			show_before_interactions = yes
+			reset_on_new_ruler = no
+			base_monthly_growth = -0.1
+
+			scaled_modifier = {
+				modifier = {
+					prestige_decay = 0.05
+				}
+			}
+		}
+	}
+	
+	interactions = {
+		epp_first_int = {
+			icon = GFX_council_of_ten_adm_interaction_button
+			cooldown_years = 2
+			cost_type = enlightened_prestige_points
+			cost = 10
+			trigger = {
+			}
+			effect = {
+				add_prestige_or_monarch_power = { amount = 10}
+			}
+			ai_chance = {
+				factor = 10
+			}
+		}
+		epp_second_int = {
+			icon = GFX_council_of_ten_dip_interaction_button
+			cooldown_years = 1
+			cost_type = enlightened_prestige_points
+			cost = 10
+			trigger = {
+
+			}
+			effect = {
+				add_adm_power = 20
+				add_dip_power = 20
+				add_mil_power = 20
+			}
+			ai_chance = {
+				factor = 10
+			}
+		}
+		epp_third_int = {
+			icon = GFX_council_of_ten_mil_interaction_button
+			cooldown_years = 2
+			cost_type = enlightened_prestige_points
+			cost = 10
+			trigger = {}
+			effect = {
+				add_yearly_manpower = 0.33
+				add_years_of_income = 0.33
+			}
+			ai_chance = {
+				factor = 10
+			}
+		}
+	}
+}
