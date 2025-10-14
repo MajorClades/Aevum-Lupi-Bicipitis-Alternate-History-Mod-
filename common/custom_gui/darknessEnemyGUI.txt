@@ -14,6 +14,7 @@ custom_icon = {
 	} #Determines when the icon is visible
 }
 
+
 custom_shield = {
     name = darkness_enemy_shield #Must match a scripted guiButtonType in a .gui file
     potential = { 
@@ -24,7 +25,16 @@ custom_shield = {
 			always = yes
 		}
 	} #Determines when the shield is clickable
-    effect = { } #Effect for clicking
+    effect = { 
+      custom_tooltip = WAR_DARKNESS
+      tooltip = {
+        add_country_modifier = {
+          name = war_against_darkness_jyo
+          duration = -1
+        }
+      }
+
+    } #Effect for clicking
     tooltip = is_darkness_enemy_tt #Can use customizable localisation
     global_event_target = darkness_enemy_target
     open_country = yes #If clicking opens the country view
