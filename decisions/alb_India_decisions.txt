@@ -1,0 +1,102 @@
+country_decisions = {
+
+	alb_rally_the_vassals_1 = {
+		major = yes
+		potential = {
+			tag = event_target:light_empire_shield_target
+			is_in_war = {
+				defender_leader = ROOT
+			}
+			any_subject_country = {
+				is_subject_of_type = light_empire_vassal
+			}
+		}
+		allow = {
+			is_at_war = yes
+			is_in_war = {
+				defender_leader = ROOT
+			}
+			custom_trigger_tooltip = {
+				tooltip = IS_EOL
+				tag = event_target:light_empire_shield_target
+			}
+			has_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = 10
+			}
+		}
+		effect = {
+			every_subject_country = {
+				limit = {
+					is_subject_of_type = light_empire_vassal
+				}
+				country_event = {
+					id = light_emp.15
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				war_score = -10
+			}
+		}
+		ai_importance = 400
+	}
+
+	alb_rally_the_vassals_2 = {
+		major = yes
+		potential = {
+			tag = event_target:light_empire_shield_target
+			is_in_war = {
+				attacker_leader = ROOT
+			}
+			any_subject_country = {
+				is_subject_of_type = light_empire_vassal
+			}
+		}
+		allow = {
+			is_at_war = yes
+			is_in_war = {
+				attacker_leader = ROOT
+			}
+			custom_trigger_tooltip = {
+				tooltip = IS_EOL
+				tag = event_target:light_empire_shield_target
+			}
+			has_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = 10
+			}
+		}
+		effect = {
+			add_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = -10
+			}
+			every_subject_country = {
+				limit = {
+					is_subject_of_type = light_empire_vassal
+				}
+				country_event = {
+					id = light_emp.16
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				war_score = -10
+			}
+		}
+		ai_importance = 400
+	}
+
+	
+
+}

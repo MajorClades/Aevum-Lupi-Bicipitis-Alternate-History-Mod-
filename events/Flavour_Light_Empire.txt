@@ -510,3 +510,72 @@ country_event = { #AI getting decrees Number 6
 		add_government_reform = light_empire_united_government
 	}
 }
+
+country_event = { #calling all the vassals to war Defender
+	id = light_emp.15
+	title = light_emp.15.test
+	desc = light_emp.15.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = light_emp.15a
+		ai_chance = {
+			factor = 70
+			modifier = {
+				factor = 2
+				has_global_flag = decree_eol_5_done
+			}
+		}
+		add_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = 5
+			}
+		join_all_defensive_wars_of = event_target:light_empire_shield_target
+	}
+
+	option = {
+		name = light_emp.15b
+		ai_chance = {
+			factor = 30
+		}
+		add_prestige = -5
+	}
+}
+
+
+country_event = { #calling all the vassals to war Offender
+	id = light_emp.16
+	title = light_emp.16.test
+	desc = light_emp.16.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = light_emp.16a
+		ai_chance = {
+			factor = 35
+			modifier = {
+				factor = 2
+				has_global_flag = decree_eol_5_done
+			}
+		}
+		add_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = 5
+			}
+		join_all_offensive_wars_of = event_target:light_empire_shield_target
+	}
+
+	option = {
+		name = light_emp.16b
+		ai_chance = {
+			factor = 65
+		}
+		add_prestige = -1
+	}
+}
