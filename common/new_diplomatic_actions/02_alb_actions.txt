@@ -593,3 +593,60 @@ alb_export_grain = {
 		}
 	}
 }
+
+eol_peace_in_empire_action = {
+	category = influence
+
+	is_visible = {
+		tag = event_target:light_empire_shield_target
+		FROM = {
+			is_at_war = yes
+			is_subject_of_type = light_empire_vassal
+			any_enemy_country = {
+				is_at_war = yes
+				is_subject_of_type = light_empire_vassal
+			}
+		}
+    }
+	is_allowed = {
+		custom_trigger_tooltip = {
+			tooltip = IS_EOL
+			tag = event_target:light_empire_shield_target
+		}
+		is_at_war = no
+		FROM = {
+			is_at_war = yes
+			is_subject_of_type = light_empire_vassal
+			any_enemy_country = {
+				is_at_war = yes
+				is_subject_of_type = light_empire_vassal
+			}
+		}
+    }
+	
+	on_accept = {
+		FROM = {
+			add_government_power = {
+					mechanic_type = emp_of_light_point_mechanic
+					power_type = enlightened_prestige_points
+					value = 5
+				}
+			every_enemy_country = {
+				limit = {
+					is_at_war = yes
+					is_subject_of_type = light_empire_vassal
+				}
+				white_peace = FROM
+				add_government_power = {
+					mechanic_type = emp_of_light_point_mechanic
+					power_type = enlightened_prestige_points
+					value = 5
+				}
+			}
+		}
+    }
+
+	ai_will_do = {
+		always = no
+    }
+}
