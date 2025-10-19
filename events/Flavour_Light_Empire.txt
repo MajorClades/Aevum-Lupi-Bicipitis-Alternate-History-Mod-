@@ -16,6 +16,15 @@ country_event = {
 		REB = {
 			save_global_event_target_as = darkness_enemy_target
 		}
+		if = {
+			limit = {
+				ai = yes
+			}
+			add_country_modifier = {
+				name = less_angry_empire
+				duration = 10850
+			}
+		}
 	}
 }
 
@@ -579,3 +588,199 @@ country_event = { #calling all the vassals to war Offender
 		add_prestige = -1
 	}
 }
+
+
+country_event = { #calling all the vassals to war Offender
+	id = light_emp.17
+	title = light_emp.17.test
+	desc = light_emp.17.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	trigger = {
+		ai = yes
+		is_subject_of = event_target:light_empire_shield_target
+		has_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = 5
+			}
+	}
+	mean_time_to_happen = {
+		months = 6
+	}
+
+	option = {
+		name = light_emp.17a
+		ai_chance = {
+			factor = 1
+		}
+		trigger = {
+			NOT = { has_country_modifier = eol_1_vassal_mod }
+		}
+		add_country_modifier = {
+			name = eol_1_vassal_mod
+			duration = -1
+		}
+	}
+
+	option = {
+		name = light_emp.17b
+		ai_chance = {
+			factor = 1
+		}
+		trigger = {
+			NOT = { has_country_modifier = eol_2_vassal_mod }
+		}
+		add_country_modifier = {
+			name = eol_2_vassal_mod
+			duration = -1
+		}
+	}
+	option = {
+		name = light_emp.17c
+		ai_chance = {
+			factor = 1
+		}
+		trigger = {
+			NOT = { has_country_modifier = eol_3_vassal_mod }
+		}
+		add_country_modifier = {
+			name = eol_3_vassal_mod
+			duration = -1
+		}
+	}
+
+	option = {
+		name = light_emp.17d
+		ai_chance = {
+			factor = 1
+		}
+		trigger = {
+			NOT = { has_country_modifier = eol_4_vassal_mod }
+		}
+		add_country_modifier = {
+			name = eol_4_vassal_mod
+			duration = -1
+		}
+	}
+	option = {
+		name = light_emp.17e
+		ai_chance = {
+			factor = 1
+		}
+		trigger = {
+			NOT = { has_country_modifier = eol_5_vassal_mod }
+		}
+		add_country_modifier = {
+			name = eol_5_vassal_mod
+			duration = -1
+		}
+	}
+	option = {
+		name = light_emp.17f
+		ai_chance = {
+			factor = 1
+		}
+		trigger = {
+			NOT = { has_country_modifier = eol_6_vassal_mod }
+		}
+		add_country_modifier = {
+			name = eol_6_vassal_mod
+			duration = -1
+		}
+	}
+
+	option = {
+		name = light_emp.17g
+		ai_chance = {
+			factor = 1
+		}
+		trigger = {
+			NOT = { has_country_modifier = eol_7_vassal_mod }
+		}
+		add_country_modifier = {
+			name = eol_7_vassal_mod
+			duration = -1
+		}
+	}
+	option = {
+		name = light_emp.17h
+		ai_chance = {
+			factor = 1
+		}
+		trigger = {
+			NOT = { has_country_modifier = eol_8_vassal_mod }
+		}
+		add_country_modifier = {
+			name = eol_8_vassal_mod
+			duration = -1
+		}
+	}
+	option = {
+		name = light_emp.17i
+		ai_chance = {
+			factor = 1
+		}
+		trigger = {
+			NOT = { has_country_modifier = eol_9_vassal_mod }
+		}
+		add_country_modifier = {
+			name = eol_9_vassal_mod
+			duration = -1
+		}
+	}
+
+	option = {
+		name = light_emp.17l
+		ai_chance = {
+			factor = 1
+		}
+		trigger = {
+			NOT = { has_country_modifier = eol_10_vassal_mod }
+		}
+		add_country_modifier = {
+			name = eol_10_vassal_mod
+			duration = -1
+		}
+	}
+}
+
+country_event = { #AI becoming Emperor of Light
+	id = light_emp.18
+	title = light_emp.18.test
+	desc = light_emp.18.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	trigger = {
+		ai = yes
+		NOT = {
+				tag = event_target:light_empire_shield_target
+				}
+		calc_true_if = {
+						amount = 7
+						has_country_modifier = eol_1_vassal_mod
+						has_country_modifier = eol_2_vassal_mod
+						has_country_modifier = eol_3_vassal_mod
+						has_country_modifier = eol_4_vassal_mod
+						has_country_modifier = eol_5_vassal_mod
+						has_country_modifier = eol_6_vassal_mod
+						has_country_modifier = eol_7_vassal_mod
+						has_country_modifier = eol_8_vassal_mod
+						has_country_modifier = eol_9_vassal_mod
+						has_country_modifier = eol_10_vassal_mod
+					}
+	}
+	mean_time_to_happen = {
+		months = 240
+	}
+
+	option = {
+		name = light_emp.18a
+		event_target:light_empire_shield_target = {
+			country_event = {
+					id = light_emp.5
+			}
+		}
+	}
+}
+
