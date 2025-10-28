@@ -283,4 +283,73 @@ country_decisions = {
 		}
 	}
 
+	siberian_march_decision = {
+		potential = {
+			NOT = {
+				tag = IN0
+			}
+			any_owned_province = {
+				culture = inuit
+			}
+			NOT = {
+				has_country_flag = no_siberian_march
+			}
+			NOT = {
+				technology_group = nomad_group
+			}
+			NOT = {
+				culture_group = kamchatkan_g
+			}
+			NOT = {
+				culture_group = evenks
+			}
+		}
+		color = { 222 244 40 }
+		allow = {
+			owns_all_provinces = {
+				culture = inuit
+			}
+		}
+		effect = {
+			country_event = {
+				id = yamat.102
+			}
+			set_country_flag = no_siberian_march
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+	siberian_march_op_decision = { # AI only
+		potential = {
+			ai = yes
+			tag = IN0
+			overlord = {
+				has_country_flag = no_siberian_march
+			}
+			has_country_modifier = north_march_siberian_op
+		}
+		color = { 222 244 40 }
+		allow = {
+			any_owned_province = {
+				NOT = {
+					region = east_siberia_region
+				}
+			}
+		}
+		effect = {
+			every_owned_province = {
+				limit = {
+					NOT = {
+						region = east_siberia_region
+					}
+				}
+				cede_province = event_target:overlord_inuit_governship
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
 }

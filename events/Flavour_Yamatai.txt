@@ -901,6 +901,124 @@ country_event = {
 	}
 }
 
+country_event = {
+	id = yamat.102
+	title = yamat.102.t
+	desc = yamat.102.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.102a
+		east_siberia_region = {
+			limit = {
+				owned_by = ROOT
+			}
+			cede_province = IN0
+			add_core = IN0
+		}
+		vassalize = IN0
+		country_event = {
+			id = yamat.103
+		}
+	}
+	option = {
+		name = yamat.102b
+		every_owned_province = {
+			limit = {
+				culture = inuit
+			}
+			add_base_manpower = 1
+			add_core = IN0
+		}
+	}
+}
+
+country_event = {
+	id = yamat.103
+	title = yamat.103.t
+	desc = yamat.103.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			save_global_event_target_as = overlord_inuit_governship
+		}
+	}
+	option = {
+		name = yamat.103a
+		IN0 = {
+			if = {
+				limit = {
+					overlord = {
+						culture_group = japanese_g
+					}
+				}
+				override_country_name = KYO_TAG
+			}else = {
+				override_country_name = GOVERN_NORTH
+			}
+			add_stability = 1
+			add_manpower = 5
+		}
+	}
+	option = {
+		name = yamat.103b
+		create_march = IN0
+		IN0 = {
+			if = {
+				limit = {
+					overlord = {
+						culture_group = japanese_g
+					}
+				}
+				override_country_name = KYO_TAG
+			}else = {
+				override_country_name = GOVERN_NORTH
+			}
+			change_country_color = {
+				country = event_target:overlord_inuit_governship
+			}
+			add_country_modifier = {
+				name = north_march_siberian
+				duration = -1
+			}
+			capital_scope = {
+				build_to_forcelimit = {
+					infantry = 1
+				}
+			}
+		}
+	}
+	option = {
+		name = yamat.103c
+		create_march = IN0
+		IN0 = {
+			if = {
+				limit = {
+					overlord = {
+						culture_group = japanese_g
+					}
+				}
+				override_country_name = KYO_TAG
+			}else = {
+				override_country_name = GOVERN_NORTH
+			}
+			change_country_color = {
+				country = event_target:overlord_inuit_governship
+			}
+			add_country_modifier = {
+				name = north_march_siberian_op
+				duration = -1
+			}
+			hidden_effect = {
+				add_idea_group = defensive_ideas
+			}
+		}
+		
+		custom_tooltip = CANNOT_HOLD_PROV
+	}
+}
+
 country_event = { 
 	id = yamat.1000
 	title = yamat.1000.t
