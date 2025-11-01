@@ -1,0 +1,235 @@
+FRS_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = FRS
+			AND = {
+				tag = PER
+				was_tag = FRS
+			}
+		}
+	} 
+
+	frs_fortify_hormuz = {
+		icon = mission_chinese_general_riding
+		position = 1
+		provinces_to_highlight = { province_id = 2999 NOT = { country_or_non_sovereign_subject_holds = ROOT } } 
+
+		trigger = { 
+			2999 = {
+				owned_by = ROOT
+				OR = {
+					fort_level = 2
+					grown_by_development = 4
+				}
+			}
+		} 
+
+		effect = {
+			4327 = {
+				add_permanent_claim = ROOT
+			}
+			2999 = {
+				change_religion = zoroastrian
+			}
+		}
+	}
+
+	frs_hormuz_trade_center = {
+		icon = mission_marwari_horses
+		position = 2
+		required_missions = { frs_fortify_hormuz } 
+		provinces_to_highlight = { area = mogostan_area NOT = { country_or_non_sovereign_subject_holds = ROOT } } 
+
+		trigger = {
+			mogostan_area = {
+				type = all
+				owned_by = ROOT
+			}
+			2999 = {
+				base_production = 6
+			}
+		}
+
+		effect = {
+			mogostan_area = {
+				change_culture = persian
+			}
+			2999 = {
+				add_permanent_province_modifier = {
+					name = frs_gems_of_hormuz
+					duration = 10950
+				}
+			}
+		}
+	}
+
+	frs_hormuz_trade_empire = {
+		icon = mission_marwari_horses
+		position = 3
+		required_missions = { frs_hormuz_trade_center frs_trade_power} 
+		provinces_to_highlight = { province_has_center_of_trade_of_level = 1 owned_by = ROOT } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				province_has_center_of_trade_of_level = 2
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = frs_trade_empire
+				duration = -1
+			}
+		}
+	}
+}
+FRS_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = FRS
+			AND = {
+				tag = PER
+				was_tag = FRS
+			}
+		}
+	} 
+
+	frs_trade_power = {
+		icon = mission_chinese_general_riding
+		position = 2
+		provinces_to_highlight = { province_id = 1334 } 
+
+		trigger = { 
+			1334 = {
+				trade_share = {
+					country = ROOT
+					share = 65
+				}
+			}
+		} 
+
+		effect = {
+			define_admiral = {
+				shock = 3
+				fire = 2
+				manuever = 6
+			}
+			1334 = {
+				add_trade_node_income = 30
+			}
+		}
+	}
+}
+FRS_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = FRS
+			AND = {
+				tag = PER
+				was_tag = FRS
+			}
+		}
+	} 
+
+	frs_army_of_the_gulf = {
+		icon = mission_chinese_general_riding
+		position = 1
+
+		trigger = { 
+			if = {
+				limit = {
+					ai = yes
+				}
+				army_size_percentage = 0.75
+				treasury = 50
+			}else = {
+				army_size_percentage = 0.9
+			}
+		} 
+
+		effect = {
+			khuzestan_area = {
+				add_permanent_claim = ROOT
+			}
+			pirate_coast_area = {
+				add_permanent_claim = ROOT
+			}
+			bahrain_area = {
+				add_permanent_claim = ROOT
+			}
+			basra_area = {
+				add_permanent_claim = ROOT
+			}
+			# unlock_estate_privilege = {
+			# 	estate_privilege = estate_burghers_great_works_of_iran
+			# }
+			# unlock_estate_privilege = {
+			# 	estate_privilege = estate_burghers_persian_rugs
+			# }
+		}
+	}
+
+	frs_some_conquest = {
+		icon = mission_marwari_horses
+		position = 2
+		required_missions = { frs_army_of_the_gulf } 
+		provinces_to_highlight = { area = khuzestan_area NOT = { country_or_non_sovereign_subject_holds = ROOT } } 
+
+		trigger = {
+			khuzestan_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+		
+		}
+	}
+
+}
+FRS_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = FRS
+			AND = {
+				tag = PER
+				was_tag = FRS
+			}
+		}
+	}  
+
+}
+FRS_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = FRS
+			AND = {
+				tag = PER
+				was_tag = FRS
+			}
+		}
+	} 
+
+}
