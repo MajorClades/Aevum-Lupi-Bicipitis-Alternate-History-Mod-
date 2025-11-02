@@ -3,7 +3,7 @@ FRS_1_slot = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { 
+	potential = {
 		OR = {
 			tag = FRS
 			AND = {
@@ -11,14 +11,17 @@ FRS_1_slot = {
 				was_tag = FRS
 			}
 		}
-	} 
+	}
 
 	frs_fortify_hormuz = {
-		icon = mission_chinese_general_riding
+		icon = mam_hormuz_straits
 		position = 1
-		provinces_to_highlight = { province_id = 2999 NOT = { country_or_non_sovereign_subject_holds = ROOT } } 
+		provinces_to_highlight = {
+			province_id = 2999
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
 
-		trigger = { 
+		trigger = {
 			2999 = {
 				owned_by = ROOT
 				OR = {
@@ -26,65 +29,58 @@ FRS_1_slot = {
 					grown_by_development = 4
 				}
 			}
-		} 
+		}
 
 		effect = {
-			4327 = {
-				add_permanent_claim = ROOT
-			}
-			2999 = {
-				change_religion = zoroastrian
-			}
+			4327 = { add_permanent_claim = ROOT } 
+			2999 = { change_religion = zoroastrian } 
 		}
 	}
 
-	frs_hormuz_trade_center = {
-		icon = mission_marwari_horses
+	frs_trade_power = {
+		icon = qara_qoyunlu_dominate_the_gulf
 		position = 2
 		required_missions = { frs_fortify_hormuz } 
-		provinces_to_highlight = { area = mogostan_area NOT = { country_or_non_sovereign_subject_holds = ROOT } } 
+		provinces_to_highlight = { province_id = 1334 } 
 
 		trigger = {
-			mogostan_area = {
-				type = all
-				owned_by = ROOT
-			}
-			2999 = {
-				base_production = 6
-			}
-		}
-
-		effect = {
-			mogostan_area = {
-				change_culture = persian
-			}
-			2999 = {
-				add_permanent_province_modifier = {
-					name = frs_gems_of_hormuz
-					duration = 10950
+			1334 = {
+				trade_share = {
+					country = ROOT
+					share = 65
 				}
 			}
 		}
+
+		effect = {
+			define_admiral = {
+				shock = 3
+				fire = 2
+				manuever = 6
+			}
+			1334 = { add_trade_node_income = 30 } 
+		}
 	}
 
-	frs_hormuz_trade_empire = {
-		icon = mission_marwari_horses
-		position = 3
-		required_missions = { frs_hormuz_trade_center frs_trade_power} 
-		provinces_to_highlight = { province_has_center_of_trade_of_level = 1 owned_by = ROOT } 
+	frs_gulf_traders = {
+		icon = mission_dominate_persian_gulf
+		position = 4
+		required_missions = { frs_trade_power } 
+		provinces_to_highlight = { province_id = 1335 } 
 
 		trigger = {
-			num_of_owned_provinces_with = {
-				value = 5
-				province_has_center_of_trade_of_level = 2
+			government_rank = 2
+			1335 = {
+				trade_share = {
+					country = ROOT
+					share = 65
+				}
 			}
 		}
 
 		effect = {
-			add_country_modifier = {
-				name = frs_trade_empire
-				duration = -1
-			}
+			1335 = { add_trade_node_income = 30 } 
+			set_trade_power_requirement_of_propogate_religion = { value = 35 } 
 		}
 	}
 }
@@ -93,7 +89,7 @@ FRS_2_slot = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { 
+	potential = {
 		OR = {
 			tag = FRS
 			AND = {
@@ -101,31 +97,67 @@ FRS_2_slot = {
 				was_tag = FRS
 			}
 		}
-	} 
+	}
 
-	frs_trade_power = {
-		icon = mission_chinese_general_riding
+	frs_hormuz_trade_center = {
+		icon = mission_into_persia_1
 		position = 2
-		provinces_to_highlight = { province_id = 1334 } 
+		required_missions = { frs_fortify_hormuz } 
+		provinces_to_highlight = {
+			area = mogostan_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
 
-		trigger = { 
-			1334 = {
-				trade_share = {
-					country = ROOT
-					share = 65
-				}
+		trigger = {
+			mogostan_area = {
+				type = all
+				owned_by = ROOT
 			}
-		} 
+			2999 = { base_production = 6 } 
+		}
 
 		effect = {
-			define_admiral = {
-				shock = 3
-				fire = 2
-				manuever = 6
+			mogostan_area = { change_culture = persian } 
+			2999 = {
+				add_permanent_province_modifier = {
+					name = "frs_gems_of_hormuz"
+					duration = 10950
+				}
 			}
-			1334 = {
-				add_trade_node_income = 30
+		}
+	}
+
+	frs_hormuz_trade_empire = {
+		icon = mission_persian_lion
+		position = 3
+		required_missions = {
+			frs_hormuz_trade_center
+			frs_trade_power
+		}
+		provinces_to_highlight = {
+			province_has_center_of_trade_of_level = 1
+			owned_by = ROOT
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				province_has_center_of_trade_of_level = 2
+				OR = {
+					has_province_modifier = fars_trade_expansion_3
+					has_province_modifier = fars_trade_expansion_2
+					has_province_modifier = fars_trade_expansion_1
+				}
 			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "frs_trade_empire"
+				duration = -1
+			}
+			set_country_flag = halved_cost_for_trade_expansion
+			custom_tooltip = trade_expansion_button_buff
 		}
 	}
 }
@@ -134,7 +166,7 @@ FRS_3_slot = {
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { 
+	potential = {
 		OR = {
 			tag = FRS
 			AND = {
@@ -142,51 +174,38 @@ FRS_3_slot = {
 				was_tag = FRS
 			}
 		}
-	} 
+	}
 
 	frs_army_of_the_gulf = {
-		icon = mission_chinese_general_riding
+		icon = mission_persian_soldiers
 		position = 1
+		provinces_to_highlight = {  } 
 
-		trigger = { 
+		trigger = {
 			if = {
-				limit = {
-					ai = yes
-				}
+				limit = { ai = yes } 
 				army_size_percentage = 0.75
 				treasury = 50
-			}else = {
-				army_size_percentage = 0.9
 			}
-		} 
+			else = { army_size_percentage = 0.9 } 
+		}
 
 		effect = {
-			khuzestan_area = {
-				add_permanent_claim = ROOT
-			}
-			pirate_coast_area = {
-				add_permanent_claim = ROOT
-			}
-			bahrain_area = {
-				add_permanent_claim = ROOT
-			}
-			basra_area = {
-				add_permanent_claim = ROOT
-			}
-			# unlock_estate_privilege = {
-			# 	estate_privilege = estate_burghers_great_works_of_iran
-			# }
-			# unlock_estate_privilege = {
-			# 	estate_privilege = estate_burghers_persian_rugs
-			# }
+			khuzestan_area = { add_permanent_claim = ROOT } 
+			pirate_coast_area = { add_permanent_claim = ROOT } 
+			bahrain_area = { add_permanent_claim = ROOT } 
+			basra_area = { add_permanent_claim = ROOT } 
 		}
 	}
 
 	frs_some_conquest = {
-		icon = mission_marwari_horses
+		icon = per_balance_of_power
 		position = 2
 		required_missions = { frs_army_of_the_gulf } 
-		provinces_to_highlight = { area = khuzestan_area NOT = { country_or_non_sovereign_subject_holds = ROOT } } 
+		provinces_to_highlight = {
+			area = khuzestan_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
 
 		trigger = {
 			khuzestan_area = {
@@ -196,17 +215,86 @@ FRS_3_slot = {
 		}
 
 		effect = {
-		
+			luristan_area = { add_permanent_claim = ROOT } 
+			khuzestan_area = { add_base_production = 1 } 
 		}
 	}
 
+	frs_more_conquest = {
+		icon = mam_basrah
+		position = 3
+		required_missions = { frs_some_conquest } 
+		provinces_to_highlight = {
+			area = basra_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			basra_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_accepted_culture_or_dip_power = { culture = babylonian_new } 
+			5023 = { add_or_upgrade_trade_building = yes } 
+		}
+	}
+
+	frs_island_and_gulfs = {
+		icon = per_a_new_eranshahr
+		position = 4
+		required_missions = {
+			frs_hormuz_trade_empire
+			frs_more_conquest
+			frs_bahrain_conquest
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 5023
+				province_id = 2999
+				province_id = 396
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			5023 = { owned_by = ROOT } 
+			2999 = { owned_by = ROOT } 
+			396 = { owned_by = ROOT } 
+			navy_size_percentage = 1
+		}
+
+		effect = {
+			5023 = {
+				add_province_modifier = {
+					name = "our_gulf_modifier"
+					duration = -1
+				}
+			}
+			2999 = {
+				add_province_modifier = {
+					name = "our_gulf_modifier"
+					duration = -1
+				}
+			}
+			396 = {
+				add_province_modifier = {
+					name = "our_gulf_modifier"
+					duration = -1
+				}
+			}
+			persia_region = { add_permanent_claim = ROOT } 
+		}
+	}
 }
 FRS_4_slot = {
 	slot = 4
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { 
+	potential = {
 		OR = {
 			tag = FRS
 			AND = {
@@ -214,15 +302,61 @@ FRS_4_slot = {
 				was_tag = FRS
 			}
 		}
-	}  
+	}
 
+	frs_no_pirates = {
+		icon = mission_dharma_mission_arabian_trade
+		position = 2
+		required_missions = { frs_army_of_the_gulf } 
+		provinces_to_highlight = {
+			area = pirate_coast_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			pirate_coast_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_accepted_culture_or_dip_power = { culture = gulf_arabic } 
+			mascat_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	frs_bahrain_conquest = {
+		icon = mission_arabian_fort
+		position = 3
+		required_missions = { frs_no_pirates } 
+		provinces_to_highlight = {
+			area = bahrain_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			bahrain_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			397 = { center_of_trade = 1 } 
+			add_country_modifier = {
+				name = "frs_conquest_of_arabia"
+				duration = 10950
+			}
+		}
+	}
 }
 FRS_5_slot = {
 	slot = 5
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { 
+	potential = {
 		OR = {
 			tag = FRS
 			AND = {
@@ -230,6 +364,144 @@ FRS_5_slot = {
 				was_tag = FRS
 			}
 		}
-	} 
+	}
 
+	frs_wine_makers = {
+		icon = per_balance_the_three_flames
+		position = 1
+		provinces_to_highlight = {
+			trade_goods = wine
+			owned_by = ROOT
+			has_tax_building_trigger = no
+		}
+
+		trigger = {
+			any_owned_province = {
+				trade_goods = wine
+				has_tax_building_trigger = yes
+			}
+		}
+
+		effect = {
+			set_country_flag = alb_unlock_vineyards_flag
+			custom_tooltip = alb_unlock_vineyards_tt
+		}
+	}
+
+	frs_wine_making = {
+		icon = mission_wine_monopolies
+		position = 2
+		required_missions = { frs_wine_makers } 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 4171
+				province_id = 4342
+				province_id = 4345
+				province_id = 413
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			4171 = {
+				owned_by = ROOT
+				religion = zoroastrian
+				has_tax_building_trigger = yes
+			}
+			4342 = {
+				owned_by = ROOT
+				religion = zoroastrian
+				has_tax_building_trigger = yes
+			}
+			4345 = {
+				owned_by = ROOT
+				religion = zoroastrian
+				has_tax_building_trigger = yes
+			}
+			413 = {
+				owned_by = ROOT
+				religion = zoroastrian
+				has_tax_building_trigger = yes
+			}
+		}
+
+		effect = {
+			4171 = { change_trade_goods = wine } 
+			4342 = { change_trade_goods = wine } 
+			4345 = { change_trade_goods = wine } 
+			413 = { change_trade_goods = wine } 
+		}
+	}
+
+	frs_zoroastrian_restoration = {
+		icon = per_build_the_fire_temples
+		position = 3
+		required_missions = { frs_wine_making } 
+		provinces_to_highlight = {
+			religion = zoroastrian
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 20
+				religion = zoroastrian
+			}
+		}
+
+		effect = {
+			custom_tooltip = FRS_center_of_reformation
+			hidden_effect = {
+				if = {
+					limit = {
+						NOT = {
+							any_owned_province = {
+								religion = zoroastrian
+								is_reformation_center = yes
+							}
+						}
+					}
+					capital_scope = {
+						if = {
+							limit = { NOT = { religion = zoroastrian }  } 
+							change_religion = zoroastrian
+						}
+						add_reform_center = zoroastrian
+					}
+				}
+			}
+			add_years_of_owned_provinces_production_income = {
+				years = 12
+				trigger = { trade_goods = wine } 
+				custom_tooltip = ITA_12_years_of_income_wine
+			}
+		}
+	}
+
+	frs_zoroastrian_supremacy = {
+		icon = per_reborn_in_fire
+		position = 4
+		required_missions = { frs_zoroastrian_restoration } 
+		provinces_to_highlight = {
+			trade_goods = wine
+			owned_by = ROOT
+			has_tax_building_trigger = no
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 4
+				trade_goods = wine
+				has_tax_building_trigger = yes
+				base_production = 7
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "frs_zoro_lifeblood_of_god"
+				duration = 10950
+			}
+		}
+	}
 }
