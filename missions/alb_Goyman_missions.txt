@@ -1,0 +1,182 @@
+MD1_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = MD1
+			AND = {
+				tag = PER
+				was_tag = MD1
+			}
+		}
+	}
+
+	MD1_war_of_resistance = {
+		icon = mam_hormuz_straits
+		position = 1
+
+		trigger = {
+			is_at_war = yes
+			OR = {
+				num_of_estate_privileges = {
+					estate = estate_nobles
+					value = 3
+				}
+				is_subject = yes
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = goy_war_of_fire_start
+				duration = 3650
+			}
+		}
+	}
+
+	MD1_victory_for_god = {
+		icon = qara_qoyunlu_dominate_the_gulf
+		position = 3
+		required_missions = { MD1_war_of_resistance } 
+
+		trigger = {
+			is_at_war = no
+			grown_by_development = 25
+		}
+
+		effect = {
+			persia_region = {
+				add_permanent_claim = ROOT
+			}
+			khorasan_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	
+}
+MD1_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = MD1
+			AND = {
+				tag = PER
+				was_tag = MD1
+			}
+		}
+	}
+
+	MD1_victory_to_fire = {
+		icon = qara_qoyunlu_dominate_the_gulf
+		position = 2
+		required_missions = { MD1_war_of_resistance MD1_reg_unity_power} 
+
+		trigger = {
+			religious_unity = 0.95
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = goy_allah_guidance
+				duration = -1
+			}
+		}
+	}
+}
+MD1_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = MD1
+			AND = {
+				tag = PER
+				was_tag = MD1
+			}
+		}
+	}
+
+	MD1_reg_unity_power = {
+		icon = mam_hormuz_straits
+		position = 1
+
+		trigger = {
+			stability = 1
+			prestige = 15
+		}
+
+		effect = {
+			capital_scope = {
+				add_province_modifier = {
+					name = goy_city_of_god
+					duration = 10950
+				}
+			}
+		}
+	}
+
+
+
+}
+MD1_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = MD1
+			AND = {
+				tag = PER
+				was_tag = MD1
+			}
+		}
+	}
+
+	MD1_army_tradition_prestige = {
+		icon = mam_hormuz_straits
+		position = 1
+
+		trigger = {
+			OR = {
+				army_tradition = 20
+				has_estate_privilege = estate_nobles_officer_corp
+			}
+		}
+
+		effect = {
+			change_variable = {
+				which = war_lesson_cost_counter
+				value = 5
+			}
+		}
+	}
+
+
+
+}
+MD1_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = MD1
+			AND = {
+				tag = PER
+				was_tag = MD1
+			}
+		}
+	}
+
+}
