@@ -56,7 +56,66 @@ MD1_1_slot = {
 		}
 	}
 
-	
+	MD1_iran_proper = {
+		icon = mission_russian_patriarchatee
+		position = 4
+		required_missions = { MD1_victory_for_god } 
+		provinces_to_highlight = {
+			region = persia_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 25
+				region = persia_region
+			}
+		}
+
+		effect = {
+			add_yearly_manpower = 1.5
+			capital_scope = {
+				add_or_upgrade_manpower_building = yes
+				add_or_upgrade_fort_building = yes
+			}
+		}
+	}
+	MD1_strenght_of_god = {
+		icon = mission_russian_patriarchatee
+		position = 5
+		required_missions = { MD1_iran_proper MD1_khorasan_region} 
+		provinces_to_highlight = {
+			OR = {
+				region = persia_region
+				region = khorasan_region
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 65
+				religion = ROOT
+				OR = {
+					region = persia_region
+					region = khorasan_region
+				}
+			}
+		}
+
+		effect = {
+			capital_scope = {
+				add_permanent_province_modifier = {
+					name = goy_bastion_of_faith_province
+					duration = -1
+				}
+			}
+			add_country_modifier = {
+				name = goy_bastion_of_faith
+				duration = -1
+			}
+		}
+	}
 }
 MD1_2_slot = {
 	slot = 2
@@ -86,6 +145,31 @@ MD1_2_slot = {
 			add_country_modifier = {
 				name = goy_allah_guidance
 				duration = -1
+			}
+		}
+	}
+
+	MD1_khorasan_region = {
+		icon = mission_russian_patriarchatee
+		position = 4
+		required_missions = { MD1_victory_for_god } 
+		provinces_to_highlight = {
+			region = khorasan_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 25
+				region = khorasan_region
+			}
+		}
+
+		effect = {
+			add_years_of_income = 1.5
+			capital_scope = {
+				add_or_upgrade_production_building = yes
+				add_or_upgrade_tax_building = yes
 			}
 		}
 	}
@@ -174,6 +258,29 @@ MD1_4_slot = {
 	}
 
 
+	MD1_soyman = {
+		icon = mam_hormuz_straits
+		position = 2
+		required_missions = { MD1_army_tradition_prestige } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_manpower_building_trigger = no
+		}
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				has_manpower_building_trigger = yes
+				base_tax = 5
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = goy_smart_soldiers
+				duration = 10950
+			}
+		}
+	}
 
 }
 MD1_5_slot = {
@@ -191,4 +298,32 @@ MD1_5_slot = {
 		}
 	}
 
+	MD1_army_of_goyman = {
+		icon = mam_hormuz_straits
+		position = 2
+		required_missions = { MD1_army_tradition_prestige } 
+		trigger = {
+			years_of_manpower = 1
+			army_size = 25
+		}
+
+		effect = {
+			add_yearly_manpower = -1
+			simple_dynamic_effect = {
+				first_custom_tooltip = GOY_TT_1a
+				first_limit = " has_country_flag = extra_discipline_for_at_flag  "
+				first_effect = "
+					change_variable = {
+						which = war_lesson_cost_counter
+						value = 25
+					}
+				"
+				second_custom_tooltip = GOY_TT_1b
+				second_limit = " NOT = { has_country_flag = extra_discipline_for_at_flag } "
+				second_effect = "
+					add_army_tradition = 20
+				"
+			}
+		}
+	}
 }
