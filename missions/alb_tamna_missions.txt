@@ -189,7 +189,7 @@ Tamna_1_slot = {
 		trigger = {
 			japan_region = {
 				type = all
-				owned_by = ROOT
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 		effect = {
@@ -218,18 +218,20 @@ Tamna_1_slot = {
 			}
 			custom_trigger_tooltip = {
 				tooltip = AYABANI_TT_16
-				num_of_owned_provinces_with = {
-					value =  25
-					religion = ROOT
-					OR = {
-						region = north_china_region
-						region = south_china_region
-					}
-				}
+           		num_of_owned_provinces_with = {
+                	value =  25
+                	religion = musok
+                	region = north_china_region
+	            }
+           		num_of_owned_provinces_with = {
+                	value =  25
+                	religion = musok
+                	region = south_china_region
+	            }
 			}
 		}
 		effect = {
-			country_event = { id = tamna.8 }
+			country_event = { id = ayabani.19 }
 		}
 	}
 }
@@ -283,7 +285,7 @@ Tamna_2_slot = {
 							}
 						}
 					}
-					country_event = { id = tamna.2 }
+					country_event = { id = ayabani.13 }
 				}
 				else = {
 					1015 = {
@@ -306,14 +308,14 @@ Tamna_2_slot = {
 			4192 = {
 				religion = ROOT
 			}
-			num_of_owned_provinces_with = {
-					value =  30
-					religion = ROOT
-					region = japan_region
-				}
+            num_of_owned_provinces_with = {
+                value =  30
+                religion = musok
+                region = japan_region
+            }
 		}
 		effect = {
-			country_event = { id = tamna.7 }
+			country_event = { id = ayabani.18 }
 		}
 	}
 	tmn_frontier = {
@@ -554,7 +556,7 @@ Tamna_3_slot = {
 		trigger = {
             corruption = 0
 			has_adm_advisor = yes
-			crown_land_share = 45
+			crown_land_share = 40
 		}
 		effect = { 
 			custom_tooltip = AYABANI_TT_17
@@ -603,13 +605,10 @@ Tamna_3_slot = {
 		provinces_to_highlight = {  } 
 
 		trigger = {
-            monthly_mil = 10
             estate_loyalty = {
                 estate = estate_church
                 loyalty = 60
             }
-                army_size_percentage = 1
-                prestige = 20
 				stability = 2
 		}
 		effect = { 
@@ -636,7 +635,7 @@ Tamna_3_slot = {
 			}
             num_of_rebel_controlled_provinces = 0
             legitimacy = 100
-			crown_land_share = 60
+			crown_land_share = 45
 		}
 		effect = {
             add_government_reform = alb_korean_empire_reform
@@ -868,7 +867,7 @@ Tamna_3_slot = {
 			is_hegemon = yes
 		}
 		effect = {
-			country_event = { id = hwan.1 }
+			country_event = { id = ayabani.23 }
 		}
 	}
 }
@@ -1106,7 +1105,7 @@ Tamna_4_slot = {
 			}
 		}
 		effect = {
-			country_event = { id = tamna.11 }
+			country_event = { id = ayabani.22 }
 		}
 	}
 }
@@ -1138,39 +1137,38 @@ Tamna_5_slot = {
 		provinces_to_highlight = { 
 			area = tamna_frontier_area
 		}
-
 		trigger = {
-			AND = {
-				OR = {
-					military_strength = {
-						who = KM3
-						value = 1
-					}
-					KM3 = {
-						exists = no
+			OR = { 
+				AND = {
+					custom_trigger_tooltip = {
+						tooltip = AYABANI_TT_6
+						OR = {
+							4228 = {
+								has_building = fort_15th
+							}
+							4227 = {
+								has_building = fort_15th
+							}
+							2745 = {
+								has_building = fort_15th
+							}
+						}
+						military_strength = {
+							who = KM3
+							value = 1
+						}
+						military_strength = {
+							who = KM2
+							value = 1
+						}
 					}
 				}
-				OR = {
-					military_strength = {
-						who = KM2
-						value = 1
-					}
+				AND = {
 					KM2 = {
 						exists = no
 					}
-				}
-			}
-			custom_trigger_tooltip = {
-				tooltip = AYABANI_TT_6
-				OR = {
-					4228 = {
-						has_building = fort_15th
-					}
-					4227 = {
-						has_building = fort_15th
-					}
-					2745 = {
-						has_building = fort_15th
+					KM3 = {
+						exists = no
 					}
 				}
 			}
@@ -1218,7 +1216,7 @@ Tamna_5_slot = {
 			KM1 = {
 				remove_fow = 12
 			}
-			country_event = { id = tamna.10 }
+			country_event = { id = ayabani.21 }
 		}
 	}
 	tmn_wiry = {
@@ -1267,7 +1265,24 @@ Tamna_5_slot = {
 			}
 		}
 		effect = {
-			country_event = { id = tamna.1 }
+			custom_tooltip = AYABANI_TT_22
+			ningguta_area = { add_permanent_claim = ROOT } 
+			jilin_area = { add_permanent_claim = ROOT } 
+			liaoning_area = { add_permanent_claim = ROOT } 
+			hidden_effect = {
+			every_owned_province = {
+				limit = { culture = mongol } 
+				change_culture = korean
+			}
+				every_province = { 
+					limit = {
+						region = east_siberia_region
+						culture = yakut
+					}
+					change_culture = mongol
+				}
+				set_global_flag = YAKUTSFLED
+			}
 		}
 	}
 	tmn_jesse = {
@@ -1286,14 +1301,14 @@ Tamna_5_slot = {
 			4207 = {
 				religion = ROOT
 			}
-			num_of_owned_provinces_with = {
-					value =  40
-					religion = ROOT
-					region = mongolia_region
-				}
+            num_of_owned_provinces_with = {
+                value =  25
+                religion = musok
+                region = mongolia_region
+            }
 		}
 		effect = {
-			country_event = { id = tamna.9 }
+			country_event = { id = ayabani.20 }
 		}
 	}
 }
