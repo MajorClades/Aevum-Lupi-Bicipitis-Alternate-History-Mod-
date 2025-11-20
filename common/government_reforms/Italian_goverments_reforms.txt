@@ -79,13 +79,13 @@ three_pointed_empire = {
 	valid_for_nation_designer = no
 	nation_designer_cost = 100
 	effect = {
-		sicily_area = {
-			add_province_modifier = {
-				name = sicilian_coastline_protected
-				duration = -1
+		every_owned_province = {
+			limit = {
+				OR = {
+					area = sicily_area
+					area = western_sicily_area
+				}
 			}
-		}
-		western_sicily_area = {
 			add_province_modifier = {
 				name = sicilian_coastline_protected
 				duration = -1
@@ -93,10 +93,13 @@ three_pointed_empire = {
 		}
 	}
 	removed_effect = {
-		sicily_area = {
-			remove_province_modifier = sicilian_coastline_protected
-		}
-		western_sicily_area = {
+		every_owned_province = {
+			limit = {
+				OR = {
+					area = sicily_area
+					area = western_sicily_area
+				}
+			}
 			remove_province_modifier = sicilian_coastline_protected
 		}
 	}
