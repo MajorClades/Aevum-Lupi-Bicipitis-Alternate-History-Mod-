@@ -89,6 +89,66 @@ country_event = { #goyman event
 	}
 }
 
+country_event = { #continuation war
+	id = persian.3
+	title = persian.3.test
+	desc = persian.3.desc
+	picture = WAR_OF_THE_ROSES_eventPicture
+	
+	trigger = {
+		OR = {
+			tag = PR0
+			tag = PR1
+		}
+		has_won_war_against = {
+			who = MD1
+		}
+		is_at_war = no
+		PR0 = {
+			exists = yes
+		}
+		PR1 = {
+			exists = yes
+		}
+		NOT = {
+			has_country_flag = fires_war_ended_flag
+		}
+	}
+
+	mean_time_to_happen = {
+		days = 12
+	}
+
+	option = {
+		name = persian.3a
+		ai_chance = {
+			factor = 50
+		}
+		if = {
+			limit = {
+				tag = PR0
+			}
+			declare_war_with_cb = {
+				casus_belli = cb_spread_the_true_faith
+				who = PR1
+			}
+		}else = {
+			declare_war_with_cb = {
+				casus_belli = cb_spread_the_true_faith
+				who = PR0
+			}
+		}
+	}
+	option = {
+		name = persian.3b
+		ai_chance = {
+			factor = 50
+		}
+		add_stability_or_adm_power = yes
+		set_country_flag = fires_war_ended_flag
+	}
+
+}
 
 province_event = {
 	id = persian.1000
