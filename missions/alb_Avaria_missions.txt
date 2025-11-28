@@ -1,0 +1,423 @@
+Avaria_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = DA3 }  
+
+	avr_1conomy = {
+		icon = mission_colonial
+		position = 1
+		provinces_to_highlight = { 
+
+		}
+
+		trigger = {
+            grown_by_development = 10
+			marketplace = 1
+		}
+		effect = {
+			
+		}
+	} 
+	avr_2conomy = {
+		icon = mission_have_manufactories
+		position = 1
+		required_missions = { 
+            avr_1conomy
+        } 
+		provinces_to_highlight = { 
+
+		}
+
+		trigger = {
+
+		}
+		effect = {
+			
+		}
+	} 
+	avr_steve = {
+		icon = mission_iron_and_copper
+		position = 4
+		required_missions = { 
+            avr_2conomy
+			avr_bread
+        } 
+		provinces_to_highlight = {
+			or = {
+				area = austria_proper_area
+				area = inner_austria_area
+				area = tirol_area
+				area = bohemia_area
+				area = erzgebirge_area
+				area = moravia_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			austria_proper_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+			inner_austria_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+			bohemia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+			moravia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+			erzgebirge_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+			tirol_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+		}
+		effect = {
+			
+		}
+	}
+}
+Avaria_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = DA3 }  
+
+	avr_bread = {
+		icon = austria_prospers
+		position = 3
+		required_missions = { 
+            avr_2conomy
+        } 
+		provinces_to_highlight = { 
+
+		}
+		trigger = {
+            army_size_percentage = 1
+			num_of_generals = 1
+		}
+		effect = {
+			
+		}
+	}
+}
+Avaria_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = DA3 }  
+
+    avr_chained = {
+		icon = mission_destroy_the_horde
+		position = 1
+		provinces_to_highlight = { 
+
+		}
+
+		trigger = {
+            army_size_percentage = 1
+			num_of_generals = 1
+		}
+		effect = {
+			country_event = { id = avaria.3 }
+		}
+	}
+	avr_revenge = {
+		icon = mission_steppe_warriors
+		position = 2
+		required_missions = { 
+            avr_chained
+        } 
+		provinces_to_highlight = { 
+
+		}
+		trigger = {
+			owns = 1954
+			owns = 155
+			owns = 4125
+			owns = 1953
+			owns = 162
+			SX1 = {
+				exists = no
+			}
+		}
+		effect = {
+			country_event = { id = avaria.4 }
+		}
+	}
+    avr_limes = {
+		icon = mch_bypass_great_wall
+		position = 3
+		required_missions = { 
+            avr_revenge
+        } 
+		provinces_to_highlight = { 
+
+		}
+
+		trigger = {
+			owns = 4126
+			owns = 153
+			owns = 154
+			owns = 1318
+			owns = 4236
+			DA5 = {
+				exists = no
+			}
+		}
+		effect = {
+			country_event = { id = avaria.6 }
+			add_country_modifier = {
+				name = avr_limes
+				duration = 7300
+			}
+		}
+	}
+    avr_legacy = {
+		icon = mission_break_the_tatar_yoke
+		position = 4
+		required_missions = { 
+            avr_limes
+        } 
+		provinces_to_highlight = { 
+
+		}
+
+		trigger = {
+            stability = 1
+		}
+		effect = {
+			country_event = { id = avaria.1 }
+		}
+	}
+    avr_place = {
+		icon = mission_oirat
+		position = 5
+		required_missions = { 
+            avr_legacy
+        } 
+		provinces_to_highlight = {
+			region = carpathia_region
+		}
+
+		trigger = {
+			carpathia_region = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		effect = {
+			custom_tooltip = AVAR_TT_3
+			if = {
+				limit = {
+					culture = avars_new
+				}
+				override_country_name = AVARKHAGANATE
+				set_government_rank = 3
+				add_prestige = 25
+				custom_tooltip = AVAR_TT_2
+				hidden_effect = {
+					yedisan_area = {
+						add_permanent_claim = DA3
+					}
+					zaporizhia_area = {
+						add_permanent_claim = DA3
+					}
+					crimea_area = {
+						add_permanent_claim = DA3
+					}
+					azov_area = {
+						add_permanent_claim = DA3
+					}
+				}
+			}
+			if = {
+				limit = {
+					culture = avars
+				}
+				change_tag = DN0
+				add_prestige = 25
+				set_government_rank = 3
+				country_event = { id = ideagroups.1 } #Swap Ideas
+				set_country_flag = formed_danube_flag
+			}
+		}
+	}
+    avr_south = {
+		icon = mission_fall_of_constantinople
+		position = 4
+		required_missions = { 
+            avr_place
+        } 
+		provinces_to_highlight = {
+			OR = {
+				area = vidin_area
+				area = silistria_area
+				area = bulgaria_area
+				area = moesia_area
+				area = thrace_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			vidin_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			silistria_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			bulgaria_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			moesia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			thrace_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			country_event = { id = avaria.1 }
+		}
+	}
+}
+Avaria_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = DA3 }  
+
+    avr_faith = {
+		icon = mission_horde_religion
+		position = 2
+		required_missions = { 
+			avr_chained
+        } 
+		provinces_to_highlight = { 		}
+		trigger = {
+            stability = 1
+		}
+		effect = {
+			country_event = { id = avaria.2 }
+		}
+	}
+}
+Avaria_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = DA3 }  
+
+	avr_tito = {
+		icon = mission_tribute_tax
+		position = 1
+		provinces_to_highlight = {
+			or = {
+				area = transylvania_area
+				culture = juggowinderan
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			owns = 4127
+			owns = 157
+			transylvania_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+			RA1 = {
+				exists = no
+			}
+		}
+		effect = {
+			country_event = { id = avaria.7 }
+		}
+	}
+	avr_idk = {
+		icon = mission_control_moldavia
+		position = 2
+		required_missions = { 
+            avr_tito
+        } 
+		provinces_to_highlight = {
+			or = {
+				area = moldavia_area
+				area = wallachia_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			moldavia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+			wallachia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+			DA0 = {
+				exists = no
+			}
+		}
+		effect = {
+			
+		}
+	}
+	avr_mare = {
+		icon = mission_lit_harness_steppes
+		position = 
+		required_missions = { 
+            avr_idk
+        } 
+		provinces_to_highlight = {
+			or = {
+				area = yedisan_area
+				area = zaporizhia_area
+				area = crimea_area
+				area = azov_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			yedisan_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+			zaporizhia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+			crimea_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+			azov_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT 
+			}
+		}
+		effect = {
+
+		}
+	}
+}
