@@ -41,7 +41,29 @@ PR1_1_slot = {
 		}
 	}
 
-	
+	eran_push_west = {
+		icon = qara_qoyunlu_dominate_the_gulf
+		position = 3
+		required_missions = { eran_north_way eran_the_other_follow } 
+		provinces_to_highlight = { province_id = 428 } 
+
+		trigger = {
+			428 = {
+				owned_by = ROOT
+				religion = zoroastrian
+				development = 20
+			}
+		}
+
+		effect = {
+			428 = {
+				add_great_project_tier = {
+					type = golestan_palace
+					tier = 2
+				}
+			}
+		}
+	}
 }
 PR1_2_slot = {
 	slot = 2
@@ -109,6 +131,24 @@ PR1_2_slot = {
 			}
 		}
 	}
+
+	eran_the_persian_return = {
+		icon = qara_qoyunlu_dominate_the_gulf
+		position = 4
+		required_missions = { eran_the_other_follow } 
+		provinces_to_highlight = { region = persia_region  NOT = {country_or_non_sovereign_subject_holds = ROOT}} 
+
+		trigger = {
+			persia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			
+		}
+	}
 }
 PR1_3_slot = {
 	slot = 3
@@ -151,6 +191,25 @@ PR1_3_slot = {
 			1334 = { add_trade_node_income = 60 } 
 		}
 	}
+	eran_more_stuff = {
+		icon = qara_qoyunlu_dominate_the_gulf
+		position = 3
+		required_missions = { eran_the_other_follow } 
+		provinces_to_highlight = { is_capital_of = BG0 } 
+
+		trigger = {
+			BG0 = {
+				exists = no
+			}
+		}
+
+		effect = {
+			add_legitimacy_or_mil_power = { amount = 20}
+			add_permanent_power_projection = {
+				amount = 25
+			}
+		}
+	}
 }
 PR1_4_slot = {
 	slot = 4
@@ -185,6 +244,50 @@ PR1_4_slot = {
 			capital_scope = {
 				add_building = university
 				add_or_upgrade_tax_building = yes
+			}
+		}
+	}
+
+	eran_fires_up = {
+		icon = qara_qoyunlu_dominate_the_gulf
+		position = 3
+		required_missions = { eran_south_way eran_zoroaster_temples } 
+
+		trigger = {
+			has_government_power = {
+				mechanic_type = firenation_mechanic
+				power_type = fire_nation
+				value = 50
+			}
+			num_of_artillery = 10
+		}
+
+		effect = {
+			add_years_of_income = 1
+		}
+	}
+	eran_fired_up = {
+		icon = qara_qoyunlu_dominate_the_gulf
+		position = 4
+		required_missions = {eran_fires_up  } 
+
+		trigger = {
+			has_government_power = {
+				mechanic_type = firenation_mechanic
+				power_type = fire_nation
+				value = 100
+			}
+			num_of_owned_provinces_with = {
+				value = 15
+				religion = zoroastrian
+				artillery_in_province = 2
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = eran_cannons
+				duration = -1
 			}
 		}
 	}
@@ -250,4 +353,22 @@ PR1_5_slot = {
 			}
 		}
 	}
+	eran_push_east = {
+		icon = qara_qoyunlu_dominate_the_gulf
+		position = 3
+		required_missions = { eran_the_other_falls } 
+		provinces_to_highlight = { region = khorasan_region  NOT = {country_or_non_sovereign_subject_holds = ROOT}} 
+
+		trigger = {
+			khorasan_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			
+		}
+	}
+
 }
