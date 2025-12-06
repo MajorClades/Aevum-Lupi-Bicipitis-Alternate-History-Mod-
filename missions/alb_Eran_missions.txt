@@ -14,10 +14,16 @@ PR1_1_slot = {
 	}
 
 	eran_north_way = {
-		icon = qara_qoyunlu_dominate_the_gulf
+		icon = per_establish_eastern_defenses
 		position = 2
 		required_missions = { eran_one_falls } 
-		provinces_to_highlight = { OR = { area = isfahan_area area = iraq_e_ajam_area } NOT = {country_or_non_sovereign_subject_holds = ROOT} } 
+		provinces_to_highlight = {
+			OR = {
+				area = isfahan_area
+				area = iraq_e_ajam_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
 
 		trigger = {
 			isfahan_area = {
@@ -32,19 +38,18 @@ PR1_1_slot = {
 
 		effect = {
 			add_yearly_manpower = 1
-			isfahan_area = {
-				change_religion = zoroastrian
-			}
-			iraq_e_ajam_area = {
-				change_religion = zoroastrian
-			}
+			isfahan_area = { change_religion = zoroastrian } 
+			iraq_e_ajam_area = { change_religion = zoroastrian } 
 		}
 	}
 
 	eran_push_west = {
-		icon = qara_qoyunlu_dominate_the_gulf
+		icon = mission_into_persia_1
 		position = 3
-		required_missions = { eran_north_way eran_the_other_follow } 
+		required_missions = {
+			eran_north_way
+			eran_the_other_follow
+		}
 		provinces_to_highlight = { province_id = 428 } 
 
 		trigger = {
@@ -81,19 +86,16 @@ PR1_2_slot = {
 	}
 
 	eran_one_falls = {
-		icon = mam_hormuz_straits
+		icon = per_our_religious_direction
 		position = 1
 		provinces_to_highlight = { is_capital_of = MD1 } 
+
 		trigger = {
 			OR = {
 				is_at_war = no
-				has_won_war_against = {
-					who = MD1
-				}
+				has_won_war_against = { who = MD1 } 
 			}
-			all_core_province = {
-				owned_by = ROOT
-			}
+			all_core_province = { owned_by = ROOT } 
 		}
 
 		effect = {
@@ -102,17 +104,18 @@ PR1_2_slot = {
 				power_type = fire_nation
 				value = 10
 			}
-			persia_region = {
-				add_permanent_claim = ROOT
-			}
+			persia_region = { add_permanent_claim = ROOT } 
 		}
 	}
 
 	eran_the_other_follow = {
-		icon = qara_qoyunlu_dominate_the_gulf
+		icon = per_create_the_tupchi
 		position = 2
 		required_missions = { eran_one_falls } 
-		provinces_to_highlight = { region = persia_region  NOT = {country_or_non_sovereign_subject_holds = ROOT}} 
+		provinces_to_highlight = {
+			region = persia_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
 
 		trigger = {
 			num_of_owned_provinces_with = {
@@ -133,20 +136,71 @@ PR1_2_slot = {
 	}
 
 	eran_the_persian_return = {
-		icon = qara_qoyunlu_dominate_the_gulf
+		icon = per_a_new_eranshahr
 		position = 4
 		required_missions = { eran_the_other_follow } 
-		provinces_to_highlight = { region = persia_region  NOT = {country_or_non_sovereign_subject_holds = ROOT}} 
+		provinces_to_highlight = {
+			region = persia_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
 
 		trigger = {
-			persia_region = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 27
+				region = persia_region
 			}
 		}
 
 		effect = {
-			
+			add_ruler_modifier = {
+				name = "eran_shah_restorer"
+				duration = -1
+			}
+			212 = {
+				if = {
+					limit = { country_or_non_sovereign_subject_holds = ROOT } 
+					add_base_tax = 1
+					add_base_production = 1
+					add_base_manpower = 1
+				}
+				else = { add_core = ROOT } 
+			}
+			4430 = {
+				if = {
+					limit = { country_or_non_sovereign_subject_holds = ROOT } 
+					add_base_tax = 1
+					add_base_production = 1
+					add_base_manpower = 1
+				}
+				else = { add_core = ROOT } 
+			}
+			2223 = {
+				if = {
+					limit = { country_or_non_sovereign_subject_holds = ROOT } 
+					add_base_tax = 1
+					add_base_production = 1
+					add_base_manpower = 1
+				}
+				else = { add_core = ROOT } 
+			}
+			441 = {
+				if = {
+					limit = { country_or_non_sovereign_subject_holds = ROOT } 
+					add_base_tax = 1
+					add_base_production = 1
+					add_base_manpower = 1
+				}
+				else = { add_core = ROOT } 
+			}
+			4336 = {
+				if = {
+					limit = { country_or_non_sovereign_subject_holds = ROOT } 
+					add_base_tax = 1
+					add_base_production = 1
+					add_base_manpower = 1
+				}
+				else = { add_core = ROOT } 
+			}
 		}
 	}
 }
@@ -166,10 +220,16 @@ PR1_3_slot = {
 	}
 
 	eran_south_way = {
-		icon = qara_qoyunlu_dominate_the_gulf
+		icon = mam_hormuz_straits
 		position = 2
 		required_missions = { eran_one_falls } 
-		provinces_to_highlight = { OR = { area = farsistan_area area = mogostan_area } NOT = {country_or_non_sovereign_subject_holds = ROOT} } 
+		provinces_to_highlight = {
+			OR = {
+				area = farsistan_area
+				area = mogostan_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
 
 		trigger = {
 			farsistan_area = {
@@ -191,23 +251,25 @@ PR1_3_slot = {
 			1334 = { add_trade_node_income = 60 } 
 		}
 	}
+
 	eran_more_stuff = {
-		icon = qara_qoyunlu_dominate_the_gulf
+		icon = mission_break_the_tatar_yoke
 		position = 3
 		required_missions = { eran_the_other_follow } 
 		provinces_to_highlight = { is_capital_of = BG0 } 
 
 		trigger = {
 			BG0 = {
-				exists = no
+				OR = {
+					exists = no
+					is_subject_of = ROOT
+				}
 			}
 		}
 
 		effect = {
-			add_legitimacy_or_mil_power = { amount = 20}
-			add_permanent_power_projection = {
-				amount = 25
-			}
+			add_legitimacy_or_mil_power = { amount = 20 } 
+			add_power_projection_mission = { amount = 25 } 
 		}
 	}
 }
@@ -225,8 +287,9 @@ PR1_4_slot = {
 			}
 		}
 	}
+
 	eran_zoroaster_temples = {
-		icon = qara_qoyunlu_dominate_the_gulf
+		icon = mission_into_persia_2
 		position = 2
 		required_missions = { eran_two_falls } 
 		provinces_to_highlight = { is_capital_of = ROOT } 
@@ -249,9 +312,13 @@ PR1_4_slot = {
 	}
 
 	eran_fires_up = {
-		icon = qara_qoyunlu_dominate_the_gulf
+		icon = mission_cannons_firing
 		position = 3
-		required_missions = { eran_south_way eran_zoroaster_temples } 
+		required_missions = {
+			eran_south_way
+			eran_zoroaster_temples
+		}
+		provinces_to_highlight = {  } 
 
 		trigger = {
 			has_government_power = {
@@ -262,14 +329,14 @@ PR1_4_slot = {
 			num_of_artillery = 10
 		}
 
-		effect = {
-			add_years_of_income = 1
-		}
+		effect = { add_years_of_income = 1 } 
 	}
+
 	eran_fired_up = {
-		icon = qara_qoyunlu_dominate_the_gulf
+		icon = per_balance_the_three_flames
 		position = 4
-		required_missions = {eran_fires_up  } 
+		required_missions = { eran_fires_up } 
+		provinces_to_highlight = {  } 
 
 		trigger = {
 			has_government_power = {
@@ -286,7 +353,7 @@ PR1_4_slot = {
 
 		effect = {
 			add_country_modifier = {
-				name = eran_cannons
+				name = "eran_cannons"
 				duration = -1
 			}
 		}
@@ -308,14 +375,13 @@ PR1_5_slot = {
 	}
 
 	eran_two_falls = {
-		icon = mam_hormuz_straits
+		icon = per_qizilbash_loyalty
 		position = 1
 		provinces_to_highlight = { is_capital_of = PR0 } 
+
 		trigger = {
 			OR = {
-				has_won_war_against = {
-					who = PR0
-				}
+				has_won_war_against = { who = PR0 } 
 				stability = 3
 			}
 		}
@@ -326,17 +392,18 @@ PR1_5_slot = {
 				power_type = fire_nation
 				value = 10
 			}
-			khorasan_region = {
-				add_permanent_claim = ROOT
-			}
+			khorasan_region = { add_permanent_claim = ROOT } 
 		}
 	}
 
 	eran_the_other_falls = {
-		icon = qara_qoyunlu_dominate_the_gulf
+		icon = mission_restore_trade_superiority
 		position = 2
 		required_missions = { eran_two_falls } 
-		provinces_to_highlight = { region = khorasan_region  NOT = {country_or_non_sovereign_subject_holds = ROOT}} 
+		provinces_to_highlight = {
+			region = khorasan_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
 
 		trigger = {
 			num_of_owned_provinces_with = {
@@ -348,27 +415,39 @@ PR1_5_slot = {
 
 		effect = {
 			add_country_modifier = {
-				name = eran_more_zoro
+				name = "eran_more_zoro"
 				duration = -1
 			}
 		}
 	}
+
 	eran_push_east = {
-		icon = qara_qoyunlu_dominate_the_gulf
+		icon = mam_persia
 		position = 3
 		required_missions = { eran_the_other_falls } 
-		provinces_to_highlight = { region = khorasan_region  NOT = {country_or_non_sovereign_subject_holds = ROOT}} 
+		provinces_to_highlight = {
+			region = khorasan_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
 
 		trigger = {
-			khorasan_region = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 25
+				region = khorasan_region
+				religion = zoroastrian
+				has_tax_building_trigger = yes
 			}
 		}
 
 		effect = {
-			
+			set_country_flag = eran_enemies_on_fire
+			custom_tooltip = ERAN_TT_1
+			tooltip = {
+				add_country_modifier = {
+					name = "eran_at_war"
+					duration = -1
+				}
+			}
 		}
 	}
-
 }
