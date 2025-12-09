@@ -1,0 +1,195 @@
+PR0_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = PR0
+			AND = {
+				tag = PER
+				was_tag = PR0
+			}
+		}
+	}
+
+	par_walls_of_faith = {
+		icon = per_establish_eastern_defenses
+		position = 1
+		provinces_to_highlight = {
+			province_id = 446
+		}
+
+		trigger = {
+			446 = {
+				owned_by = ROOT
+				grown_by_development = 3
+			}
+		}
+
+		effect = {
+			446 = {
+				add_or_upgrade_fort_building = yes
+			}
+			khorasan_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+}
+PR0_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = PR0
+			AND = {
+				tag = PER
+				was_tag = PR0
+			}
+		}
+	}
+
+	par_peace_in_our_times = {
+		icon = mission_into_persia_1
+		position = 2
+		required_missions = { par_walls_of_faith par_war_in_our_times }
+
+		trigger = {
+			is_at_war = no
+		}
+
+		effect = {
+			persia_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+}
+PR0_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = PR0
+			AND = {
+				tag = PER
+				was_tag = PR0
+			}
+		}
+	}
+
+	par_war_in_our_times = {
+		icon = mission_into_persia_1
+		position = 1
+
+		trigger = {
+			is_at_war = yes
+			has_mil_advisor = yes
+		}
+
+		effect = {
+			add_manpower = 5
+		}
+	}
+	par_western_expansion = {
+		icon = mission_into_persia_1
+		position = 3
+		required_missions = { par_peace_in_our_times }
+		provinces_to_highlight = {
+			region = persia_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 15
+				region = persia_region
+				is_core = ROOT
+			}
+		}
+		effect = {
+			
+		}
+	}
+}
+PR0_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = PR0
+			AND = {
+				tag = PER
+				was_tag = PR0
+			}
+		}
+	}
+
+	par_good_advice = {
+		icon = mission_into_persia_1
+		position = 2
+		required_missions = { par_walls_and_bridges  }
+
+		trigger = {
+			OR = {
+				has_adm_advisor_2 = yes
+				has_dip_advisor_2 = yes
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = par_advisors_no_faith
+				duration = -1
+			}
+		}
+	}
+
+}
+PR0_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = PR0
+			AND = {
+				tag = PER
+				was_tag = PR0
+			}
+		}
+	}
+
+	par_walls_and_bridges = {
+		icon = mission_into_persia_1
+		position = 1
+
+		trigger = {
+			any_ally = {
+				NOT = {
+					religion = manich
+				}
+				has_opinion = {
+					who = ROOT
+					value = 190
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = par_manichean_compassion
+				duration = 10950
+			}
+		}
+	}
+}
