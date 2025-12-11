@@ -37,6 +37,48 @@ PR0_1_slot = {
 		}
 	}
 
+	par_eastern_expansion = {
+		icon = mission_into_persia_1
+		position = 3
+		required_missions = { par_walls_of_faith }
+		provinces_to_highlight = {
+			region = khorasan_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 15
+				region = khorasan_region
+				is_core = ROOT
+			}
+		}
+
+		effect = {
+			custom_tooltip = PARN_TT_1
+			tooltip = {
+				capital_scope = {
+					add_province_modifier = {
+						name = par_eastern_walls
+						duration = 10950
+					}
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						owned_by = ROOT
+						region = khorasan_region
+					}
+					add_province_modifier = {
+						name = par_eastern_walls
+						duration = 10950
+					}
+				}				
+			}
+
+		}
+	}
 }
 PR0_2_slot = {
 	slot = 2
@@ -65,6 +107,37 @@ PR0_2_slot = {
 		effect = {
 			persia_region = {
 				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	par_great_expansion = {
+		icon = mission_into_persia_1
+		position = 4
+		required_missions = { par_eastern_expansion par_western_expansion }
+		provinces_to_highlight = {
+			superregion = persia_superregion
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 50
+				superregion = persia_superregion
+				is_core = ROOT
+			}
+		}
+
+		effect = {
+			persia_superregion = {
+				add_permanent_claim = ROOT
+			}
+			5027 = {
+				add_core = ROOT
+			}
+			add_country_modifier = {
+				name = par_defensive_action
+				duration = -1
 			}
 		}
 	}
@@ -114,7 +187,9 @@ PR0_3_slot = {
 			}
 		}
 		effect = {
-			
+			country_event = {
+				id = persian.4
+			}
 		}
 	}
 }
@@ -136,7 +211,7 @@ PR0_4_slot = {
 	par_good_advice = {
 		icon = mission_into_persia_1
 		position = 2
-		required_missions = { par_walls_and_bridges  }
+		required_missions = { par_walls_and_bridges par_war_in_our_times }
 
 		trigger = {
 			OR = {
@@ -189,6 +264,64 @@ PR0_5_slot = {
 			add_country_modifier = {
 				name = par_manichean_compassion
 				duration = 10950
+			}
+		}
+	}
+
+	par_time_of_rebirth = {
+		icon = mission_into_persia_1
+		position = 2
+		required_missions = { par_walls_and_bridges  }
+
+		trigger = {
+			has_institution = renaissance
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = par_free_ideas
+				duration = 10950
+			}
+		}
+	}
+
+	par_advisory_boards = {
+		icon = mission_into_persia_1
+		position = 3
+		required_missions = { par_good_advice par_time_of_rebirth }
+
+		trigger = {
+			years_of_income = 1
+			has_adm_advisor_3 = yes
+			has_dip_advisor_3 = yes
+			has_mil_advisor_3 = yes
+		}
+
+		effect = {
+			add_years_of_income = -1
+			remove_country_modifier = par_advisors_no_faith
+			add_country_modifier = {
+				name = par_advisors_no_faith_2
+				duration = -1
+			}
+		}
+	}
+	par_greater_elect = {
+		icon = mission_into_persia_1
+		position = 4
+		required_missions = { par_advisory_boards  }
+
+		trigger = {
+			has_adm_advisor_of_level = { level = 5 }
+			has_dip_advisor_of_level = { level = 5 }
+			has_mil_advisor_of_level = { level = 5 }
+		}
+
+		effect = {
+			remove_country_modifier = par_advisors_no_faith_2
+			add_country_modifier = {
+				name = par_advisors_no_faith_3
+				duration = -1
 			}
 		}
 	}
