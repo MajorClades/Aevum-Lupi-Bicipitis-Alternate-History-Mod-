@@ -1,0 +1,122 @@
+Persia_alb_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = PER }
+
+
+}
+
+Persia_alb_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = PER }
+
+
+}
+
+Persia_alb_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = PER }
+
+	pers_restoration_celebration = {
+		icon = mission_steppe_warriors
+		position = 5
+
+		trigger = {
+			tag = PER
+			is_at_war = no
+		}
+
+		effect = { 
+			if = {
+				limit = {
+					was_tag = PR1
+				}
+				add_country_modifier = {
+					name = eran_wins_fires
+					duration = -1
+				}
+			}
+			if = {
+				limit = {
+					was_tag = PR0
+				}
+				add_country_modifier = {
+					name = parn_persian_modifier
+					duration = -1
+				}
+			}
+			if = {
+				limit = {
+					was_tag = FRS
+				}
+				add_years_of_income = 2
+			}
+			if = {
+				limit = {
+					was_tag = MD1
+				}
+				simple_dynamic_effect = {
+					first_custom_tooltip = GOY_TT_1a
+					first_limit = " has_country_flag = extra_discipline_for_at_flag  "
+					first_effect = "
+						change_variable = {
+							which = war_lesson_counter
+							value = 5
+						}
+					"
+					second_custom_tooltip = GOY_TT_1b
+					second_limit = " NOT = { has_country_flag = extra_discipline_for_at_flag } "
+					second_effect = "
+						add_army_tradition = 10
+					"
+				}
+			}
+		} 
+	}
+
+	pers_elite_regiments = {
+		icon = per_qizilbash_loyalty
+		position = 6
+		required_missions = { pers_restoration_celebration } 
+
+		trigger = {
+			manpower = 25
+		}
+
+		effect = { 
+			add_manpower = -25
+			add_country_modifier = {
+				name = elite_persian_soldiers
+				duration = -1
+			}
+		} 
+	}
+}
+
+Persia_alb_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = PER }
+
+
+}
+
+Persia_alb_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = PER }
+
+
+}

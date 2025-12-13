@@ -509,12 +509,17 @@ goyman_war_kingdom_reform = {
 	}
 	removed_effect = {
 		hidden_effect = {
-			atm_set_down = yes
-			clr_country_flag = extra_discipline_for_at_flag
-			clr_country_flag = atm_shop_flag
+			if = {
+				limit = { tag = PER}
+			}else = {
+				atm_set_down = yes
+				clr_country_flag = extra_discipline_for_at_flag
+				clr_country_flag = atm_shop_flag
+			}
 		}
 	}
 }
+
 
 eran_last_firewall_reform = {
 	icon = "peacock_throne"
@@ -906,6 +911,62 @@ britannia_imperial_heir = {
 	}
 	ai = {
 		factor = 1
+	}
+}
+
+goyman_nobility_reform = {
+	icon = "peacock_throne"
+	allow_normal_conversion = no
+	potential = {
+		was_tag = MD1
+		tag = PER
+	}
+	modifiers = {
+		nobles_influence_modifier = 0.05
+		church_influence_modifier = 0.05
+		manpower_in_true_faith_provinces = 0.1
+	}
+	custom_attributes = {
+		free_expansionist_zealotry = yes
+	}
+	effect = {
+		if = {
+			limit = {
+				NOT = {
+					has_country_flag = extra_discipline_for_at_flag
+				}
+			}
+			set_country_flag = extra_discipline_for_at_flag
+			custom_tooltip = SPANIA_TT_8a
+			hidden_effect = {
+				atm_set_up = yes
+			}
+		}
+	}
+	removed_effect = {
+		hidden_effect = {
+			atm_set_down = yes
+			clr_country_flag = extra_discipline_for_at_flag
+			clr_country_flag = atm_shop_flag
+		}
+	}
+}
+
+farsi_trade_nobility_reform = {
+	icon = "peacock_throne"
+	allow_normal_conversion = no
+	potential = {
+		was_tag = FRS
+		tag = PER
+	}
+	modifiers = {
+		global_ship_cost = -0.05
+		estate_interaction_cooldown_modifier = -0.2
+		nobles_influence_modifier = 0.05
+		burghers_influence_modifier = 0.05
+	}
+	custom_attributes = {
+		alb_trade_expansion_mechanic = yes
 	}
 }
 
