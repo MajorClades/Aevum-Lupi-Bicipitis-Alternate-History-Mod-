@@ -2,7 +2,10 @@ custom_button = {
 	name = mani_difference_button
 	potential = {
 		FROM = {
-			has_reform = parn_manich_theocracy_reform
+			OR = {
+				has_reform = parn_manich_theocracy_reform
+				have_had_reform = parn_manich_theocracy_reform
+			}
 		}
 		owned_by = FROM
 		NOT = {
@@ -19,6 +22,11 @@ custom_button = {
 			}
 		religion = FROM
 		is_core = ROOT
+		NOT = {
+			owner = {
+				has_country_modifier = mani_diff_mod_timer
+			}
+		}
 	}
 	effect = {
 		add_province_modifier = {
@@ -28,6 +36,15 @@ custom_button = {
 		add_province_modifier = {
 			name = mani_diff_mod_2
 			duration = -1
+		}
+		hidden_effect = {
+			owner = {
+				add_country_modifier = {
+					name = mani_diff_mod_timer
+					duration = 30
+					hidden = yes
+				}
+			}
 		}
 		if = {
 			limit = {
