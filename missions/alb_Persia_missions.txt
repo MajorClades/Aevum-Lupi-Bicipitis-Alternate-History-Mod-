@@ -120,6 +120,40 @@ Persia_alb_1_slot = {
 			}
 		} 
 	}
+
+	pers_enter_into_europe = {
+		icon = per_qizilbash_loyalty
+		position = 10
+		required_missions = { pers_break_the_old_enemy } 
+		provinces_to_highlight = {
+			province_id = 151
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			151 = {
+				owned_by = ROOT
+				religion = ROOT
+				is_core = ROOT
+			}
+			RU0 = { exists = no }
+		}
+
+		effect = { 
+			europe = {
+				limit = {
+					NOT = {
+						country_or_non_sovereign_subject_holds = ROOT
+					}
+				}
+				add_named_unrest = {
+					name = "Fear"
+					value = 10
+				}
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
 }
 
 Persia_alb_2_slot = {
@@ -311,10 +345,13 @@ Persia_alb_3_slot = {
 		}
 
 		effect = { 
-			#event between two modifiers
+			country_event = {
+				id = persian.8
+			}
 		} 
 	}
 
+	
 }
 
 Persia_alb_4_slot = {
@@ -348,7 +385,35 @@ Persia_alb_4_slot = {
 			}
 		} 
 	}
+	pers_expand_into_arabia = {
+		icon = per_qizilbash_loyalty
+		position = 9
+		provinces_to_highlight = {
+			area = mogostan_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
 
+		trigger = {
+			mogostan_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				OR = {
+					province_has_center_of_trade_of_level = 2
+					province_id = 4327
+				}
+			}
+		}
+
+		effect = { 
+			mogostan_area = {
+				change_culture = persian
+				add_base_production = 1
+			}
+			arabia_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
 }
 
 Persia_alb_5_slot = {
@@ -438,12 +503,7 @@ Persia_alb_5_slot = {
 		}
 
 		trigger = {
-			OR = {
-				has_won_war_against = {
-					who = event_target:light_empire_shield_target
-				}
-				event_target:light_empire_shield_target = { exists = no }
-			}
+			event_target:light_empire_shield_target = { exists = no }
 			num_of_provinces_owned_or_owned_by_subjects_with = {
 				value = 50
 				superregion = india_superregion
@@ -478,20 +538,49 @@ Persia_alb_5_slot = {
 			}
 		} 
 	}
+
+	pers_a_biggest_men = {
+		icon = per_qizilbash_loyalty
+		position = 10
+		required_missions = { pers_a_bigger_men } 
+		provinces_to_highlight = {
+			superregion = india_superregion
+			NOT = { religion = ROOT }
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			NOT = {
+				great_power_rank = 2
+			}
+			num_of_owned_provinces_with = {
+				value = 50
+				superregion = india_superregion
+				religion = ROOT
+			}
+		}
+
+		effect = {
+			india_superregion = {
+				limit = {
+					owned_by = ROOT
+				}
+				add_unrest = -10
+				add_local_autonomy = -20
+			}
+			asia = {
+				limit = {
+					NOT = {
+						country_or_non_sovereign_subject_holds = ROOT
+					}
+				}
+				add_named_unrest = {
+					name = "Fear"
+					value = 10
+				}
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
 }
 
-
-#unlock_estate_privilege = {
-			# 	estate_privilege = estate_church_muslim_integration
-			# 	modifier_tooltip = estate_church_muslim_integration_tooltip
-			# 	effect_tooltip = "
-			# 		custom_tooltip = estate_church_muslim_integration_gt
-			# 		tooltip = {
-			# 			add_province_modifier = {
-			# 				name = estate_church_muslim_integration_mod
-			# 				duration = -1
-			# 				desc = UNTIL_REVOKED
-			# 			}
-			# 		}
-			# 	"
-			# }
