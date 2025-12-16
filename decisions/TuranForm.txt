@@ -6,16 +6,45 @@ country_decisions = {
 			normal_or_historical_nations = yes
 			was_never_end_game_tag_trigger = yes
 			NOT = { has_country_flag = formed_turan_flag }
+			NOT = { culture = wuhuan }
+			NOT = { culture = bolgar }
+			NOT = { culture = chitans }
+			NOT = { culture = di_culture } #none of these cultures are really "turkic" theyre just in it for gamepaly purposes
+			NOT = { culture = xichenger } #theyre chinese bruh
+			NOT = {
+				OR = {
+					tag = CV0
+					tag = TH1
+				}
+			}
+			culture_group = turkic
 			OR = {
-				tag = GJ0
-				tag = GJ1
-				tag = GJ2
-				tag = GJ3
-				tag = GJ4
-				tag = GJ5
-				tag = AT0
-				tag = SV0
-				tag = SK0
+				ai = no
+				is_playing_custom_nation = no
+			}
+			OR = {
+				is_free_or_tributary_trigger = yes
+				ai = no
+			}
+			is_colonial_nation = no
+			OR = {
+				is_former_colonial_nation = no
+				AND = {
+					is_former_colonial_nation = yes
+					ai = no
+				}
+			}
+		}
+		provinces_to_highlight = {
+			OR = {
+				region = russia_region 
+				region = ruthenia_region 
+				region = ural_region 
+				region = crimea_region 
+			}
+			OR = {
+				NOT = { owned_by = ROOT }
+				NOT = { is_core = ROOT }
 			}
 		}
 		allow = {
@@ -23,28 +52,15 @@ country_decisions = {
 			is_free_or_tributary_trigger = yes
 			is_nomad = no
 			is_at_war = no
-			OR = {
-				AND = {
-					is_great_power = yes
-					NOT = {
-						tag = GJ0
-					}
-					NOT = {
-						tag = AT0
-					}
+			num_of_owned_provinces_with = {
+				value = 60
+				OR = {
+					region = russia_region
+					region = ural_region
+					region = ruthenia_region
+					region = crimea_region
 				}
-				AND = {
-					tag = GJ0
-					AT0 = {
-						exists = no
-					}
-				}
-				AND = {
-					tag = AT0
-					GJ0 = {
-						exists = no
-					}
-				}
+				culture_group = turkic
 			}
 		}
 		effect = {
@@ -67,4 +83,130 @@ country_decisions = {
 		ai_importance = 400
 	}
 
+	ozrania_nation = {
+		major = yes
+		potential = {
+			NOT = { has_country_flag = formed_ozrania_flag }
+			OR = {
+				tag = ZL7
+				tag = ZL8
+			}
+		}
+		allow = {
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			is_at_war = no
+			num_of_owned_provinces_with = {
+				value = 10
+				OR = {
+					area = bothnia_area
+					area = finland_area
+					culture = samitan
+					culture = nogaybak
+				}
+			}
+		}
+		effect = {
+			override_country_name = OZRANIA_TAG
+			add_stability_or_adm_power = yes
+			set_country_flag = formed_ozrania_flag
+			add_prestige_or_monarch_power = {
+				amount = 25
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+
+	suomeya_bizzarre_adventures = {
+		major = yes
+		potential = {
+			NOT = { has_country_flag = suom_advanture }
+			tag = SM0
+		}
+		allow = {
+			if = {
+				limit = {
+					ai = yes
+				}
+				army_size_percentage = 0.75
+				is_year = 1445
+			}else = {
+				army_size_percentage = 1
+			}
+		}
+		effect = {
+			set_country_flag = suom_advanture
+			country_event = {
+				id =  finneya.1
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		ai_importance = 400
+	}
+
+	suomeya_bizzarre_adventures_2 = {
+		major = yes
+		potential = {
+			tag = SM4
+			carpathia_region = {
+				type = any
+				NOT = {
+					culture_group = ugaric
+				}
+				NOT = {
+					culture = dacian
+				}
+			}
+		}
+		allow = {
+			any_owned_province = {
+				region = carpathia_region
+				NOT = {
+					culture_group = ugaric
+				}
+				NOT = {
+					culture = dacian
+				}
+			}
+		}
+		effect = {
+			every_owned_province = {
+				limit = {
+					region = carpathia_region
+					NOT = {
+						culture_group = ugaric
+					}
+					NOT = {
+						culture = dacian
+					}
+				}
+				owner = {
+					add_dip_power = -30
+				}
+				random_list = {
+					50 = {
+						change_culture = suomy
+					}
+					50 = {
+						change_culture = avars
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				factor = 0
+				NOT = {
+					dip_power = 500
+				}
+			}
+		}
+		ai_importance = 400
+	}
 }

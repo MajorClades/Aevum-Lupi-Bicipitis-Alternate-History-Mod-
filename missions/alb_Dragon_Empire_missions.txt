@@ -1,0 +1,763 @@
+Dragon_Empire_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = TH1 } 
+
+	drem_first_of_many = {
+		icon = mission_noble_council
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = { army_size = 100 } 
+
+		effect = {
+			custom_tooltip = DR_EMP_TT_1
+			set_country_flag = guo_hong_dream_flag
+		}
+	}
+
+	drem_army_of_heaven = {
+		icon = mission_plc_lifetime_of_war
+		position = 2
+		required_missions = { drem_first_of_many } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			army_tradition = 25
+			num_of_completed_idea_groups_mil = { amount = 2 } 
+			had_recent_war = 1
+		}
+
+		effect = {
+			add_army_tradition = -25
+			country_event = { id = drag_on.3 } 
+		}
+	}
+
+	drem_latverian_overture = {
+		icon = balance_of_power
+		position = 4
+		provinces_to_highlight = {
+			region = ruthenia_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			ruthenia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				OR = {
+					infantry_in_province = 2
+					NOT = { unrest = 1 } 
+				}
+			}
+		}
+
+		effect = {
+			ruthenia_region = {
+				add_unrest = -5
+				custom_tooltip = DR_EMP_TT_5
+				if = {
+					limit = { province_group = north_silk_road_all } 
+					add_base_production = 1
+				}
+				add_province_modifier = {
+					name = "drem_thousand_resistance"
+					duration = 10950
+				}
+			}
+			capital_scope = {
+				add_base_tax = 1
+				add_base_manpower = 1
+				if = {
+					limit = { province_id = 280 } 
+					add_base_production = 1
+				}
+				else = {
+					custom_tooltip = DR_EMP_TT_4
+					tooltip = { add_base_production = 1 } 
+				}
+			}
+		}
+	}
+
+	drem_saxons_doom = {
+		icon = mission_teutonic_knights
+		position = 5
+		required_missions = { drem_latverian_overture } 
+		provinces_to_highlight = {
+			region = poland_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			poland_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 5
+				region = poland_region
+				has_fort_building_trigger = yes
+				infantry_in_province = 10
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "drem_german_knights"
+				duration = -1
+			}
+			poland_region = {
+				add_permanent_province_modifier = {
+					name = "drem_return_of_the_dragon"
+					duration = -1
+				}
+			}
+		}
+	}
+
+	drem_over_germania = {
+		icon = encroach_on_the_germans
+		position = 6
+		required_missions = { drem_saxons_doom } 
+		provinces_to_highlight = {
+			OR = {
+				region = north_german_region
+				region = south_german_region
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 50
+				OR = {
+					region = north_german_region
+					region = south_german_region
+				}
+				OR = {
+					infantry_in_province = 2
+					is_core = ROOT
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "drem_war_host_of_gott"
+				duration = -1
+			}
+			custom_tooltip = DR_EMP_TT_6
+			hidden_effect = {
+				if = {
+					limit = { SO0 = { exists = yes }  } 
+					SO0 = {
+						inherit = BR0
+						inherit = SP0
+						set_emperor = yes
+						add_country_modifier = {
+							name = "drem_imperial_enemies"
+							duration = -1
+						}
+					}
+				}
+				else = {
+					emperor = {
+						inherit = BR0
+						inherit = SP0
+						add_country_modifier = {
+							name = "drem_imperial_enemies"
+							duration = -1
+						}
+					}
+				}
+				france_region = { set_in_empire = yes } 
+				iberia_region = { set_in_empire = yes } 
+				italy_region = { set_in_empire = yes } 
+			}
+		}
+	}
+
+	drem_daqin_is_ours = {
+		icon = mission_fall_of_third_rome
+		position = 7
+		required_missions = { drem_over_germania } 
+		provinces_to_highlight = {
+			OR = {
+				region = france_region
+				region = italy_region
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 50
+				OR = {
+					region = france_region
+					region = italy_region
+				}
+			}
+			182 = {
+				infantry_in_province = 50
+				owned_by = ROOT
+				is_core = ROOT
+			}
+			118 = {
+				infantry_in_province = 50
+				owned_by = ROOT
+				is_core = ROOT
+			}
+		}
+
+		effect = {
+			182 = {
+				kill_units = {
+					who = ROOT
+					type = infantry
+					amount = 50
+				}
+			}
+			118 = {
+				kill_units = {
+					who = ROOT
+					type = infantry
+					amount = 50
+				}
+			}
+			set_country_flag = dragon_empire_above_all_elses
+			custom_tooltip = DR_EMP_TT_7
+		}
+	}
+}
+Dragon_Empire_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = TH1 } 
+
+	drem_future_of_war = {
+		icon = mission_cannons_firing
+		position = 3
+		required_missions = {
+			drem_army_of_heaven
+			drem_destiny_of_war
+		}
+		provinces_to_highlight = {
+			owned_by = ROOT
+			can_build = soldier_households
+		}
+
+		trigger = {
+			army_tradition = 50
+			num_of_owned_provinces_with = {
+				value = 6
+				artillery_in_province = 5
+				has_building = soldier_households
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "dragon_cannons_drem"
+				duration = -1
+			}
+		}
+	}
+
+	drem_valtean_overture = {
+		icon = mission_conquer_baltic_region
+		position = 5
+		provinces_to_highlight = {
+			region = baltic_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			baltic_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				OR = {
+					infantry_in_province = 2
+					NOT = { unrest = 1 } 
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "drem_culture_maxxing_1"
+				duration = -1
+			}
+			baltic_region = {
+				add_province_modifier = {
+					name = "drem_thousand_resistance"
+					duration = 10950
+				}
+			}
+			europe_superregion = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	drem_zladinian_wars = {
+		icon = mission_baltic_empire
+		position = 6
+		required_missions = { drem_valtean_overture } 
+		provinces_to_highlight = {
+			region = scandinavia_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			scandinavia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_navy_tradition = 20
+			add_country_modifier = {
+				name = "drem_zladinia_navy"
+				duration = -1
+			}
+		}
+	}
+}
+Dragon_Empire_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = TH1 } 
+
+	drem_of_legacy_and_power = {
+		icon = mission_guo_symbol
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = { stability = 3 } 
+
+		effect = {
+			if = {
+				limit = {
+					OR = {
+						dynasty = "Guo"
+						has_ruler_flag = descendant_of_guo_hong_flag
+					}
+				}
+				add_ruler_modifier = {
+					name = "restoration_of_the_dragons"
+					duration = 10950
+				}
+			}
+			else = { country_event = { id = drag_on.1 }  } 
+		}
+	}
+
+	drem_destiny_of_war = {
+		icon = mission_hundred_years_war
+		position = 2
+		required_missions = { drem_of_legacy_and_power } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			monthly_mil = 12
+			calc_true_if = {
+				amount = 10
+				all_known_country = {
+					OR = {
+						truce_with = ROOT
+						coalition_target = ROOT
+					}
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "drem_easy_war"
+				duration = -1
+			}
+			custom_tooltip = DR_EMP_TT_2
+			set_country_flag = easy_province_conquest_flag
+		}
+	}
+
+	drem_conquest_eternal = {
+		icon = mission_hong_guo
+		position = 4
+		required_missions = {
+			drem_future_of_war
+			drem_too_much_manpower
+		}
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_forcelimit_building_trigger = no
+			has_manpower_building_trigger = no
+			has_fort_building_trigger = no
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 7
+				infantry_in_province = 25
+				has_forcelimit_building_trigger = yes
+				has_manpower_building_trigger = yes
+				has_fort_building_trigger = yes
+			}
+		}
+
+		effect = {
+			custom_tooltip = DR_EMP_TT_3
+			set_country_flag = easy_castle_conquest_flag
+		}
+	}
+
+	drem_danubian_swims = {
+		icon = mission_conquer_romania
+		position = 6
+		provinces_to_highlight = {
+			region = carpathia_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			carpathia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				OR = {
+					infantry_in_province = 3
+					NOT = { unrest = 1 } 
+				}
+			}
+		}
+
+		effect = {
+			change_price = {
+				trade_goods = grain
+				key = drem_own_all_the_grains
+				value = 0.5
+				duration = 18250
+			}
+			carpathia_region = { add_nationalism = -10 } 
+			anatolia_region = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	drem_anatolia_death = {
+		icon = mission_fall_of_constantinople
+		position = 7
+		required_missions = { drem_danubian_swims } 
+		provinces_to_highlight = {
+			region = anatolia_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			151 = { country_or_non_sovereign_subject_holds = ROOT } 
+			anatolia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				OR = {
+					infantry_in_province = 3
+					NOT = { unrest = 1 } 
+				}
+			}
+		}
+
+		effect = {
+			country_event = { id = drag_on.6 } 
+			set_country_flag = dragon_empire_above_all_elses_2
+			custom_tooltip = DR_EMP_TT_9
+			tooltip = {
+				add_war_exhaustion = -2
+				add_corruption = -2
+			}
+		}
+	}
+}
+Dragon_Empire_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = TH1 } 
+
+	drem_too_many_armies = {
+		icon = mission_guilds_of_barcelona
+		position = 2
+		required_missions = {
+			drem_of_legacy_and_power
+			drem_multiculturalism
+		}
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_forcelimit_building_trigger = no
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				has_forcelimit_building_trigger = yes
+				infantry_in_province = 10
+			}
+		}
+
+		effect = {
+			change_estate_land_share = {
+				estate = all
+				share = -5
+			}
+			add_country_modifier = {
+				name = "drem_the_patriots"
+				duration = 10950
+			}
+			country_event = { id = drag_on.2 } 
+		}
+	}
+
+	drem_too_much_manpower = {
+		icon = the_hundred_years_war
+		position = 3
+		required_missions = { drem_too_many_armies } 
+		provinces_to_highlight = {  } 
+
+		trigger = { years_of_manpower = 1.5 } 
+
+		effect = {
+			add_yearly_manpower = -1.5
+			add_country_modifier = {
+				name = "drem_infinite_armies"
+				duration = -1
+			}
+		}
+	}
+
+	drem_krimea_overture = {
+		icon = mission_cossack_cavalry
+		position = 5
+		provinces_to_highlight = {
+			OR = {
+				region = crimea_region
+				region = ural_region
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			crimea_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			ural_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "drem_culture_maxxing_2"
+				duration = -1
+			}
+			crimea_region = {
+				add_province_modifier = {
+					name = "drem_thousand_resistance"
+					duration = 10950
+				}
+			}
+			persia_superregion = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	drem_persian_heir = {
+		icon = mam_persia
+		position = 6
+		required_missions = { drem_krimea_overture } 
+		provinces_to_highlight = {
+			region = persia_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			OR = {
+				persia_region = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				BG0 = {
+					alliance_with = ROOT
+					has_opinion = {
+						who = ROOT
+						value = 190
+					}
+				}
+			}
+		}
+
+		effect = { country_event = { id = drag_on.5 }  } 
+	}
+}
+Dragon_Empire_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = TH1 } 
+
+	drem_multiculturalism = {
+		icon = mission_assemble_an_army
+		position = 1
+		provinces_to_highlight = {
+			owned_by = ROOT
+			superregion = eastern_europe_superregion
+			has_manpower_building_trigger = no
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 50
+				superregion = eastern_europe_superregion
+				has_manpower_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "drem_multicultural_army"
+				duration = -1
+			}
+			eastern_europe_superregion = { add_permanent_claim = ROOT } 
+			tartary_superregion = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	drem_true_empire = {
+		icon = mission_tribal_wargames
+		position = 2
+		required_missions = { drem_multiculturalism } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			NOT = { is_core = ROOT } 
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 130
+				is_core = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "drem_just_a_spoonful"
+				duration = 10950
+			}
+		}
+	}
+
+	drem_turan_overture = {
+		icon = geo_turkoman
+		position = 4
+		provinces_to_highlight = {
+			region = russia_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			russia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				OR = {
+					infantry_in_province = 2
+					NOT = { unrest = 1 } 
+				}
+			}
+		}
+
+		effect = {
+			russia_region = {
+				add_unrest = -5
+				custom_tooltip = DR_EMP_TT_5
+				if = {
+					limit = { province_group = north_silk_road_all } 
+					add_base_production = 1
+				}
+				add_province_modifier = {
+					name = "drem_thousand_resistance"
+					duration = 10950
+				}
+			}
+			capital_scope = {
+				add_base_tax = 1
+				add_base_manpower = 1
+				if = {
+					limit = { province_id = 280 } 
+					add_base_production = 1
+				}
+				else = {
+					custom_tooltip = DR_EMP_TT_4
+					tooltip = { add_base_production = 1 } 
+				}
+			}
+		}
+	}
+
+	drem_serbian_two = {
+		icon = defeat_the_serbs
+		position = 5
+		required_missions = { drem_turan_overture } 
+		provinces_to_highlight = {
+			culture = serbian
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			owns_all_provinces = { culture = serbian } 
+			num_of_owned_provinces_with = {
+				value = 5
+				culture = serbian
+				infantry_in_province = 15
+			}
+		}
+
+		effect = {
+			country_event = { id = drag_on.4 } 
+			far_east_superregion = { add_permanent_claim = ROOT } 
+			china_superregion = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	drem_restore_mandate = {
+		icon = qng_balance_mandate
+		position = 7
+		required_missions = { drem_serbian_two } 
+		provinces_to_highlight = {
+			region = north_china_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			OR = {
+				north_china_region = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				is_emperor_of_china = yes
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "drem_mandate_of_the_dragon"
+				duration = -1
+			}
+			china_superregion = { add_core = ROOT } 
+		}
+	}
+}
