@@ -5,11 +5,36 @@ custom_button = {
 	}
 	trigger = {
 		years_of_income = 0.2
+		NOT = {
+			custom_trigger_tooltip = {
+				tooltip = "Currently sponsoring Art and Epics"
+				has_country_flag = sponsoring_art_manich_flag
+			}
+		}
 	}
 	effect = {
 		add_years_of_income = -0.2
 		set_country_flag = sponsoring_art_manich_flag
-		
+		country_event = {
+			id = light_emp.1000
+		}
+		hidden_effect = {
+			clr_country_flag = adm_art_manich_flag
+			clr_country_flag = dip_art_manich_flag
+			clr_country_flag = mil_art_manich_flag
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = first_artifact_flag
+					}
+				}
+				set_variable = {
+					which = manich_artifact_counter
+					value = 0
+				}
+				set_country_flag = first_artifact_flag
+			}
+		}
 	}
 	tooltip = manich_create_art_button_tt
 }
@@ -25,9 +50,19 @@ custom_button = {
 			tooltip = "Currently sponsoring Art and Epics"
 			has_country_flag = sponsoring_art_manich_flag
 		}
+		NOT = {
+			check_variable = {
+				which = artist_manich_gpt
+				value = 100
+			}
+		}
 	}
 	effect = {
 		add_years_of_income = -0.2
+		change_variable = {
+					which = artist_manich_gpt
+					value = 5
+				}
 	}
 	tooltip = manich_fast_art_button_tt
 }
@@ -38,10 +73,18 @@ custom_button = {
 		religion = manich
 	}
 	trigger = {
-
+		check_variable = {
+					which = manich_artifact_counter
+					value = 1
+				}
 	}
 	effect = {
-
+		custom_tooltip = USE_REL_ART
+		subtract_variable = {
+					which = manich_artifact_counter
+					value = 1
+				}
+		add_years_of_income = 0.15
 	}
 	tooltip = manich_spend_art_button_tt
 }
@@ -52,10 +95,58 @@ custom_button = {
 		religion = manich
 	}
 	trigger = {
-
+		check_variable = {
+				which = artist_manich_gpt
+				value = 100
+			}
 	}
 	effect = {
-
+		custom_tooltip = art_manich_tt_5
+		if = {
+			limit = {
+				has_country_flag = adm_art_manich_flag
+			}
+			add_adm_power = 100
+		}
+		if = {
+			limit = {
+				has_country_flag = dip_art_manich_flag
+			}
+			add_dip_power = 100
+		}
+		if = {
+			limit = {
+				has_country_flag = mil_art_manich_flag
+			}
+			add_mil_power = 100
+		}
+		clr_country_flag = sponsoring_art_manich_flag
+		hidden_effect = {
+			random_list = {
+				33 = {
+					change_variable = {
+						which = manich_artifact_counter
+						value = 1
+					}
+				}
+				33 = {
+					change_variable = {
+						which = manich_artifact_counter
+						value = 2
+					}
+				}
+				33 = {
+					change_variable = {
+						which = manich_artifact_counter
+						value = 3
+					}
+				}
+			}
+			set_variable = {
+				which = artist_manich_gpt
+				value = 0
+			}
+		}
 	}
 	tooltip = manich_finished_art_button_tt
 }
