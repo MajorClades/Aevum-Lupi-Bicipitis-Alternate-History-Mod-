@@ -1,185 +1,159 @@
-# namespace = manichs
+namespace = manichs
 
-# country_event = {
-# 	id = manichs.1
-# 	title = manichs.1.test
-# 	desc = manichs.1.desc
-# 	picture = ICONS_IN_CHURCH_eventPicture
+
+country_event = { #Manichean Art
+	id = manichs.1
+	title = manichs.1.test
+	desc = manichs.1.desc
+	picture = ARTWORK_eventPicture
 	
-# 	trigger = {
-# 		NOT = { has_ruler_flag = had_manich_choice }
-# 		religion = manich
-# 		OR = {
-# 			AND = {
-# 				OR = {
-# 					secondary_religion = catholic 
-# 					secondary_religion = wycliffian  
-# 					secondary_religion = wycliffian 
-# 					secondary_religion = arian
-# 					secondary_religion = impotian
-# 					secondary_religion = indictian
-# 				}
-# 				NOT = { has_personal_deity = teachingofjesus }
-# 			}
-# 			AND = {
-# 				OR = {
-# 					secondary_religion = islam
-# 					secondary_religion = rashidi
-# 					secondary_religion = alevilik  
-# 				}
-# 				NOT = { has_personal_deity = teachingofmuhammad }
-# 			}
-# 			AND = {
-# 				OR = {
-# 					secondary_religion = vajrayana 
-# 					secondary_religion = mahayana
-# 					secondary_religion = buddhism
-# 				}
-# 				NOT = { has_personal_deity = teachingofbuddha }
-# 			}
-# 			AND = {
-# 				secondary_religion = jewish 
-# 				NOT = { has_personal_deity = teachingofmoses }
-# 			}
-# 			AND = {
-# 				secondary_religion = zoroastrian 
-# 				NOT = { has_personal_deity = teachingofzoroaster }
-# 			}
-# 			AND = {
-# 				NOT = {
-# 					OR = {
-# 						secondary_religion = zoroastrian
-# 					secondary_religion = jewish
-# 					secondary_religion = vajrayana 
-# 					secondary_religion = mahayana
-# 					secondary_religion = buddhism
-# 					secondary_religion = catholic 
-# 					secondary_religion = wycliffian  
-# 					secondary_religion = wycliffian 
+	is_triggered_only = yes
 
-# 					secondary_religion = arian
-# 					secondary_religion = impotian
-# 					secondary_religion = indictian
-# 					secondary_religion = alevilik
-# 					secondary_religion = rashidi
-# 					secondary_religion = islam
-# 					has_secondary_religion = yes
-# 					}
-# 				}
-# 				NOT = { has_personal_deity = teachingoflocalgods }
-# 			}
-# 			AND = {
-# 				NOT = { has_secondary_religion = yes }
-# 				NOT = { has_personal_deity = teachingofmani }
-# 			}
-# 		}
-# 	}
-# 	mean_time_to_happen = {
-# 		months = 1
-# 	}
-# 	option = {
-# 		name = manichs.1a
-# 		trigger = {
-# 			has_secondary_religion = no
-# 		}
-# 		change_personal_deity = teachingofmani
-# 		set_ruler_flag = had_manich_choice
-		
-# 	}
-# 	option = {
-# 		name = manichs.1b
-# 		trigger = {
-# 			OR = { 
-# 				secondary_religion = alevilik
-# 				secondary_religion = rashidi
-# 				secondary_religion = islam
-# 			}
-# 		}
-# 		change_personal_deity = teachingofmuhammad
+	immediate = {
+		hidden_effect = {
+			set_variable = {
+				which = artist_manich_gpt
+				value = 0
+			}
+		}
+	}
+	option = {
+		name = manichs.1a
+		custom_tooltip = art_manich_tt_1
+		set_country_flag = adm_art_manich_flag
+	}
+	option = {
+		name = manichs.1b
+		custom_tooltip = art_manich_tt_2
+		set_country_flag = dip_art_manich_flag
+	}
+	option = {
+		name = manichs.1c
+		custom_tooltip = art_manich_tt_3
+		set_country_flag = mil_art_manich_flag
+	}
+	option = {
+		name = manichs.1d
+		custom_tooltip = art_manich_tt_4
+		hidden_effect = {
+			random_list = {
+				30 = {
+					set_country_flag = adm_art_manich_flag
+				}
+				30 = {
+					set_country_flag = dip_art_manich_flag
+				}
+				30 = {
+					set_country_flag = mil_art_manich_flag
+				}
+			}
+		}
+		change_variable = {
+				which = artist_manich_gpt
+				value = 10
+			}
+	}
+}
 
-# 		set_ruler_flag = had_manich_choice
-# 	}
-# 	option = {
-# 		name = manichs.1c
-# 		trigger = {
-# 			OR = { 
-# 				secondary_religion = catholic 
-# 				secondary_religion = wycliffian  
-# 				secondary_religion = wycliffian 
-# 				secondary_religion = arian
-# 				secondary_religion = impotian
-# 				secondary_religion = indictian
-# 			}
-# 		}
-# 		change_personal_deity = teachingofjesus
-# 		set_ruler_flag = had_manich_choice
-		
-# 	}
-# 	option = {
-# 		name = manichs.1d
-# 		trigger = {
-# 			OR = { 
-# 				secondary_religion = vajrayana 
-# 				secondary_religion = mahayana
-# 				secondary_religion = buddhism
-# 			}
-# 		}
-# 		change_personal_deity = teachingofbuddha
-# 		set_ruler_flag = had_manich_choice
-		
-# 	}
-# 	option = {
-# 		name = manichs.1e
-# 		trigger = {
-# 			secondary_religion = jewish
-# 		}
-# 		change_personal_deity = teachingofmoses
 
-# 		set_ruler_flag = had_manich_choice
-# 	}
-# 	option = {
-# 		name = manichs.1f
-# 		trigger = {
-# 			secondary_religion = zoroastrian
-# 		}
-# 		change_personal_deity = teachingofzoroaster
+country_event = { #Manichean Art
+	id = manichs.2
+	title = manichs.2.test
+	desc = manichs.2.desc
+	picture = ARTWORK_eventPicture
+	
+	trigger = {
+		OR = {
+			has_country_flag = adm_art_manich_flag
+			has_country_flag = dip_art_manich_flag
+			has_country_flag = mil_art_manich_flag
+		}
+		NOT = {
+			check_variable = {
+				which = artist_manich_gpt
+				value = 100
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 7
+		modifier = {
+			factor = 2
+			has_country_flag = delayed_art_manich_flag
+		}
+	}
 
-# 		set_ruler_flag = had_manich_choice
-# 	}
-# 	option = {
-# 		name = manichs.1g
-# 		trigger = {
-# 			NOT = {
-# 				OR = {
-# 					secondary_religion = zoroastrian
-# 				secondary_religion = jewish
-# 				secondary_religion = vajrayana 
-# 				secondary_religion = mahayana
-# 				secondary_religion = buddhism
-# 				secondary_religion = catholic 
-# 				secondary_religion = wycliffian  
-# 				secondary_religion = arian
-# 				secondary_religion = impotian
-# 				secondary_religion = indictian
-# 				secondary_religion = alevilik
-# 				secondary_religion = rashidi
-# 				secondary_religion = islam
-# 				}
-# 			}
-# 			has_secondary_religion = yes
-# 			}
-# 		change_personal_deity = teachingoflocalgods
-
-# 		set_ruler_flag = had_manich_choice
-# 	}
-# 	option = {
-# 		name = manichs.1h
-# 		add_prestige_or_monarch_power = {
-# 			amount = 10
-# 		}
-# 		ai_chance = { 
-# 			factor = 0
-# 		}
-# 		set_ruler_flag = had_manich_choice
-# 	}
-# }
+	immediate = {
+		hidden_effect = {
+			change_variable = {
+				which = artist_manich_gpt
+				value = 10
+			}
+			clr_country_flag = delayed_art_manich_flag
+		}
+	}
+	option = {
+		name = manichs.2a
+		custom_tooltip = CURRENT_ART_PROGRESS
+		random_list = {
+			50 = {
+				change_variable = {
+					which = artist_manich_gpt
+					value = 10
+				}
+			}
+			50 = {
+				change_variable = {
+					which = artist_manich_gpt
+					value = 15
+				}
+			}
+		}
+	}
+	option = {
+		name = manichs.2b
+		custom_tooltip = CURRENT_ART_PROGRESS
+		random_list = {
+			70 = {
+				change_variable = {
+					which = artist_manich_gpt
+					value = 5
+				}
+			}
+			30 = {
+				change_variable = {
+					which = artist_manich_gpt
+					value = 20
+				}
+			}
+		}
+	}
+	option = {
+		name = manichs.2c
+		custom_tooltip = CURRENT_ART_PROGRESS
+		random_list = {
+			50 = {
+				change_variable = {
+					which = artist_manich_gpt
+					value = 0
+				}
+			}
+			50 = {
+				change_variable = {
+					which = artist_manich_gpt
+					value = 25
+				}
+			}
+		}
+	}
+	option = {
+		name = manichs.2d
+		custom_tooltip = CURRENT_ART_PROGRESS
+		custom_tooltip = DELAYED_ART_MANICH
+		set_country_flag = delayed_art_manich_flag
+		change_variable = {
+					which = artist_manich_gpt
+					value = 25
+				}
+	}
+}
