@@ -131,6 +131,12 @@ Avaria_3_slot = {
 		}
 		effect = {
 			country_event = { id = avaria.3 }
+			define_advisor = {
+				type = commandant
+				name = "Tomor Baryn"
+				cost_multiplier = 0.5
+				skill = 2
+			}
 		}
 	}
 	avr_revenge = {
@@ -223,7 +229,15 @@ Avaria_3_slot = {
 				limit = {
 					culture = avars_new
 				}
-				override_country_name = AVARKHAGANATE
+				if = {
+					limit = {
+						religion = islam
+					}
+					override_country_name = AVARCALIPHATE
+				}
+				else = {
+					override_country_name = AVARKHAGANATE
+				}
 				set_government_rank = 3
 				add_prestige = 25
 				custom_tooltip = AVAR_TT_2
