@@ -822,7 +822,7 @@ country_event = { #vassalizing event for enlioghtned empire
 		}
 		event_target:light_empire_shield_target = {
 			create_subject = {
-				who = LE8
+				who = ROOT
 				subject_type = light_empire_vassal
 			}
 		}
@@ -834,5 +834,38 @@ country_event = { #vassalizing event for enlioghtned empire
 			factor = 65
 		}
 		add_prestige = 10
+	}
+}
+
+country_event = { #break gupta
+	id = light_emp.20
+	title = light_emp.20.test
+	desc = light_emp.20.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = light_emp.20a
+		ai_chance = {
+			factor = 65
+		}
+		inherit = LE8 
+		release = LE8
+		create_subject = {
+			who = LE8
+			subject_type = light_empire_vassal
+		}
+		LE8 = {
+				add_liberty_desire = -50
+		}
+	}
+
+	option = {
+		name = light_emp.20b
+		ai_chance = {
+			factor = 35
+		}
+		inherit = LE8 
 	}
 }

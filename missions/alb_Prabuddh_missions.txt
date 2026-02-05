@@ -26,15 +26,9 @@ LEO_1_slot = {
 		}
 
 		effect = {
-			inherit = LE8 
-			release = LE8
-			create_subject = {
-				who = LE8
-				subject_type = light_empire_vassal
-			}
-			LE8 = {
-				add_liberty_desire = -50
-			}
+			country_event = {
+					id = light_emp.20
+				}
 		}
 	}
 
@@ -79,7 +73,22 @@ LEO_2_slot = {
 		tag = LE0
 	}
 
+	leo_light_the_sun = {
+		icon = per_build_the_fire_temples
+		position = 2
+		required_missions = { leo_restoration_of_light leo_armies_of_light } 
+		trigger = {
+			has_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = 50
+			}
+		}
 
+		effect = {
+			add_stability_or_adm_power = yes
+		}
+	}
 }
 
 LEO_3_slot = {
@@ -91,7 +100,23 @@ LEO_3_slot = {
 		tag = LE0
 	}
 
+	leo_armies_of_light = {
+		icon = per_build_the_fire_temples
+		position = 1
 
+		trigger = {
+			army_size = 24
+		}
+
+		effect = {
+			add_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = 15
+			}
+			add_prestige_or_monarch_power = { amount = 15 }
+		}
+	}
 }
 
 LEO_4_slot = {
@@ -103,7 +128,25 @@ LEO_4_slot = {
 		tag = LE0
 	}
 
+	leo_artist_work = {
+		icon = per_build_the_fire_temples
+		position = 1
 
+		trigger = {
+			has_adm_advisor = yes
+			has_dip_advisor = yes
+			has_mil_advisor = yes
+		}
+
+		effect = {
+			capital_scope = {
+				add_base_tax = 1
+				add_base_production = 1
+				add_base_manpower = 1
+				add_building = temple
+			}
+		}
+	}
 }
 
 LEO_5_slot = {
@@ -115,5 +158,38 @@ LEO_5_slot = {
 		tag = LE0
 	}
 
+	leo_works_of_art = {
+		icon = per_build_the_fire_temples
+		position = 1
 
+		trigger = {
+			num_of_aspects = 2
+		}
+
+		effect = {
+			add_country_modifier_for_age = {
+				name = leo_early_religios
+				age = age_of_discovery
+			}
+		}
+	}
+	leo_lenghty_works = {
+		icon = per_build_the_fire_temples
+		position = 2
+		required_missions = { leo_works_of_art leo_artist_work } 
+		trigger = {
+			OR = {
+				has_adm_advisor_3 = yes
+				has_dip_advisor_3 = yes
+				has_mil_advisor_3 = yes
+			}
+			num_of_aspects = 3
+		}
+
+		effect = {
+			capital_scope = {
+				upgrade_tax_building = yes
+			}
+		}
+	}
 }
