@@ -144,11 +144,41 @@ mt_yonasgen_2 = {
 		required_missions = {
 			control_indus_bank
 		}
-		provinces_to_highlight = { }
+		provinces_to_highlight = { owned_by = LE7 }
 		trigger = { 
-				LE7 = {exists = no}					
+				LE7 = {exists = no}
 		}
-		effect = { }
+		effect = {  
+			custom_tooltip = YON_GAIN_10_MIL_POWER_PER_KAMBOJ_PROVINCE
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						culture = panjabi #kamboj
+					}
+					owner = {
+						add_mil_power = 10
+					}
+				}
+			}
+
+			complex_dynamic_effect = {
+				first_custom_tooltip = YON_IF_MULTAN_CONNECTED
+				first_limit = "
+					506 = {
+						is_in_capital_area = yes
+					}
+				"
+				first_effect = "
+					506 = {
+						add_or_upgrade_fort_building = yes
+						add_province_modifier = {
+							name = yon_fort_of_multan
+							duration = -1
+						}
+					}
+				"
+			}
+		}
 	}
 
 	conqueror_of_indus = {
@@ -157,9 +187,35 @@ mt_yonasgen_2 = {
 		required_missions = {
 			reconquest_kamboj
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = {
+			OR = {
+				area = lahore_area
+				area = sind_sagar_area
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		trigger = { 
+			lahore_area = {
+				type = all
+				owned_by = ROOT
+			}
+			sind_sagar_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		effect = { 
+			add_power_projection = {
+				type = mission_rewards_power_projection
+				amount = 15
+			}
+			add_country_modifier = {
+				name = "yon_victory_over_indus"
+				duration = 5475 #15 years
+			}
+		}
 	}
 
 	savior_of_the_waking_world = {
@@ -168,9 +224,50 @@ mt_yonasgen_2 = {
 		required_missions = {
 			seize_doab_plains conqueror_of_indus
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = { 
+				OR = {
+					area = lahore_area
+					area = sind_sagar_area
+					area = multan_area
+					area = sindh_area
+					area = northern_sindh_area
+					}
+				NOT = { base_manpower = 5 }
+			}
+		trigger = { 
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+					value = 12
+				OR = {
+					area = lahore_area
+					area = sind_sagar_area
+					area = multan_area
+					area = sindh_area
+					area = northern_sindh_area
+					}
+				base_manpower = 5
+				}
+		}
+		effect = {
+			custom_tooltip = YON_GAIN_15_MANPOWER_PER_IMPROVED_INDUS_PROVINCE
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+					OR = {
+							area = lahore_area
+							area = sind_sagar_area
+							area = multan_area
+							area = sindh_area
+							area = northern_sindh_area
+						}
+					}
+					add_province_modifier = {
+								name = yon_indus_zenkai_boost
+								duration = 7300
+							}
+				}
+			}
+		add_yearly_manpower = 0.8
+		}
 	}
 }
 mt_yonasgen_3 = {
