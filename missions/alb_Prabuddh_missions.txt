@@ -46,19 +46,39 @@ LEO_1_slot = {
 		}
 
 		effect = {
-			every_neighbor_country = {
-				limit = {
-					is_subject = no
-					NOT = {
-						num_of_subjects = 1
+			add_ruler_modifier = {
+				name = leo_true_emperor
+			}
+		}
+	}
+
+	leo_empire_making = {
+		icon = mission_islamic_golden_age
+		position = 3
+		required_missions = { leo_showing_of_light } 
+
+		trigger = {
+			is_at_war = no
+			OR = {
+				grown_by_development = 75
+				num_of_subjects = 10
+			}
+		}
+
+		effect = {
+			custom_tooltip = EOL_TT_3
+			hidden_effect = {
+				every_subject_country = {
+					limit = {
+						is_subject_of_type = light_empire_vassal
+					}
+					overlord = {
+						add_adm_power = 5
+						add_dip_power = 5
+						add_mil_power = 5
 					}
 				}
-				country_event = {
-					id = light_emp.19
-					days = 1
-				}
 			}
-			
 		}
 	}
 
@@ -193,3 +213,4 @@ LEO_5_slot = {
 		}
 	}
 }
+
