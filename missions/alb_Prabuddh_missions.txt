@@ -101,12 +101,13 @@ LEO_2_slot = {
 			has_government_power = {
 				mechanic_type = emp_of_light_point_mechanic
 				power_type = enlightened_prestige_points
-				value = 50
+				value = 40
 			}
 		}
 
 		effect = {
 			add_stability_or_adm_power = yes
+			add_church_power = 50
 		}
 	}
 }
@@ -135,6 +136,12 @@ LEO_3_slot = {
 				value = 15
 			}
 			add_prestige_or_monarch_power = { amount = 15 }
+			capital_scope = {
+				add_permanent_province_modifier = {
+					name = leo_elephants
+					duration = -1
+				}
+			}
 		}
 	}
 }
@@ -165,6 +172,28 @@ LEO_4_slot = {
 				add_base_manpower = 1
 				add_building = temple
 			}
+		}
+	}
+	leo_grand_army = {
+		icon = per_build_the_fire_temples
+		position = 2
+		required_missions = { leo_armies_of_light leo_artist_work } 
+		trigger = {
+			num_of_hussars = 5
+		}
+
+		effect = {
+			capital_scope = {
+				add_or_upgrade_manpower_building = yes
+			}
+			add_country_modifier = {
+					name = leo_war_training
+					duration = 7300
+				}
+			add_country_modifier = {
+					name = leo_war_foot
+					duration = -1
+				}
 		}
 	}
 }
