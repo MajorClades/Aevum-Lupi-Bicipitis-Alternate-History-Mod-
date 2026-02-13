@@ -1,0 +1,46 @@
+custom_button = {
+	name = leo_tall_button
+	potential = {
+		FROM = {
+			has_country_flag = leo_unlock_tall_modifiers
+		}
+		OR = {
+			owned_by = FROM
+			owner = {
+				is_subject_of = FROM
+			}
+		}
+	}
+	trigger = {
+		has_tax_building_trigger = yes
+		if = {
+			limit = {
+				has_government_mechanic = emp_of_light_point_mechanic
+			}
+			has_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = 15
+			}
+		}else = {
+			adm_power = 50
+			prestige = 25
+		}
+	}
+	effect = {
+		if = {
+			limit = {
+				has_government_mechanic = emp_of_light_point_mechanic
+			}
+			add_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = -15
+			}
+		}else = {
+			add_adm_power = -50
+			add_prestige = -25
+		}
+	}
+	tooltip = leo_tall_button_tt
+}
