@@ -321,10 +321,17 @@ PR1_4_slot = {
 		provinces_to_highlight = {  } 
 
 		trigger = {
-			has_government_power = {
-				mechanic_type = firenation_mechanic
-				power_type = fire_nation
-				value = 50
+			if = {
+				limit = {
+					has_government_mechanic = firenation_mechanic
+				}
+				has_government_power = {
+					mechanic_type = firenation_mechanic
+					power_type = fire_nation
+					value = 50
+				}
+			}else = {
+				mil_power = 600
 			}
 			num_of_artillery = 10
 		}
@@ -339,10 +346,17 @@ PR1_4_slot = {
 		provinces_to_highlight = {  } 
 
 		trigger = {
-			has_government_power = {
-				mechanic_type = firenation_mechanic
-				power_type = fire_nation
-				value = 100
+			if = {
+				limit = {
+					has_government_mechanic = firenation_mechanic
+				}
+				has_government_power = {
+					mechanic_type = firenation_mechanic
+					power_type = fire_nation
+					value = 100
+				}
+			}else = {
+				mil_power = 600
 			}
 			num_of_owned_provinces_with = {
 				value = 15
@@ -352,6 +366,13 @@ PR1_4_slot = {
 		}
 
 		effect = {
+			if = {
+				limit = {
+					has_government_mechanic = firenation_mechanic
+				}
+			}else = {
+				add_mil_power = -600
+			}
 			add_country_modifier = {
 				name = "eran_cannons"
 				duration = -1

@@ -191,7 +191,7 @@ country_event = {
 	title = mexic.5.test
 	desc = mexic.5.desc
 	picture = ANGRY_MOB_eventPicture
-	
+	 
 	trigger = {
 		is_year = 1445
 		treasury = 100
@@ -273,7 +273,7 @@ country_event = {
 		has_country_flag = friend_left_river
 	}
 	mean_time_to_happen = {
-		months = 3
+		months = 60
 	}
 	option = {
 		name = mexic.6a
@@ -284,6 +284,7 @@ country_event = {
 					culture_group = caddoan
 					culture = yoron
 				}
+				religion = mexicos
 			}
 			change_culture = icniuh
 		}
@@ -293,6 +294,7 @@ country_event = {
 					culture_group = caddoan
 					culture = yoron
 				}
+				religion = mexicos
 			}
 			change_culture = icniuh
 		}
@@ -302,6 +304,7 @@ country_event = {
 					culture_group = caddoan
 					culture = yoron
 				}
+				religion = mexicos
 			}
 			change_culture = icniuh
 		}
@@ -325,7 +328,7 @@ country_event = {
 		has_country_flag = friend_right_river
 	}
 	mean_time_to_happen = {
-		months = 3
+		months = 60
 	}
 
 	option = {
@@ -337,24 +340,27 @@ country_event = {
 				NOT = {
 					culture = yoron
 				}
+				religion = mexicos
 			}
 			change_culture = icniuh
 		}
 		random_owned_province = {
 			limit = {
-				OR = {
-					culture_group = caddoan
+				culture_group = muskogean
+				NOT = {
 					culture = yoron
 				}
+				religion = mexicos
 			}
 			change_culture = icniuh
 		}
 		random_owned_province = {
 			limit = {
-				OR = {
-					culture_group = caddoan
+				culture_group = muskogean
+				NOT = {
 					culture = yoron
 				}
+				religion = mexicos
 			}
 			change_culture = icniuh
 		}
@@ -648,7 +654,13 @@ country_event = {
 	picture = ANGRY_MOB_eventPicture
 	
 	trigger = {
-		tag = MX0
+		OR = {
+			tag = MX0
+			AND = {
+				tag = RL0
+				was_tag = MX0	
+			}			
+		}
 		is_year = 1700
 		any_owned_province = {
 			has_province_modifier = mex_slave_plantations
@@ -681,7 +693,15 @@ province_event = {
 	picture = ANGRY_MOB_eventPicture
 	
 	trigger = {
-		owner = {tag = MX0}
+		owner = {
+			OR = {
+				tag = MX0
+				AND = {
+					tag = RL0
+					was_tag = MX0	
+				}			
+			}
+		}
 		has_province_modifier = mex_slave_plantations
 	}
 	mean_time_to_happen = {
@@ -702,9 +722,14 @@ province_event = {
 	option = {
 		name = mexic.14c
 		trigger = {
-			MX0 = {
-				full_idea_group = humanist_ideas
+			OR = {
+				tag = MX0
+				AND = {
+					tag = RL0
+					was_tag = MX0	
+				}			
 			}
+			full_idea_group = humanist_ideas
 		}
 		remove_province_modifier = mex_slave_plantations
 			add_province_modifier = {
@@ -715,9 +740,14 @@ province_event = {
 	option = {
 		name = mexic.14d
 		trigger = {
-			MX0 = {
-				ruler_has_personality = cruel_personality
+			OR = {
+				tag = MX0
+				AND = {
+					tag = RL0
+					was_tag = MX0	
+				}			
 			}
+			ruler_has_personality = cruel_personality
 		}
 		add_unrest = -10
 			owner = {
@@ -727,9 +757,14 @@ province_event = {
 	option = {
 		name = mexic.14e
 		trigger = {
-			MX0 = {
-				ruler_has_personality = reformist_personality
+			OR = {
+				tag = MX0
+				AND = {
+					tag = RL0
+					was_tag = MX0	
+				}			
 			}
+			ruler_has_personality = reformist_personality
 		}
 		remove_province_modifier = mex_slave_plantations
 		add_province_modifier = {
@@ -997,10 +1032,17 @@ country_event = {
 	desc = mexic.22.desc
 	picture = ADVISOR_eventPicture
 	trigger = {	
-		tag = MX0
+		OR = {
+			tag = MX0
+			AND = {
+				tag = RL0
+				was_tag = MX0	
+			}			
+		}
 		any_owned_province = {
 			culture_group = bionan
 			continent = north_america
+			religion = mexicos
 		}
 	}
 	mean_time_to_happen = {
@@ -1013,6 +1055,7 @@ country_event = {
 			limit = {
 				culture_group = bionan
 				continent = north_america
+				religion = mexicos
 			}
 			change_culture = tlahuitlaca
 		}
@@ -1020,6 +1063,7 @@ country_event = {
 			limit = {
 				culture_group = bionan
 				continent = north_america
+				religion = mexicos
 			}
 			change_culture = tlahuitlaca
 		}
@@ -1034,6 +1078,7 @@ country_event = {
 				limit = {
 					culture_group = bionan
 					continent = north_america
+					religion = mexicos
 				}
 				change_culture = tlahuitlaca
 			}
@@ -1041,6 +1086,7 @@ country_event = {
 				limit = {
 					culture_group = bionan
 					continent = north_america
+					religion = mexicos
 				}
 				change_culture = tlahuitlaca
 			}
@@ -1054,10 +1100,17 @@ country_event = {
 	desc = mexic.23.desc
 	picture = ADVISOR_eventPicture
 	trigger = {	
-		tag = MX0
+		OR = {
+			tag = MX0
+			AND = {
+				tag = RL0
+				was_tag = MX0	
+			}			
+		}
 		any_owned_province = {
 			is_iberian_grouped_trigger = yes
 			continent = north_america
+			religion = mexicos
 		}
 	}
 	mean_time_to_happen = {
@@ -1070,6 +1123,7 @@ country_event = {
 			limit = {
 				is_iberian_grouped_trigger = yes
 				continent = north_america
+				religion = mexicos
 			}
 			change_culture = raklionnetlaca
 		}
@@ -1077,6 +1131,7 @@ country_event = {
 			limit = {
 				is_iberian_grouped_trigger = yes
 				continent = north_america
+				religion = mexicos
 			}
 			change_culture = raklionnetlaca
 		}
@@ -1091,6 +1146,7 @@ country_event = {
 				limit = {
 					is_iberian_grouped_trigger = yes
 					continent = north_america
+					religion = mexicos
 				}
 				change_culture = raklionnetlaca
 			}
@@ -1098,6 +1154,7 @@ country_event = {
 				limit = {
 					is_iberian_grouped_trigger = yes
 					continent = north_america
+					religion = mexicos
 				}
 				change_culture = raklionnetlaca
 			}
@@ -1111,11 +1168,18 @@ country_event = {
 	desc = mexic.24.desc
 	picture = ADVISOR_eventPicture
 	trigger = {	
-		tag = MX0
+		OR = {
+				tag = MX0
+				AND = {
+					tag = RL0
+					was_tag = MX0	
+				}			
+			}
 		adm_tech = 7
 		any_owned_province = {
 			culture_group = central_algonquian
 			region = great_lakes_region
+			religion = mexicos
 		}
 	}
 	mean_time_to_happen = {
@@ -1127,14 +1191,20 @@ country_event = {
 		random_owned_province = {
 			limit = {
 				culture_group = central_algonquian
-				region = great_lakes_region
+				NOT = {
+					region = hudson_bay_region
+				}
+				religion = mexicos
 			}
 			change_culture = axotlaca
 		}
 		random_owned_province = {
 			limit = {
 				culture_group = central_algonquian
-				region = great_lakes_region
+				NOT = {
+					region = hudson_bay_region
+				}
+				religion = mexicos
 			}
 			change_culture = axotlaca
 		}
@@ -1148,7 +1218,13 @@ country_event = {
 	picture = ADVISOR_eventPicture
 	hidden = yes
 	trigger = {	
-		tag = MX0
+		OR = {
+			tag = MX0
+			AND = {
+				tag = RL0
+				was_tag = MX0	
+			}			
+		}
 		has_country_flag = formed_aztlan
 		any_owned_province = {
 			culture_group = alt_mexican

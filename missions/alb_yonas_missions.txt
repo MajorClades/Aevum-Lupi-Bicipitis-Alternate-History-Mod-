@@ -1,0 +1,530 @@
+mt_yonasgen_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	potential = { culture = yonas }
+
+	crush_the_ksatrap = {
+		icon = mission_arabian_fort
+		position = 2
+		required_missions = {
+			control_indus_bank
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = marwar_area
+				area = mewar_area
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		trigger = { 
+			marwar_area = {
+				type = all
+				owned_by = ROOT
+			}
+			mewar_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		effect = { 
+			jangladesh_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			multan_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	seize_doab_plains = {
+		icon = mission_persian_soldiers
+		position = 5
+		required_missions = {
+			crush_the_ksatrap
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = jangladesh_area
+				area = multan_area
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		trigger = { 
+			jangladesh_area = {
+				type = all
+				owned_by = ROOT
+			}
+			multan_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		effect = { 
+			sind_sagar_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			lahore_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+}
+mt_yonasgen_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential = { culture = yonas }
+
+	control_indus_bank = {
+		icon = mission_unite_home_region
+		position = 1
+		required_missions = { }
+		provinces_to_highlight = {
+			OR = {
+				area = northern_sindh_area
+				area = sindh_area
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		trigger = { 
+			northern_sindh_area = {
+				type = all
+				owned_by = ROOT
+			}
+			sindh_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		effect = { 
+			marwar_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			mewar_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	reconquest_kamboj = {
+		icon = mission_cannons_firing
+		position = 3
+		required_missions = {
+			control_indus_bank
+		}
+		provinces_to_highlight = { owned_by = LE7 }
+		trigger = { 
+				LE7 = {exists = no}
+		}
+		effect = {  
+			custom_tooltip = YON_GAIN_10_MIL_POWER_PER_KAMBOJ_PROVINCE
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						culture = panjabi #kamboj
+					}
+					owner = {
+						add_mil_power = 10
+					}
+				}
+			}
+
+			complex_dynamic_effect = {
+				first_custom_tooltip = YON_IF_MULTAN_CONNECTED
+				first_limit = "
+					506 = {
+						is_in_capital_area = yes
+					}
+				"
+				first_effect = "
+					506 = {
+						add_or_upgrade_fort_building = yes
+						add_province_modifier = {
+							name = yon_fort_of_multan
+							duration = -1
+						}
+					}
+				"
+			}
+		}
+	}
+
+	conqueror_of_indus = {
+		icon = mission_indian_soldier_elephant
+		position = 5
+		required_missions = {
+			reconquest_kamboj
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = lahore_area
+				area = sind_sagar_area
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		trigger = { 
+			lahore_area = {
+				type = all
+				owned_by = ROOT
+			}
+			sind_sagar_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		effect = { 
+			add_power_projection = {
+				type = mission_rewards_power_projection
+				amount = 15
+			}
+			add_country_modifier = {
+				name = "yon_victory_over_indus"
+				duration = 5475 #15 years
+			}
+		}
+	}
+
+	savior_of_the_waking_world = {
+		icon = mission_pf_soldier
+		position = 6
+		required_missions = {
+			seize_doab_plains conqueror_of_indus
+		}
+		provinces_to_highlight = { 
+				OR = {
+					area = lahore_area
+					area = sind_sagar_area
+					area = multan_area
+					area = sindh_area
+					area = northern_sindh_area
+					}
+				NOT = { base_manpower = 5 }
+			}
+		trigger = { 
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+					value = 12
+				OR = {
+					area = lahore_area
+					area = sind_sagar_area
+					area = multan_area
+					area = sindh_area
+					area = northern_sindh_area
+					}
+				base_manpower = 5
+				}
+		}
+		effect = {
+			custom_tooltip = YON_GAIN_15_MANPOWER_PER_IMPROVED_INDUS_PROVINCE
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+					OR = {
+							area = lahore_area
+							area = sind_sagar_area
+							area = multan_area
+							area = sindh_area
+							area = northern_sindh_area
+						}
+					}
+					add_province_modifier = {
+								name = yon_indus_zenkai_boost
+								duration = 7300
+							}
+				}
+			}
+		add_yearly_manpower = 0.8
+		}
+	}
+}
+mt_yonasgen_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential = { culture = yonas }
+
+	embrace_parsi_community = {
+		icon = mission_indian_stateman
+		position = 2
+		required_missions = {
+			western_wind
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+	
+}
+
+mt_yonadevyn_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	
+	potential = { tag = YO0 }
+	has_country_shield = yes
+	
+	
+	yn1yonadev_1 = {
+		icon = ned_cloth_trading
+		position = 4
+		required_missions = { tomb_raider } 
+		provinces_to_highlight = {
+			OR = { trade_goods = silk trade_goods = cotton }
+			country_or_non_sovereign_subject_holds = ROOT
+			NOT = { AND = { has_manufactory_trigger = yes base_production = 10 } }
+		}
+
+		trigger = {
+			any_owned_province = {
+				OR = { trade_goods = silk trade_goods = cotton }
+				has_manufactory_trigger = yes
+				base_production = 10
+			}
+		}
+		
+		effect = {
+			change_price = {
+				trade_goods = cotton
+				key = "Yona Weaver Guilds"
+				value = 0.2
+				duration = -1
+			}
+			change_price = {
+				trade_goods = silk
+				key = "Yona Weaver Guilds"
+				value = 0.15
+				duration = -1
+			}
+			custom_tooltip = yona_prodboost_tooltip
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						country_or_non_sovereign_subject_holds = ROOT
+						OR = { trade_goods = cotton trade_goods = silk }
+					}
+				add_province_modifier = {
+					name = yona_prodboost_cotton_silk
+					duration = -1
+				}
+				}
+			}
+		}
+	}
+	
+
+}
+
+mt_yonasgencont_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential = { culture = yonas }
+
+
+	denawar_pilgrims = {
+		icon = mission_market_place_with_asian_traders
+		position = 5
+		required_missions = {
+			restore_the_imperial_road
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+	yonaraja_samrajya = {
+		icon = per_an_asha_empire
+		position = 7
+		required_missions = {
+			savior_of_the_waking_world rejoin_the_silk_road
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+}
+
+mt_yonasgen_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	potential = { culture = yonas }
+
+	western_wind = {
+		icon = mission_bedouins
+		position = 1
+		required_missions = { }
+		provinces_to_highlight = { }
+		trigger = {
+			army_size_percentage = 2
+		}
+		effect = { }
+	}
+
+	scholar_of_taxila = {
+		icon = mission_protect_jain_communities
+		position = 2
+		required_missions = {
+			western_wind
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+	tomb_raider = {
+		icon = mission_herat
+		position = 3
+		required_missions = {
+			embrace_parsi_community scholar_of_taxila sage_of_sayabiga
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+	restore_the_imperial_road = {
+		icon = mission_the_grand_trunk_road_dlh
+		position = 4
+		required_missions = { }
+		provinces_to_highlight = { }
+		trigger = {
+			army_size_percentage = 2
+		}
+		effect = { }
+	}
+
+	cross_kabul = {
+		icon = mission_growth_of_golcond
+		position = 5
+		required_missions = {
+			restore_the_imperial_road
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+	rejoin_the_silk_road = {
+		icon = mission_horde_trade
+		position = 6
+		required_missions = {
+			denawar_pilgrims cross_kabul journey_to_jongwa
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+}
+mt_yonasgen_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	potential = { culture = yonas }
+
+	sage_of_sayabiga = {
+		icon = mission_asian_trader
+		position = 2
+		required_missions = {
+			western_wind
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+
+}
+
+
+mt_yonadevyn_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	
+	potential = { tag = YO0 }
+	has_country_shield = yes
+	
+	
+	yn1yonadev_2 = {
+		icon = mission_order_in_the_domain
+		position = 4
+		required_missions = { tomb_raider } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_manpower_building_trigger = no
+			has_tax_building_trigger = no
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 20
+				has_manpower_building_trigger = yes
+				has_courthouse_building_trigger = yes
+			}
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = "yn1_basileus_of_indus"
+				duration = -1
+			}
+		}
+	}
+	
+
+}
+
+mt_yonasgencont_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	potential = { culture = yonas }
+
+
+	journey_to_jongwa = {
+		icon = mission_secure_hajj_ports
+		position = 5
+		required_missions = {
+			restore_the_imperial_road
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+}
