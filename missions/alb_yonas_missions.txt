@@ -282,9 +282,22 @@ mt_yonasgen_3 = {
 		required_missions = {
 			western_wind
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = { 4512 }
+		trigger = {
+			OR = {
+					owns_or_non_sovereign_subject_of = 4512
+					4512 = { owner = { has_opinion = { who = ROOT value = 150 } } }
+				}
+		}
+		effect = {
+			capital_scope = {
+				add_province_modifier = {
+					name = yon_parsi_community
+					duration = -1
+				}
+			}
+			add_mercantilism = 5
+		}
 	}
 
 	
@@ -391,9 +404,20 @@ mt_yonasgen_4 = {
 		required_missions = { }
 		provinces_to_highlight = { }
 		trigger = {
-			army_size_percentage = 2
+			504 = {
+					trade_share = {
+						country = ROOT
+						share = 40
+					}
+				}
 		}
-		effect = { }
+		effect = {
+			add_country_modifier = {
+				name = "yon_dvaraka_trade"
+				duration = 18250
+			}
+			add_treasury = 300
+		}
 	}
 
 	scholar_of_taxila = {
@@ -402,9 +426,20 @@ mt_yonasgen_4 = {
 		required_missions = {
 			western_wind
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = { 507 }
+		trigger = {
+			OR = {
+					owns_or_non_sovereign_subject_of = 507
+					507 = { owner = { has_opinion = { who = ROOT value = 150 } } }
+				}
+		}
+		effect = {
+			add_country_modifier = {
+				name = "yon_taxila_tutelage"
+				duration = 18250
+			}
+			change_innovativeness = 3
+		}
 	}
 
 	tomb_raider = {
@@ -413,20 +448,80 @@ mt_yonasgen_4 = {
 		required_missions = {
 			embrace_parsi_community scholar_of_taxila sage_of_sayabiga
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = { 506 }
+		trigger = {
+			any_province = {
+				has_great_project = {
+					type = shah_rukn_e_alam_tomb
+					tier = 2
+				}
+			}
+		}
+		effect = { 
+			506 = {
+				add_great_project_tier = {
+					type = shah_rukn_e_alam_tomb
+					tier = -1
+				}
+				add_unrest = 10
+				add_treasury = 1000
+			}
+		}
 	}
 
 	restore_the_imperial_road = {
 		icon = mission_the_grand_trunk_road_dlh
 		position = 4
 		required_missions = { }
-		provinces_to_highlight = { }
-		trigger = {
-			army_size_percentage = 2
+		provinces_to_highlight = {
+			OR = {
+				province_id = 578
+				province_id = 507
+				province_id = 4411
+				province_id = 506
+				province_id = 504
+				province_id = 4457
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
-		effect = { }
+		trigger = {
+			country_or_non_sovereign_subject_holds = 578
+			country_or_non_sovereign_subject_holds = 507
+			country_or_non_sovereign_subject_holds = 4411
+			country_or_non_sovereign_subject_holds = 506
+			country_or_non_sovereign_subject_holds = 504
+			country_or_non_sovereign_subject_holds = 4457
+		}
+		effect = {
+			capital_scope = {
+				add_building = stock_exchange
+				add_base_production = 3
+			}
+			504 = {
+				add_trade_modifier = {
+					who = ROOT
+					duration = -1
+					power = 50
+					key = IMPERIAL_INDUS_ROAD
+				}
+			}
+			507 = {
+				add_trade_modifier = {
+					who = ROOT
+					duration = -1
+					power = 50
+					key = IMPERIAL_INDUS_ROAD
+				}
+			}
+			524 = {
+				add_trade_modifier = {
+					who = ROOT
+					duration = -1
+					power = 50
+					key = IMPERIAL_INDUS_ROAD
+				}
+			}
+		}
 	}
 
 	cross_kabul = {
@@ -464,8 +559,25 @@ mt_yonasgen_5 = {
 			western_wind
 		}
 		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		trigger = { 
+			any_country = {
+					OR = {
+							primary_culture = sumatran
+							primary_culture = acehnese
+							primary_culture = malayan
+							primary_culture = sundanese
+							primary_culture = javanese
+						}
+					has_opinion = { who = ROOT value = 150 }
+				}
+		}
+		effect = {
+			add_country_modifier = {
+				name = "yon_blueprint_of_candi"
+				duration = 18250
+			}
+			add_prestige_or_monarch_power = { amount = 25 }
+		}
 	}
 
 
