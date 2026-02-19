@@ -213,7 +213,7 @@ mt_yonasgen_2 = {
 			}
 			add_country_modifier = {
 				name = "yon_victory_over_indus"
-				duration = 5475 #15 years
+				age = age_of_discovery
 			}
 		}
 	}
@@ -385,8 +385,19 @@ mt_yonasgencont_3 = {
 			restore_the_imperial_road
 		}
 		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		trigger = { 
+			OR = {	
+			any_country = { religion = manich has_opinion = { who = ROOT value = 150 } }
+			religion = manich
+				}
+		}
+		effect = {
+			add_country_modifier = {
+				name = "yon_denawar_donation"
+				duration = 18250
+			}
+			add_years_of_income = 5
+		}
 	}
 
 	yonaraja_samrajya = {
@@ -468,21 +479,29 @@ mt_yonasgen_4 = {
 		}
 		provinces_to_highlight = { province_id = 506 }
 		trigger = {
-			any_province = {
-				has_great_project = {
-					type = shah_rukn_e_alam_tomb
-					tier = 2
-				}
+			multan_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 		effect = { 
 			506 = {
-				add_great_project_tier = {
-					type = shah_rukn_e_alam_tomb
-					tier = -1
-				}
+				destroy_great_project = { type = shah_rukn_e_alam_tomb }
 				add_unrest = 10
 				add_treasury = 1000
+			}
+			custom_tooltip = ragebait_jyotisastra_tt
+			hidden_effect = {
+				every_country = {
+					limit = {
+						religion = jyotisastra
+						NOT = { is_subject_of = ROOT }
+					}
+					add_opinion = {
+						who = ROOT
+						modifier = yon_looted_tomb
+					}
+				}
 			}
 		}
 	}
@@ -520,7 +539,7 @@ mt_yonasgen_4 = {
 					who = ROOT
 					duration = -1
 					power = 50
-					key = IMPERIAL_INDUS_ROAD
+					key = "Imperial Indus Road"
 				}
 			}
 			507 = {
@@ -528,7 +547,7 @@ mt_yonasgen_4 = {
 					who = ROOT
 					duration = -1
 					power = 50
-					key = IMPERIAL_INDUS_ROAD
+					key = "Imperial Indus Road"
 				}
 			}
 			524 = {
@@ -536,7 +555,7 @@ mt_yonasgen_4 = {
 					who = ROOT
 					duration = -1
 					power = 50
-					key = IMPERIAL_INDUS_ROAD
+					key = "Imperial Indus Road"
 				}
 			}
 		}
@@ -548,9 +567,28 @@ mt_yonasgen_4 = {
 		required_missions = {
 			restore_the_imperial_road
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = {  not = { owned_by = ROOT}  region = khorasan_region  } 
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 4
+				trade_goods = wool
+				region = khorasan_region
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = "yon_woollord_of_khorasan"
+				duration = 18250
+			}
+			507 = {
+				add_trade_modifier = {
+					who = ROOT
+					duration = -1
+					power = 20
+					key = "Western Wool Monopoly"
+				}
+			}
+		}
 	}
 
 	rejoin_the_silk_road = {
@@ -560,8 +598,38 @@ mt_yonasgen_4 = {
 			denawar_pilgrims cross_kabul journey_to_jongwa
 		}
 		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		trigger = { 
+			507 = {
+				country_or_non_sovereign_subject_holds = ROOT
+				has_trade_building_trigger = yes
+				has_production_building_trigger = yes
+				development = 30
+				is_strongest_trade_power = root
+				}
+			504 = {
+				country_or_non_sovereign_subject_holds = ROOT
+				has_trade_building_trigger = yes
+				has_production_building_trigger = yes
+				development = 30
+				is_strongest_trade_power = root
+				}
+		}
+		effect = {
+			add_splendor = 1000
+			custom_tooltip = RHO_TT_4
+			hidden_effect = {
+				if = {
+					limit = { in_golden_age = yes } 
+					extend_golden_age = 50
+				}
+				else = {
+					if = {
+						limit = { has_had_golden_age = yes } 
+						reset_golden_age = yes
+					}
+				}
+			}
+		}
 	}
 }
 mt_yonasgen_5 = {
@@ -654,7 +722,27 @@ mt_yonasgencont_5 = {
 			restore_the_imperial_road
 		}
 		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		trigger = { 
+			any_country = {
+					capital_scope = {
+							superregion = china_superregion
+						}
+					has_opinion = { who = ROOT value = 150 }
+				}
+		}
+		effect = {
+			north_china_region = { discover_country = ROOT }
+			xinan_region = { discover_country = ROOT }
+			south_china_region = { discover_country = ROOT }
+			tibet_region = { discover_country = ROOT }
+			east_indian_ocean_region = { discover_country = ROOT }
+			south_china_sea_region = { discover_country = ROOT }
+			japan_region = { discover_country = ROOT }
+			korea_region = { discover_country = ROOT }
+			kashgaria_area = { discover_country = ROOT }
+			tarim_basin_area = { discover_country = ROOT }
+			shanshan_area = { discover_country = ROOT }
+			add_prestige_or_monarch_power = { amount = 25 }
+		}
 	}
 }
