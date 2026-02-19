@@ -144,6 +144,43 @@ LEO_3_slot = {
 			}
 		}
 	}
+
+	leo_restoration = {
+		icon = per_build_the_fire_temples
+		position = 3
+		provinces_to_highlight = {
+			superregion = india_superregion
+		}
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 30
+				superregion = india_superregion
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+					name = leo_soldiers_of_faith
+					duration = 10950
+				}
+			custom_tooltip = LEO_TT_1
+			tooltip = {
+				add_yearly_manpower = 1
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						NOT = {
+							num_of_owned_provinces_with = {
+								value = 17
+							}
+						}
+					}
+					add_yearly_manpower = 1
+				}
+			}
+		}
+	}
 }
 
 LEO_4_slot = {
@@ -257,6 +294,36 @@ LEO_5_slot = {
 		effect = {
 			custom_tooltip = LEO_TEMPLE_TT
 			set_country_flag = leo_unlock_tall_modifiers
+		}
+	}
+
+	leo_ultimate_temple_complex = {
+		icon = per_build_the_fire_temples
+		position = 4
+		required_missions = { leo_temples_for_all } 
+		provinces_to_highlight = { country_or_non_sovereign_subject_holds = ROOT has_tax_building_trigger = yes } 
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 10
+				has_province_modifier = leo_super_temple_1
+			}
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 3
+				has_province_modifier = leo_super_temple_2
+			}
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 1
+				has_province_modifier = leo_super_temple_3
+			}
+		}
+
+		effect = {
+			add_government_power = {
+					mechanic_type = emp_of_light_point_mechanic
+					power_type = enlightened_prestige_points
+					value = 50
+				}
+			add_years_of_income = 3
 		}
 	}
 }
