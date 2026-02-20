@@ -1,0 +1,52 @@
+country_decisions = {
+
+    rom_greater_rom = {
+        major = yes
+        potential = {
+            tag = RMN
+            NOT = { has_country_flag = formed_greater_romanistan_flag }
+        }
+        provinces_to_highlight = {
+			OR = {
+				region = central_asia_region
+                region = mongolia_region
+                region = west_siberia_region
+			}
+			OR = {
+				NOT = { owned_by = ROOT }
+				NOT = { is_core = ROOT }
+			}
+            NOT = 
+		}
+        allow = {
+            is_free_or_tributary_trigger = yes
+			is_at_war = no
+            num_of_owned_provinces_with = {
+				value = 50
+				OR = {
+					region = central_asia_region
+                    region = mongolia_region
+                    region = west_siberia_region
+				}
+			}
+        }
+        effect = {
+            override_country_name = MAJ_BARO_ROMANISTAN
+            add_prestige = 50
+            add_adm_power = 100
+            add_dip_power = 100
+            add_mil_power = 100
+            add_permanent_claim = {
+                region = ural_region
+                region = central_asia_region
+                region = mongolia_region
+                region = west_siberia_region
+                region = east_siberia_region
+                region = manchuria_region
+            }
+            may_establish_frontier = yes
+            set_country_flag = formed_greater_romanistan_flag
+        }
+
+    }
+}
