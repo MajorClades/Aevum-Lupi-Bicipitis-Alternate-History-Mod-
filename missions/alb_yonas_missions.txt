@@ -3,6 +3,7 @@ mt_yonasgen_1 = {
 	generic = no
 	ai = yes
 	potential = { culture = yonas }
+	has_country_shield = yes
 
 	crush_the_ksatrap = {
 		icon = mission_arabian_fort
@@ -96,6 +97,7 @@ mt_yonasgen_2 = {
 	generic = no
 	ai = yes
 	potential = { culture = yonas }
+	has_country_shield = yes
 
 	control_indus_bank = {
 		icon = mission_unite_home_region
@@ -213,7 +215,7 @@ mt_yonasgen_2 = {
 			}
 			add_country_modifier = {
 				name = "yon_victory_over_indus"
-				duration = 5475 #15 years
+				age = age_of_discovery
 			}
 		}
 	}
@@ -270,11 +272,88 @@ mt_yonasgen_2 = {
 		}
 	}
 }
+
+mt_yonasgencontcont_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential = { tag = YO0 }
+	has_country_shield = yes
+	
+	conquer_chola = {
+		icon = mission_coromandel_expansion
+		position = 9
+		required_missions = {
+			iskandar_ambition
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+	land_of_commerce = {
+		icon = mission_the_chola_conquests
+		position = 10
+		required_missions = {
+			conquer_chola
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+	land_of_stone_monument = {
+		icon = mission_mnd_maj_candi_shrines
+		position = 11
+		required_missions = {
+			land_of_commerce
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+	land_of_spice = {
+		icon = mission_mnd_maj_cloves
+		position = 12
+		required_missions = {
+			land_of_stone_monument
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+	land_of_shaman = {
+		icon = jap_five_regent_houses
+		position = 13
+		required_missions = {
+			land_of_spice
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+	uncover_ulimaroa = {
+		icon = mission_sw_against_the_desert
+		position = 15
+		required_missions = {
+			world_edge
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+	
+}
+
 mt_yonasgen_3 = {
 	slot = 3
 	generic = no
 	ai = yes
 	potential = { culture = yonas }
+	has_country_shield = yes
 
 	embrace_parsi_community = {
 		icon = mission_indian_stateman
@@ -282,9 +361,31 @@ mt_yonasgen_3 = {
 		required_missions = {
 			western_wind
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = { province_id = 4512 }
+		trigger = {
+		4512 = {
+				owner = {
+					OR = { 
+						tag = ROOT 
+						is_subject_of = ROOT 
+						overlord = { is_subject_of = ROOT }
+						has_opinion = {
+							who = ROOT
+							value = 150
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			capital_scope = {
+				add_province_modifier = {
+					name = yon_parsi_community
+					duration = -1
+				}
+			}
+			add_mercantilism = 5
+		}
 	}
 
 	
@@ -354,6 +455,7 @@ mt_yonasgencont_3 = {
 	generic = no
 	ai = yes
 	potential = { culture = yonas }
+	has_country_shield = yes
 
 
 	denawar_pilgrims = {
@@ -363,8 +465,19 @@ mt_yonasgencont_3 = {
 			restore_the_imperial_road
 		}
 		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		trigger = { 
+			OR = {	
+			any_country = { religion = manich has_opinion = { who = ROOT value = 150 } }
+			religion = manich
+				}
+		}
+		effect = {
+			add_country_modifier = {
+				name = "yon_denawar_donation"
+				duration = 18250
+			}
+			add_years_of_income = 5
+		}
 	}
 
 	yonaraja_samrajya = {
@@ -379,11 +492,135 @@ mt_yonasgencont_3 = {
 	}
 }
 
+mt_yonasgencontcont_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential = { tag = YO0 }
+	has_country_shield = yes
+
+	iskandar_ambition = {
+		icon = arm_artaxiad_legacy
+		position = 8
+		required_missions = { }
+		provinces_to_highlight = { }
+		trigger = { stability = 3 }
+		effect = {
+			stability = -3
+			custom_tooltip = yona_battle_against_the_world_tt
+			hidden_effect = {
+				country_event = { id = yonaraja.1 }
+			}
+		}
+	}
+
+	dominate_dakshina = {
+		icon = mission_unite_home_region
+		position = 9
+		required_missions = {
+			iskandar_ambition
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+	land_of_holy_mounts = {
+		icon = mission_buddhist_monk_praying
+		position = 10
+		required_missions = {
+			dominate_dakshina
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+	land_of_untamed = {
+		icon = per_convert_persia
+		position = 11
+		required_missions = {
+			land_of_holy_mounts
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+	land_of_endless_rider = {
+		icon = mam_recruit_the_mamluks
+		position = 12
+		required_missions = {
+			land_of_untamed
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+	land_of_stone_citadel = {
+		icon = mission_asian_city
+		position = 13
+		required_missions = {
+			land_of_endless_rider
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+	world_edge = {
+		icon = mission_protect_white_sea_trade
+		position = 14
+		required_missions = {
+			land_of_stone_citadel land_of_celestial_king land_of_shaman
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+	invade_inuit = {
+		icon = mission_horde_religion
+		position = 15
+		required_missions = {
+			world_edge
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+	only_way_forward = {
+		icon = the_glorious_revolution
+		position = 16
+		required_missions = {
+			invade_inuit uncover_ulimaroa great_serene_sea
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+	beyond_horizon = {
+		icon = mission_oceania_assemble_an_army
+		position = 17
+		required_missions = {
+			only_way_forward
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+	
+}
+
 mt_yonasgen_4 = {
 	slot = 4
 	generic = no
 	ai = yes
 	potential = { culture = yonas }
+	has_country_shield = yes
 
 	western_wind = {
 		icon = mission_bedouins
@@ -391,9 +628,20 @@ mt_yonasgen_4 = {
 		required_missions = { }
 		provinces_to_highlight = { }
 		trigger = {
-			army_size_percentage = 2
+			504 = {
+					trade_share = {
+						country = ROOT
+						share = 40
+					}
+				}
 		}
-		effect = { }
+		effect = {
+			add_country_modifier = {
+				name = "yon_dvaraka_trade"
+				duration = 18250
+			}
+			add_treasury = 300
+		}
 	}
 
 	scholar_of_taxila = {
@@ -402,9 +650,29 @@ mt_yonasgen_4 = {
 		required_missions = {
 			western_wind
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = { province_id = 507 }
+		trigger = {
+			507 = {
+				owner = {
+					OR = { 
+						tag = ROOT 
+						is_subject_of = ROOT 
+						overlord = { is_subject_of = ROOT }
+						has_opinion = {
+							who = ROOT
+							value = 150
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = "yon_taxila_tutelage"
+				duration = 18250
+			}
+			change_innovativeness = 3
+		}
 	}
 
 	tomb_raider = {
@@ -413,20 +681,88 @@ mt_yonasgen_4 = {
 		required_missions = {
 			embrace_parsi_community scholar_of_taxila sage_of_sayabiga
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = { province_id = 506 }
+		trigger = {
+			multan_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = { 
+			506 = {
+				destroy_great_project = { type = shah_rukn_e_alam_tomb }
+				add_unrest = 10
+				add_treasury = 1000
+			}
+			custom_tooltip = ragebait_jyotisastra_tt
+			hidden_effect = {
+				every_country = {
+					limit = {
+						religion = jyotisastra
+						NOT = { is_subject_of = ROOT }
+					}
+					add_opinion = {
+						who = ROOT
+						modifier = yon_looted_tomb
+					}
+				}
+			}
+		}
 	}
 
 	restore_the_imperial_road = {
 		icon = mission_the_grand_trunk_road_dlh
 		position = 4
 		required_missions = { }
-		provinces_to_highlight = { }
-		trigger = {
-			army_size_percentage = 2
+		provinces_to_highlight = {
+			OR = {
+				province_id = 578
+				province_id = 507
+				province_id = 4411
+				province_id = 506
+				province_id = 504
+				province_id = 4457
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
-		effect = { }
+		trigger = {
+			country_or_non_sovereign_subject_holds = 578
+			country_or_non_sovereign_subject_holds = 507
+			country_or_non_sovereign_subject_holds = 4411
+			country_or_non_sovereign_subject_holds = 506
+			country_or_non_sovereign_subject_holds = 504
+			country_or_non_sovereign_subject_holds = 4457
+		}
+		effect = {
+			capital_scope = {
+				add_building = stock_exchange
+				add_base_production = 3
+			}
+			504 = {
+				add_trade_modifier = {
+					who = ROOT
+					duration = -1
+					power = 50
+					key = "Imperial Indus Road"
+				}
+			}
+			507 = {
+				add_trade_modifier = {
+					who = ROOT
+					duration = -1
+					power = 50
+					key = "Imperial Indus Road"
+				}
+			}
+			524 = {
+				add_trade_modifier = {
+					who = ROOT
+					duration = -1
+					power = 50
+					key = "Imperial Indus Road"
+				}
+			}
+		}
 	}
 
 	cross_kabul = {
@@ -435,9 +771,28 @@ mt_yonasgen_4 = {
 		required_missions = {
 			restore_the_imperial_road
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = {  not = { owned_by = ROOT}  region = khorasan_region  } 
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 4
+				trade_goods = wool
+				region = khorasan_region
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = "yon_woollord_of_khorasan"
+				duration = 18250
+			}
+			507 = {
+				add_trade_modifier = {
+					who = ROOT
+					duration = -1
+					power = 20
+					key = "Western Wool Monopoly"
+				}
+			}
+		}
 	}
 
 	rejoin_the_silk_road = {
@@ -445,6 +800,109 @@ mt_yonasgen_4 = {
 		position = 6
 		required_missions = {
 			denawar_pilgrims cross_kabul journey_to_jongwa
+		}
+		provinces_to_highlight = { }
+		trigger = { 
+			507 = {
+				country_or_non_sovereign_subject_holds = ROOT
+				has_trade_building_trigger = yes
+				has_production_building_trigger = yes
+				development = 30
+				is_strongest_trade_power = root
+				}
+			504 = {
+				country_or_non_sovereign_subject_holds = ROOT
+				has_trade_building_trigger = yes
+				has_production_building_trigger = yes
+				development = 30
+				is_strongest_trade_power = root
+				}
+		}
+		effect = {
+			add_splendor = 1000
+			custom_tooltip = RHO_TT_4
+			hidden_effect = {
+				if = {
+					limit = { in_golden_age = yes } 
+					extend_golden_age = 50
+				}
+				else = {
+					if = {
+						limit = { has_had_golden_age = yes } 
+						reset_golden_age = yes
+					}
+				}
+			}
+		}
+	}
+}
+mt_yonasgencontcont_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	potential = { tag = YO0 }
+	has_country_shield = yes
+	
+	govern_ganghariday = {
+		icon = mission_unite_bengal
+		position = 9
+		required_missions = {
+			iskandar_ambition
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+	land_of_myriad_temple = {
+		icon = mission_upper_burma_campaign
+		position = 10
+		required_missions = {
+			govern_ganghariday
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+	land_of_golden_axe = {
+		icon = mission_mnd_khm_resurgence
+		position = 11
+		required_missions = {
+			land_of_myriad_temple
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+	land_of_serene_hill = {
+		icon = mng_expand_bogue
+		position = 12
+		required_missions = {
+			land_of_golden_axe
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+	land_of_celestial_king = {
+		icon = mission_scholar_officials
+		position = 13
+		required_missions = {
+			land_of_serene_hill
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+	great_serene_sea = {
+		icon = mission_oceania_royal_marriage
+		position = 15
+		required_missions = {
+			world_edge
 		}
 		provinces_to_highlight = { }
 		trigger = { }
@@ -456,6 +914,7 @@ mt_yonasgen_5 = {
 	generic = no
 	ai = yes
 	potential = { culture = yonas }
+	has_country_shield = yes
 
 	sage_of_sayabiga = {
 		icon = mission_asian_trader
@@ -464,8 +923,25 @@ mt_yonasgen_5 = {
 			western_wind
 		}
 		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		trigger = { 
+			any_country = {
+					OR = {
+							primary_culture = sumatran
+							primary_culture = acehnese
+							primary_culture = malayan
+							primary_culture = sundanese
+							primary_culture = javanese
+						}
+					has_opinion = { who = ROOT value = 150 }
+				}
+		}
+		effect = {
+			add_country_modifier = {
+				name = "yon_blueprint_of_candi"
+				duration = 18250
+			}
+			add_prestige_or_monarch_power = { amount = 25 }
+		}
 	}
 
 
@@ -524,7 +1000,27 @@ mt_yonasgencont_5 = {
 			restore_the_imperial_road
 		}
 		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		trigger = { 
+			any_country = {
+					capital_scope = {
+							superregion = china_superregion
+						}
+					has_opinion = { who = ROOT value = 150 }
+				}
+		}
+		effect = {
+			north_china_region = { discover_country = ROOT }
+			xinan_region = { discover_country = ROOT }
+			south_china_region = { discover_country = ROOT }
+			tibet_region = { discover_country = ROOT }
+			east_indian_ocean_region = { discover_country = ROOT }
+			south_china_sea_region = { discover_country = ROOT }
+			japan_region = { discover_country = ROOT }
+			korea_region = { discover_country = ROOT }
+			kashgaria_area = { discover_country = ROOT }
+			tarim_basin_area = { discover_country = ROOT }
+			shanshan_area = { discover_country = ROOT }
+			add_prestige_or_monarch_power = { amount = 25 }
+		}
 	}
 }

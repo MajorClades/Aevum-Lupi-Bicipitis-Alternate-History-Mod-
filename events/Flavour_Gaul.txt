@@ -1,0 +1,65 @@
+namespace = gaul
+
+# cribana/gaul convert to ugandhism yes-no
+country_event = {
+    id = gauldruid.1
+    title = gauldruid.1_title
+	desc = gauldruid.1_desc
+	picture = PROTESTANT_CATHOLIC_DEBATE_eventPicture
+	fire_only_once = yes
+
+    trigger = {
+        is_subject = no
+        OR = {
+			tag = GU0
+			AND = {
+				tag = GL0
+				was_tag = GU0
+			}			
+		}
+        SC0 = { religion = pseudo_druidism }
+    }
+    mean_time_to_happen = {
+        months = 6
+    }
+
+    option = { #convert
+        name = gauldruid.1.a
+        ai_chance = {
+            factor = 35
+        }
+        change_religion = pseudo_druidism
+        add_stability = -1
+        random_owned_province = {
+            change_religion = pseudo_druidism
+        }
+        random_owned_province = {
+            change_religion = pseudo_druidism
+        }
+        random_owned_province = {
+            change_religion = pseudo_druidism
+        }
+        random_owned_province = {
+            change_religion = pseudo_druidism
+        }
+        random_owned_province = {
+            change_religion = pseudo_druidism
+        }
+    }
+    option = { #reject convertion
+        name = gauldruid.1.b
+        ai_chance = {
+            factor = 65
+        }
+        add_stability = 1
+        random_owned_province = {
+            change_religion = pseudo_druidism
+        }
+        random_owned_province = {
+            change_religion = pseudo_druidism
+        }
+        random_owned_province = {
+            change_religion = pseudo_druidism
+        }
+    }
+}
