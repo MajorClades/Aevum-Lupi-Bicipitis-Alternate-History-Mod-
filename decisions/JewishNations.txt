@@ -34,3 +34,41 @@ country_decisions = {
     }
 }
 
+country_decisions = {
+
+    mishtavar_knaan = {
+        major = yes
+        potential = {
+			was_never_end_game_tag_trigger = yes
+			NOT = { has_country_flag = formed_knaan_flag }
+			tag = HB1
+        }
+        provinces_to_highlight = {
+            region = russia_region
+            region = ural_region
+			NOT = { owned_by = ROOT }
+		}
+        allow = {
+			is_free_or_tributary_trigger = yes
+			is_at_war = no
+            owns_all_provinces = {
+                region = russia_region
+                region = ural_region
+            }
+        }
+        effect = {
+            set_country_flag = formed_knaan_flag
+            override_country_name = KNAAN
+            set_government_rank = 3
+            add_country_modifier = {
+                name = "home_of_the_jews"
+                duration = -1
+            }
+        }
+        ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+    }
+}
+
