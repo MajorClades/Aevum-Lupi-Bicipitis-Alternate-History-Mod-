@@ -1,0 +1,57 @@
+country_decisions = {
+
+	croatia_nation = {
+		major = yes
+		potential = {
+			NOT = { has_country_flag = formed_xorvatia_flag }
+			primary_culture = croatian
+		}
+		provinces_to_highlight = {
+			OR = {
+					region = central_asia_region
+					region = khorasan_region
+					region = tibet_region
+					region = hindusthan_region
+								}
+			NOT = { owned_by = ROOT }
+		}
+		 allow = {
+            is_free_or_tributary_trigger = yes
+			is_at_war = no
+            num_of_owned_provinces_with = {
+				value = 60
+				OR = {
+					region = central_asia_region
+                    region = khorasan_region
+					region = tibet_region
+					region = hindusthan_region
+				}
+			}
+        }
+		effect = {
+			change_tag = XRV #Xorvatiston
+			swap_non_generic_missions = yes
+			add_prestige = 25
+			if = {
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			if = {
+				limit = {
+					NOT = { government_rank = 2 }
+				}
+				set_government_rank = 2
+			}
+			add_country_modifier = {
+				name = centralization_modifier
+				duration = 3650
+			}
+			set_country_flag = formed_xorvatia_flag
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+
+}
