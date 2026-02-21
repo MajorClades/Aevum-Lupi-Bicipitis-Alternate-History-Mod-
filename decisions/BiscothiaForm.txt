@@ -1,0 +1,53 @@
+country_decisions = {
+
+    unite_goth_kgdm = {
+        major = yes
+        potential = {
+            normal_or_historical_nations = yes
+			was_never_end_game_tag_trigger = yes
+			NOT = { has_country_flag = formed_biscothia_flag }
+			culture_group = goths_g
+        }
+        provinces_to_highlight = {
+            OR = {
+				culture_group = goths_g
+			}
+			NOT = { owned_by = ROOT }
+		}
+        allow = {
+            NOT = {
+				exists = CO4
+			}
+			is_free_or_tributary_trigger = yes
+			is_at_war = no
+            culture_group = goths_g
+            owns_all_provinces = {
+                culture_group = goths_g
+            }
+            OR = {
+                AND = {
+                    tag = CO1
+                    GR5 = { exists = no }
+                }
+                AND = {
+                    tag = GR5
+                    CO1 = { exists = no }
+                }
+            }
+        }
+        effect = {
+            set_country_flag = formed_biscothia_flag
+            change_tag = CO4
+			restore_country_name = yes
+            add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+        }
+        ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+    }
+}
+
