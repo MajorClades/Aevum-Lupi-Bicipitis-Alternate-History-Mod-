@@ -1,3 +1,4 @@
+#Pormane-Sepharad
 country_decisions = {
 
     pormane_sepharad = {
@@ -38,6 +39,7 @@ country_decisions = {
     }
 }
 
+#Mishtavar-Kenaan
 country_decisions = {
 
     mishtavar_knaan = {
@@ -80,3 +82,110 @@ country_decisions = {
     }
 }
 
+#Hazarlar-Khaganate
+country_decisions = {
+
+    restore_khazaria = {
+        major = yes
+        potential = {
+			was_never_end_game_tag_trigger = yes
+			NOT = { has_country_flag = restored_khazaria_flag }
+			tag = DA7
+        }
+        provinces_to_highlight = {
+            region = crimea_region
+            region = caucasus_region
+            region = poland_region
+            region = ruthenia_region
+			NOT = { owned_by = ROOT }
+		}
+        allow = {
+			is_free_or_tributary_trigger = yes
+			is_at_war = no
+            owns_all_provinces = {
+                region = crimea_region
+                region = caucasus_region
+            }
+            num_of_owned_provinces_with = {
+                value = 30
+                region = ruthenia_region
+                region = poland_region
+            }
+        }
+        effect = {
+            set_country_flag = restored_khazaria_flag
+            override_country_name = KHAZAR_KHAGANATE
+            change_country_color = { 207 207 70 }
+            set_government_rank = 3
+            poland_region = { add_permanent_claim = ROOT }
+            ruthenia_region = { add_permanent_claim = ROOT }
+            baltic_region = { add_permanent_claim = ROOT }
+            russia_region = { add_permanent_claim = ROOT }
+            ural_region = { add_permanent_claim = ROOT }
+            moldavia_area = { add_permanent_claim = ROOT }
+            lower_yik_area = { add_permanent_claim = ROOT } 
+            nogai_area = { add_permanent_claim = ROOT }
+            add_country_modifier = {
+                name = "home_of_the_jews"
+                duration = -1
+            }
+            add_country_modifier = {
+                name = "da7_siberian_frontier"
+                duration = -1
+            }
+            add_country_modifier = {
+                name = "da7_khazar_warriors"
+                duration = -1
+            }
+        }
+        ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+    }
+}
+
+#Shingly-Hodu
+country_decisions = {
+
+    shingly_hodu = {
+        major = yes
+        potential = {
+			was_never_end_game_tag_trigger = yes
+			NOT = { has_country_flag = formed_hodu_flag }
+			tag = WI6
+        }
+        provinces_to_highlight = {
+            region = deccan_region
+            region = coromandel_region
+			NOT = { owned_by = ROOT }
+		}
+        allow = {
+			is_free_or_tributary_trigger = yes
+			is_at_war = no
+            num_of_owned_provinces_with = {
+                value = 50
+                region = deccan_region
+                region = coromandel_region
+            }
+        }
+        effect = {
+            set_country_flag = formed_hodu_flag
+            override_country_name = HODU
+            set_government_rank = 3
+            india_superregion = { add_permanent_claim = ROOT }
+            add_country_modifier = {
+                name = "home_of_the_jews"
+                duration = -1
+            }
+            add_country_modifier = {
+                name = "wi6_oceanic_traders"
+                duration = -1
+            }
+        }
+        ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+    }
+}
