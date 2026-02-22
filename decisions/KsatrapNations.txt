@@ -1,0 +1,53 @@
+country_decisions = {
+
+	ksatrap_nation = {
+		major = yes
+		potential = {
+			NOT = { has_country_flag = formed_ksatrap_flag }
+			primary_culture = ksatrap
+		}
+		provinces_to_highlight = {
+			OR = {
+					region = west_india_region
+					region = hindusthan_region
+								}
+			NOT = { owned_by = ROOT }
+		}
+		 allow = {
+            is_free_or_tributary_trigger = yes
+			is_at_war = no
+            num_of_owned_provinces_with = {
+				value = 30
+				OR = {
+					region = west_india_region
+					region = hindusthan_region
+				}
+			}
+        }
+		effect = {
+			change_tag = KST #Ksatrapa
+			swap_non_generic_missions = yes
+			add_prestige = 25
+			if = {
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			if = {
+				limit = {
+					NOT = { government_rank = 2 }
+				}
+				set_government_rank = 2
+			}
+			add_country_modifier = {
+				name = centralization_modifier
+				duration = 3650
+			}
+			set_country_flag = formed_ksatrap_flag
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+
+}
