@@ -150,7 +150,7 @@ country_decisions = {
     }
 }
 
-#Shingly-Hodu
+#Shingly-Sopara-Hodu
 country_decisions = {
 
     shingly_hodu = {
@@ -158,31 +158,23 @@ country_decisions = {
         potential = {
 			was_never_end_game_tag_trigger = yes
 			NOT = { has_country_flag = formed_hodu_flag }
-			tag = WI6
+			tag = KCN
         }
         provinces_to_highlight = {
-            OR = {
-                region = deccan_region
-                region = coromandel_region 
-            }
+            superregion = india_superregion
 			NOT = { owned_by = ROOT }
 		}
         allow = {
 			is_free_or_tributary_trigger = yes
 			is_at_war = no
-            num_of_owned_provinces_with = {
-                value = 50
-                OR = {
-                    region = deccan_region
-                    region = coromandel_region
-                }
+            owns_all_provinces = {
+                superregion = india_superregion
             }
         }
         effect = {
             set_country_flag = formed_hodu_flag
             override_country_name = HODU
             set_government_rank = 3
-            india_superregion = { add_permanent_claim = ROOT }
             add_country_modifier = {
                 name = "home_of_the_jews"
                 duration = -1
