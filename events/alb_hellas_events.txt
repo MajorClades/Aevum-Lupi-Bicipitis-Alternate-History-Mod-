@@ -1,0 +1,194 @@
+namespace = hellas
+
+country_event = {
+	id = hellas.1
+	title = hellas.1.t
+	desc = hellas.1.d
+	picture = COURT_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = hellas.1a
+		ai_chance = {
+			factor = 33
+		}
+		change_religion = ephesian
+        set_capital = 146
+        custom_tooltip =  HELLAS_TT_1
+        hidden_effect = {
+            moesia_area = { add_permanent_claim = ROOT }
+            thrace_area = { add_permanent_claim = ROOT } 
+            east_macedonia_area = { add_permanent_claim = ROOT } 
+            northern_greece_area = { add_permanent_claim = ROOT }
+            morea_area = { add_permanent_claim = ROOT }
+            aegean_archipelago_area = { add_permanent_claim = ROOT }
+            crete_area = { add_permanent_claim = ROOT }
+            4944 = { add_permanent_claim = ROOT }
+            4943 = { add_permanent_claim = ROOT }
+            123 = { add_permanent_claim = ROOT }
+            5015 = { add_permanent_claim = ROOT }
+            321 = { add_permanent_claim = ROOT }
+            country_event = {
+                id = hellas.3
+                days = 10
+            }
+        }
+	}
+	option = {
+		name = hellas.1b
+		ai_chance = {
+			factor = 33
+		}
+		override_country_name = HELLASROME
+        set_country_flag = HELLASROMELARP
+        custom_tooltip =  HELLAS_TT_2
+        hidden_effect = {
+            anatolia_region = { add_permanent_claim = ROOT }
+            balkan_region = { add_permanent_claim = ROOT }
+            calabria_area = { add_permanent_claim = ROOT }
+            apulia_area = { add_permanent_claim = ROOT }
+            sicily_area = { add_permanent_claim = ROOT }
+            western_sicily_area = { add_permanent_claim = ROOT }
+            naples_area = { add_permanent_claim = ROOT }
+            molise_area = { add_permanent_claim = ROOT }
+            east_adriatic_coast_area = { add_permanent_claim = ROOT }
+            change_country_color = { 
+                color = { 167 10 100 }
+            }
+            country_event = {
+                id = hellas.3
+                days = 10
+            }
+        }
+	}
+	option = {
+		name = hellas.1c
+		ai_chance = {
+			factor = 34
+		}
+		add_stability = 1
+        custom_tooltip =  HELLAS_TT_3
+        hidden_effect = {
+            moesia_area = { add_permanent_claim = ROOT }
+            thrace_area = { add_permanent_claim = ROOT } 
+            east_macedonia_area = { add_permanent_claim = ROOT } 
+            northern_greece_area = { add_permanent_claim = ROOT }
+            morea_area = { add_permanent_claim = ROOT }
+            aegean_archipelago_area = { add_permanent_claim = ROOT }
+            crete_area = { add_permanent_claim = ROOT }
+            hudavendigar_area = { add_permanent_claim = ROOT }
+            aydin_area = { add_permanent_claim = ROOT }
+            country_event = {
+                id = hellas.3
+                days = 10
+            }
+        }
+	}
+}
+
+country_event = {
+	id = hellas.2
+	title = hellas.2.t
+	desc = hellas.2.d
+	picture = CONSTANTINOPLE_eventPicture
+    fire_only_once = yes
+    is_triggered_only = yes
+    trigger = {
+        tag = HL0
+        has_country_flag = HELLASROMELARP
+        owns_province = 151
+    }
+    option = {
+        name = hellas.2a
+        set_government_rank = 3
+        add_core = 151
+        set_capital = 151
+        151 = {
+            change_religion = ROOT
+        }
+        add_great_project_tier = {
+            type = hagia_sophia
+            tier = 1
+        }
+    }
+}
+
+country_event = {
+	id = hellas.3
+	title = hellas.3.t
+	desc = hellas.3.d
+	picture = CONSTANTINOPLE_eventPicture
+    fire_only_once = yes
+	is_triggered_only = yes
+    option = {
+        name = hellas.3a
+		ai_chance = {
+			factor = 60
+		}
+        add_accepted_culture = turk_greek
+        custom_tooltip =  HELLAS_TT_4
+        hidden_effect = {
+            every_owned_province = {
+                limit = {
+                    culture = turk_greek
+                }
+                add_unrest = -2
+                add_nationalism = -5
+            }
+        }
+    }
+    option = {
+        name = hellas.3b
+		ai_chance = {
+			factor = 40
+		}
+        custom_tooltip =  HELLAS_TT_5
+        hidden_effect = {
+            every_owned_province = {
+                limit = {
+                    culture = turk_greek
+                }
+                if = {
+                    limit = {
+                        area = albania_area
+                    }
+                    add_unrest = +3
+                    add_base_tax = -1
+                    add_base_manpower = -1
+                    add_base_production = -1
+                    change_culture = albanian_new
+                }
+                else = {
+                    add_unrest = +3
+                    add_base_tax = -1
+                    add_base_manpower = -1
+                    add_base_production = -1
+                    change_culture = greek_new
+                }
+            }
+            145 = {
+                change_province_name = "Morea"
+                rename_capital = "Mystras"
+            }
+            1773 = {
+                change_province_name = "Achaea"
+                rename_capital = "Nafplio"
+            }
+            1853 = {
+                change_province_name = "Kastoria"
+                rename_capital = "Kastoria"
+            }
+            143 = {
+                change_province_name = "Vlore"
+            }
+            4174 = {
+                change_province_name = "Durres"
+            }
+            4750 = {
+                change_province_name = "Kruje"
+            }
+            4175 = {
+                change_province_name = "Lezhe"
+            }
+        }
+    }
+}

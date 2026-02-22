@@ -1,12 +1,15 @@
 country_decisions = {
 
-	gaul_nation = {
+	turkistan_nation = {
 		major = yes
 		potential = {
 			normal_or_historical_nations = yes
 			was_never_end_game_tag_trigger = yes
-			NOT = { has_country_flag = formed_gaul_flag }
-			culture = gaulish
+			NOT = { has_country_flag = formed_turkistan_flag }
+			OR = {
+                culture = bolgar
+                culture = slovene
+            }
 			OR = {
 				ai = no
 				is_playing_custom_nation = no
@@ -26,7 +29,7 @@ country_decisions = {
 		}
         provinces_to_highlight = {
 			OR = {
-				region = france_region
+				region = central_asia_region
 			}
 			OR = {
 				NOT = { owned_by = ROOT }
@@ -35,32 +38,36 @@ country_decisions = {
 		}
 		allow = {
 			NOT = {
-				exists = GL0
+				exists = TK0
 			}
 			is_free_or_tributary_trigger = yes
 			is_at_war = no
-            culture = gaulish
-            owns_core_province = 183 	#Ruzetia
-			owns_core_province = 170 	#Ozovira
-            owns_core_province = 87 	#Caleti
+            or = {
+                culture = bolgar
+                culture = slovene
+            }
+            owns_core_province = 439 	#arkaze
+			owns_core_province = 471 	#aydar
+            owns_core_province = 2214 	#golestan
+            owns_core_province = 445    #merv
             num_of_owned_provinces_with = {
-				value = 30
+				value = 20
 				OR = {
-					region = france_region
+					region = central_asia_region
 				}
 			}
 		}
 		effect = {
-			change_tag = GL0
-			france_region = { add_permanent_claim = ROOT }
+			change_tag = TK0
+            central_asia_region = { add_permanent_claim = ROOT }
 			restore_country_name = yes
 			remove_non_electors_emperors_from_empire_effect = yes
-			set_government_rank = 3	
+            set_government_rank = 2
 			add_country_modifier = {
 				name = "centralization_modifier"
 				duration = 7300
 			}
-			set_country_flag = formed_gaul_flag
+			set_country_flag = formed_turkistan_flag
 			if = {
 				limit = {
 					has_custom_ideas = no

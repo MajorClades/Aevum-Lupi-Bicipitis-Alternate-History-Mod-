@@ -1,12 +1,15 @@
 country_decisions = {
 
-	gaul_nation = {
+	jongwa_nation = {
 		major = yes
 		potential = {
 			normal_or_historical_nations = yes
 			was_never_end_game_tag_trigger = yes
-			NOT = { has_country_flag = formed_gaul_flag }
-			culture = gaulish
+			NOT = { has_country_flag = formed_jongwa_flag }
+            all_country = {
+                is_emperor_of_china = no
+            }
+            culture_group = east_asian
 			OR = {
 				ai = no
 				is_playing_custom_nation = no
@@ -26,7 +29,7 @@ country_decisions = {
 		}
         provinces_to_highlight = {
 			OR = {
-				region = france_region
+				superregion = china_superregion
 			}
 			OR = {
 				NOT = { owned_by = ROOT }
@@ -35,24 +38,24 @@ country_decisions = {
 		}
 		allow = {
 			NOT = {
-				exists = GL0
+				exists = CN0
 			}
 			is_free_or_tributary_trigger = yes
 			is_at_war = no
-            culture = gaulish
-            owns_core_province = 183 	#Ruzetia
-			owns_core_province = 170 	#Ozovira
-            owns_core_province = 87 	#Caleti
+                culture_group = east_asian
+            owns_core_province = 1816 	#Beijing
+			owns_core_province = 1821 	#Nanjing
+            owns_core_province = 667 	#Guangzhou
             num_of_owned_provinces_with = {
-				value = 30
+				value = 50
 				OR = {
-					region = france_region
+					superregion = china_superregion
 				}
 			}
+            adm_tech = 15
 		}
 		effect = {
-			change_tag = GL0
-			france_region = { add_permanent_claim = ROOT }
+			change_tag = CN0
 			restore_country_name = yes
 			remove_non_electors_emperors_from_empire_effect = yes
 			set_government_rank = 3	
@@ -60,7 +63,8 @@ country_decisions = {
 				name = "centralization_modifier"
 				duration = 7300
 			}
-			set_country_flag = formed_gaul_flag
+            china_superregion = { add_permanent_claim = ROOT } 
+			set_country_flag = formed_jongwa_flag
 			if = {
 				limit = {
 					has_custom_ideas = no
