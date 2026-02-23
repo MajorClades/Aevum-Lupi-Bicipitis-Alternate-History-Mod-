@@ -1,0 +1,77 @@
+namespace = alb_indian_religious_upheaval_events
+
+# The Mazdaki Rise
+province_event = {
+	id = alb_indian_religious_upheaval_events.1
+	title = "alb_indian_religious_upheaval_events.1.t"
+	desc = "alb_indian_religious_upheaval_events.1.d"
+	picture = STREET_SPEECH_eventPicture
+
+	trigger = {
+		is_year = 1480
+		NOT = { is_religion_enabled = mazdakism }
+		OR = {
+			AND = {
+				religion = jyotisastra
+				OR = {
+					culture = kharosthi
+					culture = ksatrap
+					culture = kamboj
+				}
+			}
+			AND = {
+				religion = manich
+				OR = {
+					culture = kharosthi
+					culture = ksatrap
+					culture = kamboj
+				}
+			}
+		}
+	}
+
+	mean_time_to_happen = {
+		months = 260
+		modifier = {
+			factor = 0.4
+			province_id = 506 # Multan
+		}
+		modifier = {
+			factor = 0.6
+			culture = kamboj
+		}
+	}
+
+	option = {
+		name = "alb_indian_religious_upheaval_events.1.a"
+		owner = { enable_religion = mazdakism }
+		change_religion = mazdakism
+		add_province_triggered_modifier = religious_center
+		add_permanent_province_modifier = {
+			name = "religious_zeal_at_conv"
+			duration = 4500
+		}
+		random_neighbor_province = {
+			limit = {
+				is_capital = no
+				NOT = { religion = mazdakism }
+			}
+			change_religion = mazdakism
+			add_permanent_province_modifier = {
+				name = "religious_zeal_at_conv"
+				duration = 4500
+			}
+		}
+		random_neighbor_province = {
+			limit = {
+				is_capital = no
+				NOT = { religion = mazdakism }
+			}
+			change_religion = mazdakism
+			add_permanent_province_modifier = {
+				name = "religious_zeal_at_conv"
+				duration = 4500
+			}
+		}
+	}
+}
