@@ -1,3 +1,4 @@
+#Pormane-Sepharad
 country_decisions = {
 
     pormane_sepharad = {
@@ -22,6 +23,7 @@ country_decisions = {
             set_country_flag = formed_sepharad_flag
             override_country_name = SEPHARAD
             set_government_rank = 3
+            set_capital = 219
             add_country_modifier = {
                 name = "home_of_the_jews"
                 duration = -1
@@ -38,6 +40,7 @@ country_decisions = {
     }
 }
 
+#Mishtavar-Kenaan
 country_decisions = {
 
     mishtavar_knaan = {
@@ -48,16 +51,20 @@ country_decisions = {
 			tag = HB1
         }
         provinces_to_highlight = {
-            region = russia_region
-            region = ural_region
+            OR = {
+                region = russia_region
+                region = ural_region
+            }
 			NOT = { owned_by = ROOT }
 		}
         allow = {
 			is_free_or_tributary_trigger = yes
 			is_at_war = no
             owns_all_provinces = {
-                region = russia_region
-                region = ural_region
+                OR = {
+                    region = russia_region
+                    region = ural_region
+                }
             }
         }
         effect = {
@@ -80,3 +87,107 @@ country_decisions = {
     }
 }
 
+#Hazarlar-Khaganate
+country_decisions = {
+
+    restore_khazaria = {
+        major = yes
+        potential = {
+			was_never_end_game_tag_trigger = yes
+			NOT = { has_country_flag = restored_khazaria_flag }
+			tag = DA7
+        }
+        provinces_to_highlight = {
+            OR = {
+                region = crimea_region
+                region = caucasia_region
+                region = poland_region
+                region = ruthenia_region
+            }   
+			NOT = { owned_by = ROOT }
+		}
+        allow = {
+			is_free_or_tributary_trigger = yes
+			is_at_war = no
+            owns_all_provinces = {
+                OR = {
+                    region = crimea_region
+                    region = caucasia_region
+                }
+            }
+            num_of_owned_provinces_with = {
+                value = 30
+                OR = {
+                    region = ruthenia_region
+                    region = poland_region
+                }
+            }
+        }
+        effect = {
+            set_country_flag = restored_khazaria_flag
+            override_country_name = KHAZAR_KHAGANATE
+            set_government_rank = 3
+            poland_region = { add_permanent_claim = ROOT }
+            ruthenia_region = { add_permanent_claim = ROOT }
+            baltic_region = { add_permanent_claim = ROOT }
+            russia_region = { add_permanent_claim = ROOT }
+            ural_region = { add_permanent_claim = ROOT }
+            moldavia_area = { add_permanent_claim = ROOT }
+            lower_yik_area = { add_permanent_claim = ROOT } 
+            nogai_area = { add_permanent_claim = ROOT }
+            add_country_modifier = {
+                name = "home_of_the_jews"
+                duration = -1
+            }
+            add_country_modifier = {
+                name = "da7_khazar_warriors"
+                duration = -1
+            }
+        }
+        ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+    }
+}
+
+#Shingly-Sopara-Hodu
+country_decisions = {
+
+    shingly_hodu = {
+        major = yes
+        potential = {
+			was_never_end_game_tag_trigger = yes
+			NOT = { has_country_flag = formed_hodu_flag }
+			tag = KCN
+        }
+        provinces_to_highlight = {
+            superregion = india_superregion
+			NOT = { owned_by = ROOT }
+		}
+        allow = {
+			is_free_or_tributary_trigger = yes
+			is_at_war = no
+            owns_all_provinces = {
+                superregion = india_superregion
+            }
+        }
+        effect = {
+            set_country_flag = formed_hodu_flag
+            override_country_name = HODU
+            set_government_rank = 3
+            add_country_modifier = {
+                name = "home_of_the_jews"
+                duration = -1
+            }
+            add_country_modifier = {
+                name = "wi6_indian_artisans"
+                duration = -1
+            }
+        }
+        ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+    }
+}
