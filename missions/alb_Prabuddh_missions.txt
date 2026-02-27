@@ -285,17 +285,28 @@ LEO_3_slot = {
 		}
 	}
 
-	leo_restoration = {
+	leo_restoration = { #win starting war and reconquer
 		icon = per_build_the_fire_temples
 		position = 3
-		provinces_to_highlight = {
-			superregion = india_superregion
-		}
-		trigger = {
-			num_of_provinces_owned_or_owned_by_subjects_with = {
-				value = 30
-				superregion = india_superregion
+		provinces_to_highlight = { 
+			OR = {
+				province_id = 506
+				province_id = 578
+				province_id = 508
+				province_id = 504
+				province_id = 2072
 			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {
+			owns_or_non_sovereign_subject_of = 506
+			owns_or_non_sovereign_subject_of = 578
+			owns_or_non_sovereign_subject_of = 508
+			owns_or_non_sovereign_subject_of = 504
+			owns_or_non_sovereign_subject_of = 2072
 		}
 
 		effect = {

@@ -1,4 +1,4 @@
-on_startup = {	
+on_startup = {	#heads up this fires when you load a save too
 	events = {
 		mexic.1
 		thetruth.1
@@ -7,7 +7,6 @@ on_startup = {
 		vedr.1
 		arian.1
 		zimmska.7
-		light_emp.1
 		atlas.1
 		fjal.1000
 		mila.3
@@ -41,6 +40,15 @@ on_startup = {
 		set_variable = {
 			which = num_tonin_elections
 			value = 0
+		}
+	}
+	if = {
+		limit = {
+			NOT = { is_year = 1445 }
+		}
+		save_global_event_target_as = light_empire_shield_target
+		REB = {
+			save_global_event_target_as = darkness_enemy_target
 		}
 	}
 }
