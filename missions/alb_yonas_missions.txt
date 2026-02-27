@@ -213,7 +213,7 @@ mt_yonasgen_2 = {
 				type = mission_rewards_power_projection
 				amount = 15
 			}
-			add_country_modifier = {
+			add_country_modifier_for_age = {
 				name = "yon_victory_over_indus"
 				age = age_of_discovery
 			}
@@ -286,9 +286,31 @@ mt_yonasgencontcont_2 = {
 		required_missions = {
 			iskandar_ambition
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = {
+			region = coromandel_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = { 
+			coromandel_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = { 
+			malaya_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier_for_age = {
+				name = "yon_conquered_chola"
+				age = age_of_absolutism
+			}
+		}
 	}
 
 	land_of_commerce = {
@@ -297,9 +319,31 @@ mt_yonasgencontcont_2 = {
 		required_missions = {
 			conquer_chola
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = {
+			region = malaya_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = { 
+			malaya_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = { 
+			indonesia_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier_for_age = {
+				name = "yon_conquered_malaya"
+				age = age_of_absolutism
+			}
+		}
 	}
 
 	land_of_stone_monument = {
@@ -308,9 +352,35 @@ mt_yonasgencontcont_2 = {
 		required_missions = {
 			land_of_commerce
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = {
+			region = indonesia_region
+			NOR = {
+				country_or_non_sovereign_subject_holds = ROOT
+				is_empty = yes
+			}
+		}
+		trigger = { 
+			indonesia_region = {
+				type = all
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					is_empty = yes
+				}
+			}
+		}
+		effect = { 
+			moluccas_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier_for_age = {
+				name = "yon_conquered_indonesia"
+				age = age_of_absolutism
+			}
+		}
 	}
 
 	land_of_spice = {
@@ -319,9 +389,35 @@ mt_yonasgencontcont_2 = {
 		required_missions = {
 			land_of_stone_monument
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = {
+			region = moluccas_region
+			NOR = {
+				country_or_non_sovereign_subject_holds = ROOT
+				is_empty = yes
+			}
+		}
+		trigger = { 
+			moluccas_region = {
+				type = all
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					is_empty = yes
+				}
+			}
+		}
+		effect = { 
+			japan_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier_for_age = {
+				name = "yon_conquered_molucca"
+				age = age_of_absolutism
+			}
+		}
 	}
 
 	land_of_shaman = {
@@ -330,9 +426,24 @@ mt_yonasgencontcont_2 = {
 		required_missions = {
 			land_of_spice
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = {
+			region = japan_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = { 
+			japan_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = { 
+			add_country_modifier_for_age = {
+				name = "yon_conquered_japan"
+				age = age_of_absolutism
+			}
+		}
 	}
 
 	uncover_ulimaroa = {
@@ -342,8 +453,36 @@ mt_yonasgencontcont_2 = {
 			world_edge
 		}
 		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		trigger = {
+			treasury = 100
+			any_province = {
+				region = australia_region
+				has_discovered = ROOT
+			}
+		}
+
+		effect = {
+			random_province = {
+					limit = {
+						is_empty = yes
+						region = australia_region
+						has_discovered = ROOT
+					}
+					add_siberian_construction = 700
+				}
+			random_province = {
+					limit = {
+						is_empty = yes
+						region = australia_region
+						has_discovered = ROOT
+					}
+					add_siberian_construction = 700
+				}
+			add_country_modifier_for_age = {
+				name = "yon_colonize_ulimaroa"
+				age = age_of_discovery
+			}
+		}
 	}
 	
 }
@@ -520,9 +659,31 @@ mt_yonasgencontcont_3 = {
 		required_missions = {
 			iskandar_ambition
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = {
+			region = deccan_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = { 
+			deccan_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = { 
+			tibet_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier_for_age = {
+				name = "yon_conquered_deccan"
+				age = age_of_absolutism
+			}
+		}
 	}
 
 	land_of_holy_mounts = {
@@ -531,9 +692,31 @@ mt_yonasgencontcont_3 = {
 		required_missions = {
 			dominate_dakshina
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = {
+			region = tibet_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = { 
+			tibet_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = { 
+			central_asia_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier_for_age = {
+				name = "yon_conquered_tibet"
+				age = age_of_absolutism
+			}
+		}
 	}
 
 	land_of_untamed = {
@@ -542,9 +725,35 @@ mt_yonasgencontcont_3 = {
 		required_missions = {
 			land_of_holy_mounts
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = {
+			region = central_asia_region
+			NOR = {
+				country_or_non_sovereign_subject_holds = ROOT
+				is_empty = yes
+			}
+		}
+		trigger = { 
+			central_asia_region = {
+				type = all
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					is_empty = yes
+				}
+			}
+		}
+		effect = { 
+			mongolia_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier_for_age = {
+				name = "yon_conquered_central_serica"
+				age = age_of_absolutism
+			}
+		}
 	}
 
 	land_of_endless_rider = {
@@ -553,9 +762,35 @@ mt_yonasgencontcont_3 = {
 		required_missions = {
 			land_of_untamed
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = {
+			region = mongolia_region
+			NOR = {
+				country_or_non_sovereign_subject_holds = ROOT
+				is_empty = yes
+			}
+		}
+		trigger = { 
+			mongolia_region = {
+				type = all
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					is_empty = yes
+				}
+			}
+		}
+		effect = { 
+			korea_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier_for_age = {
+				name = "yon_conquered_siyi"
+				age = age_of_absolutism
+			}
+		}
 	}
 
 	land_of_stone_citadel = {
@@ -564,9 +799,28 @@ mt_yonasgencontcont_3 = {
 		required_missions = {
 			land_of_endless_rider
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = {
+			region = korea_region
+			NOR = {
+				country_or_non_sovereign_subject_holds = ROOT
+				is_empty = yes
+			}
+		}
+		trigger = { 
+			korea_region = {
+				type = all
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					is_empty = yes
+				}
+			}
+		}
+		effect = {
+			add_country_modifier_for_age = {
+				name = "yon_conquered_korea"
+				age = age_of_absolutism
+			}
+		}
 	}
 
 	world_edge = {
@@ -849,9 +1103,35 @@ mt_yonasgencontcont_4 = {
 		required_missions = {
 			iskandar_ambition
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = {
+			region = bengal_region
+			NOR = {
+				country_or_non_sovereign_subject_holds = ROOT
+				is_empty = yes
+			}
+		}
+		trigger = { 
+			bengal_region = {
+				type = all
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					is_empty = yes
+				}
+			}
+		}
+		effect = { 
+			burma_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier_for_age = {
+				name = "yon_conquered_bengal"
+				age = age_of_absolutism
+			}
+		}
 	}
 
 	land_of_myriad_temple = {
@@ -860,9 +1140,35 @@ mt_yonasgencontcont_4 = {
 		required_missions = {
 			govern_ganghariday
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = {
+			region = burma_region
+			NOR = {
+				country_or_non_sovereign_subject_holds = ROOT
+				is_empty = yes
+			}
+		}
+		trigger = { 
+			burma_region = {
+				type = all
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					is_empty = yes
+				}
+			}
+		}
+		effect = { 
+			indo_china_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier_for_age = {
+				name = "yon_conquered_pyu"
+				age = age_of_absolutism
+			}
+		}
 	}
 
 	land_of_golden_axe = {
@@ -871,9 +1177,35 @@ mt_yonasgencontcont_4 = {
 		required_missions = {
 			land_of_myriad_temple
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = {
+			region = indo_china_region
+			NOR = {
+				country_or_non_sovereign_subject_holds = ROOT
+				is_empty = yes
+			}
+		}
+		trigger = { 
+			indo_china_region = {
+				type = all
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					is_empty = yes
+				}
+			}
+		}
+		effect = { 
+			xinan_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier_for_age = {
+				name = "yon_conquered_cherosyne"
+				age = age_of_absolutism
+			}
+		}
 	}
 
 	land_of_serene_hill = {
@@ -882,9 +1214,35 @@ mt_yonasgencontcont_4 = {
 		required_missions = {
 			land_of_golden_axe
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = {
+			region = xinan_region
+			NOR = {
+				country_or_non_sovereign_subject_holds = ROOT
+				is_empty = yes
+			}
+		}
+		trigger = { 
+			xinan_region = {
+				type = all
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					is_empty = yes
+				}
+			}
+		}
+		effect = { 
+			china_superregion = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier_for_age = {
+				name = "yon_conquered_xinan"
+				age = age_of_absolutism
+			}
+		}
 	}
 
 	land_of_celestial_king = {
@@ -893,9 +1251,28 @@ mt_yonasgencontcont_4 = {
 		required_missions = {
 			land_of_serene_hill
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = {
+			superregion = china_superregion
+			NOR = {
+				country_or_non_sovereign_subject_holds = ROOT
+				is_empty = yes
+			}
+		}
+		trigger = { 
+			china_superregion = {
+				type = all
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					is_empty = yes
+				}
+			}
+		}
+		effect = { 
+			add_country_modifier_for_age = {
+				name = "yon_conquered_jongwa"
+				age = age_of_absolutism
+			}
+		}
 	}
 
 	great_serene_sea = {
