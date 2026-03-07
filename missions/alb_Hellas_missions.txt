@@ -1,0 +1,622 @@
+alb_Hellas_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = HL0 } 
+
+	hl0_hellenic_navy = {
+		icon = invade_egypt_mol
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	hl0_trade_development = {
+		icon = invade_egypt_mol
+		position = 2
+		required_missions = { hl0_hellenic_navy } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	hl0_develop_cities_of_greece = {
+		icon = invade_egypt_mol
+		position = 3
+		required_missions = { hl0_trade_development } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	hl0_new_universities = {
+		icon = invade_egypt_mol
+		position = 4
+		required_missions = { hl0_develop_cities_of_greece } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+}
+alb_Hellas_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = HL0 } 
+
+	hl0_southern_italy = {
+		icon = invade_egypt_mol
+		position = 3
+		required_missions = { hl0_unification_of_hellas } 
+		provinces_to_highlight = {  
+			OR = {
+				area = calabria_area
+				area = apulia_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			calabria_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			apulia_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {  
+			sicily_area = {
+				add_permanent_claim = ROOT
+			}
+			western_sicily_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	hl0_sicilia = {
+		icon = invade_egypt_mol
+		position = 4
+		required_missions = { hl0_southern_italy } 
+		provinces_to_highlight = {  
+			OR = {
+				area = calabria_area
+				area = apulia_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			sicily_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			western_sicily_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {  } 
+	}
+}
+alb_Hellas_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = HL0 } 
+
+	hl0_new_hellenic_state = {
+		icon = invade_egypt_mol
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			custom_trigger_tooltip = {
+				tooltip = hl0_decided_turks_tt
+				has_country_flag = hl0_decided_turks_flag
+			}
+			custom_trigger_tooltip = {
+				tooltip = hl0_decided_on_path_tt
+				OR = {
+					has_country_flag = HELLASROMELARP
+					has_country_flag = HELLASANCIENTLARP
+					has_country_flag = HELLASCRUSADELARP
+				}
+			}
+			stability = 1
+			NOT = {
+				is_at_war = yes
+			}
+		} 
+
+		effect = {  
+			morea_area = {
+				add_permanent_claim = ROOT
+			}
+			northern_greece_area = {
+				add_permanent_claim = ROOT
+			}
+			east_macedonia_area = {
+				add_permanent_claim = ROOT
+			}
+			crete_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	hl0_unification_of_hellas = {
+		icon = invade_egypt_mol
+		position = 2
+		required_missions = { hl0_new_hellenic_state } 
+		provinces_to_highlight = {  
+			OR = {
+				area = morea_area
+				area = northern_greece_area
+				area = east_macedonia_area
+				area = crete_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			morea_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			northern_greece_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			east_macedonia_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			crete_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {  
+			add_country_modifier = {
+				name = hl0_mid_greece
+				duration = 10950
+			}
+			moesia_area = {
+				add_permanent_claim = ROOT
+			}
+			thrace_area = {
+				add_permanent_claim = ROOT
+			}
+			aydin_area = {
+				add_permanent_claim = ROOT
+			}
+			hudavendigar_area = {
+				add_permanent_claim = ROOT
+			}
+			calabria_area = {
+				add_permanent_claim = ROOT
+			}
+			apulia_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	hl0_aegean_conquest = {
+		icon = invade_egypt_mol
+		position = 3
+		required_missions = { hl0_unification_of_hellas } 
+		provinces_to_highlight = {  
+			OR = {
+				area = moesia_area
+				area = thrace_area
+				area = aydin_area
+				area = hudavendigar_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			moesia_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			thrace_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			aydin_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			hudavendigar_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {  
+			add_country_modifier = {
+				name = hl0_big_greece
+				duration = -1
+			}
+			custom_tooltip = hl0_convert_rhoman_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						culture = rhoman
+					}
+					change_culture = greek_new
+				}
+				every_owned_province = {
+					limit = {
+						culture = greek_new
+					}
+					add_base_production = 1
+				}
+			}
+			custom_tooltip = empty_line_tt
+			albania_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	hl0_develop_constantinople = {
+		icon = invade_egypt_mol
+		position = 5
+		required_missions = { hl0_aegean_conquest } 
+		provinces_to_highlight = {  
+			province_id = 151
+		} 
+
+		trigger = {  
+			151 = {
+				has_trade_building_trigger = yes
+			}
+			151 = {
+				has_tax_building_trigger = yes
+			}
+			151 = {
+				has_production_building_trigger = yes
+			}
+			151 = {
+				development = 30
+			}
+		} 
+
+		effect = {  
+			151 = {
+				move_capital_effect = yes
+			}
+			country_event = {
+				id = hellas.4
+			}
+		} 
+	}
+}
+alb_Hellas_Ancient_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		tag = HL0 
+		has_country_flag = HELLASANCIENTLARP
+	} 
+
+	hl0_kill_coso = {
+		icon = invade_egypt_mol
+		position = 3
+		required_missions = { hl0_coastal_colonization } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	hl0_legacy_of_athens = {
+		icon = invade_egypt_mol
+		position = 4
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	hl0_legacy_of_sparta = {
+		icon = invade_egypt_mol
+		position = 5
+		required_missions = { hl0_legacy_of_athens } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+}
+alb_Hellas_Ancient_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		tag = HL0 
+		has_country_flag = HELLASANCIENTLARP
+	} 
+
+	hl0_an_ancient_legacy = {
+		icon = invade_egypt_mol
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	hl0_coastal_colonization = {
+		icon = invade_egypt_mol
+		position = 2
+		required_missions = { hl0_an_ancient_legacy } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	hl0_cyrene = {
+		icon = invade_egypt_mol
+		position = 4
+		required_missions = { hl0_coastal_colonization } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	hl0_ptolemy_dynasty = {
+		icon = invade_egypt_mol
+		position = 5
+		required_missions = { hl0_cyrene } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+}
+alb_Hellas_Ancient_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		tag = HL0 
+		has_country_flag = HELLASANCIENTLARP 
+	} 
+
+	hl0_heard_of_the_trojan_horse_buddy = {
+		icon = invade_egypt_mol
+		position = 5
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+}
+alb_Hellas_Crusade_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		tag = HL0 
+		has_country_flag = HELLASCRUSADELARP
+	} 
+
+	hl0_patrimony_stpeter_cyprus = {
+		icon = invade_egypt_mol
+		position = 2
+		required_missions = { hl0_christians_of_the_east } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	hl0_holy_orders = {
+		icon = invade_egypt_mol
+		position = 3
+		required_missions = { hl0_patrimony_stpeter_cyprus } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+}
+alb_Hellas_Crusade_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		tag = HL0 
+		has_country_flag = HELLASCRUSADELARP
+	} 
+
+	hl0_christians_of_the_east = {
+		icon = invade_egypt_mol
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	hl0_antioch = {
+		icon = invade_egypt_mol
+		position = 4
+		required_missions = {
+			hl0_aegean_conquest
+			hl0_christians_of_the_east
+			hl0_holy_orders
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	hl0_holy_land = {
+		icon = invade_egypt_mol
+		position = 5
+		required_missions = { hl0_antioch } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+}
+alb_Hellas_rome_larp_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		tag = HL0 
+		has_country_flag = HELLASROMELARP
+	} 
+
+	hl0_south_haemia = {
+		icon = invade_egypt_mol
+		position = 3
+		required_missions = { hl0_unification_of_hellas } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	hl0_north_haemia = {
+		icon = invade_egypt_mol
+		position = 4
+		required_missions = { hl0_south_haemia } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	hl0_eternal_city = {
+		icon = invade_egypt_mol
+		position = 5
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+}
+alb_Hellas_rome_larp_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		tag = HL0 
+		has_country_flag = HELLASROMELARP
+	} 
+
+	hl0_rome_larp = {
+		icon = invade_egypt_mol
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	hl0_western_anatolia = {
+		icon = invade_egypt_mol
+		position = 2
+		required_missions = { hl0_rome_larp } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	hl0_east_anatolia = {
+		icon = invade_egypt_mol
+		position = 3
+		required_missions = { hl0_western_anatolia } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	hl0_syria = {
+		icon = invade_egypt_mol
+		position = 4
+		required_missions = { hl0_east_anatolia } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
+	hl0_roma_egypt = {
+		icon = invade_egypt_mol
+		position = 5
+		required_missions = { hl0_syria } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+}
