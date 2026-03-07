@@ -24,6 +24,73 @@ country_decisions = {
 			}
 		}
 	}
+	
+	mazdakism_encourage_ascetism = {
+		potential = {
+			NOT = { has_ruler_modifier = mazdak_ascetism }
+			religion = mazdakism
+		}
+		allow = {
+			has_regency = no
+		}
+		effect = {	
+			add_ruler_modifier = {
+				name = "mazdak_ascetism"
+				duration = -1
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	mazdakism_suffer_not_tyrant = {
+		potential = {
+			NOT = { has_ruler_modifier = mazdak_no_tyrant }
+			religion = mazdakism
+		}
+		allow = {
+			has_regency = no
+		}
+		effect = {	
+			add_ruler_modifier = {
+				name = "mazdak_no_tyrant"
+				duration = -1
+			}
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = { 
+				OR = { government = monarchy government = tribal }
+				factor = 0
+			}
+			modifier = { 
+				NOT = { current_age = age_of_revolutions }
+				factor = 0
+			}
+		}
+	}
+	
+	mazdak_emulate_denawar = {
+		potential = {
+			NOT = { has_ruler_modifier = mazdak_go_to_school }
+			religion = mazdakism
+			adm_tech = 8
+		}
+		allow = {
+			dip = 4
+			has_regency = no
+		}
+		effect = {	
+			add_ruler_modifier = {
+				name = "mazdak_go_to_school"
+				duration = -1
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
 
 }
 
