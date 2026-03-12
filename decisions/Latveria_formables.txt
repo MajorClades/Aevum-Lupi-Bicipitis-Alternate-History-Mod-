@@ -243,5 +243,51 @@ country_decisions = {
 		}
 		ai_importance = 400
 	}
-
+	unite_the_lithuanians = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			was_never_end_game_tag_trigger = yes
+			NOT = {
+				OR = {
+					has_country_flag = united_the_lithuanians 
+					primary_culture = lithuanian
+				}
+			}
+			tag = LT1
+		}
+		provinces_to_highlight = {
+			OR = {
+				culture = aukstaitian
+				culture = samogitian
+			}
+		}
+		allow = {
+			is_at_war = no
+			owns_all_provinces = {
+                OR = {
+					culture = aukstaitian
+					culture = samogitian
+				}
+            }
+		}
+		effect = {
+			set_country_flag = united_the_lithuanians
+			change_primary_culture = lithuanian
+			every_owned_province = {
+				limit = {
+					OR = {
+						culture = aukstaitian
+						culture = samogitian 
+					}
+				}
+				change_culture = lithuanian
+			}
+			add_prestige = 20
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
 }

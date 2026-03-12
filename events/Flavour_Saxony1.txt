@@ -264,6 +264,8 @@ province_event = {
 				}
 				OR = {
 					culture = lithuanian
+					culture = aukstaitan
+					culture = samogitian
 					culture = latvian
 				}
 			}
@@ -273,6 +275,8 @@ province_event = {
 			limit = { 
 				OR = {
 					culture = lithuanian
+					culture = aukstaitan
+					culture = samogitian
 					culture = latvian
 				}
 			}
@@ -283,12 +287,34 @@ province_event = {
 				owner = {
 					culture_group = unified_germanic
 				}
-				culture = valtean
+				OR = {
+					culture = curonian
+					culture = selonian
+					culture = valtean
+				}
 			}
 			change_culture = ug_balten
 		}
-		else = {
+		else_if = {
+			limit = { 
+				OR = {
+					culture = curonian
+					culture = selonian
+					culture = valtean
+				}
+			}
 			change_culture = balten_new
+		}
+		else_if = {
+			limit = {
+				owner = {
+					culture_group = unified_germanic
+				}
+			}
+			change_culture = ug_saxonard
+		}
+		else = {
+			change_culture = saxonard
 		}
 	}
 }
