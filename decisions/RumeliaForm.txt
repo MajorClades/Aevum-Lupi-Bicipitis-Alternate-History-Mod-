@@ -1,0 +1,60 @@
+country_decisions = {
+
+    alb_form_rumelia = {
+        major = yes
+        potential = {
+            normal_or_historical_nations = yes
+			was_never_end_game_tag_trigger = yes
+			NOT = { has_country_flag = formed_rumelia_flag }
+			tag = TR1
+        }
+        provinces_to_highlight = {
+            OR = {
+				region = balkan_region
+                region = anatolia_region
+			}
+			NOT = { owned_by = ROOT }
+		}
+        allow = {
+            NOT = {
+				exists = RML
+			}
+			is_free_or_tributary_trigger = yes
+			is_at_war = no
+            owns_all_provinces = {
+                culture = turk_greek
+            }
+            owns_core_province = 151
+            owns_core_province = 317
+            owns_core_province = 318
+            num_of_owned_provinces_with = {
+				value = 30
+				OR = {
+					region = balkan_region
+                    region = anatolia_region
+				}
+			}
+        }
+        effect = {
+            set_country_flag = formed_rumelia_flag
+            change_tag = RML
+            set_capital = 151
+			restore_country_name = yes
+            set_government_rank = 3
+            add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+            balkan_region = { add_permanent_claim = ROOT }
+            anatolia_region = { add_permanent_claim = ROOT }
+            italy_region = { add_permanent_claim = ROOT }
+            mashriq_region = { add_permanent_claim = ROOT }
+            egypt_region = { add_permanent_claim = ROOT }
+        }
+        ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+    }
+}
+
