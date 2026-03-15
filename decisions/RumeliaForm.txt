@@ -5,8 +5,22 @@ country_decisions = {
         potential = {
             normal_or_historical_nations = yes
 			was_never_end_game_tag_trigger = yes
-			NOT = { has_country_flag = formed_rumelia_flag }
-			tag = TR1
+            is_free_or_tributary_trigger = yes
+            is_playing_custom_nation = no
+			NOT = {
+                OR = {
+                    has_country_flag = formed_rumelia_flag
+                    has_country_flag = turk_hellenic_destiny
+                    has_country_flag = formed_hellenoturkia_flag
+                    has_country_flag = turk_turkish_destiny
+                }
+            }
+            OR = {
+                has_country_flag = turk_rumelian_destiny
+                tag = TR1
+                tag = TR2
+            }
+            culture = turk_greek
         }
         provinces_to_highlight = {
             OR = {
