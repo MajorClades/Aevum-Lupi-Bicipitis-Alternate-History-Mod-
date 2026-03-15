@@ -7,6 +7,8 @@ country_event = { #crescent
     picture = BIG_ARABIAN_CITY_eventPicture
 
     trigger = {
+        culture_group = turko_semitic
+        religion = rashidi
         any_owned_province = {
             OR = {
                 culture_group = aramaic_group
@@ -37,7 +39,6 @@ country_event = { #crescent
                     region = mashriq_region
                     region = mesopotamia_region
                 }
-                NOT = { culture = crescent_arabic }
             }
             change_culture = crescent_arabic
         }
@@ -53,7 +54,6 @@ country_event = { #crescent
                     region = mashriq_region
                     region = mesopotamia_region
                 }
-                NOT = { culture = crescent_arabic }
             }
             change_culture = crescent_arabic
         }
@@ -67,6 +67,8 @@ country_event = { #egypt
     picture = MYSTIC_IN_PRAYER_eventPicture
 
     trigger = {
+        culture_group = turko_semitic
+        religion = rashidi
         any_owned_province = {
             OR = {
                 culture = hell_egypt
@@ -89,7 +91,6 @@ country_event = { #egypt
                 }
                 religion = rashidi
                 region = egypt_region
-                NOT = { culture = egypto_arabic }
             }
             change_culture = egypto_arabic
         }
@@ -101,7 +102,6 @@ country_event = { #egypt
                 }
                 religion = rashidi
                 region = egypt_region
-                NOT = { culture = egypto_arabic }
             }
             change_culture = egypto_arabic
         }
@@ -115,13 +115,14 @@ country_event = { #africa
     picture = muslimgfx_MILITARY_CAMP_eventPicture
 
     trigger = {
+        culture_group = turko_semitic
+        religion = rashidi
         any_owned_province = {
             OR = {
                 culture_group = afro_roman
                 culture = cartaroma
             }
             religion = rashidi
-            region = maghreb_region
         }
     }
     mean_time_to_happen = {
@@ -136,8 +137,6 @@ country_event = { #africa
                     culture = cartaroma
                 }
                 religion = rashidi
-                region = maghreb_region
-                NOT = { culture = afro_arabic }
             }
             change_culture = afro_arabic
         }
@@ -148,26 +147,25 @@ country_event = { #africa
                     culture = cartaroma
                 }
                 religion = rashidi
-                region = maghreb_region
-                NOT = { culture = afro_arabic }
             }
             change_culture = afro_arabic
         }
     }
 }
 
-country_event = { #iberia-cotia
+country_event = { #iberia
     id = arabisation.4
     title = arabisation.4.t
     desc = arabisation.4.d
     picture = muslimgfx_RAMADAN_eventPicture
     trigger = {
+        culture_group = turko_semitic
+        religion = rashidi
         any_owned_province = {
             OR = {
                 culture_group = romano_hispanian
                 culture_group = iberisch
                 culture = vrankish
-                culture = goth_p
             }
             religion = rashidi
         }
@@ -183,10 +181,8 @@ country_event = { #iberia-cotia
                     culture_group = romano_hispanian
                     culture_group = iberisch
                     culture = vrankish
-                    culture = goth_p
                 }
                 religion = rashidi
-                NOT = { culture = iberian_arabic }
             }
             change_culture = iberian_arabic
         }
@@ -196,15 +192,12 @@ country_event = { #iberia-cotia
                     culture_group = romano_hispanian
                     culture_group = iberisch
                     culture = vrankish
-                    culture = goth_p
                 }
                 religion = rashidi
-                NOT = { culture = iberian_arabic }
             }
             change_culture = iberian_arabic
         }
-    }
-    
+    }  
 }
 
 country_event = { #italy
@@ -214,6 +207,8 @@ country_event = { #italy
     picture = muslimgfx_MERCHANTS_TALKING_eventPicture
 
     trigger = {
+        culture_group = turko_semitic
+        religion = rashidi
         any_owned_province = {
             OR = {
                 culture_group = latin
@@ -236,7 +231,6 @@ country_event = { #italy
                 }
                 religion = rashidi
                 region = italy_region
-                NOT = { culture = italo_arabic }
             }
             change_culture = italo_arabic
         }
@@ -248,7 +242,6 @@ country_event = { #italy
                 }
                 religion = rashidi
                 region = italy_region
-                NOT = { culture = italo_arabic }
             }
             change_culture = italo_arabic
         }
@@ -262,6 +255,8 @@ country_event = { #anatolia-turkey
     picture = DEVLET_I_RUM_eventPicture
 
     trigger = {
+        culture_group = turko_semitic
+        religion = rashidi
         any_owned_province = {
             OR = {
                 culture = thracian
@@ -270,6 +265,7 @@ country_event = { #anatolia-turkey
             religion = rashidi
             NOT = {
                 region = italy_region
+                region = egypt_region
             }
 
         }
@@ -288,8 +284,8 @@ country_event = { #anatolia-turkey
                 religion = rashidi
                 NOT = {
                     region = italy_region
+                    region = egypt_region
                 }
-                NOT = { culture = rumi_arabic }
             }
             change_culture = rumi_arabic
         }
@@ -302,10 +298,161 @@ country_event = { #anatolia-turkey
                 religion = rashidi
                 NOT = {
                     region = italy_region
+                    region = egypt_region
                 }
-                NOT = { culture = rumi_arabic }
             }
             change_culture = rumi_arabic
+        }
+    }
+}
+
+country_event = { #abyssinia
+    id = arabisation.7
+    title = arabisation.7.t
+    desc = arabisation.7.d
+    picture = AFRICAN_CARAVAN_eventPicture
+    trigger = {
+        culture_group = turko_semitic
+        religion = rashidi
+        any_owned_province = {
+            OR = {
+                NOT = { culture = chokwe }
+                culture_group = horn_kongo_group
+                AND = {
+                    culture = somali
+                    region = horn_of_africa_region
+                }
+            }
+            religion = rashidi
+        }
+    }
+    mean_time_to_happen = {
+        months = 60
+    }
+    option = {
+        name = arabisation.7.a
+        random_owned_province = {
+            limit = {
+                OR = {
+                    NOT = { culture = chokwe }
+                    culture_group = horn_kongo_group
+                    AND = {
+                        culture = somali
+                        region = horn_of_africa_region
+                    }
+                }
+                religion = rashidi
+            }
+            change_culture = kongo_arabic
+        }
+        random_owned_province = {
+            limit = {
+                OR = {
+                    NOT = { culture = chokwe }
+                    culture_group = horn_kongo_group
+                    AND = {
+                        culture = somali
+                        region = horn_of_africa_region
+                    }
+                }
+                religion = rashidi
+            }
+            change_culture = kongo_arabic
+        }
+    }
+}
+
+country_event = { #nubia
+    id = arabisation.8
+    title = arabisation.8.t
+    desc = arabisation.8.d
+    picture = SONGHAI_eventPicture
+    trigger = {
+        culture_group = turko_semitic
+        religion = rashidi
+        any_owned_province = {
+            OR = {
+                culture = chokwe
+                culture_group = sudanese
+                culture_group = cushitic
+            }
+            religion = rashidi
+        }
+    }
+    mean_time_to_happen = {
+        months = 60
+    }
+    option = {
+        name = arabisation.8.a
+        random_owned_province = {
+            limit = {
+                OR = {
+                    culture = chokwe
+                    culture_group = sudanese
+                    AND = {
+                        culture_group = cushitic
+                        NOT = { culture = somali }
+                    }
+                }
+                religion = rashidi
+            }
+            change_culture = nubian_arabic
+        }
+        random_owned_province = {
+            limit = {
+                OR = {
+                    culture = chokwe
+                    culture_group = sudanese
+                    AND = {
+                        culture_group = cushitic
+                        NOT = { culture = somali }
+                    }
+                }
+                religion = rashidi
+            }
+            change_culture = nubian_arabic
+        }
+    }
+}
+
+country_event = { #berbers
+    id = arabisation.9
+    title = arabisation.9.t
+    desc = arabisation.9.d
+    picture = SAHARA_eventPicture
+
+    trigger = {
+        culture_group = turko_semitic
+        religion = rashidi
+        any_owned_province = {
+            OR = {
+                culture_group = berber_group
+            }
+            religion = rashidi
+        }
+    }
+    mean_time_to_happen = {
+        months = 60
+    }
+    option = {
+        name = arabisation.9.a
+        random_owned_province = {
+            limit = {
+                OR = {
+                    culture_group = berber_group
+                }
+                religion = rashidi
+            }
+            change_culture = berber_arabic
+        }
+        random_owned_province = {
+            limit = {
+                OR = {
+                    culture_group = berber_group
+                }
+                religion = rashidi
+            }
+            change_culture = berber_arabic
         }
     }
 }
