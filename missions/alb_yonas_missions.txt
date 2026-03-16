@@ -633,13 +633,13 @@ mt_yonasgencont_3 = {
 			}
 		}
 		effect = {
-			#hidden_effect = { unlock_government_reform = { government_reform = yona_samrajya_empire }  } 
-			#add_government_reform = yona_samrajya_empire
-			#custom_tooltip = empty_line_tt
-			#hidden_effect = {
-			#	unlock_government_reform = { government_reform = diadochi_systems } 
-			#}
-			#add_government_reform = diadochi_systems
+			hidden_effect = { unlock_government_reform = { government_reform = yona_samrajya_empire }  } 
+			add_government_reform = yona_samrajya_empire
+			custom_tooltip = empty_line_tt
+			hidden_effect = {
+				unlock_government_reform = { government_reform = diadochi_systems } 
+			}
+			add_government_reform = diadochi_systems
 		}
 	}
 }
@@ -843,8 +843,29 @@ mt_yonasgencontcont_3 = {
 			land_of_stone_citadel land_of_celestial_king land_of_shaman
 		}
 		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		trigger = {
+			OR = {
+				has_institution = new_world_i
+				has_idea = quest_for_the_new_world
+			}
+			share_of_starting_income = 2
+			is_in_deficit = no
+			is_bankrupt = no
+		}
+		effect = {
+			create_explorer = {
+				tradition = 67
+			}
+			define_advisor = {
+				type = navigator
+				cost_multiplier = 0.25
+				skill = 2
+			}
+			add_country_modifier = {
+				name = yon_colonial_ambitions_mod
+				duration = 18250
+			}
+		}
 	}
 
 	invade_inuit = {
@@ -853,9 +874,47 @@ mt_yonasgencontcont_3 = {
 		required_missions = {
 			world_edge
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = {
+			area = kamchatka_area
+			NOR = {
+				country_or_non_sovereign_subject_holds = ROOT
+				is_empty = yes
+			}
+		}
+		trigger = { 
+			kamchatka_area = {
+				type = all
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					is_empty = yes
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = { IN0 = { exists = yes }  } 
+				IN0 = {
+					capital_scope = { change_religion = ROOT } 
+					change_religion = ROOT
+					every_province = {
+						limit = {
+							is_empty = yes
+							OR = { area = kolyma_area area = okhotsk_area }
+						}
+						add_siberian_construction = 500
+					}
+				}
+			}
+			else = {
+				every_province = {
+					limit = {
+						is_empty = yes
+						OR = { area = kolyma_area area = okhotsk_area }
+					}
+					add_siberian_construction = 500
+				}
+			}
+		}
 	}
 
 	only_way_forward = {
@@ -864,9 +923,29 @@ mt_yonasgencontcont_3 = {
 		required_missions = {
 			invade_inuit uncover_ulimaroa great_serene_sea
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = {
+			NOT = { has_discovered = ROOT }
+			if = {
+				limit = { is_random_new_world = no }
+				OR = { colonial_region = colonial_mexico colonial_region = colonial_california colonial_region = colonial_jamesland colonial_region = colonial_peru colonial_region = colonial_la_plata }
+			}
+			else = {
+				continent = new_world
+			}
+		}		
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = miss_discover_western_america
+				OR = { colonial_region = colonial_mexico colonial_region = colonial_california colonial_region = colonial_jamesland colonial_region = colonial_peru colonial_region = colonial_la_plata }
+			}
+		}	
+		effect = {
+			add_country_modifier = {
+				name = "yon_the_unknown_frontier"
+				duration = 9125
+			}
+			add_dip_power = 50
+		}
 	}
 
 	beyond_horizon = {
@@ -875,9 +954,50 @@ mt_yonasgencontcont_3 = {
 		required_missions = {
 			only_way_forward
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = {
+			if = {
+				limit = { is_random_new_world = no }
+				OR = {
+					continent = north_america
+					continent = south_america
+				}
+			}
+			else = {
+				continent = new_world
+			}
+			has_discovered = ROOT
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}		
+		trigger = {
+			if = {
+				limit = { is_random_new_world = no }
+				num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+					OR = {
+						continent = north_america
+						continent = south_america
+					}
+					value = 200
+				}
+			}
+			else = {
+				num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+					continent = new_world
+					value = 100
+				}
+			}
+			NOT = {
+				any_subject_country = {
+					liberty_desire = 25
+				}
+			}
+		}	
+		effect = {
+			add_country_modifier = {
+				name = yon_new_world_dominance
+				duration = -1
+			}
+			custom_tooltip = yon_dominiate_new_world_at
+		}
 	}
 	
 }
@@ -1294,9 +1414,26 @@ mt_yonasgencontcont_4 = {
 		required_missions = {
 			world_edge
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = {
+			region = oceanea_region
+			country_or_non_sovereign_subject_holds = ROOT
+		}
+		trigger = { 
+			num_of_owned_provinces_with = { region = oceanea_region value = 10 }
+		}
+		effect = { 
+			oceanea_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier_for_age = {
+				name = "yon_crossing_great_ocean"
+				age = age_of_absolutism
+			}
+		}
 	}
 }
 mt_yonasgen_5 = {
