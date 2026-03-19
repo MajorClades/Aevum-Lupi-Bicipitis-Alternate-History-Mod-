@@ -46,43 +46,71 @@ Avaria_1_slot = {
         } 
 		provinces_to_highlight = {
 			or = {
-				area = austria_proper_area
-				area = inner_austria_area
-				area = tirol_area
-				area = bohemia_area
-				area = erzgebirge_area
-				area = moravia_area
+				tag = GR2
 			}
 			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		trigger = {
-			austria_proper_area = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT 
-			}
-			inner_austria_area = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT 
-			}
-			bohemia_area = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT 
-			}
-			moravia_area = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT 
-			}
-			erzgebirge_area = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT 
-			}
-			tirol_area = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT 
+			OR = {
+			GR2 = {
+					has_opinion = {
+						who = ROOT
+						value = 180
+					}
+				}
+				GR2 = {
+					has_opinion_modifier = {
+						who = ROOT
+						modifier = insulted
+					}
+					trade_embargo_by = ROOT
+				}
+				GR2 = {
+					exists = no
+				}
 			}
 		}
 		effect = {
-			
+			custom_tooltip = AVAR_TT_4a
+			custom_tooltip = AVAR_TT_4b
+
+			hidden_effect = {
+				if = {
+					limit = {
+						GR2 = {
+							has_opinion = {
+								who = ROOT
+								value = 180
+							}
+						}
+					}
+					GR2 = {
+						country_event = {
+							id = ayabani.8
+						}
+					}
+				}
+				else = {
+					austria_proper_area = {
+						add_permanent_claim = ROOT
+					}
+					inner_austria_area = {
+						add_permanent_claim = ROOT
+					}
+					bohemia_area = {
+						add_permanent_claim = ROOT
+					}
+					moravia_area = {
+						add_permanent_claim = ROOT
+					}
+					erzgebirge_area = {
+						add_permanent_claim = ROOT
+					}
+					tirol_area = {
+						add_permanent_claim = ROOT
+					}
+				}
+			}
 		}
 	}
 }
@@ -99,7 +127,7 @@ Avaria_2_slot = {
 		required_missions = { 
             avr_2conomy
         } 
-		provinces_to_highlight = { 
+		provinces_to_highlight = {
 
 		}
 		trigger = {
@@ -178,7 +206,11 @@ Avaria_3_slot = {
 			owns = 154
 			owns = 1318
 			owns = 4236
+			owns = 3004
 			DA5 = {
+				exists = no
+			}
+			RO0 ={
 				exists = no
 			}
 		}
@@ -233,7 +265,59 @@ Avaria_3_slot = {
 					limit = {
 						religion = islam
 					}
-					override_country_name = AVARCALIPHATE
+					change_government = theocracy
+					add_government_reform = caliphate_theocracy_reform
+					if = {
+						limit = {
+							dynasty = "Bayanid"
+						}
+						override_country_name = BAYANIDCALIPHATE
+					}
+					else_if = {
+						limit = {
+							dynasty = "Buqid"
+						}
+						override_country_name = BUQIDCALIPHATE
+					}
+					else_if = {
+						limit = {
+							dynasty = "Borid"
+						}
+						override_country_name = BORIDCALIPHATE
+					}
+					else_if = {
+						limit = {
+							dynasty = "Toghonid"
+						}
+						override_country_name = TOGHONIDCALIPHATE
+					}
+					else_if = {
+						limit = {
+							dynasty = "Tyeodorid"
+						}
+						override_country_name = TYEODORIDCALIPHATE
+					}
+					else_if = {
+						limit = {
+							dynasty = "Isaakid"
+						}
+						override_country_name = ISAAKIDCALIPHATE
+					}
+					else_if = {
+						limit = {
+							dynasty = "Abrakhamid"
+						}
+						override_country_name = ABRAHAMICALIPHATE
+					}
+					else_if = {
+						limit = {
+							dynasty = "Kandikid"
+						}
+						override_country_name = KANIDKIDCALIPHATE
+					}
+					else = {
+						override_country_name = AVARCALIPHATE
+					}
 				}
 				else = {
 					override_country_name = AVARKHAGANATE
@@ -242,7 +326,7 @@ Avaria_3_slot = {
 				add_prestige = 25
 				custom_tooltip = AVAR_TT_2
 			}
-			if = {
+			else_if = {
 				limit = {
 					culture = avars
 				}
@@ -251,6 +335,64 @@ Avaria_3_slot = {
 				set_government_rank = 3
 				country_event = { id = ideagroups.1 } #Swap Ideas
 				set_country_flag = formed_danube_flag
+				if = {
+					limit = {
+						religion = islam
+					}
+					change_government = theocracy
+					add_government_reform = caliphate_theocracy_reform
+					if = {
+						limit = {
+							dynasty = "Bayanid"
+						}
+						override_country_name = BAYANIDCALIPHATE
+					}
+					else_if = {
+						limit = {
+							dynasty = "Buqid"
+						}
+						override_country_name = BUQIDCALIPHATE
+					}
+					else_if = {
+						limit = {
+							dynasty = "Borid"
+						}
+						override_country_name = BORIDCALIPHATE
+					}
+					else_if = {
+						limit = {
+							dynasty = "Toghonid"
+						}
+						override_country_name = TOGHONIDCALIPHATE
+					}
+					else_if = {
+						limit = {
+							dynasty = "Tyeodorid"
+						}
+						override_country_name = TYEODORIDCALIPHATE
+					}
+					else_if = {
+						limit = {
+							dynasty = "Isaakid"
+						}
+						override_country_name = ISAAKIDCALIPHATE
+					}
+					else_if = {
+						limit = {
+							dynasty = "Abrakhamid"
+						}
+						override_country_name = ABRAHAMICALIPHATE
+					}
+					else_if = {
+						limit = {
+							dynasty = "Kandikid"
+						}
+						override_country_name = KANIDKIDCALIPHATE
+					}
+					else = {
+						override_country_name = DANUBIANCALIPHATE
+					}
+				}
 			}
 		}
 	}
@@ -258,7 +400,7 @@ Avaria_3_slot = {
 		icon = mission_fall_of_constantinople
 		position = 4
 		required_missions = { 
-            avr_place
+            avr_mare
         } 
 		provinces_to_highlight = {
 			OR = {
@@ -294,7 +436,7 @@ Avaria_3_slot = {
 			}
 		}
 		effect = {
-			country_event = { id = avaria.1 }
+
 		}
 	}
 }
@@ -313,7 +455,7 @@ Avaria_4_slot = {
         } 
 		provinces_to_highlight = { 		}
 		trigger = {
-            stability = 1
+            theologian = 1
 		}
 		effect = {
 			country_event = { id = avaria.2 }
@@ -385,16 +527,16 @@ Avaria_5_slot = {
 				duration = 7300
 			}
 			yedisan_area = {
-				add_permanent_claim = DA3
+				add_permanent_claim = ROOT
 			}
 			zaporizhia_area = {
-				add_permanent_claim = DA3
+				add_permanent_claim = ROOT
 			}
 			crimea_area = {
-				add_permanent_claim = DA3
+				add_permanent_claim = ROOT
 			}
 			azov_area = {
-				add_permanent_claim = DA3
+				add_permanent_claim = ROOT
 			}
 		}
 	}
