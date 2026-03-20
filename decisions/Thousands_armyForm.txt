@@ -106,20 +106,20 @@ country_decisions = {
 				limit = {
 					has_custom_ideas = no
 				}
-					country_event = { id = ideagroups.1 } #Swap Ideas
+				country_event = { id = ideagroups.1 } #Swap Ideas
 			}
 			russia_region = {
 					add_permanent_claim = TH1
-				}
+			}
 			ruthenia_region = {
 					add_permanent_claim = TH1
-				}
+			}
 			ural_region = {
 					add_permanent_claim = TH1
-				}
+			}
 			baltic_region = {
 					add_permanent_claim = TH1
-				}
+			}
 			add_country_modifier = {
 				name = "centralization_modifier"
 				duration = 7300
@@ -127,6 +127,20 @@ country_decisions = {
 			set_country_flag = formed_1000_flag 
 			add_prestige_or_monarch_power = {
 				amount = 50
+			}
+			hidden_effect = {
+				save_event_target_as = SUPEREVENT_CAPITAL_TARGET
+				every_country = {
+					limit = {
+						has_discovered = event_target:SUPEREVENT_CAPITAL_TARGET
+					}
+					country_event = {
+						id = superevent.4
+					}
+				}
+				country_event = {
+					id = superevent.4
+				}
 			}
 		}
 		ai_will_do = {
@@ -181,6 +195,9 @@ country_decisions = {
 		major = yes
 		potential = {
 			tag = CT0
+			NOT = {
+				has_country_flag = not_need_to_own_siescheng
+			}
 		}
 		allow = {
 			4255 = {
