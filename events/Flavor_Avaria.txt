@@ -237,9 +237,9 @@ country_event = {
 			add_base_production = -1
 			add_base_manpower = -1
 		}
-		SX0 = {
+		GR2 = {
 			country_event = {
-				id = avaria.5
+				id = avaria.10
 			}
 		}
 		hidden_effect = {
@@ -274,12 +274,6 @@ country_event = {
 			}
 			1318 = {
 				change_culture = rimedaxian
-			}
-			1772 = {
-				change_culture = longobard
-			}
-			4240 = {
-				change_culture = longobard
 			}
 		}
 	}
@@ -403,6 +397,7 @@ country_event = {
 				region = carpathia_region
 			}
 			cede_province = DA3
+			remove_core = GR2
 		}
 	}
 	option = {
@@ -435,7 +430,7 @@ country_event = {
 	id = avaria.9
 	title = avaria.9.t
 	desc = avaria.9.d
-	picture = DIPLOMACY_eventPicture
+	picture = DIPLOMACY_SIGNING_eventPicture
 	is_triggered_only = yes
 	fire_only_once = yes
 	option = {
@@ -448,17 +443,54 @@ country_event = {
 }
 
 country_event = {
-	id = avaria.9
-	title = avaria.9.t
-	desc = avaria.9.d
-	picture = DIPLOMACY_eventPicture
+	id = avaria.10
+	title = avaria.10.t
+	desc = avaria.10.d
+	picture = OVEREXTENSION_eventPicture
 	is_triggered_only = yes
 	fire_only_once = yes
 	option = {
-		name = avaria.9a
+		name = avaria.10a
 		add_opinion = {
 			who = GR2
 			modifier = not_gave_land_danube
+		}
+		austria_proper_area = {
+			add_permanent_claim = ROOT
+		}
+		inner_austria_area = {
+			add_permanent_claim = ROOT
+		}
+		tirol_area = {
+			add_permanent_claim = ROOT
+		}
+		east_bavaria_area = {
+			add_permanent_claim = ROOT
+		}
+	}
+}
+
+country_event = {
+	id = avaria.11
+	title = avaria.11.t
+	desc = avaria.11.d
+	picture = MARCHING_PEASANTS_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = avaria.11a
+		1772 = {
+			add_base_tax = 1
+			add_base_production = 1
+			add_base_manpower = 1
+		}
+		4240 = {
+			add_base_tax = 1
+			add_base_production = 1
+			add_base_manpower = 1
+		}
+		add_opinion = {
+			who = DA3
+			modifier = expelled_limes
 		}
 	}
 }

@@ -37,36 +37,60 @@ Avaria_1_slot = {
 			
 		}
 	} 
+}
+Avaria_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = DA3 }  
+
+	avr_bread = {
+		icon = austria_prospers
+		position = 3
+		required_missions = { 
+            avr_revenge
+        } 
+		provinces_to_highlight = {
+
+		}
+		trigger = {
+            army_size_percentage = 1
+			num_of_generals = 1
+		}
+		effect = {
+			
+		}
+	}
 	avr_steve = {
-		icon = mission_iron_and_copper
+		icon = mission_break_the_tatar_yoke
 		position = 4
 		required_missions = { 
-            avr_2conomy
 			avr_bread
         } 
 		provinces_to_highlight = {
-			or = {
-				tag = GR2
-			}
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+
 		}
 		trigger = {
 			OR = {
-			GR2 = {
+				GR2 = {
 					has_opinion = {
 						who = ROOT
 						value = 180
 					}
 				}
-				GR2 = {
-					has_opinion_modifier = {
-						who = ROOT
-						modifier = insulted
+				AND = {
+					GR2 = {
+						exists = no
 					}
-					trade_embargo_by = ROOT
-				}
-				GR2 = {
-					exists = no
+					austria_proper_area = { 
+						type = all
+						owned_by = ROOT
+					}
+					inner_austria_area = { 
+						type = all
+						owned_by = ROOT
+					}
 				}
 			}
 		}
@@ -91,48 +115,42 @@ Avaria_1_slot = {
 					}
 				}
 				else = {
-					austria_proper_area = {
-						add_permanent_claim = ROOT
-					}
-					inner_austria_area = {
-						add_permanent_claim = ROOT
-					}
-					bohemia_area = {
-						add_permanent_claim = ROOT
-					}
-					moravia_area = {
-						add_permanent_claim = ROOT
-					}
-					erzgebirge_area = {
-						add_permanent_claim = ROOT
-					}
-					tirol_area = {
-						add_permanent_claim = ROOT
+					add_country_modifier = {
+						name = avr_longobard
+						duration = 7300
 					}
 				}
 			}
 		}
 	}
-}
-Avaria_2_slot = {
-	slot = 2
-	generic = no
-	ai = yes
-	has_country_shield = yes
-	potential = { tag = DA3 }  
-
-	avr_bread = {
-		icon = austria_prospers
-		position = 3
+	avr_bavaria = {
+		icon = mission_steppe_warriors
+		position = 6
 		required_missions = { 
-            avr_2conomy
+            avr_place
+			avr_steve
         } 
 		provinces_to_highlight = {
-
+			OR = {
+				area = bohemia_area
+				area = moravia_area
+				area = erzgebirge_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		trigger = {
-            army_size_percentage = 1
-			num_of_generals = 1
+			bohemia_area = {
+				type = all
+				owned_by = ROOT
+			}
+			moravia_area = {
+				type = all
+				owned_by = ROOT
+			}
+			erzgebirge_area = {
+				type = all
+				owned_by = ROOT
+			}
 		}
 		effect = {
 			
@@ -396,11 +414,33 @@ Avaria_3_slot = {
 			}
 		}
 	}
+}
+Avaria_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = DA3 }  
+
+    avr_faith = {
+		icon = mission_horde_religion
+		position = 2
+		required_missions = { 
+			avr_chained
+        } 
+		provinces_to_highlight = { 		}
+		trigger = {
+            theologian = 1
+		}
+		effect = {
+			country_event = { id = avaria.2 }
+		}
+	}
     avr_south = {
 		icon = mission_fall_of_constantinople
-		position = 4
+		position = 6
 		required_missions = { 
-            avr_mare
+			avr_place
         } 
 		provinces_to_highlight = {
 			OR = {
@@ -436,29 +476,22 @@ Avaria_3_slot = {
 			}
 		}
 		effect = {
-
-		}
-	}
-}
-Avaria_4_slot = {
-	slot = 4
-	generic = no
-	ai = yes
-	has_country_shield = yes
-	potential = { tag = DA3 }  
-
-    avr_faith = {
-		icon = mission_horde_religion
-		position = 2
-		required_missions = { 
-			avr_chained
-        } 
-		provinces_to_highlight = { 		}
-		trigger = {
-            theologian = 1
-		}
-		effect = {
-			country_event = { id = avaria.2 }
+			151 = {
+				add_center_of_trade_level = 1
+				add_trade_node_income = 0.5
+			}
+			add_country_modifier = {
+				name = avr_bosp
+			}
+			if = {
+				limit = {
+					exists = RU0
+				}
+				create_subject = {
+    				subject_type = tributary_state
+    				subject = RU0
+				}
+			}
 		}
 	}
 }
