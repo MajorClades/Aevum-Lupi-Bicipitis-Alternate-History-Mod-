@@ -788,7 +788,9 @@ country_event = {
 	picture = ADVISOR_eventPicture
 	
 	is_triggered_only = yes
-
+	immediate = {
+		save_event_target_as = SUPEREVENT_CAPITAL_TARGET
+	}
 	option = {
 		name = mexic.15a
 		ai_chance = {
@@ -796,6 +798,16 @@ country_event = {
 		}
 		custom_tooltip = MV_TREATY
 		set_global_flag = mexican_vinland_treaty
+		hidden_effect = {
+			every_country = {
+				limit = {
+					has_discovered = event_target:SUPEREVENT_CAPITAL_TARGET
+				}
+				country_event = {
+					id = superevent.3
+				}
+			}
+		}
 	}
 	option = {
 		name = mexic.15b
