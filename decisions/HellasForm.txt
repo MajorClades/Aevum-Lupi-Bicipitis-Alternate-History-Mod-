@@ -77,5 +77,41 @@ country_decisions = {
 		}
 		ai_importance = 400
 	}
-
+	hellas_nation = {
+		major = yes
+		potential = {
+			has_country_flag = hl0_can_hold_triumph
+		}
+        provinces_to_highlight = {
+			
+		}
+		allow = {
+			NOT = {
+				any_owned_province = {
+					has_province_modifier = hl0_recent_triumph
+				}
+			}
+			check_variable = {
+				which = hl0_triumph_var
+				value = 1
+			}
+		}
+		effect = {
+			add_army_tradition_or_mil_power = {amount = 20}
+			add_legitimacy_equivalent = {amount = 10} 
+			capital_scope = {
+				add_province_modifier = {
+					name = hl0_recent_triumph
+					duration = 1825
+				}
+			}
+			subtract_variable = {
+				which = hl0_triumph_var
+				value = 1
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
 }

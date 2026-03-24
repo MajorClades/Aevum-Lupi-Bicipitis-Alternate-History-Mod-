@@ -779,15 +779,16 @@ country_event = {	#event carneval
 		OR = {
 			is_month = 11
 			is_month = 0
-			is_month = 1
-			is_month = 2
+		}
+		NOT = {
+			is_month = 3
 		}
 	}
 
 	option = {
 		name = gen_ita.19a
 		every_known_country = {
-			reverse_add_aggressive_expansion = {
+			add_aggressive_expansion = {
 				who = ROOT
 				value = -5
 				apply_calc = no
@@ -811,11 +812,17 @@ country_event = {	#event once formed Italy decide to stay or not in the hre
 			}
 			set_government_rank = 3
 		}
-		set_in_empire = no
-		add_casus_belli = {
-			type = cb_war_on_empire
-			target = emperor
-			months = 360
+		if = {
+			limit = {
+				hre_size = 1
+			}
+			set_in_empire = no
+			set_country_flag = can_kill_emperor_AFR
+			add_casus_belli = {
+				type = cb_dismantle_hre_africa
+				target = emperor
+				months = 300
+			}
 		}
 	}
 	option = {
@@ -897,7 +904,7 @@ country_event = {	#capitalism for me, not for thee
 		}
 	}
 	mean_time_to_happen = {
-		months = 300
+		months = 120
 	}
 
 	option = {
@@ -906,6 +913,11 @@ country_event = {	#capitalism for me, not for thee
 			factor = 30
 		}
 		add_years_of_income = -1
+		add_government_power = {
+			mechanic_type = capitanolistism
+			power_type = venetian_capitalism
+			value = 10
+		}
 	}
 	option = {
 		name = gen_ita.101b

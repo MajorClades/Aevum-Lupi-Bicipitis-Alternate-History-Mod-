@@ -11,7 +11,7 @@ country_event = {
 		ai_chance = {
 			factor = 25
 		}
-		change_religion = ephesian
+		#change_religion = ephesian #Too larpy
         set_capital = 146
         set_country_flag = HELLASANCIENTLARP
         custom_tooltip =  HELLAS_TT_1
@@ -35,6 +35,14 @@ country_event = {
         set_country_flag = HELLASROMELARP
         custom_tooltip =  HELLAS_TT_2
         swap_non_generic_missions = yes
+        if = {
+            limit = {
+                owns = 151
+            }
+            country_event = {
+                id = hellas.2
+            }
+        }
         hidden_effect = {
             country_event = {
                 id = hellas.3
@@ -79,6 +87,7 @@ country_event = {
         add_core = 151
         set_capital = 151
         override_country_name = HELLASROME
+        set_country_flag = HELLAS_CORONATED_ROMAN
         151 = {
             change_religion = ROOT
             add_great_project_tier = {
@@ -88,7 +97,7 @@ country_event = {
         }
         hidden_effect = {
             change_country_color = { 
-                color = { 167 10 100 }
+                color = { 112 41 99 } #byzantium color
             }
         }
     }
@@ -231,5 +240,30 @@ country_event = {
         }
         add_stability = 1
         add_curia_treasury = -1000
+    }
+}
+
+country_event = {
+	id = hellas.7
+	title = hellas.7.t
+	desc = hellas.7.d
+	picture = BYZ_BATTLE_eventPicture
+    
+	is_triggered_only = yes
+    option = {
+        name = hellas.7a
+		add_army_tradition_or_mil_power = {amount = 20}
+        add_legitimacy_equivalent = {amount = 10} 
+        capital_scope = {
+            add_province_modifier = {
+                name = hl0_recent_triumph
+                duration = 1825
+            }
+        }
+        set_country_flag = hl0_can_hold_triumph
+        set_variable = {
+            which = hl0_triumph_var
+            value = 0
+        }
     }
 }
