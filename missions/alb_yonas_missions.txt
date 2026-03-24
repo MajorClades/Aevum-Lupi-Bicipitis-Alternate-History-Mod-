@@ -662,7 +662,11 @@ mt_yonadevyn_3 = {
 
 		trigger = {
 			any_owned_province = {
-				OR = { trade_goods = silk trade_goods = cotton }
+				OR = {
+					trade_goods = silk 
+					trade_goods = cotton 
+					trade_goods = cloth
+				}
 				has_manufactory_trigger = yes
 				base_production = 10
 			}
@@ -682,6 +686,12 @@ mt_yonadevyn_3 = {
 				duration = -1
 			}
 			custom_tooltip = yona_prodboost_tooltip
+			tooltip = {
+				add_province_modifier = {
+					name = yona_prodboost_cotton_silk
+					duration = -1
+				}
+			}
 			hidden_effect = {
 				every_owned_province = {
 					limit = {
@@ -724,9 +734,9 @@ mt_yonasgencont_3 = {
 		effect = {
 			add_country_modifier = {
 				name = "yon_denawar_donation"
-				duration = 18250
+				duration = 10950
 			}
-			add_years_of_income = 5
+			add_years_of_income = 1.5
 		}
 	}
 
@@ -1275,12 +1285,14 @@ mt_yonasgen_4 = {
 				value = 4
 				trade_goods = wool
 				region = khorasan_region
+				base_production = 7
+				
 			}
 		}
 		effect = {
 			add_country_modifier = {
 				name = "yon_woollord_of_khorasan"
-				duration = 18250
+				duration = 10950
 			}
 			507 = {
 				add_trade_modifier = {
