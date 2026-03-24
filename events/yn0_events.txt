@@ -18,3 +18,163 @@ country_event = {
 	}
 	
 }
+
+country_event = {
+	id = yonaraja.2
+	title = yonaraja.2.test
+	desc = yonaraja.2.desc
+	picture = ARTILLERY_eventPicture
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Elephant buff Aornos
+		name = yonaraja.2a
+		add_ruler_modifier = {
+			name = yo0_sandrakotta
+			duration = -1
+		}
+		define_general = {
+			name = "Sandro Kotta"
+			culture = jambuvi
+			shock = 7
+			fire = 1
+			manuever = 5
+			siege = 1
+		}
+	}
+	option = { #Legion buff
+		name = yonaraja.2b
+		add_ruler_modifier = {
+			name = yo0_omphistaxiles
+			duration = -1
+		}
+		define_general = {
+			name = "Omphis Taxiles"
+			culture = kamboj
+			shock = 3
+			fire = 4
+			manuever = 6
+			siege = 5
+		}
+		capital_scope = {
+			qizilbash_infantry = ROOT
+			qizilbash_infantry = ROOT
+			qizilbash_infantry = ROOT
+			qizilbash_infantry = ROOT
+			qizilbash_infantry = ROOT
+		}
+	}
+	
+	option = { #Cannon buff
+		name = yonaraja.2c
+		add_ruler_modifier = {
+			name = yo0_spita_lead
+			duration = -1
+		}
+		define_general = {
+			name = "Spitamenes"
+			culture = sogdian
+			shock = 2
+			fire = 2
+			manuever = 2
+			siege = 8
+		}
+	}
+	
+}
+
+country_event = {
+	id = yonaraja.3
+	title = yonaraja.3.test
+	desc = yonaraja.3.desc
+	picture = DIPLOMACY_eventPicture
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = yonaraja.3a
+		somaliland_area = {
+			discover_country = ROOT
+			add_permanent_claim = ROOT
+		}
+		majarteen_area = {
+			discover_country = ROOT
+			add_permanent_claim = ROOT
+		}
+		mogadishu_area= {
+			discover_country = ROOT
+			add_permanent_claim = ROOT
+		}
+	}
+	
+	option = {
+		name = yonaraja.3b
+		2788 = {
+			owner = {
+				YO0 = {
+					add_casus_belli = {
+					type = cb_vassalize_mission
+					target = PREV
+						}
+				}
+			}
+			add_permanent_claim = YN0
+		}
+	}
+}
+
+province_event = {
+	id = yonaraja.5
+	title = yonaraja.5.t
+	desc = yonaraja.5.d
+	picture = CZECH_NOBLES_eventPicture
+	
+	# is_mtth_scaled_to_size = 1
+	hidden = yes
+	
+	trigger = {
+		OR = {
+					superregion = africa_superregion
+					superregion = southern_africa_superregion
+				}
+		owner = { has_country_flag = alb_yon_hellenize_africa_flag }
+	}
+
+	mean_time_to_happen = {
+		months = 300
+		modifier = {
+			factor = 0.75
+			development = 15
+		}
+		modifier = {
+			factor = 0.75
+			development = 20
+		}
+		modifier = {
+			factor = 0.75
+			development = 25
+		}
+		modifier = {
+			factor = 0.75
+			development = 30
+		}
+	}
+	
+	option = {
+		name = yonaraja.5a
+		if = {
+			limit = {
+				OR = {
+					superregion = africa_superregion
+					superregion = southern_africa_superregion
+				}
+			}
+			change_culture = siddi
+		}
+		else = {
+			change_culture = yonas
+		}
+	}
+}

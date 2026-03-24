@@ -104,8 +104,16 @@ mt_yonasgencontcont_1 = {
 		position = 8
 		required_missions = { }
 		provinces_to_highlight = { }
-		trigger = { has_had_golden_age = yes } #placeholder
-		effect = { }
+		
+		trigger = { 
+			1248 = {
+				owned_by = ROOT
+			}
+		}
+		effect = { 
+		1101 = { discover_country = ROOT add_siberian_construction = 500 }
+		1099 = { add_permanent_claim = ROOT }
+		}
 	}
 
 	yon_kongo_exchange = {
@@ -115,8 +123,20 @@ mt_yonasgencontcont_1 = {
 			yon_islands_of_garland
 		}
 		provinces_to_highlight = { }
-		trigger = { has_had_golden_age = yes } #placeholder
-		effect = { }
+		trigger = { 
+			1099 = {
+				owned_by = ROOT
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = "yon_arabic_coast_domination"
+				duration = 18250
+			}
+			custom_tooltip = empty_line_tt
+			custom_tooltip = decide_how_you_treat_kongo_tt
+			hidden_effect = { country_event = { id = yonaraja.3 } }
+		}
 	}
 
 	yon_uplift_libyan = {
@@ -1684,8 +1704,17 @@ mt_yonasgencontcont_5 = {
 		position = 8
 		required_missions = { }
 		provinces_to_highlight = { }
-		trigger = { has_had_golden_age = yes } #placeholder
-		effect = { }
+		trigger = {
+			land_forcelimit = 100
+			max_manpower = 100
+			army_size_percentage = 0.7
+		}
+		effect = {
+			capital_scope = { add_or_upgrade_manpower_building = yes } 
+			country_event = {
+				id = yonaraja.2
+			}
+		}
 	}
 
 	yon_march_through_persia = {
