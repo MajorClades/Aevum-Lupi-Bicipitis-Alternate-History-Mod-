@@ -106,6 +106,55 @@ indian_manichanate_reform = {
 	}
 }
 
+indian_manichanate_pretender_reform = {
+	icon = "indian_sultanate"
+	allow_normal_conversion = yes
+	potential = {
+		OR = {
+			capital_scope = {
+				superregion = india_superregion
+			}
+			has_reform = indian_manichanate_pretender_reform
+		}
+		OR = {
+			religion = manich
+			religion = jyotisastra
+		}
+		NOT = {
+			has_reform = light_empire_united_government
+		}
+		NOT = {
+			is_subject_of_type = light_empire_vassal
+		}
+	}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 10
+	nation_designer_trigger = {
+		OR = {
+			religion = manich
+			religion = jyotisastra
+		}
+		capital_scope = {
+			superregion = india_superregion
+		}
+	}
+
+	maintain_dynasty = yes
+	#allow_vassal_war = yes
+	#allow_vassal_alliance = yes
+
+	modifiers = {
+		tolerance_own = 1
+		tolerance_heathen = -2
+		tolerance_heretic = -2
+		global_missionary_strength = 0.02
+		prestige = 1
+	}
+	government_abilities = {
+		emp_of_light_point_mechanic
+	}
+}
+
 indian_jewish_reform = {
 	icon = "indian_sultanate"
 	allow_normal_conversion = yes
