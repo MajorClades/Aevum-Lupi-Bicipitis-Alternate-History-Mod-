@@ -8,21 +8,33 @@ country_decisions = {
 		}
 		provinces_to_highlight = {
 			OR = {
-					region = west_india_region
-					region = hindusthan_region
-								}
+				area = sind_sagar_area
+				area = lahore_area
+				area = sirhind_area
+				province_id = 578
+			}
 			NOT = { owned_by = ROOT }
 		}
 		 allow = {
-            is_free_or_tributary_trigger = yes
+			NOT = { exists = MHP }
+            OR = {
+				is_free_or_tributary_trigger = yes
+				is_subject_of_type = light_empire_vassal #let you form it as Lohawar
+			}
+			adm_tech = 10
 			is_at_war = no
             num_of_owned_provinces_with = {
-				value = 30
+				value = 10
 				OR = {
-					region = west_india_region
-					region = hindusthan_region
+					area = sind_sagar_area
+					area = lahore_area
+					area = sirhind_area
+					province_id = 578
 				}
 			}
+			owns_core_province = 507 #urban center
+			owns_core_province = 578 #Eastern fort
+			owns_core_province = 510 #make you fight Prabuddh
         }
 		effect = {
 			change_tag = MHP #Mahapanjab
