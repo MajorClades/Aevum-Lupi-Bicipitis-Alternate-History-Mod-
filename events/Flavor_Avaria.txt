@@ -494,3 +494,104 @@ country_event = {
 		}
 	}
 }
+
+country_event = {
+	id = avaria.12
+	title = avaria.12.t
+	desc = avaria.12.d
+	picture = muslimgfx_RAMADAN_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = avaria.12a
+		ai_chance = {
+			factor = 75
+		}
+		add_opinion = {
+			who = DA3
+			modifier = expelled_limes
+		}
+	}
+	option = {
+		name = avaria.12b
+		ai_chance = {
+			factor = 25
+		}
+		change_government = theocracy
+		add_government_reform = caliphate_theocracy_reform
+		if = {
+			limit = {
+				dynasty = "Bayanid"
+			}
+			override_country_name = BAYANIDCALIPHATE
+		}
+		else_if = {
+			limit = {
+				dynasty = "Buqid"
+			}
+			override_country_name = BUQIDCALIPHATE
+		}
+		else_if = {
+			limit = {
+				dynasty = "Borid"
+			}
+			override_country_name = BORIDCALIPHATE
+		}
+		else_if = {
+			limit = {
+				dynasty = "Toghonid"
+			}
+			override_country_name = TOGHONIDCALIPHATE
+		}
+		else_if = {
+			limit = {
+				dynasty = "Tyeodorid"
+			}
+			override_country_name = TYEODORIDCALIPHATE
+		}
+		else_if = {
+			limit = {
+				dynasty = "Isaakid"
+			}
+			override_country_name = ISAAKIDCALIPHATE
+		}
+		else_if = {
+			limit = {
+				dynasty = "Abrakhamid"
+			}
+			override_country_name = ABRAHAMICALIPHATE
+		}
+		else_if = {
+			limit = {
+				dynasty = "Kandikid"
+			}
+			override_country_name = KANIDKIDCALIPHATE
+		}
+		else = {
+			if = {
+				limit = {
+					culture = avars_new
+				}
+				override_country_name = AVARCALIPHATE
+			}
+			else = {
+				override_country_name = DANUBIANCALIPHATE
+			}
+		}
+		add_historical_rival = RU0
+		RU0 - {
+			add_opinion = {
+				who = DA3
+				modifier = avr_false_caliph
+			}
+		}
+		palestine_area = {
+			add_permanent_claim = ROOT
+		}
+		385 = {
+			add_permanent_claim = ROOT
+		}
+		384 = {
+			add_permanent_claim = ROOT
+		}
+	}
+}
