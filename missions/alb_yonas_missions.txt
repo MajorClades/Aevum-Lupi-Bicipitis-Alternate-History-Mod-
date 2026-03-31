@@ -1563,12 +1563,45 @@ mt_yonasgencontcont_4 = {
 	}
 	
 	yon_fostered_friendship = {
-		icon = mission_rb_egyptian_authority
+		icon = mission_diplomatic_relation
 		position = 14
 		required_missions = { }
 		provinces_to_highlight = { }
-		trigger = { has_had_golden_age = yes } #placeholder
-		effect = { }
+		trigger = {
+			OR = {
+				calc_true_if = {
+					amount = 3
+					all_country = {
+						has_opinion = {
+							who = ROOT
+							value = 150
+						}
+						alliance_with = ROOT
+					}
+				}
+				full_idea_group = diplomatic_ideas
+			}
+		}
+		effect = {
+			add_dip_power = 100
+			custom_tooltip = empty_line_tt
+			custom_tooltip = yon_wdubally15trust_tt
+			hidden_effect = {
+				every_ally = {
+					limit = {
+						has_opinion = {
+							who = ROOT
+							value = 150
+						}
+					}
+					add_trust = {
+						who = ROOT
+						value = 15
+						mutual = yes
+					}
+				}
+			}
+		}
 	}
 
 	great_serene_sea = {
@@ -1790,9 +1823,25 @@ mt_yonasgencontcont_5 = {
 		required_missions = {
 			yon_odyssey
 		}
-		provinces_to_highlight = { }
-		trigger = { has_had_golden_age = yes } #placeholder
-		effect = { }
+		provinces_to_highlight = {
+			region = balkan_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = { 
+			balkan_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = { 
+			#there will be an event here
+			add_country_modifier = {
+				name = "yon_homeland"
+				duration = -1
+			}
+		}
 	}
 
 	yon_heralding_heroism = {
@@ -1800,8 +1849,14 @@ mt_yonasgencontcont_5 = {
 		position = 14
 		required_missions = { }
 		provinces_to_highlight = { }
-		trigger = { has_had_golden_age = yes } #placeholder
-		effect = { }
+		trigger = {num_of_trusted_allies = 2 } 
+		effect = {
+			add_country_modifier = {
+				name = "yon_heroism_surge"
+				duration = 10950
+			}
+			add_prestige_or_monarch_power = { amount = 10 }
+		}
 	}
 
 	yon_call_of_champion = {
@@ -1811,8 +1866,36 @@ mt_yonasgencontcont_5 = {
 			yon_fostered_friendship yon_heralding_heroism
 		}
 		provinces_to_highlight = { }
-		trigger = { has_had_golden_age = yes } #placeholder
-		effect = { }
+		trigger = { 
+		OR = {
+			num_of_battles = { amount = 12 }
+			custom_trigger_tooltip = {
+				tooltip = yon_won_against_great_power
+				any_country = {
+					is_great_power = yes
+					ROOT = {
+						has_won_war_against = {
+							who = PREV
+						}
+					}
+				}
+			}
+			}
+		}
+		effect = {
+			add_power_projection = {
+				type = 10_permanent_power_projection
+				amount = 10
+			}
+			add_prestige_or_monarch_power = {
+				amount = 50
+			}
+			add_country_modifier = {
+				name = "yon_call_of_champion" #dip bonus for war n stuff
+				duration = -1
+			}
+			change_mil = 1
+		}
 	}
 
 	yon_theseus_trustworthiness = {
@@ -1822,7 +1905,13 @@ mt_yonasgencontcont_5 = {
 			yon_call_of_champion
 		}
 		provinces_to_highlight = { }
-		trigger = { has_had_golden_age = yes } #placeholder
-		effect = { }
+		trigger = {num_of_trusted_allies = 4 } 
+		effect = {
+			country_event_with_insight = {
+				id = yonaraja.6 #land or navy bonus
+				insight_tooltip = YON_LAND_OR_NAVY_BONUS_TT
+			}
+			change_mil = 1
+		}
 	}
 }
