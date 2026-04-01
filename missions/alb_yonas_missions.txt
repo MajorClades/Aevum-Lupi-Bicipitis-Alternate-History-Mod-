@@ -199,8 +199,18 @@ mt_yonasgencontcont_1 = {
 		position = 14
 		required_missions = { }
 		provinces_to_highlight = { }
-		trigger = { has_had_golden_age = yes } #placeholder
-		effect = { }
+		trigger = { num_of_hussars = 25 }
+		effect = {
+			capital_scope = { add_or_upgrade_manpower_building = yes } 
+			add_country_modifier = {
+				name = "leo_war_training"
+				duration = 7300
+			}
+			add_country_modifier = {
+				name = "leo_war_foot"
+				duration = -1
+			}
+		}
 	}
 
 	yon_endless_auxilaries = {
@@ -1780,8 +1790,18 @@ mt_yonasgencontcont_5 = {
 			yon_prepare_the_host
 		}
 		provinces_to_highlight = { }
-		trigger = { has_had_golden_age = yes } #placeholder
-		effect = { }
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = { value = 29 superregion = persia_superregion }
+		}
+		effect = { 
+		caucasia_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
 	}
 
 	yon_usurp_atropatene = {
@@ -1790,9 +1810,41 @@ mt_yonasgencontcont_5 = {
 		required_missions = {
 			yon_march_through_persia
 		}
-		provinces_to_highlight = { }
-		trigger = { has_had_golden_age = yes } #placeholder
-		effect = { }
+		provinces_to_highlight = {
+			region = caucasia_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = { 
+			caucasia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = { 
+			mesopotamia_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			arabia_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			mashriq_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
 	}
 
 	yon_gulf_of_iskandar = {
@@ -1801,9 +1853,39 @@ mt_yonasgencontcont_5 = {
 		required_missions = {
 			yon_usurp_atropatene
 		}
-		provinces_to_highlight = { }
-		trigger = { has_had_golden_age = yes } #placeholder
-		effect = { }
+		provinces_to_highlight = {
+		OR = {
+			region = mesopotamia_region
+			region = arabia_region
+			region = mashriq_region
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = { 
+			mesopotamia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			arabia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			mashriq_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = { 
+			balkan_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
 	}
 
 	yon_odyssey = {
@@ -1812,9 +1894,27 @@ mt_yonasgencontcont_5 = {
 		required_missions = {
 			yon_gulf_of_iskandar
 		}
-		provinces_to_highlight = { }
-		trigger = { has_had_golden_age = yes } #placeholder
-		effect = { }
+		provinces_to_highlight = {
+			region = anatolia_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = { 
+			anatolia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = { 
+			balkan_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
 	}
 
 	yon_home_thought_lost = {
