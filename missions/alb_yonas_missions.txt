@@ -156,9 +156,43 @@ mt_yonasgencontcont_1 = {
 		required_missions = {
 			yon_kongo_exchange
 		}
-		provinces_to_highlight = { }
-		trigger = { has_had_golden_age = yes } #placeholder
-		effect = { }
+		provinces_to_highlight = { 
+			superregion = africa_superregion
+			not = { country_or_non_sovereign_subject_holds = root }
+		}
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 20
+				superregion = africa_superregion
+			}
+		}
+		effect = {  
+			custom_tooltip = alb_siddi_culture_spread_slowly_tt
+			set_country_flag = alb_yon_hellenize_africa_flag
+			add_years_of_owned_provinces_manpower = {
+				years = 10
+				trigger = { 
+					superregion = africa_superregion
+				}
+				custom_tooltip = FROM_AFRICAN_PROVINCES
+			}
+			custom_tooltip = empty_line_tt
+			add_country_modifier = {
+				name = yon_siddification
+				duration = 18250
+			}
+			sahel_region = { discover_country = ROOT }
+			if = {
+					limit = { BJ1 = { exists = no }  }
+			country_event_with_insight = {
+				id = yonaraja.7 #Spawn Dakuya from wasteland
+				insight_tooltip = YON_SPAWN_DAKUYA_TT
+			}
+				}
+				else = {
+					BJ1 = { country_event = { id = yonaraja.8 } }
+				}
+		}
 	}
 
 	yon_aryanization_experiment = {
@@ -167,9 +201,55 @@ mt_yonasgencontcont_1 = {
 		required_missions = {
 			yon_uplift_libyan
 		}
-		provinces_to_highlight = { }
-		trigger = { has_had_golden_age = yes } #placeholder
-		effect = { }
+		provinces_to_highlight = { 
+			superregion = africa_superregion
+			country_or_non_sovereign_subject_holds = root
+			not = { culture = siddi }
+		}
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 30
+				superregion = africa_superregion
+				culture = siddi
+			}
+		}
+		effect = {  
+			custom_tooltip = CHANGE_PERSIAN_TO_PARSI
+			hidden_effect = {
+				every_owned_province = {
+					limit = { culture = persian } 
+					change_culture = parsi
+				}
+				every_owned_province = {
+					limit = { culture = luri } 
+					change_culture = parsi
+				}
+				every_owned_province = {
+					limit = { culture = khorasani } 
+					change_culture = parsi
+				}
+				every_owned_province = {
+					limit = { culture = baluchi } 
+					change_culture = yonas
+				}
+				every_owned_province = {
+					limit = { culture = kushana } 
+					change_culture = yonas
+				}
+				every_owned_province = {
+					limit = { culture = kurdish } 
+					change_culture = yunani
+				}
+				every_owned_province = {
+					limit = { culture = mazandarani } 
+					change_culture = yunani
+				}
+				every_owned_province = {
+					limit = { culture = iraqiya } 
+					change_culture = yunani
+				}
+			}
+		}
 	}
 
 	yon_blossoming_budh = {
@@ -178,8 +258,16 @@ mt_yonasgencontcont_1 = {
 		required_missions = {
 			yon_aryanization_experiment
 		}
-		provinces_to_highlight = { }
-		trigger = { has_had_golden_age = yes } #placeholder
+		provinces_to_highlight = { 
+			country_or_non_sovereign_subject_holds = root
+			NOR = { culture_group = western_aryan culture = dakuyan culture = yunani }
+		}
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 200
+				OR = { culture_group = western_aryan culture = dakuyan culture = yunani }
+			}
+		}
 		effect = { }
 	}
 
