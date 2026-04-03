@@ -373,7 +373,7 @@ Persia_alb_4_slot = {
 			add_years_of_income = 2
 			add_country_modifier = {
 				name = "pers_seize_the_silk_road"
-				duration = -1
+				duration = 18250
 			}
 		}
 	}
@@ -437,6 +437,7 @@ Persia_alb_5_slot = {
 		effect = {
 			central_asia_region = { add_permanent_claim = ROOT } 
 			west_india_region = { add_permanent_claim = ROOT } 
+			hindusthan_region = { add_permanent_claim = ROOT } 
 			unlock_estate_privilege = {
 				estate_privilege = estate_burghers_great_works_of_iran
 				modifier_tooltip = estate_burghers_great_works_of_iran_tooltip
@@ -461,9 +462,12 @@ Persia_alb_5_slot = {
 		}
 
 		trigger = {
-			west_india_region = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 25
+				OR = {
+					region = west_india_region
+					region = hindusthan_region
+				}
 			}
 		}
 
