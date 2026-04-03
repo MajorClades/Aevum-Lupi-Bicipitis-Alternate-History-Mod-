@@ -29,8 +29,8 @@ LEO_1_slot = {
 		trigger = {
 			is_at_war = no
 			OR = {
-				grown_by_development = 25
-				num_of_subjects = 6
+				grown_by_development = 100
+				num_of_subjects = 9
 			}
 		}
 
@@ -290,7 +290,7 @@ LEO_3_slot = {
 			tooltip = { add_yearly_manpower = 2 } 
 			hidden_effect = {
 				if = {
-					limit = { NOT = { num_of_owned_provinces_with = { value = 17 }  }  } 
+					limit = { NOT = { num_of_owned_provinces_with = { value = 11 }  }  } 
 					add_yearly_manpower = 2
 				}
 			}
@@ -323,6 +323,16 @@ LEO_3_slot = {
 					add_years_of_income = 1
 				}
 			}
+			custom_tooltip = empty_line_tt
+			hindusthan_region = {
+				add_permanent_claim = ROOT
+			}
+			west_india_region = {
+				add_permanent_claim = ROOT
+			}
+			bengal_region = {
+				add_permanent_claim = ROOT
+			}
 		}
 	}
 
@@ -336,15 +346,23 @@ LEO_3_slot = {
 			OR = {
 				num_of_provinces_owned_or_owned_by_subjects_with = {
 					value = 100
-					superregion = india_superregion
+					OR = {
+						region = bengal_region
+						region = hindusthan_region
+						region = west_india_region
+					}
 				}
 				has_reform = light_empire_united_government
 			}
 		}
 
 		effect = {
-			custom_tooltip = LEO_TT_4
-			hidden_effect = { asia = { add_permanent_claim = ROOT }  } 
+			india_superregion = {
+				add_permanent_claim = ROOT
+			}
+			east_indies_superregion = {
+				add_permanent_claim = ROOT
+			}
 		}
 	}
 
