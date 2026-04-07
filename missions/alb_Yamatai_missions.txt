@@ -90,20 +90,12 @@ Yamatai_1_slot = {
 		provinces_to_highlight = { province_id = 1020 } 
 
 		trigger = {
-			1020 = {
-				has_tax_building_trigger = yes
-			}
-			1020 = { 
-				development = 30 
-			}
-			1020 = {
-				has_production_building_trigger = yes
-			}
+			1020 = { has_tax_building_trigger = yes } 
+			1020 = { development = 30 } 
+			1020 = { has_production_building_trigger = yes } 
 			japan_region = {
 				owned_by = ROOT
-				NOT ={
-					local_autonomy = 10
-				}
+				NOT = { local_autonomy = 10 } 
 			}
 		}
 
@@ -114,7 +106,7 @@ Yamatai_1_slot = {
 					tier = 1
 				}
 				add_province_modifier = {
-					name = yam_city_of_kyoto
+					name = "yam_city_of_kyoto"
 					duration = -1
 				}
 			}
@@ -132,9 +124,7 @@ Yamatai_1_slot = {
 
 		trigger = {
 			any_country = {
-				capital_scope = {
-					continent = europe
-				}
+				capital_scope = { continent = europe } 
 				alliance_with = ROOT
 				has_opinion = {
 					who = ROOT
@@ -160,22 +150,6 @@ Yamatai_1_slot = {
 			}
 		}
 	}
-
-	yam_makau_my_way = {
-		icon = mng_jing_hang_grand_canal
-		position = 11
-		required_missions = { yam_starting_position } 
-		provinces_to_highlight = { province_id = 668 } 
-
-		trigger = { 668 = { country_or_non_sovereign_subject_holds = ROOT }  } 
-
-		effect = {
-			668 = {
-				add_or_upgrade_dock_building = yes
-				add_or_upgrade_trade_building = yes
-			}
-		}
-	}
 }
 Yamatai_2_slot = {
 	slot = 2
@@ -188,12 +162,10 @@ Yamatai_2_slot = {
 		icon = mission_asian_city
 		position = 2
 		required_missions = { yam_navy } 
-		provinces_to_highlight = { 
-			province_id = 2106 
-			NOT ={
-				
-			}
-		} 
+		provinces_to_highlight = {
+			province_id = 2106
+			NOT = {  } 
+		}
 
 		trigger = {
 			num_of_light_ship = 12
@@ -201,7 +173,6 @@ Yamatai_2_slot = {
 				owns_or_non_sovereign_subject_of = 2106
 				owns_or_non_sovereign_subject_of = 4185
 			}
-
 		}
 
 		effect = {
@@ -331,24 +302,20 @@ Yamatai_2_slot = {
 		}
 	}
 
-	yam_the_panyupaya = {
-		icon = mission_invade_island
-		position = 12
-		required_missions = { yam_starting_position } 
-		provinces_to_highlight = {
-			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
-			development = 10
-		}
+	yam_mandate_of_naval_supremacy = {
+		icon = mission_to_china
+		position = 9
+		provinces_to_highlight = {  } 
 
 		trigger = {
-			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-				value = 15
-				superregion = east_indies_superregion
-				development = 10
-			}
+			government_rank = 3
+			navy_size = 50
 		}
 
-		effect = {  } 
+		effect = {
+			custom_tooltip = YAMATAI_TT_6a
+			set_country_flag = destroy_china_flag
+		}
 	}
 }
 Yamatai_3_slot = {
@@ -400,23 +367,38 @@ Yamatai_3_slot = {
 
 		effect = {
 			random_owned_province = {
-				limit = { base_production = 5 has_port = yes } 
+				limit = {
+					base_production = 5
+					has_port = yes
+				}
 				add_or_upgrade_dock_building = yes
 			}
 			random_owned_province = {
-				limit = { base_production = 5 has_port = yes } 
+				limit = {
+					base_production = 5
+					has_port = yes
+				}
 				add_or_upgrade_dock_building = yes
 			}
 			random_owned_province = {
-				limit = { base_production = 5 has_port = yes } 
+				limit = {
+					base_production = 5
+					has_port = yes
+				}
 				add_or_upgrade_dock_building = yes
 			}
 			random_owned_province = {
-				limit = { base_production = 5 has_port = yes } 
+				limit = {
+					base_production = 5
+					has_port = yes
+				}
 				add_or_upgrade_dock_building = yes
 			}
 			random_owned_province = {
-				limit = { base_production = 5 has_port = yes } 
+				limit = {
+					base_production = 5
+					has_port = yes
+				}
 				add_or_upgrade_dock_building = yes
 			}
 		}
@@ -553,48 +535,6 @@ Yamatai_3_slot = {
 			}
 		}
 	}
-
-	yam_mandate_of_naval_supremacy = {
-		icon = mission_to_china
-		position = 9
-		provinces_to_highlight = {  } 
-
-		trigger = {
-			government_rank = 3
-			navy_size = 50
-		}
-
-		effect = {
-			custom_tooltip = YAMATAI_TT_6a
-			set_country_flag = destroy_china_flag
-		}
-	}
-
-	yam_plunder_and_oppress = {
-		icon = mission_war_chest
-		position = 10
-		required_missions = { yam_mandate_of_naval_supremacy } 
-		provinces_to_highlight = {  } 
-
-		trigger = {
-			OR = {
-				is_emperor_of_china = yes
-				any_war_enemy_country = { is_emperor_of_china = yes } 
-				calc_true_if = {
-					amount = 20
-					all_province = {
-						superregion = china_superregion
-						OR = {
-							country_or_non_sovereign_subject_holds = ROOT
-							controlled_by = ROOT
-						}
-					}
-				}
-			}
-		}
-
-		effect = { country_event = { id = yamat.19 }  } 
-	}
 }
 Yamatai_4_slot = {
 	slot = 4
@@ -705,7 +645,7 @@ Yamatai_4_slot = {
 				custom_tooltip = yam_from_manufactories_tt
 			}
 			add_country_modifier = {
-				name = yam_opening_up_to_trade
+				name = "yam_opening_up_to_trade"
 				duration = 18250
 			}
 		}
@@ -736,30 +676,15 @@ Yamatai_4_slot = {
 		}
 	}
 
-	yam_chinese_opposition = {
-		icon = jap_fate_mandate
-		position = 10
-		required_missions = { yam_mandate_of_naval_supremacy } 
-		provinces_to_highlight = {
-			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
-			OR = {
-				region = south_china_region
-				region = north_china_region
-			}
-		}
+	yam_digging_for_gold = {
+		icon = mission_rb_colonise_spice_islands
+		position = 9
+		required_missions = { yam_keep_the_sun_shine } 
+		provinces_to_highlight = {  } 
 
-		trigger = {
-			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-				value = 10
-				OR = {
-					region = south_china_region
-					region = north_china_region
-				}
-				has_port = yes
-			}
-		}
+		trigger = {  } 
 
-		effect = { country_event = { id = yamat.18 }  } 
+		effect = {  } 
 	}
 }
 Yamatai_5_slot = {
@@ -867,9 +792,20 @@ Yamatai_5_slot = {
 		}
 
 		trigger = {
-			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-				value = 4
-				area = northern_polynesia_area
+			if = {
+				limit = {
+					ai = no
+				}
+				num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+					value = 4
+					area = northern_polynesia_area
+				}
+			}
+			else = {  #AI is dumb
+				num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+					value = 1
+					area = northern_polynesia_area
+				}
 			}
 		}
 
@@ -920,49 +856,50 @@ Yamatai_5_slot = {
 		}
 	}
 
-	yam_mandate_of_heaven = {
-		icon = mng_heavens_will
-		position = 11
-		required_missions = { yam_chinese_opposition } 
-		provinces_to_highlight = {
+	yam_edict_of_transportation = {
+		icon = mission_rb_colonise_spice_islands
+		position = 9
+		required_missions = { yam_sunrise_colony } 
+		provinces_to_highlight = {  
 			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
-			superregion = china_superregion
-		}
+			colonial_region = colonial_california
+		} 
 
-		trigger = {
-			OR = {
-				num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-					value = 50
-					superregion = china_superregion
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 10
+				colonial_region = colonial_california
+			}
+			4637 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			government_reform_progress = 100
+			estate_loyalty = {
+				estate = estate_nobles
+				loyalty = 60
+			}
+		} 
+
+		effect = {  
+			#some estate privilege - ICE reference
+			hidden_effect = {
+				country_event = {
+					id = yamat.21
+					days = 400
+					random = 100
 				}
-				is_emperor_of_china = yes
 			}
-		}
+		} 
+	}
 
-		effect = {
-			simple_dynamic_effect = {
-				first_custom_tooltip = YAMATAI_TT_9a
-				first_limit = "
-					is_emperor_of_china = no
-				"
-				first_effect = "
-					dismantle_empire_of_china = yes
-					add_country_modifier = {
-						name = yam_higher_than_heaven
-						duration = -1
-					}
-				"
-				second_custom_tooltip = YAMATAI_TT_9b
-				second_limit = "
-					is_emperor_of_china = yes
-				"
-				second_effect = "
-					add_country_modifier = {
-						name = yam_conqueror_of_heaven_2
-						duration = -1
-					}
-				"
-			}
-		}
+	yam_harmonious_coast = {
+		icon = mission_rb_colonise_spice_islands
+		position = 10
+		required_missions = { yam_edict_of_transportation } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
 	}
 }

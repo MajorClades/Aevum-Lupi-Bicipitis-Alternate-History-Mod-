@@ -13,12 +13,12 @@ country_event = {
 	}
 	immediate = {
 		hidden_effect = {
-			if = { 
-				limit = {ai = no}
-				KM5 = {
-					override_country_name = EZO_NAME
-				}
-			}
+			#if = { 
+			#	limit = {ai = no}
+			#	KM5 = {
+			#		override_country_name = EZO_NAME
+			#	}
+			#}
 			manchuria_region = {
 				discover_country = KM5
 				discover_country = KM6
@@ -268,10 +268,7 @@ country_event = {
 		custom_tooltip = YAMATAI_TT_2a
 		KM5 = {
 			custom_tooltip = YAMATAI_TT_2b
-			random_owned_province = {
-				limit = {
-					culture_group = japanese_g
-				}
+			tooltip = {
 				add_province_modifier = {
 					name = nihon_revolt_lv_3
 					duration = -1
@@ -298,9 +295,16 @@ country_event = {
 			tag = KM6
 		}
 		custom_tooltip = YAMATAI_TT_2a
-			KM6 = {
-				custom_tooltip = YAMATAI_TT_2c
-				random_owned_province = {
+		KM6 = {
+			custom_tooltip = YAMATAI_TT_2c
+			tooltip = {
+				add_province_modifier = {
+					name = nihon_revolt_lv_3
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
 					limit = {
 						culture_group = kamchatkan_g
 					}
@@ -309,20 +313,14 @@ country_event = {
 						duration = -1
 					}
 				}
-				hidden_effect = {
-					every_owned_province = {
-						limit = {
-							culture_group = kamchatkan_g
-						}
-						add_province_modifier = {
-							name = nihon_revolt_lv_3
-							duration = -1
-						}
-					}
-					remove_government_reform = kingdom_of_yamatai_reform
-					add_government_reform = kingdom_of_yamatai_reform
+				remove_government_reform = kingdom_of_yamatai_reform
+				add_government_reform = kingdom_of_yamatai_reform
+				country_event = {
+					id = yamat.19
+					days = 2000
 				}
 			}
+		}
 	}
 }
 
@@ -344,7 +342,13 @@ country_event = {
 				add_government_reform = feudalism_reform
 			}
 			change_religion = shinto
+			change_primary_culture = ROOT
 			override_country_name = SHOGUN_AINU
+			define_ruler = {
+				culture = ROOT
+				religion = ROOT
+				mil = 5
+			}
 		}
 	}
 	option = {
@@ -484,26 +488,25 @@ country_event = {
 		random_subject_country = {
 			limit = {
 				is_colonial_nation = yes
+				capital_scope = {
+					OR = {
+						colonial_region = colonial_alaska
+						colonial_region = colonial_california
+					}
+				}
 			}
-			random_owned_province = {
-				change_culture = jeju
-				add_base_manpower = 1
-			}
-			random_owned_province = {
-				change_culture = jeju
-				add_base_manpower = 1
-			}
-			random_owned_province = {
-				change_culture = jeju
-				add_base_manpower = 1
-			}
-			random_owned_province = {
-				change_culture = jeju
-				add_base_manpower = 1
-			}
-			random_owned_province = {
-				change_culture = jeju
-				add_base_manpower = 1
+			custom_tooltip = YAMATAI_TT_18
+			hidden_effect = {
+				for = {
+					amount = 10
+					effect = "
+						random_owned_province = {
+							limit = { NOT = { development = 25 } }
+							change_culture = jeju
+							add_random_development = 1
+						}
+					"
+				}
 			}
 		}
 	}
@@ -750,56 +753,48 @@ country_event = { #kill China
 	id = yamat.19
 	title = yamat.19.t
 	desc = yamat.19.d
-	picture = CITY_VIEW_eventPicture
+	picture = SHIP_SAILING_eventPicture
 	is_triggered_only = yes
-	option = {
-		name = yamat.19a
-		if = {
-			limit = {
-				is_emperor_of_china = yes
+	fire_only_once = yes
+	immediate = {
+		hidden_effect = {
+			set_country_flag = expelled_iwasam_flag
+			974 = {
+				cede_province = DT0
+				add_core = DT0
+				change_religion = kamuyramat
+				change_culture = ainu
+				add_base_manpower = 1
+				add_base_production = 2
+				add_base_tax = 2
+				change_trade_goods = fish
 			}
-			every_country = {
-				limit = {
-					capital_scope = {
-						superregion = china_superregion
-					}
+			DT0 = {
+				change_religion = kamuyramat
+				change_primary_culture = ainu
+				add_government_reform = nw_ainu_reform
+				capital_scope = {
+					infantry = DT0
 				}
-				reverse_add_aggressive_expansion = {
-					who = ROOT
-					value = 5
-					apply_calc = no
+				add_country_modifier = {
+					name = dt_new_world_explorer
+					duration = 9125
 				}
-			}
-		}else = {
-			every_country = {
-				limit = {
-					capital_scope = {
-						superregion = china_superregion
-					}
-				}
-				reverse_add_aggressive_expansion = {
-					who = ROOT
-					value = 10
-					apply_calc = no
+				add_country_modifier = {
+					name = dt_new_world_settler
+					duration = -1
 				}
 			}
 		}
-		add_years_of_income = 3
+	}
+	option = {
+		name = yamat.19a
+		custom_tooltip = IWASAM_TT_0
 	}
 	option = {
 		name = yamat.19b
-		every_country = {
-			limit = {
-				capital_scope = {
-					superregion = china_superregion
-				}
-			}
-			reverse_add_aggressive_expansion = {
-				who = ROOT
-				value = -5
-				apply_calc = no
-			}
-		}
+		switch_tag = DT0
+		custom_tooltip = IWASAM_TT_1
 	}
 }
 country_event = { #god of war
@@ -827,6 +822,65 @@ country_event = { #god of war
 	option = {
 		name = yamat.20b
 		add_mil_tech = 1
+	}
+}
+country_event = { #kill China
+	id = yamat.21
+	title = yamat.21.t
+	desc = yamat.21.d
+	picture = SHIP_SAILING_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		set_country_flag = expelled_iwasam_flag
+		hidden_effect = {
+			random_province = {
+				limit = {
+					OR = {
+						area = sonora_area
+						area = arizona_area
+					}
+					is_city = no
+				}
+				save_event_target_as = dt1_spawn_prov
+			}
+			event_target:dt1_spawn_prov = {
+				cede_province = DT0
+				add_core = DT0
+				change_religion = musok
+				change_culture = jeju
+				add_base_manpower = 1
+				add_base_production = 2
+				add_base_tax = 2
+				change_trade_goods = fish
+			}
+			DT1 = {
+				change_religion = musok
+				change_primary_culture = jeju
+				add_government_reform = oligarchy_reform
+				set_capital = event_target:dt1_spawn_prov
+				capital_scope = {
+					infantry = DT1
+				}
+				add_country_modifier = {
+					name = dt_new_world_explorer
+					duration = 9125
+				}
+				add_country_modifier = {
+					name = dt_new_world_settler
+					duration = -1
+				}
+			}
+		}
+	}
+	option = {
+		name = yamat.21a
+		custom_tooltip = IWASAM_TT_0
+	}
+	option = {
+		name = yamat.21b
+		switch_tag = DT0
+		custom_tooltip = IWASAM_TT_1
 	}
 }
 country_event = {

@@ -3,8 +3,27 @@ country_decisions = {
 	gangavi_nation = {
 		major = yes
 		potential = {
+			normal_or_historical_nations = yes
+			was_never_end_game_tag_trigger = yes
 			NOT = { has_country_flag = formed_gangavi_flag }
-			primary_culture = gangavi
+            NOT = { tag = BNG }
+			culture = gangavi
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			OR = {
+				is_free_or_tributary_trigger = yes
+				ai = no
+			}
+			is_colonial_nation = no
+			OR = {
+				is_former_colonial_nation = no
+				AND = {
+					is_former_colonial_nation = yes
+					ai = no
+				}
+			}
 		}
 		provinces_to_highlight = {
 			OR = {
