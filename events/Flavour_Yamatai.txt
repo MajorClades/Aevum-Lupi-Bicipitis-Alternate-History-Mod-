@@ -586,7 +586,8 @@ country_event = {
 	option = {
 		name = yamat.13e
 		1997 = {
-			add_colonysize = 500
+			cede_province = ROOT
+			add_core = ROOT
 		}
 		northern_polynesia_area = {
 			add_permanent_claim = ROOT
@@ -651,7 +652,7 @@ country_event = {
 	}
 }
 
-country_event = { #buy macau
+country_event = { #emperors or no
 	id = yamat.16
 	title = yamat.16.t
 	desc = yamat.16.d
@@ -659,97 +660,48 @@ country_event = { #buy macau
 	is_triggered_only = yes
 	option = {
 		name = yamat.16a
-		add_years_of_income = -1
-		668 = {
-			owner = {
-				country_event = {
-					id = yamat.17
-				}
-			}
-		}
+		set_country_flag = km6_chugoku_release
+		custom_tooltip = YAMATAI_TT_20
 	}
 	option = {
 		name = yamat.16b
-		668 = {
-			add_permanent_claim = ROOT
-		}
+		set_country_flag = km6_yang_dynasty_aspirations
+		custom_tooltip = YAMATAI_TT_19
 	}
 }
 
-country_event = { #buy macau
+country_event = { #proclaim yang dynasty
 	id = yamat.17
 	title = yamat.17.t
 	desc = yamat.17.d
-	picture = CITY_VIEW_eventPicture
+	picture = CHINESE_GENERAL_eventPicture
 	is_triggered_only = yes
 	option = {
 		name = yamat.17a
-		add_years_of_income = 2
-		668 = {
-			remove_core = ROOT
-			add_core = KM6
-			cede_province = KM6
-		}
-	}
-	option = {
-		name = yamat.17b
-		668 = {
-			add_permanent_claim = KM6
-		}
+		
 	}
 }
 
-country_event = { #kill China
+country_event = { #confucian?
 	id = yamat.18
 	title = yamat.18.t
 	desc = yamat.18.d
-	picture = CITY_VIEW_eventPicture
+	picture = confucianism_RELIGION_eventPicture
 	is_triggered_only = yes
 	option = {
 		name = yamat.18a
-		custom_tooltip = YAMATAI_TT_8
-		hidden_effect = {
-			every_owned_province = {
-				limit = {
-					superregion = china_superregion
-				}
-				if = {
-					limit = {
-						is_core = owner
-					}
-					add_core = WA0
-				}
-				cede_province = WA0
-			}
-			every_subject_country = {
-				every_owned_province = {
-					limit = {
-						superregion = china_superregion
-					}
-					if = {
-						limit = {
-							is_core = owner
-						}
-						add_core = WA0
-					}
-					cede_province = WA0
-				}
-			}
-		}
-		vassalize = WA0
-		china_superregion = {
-			add_permanent_claim = WA0
-		}
+		change_religion = confucianism
+		add_harmonized_religion = jingtianfazu
+		add_harmonized_religion = daoism
+		add_harmonized_religion = shinto
 	}
 	option = {
 		name = yamat.18b
-		add_country_modifier = {
-			name = yam_conqueror_of_heaven
-			duration = 10950
-		}
+		add_church_power = 100
+		add_stability = 1
 	}
 }
-country_event = { #kill China
+country_event = { #iwasam
 	id = yamat.19
 	title = yamat.19.t
 	desc = yamat.19.d

@@ -352,4 +352,76 @@ country_decisions = {
 			factor = 10
 		}
 	}
+
+	alb_yang_dynasty_nation = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			was_never_end_game_tag_trigger = yes
+			NOT = { has_country_flag = formed_yang_flag }
+			tag = KM6
+			has_country_flag = km6_yang_dynasty_aspirations
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			OR = {
+				is_free_or_tributary_trigger = yes
+				ai = no
+			}
+			is_colonial_nation = no
+			OR = {
+				is_former_colonial_nation = no
+				AND = {
+					is_former_colonial_nation = yes
+					ai = no
+				}
+			}
+		}
+		provinces_to_highlight = {
+			superregion = china_superregion
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		allow = {
+			is_free_or_tributary_trigger = yes
+			is_at_war = no
+			owns_core_province = 1816
+			owns_core_province = 1821
+			owns_core_province = 667
+			OR = {
+				is_emperor_of_china = yes
+				NOT = {
+					any_country = {		
+						is_emperor_of_china = yes
+					}
+				}
+			}
+			num_of_owned_provinces_with = {
+				value = 30
+				superregion = china_superregion
+			}
+		}
+		effect = {
+			override_country_name = YANG_DYNASTY
+			remove_non_electors_emperors_from_empire_effect = yes
+			china_superregion = {
+				limit = {
+					NOT = { owned_by = ROOT }
+				}
+				add_permanent_claim = KM6
+			}
+			add_prestige = 20
+			set_country_flag = formed_yang_flag
+			if = {
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
 }

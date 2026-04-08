@@ -150,6 +150,96 @@ Yamatai_1_slot = {
 			}
 		}
 	}
+
+	yam_lord_of_north = {
+		icon = mng_thirteen_provinces
+		position = 11
+		required_missions = { yam_starting_position } 
+		provinces_to_highlight = {
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+			region = north_china_region
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 25
+				region = north_china_region
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = yam_defeated_huaxia
+				duration = -1
+			}
+			custom_tooltip = empty_line_tt
+			hidden_effect = {
+				if = {
+					limit = { has_country_flag = km6_chugoku_release }
+					every_owned_province = {
+						limit = { region = north_china_region }
+						if = {
+							limit = { is_core = owner }
+							add_core = WA1
+						}
+						cede_province = WA1
+					}
+					every_subject_country = {
+						every_owned_province = {
+							limit = { region = north_china_region }
+							if = {
+								limit = { is_core = owner }
+								add_core = WA1
+							}
+							cede_province = WA1
+						}
+					}
+					vassalize = WA1
+					WA1 = {
+						change_religion = ROOT
+						add_liberty_desire = -150
+					}
+				} else_if = {
+					limit = { has_country_flag = km6_yang_dynasty_aspirations }
+					add_mil_power = 100
+					country_event = {
+						id = yamat.18
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = km6_chugoku_release
+				}
+				custom_tooltip = YAMATAI_TT_21a_yes
+			}
+			else = { 
+				custom_tooltip = YAMATAI_TT_21a_no
+			}
+			custom_tooltip = YAMATAI_TT_8b
+			tooltip = {
+				vassalize = WA1
+				WA1 = {
+					change_religion = ROOT
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = km6_yang_dynasty_aspirations
+				}
+				custom_tooltip = YAMATAI_TT_21b_yes
+			}
+			else = { 
+				custom_tooltip = YAMATAI_TT_21b_no
+			}
+			tooltip = {
+				add_mil_power = 100
+				country_event = {
+					id = yamat.18
+				}
+			}
+		}
+	}
 }
 Yamatai_2_slot = {
 	slot = 2
@@ -279,29 +369,6 @@ Yamatai_2_slot = {
 		}
 	}
 
-	yam_starting_position = {
-		icon = mng_thirteen_provinces
-		position = 10
-		required_missions = { yam_mandate_of_naval_supremacy } 
-		provinces_to_highlight = {
-			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
-			area = taiwan_area
-		}
-
-		trigger = {
-			taiwan_area = {
-				type = all
-				country_or_non_sovereign_subject_holds = ROOT
-			}
-		}
-
-		effect = {
-			country_event = { id = yamat.16 } 
-			custom_tooltip = YAMATAI_TT_6b
-			set_country_flag = destroy_philip_flag
-		}
-	}
-
 	yam_mandate_of_naval_supremacy = {
 		icon = mission_to_china
 		position = 9
@@ -317,6 +384,136 @@ Yamatai_2_slot = {
 			set_country_flag = destroy_china_flag
 		}
 	}
+
+	yam_starting_position = {
+		icon = mng_thirteen_provinces
+		position = 10
+		required_missions = { yam_mandate_of_naval_supremacy } 
+		provinces_to_highlight = {
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+			superregion = china_superregion
+			has_port = yes
+		}
+
+		trigger = {
+			taiwan_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 8
+				superregion = china_superregion
+				has_port = yes
+			}
+		}
+
+		effect = {
+			country_event = { id = yamat.16 } 
+			custom_tooltip = YAMATAI_TT_6b
+			set_country_flag = destroy_philip_flag
+		}
+	}
+
+	yam_lord_of_south = {
+		icon = mng_thirteen_provinces
+		position = 11
+		required_missions = { yam_starting_position } 
+		provinces_to_highlight = {
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+			region = south_china_region
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 25
+				region = south_china_region
+			}
+		}
+
+		effect = {
+			add_years_of_trade_income = {
+				years = 6
+				custom_tooltip = ME_add_6_years_of_trade_income
+			}
+			custom_tooltip = empty_line_tt
+			hidden_effect = {
+				if = {
+					limit = { has_country_flag = km6_chugoku_release }
+					every_owned_province = {
+						limit = {
+							region = south_china_region 
+							NOT = { area = taiwan_area }
+						}
+						if = {
+							limit = { is_core = owner }
+							add_core = WA0
+						}
+						cede_province = WA0
+					}
+					every_subject_country = {
+						every_owned_province = {
+							limit = {
+								region = south_china_region 
+								NOT = { area = taiwan_area }
+							}
+							if = {
+								limit = { is_core = owner }
+								add_core = WA0
+							}
+							cede_province = WA0
+						}
+					}
+					vassalize = WA0
+					WA0 = {
+						change_religion = ROOT
+						add_liberty_desire = -150
+					}
+				} else_if = {
+					limit = { has_country_flag = km6_yang_dynasty_aspirations }
+					every_owned_province = {
+					limit = {
+						culture = vietnamese
+					}
+					change_culture = yelang
+					}
+					every_owned_province = {
+						limit = {
+							culture = new_cantonese
+						}
+						change_culture = hakka
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = km6_chugoku_release
+				}
+				custom_tooltip = YAMATAI_TT_21a_yes
+			}
+			else = { 
+				custom_tooltip = YAMATAI_TT_21a_no
+			}
+			custom_tooltip = YAMATAI_TT_8a
+			tooltip = {
+				vassalize = WA0
+				WA0 = {
+					change_religion = ROOT
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = km6_yang_dynasty_aspirations
+				}
+				custom_tooltip = YAMATAI_TT_21b_yes
+			}
+			else = { 
+				custom_tooltip = YAMATAI_TT_21b_no
+			}
+			custom_tooltip = AYABANI_TT_20
+			custom_tooltip = AYABANI_TT_21
+		}
+	}
+
 }
 Yamatai_3_slot = {
 	slot = 3
@@ -680,11 +877,39 @@ Yamatai_4_slot = {
 		icon = mission_rb_colonise_spice_islands
 		position = 9
 		required_missions = { yam_keep_the_sun_shine } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+			colonial_region = colonial_alaska
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 10
+				colonial_region = colonial_alaska
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			custom_tooltip = YAMATAI_TT_7d
+			tooltip = {
+				add_country_modifier = {
+					name = "alaska_model_colony"
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				every_subject_country = {
+					limit = {
+						is_colonial_nation_of = ROOT
+						capital_scope = { colonial_region = colonial_alaska } 
+					}
+					add_country_modifier = {
+						name = "alaska_model_colony"
+						duration = -1
+					}
+				}
+			}
+		} 
 	}
 }
 Yamatai_5_slot = {
@@ -842,7 +1067,7 @@ Yamatai_5_slot = {
 				}
 			}
 			hidden_effect = {
-				random_subject_country = {
+				every_subject_country = {
 					limit = {
 						is_colonial_nation_of = ROOT
 						capital_scope = { colonial_region = colonial_california } 
@@ -890,16 +1115,5 @@ Yamatai_5_slot = {
 				}
 			}
 		} 
-	}
-
-	yam_harmonious_coast = {
-		icon = mission_rb_colonise_spice_islands
-		position = 10
-		required_missions = { yam_edict_of_transportation } 
-		provinces_to_highlight = {  } 
-
-		trigger = {  } 
-
-		effect = {  } 
 	}
 }
