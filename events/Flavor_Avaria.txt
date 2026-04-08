@@ -188,7 +188,7 @@ country_event = {
 		}
 		add_opinion = {
 			who = DA3
-			modifier = expelled_gepids
+			modifier = avr_expelled_gepids
 		}
 	}
 }
@@ -293,38 +293,15 @@ country_event = {
 	id = avaria.7
 	title = avaria.7.t
 	desc = avaria.7.d
-	picture = event_pictures_EUROPEAN/FORT_eventPicture
+	picture = FORT_eventPicture
 	is_triggered_only = yes
 	option = {
 		name = avaria.7a
-		add_accepted_culture = dacian
-		1953 = {
-			
-
-		}
-		hidden_effect = {
-			if = {
-				limit = {
-					culture = avars
-				}
-				4127 = {
-					change_culture = avars
-				}
-				157 = {
-					change_culture = avars
-				}
-			}
-			else_if = {
-				limit = {
-					culture = avars_new
-				}
-				4127 = {
-					change_culture = avars_new
-				}
-				157 = {
-					change_culture = avars_new
-				}
-			}
+		custom_tooltip = AVAR_TT_11
+		add_treasury = -100
+		set_country_flag = avarcastle
+		4128 = {
+			add_province_triggered_modifier = avr_castle
 		}
 	}
 	option = {
@@ -333,36 +310,11 @@ country_event = {
 			type = bran_castle
 		}
 		set_global_flag = castlegone
-		hidden_effect = {
-			4128 = {
-				remove_loot = {
-					who = ROOT
-					amount = 5
-				}
-			}
-			if = {
-				limit = {
-					culture = avars
-				}
-				4127 = {
-					change_culture = avars
-				}
-				157 = {
-					change_culture = avars
-				}
-			}
-			else_if = {
-				limit = {
-					culture = avars_new
-				}
-				4127 = {
-					change_culture = avars_new
-				}
-				157 = {
-					change_culture = avars_new
-				}
-			}
-		}
+		add_treasury = 250
+	}
+	option = {
+		name = avaria.7c
+		custom_tooltip = AVAR_TT_12
 	}
 }
 
@@ -437,7 +389,7 @@ country_event = {
 		name = avaria.9a
 		add_opinion = {
 			who = GR2
-			modifier = gave_land_danube
+			modifier = avr_gave_land_danube
 		}
 	}
 }
@@ -453,7 +405,7 @@ country_event = {
 		name = avaria.10a
 		add_opinion = {
 			who = GR2
-			modifier = not_gave_land_danube
+			modifier = avr_not_gave_land_danube
 		}
 		austria_proper_area = {
 			add_permanent_claim = ROOT
@@ -490,7 +442,7 @@ country_event = {
 		}
 		add_opinion = {
 			who = DA3
-			modifier = expelled_limes
+			modifier = avr_expelled_limes
 		}
 	}
 }
@@ -506,9 +458,8 @@ country_event = {
 		ai_chance = {
 			factor = 75
 		}
-		add_opinion = {
-			who = DA3
-			modifier = expelled_limes
+		add_country_modifier = {
+			name = avr_humble
 		}
 	}
 	option = {
@@ -578,12 +529,6 @@ country_event = {
 			}
 		}
 		add_historical_rival = RU0
-		RU0 - {
-			add_opinion = {
-				who = DA3
-				modifier = avr_false_caliph
-			}
-		}
 		palestine_area = {
 			add_permanent_claim = ROOT
 		}
@@ -593,5 +538,277 @@ country_event = {
 		384 = {
 			add_permanent_claim = ROOT
 		}
+		hidden_effect = {
+			event_target:islam_caliph_target = {
+				country_event = {
+					id = avaria.13
+				}
+			}
+		}
 	}
+}
+
+country_event = {
+	id = avaria.13
+	title = avaria.13.t
+	desc = avaria.13.d
+	picture = BYZ_BAD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = avaria.13a
+		add_opinion = {
+			who = DA3
+			modifier = avr_false_caliph
+		}
+	}	
+}
+
+country_event = {
+	id = avaria.14
+	title = avaria.14.t
+	desc = avaria.14.d
+	picture = SIEGE_PRAGUE_CASTLE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = avaria.14a
+		custom_tooltip = AVAR_TT_10
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						area = bohemia_area
+						area = moravia_area
+						area = erzgebirge_area
+					}
+				}
+				add_province_triggered_modifier = avr_blessed
+			}
+		}
+		set_country_flag = blessed
+	}
+	option = {
+		name = avaria.14b
+		custom_tooltip = AVAR_TT_9
+		266 = {
+			add_province_triggered_modifier = avr_mgrr
+			set_base_tax = 1
+			set_base_production = 1
+			set_base_manpower = 1
+			remove_loot = {
+   				who = ROOT
+    			amount = 5
+			}
+			add_devastation = 100
+			}
+		hidden_effect = {
+			set_country_flag = notreallyallthatblessed
+			every_country = {
+				limit = {
+					knows_country = DA3
+				}
+				add_aggressive_expansion = {
+					who = DA3
+					value = 10
+					apply_calc = yes
+				}
+			}
+		}
+	}	
+}
+
+country_event = {
+	id = avaria.15
+	title = avaria.15.t
+	desc = avaria.15.d
+	picture = muslimgfx_EXPLORERS_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = avaria.15a
+		2410 = {
+			change_culture = avars
+			add_building = shipyard
+			change_religion = ROOT
+		}
+		2447 = {
+			change_culture = avars
+			change_religion = ROOT
+		}
+		5016 = {
+			change_culture = avars
+			change_religion = ROOT
+		}
+		add_country_modifier = {
+			name = avr_navy
+			duration = 9125
+		}
+	}
+	option = {
+		name = avaria.15b
+		custom_tooltip = AVAR_TT_18
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					region = crimea_region
+				}
+				cede_province = SM0
+				add_core = SM0
+				remove_core = ROOT
+			}
+			create_march = SM0
+			284 = {
+				change_religion = ROOT
+			}
+			285 = {
+				change_religion = ROOT
+			}
+			1974 = {
+				change_religion = ROOT
+			}
+		}
+	}	
+	option = {
+		name = avaria.15c
+		custom_tooltip = AVAR_TT_19
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					region = crimea_region
+				}
+				cede_province = DA7
+				add_core = DA7
+				remove_core = ROOT
+			}
+			2410 = {
+				change_culture = khazar
+				change_religion = ROOT
+			}
+			285 = {
+				change_religion = ROOT
+				change_culture = khazar
+			}
+			284 = {
+				change_religion = ROOT
+				change_culture = khazar
+			}
+			1974 = {
+				change_religion = ROOT
+				change_culture = khazar
+			}
+			create_march = DA7
+			DA7 = {
+				override_country_name = HAZARLAR
+				change_religion = ROOT
+			}
+		}
+	}	
+	option = {
+		name = avaria.15d
+		custom_tooltip = AVAR_TT_20
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					region = crimea_region
+				}
+				cede_province = ML1
+				add_core = ML1
+				remove_core = ROOT
+			}
+			2410 = {
+				change_culture = greek_new
+				change_religion = ROOT
+			}
+			285 = {
+				change_culture = greek_new
+				change_religion = ROOT
+			}
+			2447 = {
+				change_religion = ROOT
+			}
+			5016 = {
+				change_religion = ROOT
+			}
+			create_march = ML1
+			ML1 = {
+				override_country_name = BOSPORI
+				change_religion = ROOT
+			}
+		}
+	}	
+	option = {
+		name = avaria.15e
+		custom_tooltip = AVAR_TT_21
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					region = crimea_region
+				}
+				cede_province = RA0
+				add_core = RA0
+				remove_core = ROOT
+			}
+			2406 = {
+				change_culture = antian
+				change_religion = ROOT
+			}
+			283 = {
+				change_culture = antian
+				change_religion = ROOT
+			}
+			1974 = {
+				change_culture = antian
+				change_religion = ROOT
+			}
+			4983 = {
+				change_religion = ROOT
+			}
+			282 = {
+				change_religion = ROOT
+			}
+			create_march = RA0
+			RA0 = {
+				override_country_name = UKRAINE
+				change_religion = ROOT
+			}
+		}
+	}	
+}
+
+province_event = { #avarization shamelessly stolen from justagirl thank you justagirl (and Clades too thank you Clades)
+    id = avaria.21
+    title = avaria.21.t
+    desc = avaria.21.d
+    picture = COSSACK_ESTATE_eventPicture
+	hidden = yes
+
+	trigger = {
+		region = crimea_region
+		owner = { has_country_flag = avarstsiedlung }
+		NOT = {
+			culture = avars_new
+		}
+		religion = ROOT
+	}
+    mean_time_to_happen = {
+        months = 300
+		modifier = {
+			factor = 0.75
+			development = 15
+		}
+		modifier = {
+			factor = 0.75
+			development = 20
+		}
+		modifier = {
+			factor = 0.75
+			development = 25
+		}
+		modifier = {
+			factor = 0.75
+			development = 30
+		}
+    }
+    option = {
+        name = avaria.21a
+        change_culture = avars_new
+    }
 }
