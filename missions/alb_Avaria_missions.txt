@@ -181,6 +181,126 @@ Avaria_1_slot = {
 			}
 		}
 	}
+	avr_nerd = {
+		icon = mission_early_modern_university
+		position = 5
+		required_missions = { 
+            
+        } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+		}
+		trigger = {
+			university = 5
+			innovativeness = 30
+			is_institution_enabled = enlightenment
+		}
+		effect = {
+			capital_scope {
+				add_institution_embracement = {
+   					which = enlightenment
+    				value = 50
+				}
+			}
+			add_country_modifier = {
+				name = avr_nerds
+				duration = 7300
+			}
+		}
+	}
+	avr_assr = {
+		icon = french_revolution
+		position = 6
+		required_missions = { 
+            avr_nerd
+        } 
+		provinces_to_highlight = {
+			
+		}
+		trigger = {
+			current_age = age_of_revolutions
+			OR = {
+				AND = {
+					custom_trigger_tooltip = {
+						tooltip = AVAR_TT_27
+						has_country_flag = had_revolution
+					}
+					is_revolutionary = yes
+				}
+				AND = {
+						custom_trigger_tooltip = {
+						tooltip = AVAR_TT_27
+						has_country_flag = had_revolution
+					}
+					is_revolutionary = no
+				}
+				AND = {
+					custom_trigger_tooltip = {
+						tooltip = AVAR_TT_28
+						had_global_flag = {
+							flag = first_revolution_center_spawned
+							days = 10950
+						}
+						revolution_target_exists = no
+					}
+				}
+			}
+		}
+		effect = {
+			complex_dynamic_effect = {
+				first_custom_tooltip = AVAR_TT_23
+				first_limit = "
+					AND = {
+						has_country_flag = had_revolution
+						is_revolutionary = yes
+					}
+				"
+				first_effect = "
+					add_country_modifier = {
+						name = avr_revolution
+						duration = -1
+					}
+					set_revolution_target = ROOT
+					add_revolutionary_zeal = 20
+				"
+				second_custom_tooltip = AVAR_TT_24
+				second_limit = "
+					AND = {
+						has_country_flag = had_revolution
+						is_revolutionary = no
+					}
+				"
+				second_effect = "
+					add_country_modifier = {
+						name = avr_reaction
+						duration = -1
+					}
+					custom_tooltip = AVAR_TT_25
+					hidden_effect = {
+						every_owned_province = {
+							remove_revolution_from_province_effect = yes
+						}
+					}
+				"
+				third_custom_tooltip = AVAR_TT_26
+				third_limit = "
+					AND = {
+						had_global_flag = {
+							flag = first_revolution_center_spawned
+							days = 10950
+						}
+						revolution_target_exists = no
+					}
+				"
+				third_effect = "
+					add_country_modifier = {
+						name = avr_winner
+						duration = -1
+					}
+				"
+			}
+		}
+	}
 }
 Avaria_2_slot = {
 	slot = 2
@@ -729,9 +849,10 @@ Avaria_5_slot = {
 	}
 	avr_mare = {
 		icon = mission_lit_harness_steppes
-		position = 4
+		position = 5
 		required_missions = { 
             avr_idk
+			avr_legacy
         } 
 		provinces_to_highlight = {
 			or = {
@@ -780,6 +901,7 @@ Avaria_5_slot = {
 				"
 				second_custom_tooltip = AVAR_TT_16
 				second_limit = "
+					has_country_flag = legacylame
 					culture = avars
 				"
 				second_effect = "
@@ -787,126 +909,6 @@ Avaria_5_slot = {
 					custom_tooltip = AVAR_TT_17
 					crimea_region = {
 						add_permanent_claim = ROOT
-					}
-				"
-			}
-		}
-	}
-	avr_nerd = {
-		icon = mission_early_modern_university
-		position = 5
-		required_missions = { 
-            
-        } 
-		provinces_to_highlight = {
-			owned_by = ROOT
-		}
-		trigger = {
-			university = 5
-			innovativeness = 30
-			is_institution_enabled = enlightenment
-		}
-		effect = {
-			capital_scope {
-				add_institution_embracement = {
-   					which = enlightenment
-    				value = 50
-				}
-			}
-			add_country_modifier = {
-				name = avr_nerds
-				duration = 7300
-			}
-		}
-	}
-	avr_assr = {
-		icon = french_revolution
-		position = 6
-		required_missions = { 
-            avr_nerd
-        } 
-		provinces_to_highlight = {
-			
-		}
-		trigger = {
-			current_age = age_of_revolutions
-			OR = {
-				AND = {
-					custom_trigger_tooltip = {
-						tooltip = AVAR_TT_27
-						has_country_flag = had_revolution
-					}
-					is_revolutionary = yes
-				}
-				AND = {
-						custom_trigger_tooltip = {
-						tooltip = AVAR_TT_27
-						has_country_flag = had_revolution
-					}
-					is_revolutionary = no
-				}
-				AND = {
-					custom_trigger_tooltip = {
-						tooltip = AVAR_TT_28
-						had_global_flag = {
-							flag = first_revolution_center_spawned
-							days = 10950
-						}
-						revolution_target_exists = no
-					}
-				}
-			}
-		}
-		effect = {
-			complex_dynamic_effect = {
-				first_custom_tooltip = AVAR_TT_23
-				first_limit = "
-					AND = {
-						has_country_flag = had_revolution
-						is_revolutionary = yes
-					}
-				"
-				first_effect = "
-					add_country_modifier = {
-						name = avr_revolution
-						duration = -1
-					}
-					set_revolution_target = ROOT
-					add_revolutionary_zeal = 20
-				"
-				second_custom_tooltip = AVAR_TT_24
-				second_limit = "
-					AND = {
-						has_country_flag = had_revolution
-						is_revolutionary = no
-					}
-				"
-				second_effect = "
-					add_country_modifier = {
-						name = avr_reaction
-						duration = -1
-					}
-					custom_tooltip = AVAR_TT_25
-					hidden_effect = {
-						every_owned_province = {
-							remove_revolution_from_province_effect = yes
-						}
-					}
-				"
-				third_custom_tooltip = AVAR_TT_26
-				third_limit = "
-					AND = {
-						had_global_flag = {
-							flag = first_revolution_center_spawned
-							days = 10950
-						}
-						revolution_target_exists = no
-					}
-				"
-				third_effect = "
-					add_country_modifier = {
-						name = avr_winner
-						duration = -1
 					}
 				"
 			}
