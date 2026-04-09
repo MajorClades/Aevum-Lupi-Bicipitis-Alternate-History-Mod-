@@ -268,7 +268,20 @@ mt_yonasgencontcont_1 = {
 				OR = { culture_group = western_aryan culture = dakuyan culture = yunani }
 			}
 		}
-		effect = { }
+		effect = { 
+		custom_tooltip = YON_CULTURE_CONVERT_CHEAP_20_YEARS
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+					NOT = { culture = yonas }
+					}
+					add_province_modifier = {
+								name = yon_culture_convert_boost
+								duration = 7300
+							}
+				}
+			}
+		}
 	}
 
 	yon_yonaka_rite = {
@@ -278,8 +291,25 @@ mt_yonasgencontcont_1 = {
 			yon_blossoming_budh
 		}
 		provinces_to_highlight = { }
-		trigger = { has_had_golden_age = yes } #placeholder
-		effect = { }
+		trigger = { 
+		num_of_states = 67
+		is_great_power = yes
+		}
+		effect = { 
+		custom_tooltip = more_cheaper_fervor_or_1000_splendors_tt
+				if = {
+					limit = {
+						religion = mazdakism
+					}
+				hidden_effect = {
+					set_country_flag = yon_cheaper_mazdakism_fervor
+					yon_update_fervor_effects = yes
+					}
+				}
+				else = {
+					add_splendor = 1000
+				}
+			}
 	}
 
 	yon_towering_beasts = {
@@ -308,8 +338,48 @@ mt_yonasgencontcont_1 = {
 			yon_towering_beasts yon_terrifying_formation
 		}
 		provinces_to_highlight = { }
-		trigger = { has_had_golden_age = yes } #placeholder
-		effect = { }
+		trigger = {  
+			army_size  = 250
+			years_of_manpower = 2
+		}
+		effect = { 
+			capital_scope = {
+				add_base_manpower = 3
+			}
+			custom_tooltip = YON_GAIN_1_BASE_MAN_FOR_5_YONAS_PROVINCE
+			hidden_effect = {
+				random_province = {
+					limit = {
+						culture = yonas
+					}
+					add_base_manpower = 1
+				}
+				random_province = {
+					limit = {
+						culture = yonas
+					}
+					add_base_manpower = 1
+				}
+				random_province = {
+					limit = {
+						culture = yonas
+					}
+					add_base_manpower = 1
+				}
+				random_province = {
+					limit = {
+						culture = yonas
+					}
+					add_base_manpower = 1
+				}
+				random_province = {
+					limit = {
+						culture = yonas
+					}
+					add_base_manpower = 1
+				}
+			}
+		}
 	}
 
 	yon_vacrapani_vitality = {
@@ -319,8 +389,18 @@ mt_yonasgencontcont_1 = {
 			yon_endless_auxilaries
 		}
 		provinces_to_highlight = { }
-		trigger = { has_had_golden_age = yes } #placeholder
-		effect = { }
+		trigger = {  
+			estate_loyalty = {
+				estate = estate_nobles
+				loyalty = 67
+			}
+			OR = {
+				has_mil_advisor_3 = yes
+				mil = 6
+			}
+			monthly_mil = 12
+		} 
+		effect = { country_event = { id = yonaraja.4 }}
 	}
 }
 mt_yonasgen_2 = {
