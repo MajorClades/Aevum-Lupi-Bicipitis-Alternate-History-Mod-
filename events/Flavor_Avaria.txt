@@ -12,6 +12,7 @@ country_event = {
 			factor = 1
 		}
 		custom_tooltip = AVAR_TT_1
+		set_country_flag = legacycool
         add_stability = -1
 		set_capital = 155
 		155 = {
@@ -37,6 +38,7 @@ country_event = {
 	}
 	option = {
 		name  = avaria.1b
+		set_country_flag = legacylame
         add_stability = 1
 	}
 }
@@ -165,11 +167,11 @@ country_event = {
 		name = avaria.4b
 		add_accepted_culture = gepid
 		define_advisor = {
-				type = commandant
-				cost_multiplier = 0.5
-				skill = 3
-				culture = gepid
-			}
+			type = commandant
+			cost_multiplier = 0.5
+			skill = 3
+			culture = gepid
+		}
 	}
 }
 
@@ -239,7 +241,7 @@ country_event = {
 		}
 		GR2 = {
 			country_event = {
-				id = avaria.10
+				id = avaria.11
 			}
 		}
 		hidden_effect = {
@@ -538,13 +540,11 @@ country_event = {
 		384 = {
 			add_permanent_claim = ROOT
 		}
-		hidden_effect = {
-			event_target:islam_caliph_target = {
-				country_event = {
-					id = avaria.13
-				}
+		event_target:islam_caliph_target = { # for trappist: pls fix I'm not smart enough to figure this out. thanks.
+			country_event = { 
+				id = avaria.13
 			}
-		}
+		}	
 	}
 }
 
@@ -773,21 +773,104 @@ country_event = {
 	}	
 }
 
+country_event = { # half sword beta
+	id = avaria.17
+	title = avaria.17.t
+	desc = avaria.17.d
+	picture = TOURNAMENT_eventPicture
+
+	fire_only_once = yes
+
+	trigger = {
+		is_year = 1475
+	}
+	mean_time_to_happen = {
+		months = 300
+	}
+	option = {
+		name = avaria.17a
+		country_event = {
+			id = avaria.22
+			days = 300
+		}
+		name = avaria.17b
+		add_manpower = -0.001
+	}	
+}
+
+country_event = { # avardam smith
+	id = avaria.18
+	title = avaria.18.t
+	desc = avaria.18.d
+	picture = ECONOMY_eventPicture
+
+	fire_only_once = yes
+
+	trigger = {
+		is_year = 1776
+		NOT = { is_year = 1790 }
+	}
+	mean_time_to_happen = {
+		months = 300
+	}
+	option = {
+		name = avaria.18a
+		add_prestige = 10
+		add_adm_power = 10
+		change_innovativeness = 1
+	}	
+}
+
+country_event = { #cutrigary
+	id = avaria.19
+	title = avaria.19.t
+	desc = avaria.19.d
+	picture = muslimgfx_BIG_BOOK_eventPicture
+
+	fire_only_once = yes
+
+	trigger = {
+		is_year = 1632
+		157 = {
+			owner = {
+				is_or_was_tag = DA3
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 300
+	}
+	option = {
+		name = avaria.19a
+		hidden_effect = {
+			157 = {
+				rename_capital = "Kent"
+				change_province_name = "Kent"	
+			}
+		}
+	}	
+}
+
 province_event = { #avarization shamelessly stolen from justagirl thank you justagirl (and Clades too thank you Clades)
-    id = avaria.21
-    title = avaria.21.t
-    desc = avaria.21.d
+    id = avaria.20
+    title = avaria.20.t
+    desc = avaria.20.d
     picture = COSSACK_ESTATE_eventPicture
+
 	hidden = yes
 
 	trigger = {
-		region = crimea_region
+		OR = {
+			region = crimea_region
+			area = moldavia_area
+		}
 		owner = { has_country_flag = avarstsiedlung }
 		NOT = {
 			culture = avars_new
 		}
 		religion = ROOT
 	}
+
     mean_time_to_happen = {
         months = 300
 		modifier = {
@@ -808,7 +891,47 @@ province_event = { #avarization shamelessly stolen from justagirl thank you just
 		}
     }
     option = {
-        name = avaria.21a
+        name = avaria.20a
         change_culture = avars_new
     }
+}
+
+country_event = { # sandwich
+	id = avaria.21
+	title = avaria.21.t
+	desc = avaria.21.d
+	picture = FEAST_eventPicture
+
+	fire_only_once = yes
+
+	trigger = {
+		AND = {
+			has_country_modifier = avr_dacia
+			has_country_modifier = avr_pannonia
+		}
+	}
+	mean_time_to_happen = {
+		months = 120
+	}
+	option = {
+		name = avaria.21a
+		add_stability = 1
+	}	
+}
+
+country_event = { # half sword early access
+	id = avaria.22
+	title = avaria.22.t
+	desc = avaria.22.d
+	picture = muslimgfx_TOURNAMENT_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = avaria.22a
+		define_advisor = {
+			type = commandant
+			name = "Villi Khagaselem"
+			cost_multiplier = 0.5
+			skill = 3
+		}
+	}	
 }
