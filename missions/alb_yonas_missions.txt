@@ -214,41 +214,7 @@ mt_yonasgencontcont_1 = {
 			}
 		}
 		effect = {  
-			custom_tooltip = CHANGE_PERSIAN_TO_PARSI
-			hidden_effect = {
-				every_owned_province = {
-					limit = { culture = persian } 
-					change_culture = parsi
-				}
-				every_owned_province = {
-					limit = { culture = luri } 
-					change_culture = parsi
-				}
-				every_owned_province = {
-					limit = { culture = khorasani } 
-					change_culture = parsi
-				}
-				every_owned_province = {
-					limit = { culture = baluchi } 
-					change_culture = yonas
-				}
-				every_owned_province = {
-					limit = { culture = kushana } 
-					change_culture = yonas
-				}
-				every_owned_province = {
-					limit = { culture = kurdish } 
-					change_culture = yunani
-				}
-				every_owned_province = {
-					limit = { culture = mazandarani } 
-					change_culture = yunani
-				}
-				every_owned_province = {
-					limit = { culture = iraqiya } 
-					change_culture = yunani
-				}
-			}
+			#moved to conquer persia mission (it makes more sense game-wise)
 		}
 	}
 
@@ -260,7 +226,13 @@ mt_yonasgencontcont_1 = {
 		}
 		provinces_to_highlight = { 
 			country_or_non_sovereign_subject_holds = root
-			NOR = { culture_group = western_aryan culture = dakuyan culture = yunani }
+			NOT = { 
+				OR = {
+					culture_group = western_aryan
+					culture = dakuyan
+					culture = yunani
+				}
+			}
 		}
 		trigger = {
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
@@ -665,9 +637,11 @@ mt_yonasgencontcont_2 = {
 		}
 		provinces_to_highlight = {
 			region = indonesia_region
-			NOR = {
-				country_or_non_sovereign_subject_holds = ROOT
-				is_empty = yes
+			NOT = {
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					is_empty = yes
+				}
 			}
 		}
 		trigger = { 
@@ -702,9 +676,11 @@ mt_yonasgencontcont_2 = {
 		}
 		provinces_to_highlight = {
 			region = moluccas_region
-			NOR = {
-				country_or_non_sovereign_subject_holds = ROOT
-				is_empty = yes
+			NOT = {
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					is_empty = yes
+				}
 			}
 		}
 		trigger = { 
@@ -1070,18 +1046,14 @@ mt_yonasgencontcont_3 = {
 		}
 		provinces_to_highlight = {
 			region = central_asia_region
-			NOR = {
+			NOT = {
 				country_or_non_sovereign_subject_holds = ROOT
-				is_empty = yes
 			}
 		}
 		trigger = { 
 			central_asia_region = {
 				type = all
-				OR = {
-					country_or_non_sovereign_subject_holds = ROOT
-					is_empty = yes
-				}
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 		effect = { 
@@ -1107,18 +1079,14 @@ mt_yonasgencontcont_3 = {
 		}
 		provinces_to_highlight = {
 			region = mongolia_region
-			NOR = {
+			NOT = {
 				country_or_non_sovereign_subject_holds = ROOT
-				is_empty = yes
 			}
 		}
 		trigger = { 
 			mongolia_region = {
 				type = all
-				OR = {
-					country_or_non_sovereign_subject_holds = ROOT
-					is_empty = yes
-				}
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 		effect = { 
@@ -1144,18 +1112,14 @@ mt_yonasgencontcont_3 = {
 		}
 		provinces_to_highlight = {
 			region = korea_region
-			NOR = {
+			NOT = {
 				country_or_non_sovereign_subject_holds = ROOT
-				is_empty = yes
 			}
 		}
 		trigger = { 
 			korea_region = {
 				type = all
-				OR = {
-					country_or_non_sovereign_subject_holds = ROOT
-					is_empty = yes
-				}
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 		effect = {
@@ -1178,13 +1142,13 @@ mt_yonasgencontcont_3 = {
 				has_institution = new_world_i
 				has_idea = quest_for_the_new_world
 			}
-			share_of_starting_income = 2
+			share_of_starting_income = 10
 			is_in_deficit = no
 			is_bankrupt = no
 		}
 		effect = {
 			create_explorer = {
-				tradition = 67
+				tradition = 70
 			}
 			define_advisor = {
 				type = navigator
@@ -1206,9 +1170,11 @@ mt_yonasgencontcont_3 = {
 		}
 		provinces_to_highlight = {
 			area = kamchatka_area
-			NOR = {
-				country_or_non_sovereign_subject_holds = ROOT
-				is_empty = yes
+			NOT = {
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					is_empty = yes
+				}
 			}
 		}
 		trigger = { 
@@ -1239,7 +1205,7 @@ mt_yonasgencontcont_3 = {
 				every_province = {
 					limit = {
 						is_empty = yes
-						OR = { area = kolyma_area area = okhotsk_area }
+						OR = { area = kolyma_area area = okhotsk_area area = kamchatka_area }
 					}
 					add_siberian_construction = 500
 				}
@@ -1266,7 +1232,16 @@ mt_yonasgencontcont_3 = {
 		trigger = {
 			custom_trigger_tooltip = {
 				tooltip = miss_discover_western_america
-				OR = { colonial_region = colonial_mexico colonial_region = colonial_california colonial_region = colonial_jamesland colonial_region = colonial_peru colonial_region = colonial_la_plata }
+				any_province = {
+					OR = { 
+						colonial_region = colonial_mexico 
+						colonial_region = colonial_california 
+						colonial_region = colonial_jamesland 
+						colonial_region = colonial_peru 
+						colonial_region = colonial_la_plata 
+					}
+					has_discovered = ROOT
+				}
 			}
 		}	
 		effect = {
@@ -1570,18 +1545,14 @@ mt_yonasgencontcont_4 = {
 		}
 		provinces_to_highlight = {
 			region = bengal_region
-			NOR = {
+			NOT = {
 				country_or_non_sovereign_subject_holds = ROOT
-				is_empty = yes
 			}
 		}
 		trigger = { 
 			bengal_region = {
 				type = all
-				OR = {
-					country_or_non_sovereign_subject_holds = ROOT
-					is_empty = yes
-				}
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 		effect = { 
@@ -1607,18 +1578,14 @@ mt_yonasgencontcont_4 = {
 		}
 		provinces_to_highlight = {
 			region = burma_region
-			NOR = {
+			NOT = {
 				country_or_non_sovereign_subject_holds = ROOT
-				is_empty = yes
 			}
 		}
 		trigger = { 
 			burma_region = {
 				type = all
-				OR = {
-					country_or_non_sovereign_subject_holds = ROOT
-					is_empty = yes
-				}
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 		effect = { 
@@ -1644,18 +1611,14 @@ mt_yonasgencontcont_4 = {
 		}
 		provinces_to_highlight = {
 			region = indo_china_region
-			NOR = {
+			NOT = {
 				country_or_non_sovereign_subject_holds = ROOT
-				is_empty = yes
 			}
 		}
 		trigger = { 
 			indo_china_region = {
 				type = all
-				OR = {
-					country_or_non_sovereign_subject_holds = ROOT
-					is_empty = yes
-				}
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 		effect = { 
@@ -1681,18 +1644,14 @@ mt_yonasgencontcont_4 = {
 		}
 		provinces_to_highlight = {
 			region = xinan_region
-			NOR = {
+			NOT = {
 				country_or_non_sovereign_subject_holds = ROOT
-				is_empty = yes
 			}
 		}
 		trigger = { 
 			xinan_region = {
 				type = all
-				OR = {
-					country_or_non_sovereign_subject_holds = ROOT
-					is_empty = yes
-				}
+				country_or_non_sovereign_subject_holds = ROOT
 			}
 		}
 		effect = { 
@@ -1718,9 +1677,11 @@ mt_yonasgencontcont_4 = {
 		}
 		provinces_to_highlight = {
 			superregion = china_superregion
-			NOR = {
-				country_or_non_sovereign_subject_holds = ROOT
-				is_empty = yes
+			NOT = {
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					is_empty = yes
+				}
 			}
 		}
 		trigger = { 
@@ -1752,7 +1713,7 @@ mt_yonasgencontcont_4 = {
 					all_country = {
 						has_opinion = {
 							who = ROOT
-							value = 150
+							value = 170
 						}
 						alliance_with = ROOT
 					}
@@ -1761,7 +1722,7 @@ mt_yonasgencontcont_4 = {
 			}
 		}
 		effect = {
-			add_dip_power = 100
+			add_dip_power = 200
 			custom_tooltip = empty_line_tt
 			custom_tooltip = yon_wdubally15trust_tt
 			hidden_effect = {
@@ -1790,7 +1751,9 @@ mt_yonasgencontcont_4 = {
 		}
 		provinces_to_highlight = {
 			region = oceanea_region
-			country_or_non_sovereign_subject_holds = ROOT
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
 		}
 		trigger = { 
 			num_of_owned_provinces_with = { region = oceanea_region value = 10 }
@@ -1957,17 +1920,29 @@ mt_yonasgencontcont_5 = {
 		required_missions = {
 			yon_prepare_the_host
 		}
-		provinces_to_highlight = { }
+		provinces_to_highlight = { 
+			superregion = persia_superregion
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
 		trigger = {
-			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = { value = 29 superregion = persia_superregion }
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = { value = 30 superregion = persia_superregion }
 		}
 		effect = { 
-		caucasia_region = {
+			caucasia_region = {
 				limit = {
 					NOT = { is_core = ROOT }
 					NOT = { is_permanent_claim = ROOT }
 				}
 				add_permanent_claim = ROOT
+			}
+			custom_tooltip = CHANGE_PERSIAN_TO_PARSI
+			hidden_effect = {
+				every_owned_province = {
+					limit = { culture_group = iranian } 
+					change_culture = parsi
+				}
 			}
 		}
 	}

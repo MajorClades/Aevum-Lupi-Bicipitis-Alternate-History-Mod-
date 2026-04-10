@@ -84,6 +84,7 @@ Avaria_1_slot = {
     			trade_goods = gold
     			value = 0.1
     			duration = 10950
+				key = "Avar Goldsmithing"
 			}
 		}
 	} 
@@ -105,41 +106,39 @@ Avaria_1_slot = {
 					is_hegemon_of_type = economic_hegemon
 					custom_trigger_tooltip = {
 						tooltip = AVAR_TT_13
-						production_leader = {
-							OR = {
-								trade_goods = grain
-								trade_goods = wine
-								trade_goods = wool
-								trade_goods = cloth
-								trade_goods = fish
-								trade_goods = fur
-								trade_goods = salt
-								trade_goods = naval_supplies
-								trade_goods = copper
-								trade_goods = gold
-								trade_goods = iron
-								trade_goods = slaves
-								trade_goods = ivory
-								trade_goods = tea
-								trade_goods = chinaware
-								trade_goods = spices
-								trade_goods = coffee
-								trade_goods = cotton
-								trade_goods = sugar
-								trade_goods = tobacco
-								trade_goods = cocoa
-								trade_goods = silk
-								trade_goods = dyes
-								trade_goods = tropical_wood
-								trade_goods = livestock
-								trade_goods = incense
-								trade_goods = glass
-								trade_goods = paper
-								trade_goods = gems
-								trade_goods = coal
-								trade_goods = cloves
+						OR = {
+							production_leader = { trade_goods = ivory }
+							production_leader = { trade_goods = grain }
+							production_leader = { trade_goods = wine }
+							production_leader = { trade_goods = wool }
+							production_leader = { trade_goods = cloth }
+							production_leader = { trade_goods = fish }
+							production_leader = { trade_goods = fur }
+							production_leader = { trade_goods = salt }
+							production_leader = { trade_goods = naval_supplies }
+							production_leader = { trade_goods = copper }
+							production_leader = { trade_goods = gold }
+							production_leader = { trade_goods = iron }
+							production_leader = { trade_goods = slaves }
+							production_leader = { trade_goods = tea }
+							production_leader = { trade_goods = chinaware }
+							production_leader = { trade_goods = spices }
+							production_leader = { trade_goods = coffee }
+							production_leader = { trade_goods = cotton }
+							production_leader = { trade_goods = sugar }
+							production_leader = { trade_goods = tobacco }
+							production_leader = { trade_goods = cocoa }
+							production_leader = { trade_goods = silk }
+							production_leader = { trade_goods = dyes }
+							production_leader = { trade_goods = tropical_wood }
+							production_leader = { trade_goods = livestock }
+							production_leader = { trade_goods = incense }
+							production_leader = { trade_goods = glass }
+							production_leader = { trade_goods = paper }
+							production_leader = { trade_goods = gems }
+							production_leader = { trade_goods = coal }
+							production_leader = { trade_goods = cloves }
 							}
-						}
 					}
 				}
 		}
@@ -196,7 +195,7 @@ Avaria_1_slot = {
 			is_institution_enabled = enlightenment
 		}
 		effect = {
-			capital_scope {
+			capital_scope = {
 				add_institution_embracement = {
    					which = enlightenment
     				value = 50
@@ -621,6 +620,9 @@ Avaria_3_slot = {
 					}
 					country_event = { id = avaria.12 }
 				}
+				hidden_effect = {
+					complete_mission = avr_place #needed so you can't do it twice
+				}
 			}
 		}
 	}
@@ -695,6 +697,7 @@ Avaria_4_slot = {
 			}
 			add_country_modifier = {
 				name = avr_bosp
+				duration = -1
 			}
 			if = {
 				limit = {
@@ -905,12 +908,23 @@ Avaria_5_slot = {
 					culture = avars
 				"
 				second_effect = "
-					country_event = { id = avaria.15 }
+					tooltip = {
+					 	country_event = { id = avaria.15 }
+					}
 					custom_tooltip = AVAR_TT_17
 					crimea_region = {
 						add_permanent_claim = ROOT
 					}
 				"
+			}
+			hidden_effect = {
+				if = { #stupid dynamic effect doesnt work
+					limit = {
+						has_country_flag = legacylame
+						culture = avars
+					}
+					country_event = { id = avaria.15 }
+				}
 			}
 		}
 	}
