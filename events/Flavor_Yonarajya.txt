@@ -248,28 +248,16 @@ country_event = {
 	
 	immediate = {
 		hidden_effect = {
-			1326 = { change_province_name = "Saha Sea" }
-			if = {
-				limit = {
-					NOT = {
-						capital_scope = {
-							area = astrakhan_area
-						}
-					}
-				}
 				every_owned_province = {
 					limit = {
-						area = astrakhan_area
+						area = darfur_central_sahara_area
 					}
-					add_core = YA0
+					add_core = BJ1
 				}
-				release = YA0
+				release = BJ1
 				BJ1 = {
-					change_government = tribal
-					add_government_reform = steppe_horde
+					change_government = ROOT
 					define_ruler = {
-						name  = Tygyn
-						dynasty = Darkhan
 						adm = 4 
 						dip = 3
 						mil = 6
@@ -300,7 +288,6 @@ country_event = {
 				}
 			}
 		}
-	}
 	option = {
 		name = yonaraja.7a #Create Dakuyan
 			vassalize = BJ1
@@ -391,6 +378,30 @@ country_event = {
 			name = yo0_bonus_conquer
 			duration = -1
 		}
+	}
+	
+}
+
+country_event = {
+	id = yonaraja.10
+	title = yonaraja.10.t
+	desc = yonaraja.10.d
+	picture = muslimgfx_FEAST_eventPicture
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = yonaraja.10.a #Libyan love us so much they speak our languages
+		add_prestige = 30
+		every_known_country = {
+						limit = {
+							capital_scope = { continent = africa }
+						}
+						add_opinion = {
+							who = ROOT
+							modifier = yon_libyan_lingua_franca
+						}
+					}
 	}
 	
 }

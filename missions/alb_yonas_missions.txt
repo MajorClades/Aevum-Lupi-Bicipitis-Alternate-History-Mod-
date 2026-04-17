@@ -214,7 +214,10 @@ mt_yonasgencontcont_1 = {
 			}
 		}
 		effect = {  
-			#moved to conquer persia mission (it makes more sense game-wise)
+			country_event_with_insight = {
+				id = yonaraja.10
+				insight_tooltip = YON_GET_PRESTIGE_FOR_BECOMING_LINGUA_FRANCA_OF_EAST_LIBYAN_TT
+			}
 		}
 	}
 
@@ -738,8 +741,24 @@ mt_yonasgencontcont_2 = {
 		position = 14
 		required_missions = { }
 		provinces_to_highlight = { }
-		trigger = { has_had_golden_age = yes } #placeholder
-		effect = { }
+		trigger = {
+			army_tradition = 30
+			num_of_owned_provinces_with = {
+				value = 5
+				has_manpower_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_army_tradition = -20
+			add_country_modifier = {
+				name = "yon_strict_routines"
+				duration = 10950
+			}
+			add_country_modifier = {
+				name = "yon_uniformity_accomplished"
+				duration = -1
+			}
 	}
 
 	uncover_ulimaroa = {
