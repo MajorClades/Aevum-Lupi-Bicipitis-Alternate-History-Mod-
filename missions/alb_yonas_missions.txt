@@ -144,7 +144,6 @@ mt_yonasgencontcont_1 = {
 				name = "yon_arabic_coast_domination"
 				duration = 18250
 			}
-			custom_tooltip = empty_line_tt
 			custom_tooltip = yn0_decide_how_you_treat_kongo_tt
 			hidden_effect = { country_event = { id = yonaraja.3 } }
 		}
@@ -170,7 +169,7 @@ mt_yonasgencontcont_1 = {
 			custom_tooltip = alb_siddi_culture_spread_slowly_tt
 			set_country_flag = alb_yon_hellenize_africa_flag
 			add_years_of_owned_provinces_manpower = {
-				years = 10
+				years = 4
 				trigger = { 
 					superregion = africa_superregion
 				}
@@ -233,59 +232,52 @@ mt_yonasgencontcont_1 = {
 				OR = {
 					culture_group = western_aryan
 					culture = dakuyan
-					culture = yunani
+					culture = yonas
 				}
 			}
 		}
 		trigger = {
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
 				value = 200
-				OR = { culture_group = western_aryan culture = dakuyan culture = yunani }
+				OR = { culture_group = western_aryan culture = dakuyan culture = yonas }
 			}
 		}
 		effect = { 
-		custom_tooltip = YON_CULTURE_CONVERT_CHEAP_20_YEARS
+			custom_tooltip = YON_CULTURE_CONVERT_CHEAP_20_YEARS
+			tooltip = {
+				add_province_modifier = {
+					name = yon_culture_convert_boost
+					duration = 7300
+				}
+			}
 			hidden_effect = {
 				every_owned_province = {
 					limit = {
 					NOT = { culture = yonas }
 					}
 					add_province_modifier = {
-								name = yon_culture_convert_boost
-								duration = 7300
-							}
+						name = yon_culture_convert_boost
+						duration = 7300
+					}
 				}
+			}
+			custom_tooltip = more_cheaper_fervor_or_1000_splendors_tt
+			if = {
+				limit = {
+					religion = mazdakism
+				}
+				hidden_effect = {
+					set_country_flag = yon_cheaper_mazdakism_fervor
+					alb_update_fervor_effects = yes
+				}
+			}
+			else = {
+				add_splendor = 1000
 			}
 		}
 	}
 
-	yon_yonaka_rite = {
-		icon = mission_prosperity_in_bengal
-		position = 13
-		required_missions = {
-			yon_blossoming_budh
-		}
-		provinces_to_highlight = { }
-		trigger = { 
-		num_of_states = 67
-		is_great_power = yes
-		}
-		effect = { 
-		custom_tooltip = more_cheaper_fervor_or_1000_splendors_tt
-				if = {
-					limit = {
-						religion = mazdakism
-					}
-				hidden_effect = {
-					set_country_flag = yon_cheaper_mazdakism_fervor
-					yon_update_fervor_effects = yes
-					}
-				}
-				else = {
-					add_splendor = 1000
-				}
-			}
-	}
+	#Deleted yonaka rite because it was kind of a nothingburger
 
 	yon_towering_beasts = {
 		icon = mission_emperor_of_hindusthan
@@ -441,14 +433,14 @@ mt_yonasgen_2 = {
 			hidden_effect = {
 				every_owned_province = {
 					limit = {
-						culture = panjabi #kamboj
+						culture = kamboj #kamboj
 					}
 					owner = {
 						add_mil_power = 10
 					}
 				}
 			}
-
+			custom_tooltip = empty_line_tt
 			complex_dynamic_effect = {
 				first_custom_tooltip = YON_IF_MULTAN_CONNECTED
 				first_limit = "
@@ -525,14 +517,14 @@ mt_yonasgen_2 = {
 		trigger = { 
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
 					value = 12
-				OR = {
-					area = lahore_area
-					area = sind_sagar_area
-					area = multan_area
-					area = sindh_area
-					area = northern_sindh_area
-					}
-				base_manpower = 5
+					OR = {
+						area = lahore_area
+						area = sind_sagar_area
+						area = multan_area
+						area = sindh_area
+						area = northern_sindh_area
+						}
+					base_manpower = 5
 				}
 		}
 		effect = {
@@ -540,21 +532,22 @@ mt_yonasgen_2 = {
 			hidden_effect = {
 				every_owned_province = {
 					limit = {
-					OR = {
+						OR = {
 							area = lahore_area
 							area = sind_sagar_area
 							area = multan_area
 							area = sindh_area
 							area = northern_sindh_area
 						}
+						base_manpower = 5
 					}
 					add_province_modifier = {
-								name = yon_indus_zenkai_boost
-								duration = 7300
-							}
+						name = yon_indus_zenkai_boost
+						duration = 7300
+					}
 				}
 			}
-		add_yearly_manpower = 0.8
+			add_yearly_manpower = 0.8
 		}
 	}
 }
@@ -759,6 +752,7 @@ mt_yonasgencontcont_2 = {
 				name = "yon_uniformity_accomplished"
 				duration = -1
 			}
+		}
 	}
 
 	uncover_ulimaroa = {
@@ -778,28 +772,27 @@ mt_yonasgencontcont_2 = {
 
 		effect = {
 			random_province = {
-					limit = {
-						is_empty = yes
-						region = australia_region
-						has_discovered = ROOT
-					}
-					add_siberian_construction = 700
+				limit = {
+					is_empty = yes
+					region = australia_region
+					has_discovered = ROOT
 				}
+				add_siberian_construction = 700
+			}
 			random_province = {
-					limit = {
-						is_empty = yes
-						region = australia_region
-						has_discovered = ROOT
-					}
-					add_siberian_construction = 700
+				limit = {
+					is_empty = yes
+					region = australia_region
+					has_discovered = ROOT
 				}
-			add_country_modifier_for_age = {
+				add_siberian_construction = 700
+			}
+			add_country_modifier = {
 				name = "yon_colonize_ulimaroa"
-				age = age_of_discovery
+				duration = 10950
 			}
 		}
 	}
-	
 }
 
 mt_yonasgen_3 = {
@@ -825,7 +818,7 @@ mt_yonasgen_3 = {
 						overlord = { is_subject_of = ROOT }
 						has_opinion = {
 							who = ROOT
-							value = 150
+							value = 190
 						}
 					}
 				}
@@ -859,17 +852,25 @@ mt_yonadevyn_3 = {
 		position = 4
 		required_missions = { tomb_raider } 
 		provinces_to_highlight = {
-			OR = { trade_goods = silk trade_goods = cotton }
-			country_or_non_sovereign_subject_holds = ROOT
-			NOT = { AND = { has_manufactory_trigger = yes base_production = 10 } }
+			OR = { 
+				trade_goods = silk 
+				trade_goods = cotton
+			}
+			owned_by = ROOT
+			NOT = { 
+				AND = { 
+					has_manufactory_trigger = yes 
+					base_production = 10 
+				} 
+			}
 		}
 
 		trigger = {
-			any_owned_province = {
+			num_of_owned_provinces_with = {
+				value = 5
 				OR = {
 					trade_goods = silk 
-					trade_goods = cotton 
-					trade_goods = cloth
+					trade_goods = cotton
 				}
 				has_manufactory_trigger = yes
 				base_production = 10
@@ -881,13 +882,7 @@ mt_yonadevyn_3 = {
 				trade_goods = cotton
 				key = "Yona Weaver Guilds"
 				value = 0.2
-				duration = -1
-			}
-			change_price = {
-				trade_goods = silk
-				key = "Yona Weaver Guilds"
-				value = 0.15
-				duration = -1
+				duration = 18250
 			}
 			custom_tooltip = yona_prodboost_tooltip
 			tooltip = {
@@ -899,13 +894,15 @@ mt_yonadevyn_3 = {
 			hidden_effect = {
 				every_owned_province = {
 					limit = {
-						country_or_non_sovereign_subject_holds = ROOT
+						owned_by = ROOT
 						OR = { trade_goods = cotton trade_goods = silk }
+						has_manufactory_trigger = yes
+						base_production = 10
 					}
-				add_province_modifier = {
-					name = yona_prodboost_cotton_silk
-					duration = -1
-				}
+					add_province_modifier = {
+						name = yona_prodboost_cotton_silk
+						duration = -1
+					}
 				}
 			}
 		}
@@ -931,16 +928,21 @@ mt_yonasgencont_3 = {
 		provinces_to_highlight = { }
 		trigger = { 
 			OR = {	
-			any_country = { religion = manich has_opinion = { who = ROOT value = 150 } }
-			religion = manich
+				any_country = { religion = manich has_opinion = { who = ROOT value = 180 } }
+				religion = manich
+				AND = {
+					owns = 446
+					owns = 2225
+					owns = 506
 				}
+			}
 		}
 		effect = {
 			add_country_modifier = {
 				name = "yon_denawar_donation"
-				duration = 10950
+				duration = 9125
 			}
-			add_years_of_income = 1.5
+			add_years_of_income = 1
 		}
 	}
 
@@ -1380,7 +1382,7 @@ mt_yonasgen_4 = {
 		effect = {
 			add_country_modifier = {
 				name = "yon_taxila_tutelage"
-				duration = 18250
+				duration = 9125
 			}
 			change_innovativeness = 3
 		}
@@ -1403,6 +1405,8 @@ mt_yonasgen_4 = {
 			506 = {
 				destroy_great_project = { type = shah_rukn_e_alam_tomb }
 				add_unrest = 10
+			}
+			ROOT = {
 				add_treasury = 1000
 			}
 			custom_tooltip = ragebait_jyotisastra_tt
@@ -1437,12 +1441,12 @@ mt_yonasgen_4 = {
 			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 		trigger = {
-			country_or_non_sovereign_subject_holds = 578
-			country_or_non_sovereign_subject_holds = 507
-			country_or_non_sovereign_subject_holds = 4411
-			country_or_non_sovereign_subject_holds = 506
-			country_or_non_sovereign_subject_holds = 504
-			country_or_non_sovereign_subject_holds = 4457
+			owns_or_non_sovereign_subject_of = 578
+			owns_or_non_sovereign_subject_of = 507
+			owns_or_non_sovereign_subject_of = 4411
+			owns_or_non_sovereign_subject_of = 506
+			owns_or_non_sovereign_subject_of = 504
+			owns_or_non_sovereign_subject_of = 4457
 		}
 		effect = {
 			capital_scope = {
@@ -1821,7 +1825,7 @@ mt_yonasgen_5 = {
 		effect = {
 			add_country_modifier = {
 				name = "yon_blueprint_of_candi"
-				duration = 18250
+				duration = 9125
 			}
 			add_prestige_or_monarch_power = { amount = 25 }
 		}
@@ -1884,12 +1888,17 @@ mt_yonasgencont_5 = {
 		}
 		provinces_to_highlight = { }
 		trigger = { 
-			any_country = {
+			OR = {
+				any_country = {
 					capital_scope = {
 							superregion = china_superregion
 						}
-					has_opinion = { who = ROOT value = 150 }
+					has_opinion = { who = ROOT value = 160 }
 				}
+				any_owned_province = {
+					superregion = china_superregion
+				}
+			}
 		}
 		effect = {
 			north_china_region = { discover_country = ROOT }
@@ -1903,7 +1912,7 @@ mt_yonasgencont_5 = {
 			kashgaria_area = { discover_country = ROOT }
 			tarim_basin_area = { discover_country = ROOT }
 			shanshan_area = { discover_country = ROOT }
-			add_prestige_or_monarch_power = { amount = 25 }
+			add_prestige_or_monarch_power = { amount = 20 }
 		}
 	}
 }
@@ -2129,28 +2138,28 @@ mt_yonasgencontcont_5 = {
 		}
 		provinces_to_highlight = { }
 		trigger = { 
-		OR = {
-			num_of_battles = { amount = 12 }
-			custom_trigger_tooltip = {
-				tooltip = yon_won_against_great_power
-				any_country = {
-					is_great_power = yes
-					ROOT = {
-						has_won_war_against = {
-							who = PREV
+			OR = {
+				num_of_battles = { amount = 50 }
+				custom_trigger_tooltip = {
+					tooltip = yon_won_against_great_power
+					any_country = {
+						is_great_power = yes
+						NOT = { #make you fight top tier
+							great_power_rank = 4
+						}
+						ROOT = {
+							has_won_war_against = {
+								who = PREV
+							}
 						}
 					}
 				}
-			}
 			}
 		}
 		effect = {
 			add_power_projection = {
 				type = 10_permanent_power_projection
 				amount = 10
-			}
-			add_prestige_or_monarch_power = {
-				amount = 50
 			}
 			add_country_modifier = {
 				name = "yon_call_of_champion" #dip bonus for war n stuff
