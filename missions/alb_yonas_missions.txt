@@ -2012,6 +2012,13 @@ mt_yonasgencontcont_5 = {
 				}
 				add_permanent_claim = ROOT
 			}
+			anatolia_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
 		}
 	}
 
@@ -2026,6 +2033,7 @@ mt_yonasgencontcont_5 = {
 			region = mesopotamia_region
 			region = arabia_region
 			region = mashriq_region
+			region = anatolia_region
 			}
 			NOT = {
 				country_or_non_sovereign_subject_holds = ROOT
@@ -2044,31 +2052,6 @@ mt_yonasgencontcont_5 = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
-		}
-		effect = { 
-			balkan_region = {
-				limit = {
-					NOT = { is_core = ROOT }
-					NOT = { is_permanent_claim = ROOT }
-				}
-				add_permanent_claim = ROOT
-			}
-		}
-	}
-
-	yon_odyssey = {
-		icon = mission_spanish_armada
-		position = 12
-		required_missions = {
-			yon_gulf_of_iskandar
-		}
-		provinces_to_highlight = {
-			region = anatolia_region
-			NOT = {
-				country_or_non_sovereign_subject_holds = ROOT
-			}
-		}
-		trigger = { 
 			anatolia_region = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
@@ -2085,11 +2068,11 @@ mt_yonasgencontcont_5 = {
 		}
 	}
 
-	yon_home_thought_lost = {
+	yon_odyssey = {
 		icon = mission_parthenon
-		position = 13
+		position = 12
 		required_missions = {
-			yon_odyssey
+			yon_gulf_of_iskandar
 		}
 		provinces_to_highlight = {
 			region = balkan_region
@@ -2104,7 +2087,10 @@ mt_yonasgencontcont_5 = {
 			}
 		}
 		effect = { 
-			#there will be an event here
+			country_event_with_insight = {
+				id = yonaraja.9
+				insight_tooltip = YON_GLAZE_ALEXANDER_TT
+			}
 			add_country_modifier = {
 				name = "yon_homeland"
 				duration = -1
