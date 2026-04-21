@@ -1,0 +1,82 @@
+alb_tamna_japan_revolt_disaster = {
+
+	potential = {
+		tag = KR1
+		NOT = {
+			has_country_flag = DEFEATED_JAPANESE_REVOLT
+		}
+	}
+	
+	can_start = {
+		is_subject = no
+		custom_trigger_tooltip = {
+			tooltip = AYABANI_TT_30
+			has_country_flag = JAPANESE_REVOLT
+		}
+	}
+	
+	can_stop = {
+		has_any_disaster = yes
+	}
+	
+	down_progress = {
+		factor = 0
+	}
+	
+	progress = {
+		modifier = {
+			factor = 100
+			tag = KR1
+			custom_trigger_tooltip = {
+				tooltip = AYABANI_TT_30
+				has_country_flag = JAPANESE_REVOLT
+			}
+		}
+	}
+	
+	can_end = {
+		OR = {
+			exists = KM6
+			AND = {
+				custom_trigger_tooltip = {
+					tooltip = AYABANI_TT_31
+					had_country_flag = {
+						flag = JAPANESE_REVOLT
+						days = 3650 # 10 years
+					}
+				}
+				NOT = { num_of_rebel_armies = 1 }
+				NOT = { num_of_rebel_controlled_provinces = 1 }
+				stability = 1
+			}
+			custom_trigger_tooltip = {
+				tooltip = AYABANI_TT_33
+				has_country_flag = JAPANESE_REVOLT_FAILED
+			}
+		}
+	}
+
+	modifier = {
+		stability_cost_modifier = 0.5
+		every_owned_province = {
+			limit = {
+				OR = {
+					culture = togoku
+					culture = japanese
+				}
+			}
+			global_autonomy = 0.05
+		}
+	}
+	on_monthly = {
+		events = {
+			ayabani.27 # japan declares independence
+		}
+		random_events = {
+			100 = 0
+			5 = ayabani.29 # random rebels spawn
+		}	
+	}
+	on_start = ayabani.26
+	on_end = ayabani.28
+}
