@@ -868,6 +868,17 @@ country_event = { #Japanese Revolt failed
 		}
 	}
 
+	immediate = {
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					region = japan_region
+				}
+				clear_rebels = yes
+			}
+		}
+	}
+
 	option = {
 		name = ayabani.27a
 		custom_tooltip = AYABANI_TT_25
@@ -1067,7 +1078,7 @@ country_event = { #Japanese Revolt failed
 	}
 }
 
-country_event = { # japanese revolt ends
+country_event = { # japanese revolt starts
 	id = ayabani.28
 	title = ayabani.28.t
 	desc = ayabani.28.d
@@ -1110,13 +1121,13 @@ country_event = { # end of the revolt
 	immediate = {
 		on_non_estate_disaster_end = yes
 		hidden_effect = {
-			disband_rebels = nationalist_rebels
 			set_country_flag = DEFEATED_JAPANESE_REVOLT
 			every_owned_province = {
 				limit = {
 					has_province_modifier = japan_revolt_modifier
 				}
 				remove_province_modifier = japan_revolt_modifier
+				clear_rebels = yes
 			}
 		}
 	}
