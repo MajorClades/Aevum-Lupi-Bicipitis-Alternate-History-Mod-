@@ -944,56 +944,60 @@ country_event = {	#capitalism for me, not for thee
 	}
 }
 
-province_event = {	#get booted idiota italian migrate to the new world so that provinces dont get to high dev
+country_event = {	#get booted idiota italian migrate to the new world so that provinces dont get to high dev
 	id = gen_ita.102
 	title = gen_ita.102.test
 	desc = gen_ita.102.desc
 	picture = GOOD_WITH_MONARCH_eventPicture
 	trigger = {
 		is_part_of_hre = yes
-		owner = {
-			NOT = { #eventually the player will probably get tired of this events
-				AND = {
-					ai = no
-					absolutism = 25
-				}
+		NOT = { #eventually the player will probably get tired of this events
+			AND = {
+				ai = no
+				absolutism = 25
 			}
-			any_province = {
-				has_discovered = ROOT
-				OR = {
-					continent = north_america
-					continent = south_america
-				}
-				has_port = yes
-				is_city = yes
-				owner = {
-					OR = {
-						is_colonial_nation = yes
-						has_country_flag = changed_from_colonial_nation
-					}
-				}
-			}
-			culture_group = latin
 		}
-		OR = {
-			owner = {
-				war_exhaustion = 5
+		war_exhaustion = 5
+		any_province = {
+			has_discovered = ROOT
+			OR = {
+				continent = north_america
+				continent = south_america
 			}
+			has_port = yes
+			is_city = yes
 			owner = {
-				NOT = {
-					stability = -1
+				OR = {
+					is_colonial_nation = yes
+					has_country_flag = changed_from_colonial_nation
 				}
 			}
-			devastation = 40
 		}
 		culture_group = latin
+		OR = {
+			war_exhaustion = 5
+			NOT = {
+				stability = -1
+			}
+			any_owned_province = {
+				devastation = 40
+			}
+		}
 	}
-
+	mean_time_to_happen = {
+		days = 1
+	}
+	is_triggered_only = yes
 	option = {
 		name = gen_ita.102a
-		trigger = {	owner = { ai = yes}	}
-		add_random_development = -1
-		add_base_manpower = -1
+		trigger = {	ai = yes	}
+		random_owned_province = {
+			limit = {
+				culture_group = latin
+			}
+			add_random_development = -1
+			add_base_manpower = -1
+		}
 		random_province = {
 			limit = { 
 				OR = {
@@ -1016,10 +1020,8 @@ province_event = {	#get booted idiota italian migrate to the new world so that p
 	}
 	option = {
 		name = gen_ita.102b
-		trigger = {	owner = { ai = no}	}
-		owner = {
-			add_yearly_manpower = -0.2
-		}
+		trigger = {ai = no	}
+		add_yearly_manpower = -0.2
 		random_province = {
 			limit = { 
 				OR = {

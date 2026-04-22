@@ -871,7 +871,7 @@ country_event = { #cutrigary
 	}	
 }
 
-province_event = { #avarization shamelessly stolen from justagirl thank you justagirl (and Clades too thank you Clades)
+country_event = { #avarization shamelessly stolen from justagirl thank you justagirl (and Clades too thank you Clades)
     id = avaria.20
     title = avaria.20.t
     desc = avaria.20.d
@@ -880,39 +880,50 @@ province_event = { #avarization shamelessly stolen from justagirl thank you just
 	hidden = yes
 
 	trigger = {
-		OR = {
-			region = crimea_region
-			area = moldavia_area
+		any_owned_province = {
+			OR = {
+				region = crimea_region
+				area = moldavia_area
+			}
+			NOT = {
+				culture = avars_new
+			}
+			religion = ROOT
 		}
-		owner = { has_country_flag = avarstsiedlung }
-		NOT = {
-			culture = avars_new
-		}
-		religion = ROOT
+		has_country_flag = avarstsiedlung
 	}
 
     mean_time_to_happen = {
-        months = 300
-		modifier = {
-			factor = 0.75
-			development = 15
-		}
-		modifier = {
-			factor = 0.75
-			development = 20
-		}
-		modifier = {
-			factor = 0.75
-			development = 25
-		}
-		modifier = {
-			factor = 0.75
-			development = 30
-		}
+        months = 1
     }
     option = {
         name = avaria.20a
-        change_culture = avars_new
+        random_owned_province = {
+			limit = {
+				OR = {
+					region = crimea_region
+					area = moldavia_area
+				}
+				NOT = {
+					culture = avars_new
+				}
+				religion = ROOT
+			}
+			change_culture = avars_new
+		}
+		random_owned_province = {
+			limit = {
+				OR = {
+					region = crimea_region
+					area = moldavia_area
+				}
+				NOT = {
+					culture = avars_new
+				}
+				religion = ROOT
+			}
+			change_culture = avars_new
+		}
     }
 }
 

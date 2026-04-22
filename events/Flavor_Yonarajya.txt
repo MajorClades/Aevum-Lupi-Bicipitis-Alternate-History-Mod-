@@ -145,7 +145,7 @@ country_event = {
 	
 }
 
-province_event = {
+country_event = {
 	id = yonaraja.5
 	title = yonaraja.5.t
 	desc = yonaraja.5.d
@@ -155,46 +155,42 @@ province_event = {
 	hidden = yes
 	
 	trigger = {
-		OR = {
-			superregion = africa_superregion
-			superregion = southern_africa_superregion
+		any_owned_province = {
+			OR = {
+				superregion = africa_superregion
+				superregion = southern_africa_superregion
+			}
+			religion = ROOT
 		}
-		owner = { has_country_flag = alb_yon_hellenize_africa_flag }
+		has_country_flag = alb_yon_hellenize_africa_flag
 	}
 
 	mean_time_to_happen = {
-		months = 300
-		modifier = {
-			factor = 0.75
-			development = 15
-		}
-		modifier = {
-			factor = 0.75
-			development = 20
-		}
-		modifier = {
-			factor = 0.75
-			development = 25
-		}
-		modifier = {
-			factor = 0.75
-			development = 30
-		}
+		months = 1
 	}
 	
 	option = {
 		name = yonaraja.5a
-		if = {
+		random_owned_province = {
 			limit = {
 				OR = {
 					superregion = africa_superregion
 					superregion = southern_africa_superregion
 				}
+				religion = ROOT
 			}
-			change_culture = siddi
-		}
-		else = {
-			change_culture = yonas
+			if = {
+				limit = {
+					OR = {
+						superregion = africa_superregion
+						superregion = southern_africa_superregion
+					}
+				}
+				change_culture = siddi
+			}
+			else = {
+				change_culture = yonas
+			}
 		}
 	}
 }

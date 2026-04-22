@@ -424,7 +424,7 @@ country_event = {
 				}
 			}
 		}
-		random_subject_country = {
+		every_subject_country = {
 			limit = {
 				culture_group = korean_g
 				capital_scope = {
@@ -449,9 +449,26 @@ country_event = {
 		every_owned_province = {
 			limit = {
 				culture = jeju
+				NOT = {
+					OR = {
+						area = kyushu_area
+						area = northern_kyushu
+					}
+				}
 				region = japan_region
 			}
-			change_culture = ROOT
+			change_culture = japanese
+		}
+		every_owned_province = {
+			limit = {
+				culture = jeju
+				OR = {
+					area = kyushu_area
+					area = northern_kyushu
+				}
+				region = japan_region
+			}
+			change_culture = kyushuan
 		}
 	}
 	option = {
@@ -830,6 +847,80 @@ country_event = { #kill China
 		name = yamat.21b
 		switch_tag = DT0
 		custom_tooltip = IWASAM_TT_1
+	}
+}
+country_event = {
+	id = yamat.22
+	title = yamat.22.t
+	desc = yamat.22.d
+	picture = CZECH_NOBLES_eventPicture
+	hidden = yes
+	is_triggered_only = yes
+	trigger = {
+		any_owned_province = {
+			culture_group = east_asian
+		}
+		has_country_flag = yam_chugoku_spread_flag
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = {
+		name = saxo.5a
+		random_province = {
+			limit = {
+				country_or_non_sovereign_subject_holds = ROOT
+				culture_group = east_asian
+			}
+			change_culture = chugoku
+		}
+		random_province = {
+			limit = {
+				country_or_non_sovereign_subject_holds = ROOT
+				culture_group = east_asian
+			}
+			change_culture = chugoku
+		}
+	}
+}
+country_event = {
+	id = yamat.23
+	title = yamat.23.t
+	desc = yamat.23.d
+	picture = EMPEROR_eventPicture
+
+	is_triggered_only = yes
+	
+	option = {
+		name = yamat.23a
+		1822 = {
+			change_province_name = "Chukyo"
+			rename_capital = "Chukyo"
+			move_capital_effect = yes
+			add_base_manpower = 2
+			add_base_production = 4
+			add_base_tax = 4
+			add_or_upgrade_production_building = yes
+			add_or_upgrade_fort_building = yes
+			add_province_modifier = {
+				name = yam_chukyo
+				duration = -1
+			}
+		}
+	}
+	option = {
+		name = yamat.23b
+		capital_scope = {
+			add_base_manpower = 2
+			add_base_production = 2
+			add_base_tax = 2
+			add_province_modifier = {
+				name = yam_chukyo
+				duration = -1
+			}
+		}
 	}
 }
 country_event = {

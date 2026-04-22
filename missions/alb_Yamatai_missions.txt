@@ -516,6 +516,77 @@ Yamatai_2_slot = {
 		}
 	}
 
+	yam_lord_of_all_china = {
+		icon = mng_thirteen_provinces
+		position = 11
+		required_missions = { yam_lord_of_north yam_lord_of_south } 
+		provinces_to_highlight = {
+			OR = {
+				region = south_china_region
+				region = north_china_region
+			}
+		}
+
+		trigger = {
+			north_china_region = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			south_china_region = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+
+		effect = {
+			hidden_effect = {
+				if = {
+					limit = { has_country_flag = km6_chugoku_release }
+					add_country_modifier = {
+						name = yam_overlordship_over_china
+						duration = -1
+					}
+					set_country_flag = yam_chugoku_spread_flag
+				} else_if = {
+					limit = { has_country_flag = km6_yang_dynasty_aspirations }
+					country_event = {
+						id = yamat.23
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = km6_chugoku_release
+				}
+				custom_tooltip = YAMATAI_TT_21a_yes
+			}
+			else = { 
+				custom_tooltip = YAMATAI_TT_21a_no
+			}
+			custom_tooltip = yam_begin_chugoku_culture_spread_tt
+			tooltip = {
+				add_country_modifier = {
+					name = yam_overlordship_over_china
+					duration = -1
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = km6_yang_dynasty_aspirations
+				}
+				custom_tooltip = YAMATAI_TT_21b_yes
+			}
+			else = { 
+				custom_tooltip = YAMATAI_TT_21b_no
+			}
+			tooltip = {
+				country_event = {
+					id = yamat.23
+				}
+			}
+		}
+	}
+
 }
 Yamatai_3_slot = {
 	slot = 3
@@ -756,19 +827,10 @@ Yamatai_4_slot = {
 			OR = {
 				diplomat = 2
 				statesman = 2
-				any_ally = {
-					primary_culture = jeju
-					has_opinion = {
-						who = ROOT
-						value = 170
-					}
-				}
 			}
 		}
 
 		effect = {
-			custom_tooltip = YAMATAI_TT_4a
-			set_country_flag = not_help_the_koreans_flag
 			sanindo_area = { add_permanent_claim = ROOT } 
 			saigoku_area = { add_permanent_claim = ROOT } 
 			shikoku_area = { add_permanent_claim = ROOT } 
