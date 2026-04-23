@@ -798,10 +798,26 @@ country_event = { #kill China
 	title = yamat.21.t
 	desc = yamat.21.d
 	picture = SHIP_SAILING_eventPicture
-	is_triggered_only = yes
+	trigger = {
+		tag = KM6
+		NOT = {
+			has_country_flag = expelled_mulyoji_flag
+		}
+		any_owned_province = {
+			area = kyushu_area	
+			area = northern_kyushu	
+		}
+		num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+			value = 3
+			colonial_region = colonial_california
+		}
+	}
+	mean_time_to_happen = {
+		months = 12
+	}
 	fire_only_once = yes
 	immediate = {
-		set_country_flag = expelled_iwasam_flag
+		set_country_flag = expelled_mulyoji_flag
 		hidden_effect = {
 			random_province = {
 				limit = {

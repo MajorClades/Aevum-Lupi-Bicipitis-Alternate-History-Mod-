@@ -152,7 +152,7 @@ Yamatai_1_slot = {
 	}
 
 	yam_lord_of_north = {
-		icon = mng_thirteen_provinces
+		icon = qng_north_china
 		position = 11
 		required_missions = { yam_starting_position } 
 		provinces_to_highlight = {
@@ -416,7 +416,7 @@ Yamatai_2_slot = {
 	}
 
 	yam_lord_of_south = {
-		icon = mng_thirteen_provinces
+		icon = mission_to_the_south_china_sea
 		position = 11
 		required_missions = { yam_starting_position } 
 		provinces_to_highlight = {
@@ -517,7 +517,7 @@ Yamatai_2_slot = {
 	}
 
 	yam_lord_of_all_china = {
-		icon = mng_thirteen_provinces
+		icon = mng_shengshi_zhishi
 		position = 11
 		required_missions = { yam_lord_of_north yam_lord_of_south } 
 		provinces_to_highlight = {
@@ -805,6 +805,45 @@ Yamatai_3_slot = {
 			}
 		}
 	}
+
+	yam_colonize_singhapura = {
+		icon = invest_in_the_rich_trades
+		position = 12
+		required_missions = { yam_court_of_lusong } 
+		provinces_to_highlight = {  
+			province_id = 4815
+			NOT = {
+				AND = {
+					owned_by = ROOT
+					is_strongest_trade_power = ROOT
+				}
+			}
+		} 
+
+		trigger = {  
+			4815 = {
+				owned_by = ROOT
+				is_core = ROOT
+				province_has_center_of_trade_of_level = 2
+			}
+			4815 = {
+				is_strongest_trade_power = ROOT
+			}
+		} 
+
+		effect = {  
+			add_country_modifier = {
+				name = singha_company_deal
+				duration = -1
+			}
+			4815 = {
+				add_province_modifier = {
+					name = singha_company
+					duration = -1
+				}
+			}
+		} 
+	}
 }
 Yamatai_4_slot = {
 	slot = 4
@@ -913,7 +952,7 @@ Yamatai_4_slot = {
 	}
 
 	yam_keep_the_sun_shine = {
-		icon = mission_rb_colonise_spice_islands
+		icon = mission_rule_of_the_sun
 		position = 8
 		required_missions = {
 			yam_sunrise_colony
@@ -938,7 +977,7 @@ Yamatai_4_slot = {
 	}
 
 	yam_digging_for_gold = {
-		icon = mission_rb_colonise_spice_islands
+		icon = mission_zambezi_gold
 		position = 9
 		required_missions = { yam_keep_the_sun_shine } 
 		provinces_to_highlight = {  
@@ -971,6 +1010,135 @@ Yamatai_4_slot = {
 						name = "alaska_model_colony"
 						duration = -1
 					}
+				}
+			}
+		} 
+	}
+
+	yam_court_of_lusong = {
+		icon = indonesian_trade
+		position = 11
+		required_missions = { yam_starting_position} 
+		provinces_to_highlight = {  
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+			region = moluccas_region
+		} 
+
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 15
+				region = moluccas_region
+			}
+			owns = 2697
+			owns = 656
+		} 
+
+		effect = {  
+			656 = {
+				add_random_development = 1
+				add_random_development = 2
+				add_center_of_trade_lvl_or_ducats = yes
+			}
+			if = {
+				limit = {
+					4356 = {
+						is_city = no
+					}
+				}
+				4356 = {
+					add_siberian_construction = 400
+				}
+			}
+			if = {
+				limit = {
+					5062 = {
+						is_city = no
+					}
+				}
+				5062 = {
+					add_siberian_construction = 400
+				}
+			}
+		} 
+	}
+
+	yam_order_in_borneo = {
+		icon = mission_portuguese_ceylon
+		position = 12
+		required_missions = { yam_court_of_lusong} 
+		provinces_to_highlight = {  
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+			OR = {
+				area = brunei_area
+				area = kalimantan_area
+				area = sabah_area
+				area = banjar_area
+				area = kutai_area
+			}
+		} 
+
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 20
+					OR = {
+					area = brunei_area
+					area = kalimantan_area
+					area = sabah_area
+					area = banjar_area
+					area = kutai_area
+				}
+			}
+			owns = 636
+		} 
+
+		effect = { 
+			636 = {
+				change_culture = ROOT
+				change_religion = ROOT
+				add_center_of_trade_lvl_or_ducats = yes
+			} 
+			custom_tooltip = yam_owned_prov_in_borneo_tt
+			tooltip = {
+				add_province_modifier = {
+					name = yam_borneo_governate
+					duration = 36500
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						OR = {
+							area = brunei_area
+							area = kalimantan_area
+							area = sabah_area
+							area = banjar_area
+							area = kutai_area
+						}
+					}
+					add_province_modifier = {
+						name = yam_borneo_governate
+						duration = 36500
+					}
+				}
+			}
+			if = {
+				limit = {
+					2706 = {
+						is_city = no
+					}
+				}
+				2706 = {
+					add_siberian_construction = 400
+				}
+			}
+			if = {
+				limit = {
+					2708 = {
+						is_city = no
+					}
+				}
+				2708 = {
+					add_siberian_construction = 400
 				}
 			}
 		} 
@@ -1145,39 +1313,44 @@ Yamatai_5_slot = {
 		}
 	}
 
-	yam_edict_of_transportation = {
+	yam_colonize_spice_islands = {
 		icon = mission_rb_colonise_spice_islands
-		position = 9
-		required_missions = { yam_sunrise_colony } 
+		position = 12
+		required_missions = { yam_court_of_lusong } 
 		provinces_to_highlight = {  
 			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
-			colonial_region = colonial_california
+			OR = {
+				area = spice_islands_area
+				trade_goods = cloves
+			}
 		} 
 
 		trigger = {  
+			spice_islands_area = {
+				owned_by = ROOT
+				type = all
+			}
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-				value = 10
-				colonial_region = colonial_california
-			}
-			4637 = {
-				country_or_non_sovereign_subject_holds = ROOT
-			}
-			government_reform_progress = 100
-			estate_loyalty = {
-				estate = estate_nobles
-				loyalty = 60
+				value = 6
+				trade_goods = cloves
 			}
 		} 
 
 		effect = {  
-			#some estate privilege - ICE reference
+			custom_tooltip = yam_every_cloves_province_tt
+			tooltip = {
+				add_or_upgrade_production_building = yes
+			}
 			hidden_effect = {
-				country_event = {
-					id = yamat.21
-					days = 400
-					random = 100
+				every_owned_province = {
+					limit = {
+						trade_goods = cloves
+					}
+					add_or_upgrade_production_building = yes
 				}
 			}
+			custom_tooltip = empty_line_tt
+			add_years_of_income = 1.5
 		} 
 	}
 }
