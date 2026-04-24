@@ -2161,14 +2161,15 @@ beylik_government = {
 	icon = "noble_muslim"
 	allow_normal_conversion = yes
 	potential = {
+		always = no
 		religion_group = muslim
-		primary_culture = turkish
+
 	}
 	valid_for_nation_designer = yes
 	nation_designer_cost = 5
 	nation_designer_trigger = {
 		religion_group = muslim
-		primary_culture = turkish
+		always = no
 	}
 	modifiers = {
 		fabricate_claims_cost = -0.5
@@ -3164,6 +3165,7 @@ rajput_kingdom = {
 	icon = "rajput_kingdom"
 	allow_normal_conversion = yes
 	potential = {
+		always = no
 		has_dlc = "Dharma"
 		OR = {
 			culture_group = western_aryan
@@ -3186,9 +3188,6 @@ rajput_kingdom = {
 	legacy_equivalent = feudal_monarchy
 	modifiers = {
 		army_tradition = 0.25
-	}
-	government_abilities = {
-		emp_of_light_point_mechanic
 	}
 }
 
@@ -5885,7 +5884,11 @@ clergy_in_administration_reform = {
 			factor = 0.1
 			OR = {
 				AND = {
-					religion = hinduism
+					OR = {
+						religion = hinduism
+						religion = mantramarga
+						religion = sanatanism
+					}
 					estate_influence = {
 						estate = estate_brahmins
 						influence = 90
