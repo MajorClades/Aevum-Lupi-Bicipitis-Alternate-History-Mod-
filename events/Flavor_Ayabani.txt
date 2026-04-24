@@ -64,6 +64,13 @@ country_event = {
 			name = ayb_grand_army_disbanded
 			duration = 3652
 		}
+		custom_tooltip =  AYABANI_TT_36
+		hidden_effect = {
+			country_event = {
+				id = ayabani.35
+				days = 3652
+			}
+		}
 	}
 }
 
@@ -565,10 +572,12 @@ country_event = {
 	is_triggered_only = yes
 	option = {
 		name = ayabani.18a
+		custom_tooltip = AYABANI_TT_48a
 		set_country_flag = chosejapan
 	}
 	option = {
 		name = ayabani.18b
+		custom_tooltip = AYABANI_TT_48b
 		set_country_flag = choseainu
 	}
 }
@@ -581,10 +590,12 @@ country_event = {
 	is_triggered_only = yes
 	option = {
 		name = ayabani.19a
+		custom_tooltip = AYABANI_TT_48c
 		set_country_flag = chosechina
 	}
 	option = {
 		name = ayabani.19b
+		custom_tooltip = AYABANI_TT_48d
 		set_country_flag = chosedengpeng
 	}
 }
@@ -597,10 +608,12 @@ country_event = {
 	is_triggered_only = yes
 	option = {
 		name = ayabani.20a
+		custom_tooltip = AYABANI_TT_48e
 		set_country_flag = buddha
 	}
 	option = {
 		name = ayabani.20b
+		custom_tooltip = AYABANI_TT_48f
 		set_country_flag = tookjesus
 	}
 }
@@ -699,38 +712,54 @@ country_event = {
 	
 	option = {
 		name = ayabani.23a
-		override_country_name = DAETAMNA
+		add_stability = 1
 	}
 	option = {
 		name = ayabani.23b
+		add_stability = -1
 		override_country_name = HWAN
-		tibet_region = {
-			add_permanent_claim = ROOT
+		if = {
+			limit = {
+				KOR = {
+					is_subject_of = ROOT
+				}
+			}
+			inherit = KOR
 		}
-		burma_region = {
-			add_permanent_claim = ROOT
-		}
-		indo_china_region = {
-			add_permanent_claim = ROOT
-		}
-		burma_region = {
-			add_permanent_claim = ROOT
-		}
-		xinan_region = {
-			add_permanent_claim = ROOT
-		}
-		central_asia_region = {
-			add_permanent_claim = ROOT
-		}
-		khorasan_region = {
-			add_permanent_claim = ROOT
-		}
-		persia_region = {
-			add_permanent_claim = ROOT
-		}
+		custom_tooltip = AYABANI_TT_53
+		custom_tooltip = AYABANI_TT_54
 		hidden_effect = {
 			change_country_color = {
 				country = KOR
+			}
+			set_country_flag = hwanguk
+			swap_non_generic_missions = yes
+			tibet_region = {
+				add_permanent_claim = ROOT
+			}
+			burma_region = {
+				add_permanent_claim = ROOT
+			}
+			indo_china_region = {
+				add_permanent_claim = ROOT
+			}
+			burma_region = {
+				add_permanent_claim = ROOT
+			}
+			xinan_region = {
+				add_permanent_claim = ROOT
+			}
+			central_asia_region = {
+				add_permanent_claim = ROOT
+			}
+			khorasan_region = {
+				add_permanent_claim = ROOT
+			}
+			persia_region = {
+				add_permanent_claim = ROOT
+			}
+			south_china_region = {
+				add_permanent_claim = ROOT
 			}
 		}
 	}
@@ -1136,13 +1165,13 @@ country_event = { # end of the revolt
 	}
 	
 	option = {
-		name = ayabani.28.a
+		name = ayabani.28a
 		trigger = {
 			exists = KM6
 		}
 	}
 	option = {
-		name = ayabani.28.b
+		name = ayabani.28b
 		trigger = {
 			NOT = { exists = KM6 }
 		}
@@ -1212,6 +1241,485 @@ country_event = {
 		event_target:japan_rebels_target = {
 			add_local_autonomy = 100
 			set_province_flag = no_japanese_revolt
+		}
+	}
+}
+#rework
+
+country_event = { #intro all
+	id = ayabani.30
+	title = ayabani.30.t
+	desc = ayabani.30.d
+	picture = shinto_COLONIZATION_eventPicture
+	is_triggered_only = yes
+	trigger = {
+		primary_culture = jeju
+	}
+
+	option = {
+		name = ayabani.30a
+		if = {
+			limit = {
+				tag = KM7
+			}
+			country_event = {
+				id = ayabani.31
+			}
+		}
+		else_if = {
+			limit = {
+				tag = KM8
+			}
+			country_event = {
+				id = ayabani.32
+			}
+		}
+		else = {
+			country_event = {
+				id = ayabani.33
+			}
+		}
+	}
+}
+
+country_event = { #intro Go
+	id = ayabani.31
+	title = ayabani.31.t
+	desc = ayabani.31.d
+	picture = shinto_GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+
+
+	option = {
+		name = ayabani.31a
+	}
+}
+
+country_event = { #intro Mun
+	id = ayabani.32
+	title = ayabani.32.t
+	desc = ayabani.32.d
+	picture = shinto_GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+
+
+	option = {
+		name = ayabani.32a
+	}
+}
+
+country_event = { #intro An
+	id = ayabani.33
+	title = ayabani.33.t
+	desc = ayabani.33.d
+	picture = shinto_GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+
+
+	option = {
+		name = ayabani.33a
+	}
+}
+
+country_event = { #tamnaform
+	id = ayabani.34
+	title = ayabani.34.t
+	desc = ayabani.34.d
+	picture = east_asian_GOOD_WITH_MONARCH_eventPicture
+	is_triggered_only = yes
+
+
+	option = {
+		name = ayabani.34a
+		add_country_modifier = {
+			name = ayb_tamna_unification1
+			duration = -1
+		}
+		add_country_modifier = {
+			name = ayb_tamna_unification2
+			duration = -1
+		}
+		add_country_modifier = {
+			name = ayb_tamna_unification3
+			duration = -1
+		}
+		add_country_modifier = {
+			name = ayb_tamna_unification4
+			duration = -1
+		}
+		custom_tooltip =  AYABANI_TT_35
+		hidden_effect = {
+			every_owned_province = {
+				add_province_triggered_modifier = tmn_devastation
+			}
+		}
+	}
+}
+
+country_event = { #professional army
+	id = ayabani.35
+	title = ayabani.35.t
+	desc = ayabani.35.d
+	picture = DISCIPLINED_SOLDIERS_eventPicture
+	is_triggered_only = yes
+
+
+	option = {
+		name = ayabani.35a
+		add_country_modifier = {
+			name = ayb_professional_army
+			duration = -1
+		}
+	}
+}
+
+country_event = { #fate of korea
+	id = ayabani.36
+	title = ayabani.36.t
+	desc = ayabani.36.d
+	picture = east_asian_ADVISOR_eventPicture
+	is_triggered_only = yes
+
+
+	option = {
+		name = ayabani.36a #subject
+		custom_tooltip = AYABANI_TT_39
+		hidden_effect ={
+			every_owned_province = {
+				limit = {
+					region = korea_region
+				}
+				cede_province = KOR
+				add_core = KOR
+				remove_core = ROOT
+			}
+			create_march = KOR
+			add_historical_friend = KOR
+			KOR = {
+				change_religion = ROOT
+				define_ruler = {
+   					dynasty = "Wang"
+					culture = korean
+    				claim = 95
+				}
+			}
+		}
+	}
+	option = {
+		name = ayabani.36b #owned
+		trigger = {
+			NOT = {
+				has_country_flag = mongol4
+			}
+		}
+		custom_tooltip = AYABANI_TT_40a
+		hidden_effect ={
+			set_country_flag = korea4
+			every_owned_province = {
+				limit = {
+					region = korea_region
+				}
+				add_permanent_province_modifier = {
+					name = ayb_korea4
+					duration = -1
+				}
+			}
+		}
+	}
+	option = {
+		name = ayabani.36c #ownedmongol4
+		trigger = {
+			has_country_flag = mongol4
+		}
+		custom_tooltip = AYABANI_TT_40b
+		hidden_effect ={
+			set_country_flag = korea4
+			every_owned_province = {
+				limit = {
+					region = korea_region
+				}
+				add_permanent_province_modifier = {
+					name = ayb_korea5
+					duration = -1
+				}
+			}
+		}
+	}
+}
+
+country_event = { #koreanization shamelessly stolen from me thank you me
+    id = ayabani.37
+    title = ayabani.37.t
+    desc = ayabani.37.d
+    picture = COSSACK_ESTATE_eventPicture
+
+	hidden = yes
+
+	trigger = {
+		any_owned_province = {
+			region = korea_region
+			NOT = {
+				culture = korean
+			}
+			religion = ROOT
+		}
+		has_country_flag = koreanretvrn
+	}
+
+    mean_time_to_happen = {
+        months = 1
+    }
+    option = {
+        name = ayabani.37a
+        random_owned_province = {
+			limit = {
+				region = korea_region
+				NOT = {
+					culture = korean
+				}
+				religion = ROOT
+			}
+			change_culture = korean
+		}
+        random_owned_province = {
+			limit = {
+				region = korea_region
+				NOT = {
+					culture = korean
+				}
+				religion = ROOT
+			}
+			change_culture = korean
+		}
+		random_province = {
+			limit = {
+				area = yakutia_area
+				NOT = {
+					culture = mongol
+				}
+			}
+			change_culture = mongol
+		}
+    }
+}
+
+country_event = { #hokkaido
+	id = ayabani.38
+	title = ayabani.38.t
+	desc = ayabani.38.d
+	picture = 9_Vaisya_Estate_eventPicture
+	is_triggered_only = yes
+
+
+	option = {
+		name = ayabani.38a
+		every_owned_province = {
+			limit = {
+				OR = {
+					area = hokkaido_area
+					area = sakhalin_area
+				}
+			}
+			add_permanent_province_modifier = {
+				name = ayb_hokkaido_good
+				duration = 7300
+			}
+		}
+	}
+}
+
+country_event = { #balloon lore fuck siberia
+	id = ayabani.39
+	title = ayabani.39.t
+	desc = ayabani.39.d
+	picture = shinto_MILITARY_CAMP_eventPicture
+	fire_only_once = yes
+
+
+	trigger = {
+
+	}
+
+	option = {
+		name = ayabani.39a
+
+	}
+}
+
+country_event = { #koreanization 2 shamelessly stolen from me from earlier thank you me from earlier
+    id = ayabani.40
+    title = ayabani.40.t
+    desc = ayabani.40.d
+    picture = COSSACK_ESTATE_eventPicture
+
+	hidden = yes
+
+	trigger = {
+		any_owned_province = {
+			OR = {
+				area = jilin_area
+				area = ningguta_area
+				area = liaoning_area
+			}
+			NOT = {
+				culture = korean
+			}
+			religion = ROOT
+		}
+		AND = {
+			has_country_flag = koreanretvrn
+			has_country_flag = koreanretvrn2
+		}
+	}
+
+    mean_time_to_happen = {
+        months = 1
+    }
+    option = {
+        name = ayabani.40a
+        random_owned_province = {
+			limit = {
+				OR = {
+					area = jilin_area
+					area = ningguta_area
+					area = liaoning_area
+				}
+				NOT = {
+					culture = korean
+				}
+				religion = ROOT
+			}
+			change_culture = korean
+		}
+        random_owned_province = {
+			limit = {
+				OR = {
+					area = jilin_area
+					area = ningguta_area
+					area = liaoning_area
+				}
+				NOT = {
+					culture = korean
+				}
+				religion = ROOT
+			}
+			change_culture = korean
+		}
+    }
+}
+
+country_event = { #turning that argument I had with T one time into an event
+	id = ayabani.41
+	title = ayabani.41.t
+	desc = ayabani.41.d
+	picture = muslimgfx_BAD_WITH_MONARCH_eventPicture
+	fire_only_once = yes
+
+
+	trigger = {
+		2116 = {
+			owner = {
+				is_or_was_tag = KR1
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 300
+	}
+
+	option = {
+		name = ayabani.41a
+	}
+	option = {
+		name = ayabani.41b
+		add_treasury = -50
+		custom_tooltip = AYABANI_TT_49
+		hidden_effect = {
+			random_list = {
+    			50 = {
+					country_event = {
+						id = ayabani.42
+						days = 365
+					}
+    			}
+    			50 = {
+					country_event = {
+						id = ayabani.43
+						days = 365
+					}
+    			}
+			}
+		}
+	}
+}
+
+country_event = { #he's real
+	id = ayabani.42
+	title = ayabani.42.t
+	desc = ayabani.42.d
+	picture = asiangfx_ADVISOR_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = ayabani.42a
+		add_prestige = 10
+		add_manpower = -0.001
+	}
+}
+
+country_event = { #he's not real
+	id = ayabani.43
+	title = ayabani.43.t
+	desc = ayabani.43.d
+	picture = CROSSROAD_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = ayabani.43a
+		add_prestige = -1
+	}
+}
+
+country_event = { #da CUAN
+	id = ayabani.44
+	title = ayabani.44.t
+	desc = ayabani.44.d
+	picture = confucianism_CITY_DEVELOPMENT_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = ayabani.44a
+		add_prestige = 10
+		add_legitimacy = 10
+		add_accepted_culture = bai
+	}
+}
+
+country_event = { #hawaii
+	id = ayabani.45
+	title = ayabani.45.t
+	desc = ayabani.45.d
+	picture = east_asian_COLONIZATION_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = ayabani.45a
+		1997 = {
+			cede_province = ROOT
+			add_core = ROOT
+		}
+		northern_polynesia_area = {
+			add_permanent_claim = ROOT
+		}
+		hidden_effect = {
+			1997 = {
+				change_culture = jeju
+				change_religion = ROOT
+			}
 		}
 	}
 }
