@@ -1,25 +1,5 @@
 namespace = light_emp
 
-country_event = {
-	id = light_emp.1
-	title = light_emp.1.test
-	desc = light_emp.1.desc
-	picture = CRUSADER_HORDE_eventPicture
-	trigger = { #useless
-		always = no
-	}
-	fire_only_once = yes
-	is_triggered_only = yes
-	hidden = yes
-	option = {
-		name = redleg.1a
-		save_global_event_target_as = light_empire_shield_target
-		REB = {
-			save_global_event_target_as = darkness_enemy_target
-		}
-	}
-}
-
 
 country_event = {
 	id = light_emp.2
@@ -215,9 +195,27 @@ country_event = { #Emperor has to respong
 				has_country_flag = easy_bias_eol
 			}
 		}
-		declare_war_with_cb = {
-			casus_belli = cb_leo_expand_empire
-			who = event_target:light_empire_challenger_target
+		hidden_effect = {
+			event_target:light_empire_challenger_target = {
+				set_country_flag = challenge_EOL_flag
+				clr_country_flag = open_eol_menu_flag
+				remove_country_modifier = eol_1_vassal_mod
+				remove_country_modifier = eol_2_vassal_mod
+				remove_country_modifier = eol_3_vassal_mod
+				remove_country_modifier = eol_4_vassal_mod
+				remove_country_modifier = eol_5_vassal_mod
+				remove_country_modifier = eol_6_vassal_mod
+				remove_country_modifier = eol_7_vassal_mod
+				remove_country_modifier = eol_8_vassal_mod
+				remove_country_modifier = eol_9_vassal_mod
+				remove_country_modifier = eol_10_vassal_mod
+			}
+		}
+		event_target:light_empire_challenger_target = {
+			declare_war_with_cb = {
+				casus_belli = cb_leo_become_empire
+				who = event_target:light_empire_shield_target
+			}
 		}
 	}
 }
@@ -231,8 +229,12 @@ country_event = { #response back to player
 	option = {
 		name = light_emp.7a
 		set_government_rank = 3
+		event_target:light_empire_shield_target = {
+			clr_country_flag = is_eol_flag
+		}
 		inherit = event_target:light_empire_shield_target
 		save_global_event_target_as = light_empire_shield_target
+		set_country_flag = is_eol_flag
 		override_country_name = LE0
 		add_government_reform = light_empire_government
 		hidden_effect = {
@@ -935,5 +937,24 @@ country_event = { #Pandya intro
 	option = {
 		name = light_emp.22a
 		add_prestige = 10
+	}
+}
+
+
+country_event = {
+	id = light_emp.100
+	title = light_emp.100.test
+	desc = light_emp.100.desc
+	picture = indiangfx_ANGRY_MOB_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = light_emp.100a
+		random_country = {
+			limit = {
+				has_country_flag = is_eol_flag
+			}
+			override_country_name = LE0
+			save_global_event_target_as = light_empire_shield_target
+		}
 	}
 }

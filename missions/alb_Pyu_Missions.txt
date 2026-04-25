@@ -289,10 +289,13 @@ mt_pyu_3 = {
 		}
 
 		trigger = {
-			NOT = {
-				all_owned_province = {
-					culture_group = new_mon
-					has_province_modifier = mon_integration
+			all_owned_province = {
+				OR = {
+					NOT = { culture_group = new_mon	}
+					AND = {
+						culture_group = new_mon
+						NOT = { has_province_modifier = mon_integration }
+					}
 				}
 			}
 		}
@@ -675,7 +678,15 @@ mt_pyu_1_expanded = {
 		icon = mission_subdue_rajputana
 		required_missions = { pyu_saopha_fate } 
 		provinces_to_highlight = {
-			
+			OR = {
+				area = chindwin_area
+				area = tripura_area
+				area = naga_hills_area
+
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
 		}
 
 		trigger = {
@@ -878,7 +889,7 @@ mt_pyu_2_expanded = {
 		effect = {
 			add_country_modifier = {
 				name = PYU_kachin_auxilaries
-				duration = 18250
+				duration = 10950
 			}
 		}
 	}
