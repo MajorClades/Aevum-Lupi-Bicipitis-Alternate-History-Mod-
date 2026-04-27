@@ -378,9 +378,49 @@ alb_wu_slot_3 = {
 		required_missions = {
 			endless_wisdom
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = {
+			superregion = china_superregion
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			OR = {
+				is_emperor_of_china = yes
+				NOT = { any_country = { is_emperor_of_china = yes }  } 
+			}
+			china_superregion = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+
+		effect = {
+			country_event = { id = wuuevent.4 } 
+			custom_tooltip = empty_line_tt
+			simple_dynamic_effect = {
+				first_custom_tooltip = ch4_is_eoc_tt
+				first_limit =" is_emperor_of_china = yes"
+				first_effect = "
+					add_country_modifier = {
+						name = wuu_eoc
+						duration = -1
+					}
+					add_mandate = 20
+				"
+				second_custom_tooltip = ch4_no_eoc_tt
+				second_limit = "NOT = {
+					any_country = {
+						is_emperor_of_china = yes
+					}
+				}"
+				second_effect = "
+					add_country_modifier = {
+						name = wuu_jongwa
+						duration = -1
+					}
+				"
+			} 
+		}
 	}
 
 	casting_shadow_serpentine = {
@@ -390,8 +430,31 @@ alb_wu_slot_3 = {
 			restore_jiaozhi_commandery land_on_lizu jongwan_dragon settle_siyi expand_northern_frontier
 		}
 		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		trigger = {
+			calc_true_if = {
+				amount = 5
+				all_neighbor_country = {
+					has_spy_network_from = {
+							who = ROOT
+							value = 50
+						}
+				}
+			}
+		}
+		effect = {
+			custom_tooltip = shadow_coup_tt
+			hidden_effect = {
+				every_neighbor_country = {
+					limit = {
+						has_spy_network_from = {
+							who = ROOT
+							value = 50
+						}
+					}
+					country_event = { id = wuuevent.5 } 
+				}
+			}
+		}
 	}
 
 	slumbering_awoken = {
