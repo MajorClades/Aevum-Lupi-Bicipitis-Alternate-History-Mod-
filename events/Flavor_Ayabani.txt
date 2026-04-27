@@ -50,6 +50,7 @@ country_event = {
 		ai_chance = {
 			factor = 50
 		}
+		set_country_flag = grandarmy
 		add_country_modifier = {
 			name = ayb_grand_army_embraced
 			duration = -1
@@ -116,11 +117,11 @@ country_event = {
 				tag = KM7
 			}
 			custom_tooltip =  AYABANI_TT_24
-			declare_war_with_cb = {
+			add_casus_belli = {
 				who = KM8
 				casus_belli = cb_tamna_unification
 			}
-			declare_war_with_cb = {
+			add_casus_belli = {
 				who = KM9
 				casus_belli = cb_tamna_unification
 			}
@@ -144,11 +145,11 @@ country_event = {
 				tag = KM8
 			}
 			custom_tooltip =  AYABANI_TT_24
-			declare_war_with_cb = {
+			add_casus_belli = {
 				who = KM7
 				casus_belli = cb_tamna_unification
 			}
-			declare_war_with_cb = {
+			add_casus_belli = {
 				who = KM9
 				casus_belli = cb_tamna_unification
 			}
@@ -172,13 +173,13 @@ country_event = {
 				tag = KM9
 			}
 			custom_tooltip =  AYABANI_TT_24
-			declare_war_with_cb = {
+			add_casus_belli = {
 				who = KM7
-				casus_belli = cb_tamna_unification
+				type = cb_tamna_unification
 			}
-			declare_war_with_cb = {
+			add_casus_belli = {
 				who = KM8
-				casus_belli = cb_tamna_unification
+				type = cb_tamna_unification
 			}
 			hidden_effect = {
 				2741 = {
@@ -214,13 +215,13 @@ country_event = {
 				tag = KM7
 			}
 			custom_tooltip =  AYABANI_TT_24
-			declare_war_with_cb = {
+			add_casus_belli = {
 				who = KM8
-				casus_belli = cb_tamna_unification
+				type = cb_tamna_unification
 			}
-			declare_war_with_cb = {
+			add_casus_belli = {
 				who = KM9
-				casus_belli = cb_tamna_unification
+				type = cb_tamna_unification
 			}
 			hidden_effect = {
 				2741 = {
@@ -242,13 +243,13 @@ country_event = {
 				tag = KM8
 			}
 			custom_tooltip =  AYABANI_TT_24
-			declare_war_with_cb = {
+			add_casus_belli = {
 				who = KM7
-				casus_belli = cb_tamna_unification
+				type = cb_tamna_unification
 			}
-			declare_war_with_cb = {
+			add_casus_belli = {
 				who = KM9
-				casus_belli = cb_tamna_unification
+				type = cb_tamna_unification
 			}
 			hidden_effect = {
 				2741 = {
@@ -270,13 +271,13 @@ country_event = {
 				tag = KM9
 			}
 			custom_tooltip =  AYABANI_TT_24
-			declare_war_with_cb = {
+			add_casus_belli = {
 				who = KM7
-				casus_belli = cb_tamna_unification
+				type = cb_tamna_unification
 			}
-			declare_war_with_cb = {
+			add_casus_belli = {
 				who = KM8
-				casus_belli = cb_tamna_unification
+				type = cb_tamna_unification
 			}
 			hidden_effect = {
 				2741 = {
@@ -305,20 +306,14 @@ country_event = {
 			KM7 = {
 				add_truce_with = KM8
 				add_truce_with = KM9
-				white_peace = KM8
-				white_peace = KM9
 			}
 			KM8 = {
 				add_truce_with = KM7
 				add_truce_with = KM9
-				white_peace = KM7
-				white_peace = KM9
 			}
 			KM9 = {
 				add_truce_with = KM7
 				add_truce_with = KM8
-				white_peace = KM7
-				white_peace = KM8
 			}
 		}
 	}
@@ -1113,9 +1108,9 @@ country_event = { #Japanese Revolt failed
 }
 
 country_event = { # japanese revolt starts
-	id = ayabani.28
-	title = ayabani.28.t
-	desc = ayabani.28.d
+	id = ayabani.200
+	title = ayabani.200.t
+	desc = ayabani.200.d
 	picture = SENGOKU_eventPicture
 	is_triggered_only = yes
 	hidden = yes
@@ -1125,7 +1120,7 @@ country_event = { # japanese revolt starts
 	}
 
 	option = {
-		name = ayabani.25a
+		name = ayabani.200a
 
 	}
 }
@@ -1137,7 +1132,7 @@ country_event = { # end of the revolt
 		trigger = {
 			NOT = { exists = KM6 }
 		}
-		desc = "ayabani.28.d" # everything went pretty well  I agree paradox coder
+		desc = "ayabani.28d" # everything went pretty well  I agree paradox coder
 	}
 	desc = {
 		trigger = {
@@ -1146,7 +1141,7 @@ country_event = { # end of the revolt
 				exists = TKI
 			}
 		}
-		desc = "ayabani.28.d2" # oh no the dutch are revolting  no it's the japanese you silly paradox coder
+		desc = "ayabani.28d2" # oh no the dutch are revolting  no it's the japanese you silly paradox coder
 	}
 	picture = ANGRY_MOB_eventPicture
 	
@@ -1368,6 +1363,7 @@ country_event = { #professional army
 
 	option = {
 		name = ayabani.35a
+		set_country_flag = profarmy
 		add_country_modifier = {
 			name = ayb_professional_army
 			duration = -1
@@ -1723,5 +1719,56 @@ country_event = { #hawaii
 				change_religion = ROOT
 			}
 		}
+	}
+}
+
+country_event = { #settsu
+	id = ayabani.46
+	title = ayabani.46.t
+	desc = ayabani.46.d
+	picture = east_asian_BAD_WITH_MONARCH_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+    trigger = {
+        tag = KR1
+        owns = 1021
+    }
+	option = {
+		name = ayabani.46a
+		add_prestige = 5
+	}
+}
+
+country_event = { #kyoto
+	id = ayabani.47
+	title = ayabani.47.t
+	desc = ayabani.47.d
+	picture = shinto_CITY_DEVELOPMENT_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+    trigger = {
+        tag = KR1
+        owns = 1020
+    }
+	option = {
+		name = ayabani.47a
+		add_prestige = 5
+	}
+}
+
+country_event = { #kaesong
+	id = ayabani.48
+	title = ayabani.48.t
+	desc = ayabani.48.d
+	picture = shinto_CITY_DEVELOPMENT_eventPicture
+	fire_only_once = yes
+	is_triggered_only = yes
+    trigger = {
+        tag = KR1
+        owns = 735
+    }
+	option = {
+		name = ayabani.48a
+		add_prestige = 5
 	}
 }
