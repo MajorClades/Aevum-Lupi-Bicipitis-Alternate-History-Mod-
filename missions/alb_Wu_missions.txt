@@ -310,7 +310,7 @@ alb_wu_slot_3 = {
 		upgrade_dragon_level = yes
 		custom_tooltip = empty_line_tt
 		country_event_with_insight = {
-				id = wuuevent.3a
+				id = wuuevent.3
 				insight_tooltip = JINGJIAO_LARP_OR_NORMAL
 			}
 		}
@@ -526,9 +526,36 @@ alb_wu_slot_5 = {
 		required_missions = { }
 		provinces_to_highlight = { }
 		trigger = {
-			stability = 2
+			OR = {
+				NOT = { exists = CH1 } 
+				has_won_war_against = { who = CH1 } 
+			}
+			owns = 688
 		}
-		effect = { }
+		effect = {
+			upgrade_dragon_level = yes
+			custom_tooltip = empty_line_tt
+				if = {
+				limit = {
+					NOT = { exists = CH1 }
+				}
+				custom_tooltip = yes_kill_song_tt
+			}
+			else = {
+				custom_tooltip = no_kill_song_tt
+			}
+			tooltip = {
+				country_event = { id = wuuevent.6 }
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						NOT = { exists = CH1 }
+					}
+					country_event = { id = wuuevent.6 }
+				}
+			}
+		}
 	}
 
 	crush_chu = {
