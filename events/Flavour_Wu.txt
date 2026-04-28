@@ -68,7 +68,6 @@ country_event = {
 			random_owned_province = {
 			change_religion = nestorian
 			}
-		}
 		set_country_flag = jingjiao_larp
 	}
 }
@@ -79,6 +78,7 @@ country_event = {
 	desc = wuuevent.4.d
 	picture = CHINESE_GENERAL_eventPicture
 	is_triggered_only = yes
+	fire_only_once = yes
 
 	option = {
 		name = wuuevent.4a
@@ -97,6 +97,7 @@ country_event = {
 	picture = CZECH_NOBLES_eventPicture
 
 	is_triggered_only = yes
+	fire_only_once = yes
 
 	option = {
 		name = wuuevent.5a
@@ -106,5 +107,35 @@ country_event = {
 	option = {
 		name = wuuevent.5b
 		trigger = { ai = no }
+	}
+}
+
+country_event = {
+	id = wuuevent.6
+	title = wuuevent.6.t
+	desc = wuuevent.6.d
+	picture = CHINESE_GENERAL_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = wuuevent.6a
+		custom_tooltip = KILL_YAN_NEXT_TT
+		hidden_effect = {
+           north_henan_area = { limit = { owned_by = YAN } cede_province = ROOT }
+		   every_province = { limit = { owned_by = YAN OR = { culture = hubei culture = jin } } cede_province = ROOT }
+        }
+		declare_war_with_cb = {
+					who = YAN
+					casus_belli = cb_take_mandate
+				}
+	}
+	option = {
+		name = wuuevent.6b #hell naw thats crazy
+		custom_tooltip = IGNORE_YAN_TT
+		add_prestige = 25
+		ai_chance = {
+			factor = 100
+		}
 	}
 }
