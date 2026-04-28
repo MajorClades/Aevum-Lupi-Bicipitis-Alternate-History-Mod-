@@ -236,6 +236,7 @@ country_event = { #response back to player
 		save_global_event_target_as = light_empire_shield_target
 		set_country_flag = is_eol_flag
 		override_country_name = LE0
+		change_government = theocracy
 		add_government_reform = light_empire_government
 		hidden_effect = {
 			remove_country_modifier = eol_1_vassal_mod
@@ -937,6 +938,103 @@ country_event = { #Pandya intro
 	option = {
 		name = light_emp.22a
 		add_prestige = 10
+	}
+}
+
+country_event = { #szyzgos election
+	id = light_emp.23
+	title = light_emp.23.test
+	desc = light_emp.23.desc
+	picture = 14_Maratha_Estate_eventPicture
+	trigger = {
+		NOT = {
+			has_country_modifier = alb_ruler_death_election_timer_modifier
+		}
+		OR = {
+			has_reform = light_empire_government
+			has_reform = light_empire_united_government
+		}
+		government = theocracy
+		NOT = {
+			has_ruler_flag = alb_eol_ruler_chosen
+		}
+	}
+	immediate = {
+		hidden_effect = {
+			add_country_modifier = {
+				name = alb_ruler_death_election_timer_modifier
+				duration = 10
+				hidden = yes
+			}
+		}
+	}
+	is_triggered_only = yes
+	option = {
+		name = light_emp.23a
+		define_ruler = {
+			religion = jyotisastra
+			min_age = 50
+		}
+		set_ruler_flag = alb_eol_ruler_chosen
+	}
+	option = {
+		name = light_emp.23b
+		define_ruler = {
+			religion = jyotisastra
+			min_age = 30
+			change_mil = 1
+			max_random_mil = 5
+		}
+		set_ruler_flag = alb_eol_ruler_chosen
+	}
+	option = {
+		name = light_emp.23c
+		define_ruler = {
+			religion = jyotisastra
+			min_age = 30
+			change_dip = 1
+			max_random_dip = 5
+		}
+		set_ruler_flag = alb_eol_ruler_chosen
+	}
+	option = {
+		name = light_emp.23d
+		define_ruler = {
+			religion = jyotisastra
+			min_age = 20
+			change_dip = 2
+			change_mil = 2
+			change_adm = 2
+			max_random_dip = 4
+			max_random_mil = 4
+			max_random_adm = 4
+		}
+		add_devotion = -30
+		add_prestige = -25
+		set_ruler_flag = alb_eol_ruler_chosen
+	}
+}
+
+country_event = { #szyzgos election
+	id = light_emp.24
+	title = light_emp.24.test
+	desc = light_emp.24.desc
+	picture = 14_Maratha_Estate_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = light_emp.24a
+		change_government = theocracy
+		add_government_reform = light_empire_government
+	}
+	option = {
+		name = light_emp.24b
+		add_stability = -1
+		add_prestige = -25
+		add_government_power = {
+			mechanic_type = emp_of_light_point_mechanic
+			power_type = enlightened_prestige_points
+			value = -50
+		}
 	}
 }
 
