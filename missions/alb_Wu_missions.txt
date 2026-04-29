@@ -215,14 +215,14 @@ alb_wu_slot_2 = {
 		}
 		provinces_to_highlight = { 
 			owner = {
-				any_country = {
+				all_country = {
 					religion_group = christian
 				}
 			}
 		}
 		trigger = {
 			OR = {
-			any_country = {
+			all_country = {
 					religion_group = christian
 					has_opinion = {
 						who = ROOT
@@ -313,6 +313,7 @@ alb_wu_slot_3 = {
 				id = wuuevent.3
 				insight_tooltip = JINGJIAO_LARP_OR_NORMAL
 			}
+		remove_country_modifier = wuu_crouching_kingdom
 		}
 	}
 
@@ -464,8 +465,27 @@ alb_wu_slot_3 = {
 			casting_shadow_serpentine
 		}
 		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		trigger = {
+			calc_true_if = {
+				amount = 20
+				all_country = {
+					is_subject_of = ROOT
+				}
+			}
+		}
+		effect = {
+			upgrade_dragon_level = yes
+			custom_tooltip = empty_line_tt
+			all_country = {
+					limit = { is_subject_of = ROOT }
+					add_liberty_desire = -100
+					every_neighbor_province  = {
+						limit = { NOT = { owned_by = WUU } }
+						add_permanent_claim = ROOT
+					}
+				}
+			add_mandate = 100
+		}
 	}
 }
 alb_wu_slot_4 = {
@@ -489,9 +509,38 @@ alb_wu_slot_4 = {
 		required_missions = {
 			our_old_master
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = { owned_by = CH6 }
+		trigger = {
+			OR = {
+				NOT = { exists = CH6 } 
+				has_won_war_against = { who = CH6 } 
+			}
+			owns = 669
+		}
+		effect = {
+			add_country_modifier = { name = wuu_mountain_splitting_manuveur duration = 10950 }
+			custom_tooltip = empty_line_tt
+				if = {
+				limit = {
+					NOT = { exists = CH6 }
+				}
+				custom_tooltip = yes_kill_yue_tt
+			}
+			else = {
+				custom_tooltip = no_kill_yue_tt
+			}
+			tooltip = {
+				custom_tooltip = get_claim_on_southern_jongwan_and_yue_culture_tt
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						NOT = { exists = CHC }
+					}
+					every_province = { limit = { OR = { culture = yelang culture = hakka culture = gan culture = min owned_by = CH4 } } add_permanent_claim = ROOT }
+				}
+			}
+		}
 	}
 
 	settle_siyi = {
@@ -524,7 +573,7 @@ alb_wu_slot_5 = {
 		icon = per_the_city_of_daman
 		position = 1
 		required_missions = { }
-		provinces_to_highlight = { }
+		provinces_to_highlight = { owned_by = CH1 }
 		trigger = {
 			OR = {
 				NOT = { exists = CH1 } 
@@ -555,6 +604,8 @@ alb_wu_slot_5 = {
 					country_event = { id = wuuevent.6 }
 				}
 			}
+			custom_tooltip = empty_line_tt
+			south_china_region = { add_permanent_claim = ROOT }
 		}
 	}
 
@@ -564,9 +615,38 @@ alb_wu_slot_5 = {
 		required_missions = {
 			our_old_master
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = { owned_by = CHC }
+		trigger = {
+			OR = {
+				NOT = { exists = CHC } 
+				has_won_war_against = { who = CHC } 
+			}
+			owns = 682
+		}
+		effect = {
+			add_country_modifier = { name = wuu_cutting_rat_head duration = 10950 }
+			custom_tooltip = empty_line_tt
+				if = {
+				limit = {
+					NOT = { exists = CHC }
+				}
+				custom_tooltip = yes_kill_chu_tt
+			}
+			else = {
+				custom_tooltip = no_kill_chu_tt
+			}
+			tooltip = {
+				custom_tooltip = get_claim_on_western_jongwan_culture_tt
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						NOT = { exists = CHC }
+					}
+					every_province = { limit = { OR = { culture = miao culture = sichuanese culture = rma culture = rma_new } } add_permanent_claim = ROOT }
+				}
+			}
+		}
 	}
 
 	conquer_cuanman = {
@@ -575,9 +655,44 @@ alb_wu_slot_5 = {
 		required_missions = {
 			pacify_the_mountain_yue crush_chu
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = {
+			region = xinan_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+		trigger = {
+			xinan_region = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
+		effect = {
+			add_country_modifier = {
+						name = wuu_subdued_southern_barbarian
+						duration = -1
+					}
+			if = {
+				limit = {
+					has_country_flag = jingjiao_larp
+				}
+				custom_tooltip = yes_jingjiao_larp
+			}
+			else = {
+				custom_tooltip = no_jingjiao_larp
+			}
+			custom_tooltip = turn_cuanman_jongwan_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						has_country_flag = jingjiao_larp
+					}
+					every_owned_province = {
+						limit = { OR = { culture = miao culture = yi culture = bai } }
+						change_culture = yelang
+						change_religion = nestorian
+					}
+				}
+			}
+		}
 	}
 
 	honing_our_strength = {
