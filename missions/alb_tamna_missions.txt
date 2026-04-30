@@ -73,12 +73,39 @@ Tamna_1_slot = {
 		}
 		effect = {
 			custom_tooltip = AYABANI_TT_7
+			custom_tooltip = empty_line_tt
 			kinai_area = { add_permanent_claim = ROOT } 
 			chubu_area = { add_permanent_claim = ROOT } 
 			hokuriku_area = { add_permanent_claim = ROOT }
 			eastern_chubu_area = { add_permanent_claim = ROOT }
 			kanto_area = { add_permanent_claim = ROOT }
 			sanindo_area = { add_permanent_claim = ROOT }
+			hidden_effect = {
+				1820 = {
+					change_culture = jeju
+				}
+				1021 = {
+					change_culture = jeju
+				}
+				1019 = {
+					change_culture = jeju
+				}
+				4185 = {
+					change_culture = jeju
+				}
+				4184 = {
+					change_culture = jeju
+				}
+				1830 = {
+					change_culture = jeju
+				}
+				1018 = {
+					change_culture = jeju
+				}
+				4183 = {
+					change_culture = jeju
+				}
+			}
 		}
 	}
 	tmn_sos = {
@@ -108,6 +135,7 @@ Tamna_1_slot = {
         required_missions = { tmn_sos } 
 		provinces_to_highlight = {
 			region = korea_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 
 		trigger = {
@@ -118,7 +146,9 @@ Tamna_1_slot = {
 		}
 		effect = {
 			custom_tooltip =  AYABANI_TT_38
+			custom_tooltip = empty_line_tt
 			custom_tooltip =  AYABANI_TT_41
+			custom_tooltip = empty_line_tt
 			add_accepted_culture = korean
 			hidden_effect = {
 				country_event = { id = ayabani.36 }
@@ -163,6 +193,7 @@ Tamna_1_slot = {
 				}
 				set_country_flag = koreanretvrn2
 			}
+			custom_tooltip = empty_line_tt
 			add_country_modifier = {
 				name = ayb_buyeo
 				duration = 10950
@@ -244,6 +275,7 @@ Tamna_1_slot = {
 			discover_province = 4935
 			discover_province = 4934
 			discover_province = 1240
+			custom_tooltip = empty_line_tt
 			country_event = { id = ayabani.45 }
 		}
 	}
@@ -267,9 +299,11 @@ Tamna_1_slot = {
 			discover_province = 1693
 			discover_province = 1687
 			discover_province = 1556
+			custom_tooltip = empty_line_tt
 			869 = {
 				create_colony = 100
 			}
+			custom_tooltip = empty_line_tt
 			custom_tooltip = AYABANI_TT_52
 			hidden_effect = {
 				if = {
@@ -315,6 +349,9 @@ Tamna_1_slot = {
 					limit = {
 						is_colonial_nation_of = ROOT
 						capital_scope = { colonial_region = colonial_california } 
+					}
+					capital_scope = {
+						change_trade_goods = gold
 					}
 					add_country_modifier = {
 						name = ayb_calif
@@ -372,6 +409,7 @@ Tamna_1_slot = {
 				cost_multiplier = 0.5
 				skill = 3
 			}
+			custom_tooltip = empty_line_tt
 			698 = {
 				change_culture = jeju
 				change_religion = ROOT
@@ -379,10 +417,6 @@ Tamna_1_slot = {
 					type = the_great_wall_of_china
 					tier = 1
 				}
-			}
-			add_country_modifier = {
-				name = ayb_wall
-				duration = 10950
 			}
 		}
 	}
@@ -411,10 +445,12 @@ Tamna_2_slot = {
 		}
 		effect = { 
 			custom_tooltip = AYABANI_TT_18
+			custom_tooltip = empty_line_tt
             add_estate_loyalty = {
                 estate = estate_nobles
                 loyalty = -20
             }
+			custom_tooltip = empty_line_tt
 			remove_country_modifier = ayb_tamna_unification2
         } 
 	}
@@ -494,19 +530,18 @@ Tamna_2_slot = {
 		}
 		effect = {
 			add_army_tradition = 15
+			custom_tooltip = empty_line_tt
 			complex_dynamic_effect = {
 				first_custom_tooltip = AYABANI_TT_58a
 				first_limit = "
 					has_country_flag = grandarmy
 				"
 				first_effect = "
-					custom_tooltip = AYABANI_TT_58c
+					custom_tooltip = AYABANI_TT_58c 
 					hidden_effect = {
+						unlock_government_reform = { government_reform = alb_tamna_grandarmy_reform }
 						remove_country_modifier = ayb_grand_army_embraced
-						add_country_modifier = {
-							name = ayb_army_reformgrand
-							duration = -1
-						}				
+			
 					}
 				"
 				second_custom_tooltip = AYABANI_TT_58b
@@ -516,13 +551,24 @@ Tamna_2_slot = {
 				second_effect = "
 					custom_tooltip = AYABANI_TT_58d
 					hidden_effect = {
-						remove_country_modifier = ayb_professional_army
-						add_country_modifier = {
-							name = ayb_army_reformprof
-							duration = -1
-						}	
+						unlock_government_reform = { government_reform = alb_tamna_profarmy_reform } 
+						remove_country_modifier = alb_tamna_profarmy_reform
 					}
 				"
+			}
+			custom_tooltip = empty_line_tt
+			custom_tooltip = AYABANI_TT_58f
+			hidden_effect = {
+				if = {
+					limit = {
+						has_reform = alb_tamna_bluessolini_reform
+					}
+					add_government_power = {
+						mechanic_type = militarization_mechanic
+						power_type = militarized_society
+						value = 15
+					}
+				}
 			}
 		}
 	}
@@ -595,6 +641,12 @@ Tamna_2_slot = {
 			}
 		}
 		effect = {
+			2106 = {
+				add_or_upgrade_dock_building = yes
+				change_culture = jeju
+				change_religion = ROOT
+			}
+			custom_tooltip = empty_line_tt
 			add_country_modifier = {
 				name = ayb_coast
 				duration = 7300
@@ -658,7 +710,7 @@ Tamna_2_slot = {
 		effect = {
 			add_country_modifier = {
 				name = ayb_treasure
-				duration = 1825
+				duration = 3650
 			}
 			custom_tooltip = AYABANI_TT_57
 			hidden_effect = {
@@ -697,9 +749,15 @@ Tamna_2_slot = {
 		}
 		effect = {
 			country_event = { id = ayabani.44 }
-			add_country_modifier = {
-				name = ayb_herbal_tea
-				duration = 7300
+			custom_tooltip = empty_line_tt
+			custom_tooltip = AYABANI_TT_63
+			custom_tooltip = empty_line_tt
+			random_owned_province = {
+				limit = {
+					region = xinan_region
+					trade_goods = copper
+				}
+				add_latent_trade_goods = { coal }
 			}
 		}
 	}
@@ -724,8 +782,11 @@ Tamna_3_slot = {
 		}
 		effect = { 
 			custom_tooltip = AYABANI_TT_17
+			custom_tooltip = empty_line_tt
 			change_government_reform_progress = -100
+			custom_tooltip = empty_line_tt
 			add_legitimacy = -15
+			custom_tooltip = empty_line_tt
 			remove_country_modifier = ayb_tamna_unification3
         } 
 	}
@@ -855,11 +916,14 @@ Tamna_3_slot = {
 		}
 		effect = {
 			override_country_name = DAETAMNA
+			custom_tooltip = empty_line_tt
 			set_government_rank = 3
+			custom_tooltip = empty_line_tt
 			add_country_modifier = {
 				name = ayb_nihon
 				duration = 10950
 			}
+			custom_tooltip = empty_line_tt
 			if = {
 				limit = {
 					RYU = {
@@ -881,9 +945,6 @@ Tamna_3_slot = {
 		}
 		
 		trigger = {
-			OR = {
-
-			}
 			num_of_owned_provinces_with = {
 				value = 10
 				culture_group = japanese_g
@@ -934,6 +995,7 @@ Tamna_3_slot = {
 				cost_multiplier = 0.5
 				skill = 3
 			}
+			custom_tooltip = empty_line_tt
 			add_country_modifier = {
 				name = ayb_global_trade
 				duration = -1
@@ -961,6 +1023,7 @@ Tamna_3_slot = {
 				estate = estate_church
 				loyalty = 10
 			}
+			custom_tooltip = empty_line_tt
 			add_country_modifier = {
 				name = ayb_church
 				duration = -1
@@ -1212,11 +1275,14 @@ Tamna_4_slot = {
 		}
 		effect = { 
 			custom_tooltip = AYABANI_TT_19
+			custom_tooltip = empty_line_tt
             add_estate_loyalty = {
                 estate = estate_church
                 loyalty = -20
             }
+			custom_tooltip = empty_line_tt
 			add_stability = -1
+			custom_tooltip = empty_line_tt
 			remove_country_modifier = ayb_tamna_unification4
         } 
 	}
@@ -1245,6 +1311,7 @@ Tamna_4_slot = {
 		effect = {
 			sea_of_okhotsk_area = { discover_country = ROOT } 
 			east_siberia_region = { discover_country = ROOT } 
+			custom_tooltip = empty_line_tt
 			custom_tooltip = AYABANI_TT_43
 			hidden_effect = {
 				every_owned_province = {
@@ -1284,6 +1351,7 @@ Tamna_4_slot = {
 				cost_multiplier = 0.5
 				skill = 2
 			}
+			custom_tooltip = empty_line_tt
 			add_navy_tradition = 10
 		}
 	}
@@ -1304,6 +1372,7 @@ Tamna_4_slot = {
 		}
 		effect = {
 			create_admiral = { tradition = 100 }
+			custom_tooltip = empty_line_tt
 			add_country_modifier = {
 				name = ayb_navy
 				duration = -1
@@ -1366,14 +1435,81 @@ Tamna_4_slot = {
 			}
 		}
 		effect = {
-			add_prestige = 15
-			custom_tooltip = AYABANI_TT_47
-			hidden_effect = {
-				every_owned_province = {
-					limit = {
-						region = mongolia_region
+			complex_dynamic_effect = {
+				first_custom_tooltip = AYABANI_TT_62a
+				first_limit = "
+					accepted_culture = chile
+					NOT = {
+						accepted_culture = yenisei
+					}
+				"
+				first_effect = "
+					custom_tooltip = AYABANI_TT_62b
+					hidden_effect = {
+						every_owned_province = {
+							limit = {
+								culture = yenisei
+							}
+							change_culture = chile
+						}				
+					}
+				"
+				second_custom_tooltip = AYABANI_TT_62c
+				second_limit = "
+					accepted_culture = yenisei
+					NOT = {
+						accepted_culture = chile
+					}
+				"
+				second_effect = "
+					custom_tooltip = AYABANI_TT_62d
+					hidden_effect = {
+						every_owned_province = {
+							limit = {
+								culture = chile
+							}
+							change_culture = yenisei
+						}				
+					}
+				"
+				third_custom_tooltip = AYABANI_TT_62e
+				third_limit = "
+					tannu_uriankhai_area = {
+						type = all
+						country_or_non_sovereign_subject_holds = ROOT
+					}
+					NOT = {
+						AND = {
+							accepted_culture = chile
+							accepted_culture = yenisei
 						}
-					add_unrest = -2
+					}
+				"
+				third_effect = "
+					custom_tooltip = AYABANI_TT_62f
+					hidden_effect = {
+						every_owned_province = {
+							limit = {
+								region = mongolia_region
+							}
+							add_unrest = -2
+						}	
+					}			
+				"
+			}
+			custom_tooltip = empty_line_tt
+			custom_tooltip = AYABANI_TT_62i
+			custom_tooltip = AYABANI_TT_62g
+			custom_tooltip = AYABANI_TT_62h
+			hidden_effect = {
+				if = {
+					limit = {
+						AND = {
+							accepted_culture = chile
+							accepted_culture = yenisei
+						}
+					}
+					country_event = { id = ayabani.56 }
 				}
 			}
 		}
@@ -1435,6 +1571,7 @@ Tamna_4_slot = {
 		}
 		effect = {
 			custom_tooltip = AYABANI_TT_20
+			custom_tooltip = empty_line_tt
 			custom_tooltip = AYABANI_TT_21
 			hidden_effect = {
 				every_owned_province = {
@@ -1450,14 +1587,16 @@ Tamna_4_slot = {
 					change_culture = hakka
 				}
 			}
+			custom_tooltip = empty_line_tt
 			668 = {
 				change_culture = jeju
-				add_center_of_trade_level = 1
+				add_center_of_trade_lvl_or_ducats = yes
 				add_trade_node_income = 12
 			}
+			custom_tooltip = empty_line_tt
 			667 = {
 				change_culture = jeju
-				add_center_of_trade_level = 1
+				add_center_of_trade_lvl_or_ducats = yes
 			}
 		}
 	}
@@ -1511,6 +1650,7 @@ Tamna_5_slot = {
 				add_nationalism = -5
 				add_local_autonomy = -10
 			}
+			custom_tooltip = empty_line_tt
 			hokkaido_area = { add_permanent_claim = ROOT } 
 			sakhalin_area = { add_permanent_claim = ROOT } 
 			hidden_effect = {
@@ -1549,7 +1689,9 @@ Tamna_5_slot = {
 				change_culture = jeju
 				change_religion = ROOT
 			}
+			custom_tooltip = empty_line_tt
 			east_siberia_region = { add_permanent_claim = ROOT } 
+			custom_tooltip = empty_line_tt
 			add_country_modifier = {
 				name = ayb_colony_siberia
 				duration = 7300
@@ -1587,6 +1729,7 @@ Tamna_5_slot = {
     			duration = 10950
 				key = "Tamnan Fur Trade"
 			}
+			custom_tooltip = empty_line_tt
 			custom_tooltip =  AYABANI_TT_44
 			hidden_effect = {
 				every_owned_province = {
@@ -1622,7 +1765,7 @@ Tamna_5_slot = {
 				duration = 7300
 			}
 			738 = {
-				center_of_trade = 1
+				center_of_trade = 2
 			}
 			moluccas_region = { add_permanent_claim = ROOT } 
 			hidden_effect = {
@@ -1654,6 +1797,8 @@ Tamna_5_slot = {
 				name = ayb_filipinx
 				duration = -1
 			}
+			indonesia_region = { add_permanent_claim = ROOT } 
+			custom_tooltip = empty_line_tt
 			custom_tooltip =  AYABANI_TT_55
 			hidden_effect = {
 				every_owned_province = {
@@ -1676,6 +1821,7 @@ Tamna_5_slot = {
 			or = {
 				area = outer_mongolia_area
 				area = khamag_area
+				area = chahar_area
 				culture = khalkha
 				culture = evenk
 			}
@@ -1721,7 +1867,17 @@ Tamna_5_slot = {
 			}
 		}
 		effect = {
-			add_accepted_culture = khalkha
+			2116 = {
+				add_base_tax = 1
+				add_base_production = 1
+				add_base_manpower = 1
+				hidden_effect = {
+					add_permanent_province_modifier = {
+						name = ayb_khalkha
+						duration = -1
+					}
+				}
+			}
 			mongolia_region = { add_permanent_claim = ROOT }
 		}
 	}
@@ -1753,6 +1909,9 @@ Tamna_5_slot = {
 			}
 		}
 		effect = {
+			custom_tooltip =  AYABANI_TT_61
+			set_country_flag = tamnasilkroad
+			custom_tooltip = empty_line_tt
 			add_country_modifier = {
 				name = ayb_silk
 				duration = 7300
@@ -1862,6 +2021,7 @@ Tamna_5_slot = {
 		}
 		effect = {
 			add_manpower = 10
+			custom_tooltip = empty_line_tt
 			add_country_modifier = {
 				name = ayb_warlord
 				duration = 5475
@@ -1870,7 +2030,7 @@ Tamna_5_slot = {
 	}
 }
 
-
+#HWAN
 Tamna_hwan_1__slot = {
 	slot = 1
 	generic = no
@@ -1882,22 +2042,35 @@ Tamna_hwan_1__slot = {
 			has_country_flag = hwanguk
 		}
 	} 
-
-
-}
-Tamna_hwan_2__slot = {
-	slot = 2
-	generic = no
-	ai = yes
-	has_country_shield = yes
-	potential = { 
-		AND = {
-			tag = KR1
-			has_country_flag = hwanguk
+	tmn_persia = {
+		icon = mission_japanese_samurai
+		position = 16
+		required_missions = { tmn_empire }
+		provinces_to_highlight = { 
+			OR = {
+				region = persia_region
+				region = khorasan_region
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
-	} 
 
-
+		trigger = {
+			persia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			khorasan_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = ayb_persia
+				duration = -1
+			}
+		}
+	}
 }
 Tamna_hwan_3__slot = {
 	slot = 3
@@ -1915,33 +2088,87 @@ Tamna_hwan_3__slot = {
 		position = 16
 		required_missions = { tmn_empire }
 		provinces_to_highlight = { 
-
+			OR = {
+				region = central_asia_region
+				region = tibet_region
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 
 		trigger = {
-
+			central_asia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			tibet_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
 		}
 		effect = {
+			add_country_modifier = {
+				name = ayb_serica
+				duration = -1
+			}
+		}
+	}
+	tmn_hwan = {
+		icon = mission_japanese_samurai
+		position = 16
+        required_missions = { 
+			tmn_persia
+			tmn_serica
+			tmn_vietnam
+		} 
+		provinces_to_highlight = { 
+			OR = {
+				region = central_asia_region
+				region = khorasan_region
+				region = persia_region
+				region = tibet_region
+				region = burma_region
+				region = indo_china_region
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
 
+		trigger = {
+			central_asia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			khorasan_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			persia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			tibet_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			burma_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			indo_china_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = ayb_hwan
+				duration = -1
+			}
+			country_event = { id = ayabani.57 }
 		}
 	}
 }
-Tamna_hwan_4__slot = {
-	slot = 4
-	generic = no
-	ai = yes
-	has_country_shield = yes
-	potential = { 
-		AND = {
-			tag = KR1
-			has_country_flag = hwanguk
-		}
-	} 
-
-
-}
 Tamna_hwan_5_slot = {
-	slot = 4
+	slot = 5
 	generic = no
 	ai = yes
 	has_country_shield = yes
@@ -1951,10 +2178,106 @@ Tamna_hwan_5_slot = {
 			has_country_flag = hwanguk
 		}
 	} 
+	tmn_vietnam = {
+		icon = mission_japanese_samurai
+		position = 16
+		required_missions = { tmn_empire }
+		provinces_to_highlight = { 
+			OR = {
+				region = burma_region
+				region = indo_china_region
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
 
-
+		trigger = {
+			indo_china_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			burma_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = ayb_vietnam
+				duration = -1
+			}
+		}
+	}
 }
+#HWAN2
+Tamna_hwan_3__slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		AND = {
+			tag = KR1
+			has_country_flag = worldconquest
+		}
+	} 
+	tmn_hworld = {
+		icon = mission_japanese_samurai
+		position = 17
+		required_missions = { tmn_hwan }
+		provinces_to_highlight = {
+			OR = {
+				continent = europe
+				continent = asia
+				continent = africa
+				continent = north_america
+				continent = south_america
+				continent = oceania
+			}
+			is_sea = no
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
 
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = AYABANI_TT_64
+				AND = {
+					num_of_provinces_owned_or_owned_by_subjects_with = {
+						value = 535
+						continent = north_america
+					}
+					num_of_provinces_owned_or_owned_by_subjects_with = {
+						value = 249
+						continent = south_america
+					}
+					num_of_provinces_owned_or_owned_by_subjects_with = {
+						value = 440
+						continent = africa
+					}
+					num_of_provinces_owned_or_owned_by_subjects_with = {
+						value = 907
+						continent = europe
+					}
+					num_of_provinces_owned_or_owned_by_subjects_with = {
+						value = 535
+						continent = north_america
+					}
+					num_of_provinces_owned_or_owned_by_subjects_with = {
+						value = 1157
+						continent = asia
+					}
+					num_of_provinces_owned_or_owned_by_subjects_with = {
+						value = 90
+						continent = oceania
+					}
+				}
+			}
+		}
+		effect = {
+			country_event = { id = ayabani.58 }
+		}
+	}
+}
+#AYABANI
 Ayabani_2_slot = {
 	slot = 2
 	generic = no
