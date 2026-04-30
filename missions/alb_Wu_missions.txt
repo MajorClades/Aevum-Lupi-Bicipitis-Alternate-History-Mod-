@@ -701,9 +701,37 @@ alb_wu_slot_5 = {
 		required_missions = { }
 		provinces_to_highlight = { }
 		trigger = {
-			stability = 2
+			years_of_manpower = 2
+			years_of_income = 3
+			NOT = {
+				great_power_rank = 6
+			}
 		}
-		effect = { }
+		effect = { 
+			add_permanent_power_projection = {
+				amount = 25
+				type = 25_permanent_power_projection
+			}
+			custom_tooltip = empty_line_tt
+			if = {
+				limit = {
+					has_country_flag = jingjiao_larp
+				}
+				custom_tooltip = yes_jingjiao_larp
+			}
+			else = {
+				custom_tooltip = no_jingjiao_larp
+			}
+			tooltip = { unlock_estate_privilege = { estate_privilege = alb_all_under_heaven }  }
+			hidden_effect = {
+			if = {
+				limit = {
+					has_country_flag = jingjiao_larp
+				}
+				 unlock_estate_privilege = { estate_privilege = alb_all_under_heaven } 
+			}
+			}
+		}
 	}
 
 	expand_northern_frontier = {
