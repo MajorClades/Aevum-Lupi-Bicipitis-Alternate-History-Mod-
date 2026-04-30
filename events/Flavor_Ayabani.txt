@@ -572,6 +572,18 @@ country_event = {
 }
 
 country_event = {
+	id = ayabani.17
+	title = ayabani.17.t
+	desc = ayabani.17.d
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = ayabani.17a
+	}
+}
+
+country_event = {
 	id = ayabani.18
 	title = ayabani.18.t
 	desc = ayabani.18.d
@@ -943,70 +955,85 @@ country_event = { #Japanese Revolt failed
 			}
 			1021 = {
 				cede_province = MRI
+				add_core = MRI
 				remove_core = ROOT
 			}
 			1018 = {
 				cede_province = AMA
+				add_core = AMA
 				remove_core = ROOT
 			}
 			1830 = {
 				cede_province = AMA
+				add_core = AMA
 				remove_core = ROOT
 			}
 			4183 = {
 				cede_province = AMA
+				add_core = AMA
 				remove_core = ROOT
 			}
 			1020 = {
 				cede_province = HTK
+				add_core = HTK
 				remove_core = ROOT
 			}
 			4185 = {
 				cede_province = HTK
+				add_core = HTK
 				remove_core = ROOT
 			}
 			1023 = {
 				cede_province = HTK
+				add_core = HTK
 				remove_core = ROOT
 			}
 			1837 = {
 				cede_province = HTK
+				add_core = HTK
 				remove_core = ROOT
 			}
 			1832 = {
 				cede_province = TTI
+				add_core = TTI
 				remove_core = ROOT
 			}
 			4187 = {
 				cede_province = TTI
+				add_core = TTI
 				remove_core = ROOT
 			}
 			4359 = {
 				cede_province = TTI
+				add_core = TTI
 				remove_core = ROOT
 			}
 			1835 = {
 				cede_province = TKI
+				add_core = TKI
 				remove_core = ROOT
 			}
 			4188 = {
 				cede_province = TKI
+				add_core = TKI
 				remove_core = ROOT
 			}
 			1843 = {
 				cede_province = TKI
+				add_core = TKI
 				remove_core = ROOT
 			}
 			if = {
 				limit = { 
-					157 = {
+					1024 = {
 						owner = {
-							is_or_was_tag = KR1
+							tag = KR1
 						}
 					}
 				}
 				1024 = {
 					cede_province = TKI
+					add_core = TKI
 					remove_core = ROOT
 				}
 			}
@@ -1057,6 +1084,14 @@ country_event = { #Japanese Revolt failed
 				}
 				cede_province = ANU
 				add_core = ANU
+				remove_core = ROOT
+			}
+			every_owned_province = {
+				limit = {
+					area = furdan_area
+				}
+				cede_province = AKT
+				add_core = AKT
 				remove_core = ROOT
 			}
 		}
@@ -1545,14 +1580,20 @@ country_event = { #balloon lore fuck siberia
 	picture = shinto_MILITARY_CAMP_eventPicture
 	fire_only_once = yes
 
-
 	trigger = {
-
+		tag = KR1
+		is_year = 1550
+		NOT = { is_year = 1590 }
 	}
-
+	mean_time_to_happen = {
+		months = 300
+	}
 	option = {
 		name = ayabani.39a
-
+		add_country_modifier = {
+			name = ayb_balloon
+			duration = -1
+		}
 	}
 }
 
@@ -1790,7 +1831,7 @@ country_event = { #kaesong
 	id = ayabani.48
 	title = ayabani.48.t
 	desc = ayabani.48.d
-	picture = shinto_CITY_DEVELOPMENT_eventPicture
+	picture = asiangfx_CITY_DEVELOPMENT_eventPicture
 	fire_only_once = yes
 	is_triggered_only = yes
     trigger = {
@@ -1807,13 +1848,17 @@ country_event = { #mudang
 	id = ayabani.49
 	title = ayabani.49.t
 	desc = ayabani.49.d
-	picture = shinto_CITY_DEVELOPMENT_eventPicture
+	picture = BUDDHISM_MONASTERY_eventPicture
 	fire_only_once = yes
 	is_triggered_only = yes
-    trigger = {
-        tag = KR1
-
-    }
+	trigger = {
+		tag = KR1
+		is_year = 1600
+		NOT = { is_year = 1650 }
+	}
+	mean_time_to_happen = {
+		months = 300
+	}
 	option = {
 		name = ayabani.49a
 		custom_tooltip = AYABANI_TT_67c
@@ -1832,13 +1877,17 @@ country_event = { #general
 	id = ayabani.50
 	title = ayabani.50.t
 	desc = ayabani.50.d
-	picture = shinto_CITY_DEVELOPMENT_eventPicture
+	picture = altaic_MILITARY_CAMP_eventPicture
 	fire_only_once = yes
 	is_triggered_only = yes
-    trigger = {
-        tag = KR1
-
-    }
+	trigger = {
+		tag = KR1
+		is_year = 1460
+		NOT = { is_year = 1500 }
+	}
+	mean_time_to_happen = {
+		months = 300
+	}
 	option = {
 		name = ayabani.50a
 		custom_tooltip = AYABANI_TT_67b
@@ -1868,13 +1917,17 @@ country_event = { #book
 	id = ayabani.51
 	title = ayabani.51.t
 	desc = ayabani.51.d
-	picture = shinto_CITY_DEVELOPMENT_eventPicture
+	picture = BIG_BOOK_eventPicture
 	fire_only_once = yes
 	is_triggered_only = yes
-    trigger = {
-        tag = KR1
-
-    }
+	trigger = {
+		tag = KR1
+		is_year = 1708
+		NOT = { is_year = 1558 }
+	}
+	mean_time_to_happen = {
+		months = 300
+	}
 	option = {
 		name = ayabani.51a
 		custom_tooltip = AYABANI_TT_67d
@@ -1887,10 +1940,17 @@ country_event = { #coup?
 	id = ayabani.52
 	title = ayabani.52.t
 	desc = ayabani.52.d
-	picture = shinto_CITY_DEVELOPMENT_eventPicture
+	picture = ACCUSATION_eventPicture
 	fire_only_once = yes
 	is_triggered_only = yes
-
+	trigger = {
+		tag = KR1
+		is_year = 1508
+		NOT = { is_year = 1560 }
+	}
+	mean_time_to_happen = {
+		months = 300
+	}
 	option = {
 		name = ayabani.52a
 		add_army_tradition = -1
@@ -1909,7 +1969,7 @@ country_event = { #coup
 	id = ayabani.53
 	title = ayabani.53.t
 	desc = ayabani.53.d
-	picture = shinto_CITY_DEVELOPMENT_eventPicture
+	picture = shinto_MILITARY_CAMP_eventPicture
 	fire_only_once = yes
 	is_triggered_only = yes
 
@@ -1929,6 +1989,11 @@ country_event = { #coup
 				dip = 3
 				mil = 4
 				age = 22
+			}
+			change_country_color = {
+				color = {
+					41 44 48
+				}
 			}
 			every_owned_province = {
 				add_core = KM7
@@ -2004,7 +2069,7 @@ country_event = { #somehowgowins
 	id = ayabani.54
 	title = ayabani.54.t
 	desc = ayabani.54.d
-	picture = shinto_CITY_DEVELOPMENT_eventPicture
+	picture = east_asian_GOOD_WITH_MONARCH_eventPicture
 	fire_only_once = yes
 	is_triggered_only = yes
     trigger = {
@@ -2032,11 +2097,11 @@ country_event = { #somehowgowins
 	}
 }
 
-country_event = { #goloses
+country_event = { #golosesdoesn'twork
 	id = ayabani.55
 	title = ayabani.55.t
 	desc = ayabani.55.d
-	picture = shinto_CITY_DEVELOPMENT_eventPicture
+	picture = MILITARISTICALLY_TALENTED_RULER_eventPicture
 	fire_only_once = yes
 	is_triggered_only = yes
     trigger = {
@@ -2088,7 +2153,7 @@ country_event = { #wc1
 	id = ayabani.57
 	title = ayabani.57.t
 	desc = ayabani.57.d
-	picture = east_asian_GOOD_WITH_MONARCH_eventPicture
+	picture = east_asian_BATTLE_eventPicture
 	fire_only_once = yes
 	is_triggered_only = yes
 
@@ -2128,6 +2193,9 @@ country_event = { #wc2
 	option = {
 		name = ayabani.58a
 		custom_tooltip = AYABANI_TT_65b
+		hidden_effect = {
+
+		}
 	}
 }
 
@@ -2135,7 +2203,7 @@ country_event = { #goloses
 	id = ayabani.59
 	title = ayabani.59.t
 	desc = ayabani.59.d
-	picture = shinto_CITY_DEVELOPMENT_eventPicture
+	picture = MILITARISTICALLY_TALENTED_RULER_eventPicture
 	fire_only_once = yes
 	is_triggered_only = yes
     trigger = {

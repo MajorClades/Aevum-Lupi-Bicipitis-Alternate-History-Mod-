@@ -1371,6 +1371,7 @@ Tamna_4_slot = {
 			navy_size = 50
 		}
 		effect = {
+			add_navy_tradition = -10
 			create_admiral = { tradition = 100 }
 			custom_tooltip = empty_line_tt
 			add_country_modifier = {
@@ -1692,17 +1693,34 @@ Tamna_5_slot = {
 			custom_tooltip = empty_line_tt
 			east_siberia_region = { add_permanent_claim = ROOT } 
 			custom_tooltip = empty_line_tt
-			add_country_modifier = {
-				name = ayb_colony_siberia
-				duration = 7300
-			}
-			if = {
-				limit = {
-					IN0 = {
-						is_subject_of = ROOT
+			custom_tooltip = AYABANI_TT_52
+			hidden_effect = {
+				if = {
+					limit = {
+						NOT = {
+							has_country_modifier = ayb_colony_siberia
+						}
+					}
+					add_country_modifier = {
+						name = ayb_colony_siberia
+						duration = 7300
 					}
 				}
+				else = {
+					remove_country_modifier = ayb_colony_siberia
+					add_country_modifier = {
+						name = ayb_colony_siberia
+						duration = 7300
+					}
+				}
+				if = {
+					limit = {
+						IN0 = {
+							is_subject_of = ROOT
+						}
+					}
 				inherit = IN0
+				}
 			}
 		}
 	}
@@ -2043,7 +2061,7 @@ Tamna_hwan_1__slot = {
 		}
 	} 
 	tmn_persia = {
-		icon = mission_japanese_samurai
+		icon = per_tab_ziyarids_successor
 		position = 16
 		required_missions = { tmn_empire }
 		provinces_to_highlight = { 
@@ -2084,7 +2102,7 @@ Tamna_hwan_3__slot = {
 		}
 	} 
 	tmn_serica = {
-		icon = mission_japanese_samurai
+		icon = per_establish_western_defenses
 		position = 16
 		required_missions = { tmn_empire }
 		provinces_to_highlight = { 
@@ -2113,7 +2131,7 @@ Tamna_hwan_3__slot = {
 		}
 	}
 	tmn_hwan = {
-		icon = mission_japanese_samurai
+		icon = adopt_alphabet
 		position = 16
         required_missions = { 
 			tmn_persia
@@ -2179,7 +2197,7 @@ Tamna_hwan_5_slot = {
 		}
 	} 
 	tmn_vietnam = {
-		icon = mission_japanese_samurai
+		icon = mission_jungle
 		position = 16
 		required_missions = { tmn_empire }
 		provinces_to_highlight = { 
@@ -2221,7 +2239,7 @@ Tamna_hwan_3__slot = {
 		}
 	} 
 	tmn_hworld = {
-		icon = mission_japanese_samurai
+		icon = mission_explore_the_world
 		position = 17
 		required_missions = { tmn_hwan }
 		provinces_to_highlight = {
