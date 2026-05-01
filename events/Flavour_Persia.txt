@@ -1,0 +1,366 @@
+namespace = persian
+
+country_event = {
+	id = persian.1
+	title = persian.1.test
+	desc = persian.1.desc
+	picture = CRUSADER_HORDE_eventPicture
+	trigger = {
+		tag = MD1
+	}
+	fire_only_once = yes
+	hidden = yes
+	option = {
+		name = persian.1a
+		MD1 = {
+			set_country_flag = extra_discipline_for_at_flag
+			atm_set_up = yes
+			disband_all_units = yes
+			427 = {
+				build_to_forcelimit = {
+					infantry = 0.8
+					cavalry = 0.2
+				}
+			}
+			define_ruler_to_general = {
+				fire = 1
+				shock = 3
+				manuever = 6
+				siege = 3
+			}
+			define_general = {
+				shock = 4
+				fire = 3
+				manuever = 3
+				siege = 0
+			}
+		}
+		PR0 = {
+			define_ruler_to_general = {
+				fire = 2
+				shock = 3
+				manuever = 4
+				siege = 3
+			}
+			define_general = {
+				shock = 4
+				fire = 2
+				manuever = 2
+				siege = 5
+			}
+		}
+		PR1 = {
+			define_general = {
+				shock = 3
+				fire = 2
+				manuever = 1
+				siege = 2
+			}
+		}
+	}
+}
+
+country_event = { #goyman event
+	id = persian.2
+	title = persian.2.test
+	desc = persian.2.desc
+	picture = FAT_WARRIORS_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = persian.2a
+		add_country_modifier = {
+				name = goy_strong_soldiers
+				duration = -1
+			}
+	}
+	option = {
+		name = persian.2b
+		add_country_modifier = {
+				name = goy_strong_cav
+				duration = -1
+			}
+	}
+	option = {
+		name = persian.2c
+		add_country_modifier = {
+				name = goy_strong_art
+				duration = -1
+			}
+	}
+}
+
+country_event = { #continuation war
+	id = persian.3
+	title = persian.3.test
+	desc = persian.3.desc
+	picture = WAR_OF_THE_ROSES_eventPicture
+	
+	trigger = {
+		OR = {
+			tag = PR0
+			tag = PR1
+		}
+		has_won_war_against = {
+			who = MD1
+		}
+		is_at_war = no
+		PR0 = {
+			exists = yes
+		}
+		PR1 = {
+			exists = yes
+		}
+		NOT = {
+			has_country_flag = fires_war_contin_flag
+		}
+	}
+
+	mean_time_to_happen = {
+		days = 12
+	}
+
+	option = {
+		name = persian.3a
+		ai_chance = {
+			factor = 50
+		}
+		if = {
+			limit = {
+				tag = PR0
+			}
+			declare_war_with_cb = {
+				casus_belli = cb_spread_the_true_faith
+				who = PR1
+			}
+		}else = {
+			declare_war_with_cb = {
+				casus_belli = cb_spread_the_true_faith
+				who = PR0
+			}
+		}
+	}
+	option = {
+		name = persian.3b
+		ai_chance = {
+			factor = 50
+		}
+		add_stability_or_adm_power = yes
+	}
+	after = {
+		hidden_effect = {
+			set_country_flag = fires_war_contin_flag
+		}
+	}
+
+}
+
+country_event = { #parneshar event
+	id = persian.4
+	title = persian.4.test
+	desc = persian.4.desc
+	picture = DEBATE_REPUBLICAN_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = persian.4a
+		add_government_reform = parn_manich_kingdom_reform
+	}
+	option = {
+		name = persian.4b
+		change_government = theocracy
+		add_government_reform = parn_manich_theocracy_reform
+	}
+}
+
+country_event = { #parneshar event
+	id = persian.5
+	title = persian.5.test
+	desc = persian.5.desc
+	picture = DEBATE_REPUBLICAN_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = persian.5a
+		set_capital = 2221
+		2221 = {
+			add_or_upgrade_fort_building = yes
+			add_base_manpower = 2
+		}
+	}
+	option = {
+		name = persian.5b
+		set_capital = 2221
+		2221 = {
+			add_building = cathedral
+			add_base_manpower = 2
+		}
+	}
+	option = {
+		name = persian.5c
+		2221 = {
+			add_or_upgrade_fort_building = yes
+		}
+	}
+}
+
+country_event = { #Persia event
+	id = persian.6
+	title = persian.6.test
+	desc = persian.6.desc
+	picture = DEBATE_REPUBLICAN_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = persian.6a
+		5027 = {
+			add_core = ROOT
+			change_religion = ROOT
+			add_devastation = 50
+		}
+		custom_tooltip = every_denawar_province_tt
+		tooltip = {
+			add_province_modifier = {
+				name = pers_broken_babylon
+				duration = 9125
+			}
+		}
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					religion = manich
+				}
+				add_province_modifier = {
+					name = pers_broken_babylon
+					duration = 9125
+				}
+			}
+		}
+	}
+	option = {
+		name = persian.6b
+		custom_tooltip = every_denawar_province_tt
+		tooltip = {
+			add_province_modifier = {
+				name = pers_fallen_babylon
+				duration = 9125
+			}
+		}
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					religion = manich
+				}
+				add_province_modifier = {
+					name = pers_fallen_babylon
+					duration = 9125
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Persia event win against EOL
+	id = persian.7
+	title = persian.7.test
+	desc = persian.7.desc
+	picture = DEBATE_REPUBLICAN_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = persian.7a
+		ai_chance = {
+			factor = 50
+		}
+		change_religion = PER
+	}
+	option = {
+		name = persian.7b
+		ai_chance = {
+			factor = 50
+		}
+		add_stability = -2
+		add_war_exhaustion = 2
+	}
+}
+
+country_event = { #Persia event
+	id = persian.8
+	title = persian.8.test
+	desc = persian.8.desc
+	picture = DEBATE_REPUBLICAN_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = persian.8a
+		add_country_modifier = {
+			name = pers_one_mil_buff
+			duration = -1
+		}
+	}
+	option = {
+		name = persian.8b
+		add_country_modifier = {
+			name = elite_persian_horses
+			duration = -1
+		}
+	}
+	option = {
+		name = persian.8c
+		add_country_modifier = {
+			name = pers_2_mil_buff
+			duration = -1
+		}
+	}
+}
+
+province_event = {
+	id = persian.1000
+	title = persian.1000.test
+	desc = persian.1000.desc
+	picture = TRADEGOODS_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = persian.1000a
+		add_province_modifier = {
+			name = fars_trade_expansion_1
+			duration = -1
+		}
+		owner = {
+			if = {
+				limit = { has_country_flag = halved_cost_for_trade_expansion }
+					add_years_of_income = -0.25
+				}else = {
+					add_years_of_income = -0.5
+				}
+		}
+	}
+	option = {
+		name = persian.1000b
+		add_province_modifier = {
+			name = fars_trade_expansion_2
+			duration = -1
+		}
+		owner = {
+			if = {
+				limit = { has_country_flag = halved_cost_for_trade_expansion }
+					add_years_of_income = -0.25
+				}else = {
+					add_years_of_income = -0.5
+				}
+		}
+	}
+	option = {
+		name = persian.1000c
+		add_province_modifier = {
+			name = fars_trade_expansion_3
+			duration = -1
+		}
+		owner = {
+			if = {
+				limit = { has_country_flag = halved_cost_for_trade_expansion }
+					add_years_of_income = -0.25
+				}else = {
+					add_years_of_income = -0.5
+				}
+		}
+	}
+	option = {
+		name = persian.1000d
+		
+	}
+}

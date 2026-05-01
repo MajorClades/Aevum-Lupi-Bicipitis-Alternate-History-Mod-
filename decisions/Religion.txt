@@ -599,7 +599,7 @@ country_decisions = {
 			has_dlc = "Cradle of Civilization"
 			NOT = { religion_group = zoroastrian_group }
 			capital_scope = {
-				religion_group = zoroastrian_group
+				religion = zoroastrian
 				is_node_in_trade_company_region = yes
 			}
 		}
@@ -637,6 +637,7 @@ country_decisions = {
 			}
 		}
 	}
+	
 	
 	regulate_the_monastaries = {
 		potential = {
@@ -1555,7 +1556,11 @@ country_decisions = {
 	totemism_purification_movement = {
 		potential = {
 			NOT = { has_country_modifier = purification_movement_modifier }
-			religion = totemism
+			OR = {
+					religion = totemism
+					religion = ceremonialism
+					religion = midewiwin
+				}
 			any_owned_province = {
 				NOT = { religion = owner }
 			}

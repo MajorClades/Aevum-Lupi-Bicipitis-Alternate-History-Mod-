@@ -2233,7 +2233,7 @@ chichen_itza = {
 
 himeji_castle = {
 	# province it starts in
-	start = 1019
+	start = 1825
 	
 	# date built in real life (so anything built during game time will be there if you start a game after that date)
 	date = 1346.01.01
@@ -3896,12 +3896,21 @@ mesa_verde = {
 
 	#can we build it?
 	build_trigger = {
-		OR = {
-			province_is_or_accepts_religion = {
-				religion = totemism
-			}
-			province_is_or_accepts_religion = {
-				religion = mexicos
+		custom_trigger_tooltip = {
+			tooltip = IS_OR_ACCEPTS_NA_RELIGIONS
+			OR = {
+				province_is_or_accepts_religion = {
+					religion = totemism
+				}
+				province_is_or_accepts_religion = {
+					religion = mexicos
+				}
+				province_is_or_accepts_religion = {
+					religion = ceremonialism
+				}
+				province_is_or_accepts_religion = {
+					religion = midewiwin
+				}
 			}
 		}
 	}
@@ -3918,24 +3927,42 @@ mesa_verde = {
 
 	#can our country use it?
 	can_use_modifiers_trigger = {
-		OR = {
-			province_is_or_accepts_religion = {
-				religion = totemism
-			}
-			province_is_or_accepts_religion = {
-				religion = mexicos
+		custom_trigger_tooltip = {
+			tooltip = IS_OR_ACCEPTS_NA_RELIGIONS
+			OR = {
+				province_is_or_accepts_religion = {
+					religion = totemism
+				}
+				province_is_or_accepts_religion = {
+					religion = mexicos
+				}
+				province_is_or_accepts_religion = {
+					religion = ceremonialism
+				}
+				province_is_or_accepts_religion = {
+					religion = midewiwin
+				}
 			}
 		}
 	}
 
 	#can our country upgrade it?
 	can_upgrade_trigger = {
-		OR = {
-			province_is_or_accepts_religion = {
-				religion = totemism
-			}
-			province_is_or_accepts_religion = {
-				religion = mexicos
+		custom_trigger_tooltip = {
+			tooltip = IS_OR_ACCEPTS_NA_RELIGIONS
+			OR = {
+				province_is_or_accepts_religion = {
+					religion = totemism
+				}
+				province_is_or_accepts_religion = {
+					religion = mexicos
+				}
+				province_is_or_accepts_religion = {
+					religion = ceremonialism
+				}
+				province_is_or_accepts_religion = {
+					religion = midewiwin
+				}
 			}
 		}
 	}
@@ -4095,8 +4122,13 @@ taj_mahal = {
 
 	#can we build it?
 	build_trigger = {
-		province_is_or_accepts_religion_group = {
-			religion_group = muslim
+		OR = {
+			province_is_or_accepts_religion = {
+				religion = manich
+			}
+			province_is_or_accepts_religion = {
+				religion = jyotisastra
+			}
 		}
 	}
 
@@ -4112,15 +4144,25 @@ taj_mahal = {
 
 	#can our country use it?
 	can_use_modifiers_trigger = {
-		province_is_or_accepts_religion_group = {
-			religion_group = muslim
+		OR = {
+			province_is_or_accepts_religion = {
+				religion = manich
+			}
+			province_is_or_accepts_religion = {
+				religion = jyotisastra
+			}
 		}
 	}
 
 	#can our country upgrade it?
 	can_upgrade_trigger = {
-		province_is_or_accepts_religion_group = {
-			religion_group = muslim
+		OR = {
+			province_is_or_accepts_religion = {
+				religion = manich
+			}
+			province_is_or_accepts_religion = {
+				religion = jyotisastra
+			}
 		}
 	}
 
@@ -7304,8 +7346,7 @@ fire_temple_of_ateshgah = {
 
 		#what modifiers are added to the country when we have this project here on this tier
 		country_modifiers = {
-			discipline = 0.025
-			fire_damage_received = -0.05
+			fire_damage_received = -0.1
 		}
 
 		#what effects happen when this tier is achieved
@@ -7334,7 +7375,6 @@ fire_temple_of_ateshgah = {
 
 		#what modifiers are added to the country when we have this project here on this tier
 		country_modifiers = {
-			discipline = 0.05
 			fire_damage_received = -0.1
 			culture_conversion_cost = -0.05
 		}
@@ -7365,10 +7405,9 @@ fire_temple_of_ateshgah = {
 
 		#what modifiers are added to the country when we have this project here on this tier
 		country_modifiers = {
-			discipline = 0.1
 			fire_damage_received = -0.1
 			fire_damage = 0.05			
-			culture_conversion_cost = -0.1
+			culture_conversion_cost = -0.15
 		}
 
 		#what effects happen when this tier is achieved
@@ -7565,7 +7604,7 @@ fire_temple_of_ateshgah = {
 # 	}
 # }
 
-#pena_palace = { #Replaced by Bel�m Tower, as requested by community
+#pena_palace = { #Replaced by Bel?m Tower, as requested by community
 	# province it starts in
 	# start = 227
 	
@@ -9649,7 +9688,7 @@ bara_katra = {
 }
 
 bran_castle = {
-	start = 4128 #Kir�lyf�ld
+	start = 4128 #Kir?lyf?ld
 	date = 1357.01.01
 	time = { months = 0	}
 	build_cost = 0
@@ -9661,6 +9700,14 @@ bran_castle = {
 	build_trigger = {
 		culture_group = dacian_group
 		province_is_or_accepts_culture = yes
+		hidden_trigger = {
+			NOT = {
+				OR = {
+					has_global_flag = castlegone
+					has_global_flag = avarcastle
+				}
+			}
+		}
 	}
 
 	on_built = {
@@ -9793,12 +9840,21 @@ cahokia = {
 	type = monument
 
 	build_trigger = {
-		OR = {
-			province_is_or_accepts_religion = {
-				religion = totemism
-			}
-			province_is_or_accepts_religion = {
-				religion = mexicos
+		custom_trigger_tooltip = {
+			tooltip = IS_OR_ACCEPTS_NA_RELIGIONS
+			OR = {
+				province_is_or_accepts_religion = {
+					religion = totemism
+				}
+				province_is_or_accepts_religion = {
+					religion = mexicos
+				}
+				province_is_or_accepts_religion = {
+					religion = ceremonialism
+				}
+				province_is_or_accepts_religion = {
+					religion = midewiwin
+				}
 			}
 		}
 	}
@@ -9810,23 +9866,41 @@ cahokia = {
 	}
 
 	can_use_modifiers_trigger = {
-		OR = {
-			province_is_or_accepts_religion = {
-				religion = totemism
-			}
-			province_is_or_accepts_religion = {
-				religion = mexicos
+		custom_trigger_tooltip = {
+			tooltip = IS_OR_ACCEPTS_NA_RELIGIONS
+			OR = {
+				province_is_or_accepts_religion = {
+					religion = totemism
+				}
+				province_is_or_accepts_religion = {
+					religion = mexicos
+				}
+				province_is_or_accepts_religion = {
+					religion = ceremonialism
+				}
+				province_is_or_accepts_religion = {
+					religion = midewiwin
+				}
 			}
 		}
 	}
 
 	can_upgrade_trigger = {
-		OR = {
-			province_is_or_accepts_religion = {
-				religion = totemism
-			}
-			province_is_or_accepts_religion = {
-				religion = mexicos
+		custom_trigger_tooltip = {
+			tooltip = IS_OR_ACCEPTS_NA_RELIGIONS
+			OR = {
+				province_is_or_accepts_religion = {
+					religion = totemism
+				}
+				province_is_or_accepts_religion = {
+					religion = mexicos
+				}
+				province_is_or_accepts_religion = {
+					religion = ceremonialism
+				}
+				province_is_or_accepts_religion = {
+					religion = midewiwin
+				}
 			}
 		}
 	}
@@ -10655,6 +10729,10 @@ erdene_zuu = {
 				religion = manich
 				has_owner_religion = yes
 			}
+			AND = {
+				religion = jyotisastra
+				has_owner_religion = yes
+			}
 		}
 	}
 
@@ -10666,6 +10744,10 @@ erdene_zuu = {
 			}
 			AND = {
 				religion = manich
+				has_owner_religion = yes
+			}
+			AND = {
+				religion = jyotisastra
 				has_owner_religion = yes
 			}
 		}
@@ -11239,6 +11321,7 @@ gyeongbok_palace = {
 			culture = korean_new
 			culture = korean
 			culture = jeju
+			culture = mongol
 		}
 		province_is_or_accepts_culture = yes
 	}
@@ -11253,22 +11336,20 @@ gyeongbok_palace = {
 		OR = {
 			culture = korean_new
 			culture = korean
+			culture = jeju
+			culture = mongol
 		}
 		province_is_or_accepts_culture = yes
-		province_is_or_accepts_religion = {
-			religion = confucianism
-		}	
 	}
 
 	can_upgrade_trigger = {
 		OR = {
 			culture = korean_new
 			culture = korean
+			culture = jeju
+			culture = mongol
 		}
 		province_is_or_accepts_culture = yes
-		province_is_or_accepts_religion = {
-			religion = confucianism
-		}	
 	}
 
 	keep_trigger = {
@@ -13898,7 +13979,7 @@ swayambhunath = {
 
 
 tikal = {
-	start = 842 #Pet�n
+	start = 842 #Pet?n
 	date = 10.01.01
 	time = { months = 0	}
 	build_cost = 0
@@ -15087,7 +15168,6 @@ salvador_da_bahia = {
 		area_modifier = {
 		}
 		region_modifier = {
-			trade_goods_size = 0.25
 		}
 		country_modifiers = {
 			global_trade_power = 0.15
@@ -15110,7 +15190,6 @@ salvador_da_bahia = {
 		area_modifier = {
 		}
 		region_modifier = {
-			trade_goods_size = 0.5
 		}
 		country_modifiers = {
 			global_trade_power = 0.2
@@ -15826,14 +15905,10 @@ shah_rukn_e_alam_tomb = {
 	on_destroyed = {
 	}
 	can_use_modifiers_trigger = {
-		province_is_or_accepts_religion_group = {
-			religion_group = muslim
-		}
+		
 	}
 	can_upgrade_trigger = {
-		province_is_or_accepts_religion_group = {
-			religion_group = muslim
-		}
+		
 	}
 	keep_trigger = {
 		
@@ -15896,6 +15971,7 @@ shah_rukn_e_alam_tomb = {
 		country_modifiers = {
 			tolerance_own = 1
 			relation_with_heretics = 20
+			improve_relation_modifier = 0.15
 		}	
 		on_upgraded = {
 		}
@@ -15916,14 +15992,10 @@ shah_rukn_e_alam_tomb = {
 		country_modifiers = {
 			tolerance_own = 2
 			relation_with_heretics = 20
+			improve_relation_modifier = 0.25
+			missionaries = 1
 		}
 		on_upgraded = {
-			custom_tooltip = enable_baseline_invite_scholar_tt
-			custom_tooltip = disable_scholar_cost_tt
-			owner = { 
-				set_country_flag = no_scholar_adm_cost
-				set_country_flag = enabled_baseline_invite_scholar
-			}
 		}
 	}
 }

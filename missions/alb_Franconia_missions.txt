@@ -287,16 +287,28 @@ Franconia_3_slot = {
 
 		trigger = {
 			if = {
-				limit = { dynasty = Meroveching } 
+				limit = { has_country_flag = victory_ofthe_merovingians_flag } 
 				stability = 2
 			}
 			else = { owns_all_provinces = { is_core = FC0 }  } 
 		}
 
 		effect = {
-			lorraine_area = { add_permanent_claim = ROOT } 
-			champagne_area = { add_permanent_claim = ROOT } 
-			picardy_area = { add_permanent_claim = ROOT } 
+			if = {
+				limit = {
+					exists = SO0
+					has_country_flag = victory_ofthe_merovingians_flag
+				}
+				add_historical_friend = SO0
+				SO0 = {
+					add_historical_friend = ROOT
+				}
+			}
+			else = {
+				lorraine_area = { add_permanent_claim = ROOT } 
+				champagne_area = { add_permanent_claim = ROOT } 
+				picardy_area = { add_permanent_claim = ROOT } 
+			}
 		}
 	}
 

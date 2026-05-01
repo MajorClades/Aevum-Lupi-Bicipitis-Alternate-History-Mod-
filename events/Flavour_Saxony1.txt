@@ -221,7 +221,7 @@ country_event = {
 }
 
 #convert balts
-province_event = {
+country_event = {
 	id = saxo.5
 	title = saxo.5.t
 	desc = saxo.5.d
@@ -229,66 +229,83 @@ province_event = {
 	
 	# is_mtth_scaled_to_size = 1
 	hidden = yes
-	
+	is_triggered_only = yes
 	trigger = {
-		culture_group = baltic
-		owner = { has_country_flag = alb_sax_germanize_baltics_flag }
+		any_owned_province = {
+			culture_group = baltic
+		}
+		has_country_flag = alb_sax_germanize_baltics_flag
 	}
 
 	mean_time_to_happen = {
-		months = 300
-		modifier = {
-			factor = 0.75
-			development = 15
-		}
-		modifier = {
-			factor = 0.75
-			development = 20
-		}
-		modifier = {
-			factor = 0.75
-			development = 25
-		}
-		modifier = {
-			factor = 0.75
-			development = 30
-		}
+		months = 1
 	}
 	
 	option = {
 		name = saxo.5a
-		if = {
+		random_owned_province = {
 			limit = {
-				owner = {
-					culture_group = unified_germanic
-				}
-				OR = {
-					culture = lithuanian
-					culture = latvian
-				}
+				culture_group = baltic
 			}
-			change_culture = ug_litaisch
-		}
-		else_if = {
-			limit = { 
-				OR = {
-					culture = lithuanian
-					culture = latvian
+			if = {
+				limit = {
+					owner = {
+						culture_group = unified_germanic
+					}
+					OR = {
+						culture = lithuanian
+						culture = aukstaitian
+						culture = samogitian
+						culture = latvian
+					}
 				}
+				change_culture = ug_litaisch
 			}
-			change_culture = litaisch
-		}
-		else_if = {
-			limit = { 
-				owner = {
-					culture_group = unified_germanic
+			else_if = {
+				limit = { 
+					OR = {
+						culture = lithuanian
+						culture = aukstaitian
+						culture = samogitian
+						culture = latvian
+					}
 				}
-				culture = valtean
+				change_culture = litaisch
 			}
-			change_culture = ug_balten
-		}
-		else = {
-			change_culture = balten_new
+			else_if = {
+				limit = { 
+					owner = {
+						culture_group = unified_germanic
+					}
+					OR = {
+						culture = curonian
+						culture = selonian
+						culture = valtean
+					}
+				}
+				change_culture = ug_balten
+			}
+			else_if = {
+				limit = { 
+					OR = {
+						culture = curonian
+						culture = selonian
+						culture = valtean
+					}
+				}
+				change_culture = balten_new
+			}
+			else_if = {
+				limit = {
+					owner = {
+						culture_group = unified_germanic
+					}
+				}
+				change_culture = ug_saxonard
+			}
+			else = {
+				change_culture = saxonard
+			}
 		}
 	}
 }

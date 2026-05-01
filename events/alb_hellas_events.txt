@@ -1,0 +1,279 @@
+namespace = hellas
+
+country_event = {
+	id = hellas.1
+	title = hellas.1.t
+	desc = hellas.1.d
+	picture = COURT_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = hellas.1b
+		ai_chance = {
+			factor = 25
+		}
+        set_capital = 148
+        set_country_flag = HELLASROMELARP
+        custom_tooltip =  HELLAS_TT_2
+        swap_non_generic_missions = yes
+        if = {
+            limit = {
+                owns = 151
+            }
+            country_event = {
+                id = hellas.2
+            }
+        }
+        hidden_effect = {
+            country_event = {
+                id = hellas.3
+                days = 10
+            }
+        }
+	}
+	option = {
+		name = hellas.1c
+		ai_chance = {
+			factor = 50
+		}
+        set_country_flag = HELLASCRUSADELARP
+		add_stability = 1
+        set_capital = 148
+        custom_tooltip =  HELLAS_TT_3
+        swap_non_generic_missions = yes
+        hidden_effect = {
+            country_event = {
+                id = hellas.3
+                days = 10
+            }
+        }
+	}
+}
+
+country_event = {
+	id = hellas.2
+	title = hellas.2.t
+	desc = hellas.2.d
+	picture = CONSTANTINOPLE_eventPicture
+    fire_only_once = yes
+    is_triggered_only = yes
+    trigger = {
+        tag = HL0
+        has_country_flag = HELLASROMELARP
+        owns = 151
+    }
+    option = {
+        name = hellas.2a
+        set_government_rank = 3
+        add_core = 151
+        set_capital = 151
+        override_country_name = HELLASROME
+        set_country_flag = HELLAS_CORONATED_ROMAN
+        151 = {
+            change_religion = ROOT
+            add_great_project_tier = {
+                type = hagia_sophia
+                tier = 1
+            }
+        }
+        hidden_effect = {
+            change_country_color = { 
+                color = { 112 41 99 } #byzantium color
+            }
+        }
+    }
+}
+
+country_event = {
+	id = hellas.3
+	title = hellas.3.t
+	desc = hellas.3.d
+	picture = CONSTANTINOPLE_eventPicture
+    fire_only_once = yes
+	is_triggered_only = yes
+    option = {
+        name = hellas.3a
+		ai_chance = {
+			factor = 60
+		}
+        set_country_flag = hl0_decided_turks_flag
+        add_accepted_culture = turk_greek
+        custom_tooltip =  HELLAS_TT_4
+        hidden_effect = {
+            every_owned_province = {
+                limit = {
+                    culture = turk_greek
+                }
+                add_unrest = -2
+                add_nationalism = -5
+            }
+        }
+    }
+    option = {
+        name = hellas.3b
+		ai_chance = {
+			factor = 40
+		}
+        set_country_flag = hl0_decided_turks_flag
+        custom_tooltip =  HELLAS_TT_5
+        hidden_effect = {
+            every_owned_province = {
+                limit = {
+                    culture = turk_greek
+                }
+                add_unrest = 3
+                add_base_tax = -1
+                add_base_manpower = -1
+                add_base_production = -1
+                change_culture = greek_new
+            }
+            145 = {
+                change_province_name = "Morea"
+                rename_capital = "Mystras"
+            }
+            1773 = {
+                change_province_name = "Achaea"
+                rename_capital = "Nafplio"
+            }
+            1853 = {
+                change_province_name = "Kastoria"
+                rename_capital = "Kastoria"
+            }
+            143 = {
+                change_province_name = "Vlore"
+            }
+            4174 = {
+                change_province_name = "Dyrrachion"
+            }
+            4750 = {
+                change_province_name = "Kruje"
+            }
+            4175 = {
+                change_province_name = "Lezhe"
+            }
+        }
+    }
+}
+
+country_event = {
+	id = hellas.4
+	title = hellas.4.t
+	desc = hellas.4.d
+	picture = CONSTANTINOPLE_eventPicture
+    fire_only_once = yes
+	is_triggered_only = yes
+    option = {
+        name = hellas.4a
+		151 = {
+            add_province_modifier = {
+                name = hl0_queen_of_cities
+                duration = -1
+            }
+        }
+        add_splendor = 200
+        151 = {
+            add_great_project_tier = {
+                type = hippodrome_byz
+                tier = 1
+            }
+        }
+    }
+}
+
+country_event = {
+	id = hellas.5
+	title = hellas.5.t
+	desc = hellas.5.d
+	picture = CONSTANTINOPLE_eventPicture
+    fire_only_once = yes
+	is_triggered_only = yes
+    option = {
+        name = hellas.5a
+		calabria_area = {
+            change_culture = greek_new
+            add_unrest = 5
+        }
+        apulia_area = {
+            change_culture = greek_new
+            add_unrest = 5
+        }
+    }
+    option = {
+        name = hellas.5b
+		add_dip_power = 200
+        add_accepted_culture_or_dip_power = {
+            culture = calabrian
+        }
+    }
+}
+
+country_event = {
+	id = hellas.6
+	title = hellas.6.t
+	desc = hellas.6.d
+	picture = ORTHODOX_ICON_FLAG_eventPicture
+    fire_only_once = yes
+	is_triggered_only = yes
+    option = {
+        name = hellas.6a
+		321 = {
+            add_building = cathedral
+        }
+        add_stability = 1
+        add_curia_treasury = -1000
+    }
+}
+
+country_event = {
+	id = hellas.7
+	title = hellas.7.t
+	desc = hellas.7.d
+	picture = BYZ_BATTLE_eventPicture
+    
+	is_triggered_only = yes
+    option = {
+        name = hellas.7a
+		add_army_tradition_or_mil_power = {amount = 20}
+        add_legitimacy_equivalent = {amount = 10} 
+        capital_scope = {
+            add_province_modifier = {
+                name = hl0_recent_triumph
+                duration = 1825
+            }
+        }
+        set_country_flag = hl0_can_hold_triumph
+        set_variable = {
+            which = hl0_triumph_var
+            value = 0
+        }
+    }
+}
+
+country_event = {
+	id = hellas.8
+	title = hellas.8.t
+	desc = hellas.8.d
+	picture = BYZ_FORT_eventPicture
+
+	trigger = {
+        is_year = 1480
+        exists = CI1
+        tag = HL0
+    }
+    mean_time_to_happen = {
+        days = 1
+    }
+
+    option = {
+        name = hellas.8a
+		add_treasury = -150
+        add_prestige = -20
+        add_casus_belli = {
+            type = cb_restore_personal_union
+            target = CI1
+        }
+    }
+    option = {
+        name = hellas.8b
+		add_prestige = 10
+    }
+}

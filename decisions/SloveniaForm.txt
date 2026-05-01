@@ -1,0 +1,62 @@
+country_decisions = {
+
+    alb_form_slovenia = {
+        major = yes
+        potential = {
+            normal_or_historical_nations = yes
+			was_never_end_game_tag_trigger = yes
+			NOT = { has_country_flag = formed_slovenia_flag }
+			culture_group = south_windelic
+        }
+        provinces_to_highlight = {
+            OR = {
+				region = crimea_region
+                region = ruthenia_region
+                region = carpathia_region
+                region = poland_region
+			}
+			NOT = { owned_by = ROOT }
+		}
+        allow = {
+            NOT = {
+				exists = RA2
+			}
+			is_free_or_tributary_trigger = yes
+			is_at_war = no
+            culture_group = south_windelic
+            owns_all_provinces = {
+                culture_group = south_windelic
+            }
+            owns_core_province = 280
+			owns_core_province = 282
+            owns_core_province = 4127
+            num_of_owned_provinces_with = {
+				value = 50
+				OR = {
+					superregion = eastern_europe_superregion
+				}
+			}
+        }
+        effect = {
+            set_country_flag = formed_slovenia_flag
+            change_tag = RA2
+            on_change_tag_effect = yes
+            set_capital = 280
+            change_primary_culture = slovenian
+			restore_country_name = yes
+            set_government_rank = 3
+            add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+            eastern_europe_superregion = { add_permanent_claim = ROOT }
+            north_german_region = { add_permanent_claim = ROOT }
+            south_german_region = { add_permanent_claim = ROOT }
+        }
+        ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+    }
+}
+

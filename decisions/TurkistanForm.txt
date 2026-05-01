@@ -1,0 +1,88 @@
+country_decisions = {
+
+	turkistan_nation = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			was_never_end_game_tag_trigger = yes
+			NOT = { has_country_flag = formed_turkistan_flag }
+			OR = {
+                culture = bolgar
+                culture = slovene
+            }
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			OR = {
+				is_free_or_tributary_trigger = yes
+				ai = no
+			}
+			is_colonial_nation = no
+			OR = {
+				is_former_colonial_nation = no
+				AND = {
+					is_former_colonial_nation = yes
+					ai = no
+				}
+			}
+		}
+        provinces_to_highlight = {
+			OR = {
+				region = central_asia_region
+			}
+			OR = {
+				NOT = { owned_by = ROOT }
+				NOT = { is_core = ROOT }
+			}
+		}
+		allow = {
+			NOT = {
+				exists = TK0
+			}
+			is_free_or_tributary_trigger = yes
+			is_at_war = no
+            or = {
+                culture = bolgar
+                culture = slovene
+            }
+            owns_core_province = 439 	#arkaze
+			owns_core_province = 471 	#aydar
+            owns_core_province = 2214 	#golestan
+            owns_core_province = 445    #merv
+            num_of_owned_provinces_with = {
+				value = 20
+				OR = {
+					region = central_asia_region
+				}
+			}
+		}
+		effect = {
+			change_tag = TK0
+			on_change_tag_effect = yes
+            central_asia_region = { add_permanent_claim = ROOT }
+			restore_country_name = yes
+			remove_non_electors_emperors_from_empire_effect = yes
+            set_government_rank = 2
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+			set_country_flag = formed_turkistan_flag
+			if = {
+				limit = {
+					has_custom_ideas = no
+				}
+					country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			add_prestige_or_monarch_power = {
+				amount = 25
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+
+}

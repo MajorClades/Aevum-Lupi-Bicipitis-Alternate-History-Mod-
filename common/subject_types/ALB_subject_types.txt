@@ -291,17 +291,18 @@ light_empire_vassal = {
 	# Properties:
 	has_power_projection = yes
 	takes_diplo_slot = no
-	gives_daimyo_bonuses = yes
 	gets_help_with_rebels = no
+	joins_overlords_wars = no #to balance the lib desire
 	separatists_become_subjects = yes
+	can_have_subjects_of_other_types = no
 	allows_taking_land_without_independence = yes
 	can_use_claims = no
 	forms_trade_companies = no
 	can_concentrate_development = no
-
-	trust_on_start = 0
+	can_be_annexed = no
 	
-	base_liberty_desire = 10.0
+	trust_on_start = 10
+	base_liberty_desire = 0
 	military_focus = 1.2
 
 	relative_power_class = 1
@@ -325,14 +326,15 @@ light_empire_vassal = {
 	scutage = no
 	grant_core_claim = yes
 	grant_province = yes
-	place_relative_on_throne = yes
-	enforce_religion = no
+	place_relative_on_throne = no
+	enforce_religion = yes
 	enforce_culture = no
 	seize_territory = no
 	#(enable)
 	contribute_to_capital = yes
 	conscript_general = yes
 	return_land = yes
+	
 	
 	# Modifiers
 	
@@ -341,9 +343,36 @@ light_empire_vassal = {
 	modifier_subject = {
 		modifier = subject_nation
 	}
-	#modifier_overlord = {
-	#	modifier = light_empire_vassal
-	#}
+	modifier_subject = {
+		trigger = {
+			has_global_flag = decree_eol_4_done
+		}
+		modifier = light_empire_vassal_modifier_2
+	}
+	modifier_subject = {
+		trigger = {
+			has_global_flag = decree_eol_5_done
+		}
+		modifier = light_empire_vassal_modifier_3
+	}
+	modifier_subject = {
+		trigger = {
+			has_global_flag = decree_eol_6_done
+		}
+		modifier = light_empire_vassal_modifier_5
+	}
+	modifier_overlord = {
+		trigger = {
+			has_global_flag = decree_eol_1_done
+		}
+		modifier = light_empire_vassal_modifier_1
+	}
+	modifier_overlord = {
+		trigger = {
+			has_global_flag = decree_eol_6_done
+		}
+		modifier = light_empire_vassal_modifier_4
+	}
 }
 
 autonomous_vassal = {

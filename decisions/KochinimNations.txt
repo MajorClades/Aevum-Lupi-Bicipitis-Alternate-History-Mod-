@@ -1,0 +1,48 @@
+country_decisions = {
+
+	kochinim_nation = {
+		major = yes
+		potential = {
+			NOT = { has_country_flag = formed_kochinim_flag }
+			primary_culture = kochinim
+		}
+		provinces_to_highlight = {
+			superregion = india_superregion
+			NOT = { owned_by = ROOT }
+		}
+		 allow = {
+            is_free_or_tributary_trigger = yes
+			is_at_war = no
+            num_of_owned_provinces_with = {
+				value = 25
+				superregion = india_superregion
+			}
+        }
+		effect = {
+			change_tag = KCN #Sopara
+			swap_non_generic_missions = yes
+			on_change_tag_effect = yes
+			add_prestige = 25
+			if = {
+				limit = { has_custom_ideas = no }
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
+			if = {
+				limit = {
+					NOT = { government_rank = 2 }
+				}
+				set_government_rank = 2
+			}
+			add_country_modifier = {
+				name = centralization_modifier
+				duration = 3650
+			}
+			set_country_flag = formed_kochinim_flag
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+
+}

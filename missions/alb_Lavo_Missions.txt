@@ -50,7 +50,11 @@ mt_lavo_1 = {
 		}
 
 		trigger = {
-			
+			stability = 3
+            num_of_rebel_controlled_provinces = 0
+			all_owned_province = {
+				NOT = { unrest = 1 }
+			}
 		}
 
 		effect = {
@@ -104,12 +108,25 @@ mt_semlavo_1 = {
 		position = 5
 		required_missions = { lavo_ekkaracha } 
 		provinces_to_highlight = {
-			
+			OR = {
+				area = shan_hill_area
+				area = karenni_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 
-		trigger = { always = no }
+		trigger = {
+			shan_hill_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			karenni_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		}
 		effect = {
-			# custom_tooltip = complete_army_republic_to_preview_this_mission_tt
+			# claim on tibet siege bonus
 		}
 	}
 
@@ -129,12 +146,18 @@ mt_monlavo_1 = {
 		position = 5
 		required_missions = { lavo_ekkaracha } 
 		provinces_to_highlight = {
-			
+			culture_group = thai_group
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
 		}
 
-		trigger = { always = no }
+		trigger = {
+			owns_all_provinces = {
+			culture_group = thai_group
+			}
+		}
+		
 		effect = {
-			# custom_tooltip = complete_army_republic_to_preview_this_mission_tt
+			# end sem disaster convert them to mon
 		}
 	}
 
@@ -168,7 +191,7 @@ mt_lavo_1cont = {
 		}
 
 		effect = {
-			 create_general = { tradition = 30 } 
+			 create_general = { tradition = 30 }
 		}
 	}
 	

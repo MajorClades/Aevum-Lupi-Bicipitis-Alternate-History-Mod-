@@ -37,7 +37,10 @@ Ganden_1_slot = {
 				num_of_times_improved = 2
 			}
 			if = {
-				limit = { has_parliament = yes } 
+				limit = { 
+					has_parliament = yes 
+					ai = no
+				} 
 				251 = { has_seat_in_parliament = yes } 
 				4363 = { has_seat_in_parliament = yes } 
 				248 = { has_seat_in_parliament = yes } 
@@ -62,22 +65,28 @@ Ganden_1_slot = {
 
 		trigger = {
 			total_development = 300
-			OR = {
-				check_variable = {
-					which = num_bylandr_elections
-					value = 4
+			if = {
+				limit = {
+					ai = no
+					has_reform = ganden_union_reform
 				}
-				check_variable = {
-					which = num_gettrike_elections
-					value = 4
-				}
-				check_variable = {
-					which = num_tonin_elections
-					value = 4
-				}
-				check_variable = {
-					which = num_kadlen_elections
-					value = 4
+				OR = {
+					check_variable = {
+						which = num_bylandr_elections
+						value = 4
+					}
+					check_variable = {
+						which = num_gettrike_elections
+						value = 4
+					}
+					check_variable = {
+						which = num_tonin_elections
+						value = 4
+					}
+					check_variable = {
+						which = num_kadlen_elections
+						value = 4
+					}
 				}
 			}
 			estate_loyalty = {

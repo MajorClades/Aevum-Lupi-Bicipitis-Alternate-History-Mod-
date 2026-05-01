@@ -192,43 +192,58 @@ country_event = {
 	}	
 }
 
-province_event = { 
+country_event = { 
 	id = scotii.5
 	title = scotii.5.test
 	desc = scotii.5.desc
 	picture = CULTURE_eventPicture
 	trigger = {
-		owner = {
-			has_country_flag = sco_slow_cultural_revolution
-		}
-		OR = {
-			culture = soxon
-			culture = acutanian
-			culture = armerican
+		has_country_flag = sco_slow_cultural_revolution
+		any_owned_province = {
+			OR = {
+				culture = soxon
+				culture = acutanian
+				culture = armerican
+			}
 		}
 	}
+	is_triggered_only = yes
 	mean_time_to_happen = {
-		months = 120
+		months = 1
 	}
 
 	option = {
 		name = scotii.5a
-		owner = {
-			add_dip_power = -30
+		add_dip_power = -30
+		random_owned_province = {
+			limit = {
+				OR = {
+					culture = soxon
+					culture = acutanian
+					culture = armerican
+				}
+			}
+			add_base_manpower = -1
+			change_culture = gaulish
 		}
-		add_base_manpower = -1
-		change_culture = gallic
 	}
 	option = {
 		name = scotii.5b
-		owner = {
-			add_dip_power = -30
+		add_dip_power = -30
+		random_owned_province = {
+			limit = {
+				OR = {
+					culture = soxon
+					culture = acutanian
+					culture = armerican
+				}
+			}
+			add_province_modifier = {
+				name = sco_gallic_revolution
+				duration = 7300
+			}
+			change_culture = gaulish
 		}
-		add_province_modifier = {
-			name = sco_gallic_revolution
-			duration = 7300
-		}
-		change_culture = gallic
 	}
 	option = {
 		name = scotii.5c
