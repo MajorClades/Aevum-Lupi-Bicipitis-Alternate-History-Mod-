@@ -13,7 +13,7 @@ alb_wu_slot_1 = {
 		}
 	}
 
-	restore_order = {
+	wu_restore_order = {
 		icon = mng_thirteen_provinces
 		position = 1
 		required_missions = { }
@@ -34,11 +34,11 @@ alb_wu_slot_1 = {
 		}
 	}
 
-	uproot_cultist = {
+	wu_uproot_cultist = {
 		icon = mission_buddhist_monk_praying
 		position = 2
 		required_missions = {
-			restore_order
+			wu_restore_order
 		}
 		provinces_to_highlight = { }
 		trigger = {
@@ -50,11 +50,11 @@ alb_wu_slot_1 = {
 		}
 	}
 
-	warlord_vanity = {
+	wu_warlord_vanity = {
 		icon = mission_chinese_general_riding
 		position = 3
 		required_missions = {
-			sagely_syriac uproot_cultist
+			wu_sagely_syriac wu_uproot_cultist
 		}
 		provinces_to_highlight = { }
 		trigger = { 
@@ -97,7 +97,7 @@ alb_wu_slot_1 = {
 		}
 	}
 
-	mind_and_materials = {
+	wu_mind_and_materials = {
 		icon = mng_survey_ocean_shores
 		position = 4
 		required_missions = { }
@@ -135,11 +135,11 @@ alb_wu_slot_1 = {
 		}
 	}
 
-	restore_jiaozhi_commandery = {
+	wu_restore_jiaozhi_commandery = {
 		icon = mission_mnd_dai_universities
 		position = 5
 		required_missions = {
-			mind_and_materials
+			wu_mind_and_materials
 		}
 		provinces_to_highlight = {
 			OR = {
@@ -208,11 +208,11 @@ alb_wu_slot_2 = {
 		}
 	}
 
-	sagely_syriac = {
+	wu_sagely_syriac = {
 		icon = plague_doctor_training
 		position = 2
 		required_missions = {
-			restore_order
+			wu_restore_order
 		}
 		provinces_to_highlight = { 
 			owner = {
@@ -236,11 +236,11 @@ alb_wu_slot_2 = {
 		}
 	}
 
-	land_on_lizu = {
+	wu_land_on_lizu = {
 		icon = mission_junk_boat
 		position = 5
 		required_missions = {
-			mind_and_materials
+			wu_mind_and_materials
 		}
 		provinces_to_highlight = { is_capital_of = CGS } 
 
@@ -283,7 +283,7 @@ alb_wu_slot_3 = {
 		}
 	}
 
-	of_wen_and_wu = {
+	wu_of_wen_and_wu = {
 		icon = mng_deal_kama_kagyu
 		position = 1
 		required_missions = { }
@@ -304,11 +304,11 @@ alb_wu_slot_3 = {
 		}
 	}
 
-	our_base_origin = {
+	wu_our_base_origin = {
 		icon = mng_form_depots
 		position = 2
 		required_missions = {
-			of_wen_and_wu
+			wu_of_wen_and_wu
 		}
 		provinces_to_highlight = { }
 		trigger = { 
@@ -318,11 +318,11 @@ alb_wu_slot_3 = {
 		effect = { every_neighbor_province = { add_permanent_claim = ROOT } }
 	}
 
-	endless_wisdom = {
+	wu_endless_wisdom = {
 		icon = mng_shengshi_zhishi
 		position = 3
 		required_missions = {
-			our_base_origin
+			wu_our_base_origin
 		}
 		provinces_to_highlight = { }
 		trigger = {
@@ -360,11 +360,11 @@ alb_wu_slot_3 = {
 		}
 	}
 
-	jongwan_dragon = {
+	wu_jongwan_dragon = {
 		icon = mission_defy_the_dragon
 		position = 4
 		required_missions = {
-			endless_wisdom
+			wu_endless_wisdom
 		}
 		provinces_to_highlight = {
 			superregion = china_superregion
@@ -411,11 +411,11 @@ alb_wu_slot_3 = {
 		}
 	}
 
-	casting_shadow_serpentine = {
+	wu_casting_shadow_serpentine = {
 		icon = mission_venus
 		position = 6
 		required_missions = {
-			restore_jiaozhi_commandery land_on_lizu jongwan_dragon settle_siyi expand_northern_frontier
+			wu_restore_jiaozhi_commandery wu_land_on_lizu wu_jongwan_dragon wu_settle_siyi wu_expand_northern_frontier
 		}
 		provinces_to_highlight = { }
 		trigger = {
@@ -445,11 +445,11 @@ alb_wu_slot_3 = {
 		}
 	}
 
-	slumbering_awoken = {
+	wu_slumbering_awoken = {
 		icon = mng_pure_land
 		position = 8
 		required_missions = {
-			casting_shadow_serpentine
+			wu_casting_shadow_serpentine
 		}
 		provinces_to_highlight = { }
 		trigger = {
@@ -489,11 +489,11 @@ alb_wu_slot_4 = {
 		}
 	}
 
-	pacify_the_mountain_yue = {
+	wu_pacify_the_mountain_yue = {
 		icon = mng_expand_bogue
 		position = 2
 		required_missions = {
-			our_old_master
+			wu_our_old_master
 		}
 		provinces_to_highlight = { owned_by = CH6 }
 		trigger = {
@@ -528,15 +528,42 @@ alb_wu_slot_4 = {
 		}
 	}
 
-	settle_siyi = {
+	wu_settle_siyi = {
 		icon = mch_bypass_great_wall
 		position = 5
 		required_missions = {
-			honing_our_strength
+			wu_honing_our_strength
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = { 
+			OR = {
+				region = mongolia_region
+				culture_group = altaic
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		trigger = { 
+			OR = {
+				num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+					value = 30
+					region = mongolia_region
+				}
+				num_of_owned_provinces_with = {
+					value = 15
+					culture_group = altaic
+				}
+			}
+		}
+		effect = { 
+			country_event = {
+				id = silky.10
+			}
+			add_country_modifier = {
+				name = wuu_tamed_turco_mongols
+				duration = -1
+			}
+		}
 	}
 }
 alb_wu_slot_5 = {
@@ -554,7 +581,7 @@ alb_wu_slot_5 = {
 		}
 	}
 
-	our_old_master = {
+	wu_our_old_master = {
 		icon = per_the_city_of_daman
 		position = 1
 		required_missions = { }
@@ -594,11 +621,11 @@ alb_wu_slot_5 = {
 		}
 	}
 
-	crush_chu = {
+	wu_crush_chu = {
 		icon = qng_modernize_the_banners
 		position = 2
 		required_missions = {
-			our_old_master
+			wu_our_old_master
 		}
 		provinces_to_highlight = { owned_by = CHC }
 		trigger = {
@@ -633,11 +660,11 @@ alb_wu_slot_5 = {
 		}
 	}
 
-	conquer_cuanman = {
+	wu_conquer_cuanman = {
 		icon = qng_ten_grand_campaigns
 		position = 3
 		required_missions = {
-			pacify_the_mountain_yue crush_chu
+			wu_pacify_the_mountain_yue wu_crush_chu
 		}
 		provinces_to_highlight = {
 			region = xinan_region
@@ -679,7 +706,7 @@ alb_wu_slot_5 = {
 		}
 	}
 
-	honing_our_strength = {
+	wu_honing_our_strength = {
 		icon = mng_inward_perfection
 		position = 4
 		required_missions = { }
@@ -718,14 +745,70 @@ alb_wu_slot_5 = {
 		}
 	}
 
-	expand_northern_frontier = {
+	wu_expand_northern_frontier = {
 		icon = mng_heavens_will
 		position = 5
 		required_missions = {
-			honing_our_strength
+			wu_honing_our_strength
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = { 
+			OR = {
+				area = liaoning_area
+				area = hebei_area
+				area = chahar_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = { 
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 4
+				province_has_current_tech_fort_trigger = yes
+				OR = {
+					area = liaoning_area
+					area = hebei_area
+					area = chahar_area
+				}
+			}
+			liaoning_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			hebei_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			chahar_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = { 
+			custom_tooltip = wu_northern_frontier_fort_tt
+			tooltip = {
+				add_province_modifier = {
+					name = wuu_northern_fortification
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				every_province = {
+					limit = {
+						OR = {
+							area = liaoning_area
+							area = hebei_area
+							area = chahar_area
+						}
+						country_or_non_sovereign_subject_holds = ROOT
+						province_has_current_tech_fort_trigger = yes
+					}
+					add_province_modifier = {
+						name = wuu_northern_fortification
+						duration = -1
+					}
+				}
+			}
+		}
 	}
 }
