@@ -1,13 +1,13 @@
 ######################################################################
 # Impotian rebels. Disgruntled fanatics.
 ######################################################################
-sofieri_rebels = {
+daoism_rebels = {
 
 	color = { 230 175 175 }
 
 	area = nation 					# Sticks to provinces of their nation
 	government = theocracy 			# Desires Theocracy
-	religion = sofieri
+	religion = daoism
 	defection = none				# Will not defect
 	defect_delay = 120				# Held provinces will auto-defect after 18 months, regardless of accept/enforce demands.
 	independence = none				# Does not strive for independence
@@ -45,7 +45,7 @@ sofieri_rebels = {
 		}
 		modifier = {
 			factor = 0.0
-			NOT = { religion = sofieri }
+			NOT = { religion = daoism }
 		}
 		modifier = {
 			factor = 0.001
@@ -90,21 +90,21 @@ sofieri_rebels = {
 		}
 		modifier = {
 			factor = 0.0
-			religion = sofieri
-			owner = { religion = sofieri }
+			religion = daoism
+			owner = { religion = daoism }
 		}
 		modifier = {
 			factor = 2.0
-			NOT = { religion = sofieri }
+			NOT = { religion = daoism }
 			any_neighbor_province = {
-	 			religion = sofieri
+	 			religion = daoism
 	 			NOT = { has_province_modifier = "forced_conversion" }
 	 		}
 	 	}
 		modifier = {
 			factor = 5
 			has_missionary = yes
-			religion = sofieri
+			religion = daoism
 		}
 		modifier = {
 			factor = 1.5
@@ -135,9 +135,9 @@ sofieri_rebels = {
 			if = {
 				limit = {
 					OR = {
-						religion = sofieri
+						religion = daoism
 						is_reformation_center = yes
-						owner = { religion = sofieri }
+						owner = { religion = daoism }
 					}
 				}
 				add_province_modifier = {
@@ -147,11 +147,11 @@ sofieri_rebels = {
 			}
 			if = {
 				limit = {
-					NOT = { religion = sofieri }
+					NOT = { religion = daoism }
 					is_reformation_center = no
-					NOT = { owner = { religion = sofieri } }
+					NOT = { owner = { religion = daoism } }
 				}
-				change_religion = sofieri
+				change_religion = daoism
 				add_province_modifier = {
 					name = "forced_conversion"
 					duration = 730
@@ -171,7 +171,7 @@ sofieri_rebels = {
 	can_negotiate_trigger = {
 		OR = {
 			religion_group = christian
-			dominant_religion = sofieri
+			dominant_religion = daoism
 		}
 	}
 	
@@ -181,7 +181,7 @@ sofieri_rebels = {
 	}
 	
 	# Localisation for their demands
-	demands_description = "sofieri_rebels_demand"
+	demands_description = "daoism_rebels_demand"
 	
 	# Country Scope	
 	demands_enforced_effect = {
@@ -212,7 +212,7 @@ sofieri_rebels = {
 		}
 		else_if = {
 			limit = {
-				religion = sofieri
+				religion = daoism
 			}
 			add_country_modifier = {
 				name = "religious_intolerance_enforced"
@@ -221,16 +221,16 @@ sofieri_rebels = {
 		}
 		else_if = {
 			limit = {
-				NOT = { religion = sofieri }
-				dominant_religion = sofieri
+				NOT = { religion = daoism }
+				dominant_religion = daoism
 			}
-			change_religion = sofieri
+			change_religion = daoism
 			force_converted = yes
 		}
 		else_if = {
 			limit = {
-				NOT = { religion = sofieri }
-				NOT = { dominant_religion = sofieri }
+				NOT = { religion = daoism }
+				NOT = { dominant_religion = daoism }
 				religion_group = christian
 				NOT = { has_country_modifier = heretic_tolerance }
 			}
@@ -243,7 +243,7 @@ sofieri_rebels = {
 		else = { add_stability = -1 } #Should probably never get here
 		if = {
 			limit = {
-				religion = sofieri
+				religion = daoism
 				has_estate = estate_church
 				NOT = {
 					has_estate_influence_modifier = {
