@@ -1117,6 +1117,7 @@ country_event = { #Japanese Revolt failed
 				clear_rebels = yes
 				cede_province = KM6
 			}
+			set_country_flag = JAPANESE_REVOLT_FAILED
 			KM6 = {
 				override_country_name = BAKUFU_rename
 				change_religion = shinto
@@ -1142,6 +1143,31 @@ country_event = { #Japanese Revolt failed
 				declare_war_with_cb = {
 					who = ROOT
 					casus_belli = cb_tamna_japan_rebellion
+				}
+				1028 = {
+					if = {
+						limit = {
+							owned_by = KM6
+						}
+						move_capital_effect = yes
+						add_building = fort_15th
+					}
+				}
+				1832 = {
+					if = {
+						limit = {
+							owned_by = KM6
+						}
+						add_building = fort_15th
+					}
+				}
+				1835 = {
+					if = {
+						limit = {
+							owned_by = KM6
+						}
+						add_building = fort_15th
+					}
 				}
 			}
 			every_owned_province = {
@@ -1499,7 +1525,7 @@ country_event = { #koreanization shamelessly stolen from me thank you me
     picture = COSSACK_ESTATE_eventPicture
 
 	hidden = yes
-
+	is_triggered_only = yes
 	trigger = {
 		any_owned_province = {
 			region = korea_region
@@ -1512,7 +1538,7 @@ country_event = { #koreanization shamelessly stolen from me thank you me
 	}
 
     mean_time_to_happen = {
-        months = 1
+        days = 1
     }
     option = {
         name = ayabani.37a
@@ -1595,6 +1621,8 @@ country_event = { #balloon lore fuck siberia
 			duration = -1
 		}
 		define_advisor = {
+			name = "Min Chae-won"
+			female = yes
 			type = natural_scientist
 			skill = 2
 			cost_multiplier = 0.5
@@ -1609,7 +1637,7 @@ country_event = { #koreanization 2 shamelessly stolen from me from earlier thank
     picture = COSSACK_ESTATE_eventPicture
 
 	hidden = yes
-
+	is_triggered_only = yes
 	trigger = {
 		any_owned_province = {
 			OR = {
@@ -1629,7 +1657,7 @@ country_event = { #koreanization 2 shamelessly stolen from me from earlier thank
 	}
 
     mean_time_to_happen = {
-        months = 1
+        days = 1
     }
     option = {
         name = ayabani.40a
