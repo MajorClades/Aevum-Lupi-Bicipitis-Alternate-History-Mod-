@@ -1315,12 +1315,12 @@ country_event = { #intro all
 				tag = KM8
 			}
 			country_event = {
-				id = ayabani.32
+				id = ayabani.33
 			}
 		}
 		else = {
 			country_event = {
-				id = ayabani.33
+				id = ayabani.32
 			}
 		}
 	}
@@ -1594,6 +1594,11 @@ country_event = { #balloon lore fuck siberia
 			name = ayb_balloon
 			duration = -1
 		}
+		define_advisor = {
+			type = natural_scientist
+			skill = 2
+			cost_multiplier = 0.5
+		}
 	}
 }
 
@@ -1670,7 +1675,7 @@ country_event = { #turning that argument I had with T one time into an event
 	trigger = {
 		2116 = {
 			owner = {
-				is_or_was_tag = KR1
+				is_or_was_tag = {tag = KR1 }
 			}
 		}
 	}
@@ -1850,7 +1855,6 @@ country_event = { #mudang
 	desc = ayabani.49.d
 	picture = BUDDHISM_MONASTERY_eventPicture
 	fire_only_once = yes
-	is_triggered_only = yes
 	trigger = {
 		tag = KR1
 		is_year = 1600
@@ -1879,7 +1883,6 @@ country_event = { #general
 	desc = ayabani.50.d
 	picture = altaic_MILITARY_CAMP_eventPicture
 	fire_only_once = yes
-	is_triggered_only = yes
 	trigger = {
 		tag = KR1
 		is_year = 1460
@@ -1893,7 +1896,6 @@ country_event = { #general
 		custom_tooltip = AYABANI_TT_67b
 		define_general = {
 				name = "Won Gwangjo"
-				age = 20
 				fire = 5
 				shock = 4
 				manuever = 4
@@ -1919,10 +1921,9 @@ country_event = { #book
 	desc = ayabani.51.d
 	picture = BIG_BOOK_eventPicture
 	fire_only_once = yes
-	is_triggered_only = yes
 	trigger = {
 		tag = KR1
-		is_year = 1708
+		is_year = 1508
 		NOT = { is_year = 1558 }
 	}
 	mean_time_to_happen = {
@@ -1942,7 +1943,6 @@ country_event = { #coup?
 	desc = ayabani.52.d
 	picture = ACCUSATION_eventPicture
 	fire_only_once = yes
-	is_triggered_only = yes
 	trigger = {
 		tag = KR1
 		is_year = 1508
@@ -2057,7 +2057,7 @@ country_event = { #coup
 					}
 				}
 				declare_war_with_cb = {
-    				who = ROOT
+    				who = KR1
     				casus_belli = cb_tamna_unification
 				}
 			}
@@ -2074,7 +2074,7 @@ country_event = { #somehowgowins
 	is_triggered_only = yes
     trigger = {
         tag = KM7
-        owns = 1014
+        owns = 1818
 		has_global_flag = tamnacoup
     }
 	option = {
@@ -2082,6 +2082,7 @@ country_event = { #somehowgowins
 		add_stability = 2
 		add_legitimacy = 100
 		add_prestige = 25
+		inherit = KR1
 		change_tag = KR1
 		set_country_flag = profarmy
 		hidden_effect = {
@@ -2090,9 +2091,7 @@ country_event = { #somehowgowins
 				name = ayb_professional_army
 				duration = -1
 			}
-			remove_country_modifier = {
-				name = ayb_revolt
-			}
+			remove_country_modifier = ayb_revolt
 		}
 	}
 }
