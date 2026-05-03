@@ -2342,6 +2342,8 @@ eastern = {
 			morale_damage_received = -0.025
 		}
 		heretic = { SHANGQING }
+
+		harmonized_modifier = harmonized_mahayana
 	}
 	
 	daoism = {
@@ -2357,6 +2359,8 @@ eastern = {
 			global_prosperity_growth = 0.05
 		}
 		heretic = { SHANGQING }
+
+		harmonized_modifier = harmonized_mahayana
 		uses_harmony = yes
 	}
 
@@ -2372,6 +2376,8 @@ eastern = {
 			local_unrest = -1
 		}
 		heretic = { SHANGQING }
+
+		harmonized_modifier = harmonized_mahayana
 		uses_harmony = yes
 	}
 
@@ -3149,7 +3155,9 @@ zoroastrian_group = {
 	mazdakism = {
 		icon = 55
 		color = { 69 67 204 }
-		
+		allowed_conversion = {
+			jyotisastra
+		}
 		country = {
 			global_unrest = -2
 			all_estate_influence_modifier = -0.1
@@ -3159,12 +3167,17 @@ zoroastrian_group = {
 			stability_cost_modifier = -0.1
 		}
 		allowed_center_conversion = {
-			islam
-			rashidi
-			coptic
-			hinduism
+			jyotisastra
 		}
-		
+		on_convert = {
+			change_religion = mazdakism
+			add_prestige = -100
+			
+			add_country_modifier = {
+				name = "conversion_zeal"
+				duration = 3650
+			}			
+		}
 		date = 1499.01.01
 
 		fervor = yes
@@ -3196,10 +3209,12 @@ zoroastrian_group = {
 	}
 	
 	jyotisastra = {
-	
+		
 		flags_with_emblem_percentage = 10
 		flag_emblem_index_range = { 1 4 }
-
+		allowed_conversion = {
+			mazdakism
+		}
 		color = { 252 67 42 }
 		icon = 53
 		country = {
@@ -3248,7 +3263,15 @@ zoroastrian_group = {
 				factor = 1
 			}
 		}
-		
+		on_convert = {
+			change_religion = jyotisastra
+			add_prestige = -100
+			
+			add_country_modifier = {
+				name = "conversion_zeal"
+				duration = 3650
+			}			
+		}
 	}
 	
 	harmonized_modifier = harmonized_zoroastrian_group
