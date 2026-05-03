@@ -31,8 +31,14 @@ country_decisions = {
         effect = {
             set_country_flag = united_tlaxcallan
             change_tag = MX3
-            set_government_rank = 2
-            add_country_modifier = {
+            on_change_tag_effect = yes
+			restore_country_name = yes
+            remove_non_electors_emperors_from_empire_effect = yes
+            if = {
+				limit = { NOT = { government_rank = 2 } }
+				set_government_rank = 2
+			}
+			add_country_modifier = {
 				name = "centralization_modifier"
 				duration = 7300
 			}
