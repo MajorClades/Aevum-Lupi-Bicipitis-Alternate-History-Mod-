@@ -1,0 +1,40 @@
+country_decisions = {
+    alb_consolidate_illiniwek = {
+        major = yes
+        potential = {
+            NOT = {
+                has_country_flag = consolidated_illiniwek
+            }
+            culture = illini
+        }
+        provinces_to_highlight = {
+            OR = {
+                culture = illini
+                NOT = { owned_by = ROOT }
+            }
+        }
+        allow = {
+            owns_all_provinces = {
+                culture = illini
+            }
+        }
+        effect = {
+            set_country_flag = consolidated_illiniwek
+            change_tag = IL0
+            on_change_tag_effect = yes
+			restore_country_name = yes
+            remove_non_electors_emperors_from_empire_effect = yes
+            if = {
+				limit = { NOT = { government_rank = 2 } }
+				set_government_rank = 2
+			}
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+        }
+        ai_will_do = {
+	    	factor = 1
+	    }
+    }
+}
