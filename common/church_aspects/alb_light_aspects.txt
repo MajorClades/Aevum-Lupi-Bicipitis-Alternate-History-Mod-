@@ -74,8 +74,7 @@ light_adm_kamboj_aspect = {	#ADM aspect
 		primary_culture = kamboj
 	}
 	modifier = {
-		global_unrest = -2
-		num_accepted_cultures = 3
+		num_accepted_cultures = 2
 	}
 	monarch_power = adm
 	effect = {
@@ -97,7 +96,7 @@ light_adm_kharosthi_aspect = {	#ADM aspect
 	}
 	monarch_power = adm
 	effect = {
-		create_advisor = philosopher
+
 	}
 	ai_will_do = {
 		factor = 10
@@ -111,7 +110,6 @@ light_adm_saravi_aspect = {	#ADM aspect
 	}
 	modifier = {
 		global_trade_goods_size_modifier = 0.1
-		development_cost_in_primary_culture = -0.15
 	}
 	monarch_power = adm
 	effect = {
@@ -128,7 +126,6 @@ light_adm_huna_aspect = {	#ADM aspect
 		primary_culture = huna
 	}
 	modifier = {
-		overextension_impact_modifier = -0.5
 		war_exhaustion = -0.15
 	}
 	monarch_power = adm
@@ -147,11 +144,15 @@ light_adm_ksatrap_aspect = {	#ADM aspect
 	}
 	modifier = {
 		heir_chance = 0.5
-		monthly_support_heir_gain = 0.1
 	}
 	monarch_power = adm
 	effect = {
-		add_ruler_personality = righteous_personality
+		if = {
+			limit = {
+				NOT = { ruler_has_personality = righteous_personality }
+			}
+			add_ruler_personality = righteous_personality
+		}
 	}
 	ai_will_do = {
 		factor = 10
@@ -184,7 +185,7 @@ light_dip_1_aspect = {	#DIP aspect
 light_dip_2_aspect = {	#DIP aspect
 	cost = 100
 	modifier = {
-		same_culture_advisor_cost = -0.15
+		advisor_cost = -0.1
 	}
 	effect = {
 		add_prestige = 5
@@ -235,7 +236,7 @@ light_dip_kamboj_aspect = {	#DIP aspect
 		primary_culture = kamboj
 	}
 	modifier = {
-		envoy_travel_time = 0.2
+		envoy_travel_time = -0.2
 		improve_relation_modifier = 0.15
 	}
 	monarch_power = dip
@@ -271,8 +272,8 @@ light_dip_huna_aspect = {	#DIP aspect
 		primary_culture = huna
 	}
 	modifier = {
-		vassal_forcelimit_bonus = 0.1
-		liberty_desire_from_subject_development = -0.3
+		vassal_income = 0.33
+		diplomatic_reputation = 1
 	}
 	monarch_power = dip
 }
@@ -393,8 +394,8 @@ light_mil_saravi_aspect = {	#MIL aspect
 		primary_culture = saravi
 	}
 	modifier = {
-		infantry_power = 0.15
-		garrison_size = 0.1
+		infantry_power = 0.1
+		garrison_size = 0.15
 	}
 	monarch_power = mil
 }
@@ -405,16 +406,11 @@ light_mil_huna_aspect = {	#MIL aspect
 		primary_culture = huna
 	}
 	modifier = {
-		cavalry_shock = 0.2
+		cavalry_power = 0.1
 		cavalry_cost = -0.15
 	}
 	monarch_power = mil
 	effect = {
-		capital_scope = {
-			hussars_cavalry = ROOT
-			hussars_cavalry = ROOT
-			hussars_cavalry = ROOT
-		}
 	}
 }
 
