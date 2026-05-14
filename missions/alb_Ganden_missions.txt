@@ -8,18 +8,22 @@ Ganden_1_slot = {
 	ga0_fair_investments = {
 		icon = hungarian_union
 		position = 1
-		provinces_to_highlight = {
+		provinces_to_highlight = {  
 			OR = {
 				province_id = 251
 				province_id = 4363
 				province_id = 249
 				province_id = 248
 			}
-			NOT = { num_of_times_improved = 2 } 
-			NOT = { owned_by = ROOT } 
-		}
+			NOT = {
+				num_of_times_improved = 2
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		} 
 
-		trigger = {
+		trigger = {  
 			251 = {
 				owned_by = ROOT
 				num_of_times_improved = 2
@@ -37,84 +41,88 @@ Ganden_1_slot = {
 				num_of_times_improved = 2
 			}
 			if = {
-				limit = { 
-					has_parliament = yes 
-					ai = no
-				} 
-				251 = { has_seat_in_parliament = yes } 
-				4363 = { has_seat_in_parliament = yes } 
-				248 = { has_seat_in_parliament = yes } 
-				249 = { has_seat_in_parliament = yes } 
+				limit = {
+					has_parliament = yes
+				}
+				251 = {
+					has_seat_in_parliament = yes
+				}
+				4363 = {
+					has_seat_in_parliament = yes
+				}
+				248 = {
+					has_seat_in_parliament = yes
+				}
+				249 = {
+					has_seat_in_parliament = yes
+				}
 			}
-		}
+		} 
 
-		effect = {
-			add_country_modifier = {
-				name = "ga0_balanced_factionalism"
-				duration = 10950
-			}
-			add_stability_or_adm_power = yes
-		}
+		effect = {  } 
 	}
 
 	ga0_union_of_states = {
-		icon = mission_monarch_in_throne_room
+		icon = hungarian_union
 		position = 2
 		required_missions = { ga0_fair_investments } 
 		provinces_to_highlight = {  } 
 
-		trigger = {
-			total_development = 300
-			if = {
-				limit = {
-					ai = no
-					has_reform = ganden_union_reform
+		trigger = {  
+			total_development = 250
+			OR = {
+				check_variable = {
+					which = num_bylandr_elections
+					value = 4
 				}
-				OR = {
-					check_variable = {
-						which = num_bylandr_elections
-						value = 4
-					}
-					check_variable = {
-						which = num_gettrike_elections
-						value = 4
-					}
-					check_variable = {
-						which = num_tonin_elections
-						value = 4
-					}
-					check_variable = {
-						which = num_kadlen_elections
-						value = 4
-					}
+				check_variable = {
+					which = num_gettrike_elections
+					value = 4
+				}
+				check_variable = {
+					which = num_tonin_elections
+					value = 4
+				}
+				check_variable = {
+					which = num_kadlen_elections
+					value = 4
 				}
 			}
 			estate_loyalty = {
 				estate = estate_nobles
 				loyalty = 60
 			}
-		}
+		} 
 
 		effect = {  
-			country_event = {
-				id = gand.7
-			}
+
 		} 
 	}
 
+	ga0_centralize_question = {
+		icon = hungarian_union
+		position = 3
+		required_missions = { ga0_union_of_states } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  } 
+
+		effect = {  } 
+	}
+
 	ga0_frisians_and_britons = {
-		icon = a_real_roman_empire
+		icon = hungarian_union
 		position = 4
 		required_missions = { ga0_crucify_the_jutes } 
-		provinces_to_highlight = {
+		provinces_to_highlight = {  
 			OR = {
 				culture = briton
 				culture = frislander
 			}
 			NOT = { owned_by = ROOT } 
-		}
+		} 
 
-		trigger = {
+		trigger = { 
 			owns_all_provinces = {
 				OR = {
 					culture = briton
@@ -122,24 +130,24 @@ Ganden_1_slot = {
 				}
 			}
 			religious_unity = 0.85
-		}
+		} 
 
-		effect = {
+		effect = {  
 			custom_tooltip = fa0_move_briton_frislander_cultures_tt
 			hidden_effect = {
 				update_entire_culture_foreign = { culture = briton } 
 				update_entire_culture_foreign = { culture = frislander } 
 			}
-		}
+		} 
 	}
 
 	ga0_embrace_lysa = {
-		icon = mission_north_sea_empire
+		icon = hungarian_union
 		position = 6
 		required_missions = { ga0_temples_to_the_gods } 
 		provinces_to_highlight = {  } 
 
-		trigger = {
+		trigger = {  
 			custom_trigger_tooltip = {
 				tooltip = VINLAND_TT_12a
 				OR = {
@@ -147,9 +155,9 @@ Ganden_1_slot = {
 					has_country_flag = new_norse_deity_flag_b
 				}
 			}
-		}
+		} 
 
-		effect = {
+		effect = { 
 			simple_dynamic_effect = {
 				first_custom_tooltip = VINLAND_TT_12b
 				first_limit = "
@@ -172,7 +180,7 @@ Ganden_1_slot = {
 					}
 				"
 			}
-		}
+		} 
 	}
 }
 Ganden_2_slot = {
@@ -183,12 +191,12 @@ Ganden_2_slot = {
 	potential = { tag = GA0 } 
 
 	ga0_bionic_union = {
-		icon = mission_rb_rule_britannia_scottish_version
+		icon = hungarian_union
 		position = 2
 		required_missions = { ga0_diplo_sweden } 
 		provinces_to_highlight = {  } 
 
-		trigger = {
+		trigger = {  
 			scottish_marches_area = {
 				country_or_non_sovereign_subject_holds = ROOT
 				type = all
@@ -197,10 +205,12 @@ Ganden_2_slot = {
 				country_or_non_sovereign_subject_holds = ROOT
 				type = all
 			}
-			4361 = { country_or_non_sovereign_subject_holds = ROOT } 
-		}
+			4361 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		effect = {
+		effect = {  
 			simple_dynamic_effect = {
 				first_custom_tooltip = sweden_pu_yes_tt
 				first_limit = "
@@ -223,28 +233,38 @@ Ganden_2_slot = {
 					}
 				"
 			}
-			east_anglia_area = { add_permanent_claim = ROOT } 
-			east_midlands_area = { add_permanent_claim = ROOT } 
-			west_midlands_area = { add_permanent_claim = ROOT } 
-			home_counties_area = { add_permanent_claim = ROOT } 
-		}
+			east_anglia_area = {
+				add_permanent_claim = ROOT
+			}
+			east_midlands_area = {
+				add_permanent_claim = ROOT
+			}
+			west_midlands_area = {
+				add_permanent_claim = ROOT
+			}
+			home_counties_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	ga0_crucify_the_jutes = {
-		icon = mission_rb_control_state_religion
+		icon = hungarian_union
 		position = 3
 		required_missions = { ga0_bionic_union } 
-		provinces_to_highlight = {
+		provinces_to_highlight = {  
 			OR = {
 				area = east_anglia_area
 				area = east_midlands_area
 				area = west_midlands_area
 				area = home_counties_area
 			}
-			NOT = { country_or_non_sovereign_subject_holds = root } 
-		}
+			NOT = {
+				country_or_non_sovereign_subject_holds = root
+			}
+		} 
 
-		trigger = {
+		trigger = {  
 			east_anglia_area = {
 				country_or_non_sovereign_subject_holds = ROOT
 				type = all
@@ -261,101 +281,56 @@ Ganden_2_slot = {
 				country_or_non_sovereign_subject_holds = ROOT
 				type = all
 			}
-		}
+		} 
 
-		effect = {
+		effect = {  
 			add_country_modifier = {
-				name = "ga0_dead_jutes"
+				name = ga0_dead_jutes
 				duration = 9125
 			}
-			wales_area = { add_permanent_claim = ROOT } 
-			wessex_area = { add_permanent_claim = ROOT } 
-		}
+			wales_area = {
+				add_permanent_claim = ROOT
+			}
+			wessex_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	ga0_temples_to_the_gods = {
-		icon = mission_protestant_heddal_church
+		icon = hungarian_union
 		position = 5
-		provinces_to_highlight = {
-			owned_by = ROOT
-			NOT = { has_tax_building_trigger = yes } 
-		}
+		provinces_to_highlight = {  } 
 
-		trigger = {
-			num_of_owned_provinces_with = {
-				value = 5
-				has_tax_building_trigger = yes
-			}
-		}
+		trigger = {  } 
 
-		effect = {
-			define_advisor = {
-				type = theologian
-				skill = 2
-				cost_multiplier = 0.25
-			}
-			add_country_modifier = {
-				name = "ga0_praising_balder"
-				duration = 7300
-			}
-		}
+		effect = {  } 
 	}
 
 	ga0_formalize_priesthood = {
-		icon = mission_horde_religion
+		icon = hungarian_union
 		position = 6
 		required_missions = { ga0_temples_to_the_gods } 
 		provinces_to_highlight = {  } 
 
-		trigger = {
-			num_of_estate_agendas_completed = {
-				estate = estate_church
-				value = 3
-			}
-			num_of_estate_privileges = {
-				estate = estate_church
-				value = 5
-			}
-			estate_loyalty = {
-				estate = estate_church
-				loyalty = 60
-			}
-			stability = 2
-		}
+		trigger = {  } 
 
-		effect = {
-			change_estate_land_share = {
-				estate = estate_church
-				share = 10.0
-			}
-			unlock_estate_privilege = { estate_privilege = alb_centralized_norse_priesthood } 
-		}
+		effect = {  } 
 	}
 
 	ga0_3rd_great_allthing = {
-		icon = mission_norse_faith
+		icon = hungarian_union
 		position = 7
 		required_missions = {
 			ga0_formalize_priesthood
 			ga0_convert_christians
 			ga0_embrace_lysa
 		}
-		provinces_to_highlight = { province_id = 1861 } 
+		provinces_to_highlight = {  } 
 
-		trigger = {
-			owns = 1861
-			estate_loyalty = {
-				estate = estate_church
-				loyalty = 60
-			}
-			estate_influence = {
-				estate = estate_church
-				influence = 60
-			}
-			religion = norse_ragnaroked
-		}
+		trigger = {  } 
 
-		effect = { country_event = { id = gand.6 }  } 
+		effect = {  } 
 	}
 }
 Ganden_3_slot = {
@@ -366,20 +341,26 @@ Ganden_3_slot = {
 	potential = { tag = GA0 } 
 
 	ga0_diplo_sweden = {
-		icon = mission_swe_union
+		icon = hungarian_union
 		position = 1
-		provinces_to_highlight = { is_capital_of = SW2 } 
+		provinces_to_highlight = {  
+			is_capital_of = SW2
+		} 
 
-		trigger = {
+		trigger = {  
 			OR = {
 				alliance_with = SW2
 				AND = {
-					SW2 = { has_been_insulted_by_root = yes } 
+					SW2 = {
+						has_been_insulted_by_root = yes
+					}
 					is_rival = SW2
 				}
-				NOT = { exists = SW2 } 
+				NOT = {
+					exists = SW2
+				}
 			}
-		}
+		} 
 
 		effect = {
 			simple_dynamic_effect = {
@@ -392,7 +373,12 @@ Ganden_3_slot = {
 					set_country_flag = swedlaw_union_flag
 				"
 				second_limit = "
-					NOT = { alliance_with = SW2 }
+					AND = {
+						SW2 = {
+							has_been_insulted_by_root = yes
+						}
+						is_rival = SW2
+					}
 				"
 				second_effect = "
 					scottish_marches_area = {
@@ -404,103 +390,92 @@ Ganden_3_slot = {
 					add_core = 4361
 				"
 			}
-		}
+		} 
 	}
 
 	ga0_phinish_picts = {
-		icon = mission_rb_conquer_the_highlands
+		icon = hungarian_union
 		position = 2
 		required_missions = { ga0_legacy_of_olaf } 
-		provinces_to_highlight = {
+		provinces_to_highlight = {  
 			area = highlands_area
-			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
-		}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {
+		trigger = {  
 			highlands_area = {
 				country_or_non_sovereign_subject_holds = ROOT
 				type = all
 			}
-		}
+		} 
 
-		effect = {
+		effect = {  
 			custom_tooltip = ga0_norgael_convert_tt
-			hidden_effect = {
-				every_owned_province = {
-					limit = {
-						culture = pictish
-					}
-					change_culture = norgael
-				}
-			}
 			add_mil_power = 50
-			kingdom_of_the_isles_area = { add_permanent_claim = ROOT } 
-			subarctic_islands_area = { add_permanent_claim = ROOT } 
-		}
+			kingdom_of_the_isles_area = {
+				add_permanent_claim = ROOT
+			}
+			subarctic_islands_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	ga0_revenge_for_ostrian_war = {
-		icon = mission_rb_cod_wars
+		icon = hungarian_union
 		position = 4
 		required_missions = { ga0_phinish_picts } 
-		provinces_to_highlight = {
+		provinces_to_highlight = {  
 			OR = {
 				province_id = 1978
 				province_id = 1979
 				province_id = 369
 			}
-			NOT = { owned_by = ROOT } 
-		}
+			NOT = {
+				owned_by = ROOT
+			}
+		} 
 
-		trigger = {
+		trigger = {  
 			owns = 1978
 			owns = 1979
 			owns = 369
-		}
+		} 
 
-		effect = {
+		effect = {  
 			add_navy_tradition = 20
 			1978 = {
 				add_province_modifier = {
-					name = "ga0_cod_fishing"
+					name = ga0_cod_fishing
 					duration = -1
 				}
 			}
 			1979 = {
 				add_province_modifier = {
-					name = "ga0_cod_fishing"
+					name = ga0_cod_fishing
 					duration = -1
 				}
 			}
 			369 = {
 				add_province_modifier = {
-					name = "ga0_cod_fishing"
+					name = ga0_cod_fishing
 					duration = -1
 				}
 			}
-		}
+		} 
 	}
 
 	ga0_convert_christians = {
-		icon = mission_religious
+		icon = hungarian_union
 		position = 6
 		required_missions = { ga0_temples_to_the_gods } 
-		provinces_to_highlight = {
-			owned_by = ROOT
-			NOT = { religion = ROOT } 
-		}
+		provinces_to_highlight = {  } 
 
-		trigger = {
-			num_of_converted_provinces = { amount = 15 } 
-			religious_unity = 0.85
-		}
+		trigger = {  } 
 
-		effect = {
-			add_country_modifier = {
-				name = "ga0_norse_crusading"
-				duration = 7300
-			}
-		}
+		effect = {  } 
 	}
 }
 Ganden_4_slot = {
@@ -511,59 +486,76 @@ Ganden_4_slot = {
 	potential = { tag = GA0 } 
 
 	ga0_legacy_of_olaf = {
-		icon = viking_ruler
+		icon = hungarian_union
 		position = 1
 		provinces_to_highlight = {  } 
 
-		trigger = {
+		trigger = {  
 			if = {
-				limit = { ai = no } 
+				limit = {
+					ai = no
+				}
 				army_size_percentage = 1
 			}
-			else = { army_size_percentage = 0.8 } 
-		}
+			else = {
+				army_size_percentage = 0.8
+			}
+		} 
 
-		effect = {
-			highlands_area = { add_permanent_claim = ROOT } 
-			kingdom_of_the_isles_area = { add_permanent_claim = ROOT } 
-		}
+		effect = {  
+			highlands_area = {
+				add_permanent_claim = ROOT
+			}
+			kingdom_of_the_isles_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	ga0_into_skottland = {
-		icon = mission_rb_into_ireland
+		icon = hungarian_union
 		position = 3
 		required_missions = {
 			ga0_fortress_kogern
 			ga0_legacy_of_olaf
 		}
-		provinces_to_highlight = {
+		provinces_to_highlight = {  
 			area = ulster_area
-			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
-		}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {
+		trigger = {  
 			ulster_area = {
 				type = all
 				country_or_non_sovereign_subject_holds = ROOT
 			}
-		}
+		} 
 
-		effect = { ireland_provinces = { add_permanent_claim = ROOT }  } 
+		effect = {  
+			ireland_provinces = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	ga0_norse_settlement = {
-		icon = mission_colonial
+		icon = hungarian_union
 		position = 5
 		required_missions = { ga0_capture_highking } 
-		provinces_to_highlight = {
+		provinces_to_highlight = {  
 			province_group = ireland_provinces
-			NOT = { development = 10 } 
-		}
+			NOT = {
+				development = 10
+			}
+		} 
 
-		trigger = {
-			ireland_provinces = {
-				owned_by = root
-				type = all
+		trigger = {  
+			num_of_owned_provinces_with = {
+				value = 10
+				province_group = ireland_provinces
+				development = 10
 			}
 			has_dip_advisor_3 = yes
 			4997 = {
@@ -578,9 +570,9 @@ Ganden_4_slot = {
 				num_of_buildings_in_province = 3
 				owned_by = ROOT
 			}
-		}
+		} 
 
-		effect = {
+		effect = {  
 			4997 = {
 				change_culture = ROOT
 				change_religion = ROOT
@@ -603,7 +595,7 @@ Ganden_4_slot = {
 					change_culture = norgael
 				}
 			}
-		}
+		} 
 	}
 }
 Ganden_5_slot = {
@@ -614,79 +606,77 @@ Ganden_5_slot = {
 	potential = { tag = GA0 } 
 
 	ga0_fortress_kogern = {
-		icon = mission_sea_battles
+		icon = hungarian_union
 		position = 2
-		provinces_to_highlight = {
+		provinces_to_highlight = {  
 			province_id = 4380
-			NOT = { num_of_units_in_province = { amount = 5 }  } 
-			NOT = { development = 9 } 
-		}
+			NOT = {
+				num_of_units_in_province = {
+					amount = 5
+				}
+			}
+			NOT = {
+				development = 9
+			}
+		} 
 
-		trigger = {
+		trigger = {  
 			4380 = {
-				num_of_units_in_province = { amount = 5 } 
+				num_of_units_in_province = {
+					amount = 5
+				}
 				development = 9
 			}
 			has_mil_advisor_of_level = { level = 1 } 
-		}
+		} 
 
-		effect = {
-			country_event = { id = gand.2 } 
-			ulster_area = { add_permanent_claim = ROOT } 
-		}
+		effect = {  
+			country_event = {
+				id = gand.2
+			}
+			ulster_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	ga0_capture_highking = {
-		icon = mission_restore_faith_in_the_throne
+		icon = hungarian_union
 		position = 4
 		required_missions = { ga0_into_skottland } 
-		provinces_to_highlight = {
+		provinces_to_highlight = {  
 			province_group = ireland_provinces
-			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
-		}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {
+		trigger = {  
 			ireland_provinces = {
 				country_or_non_sovereign_subject_holds = ROOT
 				type = all
 			}
-		}
+		} 
 
-		effect = {
+		effect = {  
 			ireland_provinces = {
 				add_nationalism = -5
 				add_province_modifier = {
-					name = "ga0_pacified_scotia"
+					name = ga0_pacified_scotia
 					duration = 7300
 				}
 			}
-		}
+		} 
 	}
 
 	ga0_emerald_exploitation = {
-		icon = industrialized_rhineland
+		icon = hungarian_union
 		position = 6
 		required_missions = { ga0_capture_highking } 
-		provinces_to_highlight = {
-			province_group = ireland_provinces
-			NOT = { development = 10 } 
-		}
+		provinces_to_highlight = {  } 
 
-		trigger = {
-			ireland_provinces = {
-				owned_by = ROOT
-				development = 10
-				type = all
-			}
-		}
+		trigger = {  } 
 
-		effect = {
-			ireland_provinces = {
-				add_province_modifier = {
-					name = "ga0_crown_jewel"
-					duration = -1
-				}
-			}
-		}
+		effect = {  } 
 	}
 }

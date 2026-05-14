@@ -42,7 +42,7 @@ molise_monarchy_reform = {
 }
 
 paduan_merchants_reform = {
-	icon = "padania"
+	icon = "trading_city"
 	allow_normal_conversion = yes
 	modifiers = {
 		max_absolutism = -10
@@ -93,7 +93,7 @@ paduan_merchants_reform = {
 	has_term_election = no
 }
 italian_merchants_reform = {
-	icon = "padania"
+	icon = "trading_city"
 	allow_normal_conversion = yes
 	modifiers = {
 		merchants = 1
@@ -161,6 +161,7 @@ serican_principality = {
 				culture_group = west_serican
 				culture_group = turkic
 			}
+			
 			AND = {
 				is_playing_custom_nation = yes
 				have_had_reform = serican_principality
@@ -171,20 +172,17 @@ serican_principality = {
 	nation_designer_cost = 5
 	nation_designer_trigger = {
 		is_serican_trigger = yes
+		religion_group = muslim
 	}
 	modifiers = {
 		infantry_cost = -0.1
 		cavalry_cost = -0.1
-		mercenary_cost = 0.1
 		global_regiment_recruit_speed = 0.1
 		governing_capacity = 100
 	}
-	#custom_attributes = { #broken
-	#	more_25_tax_in_true_faith_provinces = yes
-	#}
 }
 serican_tsardom = {
-	icon = "giga_chad"
+	icon = "king"
 	allow_normal_conversion = yes
 	potential = {
 		OR = {
@@ -217,112 +215,168 @@ serican_tsardom = {
 		claim_states = yes
 	}
 }
-
-farsi_trade_kingdom_reform = {
-	icon = "zoroastrian_theocracy"
-	allow_normal_conversion = no
+indian_manichanate_reform = {
+	icon = "indian_sultanate"
+	allow_normal_conversion = yes
 	potential = {
-		is_or_was_tag = { tag = FRS }
-	}
-	modifiers = {
-		global_ship_cost = -0.05
-		estate_interaction_cooldown_modifier = -0.33
-		nobles_influence_modifier = 0.05
-		burghers_influence_modifier = 0.05
-	}
-	custom_attributes = {
-		alb_trade_expansion_mechanic = yes
-	}
-}
-
-goyman_war_kingdom_reform = {
-	icon = "modernized_furusiyya_reform"
-	allow_normal_conversion = no
-	potential = {
-		is_or_was_tag = { tag = MD1 }
-	}
-	modifiers = {
-		nobles_influence_modifier = 0.1
-		church_influence_modifier = 0.1
-	}
-	effect = {
-		set_country_flag = extra_discipline_for_at_flag
-		custom_tooltip = SPANIA_TT_8a
-		hidden_effect = {
-			atm_set_up = yes
-		}
-	}
-	removed_effect = {
-		hidden_effect = {
-			if = {
-				limit = { tag = PER}
-			}else = {
-				atm_set_down = yes
-				clr_country_flag = extra_discipline_for_at_flag
-				clr_country_flag = atm_shop_flag
+		OR = {
+			capital_scope = {
+				superregion = india_superregion
 			}
+			has_reform = indian_manichanate_reform
+		}
+		religion = manich
+	}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 10
+	nation_designer_trigger = {
+		religion = manich
+		capital_scope = {
+			superregion = india_superregion
 		}
 	}
+
+	modifiers = {
+		tolerance_heathen = 3
+ 		tolerance_of_heathens_capacity = 3
+	}
+	#PUT SOME MECHANIC HERE FOR MANICHEASIM
 }
 
-
-eran_last_firewall_reform = {
-	icon = "legacy_of_eranshahr_reform"
-	allow_normal_conversion = no
+indian_jewish_reform = {
+	icon = "indian_sultanate"
+	allow_normal_conversion = yes
 	potential = {
-		is_or_was_tag = { tag = PR1 }
+		religion_group = jewish_group
+		capital_scope = {
+			superregion = india_superregion
+		}
 	}
-	modifiers = {
-		all_estate_influence_modifier = -0.05
-		manpower_recovery_speed = -0.1
-		tolerance_own = 2
+	valid_for_nation_designer = yes
+	nation_designer_cost = 10
+	nation_designer_trigger = {
+		religion_group = jewish_group
+		capital_scope = {
+			superregion = india_superregion
+		}
 	}
-	government_abilities = {
-		firenation_mechanic
-	}
-}
 
-parn_manich_kingdom_reform = {
-	icon = "legacy_of_the_safavid_reform"
-	allow_normal_conversion = no
-	potential = {
-		is_or_was_tag = { tag = PR0 }
-	}
 	modifiers = {
-		nobles_influence_modifier = -0.05
-		burghers_influence_modifier = 0.05
-		adm_advisor_cost = -0.1
-		free_dip_policy = 1
+		merchants = 1
+		placed_merchant_power = 5
 	}
-}
-
-parn_manich_theocracy_reform = {
-	icon = "legacy_of_the_safavid_reform"
-	allow_normal_conversion = no
-	potential = {
-		is_or_was_tag = { tag = PR0 }
+	boost_income = yes
+	conditional = {
+		allow = {
+			has_dlc = "Leviathan"
+		}
+		allow_draft_transport_ships = yes
 	}
-	modifiers = {
-		tolerance_own = 2
-		missionaries = 1
-		religious_unity = 0.25
-		extra_manpower_at_religious_war = yes
+	conditional = {
+		allow = {
+			has_dlc = "Res Publica"
+			NOT = { has_dlc = "Mare Nostrum" }
+		}
+		can_use_trade_post = yes
+	}
+	conditional = {
+		allow = {
+			has_dlc = "Mare Nostrum"
+			NOT = { has_dlc = "Res Publica" }
+		}
+		can_form_trade_league = yes
+		trade_city_reform = trading_city
+	}
+	conditional = {
+		allow = {
+			has_dlc = "Res Publica"
+			has_dlc = "Mare Nostrum"
+		}
+		can_use_trade_post = yes
+		can_form_trade_league = yes
+		trade_city_reform = trading_city
 	}
 	custom_attributes = {
-		alb_parn_tolerance_mechanic = yes
+		enables_plutocratic_idea_group = yes
+		enables_aristocratic_idea_group = no
 	}
 }
 
-denawar_yamagate_reform = {
-	icon = "legacy_of_the_safavid_reform"
-	allow_normal_conversion = no
+indian_buddhist_reform = {
+	icon = "nayankara_system"
+	allow_normal_conversion = yes
 	potential = {
-		is_or_was_tag = { tag = MS0 }
+		has_dlc = "Dharma"
+		technology_group = indian
+		OR = {
+			religion = buddhism
+			religion = vajrayana
+			religion = mahayana
+		}
+	}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 10
+	legacy_equivalent = feudal_monarchy
+	nation_designer_trigger = {
+		technology_group = indian
+		OR = {
+			religion = buddhism
+			religion = vajrayana
+			religion = mahayana
+
+		}
 	}
 	modifiers = {
-		missionaries = 1
-		tolerance_heathen = -1
-		tolerance_heretic = -1
+		tolerance_own = 3
+		governing_capacity = 100
+		development_cost = -0.05
+	}
+}
+
+indian_dharmic_reform = {
+	icon = "nayankara_system"
+	allow_normal_conversion = yes
+	potential = {
+		has_dlc = "Dharma"
+		technology_group = indian
+		OR = {
+			religion_group = dharmic
+		}
+	}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 10
+	legacy_equivalent = feudal_monarchy
+	nation_designer_trigger = {
+		technology_group = indian
+		OR = {
+			religion_group = dharmic
+
+		}
+	}
+	modifiers = {
+		tolerance_own = 3
+		governing_capacity = 100
+		development_cost = -0.05
+	}
+}
+
+light_empire_government = {
+	icon = "peacock_throne"
+	allow_normal_conversion = no
+	potential = {
+		tag = LE0
+	}
+	maintain_dynasty = yes
+	allow_vassal_war = yes
+	allow_vassal_alliance = yes
+	lock_level_when_selected = yes
+
+	modifiers = {
+		tolerance_own = 1
+		tolerance_heathen = -2
+		tolerance_heretic = -2
+		global_missionary_strength = 0.03
+		governing_capacity = 150
 	}
 }
 
@@ -333,10 +387,7 @@ khanate_europe_reform = {
 	valid_for_nation_designer = yes
 	nation_designer_cost = 0
 	potential = {
-		OR = {
-			culture = mongolish
-			culture = avars_new
-		}
+		culture = mongolish
 	}
 	modifiers = {
 		cavalry_cost = -0.15
@@ -601,115 +652,11 @@ angron_warband_reform = {
 	}
 }
 
-cathay_republic_reform = {
-	icon = "cathay_repub"
-	allow_normal_conversion = yes
-	potential = {
-		is_or_was_tag = {tag = CT0}
-	}
-	trigger = {}
-	valid_for_nation_designer = yes
-	nation_designer_cost = 200
-	modifiers = {
-		golden_hands_loyalty_modifier = 0.1
-		trade_steering = 0.25
-		core_creation = 0.15
-		development_cost = -0.15
-	}
-	duration = 7
-	custom_attributes = {
-		republican_tradition_from_diets = yes
-		can_use_trade_post = yes
-		enables_plutocratic_idea_group = yes
-		enables_aristocratic_idea_group = no
-	}
-}
-
-great_wall_republic_reform = {
-	icon = "cathay_repub"
-	allow_normal_conversion = yes
-	potential = {
-		OR = {
-			has_reform = great_wall_republic_reform
-			have_had_reform = great_wall_republic_reform
-		}
-	}
-	trigger = {}
-	valid_for_nation_designer = yes
-	nation_designer_cost = 200
-	modifiers = {
-		golden_hands_loyalty_modifier = 0.1
-		trade_steering = 0.25
-		core_creation = 0.05
-		development_cost = -0.15
-		expand_infrastructure_cost_modifier = -0.5
-	}
-	duration = 7
-	custom_attributes = {
-		republican_tradition_from_diets = yes
-		can_use_trade_post = yes
-		enables_plutocratic_idea_group = yes
-		enables_aristocratic_idea_group = no
-	}
-}
-
-league_of_bari_reform = {
-	icon = "giga_chad"
-	allow_normal_conversion = no
-	potential = {
-		OR = {
-			primary_culture = albanian_new
-			primary_culture = italo_albanian
-		}	
-	}
-	nation_designer_trigger = {
-		primary_culture = albanian_new
-	}
-	valid_for_nation_designer = yes
-	nation_designer_cost = 30
-	modifiers = {
-		burghers_influence_modifier = 0.1
-		nobles_influence_modifier = 0.1
-		trade_efficiency = 0.1
-		shock_damage = 0.1
-	}
-	conditional = {
-		allow = {
-			OR = {
-				has_dlc = "Common Sense"
-				has_dlc = "Domination"
-			}
-		}
-		has_parliament = yes
-	}
-	custom_attributes = {
-		enables_plutocratic_idea_group = yes
-		enables_aristocratic_idea_group = no
-	}
-}
-
-great_holy_city_of_romania_reform = {
-	icon = "castle"
-	potential = {
-		tag = RO0
-		culture = nepo_romanian
-	}
-	nation_designer_trigger = {
-		primary_culture = nepo_romanian
-	}
-	valid_for_nation_designer = yes
-	nation_designer_cost = 30
-	modifiers = {
-		diplomatic_reputation = 1
-		prestige_decay = -0.02
-	}
-}
-
 #LEVEL 2 reforms
 
 britannia_imperial_heir = {
 	allow_normal_conversion = no
-	icon = "roman_diplomacy"
+	icon = "castle"
 	potential = {	
 		has_reform = britannia_imperial_heir
 	}
@@ -726,96 +673,11 @@ britannia_imperial_heir = {
 	}
 }
 
-goyman_nobility_reform = {
-	icon = "peacock_throne"
-	allow_normal_conversion = no
-	potential = {
-		was_tag = MD1
-		tag = PER
-	}
-	modifiers = {
-		nobles_influence_modifier = 0.05
-		church_influence_modifier = 0.05
-		manpower_in_true_faith_provinces = 0.1
-	}
-	custom_attributes = {
-		free_expansionist_zealotry = yes
-	}
-	effect = {
-		if = {
-			limit = {
-				NOT = {
-					has_country_flag = extra_discipline_for_at_flag
-				}
-			}
-			set_country_flag = extra_discipline_for_at_flag
-			custom_tooltip = SPANIA_TT_8a
-			hidden_effect = {
-				atm_set_up = yes
-			}
-		}
-	}
-	removed_effect = {
-		hidden_effect = {
-			atm_set_down = yes
-			clr_country_flag = extra_discipline_for_at_flag
-			clr_country_flag = atm_shop_flag
-		}
-	}
-}
-
-farsi_trade_nobility_reform = {
-	icon = "peacock_throne"
-	allow_normal_conversion = no
-	potential = {
-		was_tag = FRS
-		tag = PER
-	}
-	modifiers = {
-		global_ship_cost = -0.05
-		estate_interaction_cooldown_modifier = -0.2
-		nobles_influence_modifier = 0.05
-		burghers_influence_modifier = 0.05
-	}
-	custom_attributes = {
-		alb_trade_expansion_mechanic = yes
-	}
-}
-
 #LEVEL 5 MIL
-
-war_elephants_military_reform = {
-	allow_normal_conversion = yes
-	icon = "war_elephants"
-	potential = {	
-		OR = {
-			has_country_flag = war_elephants_military_reform_unlocked
-			culture_group = dravidian
-			culture_group = central_indic
-			culture_group = western_aryan
-			culture_group = hindusthani
-			culture_group = eastern_aryan
-			culture_group = burman
-			culture_group = thai_group
-			culture_group = new_mon
-			culture_group = southeastasian_group
-			culture_group = new_cham
-		}
-	}
-	trigger = {	}
-	modifiers = {
-		cavalry_cost = 0.15
-		can_recruit_hussars = yes
-		amount_of_hussars = 10
-	}
-	ai = {
-		factor = 1
-	}
-}
 
 at_shop_reform = {
 	allow_normal_conversion = yes
-	icon = "at_shop"
+	icon = "at_shop" #REPLACE_ME
 	potential = {	
 		has_unlocked_government_reform = { government_reform = at_shop_reform }
 	}
@@ -849,7 +711,7 @@ at_shop_reform = {
 
 professional_expansion_reform = {
 	allow_normal_conversion = yes
-	icon = "professionalism"
+	icon = "professionalism" #REPLACE_ME
 	potential = {	
 		has_unlocked_government_reform = { government_reform = professional_expansion_reform }
 	}
@@ -925,28 +787,6 @@ herkulian_quality_reform = {
 	
 	ai = {
 		factor = 1
-	}
-}
-
-marching_empire_reform = {
-	icon = "religious_permanent_revolution_reform"
-	allow_normal_conversion = yes
-	potential = {
-		OR = {
-			has_reform = marching_empire_reform
-			have_had_reform = marching_empire_reform
-			tag = TH1
-		}
-	}
-	trigger = {}
-	valid_for_nation_designer = yes
-	nation_designer_cost = 200
-	modifiers = {
-		mercenary_manpower = -0.5
-		global_regiment_cost = 0.1
-	}
-	government_abilities = {
-		marching_empire_tactics
 	}
 }
 

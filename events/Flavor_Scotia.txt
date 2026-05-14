@@ -192,58 +192,43 @@ country_event = {
 	}	
 }
 
-country_event = { 
+province_event = { 
 	id = scotii.5
 	title = scotii.5.test
 	desc = scotii.5.desc
 	picture = CULTURE_eventPicture
 	trigger = {
-		has_country_flag = sco_slow_cultural_revolution
-		any_owned_province = {
-			OR = {
-				culture = soxon
-				culture = acutanian
-				culture = armerican
-			}
+		owner = {
+			has_country_flag = sco_slow_cultural_revolution
+		}
+		OR = {
+			culture = soxon
+			culture = acutanian
+			culture = armerican
 		}
 	}
-	is_triggered_only = yes
 	mean_time_to_happen = {
-		months = 1
+		months = 120
 	}
 
 	option = {
 		name = scotii.5a
-		add_dip_power = -30
-		random_owned_province = {
-			limit = {
-				OR = {
-					culture = soxon
-					culture = acutanian
-					culture = armerican
-				}
-			}
-			add_base_manpower = -1
-			change_culture = gaulish
+		owner = {
+			add_dip_power = -30
 		}
+		add_base_manpower = -1
+		change_culture = gallic
 	}
 	option = {
 		name = scotii.5b
-		add_dip_power = -30
-		random_owned_province = {
-			limit = {
-				OR = {
-					culture = soxon
-					culture = acutanian
-					culture = armerican
-				}
-			}
-			add_province_modifier = {
-				name = sco_gallic_revolution
-				duration = 7300
-			}
-			change_culture = gaulish
+		owner = {
+			add_dip_power = -30
 		}
+		add_province_modifier = {
+			name = sco_gallic_revolution
+			duration = 7300
+		}
+		change_culture = gallic
 	}
 	option = {
 		name = scotii.5c
@@ -365,14 +350,11 @@ country_event = {
 	mean_time_to_happen = {
 		months = 12
 	}
-	immediate = {
-		enable_religion = pseudo_druidism
-	}
 
 	option = {
 		name = scotii.7a
 		ai_chance = {
-			factor = 33
+			factor = 1
 			modifier = {
 				factor = 0
 				stability = 2
@@ -392,7 +374,7 @@ country_event = {
 	option = {
 		name = scotii.7b
 		ai_chance = {
-			factor = 66
+			factor = 2
 			modifier = {
 				factor = 0
 				any_war_enemy_country = {

@@ -191,7 +191,7 @@ country_event = {
 	title = mexic.5.test
 	desc = mexic.5.desc
 	picture = ANGRY_MOB_eventPicture
-	 
+	
 	trigger = {
 		is_year = 1445
 		treasury = 100
@@ -273,7 +273,7 @@ country_event = {
 		has_country_flag = friend_left_river
 	}
 	mean_time_to_happen = {
-		months = 60
+		months = 3
 	}
 	option = {
 		name = mexic.6a
@@ -284,7 +284,6 @@ country_event = {
 					culture_group = caddoan
 					culture = yoron
 				}
-				religion = mexicos
 			}
 			change_culture = icniuh
 		}
@@ -294,7 +293,6 @@ country_event = {
 					culture_group = caddoan
 					culture = yoron
 				}
-				religion = mexicos
 			}
 			change_culture = icniuh
 		}
@@ -304,7 +302,6 @@ country_event = {
 					culture_group = caddoan
 					culture = yoron
 				}
-				religion = mexicos
 			}
 			change_culture = icniuh
 		}
@@ -328,7 +325,7 @@ country_event = {
 		has_country_flag = friend_right_river
 	}
 	mean_time_to_happen = {
-		months = 60
+		months = 3
 	}
 
 	option = {
@@ -340,27 +337,24 @@ country_event = {
 				NOT = {
 					culture = yoron
 				}
-				religion = mexicos
 			}
 			change_culture = icniuh
 		}
 		random_owned_province = {
 			limit = {
-				culture_group = muskogean
-				NOT = {
+				OR = {
+					culture_group = caddoan
 					culture = yoron
 				}
-				religion = mexicos
 			}
 			change_culture = icniuh
 		}
 		random_owned_province = {
 			limit = {
-				culture_group = muskogean
-				NOT = {
+				OR = {
+					culture_group = caddoan
 					culture = yoron
 				}
-				religion = mexicos
 			}
 			change_culture = icniuh
 		}
@@ -654,13 +648,7 @@ country_event = {
 	picture = ANGRY_MOB_eventPicture
 	
 	trigger = {
-		OR = {
-			tag = MX0
-			AND = {
-				tag = RL0
-				was_tag = MX0	
-			}			
-		}
+		tag = MX0
 		is_year = 1700
 		any_owned_province = {
 			has_province_modifier = mex_slave_plantations
@@ -686,93 +674,67 @@ country_event = {
 }
 
 
-country_event = {
+province_event = {
 	id = mexic.14
 	title = mexic.14.test
 	desc = mexic.14.desc
 	picture = ANGRY_MOB_eventPicture
-	is_triggered_only = yes
+	
 	trigger = {
-		OR = {
-			tag = MX0
-			AND = {
-				tag = RL0
-				was_tag = MX0	
-			}			
-		}
-		any_owned_province = {
-			has_province_modifier = mex_slave_plantations
-		}
+		owner = {tag = MX0}
+		has_province_modifier = mex_slave_plantations
 	}
 	mean_time_to_happen = {
-		days = 1
+		months = 1200
 	}
 
 	option = {
 		name = mexic.14a
-		random_owned_province = {
-			limit = {
-				has_province_modifier = mex_slave_plantations
-			}
-			add_unrest = 20
-		}
+		add_unrest = 20
 	}
 	option = {
 		name = mexic.14b
-		add_manpower = -1
-		random_owned_province = {
-			limit = {
-				has_province_modifier = mex_slave_plantations
+		add_unrest = 10
+			owner = {
+				add_manpower = -1
 			}
-			add_unrest = 10
-		}
 	}
 	option = {
 		name = mexic.14c
 		trigger = {
-			OR = {
-					tag = MX0
-					AND = {
-						tag = RL0
-						was_tag = MX0	
-					}			
-				}
-				OR = {
-					ruler_has_personality = reformist_personality
-					full_idea_group = humanist_ideas
-				}
-		}
-		random_owned_province = {
-			limit = {
-				has_province_modifier = mex_slave_plantations
+			MX0 = {
+				full_idea_group = humanist_ideas
 			}
-			remove_province_modifier = mex_slave_plantations
+		}
+		remove_province_modifier = mex_slave_plantations
 			add_province_modifier = {
 				name = mex_indentured_plantations
 				duration = -1
 			}
-		}
 	}
 	option = {
 		name = mexic.14d
 		trigger = {
-			OR = {
-				tag = MX0
-				AND = {
-					tag = RL0
-					was_tag = MX0	
-				}			
+			MX0 = {
+				ruler_has_personality = cruel_personality
 			}
-			ruler_has_personality = cruel_personality
 		}
-		random_owned_province = {
-			limit = {
-				has_province_modifier = mex_slave_plantations
-			}
-			add_unrest = -10
+		add_unrest = -10
 			owner = {
 				add_manpower = -1
 			}
+	}
+	option = {
+		name = mexic.14e
+		trigger = {
+			MX0 = {
+				ruler_has_personality = reformist_personality
+			}
+		}
+		remove_province_modifier = mex_slave_plantations
+		add_province_modifier = {
+			name = mex_indentured_plantations
+			duration = -1
 		}
 	}
 }
@@ -785,11 +747,7 @@ country_event = {
 	picture = ADVISOR_eventPicture
 	
 	is_triggered_only = yes
-	immediate = {
-		capital_scope = {
-			save_event_target_as = SUPEREVENT_CAPITAL_TARGET
-		}
-	}
+
 	option = {
 		name = mexic.15a
 		ai_chance = {
@@ -797,16 +755,6 @@ country_event = {
 		}
 		custom_tooltip = MV_TREATY
 		set_global_flag = mexican_vinland_treaty
-		hidden_effect = {
-			every_country = {
-				limit = {
-					has_discovered = event_target:SUPEREVENT_CAPITAL_TARGET
-				}
-				country_event = {
-					id = superevent.3
-				}
-			}
-		}
 	}
 	option = {
 		name = mexic.15b
@@ -827,6 +775,9 @@ country_event = {
 		any_owned_province = {
 			vinland_treaty_land = yes
 		}
+	}
+	mean_time_to_happen = {
+		months = 1
 	}
 
 	option = {
@@ -884,6 +835,9 @@ country_event = {
 		any_owned_province = {
 			mexican_treaty_land = yes
 		}
+	}
+	mean_time_to_happen = {
+		months = 1
 	}
 
 	option = {
@@ -1049,17 +1003,10 @@ country_event = {
 	desc = mexic.22.desc
 	picture = ADVISOR_eventPicture
 	trigger = {	
-		OR = {
-			tag = MX0
-			AND = {
-				tag = RL0
-				was_tag = MX0	
-			}			
-		}
+		tag = MX0
 		any_owned_province = {
 			culture_group = bionan
 			continent = north_america
-			religion = mexicos
 		}
 	}
 	mean_time_to_happen = {
@@ -1072,7 +1019,6 @@ country_event = {
 			limit = {
 				culture_group = bionan
 				continent = north_america
-				religion = mexicos
 			}
 			change_culture = tlahuitlaca
 		}
@@ -1080,7 +1026,6 @@ country_event = {
 			limit = {
 				culture_group = bionan
 				continent = north_america
-				religion = mexicos
 			}
 			change_culture = tlahuitlaca
 		}
@@ -1095,7 +1040,6 @@ country_event = {
 				limit = {
 					culture_group = bionan
 					continent = north_america
-					religion = mexicos
 				}
 				change_culture = tlahuitlaca
 			}
@@ -1103,7 +1047,6 @@ country_event = {
 				limit = {
 					culture_group = bionan
 					continent = north_america
-					religion = mexicos
 				}
 				change_culture = tlahuitlaca
 			}
@@ -1117,17 +1060,10 @@ country_event = {
 	desc = mexic.23.desc
 	picture = ADVISOR_eventPicture
 	trigger = {	
-		OR = {
-			tag = MX0
-			AND = {
-				tag = RL0
-				was_tag = MX0	
-			}			
-		}
+		tag = MX0
 		any_owned_province = {
 			is_iberian_grouped_trigger = yes
 			continent = north_america
-			religion = mexicos
 		}
 	}
 	mean_time_to_happen = {
@@ -1140,7 +1076,6 @@ country_event = {
 			limit = {
 				is_iberian_grouped_trigger = yes
 				continent = north_america
-				religion = mexicos
 			}
 			change_culture = raklionnetlaca
 		}
@@ -1148,7 +1083,6 @@ country_event = {
 			limit = {
 				is_iberian_grouped_trigger = yes
 				continent = north_america
-				religion = mexicos
 			}
 			change_culture = raklionnetlaca
 		}
@@ -1163,7 +1097,6 @@ country_event = {
 				limit = {
 					is_iberian_grouped_trigger = yes
 					continent = north_america
-					religion = mexicos
 				}
 				change_culture = raklionnetlaca
 			}
@@ -1171,7 +1104,6 @@ country_event = {
 				limit = {
 					is_iberian_grouped_trigger = yes
 					continent = north_america
-					religion = mexicos
 				}
 				change_culture = raklionnetlaca
 			}
@@ -1185,18 +1117,11 @@ country_event = {
 	desc = mexic.24.desc
 	picture = ADVISOR_eventPicture
 	trigger = {	
-		OR = {
-				tag = MX0
-				AND = {
-					tag = RL0
-					was_tag = MX0	
-				}			
-			}
+		tag = MX0
 		adm_tech = 7
 		any_owned_province = {
 			culture_group = central_algonquian
 			region = great_lakes_region
-			religion = mexicos
 		}
 	}
 	mean_time_to_happen = {
@@ -1208,20 +1133,14 @@ country_event = {
 		random_owned_province = {
 			limit = {
 				culture_group = central_algonquian
-				NOT = {
-					region = hudson_bay_region
-				}
-				religion = mexicos
+				region = great_lakes_region
 			}
 			change_culture = axotlaca
 		}
 		random_owned_province = {
 			limit = {
 				culture_group = central_algonquian
-				NOT = {
-					region = hudson_bay_region
-				}
-				religion = mexicos
+				region = great_lakes_region
 			}
 			change_culture = axotlaca
 		}
@@ -1235,13 +1154,7 @@ country_event = {
 	picture = ADVISOR_eventPicture
 	hidden = yes
 	trigger = {	
-		OR = {
-			tag = MX0
-			AND = {
-				tag = RL0
-				was_tag = MX0	
-			}			
-		}
+		tag = MX0
 		has_country_flag = formed_aztlan
 		any_owned_province = {
 			culture_group = alt_mexican

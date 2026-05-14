@@ -1,0 +1,68 @@
+dyes = {
+	color = { 0.63 0.17 0.50 }
+	modifier = {
+		heir_chance = 0.33
+	}
+	province = {
+		province_trade_power_modifier = 0.10
+	}
+	
+	chance = {
+		factor = 15
+		modifier = {
+			factor = 0
+			area = newfoundland_area
+		}
+		modifier = {
+			factor = 0
+			NOT = { has_terrain = jungle }
+		}
+		modifier = {
+			factor = 0
+			OR = {
+				has_climate = arid
+				has_climate = arctic
+				has_winter = mild_winter
+				has_winter = normal_winter
+				has_winter = severe_winter
+			}
+		}
+		modifier = {
+			factor = 0
+			is_random_new_world =  no
+			NOT = { region = niger_region }
+			NOT = { region = guinea_region }
+			NOT = { region = kongo_region }
+			NOT = { region = central_america_region }
+			NOT = { region = mexico_region }
+			NOT = { region = carribeans_region }
+			NOT = {
+				AND = {
+					colonial_region = colonial_antartika
+					has_port = yes
+				}
+			}
+		}
+		modifier = {
+			factor = 2.0
+			FROM = {
+				has_country_flag = encourage_cash_crops_flag
+			}
+		}
+		modifier = {
+			factor = 2
+			FROM = {
+				OR = {
+					has_increased_trade_goods_discovery = { trade_goods = dyes }
+					colonial_parent = { has_increased_trade_goods_discovery = { trade_goods = dyes } }
+				}
+			}
+		}
+		modifier = {
+			factor = 2.5
+			colonial_region = colonial_antartika
+			has_port = yes
+			NOT = { has_global_flag = CEF_brazilwood_overexploitation_flag }
+		}
+	}
+}

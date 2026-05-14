@@ -361,7 +361,7 @@ country_event = {
 				has_global_flag = incident_reformer_dissension_can_happen
 			}
 			custom_tooltip = incident_reformer_dissension_can_happen_tt
-			#set_imperial_incident = incident_reformer_dissension
+			set_imperial_incident = incident_reformer_dissension
 		}
 		else_if = {
 			limit = {
@@ -369,15 +369,10 @@ country_event = {
 				has_global_flag = incident_hussite_protest_can_happen
 			}
 			custom_tooltip = incident_hussite_protest_can_happen_tt
-			#set_imperial_incident = incident_hussite_protest
+			set_imperial_incident = incident_hussite_protest
 		}
 		# this should elect a new emperor
 		set_hre_religion = pontifex
-		hidden_effect = {
-			PA0 = {
-				set_emperor = yes
-			}
-		}
 	}
 
 	after = {
@@ -487,9 +482,9 @@ country_event = { #I feel like the leagues should be instant. Also, I need a goo
 
 	 trigger = {
 	 	emperor = {
+			is_excommunicated = yes
 			OR = {
 				AND = {
-					is_excommunicated = yes
 					NOT = {
 						has_opinion = {
 							who = PAP
@@ -561,7 +556,6 @@ country_event = { #I feel like the leagues should be instant. Also, I need a goo
 	option = {
 		name = "religious_leagues.5.a"
 		change_tag = PA0
-		on_change_tag_effect = yes
 		hidden_effect = {
 			save_global_event_target_as = pontifex_pope_tag
 		}
@@ -590,17 +584,14 @@ country_event = { #I feel like the leagues should be instant. Also, I need a goo
 		}
 		hidden_effect = {
 			set_ruler_flag = pontifex_naughty_flag
-			every_country = { #make them all choose
+			every_country = {
 				limit = {
-					is_part_of_hre = yes
-					NOT = {
-						tag = PA0
+					has_opinion = {
+						who = PAP
+						value = 180
 					}
 					NOT = {
 						tag = emperor
-					}
-					NOT = {
-						is_subject_of = emperor
 					}
 				}
 				country_event = {

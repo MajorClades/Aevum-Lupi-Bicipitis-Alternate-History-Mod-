@@ -2270,7 +2270,43 @@ country_event = {
 }
 
 # Province converts to Catholicism
+province_event = {
+	id = flavor_jap.35
+	title = "flavor_jap.EVTNAME35"
+	desc = "flavor_jap.EVTDESC35"
+	picture = RELIGION_eventPicture
 
+	trigger = {
+		NOT = { has_dlc = "Mandate of Heaven" }
+		owner = {
+			culture_group = japanese_g
+			has_country_modifier = western_trade
+		}
+		is_reformation_center = no
+		NOT = { religion = catholic }
+	}
+
+	is_mtth_scaled_to_size = 1
+
+	mean_time_to_happen = {
+		months = 400
+		modifier = {
+			factor = 2
+			is_capital = yes
+		}
+		modifier = {
+			factor = 0.8
+			any_neighbor_province = {
+				religion = catholic
+			}
+		}
+	}
+	
+	option = {
+		name = "flavor_jap.EVTOPTA35"
+		change_religion = catholic
+	}
+}
 
 # Ninja strike
 country_event = {
@@ -3413,9 +3449,70 @@ country_event = {
 
 # Iwami Ginzan Silver Mine
 
+province_event = {
+	id = flavor_jap.60
+	
+	title = flavor_jap.60.t
+	desc = flavor_jap.60.d
 
+	picture = COURT_eventPicture
+	
+	fire_only_once = yes
+	
+	trigger = {
+		province_id = 4183 # Iwami
+		is_year = 1526
+		NOT = { trade_goods = gold }
+	}
+	
+	mean_time_to_happen = {
+		months = 200
+	}
+	
+	option = { 
+		name = flavor_jap.60.a
+		change_trade_goods = gold
+		add_base_production = 3
+	}
+	
+}
 
 #Sado Kinzan
+province_event = {
+	id = flavor_jap.61
+	
+	title = flavor_jap.61.t
+	desc = flavor_jap.61.d
+
+	picture = COURT_eventPicture
+	
+	fire_only_once = yes
+	
+	trigger = {
+		OR = {
+			AND = { 
+				province_id = 1024 # Echigo
+				is_year = 1526
+				NOT = { trade_goods = gold }
+			}
+			AND = {
+				owner = { has_country_flag = jap_flavor_61_flag }
+				province_id = 1024 # Echigo
+				NOT = { trade_goods = gold }
+			}
+		}
+	}
+	
+	mean_time_to_happen = {
+		months = 200
+	}
+	
+	option = { 
+		name = flavor_jap.61.a
+		change_trade_goods = gold
+	}
+	
+}
 
 
 #1.35 Event Additions by Big Boss#

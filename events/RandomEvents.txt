@@ -1728,7 +1728,7 @@ country_event = {
 		has_estate = estate_church
 		OR = {
 			religion = catholic
-			religion = impotian
+			religion = orthodox
 			religion_group = muslim
 		}
 		NOT = { tag = PAP }
@@ -1772,7 +1772,7 @@ country_event = {
 		}
 		if = {
 			limit = {
-				religion = impotian
+				religion = orthodox
 			}
 			add_patriarch_authority = -0.1
 		}
@@ -1802,7 +1802,7 @@ country_event = {
 		}
 		if = {
 			limit = {
-				religion = impotian
+				religion = orthodox
 			}
 			add_patriarch_authority = 0.05
 		}
@@ -1827,7 +1827,7 @@ country_event = {
 		}
 		if = {
 			limit = {
-				religion = impotian
+				religion = orthodox
 			}
 			add_patriarch_authority = 0.025
 		}
@@ -9050,8 +9050,8 @@ country_event = {
 				religion = catholic
 				religion = reformed
 				religion = protestant
-				religion = pseudo_druidism
-				religion = wycliffian
+				religion = anglican
+				religion = hussite
 			}
 			continent = europe
 			printing_press = 1
@@ -9067,8 +9067,8 @@ country_event = {
 						religion = catholic
 						religion = reformed
 						religion = protestant
-						religion = pseudo_druidism
-				religion = wycliffian
+						religion = anglican
+						religion = hussite
 					}
 					continent = europe
 					printing_press = 1
@@ -10015,7 +10015,7 @@ country_event = {
 	}
 }
 
-### Scripted by Sara Wendel-?tqvist ###
+### Scripted by Sara Wendel-Örtqvist ###
 
 namespace = random_event
 
@@ -11993,8 +11993,8 @@ province_event = {
 				religion = catholic
 				religion = protestant
 				religion = reformed
-				religion = pseudo_druidism
-				religion = wycliffian
+				religion = anglican
+				religion = hussite
 			}
 		}
 		is_religion_enabled = protestant
@@ -12039,8 +12039,8 @@ province_event = {
 					OR = {
 						religion = protestant
 						religion = reformed
-						religion = pseudo_druidism
-				religion = wycliffian
+						religion = anglican
+						religion = hussite
 					}
 				}
 				add_opinion = { who = ROOT modifier = opinion_angry }
@@ -12068,6 +12068,22 @@ province_event = {
 			}
 			change_religion = reformed
 		}
+		if = {
+			limit = {
+				owner = {
+					religion = anglican
+				}
+			}
+			change_religion = anglican
+		}
+		if = {
+			limit = {
+				owner = {
+					religion = hussite
+				}
+			}
+			change_religion = hussite
+		}
 		owner = {
 			add_reform_desire = 0.015
 			if = {
@@ -12089,8 +12105,8 @@ province_event = {
 					OR = {
 						religion = protestant
 						religion = reformed
-						religion = pseudo_druidism
-				religion = wycliffian
+						religion = anglican
+						religion = hussite
 					}
 				}
 				add_opinion = { who = ROOT modifier = opinion_grateful }
@@ -12345,7 +12361,7 @@ country_event = {
 		NOT = {
 			OR = {
 				religion = coptic
-				religion = impotian
+				religion = orthodox
 			}
 		}
 		is_religion_enabled = protestant
@@ -12362,8 +12378,8 @@ country_event = {
 			OR = {
 				religion = protestant
 				religion = reformed
-				religion = pseudo_druidism
-				religion = wycliffian
+				religion = anglican
+				religion = hussite
 			}
 		}
 	}
@@ -12389,8 +12405,8 @@ country_event = {
 					OR = {
 						religion = protestant
 						religion = reformed
-						religion = pseudo_druidism
-				religion = wycliffian
+						religion = anglican
+						religion = hussite
 					}
 				}
 				save_event_target_as = target_province
@@ -12402,8 +12418,8 @@ country_event = {
 					OR = {
 						religion = protestant
 						religion = reformed
-						religion = pseudo_druidism
-				religion = wycliffian
+						religion = anglican
+						religion = hussite
 					}
 					OR = {
 						owner = { religion = catholic }
@@ -12431,8 +12447,8 @@ country_event = {
 					OR = {
 						religion = protestant
 						religion = reformed
-						religion = pseudo_druidism
-				religion = wycliffian
+						religion = anglican
+						religion = hussite
 					}
 				}
 				add_unrest = 10
@@ -12486,10 +12502,18 @@ country_event = {
 			if = {
 				limit = {
 					owner = {
-						religion = wycliffian
+						religion = anglican
 					}
 				}
-				change_religion = wycliffian
+				change_religion = anglican
+			}
+			if = {
+				limit = {
+					owner = {
+						religion = hussite
+					}
+				}
+				change_religion = hussite
 			}
 		}
 	}

@@ -5,25 +5,38 @@
 namespace = CEF_flavor_brz
 
 #Brazilwood Extractivism
-country_event = {
+province_event = {
 	id = CEF_flavor_brz.1
 	title = "CEF_flavor_brz.1.title"
 	desc = "CEF_flavor_brz.1.desc"
 	picture = COLONIZATION_eventPicture
-is_triggered_only = yes
+
 	trigger = {
+		colonial_region = colonial_antartika
+		has_port = yes
+		is_city = yes
 		NOT = { has_global_flag = CEF_brazilwood_overexploitation_flag }
-		any_owned_province = {
-			colonial_region = colonial_antartika
-			has_port = yes
-			is_city = yes
-			NOT = { trade_goods = dyes }
-			NOT = { has_province_flag = cef_refused_brazilwood_flag }
-		}
+		NOT = { trade_goods = dyes }
+		NOT = { has_province_flag = cef_refused_brazilwood_flag }
 	}
 
 	mean_time_to_happen = {
-		months = 1
+		months = 120
+		modifier = {
+			factor = 0.1
+			trade_goods = tropical_wood
+		}
+		modifier = {
+			factor = 10
+			owner = {
+				calc_true_if = {
+					all_owned_province = {
+						trade_goods = dyes
+					}
+					amount = 5
+				}
+			}
+		}
 	}
 	
 	#Such a beautiful color of embers!
@@ -32,16 +45,7 @@ is_triggered_only = yes
 		ai_chance = {
 			factor = 100
 		}
-		random_owned_province = {
-			limit = {
-				colonial_region = colonial_antartika
-				has_port = yes
-				is_city = yes
-				NOT = { trade_goods = dyes }
-				NOT = { has_province_flag = cef_refused_brazilwood_flag }
-			}
-			change_trade_goods = dyes
-		}
+		change_trade_goods = dyes
 	}
 	#Stick to the current production.
 	option = {
@@ -49,16 +53,7 @@ is_triggered_only = yes
 		ai_chance = {
 			factor = 0
 		}
-		random_owned_province = {
-			limit = {
-				colonial_region = colonial_antartika
-				has_port = yes
-				is_city = yes
-				NOT = { trade_goods = dyes }
-				NOT = { has_province_flag = cef_refused_brazilwood_flag }
-			}
-			set_province_flag = cef_refused_brazilwood_flag
-		}
+		set_province_flag = cef_refused_brazilwood_flag
 	}
 }
 
@@ -105,18 +100,16 @@ country_event = {
 }
 
 #Scarce Brazilwood
-country_event = {
+province_event = {
 	id = CEF_flavor_brz.3
 	title = "CEF_flavor_brz.3.title"
 	desc = "CEF_flavor_brz.3.desc"
 	picture = COLONIZATION_eventPicture
-	is_triggered_only = yes
+	
 	trigger = {
+		colonial_region = colonial_antartika
 		has_global_flag = CEF_brazilwood_overexploitation_flag
-		any_owned_province = {
-			trade_goods = dyes
-			colonial_region = colonial_antartika
-		}
+		trade_goods = dyes
 	}
 
 	mean_time_to_happen = {
@@ -129,13 +122,7 @@ country_event = {
 		ai_chance = {
 			factor = 100
 		}
-		random_owned_province = {
-			limit = {
-				trade_goods = dyes
-				colonial_region = colonial_antartika
-			}
-			change_trade_goods = sugar
-		}
+		change_trade_goods = sugar
 	}
 	#See what else can be produced.
 	option = {
@@ -143,13 +130,7 @@ country_event = {
 		ai_chance = {
 			factor = 0
 		}
-		random_owned_province = {
-			limit = {
-				trade_goods = dyes
-				colonial_region = colonial_antartika
-			}
-			change_trade_goods = unknown
-		}
+		change_trade_goods = unknown
 	}
 }
 
@@ -318,7 +299,7 @@ country_event = {
 		hidden_effect = { swap_non_generic_missions = yes }
 	}
 	
-	#Ave Glória, Ave Império!
+	#Ave GlÃ³ria, Ave ImpÃ©rio!
 	option = {
 		name = "CEF_flavor_brz.8.a"
 		ai_chance = {

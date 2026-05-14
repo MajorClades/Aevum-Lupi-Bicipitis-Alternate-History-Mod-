@@ -222,7 +222,6 @@ country_event = {	#Another meme
 				name = rasnian_khitans
 				duration = 36500
 			}
-			change_culture = chitans
 		}
 	}
 	option = {
@@ -373,10 +372,7 @@ country_event = {	#Rasna vassalization event
 			factor = 90
 		}
 		PD7 = {
-			create_subject = {
-				subject_type = crown_colony
-				who = ROOT
-			}
+			vassalize = ROOT
 		}
 		add_manpower = 1
 		define_conquistador = {
@@ -438,7 +434,6 @@ country_event = {	#Etna doing Vulcano things
 	desc = gen_ita.11.desc
 	picture = REVOLT_eventPicture
 	fire_only_once = yes
-
 	mean_time_to_happen = {
 		months = 12
 	}
@@ -468,13 +463,6 @@ country_event = {	#Etna doing Vulcano things
 			add_devastation = 10
 		}
 		set_country_flag = etna_erupted_flag 
-		hidden_effect = {
-			country_event = {
-				id = gen_ita.12
-				days = 400
-				random = 100
-			}
-		}
 		hidden_effect = {
 			set_variable = {
 				which = sicilian_fascio_rebel_numbers
@@ -590,11 +578,6 @@ country_event = {	#peasant being revolt
 				size = 3
 			}
 		}
-		set_country_flag = fascioist_victory_flag
-		kill_heir = { allow_new_heir = no }
-		kill_ruler = yes
-		change_government = republic
-		add_government_reform = fascioist_republic_reform
 	}
 }
 
@@ -792,16 +775,15 @@ country_event = {	#event carneval
 		OR = {
 			is_month = 11
 			is_month = 0
-		}
-		NOT = {
-			is_month = 3
+			is_month = 1
+			is_month = 2
 		}
 	}
 
 	option = {
 		name = gen_ita.19a
 		every_known_country = {
-			add_aggressive_expansion = {
+			reverse_add_aggressive_expansion = {
 				who = ROOT
 				value = -5
 				apply_calc = no
@@ -825,17 +807,11 @@ country_event = {	#event once formed Italy decide to stay or not in the hre
 			}
 			set_government_rank = 3
 		}
-		if = {
-			limit = {
-				hre_size = 1
-			}
-			set_in_empire = no
-			set_country_flag = can_kill_emperor_AFR
-			add_casus_belli = {
-				type = cb_dismantle_hre_africa
-				target = emperor
-				months = 300
-			}
+		set_in_empire = no
+		add_casus_belli = {
+			type = cb_war_on_empire
+			target = emperor
+			months = 360
 		}
 	}
 	option = {
@@ -917,7 +893,7 @@ country_event = {	#capitalism for me, not for thee
 		}
 	}
 	mean_time_to_happen = {
-		months = 120
+		months = 300
 	}
 
 	option = {
@@ -926,11 +902,6 @@ country_event = {	#capitalism for me, not for thee
 			factor = 30
 		}
 		add_years_of_income = -1
-		add_government_power = {
-			mechanic_type = capitanolistism
-			power_type = venetian_capitalism
-			value = 10
-		}
 	}
 	option = {
 		name = gen_ita.101b
@@ -944,60 +915,59 @@ country_event = {	#capitalism for me, not for thee
 	}
 }
 
-country_event = {	#get booted idiota italian migrate to the new world so that provinces dont get to high dev
+province_event = {	#get booted idiota italian migrate to the new world so that provinces dont get to high dev
 	id = gen_ita.102
 	title = gen_ita.102.test
 	desc = gen_ita.102.desc
 	picture = GOOD_WITH_MONARCH_eventPicture
 	trigger = {
 		is_part_of_hre = yes
-		NOT = { #eventually the player will probably get tired of this events
-			AND = {
-				ai = no
-				absolutism = 25
-			}
-		}
-		war_exhaustion = 5
-		any_province = {
-			has_discovered = ROOT
-			OR = {
-				continent = north_america
-				continent = south_america
-			}
-			has_port = yes
-			is_city = yes
-			owner = {
-				OR = {
-					is_colonial_nation = yes
-					has_country_flag = changed_from_colonial_nation
+		owner = {
+			NOT = { #eventually the player will probably get tired of this events
+				AND = {
+					ai = no
+					absolutism = 25
 				}
 			}
+			any_province = {
+				has_discovered = ROOT
+				OR = {
+					continent = north_america
+					continent = south_america
+				}
+				has_port = yes
+				is_city = yes
+				owner = {
+					OR = {
+						is_colonial_nation = yes
+						has_country_flag = changed_from_colonial_nation
+					}
+				}
+			}
+			culture_group = latin
+		}
+		OR = {
+			owner = {
+				war_exhaustion = 5
+			}
+			owner = {
+				NOT = {
+					stability = -1
+				}
+			}
+			devastation = 80
 		}
 		culture_group = latin
-		OR = {
-			war_exhaustion = 5
-			NOT = {
-				stability = -1
-			}
-			any_owned_province = {
-				devastation = 40
-			}
-		}
 	}
 	mean_time_to_happen = {
-		days = 1
+		months = 300
 	}
-	is_triggered_only = yes
+
 	option = {
 		name = gen_ita.102a
-		trigger = {	ai = yes	}
-		random_owned_province = {
-			limit = {
-				culture_group = latin
-			}
-			add_random_development = -1
-			add_base_manpower = -1
-		}
+		trigger = {	owner = { ai = yes}	}
+		add_random_development = -1
+		add_base_manpower = -1
 		random_province = {
 			limit = { 
 				OR = {
@@ -1020,8 +990,10 @@ country_event = {	#get booted idiota italian migrate to the new world so that pr
 	}
 	option = {
 		name = gen_ita.102b
-		trigger = {ai = no	}
-		add_yearly_manpower = -0.2
+		trigger = {	owner = { ai = no}	}
+		owner = {
+			add_yearly_manpower = -0.2
+		}
 		random_province = {
 			limit = { 
 				OR = {
@@ -1048,7 +1020,7 @@ province_event = {	# Italian Migrations
 	id = gen_ita.103
 	title = gen_ita.103.test
 	desc = gen_ita.103.desc
-	picture = COLONIZATION_eventPicture
+	picture = GOOD_WITH_MONARCH_eventPicture
 	is_triggered_only = yes
 
 	option = {

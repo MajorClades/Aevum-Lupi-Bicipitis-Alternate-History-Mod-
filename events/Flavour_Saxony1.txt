@@ -218,7 +218,7 @@ country_event = {
 }
 
 #convert balts
-country_event = {
+province_event = {
 	id = saxo.5
 	title = saxo.5.t
 	desc = saxo.5.d
@@ -226,83 +226,66 @@ country_event = {
 	
 	# is_mtth_scaled_to_size = 1
 	hidden = yes
-	is_triggered_only = yes
+	
 	trigger = {
-		any_owned_province = {
-			culture_group = baltic
-		}
-		has_country_flag = alb_sax_germanize_baltics_flag
+		culture_group = baltic
+		owner = { has_country_flag = alb_sax_germanize_baltics_flag }
 	}
 
 	mean_time_to_happen = {
-		months = 1
+		months = 300
+		modifier = {
+			factor = 0.75
+			development = 15
+		}
+		modifier = {
+			factor = 0.75
+			development = 20
+		}
+		modifier = {
+			factor = 0.75
+			development = 25
+		}
+		modifier = {
+			factor = 0.75
+			development = 30
+		}
 	}
 	
 	option = {
 		name = saxo.5a
-		random_owned_province = {
+		if = {
 			limit = {
-				culture_group = baltic
-			}
-			if = {
-				limit = {
-					owner = {
-						culture_group = unified_germanic
-					}
-					OR = {
-						culture = lithuanian
-						culture = aukstaitian
-						culture = samogitian
-						culture = latvian
-					}
+				owner = {
+					culture_group = unified_germanic
 				}
-				change_culture = ug_litaisch
-			}
-			else_if = {
-				limit = { 
-					OR = {
-						culture = lithuanian
-						culture = aukstaitian
-						culture = samogitian
-						culture = latvian
-					}
+				OR = {
+					culture = lithuanian
+					culture = latvian
 				}
-				change_culture = litaisch
 			}
-			else_if = {
-				limit = { 
-					owner = {
-						culture_group = unified_germanic
-					}
-					OR = {
-						culture = curonian
-						culture = selonian
-						culture = valtean
-					}
+			change_culture = ug_litaisch
+		}
+		else_if = {
+			limit = { 
+				OR = {
+					culture = lithuanian
+					culture = latvian
 				}
-				change_culture = ug_balten
 			}
-			else_if = {
-				limit = { 
-					OR = {
-						culture = curonian
-						culture = selonian
-						culture = valtean
-					}
+			change_culture = litaisch
+		}
+		else_if = {
+			limit = { 
+				owner = {
+					culture_group = unified_germanic
 				}
-				change_culture = balten_new
+				culture = valtean
 			}
-			else_if = {
-				limit = {
-					owner = {
-						culture_group = unified_germanic
-					}
-				}
-				change_culture = ug_saxonard
-			}
-			else = {
-				change_culture = saxonard
-			}
+			change_culture = ug_balten
+		}
+		else = {
+			change_culture = balten_new
 		}
 	}
 }
@@ -589,6 +572,39 @@ country_event = {		# Knightly Feudalism
 		add_country_modifier = {
 			name = alb_knights_less_taxes
 			duration = 3650
+		}
+	}
+	option = {
+		name = saxo.11b
+		add_estate_loyalty = {
+			estate = estate_knight_lodges
+			loyalty = 10
+		}
+		add_adm_power = -50
+	}
+}
+
+country_event = {		# Knightly Feudalism
+	id = saxo.11
+	title = saxo.11.test
+	desc = saxo.11.desc
+	picture = NOBLE_ESTATE_DEMANDS_eventPicture
+
+	trigger = {
+		has_estate = estate_knight_lodges
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	is_triggered_only = yes
+
+	option = {
+		name = saxo.11a
+		add_estate_loyalty = {
+			estate = estate_knight_lodges
+			loyalty = -10
 		}
 	}
 	option = {

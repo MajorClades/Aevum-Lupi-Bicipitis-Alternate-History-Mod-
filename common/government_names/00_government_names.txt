@@ -878,10 +878,11 @@ ottoman_marches = {
 	}
 	
 	trigger = {
-		always = no
 		is_march = yes
 		religion_group = muslim
-		
+		overlord = {
+			primary_culture = turkish
+		}
 	}
 }
 
@@ -915,13 +916,15 @@ ottoman_vassals = {
 	}
 
 	trigger = {
-		always = no
 		government = monarchy
 		religion_group = muslim
 		NOT = { is_march = yes }
 		is_subject_of_type = vassal
 		NOT = { has_reform = eyalet_government }
 		NOT = { has_reform = barbary_eyalet_government }
+		overlord = {
+			primary_culture = turkish
+		}
 	}
 }
 
@@ -2288,7 +2291,7 @@ hunyadi_regent_monarchy = {
 	trigger = {
 		tag = HUN
 		government = monarchy
-#		has_ruler = "J?nos"
+#		has_ruler = "János"
 		has_heir = "Ladislaus Postumus"
 	}
 }
@@ -2384,9 +2387,8 @@ turkish_monarchy = {
 	}
 
 	trigger = {
-		always = no
 		government = monarchy
-		
+		primary_culture = turkish
 	}
 }
 
@@ -3666,12 +3668,7 @@ hindu_rajput_monarchy = {
 	trigger = {
 		government = monarchy
 		primary_culture = rajput
-		OR = {
-			religion = hinduism
-			religion = sanatanism
-			religion = mantramarga
-			religion = jyotisastra
-		}
+		religion = hinduism
 	}
 }
 
@@ -3726,12 +3723,7 @@ maratha_peshwas = {
 			has_reform = meritocratic_focus_reform
 		}
 		primary_culture = marathi
-		OR = {
-			religion = hinduism
-			religion = sanatanism
-			religion = mantramarga
-			religion = jyotisastra
-		}
+		religion = hinduism
 	}
 }
 
@@ -3781,12 +3773,7 @@ hindu_maratha_monarchy = {
 	trigger = {
 		government = monarchy
 		primary_culture = marathi
-		OR = {
-			religion = hinduism
-			religion = sanatanism
-			religion = mantramarga
-			religion = jyotisastra
-		}
+		religion = hinduism
 	}
 }
 
@@ -5064,9 +5051,9 @@ chinese_monarchy = {
 
 hindu_monarchy = {
 	rank = {
-		1 = RAJ_t
-		2 = RAJYA
-		3 = SAMRAJYA
+		1 = PRINCEDOM
+		2 = KINGDOM
+		3 = EMPIRE
 	}
 
 	ruler_male = {
@@ -5107,11 +5094,7 @@ hindu_monarchy = {
 
 	trigger = {
 		government = monarchy
-		OR = {
-			religion = hinduism
-			religion = mantramarga
-			religion = sanatanism
-		}
+		religion = hinduism
 	}
 }
 
@@ -5219,9 +5202,7 @@ muslim_monarchy = {
 		NOT = { has_reform = byz_muslim_government }
 		NOT = { has_reform = byz_no_decadence_government }
 		NOT = { 		
-			culture = suomy 
-			culture = chuvash
-			culture = dardarian
+				culture = suomy 
 		}
 	}
 }
@@ -5584,12 +5565,7 @@ hindu_republic = { #Based on titles in Maratha administration
 
 	trigger = {
 		government = republic
-		OR = {
-			religion = hinduism
-			religion = sanatanism
-			religion = mantramarga
-			religion = jyotisastra
-		}
+		religion = hinduism
 	}
 }
 

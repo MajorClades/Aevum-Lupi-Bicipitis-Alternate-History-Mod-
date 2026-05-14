@@ -1,38 +1,38 @@
 country_decisions = {
 
-	#yam_move_koreans_back = { #Basically impossible to accomplish
-	#	potential = {
-	#		has_country_flag = not_help_the_koreans_flag
-	#	}
-	#	allow = {
-	#		any_ally = {
-	#			primary_culture = jeju
-	#			has_opinion = {
-	#				who = ROOT
-	#				value = 180
-	#			}
-	#		}
-	#	}
-	#	effect = {
-	#		random_ally = {
-	#			limit = {
-	#				primary_culture = jeju
-	#			}
-	#			ROOT = {
-	#				create_union = PREV
-	#			}
-	#			custom_tooltip = YAMATAI_TT_5a
-	#			set_country_flag = helped_the_koreans_flag
-	#			korea_region = {
-	#				add_permanent_claim = PREV
-	#			}
-	#		}
-	#		clr_country_flag = not_help_the_koreans_flag
-	#	}
-	#	ai_will_do = {
-	#		factor = 100
-	#	}
-	#}
+	yam_move_koreans_back = {
+		potential = {
+			has_country_flag = not_help_the_koreans_flag
+		}
+		allow = {
+			any_ally = {
+				primary_culture = jeju
+				has_opinion = {
+					who = ROOT
+					value = 180
+				}
+			}
+		}
+		effect = {
+			random_ally = {
+				limit = {
+					primary_culture = jeju
+				}
+				ROOT = {
+					create_union = PREV
+				}
+				custom_tooltip = YAMATAI_TT_5a
+				set_country_flag = helped_the_koreans_flag
+				korea_region = {
+					add_permanent_claim = PREV
+				}
+			}
+			clr_country_flag = not_help_the_koreans_flag
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
 
 	yam_move_koreans_around = {
 		potential = {
@@ -283,145 +283,4 @@ country_decisions = {
 		}
 	}
 
-	siberian_march_decision = {
-		potential = {
-			NOT = {
-				tag = IN0
-			}
-			any_owned_province = {
-				culture = inuit
-			}
-			NOT = {
-				has_country_flag = no_siberian_march
-			}
-			NOT = {
-				technology_group = nomad_group
-			}
-			NOT = {
-				culture_group = kamchatkan_g
-			}
-			NOT = {
-				culture_group = evenks
-			}
-		}
-		color = { 222 244 40 }
-		allow = {
-			owns_all_provinces = {
-				culture = inuit
-			}
-		}
-		effect = {
-			country_event = {
-				id = yamat.102
-			}
-			set_country_flag = no_siberian_march
-		}
-		ai_will_do = {
-			factor = 0
-		}
-	}
-
-	siberian_march_op_decision = { # AI only
-		potential = {
-			ai = yes
-			tag = IN0
-			overlord = {
-				has_country_flag = no_siberian_march
-			}
-			has_country_modifier = north_march_siberian_op
-		}
-		color = { 222 244 40 }
-		allow = {
-			any_owned_province = {
-				NOT = {
-					region = east_siberia_region
-				}
-			}
-		}
-		effect = {
-			every_owned_province = {
-				limit = {
-					NOT = {
-						region = east_siberia_region
-					}
-				}
-				cede_province = event_target:overlord_inuit_governship
-			}
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	alb_yang_dynasty_nation = {
-		major = yes
-		potential = {
-			normal_or_historical_nations = yes
-			was_never_end_game_tag_trigger = yes
-			NOT = { has_country_flag = formed_yang_flag }
-			tag = KM6
-			has_country_flag = km6_yang_dynasty_aspirations
-			OR = {
-				ai = no
-				is_playing_custom_nation = no
-			}
-			OR = {
-				is_free_or_tributary_trigger = yes
-				ai = no
-			}
-			is_colonial_nation = no
-			OR = {
-				is_former_colonial_nation = no
-				AND = {
-					is_former_colonial_nation = yes
-					ai = no
-				}
-			}
-		}
-		provinces_to_highlight = {
-			superregion = china_superregion
-			NOT = {
-				owned_by = ROOT
-			}
-		}
-		allow = {
-			is_free_or_tributary_trigger = yes
-			is_at_war = no
-			owns_core_province = 1816
-			owns_core_province = 1821
-			owns_core_province = 667
-			OR = {
-				is_emperor_of_china = yes
-				NOT = {
-					any_country = {		
-						is_emperor_of_china = yes
-					}
-				}
-			}
-			num_of_owned_provinces_with = {
-				value = 30
-				superregion = china_superregion
-			}
-		}
-		effect = {
-			override_country_name = YANG_DYNASTY
-			remove_non_electors_emperors_from_empire_effect = yes
-			china_superregion = {
-				limit = {
-					NOT = { owned_by = ROOT }
-				}
-				add_permanent_claim = KM6
-			}
-			add_prestige = 20
-			set_country_flag = formed_yang_flag
-			if = {
-				limit = { has_custom_ideas = no }
-				country_event = { id = ideagroups.1 } #Swap Ideas
-			}
-		}
-		ai_will_do = {
-			factor = 1
-		}
-		ai_importance = 400
-	}
 }
