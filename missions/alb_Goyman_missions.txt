@@ -1,0 +1,438 @@
+MD1_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = MD1
+			AND = {
+				tag = PER
+				was_tag = MD1
+			}
+		}
+	}
+
+	MD1_war_of_resistance = {
+		icon = per_build_the_fire_temples
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			is_at_war = yes
+			OR = {
+				num_of_estate_privileges = {
+					estate = estate_nobles
+					value = 3
+				}
+				is_subject = yes
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "goy_war_of_fire_start"
+				duration = 3650
+			}
+		}
+	}
+
+	MD1_victory_for_god = {
+		icon = mission_islamic_golden_age
+		position = 2
+		required_missions = { MD1_war_of_resistance } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			is_at_war = no
+			grown_by_development = 25
+		}
+
+		effect = {
+			persia_region = { add_permanent_claim = ROOT } 
+			khorasan_region = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	MD1_iran_proper = {
+		icon = per_tab_ziyarids_successor
+		position = 3
+		required_missions = { MD1_victory_for_god } 
+		provinces_to_highlight = {
+			region = persia_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 25
+				region = persia_region
+			}
+		}
+
+		effect = {
+			add_yearly_manpower = 1.5
+			capital_scope = {
+				add_or_upgrade_manpower_building = yes
+				add_or_upgrade_fort_building = yes
+			}
+		}
+	}
+
+	MD1_strenght_of_god = {
+		icon = per_unify_islam
+		position = 4
+		required_missions = {
+			MD1_iran_proper
+			MD1_khorasan_region
+		}
+		provinces_to_highlight = {
+			OR = {
+				region = persia_region
+				region = khorasan_region
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 65
+				religion = ROOT
+				OR = {
+					region = persia_region
+					region = khorasan_region
+				}
+			}
+		}
+
+		effect = {
+			capital_scope = {
+				add_permanent_province_modifier = {
+					name = "goy_bastion_of_faith_province"
+					duration = -1
+				}
+			}
+			add_country_modifier = {
+				name = "goy_bastion_of_faith"
+				duration = -1
+			}
+		}
+	}
+}
+MD1_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = MD1
+			AND = {
+				tag = PER
+				was_tag = MD1
+			}
+		}
+	}
+
+	MD1_victory_to_fire = {
+		icon = per_our_religious_direction
+		position = 2
+		required_missions = {
+			MD1_war_of_resistance
+			MD1_reg_unity_power
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = { religious_unity = 0.95 } 
+
+		effect = {
+			add_country_modifier = {
+				name = "goy_allah_guidance"
+				duration = -1
+			}
+		}
+	}
+
+	MD1_khorasan_region = {
+		icon = mam_persia
+		position = 3
+		required_missions = { MD1_victory_for_god } 
+		provinces_to_highlight = {
+			region = khorasan_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 25
+				region = khorasan_region
+			}
+		}
+
+		effect = {
+			add_years_of_income = 1.5
+			capital_scope = {
+				add_or_upgrade_production_building = yes
+				add_or_upgrade_tax_building = yes
+			}
+		}
+	}
+}
+MD1_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = MD1
+			AND = {
+				tag = PER
+				was_tag = MD1
+			}
+		}
+	}
+
+	MD1_reg_unity_power = {
+		icon = per_convert_persia
+		position = 1
+
+		trigger = {
+			OR = {
+				AND = {
+					stability = 1
+					prestige = 15
+				}
+				num_of_allies = 2
+				capital_scope = {
+					religion = ROOT
+				}
+			}
+		}
+
+		effect = {
+			capital_scope = {
+				add_province_modifier = {
+					name = "goy_city_of_god"
+					duration = 10950
+				}
+			}
+		}
+	}
+
+	MD1_churches = {
+		icon = mission_russian_patriarchatee
+		position = 3
+		required_missions = { MD1_reg_unity_power } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_tax_building_trigger = no
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				has_tax_building_trigger = yes
+			}
+		}
+
+		effect = {
+			define_advisor = {
+				type = inquisitor
+				skill = 2
+				cost_multiplier = 0.5
+			}
+			add_estate_loyalty = {
+				estate = estate_church
+				loyalty = 15
+			}
+		}
+	}
+
+	MD1_even_further_beyond = {
+		icon = mam_hormuz_straits
+		position = 4
+		required_missions = {
+			MD1_super_soyman
+			MD1_churches
+		}
+		provinces_to_highlight = {
+			owned_by = ROOT
+			NOT = { num_of_buildings_in_province = 3 } 
+		}
+
+		trigger = {
+			is_great_power = yes
+			is_defender_of_faith = yes
+			num_of_owned_provinces_with = {
+				value = 20
+				religion = ROOT
+				num_of_buildings_in_province = 3
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "goy_religions_wars"
+				duration = -1
+			}
+		}
+	}
+}
+MD1_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = MD1
+			AND = {
+				tag = PER
+				was_tag = MD1
+			}
+		}
+	}
+
+	MD1_army_tradition_prestige = {
+		icon = per_the_seljuk_successors
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			OR = {
+				army_tradition = 20
+				has_estate_privilege = estate_nobles_officer_corp
+			}
+		}
+
+		effect = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = GOY_TT_1a
+				first_limit = " has_country_flag = extra_discipline_for_at_flag  "
+				first_effect = "
+					change_variable = {
+						which = war_lesson_counter
+						value = 5
+					}
+				"
+				second_custom_tooltip = GOY_TT_1b
+				second_limit = " NOT = { has_country_flag = extra_discipline_for_at_flag } "
+				second_effect = "
+					add_army_tradition = 10
+				"
+			}
+		}
+	}
+
+	MD1_soyman = {
+		icon = per_create_the_ghulams
+		position = 2
+		required_missions = { MD1_army_tradition_prestige } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_manpower_building_trigger = no
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				has_manpower_building_trigger = yes
+				base_tax = 5
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "goy_smart_soldiers"
+				duration = 10950
+			}
+		}
+	}
+
+	MD1_super_soyman = {
+		icon = mission_persian_lion
+		position = 2
+		required_missions = { MD1_soyman } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_manpower_building_trigger = no
+			has_tax_building_trigger = no
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 20
+				has_manpower_building_trigger = yes
+				has_tax_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "goy_faith_warriors"
+				duration = -1
+			}
+		}
+	}
+}
+MD1_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = MD1
+			AND = {
+				tag = PER
+				was_tag = MD1
+			}
+		}
+	}
+
+	MD1_army_of_goyman = {
+		icon = mission_persian_soldiers
+		position = 2
+		required_missions = { MD1_army_tradition_prestige } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			years_of_manpower = 1
+			army_size = 25
+		}
+
+		effect = {
+			add_yearly_manpower = -1
+			simple_dynamic_effect = {
+				first_custom_tooltip = GOY_TT_1a
+				first_limit = " has_country_flag = extra_discipline_for_at_flag  "
+				first_effect = "
+					change_variable = {
+						which = war_lesson_counter
+						value = 25
+					}
+				"
+				second_custom_tooltip = GOY_TT_1b
+				second_limit = " NOT = { has_country_flag = extra_discipline_for_at_flag } "
+				second_effect = "
+					add_army_tradition = 20
+				"
+			}
+		}
+	}
+
+	MD1_armies_of_goyman = {
+		icon = per_create_the_tupchi
+		position = 4
+		required_missions = { MD1_army_of_goyman } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			army_size = 50
+			num_of_completed_idea_groups_mil = { amount = 1 } 
+		}
+
+		effect = { country_event = { id = persian.2 }  } 
+	}
+}

@@ -326,7 +326,14 @@ Atro_branch4 = {
 		required_missions = { false_conversion } 
 		provinces_to_highlight = {  } 
 
-		trigger = { RU0 = { has_been_insulted_by_root = yes }  } 
+		trigger = { 
+			OR = {
+				RU0 = { has_been_insulted_by_root = yes } 
+				NOT = {
+					exists = RU0
+				}
+			} 
+		} 
 
 		effect = {
 			add_country_modifier = {
@@ -351,7 +358,13 @@ Atro_branch4 = {
 					value = 150
 				}
 			}
-			ROOT = { is_rival = RU0 } 
+			OR = {
+				ROOT = { is_rival = RU0 }
+				AND = {
+					NOT = { exists = RU0 }
+					army_size = 30
+				}
+			}
 		}
 
 		effect = {
@@ -376,8 +389,12 @@ Atro_branch4 = {
 		trigger = {
 			OR = {
 				war_with = RU0
-				NOT = {
-					exists = RU0
+				AND = {
+					NOT = { exists = RU0 }
+					erzurum_area = {
+						owned_by = ROOT
+						type = all
+					}
 				}
 			}
 		}

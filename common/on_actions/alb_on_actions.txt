@@ -1,9 +1,8 @@
-on_startup = {	
+on_startup = {	#heads up this fires when you load a save too
 	events = {
 		mexic.1
 		thetruth.1
 		fjal.302
-		rhom.6
 		rhom.1
 		vedr.1
 		arian.1
@@ -17,6 +16,9 @@ on_startup = {
 		liqian.3
 		pictii.10
 		siec.27
+		persian.1
+		light_emp.22
+		wuuevent.1
 	}
 	if = {
 		limit = {
@@ -40,6 +42,36 @@ on_startup = {
 		set_variable = {
 			which = num_tonin_elections
 			value = 0
+		}
+	}
+	if = {
+		limit = {
+			tag = TR0
+			NOT = { is_year = 1445 }
+		}
+		country_event = {
+			id = turkey.1
+			days = 100
+		}
+	}
+	if = {
+		limit = {
+			culture = jeju
+			NOT = { is_year = 1445 }
+		}
+		country_event = {
+			id = ayabani.30
+		}
+	}
+	if = {
+		limit = {
+			tag = LE0
+			NOT = { is_year = 1445 }
+		}
+		save_global_event_target_as = light_empire_shield_target
+		set_country_flag = is_eol_flag
+		REB = {
+			save_global_event_target_as = darkness_enemy_target
 		}
 	}
 }
@@ -106,6 +138,18 @@ on_regiment_recruited = {
 			}
 		}
 	}
+	FROM = {
+		if = {
+			limit = {
+				has_government_mechanic = marching_empire_tactics
+			}
+			add_government_power = {
+				mechanic_type = marching_empire_tactics
+				power_type = artofwar_2
+				value = -0.5
+			}
+		}
+	}
 }
 on_war_lost = {
 	if = {
@@ -162,32 +206,7 @@ on_battle_won_country = {
 			value = 1
 		}
 	}
-	if = {
-		limit = {
-			has_government_mechanic = guo_loyalist_mechanic
-			is_monarch_leader = yes
-			is_ruler_commanding_unit = yes
-		}
-		add_government_power = {
-				mechanic_type = guo_loyalist_mechanic
-				power_type = guo_loyal_favor
-				value = 3
-			}
-			if = {
-				limit = {
-					NOT = {
-						check_variable = {
-							which = guo_battle_won_var
-							value = 10
-						}
-					}
-				}
-				change_variable = {
-					which = guo_battle_won_var
-					value = 1
-				}
-			}
-	}
+	
 	if = {
 		limit = {
 			OR = {
@@ -204,6 +223,12 @@ on_battle_won_country = {
 			id = molis.100
 		}
 		set_country_flag = mol_iron_fist
+	}
+	if = {
+		limit = { 
+			has_country_flag = wuu_winning_battles_flag
+		}
+		add_meritocracy = 0.1
 	}
 }
 on_war_won = {
@@ -329,12 +354,38 @@ on_center_of_trade_downgrade = {
 		remove_building = stock_exchange
 	}
 }
-on_battle_won_country = {
 
-}
 
 on_battle_won_unit = {
-
+	if = {
+		limit = {
+			unit_owner = {
+				has_government_mechanic = guo_loyalist_mechanic
+			}
+			is_ruler_commanding_unit = yes
+		}
+		unit_owner = {
+			add_government_power = {
+					mechanic_type = guo_loyalist_mechanic
+					power_type = guo_loyal_favor
+					value = 3
+				}
+				if = {
+				limit = {
+					NOT = {
+						check_variable = {
+							which = guo_battle_won_var
+							value = 10
+						}
+					}
+				}
+				change_variable = {
+					which = guo_battle_won_var
+					value = 1
+				}
+			}
+		}		
+	}
 }
 
 on_main_war_won = {
@@ -444,7 +495,7 @@ on_colony_finished = {
 on_mil_tech_taken = {
 	if = {
 		limit = {
-			has_reform = pruthian_professional_army
+			has_government_attribute = mil_tech_army_professionalism
 		}
 		add_army_professionalism = 0.05
 	}
@@ -567,19 +618,10 @@ on_monthly_pulse = {
 		}
 	}
 }
-on_thri_yearly_pulse = {
-	if = {
-		limit = {
-			has_country_flag = sicilian_fascio_flag
-		}
-		country_event = {
-			id = gen_ita.12
-		}
-	}
-}
 on_monarch_death = {
 	events = {
 		gand.102
+		light_emp.23
 	}
 	if = {
 		limit = { 
@@ -745,6 +787,12 @@ on_adm_development = {
 						which = kamuyhuci_variable
 						value = 10
 					}
+					NOT = {
+						check_variable = {
+							which = kamuyhuci_variable
+							value = 11
+						}
+					}
 				}
 				country_event = {
 					id = ezo.2
@@ -856,6 +904,12 @@ on_dip_development = {
 					check_variable = {
 						which = repunkamuy_variable
 						value = 10
+					}
+					NOT = {
+						check_variable = {
+							which = repunkamuy_variable
+							value = 11
+						}
 					}
 				}
 				country_event = {
@@ -1000,6 +1054,12 @@ on_mil_development = {
 					check_variable = {
 						which = kimunkamuy_variable
 						value = 10
+					}
+					NOT = {
+						check_variable = {
+							which = kimunkamuy_variable
+							value = 11
+						}
 					}
 				}
 				country_event = {
@@ -1344,8 +1404,99 @@ on_siege_lost_province =  {
 			}
 		}
 	}
+	if = {
+			limit = {
+				owner = {
+					war_with = FROM
+					FROM = {
+						has_country_flag = easy_province_conquest_flag
+					}
+				}
+			}
+			random_neighbor_province = {
+					limit = {
+						NOT = {
+							owned_by = FROM
+						}
+						NOT = {
+							controlled_by = TH1
+						}
+						owner = {
+							war_with = FROM
+						}
+						NOT = {
+							fort_level = 1
+						}
+					}
+					change_controller = FROM
+				}
+		}
+	if = {
+		limit = {
+			owner = {
+				war_with = FROM
+				FROM = {
+					has_country_flag = easy_castle_conquest_flag
+				}
+			}
+		}
+		every_neighbor_province = {
+				limit = {
+					NOT = {
+						owned_by = FROM
+					}
+					NOT = {
+						controlled_by = TH1
+					}
+					owner = {
+						war_with = FROM
+						}
+					NOT = {
+							fort_level = 1
+						}
+					}
+					change_controller = FROM
+				}
+		}
 }
 on_yearly_pulse = {
+	if = { #this will need to be tested
+		limit = {
+			NOT = {
+				religion = manich
+			}
+			NOT = {
+				religion = jyotisastra
+			}
+			calc_true_if = {
+					amount = 7
+					all_country = {
+						OR = {
+							religion = manich
+							religion = jyotisastra
+						}
+						NOT = {
+							has_opinion = {
+								who = ROOT
+								value = -5
+							}
+						}
+				}
+			}
+			has_discovered = 522
+			event_target:darkness_enemy_target = {
+				NOT = {
+					has_country_modifier = darkness_enemy_target_timer
+				}
+			}
+		}
+		save_global_event_target_as = darkness_enemy_target
+		add_country_modifier = {
+			name = darkness_enemy_target_timer
+			duration = 365
+			hidden = yes
+		}
+	}
 	if = {
 		limit = {
 			OR = {
@@ -1583,6 +1734,34 @@ on_buy_religious_reform = {
 	}
 }
 
+on_yearly_pulse_3 = { #culture change events
+	random_events = {
+		10 = arabisation.1 #arabisation events are low chance because theres so many
+		10 = arabisation.2
+		10 = arabisation.3
+		10 = arabisation.4
+		10 = arabisation.5
+		10 = arabisation.6
+		10 = arabisation.7
+		10 = arabisation.8
+		10 = arabisation.9
+		40 = avaria.20 #everything else should be 30
+		40 = scotii.5
+		40 = saxo.5
+		40 = yamat.22
+		40 = yonaraja.5
+		40 = ayabani.40
+		40 = ayabani.37
+	}
+}
+on_four_year_pulse_3 = { #other province events
+	random_events = {
+		10 = CEF_flavor_brz.1
+		10 = CEF_flavor_brz.3
+		10 = gen_ita.102
+		10 = mexic.14
+	}
+}
 
 on_secondary_religion_change = {
 	remove_country_modifier = krc_shinto_secondary_bonus
@@ -1641,5 +1820,46 @@ on_harmonized_postroman_group = {
 	on_harmonized_religion_estate_privileges_effect = yes
 	events = {
 		ephesian.1 #cofnusion harmonize
+	}
+}
+on_harmonized_kamuyramat = {
+	on_harmonized_effect = yes
+	on_harmonized_religion_estate_privileges_effect = yes
+	events = {
+		confucian_events.7
+	}
+}
+on_harmonized_jingtianfazu = {
+	on_harmonized_effect = yes
+	on_harmonized_religion_estate_privileges_effect = yes
+	events = {
+		confucian_events.9
+	}
+}
+on_harmonized_daoism = {
+	on_harmonized_effect = yes
+	on_harmonized_religion_estate_privileges_effect = yes
+	events = {
+		confucian_events.9
+	}
+}
+
+on_harmonized_taiping = {
+	on_harmonized_effect = yes
+	on_harmonized_religion_estate_privileges_effect = yes
+	events = {
+		confucian_events.9
+	}
+}
+
+
+on_peace_actor = {
+	events = {
+		hellas.2
+		ayabani.46
+		ayabani.47
+		ayabani.48
+		ayabani.54
+		ayabani.59
 	}
 }

@@ -28,7 +28,7 @@ country_decisions = {
 				}
 			}
 			custom_trigger_tooltip = {
-				tooltip = sinicize_qiang_culture_tt
+				tooltip = sinicize_culture_tt
 				owns_all_provinces = {
 					culture = rma
 					NOT = {
@@ -51,15 +51,18 @@ country_decisions = {
 			factor = 1
 		}
 	}
-	alb_sinicize_meng_culture = {
+	alb_sinicize_japanese_culture = {
 		potential = {
-			OR ={
-				culture_group = nanman_group
-				has_country_flag = unlock_meng_sinicization_flag
+			OR = {
+				AND = {
+					culture_group = japanese_g
+					has_country_flag = km6_yang_dynasty_aspirations
+				}
+				has_country_flag = unlock_japanese_g_sinicization_flag
 			}
 		}
 		provinces_to_highlight = {
-			culture_group = nanman_group
+			culture_group = japanese_g
 			NOT = { continent = north_america }
 			NOT = { continent = south_america }
 			NOT = { continent = oceania }
@@ -68,7 +71,7 @@ country_decisions = {
 		allow = {
 			if = {
 				limit = {
-					culture_group = nanman_group
+					culture_group = japanese_g
 				}
 				OR = {
 					development_in_provinces = {
@@ -81,7 +84,7 @@ country_decisions = {
 			custom_trigger_tooltip = {
 				tooltip = sinicize_culture_tt
 				owns_all_provinces = {
-					culture_group = nanman_group
+					culture_group = japanese_g
 					NOT = {
 						OR = {
 							continent = north_america
@@ -93,10 +96,15 @@ country_decisions = {
 			}
 		}
 		effect = {
-			update_entire_culture_foreign = {
-				culture = rma
+			custom_tooltip = alb_sinicize_japanese_tt
+			update_entire_culture_group = {
+				culture = japanese
+				culture1 = japanese
+				culture2 = kyushuan
+				culture3 = emishi
+				culture4 = yezo
+				culture5 = togoku
 			}
-			custom_tooltip = alb_sinicize_qiang_tt
 		}
 		ai_will_do = {
 			factor = 1

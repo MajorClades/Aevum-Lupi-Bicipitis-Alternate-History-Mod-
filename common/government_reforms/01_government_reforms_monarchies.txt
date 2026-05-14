@@ -233,6 +233,7 @@ shogunate = {
 	icon = "shogunate"
 	allow_normal_conversion = yes
 	potential = {
+		always = no
 		NOT = { has_country_flag = formed_japan_flag }
 		OR = {
 			AND = {
@@ -288,6 +289,7 @@ daimyo = {
 	icon = "daimyo"
 	allow_normal_conversion = no
 	potential = {
+		always = no
 		NOT = { has_country_flag = formed_japan_flag }
 		overlord = { has_reform = shogunate }
 	}
@@ -424,6 +426,7 @@ indep_daimyo = {
 	icon = "samurai"
 	allow_normal_conversion = no
 	potential = {
+		always = no
 		NOT = { has_country_flag = formed_japan_flag }
 		OR = {
 			AND = {
@@ -540,6 +543,7 @@ chinese_warlord = {
 			culture_group = nanman_group
 			culture_group = east_asian
 			culture_group = new_yue
+			primary_culture = rma
 		}
 		technology_group = chinese
 		capital_scope = {
@@ -559,6 +563,7 @@ chinese_warlord = {
 			culture_group = nanman_group
 			culture_group = east_asian
 			culture_group = new_yue
+			primary_culture = rma
 		}
 		technology_group = chinese
 		capital_scope = {
@@ -582,6 +587,7 @@ chinese_warlord = {
 			primary_culture = bai
 			primary_culture = miao
 			primary_culture = yi
+			primary_culture = rma
 			culture_group = east_asian
 			culture_group = new_yue
 		}
@@ -1388,30 +1394,6 @@ caliphate_reform = {
 	}
 }
 
-league_of_lezhe_reform = {
-	icon = "giga_chad"
-	allow_normal_conversion = yes
-	potential = {
-		primary_culture = albanian
-	}
-	nation_designer_trigger = {
-		primary_culture = albanian
-	}
-	valid_for_nation_designer = yes
-	nation_designer_cost = 30
-	modifiers = {
-		morale_damage = 0.1
-		hostile_attrition = 1
-		defensiveness = 0.25
-	}
-	custom_attributes = {
-		winning_battles_increases_legitimacy = yes
-	}
-	ai = {
-		factor = 1
-	}
-}
-
 barbary_sultanate_reform = {
 	icon = "barbary_eyalet_government"
 	allow_normal_conversion = yes
@@ -2179,14 +2161,15 @@ beylik_government = {
 	icon = "noble_muslim"
 	allow_normal_conversion = yes
 	potential = {
+		always = no
 		religion_group = muslim
-		primary_culture = turkish
+
 	}
 	valid_for_nation_designer = yes
 	nation_designer_cost = 5
 	nation_designer_trigger = {
 		religion_group = muslim
-		primary_culture = turkish
+		always = no
 	}
 	modifiers = {
 		fabricate_claims_cost = -0.5
@@ -2231,7 +2214,7 @@ al_andalusia_government = {
 	conditional = {
 		allow = { has_dlc = "Cradle of Civilization" }
 		custom_attributes = {
-			allow_piety_switch_decision = yes	#Enables a decision which gives 1 stabhit, but turns your piety 180�
+			allow_piety_switch_decision = yes	#Enables a decision which gives 1 stabhit, but turns your piety 180?
 		}
 	}
 }
@@ -3182,6 +3165,7 @@ rajput_kingdom = {
 	icon = "rajput_kingdom"
 	allow_normal_conversion = yes
 	potential = {
+		always = no
 		has_dlc = "Dharma"
 		OR = {
 			culture_group = western_aryan
@@ -4629,7 +4613,7 @@ aztec_empire_reform = {
 	icon = "aztec_empire_reform"
 	allow_normal_conversion = no
 	potential = {
-		primary_culture = aztek
+		always = no
 	}
 	valid_for_nation_designer = yes
 	nation_designer_cost = 60
@@ -5046,11 +5030,7 @@ deccani_society_reform = {
 		has_dlc = "Dharma"
 		is_revolutionary = no
 		technology_group = indian
-		religion_group = muslim
-		OR = {
-			culture_group = dravidian
-			primary_culture = marathi
-		}
+		religion_group = zoroastrian_group
 	}
 	modifiers = {
 		free_dip_policy = 1
@@ -5663,6 +5643,7 @@ sidhi_recruitment = {
 	icon = "siddhi_recruitment"
 	allow_normal_conversion = yes
 	potential = {
+		always = no
 		has_dlc = "Dharma"
 		technology_group = indian
 		religion_group = muslim
@@ -5900,7 +5881,11 @@ clergy_in_administration_reform = {
 			factor = 0.1
 			OR = {
 				AND = {
-					religion = hinduism
+					OR = {
+						religion = hinduism
+						religion = mantramarga
+						religion = sanatanism
+					}
 					estate_influence = {
 						estate = estate_brahmins
 						influence = 90

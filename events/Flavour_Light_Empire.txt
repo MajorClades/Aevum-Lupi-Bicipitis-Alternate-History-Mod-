@@ -1,0 +1,1058 @@
+namespace = light_emp
+
+
+country_event = {
+	id = light_emp.2
+	title = light_emp.2.test
+	desc = light_emp.2.desc
+	picture = CRUSADER_HORDE_eventPicture
+	trigger = {
+		OR = {
+			tag = LE0
+			is_subject_of_type_with_overlord = {
+				who = LE0
+				type = light_empire_vassal
+			}
+		}
+		OR = {
+			religion = manich
+			religion = jyotisastra
+		}
+		has_global_flag = decree_eol_2_done
+	}
+	hidden = yes
+	option = {
+		name = redleg.1a
+		random_owned_province = {
+			limit = {
+				NOT = {
+					religion = ROOT
+				}
+			}
+			change_religion = ROOT
+		}
+	}
+}
+
+country_event = {
+	id = light_emp.3
+	title = light_emp.3.test
+	desc = light_emp.3.desc
+	picture = CRUSADER_HORDE_eventPicture
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = redleg.1a
+		event_target:light_empire_shield_target = {
+			inherit = ROOT
+		}
+	}
+}
+
+country_event = {
+	id = light_emp.4
+	title = light_emp.4.test
+	desc = light_emp.4.desc
+	picture = CRUSADER_HORDE_eventPicture
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = redleg.1a
+		every_core_province = {
+			add_core = event_target:light_empire_shield_target
+		}
+		overlord = {
+			free_vassal = ROOT
+		}
+	}
+}
+
+country_event = { #Challenge emperor how you want it
+	id = light_emp.5
+	title = light_emp.5.test
+	desc = light_emp.5.desc
+	picture = CRUSADER_HORDE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = light_emp.5a
+		save_global_event_target_as = light_empire_challenger_target
+		event_target:light_empire_shield_target = {
+			country_event = {
+				id = light_emp.6
+			}
+		}
+		
+	}
+	option = {
+		name = light_emp.5b
+		if = {
+			limit = {
+				has_government_power = {
+					mechanic_type = emp_of_light_point_mechanic
+					power_type = enlightened_prestige_points
+					value = 30
+				}
+			}
+			add_government_power = {
+					mechanic_type = emp_of_light_point_mechanic
+					power_type = enlightened_prestige_points
+					value = -30
+				}
+				save_global_event_target_as = light_empire_challenger_target
+			event_target:light_empire_shield_target = {
+				set_country_flag = medium_bias_eol
+				country_event = {
+					id = light_emp.6
+				}
+			}
+		}else = {
+			custom_tooltip = EOL_TT_2a
+		}
+	}
+	option = {
+		name = light_emp.5c
+		if = {
+			limit = {
+				has_government_power = {
+					mechanic_type = emp_of_light_point_mechanic
+					power_type = enlightened_prestige_points
+					value = 50
+				}
+			}
+			add_government_power = {
+					mechanic_type = emp_of_light_point_mechanic
+					power_type = enlightened_prestige_points
+					value = -50
+				}
+				save_global_event_target_as = light_empire_challenger_target
+			event_target:light_empire_shield_target = {
+				set_country_flag = easy_bias_eol
+				country_event = {
+					id = light_emp.6
+				}
+			}
+		}else = {
+			custom_tooltip = EOL_TT_2b
+		}
+	}
+	option = {
+		name = light_emp.5d
+		
+	}
+}
+
+country_event = { #Emperor has to respong
+	id = light_emp.6
+	title = light_emp.6.test
+	desc = light_emp.6.desc
+	picture = CRUSADER_HORDE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = light_emp.6a
+		ai_chance = {
+			factor = 10
+		}
+		event_target:light_empire_challenger_target = {
+			country_event = {
+				id = light_emp.7
+			}
+		}
+	}
+	option = {
+		name = light_emp.6b
+		trigger = {
+			has_country_flag = medium_bias_eol
+		}
+		ai_chance = {
+			factor = 50
+		}
+		event_target:light_empire_challenger_target = {
+			country_event = {
+				id = light_emp.7
+			}
+		}
+	}
+	option = {
+		name = light_emp.6c
+		trigger = {
+			has_country_flag = easy_bias_eol
+		}
+		ai_chance = {
+			factor = 70
+		}
+		event_target:light_empire_challenger_target = {
+			country_event = {
+				id = light_emp.7
+			}
+		}
+	}
+	option = {
+		name = light_emp.6d
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0.5
+				has_country_flag = easy_bias_eol
+			}
+		}
+		hidden_effect = {
+			event_target:light_empire_challenger_target = {
+				set_country_flag = challenge_EOL_flag
+				clr_country_flag = open_eol_menu_flag
+				remove_country_modifier = eol_1_vassal_mod
+				remove_country_modifier = eol_2_vassal_mod
+				remove_country_modifier = eol_3_vassal_mod
+				remove_country_modifier = eol_4_vassal_mod
+				remove_country_modifier = eol_5_vassal_mod
+				remove_country_modifier = eol_6_vassal_mod
+				remove_country_modifier = eol_7_vassal_mod
+				remove_country_modifier = eol_8_vassal_mod
+				remove_country_modifier = eol_9_vassal_mod
+				remove_country_modifier = eol_10_vassal_mod
+			}
+		}
+		event_target:light_empire_challenger_target = {
+			declare_war_with_cb = {
+				casus_belli = cb_leo_become_empire
+				who = event_target:light_empire_shield_target
+			}
+		}
+	}
+}
+
+country_event = { #response back to player
+	id = light_emp.7
+	title = light_emp.7.test
+	desc = light_emp.7.desc
+	picture = CRUSADER_HORDE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = light_emp.7a
+		set_government_rank = 3
+		event_target:light_empire_shield_target = {
+			clr_country_flag = is_eol_flag
+		}
+		inherit = event_target:light_empire_shield_target
+		save_global_event_target_as = light_empire_shield_target
+		set_country_flag = is_eol_flag
+		override_country_name = LE0
+		change_government = theocracy
+		add_government_reform = light_empire_government
+		hidden_effect = {
+			remove_country_modifier = eol_1_vassal_mod
+			remove_country_modifier = eol_2_vassal_mod
+			remove_country_modifier = eol_3_vassal_mod
+			remove_country_modifier = eol_4_vassal_mod
+			remove_country_modifier = eol_5_vassal_mod
+			remove_country_modifier = eol_6_vassal_mod
+			remove_country_modifier = eol_7_vassal_mod
+			remove_country_modifier = eol_8_vassal_mod
+			remove_country_modifier = eol_9_vassal_mod
+			remove_country_modifier = eol_10_vassal_mod
+		}
+	}
+}
+
+
+country_event = { #AI getting decrees Number 1 
+	id = light_emp.8
+	title = light_emp.8.test
+	desc = light_emp.8.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	trigger = {
+		ai = yes
+		tag = event_target:light_empire_shield_target
+		OR = {
+			has_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = 30
+			}
+			is_year = 1490
+		}
+	}
+	mean_time_to_happen = {
+		months = 240
+	}
+
+	option = {
+		name = light_emp.8a
+		add_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = -30
+			}
+		set_global_flag = decree_eol_1_done
+	}
+}
+
+country_event = { #AI getting decrees Number 2 
+	id = light_emp.9
+	title = light_emp.9.test
+	desc = light_emp.9.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	trigger = {
+		ai = yes
+		tag = event_target:light_empire_shield_target
+		OR = {
+			has_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = 30
+			}
+			is_year = 1520
+		}
+		has_global_flag = decree_eol_1_done
+	}
+	mean_time_to_happen = {
+		months = 240
+	}
+
+	option = {
+		name = light_emp.9a
+		add_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = -30
+			}
+		set_global_flag = decree_eol_2_done
+	}
+}
+
+country_event = { #AI getting decrees Number 3
+	id = light_emp.10
+	title = light_emp.10.test
+	desc = light_emp.10.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	trigger = {
+		ai = yes
+		tag = event_target:light_empire_shield_target
+		OR = {
+			has_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = 30
+			}
+			is_year = 1520
+		}
+		has_global_flag = decree_eol_2_done
+	}
+	mean_time_to_happen = {
+		months = 240
+	}
+
+	option = {
+		name = light_emp.10a
+		add_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = -30
+			}
+		set_global_flag = decree_eol_3_done
+	}
+}
+
+country_event = { #AI getting decrees Number 4
+	id = light_emp.11
+	title = light_emp.11.test
+	desc = light_emp.11.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	trigger = {
+		ai = yes
+		tag = event_target:light_empire_shield_target
+		OR = {
+			has_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = 30
+			}
+			is_year = 1550
+		}
+		has_global_flag = decree_eol_3_done
+	}
+	mean_time_to_happen = {
+		months = 240
+	}
+
+	option = {
+		name = light_emp.11a
+		add_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = -30
+			}
+		set_global_flag = decree_eol_6_done
+	}
+}
+
+
+country_event = { #AI getting decrees Number 5
+	id = light_emp.12
+	title = light_emp.12.test
+	desc = light_emp.12.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	trigger = {
+		ai = yes
+		tag = event_target:light_empire_shield_target
+		OR = {
+			has_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = 30
+			}
+			is_year = 1590
+		}
+		has_global_flag = decree_eol_6_done
+	}
+	mean_time_to_happen = {
+		months = 240
+	}
+
+	option = {
+		name = light_emp.12a
+		add_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = -30
+			}
+		set_global_flag = decree_eol_5_done
+	}
+}
+
+country_event = { #AI getting decrees Number 6
+	id = light_emp.13
+	title = light_emp.13.test
+	desc = light_emp.13.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	trigger = {
+		ai = yes
+		tag = event_target:light_empire_shield_target
+		OR = {
+			has_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = 30
+			}
+			is_year = 1630
+		}
+		has_global_flag = decree_eol_5_done
+	}
+	mean_time_to_happen = {
+		months = 240
+	}
+
+	option = {
+		name = light_emp.13a
+		add_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = -30
+			}
+		set_global_flag = decree_eol_4_done
+	}
+}
+
+country_event = { #AI getting decrees Number 6
+	id = light_emp.14
+	title = light_emp.14.test
+	desc = light_emp.14.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	trigger = {
+		ai = yes
+		tag = event_target:light_empire_shield_target
+		is_year = 1670
+		is_at_war = no
+		custom_trigger_tooltip = {
+			tooltip = all_light_decrees_done
+			has_global_flag = decree_eol_1_done
+			has_global_flag = decree_eol_2_done
+			has_global_flag = decree_eol_3_done
+			has_global_flag = decree_eol_4_done
+			has_global_flag = decree_eol_5_done
+			has_global_flag = decree_eol_6_done
+		}
+	}
+	mean_time_to_happen = {
+		months = 240
+	}
+
+	option = {
+		name = light_emp.14a
+		override_country_name = ARJUNASAMRAJYA
+		hidden_effect = {
+			every_subject_country = {
+				limit = {
+					is_subject_of_type = light_empire_vassal
+					NOT = {
+						liberty_desire = 50
+					}
+				}
+				country_event = {
+					id = light_emp.3
+				}
+			}
+			every_subject_country = {
+				limit = {
+					is_subject_of_type = light_empire_vassal
+					liberty_desire = 50
+				}	
+				country_event = {
+					id = light_emp.4
+				}
+			}
+			set_global_flag = eol_completed
+			clr_country_flag = open_eol_menu_flag
+			remove_country_modifier = eol_1_vassal_mod
+			remove_country_modifier = eol_2_vassal_mod
+			remove_country_modifier = eol_3_vassal_mod
+			remove_country_modifier = eol_4_vassal_mod
+			remove_country_modifier = eol_5_vassal_mod
+			remove_country_modifier = eol_6_vassal_mod
+			remove_country_modifier = eol_7_vassal_mod
+			remove_country_modifier = eol_8_vassal_mod
+			remove_country_modifier = eol_9_vassal_mod
+			remove_country_modifier = eol_10_vassal_mod
+		}
+		add_government_reform = light_empire_united_government
+	}
+}
+
+country_event = { #calling all the vassals to war Defender
+	id = light_emp.15
+	title = light_emp.15.test
+	desc = light_emp.15.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = light_emp.15a
+		ai_chance = {
+			factor = 70
+			modifier = {
+				factor = 2
+				has_global_flag = decree_eol_5_done
+			}
+		}
+		add_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = 5
+			}
+		join_all_defensive_wars_of = event_target:light_empire_shield_target
+	}
+
+	option = {
+		name = light_emp.15b
+		ai_chance = {
+			factor = 30
+		}
+		add_prestige = -5
+	}
+}
+
+
+country_event = { #calling all the vassals to war Offender
+	id = light_emp.16
+	title = light_emp.16.test
+	desc = light_emp.16.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = light_emp.16a
+		ai_chance = {
+			factor = 35
+			modifier = {
+				factor = 2
+				has_global_flag = decree_eol_5_done
+			}
+		}
+		add_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = 5
+			}
+		join_all_offensive_wars_of = event_target:light_empire_shield_target
+	}
+
+	option = {
+		name = light_emp.16b
+		ai_chance = {
+			factor = 65
+		}
+		add_prestige = -1
+	}
+}
+
+
+country_event = { #calling all the vassals to war Offender
+	id = light_emp.17
+	title = light_emp.17.test
+	desc = light_emp.17.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	trigger = {
+		ai = yes
+		is_subject_of = event_target:light_empire_shield_target
+		has_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = 5
+			}
+	}
+	mean_time_to_happen = {
+		months = 6
+	}
+
+	option = {
+		name = light_emp.17a
+		ai_chance = {
+			factor = 1
+		}
+		trigger = {
+			NOT = { has_country_modifier = eol_1_vassal_mod }
+		}
+		add_country_modifier = {
+			name = eol_1_vassal_mod
+			duration = -1
+		}
+	}
+
+	option = {
+		name = light_emp.17b
+		ai_chance = {
+			factor = 1
+		}
+		trigger = {
+			NOT = { has_country_modifier = eol_2_vassal_mod }
+		}
+		add_country_modifier = {
+			name = eol_2_vassal_mod
+			duration = -1
+		}
+	}
+	option = {
+		name = light_emp.17c
+		ai_chance = {
+			factor = 1
+		}
+		trigger = {
+			NOT = { has_country_modifier = eol_3_vassal_mod }
+		}
+		add_country_modifier = {
+			name = eol_3_vassal_mod
+			duration = -1
+		}
+	}
+
+	option = {
+		name = light_emp.17d
+		ai_chance = {
+			factor = 1
+		}
+		trigger = {
+			NOT = { has_country_modifier = eol_4_vassal_mod }
+		}
+		add_country_modifier = {
+			name = eol_4_vassal_mod
+			duration = -1
+		}
+	}
+	option = {
+		name = light_emp.17e
+		ai_chance = {
+			factor = 1
+		}
+		trigger = {
+			NOT = { has_country_modifier = eol_5_vassal_mod }
+		}
+		add_country_modifier = {
+			name = eol_5_vassal_mod
+			duration = -1
+		}
+	}
+	option = {
+		name = light_emp.17f
+		ai_chance = {
+			factor = 1
+		}
+		trigger = {
+			NOT = { has_country_modifier = eol_6_vassal_mod }
+		}
+		add_country_modifier = {
+			name = eol_6_vassal_mod
+			duration = -1
+		}
+	}
+
+	option = {
+		name = light_emp.17g
+		ai_chance = {
+			factor = 1
+		}
+		trigger = {
+			NOT = { has_country_modifier = eol_7_vassal_mod }
+		}
+		add_country_modifier = {
+			name = eol_7_vassal_mod
+			duration = -1
+		}
+	}
+	option = {
+		name = light_emp.17h
+		ai_chance = {
+			factor = 1
+		}
+		trigger = {
+			NOT = { has_country_modifier = eol_8_vassal_mod }
+		}
+		add_country_modifier = {
+			name = eol_8_vassal_mod
+			duration = -1
+		}
+	}
+	option = {
+		name = light_emp.17i
+		ai_chance = {
+			factor = 1
+		}
+		trigger = {
+			NOT = { has_country_modifier = eol_9_vassal_mod }
+		}
+		add_country_modifier = {
+			name = eol_9_vassal_mod
+			duration = -1
+		}
+	}
+
+	option = {
+		name = light_emp.17l
+		ai_chance = {
+			factor = 1
+		}
+		trigger = {
+			NOT = { has_country_modifier = eol_10_vassal_mod }
+		}
+		add_country_modifier = {
+			name = eol_10_vassal_mod
+			duration = -1
+		}
+	}
+}
+
+country_event = { #AI becoming Emperor of Light
+	id = light_emp.18
+	title = light_emp.18.test
+	desc = light_emp.18.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	trigger = {
+		ai = yes
+		is_subject_of = event_target:light_empire_shield_target
+		NOT = {
+			tag = event_target:light_empire_shield_target
+		}
+		calc_true_if = {
+						amount = 7
+						has_country_modifier = eol_1_vassal_mod
+						has_country_modifier = eol_2_vassal_mod
+						has_country_modifier = eol_3_vassal_mod
+						has_country_modifier = eol_4_vassal_mod
+						has_country_modifier = eol_5_vassal_mod
+						has_country_modifier = eol_6_vassal_mod
+						has_country_modifier = eol_7_vassal_mod
+						has_country_modifier = eol_8_vassal_mod
+						has_country_modifier = eol_9_vassal_mod
+						has_country_modifier = eol_10_vassal_mod
+					}
+		OR = {
+			is_year = 1550
+			event_target:light_empire_shield_target = {
+				ai = yes
+			}
+		}
+	}
+	mean_time_to_happen = {
+		months = 240
+	}
+
+	option = {
+		name = light_emp.18a
+		country_event = {
+				id = light_emp.5
+		}
+	}
+}
+
+country_event = { #vassalizing event for enlioghtned empire
+	id = light_emp.19
+	title = light_emp.19.test
+	desc = light_emp.19.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = light_emp.19a
+		ai_chance = {
+			factor = 35
+			modifier = {
+				factor = 1.5
+				event_target:light_empire_shield_target = {
+					OR = {
+						prestige = 15
+						has_government_power = {
+							mechanic_type = emp_of_light_point_mechanic
+							power_type = enlightened_prestige_points
+							value = 15
+						}
+					}
+				}
+			}
+			modifier = {
+				factor = 3
+				event_target:light_empire_shield_target = {
+					OR = {
+						prestige = 30
+						has_government_power = {
+							mechanic_type = emp_of_light_point_mechanic
+							power_type = enlightened_prestige_points
+							value = 30
+						}
+					}
+				}
+			}
+		}
+		event_target:light_empire_shield_target = {
+			create_subject = {
+				who = ROOT
+				subject_type = light_empire_vassal
+			}
+		}
+	}
+
+	option = {
+		name = light_emp.19b
+		ai_chance = {
+			factor = 65
+		}
+		add_prestige = 10
+	}
+}
+
+country_event = { #break gupta
+	id = light_emp.20
+	title = light_emp.20.test
+	desc = light_emp.20.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = light_emp.20a
+		ai_chance = {
+			factor = 65
+		}
+		inherit = LE8 
+		release = LE8
+		create_subject = {
+			who = LE8
+			subject_type = light_empire_vassal
+		}
+		LE8 = {
+			add_liberty_desire = -50
+			change_religion = ROOT
+		}
+	}
+
+	option = {
+		name = light_emp.20b
+		ai_chance = {
+			factor = 35
+		}
+		inherit = LE8 
+	}
+}
+
+country_event = { #Make new subjects the right gov reform
+	id = light_emp.21
+	title = light_emp.21.test
+	desc = light_emp.21.desc
+	picture = CULTURE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = light_emp.21a
+		ai_chance = {
+			factor = 65
+		}
+		add_government_reform = indian_manichanate_reform
+	}
+
+	option = {
+		name = light_emp.21b
+		ai_chance = {
+			factor = 35
+		}
+		trigger = {
+			any_neighbor_country = {
+				NOT = {
+					religion = jyotisastra
+				}
+			}
+		}
+		add_government_reform = indian_border_manichanate_reform
+	}
+	option = {
+		name = light_emp.21c
+		ai_chance = {
+			factor = 0
+		}
+		add_prestige = 10
+	}
+}
+
+country_event = { #Pandya intro
+	id = light_emp.22
+	title = light_emp.22.test
+	desc = light_emp.22.desc
+	picture = indiangfx_ANGRY_MOB_eventPicture
+	trigger = {
+		tag = LE5
+		NOT = {
+			is_year = 1445
+		}
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = light_emp.22a
+		add_prestige = 10
+	}
+}
+
+country_event = { #szyzgos election
+	id = light_emp.23
+	title = light_emp.23.test
+	desc = light_emp.23.desc
+	picture = 14_Maratha_Estate_eventPicture
+	trigger = {
+		NOT = {
+			has_country_modifier = alb_ruler_death_election_timer_modifier
+		}
+		OR = {
+			has_reform = light_empire_government
+			has_reform = light_empire_united_government
+		}
+		government = theocracy
+		NOT = {
+			has_ruler_flag = alb_eol_ruler_chosen
+		}
+	}
+	immediate = {
+		hidden_effect = {
+			add_country_modifier = {
+				name = alb_ruler_death_election_timer_modifier
+				duration = 10
+				hidden = yes
+			}
+		}
+	}
+	is_triggered_only = yes
+	option = {
+		name = light_emp.23a
+		define_ruler = {
+			religion = jyotisastra
+			min_age = 50
+		}
+		set_ruler_flag = alb_eol_ruler_chosen
+	}
+	option = {
+		name = light_emp.23b
+		define_ruler = {
+			religion = jyotisastra
+			min_age = 30
+			change_mil = 1
+			max_random_mil = 5
+		}
+		set_ruler_flag = alb_eol_ruler_chosen
+	}
+	option = {
+		name = light_emp.23c
+		define_ruler = {
+			religion = jyotisastra
+			min_age = 30
+			change_dip = 1
+			max_random_dip = 5
+		}
+		set_ruler_flag = alb_eol_ruler_chosen
+	}
+	option = {
+		name = light_emp.23d
+		define_ruler = {
+			religion = jyotisastra
+			min_age = 20
+			change_dip = 2
+			change_mil = 2
+			change_adm = 2
+			max_random_dip = 4
+			max_random_mil = 4
+			max_random_adm = 4
+		}
+		add_devotion = -30
+		add_prestige = -25
+		set_ruler_flag = alb_eol_ruler_chosen
+	}
+}
+
+country_event = { #szyzgos election
+	id = light_emp.24
+	title = light_emp.24.test
+	desc = light_emp.24.desc
+	picture = 14_Maratha_Estate_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = light_emp.24a
+		change_government = theocracy
+		add_government_reform = light_empire_government
+	}
+	option = {
+		name = light_emp.24b
+		add_stability = -1
+		add_prestige = -25
+		add_government_power = {
+			mechanic_type = emp_of_light_point_mechanic
+			power_type = enlightened_prestige_points
+			value = -50
+		}
+	}
+}
+
+
+country_event = {
+	id = light_emp.100
+	title = light_emp.100.test
+	desc = light_emp.100.desc
+	picture = indiangfx_ANGRY_MOB_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = light_emp.100a
+		random_country = {
+			limit = {
+				has_country_flag = is_eol_flag
+			}
+			override_country_name = LE0
+			save_global_event_target_as = light_empire_shield_target
+		}
+	}
+}

@@ -17,7 +17,7 @@ christian = {
 	
 	
 	catholic = {
-		color = { 204 204 0 }
+		color = { 224 232 186 }
 		icon = 1
 		country = {
 			tolerance_own = 1
@@ -909,7 +909,7 @@ christian = {
 	}
 
 	nestorian = {
-		color = { 180 170 0 }
+		color = { 54 23 100 }
 		icon = 35
 		
 		country = {
@@ -1303,19 +1303,19 @@ christian = {
 	
 		flags_with_emblem_percentage = 10
 		flag_emblem_index_range = { 1 4 }
-
+		date = 1520.1.1
 		color = { 61 252 3 }
 		icon = 31
 		country = {
-			same_religion_advisor_cost = -0.25
-			governing_capacity_modifier = -0.1
+			same_religion_advisor_cost = -0.15
+			governing_capacity_modifier = 0.1
 		}
 		country_as_secondary = {
 			manpower_recovery_speed = 0.15
 		}
 		province = {
-			local_build_cost = 0.15
-			local_manpower_modifier = 0.15
+			local_build_cost = 0.1
+			local_manpower_modifier = 0.1
 		}
 		uses_anglican_power = yes				# Uses church power/aspect mechanics
 		
@@ -1334,16 +1334,79 @@ christian = {
 			spread_the_book_of_common_prayer
 		}
 		aspects_name = ANGLICAN_ASPECTS
+
+		on_convert = {
+			change_religion = pseudo_druidism
+			add_prestige = -100
+			remove_country_modifier = counter_reformation
+			remove_country_modifier = the_statue_in_restraint_of_appeals
+			remove_country_modifier = revocation_of_restraint_of_appeals
+			remove_country_modifier = bavarian_jesuits
+			remove_country_modifier = the_societas_jesu
+			remove_country_modifier = the_declaration_of_indulgence
+			remove_country_modifier = de_heretico_comburendo
+			remove_country_modifier = the_conventicle_act
+			add_country_modifier = {
+				name = "conversion_zeal"
+				duration = 3650
+			}
+			every_known_country = {
+				limit = {
+					reverse_has_opinion_modifier = {
+						who = ROOT
+						modifier = opinion_demote_pope
+					}
+				}
+				reverse_remove_opinion = {
+					who = ROOT
+					modifier = opinion_demote_pope
+				}
+			}
+		}
 		
 		heretic = { POLY_HERETIC }
 	}
+
+	baptistism = {
+		color = { 150 170 10 }
+		icon = 35
+		
+		country = {
+			reverse_relation_with_heretic_religion = -20
+			missionaries = 1
+		}
+		country_as_secondary = {
+			warscore_cost_vs_other_religion = -0.2
+			war_exhaustion_cost = -0.2
+		}
+		
+		heretic = { ZAMIKAELITES   }
+	
+	}
+
+	montanist = {
+		color = { 197 51 165 }
+		icon = 3
+
+		country = {
+			tolerance_own = 2
+			tolerance_heretic = -2
+		}
+		country_as_secondary = {
+			tolerance_heretic = 1
+			warscore_cost_vs_other_religion = -0.1
+		}
+		
+		heretic = { ZAMIKAELITES }
+	}
+
 
 	harmonized_modifier = harmonized_christian
 	
 	crusade_name = CRUSADE
 
-	
 }
+
 
 muslim = {
 	defender_of_faith = yes
@@ -2143,8 +2206,8 @@ eastern = {
 	}
 
 	confucianism = {
-		color = { 214 229 140 }
-		icon = 9
+		color = { 214 229 140 } 
+		icon = 49
 		country = {
 			tolerance_heretic = 2
 			adm_tech_cost_modifier = -0.1
@@ -2264,7 +2327,58 @@ eastern = {
 
 		harmonized_modifier = harmonized_pagan
 
-		heretic = { TAOIST }
+		heretic = { RUIST }
+	}
+
+	taiping = {
+		color = { 232 208 23 } 
+		icon = 7
+		country = {
+			global_missionary_strength = 0.02
+			manpower_in_true_faith_provinces= 0.10
+		}
+		country_as_secondary = {
+			manpower_recovery_speed = 0.05
+			morale_damage_received = -0.025
+		}
+		heretic = { SHANGQING }
+
+		harmonized_modifier = harmonized_mahayana
+	}
+	
+	daoism = {
+		color = { 194 143 143 } 
+		icon = 9
+		country = {
+			infantry_power = 0.10
+			defensiveness = 0.1
+			local_unrest = -1
+		}
+		country_as_secondary = {
+			improve_relation_modifier = 0.15
+			global_prosperity_growth = 0.05
+		}
+		heretic = { SHANGQING }
+
+		harmonized_modifier = harmonized_mahayana
+		uses_harmony = yes
+	}
+
+	jingtianfazu = {
+		color = { 87  9  9 } 
+		icon = 60
+		country = {
+			advisor_cost = -0.1
+			tolerance_heretic = 2
+		}
+		country_as_secondary = {
+			tolerance_heathen = 1
+			local_unrest = -1
+		}
+		heretic = { SHANGQING }
+
+		harmonized_modifier = harmonized_mahayana
+		uses_harmony = yes
 	}
 
 	anito = {
@@ -2409,10 +2523,7 @@ dharmic = {
 		color = { 24 65 43 }
 		icon = 47
 		allowed_conversion = {
-			mahayana
-			buddhism #Theravada
 			hinduism
-			vajrayana
 		}
 		country = {
 			naval_forcelimit_modifier = 0.1
@@ -2433,8 +2544,55 @@ dharmic = {
 		can_have_secondary_religion = yes
 		
 		heretic = { BHAKTI }
+	}
+
+	mantramarga = { #tantraism
+		color = { 88 196 169 }
+		icon = 57
+		country = {
+			idea_cost = -0.1
+			hostile_attrition = 0.5
+		}
+		country_as_secondary = {
+			hostile_attrition = 0.5
+			idea_cost = -0.05
+		}
+		on_convert = {
+			add_prestige = -100
+			add_stability = -1
+			add_country_modifier = {
+				name = "conversion_zeal"
+				duration = 3650
+			}
+		}
+		uses_karma = yes
 		
-	
+		heretic = { BHAKTI }
+	}
+
+	sanatanism = { #Hindutva
+		color = { 137 183 124 }
+		icon = 58
+		country = {
+			stability_cost_modifier = -0.1
+			brahmins_hindu_influence_modifier = 0.2
+			brahmins_hindu_loyalty_modifier = 0.1
+		}
+		country_as_secondary = {
+			stability_cost_modifier = -0.1
+			tolerance_own = 1
+		}
+		on_convert = {
+			add_prestige = -100
+			add_stability = -1
+			add_country_modifier = {
+				name = "conversion_zeal"
+				duration = 3650
+			}
+		}
+		personal_deity = yes
+		
+		heretic = { BHAKTI }
 	}
 
 	sikhism = {
@@ -2470,583 +2628,6 @@ dharmic = {
 		heretic = { MASANDIS }
 
 		date = 1499.01.01
-
-		gurus = {
-			guru_nanak = {
-				trigger = {
-					NOT = { has_global_flag = guru_event_happening }
-				}
-				chance = {
-					factor = 1000
-				}
-				modifier = {
-					country_admin_power = 1
-				}
-				teachings = {
-					share_and_consume = {
-						type = ADM
-						cost = 50
-
-						global_unrest = -1
-					}
-					work_honestly = {
-						type = DIP
-						cost = 50
-
-						production_efficiency = 0.05
-					}
-					recite_his_name = {
-						type = MIL
-						cost = 50
-
-						global_regiment_cost = -0.025
-					}
-				}
-			}
-			guru_angad = {
-				trigger = {
-					is_year = 1539
-					is_month = 9
-					NOT = { has_global_flag = guru_event_happening }
-				}
-				chance = {
-					factor = 5
-					modifier = {
-						factor = 1.5
-						is_year = 1540
-					}
-					modifier = {
-						factor = 1.5
-						is_year = 1541
-					}
-					modifier = {
-						factor = 1.5
-						is_year = 1542
-					}
-					modifier = {
-						factor = 2
-						is_year = 1543
-					}
-					modifier = {
-						factor = 2
-						is_year = 1544
-					}
-				}
-				modifier = {
-					country_military_power = 1
-				}
-				teachings = {
-					gurmukhi_script_teaching = {
-						type = ADM
-						cost = 50
-
-						technology_cost = -0.025
-					}
-					temple_langar = {
-						type = DIP
-						cost = 50
-
-						church_loyalty_modifier = 0.05
-					}
-					wrestling_akhara = {
-						type = MIL
-						cost = 50
-
-						yearly_army_professionalism = 0.005
-					}
-				}
-			}
-			guru_amar_das = {
-				trigger = {
-					is_year = 1552
-					is_month = 3
-					NOT = { has_global_flag = guru_event_happening }
-				}
-				chance = {
-					factor = 5
-					modifier = {
-						factor = 1.5
-						is_year = 1553
-					}
-					modifier = {
-						factor = 1.5
-						is_year = 1554
-					}
-					modifier = {
-						factor = 1.5
-						is_year = 1555
-					}
-					modifier = {
-						factor = 2
-						is_year = 1556
-					}
-					modifier = {
-						factor = 2
-						is_year = 1557
-					}
-				}
-				modifier = {
-					country_diplomatic_power = 1
-				}
-				teachings = {
-					dasvandh_collection = {
-						type = ADM
-						cost = 50
-
-						global_tax_modifier = 0.05
-					}
-					anand_karaj = {
-						type = DIP
-						cost = 50
-
-						diplomatic_reputation = 1
-					}
-					sanghat_equality = {
-						type = MIL
-						cost = 50
-
-						nobles_loyalty_modifier = 0.05
-						rajput_exclusive_loyalty_modifier = 0.05
-						maratha_exclusive_loyalty_modifier = 0.05
-					}
-				}
-			}
-			guru_ram_das = {
-				trigger = {
-					is_year = 1574
-					is_month = 9
-					NOT = { has_global_flag = guru_event_happening }
-				}
-				chance = {
-					factor = 5
-					modifier = {
-						factor = 1.5
-						is_year = 1575
-					}
-					modifier = {
-						factor = 1.5
-						is_year = 1576
-					}
-					modifier = {
-						factor = 1.5
-						is_year = 1577
-					}
-					modifier = {
-						factor = 2
-						is_year = 1578
-					}
-					modifier = {
-						factor = 2
-						is_year = 1579
-					}
-				}
-				modifier = {
-					country_admin_power = 1
-				}
-				teachings = {
-					legitimize_inheritance = {
-						type = ADM
-						cost = 50
-
-						legitimacy = 0.25
-						republican_tradition = 0.1
-						devotion = 0.25
-						horde_unity = 0.25
-						meritocracy = 0.1
-					}
-					scripture_hymns = {
-						type = DIP
-						cost = 50
-
-						prestige = 0.5
-					}
-					masand_system = {
-						type = MIL
-						cost = 50
-
-						global_manpower_modifier = 0.1
-					}
-				}
-			}
-			guru_arjan = {
-				trigger = {
-					is_year = 1581
-					is_month = 9
-					NOT = { has_global_flag = guru_event_happening }
-				}
-				chance = {
-					factor = 5
-					modifier = {
-						factor = 1.5
-						is_year = 1582
-					}
-					modifier = {
-						factor = 1.5
-						is_year = 1583
-					}
-					modifier = {
-						factor = 1.5
-						is_year = 1584
-					}
-					modifier = {
-						factor = 2
-						is_year = 1585
-					}
-					modifier = {
-						factor = 2
-						is_year = 1586
-					}
-				}
-				modifier = {
-					country_diplomatic_power = 1
-				}
-				teachings = {
-					adi_granth = {
-						type = ADM
-						cost = 50
-
-						global_institution_spread = 0.1
-					}
-					the_abode_of_god = {
-						type = DIP
-						cost = 50
-
-						religious_unity = 0.1
-					}
-					martyrdom = {
-						type = MIL
-						cost = 50
-
-						land_morale = 0.05
-					}
-				}
-			}
-			guru_hargobind = {
-				trigger = {
-					is_year = 1606
-					is_month = 6
-					NOT = { has_global_flag = guru_event_happening }
-				}
-				chance = {
-					factor = 5
-					modifier = {
-						factor = 1.5
-						is_year = 1607
-					}
-					modifier = {
-						factor = 1.5
-						is_year = 1608
-					}
-					modifier = {
-						factor = 1.5
-						is_year = 1609
-					}
-					modifier = {
-						factor = 2
-						is_year = 1610
-					}
-					modifier = {
-						factor = 2
-						is_year = 1611
-					}
-				}
-				modifier = {
-					country_military_power = 1
-				}
-				teachings = {
-					throne_of_the_timeless_one = {
-						type = ADM
-						cost = 50
-
-						legitimacy = 0.25
-						republican_tradition = 0.1
-						devotion = 0.25
-						horde_unity = 0.25
-						meritocracy = 0.1
-					}
-					protection_of_the_poor = {
-						type = DIP
-						cost = 50
-
-						war_exhaustion = -0.025
-					}
-					miri_and_piri = {
-						type = MIL
-						cost = 50
-
-						discipline = 0.025
-					}
-				}
-			}
-			guru_har_rai = {
-				trigger = {
-					is_year = 1644
-					is_month = 3
-					NOT = { has_global_flag = guru_event_happening }
-				}
-				chance = {
-					factor = 5
-					modifier = {
-						factor = 1.5
-						is_year = 1645
-					}
-					modifier = {
-						factor = 1.5
-						is_year = 1646
-					}
-					modifier = {
-						factor = 1.5
-						is_year = 1647
-					}
-					modifier = {
-						factor = 2
-						is_year = 1648
-					}
-					modifier = {
-						factor = 2
-						is_year = 1649
-					}
-				}
-				modifier = {
-					country_diplomatic_power = 1
-				}
-				teachings = {
-					impartial_manjis = {
-						type = ADM
-						cost = 50
-
-						yearly_corruption = -0.05
-					}
-					the_fragrance_of_a_flower = {
-						type = DIP
-						cost = 50
-
-						improve_relation_modifier = 0.1
-					}
-					one_guru = {
-						type = MIL
-						cost = 50
-
-						nobles_loyalty_modifier = 0.05
-						rajput_exclusive_loyalty_modifier = 0.05
-						maratha_exclusive_loyalty_modifier = 0.05
-					}
-				}
-			}
-			guru_har_krishan = {
-				trigger = {
-					is_year = 1661
-					is_month = 3
-					NOT = { has_global_flag = guru_event_happening }
-				}
-				chance = {
-					factor = 5
-					modifier = {
-						factor = 1.5
-						is_year = 1662
-					}
-					modifier = {
-						factor = 1.5
-						is_year = 1663
-					}
-					modifier = {
-						factor = 1.5
-						is_year = 1664
-					}
-					modifier = {
-						factor = 2
-						is_year = 1665
-					}
-					modifier = {
-						factor = 2
-						is_year = 1666
-					}
-				}
-				modifier = {
-					country_diplomatic_power = 1
-				}
-				teachings = {
-					treat_the_sick = {
-						type = ADM
-						cost = 50
-
-						monarch_admin_power = 1
-					}
-					illiterate_recites_saloks = {
-						type = DIP
-						cost = 50
-
-						monarch_diplomatic_power = 1
-					}
-					young_humility = {
-						type = MIL
-						cost = 50
-
-						monarch_military_power = 1
-					}
-				}
-			}
-			guru_tegh_bahadur = {
-				trigger = {
-					is_year = 1665
-					is_month = 3
-					NOT = { has_global_flag = guru_event_happening }
-				}
-				chance = {
-					factor = 5
-					modifier = {
-						factor = 1.5
-						is_year = 1666
-					}
-					modifier = {
-						factor = 1.5
-						is_year = 1667
-					}
-					modifier = {
-						factor = 1.5
-						is_year = 1668
-					}
-					modifier = {
-						factor = 2
-						is_year = 1669
-					}
-					modifier = {
-						factor = 2
-						is_year = 1670
-					}
-				}
-				modifier = {
-					country_admin_power = 1
-				}
-				teachings = {
-					the_word_of_sikh = {
-						type = ADM
-						cost = 50
-
-						missionaries = 1
-					}
-					all_kings_must_pass = {
-						type = DIP
-						cost = 50
-
-						tolerance_heretic = 2
-					}
-					resist_persecution = {
-						type = MIL
-						cost = 50
-
-						hostile_attrition = 1
-					}
-				}
-			}
-			guru_gobind_singh = {
-				trigger = {
-					is_year = 1675
-					is_month = 3
-					NOT = { has_global_flag = guru_event_happening }
-				}
-				chance = {
-					factor = 5
-					modifier = {
-						factor = 1.5
-						is_year = 1676
-					}
-					modifier = {
-						factor = 1.5
-						is_year = 1677
-					}
-					modifier = {
-						factor = 1.5
-						is_year = 1678
-					}
-					modifier = {
-						factor = 2
-						is_year = 1679
-					}
-					modifier = {
-						factor = 2
-						is_year = 1680
-					}
-				}
-				modifier = {
-					country_admin_power = 1
-				}
-				teachings = {
-					pluralism = {
-						type = ADM
-						cost = 50
-
-						advisor_cost = -0.1
-					}
-					dharam_yudh = {
-						type = DIP
-						cost = 50
-
-						war_taxes_cost_modifier = -0.5
-					}
-					the_khalsa_sikh = {
-						type = MIL
-						cost = 50
-
-						yearly_army_professionalism = 0.005
-					}
-				}
-			}
-			guru_granth_sahib = {
-				trigger = {
-					is_year = 1708
-					is_month = 3
-					NOT = { has_global_flag = guru_event_happening }
-				}
-				chance = {
-					factor = 5
-					modifier = {
-						factor = 1.5
-						is_year = 1709
-					}
-					modifier = {
-						factor = 1.5
-						is_year = 1710
-					}
-					modifier = {
-						factor = 1.5
-						is_year = 1711
-					}
-					modifier = {
-						factor = 2
-						is_year = 1712
-					}
-					modifier = {
-						factor = 2
-						is_year = 1713
-					}
-				}
-				modifier = {
-					state_maintenance_modifier = -0.5
-					drill_decay_modifier = -0.25
-				}
-				teachings = {
-					eternally_living_guru = {
-						type = ADM
-						cost = 50
-
-						development_cost = -0.1
-					}
-					divine_justice = {
-						type = DIP
-						cost = 50
-
-						trade_efficiency = 0.1
-					}
-					the_unchanging_writing = {
-						type = MIL
-						cost = 50
-
-						drill_gain_modifier = 0.5
-					}
-				}
-			}
-		}
 	}
 	
 	harmonized_modifier = harmonized_dharmic
@@ -3091,8 +2672,9 @@ pagan = {
 		fetishist_cult = yes
 		heretic = { GOAT_SKULL }
 	}
+
 	totemism = {
-		color = { 127 115 115 }
+		color = { 0 147 101 }
 		icon = 13
 		country = {
 			tolerance_own = 1
@@ -3111,6 +2693,42 @@ pagan = {
 		heretic = { BEAR_SPIRIT }	
 	}
 	
+	ceremonialism = {
+		color = { 154 133 78 }
+		icon = 52
+		country = {
+			tolerance_own = 1.5
+			improve_relation_modifier = 0.15
+		}
+		country_as_secondary = {
+			tolerance_own = 2
+			loot_amount = 0.25
+		}
+		province = {
+			local_missionary_strength = 0.02
+		}
+		ancestors = yes
+		heretic = { BEAR_SPIRIT }	
+	}
+
+	midewiwin = {
+		color = { 104 88 165 }
+		icon = 13 #placeholder icon
+		country = {
+			monarch_lifespan = 0.15
+			diplomatic_reputation = 1
+		}
+		country_as_secondary = {
+			monarch_lifespan = 0.05
+			improve_relation_modifier = 0.10
+		}
+		province = {
+			local_missionary_strength = 0.02
+		}
+		ancestors = yes
+		heretic = { BEAR_SPIRIT } #find a different name
+	}
+
 	inti = {
 		color = { 64 115 115 }
 		icon = 18
@@ -3201,7 +2819,7 @@ pagan = {
 	
 	norse_ragnaroked = {
 		icon = 21
-		color = { 191 191 191 }
+		color = { 165 165 165 }
 		country = {
 			army_tradition_from_battle = 0.5
 			global_manpower_modifier = 0.10
@@ -3314,6 +2932,54 @@ pagan = {
 		
 		heretic = { DRYIST }
 	
+	}
+
+	deketa = { # dacians
+		color = { 127 76 176 }
+		icon = 12
+		country = {
+			tolerance_heathen = 2
+			diplomatic_reputation = 1
+		}
+		country_as_secondary = {
+			tolerance_own = 2
+			loot_amount = 0.25
+		}
+
+		heretic = { GOAT_SKULL }
+	}
+
+	AfatRoog = { #seerer
+		color = { 27 126 76 }
+		icon = 12
+		country = {
+			defensiveness = 0.1
+			manpower_recovery_speed = 0.1
+		}
+		country_as_secondary = {
+			tolerance_own = 2
+			loot_amount = 0.25
+		}
+
+		heretic = { GOAT_SKULL }
+	}
+
+	banuamm = {
+		color = { 7 240 174 }
+		icon = 59
+		country = {
+			tolerance_own = 1
+			cavalry_power = 0.1
+		}
+		country_as_secondary = {
+			tolerance_own = 2
+			cavalry_power = 0.1
+		}
+		province = {
+			local_missionary_strength = -0.02
+		}
+		
+		heretic = { SNAKE_CLAN }
 	}
 
 	crusade_name = CRUSADE
@@ -3457,7 +3123,7 @@ zoroastrian_group = {
 	defender_of_faith = yes
 	zoroastrian = {
 		icon = 26
-		color = { 127 178 51 }
+		color = { 83 128 142 }
 		
 		country = {
 			tolerance_own = 2
@@ -3486,12 +3152,43 @@ zoroastrian_group = {
 		
 		heretic = { MAZDAKI  }	
 	}
-	manich = {
+	mazdakism = {
+		icon = 55
+		color = { 69 67 204 }
+		allowed_conversion = {
+			jyotisastra
+		}
+		country = {
+			global_unrest = -2
+			all_estate_influence_modifier = -0.1
+		}
+		country_as_secondary = {
+			burghers_loyalty_modifier = 0.05
+			stability_cost_modifier = -0.1
+		}
+		allowed_center_conversion = {
+			jyotisastra
+		}
+		on_convert = {
+			change_religion = mazdakism
+			add_prestige = -100
+			
+			add_country_modifier = {
+				name = "conversion_zeal"
+				duration = 3650
+			}			
+		}
+		date = 1499.01.01
+
+		fervor = yes
+		heretic = { NOTMANICH  }	
+	}
+	manich = { #denawar
 	
 		flags_with_emblem_percentage = 10
 		flag_emblem_index_range = { 1 4 }
 
-		color = { 255 255 200 }
+		color = { 214 214 107 }
 		icon = 33
 		country = {
 			tolerance_heretic = -2
@@ -3508,7 +3205,91 @@ zoroastrian_group = {
 		
 		can_have_secondary_religion = yes
 		
-		personal_deity = yes
+		# personal_deity = yes
+	}
+	
+	jyotisastra = {
+		
+		flags_with_emblem_percentage = 10
+		flag_emblem_index_range = { 1 4 }
+		allowed_conversion = {
+			mazdakism
+		}
+		color = { 252 67 42 }
+		icon = 53
+		country = {
+			tolerance_heretic = -2
+			tolerance_heathen = 2
+		}
+		country_as_secondary = {
+			tolerance_heretic = 1
+			tolerance_heathen = 1
+		}
+		
+		declare_war_in_regency = yes
+		
+		heretic = { NOTMANICH }
+
+		uses_judaism_power = yes
+		aspects_name = MANICH_ASPECTS
+			
+		aspects = {
+			light_adm_1_aspect
+			light_dip_1_aspect
+			light_mil_1_aspect
+			light_adm_2_aspect
+			light_dip_2_aspect
+			light_mil_2_aspect
+			light_adm_3_aspect
+			light_dip_3_aspect
+			light_mil_3_aspect
+			light_adm_jambuvi_aspect
+			light_adm_kamboj_aspect
+			light_adm_kharosthi_aspect
+			light_adm_saravi_aspect
+			light_adm_huna_aspect
+			light_adm_ksatrap_aspect
+			light_dip_jambuvi_aspect
+			light_dip_kamboj_aspect
+			light_dip_kharosthi_aspect
+			light_dip_saravi_aspect
+			light_dip_huna_aspect
+			light_dip_ksatrap_aspect
+			light_mil_jambuvi_aspect
+			light_mil_kamboj_aspect
+			light_mil_kharosthi_aspect
+			light_mil_saravi_aspect
+			light_mil_huna_aspect
+			light_mil_ksatrap_aspect	
+		}
+
+		celebrate = {
+			cost = 100
+			potential = {
+			}
+			allow = {
+				stability = 3
+				NOT = {
+					prestige = 0
+				}
+			}
+			effect = {
+				add_stability = -2
+				add_prestige = 50
+			}
+			ai_will_do = {
+				factor = 1
+			}
+		}
+		on_convert = {
+			change_religion = jyotisastra
+			add_prestige = -100
+			
+			add_country_modifier = {
+				name = "conversion_zeal"
+				duration = 3650
+			}			
+		}
 	}
 	
 	harmonized_modifier = harmonized_zoroastrian_group
@@ -3529,23 +3310,174 @@ postroman_group = { #For your crossdressers and bees
 		color = { 8 56 201 }
 		icon = 51
 		country = {
-			
+			trade_efficiency = 0.1
+			idea_cost = -0.1
 		}
 		country_as_secondary = {
-			
+			idea_cost = -0.1
 		}
 		
 		heretic = { OLD_HELLENIC }
 	}
 
+	larroeism = {
+	
+		flags_with_emblem_percentage = 10
+		flag_emblem_index_range = { 1 4 }
+
+		color = { 239 165 55 }
+		icon = 39
+		country = {
+			tolerance_own = 2
+			defensiveness = 0.1
+		}
+		country_as_secondary = {
+			tolerance_own = 1
+		}
+		
+		heretic = { OLD_HELLENIC }
+	}
+
+	sofieri = { 
+		flags_with_emblem_percentage = 10
+		flag_emblem_index_range = { 1 4 }
+
+		color = { 71 186 204 }
+		icon = 56
+		country = { 
+			institution_spread_from_true_faith = 0.10
+			idea_cost = -0.05
+		}
+		country_as_secondary = {
+			idea_cost = -0.05
+		}
+		heretic = { OLD_HELLENIC }
+	}
 	harmonized_modifier = harmonized_postroman_group
 	
 	crusade_name = HOLY_WAR
 }
 
 timeout_group = { # don't want it to show up in pagan and don't want to delete it
+
+	sunni = {
+		flags_with_emblem_percentage = 10
+		flag_emblem_index_range = { 1 4 }
+		date = 1999.1.1
+		color = { 61 252 3 }
+		icon = 31
+		country = {
+		
+		}
+		country_as_secondary = {
+			
+		}
+		province = {
+		
+		}
+		
+		heretic = { POLY_HERETIC }
+	}
+	ibadi = {
+		flags_with_emblem_percentage = 10
+		flag_emblem_index_range = { 1 4 }
+		date = 1999.1.1
+		color = { 61 252 3 }
+		icon = 31
+		country = {
+		
+		}
+		country_as_secondary = {
+			
+		}
+		province = {
+		
+		}
+		
+		heretic = { POLY_HERETIC }
+	}
+
+	shiite = {
+		flags_with_emblem_percentage = 10
+		flag_emblem_index_range = { 1 4 }
+		date = 1999.1.1
+		color = { 61 252 3 }
+		icon = 31
+		country = {
+		
+		}
+		country_as_secondary = {
+			
+		}
+		province = {
+		
+		}
+		
+		heretic = { POLY_HERETIC }
+	}
+
+
+	anglican = {
+		flags_with_emblem_percentage = 10
+		flag_emblem_index_range = { 1 4 }
+		date = 1999.1.1
+		color = { 61 252 3 }
+		icon = 31
+		country = {
+		
+		}
+		country_as_secondary = {
+			
+		}
+		province = {
+		
+		}
+		
+		heretic = { POLY_HERETIC }
+	}
+
+	hussite = {
+		flags_with_emblem_percentage = 10
+		flag_emblem_index_range = { 1 4 }
+		date = 1999.1.1
+		color = { 61 252 3 }
+		icon = 31
+		country = {
+		
+		}
+		country_as_secondary = {
+			
+		}
+		province = {
+		
+		}
+		
+		heretic = { POLY_HERETIC }
+	}
+
+	orthodox = {
+		flags_with_emblem_percentage = 10
+		flag_emblem_index_range = { 1 4 }
+		date = 1999.1.1
+		color = { 61 252 3 }
+		icon = 31
+		country = {
+		
+		}
+		country_as_secondary = {
+			
+		}
+		province = {
+		
+		}
+		
+		heretic = { POLY_HERETIC }
+	}
+
+
 	norse_pagan_reformed = {
 		icon = 21
+		date = 1999.1.1
 		color = { 191 191 191 }
 		country = {
 			land_forcelimit_modifier = 0.10

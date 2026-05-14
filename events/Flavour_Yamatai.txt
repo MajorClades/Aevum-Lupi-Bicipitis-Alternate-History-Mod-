@@ -13,12 +13,12 @@ country_event = {
 	}
 	immediate = {
 		hidden_effect = {
-			if = { 
-				limit = {ai = no}
-				KM5 = {
-					override_country_name = EZO_NAME
-				}
-			}
+			#if = { 
+			#	limit = {ai = no}
+			#	KM5 = {
+			#		override_country_name = EZO_NAME
+			#	}
+			#}
 			manchuria_region = {
 				discover_country = KM5
 				discover_country = KM6
@@ -268,10 +268,7 @@ country_event = {
 		custom_tooltip = YAMATAI_TT_2a
 		KM5 = {
 			custom_tooltip = YAMATAI_TT_2b
-			random_owned_province = {
-				limit = {
-					culture_group = japanese_g
-				}
+			tooltip = {
 				add_province_modifier = {
 					name = nihon_revolt_lv_3
 					duration = -1
@@ -298,9 +295,16 @@ country_event = {
 			tag = KM6
 		}
 		custom_tooltip = YAMATAI_TT_2a
-			KM6 = {
-				custom_tooltip = YAMATAI_TT_2c
-				random_owned_province = {
+		KM6 = {
+			custom_tooltip = YAMATAI_TT_2c
+			tooltip = {
+				add_province_modifier = {
+					name = nihon_revolt_lv_3
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
 					limit = {
 						culture_group = kamchatkan_g
 					}
@@ -309,20 +313,14 @@ country_event = {
 						duration = -1
 					}
 				}
-				hidden_effect = {
-					every_owned_province = {
-						limit = {
-							culture_group = kamchatkan_g
-						}
-						add_province_modifier = {
-							name = nihon_revolt_lv_3
-							duration = -1
-						}
-					}
-					remove_government_reform = kingdom_of_yamatai_reform
-					add_government_reform = kingdom_of_yamatai_reform
+				remove_government_reform = kingdom_of_yamatai_reform
+				add_government_reform = kingdom_of_yamatai_reform
+				country_event = {
+					id = yamat.19
+					days = 2000
 				}
 			}
+		}
 	}
 }
 
@@ -344,7 +342,13 @@ country_event = {
 				add_government_reform = feudalism_reform
 			}
 			change_religion = shinto
+			change_primary_culture = ROOT
 			override_country_name = SHOGUN_AINU
+			define_ruler = {
+				culture = ROOT
+				religion = ROOT
+				mil = 5
+			}
 		}
 	}
 	option = {
@@ -364,18 +368,16 @@ country_event = {
 	picture = CITY_VIEW_eventPicture
 	fire_only_once = yes
 	trigger = {
-		any_country = {
-			OR = {
-				culture_group = japanese_g
-				culture_group = kamchatkan_g
-			}
-			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-				value = 10
-				region = korea_region
-			}
-			any_subject_country = {
-				has_country_flag = helped_the_koreans_flag
-			}
+		OR = {
+			culture_group = japanese_g
+			culture_group = kamchatkan_g
+		}
+		num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+			value = 10
+			region = korea_region
+		}
+		any_subject_country = {
+			has_country_flag = helped_the_koreans_flag
 		}
 	}
 	mean_time_to_happen = {
@@ -422,7 +424,7 @@ country_event = {
 				}
 			}
 		}
-		random_subject_country = {
+		every_subject_country = {
 			limit = {
 				culture_group = korean_g
 				capital_scope = {
@@ -447,9 +449,26 @@ country_event = {
 		every_owned_province = {
 			limit = {
 				culture = jeju
+				NOT = {
+					OR = {
+						area = kyushu_area
+						area = northern_kyushu
+					}
+				}
 				region = japan_region
 			}
-			change_culture = ROOT
+			change_culture = japanese
+		}
+		every_owned_province = {
+			limit = {
+				culture = jeju
+				OR = {
+					area = kyushu_area
+					area = northern_kyushu
+				}
+				region = japan_region
+			}
+			change_culture = kyushuan
 		}
 	}
 	option = {
@@ -486,26 +505,25 @@ country_event = {
 		random_subject_country = {
 			limit = {
 				is_colonial_nation = yes
+				capital_scope = {
+					OR = {
+						colonial_region = colonial_alaska
+						colonial_region = colonial_california
+					}
+				}
 			}
-			random_owned_province = {
-				change_culture = jeju
-				add_base_manpower = 1
-			}
-			random_owned_province = {
-				change_culture = jeju
-				add_base_manpower = 1
-			}
-			random_owned_province = {
-				change_culture = jeju
-				add_base_manpower = 1
-			}
-			random_owned_province = {
-				change_culture = jeju
-				add_base_manpower = 1
-			}
-			random_owned_province = {
-				change_culture = jeju
-				add_base_manpower = 1
+			custom_tooltip = YAMATAI_TT_18
+			hidden_effect = {
+				for = {
+					amount = 10
+					effect = "
+						random_owned_province = {
+							limit = { NOT = { development = 25 } }
+							change_culture = jeju
+							add_random_development = 1
+						}
+					"
+				}
 			}
 		}
 	}
@@ -584,8 +602,9 @@ country_event = {
 	}
 	option = {
 		name = yamat.13e
-		1692 = {
-			add_colonysize = 500
+		1997 = {
+			cede_province = ROOT
+			add_core = ROOT
 		}
 		northern_polynesia_area = {
 			add_permanent_claim = ROOT
@@ -650,7 +669,7 @@ country_event = {
 	}
 }
 
-country_event = { #buy macau
+country_event = { #emperors or no
 	id = yamat.16
 	title = yamat.16.t
 	desc = yamat.16.d
@@ -658,150 +677,93 @@ country_event = { #buy macau
 	is_triggered_only = yes
 	option = {
 		name = yamat.16a
-		add_years_of_income = -1
-		668 = {
-			owner = {
-				country_event = {
-					id = yamat.17
-				}
-			}
-		}
+		set_country_flag = km6_chugoku_release
+		custom_tooltip = YAMATAI_TT_20
 	}
 	option = {
 		name = yamat.16b
-		668 = {
-			add_permanent_claim = ROOT
-		}
+		set_country_flag = km6_yang_dynasty_aspirations
+		custom_tooltip = YAMATAI_TT_19
 	}
 }
 
-country_event = { #buy macau
+country_event = { #proclaim yang dynasty
 	id = yamat.17
 	title = yamat.17.t
 	desc = yamat.17.d
-	picture = CITY_VIEW_eventPicture
+	picture = CHINESE_GENERAL_eventPicture
 	is_triggered_only = yes
 	option = {
 		name = yamat.17a
-		add_years_of_income = 2
-		668 = {
-			remove_core = ROOT
-			add_core = KM6
-			cede_province = KM6
-		}
-	}
-	option = {
-		name = yamat.17b
-		668 = {
-			add_permanent_claim = KM6
-		}
+		
 	}
 }
 
-country_event = { #kill China
+country_event = { #confucian?
 	id = yamat.18
 	title = yamat.18.t
 	desc = yamat.18.d
-	picture = CITY_VIEW_eventPicture
+	picture = confucianism_RELIGION_eventPicture
 	is_triggered_only = yes
 	option = {
 		name = yamat.18a
-		custom_tooltip = YAMATAI_TT_8
-		hidden_effect = {
-			every_owned_province = {
-				limit = {
-					superregion = china_superregion
-				}
-				if = {
-					limit = {
-						is_core = owner
-					}
-					add_core = WA0
-				}
-				cede_province = WA0
-			}
-			every_subject_country = {
-				every_owned_province = {
-					limit = {
-						superregion = china_superregion
-					}
-					if = {
-						limit = {
-							is_core = owner
-						}
-						add_core = WA0
-					}
-					cede_province = WA0
-				}
-			}
-		}
-		vassalize = WA0
-		china_superregion = {
-			add_permanent_claim = WA0
-		}
+		change_religion = confucianism
+		add_harmonized_religion = jingtianfazu
+		add_harmonized_religion = daoism
+		add_harmonized_religion = shinto
 	}
 	option = {
 		name = yamat.18b
-		add_country_modifier = {
-			name = yam_conqueror_of_heaven
-			duration = 10950
-		}
+		add_church_power = 100
+		add_stability = 1
 	}
 }
-country_event = { #kill China
+country_event = { #iwasam
 	id = yamat.19
 	title = yamat.19.t
 	desc = yamat.19.d
-	picture = CITY_VIEW_eventPicture
+	picture = SHIP_SAILING_eventPicture
 	is_triggered_only = yes
-	option = {
-		name = yamat.19a
-		if = {
-			limit = {
-				is_emperor_of_china = yes
+	fire_only_once = yes
+	immediate = {
+		hidden_effect = {
+			set_country_flag = expelled_iwasam_flag
+			974 = {
+				cede_province = DT0
+				add_core = DT0
+				change_religion = kamuyramat
+				change_culture = ainu
+				add_base_manpower = 1
+				add_base_production = 2
+				add_base_tax = 2
+				change_trade_goods = fish
 			}
-			every_country = {
-				limit = {
-					capital_scope = {
-						superregion = china_superregion
-					}
+			DT0 = {
+				change_religion = kamuyramat
+				change_primary_culture = ainu
+				add_government_reform = nw_ainu_reform
+				capital_scope = {
+					infantry = DT0
 				}
-				reverse_add_aggressive_expansion = {
-					who = ROOT
-					value = 5
-					apply_calc = no
+				add_country_modifier = {
+					name = dt_new_world_explorer
+					duration = 9125
 				}
-			}
-		}else = {
-			every_country = {
-				limit = {
-					capital_scope = {
-						superregion = china_superregion
-					}
-				}
-				reverse_add_aggressive_expansion = {
-					who = ROOT
-					value = 10
-					apply_calc = no
+				add_country_modifier = {
+					name = dt_new_world_settler
+					duration = -1
 				}
 			}
 		}
-		add_years_of_income = 3
+	}
+	option = {
+		name = yamat.19a
+		custom_tooltip = IWASAM_TT_0
 	}
 	option = {
 		name = yamat.19b
-		every_country = {
-			limit = {
-				capital_scope = {
-					superregion = china_superregion
-				}
-			}
-			reverse_add_aggressive_expansion = {
-				who = ROOT
-				value = -5
-				apply_calc = no
-			}
-		}
+		switch_tag = DT0
+		custom_tooltip = IWASAM_TT_1
 	}
 }
 country_event = { #god of war
@@ -829,6 +791,152 @@ country_event = { #god of war
 	option = {
 		name = yamat.20b
 		add_mil_tech = 1
+	}
+}
+country_event = { #kill China
+	id = yamat.21
+	title = yamat.21.t
+	desc = yamat.21.d
+	picture = SHIP_SAILING_eventPicture
+	trigger = {
+		tag = KM6
+		NOT = {
+			has_country_flag = expelled_mulyoji_flag
+		}
+		any_owned_province = {
+			area = kyushu_area	
+			area = northern_kyushu	
+		}
+		num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+			value = 3
+			colonial_region = colonial_california
+		}
+	}
+	mean_time_to_happen = {
+		months = 12
+	}
+	fire_only_once = yes
+	immediate = {
+		set_country_flag = expelled_mulyoji_flag
+		hidden_effect = {
+			random_province = {
+				limit = {
+					OR = {
+						area = sonora_area
+						area = arizona_area
+					}
+					is_city = no
+				}
+				save_event_target_as = dt1_spawn_prov
+			}
+			event_target:dt1_spawn_prov = {
+				cede_province = DT1
+				add_core = DT1
+				change_religion = musok
+				change_culture = jeju
+				add_base_manpower = 1
+				add_base_production = 2
+				add_base_tax = 2
+				change_trade_goods = fish
+			}
+			DT1 = {
+				change_religion = musok
+				change_primary_culture = jeju
+				add_government_reform = oligarchy_reform
+				set_capital = event_target:dt1_spawn_prov
+				add_country_modifier = {
+					name = dt_new_world_explorer
+					duration = 9125
+				}
+				add_country_modifier = {
+					name = dt_new_world_settler
+					duration = -1
+				}
+			}
+		}
+	}
+	option = {
+		name = yamat.21a
+		custom_tooltip = IWASAM_TT_0
+	}
+	option = {
+		name = yamat.21b
+		switch_tag = DT0
+		custom_tooltip = IWASAM_TT_1
+	}
+}
+country_event = {
+	id = yamat.22
+	title = yamat.22.t
+	desc = yamat.22.d
+	picture = CZECH_NOBLES_eventPicture
+	hidden = yes
+	is_triggered_only = yes
+	trigger = {
+		any_owned_province = {
+			culture_group = east_asian
+		}
+		has_country_flag = yam_chugoku_spread_flag
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	option = {
+		name = saxo.5a
+		random_province = {
+			limit = {
+				country_or_non_sovereign_subject_holds = ROOT
+				culture_group = east_asian
+			}
+			change_culture = chugoku
+		}
+		random_province = {
+			limit = {
+				country_or_non_sovereign_subject_holds = ROOT
+				culture_group = east_asian
+			}
+			change_culture = chugoku
+		}
+	}
+}
+country_event = {
+	id = yamat.23
+	title = yamat.23.t
+	desc = yamat.23.d
+	picture = EMPEROR_eventPicture
+
+	is_triggered_only = yes
+	
+	option = {
+		name = yamat.23a
+		1822 = {
+			change_province_name = "Chukyo"
+			rename_capital = "Chukyo"
+			move_capital_effect = yes
+			add_base_manpower = 2
+			add_base_production = 4
+			add_base_tax = 4
+			add_or_upgrade_production_building = yes
+			add_or_upgrade_fort_building = yes
+			add_province_modifier = {
+				name = yam_chukyo
+				duration = -1
+			}
+		}
+	}
+	option = {
+		name = yamat.23b
+		capital_scope = {
+			add_base_manpower = 2
+			add_base_production = 2
+			add_base_tax = 2
+			add_province_modifier = {
+				name = yam_chukyo
+				duration = -1
+			}
+		}
 	}
 }
 country_event = {
@@ -900,6 +1008,127 @@ country_event = {
 			}
 			change_culture = emishi
 		}
+	}
+}
+
+country_event = {
+	id = yamat.102
+	title = yamat.102.t
+	desc = yamat.102.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = yamat.102a
+		east_siberia_region = {
+			limit = {
+				owned_by = ROOT
+			}
+			cede_province = IN0
+			add_core = IN0
+		}
+		vassalize = IN0
+		country_event = {
+			id = yamat.103
+		}
+	}
+	option = {
+		name = yamat.102b
+		every_owned_province = {
+			limit = {
+				culture = inuit
+			}
+			add_base_manpower = 1
+			add_core = IN0
+		}
+	}
+}
+
+country_event = {
+	id = yamat.103
+	title = yamat.103.t
+	desc = yamat.103.d
+	picture = CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			save_global_event_target_as = overlord_inuit_governship
+		}
+	}
+	option = {
+		name = yamat.103a
+		IN0 = {
+			if = {
+				limit = {
+					overlord = {
+						culture_group = japanese_g
+					}
+				}
+				override_country_name = KYO_TAG
+			}else = {
+				override_country_name = GOVERN_NORTH
+			}
+			add_stability = 1
+			add_manpower = 5
+			change_government = monarchy
+		}
+	}
+	option = {
+		name = yamat.103b
+		create_march = IN0
+		IN0 = {
+			if = {
+				limit = {
+					overlord = {
+						culture_group = japanese_g
+					}
+				}
+				override_country_name = KYO_TAG
+			}else = {
+				override_country_name = GOVERN_NORTH
+			}
+			change_country_color = {
+				country = event_target:overlord_inuit_governship
+			}
+			add_country_modifier = {
+				name = north_march_siberian
+				duration = -1
+			}
+			capital_scope = {
+				build_to_forcelimit = {
+					infantry = 1
+				}
+			}
+			change_government = monarchy
+		}
+	}
+	option = {
+		name = yamat.103c
+		create_march = IN0
+		IN0 = {
+			if = {
+				limit = {
+					overlord = {
+						culture_group = japanese_g
+					}
+				}
+				override_country_name = KYO_TAG
+			}else = {
+				override_country_name = GOVERN_NORTH
+			}
+			change_country_color = {
+				country = event_target:overlord_inuit_governship
+			}
+			add_country_modifier = {
+				name = north_march_siberian_op
+				duration = -1
+			}
+			hidden_effect = {
+				add_idea_group = defensive_ideas
+			}
+			change_government = monarchy
+		}
+		
+		custom_tooltip = CANNOT_HOLD_PROV
 	}
 }
 

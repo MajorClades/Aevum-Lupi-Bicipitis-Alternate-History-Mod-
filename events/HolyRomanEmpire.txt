@@ -89,9 +89,13 @@ country_event = {
 	desc = "EVTDESC9075"
 	picture = HRE_eventPicture
 
-	major = yes
+	#major = yes
 	is_triggered_only = yes
-	
+	immediate = {
+		capital_scope = {
+			save_event_target_as = SUPEREVENT_CAPITAL_TARGET
+		}
+	}
 	option = {
 		name = "EVTOPTA9075"
 		trigger = {
@@ -100,7 +104,16 @@ country_event = {
 			}
 		}
 		change_tag = IT9
+		on_change_tag_effect = yes
 		restore_country_name = yes
+		if = {
+			limit = {
+				NOT = {
+					culture_group = latin
+				}
+			}
+			override_country_name = HOLY_ROME_EMPIRE
+		}
 		add_country_modifier = {
 			name = "rome_reborn"
 			duration = -1
@@ -124,6 +137,21 @@ country_event = {
 					num_of_cities = 1
 				}
 				country_event = { id = 9076 }
+			}
+			every_country = {
+				limit = {
+					has_discovered = event_target:SUPEREVENT_CAPITAL_TARGET
+					NOT = {
+						AND = {
+							is_part_of_hre = yes
+							is_emperor = no
+							num_of_cities = 1
+						}
+					}
+				}
+				country_event = {
+					id = superevent.1
+				}
 			}
 		}
 		dismantle_hre = yes
@@ -732,10 +760,27 @@ country_event = {
 	desc = hre_event.15.desc
 	picture = HRE_eventPicture
 	is_triggered_only = yes
-	major = yes
-
+	#major = yes
+	immediate = {
+		capital_scope = {
+			save_event_target_as = SUPEREVENT_CAPITAL_TARGET
+		}
+	}
 	option = {
 		name = hre_event.15.a
+		hidden_effect = {
+			every_country = {
+				limit = {
+					has_discovered = event_target:SUPEREVENT_CAPITAL_TARGET
+				}
+				country_event = {
+					id = superevent.2
+				}
+			}
+			country_event = {
+				id = superevent.2
+			}
+		}
 		add_prestige_or_monarch_power = {
 			amount = 100
 		}

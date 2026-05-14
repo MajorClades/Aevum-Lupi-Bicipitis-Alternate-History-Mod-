@@ -184,7 +184,11 @@ add_estate_church_loyalty_effect = {
 	}
 	else_if = {
 		limit = {
-			religion = hinduism
+			OR = {
+				religion = hinduism
+				religion = mantramarga
+				religion = sanatanism
+			}
 			has_estate = estate_brahmins
 		}
 		add_estate_loyalty = {
@@ -205,7 +209,11 @@ reduce_estate_church_loyalty_effect = {
 	}
 	else_if = {
 		limit = {
-			religion = hinduism
+			OR = {
+				religion = hinduism
+				religion = mantramarga
+				religion = sanatanism
+			}
 			has_estate = estate_brahmins
 		}
 		add_estate_loyalty = {
@@ -816,7 +824,11 @@ on_province_religion_converted_estate_privileges_effect = {
 		}
 		if = {
 			limit = {
-				religion = hinduism
+				OR = {
+					religion = hinduism
+					religion = mantramarga
+					religion = sanatanism
+				}
 			}
 			add_province_modifier = {
 				name = estate_maratha_levies_for_muslims_mod
@@ -1200,21 +1212,6 @@ on_province_owner_change_estate_privileges_effect = {
 		}
 		add_province_modifier = {
 			name = estate_dhimmi_guaranteed_autonomy_mod
-			duration = -1
-		}
-	}
-	if = {
-		limit = {
-			owner = {
-				has_country_flag = burghers_tolerates_orthodoxy
-			}
-			OR = {
-				religion = orthodox
-				religion = coptic
-			}
-		}
-		add_province_modifier = {
-			name = estate_burghers_guaranteed_autonomy_mod
 			duration = -1
 		}
 	}
@@ -1717,7 +1714,11 @@ on_province_owner_change_estate_privileges_effect = {
 	}
 	if = {
 		limit = {
-			religion = hinduism
+			OR = {
+				religion = hinduism
+				religion = mantramarga
+				religion = sanatanism
+			}
 			owner = {
 				has_estate_privilege = estate_maratha_levies_for_muslims
 			}
@@ -4123,6 +4124,8 @@ re_add_loyalty_from_seized_land = {
 			if = { limit = { estate_has_exempt_from_seize_land_privilege = { estate = estate_eunuchs } }		add_estate_loyalty = { estate = estate_eunuchs			 loyalty = 15 } }
 			if = { limit = { estate_has_exempt_from_seize_land_privilege = { estate = estate_qizilbash } }		add_estate_loyalty = { estate = estate_qizilbash		 loyalty = 15 } }
 			if = { limit = { estate_has_exempt_from_seize_land_privilege = { estate = estate_ghulams } }		add_estate_loyalty = { estate = estate_ghulams			 loyalty = 15 } }
+			if = { limit = { estate_has_exempt_from_seize_land_privilege = { estate = estate_golden_hands } }	add_estate_loyalty = { estate = estate_golden_hands		 loyalty = 15 } }
+			if = { limit = { estate_has_exempt_from_seize_land_privilege = { estate = estate_knight_lodges } }	add_estate_loyalty = { estate = estate_knight_lodges	 loyalty = 15 } }
 		}
 		else = {
 			if = { limit = { estate_has_exempt_from_seize_land_privilege = { estate = estate_nobles } }			add_estate_loyalty = { estate = estate_nobles			 loyalty = 20 } }
@@ -4140,6 +4143,8 @@ re_add_loyalty_from_seized_land = {
 			if = { limit = { estate_has_exempt_from_seize_land_privilege = { estate = estate_eunuchs } }		add_estate_loyalty = { estate = estate_eunuchs			 loyalty = 20 } }
 			if = { limit = { estate_has_exempt_from_seize_land_privilege = { estate = estate_qizilbash } }		add_estate_loyalty = { estate = estate_qizilbash		 loyalty = 20 } }
 			if = { limit = { estate_has_exempt_from_seize_land_privilege = { estate = estate_ghulams } }		add_estate_loyalty = { estate = estate_ghulams			 loyalty = 20 } }
+			if = { limit = { estate_has_exempt_from_seize_land_privilege = { estate = estate_golden_hands } }	add_estate_loyalty = { estate = estate_golden_hands		 loyalty = 20 } }
+			if = { limit = { estate_has_exempt_from_seize_land_privilege = { estate = estate_knight_lodges } }	add_estate_loyalty = { estate = estate_knight_lodges	 loyalty = 20 } }
 		}
 	}
 }
@@ -4763,7 +4768,18 @@ on_completed_agenda_effect_estate_ghulams = {
 		change_statists_vs_orangists = 0.05
 	}
 }
-
+on_completed_agenda_effect_estate_golden_hands = {
+	if = {
+		limit = { has_government_attribute = theocratic_monarchy_mechanic }
+		change_statists_vs_orangists = 0.05
+	}
+}
+on_completed_agenda_effect_estate_knight_lodges = {
+	if = {
+		limit = { has_government_attribute = theocratic_monarchy_mechanic }
+		change_statists_vs_orangists = 0.05
+	}
+}
 on_completed_agenda_effect = {
 	on_completed_agenda_effect_$estate$ = yes
 	if = {

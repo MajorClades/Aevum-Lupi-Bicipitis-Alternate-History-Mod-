@@ -1,0 +1,124 @@
+Kongo_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = HR4 } 
+
+	kong_restore_the_coast = {
+		icon = protect_against_the_turks
+		position = 1
+
+		trigger = {	
+			OR = {
+				stability = 2
+				army_size_percentage = 1
+			}
+		}
+
+		effect = {
+			country_event = {
+				id = kongo_alb.1
+			}
+			somaliland_area = { add_permanent_claim = ROOT } 
+			majarteen_area = { add_permanent_claim = ROOT } 
+			mogadishu_area = { add_permanent_claim = ROOT } 
+			ajuuran_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	kong_taverian_retook = {
+		icon = mission_ottoman_harem
+		position = 2
+		required_missions = { 1_land_grab } 
+		provinces_to_highlight = { OR = { area = somaliland_area area = majarteen_area } } 
+
+		trigger = {
+			somaliland_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			majarteen_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = KOLM_TT_5b
+				first_limit = "accepted_culture = turk_greek"
+				first_effect = "add_country_modifier = {name = kolm_turks duration = 10950 }"
+				second_limit = "NOT = {accepted_culture = turk_greek}"
+				second_effect = "add_accepted_culture = turk_greek add_prestige = 20"
+			}
+		}
+	}
+
+}
+
+Kongo_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = HR4 } 
+
+}
+
+Kongo_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = HR4 } 
+
+}
+
+Kongo_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = HR4 } 
+
+}
+
+Kongo_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = HR4 } 
+
+	kong_ndau_subjects = {
+		icon = protect_against_the_turks
+		position = 1
+		provinces_to_highlight = {
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			culture = shona_h
+		}
+
+		trigger = {	
+			OR = {
+				accepted_culture = shona_h
+				num_of_provinces_owned_or_owned_by_subjects_with = {
+					value = 8
+					culture = shona_h
+				}
+			}
+		}
+
+		effect = {
+			country_event = {
+				id = kongo_alb.1
+			}
+			somaliland_area = { add_permanent_claim = ROOT } 
+			majarteen_area = { add_permanent_claim = ROOT } 
+			mogadishu_area = { add_permanent_claim = ROOT } 
+			ajuuran_area = { add_permanent_claim = ROOT } 
+		}
+	}
+}

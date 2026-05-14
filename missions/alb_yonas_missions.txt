@@ -1,0 +1,2171 @@
+mt_yonasgen_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	potential = { culture = yonas }
+	has_country_shield = yes
+
+	crush_the_ksatrap = {
+		icon = mission_arabian_fort
+		position = 2
+		required_missions = {
+			control_indus_bank
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = marwar_area
+				area = mewar_area
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		trigger = { 
+			marwar_area = {
+				type = all
+				owned_by = ROOT
+			}
+			mewar_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		effect = { 
+			jangladesh_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			multan_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	seize_doab_plains = {
+		icon = mission_persian_soldiers
+		position = 5
+		required_missions = {
+			crush_the_ksatrap
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = jangladesh_area
+				area = multan_area
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		trigger = { 
+			jangladesh_area = {
+				type = all
+				owned_by = ROOT
+			}
+			multan_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		effect = { 
+			sind_sagar_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			lahore_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+}
+mt_yonasgencontcont_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	potential = { tag = YO0 }
+	has_country_shield = yes
+	
+	yon_islands_of_garland = {
+		icon = mission_ne_great_lakes_conquest
+		position = 8
+		required_missions = { }
+		provinces_to_highlight = { 
+			province_id = 1248
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		
+		trigger = { 
+			1248 = {
+				owned_by = ROOT
+			}
+		}
+		effect = { 
+		1101 = { discover_country = ROOT add_siberian_construction = 500 }
+		1099 = { add_permanent_claim = ROOT }
+		}
+	}
+
+	yon_kongo_exchange = {
+		icon = mission_son_fetishist_alliances
+		position = 9
+		required_missions = {
+			yon_islands_of_garland
+		}
+		provinces_to_highlight = { 
+			province_id = 1099
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		trigger = { 
+			1099 = {
+				owned_by = ROOT
+				has_trade_building_trigger = yes
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = "yon_arabic_coast_domination"
+				duration = 18250
+			}
+			custom_tooltip = yn0_decide_how_you_treat_kongo_tt
+			hidden_effect = { country_event = { id = yonaraja.3 } }
+		}
+	}
+
+	yon_uplift_libyan = {
+		icon = mission_zim_strong_rulership
+		position = 10
+		required_missions = {
+			yon_kongo_exchange
+		}
+		provinces_to_highlight = { 
+			superregion = africa_superregion
+			not = { country_or_non_sovereign_subject_holds = root }
+		}
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 20
+				superregion = africa_superregion
+			}
+		}
+		effect = {  
+			custom_tooltip = alb_siddi_culture_spread_slowly_tt
+			set_country_flag = alb_yon_hellenize_africa_flag
+			add_years_of_owned_provinces_manpower = {
+				years = 4
+				trigger = { 
+					superregion = africa_superregion
+				}
+				custom_tooltip = FROM_AFRICAN_PROVINCES
+			}
+			custom_tooltip = empty_line_tt
+			add_country_modifier = {
+				name = yon_siddification
+				duration = 18250
+			}
+			sahel_region = { discover_country = ROOT }
+			if = {
+					limit = { BJ1 = { exists = no }  }
+			country_event_with_insight = {
+				id = yonaraja.7 #Spawn Dakuya from wasteland
+				insight_tooltip = YON_SPAWN_DAKUYA_TT
+			}
+				}
+				else = {
+					BJ1 = { country_event = { id = yonaraja.8 } }
+				}
+		}
+	}
+
+	yon_aryanization_experiment = {
+		icon = mission_son_military_expertise
+		position = 11
+		required_missions = {
+			yon_uplift_libyan
+		}
+		provinces_to_highlight = { 
+			superregion = africa_superregion
+			country_or_non_sovereign_subject_holds = root
+			not = { culture = siddi }
+		}
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 30
+				superregion = africa_superregion
+				culture = siddi
+			}
+		}
+		effect = {  
+			country_event_with_insight = {
+				id = yonaraja.10
+				insight_tooltip = YON_GET_PRESTIGE_FOR_BECOMING_LINGUA_FRANCA_OF_EAST_LIBYAN_TT
+			}
+		}
+	}
+
+	yon_blossoming_budh = {
+		icon = mission_patronize_local_gods
+		position = 12
+		required_missions = {
+			yon_aryanization_experiment
+		}
+		provinces_to_highlight = { 
+			country_or_non_sovereign_subject_holds = root
+			NOT = { 
+				OR = {
+					culture_group = western_aryan
+					culture = dakuyan
+				}
+			}
+		}
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 200
+				OR = { culture_group = western_aryan culture = dakuyan }
+			}
+		}
+		effect = { 
+			custom_tooltip = YON_CULTURE_CONVERT_CHEAP_20_YEARS
+			tooltip = {
+				add_province_modifier = {
+					name = yon_culture_convert_boost
+					duration = 7300
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+					NOT = { culture = yonas }
+					}
+					add_province_modifier = {
+						name = yon_culture_convert_boost
+						duration = 7300
+					}
+				}
+			}
+			custom_tooltip = more_cheaper_fervor_or_1000_splendors_tt
+			if = {
+				limit = {
+					religion = mazdakism
+				}
+				set_country_flag = yon_cheaper_mazdakism_fervor
+				hidden_effect = {
+					alb_update_fervor_effects = yes
+				}
+			}
+			else = {
+				add_splendor = 1000
+			}
+		}
+	}
+
+	yon_towering_beasts = {
+		icon = mission_emperor_of_hindusthan
+		position = 14
+		required_missions = { }
+		provinces_to_highlight = { }
+		trigger = { num_of_hussars = 25 }
+		effect = {
+			capital_scope = { add_or_upgrade_manpower_building = yes } 
+			add_country_modifier = {
+				name = "leo_war_training"
+				duration = 7300
+			}
+			add_country_modifier = {
+				name = "leo_war_foot"
+				duration = -1
+			}
+		}
+	}
+
+	yon_endless_auxilaries = {
+		icon = mission_integrate_the_purbias
+		position = 15
+		required_missions = {
+			yon_towering_beasts yon_terrifying_formation
+		}
+		provinces_to_highlight = { }
+		trigger = {  
+			army_size  = 250
+			years_of_manpower = 2
+		}
+		effect = { 
+			capital_scope = {
+				add_base_manpower = 3
+			}
+			custom_tooltip = YON_GAIN_1_BASE_MAN_FOR_5_YONAS_PROVINCE
+			hidden_effect = {
+				random_province = {
+					limit = {
+						culture = yonas
+					}
+					add_base_manpower = 1
+				}
+				random_province = {
+					limit = {
+						culture = yonas
+					}
+					add_base_manpower = 1
+				}
+				random_province = {
+					limit = {
+						culture = yonas
+					}
+					add_base_manpower = 1
+				}
+				random_province = {
+					limit = {
+						culture = yonas
+					}
+					add_base_manpower = 1
+				}
+				random_province = {
+					limit = {
+						culture = yonas
+					}
+					add_base_manpower = 1
+				}
+			}
+		}
+	}
+
+	yon_vacrapani_vitality = {
+		icon = mission_order_in_the_domain
+		position = 16
+		required_missions = {
+			yon_endless_auxilaries
+		}
+		provinces_to_highlight = { }
+		trigger = {  
+			estate_loyalty = {
+				estate = estate_nobles
+				loyalty = 67
+			}
+			OR = {
+				has_mil_advisor_3 = yes
+				mil = 6
+			}
+			monthly_mil = 12
+		} 
+		effect = { country_event = { id = yonaraja.4 }}
+	}
+}
+mt_yonasgen_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential = { culture = yonas }
+	has_country_shield = yes
+
+	control_indus_bank = {
+		icon = mission_unite_home_region
+		position = 1
+		required_missions = { }
+		provinces_to_highlight = {
+			OR = {
+				area = northern_sindh_area
+				area = sindh_area
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		trigger = { 
+			northern_sindh_area = {
+				type = all
+				owned_by = ROOT
+			}
+			sindh_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		effect = { 
+			marwar_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			mewar_area = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	reconquest_kamboj = {
+		icon = mission_cannons_firing
+		position = 3
+		required_missions = {
+			control_indus_bank
+		}
+		provinces_to_highlight = { owned_by = LE7 }
+		trigger = { 
+				LE7 = {exists = no}
+		}
+		effect = {  
+			custom_tooltip = YON_GAIN_10_MIL_POWER_PER_KAMBOJ_PROVINCE
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						culture = kamboj #kamboj
+					}
+					owner = {
+						add_mil_power = 10
+					}
+				}
+			}
+			custom_tooltip = empty_line_tt
+			complex_dynamic_effect = {
+				first_custom_tooltip = YON_IF_MULTAN_CONNECTED
+				first_limit = "
+					506 = {
+						is_in_capital_area = yes
+					}
+				"
+				first_effect = "
+					506 = {
+						add_or_upgrade_fort_building = yes
+						add_province_modifier = {
+							name = yon_fort_of_multan
+							duration = -1
+						}
+					}
+				"
+			}
+		}
+	}
+
+	conqueror_of_indus = {
+		icon = mission_indian_soldier_elephant
+		position = 5
+		required_missions = {
+			reconquest_kamboj
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = lahore_area
+				area = sind_sagar_area
+			}
+			NOT = {
+				owned_by = ROOT
+			}
+		}
+		trigger = { 
+			lahore_area = {
+				type = all
+				owned_by = ROOT
+			}
+			sind_sagar_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+		effect = { 
+			add_power_projection = {
+				type = mission_rewards_power_projection
+				amount = 15
+			}
+			add_country_modifier = {
+				name = "yon_victory_over_indus"
+				duration = 18250
+			}
+		}
+	}
+
+	savior_of_the_waking_world = {
+		icon = mission_pf_soldier
+		position = 6
+		required_missions = {
+			seize_doab_plains conqueror_of_indus
+		}
+		provinces_to_highlight = { 
+				OR = {
+					area = lahore_area
+					area = sind_sagar_area
+					area = multan_area
+					area = sindh_area
+					area = northern_sindh_area
+					}
+				NOT = { base_manpower = 5 }
+			}
+		trigger = { 
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+					value = 12
+					OR = {
+						area = lahore_area
+						area = sind_sagar_area
+						area = multan_area
+						area = sindh_area
+						area = northern_sindh_area
+						}
+					base_manpower = 5
+				}
+		}
+		effect = {
+			custom_tooltip = YON_GAIN_15_MANPOWER_PER_IMPROVED_INDUS_PROVINCE
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						OR = {
+							area = lahore_area
+							area = sind_sagar_area
+							area = multan_area
+							area = sindh_area
+							area = northern_sindh_area
+						}
+						base_manpower = 5
+					}
+					add_province_modifier = {
+						name = yon_indus_zenkai_boost
+						duration = 7300
+					}
+				}
+			}
+			add_yearly_manpower = 0.8
+		}
+	}
+}
+
+mt_yonasgencontcont_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential = { tag = YO0 }
+	has_country_shield = yes
+	
+	conquer_chola = {
+		icon = mission_coromandel_expansion
+		position = 9
+		required_missions = {
+			iskandar_ambition
+		}
+		provinces_to_highlight = {
+			region = coromandel_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = { 
+			coromandel_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = { 
+			malaya_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name = "yon_conquered_chola"
+				duration = 18250
+			}
+		}
+	}
+
+	land_of_commerce = {
+		icon = mission_the_chola_conquests
+		position = 10
+		required_missions = {
+			conquer_chola
+		}
+		provinces_to_highlight = {
+			region = malaya_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = { 
+			malaya_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = { 
+			indonesia_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name = "yon_conquered_malaya"
+				duration = 18250
+			}
+		}
+	}
+
+	land_of_stone_monument = {
+		icon = mission_mnd_maj_candi_shrines
+		position = 11
+		required_missions = {
+			land_of_commerce
+		}
+		provinces_to_highlight = {
+			region = indonesia_region
+			NOT = {
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					is_empty = yes
+				}
+			}
+		}
+		trigger = { 
+			indonesia_region = {
+				type = all
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					is_empty = yes
+				}
+			}
+		}
+		effect = { 
+			moluccas_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name = "yon_conquered_indonesia"
+				duration = 18250
+			}
+		}
+	}
+
+	land_of_spice = {
+		icon = mission_mnd_maj_cloves
+		position = 12
+		required_missions = {
+			land_of_stone_monument
+		}
+		provinces_to_highlight = {
+			region = moluccas_region
+			NOT = {
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					is_empty = yes
+				}
+			}
+		}
+		trigger = { 
+			moluccas_region = {
+				type = all
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					is_empty = yes
+				}
+			}
+		}
+		effect = { 
+			japan_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name = "yon_conquered_molucca"
+				duration = 18250
+			}
+		}
+	}
+
+	land_of_shaman = {
+		icon = jap_five_regent_houses
+		position = 13
+		required_missions = {
+			land_of_spice
+		}
+		provinces_to_highlight = {
+			region = japan_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = { 
+			japan_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = { 
+			add_country_modifier = {
+				name = "yon_conquered_japan"
+				duration = 18250
+			}
+		}
+	}
+	
+	yon_terrifying_formation = {
+		icon = mission_afghan_frontier
+		position = 14
+		required_missions = { }
+		provinces_to_highlight = { }
+		trigger = {
+			army_tradition = 30
+			num_of_owned_provinces_with = {
+				value = 5
+				has_manpower_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_army_tradition = -20
+			add_country_modifier = {
+				name = "yon_strict_routines"
+				duration = 10950
+			}
+			add_country_modifier = {
+				name = "yon_uniformity_accomplished"
+				duration = -1
+			}
+		}
+	}
+
+	uncover_ulimaroa = {
+		icon = mission_sw_against_the_desert
+		position = 15
+		required_missions = {
+			world_edge
+		}
+		provinces_to_highlight = { }
+		trigger = {
+			treasury = 100
+			any_province = {
+				region = australia_region
+				has_discovered = ROOT
+			}
+		}
+
+		effect = {
+			random_province = {
+				limit = {
+					is_empty = yes
+					region = australia_region
+					has_discovered = ROOT
+				}
+				add_siberian_construction = 700
+			}
+			random_province = {
+				limit = {
+					is_empty = yes
+					region = australia_region
+					has_discovered = ROOT
+				}
+				add_siberian_construction = 700
+			}
+			add_country_modifier = {
+				name = "yon_colonize_ulimaroa"
+				duration = 10950
+			}
+		}
+	}
+}
+
+mt_yonasgen_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential = { culture = yonas }
+	has_country_shield = yes
+
+	embrace_parsi_community = {
+		icon = mission_indian_stateman
+		position = 2
+		required_missions = {
+			western_wind
+		}
+		provinces_to_highlight = { province_id = 4512 }
+		trigger = {
+		4512 = {
+				owner = {
+					OR = { 
+						tag = ROOT 
+						is_subject_of = ROOT 
+						overlord = { is_subject_of = ROOT }
+						has_opinion = {
+							who = ROOT
+							value = 190
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			capital_scope = {
+				add_province_modifier = {
+					name = yon_parsi_community
+					duration = -1
+				}
+			}
+			add_mercantilism = 5
+		}
+	}
+
+	
+}
+
+mt_yonadevyn_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	
+	potential = { tag = YO0 }
+	has_country_shield = yes
+	
+	
+	yn1yonadev_1 = {
+		icon = ned_cloth_trading
+		position = 4
+		required_missions = { tomb_raider } 
+		provinces_to_highlight = {
+			OR = { 
+				trade_goods = silk 
+				trade_goods = cotton
+			}
+			owned_by = ROOT
+			NOT = { 
+				AND = { 
+					has_manufactory_trigger = yes 
+					base_production = 10 
+				} 
+			}
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				OR = {
+					trade_goods = silk 
+					trade_goods = cotton
+				}
+				has_manufactory_trigger = yes
+				base_production = 10
+			}
+		}
+		
+		effect = {
+			change_price = {
+				trade_goods = cotton
+				key = "Yona Weaver Guilds"
+				value = 0.2
+				duration = 18250
+			}
+			custom_tooltip = yona_prodboost_tooltip
+			tooltip = {
+				add_province_modifier = {
+					name = yona_prodboost_cotton_silk
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						owned_by = ROOT
+						OR = { trade_goods = cotton trade_goods = silk }
+						has_manufactory_trigger = yes
+						base_production = 10
+					}
+					add_province_modifier = {
+						name = yona_prodboost_cotton_silk
+						duration = -1
+					}
+				}
+			}
+		}
+	}
+	
+
+}
+
+mt_yonasgencont_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential = { culture = yonas }
+	has_country_shield = yes
+
+
+	denawar_pilgrims = {
+		icon = mission_market_place_with_asian_traders
+		position = 5
+		required_missions = {
+			restore_the_imperial_road
+		}
+		provinces_to_highlight = { }
+		trigger = { 
+			OR = {	
+				any_country = { religion = manich has_opinion = { who = ROOT value = 180 } }
+				religion = manich
+				AND = {
+					owns = 446
+					owns = 2225
+					owns = 506
+				}
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = "yon_denawar_donation"
+				duration = 9125
+			}
+			add_years_of_income = 1
+		}
+	}
+
+	yonaraja_samrajya = {
+		icon = per_an_asha_empire
+		position = 7
+		required_missions = {
+			savior_of_the_waking_world rejoin_the_silk_road
+		}
+		provinces_to_highlight = { }
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 50
+				superregion = india_superregion
+			}
+		}
+		effect = {
+			hidden_effect = { unlock_government_reform = { government_reform = yona_samrajya_empire }  } 
+			add_government_reform = yona_samrajya_empire
+			custom_tooltip = empty_line_tt
+			hidden_effect = {
+				unlock_government_reform = { government_reform = diadochi_systems } 
+			}
+			add_government_reform = diadochi_systems
+		}
+	}
+}
+
+mt_yonasgencontcont_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential = { tag = YO0 }
+	has_country_shield = yes
+
+	iskandar_ambition = {
+		icon = arm_artaxiad_legacy
+		position = 8
+		required_missions = { }
+		provinces_to_highlight = { }
+		trigger = { stability = 3 }
+		effect = {
+			add_stability = -3
+			custom_tooltip = yona_battle_against_the_world_tt
+			hidden_effect = {
+				country_event = { id = yonaraja.1 }
+			}
+		}
+	}
+
+	dominate_dakshina = {
+		icon = mission_unite_home_region
+		position = 9
+		required_missions = {
+			iskandar_ambition
+		}
+		provinces_to_highlight = {
+			region = deccan_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = { 
+			deccan_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = { 
+			tibet_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name = "yon_conquered_deccan"
+				duration = 18250
+			}
+		}
+	}
+
+	land_of_holy_mounts = {
+		icon = mission_buddhist_monk_praying
+		position = 10
+		required_missions = {
+			dominate_dakshina
+		}
+		provinces_to_highlight = {
+			region = tibet_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = { 
+			tibet_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = { 
+			central_asia_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name = "yon_conquered_tibet"
+				duration = 18250
+			}
+		}
+	}
+
+	land_of_untamed = {
+		icon = per_convert_persia
+		position = 11
+		required_missions = {
+			land_of_holy_mounts
+		}
+		provinces_to_highlight = {
+			region = central_asia_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = { 
+			central_asia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = { 
+			mongolia_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name = "yon_conquered_central_serica"
+				duration = 18250
+			}
+		}
+	}
+
+	land_of_endless_rider = {
+		icon = mam_recruit_the_mamluks
+		position = 12
+		required_missions = {
+			land_of_untamed
+		}
+		provinces_to_highlight = {
+			region = mongolia_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = { 
+			mongolia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = { 
+			korea_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name = "yon_conquered_siyi"
+				duration = 18250
+			}
+		}
+	}
+
+	land_of_stone_citadel = {
+		icon = mission_asian_city
+		position = 13
+		required_missions = {
+			land_of_endless_rider
+		}
+		provinces_to_highlight = {
+			region = korea_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = { 
+			korea_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = "yon_conquered_korea"
+				duration = 18250
+			}
+		}
+	}
+
+	world_edge = {
+		icon = mission_protect_white_sea_trade
+		position = 14
+		required_missions = {
+			land_of_stone_citadel land_of_celestial_king land_of_shaman
+		}
+		provinces_to_highlight = { }
+		trigger = {
+			OR = {
+				has_institution = new_world_i
+				has_idea = quest_for_the_new_world
+			}
+			share_of_starting_income = 10
+			is_in_deficit = no
+			is_bankrupt = no
+		}
+		effect = {
+			create_explorer = {
+				tradition = 70
+			}
+			define_advisor = {
+				type = navigator
+				cost_multiplier = 0.25
+				skill = 2
+			}
+			add_country_modifier = {
+				name = yon_colonial_ambitions_mod
+				duration = 18250
+			}
+		}
+	}
+
+	invade_inuit = {
+		icon = mission_horde_religion
+		position = 15
+		required_missions = {
+			world_edge
+		}
+		provinces_to_highlight = {
+			area = kamchatka_area
+			NOT = {
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					is_empty = yes
+				}
+			}
+		}
+		trigger = { 
+			kamchatka_area = {
+				type = all
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					is_empty = yes
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = { IN0 = { exists = yes }  } 
+				IN0 = {
+					capital_scope = { change_religion = ROOT } 
+					change_religion = ROOT
+					every_province = {
+						limit = {
+							is_empty = yes
+							OR = { area = kolyma_area area = okhotsk_area }
+						}
+						add_siberian_construction = 500
+					}
+				}
+			}
+			else = {
+				every_province = {
+					limit = {
+						is_empty = yes
+						OR = { area = kolyma_area area = okhotsk_area area = kamchatka_area }
+					}
+					add_siberian_construction = 500
+				}
+			}
+		}
+	}
+
+	only_way_forward = {
+		icon = the_glorious_revolution
+		position = 16
+		required_missions = {
+			invade_inuit uncover_ulimaroa great_serene_sea
+		}
+		provinces_to_highlight = {
+			NOT = { has_discovered = ROOT }
+			if = {
+				limit = { is_random_new_world = no }
+				OR = { colonial_region = colonial_mexico colonial_region = colonial_california colonial_region = colonial_jamesland colonial_region = colonial_peru colonial_region = colonial_la_plata }
+			}
+			else = {
+				continent = new_world
+			}
+		}		
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = miss_discover_western_america
+				any_province = {
+					OR = { 
+						colonial_region = colonial_mexico 
+						colonial_region = colonial_california 
+						colonial_region = colonial_jamesland 
+						colonial_region = colonial_peru 
+						colonial_region = colonial_la_plata 
+					}
+					has_discovered = ROOT
+				}
+			}
+		}	
+		effect = {
+			add_country_modifier = {
+				name = "yon_the_unknown_frontier"
+				duration = 9125
+			}
+			add_dip_power = 50
+		}
+	}
+
+	beyond_horizon = {
+		icon = mission_oceania_assemble_an_army
+		position = 17
+		required_missions = {
+			only_way_forward
+		}
+		provinces_to_highlight = {
+			if = {
+				limit = { is_random_new_world = no }
+				OR = {
+					continent = north_america
+					continent = south_america
+				}
+			}
+			else = {
+				continent = new_world
+			}
+			has_discovered = ROOT
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}		
+		trigger = {
+			if = {
+				limit = { is_random_new_world = no }
+				num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+					OR = {
+						continent = north_america
+						continent = south_america
+					}
+					value = 200
+				}
+			}
+			else = {
+				num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+					continent = new_world
+					value = 100
+				}
+			}
+			NOT = {
+				any_subject_country = {
+					liberty_desire = 25
+				}
+			}
+		}	
+		effect = {
+			add_country_modifier = {
+				name = yon_new_world_dominance
+				duration = -1
+			}
+			custom_tooltip = yon_dominiate_new_world_at
+		}
+	}
+	
+}
+
+mt_yonasgen_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	potential = { culture = yonas }
+	has_country_shield = yes
+
+	western_wind = {
+		icon = mission_bedouins
+		position = 1
+		required_missions = { }
+		provinces_to_highlight = { }
+		trigger = {
+			504 = {
+					trade_share = {
+						country = ROOT
+						share = 40
+					}
+				}
+		}
+		effect = {
+			add_country_modifier = {
+				name = "yon_dvaraka_trade"
+				duration = 18250
+			}
+			add_treasury = 300
+		}
+	}
+
+	scholar_of_taxila = {
+		icon = mission_protect_jain_communities
+		position = 2
+		required_missions = {
+			western_wind
+		}
+		provinces_to_highlight = { province_id = 507 }
+		trigger = {
+			507 = {
+				owner = {
+					OR = { 
+						tag = ROOT 
+						is_subject_of = ROOT 
+						overlord = { is_subject_of = ROOT }
+						has_opinion = {
+							who = ROOT
+							value = 150
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = "yon_taxila_tutelage"
+				duration = 9125
+			}
+			change_innovativeness = 3
+		}
+	}
+
+	tomb_raider = {
+		icon = mission_herat
+		position = 3
+		required_missions = {
+			embrace_parsi_community scholar_of_taxila sage_of_sayabiga
+		}
+		provinces_to_highlight = { province_id = 506 }
+		trigger = {
+			multan_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = { 
+			506 = {
+				destroy_great_project = { type = shah_rukn_e_alam_tomb }
+				add_unrest = 10
+			}
+			ROOT = {
+				add_treasury = 1000
+			}
+			custom_tooltip = ragebait_jyotisastra_tt
+			hidden_effect = {
+				every_country = {
+					limit = {
+						religion = jyotisastra
+						NOT = { is_subject_of = ROOT }
+					}
+					add_opinion = {
+						who = ROOT
+						modifier = yon_looted_tomb
+					}
+				}
+			}
+		}
+	}
+
+	restore_the_imperial_road = {
+		icon = mission_the_grand_trunk_road_dlh
+		position = 4
+		required_missions = { }
+		provinces_to_highlight = {
+			OR = {
+				province_id = 578
+				province_id = 507
+				province_id = 4411
+				province_id = 506
+				province_id = 504
+				province_id = 4457
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+		trigger = {
+			owns_or_non_sovereign_subject_of = 578
+			owns_or_non_sovereign_subject_of = 507
+			owns_or_non_sovereign_subject_of = 4411
+			owns_or_non_sovereign_subject_of = 506
+			owns_or_non_sovereign_subject_of = 504
+			owns_or_non_sovereign_subject_of = 4457
+		}
+		effect = {
+			capital_scope = {
+				add_building = stock_exchange
+				add_base_production = 3
+			}
+			504 = {
+				add_trade_modifier = {
+					who = ROOT
+					duration = -1
+					power = 50
+					key = "Imperial Indus Road"
+				}
+			}
+			507 = {
+				add_trade_modifier = {
+					who = ROOT
+					duration = -1
+					power = 50
+					key = "Imperial Indus Road"
+				}
+			}
+			524 = {
+				add_trade_modifier = {
+					who = ROOT
+					duration = -1
+					power = 50
+					key = "Imperial Indus Road"
+				}
+			}
+		}
+	}
+
+	cross_kabul = {
+		icon = mission_growth_of_golcond
+		position = 5
+		required_missions = {
+			restore_the_imperial_road
+		}
+		provinces_to_highlight = {  not = { owned_by = ROOT}  region = khorasan_region  } 
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 4
+				trade_goods = wool
+				region = khorasan_region
+				base_production = 7
+				
+			}
+		}
+		effect = {
+			add_country_modifier = {
+				name = "yon_woollord_of_khorasan"
+				duration = 10950
+			}
+			507 = {
+				add_trade_modifier = {
+					who = ROOT
+					duration = -1
+					power = 20
+					key = "Western Wool Monopoly"
+				}
+			}
+		}
+	}
+
+	rejoin_the_silk_road = {
+		icon = mission_horde_trade
+		position = 6
+		required_missions = {
+			denawar_pilgrims cross_kabul journey_to_jongwa
+		}
+		provinces_to_highlight = { }
+		trigger = { 
+			507 = {
+				country_or_non_sovereign_subject_holds = ROOT
+				has_trade_building_trigger = yes
+				has_production_building_trigger = yes
+				development = 30
+				is_strongest_trade_power = root
+				}
+			504 = {
+				country_or_non_sovereign_subject_holds = ROOT
+				has_trade_building_trigger = yes
+				has_production_building_trigger = yes
+				development = 30
+				is_strongest_trade_power = root
+				}
+		}
+		effect = {
+			add_splendor = 1000
+			custom_tooltip = RHO_TT_4
+			hidden_effect = {
+				if = {
+					limit = { in_golden_age = yes } 
+					extend_golden_age = 50
+				}
+				else = {
+					if = {
+						limit = { has_had_golden_age = yes } 
+						reset_golden_age = yes
+					}
+				}
+			}
+		}
+	}
+}
+mt_yonasgencontcont_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	potential = { tag = YO0 }
+	has_country_shield = yes
+	
+	govern_ganghariday = {
+		icon = mission_unite_bengal
+		position = 9
+		required_missions = {
+			iskandar_ambition
+		}
+		provinces_to_highlight = {
+			region = bengal_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = { 
+			bengal_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = { 
+			burma_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name = "yon_conquered_bengal"
+				duration = 18250
+			}
+		}
+	}
+
+	land_of_myriad_temple = {
+		icon = mission_upper_burma_campaign
+		position = 10
+		required_missions = {
+			govern_ganghariday
+		}
+		provinces_to_highlight = {
+			region = burma_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = { 
+			burma_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = { 
+			indo_china_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name = "yon_conquered_pyu"
+				duration = 18250
+			}
+		}
+	}
+
+	land_of_golden_axe = {
+		icon = mission_mnd_khm_resurgence
+		position = 11
+		required_missions = {
+			land_of_myriad_temple
+		}
+		provinces_to_highlight = {
+			region = indo_china_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = { 
+			indo_china_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = { 
+			xinan_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name = "yon_conquered_cherosyne"
+				duration = 18250
+			}
+		}
+	}
+
+	land_of_serene_hill = {
+		icon = mng_expand_bogue
+		position = 12
+		required_missions = {
+			land_of_golden_axe
+		}
+		provinces_to_highlight = {
+			region = xinan_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = { 
+			xinan_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = { 
+			china_superregion = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name = "yon_conquered_xinan"
+				duration = 18250
+			}
+		}
+	}
+
+	land_of_celestial_king = {
+		icon = mission_scholar_officials
+		position = 13
+		required_missions = {
+			land_of_serene_hill
+		}
+		provinces_to_highlight = {
+			superregion = china_superregion
+			NOT = {
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					is_empty = yes
+				}
+			}
+		}
+		trigger = { 
+			china_superregion = {
+				type = all
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					is_empty = yes
+				}
+			}
+		}
+		effect = { 
+			add_country_modifier = {
+				name = "yon_conquered_jongwa"
+				duration = 18250
+			}
+		}
+	}
+	
+	yon_fostered_friendship = {
+		icon = mission_diplomatic_relation
+		position = 14
+		required_missions = { }
+		provinces_to_highlight = { }
+		trigger = {
+			OR = {
+				calc_true_if = {
+					amount = 3
+					all_country = {
+						has_opinion = {
+							who = ROOT
+							value = 170
+						}
+						alliance_with = ROOT
+					}
+				}
+				full_idea_group = diplomatic_ideas
+			}
+		}
+		effect = {
+			add_dip_power = 200
+			custom_tooltip = empty_line_tt
+			custom_tooltip = yon_wdubally15trust_tt
+			hidden_effect = {
+				every_ally = {
+					limit = {
+						has_opinion = {
+							who = ROOT
+							value = 150
+						}
+					}
+					add_trust = {
+						who = ROOT
+						value = 15
+						mutual = yes
+					}
+				}
+			}
+		}
+	}
+
+	great_serene_sea = {
+		icon = mission_oceania_royal_marriage
+		position = 15
+		required_missions = {
+			world_edge
+		}
+		provinces_to_highlight = {
+			region = oceanea_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = { 
+			num_of_owned_provinces_with = { region = oceanea_region value = 10 }
+		}
+		effect = { 
+			oceanea_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name = "yon_crossing_great_ocean"
+				duration = 18250
+			}
+		}
+	}
+}
+mt_yonasgen_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	potential = { culture = yonas }
+	has_country_shield = yes
+
+	sage_of_sayabiga = {
+		icon = mission_asian_trader
+		position = 2
+		required_missions = {
+			western_wind
+		}
+		provinces_to_highlight = { }
+		trigger = { 
+			any_country = {
+					OR = {
+							primary_culture = sumatran
+							primary_culture = acehnese
+							primary_culture = malayan
+							primary_culture = sundanese
+							primary_culture = javanese
+						}
+					has_opinion = { who = ROOT value = 150 }
+				}
+		}
+		effect = {
+			add_country_modifier = {
+				name = "yon_blueprint_of_candi"
+				duration = 9125
+			}
+			add_prestige_or_monarch_power = { amount = 25 }
+		}
+	}
+
+
+}
+
+
+mt_yonadevyn_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	
+	potential = { tag = YO0 }
+	has_country_shield = yes
+	
+	
+	yn1yonadev_2 = {
+		icon = mission_order_in_the_domain
+		position = 4
+		required_missions = { tomb_raider } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_manpower_building_trigger = no
+			has_tax_building_trigger = no
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 20
+				has_manpower_building_trigger = yes
+				has_courthouse_building_trigger = yes
+			}
+		}
+		
+		effect = {
+			add_country_modifier = {
+				name = "yn1_basileus_of_indus"
+				duration = -1
+			}
+		}
+	}
+	
+
+}
+
+mt_yonasgencont_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	potential = { culture = yonas }
+
+
+	journey_to_jongwa = {
+		icon = mission_secure_hajj_ports
+		position = 5
+		required_missions = {
+			restore_the_imperial_road
+		}
+		provinces_to_highlight = { }
+		trigger = { 
+			OR = {
+				any_country = {
+					capital_scope = {
+							superregion = china_superregion
+						}
+					has_opinion = { who = ROOT value = 160 }
+				}
+				any_owned_province = {
+					superregion = china_superregion
+				}
+			}
+		}
+		effect = {
+			north_china_region = { discover_country = ROOT }
+			xinan_region = { discover_country = ROOT }
+			south_china_region = { discover_country = ROOT }
+			tibet_region = { discover_country = ROOT }
+			east_indian_ocean_region = { discover_country = ROOT }
+			south_china_sea_region = { discover_country = ROOT }
+			japan_region = { discover_country = ROOT }
+			korea_region = { discover_country = ROOT }
+			kashgaria_area = { discover_country = ROOT }
+			tarim_basin_area = { discover_country = ROOT }
+			shanshan_area = { discover_country = ROOT }
+			add_prestige_or_monarch_power = { amount = 20 }
+		}
+	}
+}
+
+mt_yonasgencontcont_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	potential = { tag = YO0 }
+	has_country_shield = yes
+	
+	yon_prepare_the_host = {
+		icon = mission_gothic_invasion
+		position = 8
+		required_missions = { }
+		provinces_to_highlight = { }
+		trigger = {
+			land_forcelimit = 100
+			max_manpower = 100
+			army_size_percentage = 0.7
+		}
+		effect = {
+			capital_scope = { add_or_upgrade_manpower_building = yes } 
+			country_event = {
+				id = yonaraja.2
+			}
+		}
+	}
+
+	yon_march_through_persia = {
+		icon = per_the_seljuk_successors
+		position = 9
+		required_missions = {
+			yon_prepare_the_host
+		}
+		provinces_to_highlight = { 
+			superregion = persia_superregion
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = { value = 30 superregion = persia_superregion }
+		}
+		effect = { 
+			caucasia_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			custom_tooltip = CHANGE_PERSIAN_TO_PARSI
+			hidden_effect = {
+				every_owned_province = {
+					limit = { culture_group = iranian } 
+					change_culture = parsi
+				}
+			}
+		}
+	}
+
+	yon_usurp_atropatene = {
+		icon = per_butcher_black_sheep
+		position = 10
+		required_missions = {
+			yon_march_through_persia
+		}
+		provinces_to_highlight = {
+			region = caucasia_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = { 
+			caucasia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = { 
+			mesopotamia_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			arabia_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			mashriq_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+			anatolia_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	yon_gulf_of_iskandar = {
+		icon = mam_highway_empire
+		position = 11
+		required_missions = {
+			yon_usurp_atropatene
+		}
+		provinces_to_highlight = {
+		OR = {
+			region = mesopotamia_region
+			region = arabia_region
+			region = mashriq_region
+			region = anatolia_region
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = { 
+			mesopotamia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			arabia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			mashriq_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			anatolia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = { 
+			balkan_region = {
+				limit = {
+					NOT = { is_core = ROOT }
+					NOT = { is_permanent_claim = ROOT }
+				}
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	yon_odyssey = {
+		icon = mission_parthenon
+		position = 12
+		required_missions = {
+			yon_gulf_of_iskandar
+		}
+		provinces_to_highlight = {
+			region = balkan_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = { 
+			balkan_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		effect = { 
+			country_event_with_insight = {
+				id = yonaraja.9
+				insight_tooltip = YON_GLAZE_ALEXANDER_TT
+			}
+			add_country_modifier = {
+				name = "yon_homeland"
+				duration = -1
+			}
+		}
+	}
+
+	yon_heralding_heroism = {
+		icon = mission_unite_rajputana
+		position = 14
+		required_missions = { }
+		provinces_to_highlight = { }
+		trigger = {num_of_trusted_allies = 2 } 
+		effect = {
+			add_country_modifier = {
+				name = "yon_heroism_surge"
+				duration = 10950
+			}
+			add_prestige_or_monarch_power = { amount = 10 }
+		}
+	}
+
+	yon_call_of_champion = {
+		icon = mission_subdue_rajputana
+		position = 15
+		required_missions = {
+			yon_fostered_friendship yon_heralding_heroism
+		}
+		provinces_to_highlight = { }
+		trigger = { 
+			OR = {
+				num_of_battles = { amount = 50 }
+				custom_trigger_tooltip = {
+					tooltip = yon_won_against_great_power
+					any_country = {
+						is_great_power = yes
+						NOT = { #make you fight top tier
+							great_power_rank = 4
+						}
+						ROOT = {
+							has_won_war_against = {
+								who = PREV
+							}
+						}
+					}
+				}
+			}
+		}
+		effect = {
+			add_power_projection = {
+				type = 10_permanent_power_projection
+				amount = 10
+			}
+			add_country_modifier = {
+				name = "yon_call_of_champion" #dip bonus for war n stuff
+				duration = -1
+			}
+			change_mil = 1
+		}
+	}
+
+	yon_theseus_trustworthiness = {
+		icon = mission_embassy_to_the_west
+		position = 16
+		required_missions = {
+			yon_call_of_champion
+		}
+		provinces_to_highlight = { }
+		trigger = {num_of_trusted_allies = 4 } 
+		effect = {
+			country_event_with_insight = {
+				id = yonaraja.6 #land or navy bonus
+				insight_tooltip = YON_LAND_OR_NAVY_BONUS_TT
+			}
+			change_mil = 1
+		}
+	}
+}
