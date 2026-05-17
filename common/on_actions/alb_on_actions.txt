@@ -1863,3 +1863,34 @@ on_peace_actor = {
 		ayabani.59
 	}
 }
+
+
+on_core = { #ROOT - Province, #FROM - Country that gets the core
+	if = {
+		limit = {
+			FROM = {
+				has_government_attribute = restorer_of_nenekongo
+			}
+			region = horn_of_africa_region
+		}
+		FROM = {
+			add_legitimacy_or_mil_power = { amount = 5 }
+		}
+	}
+	if = {
+		limit = {
+			FROM = {
+				has_government_attribute = conqueror_of_nenekongo
+				OR = {
+					ruler_has_personality = conqueror_personality
+					ruler_has_personality = legendary_conqueror_personality
+				}
+			}
+		}
+		FROM = {
+			add_adm_power = 10
+			add_mil_power = 10
+			add_dip_power = 10
+		}
+	}
+}
