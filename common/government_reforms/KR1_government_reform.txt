@@ -1,8 +1,9 @@
 alb_korean_empire_reform = {
 	icon = "korean_monarchy"
 	allow_normal_conversion = yes
-	valid_for_nation_designer = no
-	nation_designer_cost = 0
+	allow_convert = no
+	valid_for_nation_designer = yes
+	nation_designer_cost = 100
 	potential = {
 		culture = jeju
 		has_reform = alb_korean_empire_reform
@@ -19,6 +20,7 @@ alb_korean_empire_reform = {
 alb_tamna_remnant_reform = {
 	icon = "chinese_soldier"
 	allow_normal_conversion = yes
+	allow_convert = no
 	valid_for_nation_designer = yes
 	nation_designer_cost = 100
 	potential = {
@@ -27,7 +29,6 @@ alb_tamna_remnant_reform = {
 			has_reform = alb_tamna_remnant_reform
 		}
 	}
-	locked_government_type
 	lock_level_when_selected = yes
 	modifiers = {
 		land_morale = 0.1
@@ -36,76 +37,65 @@ alb_tamna_remnant_reform = {
 	}
 }
 
-alb_first_tier_restoration_reform = {
-	icon = "korean_monarchy"
+alb_tamna_bluessolini_reform = {
+	icon = "manchu_warrior"
 	allow_normal_conversion = yes
-	valid_for_nation_designer = yes
+	allow_convert = yes
+	valid_for_nation_designer = no
 	nation_designer_cost = 100
 	potential = {
-		culture = jeju
-		tag = KR1
-		has_reform = alb_first_tier_restoration_reform
+		has_unlocked_government_reform = { government_reform = alb_tamna_bluessolini_reform }
 	}
-	locked_government_type
 	lock_level_when_selected = yes
+	has_term_election = no
 	modifiers = {
-		governing_capacity_modifier = -0.5
-		yearly_corruption = 0.05
-		global_autonomy = 0.05
-		stability_cost_to_declare_war = 1
+		country_military_power = 1
+		monthly_militarized_society = 0.05
+		yearly_army_professionalism = 0.03
+	}
+	government_abilities = {
+		militarization_mechanic
+	}
+	custom_attributes = {
+		generals_become_rulers = yes
+		locked_government_type = yes
+		enables_plutocratic_idea_group = yes
+		enables_aristocratic_idea_group = no
 	}
 }
 
-alb_second_tier_restoration_reform = {
-	icon = "korean_monarchy"
+alb_tamna_grandarmy_reform = {
+	icon = "soldiers_4"
 	allow_normal_conversion = yes
-	valid_for_nation_designer = yes
+	allow_convert = yes
+	valid_for_nation_designer = no
 	nation_designer_cost = 100
 	potential = {
-		culture = jeju
-		tag = KR1
-		has_reform = alb_second_tier_restoration_reform
+		has_unlocked_government_reform = { government_reform = alb_tamna_grandarmy_reform }
 	}
-	locked_government_type
 	lock_level_when_selected = yes
 	modifiers = {
-		governing_capacity_modifier = -0.5
-		global_autonomy = 0.05
-		stability_cost_to_declare_war = 1
+		global_manpower_modifier = 0.1
+		manpower_recovery_speed = 0.1
+		land_morale = 0.10
 	}
+
 }
 
-alb_third_tier_restoration_reform = {
-	icon = "korean_monarchy"
+alb_tamna_profarmy_reform = {
+	icon = "ashigaru"
 	allow_normal_conversion = yes
-	valid_for_nation_designer = yes
+	allow_convert = yes
+	valid_for_nation_designer = no
 	nation_designer_cost = 100
 	potential = {
-		culture = jeju
-		tag = KR1
-		has_reform = alb_third_tier_restoration_reform
+		has_unlocked_government_reform = { government_reform = alb_tamna_profarmy_reform }
 	}
-	locked_government_type
 	lock_level_when_selected = yes
 	modifiers = {
-		governing_capacity_modifier = -0.5
-		stability_cost_to_declare_war = 1
-	}
-}
-
-alb_fourth_tier_restoration_reform = {
-	icon = "korean_monarchy"
-	allow_normal_conversion = yes
-	valid_for_nation_designer = yes
-	nation_designer_cost = 100
-	potential = {
-		culture = jeju
-		tag = KR1
-		has_reform = alb_fourth_tier_restoration_reform
-	}
-	locked_government_type
-	lock_level_when_selected = yes
-	modifiers = {
-		governing_capacity_modifier = -0.5
+		discipline = 0.025
+		drill_gain_modifier = 0.05
+		drill_decay_modifier = -0.05
+		yearly_army_professionalism = 0.01
 	}
 }

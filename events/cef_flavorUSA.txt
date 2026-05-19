@@ -1,0 +1,131 @@
+namespace = cef_flavor_usa
+
+country_event = {
+	id = cef_flavor_usa.1
+	title = cef_flavor_usa.1.t
+	desc = cef_flavor_usa.1.d
+	picture = TRADEGOODS_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = cef_flavor_usa.1.a
+		custom_tooltip = cef_flavor_usa.1.tt
+		tooltip = {
+			add_province_modifier = {
+				name = cef_ea_slave_plantations
+				duration = -1
+			}
+		}
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						trade_goods = tobacco
+						trade_goods = cotton
+					}
+					region = southeast_america_region
+				}
+				add_province_modifier = {
+					name = cef_ea_slave_plantations
+					duration = -1
+				}
+			}
+			set_country_flag = cef_ea_accepted_slaves
+		}
+	}
+
+	option = {
+		name = cef_flavor_usa.1.b
+		custom_tooltip = cef_flavor_usa.1.tt
+		tooltip = {
+			add_province_modifier = {
+				name = cef_ea_insufficient_labor
+				duration = -1
+			}
+		}
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						trade_goods = tobacco
+						trade_goods = cotton
+					}
+					region = southeast_america_region
+				}
+				add_province_modifier = {
+					name = cef_ea_insufficient_labor
+					duration = -1
+				}
+			}
+			set_country_flag = cef_ea_rejected_slaves
+		}
+		add_prestige = 50
+		add_liberty_desire = 20
+	}
+}
+
+country_event = {
+	id = cef_flavor_usa.2
+	title = cef_flavor_usa.2.t
+	desc = cef_flavor_usa.2.d
+	picture = SHIP_SAILING_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = cef_flavor_usa.2.a
+		random_owned_province = {
+			limit = {
+				has_port = yes
+			}
+			change_trade_goods = naval_supplies
+			add_province_modifier = {
+				name = cef_ea_national_shipyard
+				duration = -1
+			}
+		}
+		add_country_modifier = {
+			name = cef_ea_shipyard_focus
+			duration = -1
+		}
+	}
+
+	option = {
+		name = cef_flavor_usa.2.b
+		add_country_modifier = {
+			name = cef_ea_warship_focus
+			duration = -1
+		}
+	}
+
+	option = {
+		name = cef_flavor_usa.2.c
+		add_country_modifier = {
+			name = cef_ea_trade_ship_focus
+			duration = -1
+		}
+	}
+}
+
+country_event = {
+	id = cef_flavor_usa.3
+	title = cef_flavor_usa.3.t
+	desc = cef_flavor_usa.3.d
+	picture = northamericagfx_DEATH_OF_HEIR_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = cef_flavor_usa.3.a
+		reduce_legitimacy_medium_effect = yes
+		reduce_estate_nobles_loyalty_effect = yes
+	}
+
+	option = {
+		name = cef_flavor_usa.3.b
+		add_country_modifier = {
+			name = cef_ea_bio_warfare
+			duration = 7300
+		}
+		custom_tooltip = cef_flavor_usa.3.tt
+	}
+}
+#HAVE NOT ADDED USA STUFF

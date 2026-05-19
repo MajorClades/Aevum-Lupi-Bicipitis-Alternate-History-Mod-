@@ -9,17 +9,29 @@ ganden_union_reform = {
 		}
 	}
 	trigger = {
-		NOT = {
-			total_development = 200
+		OR = {
+			owns = 4363
+			owns = 249
+			owns = 248
+			owns = 251
 		}
 	}
 	valid_for_nation_designer = yes
 	nation_designer_cost = 100
-
+	custom_attributes = {
+		has_ruler_election_ganden = yes #to avoid generic ruler election thing
+		has_itinerant_capital = yes
+	}
+	conditional = {
+		allow = {
+			has_dlc = "Common Sense"
+		}
+		has_parliament = yes
+	}
 	modifiers = {
-		development_cost_in_primary_culture = -0.15
+		development_cost_in_primary_culture = -0.05
 		global_autonomy = 0.05
-		vassal_income = 0.15
+		vassal_income = 0.2
 	}
 	ai = {
 		factor = 100
@@ -30,54 +42,58 @@ ganden_union_max_reform = {
 	icon = "crown"
 	allow_normal_conversion = no
 	potential = {
-		OR = {
-			tag = GA0
-			was_tag = GA0
-		}
+		has_country_flag = ganden_union_max_flag
 	}
 	trigger = {
-		total_development = 200
 	}
 	valid_for_nation_designer = yes
 	nation_designer_cost = 100
-
+	custom_attributes = {
+		has_ruler_election = yes
+		has_itinerant_capital = yes
+	}
+	conditional = {
+		allow = {
+			has_dlc = "Common Sense"
+		}
+		has_parliament = yes
+	}
 	modifiers = {
-		num_accepted_cultures = 2
-		development_cost = -0.15
-		global_autonomy = 0.05
-		vassal_income = 0.15
+		development_cost_in_primary_culture = -0.1
+		advisor_cost = -0.1
+		vassal_income = 0.25
 	}
 	ai = {
 		factor = 100
 	}
 }
 
-ganden_union_ultimate_reform = {
+geatland_kingdom_reform = {
 	icon = "crown"
 	allow_normal_conversion = no
 	potential = {
-		OR = {
-			tag = GA0
-			was_tag = GA0
-		}
+		has_country_flag = geatland_kingdom_flag
 	}
 	trigger = {
-		total_development = 1000
 	}
 	valid_for_nation_designer = yes
 	nation_designer_cost = 100
-
+	conditional = {
+		allow = {
+			has_dlc = "Common Sense"
+		}
+		has_parliament = yes
+	}
 	modifiers = {
-		num_accepted_cultures = 10
-		promote_culture_cost = -0.9
-		development_cost = -0.25
-		global_autonomy = 0.1
-		vassal_income = 0.33
+		max_absolutism = 20
+		min_autonomy_in_territories = -0.1
+		shock_damage = 0.1
 	}
 	ai = {
 		factor = 100
 	}
 }
+
 
 bards_of_baldr_reform = {
 	icon = "soldiers_5"

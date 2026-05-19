@@ -1,0 +1,244 @@
+namespace = yotvingia
+
+country_event = {
+    id = yotvingia.1
+    title = yotvingia.1.title
+    desc = yotvingia.1.desc
+    picture = TRIBUTE_TO_TATARS_eventPicture
+
+    is_triggered_only = yes
+    fire_only_once = yes
+
+    option = { #woke option
+        name = yotvingia.1.a
+        ai_chance = { factor = 40 }
+        custom_tooltip = YOTVINGIA_TT_1
+        hidden_effect = {
+            every_owned_province = {
+                limit = {
+                    OR = {
+                        culture_group = saxonic
+                        culture = elutsian
+                    }
+                }
+                add_unrest = -10
+                add_nationalism = -10
+            }
+        }
+        add_accepted_culture = saxonard
+        add_accepted_culture = balten_new
+        add_accepted_culture = elutsian
+    }
+    option = { #evil larp option
+        name = yotvingia.1.b
+        ai_chance = { factor = 50 }
+        set_country_flag = yot_reclaiming_old_sudovia 
+        custom_tooltip = YOTVINGIA_TT_2
+        set_capital = 260
+        hidden_effect = {
+            every_owned_province = {
+                limit = {
+                    culture_group = saxonic
+                }
+                add_unrest = 5
+                add_nationalism = 10
+            }
+        }
+        2960 = {
+            change_culture = saxonard
+        }
+    }
+    option = { #israeli option
+        name = yotvingia.1.c
+        ai_chance = { factor = 10 }
+        set_country_flag = yot_genocide_saxons
+        custom_tooltip = YOTVINGIA_TT_3
+        set_capital = 257
+        hidden_effect = {
+            every_owned_province = {
+                limit = {
+                    OR = {
+                        culture_group = saxonic
+                        culture = elutsian
+                    }
+                }
+                add_unrest = 10
+                add_nationalism = 15
+            }
+        }
+    }
+}
+
+country_event = {
+    id = yotvingia.2
+    title = yotvingia.2.title
+    desc = yotvingia.2.desc
+    picture = REFUGEES_ESCAPING_eventPicture
+    trigger = {
+        tag = LT7
+        has_country_flag = yot_genocide_saxons 
+        any_owned_province = {
+            OR = {
+                culture = saxonard
+                culture = balten_new
+                culture = elutsian
+            }
+        }
+    }
+    mean_time_to_happen = {
+        months = 60
+    }
+    option = {
+        name = yotvingia.2.a
+        random_owned_province = {
+                limit = {
+                    OR = {
+                        culture = saxonard
+                        culture = balten_new
+                        culture = elutsian
+                    }
+                }
+                if ={
+                    limit = {
+                        OR = {
+                            culture = saxonard
+                            AND = {
+                                culture = balten_new
+                                area = mazovia_area
+                            }
+                        }
+                    }
+                    change_culture = yotvingian    
+                }
+                else_if = {
+                    limit = {
+                        culture = balten_new
+                        NOT = {
+                            area = mazovia_area
+                        }
+                    }
+                    change_culture = curonian
+                }
+                else_if = {
+                    limit = {
+                        culture = elutsian
+                    }
+                    change_culture = balt_elutsian
+                } 
+                add_base_tax = -1
+                add_base_production = -1
+                add_base_manpower = -1
+                add_devastation = 70
+        }
+        random_owned_province = {
+                limit = {
+                    OR = {
+                        culture = saxonard
+                        culture = balten_new
+                        culture = elutsian
+                    }
+                }
+                if ={
+                    limit = {
+                        OR = {
+                            culture = saxonard
+                            AND = {
+                                culture = balten_new
+                                area = mazovia_area
+                            }
+                        }
+                    }
+                    change_culture = yotvingian    
+                }
+                else_if = {
+                    limit = {
+                        culture = balten_new
+                        NOT = {
+                            area = mazovia_area
+                        }
+                    }
+                    change_culture = curonian
+                }
+                else_if = {
+                    limit = {
+                        culture = elutsian
+                    }
+                    change_culture = balt_elutsian
+                } 
+                add_base_tax = -1
+                add_base_production = -1
+                add_base_manpower = -1
+                add_devastation = 70
+        }
+    }
+}
+
+country_event = {
+    id = yotvingia.3
+    title = yotvingia.3.title
+    desc = yotvingia.3.desc
+    picture = PEASANTS_ON_STEPPES_eventPicture
+
+    trigger = {
+        tag = LT7
+        has_country_flag = yot_reclaiming_old_sudovia 
+        any_owned_province = {
+            OR = {
+                culture = saxonard
+                culture = balten_new
+            }
+        }
+    }
+    mean_time_to_happen = {
+        months = 60
+    }
+    option = {
+        name = yotvingia.3.a
+        random_owned_province = {
+            limit = {
+                OR = {
+                    AND = {
+                        culture = saxonard
+                        NOT = {
+                            area = malopolska_area
+                            area = central_poland_area
+                        }
+                    }
+                    AND = {
+                        culture = balten_new
+                        area = mazovia_area
+                        NOT = {
+                            area = east_prussia_area
+                        }
+                    }
+                }
+            }
+            change_culture = yotvingian
+            add_base_manpower = -1
+            add_devastation = 10    
+        }
+        random_owned_province = {
+            limit = {
+                OR = {
+                    AND = {
+                        culture = saxonard
+                        NOT = {
+                            area = malopolska_area
+                            area = central_poland_area
+                        }
+                    }
+                    AND = {
+                        culture = balten_new
+                        area = mazovia_area
+                        NOT = {
+                            area = east_prussia_area
+                        }
+                    }
+                }
+            }
+            change_culture = yotvingian
+            add_base_manpower = -1
+            add_devastation = 10    
+        }
+    }
+}

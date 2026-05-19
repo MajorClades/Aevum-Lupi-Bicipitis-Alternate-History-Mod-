@@ -1,0 +1,1212 @@
+cef_la_1_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		
+		OR = {
+			is_former_colonial_nation = yes
+			is_colonial_nation = yes
+			tag = LOU
+			tag = ILI
+		}
+		capital_scope = {
+			colonial_region = colonial_louisiana
+			is_core = ROOT
+		}
+	}
+
+	cef_la_expand_colony = {
+		icon = settle_north_america
+		position = 1
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 8
+				is_city = yes
+			}
+		} 
+
+		effect = {
+			add_country_modifier = {
+				name = cef_la_growing_colony
+				duration = 3650
+			}
+		} 
+	}
+
+	cef_la_settle_mississippi = {
+		icon = mission_se_along_the_river
+		position = 3
+		required_missions = {
+			cef_la_expand_colony
+			cef_la_explore_mississippi
+		}
+		provinces_to_highlight = {
+			province_group = mississippi_river_group
+			NOT = {
+				owned_by = ROOT
+			}
+		} 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 6
+				province_group = mississippi_river_group
+			}
+		} 
+
+		effect = {
+			mississippi_river_group = {
+				limit = {
+					OR = {
+						is_empty = yes
+						owner = {
+							can_migrate = yes
+						}
+					}
+				}
+				add_permanent_province_modifier = {
+					name = cef_la_river_settlements
+					duration = -1
+				}
+			}
+		} 
+	}
+
+	cef_la_found_st_louis = {
+		icon = mission_hanseatic_city
+		position = 4
+		required_missions = { cef_la_settle_mississippi } 
+		provinces_to_highlight = {
+			province_id = 900
+		} 
+
+		trigger = {
+			900 = {
+				owned_by = ROOT
+				is_city = yes
+				development = 15
+				num_of_buildings_in_province = 2
+			}
+		} 
+
+		effect = {
+			900 = {
+				change_province_name = "St. Louis"
+				rename_capital = "St. Louis"
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+			}
+		} 
+	}
+}
+
+cef_la_2_1 = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		
+		OR = {
+			is_former_colonial_nation = yes
+			is_colonial_nation = yes
+			tag = LOU
+			tag = ILI
+		}
+		capital_scope = {
+			colonial_region = colonial_louisiana
+			is_core = ROOT
+		}
+	}
+
+	cef_la_explore_mississippi = {
+		icon = mission_exploration
+		position = 2
+		required_missions = { cef_la_new_orleans } 
+		provinces_to_highlight = {
+			province_group = mississippi_river_group
+		} 
+
+		trigger = {
+			calc_true_if = {
+				amount = 15
+				mississippi_river_group = {
+					type = all
+					has_discovered = ROOT
+				}
+				desc = cef_la_explore_mississippi_tt
+			}
+		} 
+
+		effect = {
+			add_country_modifier = {
+				name = cef_la_colonial_enthusiasm
+				duration = 3650
+			}
+
+			create_conquistador = {
+				tradition = 60
+			}
+		} 
+	}
+
+	cef_la_reach_great_lakes = {
+		icon = mission_ne_great_lakes_conquest
+		position = 3
+		required_missions = { cef_la_explore_mississippi } 
+		provinces_to_highlight = {
+			province_id = 4903
+		} 
+
+		trigger = {
+			4903 = {
+				has_discovered = ROOT
+			}
+		} 
+
+		effect = {
+			country_event = {
+				id = cef_uca_flav.5
+			}
+			add_permanent_claim = 4903
+		}
+	}
+
+	cef_la_sweeping_claims = {
+		icon = mission_unite_home_region
+		position = 4
+		required_missions = {
+			cef_la_settle_mississippi
+			cef_la_reach_great_lakes
+		}
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 25
+				is_city = yes
+			}
+		} 
+
+		effect = {
+			add_prestige_or_monarch_power = {
+				amount = 25
+			}
+			
+			custom_tooltip = cef_la_claims_on_louisiana
+			colonial_louisiana = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	cef_la_find_supporters = {
+		icon = mission_alliances
+		position = 5
+
+		trigger = {
+			colonial_parent = {
+				any_rival_country = {
+					has_opinion = {
+						who = ROOT
+						value = 150
+					}
+				}
+			}
+		} 
+
+		effect = {
+			custom_tooltip = cef_la_find_supporters_tt
+			hidden_effect = {
+				colonial_parent = {
+					every_rival_country = {
+						limit = {
+							has_opinion = {
+								who = ROOT
+								value = 150
+							}
+						}
+						support_independence_of = ROOT
+					}
+				}
+			}
+		} 
+	}
+}
+
+cef_la_3_1 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		
+		OR = {
+			is_former_colonial_nation = yes
+			is_colonial_nation = yes
+			tag = LOU
+			tag = ILI
+		}
+		capital_scope = {
+			colonial_region = colonial_louisiana
+			is_core = ROOT
+		}
+	}
+
+	cef_la_new_orleans = {
+		icon = renaissance_city
+		position = 1
+		provinces_to_highlight = {
+			province_id = 893
+		} 
+
+		trigger = {
+			893 = {
+				owned_by = ROOT
+				is_city = yes
+				development = 12
+			}
+		} 
+
+		effect = {
+			set_capital = 893
+			893 = {
+				add_province_modifier = {
+					name = cef_la_great_shipyard
+					duration = -1
+				}
+				add_base_tax = 2
+				add_base_production = 2
+				add_base_manpower = 2
+			}
+		} 
+	}
+
+	cef_la_build_navy = {
+		icon = mission_galleys_in_port
+		position = 2
+		required_missions = { cef_la_new_orleans } 
+
+		trigger = {
+			OR = {
+				navy_size = 20
+				navy_size_percentage = 1.5
+			}
+		} 
+
+		effect = {
+			add_navy_tradition = 20
+			create_admiral = {
+				tradition = 100
+			}
+		} 
+	}
+
+	cef_la_mississippi_shipping = {
+		icon = mission_launch_a_flagship
+		position = 3
+		required_missions = {
+			cef_la_build_navy
+			cef_la_explore_mississippi
+		}
+		provinces_to_highlight = {
+			province_id = 893
+		} 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 12
+				province_group = mississippi_river_group
+			}
+			893 = {
+				light_ships_in_province = 15
+			}
+		} 
+
+		effect = {
+			mississippi_river_group = {
+				add_permanent_province_modifier = {
+					name = cef_la_mississippi_shipping_modifier
+					duration = -1
+				}
+			}
+		} 
+	}
+
+	cef_la_uncontainable_growth = {
+		icon = mission_conquer_50_development
+		position = 5
+		required_missions = {
+			cef_la_sweeping_claims
+			cef_la_develop_riverside_cities
+		}
+
+		trigger = {
+			OR = {
+				total_development = 300
+				custom_trigger_tooltip = {
+					tooltip = cef_la_33percent_dev
+					development_of_overlord_fraction = 0.33
+				}
+			}
+			monthly_income = 30
+		} 
+
+		effect = {
+			add_liberty_desire = 50
+			add_mil_power = 150
+		} 
+	}
+
+	cef_la_our_time_is_now = {
+		icon = mission_cannons_firing
+		position = 6
+		required_missions = {
+			cef_la_uncontainable_growth
+			cef_la_find_supporters
+			cef_la_prepare_the_army
+		}
+
+		trigger = {
+			OR = {
+				liberty_desire = 50
+				is_subject = no
+			}
+		} 
+
+		effect = {
+			custom_tooltip = cef_la_if_subject
+			tooltip = {
+				declare_war_with_cb = {
+					casus_belli = cb_colonial_independence_war
+					who = overlord
+				}
+				add_country_modifier = {
+					name = cef_la_our_time_is_now_modifier
+					duration = 1825
+				}
+			}
+
+			hidden_effect = {
+				if = {
+					limit = {
+						is_subject = yes
+					}
+					declare_war_with_cb = {
+						casus_belli = cb_colonial_independence_war
+						who = overlord
+					}
+					add_country_modifier = {
+						name = cef_la_our_time_is_now_modifier
+						duration = 1825
+					}
+				}
+			}
+		}
+	}
+}
+
+cef_la_4_1 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		
+		OR = {
+			is_former_colonial_nation = yes
+			is_colonial_nation = yes
+			tag = LOU
+			tag = ILI
+		}
+		capital_scope = {
+			colonial_region = colonial_louisiana
+			is_core = ROOT
+		}
+	}
+
+	cef_la_native_diplomacy = {
+		icon = mission_iroquois_the_great_peacemaker
+		position = 2
+
+		trigger = {
+			any_ally = {
+				technology_group = north_american
+				has_opinion = {
+					who = ROOT
+					value = 150
+				}
+			}
+		} 
+
+		effect = {
+			1507 = {
+				add_trade_modifier = {
+					who = ROOT
+					duration = 7300
+					power = 25
+					key = cef_la_native_trading
+				}
+			}
+		} 
+	}
+
+	cef_la_develop_riverside_cities = {
+		icon = mission_colonial
+		position = 4
+		required_missions = {
+			cef_la_mississippi_shipping
+			cef_la_mississippi_trade
+		}
+		provinces_to_highlight = {
+			province_group = mississippi_river_group
+			NOT = {
+				AND = {
+					development = 15
+					has_trade_building_trigger = yes
+				}
+			}
+		} 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 6
+				province_group = mississippi_river_group
+				development = 15
+				has_trade_building_trigger = yes
+			}
+		}
+
+		effect = {
+			custom_tooltip = cef_la_develop_riverside_cities_tt
+			tooltip = {
+				add_province_modifier = {
+					name = cef_la_mississippi_cities_modifier
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				mississippi_river_group = {
+					remove_province_modifier = cef_la_mississippi_shipping_modifier
+					add_province_modifier = {
+						name = cef_la_mississippi_cities_modifier
+						duration = -1
+					}
+				}
+			}
+		} 
+	}
+
+	cef_la_prepare_the_army = {
+		icon = mission_assemble_an_army
+		position = 5
+		required_missions = { cef_la_develop_riverside_cities } 
+
+		trigger = {
+			army_size = 40
+			manpower = 40
+			NOT = {
+				colonial_parent = {
+					tech_difference = 1
+				}
+			}
+		} 
+
+		effect = {
+			add_army_professionalism = 0.1
+			add_manpower = 10
+		} 
+	}
+}
+
+cef_la_5_1 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		
+		OR = {
+			is_former_colonial_nation = yes
+			is_colonial_nation = yes
+			tag = LOU
+			tag = ILI
+		}
+		capital_scope = {
+			colonial_region = colonial_louisiana
+			is_core = ROOT
+		}
+	}
+
+	cef_la_fur_trading_post = {
+		icon = mission_control_fur_trade
+		position = 1
+		provinces_to_highlight = {
+			owned_by = ROOT
+			trade_goods = fur
+		} 
+
+		trigger = {
+			any_owned_province = {
+				trade_goods = fur
+				base_production = 6
+				custom_trigger_tooltip = {
+					tooltip = cef_la_province_trade_power_5
+					province_trade_power = 5
+				}
+			}
+		} 
+
+		effect = {
+			country_event = {
+				id = cef_la_events.3
+			}
+			custom_tooltip = empty_line_tt
+			custom_tooltip = cef_la_one_province_meeting_reqs
+			tooltip = {
+				add_base_production = 3
+				upgrade_production_building = yes
+			}
+			hidden_effect = {
+				random_owned_province = {
+					limit = {
+						trade_goods = fur
+						base_production = 6
+						province_trade_power = 5
+					}
+					add_base_production = 3
+					upgrade_production_building = yes
+				}
+			}
+		} 
+	}
+
+	cef_la_grow_the_economy = {
+		icon = dominant_economy
+		position = 2
+		required_missions = { cef_la_fur_trading_post } 
+
+		trigger = {
+			monthly_income = 10
+		} 
+
+		effect = {
+			add_years_of_income = 2
+			add_adm_power = 100
+		} 
+	}
+
+	cef_la_mississippi_trade = {
+		icon = mission_dominate_home_trade_node
+		position = 3
+		required_missions = {
+			cef_la_grow_the_economy
+			cef_la_native_diplomacy
+		}
+		provinces_to_highlight = {
+			province_id = 1507
+		} 
+
+		trigger = {
+			1507 = {
+				trade_share = {
+					country = ROOT
+					share = 40
+				}
+			}
+			monthly_trade_income = 5
+		}
+
+		effect = {
+			1507 = {
+				add_trade_node_income = 12
+			}
+			add_dip_power = 100
+		}
+	}
+}
+
+cef_la_1_2 = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = LOU
+			tag = ILI
+		}
+	}
+
+	cef_la_found_chicago = {
+		icon = mission_eastern_european_city
+		position = 7
+		required_missions = { cef_la_found_st_louis } 
+		provinces_to_highlight = {  
+			province_id = 4903
+			NOT = {
+				AND = {
+					owned_by = ROOT
+					num_of_buildings_in_province = 4
+					development = 25
+				}
+			}
+		} 
+
+		trigger = {  
+			4903 = {
+				owned_by = ROOT
+			}
+			4903 = {
+				num_of_buildings_in_province = 4
+			}
+			4903 = {
+				development = 25
+			}
+		} 
+
+		effect = {  
+			4903 = {
+				change_province_name = "Chicago"
+				rename_capital = "Chicago"
+				add_center_of_trade_lvl_or_ducats = yes
+				add_base_manpower = 2
+				add_base_production = 2
+				add_base_tax = 2
+			}
+		} 
+	}
+
+	cef_la_secure_great_lakes = {
+		icon = mission_ne_great_lakes_conquest
+		position = 8
+		required_missions = { cef_la_found_chicago } 
+		provinces_to_highlight = {  
+			region = great_lakes_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			great_lakes_region = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {  
+			add_adm_power = 300
+			northeast_america_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+}
+
+cef_la_2_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = LOU
+			tag = ILI
+		}
+	}
+
+	cef_la_import_grain = {
+		icon = mal_trade_with_europeans
+		position = 6
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			OR = {
+				any_ally = {
+					capital_scope = {
+						continent = europe
+					}
+					has_opinion = {
+						who = ROOT
+						value = 180
+					}
+					any_owned_province = {
+						trade_goods = grain
+					}
+				}
+				treasury = 750
+			}
+		} 
+
+		effect = {  
+			custom_tooltip = cef_la_get_10_grain_provinces
+			tooltip = {
+				change_trade_goods = grain
+				add_base_production = 1
+			}
+			hidden_effect = {
+				for = {
+					amount = 10
+					effect = "
+					random_owned_province = {
+						limit = {
+							colonial_region = colonial_louisiana
+						}
+						change_trade_goods = grain
+						add_base_production = 1
+					}
+					"
+				}
+			}
+		} 
+	}
+
+	cef_la_american_bread_basket = {
+		icon = mission_pol_breadbasket_europe
+		position = 8
+		required_missions = {
+			cef_la_found_chicago
+			cef_la_conquer_great_plains
+			cef_la_import_grain
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			num_of_owned_provinces_with = {
+				value = 10
+				trade_goods = grain
+				base_production = 8
+				has_production_building_trigger = yes
+				has_manufactory_trigger = yes
+			}
+		} 
+
+		effect = {  
+			country_event = {
+				id = cef_la_events.1
+			}
+			custom_tooltip = cef_la_ten_province_meeting_reqs
+			tooltip = {
+				add_or_upgrade_production_building = yes
+				custom_tooltip = empty_line_tt
+				add_province_modifier = {
+					name = cef_la_america_breadbasket
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				for = {
+					amount = 10
+					effect = "
+					random_owned_province = {
+						limit = {
+							trade_goods = grain
+							base_production = 8
+							has_production_building_trigger = yes
+							has_manufactory_trigger = yes
+						}
+						add_or_upgrade_production_building = yes
+						add_province_modifier = {
+							name = cef_la_america_breadbasket
+							duration = -1
+						}
+					}
+					"
+				}
+			}
+		} 
+	}
+
+	cef_la_reach_atlantic = {
+		icon = mission_settlers_north_america
+		position = 9
+		required_missions = { cef_la_secure_great_lakes } 
+		provinces_to_highlight = {  
+			region = northeast_america_region
+			has_port = yes
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 5
+				has_port = yes
+				region = northeast_america_region
+			}
+		} 
+
+		effect = { 
+			add_adm_power = 250 
+			southeast_america_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+}
+
+cef_la_3_2 = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = LOU
+			tag = ILI
+		}
+	}
+
+	cef_la_conquer_great_plains = {
+		icon = mission_conquer_5_states
+		position = 7
+		provinces_to_highlight = {  
+			region = great_plains_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = { 
+			great_plains_region = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = {  
+			add_country_modifier = {
+				name = cef_la_great_plains_control
+				duration = -1
+			}
+			snake_river_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	cef_la_rocky_mountains = {
+		icon = mission_fortify_rajputana
+		position = 9
+		required_missions = {
+			cef_la_conquer_great_plains
+			cef_la_expand_the_military
+		}
+		provinces_to_highlight = {  
+			area = snake_river_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			snake_river_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			2020 = {
+				province_has_current_tech_fort_trigger = yes
+			}
+		} 
+
+		effect = {  
+			cascadia_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	cef_la_american_hegemon = {
+		icon = mission_ruler_of_north_america
+		position = 10
+		required_missions = {
+			cef_la_reach_atlantic
+			cef_la_rocky_mountains
+			cef_la_push_into_texas
+		}
+		provinces_to_highlight = {  
+			any_country = {
+				capital_scope = {
+					OR = {
+						continent = north_america
+						continent = south_america
+					}
+				}
+				OR = {
+					monthly_income = ROOT
+					army_balance = {
+						who = ROOT
+						value = 1
+					}
+					total_development = ROOT
+				}
+			}
+		} 
+
+		trigger = {  
+			OR = {
+				is_great_power = yes
+				total_development = 1000
+			}
+			num_of_owned_provinces_with = {
+				value = 100
+				continent = north_america
+			}
+			custom_trigger_tooltip = {
+				tooltip = cef_la_no_country_better_than_us_lol
+				NOT = {
+					any_country = {
+						capital_scope = {
+							OR = {
+								continent = north_america
+								continent = south_america
+							}
+						}
+						OR = {
+							monthly_income = ROOT
+							army_balance = {
+								who = ROOT
+								value = 1
+							}
+							total_development = ROOT
+						}
+					}
+				}
+			}
+		} 
+
+		effect = {  
+			add_power_projection = {
+				type = 25_permanent_power_projection
+				amount = 25
+			}
+			add_country_modifier = {
+				name = cef_ea_american_empire
+				duration = -1
+			}
+		} 
+	}
+}
+
+cef_la_4_2 = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = LOU
+			tag = ILI
+		}
+	}
+
+	cef_la_expand_the_military = {
+		icon = army_reforms
+		position = 8
+		required_missions = { cef_la_prepare_the_army } 
+		provinces_to_highlight = {  } 
+
+		trigger = {  
+			max_manpower = 100
+			army_size = 75
+			army_professionalism = 0.25
+		} 
+
+		effect = {  
+			add_country_modifier = {
+				name = cef_la_grand_army
+				duration = 9125
+			}
+			add_mil_power = 250
+			texas_plains_area = {
+				add_permanent_claim = ROOT
+			}
+			texas_area = {
+				add_permanent_claim = ROOT
+			}
+			coastal_prarie_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+
+	cef_la_push_into_texas = {
+		icon = mission_steppe_warriors
+		position = 9
+		required_missions = { cef_la_expand_the_military } 
+		provinces_to_highlight = {  
+			OR = {
+				area = texas_area
+				area = texas_plains_area
+				area = coastal_prarie_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {  
+			texas_plains_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			texas_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			coastal_prarie_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
+
+		effect = { 
+			add_adm_power = 250 
+			rio_grande_region = {
+				add_permanent_claim = ROOT
+			}
+		} 
+	}
+}
+
+cef_la_5_2 = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { 
+		OR = {
+			tag = LOU
+			tag = ILI
+		}
+	}
+
+	cef_la_secure_mississippi = {
+		icon = mission_build_up_to_force_limit
+		position = 5
+		required_missions = {
+			cef_la_develop_riverside_cities
+			cef_la_mississippi_trade
+		}
+		provinces_to_highlight = {  
+			province_group = mississippi_river_group
+			NOT = {
+				owned_by = ROOT
+			}
+		} 
+
+		trigger = {  
+			mississippi_river_group = {
+				owned_by = ROOT
+				type = all
+			}
+		} 
+
+		effect = {  
+			custom_tooltip = cef_la_develop_riverside_cities_tt
+			tooltip = {
+				add_province_modifier = {
+					name = cef_la_mississippi_cities_2_modifier
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				mississippi_river_group = {
+					remove_province_modifier = cef_la_mississippi_cities_modifier
+					add_province_modifier = {
+						name = cef_la_mississippi_cities_2_modifier
+						duration = -1
+					}
+				}
+			}
+		} 
+	}
+
+	cef_la_dominate_trade = {
+		icon = mississippi_company
+		position = 6
+		required_missions = { cef_la_secure_mississippi } 
+		provinces_to_highlight = {  
+			province_id = 1507
+		} 
+
+		trigger = {  
+			1507 = {
+				is_strongest_trade_power = ROOT
+				trade_share = {
+					country = ROOT
+					share = 80
+				}
+			}
+		} 
+
+		effect = {  
+			custom_tooltip = cef_la_develop_riverside_cities_tt
+			tooltip = {
+				add_province_modifier = {
+					name = cef_la_mississippi_cities_3_modifier
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				mississippi_river_group = {
+					remove_province_modifier = cef_la_mississippi_cities_2_modifier
+					add_province_modifier = {
+						name = cef_la_mississippi_cities_3_modifier
+						duration = -1
+					}
+				}
+			}
+		} 
+	}
+
+	cef_la_urbanise_mississippi = {
+		icon = promote_urbanization
+		position = 7
+		required_missions = { cef_la_dominate_trade } 
+		provinces_to_highlight = {  
+			province_group = mississippi_river_group
+			owned_by = ROOT
+			NOT = {
+				AND = {
+					development = 30
+					num_of_buildings_in_province = 4
+				}
+			}
+		} 
+
+		trigger = {  
+			num_of_owned_provinces_with = {
+				value = 10
+				province_group = mississippi_river_group
+				development = 30
+				num_of_buildings_in_province = 4
+			}
+		} 
+
+		effect = {  
+			custom_tooltip = cef_la_develop_riverside_cities_tt
+			tooltip = {
+				add_province_modifier = {
+					name = cef_la_mississippi_cities_4_modifier
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				mississippi_river_group = {
+					remove_province_modifier = cef_la_mississippi_cities_3_modifier
+					add_province_modifier = {
+						name = cef_la_mississippi_cities_4_modifier
+						duration = -1
+					}
+				}
+			}
+		} 
+	}
+
+}

@@ -34,6 +34,11 @@ country_event = {
 		NOT = {
 			has_country_flag = alb_revolted_from_soxony_flag
 		}
+		NOT = {
+			any_country = {
+				has_country_flag = alb_currently_revolted_from_soxony_flag
+			}
+		}
 		if= {
 			limit = {
 				ai = yes
@@ -47,6 +52,7 @@ country_event = {
 		hidden_effect = {
 			save_global_event_target_as = sox_rebelling_vassal_target
 			set_country_flag = alb_revolted_from_soxony_flag
+			set_country_flag = alb_currently_revolted_from_soxony_flag
 		}
 	}
 
@@ -277,31 +283,25 @@ country_event = {
 	option = {
 		name = soxony.7a
 		change_country_color = {
-			country = ROM
+			color = { 128  0  0 }
 		}
 	}
 	option = {
 		name = soxony.7b
 		change_country_color = {
-			country = SO0
-		}
-	}
-	option = {
-		name = soxony.7c
-		change_country_color = {
-			country = MO0
+			color = { 216 140 74 }
 		}
 	}
 	option = {
 		name = soxony.7d
 		change_country_color = {
-			country = SPA
+			color = { 231  181  12 }
 		}
 	}
 	option = {
 		name = soxony.7e
 		change_country_color = {
-			country = BYZ
+			color = { 149 45 102 }
 		}
 	}
 	option = {
@@ -704,6 +704,12 @@ country_event = {
 		}
 		add_treasury = 100
 	}
+	after = {
+		event_target:sox_rebelling_vassal_target = {
+			clr_country_flag = alb_currently_revolted_from_soxony_flag
+		}
+		clear_global_event_target = sox_rebelling_vassal_target
+	}
 }
 
 country_event = {
@@ -766,6 +772,9 @@ country_event = {
 		}
 	}
 	after = {
+		event_target:sox_rebelling_vassal_target = {
+			clr_country_flag = alb_currently_revolted_from_soxony_flag
+		}
 		clear_global_event_target = sox_rebelling_vassal_target
 	}
 }

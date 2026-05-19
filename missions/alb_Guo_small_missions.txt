@@ -1,0 +1,528 @@
+Guo_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = GU9 } 
+
+	guo_old_vassals = {
+		icon = mission_pol_raise_noble_host
+		position = 3
+		required_missions = { guo_dardarian_command } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			has_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = 25
+			}
+			diplomat = 2
+			is_at_war = no
+		}
+
+		effect = {
+			custom_tooltip = GUO_TT_6
+			SV0 = { country_event = { id = guo_smal.6 }  } 
+			CT0 = { country_event = { id = guo_smal.6 }  } 
+			AT0 = { country_event = { id = guo_smal.6 }  } 
+			CT1 = { country_event = { id = guo_smal.6 }  } 
+		}
+	}
+
+	guo_break_valtea = {
+		icon = mission_impaled_soldies
+		position = 4
+		required_missions = { guo_old_dominions } 
+		provinces_to_highlight = {
+			region = baltic_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			OR = {
+				num_of_provinces_owned_or_owned_by_subjects_with = {
+					value = 20
+					region = baltic_region
+				}
+				has_spy_network_in = {
+					who = LT0
+					value = 70
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "guo_underwar"
+				duration = -1
+			}
+			baltic_region = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	guo_destroy_valtea = {
+		icon = mission_russian_patriarchatee
+		position = 5
+		required_missions = { guo_break_valtea } 
+		provinces_to_highlight = {
+			region = baltic_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			baltic_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			change_government_reform_progress = 50
+			set_country_flag = guo_unlocked_gov_flag
+			custom_tooltip = "Unlock the following government reforms,"
+			tooltip = {
+				add_government_reform = valtean_state_security_reform
+				custom_tooltip = empty_line_tt
+				add_government_reform = council_system_reform
+			}
+		}
+	}
+}
+Guo_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = GU9 } 
+
+	guo_dardarian_command = {
+		icon = mission_noble_tribes
+		position = 2
+		required_missions = { guo_legacy_of_dragons } 
+		provinces_to_highlight = { is_capital_of = DR0 } 
+
+		trigger = {
+			DR0 = {
+				OR = {
+					exists = no
+					has_opinion = {
+						who = ROOT
+						value = 190
+					}
+					has_been_insulted_by_root = yes
+				}
+			}
+		}
+
+		effect = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = GUO_TT_2a
+				first_limit = " DR0 = { has_opinion = { who = ROOT value = 190 } }"
+				first_effect = "
+					inherit = DR0
+					DR0 = {
+						random_core_province = {
+							spawn_rebels = {
+								size = 2
+								type = nationalist_rebels
+							}
+						}
+					}"
+				second_custom_tooltip = GUO_TT_2b
+				second_limit = "DR0 = {	OR = { exists = no has_been_insulted_by_root = yes } }"
+				second_effect = "
+					DR0 = {
+						every_core_province = {
+							add_core = GU9
+						}
+					}
+				"
+			}
+		}
+	}
+
+	guo_old_dominions = {
+		icon = mission_king_of_eastern_europe
+		position = 3
+		required_missions = { guo_dardarian_command } 
+		provinces_to_highlight = {
+			OR = {
+				region = russia_region
+				region = ruthenia_region
+				region = ural_region
+				region = baltic_region
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 15
+				OR = {
+					region = russia_region
+					region = ruthenia_region
+					region = ural_region
+					region = baltic_region
+				}
+			}
+		}
+
+		effect = {
+			add_government_reform = scales_of_dragon_reform
+			custom_tooltip = empty_line_tt
+			add_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = 15
+			}
+			custom_tooltip = empty_line_tt
+			ruthenia_region = { add_permanent_claim = ROOT } 
+			crimea_region = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	guo_turan_turan = {
+		icon = the_russian_campaign
+		position = 5
+		required_missions = { guo_home_base } 
+		provinces_to_highlight = {
+			region = russia_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 42
+				region = russia_region
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "guo_turan_owned"
+				duration = 10950
+			}
+		}
+	}
+}
+Guo_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = GU9 } 
+
+	guo_legacy_of_dragons = {
+		icon = mission_guo_symbol
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = { army_size_percentage = 1 } 
+
+		effect = {
+			pripyat_area = { add_permanent_claim = ROOT } 
+			country_event = { id = guo_smal.4 } 
+		}
+	}
+
+	guo_the_capital = {
+		icon = public_works
+		position = 2
+		required_missions = { guo_legacy_of_dragons } 
+		provinces_to_highlight = {
+			area = pripyat_area
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			pripyat_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			pripyat_area = { change_culture = xichenger } 
+			1941 = { change_province_name = "Nanmen" } 
+			278 = { change_province_name = "Beimen" } 
+			4982 = { change_province_name = "Ximen" } 
+			4545 = { change_province_name = "Dongmen" } 
+		}
+	}
+
+	guo_home_army = {
+		icon = form_the_swiss_guard
+		position = 3
+		required_missions = { guo_the_capital } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			has_manpower_building_trigger = no
+		}
+
+		trigger = {
+			280 = {
+				has_great_project = {
+					type = sie_council_quarter
+					tier = 2
+				}
+				has_manpower_building_trigger = yes
+			}
+			num_of_owned_provinces_with = {
+				value = 20
+				has_manpower_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_yearly_manpower = 1
+			280 = {
+				add_great_project_tier = {
+					type = sie_council_quarter
+					tier = 1
+				}
+			}
+		}
+	}
+
+	guo_home_base = {
+		icon = mission_european_politics
+		position = 4
+		required_missions = { guo_old_dominions } 
+		provinces_to_highlight = {
+			region = ruthenia_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			ruthenia_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			ruthenia_region = {
+				add_permanent_province_modifier = {
+					name = "guo_conqueror_again"
+					duration = 10950
+				}
+			}
+			ural_region = { add_permanent_claim = ROOT } 
+			russia_region = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	guo_guo_empire = {
+		icon = mission_hong_guo
+		position = 6
+		required_missions = { guo_home_base } 
+		provinces_to_highlight = {
+			OR = {
+				region = russia_region
+				region = ruthenia_region
+				region = ural_region
+				region = baltic_region
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 75
+				OR = {
+					region = russia_region
+					region = ruthenia_region
+					region = ural_region
+					region = baltic_region
+				}
+			}
+		}
+
+		effect = { add_government_reform = ascendant_dragon_reform } 
+	}
+}
+Guo_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = GU9 } 
+
+	guo_war_masters = {
+		icon = mission_hundred_years_war
+		position = 2
+		required_missions = { guo_legacy_of_dragons } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			any_army = {
+				is_ruler_commanding_unit = yes
+				location = {
+					is_capital = yes
+					owner = {
+						NOT = {
+							war_score_against = {
+								who = ROOT
+								value = -50
+							}
+						}
+					}
+				}
+			}
+		}
+
+		effect = {
+			custom_tooltip = GUO_TT_3
+			set_country_flag = guo_hong_reason_for_war_flag
+		}
+	}
+
+	guo_new_wars = {
+		icon = mission_cannons_firing
+		position = 3
+		required_missions = { guo_war_masters } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			check_variable = {
+				which = guo_battle_won_var
+				value = 10
+			}
+		}
+
+		effect = {
+			custom_tooltip = GUO_TT_4
+			set_country_flag = guo_easy_coring_flag
+			add_ruler_modifier = {
+				name = "guo_dragon_reborn"
+				duration = -1
+			}
+		}
+	}
+
+	guo_uralic_reach = {
+		icon = mission_beyond_the_urals
+		position = 5
+		required_missions = { guo_home_base } 
+		provinces_to_highlight = {
+			region = ural_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			ural_region = {
+				type = all
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					is_empty = yes
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "guo_far_out"
+				duration = -1
+			}
+			custom_tooltip = GUO_TT_5
+			hidden_effect = {
+				every_owned_province = {
+					limit = { has_province_modifier = alb_northern_silk_road_basic } 
+					add_base_tax = 1
+				}
+			}
+		}
+	}
+}
+Guo_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = GU9 } 
+
+	guo_old_council = {
+		icon = mission_noble_council
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			has_adm_advisor = yes
+			has_dip_advisor = yes
+			has_mil_advisor = yes
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "guo_loyal_meetings"
+				duration = 10950
+			}
+		}
+	}
+
+	guo_old_wars = {
+		icon = mission_plc_lifetime_of_war
+		position = 3
+		required_missions = { guo_war_masters } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			num_of_streltsy = 10
+			army_tradition = 25
+		}
+
+		effect = {
+			add_army_tradition = -10
+			add_country_modifier = {
+				name = "guo_new_training"
+				duration = -1
+			}
+		}
+	}
+
+	guo_war_goals = {
+		icon = mission_tribal_wargames
+		position = 4
+		required_missions = {
+			guo_new_wars
+			guo_old_wars
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			num_of_streltsy = 20
+			OR = {
+				army_tradition = 50
+				has_leader_with = {
+					is_monarch_leader = yes
+					total_pips = 12
+				}
+			}
+		}
+
+		effect = {
+			remove_country_modifier = guo_new_training
+			add_country_modifier = {
+				name = "guo_good_training"
+				duration = -1
+			}
+		}
+	}
+
+	guo_fire_handed = {
+		icon = mission_steppe_warriors
+		position = 6
+		required_missions = { guo_war_goals } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			has_mil_advisor_3 = yes
+			num_of_completed_idea_groups_mil = { amount = 1 } 
+			num_of_streltsy = 20
+			num_of_artillery = 20
+		}
+
+		effect = { country_event = { id = guo_smal.11 }  } 
+	}
+}

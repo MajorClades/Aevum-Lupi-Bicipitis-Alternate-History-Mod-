@@ -1,0 +1,879 @@
+namespace = papacy
+
+country_event = { #Investiture good pope do their job
+	id = papacy.1
+	title = papacy.1.t
+	desc = papacy.1.d
+	picture = POPE_PREACHING_eventPicture
+	major = yes
+	trigger = {
+		tag = PAP
+		emperor = {
+			NOT = {
+				has_ruler_modifier = pope_likes_emperor
+			}
+			NOT = {
+				has_ruler_modifier = pope_dislikes_emperor
+			}
+		}
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = papacy.1a
+		ai_chance = {
+			factor = 90
+			modifier = {
+				factor = 0.5
+				ruler_has_personality = sinner_personality
+			}
+			modifier = {
+				factor = 5
+				emperor = {
+					is_papal_controller = yes
+				}
+			}
+		}
+		emperor = {
+			add_ruler_modifier = {
+				name = pope_likes_emperor
+			}
+		}
+		sinful_emperor_endorsed = yes
+		faithful_emperor_endorsed = yes	
+	}
+	option = {
+		name = papacy.1b
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 2
+				ruler_has_personality = cruel_personality
+			}
+		}
+		emperor = {
+			add_ruler_modifier = {
+				name = pope_dislikes_emperor
+			}
+			country_event = {
+				id = papacy.2
+				days = 7
+			}
+		}
+		sinful_emperor_denied = yes
+		faithful_emperor_denied = yes
+	}
+}
+
+
+country_event = { #Investiture Emperor mad
+	id = papacy.2
+	title = papacy.2.t
+	desc = papacy.2.d
+	picture = POPE_PREACHING_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = papacy.2a
+		add_treasury = -100
+		PAP = {
+			country_event = {
+				id = papacy.4
+			}
+		}
+	}
+	option = {
+		name = papacy.2b
+		highlight = yes
+		trigger = {
+			papal_influence = 50
+		}
+		add_papal_influence = -50
+		remove_country_modifier = pope_dislikes_emperor
+		add_ruler_modifier = {
+			name = pope_likes_emperor
+		}
+	}
+	option = {
+		name = papacy.2c
+		highlight = yes
+		trigger = {
+			is_papal_controller = yes
+		}
+		remove_country_modifier = pope_dislikes_emperor
+		add_ruler_modifier = {
+			name = pope_likes_emperor
+		}
+	}
+	option = {
+		name = papacy.2d
+		highlight = yes
+		trigger = {
+			army_tradition = 15
+		}
+		add_army_tradition = -15
+		PAP = {
+			country_event = {
+				id = papacy.4
+			}
+		}
+	}
+}
+
+country_event = { #promote celibacy among the clergy
+	id = papacy.3
+	title = papacy.3.t
+	desc = papacy.3.d
+	picture = POPE_PREACHING_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = papacy.3a
+		add_stability_or_adm_power = yes
+	}
+	option = {
+		name = papacy.3b
+		add_curia_treasury = 1000
+	}
+}
+
+country_event = { #reasonable response
+	id = papacy.4
+	title = papacy.4.t
+	desc = papacy.4.d
+	picture = POPE_PREACHING_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = papacy.4a
+		add_treasury = 100
+		emperor = {
+			remove_country_modifier = pope_dislikes_emperor
+			add_ruler_modifier = {
+				name = pope_likes_emperor
+			}
+		}
+	}
+	option = {
+		name = papacy.4b
+		add_stability = 1
+		emperor = {
+			remove_country_modifier = pope_dislikes_emperor
+			add_ruler_modifier = {
+				name = pope_likes_emperor
+			}
+		}
+	}
+	option = {
+		name = papacy.4c
+		excommunicate = emperor
+		custom_tooltip = PAP_WAR_IN_EARTH
+	}
+}
+
+country_event = { #select the next POPE
+	id = papacy.6
+	title = papacy.6.t
+	desc = papacy.6.d
+	picture = POPE_PREACHING_eventPicture
+	
+	trigger = {
+		has_reform = papal_monarchy_pontifex
+		has_heir = no
+	}
+
+	mean_time_to_happen = {
+		months = 24
+	}
+
+	option = {
+		name = papacy.6a
+		define_heir = {
+			max_random_adm = 6
+			max_random_dip = 5
+			max_random_mil = 3
+		}
+	}
+	option = {
+		name = papacy.6b
+		define_heir = {
+			max_random_adm = 5
+			max_random_dip = 6
+			max_random_mil = 3
+		}	
+	}
+	option = {
+		name = papacy.6c
+		define_heir = {
+			max_random_adm = 3
+			max_random_dip = 5
+			max_random_mil = 6
+		}
+
+	}
+}
+
+country_event = { #ANTIPOPE TIME
+	id = papacy.7
+	title = papacy.7.t
+	desc = papacy.7.d
+	picture = POPE_PREACHING_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = papacy.7a
+		random_owned_province = {
+			limit = {
+				is_capital = no
+			}
+			cede_province = PAP
+			add_core = PAP
+			emperor = {
+				vassalize = PAP
+			}
+			hidden_effect = {
+				PA0 = {
+					every_core_province = {
+						add_core = PAP
+					}
+				}
+			}
+		}
+	}
+	option = {
+		name = papacy.7b
+		trigger = {
+			owns = 118
+		}
+		118 = {
+			cede_province = PAP
+			add_core = PAP
+			emperor = {
+				vassalize = PAP
+			}
+			hidden_effect = {
+				PA0 = {
+					every_core_province = {
+						add_core = PAP
+					}
+				}
+			}
+		}
+	}
+	option = {
+		name = papacy.7c
+		trigger = {
+			owns = 4951
+		}
+		4951 = {
+			cede_province = PAP
+			add_core = PAP
+			emperor = {
+				vassalize = PAP
+			}
+			hidden_effect = {
+				PA0 = {
+					every_core_province = {
+						add_core = PAP
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = { #expand Pontifexian, anger the Emperor
+	id = papacy.8
+	title = papacy.8.t
+	desc = papacy.8.d
+	picture = POPE_PREACHING_eventPicture
+
+	is_triggered_only = yes
+
+	option = {
+		name = papacy.8a
+		change_religion = pontifex
+		join_league = pontifex
+		add_imperial_influence = -2.5
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					religion = catholic
+				}
+				random_list = {
+					75 = {}
+					25 = {
+						change_religion = pontifex
+					}
+				}
+			}
+		}
+		ai_chance = {
+			factor = 25
+			modifier = {
+				factor = 1.5
+				NOT = {
+					has_opinion = {
+						who = emperor
+						value = 0
+					}
+				}
+			}
+			modifier = {
+				factor = 1.1
+				NOT = {
+					has_opinion = {
+						who = emperor
+						value = 50
+					}
+				}
+			}
+			modifier = {
+				factor = 1.1
+				has_opinion = {
+					who = PA0
+					value = 50
+				}
+			}
+			modifier = {
+				factor = 1.1
+				has_opinion = {
+					who = PA0
+					value = 100
+				}
+			}
+			modifier = {
+				factor = 1.1
+				has_opinion = {
+					who = PA0
+					value = 150
+				}
+			}
+			modifier = {
+				factor = 1.1
+				has_opinion = {
+					who = PA0
+					value = 190
+				}
+			}
+			modifier = {
+				factor = 0.5
+				invested_papal_influence = 50
+			}
+		}
+	}
+	option = {
+		name = papacy.8b
+		add_prestige = 10
+		join_league = catholic
+		add_imperial_influence = 2.5
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 1.5
+				NOT = {
+					has_opinion = {
+						who = PA0
+						value = 0
+					}
+				}
+			}
+			modifier = {
+				factor = 1.1
+				NOT = {
+					has_opinion = {
+						who = PA0
+						value = 50
+					}
+				}
+			}
+			modifier = {
+				factor = 1.1
+				has_opinion = {
+					who = emperor
+					value = 50
+				}
+			}
+			modifier = {
+				factor = 1.1
+				has_opinion = {
+					who = emperor
+					value = 100
+				}
+			}
+			modifier = {
+				factor = 1.1
+				has_opinion = {
+					who = emperor
+					value = 150
+				}
+			}
+			modifier = {
+				factor = 1.1
+				has_opinion = {
+					who = emperor
+					value = 190
+				}
+			}
+			modifier = {
+				factor = 2
+				has_country_modifier = the_statue_in_restraint_of_appeals
+			}
+		}
+	}
+}
+
+country_event = { #papal diplomacy
+	id = papacy.9
+	title = papacy.9.t
+	desc = papacy.9.d
+	picture = POPE_PREACHING_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = papacy.9a
+		define_advisor = {
+			type = diplomat
+			skill = 3
+			cost_multiplier = 0.25
+		}
+		custom_tooltip = PAP_IF_1
+		tooltip = {
+			random_known_country = {
+				limit = {
+					OR = {
+						is_part_of_hre = yes
+						culture_group = latin
+					}
+				}
+				add_opinion = {
+					who = ROOT
+					modifier = pap_faithful_2
+				}
+			}
+		}
+		hidden_effect = {
+			every_known_country = {
+				limit = {
+					OR = {
+						is_part_of_hre = yes
+						culture_group = latin
+					}
+				}
+				add_opinion = {
+					who = ROOT
+					modifier = pap_faithful_2
+				}
+			}
+		}
+
+	}
+	option = {
+		name = papacy.9b
+		add_country_modifier = {
+			name = pap_faithful
+			duration = 10950
+		}
+	}
+}
+
+country_event = { #family matters
+	id = papacy.10
+	title = papacy.10.t
+	desc = papacy.10.d
+	picture = POPE_PREACHING_eventPicture
+	fire_only_once = yes
+	trigger = {
+		tag = PAP
+		AP6 = {
+			exists = yes
+			is_at_war = no
+			is_female = yes
+			dynasty = "Baglioni"
+		}
+	}
+	is_triggered_only = yes
+	option = {
+		name = papacy.10a
+		create_subject = {
+			who = AP6
+			subject_type = papal_vassal
+		}
+		AP6 = {
+			set_country_flag = papal_vassal_time
+		}
+	}
+	option = {
+		name = papacy.10b
+		vassalize = AP6
+		AP6 = {
+			set_country_flag = papal_vassal_time
+		}
+	}
+}
+
+country_event = { #mission to JONGWA
+	id = papacy.11
+	title = papacy.11.t
+	desc = papacy.11.d
+	picture = POPE_PREACHING_eventPicture
+	
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					tag = PAP
+				}
+				random_country = {
+					limit = { is_emperor_of_china = yes }
+					set_country_flag = Jonwa_catholic
+				}
+			}
+		}
+	}
+	option = {
+		name = papacy.11a
+		add_years_of_income = -1
+		random_country = {
+			limit = { is_emperor_of_china = yes }
+			country_event = {
+				id = papacy.12
+			}
+		}
+	}
+	option = {
+		name = papacy.11b
+		add_years_of_income = -1.5
+		random_country = {
+			limit = { is_emperor_of_china = yes }
+			set_country_flag = jonwa_high_chance_flag
+			country_event = {
+				id = papacy.12
+			}
+		}
+	}
+	option = {
+		name = papacy.11c
+		add_years_of_income = -2
+		random_country = {
+			limit = { is_emperor_of_china = yes }
+			set_country_flag = jonwa_higher_chance_flag
+			country_event = {
+				id = papacy.12
+			}
+		}
+	}
+}
+
+country_event = { #mission to JONGWA
+	id = papacy.12
+	title = papacy.12.t
+	desc = papacy.12.d
+	picture = POPE_PREACHING_eventPicture
+	
+	is_triggered_only = yes
+	after = {
+		clr_country_flag = jonwa_high_chance_flag
+		clr_country_flag = jonwa_higher_chance_flag
+		clr_country_flag = Jonwa_catholic
+	}
+	option = {
+		name = papacy.12a
+		ai_chance = {
+			factor = 0
+		}
+		if = {
+			limit = {
+				has_country_flag = Jonwa_catholic
+			}
+			change_religion = catholic
+			random_owned_province = {
+				change_religion = catholic
+			}
+		}else = {
+			change_religion = pontifex
+			random_owned_province = {
+				change_religion = pontifex
+			}
+		}
+	}
+	option = {
+		name = papacy.12b
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 2
+				has_country_flag = jonwa_high_chance_flag
+			}
+			modifier = {
+				factor = 4
+				has_country_flag = jonwa_higher_chance_flag
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = Jonwa_catholic
+			}
+			random_owned_province = {
+				limit = { has_port = yes}
+				change_religion = catholic
+				add_permanent_province_modifier = {
+					name = pap_jonwa_welcome
+					duration = 10950
+				}
+			}
+		}else = {
+			random_owned_province = {
+				limit = { has_port = yes}
+				change_religion = pontifex
+				add_permanent_province_modifier = {
+					name = pap_jonwa_welcome
+					duration = 10950
+				}
+			}
+		}
+	}
+	option = {
+		name = papacy.12c
+		ai_chance = {
+			factor = 70
+		}
+		if = {
+			limit = {
+				has_country_flag = Jonwa_catholic
+			}
+			random_owned_province = {
+				limit = { has_port = yes}
+				change_religion = catholic
+				add_permanent_province_modifier = {
+					name = pap_jonwa_persecution
+					duration = 10950
+				}
+			}
+		}else = {
+			random_owned_province = {
+				limit = { has_port = yes}
+				change_religion = pontifex
+				add_permanent_province_modifier = {
+					name = pap_jonwa_persecution
+					duration = 10950
+				}
+			}
+		}
+	}
+}
+
+
+country_event = { #force-conversion
+	id = papacy.13
+	title = papacy.13.t
+	desc = papacy.13.d
+	picture = POPE_PREACHING_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = papacy.13a
+		ai_chance = {
+			factor = 70
+		}
+		if = {
+			limit = {
+				PAP = {
+					exists = yes
+					religion = catholic
+				}
+			}
+			change_religion = catholic
+		}else = {
+			change_religion = pontifex
+		}
+	}
+	option = {
+		name = papacy.13b
+		ai_chance = {
+			factor = 30
+			modifier = {
+				factor = 100
+				tag = SO0
+			}
+			modifier = {
+				factor = 100
+				tag = AF0
+			}
+		}
+		add_stability = 1
+	}
+
+}
+
+country_event = { #advisor-special
+	id = papacy.14
+	title = papacy.14.t
+	desc = papacy.14.d
+	picture = POPE_PREACHING_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = papacy.14a
+		set_country_flag = pap_super_inquisition_flag
+		custom_tooltip = pap_super_inquisition_flag_tt
+	}
+	option = {
+		name = papacy.14b
+		add_country_modifier = {
+			name = pap_less_tax
+			duration = -1
+		}
+		set_country_flag = fin_fine_finances_flag
+		custom_tooltip = fin_every_adm_advisor_grants_5_tax_per_level
+	}
+
+}
+
+country_event = { #rhomania bad
+	id = papacy.15
+	title = papacy.15.t
+	desc = papacy.15.d
+	picture = POPE_PREACHING_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = papacy.15a
+		ai_chance = {
+			factor = 1
+		}
+		add_country_modifier = {
+			name = pap_beaten_the_heathen
+			duration = 10950
+		}
+	}
+	option = {
+		name = papacy.15b
+		ai_chance = {
+			factor = 0
+		}
+		add_corruption = 5
+		add_stability = -1
+	}
+
+}
+country_event = { #Pontifex flavor events
+	id = papacy.1000
+	title = papacy.1000.t
+	desc = papacy.1000.d
+	picture = POPE_PREACHING_eventPicture
+	trigger = {
+		always = no #not needed
+		religion = pontifex
+		NOT = {
+			tag = PA0
+		}
+	}
+	mean_time_to_happen = {
+		months = 200
+	}
+	option = {
+		name = papacy.1000a
+		add_estate_loyalty = {
+			estate = estate_burghers
+			loyalty = -5
+		}
+		add_estate_loyalty = {
+			estate = estate_nobles
+			loyalty = -5
+		}
+		change_variable = {
+			which = pont_cash_bank_var
+			which = 500
+		}
+	}
+	option = {
+		name = papacy.1000b
+		add_estate_loyalty = {
+			estate = estate_church
+			loyalty = -10
+		}
+	}
+	option = {
+		name = papacy.1000c
+		trigger = {
+			full_idea_group = religious_ideas
+		}
+		add_years_of_income = 0.3
+		change_variable = {
+			which = pont_cash_bank_var
+			which = 200
+		}
+	}
+}
+
+country_event = { #Pontifex flavor events
+	id = papacy.1001
+	title = papacy.1001.t
+	desc = papacy.1001.d
+	picture = POPE_PREACHING_eventPicture
+	trigger = {
+		religion = pontifex
+		NOT = {
+			tag = PA0
+		}
+		papal_influence = 25
+	}
+	mean_time_to_happen = {
+		months = 200
+	}
+	option = {
+		name = papacy.1001a
+		add_papal_influence = -25
+	}
+	option = {
+		name = papacy.1001b
+		add_adm_power = -50
+		add_dip_power = -50
+	}
+	option = {
+		name = papacy.1001c
+		trigger = {
+			full_idea_group = religious_ideas
+		}
+		add_adm_power = -25
+		add_dip_power = -25
+		add_papal_influence = 25
+	}
+}
+
+country_event = { #Pontifex flavor events
+	id = papacy.1002
+	title = papacy.1002.t
+	desc = papacy.1002.d
+	picture = POPE_PREACHING_eventPicture
+	trigger = {
+		religion = pontifex
+		NOT = {
+			tag = PA0
+		}
+	}
+	mean_time_to_happen = {
+		months = 200
+	}
+	option = {
+		name = papacy.1002a
+		add_papal_influence = 25
+	}
+	option = {
+		name = papacy.1002b
+		add_adm_power = 100
+	}
+	option = {
+		name = papacy.1002c
+		trigger = {
+			full_idea_group = religious_ideas
+		}
+		add_adm_power = 50
+		add_papal_influence = 25
+	}
+}
+

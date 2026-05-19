@@ -1,0 +1,57 @@
+custom_button = {
+	name = guo_loyal_button
+	potential = {
+		FROM = {
+			has_government_mechanic = guo_loyalist_mechanic
+		}
+		owned_by = FROM
+		OR = {
+			region = russia_region 
+			region = ruthenia_region 
+			region = ural_region 
+			region = baltic_region 
+		}
+		NOT = {
+			is_core = ROOT
+		}
+	}
+	trigger = {
+		owner = {
+			has_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = 5
+			}
+		}
+		NOT = {
+			is_core = ROOT
+		}
+	}
+	effect = {
+		add_core = ROOT
+		if = {
+			limit = {
+				owner = {
+					has_country_flag = guo_easy_coring_flag
+					check_variable = {
+						which = guo_battle_won_var
+						value = 10
+					}
+				}
+			}
+		}else = {
+			add_province_modifier = {
+				name = guo_not_easy_core
+				duration = 7300
+			}
+		}
+		owner = {
+			add_government_power = {
+				mechanic_type = guo_loyalist_mechanic
+				power_type = guo_loyal_favor
+				value = -5
+			}
+		}
+	}
+	tooltip = guo_loyal_button_tt
+}

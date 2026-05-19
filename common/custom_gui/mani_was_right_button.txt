@@ -1,0 +1,105 @@
+custom_button = {
+	name = mani_difference_button
+	potential = {
+		FROM = {
+			OR = {
+				has_reform = parn_manich_theocracy_reform
+				have_had_reform = parn_manich_theocracy_reform
+			}
+		}
+		owned_by = FROM
+		NOT = {
+			province_id = 5027
+		}
+		NOT = {
+			has_province_modifier = mani_diff_mod_2
+		}
+		continent = asia
+	}
+	trigger = {
+		owner = {
+				num_of_missionaries = 1
+			}
+		religion = FROM
+		is_core = ROOT
+		NOT = {
+			owner = {
+				has_country_modifier = mani_diff_mod_timer
+			}
+		}
+	}
+	effect = {
+		add_province_modifier = {
+			name = mani_diff_mod_1
+			duration = 7300
+		}
+		add_province_modifier = {
+			name = mani_diff_mod_2
+			duration = -1
+		}
+		hidden_effect = {
+			owner = {
+				add_country_modifier = {
+					name = mani_diff_mod_timer
+					duration = 30
+					hidden = yes
+				}
+			}
+		}
+		if = {
+			limit = {
+				superregion = china_superregion
+			}
+			random_list = {
+				25 = {
+					change_religion = confucianism
+				}
+				25 = {
+					change_religion = vajrayana
+				}
+				25 = {
+					change_religion = nestorian
+				}
+				25 = {
+					add_base_tax = 1
+				}
+			}
+		}else = {
+			if = {
+				limit = {
+					superregion = india_superregion
+				}
+				random_list = {
+					25 = {
+						change_religion = hinduism
+					}
+					25 = {
+						change_religion = jyotisastra
+					}
+					25 = {
+						change_religion = islam
+					}
+					25 = {
+						add_base_tax = 1
+					}
+				}
+			}else = {
+				random_list = {
+					25 = {
+						change_religion = islam
+					}
+					25 = {
+						change_religion = nestorian
+					}
+					25 = {
+						change_religion = zoroastrian
+					}
+					25 = {
+						add_base_tax = 1
+					}
+				}
+			}
+		}
+	}
+	tooltip = mani_difference_button_tt
+}

@@ -1,24 +1,30 @@
+namespace = saha
+
 country_event = {
-	id = flavor_ya0.1
-	title = "flavor_ya0.t.1"
-	desc = "flavor_ya0.d.1"
+	id = saha.1
+	title = "saha.1.t"
+	desc = "saha.1.d"
 	picture = HORDE_ON_HORSEBACK_eventPicture
 	
 	fire_only_once = yes
 	
 	trigger = {
-		is_year = 1600
-		is_subject = no
-		is_at_war = no
 		NOT = { exists = YA0 }
 		owns_core_province = 466
 		owns_core_province = 2417
+		is_at_war = no
+		is_subject = no
+		OR = {
+			is_year = 1600
+			has_global_flag = YAKUTSFLED
+		}
 	}
 	mean_time_to_happen = {
 		months = 600
 	}
 	immediate = {
 		hidden_effect = {
+			1326 = { change_province_name = "Saha Sea" }
 			if = {
 				limit = {
 					NOT = {
@@ -53,19 +59,22 @@ country_event = {
 						}
 					}
 				}
+				2417 = {
+					change_religion = tengri_pagan_reformed
+					change_culture = yakut
+				}
 				466 = {
 					change_religion = tengri_pagan_reformed
 					change_culture = yakut
 				}
-				2417 = {
-					change_religion = tengri_pagan_reformed
+				464 = {
 					change_culture = yakut
 				}
 			}
 		}
 	}
 	option = {
-		name = "flavor_ya0.1.a"
+		name = "saha.1a"
 		trigger = {
 			NOT = {
 				capital_scope = {
@@ -82,7 +91,7 @@ country_event = {
 		}
 	}
 	option = {
-		name = "flavor_ya0.1.b"
+		name = "saha.1b"
 		trigger = {
 			NOT = {
 				capital_scope = {
@@ -97,7 +106,7 @@ country_event = {
 		}
 	}
 	option = {
-		name = "flavor_ya0.1.b"
+		name = "saha.1b"
 		trigger = {
 			capital_scope = {
 				area = astrakhan_area
@@ -111,4 +120,3 @@ country_event = {
 		}
 	}
 }
-	

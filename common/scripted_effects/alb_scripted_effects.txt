@@ -118,6 +118,61 @@ upgrade_roman_heirs ={
 	}
 }
 
+upgrade_dragon_level ={
+	if = {
+		limit = {
+			has_country_modifier = wuu_dragon_level_0
+		}
+		hidden_effect = {
+			remove_country_modifier = wuu_dragon_level_0
+			add_country_modifier = {
+				name = wuu_dragon_level_1
+				duration = -1
+			}
+		}
+		custom_tooltip = upgrade_wuu_dragon_level_0to1_tt
+	}
+	else_if = {
+		limit = {
+			has_country_modifier = wuu_dragon_level_1
+		}
+		hidden_effect = {
+			remove_country_modifier = wuu_dragon_level_1
+			add_country_modifier = {
+				name = wuu_dragon_level_2
+				duration = -1
+			}
+		}
+		custom_tooltip = upgrade_wuu_dragon_level_1to2_tt
+	}
+	else_if = {
+		limit = {
+			has_country_modifier = wuu_dragon_level_2
+		}
+		hidden_effect = {
+			remove_country_modifier = wuu_dragon_level_2
+			add_country_modifier = {
+				name = wuu_dragon_level_3
+				duration = -1
+			}
+		}
+		custom_tooltip = upgrade_wuu_dragon_level_2to3_tt
+	}
+	else_if = {
+		limit = {
+			has_country_modifier = wuu_dragon_level_3
+		}
+		hidden_effect = {
+			remove_country_modifier = wuu_dragon_level_3
+			add_country_modifier = {
+				name = wuu_dragon_level_4
+				duration = -1
+			}
+		}
+		custom_tooltip = upgrade_wuu_dragon_level_3to4_tt
+	}
+}
+
 dacia_culture_change_1 = {
 	hidden_effect = {
 		if = {
@@ -238,4 +293,160 @@ atm_set_down = {
 	remove_country_modifier = morale_defense_lv_3
 	remove_country_modifier = morale_defense_lv_4
 	remove_country_modifier = morale_defense_lv_5
+}
+
+give_ducats_per_dev = {
+	if = {
+		limit = {
+			development = $amount$
+		}
+		ROOT = {
+			add_treasury = -$amount$
+		}
+	}
+}
+
+brittannia_knight_of_the_round_table = {
+	if = {
+			limit = {
+				has_idea_group = aristocracy_ideas
+			}
+			if = {
+				limit = {
+					full_idea_group = aristocracy_ideas
+				}
+				custom_tooltip = YES_MARK
+			}else = {
+				custom_tooltip = NOT_MARK
+			}
+			tooltip = {
+				add_country_modifier = {
+					name = knights_of_aristocracy_ideas
+					duration = -1
+				}
+			}
+		}
+	if = {
+			limit = {
+				has_idea_group = offensive_ideas
+			}
+			if = {
+				limit = {
+					full_idea_group = offensive_ideas
+				}
+				custom_tooltip = YES_MARK
+			}else = {
+				custom_tooltip = NOT_MARK
+			}
+			tooltip = {
+				add_country_modifier = {
+					name = knights_of_offensive_ideas
+					duration = -1
+				}
+			}
+		}
+	if = {
+			limit = {
+				has_idea_group = defensive_ideas
+			}
+			if = {
+				limit = {
+					full_idea_group = defensive_ideas
+				}
+				custom_tooltip = YES_MARK
+			}else = {
+				custom_tooltip = NOT_MARK
+			}
+			tooltip = {
+				add_country_modifier = {
+					name = knights_of_defensive_ideas
+					duration = -1
+				}
+			}
+		}
+	if = {
+			limit = {
+				has_idea_group = quality_ideas
+			}
+			if = {
+				limit = {
+					full_idea_group = quality_ideas
+				}
+				custom_tooltip = YES_MARK
+			}else = {
+				custom_tooltip = NOT_MARK
+			}
+			tooltip = {
+				add_country_modifier = {
+					name = knights_of_quality_ideas
+					duration = -1
+				}
+			}
+		}
+	if = {
+			limit = {
+				has_idea_group = quantity_ideas
+			}
+			if = {
+				limit = {
+					full_idea_group = quantity_ideas
+				}
+				custom_tooltip = YES_MARK
+			}else = {
+				custom_tooltip = NOT_MARK
+			}
+			tooltip = {
+				add_country_modifier = {
+					name = knights_of_quantity_ideas
+					duration = -1
+				}
+			}
+		}
+	hidden_effect = {
+	if = {
+			limit = {
+				full_idea_group = aristocracy_ideas
+			}
+			add_country_modifier = {
+					name = knights_of_aristocracy_ideas
+					duration = -1
+				}
+		}
+	if = {
+			limit = {
+				full_idea_group = offensive_ideas
+			}
+			add_country_modifier = {
+					name = knights_of_offensive_ideas
+					duration = -1
+				}
+		}
+	if = {
+			limit = {
+				full_idea_group = defensive_ideas
+			}
+			add_country_modifier = {
+					name = knights_of_defensive_ideas
+					duration = -1
+				}
+		}
+	if = {
+			limit = {
+				full_idea_group = quality_ideas
+			}
+			add_country_modifier = {
+					name = knights_of_quality_ideas
+					duration = -1
+				}
+		}
+	if = {
+			limit = {
+				full_idea_group = quantity_ideas
+			}
+			add_country_modifier = {
+					name = knights_of_quantity_ideas
+					duration = -1
+				}
+		}
+	}
 }

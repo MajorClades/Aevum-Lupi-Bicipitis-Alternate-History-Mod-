@@ -5,638 +5,35 @@ Britannia_1_slot = {
 	has_country_shield = yes
 	potential = { tag = BR0 } 
 
-	1_brit_bryt = {
-		icon = mission_rb_nova_scotia
+	brit_restoring_the_realm = {
+		icon = mission_colonial
 		position = 1
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = { culture = briton } 
 
 		trigger = {
-			OR = {
-				SC0 = {
-					OR = {
-						is_rival = ROOT
-						exists = no
-					}
-				}
-				is_rival = SC0
-			}
-		}
-
-		effect = {
-			if = {
-				limit = {
-					capital_scope = {
-						has_port = yes
-					}
-				}
-				capital_scope = {
-					add_province_modifier = {
-						name = "naval_buildup"
-						duration = 10950
-					}
-				}
-			}
-			else_if = {
-				limit = {
-					capital_scope = {
-						has_port = no
-					}
-				}
-				random_owned_province = {
-					limit = {
-						has_port = yes
-					}
-					add_province_modifier = {
-						name = "naval_buildup"
-						duration = 10950
-					}
-				}
-			}
-			242 = { add_permanent_claim = ROOT } 
-			4365 = { add_permanent_claim = ROOT } 
-		}
-	}
-
-	1_rebryt = {
-		icon = mission_rb_conquer_ulster
-		position = 2
-		required_missions = { 1_brit_bryt } 
-		provinces_to_highlight = {
-			OR = {
-				province_id = 242
-				province_id = 4365
-			}
-		}
-
-		trigger = {
-			owns = 242
-			owns = 4365
-		}
-
-		effect = {
-			ulster_area = { add_permanent_claim = ROOT } 
-			leinster_area = { add_permanent_claim = ROOT } 
-		}
-	}
-
-	1_scotia = {
-		icon = mission_rb_conquer_the_highlands
-		position = 4
-		required_missions = {
-			1_rebryt
-			2_scotia_push
-		}
-		provinces_to_highlight = {
-			OR = {
-				area = ulster_area
-				area = leinster_area
-			}
-		}
-
-		trigger = {
-			ulster_area = {
-				type = all
-				owned_by = ROOT
-			}
-			leinster_area = {
-				type = all
-				owned_by = ROOT
-			}
-		}
-
-		effect = {
-			add_dip_power = 150
-			connacht_area = { add_permanent_claim = ROOT } 
-			munster_area = { add_permanent_claim = ROOT } 
-		}
-	}
-
-	1_isle_of_scotia = {
-		icon = mission_rb_conquer_ireland
-		position = 5
-		required_missions = { 1_scotia } 
-		provinces_to_highlight = {
-			OR = {
-				area = ulster_area
-				area = leinster_area
-				area = connacht_area
-				area = munster_area
-			}
-		}
-
-		trigger = {
-			ulster_area = {
-				type = all
-				owned_by = ROOT
-			}
-			leinster_area = {
-				type = all
-				owned_by = ROOT
-			}
-			connacht_area = {
-				type = all
-				owned_by = ROOT
-			}
-			munster_area = {
-				type = all
-				owned_by = ROOT
-			}
-		}
-
-		effect = { country_event = { id = swe2.2 }  } 
-	}
-
-	1_britannia_navy = {
-		icon = the_london_steelyard
-		position = 8
-		required_missions = { 2_londinium_port } 
-		provinces_to_highlight = {
-			owned_by = ROOT
-			has_port = yes
-		}
-
-		trigger = {
-			navy_size_percentage = 0.8
-			num_of_owned_provinces_with = {
-				value = 10
-				OR = {
-					has_building = dock
-					has_building = drydock
-				}
-			}
-		}
-
-		effect = {
-			add_sailors = 3000
-			add_country_modifier = {
-				name = "brit_admirals"
-				duration = 10950
-			}
-		}
-	}
-
-	1_britannia_rules = {
-		icon = mission_establish_high_seas_navy
-		position = 9
-		required_missions = { 1_britannia_navy } 
-		provinces_to_highlight = {  } 
-
-		trigger = {
-			num_of_owned_provinces_with = {
-				value = 10
-				NOT = { continent = europe } 
-			}
-			navy_size_percentage = 1
-			num_of_heavy_ship = 20
-		}
-
-		effect = {
-			add_country_modifier = {
-				name = "britannia_rules_the_waves"
-				duration = -1
-			}
-		}
-	}
-}
-Britannia_2_slot = {
-	slot = 2
-	generic = no
-	ai = yes
-	has_country_shield = yes
-	potential = { tag = BR0 } 
-
-	2_scotia_push = {
-		icon = mission_rb_rein_in_the_highland_clans
-		position = 3
-		required_missions = { 3_core_back } 
-		provinces_to_highlight = { area = scottish_marches_area } 
-
-		trigger = {
-			scottish_marches_area = {
-				type = all
-				owned_by = ROOT
-			}
-		}
-
-		effect = {
-			add_prestige_or_monarch_power = {
-				amount = 10
-			}
-			yorkshire_area = { add_permanent_claim = ROOT } 
-			lowlands_area = { add_permanent_claim = ROOT } 
-			highlands_area = { add_permanent_claim = ROOT } 
-		}
-	}
-
-	2_londinium_port = {
-		icon = mission_control_the_channel
-		position = 7
-		required_missions = { 3_londinium } 
-		provinces_to_highlight = { 
-			province_id = 236 
-			NOT = {
-				AND = {
-					province_has_center_of_trade_of_level = 2
-					has_trade_building_trigger = yes
-				}
-			}
-		} 
-
-		trigger = {
-			236 = {
-				province_has_center_of_trade_of_level = 2
-				has_trade_building_trigger = yes
-			}
-			owns = 238
-			owns = 235
-		}
-
-		effect = {
-			238 = {
-				add_permanent_province_modifier = {
-					name = "londinium_trade_up"
-					duration = -1
-				}
-			}
-			235 = {
-				add_permanent_province_modifier = {
-					name = "londinium_trade_up"
-					duration = -1
-				}
-			}
-			236 = {
-				set_center_level_3_center_of_trade = yes
-			}
-		}
-	}
-}
-Britannia_3_slot = {
-	slot = 3
-	generic = no
-	ai = yes
-	has_country_shield = yes
-	potential = { tag = BR0 } 
-
-	3_core_back = {
-		icon = mission_conquer_50_development
-		position = 2
-		required_missions = { 4_brit_resistance } 
-		provinces_to_highlight = { province_id = 4375 } 
-
-		trigger = { owns = 4375 } 
-
-		effect = {
-			4375 = { change_religion = ROOT } 
-			scottish_marches_area = { add_permanent_claim = ROOT } 
-		}
-	}
-
-	3_ganden_union = {
-		icon = mission_swe_union
-		position = 4
-		required_missions = { 2_scotia_push } 
-		provinces_to_highlight = {
-			OR = {
-				area = lowlands_area
-				area = highlands_area
-			}
-		}
-
-		trigger = {
-			lowlands_area = {
-				type = all
-				owned_by = ROOT
-			}
-			highlands_area = {
-				type = all
-				owned_by = ROOT
-			}
-		}
-
-		effect = {
-			add_country_modifier = {
-				name = "asatru_not_true"
-				duration = 10950
-			}
-		}
-	}
-
-	3_londinium = {
-		icon = mission_rb_scottish_conquer_london
-		position = 6
-		provinces_to_highlight = { province_id = 236 } 
-
-		trigger = {
-			owns_or_non_sovereign_subject_of = 236
-			236 = { development = 25 } 
-		}
-
-		effect = {
-			set_capital = 236
-			236 = {
-				change_culture = briton
-				cede_province = ROOT
-				add_core = ROOT
-			}
-		}
-	}
-
-	3_euts = {
-		icon = adjust_the_general_means
-		position = 8
-		required_missions = {
-			2_londinium_port
-			3_londinium
-			4_londinium_school
-		}
-		provinces_to_highlight = {
-			OR = {
-				area = home_counties_area
-				area = east_anglia_area
-				area = east_midlands_area
-			}
-		}
-
-		trigger = {
-			home_counties_area = {
-				type = all
-				owned_by = ROOT
-			}
-			east_anglia_area = {
-				type = all
-				owned_by = ROOT
-			}
-			east_midlands_area = {
-				type = all
-				owned_by = ROOT
-			}
-		}
-
-		effect = {
-			if = {
-				limit = { accepted_culture = juts } 
-				add_accepted_culture = jutlander
-				remove_accepted_culture = juts
-			}
-			custom_tooltip = alb_brit_move_jutish_culture_tt
-			hidden_effect = {
-				every_owned_province = {
-					limit = { culture = juts } 
-					change_culture = jutlander
-				}
-			}
-			1861 = { change_culture = briton } 
-			4785 = { change_culture = briton } 
-		}
-	}
-
-	3_united_kingdom = {
-		icon = a_real_roman_empire
-		position = 9
-		required_missions = { 3_euts } 
-		provinces_to_highlight = {  } 
-
-		trigger = {
-			total_development = 300
-			is_great_power = yes
-		}
-
-		effect = {
-			add_adm_power = 100
-			add_country_modifier = {
-				name = "adm_brit"
-				duration = 10950
-			}
-		}
-	}
-
-	3_united_empire = {
-		icon = mission_empire
-		position = 10
-		required_missions = { 3_united_kingdom } 
-		provinces_to_highlight = {  } 
-
-		trigger = {
-			british_isles_region = {
-				type = all
-				owned_by = ROOT
-			}
-			num_of_owned_provinces_with = {
-				value = 25
+			owns_all_provinces = {
 				region = british_isles_region
-				num_of_times_improved = 1
+				culture = briton
 			}
 		}
 
-		effect = {
-			set_government_rank = 3
-			british_isles_region = {
-				add_province_modifier = {
-					name = "united_isles"
-					duration = 10950
-				}
-			}
-			override_country_name = REGNUM_BRITANNUM
-		}
+		effect = { country_event = { id = britt.1 } custom_tooltip = BRIT_ET_1 } 
 	}
 
-	3_strongest = {
-		icon = mission_crown_of_norway
-		position = 11
-		required_missions = { 3_united_empire } 
-		provinces_to_highlight = {  } 
-
-		trigger = {
-			total_development = 1000
-			NOT = { great_power_rank = 3 } 
-		}
-
-		effect = {
-			add_country_modifier = {
-				name = "imperium_britannum"
-				duration = -1
-			}
-		}
-	}
-}
-Britannia_4_slot = {
-	slot = 4
-	generic = no
-	ai = yes
-	has_country_shield = yes
-	potential = { tag = BR0 } 
-
-	4_brit_resistance = {
-		icon = mission_assemble_an_army
-		position = 1
-		provinces_to_highlight = { is_capital_of = SW2 } 
-
-		trigger = {
-			OR = {
-				army_size_percentage = 1
-				SW2 = { is_rival = ROOT } 
-				is_rival = SW2
-			}
-		}
-
-		effect = {
-			add_country_modifier = {
-				name = "resist_sweden"
-				duration = 10950
-			}
-		}
-	}
-
-	4_core_back = {
-		icon = mission_italian_condottiere
-		position = 2
-		required_missions = { 4_brit_resistance } 
-		provinces_to_highlight = { province_id = 240 } 
-
-		trigger = { owns = 240 } 
-
-		effect = {
-			4372 = {
-				change_culture = briton
-				add_core = ROOT
-			}
-		}
-	}
-
-	4_britannia_returns = {
-		icon = a_show_of_strength
+	britannia_swedish_suffering = {
+		icon = mission_swedish_peasantry
 		position = 3
-		required_missions = {
-			3_core_back
-			4_core_back
-			5_core_back
+		required_missions = { brit_union_of_roses } 
+		provinces_to_highlight = {
+			culture = svede
+			region = british_isles_region
 		}
-		provinces_to_highlight = { is_core = ROOT } 
-
-		trigger = {owns = 239 owns = 240 owns = 4375 stability = 1 } 
-
-		effect = {
-			add_yearly_manpower = 2
-			add_years_of_income = 2
-		}
-	}
-
-	4_brittania_home = {
-		icon = mission_rb_into_england
-		position = 4
-		required_missions = { 4_britannia_returns } 
-		provinces_to_highlight = { is_capital_of = SW2 } 
-
-		trigger = {
-			SW2 = {
-				OR = {
-					NOT = {
-						army_strength = {
-							who = ROOT
-							value = 1
-						}
-					}
-					exists = no
-				}
-			}
-		}
-
-		effect = {
-			add_prestige_or_monarch_power = {
-				amount = 15
-			}
-			east_midlands_area = { add_permanent_claim = ROOT } 
-			east_anglia_area = { add_permanent_claim = ROOT } 
-		}
-	}
-
-	4_last_push = {
-		icon = mission_invade_england
-		position = 5
-		required_missions = { 4_brittania_home } 
-		provinces_to_highlight = { is_capital_of = SW2 } 
 
 		trigger = {
 			SW2 = { exists = no } 
-			num_of_owned_provinces_with = {
-				value = 15
-				region = british_isles_region
-			}
-		}
-
-		effect = {
-			add_country_modifier = {
-				name = "brittania_reconstruction"
-				duration = 10950
-			}
-		}
-	}
-
-	4_londinium_school = {
-		icon = bibliotheca_corviana
-		position = 7
-		required_missions = { 3_londinium } 
-		provinces_to_highlight = { province_id = 237 } 
-
-		trigger = {
-			has_institution = renaissance
-			OR = {
-				innovativeness = 20
-				237 = { development = 20 } 
-			}
-		}
-
-		effect = {
-			237 = {
-				change_culture = briton
-				add_building = university
-				add_permanent_province_modifier = {
-					name = "great_oxford_school"
-					duration = -1
-				}
-			}
-		}
-	}
-}
-Britannia_5_slot = {
-	slot = 5
-	generic = no
-	ai = yes
-	has_country_shield = yes
-	potential = { tag = BR0 } 
-
-	5_core_back = {
-		icon = mission_pol_develop_countryside
-		position = 2
-		required_missions = { 4_brit_resistance } 
-		provinces_to_highlight = { province_id = 239 } 
-
-		trigger = { owns = 239 } 
-
-		effect = {
-			241 = {
-				add_base_tax = 1
-				add_base_manpower = 1
-			}
-			wessex_area = { add_permanent_claim = ROOT } 
-		}
-	}
-
-	5_sweden = {
-		icon = mission_swedish_peasantry
-		position = 8
-		required_missions = { 4_londinium_school } 
-		provinces_to_highlight = { 
-			culture = svede 
-			owned_by = ROOT
-			unrest = 1
-		} 
-
-		trigger = {
-			num_of_owned_provinces_with = {
-				value = 8
+			owns_all_provinces = {
 				culture = svede
-				NOT = { unrest = 1 } 
+				region = british_isles_region
 			}
 		}
 
@@ -656,21 +53,823 @@ Britannia_5_slot = {
 		}
 	}
 
-	5_curriculum = {
-		icon = a_roman_empire
-		position = 9
-		required_missions = { 5_sweden } 
-		provinces_to_highlight = {  } 
+	britannia_the_last_highlander = {
+		icon = mission_swe_union
+		position = 4
+		required_missions = { britannia_swedish_suffering } 
+		provinces_to_highlight = {
+			OR = {
+				area = highlands_area
+				province_id = 251
+				province_id = 253
+				province_id = 4364
+			}
+		}
 
 		trigger = {
-			monthly_dip = 12
-			has_dip_advisor_3 = yes
-			dip_power = 200
+			dip_power = 150
+			highlands_area = {
+				type = all
+				owned_by = ROOT
+			}
+			owns = 251
+			owns = 253
+			owns = 4364
 		}
 
 		effect = {
-			add_dip_power = -200
-			country_event = { id = britt.5 } 
+			add_dip_power = -150
+			country_event = { id = britt.7 } 
+			custom_tooltip = BRIT_ET_4
 		}
+	}
+
+	brit_colonial_lead = {
+		icon = mission_scandinavian_port_authority
+		position = 6
+		provinces_to_highlight = { is_capital_of = ICE } 
+
+		trigger = {
+			OR = {
+				ICE = {
+					has_opinion = {
+						who = ROOT
+						value = 190
+					}
+				}
+				num_of_explorers = 1
+			}
+		}
+
+		effect = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = BRIT_TT_5
+				first_limit = "ICE = { has_opinion = { who = ROOT value = 190} }"
+				first_effect = "american_east_coast_region = {discover_country = ROOT} north_atlantic_region = {discover_country = ROOT} canada_region = { discover_country = ROOT} northeast_america_region = { discover_country = ROOT}"
+				second_limit = "NOT = {ICE = { has_opinion = { who = ROOT value = 190} }}"
+				second_effect = "add_country_modifier = {
+					name = brit_explore_more
+					duration = 10950
+				}"
+			}
+		}
+	}
+
+	brit_enter_vinland = {
+		icon = mission_rb_colonise_canada
+		position = 7
+		required_missions = { brit_colonial_lead } 
+		provinces_to_highlight = {
+			has_port = yes
+			OR = {
+				region = canada_region
+				region = northeast_america_region
+			}
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 5
+				has_port = yes
+				OR = {
+					region = canada_region
+					region = northeast_america_region
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "brit_continue_norse_kill"
+				duration = 10950
+			}
+			canada_region = { add_permanent_claim = ROOT } 
+			northeast_america_region = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	brit_exit_vinland = {
+		icon = mission_ruler_of_north_america
+		position = 8
+		required_missions = { brit_enter_vinland } 
+		provinces_to_highlight = {
+			region = canada_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			canada_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_years_of_income = 1.5
+			tooltip = {
+				custom_tooltip = BRIT_TT_6
+				capital_scope = {
+					add_permanent_province_modifier = {
+						name = "brit_end_of_norse"
+						duration = -1
+					}
+				}
+			}
+			hidden_effect = {
+				random_subject_country = {
+					limit = {
+						is_colonial_nation_of = ROOT
+						capital_scope = { region = canada_region } 
+					}
+					capital_scope = {
+						add_permanent_province_modifier = {
+							name = "brit_end_of_norse"
+							duration = -1
+						}
+					}
+				}
+			}
+		}
+	}
+}
+Britannia_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = BR0 } 
+
+	brit_union_of_roses = {
+		icon = mission_rb_war_of_the_roses
+		position = 2
+		required_missions = {
+			brit_restoring_the_realm
+			britannia_not_yet_lost
+		}
+		provinces_to_highlight = { is_core = JU0 } 
+
+		trigger = { JU0 = { all_core_province = { owned_by = ROOT }  }  } 
+
+		effect = { british_isles_region = { add_permanent_claim = ROOT }  } 
+	}
+
+	brit_impotian_spreading = {
+		icon = shield_of_christendom
+		position = 3
+		required_missions = { brit_union_of_roses } 
+		provinces_to_highlight = {
+			region = british_isles_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 30
+				region = british_isles_region
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "brit_jolly_good_time"
+				duration = 10950
+			}
+		}
+	}
+
+	brit_greater_britannia = {
+		icon = mission_rb_increase_our_reach
+		position = 4
+		required_missions = { brit_impotian_spreading } 
+		provinces_to_highlight = {
+			region = british_isles_region
+			OR = {
+				NOT = { religion = impotian } 
+				NOT = { owned_by = ROOT } 
+			}
+		}
+
+		trigger = {
+			OR = {
+				total_development = 300
+				development_in_provinces = {
+					value = 200
+					religion = impotian
+					region = british_isles_region
+				}
+			}
+		}
+
+		effect = {
+			add_stability_or_adm_power = yes
+			capital_scope = { add_or_upgrade_courthouse_building = yes } 
+			override_country_name = "REGNUM_BRITANNUM"
+		}
+	}
+
+	brit_imperial_heir = {
+		icon = imperial_ascendancy
+		position = 5
+		required_missions = { brit_greater_britannia } 
+		provinces_to_highlight = { is_capital_of = SO0 } 
+
+		trigger = {
+			SO0 = {
+				OR = {
+					NOT = { total_development = 200 } 
+					exists = no
+					AND = {
+						alliance_with = ROOT
+						owes_favors = {
+							who = ROOT
+							value = 90
+						}
+					}
+				}
+			}
+		}
+
+		effect = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = BRIT_TT_3
+				first_limit = "SO0 = {exists = yes total_development = 200 }"
+				first_effect = "add_government_reform = britannia_imperial_heir custom_tooltip = BRIT_TT_3a"
+				second_limit = "SO0 = {OR = {exists = no NOT = { total_development = 200 } }}"
+				second_effect = "france_region = {add_permanent_claim = ROOT}"
+			}
+		}
+	}
+
+	brit_imperium_britannum = {
+		icon = emperor_and_autocrat
+		position = 6
+		required_missions = { brit_imperial_heir } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			government_rank = 3
+			total_development = 1000
+		}
+
+		effect = { country_event = { id = britt.11 }  } 
+	}
+
+	brit_enter_rausulia = {
+		icon = mission_control_fur_trade
+		position = 8
+		required_missions = { brit_enter_vinland } 
+		provinces_to_highlight = {
+			colonial_region = colonial_eastern_america
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			colonial_eastern_america = {
+				type = all
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					owned_by = IRO
+				}
+			}
+		}
+
+		effect = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = BRIT_TT_7
+				first_limit = "alliance_with = IRO"
+				first_effect = "IRO = { capital_scope = { add_permanent_province_modifier = { name = brit_natives_trading duration = -1}}}"
+				second_limit = "NOT = {alliance_with = IRO}"
+				second_effect = "add_yearly_manpower = 2"
+			}
+			tooltip = {
+				custom_tooltip = BRIT_TT_6
+				capital_scope = {
+					add_permanent_province_modifier = {
+						name = brit_natives_trading
+						duration = -1
+					}
+				}
+			}
+			hidden_effect = {
+				random_subject_country = {
+					limit = {
+						is_colonial_nation_of = ROOT
+						capital_scope = { colonial_region = colonial_eastern_america } 
+					}
+					capital_scope = {
+						add_permanent_province_modifier = {
+							name = "brit_natives_trading"
+							duration = -1
+						}
+					}
+				}
+			}
+		}
+	}
+}
+Britannia_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = BR0 } 
+
+	britannia_not_yet_lost = {
+		icon = mission_conquer_50_development
+		position = 1
+		provinces_to_highlight = { is_capital_of = JU0 } 
+
+		trigger = {
+			if = {
+				limit = { ai = yes } 
+				dip_power = 220
+			}
+			else = { diplomat = 1 } 
+			JU0 = {
+				OR = {
+					junior_union_with = ROOT
+					exists = no
+				}
+			}
+			home_counties_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			custom_tooltip = union_of_roses_tt
+			JU0 = {
+				add_opinion = {
+					who = ROOT
+					modifier = union_of_roses
+				}
+			}
+			home_counties_area = { add_core = ROOT } 
+		}
+	}
+
+	britannia_the_protector_city = {
+		icon = mission_rb_scottish_conquer_london
+		position = 2
+		required_missions = { britannia_not_yet_lost } 
+		provinces_to_highlight = { province_id = 236 } 
+
+		trigger = {
+			236 = {
+				country_or_non_sovereign_subject_holds = ROOT
+				development = 24
+			}
+		}
+
+		effect = {
+			236 = {
+				change_culture = briton
+				cede_province = ROOT
+				add_core = ROOT
+				remove_core = JU0
+			}
+			set_capital = 236
+		}
+	}
+
+	britannia_justice_for_the_juts = {
+		icon = protectors_of_christendom
+		position = 3
+		required_missions = { brit_union_of_roses } 
+		provinces_to_highlight = {
+			culture = juts
+			region = british_isles_region
+		}
+
+		trigger = {
+			owns_all_provinces = {
+				culture = juts
+				region = british_isles_region
+			}
+		}
+
+		effect = {
+			if = {
+				limit = { accepted_culture = juts } 
+				add_accepted_culture = jutlander
+				remove_accepted_culture = juts
+			}
+			custom_tooltip = alb_brit_move_jutish_culture_tt
+			hidden_effect = {
+				every_owned_province = {
+					limit = { culture = juts } 
+					change_culture = jutlander
+				}
+			}
+		}
+	}
+
+	britannia_scotlandia = {
+		icon = crush_heretic_strongholds
+		position = 5
+		provinces_to_highlight = {
+			province_group = ireland_provinces
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 3
+				province_group = ireland_provinces
+			}
+		}
+
+		effect = { country_event = { id = britt.2 } custom_tooltip = BRIT_ET_2 } 
+	}
+
+	britannia_emerald_sword = {
+		icon = mission_rb_into_ireland
+		position = 6
+		required_missions = { britannia_scotlandia } 
+		provinces_to_highlight = {
+			province_group = ireland_provinces
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			OR = {
+				accepted_culture = scotian
+				accepted_culture = belgian
+				commandant = 5
+			}
+			ireland_provinces = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = { country_event = { id = britt.6 } custom_tooltip = BRIT_ET_3  } 
+	}
+
+	britannia_our_britannia = {
+		icon = mission_naval_kingdom
+		position = 7
+		required_missions = {
+			britannia_scotian_troops
+			brit_imperium_britannum
+		}
+		provinces_to_highlight = {
+			region = british_isles_region
+			NOT = { owned_by = ROOT } 
+		}
+
+		trigger = {
+			british_isles_region = {
+				type = all
+				owned_by = ROOT
+			}
+			navy_size_percentage = 1
+		}
+
+		effect = {
+			add_yearly_manpower = 1
+			add_country_modifier = {
+				name = "brit_safe_shores"
+				duration = -1
+			}
+		}
+	}
+
+	britannia_the_wealth = {
+		icon = mission_rb_central_belt_coal_mining
+		position = 8
+		required_missions = { britannia_our_britannia } 
+		provinces_to_highlight = {
+			region = british_isles_region
+			OR = {
+				trade_goods = coal
+				has_latent_trade_goods = coal
+			}
+		}
+
+		trigger = {
+			all_province = {
+				region = british_isles_region
+				trade_goods = coal
+				has_manufactory_trigger = yes
+			}
+		}
+
+		effect = {
+			add_years_of_owned_provinces_production_income = {
+				years = 10
+				trigger = { trade_goods = coal } 
+				custom_tooltip = MONOPOLY_INCOME_COAL_DESC
+			}
+		}
+	}
+}
+Britannia_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = BR0 } 
+
+	britannia_a_navy_perhaps = {
+		icon = mission_establish_high_seas_navy
+		position = 2
+		required_missions = { britannia_recruit_a_legion_worth } 
+		provinces_to_highlight = { province_id = 241 } 
+
+		trigger = {
+			owns = 241
+			navy_size = 17
+		}
+
+		effect = {
+			241 = {
+				add_permanent_province_modifier = {
+					name = "augustan_port_royal"
+					duration = -1
+				}
+			}
+		}
+	}
+
+	britannia_the_little_republic = {
+		icon = ned_friesland
+		position = 3
+		required_missions = {
+			britannia_the_protector_city
+			britannia_a_navy_perhaps
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			trader = 3
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 2
+				province_has_center_of_trade_of_level = 2
+			}
+		}
+
+		effect = {
+			custom_tooltip = folding_fonlod_flag_tt
+			set_country_flag = folding_fonlod_flag
+		}
+	}
+
+	brit_the_great_channel = {
+		icon = the_hundred_years_war
+		position = 4
+		required_missions = { britannia_the_little_republic } 
+		provinces_to_highlight = { province_id = 1269 } 
+
+		trigger = {
+			OR = {
+				1269 = {
+					trade_share = {
+						country = ROOT
+						share = 30
+					}
+				}
+				calc_true_if = {
+					amount = 3
+					all_ally = { primary_culture = ellan } 
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "brit_power_from_trade"
+				duration = 10950
+			}
+			flanders_area = { add_permanent_claim = ROOT } 
+			frisia_area = { add_permanent_claim = ROOT } 
+			holland_area = { add_permanent_claim = ROOT } 
+			north_brabant_area = { add_permanent_claim = ROOT } 
+		}
+	}
+
+	brit_we_love_france = {
+		icon = bavarian_netherlands
+		position = 5
+		required_missions = { brit_the_great_channel } 
+		provinces_to_highlight = {
+			OR = {
+				area = flanders_area
+				area = frisia_area
+				area = holland_area
+				area = north_brabant_area
+			}
+		}
+
+		trigger = {
+			OR = {
+				accepted_culture = ellan
+				government_rank = 3
+			}
+			num_of_owned_provinces_with = {
+				value = 10
+				OR = {
+					area = flanders_area
+					area = frisia_area
+					area = holland_area
+					area = north_brabant_area
+				}
+			}
+		}
+
+		effect = { 
+			country_event = { id = britt.8 }
+			custom_tooltip =  BRIT_ET_5 
+			tooltip = {
+				add_country_modifier = {
+					name = brit_continental_trade
+					duration = -1
+				}
+			}
+		} 
+	}
+
+	britannia_scotian_troops = {
+		icon = mission_rb_conquer_the_highlands
+		position = 6
+		required_missions = { britannia_scotlandia } 
+		provinces_to_highlight = {
+			province_group = ireland_provinces
+			unrest = 1
+		}
+
+		trigger = {
+			ireland_provinces = {
+				type = all
+				owned_by = ROOT
+				NOT = { unrest = 1 } 
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "brit_scottian_aux"
+				duration = 10950
+			}
+		}
+	}
+}
+Britannia_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = BR0 } 
+
+	britannia_recruit_a_legion_worth = {
+		icon = mission_roman_legions
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			if = {
+				limit = { ai = no } 
+				army_size_percentage = 0.9
+			}
+			else = {
+				army_size_percentage = 0.7
+				num_of_generals = 1
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "resist_sweden"
+				duration = 10950
+			}
+		}
+	}
+
+	britannia_expand_the_corps = {
+		icon = mission_have_two_subjects
+		position = 2
+		required_missions = { britannia_recruit_a_legion_worth } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			OR = {
+				army_tradition = 20
+				has_estate_privilege = estate_nobles_officer_corp
+			}
+		}
+
+		effect = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = BRIT_TT_1
+				first_limit = "has_estate_privilege = estate_nobles_officer_corp"
+				first_effect = " add_patriarch_authority = 0.05 add_army_professionalism = 0.005"
+				second_limit = "NOT = {has_estate_privilege = estate_nobles_officer_corp}"
+				second_effect = " add_army_tradition = -10 set_estate_privilege = estate_nobles_officer_corp "
+			} 
+		} 
+	}
+
+	britannia_the_tabula_rotunda = {
+		icon = balance_of_power
+		position = 4
+		required_missions = { britannia_expand_the_corps } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			num_of_completed_idea_groups_mil = { amount = 1 } 
+			army_tradition = 50
+		}
+
+		effect = {
+			add_army_tradition = -30
+			add_country_modifier = {
+				name = "knights_of_the_round_table"
+				duration = -1
+			}
+			custom_tooltip = BRIT_TT_2
+			brittannia_knight_of_the_round_table = yes
+		}
+	}
+
+	britannia_frankish_hammers = {
+		icon = carolingian_empire
+		position = 6
+		required_missions = {
+			britannia_the_tabula_rotunda
+			brit_we_love_france
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			num_of_completed_idea_groups_mil = { amount = 2 } 
+			OR = {
+				FR2 = {
+					years_in_union_under = {
+						who = ROOT
+						years = 25
+					}
+				}
+				AND = {
+					accepted_culture = franken
+					accepted_culture = ellan
+					development_in_provinces = {
+						value = 250
+						culture_group = frankish
+					}
+				}
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "angevin_forces"
+				duration = -1
+			}
+		}
+	}
+
+	britannia_universities = {
+		icon = mission_early_modern_university
+		position = 7
+		provinces_to_highlight = { province_id = 237 } 
+
+		trigger = {
+			owns = 237
+			237 = {
+				has_tax_building_trigger = yes
+			}
+			has_institution = renaissance
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "brit_oxforda"
+				duration = 10950
+			}
+			237 = { add_building = university } 
+		}
+	}
+
+	britannia_expanding_teachings = {
+		icon = pontifical_universities
+		position = 8
+		required_missions = { britannia_universities } 
+		provinces_to_highlight = { province_id = 237 } 
+
+		trigger = {
+			237 = {
+				owned_by = ROOT
+				development = 25
+			}
+			num_of_completed_idea_groups_adm = { amount = 1 } 
+			num_of_completed_idea_groups_dip = { amount = 1 } 
+			has_adm_advisor_3 = yes
+			has_dip_advisor_3 = yes
+			has_mil_advisor_3 = yes
+		}
+
+		effect = { country_event = { id = britt.12 }  } 
 	}
 }

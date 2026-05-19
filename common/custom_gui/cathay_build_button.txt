@@ -1,0 +1,38 @@
+custom_button = {
+	name = cath_build_button
+	potential = {
+		FROM = {
+			has_country_flag = cath_build_button_flag
+		}
+		owned_by = FROM
+		OR = {
+			region = russia_region 
+			region = ruthenia_region 
+			region = ural_region 
+			region = baltic_region 
+		}
+		NOT = {
+			has_building = town_hall
+		}
+	}
+	trigger = {
+		owner = {
+			NOT = {
+				has_country_modifier = cathay_block_button
+			}
+			years_of_income = 0.33
+		}
+		is_core = ROOT
+	}
+	effect = {
+		add_or_upgrade_courthouse_building = yes
+		owner = {
+			add_years_of_income = -0.33
+			add_country_modifier = {
+				name = cathay_block_button
+				duration = 365
+			}
+		}
+	}
+	tooltip = cath_build_button_tt
+}

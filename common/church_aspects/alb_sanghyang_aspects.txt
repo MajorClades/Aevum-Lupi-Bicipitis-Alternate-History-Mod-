@@ -1,0 +1,100 @@
+galungan_aspect = {
+	sprite = "GFX_galungan_aspect"
+	cost = 100
+	trigger = {
+		NOT = {
+			OR = {
+				has_country_modifier = galungan_celebration_1
+				has_country_modifier = galungan_celebration_2
+				has_country_modifier = galungan_celebration_3
+				has_country_modifier = galungan_celebration_4
+				has_country_modifier = galungan_celebration_5
+				has_country_modifier = galungan_celebration_6
+			}
+		}
+	}
+	effect = {
+		country_event = {
+			id = hyang_event.1
+		}
+	}
+	ai_will_do = {
+		factor = 10
+	}
+}
+find_devi_aspect = {
+	sprite = "GFX_find_devi_aspect"
+	cost = 100
+	trigger = {
+		OR = {
+			has_consort = no
+			has_regency = no
+		}
+	}
+	effect = {
+		country_event = {
+			id = hyang_event.2
+		}
+	}
+	ai_will_do = {
+		factor = 10
+	}
+}
+seek_wisdom_aspect = {
+	sprite = "GFX_seek_wisdom_aspect"
+	cost = 100
+	trigger = {
+		NOT = {
+			OR = {
+				has_country_modifier = tolerant_sage_alb
+				has_country_modifier = traditional_sage_alb
+			}
+		}	
+	}
+	effect = {
+		country_event = {
+			id = hyang_event.3	
+		}
+	}
+	ai_will_do = {
+		factor = 10
+	}
+}
+enlighten_the_mainlanders_aspect = {
+	sprite = "GFX_enlighten_the_mainlanders_aspect_icon"
+	cost = 100
+	potential = {
+		
+	}
+	trigger = {
+		any_owned_province = {
+			OR = {
+				religion_group = pagan
+				religion_group = eastern
+				AND = {
+				religion_group = dharmic
+				NOT = { religion = kepercayaan }
+				}
+			}
+		}
+	}
+	effect = {
+		custom_tooltip = enlighten_the_mainlanders_aspect_tt
+		hidden_effect = {
+			random_owned_province = {
+				limit = {
+					OR = {
+					religion_group = pagan
+					religion_group = eastern
+						AND = {
+					religion_group = dharmic
+					NOT = { religion = kepercayaan }
+						}
+					}
+				}
+				change_religion = kepercayaan
+				add_base_production = 1
+			}
+		}
+	}
+}

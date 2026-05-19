@@ -1,10 +1,11 @@
 german_cofederation_monarchy = {
-	icon = "prussian_monarchy" #REPLACE_ME
+	icon = "ger_conf_reform"
 	allow_normal_conversion = no
 	potential = {
 		OR = {
 			tag = GR0
 			tag = PU0
+			tag = GE7
 		}
 		NOT = {
 			has_reform = great_germany_reform
@@ -25,7 +26,6 @@ german_cofederation_monarchy = {
 		germ_conf_mechanic
 	}
 	modifiers = {
-		vassal_income = -0.20
 		num_accepted_cultures = 1
 		max_absolutism = -10
 		nobles_influence_modifier = 0.1
@@ -34,7 +34,7 @@ german_cofederation_monarchy = {
 }
 
 kongrevy_reform = {
-	icon = "prussian_monarchy" #REPLACE_ME
+	icon = "kongrevy"
 	allow_normal_conversion = yes
 	potential = {
 		OR = {
@@ -75,18 +75,51 @@ kongrevy_reform = {
 
 }
 
+bavarian_councils_reform = {
+	icon = "bav_councils"
+	allow_normal_conversion = yes
+	potential = {
+		OR = {
+			tag = GR1
+			was_tag = GR1
+		}
+	}
+	trigger = {}
+	valid_for_nation_designer = yes
+	nation_designer_cost = 100
+	modifiers = {
+		governing_capacity = -50
+		global_trade_goods_size_modifier = 0.05
+		development_cost_in_primary_culture = -0.1
+	}
+	government_abilities = {
+		bav_councils
+	}
+	conditional = {
+		allow = {
+			OR = {
+				has_dlc = "Common Sense"
+				has_dlc = "Domination"
+			}
+		}
+		has_parliament = yes
+	}
+}
+
+
 great_germany_reform = {
-	icon = "prussian_monarchy" #REPLACE_ME
+	icon = "ger_conf_reform"
 	allow_normal_conversion = yes
 	potential = {
 		tag = GR0
 	}
 	trigger = {
-		OR = {
-			hidden_trigger = {
+		hidden_trigger = {
+			OR = {
 				has_reform = great_germany_reform
-			}
-			have_had_reform = great_germany_reform
+				tag = GR0
+				have_had_reform = great_germany_reform
+			}	
 		}
 	}
 	valid_for_nation_designer = yes
@@ -101,7 +134,7 @@ great_germany_reform = {
 }
 
 german_efficient_governing = {
-	icon = "prussian_monarchy" #REPLACE_ME
+	icon = "german_judges"
 	allow_normal_conversion = yes
 	potential = {
 		has_unlocked_government_reform = { government_reform = german_efficient_governing }
@@ -121,7 +154,7 @@ german_efficient_governing = {
 }
 
 pruthian_professional_army = {
-	icon = "prussian_monarchy" #REPLACE_ME
+	icon = "pruthian_army"
 	allow_normal_conversion = yes
 	potential = {
 		has_unlocked_government_reform = { government_reform = pruthian_professional_army }
@@ -130,8 +163,8 @@ pruthian_professional_army = {
 	}
 	valid_for_nation_designer = yes
 	nation_designer_cost = 100
-	effect = {
-		custom_tooltip = EFFECT_PRUTHIAN_STEPS
+	custom_attributes = {
+		mil_tech_army_professionalism = yes
 	}
 	modifiers = {
 		max_general_shock = 1

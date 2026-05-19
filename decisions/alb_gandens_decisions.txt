@@ -1,0 +1,113 @@
+country_decisions = {
+	ga0_restore_swedlaw_union = {
+		potential = {
+			tag = GA0
+			has_country_flag = swedlaw_union_flag
+		}
+		allow = {
+			alliance_with = SW2
+			SW2 = {
+				has_opinion = {
+					who = ROOT
+					value = 180
+				}
+			}
+			total_development = SW2
+		}
+		effect = {
+			SW2 = {
+				country_event_with_insight = {
+					id = gand.101
+					insight_tooltip = swedlaw_union_tt
+				}
+			}
+			clr_country_flag = swedlaw_union_flag
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 100
+	}
+	ga0_integrate_mittavia = {
+		potential = {
+			tag = GA0
+			has_country_flag = integrate_mittavia_flag
+		}
+		allow = {
+			senior_union_with = SW2
+			stability = 1
+		}
+		effect = {
+			add_stability = -1
+			SW2 = {
+				add_liberty_desire = 45
+			}
+			custom_tooltip = ga0_transfer_swedland
+			SW2 = {
+				every_owned_province = {
+					limit = {
+						area = scottish_marches_area
+						province_id = 246
+						province_id = 4361
+					}
+					cede_province = ROOT
+					add_core = ROOT
+				}
+			}
+			clr_country_flag = integrate_mittavia_flag
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 100
+	}
+	ar1_form_hringhorni = {
+		major = yes
+		potential = {
+			normal_or_historical_nations = yes
+			NOT = { has_country_flag = formed_hringhorni_flag }
+			NOT = { tag = AR1}
+			NOT = { tag = GA0} #they have a more flavorful way to form it
+			NOT = { tag = PAP}
+			NOT = { tag = IT9}
+			NOT = { tag = RU0}
+			OR = {
+				ai = no
+				is_playing_custom_nation = no
+			}
+			OR = {
+				is_free_or_tributary_trigger = yes
+				ai = no
+			}
+			religion = norse_ragnaroked
+			has_reform = bards_of_baldr_reform
+		}
+		provinces_to_highlight = {
+			
+		}
+		allow = {
+			NOT = { exists = AR1 }
+			is_free_or_tributary_trigger = yes
+			is_nomad = no
+			is_at_war = no
+			estate_influence = {
+				estate = estate_church
+				influence = 80
+			}
+			has_government_power = {
+				mechanic_type = baldrlight_mechanic
+				power_type = lightness_power
+				value = 90
+			}
+		}
+		effect = {
+			country_event = {
+				id = gand.100
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+}
