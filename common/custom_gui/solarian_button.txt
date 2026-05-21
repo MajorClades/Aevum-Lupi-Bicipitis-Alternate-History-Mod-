@@ -1,0 +1,57 @@
+custom_button = {
+	name = solarian_button
+	potential = {
+		owner = {
+			tag = FROM
+			OR = {
+				tag = BL0
+				tag = BL1
+				tag = BL4
+				has_country_flag = solarian_rites_flag
+			}
+		}
+		has_fort_building_trigger = yes
+	}
+	trigger = {
+		owner = {
+			years_of_income = 0.43
+		}
+		owned_by = FROM
+		religion = marcionist
+		has_fort_building_trigger = yes
+	}
+	effect = {
+		if = {
+			limit = {
+				NOT = {
+					has_province_modifier = solari_stronghold
+				}
+			}
+			owner = {
+				add_years_of_income = -0.43
+			}
+			add_province_modifier = {
+				name = solari_stronghold
+				duration = -1
+			}
+			custom_tooltip = BROK_LEG_TT_2
+		}else = {
+			add_named_unrest = {
+				name = "Angry Solarians"
+				value = 10
+			}
+			remove_province_modifier = solari_stronghold
+		}
+		hidden_effect = {
+			every_owned_province = {
+				limit = {
+					has_province_modifier = solari_stronghold
+					has_fort_building_trigger = no
+					is_capital = no
+				}
+				remove_province_modifier = solari_stronghold
+			}
+		}
+	}
+	tooltip = solarian_button_tt
+}

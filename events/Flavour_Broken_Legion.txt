@@ -1,0 +1,1175 @@
+namespace = legion
+
+country_event = { #Meet Solari
+	id = legion.1
+	title = legion.1.test
+	desc = legion.1.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = legion.2
+				days = 7
+			}
+		}
+	}
+
+	option = {
+		name = legion.1a
+		custom_tooltip = BROK_LEG_TT_6a
+		add_country_modifier = {
+			name = addarius_solari_sunshine
+			duration = -1
+		}
+		add_government_power = {
+			mechanic_type = marcionism_legion_mechanic
+			power_type = marc_leg_mil
+			value = 10
+		}
+	}
+	option = {
+		name = legion.1b
+		custom_tooltip = BROK_LEG_TT_6a
+		add_country_modifier = {
+			name = addarius_solari_sunshine
+			duration = -1
+		}
+		add_government_power = {
+			mechanic_type = marcionism_legion_mechanic
+			power_type = marc_leg_adm
+			value = 10
+		}
+	}
+}
+
+country_event = { #Meet Sirius
+	id = legion.2
+	title = legion.2.test
+	desc = legion.2.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = legion.2a
+		custom_tooltip = BROK_LEG_TT_6b
+		add_country_modifier = {
+			name = syrius_bloody_handed
+			duration = -1
+		}
+		add_government_power = {
+			mechanic_type = marcionism_legion_mechanic
+			power_type = marc_leg_dip
+			value = 20
+		}
+	}
+	option = {
+		name = legion.2b
+		custom_tooltip = BROK_LEG_TT_6b
+		add_country_modifier = {
+			name = syrius_bloody_handed
+			duration = -1
+		}
+	}
+}
+
+country_event = { #Making my way down town
+	id = legion.3
+	title = legion.3.test
+	desc = legion.3.desc
+	picture = ADVISOR_eventPicture
+	
+	trigger = {
+		has_government_mechanic = marcionism_legion_mechanic
+		NOT = {
+			has_country_modifier = clades_acolyte
+		}
+		NOT = {
+			has_country_modifier = sanguine_acolyte
+		}
+		NOT = {
+			has_country_modifier = solari_acolyte
+		}
+		NOT = {
+			has_country_modifier = above_all_acolyte
+		}
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = legion.3a
+		add_ruler_modifier = {
+			name = clades_acolyte
+			duration = -1
+		}
+	}
+	option = {
+		name = legion.3b
+		add_ruler_modifier = {
+			name = sanguine_acolyte
+			duration = -1
+		}
+	}
+	option = {
+		name = legion.3c
+		add_ruler_modifier = {
+			name = solari_acolyte
+			duration = -1
+		}
+	}
+	option = {
+		name = legion.3d
+		add_ruler_modifier = {
+			name = above_all_acolyte
+			duration = -1
+		}
+	}
+}
+
+country_event = { #Lybia
+	id = legion.4
+	title = legion.4.test
+	desc = legion.4.desc
+	picture = CRUSADER_HORDE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = legion.4a
+		set_capital = 354
+		354 = {
+			change_religion = marcionist
+			add_devastation = 20
+			add_core = ROOT
+		}
+		add_government_power = {
+			mechanic_type = marcionism_legion_mechanic
+			power_type = marc_leg_adm
+			value = 10
+		}
+	}
+	option = {
+		name = legion.4b
+		set_capital = 354
+		354 = {
+			change_religion = marcionist
+			add_devastation = 20
+			add_core = ROOT
+		}
+		add_government_power = {
+			mechanic_type = marcionism_legion_mechanic
+			power_type = marc_leg_dip
+			value = 10
+		}
+	}
+	option = {
+		name = legion.4c
+		set_capital = 354
+		354 = {
+			change_religion = marcionist
+			add_devastation = 20
+			add_core = ROOT
+		}
+		add_government_power = {
+			mechanic_type = marcionism_legion_mechanic
+			power_type = marc_leg_mil
+			value = 10
+		}
+	}
+	option = {
+		name = legion.4d
+		set_capital = 354
+		354 = {
+			change_religion = marcionist
+		}
+	}
+}
+
+country_event = { #Addarius Dies
+	id = legion.5
+	title = legion.5.test
+	desc = legion.5.desc
+	picture = DEATH_OF_HEIR_eventPicture
+	fire_only_once = yes
+	trigger = {
+		has_country_modifier = addarius_solari_sunshine
+		is_year = 1491
+	}
+
+	mean_time_to_happen = { months = 12 }
+
+	option = {
+		name = legion.5a
+		remove_country_modifier = addarius_solari_sunshine
+		capital_scope = {
+			if = {
+				limit = { has_province_modifier = solari_stronghold }
+				owner = { add_years_of_income = 1.5 }
+			}else = {
+				add_province_modifier = {
+					name = solari_stronghold
+					duration = -1
+				}
+				custom_tooltip = BROK_LEG_TT_2
+			}
+		}
+	}
+	option = {
+		name = legion.5b
+		remove_country_modifier = addarius_solari_sunshine
+		add_solarian_authority = {amount = 15}
+	}
+}
+
+country_event = { #Syrius Dies
+	id = legion.6
+	title = legion.6.test
+	desc = legion.6.desc
+	picture = DEATH_OF_HEIR_eventPicture
+	fire_only_once = yes
+	trigger = {
+		has_country_modifier = syrius_bloody_handed
+		is_year = 1494
+	}
+
+	mean_time_to_happen = { months = 12 }
+
+	option = {
+		name = legion.6a
+		remove_country_modifier = syrius_bloody_handed
+		add_corruption = -4
+		add_church_power = -50
+	}
+	option = {
+		name = legion.6b
+		remove_country_modifier = syrius_bloody_handed
+		add_corruption = -4
+		add_sanguine_authority = {amount = 15}
+	}
+}
+
+country_event = { #Clades Dies
+	id = legion.7
+	title = legion.7.test
+	desc = legion.7.desc
+	picture = DEATH_OF_HEIR_eventPicture
+	fire_only_once = yes
+	trigger = {
+		has_country_modifier = clades_itsame
+		is_year = 1489
+	}
+
+	mean_time_to_happen = { months = 12 }
+
+	option = {
+		name = legion.7a
+		remove_country_modifier = clades_itsame
+		add_stability_or_adm_power = yes
+		add_cladesian_authority = {amount = 10}
+	}
+	option = {
+		name = legion.7b
+		remove_country_modifier = clades_itsame
+		add_adm_power = 250
+		add_cladesian_authority = {amount = 20}
+	}
+}
+
+country_event = { #Africa converted
+	id = legion.8
+	title = legion.8.test
+	desc = legion.8.desc
+	picture = EMPEROR_eventPicture
+
+	is_triggered_only = yes
+	option = {
+		name = legion.8a
+		add_cladesian_authority = {amount = 80}
+	}
+	option = {
+		name = legion.8b
+		add_sanguine_authority = {amount = 80}
+	}
+	option = {
+		name = legion.8c
+		add_solarian_authority = {amount = 80}
+	}
+	option = {
+		name = legion.8d
+		add_cladesian_authority = {amount = 50}
+		add_sanguine_authority = {amount = 50}
+		add_solarian_authority = {amount = 50}
+	}
+	option = {
+		name = legion.8e
+		add_cladesian_authority = {amount = -50}
+		add_sanguine_authority = {amount = -50}
+		add_solarian_authority = {amount = -50}
+	}
+}
+
+country_event = { #the ascension
+	id = legion.9
+	title = legion.9.test
+	desc = legion.9.desc
+	picture = DEATH_OF_HEIR_eventPicture
+
+	is_triggered_only = yes
+	immediate = {
+		set_country_flag = marcionism_not_base_flag
+	}
+	option = {
+		name = legion.9a
+		if = {limit = {has_cladesian_authority = {amount = 90}}
+		}else = {add_stability = -6}
+		change_tag = BL2
+		add_government_reform = marcionism_cladesian_reform
+		swap_non_generic_missions = yes
+	}
+	option = {
+		name = legion.9b
+		if = {limit = {has_sanguine_authority = {amount = 90}}
+		}else = {add_stability = -6}
+		change_tag = BL3
+		change_government = republic
+		add_government_reform = marcionism_sanguine_reform
+		swap_non_generic_missions = yes
+	}
+	option = {
+		name = legion.9c
+		if = {limit = {has_solarian_authority = {amount = 90}}
+		}else = {add_stability = -6}
+		change_tag = BL4
+		change_government = monarchy
+		add_government_reform = marcionism_solarian_reform
+		hidden_effect = {
+			BL4 = {
+				set_dynasty = "Solari"
+			}
+		}
+		swap_non_generic_missions = yes
+	}
+	option = {
+		name = legion.9d
+		change_tag = BL5
+		country_event = {
+			id = legion.100
+		}
+		add_government_reform = marcionism_all_reform
+		swap_non_generic_missions = yes
+	}
+}
+
+country_event = { #get Alexandria
+	id = legion.10
+	title = legion.10.test
+	desc = legion.10.desc
+	picture = ADVISOR_eventPicture
+	fire_only_once = yes
+	trigger = {
+		owns = 358
+		religion = marcionist
+	}
+
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	option = {
+		name = legion.10a
+		358 = {
+			add_devastation = 30
+			change_religion = marcionist
+			add_province_modifier = {
+				name = solari_stronghold
+				duration = -1
+			}
+			custom_tooltip = BROK_LEG_TT_2
+		}
+		add_solarian_authority = {amount = 20}
+	}
+	option = {
+		name = legion.10b
+		358 = {
+			add_unrest = -10
+		}
+	}
+}
+
+country_event = { #get Memphis
+	id = legion.11
+	title = legion.11.test
+	desc = legion.11.desc
+	picture = ADVISOR_eventPicture
+	fire_only_once = yes
+	trigger = {
+		owns = 361
+		religion = marcionist
+	}
+
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	option = {
+		name = legion.11a
+		361 = {
+			add_devastation = 30
+			change_religion = marcionist
+			add_core = ROOT
+		}
+		add_cladesian_authority = {amount = 20}
+	}
+	option = {
+		name = legion.11b
+		361 = {
+			add_unrest = -10
+		}
+	}
+}
+
+country_event = { #get Aldabba
+	id = legion.12
+	title = legion.12.test
+	desc = legion.12.desc
+	picture = ADVISOR_eventPicture
+	fire_only_once = yes
+	trigger = {
+		owns = 336
+		religion = marcionist
+	}
+
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	option = {
+		name = legion.12a
+		336 = {
+			add_devastation = 30
+			change_religion = marcionist
+			destroy_great_project = {
+				type = aldabba_palace
+			}
+		}
+		add_years_of_income = 2
+		add_sanguine_authority = {amount = 20}
+	}
+	option = {
+		name = legion.12b
+		336 = {
+			add_unrest = -10
+		}
+	}
+}
+
+country_event = { #get saint mark
+	id = legion.13
+	title = legion.13.test
+	desc = legion.13.desc
+	picture = ADVISOR_eventPicture
+	fire_only_once = yes
+	trigger = {
+		owns = 338
+		religion = marcionist
+	}
+
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	option = {
+		name = legion.13a
+		338 = {
+			add_devastation = 30
+			change_religion = marcionist
+			destroy_great_project = {
+				type = indictian_cathedral
+			}
+		}
+		add_adm_power = 100
+		add_dip_power = 100
+		add_mil_power = 100
+		add_cladesian_authority = {amount = 10}
+		add_sanguine_authority = {amount = 10}
+		add_solarian_authority = {amount = 10}
+	}
+	option = {
+		name = legion.13b
+		338 = {
+			add_unrest = -10
+		}
+	}
+}
+
+country_event = { #get Jerusalem
+	id = legion.14
+	title = legion.14.test
+	desc = legion.14.desc
+	picture = ADVISOR_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = legion.14a
+		379 = {
+			add_devastation = 30
+			change_religion = marcionist
+		}
+		add_demiurgic_defiance = {amount = 20}
+	}
+	option = {
+		name = legion.14b
+		add_demiurgic_defiance = {amount = -20}
+		set_country_flag = de_de_more_missionaries
+		custom_tooltip = DE_DE_TT_1
+	}
+}
+
+country_event = { #get ROMe
+	id = legion.15
+	title = legion.15.test
+	desc = legion.15.desc
+	picture = ADVISOR_eventPicture
+	fire_only_once = yes
+	trigger = {
+		owns = 118
+		religion = marcionist
+	}
+
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	option = {
+		name = legion.15a
+		118 = {
+			add_devastation = 50
+			destroy_great_project = {
+				type = stpeters_cathedral
+			}
+			change_religion = marcionist
+		}
+	}
+	option = {
+		name = legion.15b
+		add_demiurgic_defiance = {amount = 20}
+		118 = {
+			destroy_great_project = {
+				type = stpeters_cathedral
+			}
+			add_named_unrest = {
+				name = "Demiurgic Resistance"
+				value = 5
+			}
+		}
+	}
+}
+
+country_event = { #get Mecca
+	id = legion.16
+	title = legion.16.test
+	desc = legion.16.desc
+	picture = ADVISOR_eventPicture
+	fire_only_once = yes
+	trigger = {
+		owns = 358
+		religion = marcionist
+	}
+
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	option = {
+		name = legion.16a
+		358 = {
+			add_devastation = 50
+			change_religion = marcionist
+		}
+	}
+	option = {
+		name = legion.16b
+		358 = {
+			add_unrest = -10
+		}
+	}
+}
+
+country_event = { #conquered italy
+	id = legion.17
+	title = legion.17.test
+	desc = legion.17.desc
+	picture = ADVISOR_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = legion.17a
+		set_country_flag = de_de_italy_1
+		set_capital = 118
+		custom_tooltip = DE_DE_TT_5a
+	}
+	option = {
+		name = legion.17b
+		set_country_flag = de_de_italy_2
+		custom_tooltip = DE_DE_TT_5b
+	}
+}
+
+country_event = { #get cosntantinoploli
+	id = legion.18
+	title = legion.18.test
+	desc = legion.18.desc
+	picture = ADVISOR_eventPicture
+	fire_only_once = yes
+	trigger = {
+		owns = 151
+		religion = marcionist
+	}
+
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	option = {
+		name = legion.18a
+		151 = {
+			add_devastation = 50
+			destroy_great_project = {
+				type = hagia_sophia
+			}
+			change_religion = marcionist
+		}
+	}
+	option = {
+		name = legion.18b
+		151 = {
+			add_great_project_tier = {
+				type = hippodrome_byz
+				tier = 1
+			}
+		}
+	}
+}
+
+country_event = { #numberas
+	id = legion.19
+	title = legion.19.test
+	desc = legion.19.desc
+	picture = ADVISOR_eventPicture
+	
+ 	is_triggered_only = yes
+	option = {
+		name = legion.19a
+		custom_tooltip = BROK_LEG_TT_11
+	}
+}
+
+country_event = { #arabian buff
+	id = legion.20
+	title = legion.20.test
+	desc = legion.20.desc
+	picture = ADVISOR_eventPicture
+	
+ 	is_triggered_only = yes
+	option = {
+		name = legion.20a
+		tooltip = {
+			add_country_modifier = {
+				name = de_de_infantry_fake
+				duration = 1
+			}
+		}
+		set_country_flag = de_de_infantry
+	}
+	option = {
+		name = legion.20b
+		tooltip = {
+			add_country_modifier = {
+				name = de_de_cavalry_fake
+				duration = 1
+			}
+		}
+		set_country_flag = de_de_cavalry
+	}
+	option = {
+		name = legion.20c
+		tooltip = {
+			add_country_modifier = {
+				name = de_de_artillery_fake
+				duration = 1
+			}
+		}
+		set_country_flag = de_de_artillery
+	}
+}
+
+country_event = { #sanguine studies
+	id = legion.21
+	title = legion.21.test
+	desc = legion.21.desc
+	picture = ADVISOR_eventPicture
+	trigger = {
+		tag = BL3
+		has_government_mechanic = demiurgic_defiance_mechanic
+		NOT = {
+			has_ruler_modifier = bl3_studies
+		}
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	option = {
+		name = legion.21a
+		change_adm = 2
+		add_demiurgic_defiance = {amount = -15}
+	}
+	option = {
+		name = legion.21b
+		change_dip = 2
+		add_demiurgic_defiance = {amount = -15}
+	}
+	option = {
+		name = legion.21c
+		change_mil = 2
+		add_demiurgic_defiance = {amount = -15}
+	}
+	option = {
+		name = legion.21d
+		add_demiurgic_defiance = {amount = 15}
+	}
+	after = {
+		hidden_effect = {
+			add_ruler_modifier = {
+				name = bl3_studies
+				hidden = yes
+			}
+		}
+	}
+}
+
+country_event = { #Solari Rulers
+	id = legion.22
+	title = legion.22.test
+	desc = legion.22.desc
+	picture = ADVISOR_eventPicture
+	trigger = {
+		tag = BL4
+		has_government_mechanic = demiurgic_defiance_mechanic
+		has_heir = no
+	}
+	mean_time_to_happen = {
+		months = 1
+	}
+	option = {
+		name = legion.22a
+		random_list = {
+			75 = {
+				define_heir = {
+					dynasty = "Solari"
+					adm = 2
+					dip = 2
+					mil = 2
+					max_random_adm = 6
+					max_random_dip = 4
+					max_random_mil = 5
+					male = yes
+				}
+			}
+			25 = {
+				define_heir = {
+					dynasty = "Solari"
+					adm = 2
+					dip = 2
+					mil = 2
+					max_random_adm = 6
+					max_random_dip = 4
+					max_random_mil = 5
+					female = yes
+				}
+			}
+		}
+	}
+	option = {
+		name = legion.22b
+		random_list = {
+			75 = {
+				define_heir = {
+					dynasty = "Solari"
+					adm = 2
+					dip = 2
+					mil = 2
+					max_random_adm = 4
+					max_random_dip = 6
+					max_random_mil = 5
+					male = yes
+				}
+			}
+			25 = {
+				define_heir = {
+					dynasty = "Solari"
+					adm = 2
+					dip = 2
+					mil = 2
+					max_random_adm = 4
+					max_random_dip = 6
+					max_random_mil = 5
+					female = yes
+				}
+			}
+		}
+	}
+	option = {
+		name = legion.22c
+		random_list = {
+			75 = {
+				define_heir = {
+					dynasty = "Solari"
+					adm = 2
+					dip = 2
+					mil = 2
+					max_random_adm = 5
+					max_random_dip = 4
+					max_random_mil = 6
+					male = yes
+				}
+			}
+			25 = {
+				define_heir = {
+					dynasty = "Solari"
+					adm = 2
+					dip = 2
+					mil = 2
+					max_random_adm = 5
+					max_random_dip = 4
+					max_random_mil = 6
+					male = yes
+				}
+			}
+		}
+	}
+	option = {
+		name = legion.22d
+		random_list = {
+			50 = {
+				define_heir = {
+					dynasty = "Solari"
+					adm = 1
+					dip = 1
+					mil = 1
+					max_random_adm = 6
+					max_random_dip = 6
+					max_random_mil = 6
+					male = yes
+				}
+			}
+			50 = {
+				define_heir = {
+					dynasty = "Solari"
+					adm = 1
+					dip = 1
+					mil = 1
+					max_random_adm = 6
+					max_random_dip = 6
+					max_random_mil = 6
+					female = yes
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = { #choose rites
+	id = legion.100
+	title = legion.100.test
+	desc = legion.100.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = legion.100a
+		set_country_flag = cladesian_rites_flag	
+		custom_tooltip = RITES_TT_1a		
+		tooltip = {
+			add_country_modifier = {
+				name = fake_cladesian_power
+				duration = 1
+			}
+		}
+		country_event = {
+			id = legion.101
+		}
+	}
+	option = {
+		name = legion.100b
+		add_prestige = -30
+		country_event = {
+			id = legion.101
+		}
+	}
+}
+
+country_event = { #choose rites
+	id = legion.101
+	title = legion.101.test
+	desc = legion.101.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = legion.101a
+		set_country_flag = sanguine_rites_flag		
+		custom_tooltip = RITES_TT_1b	
+		tooltip = {
+			add_country_modifier = {
+				name = fake_sanguine_power
+				duration = 1
+			}
+		}
+		country_event = {
+			id = legion.102
+		}
+	}
+	option = {
+		name = legion.101b
+		country_event = {
+			id = legion.102
+		}
+	}
+}
+
+country_event = { #choose rites
+	id = legion.102
+	title = legion.102.test
+	desc = legion.102.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = legion.102a
+		set_country_flag = solarian_rites_flag		
+		custom_tooltip = RITES_TT_1c	
+		tooltip = {
+			add_country_modifier = {
+				name = fake_solarian_power
+				duration = 1
+			}
+		}
+		country_event = {
+			id = legion.103
+		}
+	}
+	option = {
+		name = legion.102b
+		add_devotion = -20
+		country_event = {
+			id = legion.103
+		}
+	}
+}
+
+country_event = { #choose rites
+	id = legion.103
+	title = legion.103.test
+	desc = legion.103.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = legion.103a
+		set_country_flag = pauline_1_rites_flag	
+		custom_tooltip = RITES_TT_1d			
+		tooltip = {
+			add_country_modifier = {
+				name = fake_pauline_1_power
+				duration = 1
+			}
+		}
+	}
+	option = {
+		name = legion.103b
+		set_country_flag = pauline_2_rites_flag		
+		custom_tooltip = RITES_TT_1d	
+		tooltip = {
+			add_country_modifier = {
+				name = fake_pauline_2_power
+				duration = 1
+			}
+		}
+	}
+}
+
+country_event = { #festival and council
+	id = legion.1000
+	title = legion.1000.test
+	desc = legion.1000.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = legion.1000a
+		trigger = {has_cladesian_authority = { amount = 50 }	}
+		add_adm_power = -50
+		add_cladesian_authority = { amount = -25 }				
+	}
+	option = {
+		name = legion.1000b
+		trigger = {has_sanguine_authority = { amount = 50 }	}
+		add_dip_power = -50
+		add_sanguine_authority = { amount = -25 }		
+	}
+	option = {
+		name = legion.1000c
+		trigger = {has_solarian_authority = { amount = 50 }	}
+		add_mil_power = -50
+		add_solarian_authority = { amount = -25 }		
+	}
+	option = {
+		name = legion.1000d
+		add_cladesian_authority = { amount = -10 }	
+		add_sanguine_authority = { amount = -10 }	
+		add_solarian_authority = { amount = -10 }		
+	}
+	option = {
+		name = legion.1000e
+		add_cladesian_authority = { amount = 10 }	
+		add_sanguine_authority = { amount = 10 }	
+		add_solarian_authority = { amount = 10 }		
+	}
+	option = {
+		name = legion.1000f
+		trigger = {has_cladesian_authority = { amount = 50 } has_sanguine_authority = { amount = 50 }	}
+		add_adm_power = -25 
+		add_dip_power = -25
+		add_cladesian_authority = { amount = -25 }		
+		add_sanguine_authority = { amount = -25 }			
+	}
+	option = {
+		name = legion.1000g
+		trigger = {has_sanguine_authority = { amount = 50 }	has_solarian_authority = { amount = 50 }}
+		add_dip_power = -25
+		add_mil_power = -25
+		add_sanguine_authority = { amount = -25 }	
+		add_solarian_authority = { amount = -25 }	
+	}
+	option = {
+		name = legion.1000h
+		trigger = {has_solarian_authority = { amount = 50 } has_cladesian_authority = { amount = 50 }	}
+		add_adm_power = -25 
+		add_mil_power = -25
+		add_cladesian_authority = { amount = -25 }	
+		add_solarian_authority = { amount = -25 }		
+	}
+	after = {
+		hidden_effect = {
+			change_variable = {
+				which = num_council_marcionism_var
+				value = 1
+			}
+		}
+	}
+}
+
+
+country_event = { #anti-demiurgic coalition
+	id = legion.2000
+	title = legion.2000.test
+	desc = legion.2000.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = legion.2000a
+		country_event = {
+			id = legion.2001
+		}	
+	}
+	option = {
+		name = legion.2000b
+		country_event = {
+			id = legion.2002
+		}
+	}
+}
+
+country_event = { #anti-demiurgic coalition gain wealth lose power
+	id = legion.2001
+	title = legion.2001.test
+	desc = legion.2001.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = legion.2001a
+		add_adm_power = 100
+		add_dip_power = 50
+		add_mil_power = 50
+		add_demiurgic_defiance = { amount = -25 }		
+	}
+	option = {
+		name = legion.2001b
+		add_adm_power = 50
+		add_dip_power = 100
+		add_mil_power = 50
+		add_demiurgic_defiance = { amount = -25 }		
+	}
+	option = {
+		name = legion.2001c
+		add_adm_power = 50
+		add_dip_power = 50
+		add_mil_power = 100
+		add_demiurgic_defiance = { amount = -25 }		
+	}
+	option = {
+		name = legion.2001d
+		add_church_power = 100
+		add_demiurgic_defiance = { amount = -25 }		
+	}
+}
+
+country_event = { #anti-demiurgic coalition gain power lose wealth
+	id = legion.2002
+	title = legion.2002.test
+	desc = legion.2002.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = legion.2002a
+		add_adm_power = -100
+		add_demiurgic_defiance = { amount = 10 }		
+	}
+	option = {
+		name = legion.2002b
+		add_dip_power = -100
+		add_demiurgic_defiance = { amount = 10 }		
+	}
+	option = {
+		name = legion.2002c
+		add_mil_power = -100
+		add_demiurgic_defiance = { amount = 10 }		
+	}
+	option = {
+		name = legion.2002d
+		add_church_power = -100
+		add_demiurgic_defiance = { amount = 10 }		
+	}
+	option = {
+		name = legion.2000e
+		add_country_modifier = {
+			name = de_de_more
+			duration = 730
+		}		
+	}
+}
