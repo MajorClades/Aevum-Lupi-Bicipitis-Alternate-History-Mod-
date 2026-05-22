@@ -159,6 +159,30 @@ country_decisions = {
 			country_event = {
 				id = redleg.2
 			}
+			358 = {
+				add_province_modifier = {
+					name = crusader_target_local_mod
+					duration = 1825
+				}
+			}
+			361 = {
+				add_province_modifier = {
+					name = crusader_target_local_mod
+					duration = 1825
+				}
+			}
+			379 = {
+				add_province_modifier = {
+					name = crusader_target_local_mod
+					duration = 1825
+				}
+			}
+			4316 = {
+				add_province_modifier = {
+					name = crusader_target_local_mod
+					duration = 1825
+				}
+			}
 			clr_country_flag = red_crusade
 			set_country_flag = end_red_crusade
 		}
@@ -202,6 +226,61 @@ country_decisions = {
 					is_year = 1525
 				}
 			}
+		}
+	}
+	ae0_bring_in_egypt = {
+		color = { 200 50 110 }
+		potential = {
+			tag = AE0
+			NOT = {
+				has_country_flag = red_egypt_culture_done
+			}
+		}
+		allow = {
+			mission_completed = AE0_egypt_prosperity
+			accepted_culture = hell_egypt
+			accepted_culture = copt
+			egypt_region = {
+				type = all
+				owned_by = ROOT
+				religion = ROOT
+			}
+		}
+		effect = {
+			custom_tooltip = move_egypt_into_african_group
+			change_primary_culture = african_egyptian
+			hidden_effect = {
+				egypt_region = {
+					change_culture = african_egyptian
+				}
+				remove_accepted_culture = hell_egypt
+				remove_accepted_culture = copt
+			}
+			set_country_flag = red_egypt_culture_done
+		}
+	}
+	ae0_bring_in_syria = {
+		color = { 200 50 110 }
+		potential = {
+			has_country_flag = red_egypt_culture_done
+			NOT = {
+				has_country_flag = red_egypt_siria_culture_done
+			}
+		}
+		allow = {
+			accepted_culture = sirian
+			owns_all_provinces = {
+				culture = sirian
+			}
+		}
+		effect = {
+			every_province = {
+				limit = {
+					culture = sirian
+				}
+				change_culture = afro_sirian
+			}
+			set_country_flag = red_egypt_siria_culture_done
 		}
 	}
 }
