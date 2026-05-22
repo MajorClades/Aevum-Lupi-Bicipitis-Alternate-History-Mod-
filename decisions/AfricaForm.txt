@@ -182,4 +182,49 @@ country_decisions = {
 		}
 		ai_importance = 400
 	}
+	ae0_bring_in_egypt = {
+		potential = {
+			tag = AE0
+		}
+		allow = {
+			mission_completed = AE0_egypt_prosperity
+			accepted_culture = hell_egypt
+			accepted_culture = copt
+			egypt_region = {
+				type = all
+				owned_by = ROOT
+				religion = ROOT
+			}
+		}
+		effect = {
+			custom_tooltip = move_egypt_into_african_group
+			change_primary_culture = african_egyptian
+			hidden_effect = {
+				egypt_region = {
+					change_culture = african_egyptian
+				}
+				remove_accepted_culture = hell_egypt
+				remove_accepted_culture = copt
+			}
+		}
+	}
+	ae0_bring_in_syria = {
+		potential = {
+			primary_culture = african_egyptian
+		}
+		allow = {
+			accepted_culture = sirian
+			owns_all_provinces = {
+				culture = sirian
+			}
+		}
+		effect = {
+			every_province = {
+				limit = {
+					culture = sirian
+				}
+				change_culture = afro_sirian
+			}
+		}
+	}
 }
