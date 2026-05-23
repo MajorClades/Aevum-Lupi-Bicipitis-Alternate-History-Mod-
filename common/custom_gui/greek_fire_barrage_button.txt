@@ -1,0 +1,110 @@
+custom_button = {
+	name = g_f_b_button
+	potential = {
+		has_siege = yes
+		sieged_by = FROM
+		fort_level = 1
+		FROM = {
+			has_country_modifier = rho_use_that_fire_3
+		}
+	}
+	trigger = {
+		if = {
+			limit = { fort_level = 1 NOT = { fort_level = 2 } }
+			artillery_in_province = 3
+		}
+		if = {
+			limit = { fort_level = 2 NOT = { fort_level = 3 } }
+			artillery_in_province = 5
+		}
+		if = {
+			limit = { fort_level = 3 NOT = { fort_level = 4 } }
+			artillery_in_province = 8
+		}
+		if = {
+			limit = { fort_level = 4 NOT = { fort_level = 5 } }
+			artillery_in_province = 12
+		}
+		if = {
+			limit = { fort_level = 5 }
+			artillery_in_province = 20
+		}
+		NOT = {
+			has_province_modifier = exploded_cannons_rhom
+		}
+	}
+	effect = {
+		if = {
+			limit = { fort_level = 1 NOT = { fort_level = 2 } }
+			kill_units = {
+				who = enemy
+				type = artillery
+				amount = 3
+			}
+			add_garrison = -500
+			change_siege = 2
+		}
+		if = {
+			limit = {
+				fort_level = 2
+				NOT = {
+					fort_level = 3
+				}
+			}
+			kill_units = {
+				who = enemy
+				type = artillery
+				amount = 5
+			}
+			add_garrison = -750
+			change_siege = 3
+		}
+		if = {
+			limit = {
+				fort_level = 3
+				NOT = {
+					fort_level = 4
+				}
+			}
+			kill_units = {
+				who = enemy
+				type = artillery
+				amount = 8
+			}
+			add_garrison = -1000
+			change_siege = 3
+		}
+		if = {
+			limit = {
+				fort_level = 4
+				NOT = {
+					fort_level = 5
+				}
+			}
+			kill_units = {
+				who = enemy
+				type = artillery
+				amount = 12
+			}
+			add_garrison = -1500
+			change_siege = 3
+		}
+		if = {
+			limit = {
+				fort_level = 5
+			}
+			kill_units = {
+				who = enemy
+				type = artillery
+				amount = 20
+			}
+			add_garrison = -2000
+			change_siege = 4
+		}
+		add_province_modifier = {
+			name = exploded_cannons_rhom
+			duration = 365
+		}
+	}
+	tooltip = g_f_b_button_tt
+}

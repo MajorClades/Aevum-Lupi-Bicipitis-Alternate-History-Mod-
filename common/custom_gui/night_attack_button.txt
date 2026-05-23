@@ -1,0 +1,93 @@
+custom_button = {
+	name = night_attack_button
+	potential = {
+		has_siege = yes
+		sieged_by = FROM
+		fort_level = 1
+		FROM = {
+			OR = {
+				mission_completed = kong_night_lords 
+				has_reform = night_lord_fear_based_state
+			}
+		}
+	}
+	trigger = {
+		if = {
+			limit = { fort_level = 1 NOT = { fort_level = 2 } }
+			FROM = { manpower = 3 }
+		}
+		if = {
+			limit = { fort_level = 2 NOT = { fort_level = 3 } }
+			FROM = { manpower = 5 }
+		}
+		if = {
+			limit = { fort_level = 3 NOT = { fort_level = 4 } }
+			FROM = { manpower = 10 }
+		}
+		if = {
+			limit = { fort_level = 4 NOT = { fort_level = 5 } }
+			FROM = { manpower = 15 }
+		}
+		if = {
+			limit = { fort_level = 5 }
+			FROM = { manpower = 25 }
+		}
+		NOT = {
+			has_province_modifier = night_lords_attacked
+		}
+	}
+	effect = {
+		if = {
+			limit = { fort_level = 1 NOT = { fort_level = 2 } }
+			FROM = { add_manpower = -3 }
+			add_garrison = -500
+			change_siege = 1
+		}
+		if = {
+			limit = {
+				fort_level = 2
+				NOT = {
+					fort_level = 3
+				}
+			}
+			FROM = { add_manpower = -5 }
+			add_garrison = -750
+			change_siege = 2
+		}
+		if = {
+			limit = {
+				fort_level = 3
+				NOT = {
+					fort_level = 4
+				}
+			}
+			FROM = { add_manpower = -10 }
+			add_garrison = -1000
+			change_siege = 2
+		}
+		if = {
+			limit = {
+				fort_level = 4
+				NOT = {
+					fort_level = 5
+				}
+			}
+			FROM = { add_manpower = -15 }
+			add_garrison = -1500
+			change_siege = 2
+		}
+		if = {
+			limit = {
+				fort_level = 5
+			}
+			FROM = { add_manpower = -25 }
+			add_garrison = -2000
+			change_siege = 3
+		}
+		add_province_modifier = {
+			name = night_lords_attacked
+			duration = 180
+		}
+	}
+	tooltip = night_attack_button_tt
+}
