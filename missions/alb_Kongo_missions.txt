@@ -105,6 +105,87 @@ Kongo_1_slot = {
 			country_event = { id = kongo_alb.3 }
 		}
 	}
+	
+	kong_home_of_warriors = {
+		icon = mission_ottoman_harem
+		position = 5
+		provinces_to_highlight = { NOT = { has_manpower_building_trigger = yes  } owned_by = ROOT } 
+
+		trigger = {
+			army_tradition = 20
+			num_of_owned_provinces_with = {
+				value = 10
+				has_manpower_building_trigger = yes
+			}
+		}
+
+		effect = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = KONG_TT_5
+				first_limit = "has_country_modifier = kongo_old_wars_tactics"
+				first_effect = "
+					add_country_modifier = {
+						name = kongo_solution
+						duration = -1
+					}
+				"
+				second_limit = "NOT = { has_country_modifier = kongo_old_wars_tactics }"
+				second_effect = "
+					add_country_modifier = {
+						name = kongo_warfare_of_the_horn
+						duration = -1
+					}
+				"
+			}
+		}
+	}
+
+	kong_true_warriors = {
+		icon = mission_ottoman_harem
+		position = 6
+		required_missions = { kong_home_of_warriors } 
+		provinces_to_highlight = { NOT = { has_manpower_building_trigger = yes  } owned_by = ROOT } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				has_manpower_building_trigger = yes
+				has_forcelimit_building_trigger = yes
+			}
+		}
+
+		effect = {
+			distribute_development = {
+				amount = 10
+				type = manpower
+				limit = "culture = kongolese_h"
+			}
+		}
+	}
+
+	kong_more_war = {
+		icon = mission_ottoman_harem
+		position = 7
+		required_missions = { kong_true_warriors } 
+		provinces_to_highlight = { NOT = { has_manpower_building_trigger = yes  } owned_by = ROOT } 
+
+		trigger = {
+			army_tradition = 50
+			num_of_owned_provinces_with = {
+				value = 15
+				has_manpower_building_trigger = yes
+				has_forcelimit_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = kong_great_conquerors
+				duration = -1
+			}
+		}
+	}
+
 }
 
 Kongo_2_slot = {
@@ -143,7 +224,7 @@ Kongo_2_slot = {
 				first_custom_tooltip = KONG_TT_2
 				first_limit = "KUB = { is_subject_of = ROOT }"
 				first_effect = "
-					vassalize = MDI
+					ajuuran_area = { add_core = ROOT }
 				"
 				second_limit = "NOT = { KUB = { is_subject_of = ROOT } }"
 				second_effect = "
@@ -176,6 +257,111 @@ Kongo_2_slot = {
 			add_government_reform = kongo_stable_dynasty
 		}
 	}
+
+	kong_upbringers = {
+		icon = mission_ottoman_harem
+		position = 4
+		required_missions = { kong_restorer_of_kongo  } 
+		provinces_to_highlight = { region = horn_of_africa_region NOT = { grown_by_development = 2 }  } 
+
+		trigger = {
+			horn_of_africa_region = {
+				type = all
+				owned_by = ROOT
+				OR = {
+					grown_by_development = 2
+					has_tax_building_trigger = yes
+				}
+			}
+		}
+
+		effect = {
+			horn_of_africa_region = {
+				limit = {
+					has_terrain = highlands
+				}
+				add_permanent_province_modifier = {
+					name = kong_highlands
+					duration = -1
+				}
+			}
+			horn_of_africa_region = {
+				limit = {
+					has_terrain = mountain
+				}
+				add_permanent_province_modifier = {
+					name = kong_mountains
+					duration = -1
+				}
+			}
+		}
+	}
+
+	kong_brew_of_war = {
+		icon = mission_ottoman_harem
+		position = 6
+		required_missions = { kong_home_of_warriors kong_true_mokha } 
+		provinces_to_highlight = { NOT = { has_manpower_building_trigger = yes  } trade_goods = coffee owned_by = ROOT } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				trade_goods = coffee
+				has_manpower_building_trigger = yes
+				base_manpower = 4
+			}
+			
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = kong_warrior_brew
+				duration = -1
+			}
+		}
+	}
+	kong_night_terrors = {
+		icon = mission_ottoman_harem
+		position = 8
+		required_missions = { kong_brew_of_war kong_night_lords } 
+		provinces_to_highlight = { trade_goods = coffee owned_by = ROOT } 
+
+		trigger = {
+			check_variable = {
+				which = num_night_assaults
+				value = 10
+			}
+			
+		}
+
+		effect = {
+			custom_tooltip = UNLOCK_NIGHT_ASSAULTS_2
+			custom_tooltip = KONG_TT_7
+			tooltip = {
+				random_owned_province = {
+				limit = {
+						trade_goods = coffee
+				}
+				add_province_modifier = {
+						name = kong_used_coffee
+						duration = 3650
+				}
+			}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						trade_goods = coffee
+					}
+					add_province_modifier = {
+						name = kong_used_coffee
+						duration = 3650
+					}
+				}
+			}
+		}
+	}
+
 
 }
 
@@ -274,6 +460,96 @@ Kongo_3_slot = {
 		}
 	}
 
+	kong_aktogramm_coast = {
+		icon = mission_ottoman_harem
+		position = 3
+		required_missions = { kong_aktogramm_city } 
+		provinces_to_highlight = { region = east_africa_region NOT = { country_or_non_sovereign_subject_holds = ROOT } } 
+
+		trigger = {
+			navy_size = 25
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 20
+				region = east_africa_region
+			}
+		}
+
+		effect = {
+			southern_africa_superregion = {
+				add_permanent_claim = ROOT
+			}
+			country_event = {
+				id = kongo_alb.4
+			}
+		}
+	}
+	kong_true_mokha = {
+		icon = mission_ottoman_harem
+		position = 5
+		required_missions = { kong_adenic_coffe } 
+		provinces_to_highlight = { trade_goods = coffee owned_by = ROOT has_production_building_trigger = no  } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				trade_goods = coffee
+				has_production_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_years_of_owned_provinces_production_income = {
+				years = 8
+				trigger = {
+					trade_goods = coffee
+				}
+				custom_tooltip = MONOPOLY_INCOME_COFFEE_DESC
+			}
+		}
+	}
+	kong_filosofy_brew = {
+		icon = mission_ottoman_harem
+		position = 6
+		required_missions = { kong_true_mokha } 
+		provinces_to_highlight = { trade_goods = coffee owned_by = ROOT has_courthouse_building_trigger = no } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				trade_goods = coffee
+				development = 12
+				has_courthouse_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = kong_future_sight
+				duration = -1
+			}
+		}
+	}
+	kong_night_lords = {
+		icon = mission_ottoman_harem
+		position = 7
+		trigger = {
+			any_hired_mercenary_company = {
+				template = merc_zappo_zaps
+				hired_for_months = 12
+			}
+		}
+
+		effect = {
+			custom_tooltip = UNLOCK_NIGHT_ASSAULTS
+			hidden_effect = {
+				set_variable = {
+					which = num_night_assaults
+					value = 0
+				}
+			}
+		}
+	}
+
 }
 
 Kongo_4_slot = {
@@ -327,6 +603,108 @@ Kongo_4_slot = {
 		}
 	}
 
+	kong_adenic_coffe = {
+		icon = mission_ottoman_harem
+		position = 4
+		provinces_to_highlight = { province_id = 4346 } 
+
+		trigger = {
+			4346 = {
+				is_strongest_trade_power = ROOT
+			}
+		}
+
+		effect = {
+			arabia_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	kong_true_faith = {
+		icon = mission_ottoman_harem
+		position = 5
+		required_missions = { kong_adenic_coffe } 
+		provinces_to_highlight = { province_id = 385 } 
+
+		trigger = {
+			385 = {
+				owned_by = ROOT
+				is_core = ROOT
+			}
+		}
+
+		effect = {
+			385 = {
+				add_great_project_tier = {
+					type = kaaba
+					tier = 1
+				}
+			}
+		}
+	}
+	kong_true_caliph = {
+		icon = mission_ottoman_harem
+		position = 7
+		required_missions = { kong_true_faith kong_jerusalem} 
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = is_caliph_kong
+				tag = event_target:islam_caliph_target
+			}
+		}
+
+		effect = {
+			add_ruler_personality = legendary_conqueror_personality
+			385 = {
+				add_great_project_tier = {
+					type = kaaba
+					tier = 1
+				}
+			}
+			379 = {
+				add_great_project_tier = {
+					type = holy_city_jerusalem
+					tier = 1
+				}
+			}
+			custom_tooltip = KONG_TT_6
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						religion_group = muslim
+					}
+					add_named_unrest = {
+						name = "A New Caliph"
+						value = -5
+					}
+				}
+			}
+		}
+	}
+	kong_india_that_way = {
+		icon = mission_ottoman_harem
+		position = 9
+		required_missions = { kong_india_this_way } 
+		provinces_to_highlight = { superregion = india_superregion NOT = {country_or_non_sovereign_subject_holds = ROOT} } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 20
+				superregion = india_superregion
+			}
+		}
+
+		effect = {
+			add_years_of_owned_provinces_production_income = {
+				years = 12
+				trigger = {
+					trade_goods = spices
+				}
+				custom_tooltip = MONOPOLY_INCOME_SPICES_DESC
+			}
+		}
+	}
 }
 
 Kongo_5_slot = {
@@ -432,28 +810,154 @@ Kongo_5_slot = {
 		}
 
 		effect = {
-			add_prestige_or_monarch_power = { amount = 20 }
-			add_power_projection = {
-				type = mission_rewards_power_projection
-				amount = 20
+			every_province = {
+				limit = {
+					culture = beja
+				}
+				add_core = ROOT
 			}
 			horn_of_africa_region = {
 				add_permanent_claim = ROOT
 			}
 		}
 	}
-	kong_night_lords = {
+	kong_break_nubia = {
 		icon = mission_ottoman_harem
-		position = 6
+		position = 4
+		required_missions = { kong_chollo_retook } 
+		provinces_to_highlight = { is_capital_of = NBI } 
+
 		trigger = {
-			any_hired_mercenary_company = {
-				template = merc_zappo_zaps
-				hired_for_months = 12
+			OR = {
+				has_won_war_against = {
+					who = NBI
+				}
+				NBI = {
+					exists = no
+				}
 			}
 		}
 
 		effect = {
-			
+			add_prestige_or_monarch_power = { amount = 20 }
+			add_power_projection = {
+				type = mission_rewards_power_projection
+				amount = 20
+			}
+			egypt_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	kong_one_last_dynasty = {
+		icon = mission_ottoman_harem
+		position = 5
+		required_missions = { kong_break_nubia } 
+		provinces_to_highlight = { region = egypt_region NOT = { country_or_non_sovereign_subject_holds = ROOT } } 
+
+		trigger = {
+			owns = 361
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 30
+				region = egypt_region
+			}
+		}
+
+		effect = {
+			358 = {
+				add_trade_modifier = {
+					who = ROOT
+					duration = 7300
+					power = 25
+					key = "Nile Trade"
+				}
+			}
+			mashriq_region = {
+				add_permanent_claim = ROOT
+			}
+			country_event = {
+				id = kongo_alb.5
+			}
+		}
+	}
+
+	kong_jerusalem = {
+		icon = mission_ottoman_harem
+		position = 6
+		required_missions = { kong_one_last_dynasty } 
+		provinces_to_highlight = { province_id = 379 } 
+
+		trigger = {
+			379 = {
+				owned_by = ROOT
+				is_core = ROOT
+			}
+		}
+
+		effect = {
+			379 = {
+				add_great_project_tier = {
+					type = holy_city_jerusalem
+					tier = 1
+				}
+			}
+			maghreb_region = {
+				add_permanent_claim = ROOT
+			}
+			anatolia_region = {
+				add_permanent_claim = ROOT
+			}
+			mesopotamia_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	kong_india_this_way = {
+		icon = mission_ottoman_harem
+		position = 8
+		provinces_to_highlight = { province_id = 1099 } 
+
+		trigger = {
+			1099 = {
+				owned_by = ROOT
+				is_core = ROOT
+			}
+		}
+
+		effect = {
+			1248 = {
+				add_permanent_claim = ROOT
+			}
+			malabar_area = {
+				add_permanent_claim = ROOT
+			}
+			kanara_area = {
+				add_permanent_claim = ROOT
+			}
+			madura_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	kong_india_my_way = {
+		icon = mission_ottoman_harem
+		position = 9
+		required_missions = { kong_india_this_way } 
+		provinces_to_highlight = { OR = { area = malabar_area area = kanara_area area = madura_area} NOT = {country_or_non_sovereign_subject_holds = ROOT} } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 8
+				OR = { area = malabar_area area = kanara_area area = madura_area }
+			}
+		}
+
+
+		effect = {
+			country_event = {
+				id = kongo_alb.6
+			}
 		}
 	}
 }
