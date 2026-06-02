@@ -23,6 +23,7 @@ Kongo_1_slot = {
 			majarteen_area = { add_permanent_claim = ROOT } 
 			mogadishu_area = { add_permanent_claim = ROOT } 
 			ajuuran_area = { add_permanent_claim = ROOT } 
+			mujila_area = { add_permanent_claim = ROOT } 
 			add_casus_belli = {
 				type = cb_vassalize_mission
 				target = HR6
@@ -286,15 +287,22 @@ Kongo_2_slot = {
 		provinces_to_highlight = {
 			region = horn_of_africa_region
 			NOT = { grown_by_development = 2 } 
+			has_tax_building_trigger = no
+			OR = {
+					has_terrain = highlands
+					has_terrain = mountain
+				}
 		}
 
 		trigger = {
-			horn_of_africa_region = {
-				type = all
-				owned_by = ROOT
+			num_of_owned_provinces_with = {
+				value = 10
+				region = horn_of_africa_region
+				grown_by_development = 2
+				has_tax_building_trigger = yes
 				OR = {
-					grown_by_development = 2
-					has_tax_building_trigger = yes
+					has_terrain = highlands
+					has_terrain = mountain
 				}
 			}
 		}
@@ -800,6 +808,7 @@ Kongo_5_slot = {
 			damot_area = { add_permanent_claim = ROOT } 
 			sennar_area = { add_permanent_claim = ROOT } 
 			central_ethiopia_area = { add_permanent_claim = ROOT } 
+			hadiya_area = { add_permanent_claim = ROOT } 
 			simple_dynamic_effect = {
 				first_custom_tooltip = KONG_TT_4
 				first_limit = "RZW = { is_subject_of = ROOT }"
