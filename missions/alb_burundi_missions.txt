@@ -9,8 +9,26 @@ burundi_1 = {
 		position = 3
 		required_missions = { }
 		provinces_to_highlight = { }
-		trigger = { adm_power = 200 dip_power = 200 mil_power = 200}
-		effect = { }
+		trigger = {  
+			estate_loyalty = {
+				estate = estate_nobles
+				loyalty = 67
+			}
+			OR = {
+				has_mil_advisor_3 = yes
+				mil = 5
+			}
+			monthly_mil = 10
+		} 
+		effect = {
+			tooltip = { unlock_estate_privilege = { estate_privilege = estate_noble_ganwa_warrior_king }  }
+			set_estate_privilege = estate_noble_ganwa_warrior_king
+			hidden_effect = {
+				unlock_estate_privilege = {
+					estate_privilege = estate_noble_ganwa_warrior_king
+				}
+			}
+		}
 	}
 
 	our_ancestry = {
@@ -75,9 +93,31 @@ burundi_2 = {
 		required_missions = {
 			aftermath_of_exodus
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = { 
+			is_capital = yes
+			owner = {
+					is_neighbor_of = ROOT
+					NOT = { truce_with = ROOT }
+		}
+		}
+		trigger = { 
+			custom_trigger_tooltip = {
+					tooltip = buu_won_against_neighboring_power
+					any_neighbor_country = {
+						ROOT = {
+							has_won_war_against = {
+								who = PREV
+							}
+						}
+					}
+				}
+		}
+		effect = { 
+			custom_tooltip = vog_claims_on_all_neighbor_provs_tt
+			hidden_effect = {
+				every_neighbor_province = { add_permanent_claim = ROOT }
+			}
+		}
 	}
 
 	nubia_pacified = {
@@ -121,8 +161,14 @@ burundi_3 = {
 		position = 1
 		required_missions = { }
 		provinces_to_highlight = { }
-		trigger = { adm_power = 200 dip_power = 200 mil_power = 200}
-		effect = { }
+		trigger = { army_size_percentage = 0.8 }
+		effect = { 
+			country_event = { id = burundi_alb.1 }
+			add_ruler_modifier = {
+				name = alb_lion_of_burundi
+				duration = -1
+			}
+		}
 	}
 
 	under_god_domain = {

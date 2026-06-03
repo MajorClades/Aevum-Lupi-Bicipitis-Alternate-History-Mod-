@@ -444,3 +444,111 @@ alb_ch4_chinese_western_commanders = {
 		factor = 2
 	}
 }
+
+estate_noble_ganwa_warrior_king = {
+	icon = privilege_promote_purbias
+	max_absolutism = -5
+	conditional_modifier = { trigger = { has_absolutism_reduction_for_estate_privileges = yes } modifier = { max_absolutism = 1 } }
+	loyalty = -0.1
+	influence = 0.1
+	is_valid = {
+		OR = {
+			tag = BUU
+			was_tag = BUU
+		}
+		any_owned_province = {
+			NOT = { culture = ganwa } culture_group = horn_kongo_group
+		}
+	}
+	can_revoke = {
+	}
+	on_granted = {
+		custom_tooltip = ganwa_warrior_king_provinces
+		tooltip = {
+			add_province_modifier = {
+				name = buu_initiation_camp
+				duration = -1
+			}
+		}
+	}
+	on_granted_province = {
+		if = {
+			limit = {
+				NOT = {
+					culture = ganwa
+				}
+				culture_group = horn_kongo_group
+			}
+			add_province_modifier = {
+				name = buu_initiation_camp
+				duration = -1
+			}
+		}
+		else_if = {
+			limit = {
+				has_province_modifier = buu_initiation_camp
+			}
+			remove_province_modifier = buu_initiation_camp
+		}
+	}
+	on_revoked = {
+		custom_tooltip = ganwa_warrior_king_provinces_revoked
+		tooltip = {
+			remove_province_modifier = buu_initiation_camp
+		}
+	}
+	on_revoked_province = {
+		if = {
+			limit = {
+				has_province_modifier = buu_initiation_camp
+			}
+			remove_province_modifier = buu_initiation_camp
+		}
+	}
+	on_invalid = {
+		custom_tooltip = ganwa_warrior_king_provinces_revoked
+	}
+	on_invalid_province = {
+		if = {
+			limit = {
+				has_province_modifier = buu_initiation_camp
+			}
+			remove_province_modifier = buu_initiation_camp
+		}
+	}
+	penalties = {
+		yearly_corruption = 0.1
+	}
+	benefits = {
+		general_cost = -0.1
+	}
+	#conditional_modifier = {
+	#	trigger = { has_government_mechanic = ottoman_decadence_mechanic }
+	#	modifier = { monthly_ottoman_decadence = 0.02 }
+	#}
+	ai_will_do = {
+		factor = 1
+		modifier = {
+			factor = 0
+			NOT = {
+					any_owned_province = {
+						NOT = { culture = ganwa } culture_group = horn_kongo_group
+					}
+				}
+		}
+		modifier = {
+			factor = 0
+			is_subject = yes
+		}
+		modifier = {
+			factor = 1000
+			any_owned_province = {
+				NOT = { culture = ganwa } culture_group = horn_kongo_group
+			}
+		}
+		modifier = {
+			factor = 0
+			NOT = { primary_culture = ganwa }
+		}
+	}
+}
