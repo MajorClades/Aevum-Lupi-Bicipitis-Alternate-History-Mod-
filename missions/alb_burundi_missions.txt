@@ -37,9 +37,97 @@ burundi_1 = {
 		required_missions = {
 			legitimate_lineage
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = { owned_by = ROOT  NOT = { culture = ganwa } }
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 20
+				AND = {
+					num_of_units_in_province = { amount = 1 }
+					culture = ganwa
+				}
+			}
+		}
+		effect = {
+		add_legitimacy_or_mil_power = { amount = 20 }
+		custom_tooltip = buu_20_dev_in_manpower_provinces_tt
+			for = {
+				amount = 20
+				effect = "
+					random_owned_province = {
+						limit = {
+							num_of_units_in_province = { amount = 1 }
+							culture = ganwa
+						}
+						add_random_development = 1
+					}
+				"
+			}
+			if = {
+				limit = {
+					religion = jewish
+				}
+			custom_tooltip = is_jewish_tooltip
+			tooltip = {
+				add_country_modifier = {
+					name = judaized_ganwa_culture
+					duration = -1
+						}
+					}
+			}
+			if = {
+				limit = {
+					religion = coptic
+				}
+			custom_tooltip = is_coptic_tooltip
+			tooltip = {
+				add_country_modifier = {
+					name = neo_nilotic_renaissance
+					duration = -1
+						}
+					}
+			}
+			if = {
+				limit = {
+					religion = shamanism 
+				}
+			custom_tooltip = is_fetishist_tooltip
+			tooltip = {
+				add_country_modifier = {
+					name = honor_hutu_ancestor
+					duration = -1
+						}
+					}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						religion = jewish
+					}
+					add_country_modifier = {
+						name = judaized_ganwa_culture
+						duration = -1
+					}
+				}
+				if = {
+					limit = {
+						religion = coptic
+					}
+					add_country_modifier = {
+						name = neo_nilotic_renaissance
+						duration = -1
+					}
+				}
+				if = {
+					limit = {
+						religion = shamanism 
+					}
+					add_country_modifier = {
+						name = honor_hutu_ancestor
+						duration = -1
+					}
+				}
+			}
+		}
 	}
 
 }
