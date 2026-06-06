@@ -1,0 +1,132 @@
+namespace = nubic
+
+country_event = { #ask red legion to join the crusade
+	id = nubic.1
+	title = nubic.1.test
+	desc = nubic.1.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = nubic.1a
+		trigger = {
+			AF6 = { ai = yes }
+		}
+		join_all_offensive_wars_of = AF6
+		said_area = {
+			add_core = NBI
+		}
+	}
+	option = {
+		name = nubic.1b
+		trigger = {
+			AF6 = { ai = no }
+		}
+		ai_chance = {
+			factor = 1
+		}
+		AF6 = {
+			country_event = {
+				id = nubic.2
+			}
+		}
+	}
+	option = {
+		name = nubic.1c
+		ai_chance = {
+			factor = 0
+		}
+		add_stability = 1
+	}
+}
+
+country_event = { #event for human Red Legion to refuse help
+	id = nubic.2
+	title = nubic.2.test
+	desc = nubic.2.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = nubic.2a
+		ai_chance = {
+			factor = 1
+		}
+		NBI = {
+			join_all_offensive_wars_of = AF6
+		}
+		said_area = {
+			add_core = NBI
+		}
+	}
+	option = {
+		name = nubic.2b
+		ai_chance = {
+			factor = 0
+		}
+
+	}
+}
+
+country_event = { #ask for promised land
+	id = nubic.3
+	title = nubic.3.test
+	desc = nubic.3.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = nubic.3a
+		ai_chance = {
+			factor = 1
+		}
+		said_area = {
+			cede_province = NBI
+		}
+	}
+	option = {
+		name = nubic.3b
+		ai_chance = {
+			factor = 0
+		}
+		add_trust = {
+			who = NBI
+			value = -100
+			mutual = yes
+		}
+	}
+}
+
+country_event = { # make rebels appear
+	id = nubic.4
+	title = nubic.4.test
+	desc = nubic.4.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = nubic.4a
+		add_yearly_manpower = -0.33
+		add_years_of_income = -0.33
+		said_area = {
+			add_core = NBI
+		}
+		4319 = {
+			spawn_rebels = {
+				size = 1
+				type = nationalist_rebels
+				friend = NBI
+			}
+		}
+	}
+	option = {
+		name = nubic.4b
+		said_area = {
+			add_core = NBI
+		}
+	}
+}

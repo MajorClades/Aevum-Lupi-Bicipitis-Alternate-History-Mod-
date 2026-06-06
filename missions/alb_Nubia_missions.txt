@@ -1,0 +1,197 @@
+Nubia_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = NBI } 
+
+	nub_pacify_beja = {
+		icon = hornofafrica
+		position = 1
+		provinces_to_highlight = { owned_by = ROOT culture = beja } 
+
+		trigger = {
+			OR = {
+				accepted_culture = beja
+				religious_unity = 0.9
+			}
+		}
+
+		effect = {
+			add_yearly_manpower = 1
+			dongola_area = {
+				add_permanent_claim = ROOT
+			}
+			red_sea_coast_area = {
+				add_permanent_claim = ROOT
+			}
+			upper_nubia_area = {
+				add_permanent_claim = ROOT
+			}
+			kurdufan_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	nub_southern_attacks = {
+		icon = mission_african_trade_post
+		position = 2
+		required_missions = { nub_pacify_beja } 
+		provinces_to_highlight = {
+			OR = {
+				area = upper_nubia_area
+				area = red_sea_coast_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		trigger = {
+			upper_nubia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			red_sea_coast_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			1234 = {
+				center_of_trade = 1
+			}
+			1228 = {
+				center_of_trade = 1
+			}
+			horn_of_africa_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+}
+
+Nubia_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = NBI } 
+
+}
+
+Nubia_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = NBI } 
+
+	nub_dam_against_islam = {
+		icon = hornofafrica
+		position = 1
+		provinces_to_highlight = { 1234 = { owned_by = ROOT NOT = { grown_by_development = 3  }  }  } 
+
+		trigger = {
+			1234 = {
+				owned_by = ROOT
+				grown_by_development = 4
+			}
+		}
+
+		effect = {
+			1234 = {
+				add_province_modifier = {
+					name = nubian_dam_islam
+					duration = -1
+				}
+			}
+		}
+	}
+
+}
+
+Nubia_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = NBI } 
+
+}
+
+Nubia_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = NBI } 
+
+	nub_coptic_kin = {
+		icon = hornofafrica
+		position = 1
+		provinces_to_highlight = { region = egypt_region religion = coptic NOT = { country_or_non_sovereign_subject_holds = ROOT }    } 
+
+		trigger = {
+			OR = {
+				RU0 = { has_been_insulted_by_root = yes }
+				AE0 = { alliance_with = ROOT }
+				AE0 = {
+					has_been_insulted_by_root = yes
+				}
+			}
+		}
+
+		effect = {
+			
+			simple_dynamic_effect = {
+				first_custom_tooltip = NUBIA_TT_1
+				first_limit = "AE0 = { alliance_with = ROOT }"
+				first_effect = "
+					AE0 = {
+						country_event = {
+							id = nubic.3
+						}
+					}
+				"
+				second_limit = "NOT = { AE0 = { alliance_with = ROOT } }"
+				second_effect = "
+					egypt_region = {
+						add_permanent_claim = ROOT
+					}
+						country_event = {
+							id = nubic.4
+						}
+				"
+			}
+		}
+	}
+
+	nub_egyptian_story = {
+		icon = mission_african_trade_post
+		position = 2
+		required_missions = { nub_coptic_kin } 
+		provinces_to_highlight = {
+			region = egypt_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 10
+				region = egypt_region
+				religion = ROOT
+			}
+		}
+
+		effect = {
+			
+		}
+	}
+
+
+}
