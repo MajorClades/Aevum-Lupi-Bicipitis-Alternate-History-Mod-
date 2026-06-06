@@ -356,8 +356,10 @@ burundi_4 = {
 			aftermath_of_exodus
 		}
 		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		trigger = { grown_by_states = 3 }
+		effect = { 
+			add_yearly_manpower = 0.75
+		}
 	}
 
 	end_of_ethiopia = {
@@ -401,8 +403,88 @@ burundi_5 = {
 		position = 3
 		required_missions = { }
 		provinces_to_highlight = { }
-		trigger = { adm_power = 200 dip_power = 200 mil_power = 200}
-		effect = { }
+		trigger = { 
+			OR = {
+				HR4 = { exists = no }
+				has_won_war_against = { who = HR4 } 
+			}
+		}
+		effect = { 
+		add_power_projection_mission = { amount = 25 }
+			custom_tooltip = " "
+			define_general = {
+				shock = 1
+				fire = 1
+				manuever = 4
+				siege = 4
+			}
+			custom_tooltip = " "
+		if = {
+				limit = {
+					religion = jewish
+				}
+			custom_tooltip = is_jewish_tooltip
+			tooltip = {
+				add_country_modifier = {
+					name = shattering_shot
+					duration = 24455
+						}
+					}
+			}
+			if = {
+				limit = {
+					religion = coptic
+				}
+			custom_tooltip = is_coptic_tooltip
+			tooltip = {
+				add_country_modifier = {
+					name = lance_of_the_victorious
+					duration = 24455
+						}
+					}
+			}
+			if = {
+				limit = {
+					religion = shamanism 
+				}
+			custom_tooltip = is_fetishist_tooltip
+			tooltip = {
+				add_country_modifier = {
+					name = warcry_of_waaq
+					duration = 24455
+						}
+					}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						religion = jewish
+					}
+					add_country_modifier = {
+						name = shattering_shot
+						duration = 24455
+					}
+				}
+				if = {
+					limit = {
+						religion = coptic
+					}
+					add_country_modifier = {
+						name = lance_of_the_victorious
+						duration = 24455
+					}
+				}
+				if = {
+					limit = {
+						religion = shamanism 
+					}
+					add_country_modifier = {
+						name = warcry_of_waaq
+						duration = 24455
+					}
+				}
+			}
+		}
 	}
 
 	triumph_over_tyrant = {
@@ -411,9 +493,23 @@ burundi_5 = {
 		required_missions = {
 			against_goliath
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = { culture = kongolese_h  NOT = { owned_by = ROOT} }
+		trigger = { HR4 = { exists = no } 
+		num_of_owned_provinces_with = {
+				value = 12
+				AND = {
+					num_of_units_in_province = { amount = 1 }
+					culture = kongolese_h
+				}
+			}
+		}
+		effect = { country_event = { id = burundi_alb.3 } 
+		add_country_modifier = {
+						name = sword_of_islam_broken
+						duration = -1
+					}
+		
+		}
 	}
 
 }
