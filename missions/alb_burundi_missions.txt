@@ -1,0 +1,566 @@
+burundi_1 = {
+	slot = 1
+	generic = no
+	ai = yes
+	potential = { tag = BUU } 
+
+	legitimate_lineage = {
+		icon = mission_mal_fighting_musa
+		position = 3
+		required_missions = { }
+		provinces_to_highlight = { }
+		trigger = {  
+			estate_loyalty = {
+				estate = estate_nobles
+				loyalty = 67
+			}
+			OR = {
+				has_mil_advisor_3 = yes
+				mil = 5
+			}
+			monthly_mil = 10
+		} 
+		effect = {
+			tooltip = { unlock_estate_privilege = { estate_privilege = estate_noble_ganwa_warrior_king }  }
+			set_estate_privilege = estate_noble_ganwa_warrior_king
+			hidden_effect = {
+				unlock_estate_privilege = {
+					estate_privilege = estate_noble_ganwa_warrior_king
+				}
+			}
+		}
+	}
+
+	our_ancestry = {
+		icon = mission_zim_strong_rulership
+		position = 4
+		required_missions = {
+			legitimate_lineage
+		}
+		provinces_to_highlight = { owned_by = ROOT  NOT = { culture = ganwa } }
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 20
+				AND = {
+					num_of_units_in_province = { amount = 1 }
+					culture = ganwa
+				}
+			}
+		}
+		effect = {
+		add_legitimacy_or_mil_power = { amount = 20 }
+		custom_tooltip = buu_20_dev_in_manpower_provinces_tt
+			for = {
+				amount = 20
+				effect = "
+					random_owned_province = {
+						limit = {
+							num_of_units_in_province = { amount = 1 }
+							culture = ganwa
+						}
+						add_random_development = 1
+					}
+				"
+			}
+			if = {
+				limit = {
+					religion = jewish
+				}
+			custom_tooltip = is_jewish_tooltip
+			tooltip = {
+				add_country_modifier = {
+					name = judaized_ganwa_culture
+					duration = -1
+						}
+					}
+			}
+			if = {
+				limit = {
+					religion = coptic
+				}
+			custom_tooltip = is_coptic_tooltip
+			tooltip = {
+				add_country_modifier = {
+					name = neo_nilotic_renaissance
+					duration = -1
+						}
+					}
+			}
+			if = {
+				limit = {
+					religion = shamanism 
+				}
+			custom_tooltip = is_fetishist_tooltip
+			tooltip = {
+				add_country_modifier = {
+					name = honor_hutu_ancestor
+					duration = -1
+						}
+					}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						religion = jewish
+					}
+					add_country_modifier = {
+						name = judaized_ganwa_culture
+						duration = -1
+					}
+				}
+				if = {
+					limit = {
+						religion = coptic
+					}
+					add_country_modifier = {
+						name = neo_nilotic_renaissance
+						duration = -1
+					}
+				}
+				if = {
+					limit = {
+						religion = shamanism 
+					}
+					add_country_modifier = {
+						name = honor_hutu_ancestor
+						duration = -1
+					}
+				}
+			}
+		}
+	}
+
+}
+burundi_1_pt2 = {
+	slot = 1
+	generic = no
+	ai = yes
+	potential = { tag = BUU has_country_flag = burundi_more_mission_unlock } 
+
+
+	bounty_of_burundi = {
+		icon = mission_mal_subjugate_zaf
+		position = 6
+		required_missions = { }
+		provinces_to_highlight = { }
+		trigger = { adm_power = 200 dip_power = 200 mil_power = 200}
+		effect = { }
+	}
+
+	flatten_the_rugged_field = {
+		icon = the_land_of_moses
+		position = 7
+		required_missions = {
+			bounty_of_burundi
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+	our_eden = {
+		icon = the_fountain_of_youth
+		position = 8
+		required_missions = {
+			seeding_the_land flatten_the_rugged_field
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+}
+burundi_2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential = { tag = BUU } 
+
+	dust_settle = {
+		icon = mission_kon_conquer_kub
+		position = 2
+		required_missions = {
+			aftermath_of_exodus
+		}
+		provinces_to_highlight = { 
+			is_capital = yes
+			owner = {
+					is_neighbor_of = ROOT
+					NOT = { truce_with = ROOT }
+		}
+		}
+		trigger = { 
+			custom_trigger_tooltip = {
+					tooltip = buu_won_against_neighboring_power
+					any_neighbor_country = {
+						ROOT = {
+							has_won_war_against = {
+								who = PREV
+							}
+						}
+					}
+				}
+		}
+		effect = { 
+			custom_tooltip = vog_claims_on_all_neighbor_provs_tt
+			hidden_effect = {
+				every_neighbor_province = { add_permanent_claim = ROOT }
+			}
+		}
+	}
+
+	nubia_pacified = {
+		icon = mission_egyptian_mamluk_soldier
+		position = 4
+		required_missions = {
+			under_god_domain
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+}
+burundi_2_pt2 = {
+	slot = 2
+	generic = no
+	ai = yes
+	potential = { tag = BUU has_country_flag = burundi_more_mission_unlock } 
+
+
+	seeding_the_land = {
+		icon = yem_coffee
+		position = 7
+		required_missions = {
+			crossing_the_strait bounty_of_burundi
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+}
+burundi_3 = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential = { tag = BUU } 
+
+	aftermath_of_exodus = {
+		icon = mission_african_soldier
+		position = 1
+		required_missions = { }
+		provinces_to_highlight = { }
+		trigger = { army_size_percentage = 0.8 }
+		effect = { 
+			country_event = { id = burundi_alb.1 }
+			add_ruler_modifier = {
+				name = alb_lion_of_burundi
+				duration = -1
+			}
+		}
+	}
+
+	under_god_domain = {
+		icon = mission_hands_praying
+		position = 3
+		required_missions = {
+			dust_settle dusk_and_down
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+	kongo_crushed = {
+		icon = mission_kon_conquer_kub
+		position = 4
+		required_missions = {
+			under_god_domain
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+	home_of_the_faithful = {
+		icon = mission_unite_home_region
+		position = 5
+		required_missions = {
+			nubia_pacified kongo_crushed end_of_ethiopia
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+}
+burundi_3_pt2 = {
+	slot = 3
+	generic = no
+	ai = yes
+	potential = { tag = BUU has_country_flag = burundi_more_mission_unlock } 
+
+	in_god_we_trust = {
+		icon = mission_fiqh_laws
+		position = 6
+		required_missions = {
+			home_of_the_faithful
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+	servant_of_the_lord = {
+		icon = mission_mal_jihad_upon_own_population
+		position = 7
+		required_missions = {
+			in_god_we_trust
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+	blade_of_conviction = {
+		icon = mission_kon_protector_of_africa
+		position = 8
+		required_missions = {
+			servant_of_the_lord
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+	lord_of_levant = {
+		icon = ark_of_the_covenant
+		position = 10
+		required_missions = {
+			control_yisrael
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+}
+burundi_4 = {
+	slot = 4
+	generic = no
+	ai = yes
+	potential = { tag = BUU } 
+
+	dusk_and_down = {
+		icon = mission_son_back_to_the_roots
+		position = 2
+		required_missions = {
+			aftermath_of_exodus
+		}
+		provinces_to_highlight = { }
+		trigger = { grown_by_states = 3 }
+		effect = { 
+			add_yearly_manpower = 0.75
+		}
+	}
+
+	end_of_ethiopia = {
+		icon = mam_ethiopia
+		position = 4
+		required_missions = {
+			under_god_domain
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+}
+burundi_4_pt2 = {
+	slot = 4
+	generic = no
+	ai = yes
+	potential = { tag = BUU has_country_flag = burundi_more_mission_unlock } 
+
+
+	dominate_arabia = {
+		icon = geo_crade_of_civilization
+		position = 8
+		required_missions = {
+			sheba_domain
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+}
+burundi_5 = {
+	slot = 5
+	generic = no
+	ai = yes
+	potential = { tag = BUU } 
+
+	against_goliath = {
+		icon = mission_invade_kanem
+		position = 3
+		required_missions = { }
+		provinces_to_highlight = { }
+		trigger = { 
+			OR = {
+				HR4 = { exists = no }
+				has_won_war_against = { who = HR4 } 
+			}
+		}
+		effect = { 
+		add_power_projection_mission = { amount = 25 }
+			custom_tooltip = " "
+			define_general = {
+				shock = 1
+				fire = 1
+				manuever = 4
+				siege = 4
+			}
+			custom_tooltip = " "
+		if = {
+				limit = {
+					religion = jewish
+				}
+			custom_tooltip = is_jewish_tooltip
+			tooltip = {
+				add_country_modifier = {
+					name = shattering_shot
+					duration = 24455
+						}
+					}
+			}
+			if = {
+				limit = {
+					religion = coptic
+				}
+			custom_tooltip = is_coptic_tooltip
+			tooltip = {
+				add_country_modifier = {
+					name = lance_of_the_victorious
+					duration = 24455
+						}
+					}
+			}
+			if = {
+				limit = {
+					religion = shamanism 
+				}
+			custom_tooltip = is_fetishist_tooltip
+			tooltip = {
+				add_country_modifier = {
+					name = warcry_of_waaq
+					duration = 24455
+						}
+					}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						religion = jewish
+					}
+					add_country_modifier = {
+						name = shattering_shot
+						duration = 24455
+					}
+				}
+				if = {
+					limit = {
+						religion = coptic
+					}
+					add_country_modifier = {
+						name = lance_of_the_victorious
+						duration = 24455
+					}
+				}
+				if = {
+					limit = {
+						religion = shamanism 
+					}
+					add_country_modifier = {
+						name = warcry_of_waaq
+						duration = 24455
+					}
+				}
+			}
+		}
+	}
+
+	triumph_over_tyrant = {
+		icon = mission_kon_conquer_ksj
+		position = 4
+		required_missions = {
+			against_goliath
+		}
+		provinces_to_highlight = { culture = kongolese_h  NOT = { owned_by = ROOT} }
+		trigger = { HR4 = { exists = no } 
+		num_of_owned_provinces_with = {
+				value = 12
+				AND = {
+					num_of_units_in_province = { amount = 1 }
+					culture = kongolese_h
+				}
+			}
+		}
+		effect = { country_event = { id = burundi_alb.3 } 
+		add_country_modifier = {
+						name = sword_of_islam_broken
+						duration = -1
+					}
+		
+		}
+	}
+
+}
+burundi_5_pt2 = {
+	slot = 5
+	generic = no
+	ai = yes
+	potential = { tag = BUU has_country_flag = burundi_more_mission_unlock } 
+
+
+	crossing_the_strait = {
+		icon = mission_retake_ceuta
+		position = 6
+		required_missions = {
+			home_of_the_faithful triumph_over_tyrant
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+	sheba_domain = {
+		icon = mam_baghdad
+		position = 7
+		required_missions = {
+			crossing_the_strait
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+	master_of_mekkah = {
+		icon = kok_mam_holy_cities
+		position = 8
+		required_missions = {
+			sheba_domain
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+
+	control_yisrael = {
+		icon = jerusalem
+		position = 9
+		required_missions = {
+			master_of_mekkah dominate_arabia
+		}
+		provinces_to_highlight = { }
+		trigger = { }
+		effect = { }
+	}
+}

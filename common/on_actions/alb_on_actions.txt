@@ -24,8 +24,8 @@ on_startup = {	#heads up this fires when you load a save too
 		limit = {
 			NOT = {
 				is_year = 1445
-				tag = GA0
 			}
+			tag = GA0
 		}
 		set_variable = {
 			which = num_kadlen_elections
@@ -456,14 +456,8 @@ on_main_war_lost = {
 			limit = {
 				ai = no
 			}
-			random_list = {
-				75 = {
-				}
-				25 = {
-					country_event = {
-						id = redleg.103
-					}
-				}
+			country_event = {
+				id = redleg.103
 			}
 		}
 	}
@@ -717,6 +711,15 @@ on_emperor_elected = {
 }
 
 on_adm_development = {
+	if = {
+		limit = {
+			owner = {has_church_aspect = cladesian_adm_aspect}
+		}
+		random = { 
+			chance = 50 
+			add_base_tax = 1
+		}
+	}
 	if = { 
 		limit = { owner = { has_country_flag = get_manpower_from_dev_grain_flag } trade_goods = grain }
 		owner = {add_manpower = 0.1}
@@ -835,6 +838,15 @@ on_adm_development = {
 }
 
 on_dip_development = {
+	if = {
+		limit = {
+			owner = {has_church_aspect = sanguinar_dip_aspect}
+		}
+		random = { 
+			chance = 25 
+			add_base_production = 1
+		}
+	}
 	if = { 
 		limit = { owner = { has_country_flag = get_manpower_from_dev_grain_flag } trade_goods = grain }
 		owner = {add_manpower = 0.1}
@@ -985,6 +997,31 @@ on_dip_development = {
 }
 
 on_mil_development = {
+	if = {
+		limit = {
+			has_province_modifier = solari_stronghold
+		}
+		if = {
+			limit = {
+				owner = {
+					has_government_mechanic = marcionism_legion_mechanic
+				}
+			}
+			owner = { add_solarian_authority = {amount = 1}}
+		}else = {
+			owner = { add_demiurgic_defiance = {amount = 1}}
+		}
+	}
+	if = {
+		limit = {
+			owner = {has_church_aspect = solar_mil_aspect}
+		}
+		random = { 
+			chance = 25 
+			add_base_manpower = 1
+		}
+	}
+
 	if = { 
 		limit = { owner = { has_country_flag = get_manpower_from_dev_grain_flag } trade_goods = grain }
 		owner = {add_manpower = 0.1}
@@ -1168,6 +1205,17 @@ on_thri_yearly_pulse_2 = {
 }
 
 on_province_religion_converted = {
+	#Marcionism
+	if = {
+		limit = { religion = marcionist}
+		random_country = {
+			limit = {
+				mission_completed = blo_iberia
+			}
+			add_demiurgic_defiance = {amount = 1}
+		}
+	}
+
 	##PAP
 	if = {
 		limit = {owner = { has_country_flag = pap_supreme_coring_flag }}
@@ -1787,6 +1835,49 @@ on_secondary_religion_change = {
 		}
 	}
 }
+on_mil_exploited = {
+	if = {
+		limit = {
+			owner = {
+				has_country_flag = exploited_mil_twice
+			}
+		}
+		owner = {
+			clr_country_flag = exploited_mil_twice
+			set_country_flag = exploited_mil_thrice
+		}
+	if = {
+		limit = {
+			owner = {
+				has_country_flag = exploited_mil_once
+			}
+		}
+		owner = {
+			clr_country_flag = exploited_mil_once
+			set_country_flag = exploited_mil_twice
+		}
+	}
+	if = {
+		limit = {
+			owner = {
+				has_country_modifier = starving_army_leg
+			}
+		}
+		owner = {
+			set_country_flag = exploited_mil_once
+		}
+	}
+}
+}
+
+
+on_colonial_nation_established = {
+	FROM = {
+		country_event = {
+			id = CEF_colonial_switch.1	
+		}
+	}
+}
 on_parliament_debate_succeeded = {
 	if = {
 		limit = {
@@ -1822,6 +1913,36 @@ on_harmonized_postroman_group = {
 		ephesian.1 #cofnusion harmonize
 	}
 }
+on_harmonized_kamuyramat = {
+	on_harmonized_effect = yes
+	on_harmonized_religion_estate_privileges_effect = yes
+	events = {
+		confucian_events.7
+	}
+}
+on_harmonized_jingtianfazu = {
+	on_harmonized_effect = yes
+	on_harmonized_religion_estate_privileges_effect = yes
+	events = {
+		confucian_events.9
+	}
+}
+on_harmonized_daoism = {
+	on_harmonized_effect = yes
+	on_harmonized_religion_estate_privileges_effect = yes
+	events = {
+		confucian_events.9
+	}
+}
+
+on_harmonized_taiping = {
+	on_harmonized_effect = yes
+	on_harmonized_religion_estate_privileges_effect = yes
+	events = {
+		confucian_events.9
+	}
+}
+
 
 on_peace_actor = {
 	events = {
@@ -1831,5 +1952,36 @@ on_peace_actor = {
 		ayabani.48
 		ayabani.54
 		ayabani.59
+	}
+}
+
+
+on_core = { #ROOT - Province, #FROM - Country that gets the core
+	if = {
+		limit = {
+			FROM = {
+				has_government_attribute = restorer_of_nenekongo
+			}
+			region = horn_of_africa_region
+		}
+		FROM = {
+			add_legitimacy_or_mil_power = { amount = 5 }
+		}
+	}
+	if = {
+		limit = {
+			FROM = {
+				has_government_attribute = conqueror_of_nenekongo
+				OR = {
+					ruler_has_personality = conqueror_personality
+					ruler_has_personality = legendary_conqueror_personality
+				}
+			}
+		}
+		FROM = {
+			add_adm_power = 10
+			add_mil_power = 10
+			add_dip_power = 10
+		}
 	}
 }

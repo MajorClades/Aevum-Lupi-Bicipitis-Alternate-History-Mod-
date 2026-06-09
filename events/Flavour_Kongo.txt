@@ -1,0 +1,358 @@
+namespace = kongo_alb
+
+country_event = {
+	id = kongo_alb.1
+	title = kongo_alb.1.test
+	desc = kongo_alb.1.desc
+	picture = FAT_WARRIORS_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = kongo_alb.1a
+		add_country_modifier = {
+			name = kongo_old_wars_tactics
+			duration = -1
+		}
+	}
+	option = {
+		name = kongo_alb.1b
+		add_country_modifier = {
+			name = kongo_regional_tactics
+			duration = 10950
+		}
+	}
+}
+
+country_event = {
+	id = kongo_alb.2
+	title = kongo_alb.2.test
+	desc = kongo_alb.2.desc
+	picture = BIG_ARABIAN_CITY_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = kongo_alb.2a
+		every_owned_province = {
+			limit = {
+				region = horn_of_africa_region culture = himyaritic
+			}
+			change_culture = kongolese_h			
+		}
+		
+	}
+	option = {
+		name = kongo_alb.2b
+		1215 = { add_center_of_trade_level = 1 }
+	}
+}
+
+country_event = {
+	id = kongo_alb.3
+	title = kongo_alb.3.test
+	desc = kongo_alb.3.desc
+	picture = TRADE_GOODS_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = kongo_alb.3a
+		1209 = {
+				add_permanent_province_modifier = {
+					name = kong_greek_cities
+					duration = -1
+				}
+			}
+		2783 = {add_permanent_province_modifier = {
+					name = kong_greek_cities
+					duration = -1
+				}
+
+			}
+		2788 = {add_permanent_province_modifier = {
+					name = kong_greek_cities
+					duration = -1
+				}
+
+			}
+	}
+	option = {
+		name = kongo_alb.3b
+		add_years_of_income = 1
+		1209 = { add_devastation = 25 }
+		2783 = { add_devastation = 20 }
+		2788 = { add_devastation = 15 }
+	}
+}
+
+country_event = {
+	id = kongo_alb.4
+	title = kongo_alb.4.test
+	desc = kongo_alb.4.desc
+	picture = COASTLINE_MAP_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = kongo_alb.4a
+		add_country_modifier = {
+			name = kong_african_colonisation
+			duration = 18250
+		}
+	}
+	option = {
+		name = kongo_alb.4b
+		india_superregion = {
+			limit = {
+				has_port = yes
+			}
+			add_permanent_claim = ROOT
+		}
+		add_country_modifier = {
+			name = kong_campaigns_in_india
+			duration = 18250
+		}
+	}
+}
+
+country_event = {
+	id = kongo_alb.5
+	title = kongo_alb.5.test
+	desc = kongo_alb.5.desc
+	picture = JERUSALEM_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = kongo_alb.5a
+		capital_scope = {
+			add_province_modifier = {
+				name = kong_old_capital
+				duration = -1
+			}
+		}
+		set_capital = 361
+	}
+	option = {
+		name = kongo_alb.5b
+		361 = {
+			add_province_modifier = {
+				name = kong_new_capital
+				duration = -1
+			}
+		}
+	}
+}
+
+country_event = {
+	id = kongo_alb.6
+	title = kongo_alb.6.test
+	desc = kongo_alb.6.desc
+	picture = INDIAN_WARS_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = kongo_alb.6a
+		534 = {
+			change_culture = habshian
+			change_religion = coptic
+		}
+		malabar_area = {
+			add_core = HR9
+			add_province_modifier = {
+				name = kong_slaves_workers
+				duration = -1
+			}
+		}
+	}
+	option = {
+		name = kongo_alb.6b
+		add_years_of_income = 2
+	}
+}
+
+country_event = { 
+	id = kongo_alb.100
+	title = kongo_alb.100.t
+	desc = kongo_alb.100.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	
+	trigger = {
+		any_hired_mercenary_company = {
+			template = merc_zappo_zaps
+		}
+		is_in_deficit = yes
+		owns = 5097
+	}
+	fire_only_once = yes
+	mean_time_to_happen = {
+		months = 30
+	}
+
+	immediate = {
+		hidden_effect = {
+			random_hired_mercenary_company = {
+				limit = {
+					template = merc_zappo_zaps
+				}
+				save_event_target_as = merc_zappo_zaps_target
+			}
+		}
+	}
+	option = {
+		name = kongo_alb.100a
+		add_stability = -1
+		if = {
+			limit = { has_saved_event_target = merc_zappo_zaps_target }
+			event_target:merc_zappo_zaps_target = {
+				disband_mercenary_company = THIS
+			}
+		}
+	}
+	option = {
+		name = kongo_alb.100b
+		5097 = {
+			spawn_rebels = {
+				size = 2
+				type = zappo_zaps_rebels
+			}
+			add_core = HR7
+		}
+		if = {
+			limit = { has_saved_event_target = merc_zappo_zaps_target }
+			event_target:merc_zappo_zaps_target = {
+				disband_mercenary_company = THIS
+			}
+		}
+	}
+}
+
+country_event = { 
+	id = kongo_alb.101
+	title = kongo_alb.101.t
+	desc = kongo_alb.101.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			horn_of_africa_region = {
+				discover_country = HR7
+			}
+		}
+	}
+
+	option = {
+		name = kongo_alb.101a
+		switch_tag = HR7
+	}
+	option = {
+		name = kongo_alb.101b
+		
+	}
+}
+
+country_event = { 
+	id = kongo_alb.102
+	title = kongo_alb.102.t
+	desc = kongo_alb.102.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	
+	trigger = {
+		any_hired_mercenary_company = {
+			template = merc_sacred_band_of_banta
+		}
+		is_in_deficit = yes
+		NOT = {
+			has_global_flag = merc_sacred_band_of_banta_flag
+		}
+		owns = 2790
+	}
+	fire_only_once = yes
+	mean_time_to_happen = {
+		months = 30
+	}
+
+	immediate = {
+		hidden_effect = {
+			random_hired_mercenary_company = {
+				limit = {
+					template = merc_sacred_band_of_banta
+				}
+				save_event_target_as = merc_sacred_band_of_banta_target
+			}
+			set_global_flag = merc_sacred_band_of_banta_flag
+		}
+	}
+	option = {
+		name = kongo_alb.102a
+		add_stability = -1
+		2790 = {
+			add_core = HR8
+		}
+		if = {
+			limit = { has_saved_event_target = merc_sacred_band_of_banta_target }
+			event_target:merc_sacred_band_of_banta_target = {
+				disband_mercenary_company = THIS
+			}
+		}
+	}
+	option = {
+		name = kongo_alb.102b
+		2790 = {
+			add_core = HR8
+			cede_province = HR8
+		}
+		vassalize = HR8
+		if = {
+			limit = { has_saved_event_target = merc_sacred_band_of_banta_target }
+			event_target:merc_sacred_band_of_banta_target = {
+				disband_mercenary_company = THIS
+			}
+		}
+		hidden_effect = {
+			horn_of_africa_region = {
+				discover_country = HR8
+			}
+		}
+		switch_tag = HR8 #make decisions to form Lomanya - Rhomania
+	}
+}
+
+
+country_event = { 
+	id = kongo_alb.103
+	title = kongo_alb.103.t
+	desc = kongo_alb.103.d
+	picture = GOOD_WITH_MONARCH_eventPicture
+	
+	trigger = {
+		tag = HR4
+		HR9 = {
+			exists = yes
+		}
+	}
+	fire_only_once = yes
+	mean_time_to_happen = {
+		months = 1
+	}
+
+	immediate = {
+		hidden_effect = {
+			HR9 = {
+				change_government = republic
+				add_government_reform = peasants_republic
+			}
+		}
+	}
+	option = {
+		name = kongo_alb.103a
+		switch_tag = HR9
+	}
+	option = {
+		name = kongo_alb.103b
+		add_prestige = 5
+	}
+}

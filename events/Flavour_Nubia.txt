@@ -1,0 +1,331 @@
+namespace = nubic
+
+country_event = { #ask red legion to join the crusade
+	id = nubic.1
+	title = nubic.1.test
+	desc = nubic.1.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = nubic.1a
+		trigger = {
+			AF6 = { ai = yes }
+		}
+		join_all_offensive_wars_of = AF6
+		said_area = {
+			add_core = NBI
+		}
+		AF6 = {
+			add_opinion = {
+				who = ROOT
+				modifier = nubian_crusade
+			}
+		}
+	}
+	option = {
+		name = nubic.1b
+		trigger = {
+			AF6 = { ai = no }
+		}
+		ai_chance = {
+			factor = 1
+		}
+		AF6 = {
+			country_event = {
+				id = nubic.2
+			}
+		}
+	}
+	option = {
+		name = nubic.1c
+		ai_chance = {
+			factor = 0
+		}
+		add_stability = 1
+	}
+}
+
+country_event = { #event for human Red Legion to refuse help
+	id = nubic.2
+	title = nubic.2.test
+	desc = nubic.2.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = nubic.2a
+		ai_chance = {
+			factor = 1
+		}
+		NBI = {
+			join_all_offensive_wars_of = AF6
+		}
+		said_area = {
+			add_core = NBI
+		}
+	}
+	option = {
+		name = nubic.2b
+		ai_chance = {
+			factor = 0
+		}
+
+	}
+}
+
+country_event = { #ask for promised land
+	id = nubic.3
+	title = nubic.3.test
+	desc = nubic.3.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = nubic.3a
+		ai_chance = {
+			factor = 1
+		}
+		said_area = {
+			cede_province = NBI
+			remove_core = ROOT
+		}
+	}
+	option = {
+		name = nubic.3b
+		ai_chance = {
+			factor = 0
+		}
+		add_trust = {
+			who = NBI
+			value = -100
+			mutual = yes
+		}
+	}
+}
+
+country_event = { # make rebels appear
+	id = nubic.4
+	title = nubic.4.test
+	desc = nubic.4.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = nubic.4a
+		add_yearly_manpower = -0.33
+		add_years_of_income = -0.33
+		said_area = {
+			add_core = NBI
+		}
+		4319 = {
+			spawn_rebels = {
+				size = 1
+				type = nationalist_rebels
+				friend = NBI
+			}
+		}
+	}
+	option = {
+		name = nubic.4b
+		said_area = {
+			add_core = NBI
+		}
+	}
+}
+
+country_event = { # religion stuff
+	id = nubic.5
+	title = nubic.5.test
+	desc = nubic.5.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = nubic.5a
+		create_union = AE0
+		set_country_flag = union_with_aegyptus_flag
+		change_government = monarchy
+		add_government_reform = nubian_african_monarchy
+		AE0 = {
+			capital_scope = {
+				spawn_rebels = {
+					size = 2
+					type = pretender_rebels
+				}
+			}
+			random_owned_province = {
+				spawn_rebels = {
+					size = 2
+					type = indictian_rebels
+				}
+			}
+		}
+	}
+	option = {
+		name = nubic.5b
+		change_religion = indictian
+		set_country_flag = union_with_aegyptus_flag
+		change_government = monarchy
+		add_government_reform = nubian_african_monarchy
+		create_union = AE0
+		capital_scope = {
+			spawn_rebels = {
+					size = 2
+					type = coptic_rebels
+				}
+		}
+		random_owned_province = {
+				spawn_rebels = {
+					size = 2
+					type = coptic_rebels
+				}
+			}
+	}
+	option = {
+		name = nubic.5c
+		add_stability = 1
+		AE0 = {
+			add_stability = 1
+			add_trust = {
+				who = ROOT
+				value = 50
+				mutual = yes
+			}
+		}
+	}
+}
+
+country_event = { # kushite restoration
+	id = nubic.6
+	title = nubic.6.test
+	desc = nubic.6.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = nubic.6a
+		set_capital = 2798
+		2798 = {
+			add_base_tax = 2
+			add_base_manpower = 2
+			change_culture = ROOT
+			change_religion = ROOT
+			add_province_modifier = {
+				name = nub_looking_for_kush
+				duration = 18250
+			}
+		}
+		2797 = {
+			add_province_modifier = {
+				name = nub_looking_for_kush
+				duration = 18250
+			}
+		}
+	}
+	option = {
+		name = nubic.6b
+		2798 = {
+			add_province_modifier = {
+				name = nub_looking_for_kush
+				duration = 18250
+			}
+		}
+		2797 = {
+			add_province_modifier = {
+				name = nub_looking_for_kush
+				duration = 18250
+			}
+		}
+	}
+}
+
+country_event = { # kushite restoration
+	id = nubic.7
+	title = nubic.7.test
+	desc = nubic.7.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = nubic.7a
+		override_country_name = KUSH_NAME
+		change_government = monarchy
+		add_government_reform = nubian_matrilineal_monarchy
+		add_prestige_or_monarch_power = { amount = 10 }
+		add_country_modifier = {
+			name = relics_of_old_kush
+			duration = -1
+		}
+	}
+	option = {
+		name = nubic.7b
+		change_government = monarchy
+		add_government_reform = nubian_matrilineal_monarchy
+		add_prestige_or_monarch_power = { amount = 10 }
+		add_country_modifier = {
+			name = relics_of_old_kush
+			duration = -1
+		}
+	}
+	option = {
+		name = nubic.7c
+		override_country_name = KUSH_NAME
+		add_prestige_or_monarch_power = { amount = 10 }
+		add_country_modifier = {
+			name = relics_of_old_kush
+			duration = -1
+		}
+	}
+	option = {
+		name = nubic.7d
+		change_government = monarchy
+		add_government_reform = nubian_matrilineal_monarchy
+		change_religion = egyptian_paganism
+		add_stability = -2
+	}
+}
+
+country_event = { # sons of Horus event
+	id = nubic.100
+	title = nubic.100.test
+	desc = nubic.100.desc
+	picture = CRUSADER_HORDE_eventPicture
+	
+	mean_time_to_happen = {
+		months = 20
+	}
+
+	trigger = {
+		NOT = {
+			stability = 0
+		}
+		num_of_owned_provinces_with = {
+			value = 2
+			region = egypt_region
+		}
+		tag = NBI
+		owns = 2323
+	}
+
+	option = {
+		name = nubic.5a
+		2323 = {
+			change_religion = egyptian_paganism
+		}
+		
+	}
+	option = {
+		name = nubic.5b
+		2323 = {
+			add_base_manpower = -1
+		}
+	}
+}

@@ -298,16 +298,30 @@ country_event = { #lose 4th crusade
 
 	option = {
 		name = redleg.103a
-		#change_religion = nothing #can comment this out for now Ig since red legion might be getting stuff
+		change_tag = BL0
+		swap_free_idea_group = yes
+		swap_non_generic_missions = yes
+		change_religion = marcionist 
 		add_government_reform = mars_legions_reform 
 		hidden_effect = {
 			add_government_reform = mars_legions_reform 
+			country_event = {
+				id = legion.1
+				days = 7
+			}
+			set_variable = {
+				which = num_council_marcionism_var
+				value = 1
+			}
 		}
-		define_advisor = {
-			type = army_organiser
-			name = "Clades Major"
-			skill = 3
-			cost_multiplier = -0.1
+		custom_tooltip = empty_line_tt
+		add_country_modifier = {
+			name = clades_itsame
+			duration = 15695
+		}
+		add_country_modifier = {
+			name = starving_army_leg
+			duration = -1
 		}
 		ai_chance = {
 			factor = 0

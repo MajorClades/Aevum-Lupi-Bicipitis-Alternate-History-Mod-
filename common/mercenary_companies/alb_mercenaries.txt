@@ -447,3 +447,73 @@ merc_forest_scout = {
 		reinforce_speed = 0.15
 	}
 }
+
+
+#Kongo mercenaries
+
+merc_zappo_zaps = {
+    regiments_per_development = 0.15
+	artillery_weight = 0.0
+	cavalry_weight = 0.0
+    home_province = 5097 
+	mercenary_desc_key = ZAPPO_ZAP_MERC_DESC
+	sprites = { dlc057_nub_sprite_pack africangfx_sprite_pack }
+	cost_modifier = 0.25
+    trigger = {
+		5097 = {
+			owned_by = ROOT
+		}
+		hidden_trigger = {
+			HR7 = {
+				exists = no
+			}
+		}
+	}
+	
+	modifier = {
+		morale_damage = 0.5
+		land_attrition = -0.25
+		land_morale = 0.2
+	}
+	min_size = 12
+	max_size = 32   
+	manpower_pool = 50
+}
+
+merc_sacred_band_of_banta = {
+    regiments_per_development = 0.15
+	artillery_weight = 0.0
+	cavalry_weight = 0.0
+    home_province = 2790 
+	sprites = { dlc057_nub_sprite_pack africangfx_sprite_pack }
+	cost_modifier = 0.5
+    trigger = {
+		is_allowed_to_recruit_mercenaries = yes
+		OR = {
+			capital_scope = { 
+				OR = {
+					region = horn_of_africa_region
+					region = arabia_region
+				}
+			}
+			has_country_modifier = mercenaries_to_the_standard
+			has_country_modifier = glut_of_mercs
+		}
+		hidden_trigger = {
+			NOT = {
+				HR8 = {
+					exists = yes
+				}
+			}
+		}
+	}
+	
+	modifier = {
+		shock_damage_received = -0.1
+		fire_damage_received = -0.1
+		morale_damage_received = -0.2
+	}
+	min_size = 12
+	max_size = 32   
+	manpower_pool = 50
+}

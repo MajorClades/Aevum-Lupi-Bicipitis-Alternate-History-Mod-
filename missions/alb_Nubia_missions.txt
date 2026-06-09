@@ -1,0 +1,460 @@
+Nubia_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = NBI } 
+
+	nub_pacify_beja = {
+		icon = hornofafrica
+		position = 1
+		provinces_to_highlight = { owned_by = ROOT culture = beja } 
+
+		trigger = {
+			OR = {
+				accepted_culture = beja
+				religious_unity = 0.9
+			}
+		}
+
+		effect = {
+			add_yearly_manpower = 1
+			dongola_area = {
+				add_permanent_claim = ROOT
+			}
+			red_sea_coast_area = {
+				add_permanent_claim = ROOT
+			}
+			upper_nubia_area = {
+				add_permanent_claim = ROOT
+			}
+			kurdufan_area = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	nub_southern_attacks = {
+		icon = mission_african_trade_post
+		position = 2
+		required_missions = { nub_pacify_beja } 
+		provinces_to_highlight = {
+			OR = {
+				area = upper_nubia_area
+				area = red_sea_coast_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		trigger = {
+			upper_nubia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			red_sea_coast_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			1234 = {
+				center_of_trade = 1
+			}
+			1228 = {
+				center_of_trade = 1
+			}
+			horn_of_africa_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	nub_up_the_nile = {
+		icon = mission_african_trade_post
+		position = 3
+		required_missions = { nub_southern_attacks  } 
+		provinces_to_highlight = {
+			region = horn_of_africa_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 25
+				region = horn_of_africa_region
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = nub_up_denile
+				duration = 10950
+			}
+		}
+	}
+}
+
+Nubia_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = NBI } 
+
+	nub_churches = {
+		icon = mission_african_trade_post
+		position = 2
+		required_missions = { nub_dam_against_islam } 
+		provinces_to_highlight = {
+			has_tax_building_trigger = no
+			owned_by = ROOT
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 5
+				has_tax_building_trigger = yes
+			}
+		}
+
+		effect = {
+			capital_scope = {
+				add_or_upgrade_tax_building = yes
+			}
+		}
+	}
+	nub_ancient_history = {
+		icon = mission_african_trade_post
+		position = 3
+		required_missions = { nub_southern_attacks nub_estate_knowledge nub_churches } 
+		provinces_to_highlight = {
+			area = upper_nubia_area
+			NOT = { is_core = ROOT }
+		}
+
+		trigger = {
+			has_institution = renaissance
+			upper_nubia_area = {
+				type = all
+				is_core = ROOT
+			}
+		}
+
+		effect = {
+			country_event = {
+				id = nubic.6
+			}
+		}
+	}
+	nub_ancient_kush = {
+		icon = mission_african_trade_post
+		position = 4
+		required_missions = { nub_ancient_history } 
+		provinces_to_highlight = {
+			has_province_modifier = nub_looking_for_kush
+		}
+
+		trigger = {
+			2798 = {
+				has_province_modifier = nub_looking_for_kush
+				grown_by_development = 5
+			}
+			2797 = {
+				has_province_modifier = nub_looking_for_kush
+				grown_by_development = 5
+			}
+		}
+
+		effect = {
+			country_event = {
+				id = nubic.7
+			}
+		}
+	}
+}
+
+Nubia_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = NBI } 
+
+	nub_dam_against_islam = {
+		icon = hornofafrica
+		position = 1
+		provinces_to_highlight = { province_id = 1234 NOT = { grown_by_development = 3  } } 
+
+		trigger = {
+			1234 = {
+				owned_by = ROOT
+				grown_by_development = 4
+			}
+		}
+
+		effect = {
+			define_ruler_to_general = {
+				fire = 3
+				shock = 5
+				manuever = 3
+				siege = 1
+			}
+			1234 = {
+				add_province_modifier = {
+					name = nubian_dam_islam_temp
+					duration = 3650
+				}
+				add_province_modifier = {
+					name = nubian_dam_islam
+					duration = -1
+				}
+			}
+		}
+	}
+
+	nub_estate_knowledge = {
+		icon = mission_african_trade_post
+		position = 2
+		required_missions = { nub_dam_against_islam } 
+
+		trigger = {
+			estate_loyalty = {
+				estate = estate_church
+				loyalty = 70
+			}
+		}
+
+		effect = {
+			capital_scope = {
+				add_institution_embracement = {
+					which = renaissance
+					value = 50
+				}
+			}
+		}
+	}
+
+
+
+}
+
+Nubia_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = NBI } 
+
+	nub_egyptian_friendship = {
+		icon = mission_african_trade_post
+		position = 2
+		required_missions = { nub_coptic_kin } 
+		provinces_to_highlight = {
+			is_capital_of = AE0
+		}
+
+		trigger = {
+			OR = {
+				AE0 = { 
+					exists = no
+				}
+				AE0 = { 
+					alliance_with = ROOT 
+					owes_favors = {
+						who = ROOT
+						value = 80
+					}
+				}
+			}
+		}
+
+		effect = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = NUBIA_TT_1
+				first_limit = "AE0 = { alliance_with = ROOT }"
+				first_effect = "
+					country_event = {
+							id = nubic.5
+						}
+				"
+				second_limit = "NOT = { AE0 = { alliance_with = ROOT } }"
+				second_effect = "
+					custom_tooltip = NUBIA_TT_2
+					hidden_effect = {
+					egypt_region = {
+						limit = {
+							owned_by = RU0
+						}
+						add_unrest = 5
+					}}
+					
+				"
+			}
+			hidden_effect = {
+				if = {
+					limit = {AE0 = { alliance_with = ROOT }}
+					country_event = {
+							id = nubic.5
+						}
+				}
+			}
+			if = {
+				limit = {
+					NOT = { AE0 = { alliance_with = ROOT } }
+				}
+				add_casus_belli = {
+						type = cb_restore_personal_union
+						target = AE0
+						months = 300
+					}
+			}
+		}
+	}
+
+}
+
+Nubia_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = NBI } 
+
+	nub_coptic_kin = {
+		icon = hornofafrica
+		position = 1
+		provinces_to_highlight = { region = egypt_region religion = coptic NOT = { country_or_non_sovereign_subject_holds = ROOT }    } 
+
+		trigger = {
+			OR = {
+				RU0 = { has_been_insulted_by_root = yes }
+				AE0 = { alliance_with = ROOT }
+				AE0 = {
+					has_been_insulted_by_root = yes
+				}
+			}
+		}
+
+		effect = {			
+			simple_dynamic_effect = {
+				first_custom_tooltip = NUBIA_TT_1
+				first_limit = "AE0 = { alliance_with = ROOT }"
+				first_effect = "
+					AE0 = {
+						country_event = {
+							id = nubic.3
+						}
+					}
+				"
+				second_limit = "NOT = { AE0 = { alliance_with = ROOT } }"
+				second_effect = "
+					egypt_region = {
+						add_permanent_claim = ROOT
+					}
+					country_event = {
+						id = nubic.4
+					}
+				"
+			}
+			hidden_effect = {
+				if = {
+					limit = {NOT = { AE0 = { alliance_with = ROOT } }}
+					country_event = {
+						id = nubic.4
+					}
+				}
+			}
+		}
+	}
+
+	nub_egyptian_story = {
+		icon = mission_african_trade_post
+		position = 2
+		required_missions = { nub_coptic_kin } 
+		provinces_to_highlight = {
+			region = egypt_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 10
+				region = egypt_region
+				religion = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = nub_coptic_resurgence
+				duration = 10950
+			}
+			
+		}
+	}
+
+	nub_tales_of_two_kingdoms = {
+		icon = mission_african_trade_post
+		position = 3
+		required_missions = { nub_egyptian_friendship nub_egyptian_story } 
+		provinces_to_highlight = {
+			region = egypt_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		trigger = {
+			egypt_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			near_east_superregion = {
+				add_permanent_claim = ROOT
+				
+			}
+			
+			simple_dynamic_effect = {
+				first_custom_tooltip = NUBIA_TT_3
+				first_limit = "AE0 = { is_subject_of = ROOT }"
+				first_effect = "
+					inherit = AE0
+					custom_tooltip = NUBIA_TT_4a
+					hidden_effect = {
+							egypt_region = {
+										limit = {
+											owned_by = ROOT
+											NOT = {
+												religion = ROOT
+											}
+										}
+										spawn_rebels = {
+											size = 1
+											type = nationalist_rebels
+										}
+									}
+						}
+				"
+				second_limit = "NOT = { AE0 = { is_subject_of = ROOT } }"
+				second_effect = "
+					custom_tooltip = NUBIA_TT_4b
+					egypt_region = {
+						change_religion = ROOT
+					}
+				"
+			}
+
+			
+		}
+	}
+}

@@ -1,0 +1,83 @@
+namespace = burundi_alb
+
+country_event = { #lore event pick religion
+	id = burundi_alb.1
+	title = burundi_alb.1.test
+	desc = burundi_alb.1.desc
+	picture = AFRICAN_CARAVAN_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = burundi_alb.1a #Become Jewish
+		change_religion = jewish
+		add_country_modifier = {
+			name = buu_exodus_zeal
+			duration = 10950
+		}
+	}
+	option = {
+		name = burundi_alb.1b #Convert to Christianity
+		change_religion = coptic
+		add_country_modifier = {
+			name = buu_exodus_zeal
+			duration = 10950
+		}
+	}
+	option = {
+		name = burundi_alb.1c #Stay fetishist
+		add_country_modifier = {
+			name = buu_pagan_larper
+			duration = -1
+		}
+	}
+}
+
+country_event = {
+	id = burundi_alb.2
+	title = burundi_alb.2.test
+	desc = burundi_alb.2.desc
+	picture = ASKIA_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = burundi_alb.2a
+		custom_tooltip = burundi_more_mission_unlock_tooltip
+		set_country_flag = burundi_more_mission_unlock #enables second part
+		swap_non_generic_missions = yes #adds the obtains new missions tooltip
+		
+	}
+}
+
+country_event = {
+	id = burundi_alb.3
+	title = burundi_alb.3.test
+	desc = burundi_alb.3.desc
+	picture = AFRICAN_CHIEFTAIN_eventPicture
+	
+	is_triggered_only = yes
+
+	option = {
+		name = burundi_alb.3a
+		custom_tooltip =  BUU_RANDOM_RELIGION_KONGO_TT
+        hidden_effect = {
+            every_owned_province = {
+                limit = {
+                    culture = kongolese_h
+                }
+                random_list = {
+					30 = {
+						change_religion = ROOT
+					}
+					70 = {
+						
+					}
+				}
+            }
+        }
+		custom_tooltip = burundi_harar_jugol_tooltip
+		set_country_flag = alb_get_access_to_harar_jugol_monuments #enables harar jugol
+		
+	}
+}

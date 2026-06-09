@@ -2342,6 +2342,8 @@ eastern = {
 			morale_damage_received = -0.025
 		}
 		heretic = { SHANGQING }
+
+		harmonized_modifier = harmonized_mahayana
 	}
 	
 	daoism = {
@@ -2357,6 +2359,8 @@ eastern = {
 			global_prosperity_growth = 0.05
 		}
 		heretic = { SHANGQING }
+
+		harmonized_modifier = harmonized_mahayana
 		uses_harmony = yes
 	}
 
@@ -2372,6 +2376,8 @@ eastern = {
 			local_unrest = -1
 		}
 		heretic = { SHANGQING }
+
+		harmonized_modifier = harmonized_mahayana
 		uses_harmony = yes
 	}
 
@@ -2881,20 +2887,35 @@ pagan = {
 		fetishist_cult = yes
 		heretic = { WAGYLKOOP MOORAMOORA GINGARRURNDE }
 	}
+
+	egyptian_paganism = {
+		icon = 29
+		color = { 222 133 43 }
+		country = {
+			manpower_in_true_faith_provinces = 0.1
+			monarch_lifespan = 0.15
+		}
+		country_as_secondary = {
+			manpower_in_true_faith_provinces = 0.1
+			monarch_lifespan = 0.15
+		}
+		
+		fetishist_cult = yes
+		heretic = { WAGYLKOOP MOORAMOORA GINGARRURNDE }
+	}
 	
 	tapuism = {
 		color = { 0 250 85 }
-		icon = 41
+		icon = 4
 		country = {
 			naval_morale = 0.1
 			leader_naval_manuever = 1
 		}
 		country_as_secondary = {
 			naval_morale = 0.1
-			light_ship_power = 0.2
+			legitimacy = 1
 		}
 		province = {
-			local_ship_repair = 0.1
 			ship_recruit_speed = -0.1
 		}
 		
@@ -3149,7 +3170,9 @@ zoroastrian_group = {
 	mazdakism = {
 		icon = 55
 		color = { 69 67 204 }
-		
+		allowed_conversion = {
+			jyotisastra
+		}
 		country = {
 			global_unrest = -2
 			all_estate_influence_modifier = -0.1
@@ -3159,12 +3182,17 @@ zoroastrian_group = {
 			stability_cost_modifier = -0.1
 		}
 		allowed_center_conversion = {
-			islam
-			rashidi
-			coptic
-			hinduism
+			jyotisastra
 		}
-		
+		on_convert = {
+			change_religion = mazdakism
+			add_prestige = -100
+			
+			add_country_modifier = {
+				name = "conversion_zeal"
+				duration = 3650
+			}			
+		}
 		date = 1499.01.01
 
 		fervor = yes
@@ -3196,10 +3224,12 @@ zoroastrian_group = {
 	}
 	
 	jyotisastra = {
-	
+		
 		flags_with_emblem_percentage = 10
 		flag_emblem_index_range = { 1 4 }
-
+		allowed_conversion = {
+			mazdakism
+		}
 		color = { 252 67 42 }
 		icon = 53
 		country = {
@@ -3228,6 +3258,24 @@ zoroastrian_group = {
 			light_adm_3_aspect
 			light_dip_3_aspect
 			light_mil_3_aspect
+			light_adm_jambuvi_aspect
+			light_adm_kamboj_aspect
+			light_adm_kharosthi_aspect
+			light_adm_saravi_aspect
+			light_adm_huna_aspect
+			light_adm_ksatrap_aspect
+			light_dip_jambuvi_aspect
+			light_dip_kamboj_aspect
+			light_dip_kharosthi_aspect
+			light_dip_saravi_aspect
+			light_dip_huna_aspect
+			light_dip_ksatrap_aspect
+			light_mil_jambuvi_aspect
+			light_mil_kamboj_aspect
+			light_mil_kharosthi_aspect
+			light_mil_saravi_aspect
+			light_mil_huna_aspect
+			light_mil_ksatrap_aspect	
 		}
 
 		celebrate = {
@@ -3248,7 +3296,15 @@ zoroastrian_group = {
 				factor = 1
 			}
 		}
-		
+		on_convert = {
+			change_religion = jyotisastra
+			add_prestige = -100
+			
+			add_country_modifier = {
+				name = "conversion_zeal"
+				duration = 3650
+			}			
+		}
 	}
 	
 	harmonized_modifier = harmonized_zoroastrian_group
@@ -3458,4 +3514,97 @@ timeout_group = { # don't want it to show up in pagan and don't want to delete i
 	harmonized_modifier = harmonized_zoroastrian_group
 	
 	crusade_name = HOLY_WAR
+}
+
+marcionism = { # We will kill God
+	marcionist = {
+		icon = 56
+		color = { 66 6 0 }
+		country = {
+			tolerance_heathen = -1
+			church_power_modifier = 0.15
+		}
+		country_as_secondary = {
+			warscore_cost_vs_other_religion = 0.15
+		}
+		province = {
+			local_missionary_strength = 0.05
+		}
+		uses_judaism_power = yes
+		aspects_name = MARX_ASPECTS
+			
+		aspects = {
+			clades_adm_aspect
+			sanguine_adm_aspect
+			solari_adm_aspect
+			clades_dip_aspect
+			sanguine_dip_aspect
+			solari_dip_aspect
+			clades_mil_aspect
+			sanguine_mil_aspect
+			solari_mil_aspect
+			cladesian_adm_aspect
+			sanguinar_adm_aspect
+			solar_adm_aspect
+			marxionist_1_adm_aspect
+			marxionist_2_adm_aspect
+			cladesian_dip_aspect
+			sanguinar_dip_aspect
+			solar_dip_aspect
+			marxionist_1_dip_aspect
+			marxionist_2_dip_aspect
+			cladesian_mil_aspect
+			sanguinar_mil_aspect
+			solar_mil_aspect
+			marxionist_1_mil_aspect
+			marxionist_2_mil_aspect
+		}
+
+		celebrate = {
+			cost = 100
+			potential = { religion = marcionist}
+			allow = {
+				custom_trigger_tooltip = {
+					tooltip = BROK_LEG_TT_0
+					NOT = {has_country_modifier = marc_hidden_timer}
+				}
+			}
+			effect = {
+				if = {
+					limit = {
+						OR = {
+							tag = BL0
+							tag = BL1
+						}
+					}
+					country_event = {
+						id = legion.1000
+					}
+				}else = {
+					country_event = {
+						id = legion.2000
+					}
+				}
+				hidden_effect = {
+					add_country_modifier = {
+						name = marc_hidden_timer
+						duration = 730
+						hidden = yes
+					}
+				}
+			}
+			ai_will_do = {
+				factor = 1
+				modifier = {
+					factor = 0
+					stability = 2
+				}
+			}
+		}
+		heretic = { DEMIURGIC }	
+	}
+
+	harmonized_modifier = harmonized_zoroastrian_group
+	
+	crusade_name = UNHOLY_WAR
 }
