@@ -1,0 +1,116 @@
+tech_madness_mechanic = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 1
+	available = {
+		
+	}
+	
+	powers = {
+		tech_madness_power = {
+			max = 100
+			min = 0
+			gui = council_of_ten_gov_mech
+			show_before_interactions = yes
+			reset_on_new_ruler = no
+			base_monthly_growth = -0.15
+
+			scaled_modifier = {
+				modifier = {
+					global_tax_modifier = -0.3
+					build_time = 0.25
+					stability_cost_modifier = 0.5
+					all_estate_loyalty_equilibrium = -0.5
+					build_cost = 0.25
+					technology_cost = -0.3
+					innovativeness_gain = 1
+				}
+				start_value = 0
+				end_value = 100
+			}
+		}
+	}
+	
+	interactions = {
+		mekh_do_it_yourself = {
+			icon = GFX_council_of_ten_adm_interaction_button
+			cooldown_years = 2
+			trigger = {
+				
+			}
+			effect = {
+				add_government_power = {
+					mechanic_type = tech_madness_mechanic
+					power_type = tech_madness_power
+					value = 5
+				}
+				random = {
+					chance = 5
+					kill_ruler = yes
+				}
+			}
+			ai_chance = {
+				factor = 10
+			}
+		}
+		mekh_use_d_class = {
+			icon = GFX_council_of_ten_dip_interaction_button
+			cooldown_years = 2
+			trigger = {
+				years_of_manpower = 0.25
+			}
+			effect = {
+				add_government_power = {
+					mechanic_type = tech_madness_mechanic
+					power_type = tech_madness_power
+					value = 5
+				}
+				random_list = {
+					25 = {
+						add_yearly_manpower = -0.12
+					}
+					25 = {
+						add_yearly_manpower = -0.19
+					}
+					25 = {
+						add_yearly_manpower = -0.25
+					}
+					25 = {
+						add_yearly_manpower = -0.3
+					}
+				}
+			}
+			ai_chance = {
+				factor = 0
+			}
+		}
+		mekh_bother_the_estates = {
+			icon = GFX_council_of_ten_mil_interaction_button
+			cooldown_years = 2
+			trigger = {
+				
+			}
+			effect = {
+				add_government_power = {
+					mechanic_type = tech_madness_mechanic
+					power_type = tech_madness_power
+					value = 5
+				}
+				add_estate_loyalty = {
+					estate = estate_church
+					loyalty = -10
+				}
+				add_estate_loyalty = {
+					estate = estate_nobles
+					loyalty = -10
+				}
+				add_estate_loyalty = {
+					estate = estate_burghers
+					loyalty = -10
+				}
+			}
+			ai_chance = {
+				factor = 0
+			}
+		}
+	}
+}
