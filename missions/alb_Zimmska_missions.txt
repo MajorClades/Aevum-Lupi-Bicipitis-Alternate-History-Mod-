@@ -1807,28 +1807,33 @@ ZL0_second_5_slot = {
 		trigger = {  
 			if = {
 				limit = {
-					religion = catholic
+					religion_group = christian
 				}
-				num_of_cardinals = 2
-				OR = {
-					is_papal_controller = yes
-					invested_papal_influence = 100
+				if = {
+					limit = {
+						religion = catholic
+					}
+					num_of_cardinals = 2
+					OR = {
+						is_papal_controller = yes
+						invested_papal_influence = 100
+					}
 				}
-			}
-			else_if = {
-				limit = {
-					religion = wycliffian
+				else_if = {
+					limit = {
+						religion = wycliffian
+					}
+					OR = {
+						has_church_aspect = sola_scriptura_aspect
+						has_church_aspect = taborite_resurgence_aspect
+						has_church_aspect = orphan_hetmans_aspect
+					}
+					church_power = 200
+					army_size_percentage = 0.8
 				}
-				OR = {
-					has_church_aspect = sola_scriptura_aspect
-					has_church_aspect = taborite_resurgence_aspect
-					has_church_aspect = orphan_hetmans_aspect
-				}
-				church_power = 200
-				army_size_percentage = 0.8
+				is_defender_of_faith_of_tier = 4
 			}
 			religious_unity = 1
-			is_defender_of_faith_of_tier = 4
 		} 
 
 		effect = {  
