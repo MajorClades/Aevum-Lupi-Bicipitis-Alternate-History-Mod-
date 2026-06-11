@@ -265,9 +265,88 @@ burundi_3 = {
 		required_missions = {
 			dust_settle dusk_and_down
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = {
+			owned_by = ROOT
+			NOT = { religion = ROOT }
+		}
+		trigger = { grown_by_states = 5 religious_unity = 0.85 }
+		effect = {
+		add_prestige_or_monarch_power = { amount = 25 }
+			if = {
+				limit = {
+					religion = jewish
+				}
+			custom_tooltip = is_jewish_truefaithprov_tooltip
+			tooltip = {
+				add_province_modifier = {
+					name = buu_truefaith_jewish
+					duration = 36500
+						}
+					}
+			}
+			if = {
+				limit = {
+					religion = coptic
+				}
+			custom_tooltip = is_coptic_truefaithprov_tooltip
+			tooltip = {
+				add_province_modifier = {
+					name = buu_truefaith_coptic
+					duration = 36500
+						}
+					}
+			}
+			if = {
+				limit = {
+					religion = shamanism 
+				}
+			custom_tooltip = is_fetishist_truefaithprov_tooltip
+			tooltip = {
+				add_province_modifier = {
+					name = buu_truefaith_shamanism
+					duration = 36500
+						}
+					}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						religion = jewish
+					}
+					every_owned_province = {
+						limit = { religion = ROOT } 
+						add_province_modifier = {
+							name = "buu_truefaith_jewish"
+							duration = 36500
+						}
+					}
+				}
+				if = {
+					limit = {
+						religion = coptic
+					}
+					every_owned_province = {
+						limit = { religion = ROOT } 
+						add_province_modifier = {
+							name = "buu_truefaith_coptic"
+							duration = 36500
+						}
+					}
+				}
+				if = {
+					limit = {
+						religion = shamanism 
+					}
+					every_owned_province = {
+						limit = { religion = ROOT } 
+						add_province_modifier = {
+							name = "buu_truefaith_shamanism"
+							duration = 36500
+						}
+					}
+				}
+			}
+		}
 	}
 
 	kongo_crushed = {
@@ -287,9 +366,46 @@ burundi_3 = {
 		required_missions = {
 			nubia_pacified kongo_crushed end_of_ethiopia
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = {
+			owned_by = ROOT
+			NOT = { religion = ROOT }
+		}
+		trigger = { NOT = { overextension_percentage = 0.05 } religious_unity = 0.9 }
+		effect = {
+		country_event_with_insight = {
+				id = burundi_alb.2
+				insight_tooltip = BUU_MORE_MISSION_TT
+			}
+			east_africa_region = { add_permanent_claim = ROOT }
+			custom_tooltip =  BUU_RANDOM_PROSPERITY_TT
+			hidden_effect = {
+            every_owned_province = {
+                limit = {
+                    religion = ROOT
+                }
+                random_list = {
+					5 = {
+						add_prosperity = 50
+					}
+					10 = {
+						add_prosperity = 75
+					}
+					15 = {
+						add_prosperity = 50
+					}
+					20 = {
+						add_prosperity = 30
+					}
+					45 = {
+						add_prosperity = 20
+					}
+					5 = {
+						add_prosperity = 5
+					}
+				}
+            }
+        }
+		}
 	}
 
 }
