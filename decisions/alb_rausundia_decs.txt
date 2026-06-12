@@ -228,4 +228,52 @@ country_decisions = {
 		}
 		ai_importance = 400
 	}
+	alb_illiniwek_rausundia = {
+        major = yes
+        potential = {
+            NOT = {
+                has_country_flag = alb_illiniwek_rausundia_flag
+            }
+            tag = ILL
+        }
+        provinces_to_highlight = {
+            OR = {
+                region = great_lakes_region
+				region = mississippi_region
+				region = great_plains_region
+            }
+        }
+        allow = {
+            num_of_owned_provinces_with = {
+				value = 50
+				OR = {
+					region = great_lakes_region
+					region = mississippi_region
+					region = great_plains_region
+				}
+			}
+        }
+        effect = {
+            set_country_flag = alb_illiniwek_rausundia_flag
+            change_tag = IL0
+			restore_country_name = yes
+			set_government_rank = 3
+			add_country_modifier = {
+				name = nita_turtle_island
+				duration = -1
+			}
+			great_lakes_region = {
+				add_permanent_claim = ROOT
+			}
+			mississippi_region = {
+				add_permanent_claim = ROOT
+			}
+			great_plains_region = {
+				add_permanent_claim = ROOT
+			}
+        }
+        ai_will_do = {
+	    	factor = 1
+	    }
+    }
 }
