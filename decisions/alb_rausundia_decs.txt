@@ -164,7 +164,10 @@ country_decisions = {
 	alb_tsenacommacah_formable = {
 		major = yes
 		potential = {
-			tag = POW
+			OR = {
+				culture = powhatan
+				tag = POW
+			}
 			NOT = {
 				has_country_flag = formed_tsenacommacah_flag
 			}
@@ -181,17 +184,20 @@ country_decisions = {
 		allow = {
 			AND = {
 				is_migratory_tribe = no
-				owns_all_provinces = {
-					area = maryland_area
-					area = chesapeake_area
-					area = great_valley_area
-					area = piedmont_north_america_area
-					area = carolinas_area
+				every_province = {
+					limit = {
+						area = maryland_area
+						area = chesapeake_area
+						area = great_valley_area
+						area = piedmont_north_america_area
+						area = carolinas_area
+					}
+					owned_by = ROOT
 				}
 			}
 		}
 		effect = {
-			set_country_flag = formed_rausundian_union_flag
+			set_country_flag = formed_tsenacommacah_flag
 			override_country_name = TSENACOMMACAH
 			set_capital = 952
 			set_government_rank = 3
@@ -199,6 +205,9 @@ country_decisions = {
 				add_permanent_claim = ROOT
 			}
 			southeast_america_region = {
+				add_permanent_claim = ROOT
+			}
+			appalachia_area = {
 				add_permanent_claim = ROOT
 			}
 			add_country_modifier = {
