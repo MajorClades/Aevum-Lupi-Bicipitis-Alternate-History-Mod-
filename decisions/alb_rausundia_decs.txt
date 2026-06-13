@@ -53,7 +53,17 @@ country_decisions = {
 		potential = {
 			is_rausundian_native = yes
 			NOT = {
-				has_country_flag = formed_rausundian_union_flag
+				OR = {
+					has_global_flag = formed_rausundian_union_flag
+					tag = ILL
+					tag = IL0
+					culture = mikmaq
+					culture = abenaki
+					culture = maliseet
+				}		
+			}
+			OR = {
+				tag = WAB
 			}
 		}
 		provinces_to_highlight = {
@@ -76,19 +86,19 @@ country_decisions = {
 				limit = {
 					culture_group = eastern_algonquian
 				}
-				override_country_name = RAU_EA_UNION
+				change_tag = OQO
 			}
 			if = {
 				limit = {
 					culture_group = iroquoian
 				}
-				override_country_name = RAU_IROQUIA
+				change_tag = ONG
 			}
 			if = {
 				limit = {
 					culture_group = central_algonquian
 				}
-				override_country_name = RAU_CA_UNION
+				change_tag = NIT
 			}
 			add_country_modifier = {
 				name = rau_native_union
@@ -101,7 +111,10 @@ country_decisions = {
 			northeast_america_region = {
 				add_permanent_claim = ROOT
 			}
-			set_country_flag = formed_rausundian_union_flag
+			great_lakes_region = {
+				add_permanent_claim = ROOT
+			}
+			set_global_flag = formed_rausundian_union_flag
 		}
 		ai_will_do = {
 			factor = 1
@@ -135,23 +148,18 @@ country_decisions = {
 			}
 		}
 		allow = {
-			num_of_owned_provinces_with = {
-				value = 15
+			owns_all_provinces = {
 				OR = {
 					culture = mikmaq
 					culture = abenaki
 					culture = maliseet
 				}
-				OR = {
-					region = canada_region
-					region = northeast_america_region
-				}
 			}
 		}
 		effect = {
-			override_country_name = WABANAKI
+			change_tag = WAB
 			set_government_rank = 2
-			northeast_america_region = {
+			wabanaki_confederacy_group = {
 				add_permanent_claim = ROOT
 			}
 			set_country_flag = formed_wabanaki_flag
@@ -206,7 +214,7 @@ country_decisions = {
 		}
 		effect = {
 			set_country_flag = formed_tsenacommacah_flag
-			override_country_name = TSENACOMMACAH
+			change_tag = TSE
 			set_capital = 952
 			set_government_rank = 3
 			northeast_america_region = {
