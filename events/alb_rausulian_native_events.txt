@@ -6,33 +6,47 @@ country_event = {
     desc = rausulian_native.1.d
     picture = northamericagfx_HORDE_ON_HORSEBACK_eventPicture
     fire_only_once = yes
+    hidden = yes
     trigger = {
         is_year = 1540
-        capital_scope {
-            OR = {
-                region = great_plains_region
-                region = rio_grande_region
-                area = wisconsin_area
-                area = red_river_area
-                area = dakota_area
-                area = upper_missouri_area
-                area = snake_river_area
-                area = manitoba_area
-                area = assiniboia_area
-            }
-        }
-        if = {
-            limit = {
-                has_dlc = "conquest of Paradise"
-            }
-            is_migratory_native = yes
-        }
     }
     mean_time_to_happen = {
         months = 120
     }
     option = {
         name = rausulian_native.1.a
+        every_country = {
+                limit = {
+                    capital_scope = {
+                        OR = {
+                            region = great_plains_region
+                            region = rio_grande_region
+                            area = wisconsin_area
+                            area = red_river_area
+                            area = dakota_area
+                            area = upper_missouri_area
+                            area = snake_river_area
+                            area = manitoba_area
+                            area = assiniboia_area
+                        }
+                    }
+                    is_migratory_tribe = yes
+                }
+                country_event = {
+                    id = rausulian_native.2
+                }
+            }
+    }
+}
+
+country_event = {
+    id = rausulian_native.2
+    title = rausulian_native.2.t
+    desc = rausulian_native.2.d
+    picture = northamericagfx_HORDE_ON_HORSEBACK_eventPicture
+    is_triggered_only = yes
+    option = {
+        name = rausulian_native.2.a
         every_tribal_land_province = {
             limit = { NOT = { owner = { exists = yes } } }
             settle_province = ROOT
@@ -43,5 +57,34 @@ country_event = {
         change_unit_type = nomad_group
         change_technology_group = nomad_group
         custom_tooltip = STEPPE_HORDE_BENEFITS
+
+        country_event = {
+            id = rausulian_native.3
+        }
+    }
+}
+
+country_event = {
+    id = rausulian_native.3
+    title = rausulian_native.3.t
+    desc = rausulian_native.3.d
+    picture = northamericagfx_COMET_SIGHTED_eventPicture
+    is_triggered_only = yes
+    option = {
+        name = rausulian_native.3.a
+        ai_chance = {
+            factor = 50
+        }
+        change_religion = wakan
+        every_owned_province = {
+            limit = {
+                has_owner_culture = yes
+            }
+            change_religion = wakan
+        }
+    }
+    option = {
+        name = rausulian_native.3.b
+        add_stability = 1
     }
 }
