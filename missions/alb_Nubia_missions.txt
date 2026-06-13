@@ -6,9 +6,12 @@ Nubia_1_slot = {
 	potential = { tag = NBI } 
 
 	nub_pacify_beja = {
-		icon = hornofafrica
+		icon = mission_arabian_fort
 		position = 1
-		provinces_to_highlight = { owned_by = ROOT culture = beja } 
+		provinces_to_highlight = {
+			owned_by = ROOT
+			culture = beja
+		}
 
 		trigger = {
 			OR = {
@@ -19,23 +22,15 @@ Nubia_1_slot = {
 
 		effect = {
 			add_yearly_manpower = 1
-			dongola_area = {
-				add_permanent_claim = ROOT
-			}
-			red_sea_coast_area = {
-				add_permanent_claim = ROOT
-			}
-			upper_nubia_area = {
-				add_permanent_claim = ROOT
-			}
-			kurdufan_area = {
-				add_permanent_claim = ROOT
-			}
+			dongola_area = { add_permanent_claim = ROOT } 
+			red_sea_coast_area = { add_permanent_claim = ROOT } 
+			upper_nubia_area = { add_permanent_claim = ROOT } 
+			kurdufan_area = { add_permanent_claim = ROOT } 
 		}
 	}
 
 	nub_southern_attacks = {
-		icon = mission_african_trade_post
+		icon = hornofafrica
 		position = 2
 		required_missions = { nub_pacify_beja } 
 		provinces_to_highlight = {
@@ -43,9 +38,7 @@ Nubia_1_slot = {
 				area = upper_nubia_area
 				area = red_sea_coast_area
 			}
-			NOT = {
-				country_or_non_sovereign_subject_holds = ROOT
-			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 		}
 
 		trigger = {
@@ -60,27 +53,19 @@ Nubia_1_slot = {
 		}
 
 		effect = {
-			1234 = {
-				center_of_trade = 1
-			}
-			1228 = {
-				center_of_trade = 1
-			}
-			horn_of_africa_region = {
-				add_permanent_claim = ROOT
-			}
+			1234 = { center_of_trade = 1 } 
+			1228 = { center_of_trade = 1 } 
+			horn_of_africa_region = { add_permanent_claim = ROOT } 
 		}
 	}
 
 	nub_up_the_nile = {
-		icon = mission_african_trade_post
+		icon = befriend_ethiopia
 		position = 3
-		required_missions = { nub_southern_attacks  } 
+		required_missions = { nub_southern_attacks } 
 		provinces_to_highlight = {
 			region = horn_of_africa_region
-			NOT = {
-				country_or_non_sovereign_subject_holds = ROOT
-			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 		}
 
 		trigger = {
@@ -92,13 +77,118 @@ Nubia_1_slot = {
 
 		effect = {
 			add_country_modifier = {
-				name = nub_up_denile
+				name = "nub_up_denile"
 				duration = 10950
 			}
 		}
 	}
-}
 
+	nub_admin_diplo = {
+		icon = mission_advance_to_the_arabian_sea
+		position = 5
+		provinces_to_highlight = { province_id = 358 } 
+
+		trigger = {
+			358 = { is_strongest_trade_power = ROOT } 
+			OR = {
+				num_of_completed_idea_groups_adm = { amount = 1 } 
+				num_of_completed_idea_groups_dip = { amount = 1 } 
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "nub_gates_of_the_east"
+				duration = -1
+			}
+		}
+	}
+
+	nub_great_library = {
+		icon = found_the_vatican_library
+		position = 6
+		required_missions = {
+			nub_admin_diplo
+			nub_warfare
+		}
+		provinces_to_highlight = { province_id = 358 } 
+
+		trigger = {
+			358 = {
+				owned_by = ROOT
+				is_core = ROOT
+				has_great_project = {
+					type = alexandria_library
+					tier = 2
+				}
+			}
+		}
+
+		effect = {
+			if = {
+				limit = {
+					358 = {
+						has_great_project = {
+							type = alexandria_library
+							tier = 3
+						}
+					}
+				}
+				add_adm_power = 400
+				add_dip_power = 400
+				add_mil_power = 400
+				custom_tooltip = NUBIA_TT_6a
+			}
+			else = {
+				358 = {
+					add_great_project_tier = {
+						type = alexandria_library
+						tier = 1
+					}
+				}
+				custom_tooltip = NUBIA_TT_6b
+				tooltip = {
+					add_adm_power = 400
+					add_dip_power = 400
+					add_mil_power = 400
+					custom_tooltip = NUBIA_TT_6a
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						358 = {
+							has_great_project = {
+								type = alexandria_library
+								tier = 3
+							}
+						}
+					}
+					egypt_region = {
+						limit = {
+							development = 20
+							owned_by = ROOT
+						}
+						add_building_construction = {
+							building = university
+							cost = 0
+						}
+					}
+					horn_of_africa_region = {
+						limit = {
+							development = 20
+							owned_by = ROOT
+						}
+						add_building_construction = {
+							building = university
+							cost = 0
+						}
+					}
+				}
+			}
+		}
+	}
+}
 Nubia_2_slot = {
 	slot = 2
 	generic = no
@@ -107,7 +197,7 @@ Nubia_2_slot = {
 	potential = { tag = NBI } 
 
 	nub_churches = {
-		icon = mission_african_trade_post
+		icon = mission_european_church
 		position = 2
 		required_missions = { nub_dam_against_islam } 
 		provinces_to_highlight = {
@@ -122,19 +212,20 @@ Nubia_2_slot = {
 			}
 		}
 
-		effect = {
-			capital_scope = {
-				add_or_upgrade_tax_building = yes
-			}
-		}
+		effect = { capital_scope = { add_or_upgrade_tax_building = yes }  } 
 	}
+
 	nub_ancient_history = {
-		icon = mission_african_trade_post
+		icon = mission_rb_seize_alexandria
 		position = 3
-		required_missions = { nub_southern_attacks nub_estate_knowledge nub_churches } 
+		required_missions = {
+			nub_southern_attacks
+			nub_estate_knowledge
+			nub_churches
+		}
 		provinces_to_highlight = {
 			area = upper_nubia_area
-			NOT = { is_core = ROOT }
+			NOT = { is_core = ROOT } 
 		}
 
 		trigger = {
@@ -145,19 +236,14 @@ Nubia_2_slot = {
 			}
 		}
 
-		effect = {
-			country_event = {
-				id = nubic.6
-			}
-		}
+		effect = { country_event = { id = nubic.6 } custom_tooltip = NUBIA_TT_EV_1  } 
 	}
+
 	nub_ancient_kush = {
-		icon = mission_african_trade_post
+		icon = mission_arabian_thalassocracy
 		position = 4
 		required_missions = { nub_ancient_history } 
-		provinces_to_highlight = {
-			has_province_modifier = nub_looking_for_kush
-		}
+		provinces_to_highlight = { has_province_modifier = nub_looking_for_kush } 
 
 		trigger = {
 			2798 = {
@@ -170,14 +256,69 @@ Nubia_2_slot = {
 			}
 		}
 
+		effect = { country_event = { id = nubic.7 }  } 
+	}
+
+	nub_warfare = {
+		icon = mam_arabia
+		position = 5
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			has_won_war_against = {
+				who = RU0
+				max_years_since = 10
+			}
+			num_of_completed_idea_groups_mil = { amount = 1 } 
+		}
+
 		effect = {
-			country_event = {
-				id = nubic.7
+			simple_dynamic_effect = {
+				first_custom_tooltip = NUBIA_TT_5
+				first_limit = "full_idea_group = defensive_ideas"
+				first_effect = "
+					add_country_modifier = {
+						name = nub_more_defense
+						duration = -1
+					}
+				"
+				second_limit = "NOT = { full_idea_group = defensive_ideas }"
+				second_effect = "
+					add_country_modifier = {
+						name = nub_less_defense
+						duration = -1
+					}
+				"
+			}
+			
+		}
+	}
+
+	nub_winds_of_noun = {
+		icon = mission_aragonese_navy
+		position = 6
+		required_missions = {
+			nub_warfare
+			navy_of_the_nile
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			OR = {
+				full_idea_group = naval_ideas
+				navy_tradition = 50
+			}
+			num_of_heavy_ship = 10
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "nub_ships"
+				duration = -1
 			}
 		}
 	}
 }
-
 Nubia_3_slot = {
 	slot = 3
 	generic = no
@@ -186,9 +327,12 @@ Nubia_3_slot = {
 	potential = { tag = NBI } 
 
 	nub_dam_against_islam = {
-		icon = hornofafrica
+		icon = mission_egyptian_mamluk_soldier
 		position = 1
-		provinces_to_highlight = { province_id = 1234 NOT = { grown_by_development = 3  } } 
+		provinces_to_highlight = {
+			province_id = 1234
+			NOT = { grown_by_development = 3 } 
+		}
 
 		trigger = {
 			1234 = {
@@ -206,11 +350,11 @@ Nubia_3_slot = {
 			}
 			1234 = {
 				add_province_modifier = {
-					name = nubian_dam_islam_temp
+					name = "nubian_dam_islam_temp"
 					duration = 3650
 				}
 				add_province_modifier = {
-					name = nubian_dam_islam
+					name = "nubian_dam_islam"
 					duration = -1
 				}
 			}
@@ -218,9 +362,10 @@ Nubia_3_slot = {
 	}
 
 	nub_estate_knowledge = {
-		icon = mission_african_trade_post
+		icon = prester_john
 		position = 2
 		required_missions = { nub_dam_against_islam } 
+		provinces_to_highlight = {  } 
 
 		trigger = {
 			estate_loyalty = {
@@ -230,6 +375,8 @@ Nubia_3_slot = {
 		}
 
 		effect = {
+			mediterrenean_region = { discover_country = ROOT } 
+			maghreb_region = { discover_country = ROOT } 
 			capital_scope = {
 				add_institution_embracement = {
 					which = renaissance
@@ -239,10 +386,75 @@ Nubia_3_slot = {
 		}
 	}
 
+	nub_cut_africa_from_asia = {
+		icon = mission_occupy_alexandria
+		position = 3
+		required_missions = { nub_estate_knowledge } 
+		provinces_to_highlight = {  } 
 
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 5
+				has_fort_building_trigger = yes
+			}
+		}
 
+		effect = {
+			add_mil_power = 100
+			add_army_tradition = 15
+		}
+	}
+
+	navy_of_the_nile = {
+		icon = mission_arabian_sea_trade
+		position = 5
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 2
+				has_dock_building_trigger = yes
+			}
+			navy_size_percentage = 0.9
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "nub_egyptian_navy"
+				duration = -1
+			}
+		}
+	}
+
+	nub_indian_trade = {
+		icon = mission_african_trade_post
+		position = 7
+		required_missions = { navy_of_the_nile } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			OR = {
+				full_idea_group = expansion_ideas
+				full_idea_group = exploration_ideas
+				any_owned_province = { superregion = india_superregion } 
+			}
+		}
+
+		effect = {
+			custom_tooltip = NUBIA_TT_7
+			hidden_effect = {
+				india_superregion = {
+					limit = { has_port = yes } 
+					add_permanent_claim = ROOT
+				}
+			}
+			add_country_modifier = {
+				name = "nub_colonization"
+				duration = 10950
+			}
+		}
+	}
 }
-
 Nubia_4_slot = {
 	slot = 4
 	generic = no
@@ -251,20 +463,16 @@ Nubia_4_slot = {
 	potential = { tag = NBI } 
 
 	nub_egyptian_friendship = {
-		icon = mission_african_trade_post
+		icon = mission_conquer_alexandria
 		position = 2
 		required_missions = { nub_coptic_kin } 
-		provinces_to_highlight = {
-			is_capital_of = AE0
-		}
+		provinces_to_highlight = { is_capital_of = AE0 } 
 
 		trigger = {
 			OR = {
-				AE0 = { 
-					exists = no
-				}
-				AE0 = { 
-					alliance_with = ROOT 
+				AE0 = { exists = no } 
+				AE0 = {
+					alliance_with = ROOT
 					owes_favors = {
 						who = ROOT
 						value = 80
@@ -281,6 +489,7 @@ Nubia_4_slot = {
 					country_event = {
 							id = nubic.5
 						}
+					custom_tooltip = NUBIA_TT_1c
 				"
 				second_limit = "NOT = { AE0 = { alliance_with = ROOT } }"
 				second_effect = "
@@ -297,27 +506,113 @@ Nubia_4_slot = {
 			}
 			hidden_effect = {
 				if = {
-					limit = {AE0 = { alliance_with = ROOT }}
-					country_event = {
-							id = nubic.5
-						}
+					limit = { AE0 = { alliance_with = ROOT }  } 
+					country_event = { id = nubic.5 } 
 				}
 			}
 			if = {
-				limit = {
-					NOT = { AE0 = { alliance_with = ROOT } }
-				}
+				limit = { NOT = { AE0 = { alliance_with = ROOT }  }  } 
 				add_casus_belli = {
-						type = cb_restore_personal_union
-						target = AE0
-						months = 300
-					}
+					type = cb_restore_personal_union
+					target = AE0
+					months = 300
+				}
 			}
 		}
 	}
 
-}
+	nub_the_old_canals = {
+		icon = mam_highway_empire
+		position = 4
+		required_missions = {
+			nub_cut_africa_from_asia
+			nub_tales_of_two_kingdoms
+		}
+		provinces_to_highlight = {
+			OR = {
+				area = gulf_of_arabia_area
+				area = bahari_area
+			}
+			NOT = { owned_by = ROOT } 
+		}
 
+		trigger = {
+			years_of_income = 1
+			gulf_of_arabia_area = {
+				type = all
+				owned_by = ROOT
+			}
+			bahari_area = {
+				type = all
+				owned_by = ROOT
+			}
+		}
+
+		effect = {
+			add_years_of_income = -1
+			hidden_effect = { add_treasury = 20000 } 
+			4316 = {
+				add_great_project = {
+					type = suez_canal
+					instant = no
+					builder = root
+				}
+			}
+			hidden_effect = { add_treasury = -20000 } 
+		}
+	}
+
+	nub_defenders_of_the_canals = {
+		icon = mission_cannons_firing
+		position = 6
+		required_missions = {
+			navy_of_the_nile
+			nub_the_old_canals
+		}
+		provinces_to_highlight = {
+			OR = {
+				province_id = 1316
+				province_id = 1328
+				province_id = 4316
+				province_id = 2315
+			}
+		}
+
+		trigger = {
+			4316 = {
+				owned_by = ROOT
+				has_dock_building_trigger = yes
+				has_shipyard_building_trigger = yes
+			}
+			2315 = {
+				owned_by = ROOT
+				has_dock_building_trigger = yes
+				has_shipyard_building_trigger = yes
+			}
+			1316 = { units_in_province = 10 } 
+			1328 = { units_in_province = 10 } 
+		}
+
+		effect = {
+			4316 = {
+				add_province_modifier = {
+					name = "nub_gates"
+					duration = -1
+				}
+				add_or_upgrade_dock_building = yes
+				add_or_upgrade_shipyard_building = yes
+			}
+			2315 = {
+				add_province_modifier = {
+					name = "nub_gates"
+					duration = -1
+				}
+				add_or_upgrade_dock_building = yes
+				add_or_upgrade_shipyard_building = yes
+			}
+		}
+	}
+}
 Nubia_5_slot = {
 	slot = 5
 	generic = no
@@ -326,21 +621,23 @@ Nubia_5_slot = {
 	potential = { tag = NBI } 
 
 	nub_coptic_kin = {
-		icon = hornofafrica
+		icon = mam_persia
 		position = 1
-		provinces_to_highlight = { region = egypt_region religion = coptic NOT = { country_or_non_sovereign_subject_holds = ROOT }    } 
+		provinces_to_highlight = {
+			region = egypt_region
+			religion = coptic
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
 
 		trigger = {
 			OR = {
-				RU0 = { has_been_insulted_by_root = yes }
-				AE0 = { alliance_with = ROOT }
-				AE0 = {
-					has_been_insulted_by_root = yes
-				}
+				RU0 = { has_been_insulted_by_root = yes } 
+				AE0 = { alliance_with = ROOT } 
+				AE0 = { has_been_insulted_by_root = yes } 
 			}
 		}
 
-		effect = {			
+		effect = {
 			simple_dynamic_effect = {
 				first_custom_tooltip = NUBIA_TT_1
 				first_limit = "AE0 = { alliance_with = ROOT }"
@@ -363,24 +660,20 @@ Nubia_5_slot = {
 			}
 			hidden_effect = {
 				if = {
-					limit = {NOT = { AE0 = { alliance_with = ROOT } }}
-					country_event = {
-						id = nubic.4
-					}
+					limit = { NOT = { AE0 = { alliance_with = ROOT }  }  } 
+					country_event = { id = nubic.4 } 
 				}
 			}
 		}
 	}
 
 	nub_egyptian_story = {
-		icon = mission_african_trade_post
+		icon = mission_saharan_route
 		position = 2
 		required_missions = { nub_coptic_kin } 
 		provinces_to_highlight = {
 			region = egypt_region
-			NOT = {
-				country_or_non_sovereign_subject_holds = ROOT
-			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 		}
 
 		trigger = {
@@ -393,22 +686,22 @@ Nubia_5_slot = {
 
 		effect = {
 			add_country_modifier = {
-				name = nub_coptic_resurgence
+				name = "nub_coptic_resurgence"
 				duration = 10950
 			}
-			
 		}
 	}
 
 	nub_tales_of_two_kingdoms = {
-		icon = mission_african_trade_post
+		icon = mission_kongo_egypt
 		position = 3
-		required_missions = { nub_egyptian_friendship nub_egyptian_story } 
+		required_missions = {
+			nub_egyptian_friendship
+			nub_egyptian_story
+		}
 		provinces_to_highlight = {
 			region = egypt_region
-			NOT = {
-				country_or_non_sovereign_subject_holds = ROOT
-			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 		}
 
 		trigger = {
@@ -455,6 +748,34 @@ Nubia_5_slot = {
 			}
 
 			
+		}
+	}
+
+	nub_jerusalme = {
+		icon = jerusalem
+		position = 5
+		required_missions = { nub_tales_of_two_kingdoms } 
+		provinces_to_highlight = {
+			region = mashriq_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			owns = 379
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 6
+				region = mashriq_region
+			}
+		}
+
+		effect = {
+			379 = {
+				change_religion = ROOT
+				add_great_project_tier = {
+					type = holy_city_jerusalem
+					tier = 1
+				}
+			}
 		}
 	}
 }

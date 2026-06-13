@@ -1,0 +1,158 @@
+
+custom_icon = {
+    name = experiment_base_bg #Must match a scripted iconType in a .gui file
+    potential = { 
+		has_country_flag = mech_ongoing_experiment
+	} #Determines when the icon is visible
+}
+custom_window = {
+	name = experiment_window
+	potential = {has_country_flag = mech_ongoing_experiment }
+}
+
+custom_text_box = {
+    name = experiment_window_title #Must match a scripted instantTextBoxType in a .gui file
+    potential = { 
+		has_country_flag = mech_ongoing_experiment
+	} #Determines when the text is visible
+    #To localize it, use the name of the button as a key, can also use customizable localisation
+}
+
+
+custom_button = { 
+	name = experiment_1_button
+	potential = {
+		has_country_flag = mech_ongoing_experiment
+		NOT = {
+			has_country_flag = complete_1_experiment
+		}
+	}
+	trigger = {
+		if = {
+			limit = {
+				has_country_flag = experiment_demand_1a_flag
+			}
+			ROOT = {
+				any_owned_province = {
+					has_building = workshop
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = experiment_demand_1b_flag
+			}
+			ROOT = {
+				has_adm_advisor_3 = yes
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = experiment_demand_1c_flag
+			}
+			any_province = {
+				num_of_units_in_province = {
+					amount = 5
+					type = infantry
+				}
+				trade_goods = iron
+			}
+		}
+	}
+	effect = {	
+		set_country_flag = complete_1_experiment
+	}
+	tooltip = experiment_1_button_text
+} 
+
+custom_button = { 
+	name = experiment_2_button
+	potential = {
+		has_country_flag = mech_ongoing_experiment
+		NOT = {
+			has_country_flag = complete_2_experiment
+		}
+	}
+	trigger = {
+		
+	}
+	effect = {	
+		set_country_flag = complete_2_experiment
+	}
+	tooltip = experiment_2_button_text
+} 
+
+custom_button = { 
+	name = experiment_3_button
+	potential = {
+		has_country_flag = mech_ongoing_experiment
+		NOT = {
+			has_country_flag = complete_3_experiment
+		}
+	}
+	trigger = {
+		
+	}
+	effect = {	
+		set_country_flag = complete_3_experiment
+	}
+	tooltip = experiment_3_button_text
+} 
+
+custom_button = { 
+	name = experiment_4_button
+	potential = {
+		has_country_flag = mech_ongoing_experiment
+		NOT = {
+			has_country_flag = complete_4_experiment
+		}
+	}
+	trigger = {
+		
+	}
+	effect = {	
+		set_country_flag = complete_4_experiment
+	}
+	tooltip = experiment_4_button_text
+} 
+
+custom_button = { 
+	name = experiment_5_button
+	potential = {
+		has_country_flag = mech_ongoing_experiment
+		NOT = {
+			has_country_flag = complete_5_experiment
+		}
+	}
+	trigger = {
+		
+	}
+	effect = {	
+		set_country_flag = complete_5_experiment
+	}
+	tooltip = experiment_5_button_text
+} 
+
+custom_button = { 
+	name = experiment_done_button
+	potential = {
+		has_country_flag = mech_ongoing_experiment
+
+	}
+	trigger = {
+		has_country_flag = complete_1_experiment
+		has_country_flag = complete_2_experiment
+		has_country_flag = complete_3_experiment
+		has_country_flag = complete_4_experiment
+		has_country_flag = complete_5_experiment
+	}
+	effect = {	
+		clr_country_flag = mech_ongoing_experiment
+		clr_country_flag = complete_1_experiment
+		clr_country_flag = complete_2_experiment
+		clr_country_flag = complete_3_experiment
+		clr_country_flag = complete_4_experiment
+		clr_country_flag = complete_5_experiment
+	}
+	tooltip = experiment_done_button_text
+} 
