@@ -1,6 +1,6 @@
 namespace = aust_rho
 
-country_event = {
+country_event = { #event when Alexandira is under siege, arrival of mad scientists
 	id = aust_rho.1
 	title = aust_rho.1.test
 	desc = aust_rho.1.desc
@@ -30,7 +30,7 @@ country_event = {
 	}
 }
 
-country_event = {
+country_event = { #event for chosing normal or crazy Australia
 	id = aust_rho.2
 	title = aust_rho.2.test
 	desc = aust_rho.2.desc
@@ -41,15 +41,9 @@ country_event = {
 	option = {
 		name = aust_rho.2a
 		trigger = {
-			employed_advisor = {
-				name = "Basilios Bessarion"
-			}
+			employed_advisor = { name = "Basilios Bessarion" }
 		}
 		change_tag = RX3
-		swap_free_idea_group = yes
-		swap_non_generic_missions = yes
-		set_country_flag = australian_technocracy_unlocked
-		add_government_reform = australian_technocracy
 		define_ruler = {
 			name = "Basilios Bessarion"
 			adm = 5
@@ -58,6 +52,9 @@ country_event = {
 			age = 47
 			claim = 95
 		}
+		country_event = {
+			id = aust_rho.5
+		}
 		hidden_effect = {
 			kill_advisor = natural_scientist
 		}
@@ -65,13 +62,6 @@ country_event = {
 
 	option = {
 		name = aust_rho.2b
-		trigger = {
-			NOT = {
-				employed_advisor = {
-					name = "Basilios Bessarion"
-				}
-			}
-		}
 		country_event = {
 			id = aust_rho.3
 			days = 20
@@ -79,7 +69,7 @@ country_event = {
 	}
 }
 
-country_event = {
+country_event = { #event to get cool secrets
 	id = aust_rho.3
 	title = aust_rho.3.test
 	desc = aust_rho.3.desc
@@ -112,7 +102,7 @@ country_event = {
 	}
 }
 
-country_event = {
+country_event = { #event at the start to lull naive players
 	id = aust_rho.4
 	title = aust_rho.4.test
 	desc = aust_rho.4.desc
@@ -131,6 +121,113 @@ country_event = {
 		name = aust_rho.4b
 		add_ruler_modifier = {
 			name = astrho_colonial_concern
+			duration = -1
+		}
+	}
+}
+
+country_event = { #event for chosing normal or crazy Australia
+	id = aust_rho.5
+	title = aust_rho.5.test
+	desc = aust_rho.5.desc
+	picture = muslimgfx_CITY_VIEW_eventPicture
+	
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			swap_free_idea_group = yes
+			swap_non_generic_missions = yes
+			set_country_flag = australian_technocracy_unlocked
+		}
+	}
+
+	option = {
+		name = aust_rho.5a
+		add_government_reform = australian_technocracy
+		overlord = {
+			free_vassal = ROOT
+		}
+		white_peace = AF6
+		add_stability = -3
+		country_event = {
+			id = aust_rho.6
+		}
+	}
+}
+
+country_event = { #event for the upcoming tech
+	id = aust_rho.6
+	title = aust_rho.6.test
+	desc = aust_rho.6.desc
+	picture = muslimgfx_CITY_VIEW_eventPicture
+	
+	is_triggered_only = yes
+	option = {
+		name = aust_rho.6a
+		add_country_modifier = {
+			name = mekh_greek_fire_production
+			duration = -1
+		}
+		hidden_effect = {
+			set_variable = {
+				which = num_success_mekh
+				value = 0
+			}
+			set_variable = {
+				which = num_experiment_mekh
+				value = 1
+			}
+		}
+	}
+}
+
+
+country_event = { #event for creation of the council
+	id = aust_rho.7
+	title = aust_rho.7.test
+	desc = aust_rho.7.desc
+	picture = muslimgfx_CITY_VIEW_eventPicture
+	
+	is_triggered_only = yes
+	option = {
+		name = aust_rho.7a
+		add_government_reform = council_of_13_reform
+	}
+	option = {
+		name = aust_rho.7b
+		add_government_reform = mekhanite_supreme_reform
+	}
+	option = {
+		name = aust_rho.7c
+		add_government_reform = bicephalus_eagle_reform
+	}
+}
+
+country_event = { #event for creation of the d class
+	id = aust_rho.8
+	title = aust_rho.8.test
+	desc = aust_rho.8.desc
+	picture = muslimgfx_CITY_VIEW_eventPicture
+	
+	is_triggered_only = yes
+	option = {
+		name = aust_rho.8a
+		add_country_modifier = {
+			name = mekh_demos_class_1
+			duration = -1
+		}
+	}
+	option = {
+		name = aust_rho.8b
+		add_country_modifier = {
+			name = mekh_demos_class_2
+			duration = -1
+		}
+	}
+	option = {
+		name = aust_rho.8c
+		add_country_modifier = {
+			name = mekh_demos_class_3
 			duration = -1
 		}
 	}
