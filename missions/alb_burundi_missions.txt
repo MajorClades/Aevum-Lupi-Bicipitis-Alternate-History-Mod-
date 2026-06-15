@@ -214,9 +214,62 @@ burundi_2 = {
 		required_missions = {
 			under_god_domain
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = {
+			OR = {
+				area = lower_nubia_area
+				area = upper_nubia_area
+				area = red_sea_coast_area
+				area = dongola_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			lower_nubia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				
+			}
+			upper_nubia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				
+			}
+			red_sea_coast_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				
+			}
+			dongola_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				
+			}
+		}
+		effect = { 
+		egypt_region = { add_permanent_claim = ROOT }
+		if = {
+				limit = {
+					religion = coptic
+				}
+				set_country_flag = buu_nilotic_church
+				custom_tooltip = BUU_NILOTIC_POWER
+				hidden_effect = {
+				set_country_flag = build_churches_flag_BUU
+				every_owned_province = {
+					limit = {
+						has_tax_building_trigger = yes
+					}
+					add_base_tax = 1
+				}
+			}
+			}
+			else = {
+				add_adm_power = 150
+				add_mil_power = 150
+				add_dip_power = 150
+			}
+		}
 	}
 
 }
@@ -355,9 +408,87 @@ burundi_3 = {
 		required_missions = {
 			under_god_domain
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = {
+			OR = {
+				area = hadiya_area
+				area = ogaden_area
+				area = new_kongo_area
+				area = mujila_area
+				area = shewa_area
+				area = ajuuran_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			hadiya_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				
+			}
+			ogaden_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				
+			}
+			new_kongo_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				
+			}
+			mujila_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				
+			}
+			shewa_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				
+			}
+			ajuuran_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				
+			}
+		}
+		effect = { 
+		central_africa_region = {
+				discover_country = ROOT
+			}
+		custom_tooltip = ALB_cb_on_all_central_african_tt
+			hidden_effect = {
+				every_country = {
+					limit = { capital_scope = { region = central_africa_region } } 
+					reverse_add_casus_belli = {
+						type = cb_vassalize_mission
+						target = PREV
+						months = 360
+					}
+				}
+			}
+		if = {
+				limit = {
+					religion = shamanism
+				}
+				set_country_flag = buu_bantu_rite
+				custom_tooltip = BUU_BANTU_POWER
+				hidden_effect = {
+				set_country_flag = build_churches_flag_BUU
+				every_owned_province = {
+					limit = {
+						has_tax_building_trigger = yes
+					}
+					add_base_tax = 1
+				}
+			}
+			}
+			else = {
+				add_adm_power = 150
+				add_mil_power = 150
+				add_dip_power = 150
+			}
+		}
 	}
 
 	home_of_the_faithful = {
@@ -484,9 +615,62 @@ burundi_4 = {
 		required_missions = {
 			under_god_domain
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = {
+			OR = {
+				area = ifat_area
+				area = aussa_area
+				area = tigray_area
+				area = central_ethiopia_area
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		}
+
+		trigger = {
+			ifat_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				
+			}
+			aussa_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				
+			}
+			tigray_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				
+			}
+			central_ethiopia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				
+			}
+		}
+		effect = { 
+		arabia_region = { add_permanent_claim = ROOT }
+		if = {
+				limit = {
+					religion = jewish
+				}
+				set_country_flag = buu_jewish_culture
+				custom_tooltip = BUU_ISRAELITE_POWER
+				hidden_effect = {
+				set_country_flag = build_churches_flag_BUU
+				every_owned_province = {
+					limit = {
+						has_tax_building_trigger = yes
+					}
+					add_base_tax = 1
+				}
+			}
+			}
+			else = {
+				add_adm_power = 150
+				add_mil_power = 150
+				add_dip_power = 150
+			}
+		}
 	}
 
 }
