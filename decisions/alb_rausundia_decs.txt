@@ -144,13 +144,13 @@ country_decisions = {
 			}
 		}
 		allow = {
-			num_of_owned_provinces_with = {
-				value = 10
+			owns_all_provinces = {
 				OR = {
 					culture = mikmaq
 					culture = abenaki
 					culture = maliseet
 				}
+				is_city = yes
 			}
 		}
 		effect = {
@@ -311,7 +311,7 @@ country_decisions = {
 				type = all
 				owned_by = ROOT
 			}
-			owns_every_province = {
+			owns_all_provinces = {
 				culture = yokuts
 			}
 			every_owned_province = {
@@ -341,6 +341,83 @@ country_decisions = {
 			}
 			add_accepted_culture = iukutakoan
 			set_country_flag = formed_hikina_flag
+			add_prestige = 20
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	alb_yokuts_formable = {
+		major = yes
+		potential = {
+			culture = yokuts
+		}
+		provinces_to_highlight = {
+			NOT = { has_country_flag = yokuts_kingdom_flag }
+			OR = {
+				culture = yokuts
+				culture_group = neonesian
+			}
+			is_city = yes
+		}
+		allow = {
+			owns_all_provinces = {
+				OR = {
+					culture = yokuts
+					culture_group = neonesian
+				}
+				is_city = yes
+			}
+			every_owned_province = {
+				religion = totemist
+			}
+		}
+		effect = {
+			set_country_flag = yokuts_kingdom_flag
+			change_tag = YKT
+			set_government_rank = 2
+			every_owned_province = {
+				limit = {
+					culture_group = neonesian
+				}
+				change_culture = yokuts
+			}
+			central_valley_area = {
+				owned_by = ROOT
+			}
+			california_area = {
+				add_permanent_claim = ROOT
+			}
+			northern_california_area = {
+				add_permanent_claim = ROOT
+			}
+			add_prestige = 20
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	alb_salish_federation = {
+		major = yes
+		potential = {
+			NOT = { has_country_flag = salish_federation_flag }
+			culture = salish
+		}
+		provinces_to_highlight = {
+			culture = salish
+			is_city = yes
+		}
+		allow = {
+			owns_all_provinces = {
+				culture = salish
+				is_city = yes
+			}
+		}
+		effect = {
+			set_country_flag = salish_federation_flag
+			change_tag = SAL
 			add_prestige = 20
 		}
 		ai_will_do = {
