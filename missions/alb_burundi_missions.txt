@@ -142,9 +142,45 @@ burundi_1_pt2 = {
 		icon = mission_mal_subjugate_zaf
 		position = 6
 		required_missions = { }
-		provinces_to_highlight = { }
-		trigger = { adm_power = 200 dip_power = 200 mil_power = 200}
-		effect = { }
+		provinces_to_highlight = {
+			OR = {
+				area = sennar_area
+				area = damot_area
+			}
+			NOT = { grown_by_development = 5 } 
+		}
+
+		trigger = {
+			sennar_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				grown_by_development = 5
+			}
+			damot_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+				grown_by_development = 5
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "BUU_bounty"
+				duration = 10950
+			}
+			every_owned_province = {
+				limit = {
+					OR = {
+						region = sennar_area
+						region = damot_area
+					}
+				}
+				add_province_modifier = {
+							name = "buu_building_block"
+							duration = -1
+						}
+			}
+		}
 	}
 
 	flatten_the_rugged_field = {
@@ -153,9 +189,43 @@ burundi_1_pt2 = {
 		required_missions = {
 			bounty_of_burundi
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = {
+			OR = {
+				has_terrain = highlands
+				has_terrain = mountain
+			}
+			country_or_non_sovereign_subject_holds = ROOT
+			NOT = { grown_by_development = 10 } 
+		}
+
+		trigger = {
+		num_of_owned_provinces_with = {
+				OR = {
+						has_terrain = highlands
+						has_terrain = mountain
+					}
+				grown_by_development = 10
+				NOT = { has_province_modifier = buu_building_block }
+				value = 12
+			}
+		}
+
+		effect = {
+			every_owned_province = {
+				limit = {
+					OR = {
+						has_terrain = highlands
+						has_terrain = mountain
+					}
+				NOT = { has_province_modifier = buu_building_block }
+				grown_by_development = 10
+				}
+				add_province_modifier = {
+							name = "buu_building_block"
+							duration = -1
+						}
+			}
+		}
 	}
 
 	our_eden = {
@@ -532,10 +602,10 @@ burundi_3 = {
 					}
 					5 = {
 						add_prosperity = 5
+						}
 					}
 				}
-            }
-        }
+			}
 		}
 	}
 
