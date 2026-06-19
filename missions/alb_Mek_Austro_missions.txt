@@ -41,6 +41,29 @@ Austmek_1_slot = {
 		} 
 	}
 
+	mekh_our_foundations = {
+		icon = byz_justinians_ambition
+		position = 4
+		required_missions = { mekh_class_divisions } 
+		trigger = {
+			OR = {
+				full_idea_group = spy_ideas
+				has_idea = scp_foundation
+				calc_true_if = {
+					amount = 3
+					has_spy_network_from = {
+						who = ROOT
+						value = 50
+					}
+				}
+			}
+		}
+
+		effect = { 
+			custom_tooltip = NO_REBELS_MEKH
+		} 
+	}
+
 }
 Austmek_2_slot = {
 	slot = 2
@@ -79,6 +102,64 @@ Austmek_2_slot = {
 					duration = -1
 				}
 			}
+			4028 = {
+				if = {
+					limit = { is_empty = yes }
+					add_siberian_construction = 500
+				}
+			}
+		}
+	}
+
+	mekh_the_workforce = {
+		icon = peace_in_europe
+		position = 3
+		required_missions = { mekh_the_question_of_food } 
+		provinces_to_highlight = { province_group = madagascar_island_group has_terrain = jungle} 
+
+		trigger = {
+			has_government_power = {
+					mechanic_type = tech_madness_mechanic
+					power_type = tech_madness_power
+					value = 5
+				}
+			num_of_owned_provinces_with = {
+				value = 4
+				province_group = madagascar_island_group
+				has_terrain = jungle
+			}
+		}
+
+		effect = {
+			add_government_power = {
+					mechanic_type = tech_madness_mechanic
+					power_type = tech_madness_power
+					value = -5
+				}
+			4021 = {
+				add_permanent_province_modifier = {
+					name = "astrho_tamed_jungle"
+					duration = -1
+				}
+			}
+			4024 = {
+				add_permanent_province_modifier = {
+					name = "astrho_tamed_jungle"
+					duration = -1
+				}
+			}
+			4025 = {
+				add_permanent_province_modifier = {
+					name = "astrho_tamed_jungle"
+					duration = -1
+				}
+			}
+			4026 = {
+				add_permanent_province_modifier = {
+					name = "astrho_tamed_jungle"
+					duration = -1
+				}
+			}
 		}
 	}
 }
@@ -106,6 +187,28 @@ Austmek_3_slot = {
 		}
 	}
 
+	mekh_our_island = {
+		icon = peace_in_europe
+		position = 3
+		required_missions = { mekh_the_question_of_food mekh_new_laws } 
+		provinces_to_highlight = { province_group = madagascar_island_group } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 15
+				province_group = madagascar_island_group
+			}
+		}
+
+		effect = {
+			madagascar_island_group = {
+				change_culture = austro_greek
+			}
+			country_event = {
+				id = aust_rho.9
+			}
+		}
+	}
 }
 Austmek_4_slot = {
 	slot = 4
@@ -170,9 +273,19 @@ Austmek_5_slot = {
 		}
 		trigger = {
 			owns = 4023
+			has_government_power = {
+					mechanic_type = tech_madness_mechanic
+					power_type = tech_madness_power
+					value = 5
+				}
 		}
 
 		effect = {
+			add_government_power = {
+					mechanic_type = tech_madness_mechanic
+					power_type = tech_madness_power
+					value = -5
+				}
 			4025 = {
 				if = {
 					limit = { is_empty = yes }
@@ -199,6 +312,7 @@ Austmek_5_slot = {
 			province_id = 4023
 		}
 		trigger = {
+			owns = 4023
 			check_variable = {
 				which = num_success_mekh
 				value = 1
