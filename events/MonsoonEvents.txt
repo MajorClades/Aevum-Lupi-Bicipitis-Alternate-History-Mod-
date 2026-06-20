@@ -136,14 +136,19 @@ country_event = {
 
     option = {
         name = monsoon_events.2.a
-		event_target:monsoon_failure_province = {
-			area = {
-				limit = {
-					owned_by = ROOT
-				}
-				add_province_modifier = {
-					name = "failed_monsoon"
-					duration = 1825
+		if = {
+			limit = {
+				NOT = { has_government_attribute = no_more_bad_monsoons }
+			}
+			event_target:monsoon_failure_province = {
+				area = {
+					limit = {
+						owned_by = ROOT
+					}
+					add_province_modifier = {
+						name = "failed_monsoon"
+						duration = 1825
+					}
 				}
 			}
 		}
