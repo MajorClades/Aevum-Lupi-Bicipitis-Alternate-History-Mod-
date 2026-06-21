@@ -165,6 +165,32 @@ Austmek_2_slot = {
 			}
 		}
 	}
+
+	mekh_marine_force = {
+		icon = peace_in_europe
+		position = 4
+		trigger = {
+			mil_tech = 6
+			num_of_marines = 3
+			has_government_power = {
+					mechanic_type = tech_madness_mechanic
+					power_type = tech_madness_power
+					value = 10
+				}
+		}
+
+		effect = {
+			add_government_power = {
+					mechanic_type = tech_madness_mechanic
+					power_type = tech_madness_power
+					value = -10
+				}
+			add_country_modifier = {
+				name = austro_marine
+				duration = -1
+			}
+		}
+	}
 }
 Austmek_3_slot = {
 	slot = 3
@@ -209,6 +235,74 @@ Austmek_3_slot = {
 			}
 			country_event = {
 				id = aust_rho.9
+			}
+		}
+	}
+
+	mekh_our_hands = {
+		icon = peace_in_europe
+		position = 5
+		required_missions = { mekh_marine_force mekh_our_island } 
+		provinces_to_highlight = { province_group = madagascar_island_group has_manpower_building_trigger = no} 
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = ACTIVATE_EXPERIMENTS_TR
+				NOT = {
+					has_country_flag = mech_ongoing_experiment
+				}
+			}
+			num_of_owned_provinces_with = {
+				value = 7
+				province_group = madagascar_island_group
+				has_manpower_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_yearly_manpower = 1.5
+			define_general = {
+				name = "Siderenia Cheria"
+				shock = 7
+				fire = 1
+				manuever = 2
+				siege = 2
+			}
+			custom_tooltip = ACTIVATE_EXPERIMENTS
+			hidden_effect = {
+				set_mekh_experiment = yes
+			}
+		}
+	}
+
+	mekh_our_iron_hands = {
+		icon = mission_war_chest
+		position = 6
+		required_missions = { mekh_our_hands } 
+		provinces_to_highlight = { province_group = madagascar_island_group has_manpower_building_trigger = no} 
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				province_group = madagascar_island_group
+				has_manpower_building_trigger = yes
+			}
+			check_variable = {
+				which = num_success_mekh
+				value = 1
+			}
+		}
+
+		effect = {
+			change_variable = {
+				which = num_success_mekh
+				value = -1
+			}
+			add_country_modifier = {
+				name = ferrus_manus
+				duration = -1
+			}
+			country_event = {
+				id = aust_rho.12
 			}
 		}
 	}
@@ -281,6 +375,12 @@ Austmek_5_slot = {
 					power_type = tech_madness_power
 					value = 5
 				}
+			custom_trigger_tooltip = {
+				tooltip = ACTIVATE_EXPERIMENTS_TR
+				NOT = {
+					has_country_flag = mech_ongoing_experiment
+				}
+			}
 		}
 
 		effect = {
