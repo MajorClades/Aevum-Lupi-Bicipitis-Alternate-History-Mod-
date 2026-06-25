@@ -689,3 +689,78 @@ estate_burghers_pyu_jade_zeya = {
 		}
 	}
 }
+
+estate_burghers_alb_kongo_highland_adaptation = {
+	icon = privilege_dev_cost_desert
+	land_share = 5
+	max_absolutism = -10
+	loyalty = 0.05
+	influence = 0.1
+	is_valid = {
+		has_unlocked_estate_privilege = {
+			estate_privilege = estate_burghers_alb_kongo_highland_adaptation
+		}
+	}
+	can_select = {
+		any_owned_province = {
+			OR = {
+				has_terrain = mountain
+				has_terrain = highlands
+			}
+			region = horn_of_africa_region
+		}
+	}
+	on_granted = {
+		custom_tooltip = kongo_highland_adaptation_tt
+	}
+	on_granted_province = {
+		if = {
+			limit = {
+				has_terrain = mountain
+				region = horn_of_africa_region
+			}
+			add_province_modifier = {
+				name = kong_mountains
+				duration = -1
+			}
+		}
+		if = {
+			limit = {
+				has_terrain = highlands
+				region = horn_of_africa_region
+			}
+			add_province_modifier = {
+				name = kong_highlands
+				duration = -1
+			}
+		}
+	}
+	on_revoked = {
+		custom_tooltip = kongo_highland_adaptation_revoke_tt
+	}
+	on_revoked_province = {
+		if = {
+			limit = { has_province_modifier = kong_mountains }
+			remove_province_modifier = kong_mountains
+		}
+		if = {
+			limit = { has_province_modifier = kong_highlands }
+			remove_province_modifier = kong_highlands
+		}
+	}
+	on_invalid = {
+	}
+	on_invalid_province = {
+		if = {
+			limit = { has_province_modifier = kong_mountains }
+			remove_province_modifier = kong_mountains
+		}
+		if = {
+			limit = { has_province_modifier = kong_highlands }
+			remove_province_modifier = kong_highlands
+		}
+	}
+	ai_will_do = {
+		factor = 1000
+	}
+}

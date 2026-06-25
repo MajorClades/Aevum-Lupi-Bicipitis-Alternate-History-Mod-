@@ -13,10 +13,10 @@ Austrho_1_slot = {
 		trigger = { capital_scope = { grown_by_development = 3 }  } 
 
 		effect = {
-			madagascar_island_group = { 
-				add_permanent_claim = ROOT 
+			madagascar_island_group = {
+				add_permanent_claim = ROOT
 				discover_country = ROOT
-			} 
+			}
 		}
 	}
 
@@ -26,11 +26,11 @@ Austrho_1_slot = {
 		required_missions = { aust_capital_power } 
 		provinces_to_highlight = {  } 
 
-		trigger = { 
-			has_adm_advisor = yes	
-			has_dip_advisor = yes	
-			has_mil_advisor = yes	
-		} 
+		trigger = {
+			has_adm_advisor = yes
+			has_dip_advisor = yes
+			has_mil_advisor = yes
+		}
 
 		effect = {
 			capital_scope = {
@@ -44,7 +44,7 @@ Austrho_1_slot = {
 	}
 
 	aust_rebirth = {
-		icon = mission_trade_company_region_abroad
+		icon = byz_justinians_ambition
 		position = 3
 		required_missions = { aust_growth } 
 		provinces_to_highlight = {  } 
@@ -54,34 +54,57 @@ Austrho_1_slot = {
 			has_institution = renaissance
 		}
 
-		effect = { 
-			capital_scope = {
-				add_or_upgrade_tax_building = yes
-			}
-
-	 	} 
+		effect = { capital_scope = { add_or_upgrade_tax_building = yes }  } 
 	}
 
 	aust_power = {
-		icon = mission_trade_company_region_abroad
+		icon = french_revolution
 		position = 4
 		required_missions = { aust_rebirth } 
+		provinces_to_highlight = {  } 
 
 		trigger = {
 			stability = 3
 			overlord = {
-				hidden_trigger = {
-					ai = yes
-				}
+				hidden_trigger = { ai = yes } 
 				is_at_war = yes
 			}
 		}
 
-		effect = { 
-			overlord = {
-				free_vassal = ROOT
+		effect = { overlord = { free_vassal = ROOT }  } 
+	}
+
+	aust_island_fortress = {
+		icon = australia_rhomania_2
+		position = 5
+		required_missions = { aust_power } 
+		provinces_to_highlight = {
+			has_port = yes
+			province_group = madagascar_island_group
+			owned_by = ROOT
+		}
+
+		trigger = {
+			madagascar_island_group = {
+				owned_by = ROOT
+				has_port = yes
+				infantry_in_province = 3
+				OR = {
+					grown_by_development = 3
+					fort_level = 2
+				}
 			}
-	 	} 
+		}
+
+		effect = {
+			madagascar_island_group = {
+				limit = { has_port = yes } 
+				add_province_modifier = {
+					name = "astrho_island_fortress"
+					duration = -1
+				}
+			}
+		}
 	}
 }
 Austrho_2_slot = {
@@ -95,9 +118,7 @@ Austrho_2_slot = {
 		icon = mission_unite_home_region
 		position = 2
 		required_missions = { aust_capital_power } 
-		provinces_to_highlight = {
-			province_group = madagascar_island_group
-		}
+		provinces_to_highlight = { province_group = madagascar_island_group } 
 
 		trigger = {
 			num_of_owned_provinces_with = {
@@ -106,12 +127,11 @@ Austrho_2_slot = {
 			}
 		}
 
-		effect = {
-			madagascar_island_group = { change_culture = austro_greek } 
-		}
+		effect = { madagascar_island_group = { change_culture = austro_greek }  } 
 	}
+
 	aust_tax_base = {
-		icon = mission_trade_company_region_abroad
+		icon = mission_rice_field
 		position = 3
 		required_missions = { aust_growth } 
 		provinces_to_highlight = {
@@ -119,6 +139,7 @@ Austrho_2_slot = {
 			has_tax_building_trigger = no
 			owned_by = ROOT
 		}
+
 		trigger = {
 			num_of_owned_provinces_with = {
 				value = 5
@@ -127,12 +148,12 @@ Austrho_2_slot = {
 			}
 		}
 
-		effect = { 
+		effect = {
 			add_country_modifier = {
-				name = astrho_convert_faith
+				name = "astrho_convert_faith"
 				duration = 10950
 			}
-	 	} 
+		}
 	}
 }
 Austrho_3_slot = {
@@ -186,16 +207,12 @@ Austrho_3_slot = {
 	}
 
 	aust_south_lybia = {
-		icon = scramble_for_africa
+		icon = mission_zim_strong_rulership
 		position = 4
-		required_missions = {
-			aust_expand_outside
-		}
+		required_missions = { aust_expand_outside } 
 		provinces_to_highlight = {
 			region = south_africa_region
-			NOT = {
-				country_or_non_sovereign_subject_holds = ROOT
-			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 		}
 
 		trigger = {
@@ -205,12 +222,36 @@ Austrho_3_slot = {
 			}
 		}
 
-		effect = { 
+		effect = {
 			add_country_modifier = {
-				name = astrho_gold_rush
+				name = "astrho_gold_rush"
 				duration = 10950
 			}
-		} 
+		}
+	}
+
+	aust_the_way_west = {
+		icon = mission_inca_noble
+		position = 5
+		required_missions = { aust_south_lybia } 
+		provinces_to_highlight = { province_id = 1177 } 
+
+		trigger = {
+			1177 = {
+				owned_by = ROOT
+				grown_by_development = 3
+			}
+		}
+
+		effect = {
+			1177 = {
+				add_province_modifier = {
+					name = "astrho_port_occidentalis"
+					duration = -1
+				}
+			}
+			andes_superregion = { add_permanent_claim = ROOT } 
+		}
 	}
 }
 Austrho_4_slot = {
@@ -238,17 +279,17 @@ Austrho_4_slot = {
 	}
 
 	aust_use_the_army = {
-		icon = mission_islamic_golden_age
+		icon = peace_in_europe
 		position = 2
 		required_missions = { aust_armies } 
-		provinces_to_highlight = { 
+		provinces_to_highlight = {
 			OR = {
 				province_id = 4021
 				province_id = 4024
 			}
-		} 
+		}
 
-		trigger = { 
+		trigger = {
 			4021 = {
 				owned_by = ROOT
 				infantry_in_province = 5
@@ -257,7 +298,7 @@ Austrho_4_slot = {
 				owned_by = ROOT
 				infantry_in_province = 5
 			}
-		} 
+		}
 
 		effect = {
 			4021 = {
@@ -268,7 +309,7 @@ Austrho_4_slot = {
 				}
 				add_base_manpower = 2
 				add_permanent_province_modifier = {
-					name = astrho_tamed_jungle
+					name = "astrho_tamed_jungle"
 					duration = -1
 				}
 			}
@@ -280,35 +321,72 @@ Austrho_4_slot = {
 				}
 				add_base_manpower = 2
 				add_permanent_province_modifier = {
-					name = astrho_tamed_jungle
+					name = "astrho_tamed_jungle"
 					duration = -1
 				}
 			}
 		}
 	}
+
 	aust_expand_outside = {
-		icon = mission_islamic_golden_age
+		icon = mission_trade_in_gold_coast
 		position = 3
-		required_missions = { aust_grand_armies aust_marittime_expand} 
-		provinces_to_highlight = {
-			province_id = 4020
+		required_missions = {
+			aust_grand_armies
+			aust_marittime_expand
 		}
-		trigger = { 
+		provinces_to_highlight = { province_id = 4020 } 
+
+		trigger = {
 			OR = {
-				4020 = {
-					grown_by_development = 5
-				}
+				4020 = { grown_by_development = 5 } 
 				full_idea_group = expansion_ideas
 				full_idea_group = exploration_ideas
 			}
-		} 
+		}
+
+		effect = { southern_africa_superregion = { add_permanent_claim = ROOT }  } 
+	}
+
+	aust_empire_downunder = {
+		icon = colonize_australia
+		position = 6
+		required_missions = {
+			aust_the_way_east
+			aust_the_way_west
+		}
+		provinces_to_highlight = {
+			OR = {
+				superregion = andes_superregion
+				superregion = oceania_superregion
+				superregion = southern_africa_superregion
+				region = malaya_region
+				region = moluccas_region
+				region = indonesia_region
+			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 100
+				OR = {
+					superregion = andes_superregion
+					superregion = oceania_superregion
+					superregion = southern_africa_superregion
+					region = malaya_region
+					region = moluccas_region
+					region = indonesia_region
+				}
+			}
+		}
 
 		effect = {
-			east_africa_region = {
-				add_permanent_claim = ROOT
-			}
-			south_africa_region = {
-				add_permanent_claim = ROOT
+			override_country_name = "AUSTRALIS"
+			set_government_rank = 3
+			add_country_modifier = {
+				name = "astrho_terra_australis"
+				duration = -1
 			}
 		}
 	}
@@ -335,17 +413,14 @@ Austrho_5_slot = {
 			}
 		}
 	}
+
 	aust_east_lybia = {
-		icon = scramble_for_africa
+		icon = mission_zanzibari_trade
 		position = 4
-		required_missions = {
-			aust_expand_outside
-		}
+		required_missions = { aust_expand_outside } 
 		provinces_to_highlight = {
 			region = east_africa_region
-			NOT = {
-				country_or_non_sovereign_subject_holds = ROOT
-			}
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
 		}
 
 		trigger = {
@@ -355,11 +430,37 @@ Austrho_5_slot = {
 			}
 		}
 
-		effect = { 
+		effect = {
 			add_country_modifier = {
-				name = astrho_conquest
+				name = "astrho_conquest"
 				duration = 10950
 			}
-		} 
+		}
+	}
+
+	aust_the_way_east = {
+		icon = settle_austrialasia
+		position = 5
+		required_missions = { aust_east_lybia } 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 1101
+				province_id = 1102
+				province_id = 1103
+			}
+		}
+
+		trigger = {
+			owns = 1101
+			owns = 1102
+			owns = 1103
+		}
+
+		effect = {
+			malaya_region = { add_permanent_claim = ROOT } 
+			moluccas_region = { add_permanent_claim = ROOT } 
+			indonesia_region = { add_permanent_claim = ROOT } 
+			oceania_superregion = { add_permanent_claim = ROOT } 
+		}
 	}
 }

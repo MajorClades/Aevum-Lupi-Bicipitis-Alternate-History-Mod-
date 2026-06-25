@@ -4,7 +4,7 @@ australian_technocracy = {
 	potential = {
 		has_country_flag = australian_technocracy_unlocked
 	}
-	lock_level_when_selected = no
+	lock_level_when_selected = yes
 	valid_for_nation_designer = no
 	nation_designer_cost = 100	
 	modifiers = {
@@ -48,4 +48,146 @@ australian_colonial_governoship = {
 		enables_nepotism = yes
 	}
 	has_term_election = no
+}
+
+#tier 2
+secure_domus_reform = {
+	icon = "constitution"
+	allow_normal_conversion = no
+	potential = {
+		OR = {
+			is_revolutionary = no
+			NOT = { has_dlc = "Emperor" }
+		}
+		has_reform = secure_domus_reform
+	}
+	modifiers = {
+		max_absolutism = 5
+		trade_efficiency = 0.15
+		inflation_action_cost = -0.5
+		allow_free_estate_privilege_revocation = yes
+	}
+}
+
+contain_vaults_reform = {
+	icon = "constitution"
+	allow_normal_conversion = no
+	potential = {
+		OR = {
+			is_revolutionary = no
+			NOT = { has_dlc = "Emperor" }
+		}
+		has_reform = contain_vaults_reform
+	}
+	modifiers = {
+		max_absolutism = 5
+		administrative_efficiency = 0.05
+		global_unrest = -1
+		defensiveness = 0.1
+	}
+	custom_attributes = {
+		no_more_bad_monsoons = yes
+	}
+}
+
+protect_steel_reform = {
+	icon = "constitution"
+	allow_normal_conversion = no
+	potential = {
+		OR = {
+			is_revolutionary = no
+			NOT = { has_dlc = "Emperor" }
+		}
+		has_reform = protect_steel_reform
+	}
+	modifiers = {
+		max_absolutism = 5
+		global_regiment_cost = -0.1
+		global_regiment_recruit_speed = -0.2
+		military_tactics = 0.05
+	}
+}
+
+#tier 3
+
+council_of_13_reform = {
+	icon = "constitution"
+	allow_normal_conversion = no
+	potential = {
+		OR = {
+			is_revolutionary = no
+			NOT = { has_dlc = "Emperor" }
+		}
+		has_reform = council_of_13_reform
+	}
+	modifiers = {
+		max_absolutism = 25
+		election_cycle = 6
+		adm_advisor_cost = -0.15
+		max_terms = 1
+	}
+	custom_attributes = {
+		reelection_depowers_estates = yes
+	}
+}
+
+mekhanite_supreme_reform = {
+	icon = "paper_with_seal_3"
+	allow_normal_conversion = yes
+	potential = {
+		is_colonial_nation = no
+		OR = {
+			is_revolutionary = no
+			NOT = { has_dlc = "Emperor" }
+		}
+		NOT = { has_government_attribute = is_pirate_republic_reform }
+		has_reform = mekhanite_supreme_reform
+	}
+	trigger = {
+		NOT = { 
+			OR = {
+				has_reform = venice_merchants_reform 
+				has_government_attribute = has_dutch_election
+				has_reform = presidential_despot_reform
+				has_reform = military_dictatorship_reform
+				has_reform = admiralty_reform
+				has_reform = military_rulership_reform
+				has_reform = prussian_republic
+				has_reform = prussian_republic_reform
+			}
+		}
+	}
+	modifiers = {
+		monarch_lifespan = 0.25
+		dip_advisor_cost = -0.15
+	}
+	custom_attributes = {
+		lottery_election = yes
+		election_on_death = yes
+		bonus_stats_for_elected_ruler = yes
+	}
+	has_term_election = no
+	ai = {
+		factor = 1
+	}
+}
+
+bicephalus_eagle_reform = {
+	icon = "constitution"
+	allow_normal_conversion = no
+	potential = {
+		OR = {
+			is_revolutionary = no
+			NOT = { has_dlc = "Emperor" }
+		}
+		has_reform = bicephalus_eagle_reform
+	}
+	modifiers = {
+		max_absolutism = 5
+		election_cycle = 1
+		mil_advisor_cost = -0.15
+	}
+	custom_attributes = {
+		winning_wars_gives_rt = yes
+	}
 }

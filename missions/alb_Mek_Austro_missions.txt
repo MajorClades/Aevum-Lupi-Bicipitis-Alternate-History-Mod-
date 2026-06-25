@@ -1,0 +1,442 @@
+Austmek_1_slot = {
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = RX3 } 
+
+	mekh_the_council_of_13 = {
+		icon = mission_war_chest
+		position = 1
+
+		trigger = {
+			has_government_power = {
+					mechanic_type = tech_madness_mechanic
+					power_type = tech_madness_power
+					value = 10
+				}
+		}
+
+		effect = {
+			add_government_reform = republican_authoritarianism_reform
+			country_event = {
+				id = aust_rho.7
+			}
+		}
+	}
+
+	mekh_class_divisions = {
+		icon = byz_justinians_ambition
+		position = 2
+		required_missions = { mekh_the_council_of_13 } 
+		trigger = {
+			has_adm_advisor_2 = yes
+			has_institution = renaissance
+		}
+
+		effect = { 
+			country_event = {
+				id = aust_rho.8
+			}
+		} 
+	}
+
+	mekh_our_foundations = {
+		icon = byz_justinians_ambition
+		position = 4
+		required_missions = { mekh_class_divisions } 
+		trigger = {
+			OR = {
+				full_idea_group = spy_ideas
+				has_idea = scp_foundation
+				calc_true_if = {
+					amount = 3
+					has_spy_network_from = {
+						who = ROOT
+						value = 50
+					}
+				}
+			}
+		}
+
+		effect = { 
+			custom_tooltip = NO_REBELS_MEKH
+			country_event = {
+				id = aust_rho.11
+			}
+		} 
+	}
+
+}
+Austmek_2_slot = {
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = RX3 } 
+
+	mekh_the_question_of_food = {
+		icon = mission_war_chest
+		position = 2
+		required_missions = { mekh_the_council_of_13 mekh_the_matter_of_stability} 
+		provinces_to_highlight = {
+			province_id = 4022
+		}
+		trigger = {
+			has_government_power = {
+					mechanic_type = tech_madness_mechanic
+					power_type = tech_madness_power
+					value = 5
+				}
+			4022 = {
+				development = 15
+			}
+		}
+
+		effect = {
+			add_government_power = {
+					mechanic_type = tech_madness_mechanic
+					power_type = tech_madness_power
+					value = -5
+				}
+			4022 = {
+				add_permanent_province_modifier = {
+					name = mekh_academia_of_agricolture
+					duration = -1
+				}
+			}
+			4028 = {
+				if = {
+					limit = { is_empty = yes }
+					add_siberian_construction = 500
+				}
+			}
+		}
+	}
+
+	mekh_the_workforce = {
+		icon = peace_in_europe
+		position = 3
+		required_missions = { mekh_the_question_of_food } 
+		provinces_to_highlight = { province_group = madagascar_island_group has_terrain = jungle} 
+
+		trigger = {
+			has_government_power = {
+					mechanic_type = tech_madness_mechanic
+					power_type = tech_madness_power
+					value = 5
+				}
+			num_of_owned_provinces_with = {
+				value = 4
+				province_group = madagascar_island_group
+				has_terrain = jungle
+			}
+		}
+
+		effect = {
+			add_government_power = {
+					mechanic_type = tech_madness_mechanic
+					power_type = tech_madness_power
+					value = -5
+				}
+			4021 = {
+				add_permanent_province_modifier = {
+					name = "astrho_tamed_jungle"
+					duration = -1
+				}
+			}
+			4024 = {
+				add_permanent_province_modifier = {
+					name = "astrho_tamed_jungle"
+					duration = -1
+				}
+			}
+			4025 = {
+				add_permanent_province_modifier = {
+					name = "astrho_tamed_jungle"
+					duration = -1
+				}
+			}
+			4026 = {
+				add_permanent_province_modifier = {
+					name = "astrho_tamed_jungle"
+					duration = -1
+				}
+			}
+		}
+	}
+
+	mekh_marine_force = {
+		icon = peace_in_europe
+		position = 4
+		trigger = {
+			mil_tech = 6
+			num_of_marines = 3
+			has_government_power = {
+					mechanic_type = tech_madness_mechanic
+					power_type = tech_madness_power
+					value = 10
+				}
+		}
+
+		effect = {
+			add_government_power = {
+					mechanic_type = tech_madness_mechanic
+					power_type = tech_madness_power
+					value = -10
+				}
+			add_country_modifier = {
+				name = austro_marine
+				duration = -1
+			}
+		}
+	}
+}
+Austmek_3_slot = {
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = RX3 } 
+
+	mekh_the_matter_of_stability = {
+		icon = mission_war_chest
+		position = 1
+
+		trigger = {
+			stability = 0
+		}
+
+		effect = {
+			add_treasury = 300
+			madagascar_island_group = {
+				add_permanent_claim = ROOT
+				discover_country = ROOT
+			}
+		}
+	}
+
+	mekh_our_island = {
+		icon = peace_in_europe
+		position = 3
+		required_missions = { mekh_the_question_of_food mekh_new_laws } 
+		provinces_to_highlight = { province_group = madagascar_island_group } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 15
+				province_group = madagascar_island_group
+			}
+		}
+
+		effect = {
+			madagascar_island_group = {
+				change_culture = austro_greek
+			}
+			country_event = {
+				id = aust_rho.9
+			}
+		}
+	}
+
+	mekh_our_hands = {
+		icon = peace_in_europe
+		position = 5
+		required_missions = { mekh_marine_force mekh_our_island } 
+		provinces_to_highlight = { province_group = madagascar_island_group has_manpower_building_trigger = no} 
+
+		trigger = {
+			custom_trigger_tooltip = {
+				tooltip = ACTIVATE_EXPERIMENTS_TR
+				NOT = {
+					has_country_flag = mech_ongoing_experiment
+				}
+			}
+			num_of_owned_provinces_with = {
+				value = 7
+				province_group = madagascar_island_group
+				has_manpower_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_yearly_manpower = 1.5
+			define_general = {
+				name = "Siderenia Cheria"
+				shock = 7
+				fire = 1
+				manuever = 2
+				siege = 2
+			}
+			custom_tooltip = ACTIVATE_EXPERIMENTS
+			hidden_effect = {
+				set_mekh_experiment = yes
+			}
+		}
+	}
+
+	mekh_our_iron_hands = {
+		icon = mission_war_chest
+		position = 6
+		required_missions = { mekh_our_hands } 
+		provinces_to_highlight = { province_group = madagascar_island_group has_manpower_building_trigger = no} 
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 10
+				province_group = madagascar_island_group
+				has_manpower_building_trigger = yes
+			}
+			check_variable = {
+				which = num_success_mekh
+				value = 1
+			}
+		}
+
+		effect = {
+			change_variable = {
+				which = num_success_mekh
+				value = -1
+			}
+			add_country_modifier = {
+				name = ferrus_manus
+				duration = -1
+			}
+			country_event = {
+				id = aust_rho.12
+			}
+		}
+	}
+}
+Austmek_4_slot = {
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = RX3 } 
+
+	mekh_new_laws = {
+		icon = mission_war_chest
+		position = 2
+		required_missions = { mekh_the_matter_of_stability } 
+
+		trigger = {
+			estate_loyalty = {
+				estate = estate_church
+				loyalty = 60
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = mekh_clean_hands
+				duration = -1
+			}
+		}
+	}
+}
+Austmek_5_slot = {
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = RX3 } 
+
+	mekh_new_arrivals = {
+		icon = mission_war_chest
+		position = 1
+
+		trigger = {
+			1448 = {
+				ROOT = {
+					trading_policy_in_node = {
+						node = PREV
+						policy = establish_communities
+					}
+				}
+			}
+		}
+
+		effect = {
+			add_stability_or_adm_power = yes
+		}
+	}
+
+	mekh_claws_and_screws = {
+		icon = mission_war_chest
+		position = 2
+		required_missions = { mekh_new_arrivals } 
+		provinces_to_highlight = {
+			province_id = 4023
+		}
+		trigger = {
+			owns = 4023
+			has_government_power = {
+					mechanic_type = tech_madness_mechanic
+					power_type = tech_madness_power
+					value = 5
+				}
+			custom_trigger_tooltip = {
+				tooltip = ACTIVATE_EXPERIMENTS_TR
+				NOT = {
+					has_country_flag = mech_ongoing_experiment
+				}
+			}
+		}
+
+		effect = {
+			add_government_power = {
+					mechanic_type = tech_madness_mechanic
+					power_type = tech_madness_power
+					value = -5
+				}
+			4025 = {
+				if = {
+					limit = { is_empty = yes }
+					add_siberian_construction = 500
+				}
+			}
+			4026 = {
+				if = {
+					limit = { is_empty = yes }
+					add_siberian_construction = 500
+				}
+			}
+			custom_tooltip = ACTIVATE_EXPERIMENTS
+			hidden_effect = {
+				set_mekh_experiment = yes
+			}
+		}
+	}
+	mekh_iron_needs = {
+		icon = mission_war_chest
+		position = 3
+		required_missions = { mekh_claws_and_screws } 
+		provinces_to_highlight = {
+			province_id = 4023
+		}
+		trigger = {
+			owns = 4023
+			check_variable = {
+				which = num_success_mekh
+				value = 1
+			}
+		}
+
+		effect = {
+			change_variable = {
+				which = num_success_mekh
+				value = -1
+			}
+			add_country_modifier = {
+				name = mekh_screws
+				duration = -1
+			}
+			4023 = {
+				add_permanent_province_modifier = {
+					name = mekh_local_screws
+					duration = -1
+				}
+			}
+		}
+	}
+}

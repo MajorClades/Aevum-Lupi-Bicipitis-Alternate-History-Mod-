@@ -174,8 +174,8 @@ Kongo_1_slot = {
 				amount = 10
 				type = manpower
 				limit = "culture = kongolese_h"
+				tooltip = kong_10_mil_dev
 			}
-			custom_tooltip = "in Kongolese provinces"
 		}
 	}
 
@@ -289,16 +289,16 @@ Kongo_2_slot = {
 			NOT = { grown_by_development = 2 } 
 			has_tax_building_trigger = no
 			OR = {
-					has_terrain = highlands
-					has_terrain = mountain
-				}
+				has_terrain = highlands
+				has_terrain = mountain
+			}
 		}
 
 		trigger = {
 			num_of_owned_provinces_with = {
 				value = 10
 				region = horn_of_africa_region
-				grown_by_development = 2
+				grown_by_development = 3
 				has_tax_building_trigger = yes
 				OR = {
 					has_terrain = highlands
@@ -308,19 +308,15 @@ Kongo_2_slot = {
 		}
 
 		effect = {
-			horn_of_africa_region = {
-				limit = { has_terrain = highlands } 
-				add_permanent_province_modifier = {
-					name = "kong_highlands"
-					duration = -1
-				}
-			}
-			horn_of_africa_region = {
-				limit = { has_terrain = mountain } 
-				add_permanent_province_modifier = {
-					name = "kong_mountains"
-					duration = -1
-				}
+			unlock_estate_privilege = {
+				estate_privilege = estate_burghers_alb_kongo_highland_adaptation
+				effect_tooltip = "
+					change_estate_land_share = {
+						estate = estate_burghers
+						share = 5
+					}
+					custom_tooltip = kongo_highland_adaptation_tt
+				"
 			}
 		}
 	}
@@ -445,7 +441,10 @@ Kongo_3_slot = {
 			num_of_owned_provinces_with = {
 				value = 3
 				region = horn_of_africa_region
-				culture = himyaritic
+				OR = {
+					culture = himyaritic
+					culture = somali
+				}
 			}
 		}
 
