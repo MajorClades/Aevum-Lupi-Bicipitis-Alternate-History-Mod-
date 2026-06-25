@@ -333,6 +333,41 @@ Austmek_4_slot = {
 			}
 		}
 	}
+
+	mekh_rivers_gold = {
+		icon = mission_war_chest
+		position = 4
+		required_missions = { mekh_iron_needs } 
+		provinces_to_highlight = {
+			province_id = 1792
+		}
+		trigger = {
+			owns = 1792
+			1792 = {
+				NOT = {
+					unrest = 0
+				}
+				num_of_buildings_in_province = 2
+			}
+			custom_trigger_tooltip = {
+				tooltip = ACTIVATE_EXPERIMENTS_TR
+				NOT = {
+					has_country_flag = mech_ongoing_experiment
+				}
+			}
+		}
+
+		effect = {
+			1792 = {
+				change_trade_goods = gold
+			}
+			custom_tooltip = ACTIVATE_EXPERIMENTS
+			hidden_effect = {
+				set_mekh_experiment = yes
+			}
+		}
+	}
+
 }
 Austmek_5_slot = {
 	slot = 5
@@ -437,6 +472,35 @@ Austmek_5_slot = {
 					duration = -1
 				}
 			}
+		}
+	}
+	mekh_hidden_power = {
+		icon = mission_war_chest
+		position = 4
+		required_missions = { mekh_iron_needs } 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 5
+				has_dock_building_trigger = yes
+			}
+			has_government_power = {
+					mechanic_type = tech_madness_mechanic
+					power_type = tech_madness_power
+					value = 20
+				}
+			check_variable = {
+				which = num_success_mekh
+				value = 1
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = mekh_aeolipyle
+				duration = -1
+			}
+			custom_tooltip = UNLOCK_SHIP_MODS
 		}
 	}
 }
