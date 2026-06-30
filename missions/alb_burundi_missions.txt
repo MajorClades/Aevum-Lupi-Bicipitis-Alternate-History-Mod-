@@ -168,7 +168,15 @@ burundi_1_pt2 = {
 				name = "BUU_bounty"
 				duration = 10950
 			}
-			every_owned_province = {
+			custom_tooltip = homeland_devved
+			tooltip = {
+				add_province_modifier = {
+					name = buu_building_block
+					duration = -1
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
 				limit = {
 					OR = {
 						region = sennar_area
@@ -179,6 +187,7 @@ burundi_1_pt2 = {
 							name = "buu_building_block"
 							duration = -1
 						}
+				}
 			}
 		}
 	}
@@ -211,6 +220,14 @@ burundi_1_pt2 = {
 		}
 
 		effect = {
+		custom_tooltip = every_highland_or_mountain_devved
+		tooltip = {
+				add_province_modifier = {
+					name = buu_building_block
+					duration = -1
+				}
+			}
+			hidden_effect = {
 			every_owned_province = {
 				limit = {
 					OR = {
@@ -224,6 +241,7 @@ burundi_1_pt2 = {
 							name = "buu_building_block"
 							duration = -1
 						}
+					}
 			}
 		}
 	}
@@ -234,9 +252,35 @@ burundi_1_pt2 = {
 		required_missions = {
 			seeding_the_land flatten_the_rugged_field
 		}
-		provinces_to_highlight = { }
-		trigger = { }
-		effect = { }
+		provinces_to_highlight = {
+			owned_by = ROOT
+			NOT = { num_of_times_improved = 5 }
+		}
+
+		trigger = {
+		num_of_owned_provinces_with = {
+				value = 25
+				num_of_times_improved = 5
+				base_production = 5
+			}
+		}
+		effect = { 
+		set_country_flag = EDENBURUNDI
+		custom_tooltip = random_foundation_random
+		tooltip = {
+				add_province_modifier = {
+					name = buu_building_block
+					duration = -1
+				}
+			}
+		custom_tooltip = random_eden_random
+		tooltip = {
+				add_province_modifier = {
+					name = buu_building_block
+					duration = -1
+				}
+			}
+		}
 	}
 }
 burundi_2 = {

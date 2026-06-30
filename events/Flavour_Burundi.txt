@@ -81,3 +81,75 @@ country_event = {
 		
 	}
 }
+#Spreading Foundation
+country_event = {
+	id = burundi_alb.99
+	title = burundi_alb.99.test
+	desc = burundi_alb.99.desc
+	picture = COLONIZATION_eventPicture
+	is_triggered_only = yes
+	hidden = yes
+	trigger = {
+		has_country_flag = EDENBURUNDI
+		any_owned_province = {
+			NOT = { has_province_modifier = buu_building_block }
+			region = horn_of_africa_region
+		}
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	#Establish Foundation
+	option = {
+		name = "burundi_alb.99.a"
+		random_owned_province = {
+			limit = {
+			NOT = { has_province_modifier = buu_building_block }
+			region = horn_of_africa_region
+			}
+				add_province_modifier = {
+						name = buu_building_block
+						duration = -1
+				}
+		}
+	}
+}
+#Spreading Eden
+country_event = {
+	id = burundi_alb.100
+	title = burundi_alb.100.test
+	desc = burundi_alb.100.desc
+	picture = COLONIZATION_eventPicture
+	is_triggered_only = yes
+	hidden = yes
+	trigger = {
+		has_country_flag = EDENBURUNDI
+		any_owned_province = {
+			NOT = { has_province_modifier = buu_god_garden }
+			has_province_modifier = buu_building_block
+			region = horn_of_africa_region
+		}
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	#Add God's Garden.
+	option = {
+		name = "burundi_alb.100.a"
+		random_owned_province = {
+			limit = {
+			has_province_modifier = buu_building_block
+			region = horn_of_africa_region
+			}
+				remove_province_modifier = buu_building_block
+				add_province_modifier = {
+						name = buu_god_garden
+						duration = -1
+				}
+		}
+	}
+}
