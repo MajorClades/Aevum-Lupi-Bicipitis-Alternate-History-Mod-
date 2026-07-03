@@ -1,3 +1,42 @@
+mekh_addiction_action = {
+	category = covert
+	require_acceptance = no
+	is_visible = {
+		has_country_flag = mekhanite_addiction_flag
+    }
+
+	is_allowed = {
+		FROM = {
+			has_spy_network_from = {
+				who = ROOT
+				value = 25
+			}
+			if = {
+				limit = {
+					has_country_modifier = mekh_need_for_intervention
+				}
+				custom_trigger_tooltip = {
+					tooltip = NOT_DONE_VALTEA_SPY_ACTION_IN_COUNTRY
+					NOT = {
+						has_country_modifier = mekh_need_for_intervention
+					}
+				}
+			}
+		}
+    }
+	on_accept = {
+		FROM = {
+			add_country_modifier = {
+				name = mekh_need_for_intervention
+				duration =  7300
+			}
+		}
+    }
+
+	ai_will_do = {
+        always = yes
+    }
+}
 
 
 valtea_event_action = {

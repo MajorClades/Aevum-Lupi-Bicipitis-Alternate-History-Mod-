@@ -122,6 +122,50 @@ Austmek_1_slot = {
 		} 
 	}
 
+	mekh_dealers = {
+		icon = byz_justinians_ambition
+		position = 7
+		required_missions = { mekh_of_humors_and_balance mekh_the_good_stuff} 
+		provinces_to_highlight = {
+			OR = {
+				trade_goods = coffee
+				trade_goods = tobacco
+				trade_goods = incense
+				trade_goods = spices
+			}
+		}
+		trigger = {
+			NOT = {
+				has_country_modifier = mekh_unbalanced_humors
+			}
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 1
+				trade_goods = coffee
+			}
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 1
+				trade_goods = tobacco
+			}
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 1
+				trade_goods = incense
+			}
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 1
+				trade_goods = spices
+			}
+			check_variable = {
+				which = num_success_mekh
+				value = 2
+			}
+		}
+
+		effect = { 
+			country_event = {
+				id = aust_rho.13
+			}
+		} 
+	}
 }
 Austmek_2_slot = {
 	slot = 2
