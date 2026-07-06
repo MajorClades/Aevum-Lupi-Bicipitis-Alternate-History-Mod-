@@ -850,3 +850,40 @@ custom_button = {
 	}
 	tooltip = experiment_done_button_text
 } 
+
+
+custom_button = {
+	name = railway_construction_button
+	potential = {
+		FROM = {
+			has_country_flag = railway_construction_button_flag
+		}
+		owned_by = FROM
+		NOT = {
+			has_province_modifier = railway_in_construction
+		}
+		NOT = {
+			has_province_modifier = mekh_railway
+		}
+	}
+	trigger = {
+		owner = {
+				years_of_income = 0.5
+			}
+		is_core = owner
+	}
+	effect = {
+		owner = {
+				add_years_of_income = -0.5
+			}
+		add_province_modifier = {
+			name = mekh_railway
+			duration = -1
+		}
+		add_province_modifier = {
+			name = railway_in_construction
+			duration = 3650
+		}
+	}
+	tooltip = railway_construction_button_tt
+}

@@ -67,6 +67,105 @@ Austmek_1_slot = {
 		} 
 	}
 
+	mekh_medicine = {
+		icon = byz_justinians_ambition
+		position = 5
+		trigger = {
+			estate_loyalty = {
+				estate = estate_church
+				loyalty = 55
+			}
+			estate_loyalty = {
+				estate = estate_burghers
+				loyalty = 55
+			}
+			has_government_power = {
+					mechanic_type = tech_madness_mechanic
+					power_type = tech_madness_power
+					value = 20
+				}
+		}
+
+		effect = { 
+			add_government_power = {
+					mechanic_type = tech_madness_mechanic
+					power_type = tech_madness_power
+					value = -20
+				}
+			add_country_modifier = {
+				name = mekh_medicine_101
+				duration = -1
+			}
+		} 
+	}
+
+	mekh_of_humors_and_balance = {
+		icon = byz_justinians_ambition
+		position = 6
+		required_missions = { mekh_medicine } 
+		trigger = {
+			has_adm_advisor_of_level = { level = 4 }
+			has_dip_advisor_of_level = { level = 4 }
+			has_mil_advisor_of_level = { level = 4 }
+		}
+
+		effect = { 
+			remove_country_modifier = mekh_medicine_101
+			add_country_modifier = {
+				name = mekh_medicine_102
+				duration = -1
+			}
+			add_country_modifier = {
+				name = mekh_unbalanced_humors
+				duration = 10950
+			}
+		} 
+	}
+
+	mekh_dealers = {
+		icon = byz_justinians_ambition
+		position = 7
+		required_missions = { mekh_of_humors_and_balance mekh_the_good_stuff} 
+		provinces_to_highlight = {
+			OR = {
+				trade_goods = coffee
+				trade_goods = tobacco
+				trade_goods = incense
+				trade_goods = spices
+			}
+		}
+		trigger = {
+			NOT = {
+				has_country_modifier = mekh_unbalanced_humors
+			}
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 1
+				trade_goods = coffee
+			}
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 1
+				trade_goods = tobacco
+			}
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 1
+				trade_goods = incense
+			}
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 1
+				trade_goods = spices
+			}
+			check_variable = {
+				which = num_success_mekh
+				value = 2
+			}
+		}
+
+		effect = { 
+			country_event = {
+				id = aust_rho.13
+			}
+		} 
+	}
 }
 Austmek_2_slot = {
 	slot = 2
@@ -191,6 +290,37 @@ Austmek_2_slot = {
 			}
 		}
 	}
+
+	mekh_the_good_stuff = {
+		icon = byz_justinians_ambition
+		position = 6
+		required_missions = { mekh_medicine } 
+		provinces_to_highlight = {
+			OR = {
+				trade_goods = coffee
+				trade_goods = tobacco
+				trade_goods = incense
+				trade_goods = spices
+			}
+		}
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 10
+				OR = {
+					trade_goods = coffee
+					trade_goods = tobacco
+					trade_goods = incense
+					trade_goods = spices
+				}
+			}
+		}
+
+		effect = { 
+			add_years_of_income = 2
+			add_yearly_manpower = 1
+			add_stability_or_adm_power = yes
+		} 
+	}
 }
 Austmek_3_slot = {
 	slot = 3
@@ -235,6 +365,9 @@ Austmek_3_slot = {
 			}
 			country_event = {
 				id = aust_rho.9
+			}
+			east_africa_region = {
+				add_permanent_claim = ROOT
 			}
 		}
 	}
@@ -368,6 +501,23 @@ Austmek_4_slot = {
 		}
 	}
 
+	mekh_printing_presses = {
+		icon = mission_war_chest
+		position = 6
+
+		trigger = {
+			has_institution = printing_press
+			has_government_power = {
+					mechanic_type = tech_madness_mechanic
+					power_type = tech_madness_power
+					value = 50
+				}
+		}
+
+		effect = {
+			custom_tooltip = unlock_decision_to_experiment
+		}
+	}
 }
 Austmek_5_slot = {
 	slot = 5
@@ -501,6 +651,122 @@ Austmek_5_slot = {
 				duration = -1
 			}
 			custom_tooltip = UNLOCK_SHIP_MODS
+		}
+	}
+	mekh_carbon_fuel = {
+		icon = mission_war_chest
+		position = 5
+		required_missions = { mekh_hidden_power } 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 4028
+				province_id = 4030
+				province_id = 4032
+			}
+		}
+		trigger = {
+			4028 = {
+				owned_by = ROOT
+				grown_by_development = 2
+				has_production_building_trigger = yes
+			}
+			4030 = {
+				owned_by = ROOT
+				grown_by_development = 2
+				has_production_building_trigger = yes
+			}
+			4032 = {
+				owned_by = ROOT
+				grown_by_development = 2
+				has_production_building_trigger = yes
+			}
+		}
+
+		effect = {
+			4028 = {
+				change_trade_goods = copper
+				add_province_modifier = {
+					name = mekh_wagonway
+					duration = -1
+				}
+			}
+			4032 = {
+				change_trade_goods = livestock
+				add_province_modifier = {
+					name = mekh_wagonway
+					duration = -1
+				}
+			}
+			4030 = {
+				change_trade_goods = copper
+				add_latent_trade_goods = { coal }
+				add_province_modifier = {
+					name = mekh_wagonway
+					duration = -1
+				}
+			}
+		}
+	}
+
+	mekh_fire_powder_steel = {
+		icon = mission_war_chest
+		position = 6
+		required_missions = { mekh_carbon_fuel } 
+		provinces_to_highlight = {
+			OR = {
+				trade_goods = iron
+				trade_goods = copper
+				trade_goods = gold
+			}
+			continent = africa
+		}
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 5
+				OR = {
+					trade_goods = iron
+					trade_goods = copper
+					trade_goods = gold
+				}
+				has_production_building_trigger = yes
+			}
+			check_variable = {
+				which = num_success_mekh
+				value = 2
+			}
+		}
+
+		effect = {
+			remove_country_modifier = mekh_greek_fire_production
+			add_country_modifier = {
+				name = mekh_gunpowder_and_true_steel
+				duration = -1
+			}
+		}
+	}
+	mekh_the_way_of_rail = {
+		icon = mission_war_chest
+		position = 7
+		required_missions = { mekh_fire_powder_steel mekh_printing_presses} 
+		provinces_to_highlight = {
+			province_id = 4030
+		}
+		trigger = {
+			4030 = {
+				owned_by = ROOT
+				grown_by_development = 15
+				has_production_building_trigger = yes
+				has_manufactory_trigger = yes
+			}
+			check_variable = {
+				which = num_success_mekh
+				value = 5
+			}
+		}
+
+		effect = {
+			custom_tooltip = railway_construction_tt
+			set_country_flag = railway_construction_button_flag
 		}
 	}
 }

@@ -1,0 +1,127 @@
+country_decisions = {
+
+	mekh_break_decision = {
+		major = yes
+		potential = {
+			mission_completed = mekh_printing_presses
+		}
+		allow = {
+			has_government_power = {
+					mechanic_type = tech_madness_mechanic
+					power_type = tech_madness_power
+					value = 5
+				}
+			custom_trigger_tooltip = {
+				tooltip = ACTIVATE_EXPERIMENTS_TR
+				NOT = {
+					has_country_flag = mech_ongoing_experiment
+				}
+			}
+		}
+		effect = {
+			add_government_power = {
+					mechanic_type = tech_madness_mechanic
+					power_type = tech_madness_power
+					value = -5
+				}
+			custom_tooltip = ACTIVATE_EXPERIMENTS
+			hidden_effect = {
+				set_mekh_experiment = yes
+			}
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		ai_importance = 400
+	}
+	mekh_drink_the_juice = {
+		major = yes
+		color = { 99 99 99 }
+		potential = {
+			has_country_flag = mekhanite_serum_flag
+		}
+		allow = {
+			has_government_power = {
+					mechanic_type = tech_madness_mechanic
+					power_type = tech_madness_power
+					value = 25
+				}
+		}
+		effect = {
+			add_government_power = {
+					mechanic_type = tech_madness_mechanic
+					power_type = tech_madness_power
+					value = -15
+				}
+			add_ruler_modifier = {
+				name = mekhanite_brumaro_brew
+			}
+			random_list = {
+				50 = {
+					change_adm = 1
+				}
+				25 = {
+					change_adm = -1
+				}
+			}
+			random_list = {
+				50 = {
+					change_dip = 1
+				}
+				25 = {
+					change_dip = -1
+				}
+			}
+			random_list = {
+				50 = {
+					change_mil = 1
+				}
+				25 = {
+					change_mil = -1
+				}
+			}
+			random_list = {
+				50 = {
+					
+				}
+				45 = {
+					add_government_power = {
+					mechanic_type = tech_madness_mechanic
+					power_type = tech_madness_power
+					value = -10
+				}
+				}
+				5 = {
+					kill_ruler = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		ai_importance = 400
+	}
+	mekh_juiced_up_general = {
+		major = yes
+		color = { 99 99 99 }
+		potential = {
+			has_country_flag = mekhanite_serum_flag
+		}
+	
+		allow = {
+			has_ruler_modifier = mekhanite_brumaro_brew
+		}
+		effect = {
+			define_ruler_to_general = {
+				fire = 7
+				shock = 7
+				manuever = 7
+				siege = 7
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+		ai_importance = 400
+	}
+}
