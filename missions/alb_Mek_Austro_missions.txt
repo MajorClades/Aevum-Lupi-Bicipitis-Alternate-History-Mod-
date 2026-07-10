@@ -161,6 +161,10 @@ Austmek_1_slot = {
 		}
 
 		effect = { 
+			change_variable = {
+				which = num_success_mekh
+				value = -2
+			}
 			country_event = {
 				id = aust_rho.13
 			}
@@ -321,6 +325,31 @@ Austmek_2_slot = {
 			add_stability_or_adm_power = yes
 		} 
 	}
+	mekh_the_cyber_fleet = {
+		icon = mission_war_chest
+		position = 8
+		required_missions = { mekh_expansionism} 
+
+		trigger = {
+			navy_tradition = 30
+			navy_size = 50
+			has_flagship = yes
+			check_variable = {
+				which = num_success_mekh
+				value = 2
+			}
+		}
+
+		effect = {
+			change_variable = {
+				which = num_success_mekh
+				value = -2
+			}
+			country_event = {
+				id = aust_rho.14
+			}
+		}
+	}
 }
 Austmek_3_slot = {
 	slot = 3
@@ -439,6 +468,30 @@ Austmek_3_slot = {
 			}
 		}
 	}
+
+	mekh_expansionism = {
+		icon = mission_war_chest
+		position = 7
+		provinces_to_highlight = {
+			superregion = southern_africa_superregion
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 30
+				superregion = southern_africa_superregion
+			}
+		}
+
+		effect = {
+			southern_africa_superregion = { add_permanent_claim = ROOT } 
+			add_country_modifier = {
+				name = mekh_african_hinterland
+				duration = -1
+			}
+		}
+	}
 }
 Austmek_4_slot = {
 	slot = 4
@@ -516,6 +569,38 @@ Austmek_4_slot = {
 
 		effect = {
 			custom_tooltip = unlock_decision_to_experiment
+		}
+	}
+
+	mekh_the_science_method = {
+		icon = mission_war_chest
+		position = 8
+		required_missions = { mekh_printing_presses mekh_expansionism} 
+
+		trigger = {
+			has_government_power = {
+					mechanic_type = tech_madness_mechanic
+					power_type = tech_madness_power
+					value = 30
+				}
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 1
+				trade_goods = paper
+			}
+		}
+
+		effect = {
+			add_government_power = {
+					mechanic_type = tech_madness_mechanic
+					power_type = tech_madness_power
+					value = -30
+				}
+			capital_scope = {
+				add_great_project_tier = {
+					type = mekhanite_library
+					tier = 1
+				}
+			}
 		}
 	}
 }
@@ -646,6 +731,10 @@ Austmek_5_slot = {
 		}
 
 		effect = {
+			change_variable = {
+				which = num_success_mekh
+				value = -1
+			}
 			add_country_modifier = {
 				name = mekh_aeolipyle
 				duration = -1
@@ -742,6 +831,10 @@ Austmek_5_slot = {
 				name = mekh_gunpowder_and_true_steel
 				duration = -1
 			}
+			change_variable = {
+				which = num_success_mekh
+				value = -2
+			}
 		}
 	}
 	mekh_the_way_of_rail = {
@@ -765,8 +858,27 @@ Austmek_5_slot = {
 		}
 
 		effect = {
+			change_variable = {
+				which = num_success_mekh
+				value = -5
+			}
 			custom_tooltip = railway_construction_tt
 			set_country_flag = railway_construction_button_flag
+			tooltip = {
+				random_owned_province = {
+					owner = {
+							add_years_of_income = -0.5
+						}
+					add_province_modifier = {
+						name = mekh_railway
+						duration = -1
+					}
+					add_province_modifier = {
+						name = railway_in_construction
+						duration = 3650
+					}
+				}
+			}
 		}
 	}
 }
