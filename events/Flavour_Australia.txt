@@ -357,8 +357,127 @@ country_event = { #event for army
 	}
 }
 
+country_event = { #event for drugs, like the stuff, cocaine and shit man
+	id = aust_rho.13
+	title = aust_rho.13.test
+	desc = aust_rho.13.desc
+	picture = muslimgfx_CITY_VIEW_eventPicture
+	
+	is_triggered_only = yes
+	option = {
+		name = aust_rho.13a
+		set_country_flag = mekhanite_serum_flag
+		custom_tooltip = UNLOCK_MEKH_SERUM_RULER
+	}
+	option = {
+		name = aust_rho.13b
+		add_country_modifier = {
+			name = mekh_drug_dealers
+			duration = -1
+		}
+		custom_tooltip = UNLOCK_MKEH_ACTION
+		tooltip = {
+			random_country = {
+				add_country_modifier = {
+					name = mekh_need_for_intervention
+					duration =  7300
+				}
+			}
+		}
+		set_country_flag = mekhanite_addiction_flag
+	}
+	option = {
+		name = aust_rho.13c
+		add_country_modifier = {
+			name = mekh_opium_of_the_masses
+			duration = -1
+		}
+		custom_tooltip = UNLOCK_MKEH_ACTION
+		tooltip = {
+			random_country = {
+				add_country_modifier = {
+					name = mekh_need_for_intervention
+					duration =  7300
+				}
+			}
+		}
+		set_country_flag = mekhanite_addiction_flag
+	}
+}
+
 
  				
  				
+ 				
+ 				
+country_event = { #event for goofy ahh
+	id = aust_rho.100
+	title = aust_rho.100.test
+	desc = aust_rho.100.desc
+	picture = muslimgfx_CITY_VIEW_eventPicture
+	
+	trigger = {
+		tag = RX3
+		zambia_area = {
+			type = all
+			is_empty = yes
+		}
+		has_government_power = {
+					mechanic_type = tech_madness_mechanic
+					power_type = tech_madness_power
+					value = 50
+				}
+	}
+	mean_time_to_happen = {
+		months = 60
+	}
+	immediate = {
+		hidden_effect = {
+			zambia_area = {
+				hidden_effect = {
+					add_core = RX4
+					cede_province = RX4
+					change_culture = austro_makrya
+					change_religion = ephesian
+				}
+			}
+			southern_africa_superregion = {
+					discover_country = RX4
+				}
+			central_africa_region = {
+				add_permanent_claim = RX4
+			}
+			RX4 = {
+				define_ruler = {
+					name = "Yakub 'Alexander'"
+					age = 30
+					adm = 5
+					dip = 0
+					mil = 6
+				}
+				define_general = {
+					name = "Youshua 'Phoenix'"
+					shock = 5
+					fire = 5
+					manuever = 4
+					siege = 0
+				}
+			}
+		}
+	}
+	option = {
+		name = aust_rho.100a
+
+	}
+	option = {
+		name = aust_rho.100b
+		custom_tooltip = RX4_TT
+		hidden_effect = {
+			switch_tag = RX4
+		}
+	}
+}
+
+
  				
  				

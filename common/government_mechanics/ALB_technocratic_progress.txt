@@ -9,20 +9,18 @@ tech_madness_mechanic = {
 		tech_madness_power = {
 			max = 100
 			min = 0
-			gui = council_of_ten_gov_mech
 			show_before_interactions = yes
 			reset_on_new_ruler = no
 			base_monthly_growth = -0.15
-
 			scaled_modifier = {
 				modifier = {
-					global_tax_modifier = -0.3
+					global_tax_modifier = -0.25
 					build_time = 0.25
-					stability_cost_modifier = 0.5
-					all_estate_loyalty_equilibrium = -0.5
+					stability_cost_modifier = 1
+					all_estate_loyalty_equilibrium = -0.25
 					build_cost = 0.25
-					technology_cost = -0.3
-					innovativeness_gain = 1
+					technology_cost = -0.25
+					innovativeness_gain = 0.5
 				}
 				start_value = 0
 				end_value = 100
@@ -32,10 +30,14 @@ tech_madness_mechanic = {
 	
 	interactions = {
 		mekh_do_it_yourself = {
-			icon = GFX_council_of_ten_adm_interaction_button
-			cooldown_years = 2
+			icon = GFX_mekh_do_it_yourself_button
+			cooldown_years = 3
 			trigger = {
-				
+				OR = {
+					adm = 5
+					dip = 5
+					mil = 5 
+				}
 			}
 			effect = {
 				add_government_power = {
@@ -44,10 +46,10 @@ tech_madness_mechanic = {
 					value = 5
 				}
 				random_list = {
-					95 = {
-
+					90 = {
+						add_stability = -1
 					}
-					5 = {
+					10 = {
 						kill_ruler = yes
 					}
 				}
@@ -57,10 +59,10 @@ tech_madness_mechanic = {
 			}
 		}
 		mekh_use_d_class = {
-			icon = GFX_council_of_ten_dip_interaction_button
-			cooldown_years = 2
+			icon = GFX_mekh_use_d_class_button
+			cooldown_years = 3
 			trigger = {
-				years_of_manpower = 0.25
+				years_of_manpower = 0.5
 			}
 			effect = {
 				add_government_power = {
@@ -70,16 +72,19 @@ tech_madness_mechanic = {
 				}
 				random_list = {
 					25 = {
-						add_yearly_manpower = -0.2
+						add_yearly_manpower = -0.5
 					}
 					25 = {
-						add_yearly_manpower = -0.25
+						add_yearly_manpower = -1
+						add_years_of_income = -0.25
 					}
 					25 = {
-						add_yearly_manpower = -0.3
+						add_yearly_manpower = -2
+						add_years_of_income = -0.5
 					}
 					25 = {
-						add_yearly_manpower = -0.35
+						add_yearly_manpower = -3
+						add_years_of_income = -1
 					}
 				}
 			}
@@ -88,8 +93,8 @@ tech_madness_mechanic = {
 			}
 		}
 		mekh_bother_the_estates = {
-			icon = GFX_council_of_ten_mil_interaction_button
-			cooldown_years = 2
+			icon = GFX_mekh_bother_the_estates_button
+			cooldown_years = 3
 			trigger = {
 				
 			}
@@ -101,15 +106,15 @@ tech_madness_mechanic = {
 				}
 				add_estate_loyalty = {
 					estate = estate_church
-					loyalty = -10
+					loyalty = -15
 				}
 				add_estate_loyalty = {
 					estate = estate_nobles
-					loyalty = -10
+					loyalty = -15
 				}
 				add_estate_loyalty = {
 					estate = estate_burghers
-					loyalty = -10
+					loyalty = -15
 				}
 			}
 			ai_chance = {
