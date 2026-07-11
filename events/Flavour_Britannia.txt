@@ -16,7 +16,7 @@ country_event = {
 		}
 		4375 = {
 			remove_core = SW2
-			change_religion = impotian
+			change_religion = ROOT
 		}
 		240 = {
 			remove_core = SW2
@@ -36,7 +36,7 @@ country_event = {
 			}
 			add_base_manpower = -1
 			remove_core = SW2
-			change_religion = impotian
+			change_religion = ROOT
 		}
 	}
 }
@@ -303,9 +303,22 @@ country_event = {
 				}
 			}
 		}
-		create_union = FR2
+		if = {
+			limit = {
+				religion = impotian
+			}
+			create_union = FR2
+		}
+		else = {
+			create_march = FR2
+		}
 		low_countries_region = { add_permanent_claim = FR2 }
-		hidden_effect = {FR2 = { complete_mission = 3_elland change_government = monarchy }}
+		hidden_effect = {
+			FR2 = {
+				complete_mission = 3_elland change_government = monarchy
+				change_primary_culture = ellan
+			}
+		}
 	}
 	option = {
 		name = britt.8b
