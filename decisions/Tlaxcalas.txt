@@ -1,0 +1,61 @@
+country_decisions = {
+    alb_unite_tlaxcallan = {
+        major = yes
+        potential = {
+            NOT = {
+				has_country_flag = united_tlaxcallan
+			}
+            OR = {
+                tag = CX0
+                tag = CX1
+                tag = CX2
+            }
+        }
+        provinces_to_highlight = {
+            OR = {
+                province_id = 2498
+                province_id = 2666
+                province_id = 2667
+                culture = camaxtecah
+            }
+            NOT = { owned_by = ROOT }
+        }
+        allow = {
+            owns_core_province = 2498
+            owns_core_province = 2666
+            owns_core_province = 2667
+            owns_all_provinces = {
+                culture = camaxtecah
+            }
+        }
+        effect = {
+            set_country_flag = united_tlaxcallan
+            change_tag = TLX
+            on_change_tag_effect = yes
+            remove_non_electors_emperors_from_empire_effect = yes
+            if = {
+				limit = { NOT = { government_rank = 2 } }
+				set_government_rank = 2
+			}
+            if = {
+                limit = {
+                    government = theocracy
+                }
+                override_country_name = CAMAXCO
+            }
+            rio_grande_region = {
+                add_permanent_claim = ROOT
+            }
+            new_mexico_area = {
+                add_permanent_claim = ROOT
+            }
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
+        }
+        ai_will_do = {
+			factor = 1
+		}
+    }
+}
