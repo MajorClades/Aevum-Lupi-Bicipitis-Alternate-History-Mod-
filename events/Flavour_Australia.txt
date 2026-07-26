@@ -22,11 +22,6 @@ country_event = { #event when Alexandira is under siege, arrival of mad scientis
 			id = aust_rho.2
 			days = 20
 		}
-		capital_scope = {
-				add_great_project = {
-					type = mekhanite_library
-				}
-			}
 	}
 
 	option = {
@@ -427,11 +422,24 @@ country_event = { #event for navy
 		name = aust_rho.14a
 		clr_country_flag = mekh_dread_nothing_flag
 		set_naval_doctrine = mekh_big_strong_navy_doctrine
+		custom_tooltip = UNLOCK_NAVAL_DOCTRINE_MEKH
+		tooltip = {
+			add_country_modifier = {
+				name = mekh_big_strong_navy
+				duration = 1
+			}
+		}
 	}
 	option = {
 		name = aust_rho.14b
 		clr_country_flag = mekh_big_strong_navy_flag
 		set_naval_doctrine = mekh_dread_nothing_doctrine
+		tooltip = {
+			add_country_modifier = {
+				name = mekh_dread_nothing
+				duration = 1
+			}
+		}
 	}
 }
  				
@@ -490,6 +498,12 @@ country_event = { #event for goofy ahh
 					manuever = 4
 					siege = 0
 				}
+				add_country_modifier = {
+					name = alexander_phalanx_modifier
+					duration = 3650
+				}
+				set_ruler_flag = alexander_phalanx_flag
+				add_manpower = 10
 			}
 		}
 	}
@@ -506,6 +520,30 @@ country_event = { #event for goofy ahh
 	}
 }
 
-
- 				
- 				
+country_event = { #event for goofy ahh
+	id = aust_rho.101
+	title = aust_rho.101.test
+	desc = aust_rho.101.desc
+	picture = muslimgfx_CITY_VIEW_eventPicture
+	
+	trigger = {
+		tag = RX4
+		ruler_age = 55
+		has_ruler_flag = alexander_phalanx_flag
+	}
+	mean_time_to_happen = {
+		months = 60
+	}
+	
+	option = {
+		name = aust_rho.101a
+		kill_ruler = yes
+	}
+	option = {
+		name = aust_rho.101b
+		add_stability = -1
+		change_adm = -1
+		change_dip = -1
+		change_mil = -1
+	}
+}
