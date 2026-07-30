@@ -1,0 +1,99 @@
+sesdaio_maxxing_mechanic = {
+	alert_icon_gfx = GFX_alerticons_government_mechanics
+	alert_icon_index = 12
+	available = {
+		
+	}
+
+	powers = {
+		rx_num_slaves = {
+			max = 100
+			min = 0
+			base_monthly_growth = -0.1
+			scaled_modifier = {
+				modifier = {
+					monthly_rx_slave_unrest = 0.2
+					production_efficiency = 0.2
+					war_exhaustion_cost = -0.5
+				}
+			}
+		}
+		rx_slave_unrest = {
+			max = 100
+			min = 0
+			base_monthly_growth = 0.2
+			scaled_modifier = {
+				modifier = {
+					monthly_rx_num_slaves = -0.5
+					production_efficiency = -0.2
+					global_unrest = 6
+				}
+			}
+			
+		}
+	}
+	interactions = {
+		rx_sell_slaves = {
+			icon = GFX_mekh_do_it_yourself_button
+			cooldown_years = 1
+			trigger = {
+				has_government_power = {
+					mechanic_type = sesdaio_maxxing_mechanic
+					power_type = rx_num_slaves
+					value = 10
+				}
+			}
+			effect = {
+				add_government_power = {
+					mechanic_type = sesdaio_maxxing_mechanic
+					power_type = rx_num_slaves
+					value = -10
+				}
+				add_years_of_income = 1.5
+			}
+			ai_chance = {
+				factor = 5
+			}
+		}
+		rx_reward_loyalty = {
+			icon = GFX_mekh_use_d_class_button
+			cooldown_years = 1
+			trigger = {
+				has_government_power = {
+					mechanic_type = sesdaio_maxxing_mechanic
+					power_type = rx_num_slaves
+					value = 5
+				}
+			}
+			effect = {
+				add_government_power = {
+					mechanic_type = sesdaio_maxxing_mechanic
+					power_type = rx_num_slaves
+					value = -5
+				}
+				add_manpower = 4.5
+			}
+			ai_chance = {
+				factor = 2
+			}
+		}
+		rx_law_of_oppression = {
+			icon = GFX_mekh_bother_the_estates_button
+			cooldown_years = 1
+			trigger = {
+				manpower = 5
+			}
+			effect = {
+				add_manpower = -5
+				add_government_power = {
+					mechanic_type = sesdaio_maxxing_mechanic
+					power_type = rx_slave_unrest
+					value = -5
+				}
+			}
+			ai_chance = {
+				factor = 2
+			}
+		}
+	}
+}
