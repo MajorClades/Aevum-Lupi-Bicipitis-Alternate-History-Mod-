@@ -1,5 +1,5 @@
 ausor_shared_1_slot = {
-    slot = 1
+	slot = 1
 	generic = no
 	ai = yes
 	has_country_shield = yes
@@ -7,32 +7,35 @@ ausor_shared_1_slot = {
 		OR = {
 			tag = AS1
 			tag = AS0
-            tag = AS2
+			tag = AS2
 		}
 	}
-    ausor_trade = {
-        icon =
-        position = 3
-        required_missions = { ausor_comoros_fortress }
-        provinces_to_highlight = {  }
-        trigger = {
-            num_of_light_ship = 30
-            num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-                value = 10
-                has_building = shipyard
-            }
-        }
-        effect = {
-            add_years_of_income = 10
-            add_country_modifier = {
-                name = "ausor_trade_modifier"
-                duration = -1
-            }
-        }
-    }
+
+	ausor_trade = {
+		icon = mission_indian_ocean_supremacy
+		position = 3
+		required_missions = { ausor_comoros_fortress } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			num_of_light_ship = 30
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 10
+				has_building = shipyard
+			}
+		}
+
+		effect = {
+			add_years_of_income = 10
+			add_country_modifier = {
+				name = "ausor_trade_modifier"
+				duration = -1
+			}
+		}
+	}
 }
 ausor_shared_2_slot = {
-    slot = 2
+	slot = 2
 	generic = no
 	ai = yes
 	has_country_shield = yes
@@ -40,87 +43,90 @@ ausor_shared_2_slot = {
 		OR = {
 			tag = AS1
 			tag = AS0
-            tag = AS2
+			tag = AS2
 		}
 	}
-    ausor_navy = {
-        icon =
-        position = 1
-        provinces_to_highlight = { }
-        trigger = {
-            navy_size_percentage = 1
-        }
-        effect = {
-            add_yearly_sailors = 5
-        }
-    }
-    ausor_comoros_fortress = {
-        icon =
-        position = 2
-        required_missions = { ausor_navy }
-        provinces_to_highlight = { province_id = 4020 }
-        trigger = {
-            4020 = {
-                owned_by = ROOT
-                development = 15
-                has_building = fort_15th
-                has_building = barracks
-                has_building = dock
-                has_building = marketplace
-                infantry_in_province = 5
-            }
-        }
-        effect = {
-            4020 = {
-                add_province_modifier = {
-                    name = "the_bridge_to_libya"
-                    duration = -1
-                }
-                center_of_trade = 1
-            }
-            hidden_effect = {
-                every_province = {
-                    limit = {
-                        OR = {
-                            region = east_africa_region
-                            region = south_africa_region
-                        }
-                        has_port = yes
-                    }
-                    add_permanent_claim = ROOT
-                }
-            }
-            custom_tooltip = AUSOR_CLAIM_TT
-        }
-    }
-    ausor_colonial = {
-        icon = mission_colonial
-        position = 3
-        required_missions = { ausor_comoros_fortress }
-        provinces_to_highlight = {
-            province_group = madagascar_island_group
-        }
-        trigger = {
-            all_owned_province = {
-                province_group = madagascar_island_group
-                grown_by_development = 3
-            }
-            num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-                value = 5
-                province_group = madagascar_island_group
-                has_building = workshop
-            }
-        }
-        effect = {
-            add_country_modifier = {
-                name = "ausor_colonialism"
-                duration = -1
-            }
-        }
-    }
+
+	ausor_navy = {
+		icon = crusader_fleet
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = { navy_size_percentage = 1 } 
+
+		effect = { add_yearly_sailors = 5 } 
+	}
+
+	ausor_comoros_fortress = {
+		icon = mission_invade_island
+		position = 2
+		required_missions = { ausor_navy } 
+		provinces_to_highlight = { province_id = 4020 } 
+
+		trigger = {
+			4020 = {
+				owned_by = ROOT
+				development = 15
+				has_building = fort_15th
+				has_building = barracks
+				has_building = dock
+				has_building = marketplace
+				infantry_in_province = 5
+			}
+		}
+
+		effect = {
+			4020 = {
+				add_province_modifier = {
+					name = "the_bridge_to_libya"
+					duration = -1
+				}
+				center_of_trade = 1
+			}
+			hidden_effect = {
+				every_province = {
+					limit = {
+						OR = {
+							region = east_africa_region
+							region = south_africa_region
+						}
+						has_port = yes
+					}
+					add_permanent_claim = ROOT
+				}
+			}
+			custom_tooltip = AUSOR_CLAIM_TT
+		}
+	}
+
+	ausor_colonial = {
+		icon = mission_colonial
+		position = 3
+		required_missions = { ausor_comoros_fortress } 
+		provinces_to_highlight = { province_group = madagascar_island_group } 
+
+		trigger = {
+			all_owned_province = {
+				province_group = madagascar_island_group
+				grown_by_development = 3
+			}
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 5
+				province_group = madagascar_island_group
+				has_building = workshop
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "ausor_colonialism"
+				duration = -1
+			}
+		}
+	}
 }
 ausor_shared_3_slot = {
-    slot = 3
+	slot = 3
 	generic = no
 	ai = yes
 	has_country_shield = yes
@@ -128,115 +134,113 @@ ausor_shared_3_slot = {
 		OR = {
 			tag = AS1
 			tag = AS0
-            tag = AS2
+			tag = AS2
 		}
 	}
-    ausor_army = {
-        icon = 
-        position = 1
-        provinces_to_highlight = { }
-        trigger = {
-            army_size_percentage = 1
-        }
-        effect = {
-            madagascar_island_group = {
-                add_permanent_claim = ROOT
-            }
-            add_country_modifier = {
-                name = ""
-                duration = 7300
-            }
-        }
-    }
-    ausor_military_buildup = {
-        icon = 
-        position = 2
-        required_missions = { ausor_army }
-        required_missions = { ausor_navy }
-        required_missions = { ausor_consolidate_faith }
-        trigger = {
-            num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-                value = 15
-                province_group = madagascar_island_group
-                has_building = barracks
-            }
-            num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-                value = 11
-                province_group = madagascar_island_group
-                has_building = dock
-            }
-        }
-        effect = {
-            add_country_modifier = {
-                name = "ausor_crusader_culture"
-                duration = -1
-            }
-        }
-    }
-    ausor_libyan_landfall = {
-        icon = 
-        position = 3
-        required_missions = { ausor_military_buildup }
-        required_missions = { ausor_comoros_fortress }
-        provinces_to_highlight = {
-            region = east_africa_region
-            has_port = yes
-            NOT = {
-                owned_by = ROOT
-            }
-        }
-        trigger = {
-            owns_all_provinces = {
-                region = east_africa_region
-                has_port = yes
-            }
-        }
-        effect = {
-            southern_africa_superregion = {
-                add_permanent_claim = ROOT
-            }
-            add_country_modifier = {
-                name = "ausor_southern_conquest"
-                duration = 10950
-            }
-        }
-    }
 
+	ausor_army = {
+		icon = mission_assemble_an_army
+		position = 1
+		provinces_to_highlight = {  } 
 
+		trigger = { army_size_percentage = 1 } 
 
+		effect = {
+			madagascar_island_group = { add_permanent_claim = ROOT } 
+			add_country_modifier = {
+				name = ""
+				duration = 7300
+			}
+		}
+	}
 
-    ausor_africa_all = {
-        icon = 
-        position = 7
-        provinces_to_highlight = { continent = africa }
-        trigger = {
-            owns_all_provinces = {
-                continent = africa
-            }
-        }
-        effect = {
-            every_owned_province = {
-                limit = {
-                    continent = africa
-                }
-                add_core = ROOT
-                change_religion = ROOT
-                add_nationalism = -10
-                add_unrest = -5
-                add_province_modifier = {
-                    name = "ausor_continent_of_faithful"
-                    duration -1
-                }
-            }
-            add_power_projection = { 
-	            type = 100_permanent_power_projection
-	            amount = 100
-            }
-        }
-    }
+	ausor_military_buildup = {
+		icon = army_reforms
+		position = 2
+		required_missions = {
+			ausor_consolidate_faith
+			ausor_army
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 15
+				province_group = madagascar_island_group
+				has_building = barracks
+			}
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 11
+				province_group = madagascar_island_group
+				has_building = dock
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = "ausor_crusader_culture"
+				duration = -1
+			}
+		}
+	}
+
+	ausor_libyan_landfall = {
+		icon = mission_into_africa
+		position = 3
+		required_missions = {
+			ausor_comoros_fortress
+			ausor_military_buildup
+		}
+		provinces_to_highlight = {
+			region = east_africa_region
+			has_port = yes
+			NOT = { owned_by = ROOT } 
+		}
+
+		trigger = {
+			owns_all_provinces = {
+				region = east_africa_region
+				has_port = yes
+			}
+		}
+
+		effect = {
+			southern_africa_superregion = { add_permanent_claim = ROOT } 
+			add_country_modifier = {
+				name = "ausor_southern_conquest"
+				duration = 10950
+			}
+		}
+	}
+
+	ausor_africa_all = {
+		icon = protectors_of_christendom
+		position = 4
+		provinces_to_highlight = { continent = africa } 
+
+		trigger = { owns_all_provinces = { continent = africa }  } 
+
+		effect = {
+			every_owned_province = {
+				limit = { continent = africa } 
+				add_core = ROOT
+				change_religion = ROOT
+				add_nationalism = -10
+				add_unrest = -5
+				add_province_modifier = {
+					name = "ausor_continent_of_faithful"
+					duration = -1
+				}
+			}
+			add_power_projection = {
+				type = 100_permanent_power_projection
+				amount = 100
+			}
+		}
+	}
 }
 ausor_shared_4_slot = {
-    slot = 4
+	slot = 4
 	generic = no
 	ai = yes
 	has_country_shield = yes
@@ -244,32 +248,33 @@ ausor_shared_4_slot = {
 		OR = {
 			tag = AS1
 			tag = AS0
-            tag = AS2
+			tag = AS2
 		}
 	}
-    ausor_consolidate_faith = {
-        icon = 
-        position = 1
-        provinces_to_highlight = { province_group = madagascar_island_group }
-        trigger = {
-            num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-                value = 15
-                province_group = madagascar_island_group
-                has_building = temple
-            }
-            madagascar_island_group = {
-                type = all
-                owned_by = ROOT
-                religion = coptic
-            }
-        }
-        effect = {
-            add_treasury = 750
-        }
-    }
+
+	ausor_consolidate_faith = {
+		icon = mission_land_of_churches
+		position = 1
+		provinces_to_highlight = { province_group = madagascar_island_group } 
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 15
+				province_group = madagascar_island_group
+				has_building = temple
+			}
+			madagascar_island_group = {
+				type = all
+				owned_by = ROOT
+				religion = coptic
+			}
+		}
+
+		effect = { add_treasury = 750 } 
+	}
 }
 ausor_shared_5_slot = {
-    slot = 5
+	slot = 5
 	generic = no
 	ai = yes
 	has_country_shield = yes
@@ -277,88 +282,91 @@ ausor_shared_5_slot = {
 		OR = {
 			tag = AS1
 			tag = AS0
-            tag = AS2
+			tag = AS2
 		}
 	}
-    ausor_southern_home = {
-        icon = australia_rhomania_2
-        position = 1
-        provinces_to_highlight = {
-            province_group = madagascar_island_group
-            NOT = {
-                religion = coptic
-            }
-        }
-        trigger = {
-            madagascar_island_group = {
-                type = all
-                owned_by = ROOT
-                religion = coptic
-                grown_by_development = 3
-            }
-            4020 = {
-                owned_by = ROOT
-                religion = coptic
-            }
-        }
-        effect = {
-            madagascar_island_group = {
-                add_province_modifier = {
-                    name = "ausor_southern_homes"
-                    duration = -1
-                }
-                add_random_development = 1
-                change_culture = ROOT
-            }
-            4020 = {
-                change_culture = ROOT
-            }
-        }
-    }
-    ausor_development = {
-        icon =
-        position = 2
-        required_missions = { ausor_southern_home }
-        provinces_to_highlight = {  } 
+
+	ausor_southern_home = {
+		icon = australia_rhomania_2
+		position = 1
+		provinces_to_highlight = {
+			province_group = madagascar_island_group
+			NOT = { religion = coptic } 
+		}
+
+		trigger = {
+			madagascar_island_group = {
+				type = all
+				owned_by = ROOT
+				religion = coptic
+				grown_by_development = 3
+			}
+			4020 = {
+				owned_by = ROOT
+				religion = coptic
+			}
+		}
+
+		effect = {
+			madagascar_island_group = {
+				add_province_modifier = {
+					name = "ausor_southern_homes"
+					duration = -1
+				}
+				add_random_development = 1
+				change_culture = ROOT
+			}
+			4020 = { change_culture = ROOT } 
+		}
+	}
+
+	ausor_development = {
+		icon = mlo_renaissance_city
+		position = 2
+		required_missions = { ausor_southern_home } 
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			has_adm_advisor = yes
 			has_dip_advisor = yes
 			has_mil_advisor = yes
-            treasury = 200
-            capital_scope = { grown_by_development = 6 }
+			treasury = 200
+			capital_scope = { grown_by_development = 6 } 
 		}
-        effect = {
-            add_treasury = -200
-            capital_scope = {
+
+		effect = {
+			add_treasury = -200
+			capital_scope = {
 				add_institution_embracement = {
 					which = renaissance
 					value = 100
 				}
-                add_province_modifier = {
-                    name = "ausor_institution"
-                    duration = -1
-                }
+				add_province_modifier = {
+					name = "ausor_institution"
+					duration = -1
+				}
 			}
-        }
-    }
-    ausor_manufacturies = {
-        icon = 
-        position = 3
-        required_missions = { ausor_development }
-        provinces_to_highlight = {  }
-        trigger = {
-            num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-                value = 20
-                has_building = manufactory
-            }
-        }
-        effect = {
-            every_owned_province = {
-                limit = {
-                    has_building = manufactory
-                }
-                add_base_production = 1
-            }
-        }
-    }
+		}
+	}
+
+	ausor_manufacturies = {
+		icon = mission_industrial_forging
+		position = 3
+		required_missions = { ausor_development } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 20
+				has_building = manufactory
+			}
+		}
+
+		effect = {
+			every_owned_province = {
+				limit = { has_building = manufactory } 
+				add_base_production = 1
+			}
+		}
+	}
 }
