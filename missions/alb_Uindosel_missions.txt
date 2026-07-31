@@ -1,0 +1,272 @@
+ausor_shared_1_slot = {
+    slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = AS1
+			tag = AS0
+            tag = AS2
+		}
+	}
+    ausor_southern_home = {
+        icon =
+        position = 1
+        provinces_to_highlight = {
+            province_group = madagascar_island_group
+            NOT = {
+                religion = coptic
+            }
+        }
+        trigger = {
+            madagascar_island_group = {
+                owned_by = ROOT
+                religion = coptic
+                grown_by_development = 3
+            }
+            4020 = {
+                owned_by = ROOT
+                religion = coptic
+            }
+        }
+        effect = {
+            madagascar_island_group = {
+                change_culture = ROOT
+                add_random_development = 1
+                add_province_modifier = {
+                    name = "ausor_southern_homes"
+                    duration = -1
+                }
+            }
+            4020 = {
+                change_culture = ROOT
+            }
+        }
+    }
+    ausor_development = {
+        icon =
+        position = 2
+        required_missions = { ausor_southern_home }
+        provinces_to_highlight = {  } 
+		trigger = {
+			has_adm_advisor = yes
+			has_dip_advisor = yes
+			has_mil_advisor = yes
+            treasury = 200
+            capital_scope = { grown_by_development = 6 }
+		}
+        effect = {
+            add_treasury = -200
+            capital_scope = {
+				add_institution_embracement = {
+					which = renaissance
+					value = 100
+				}
+			}
+        }
+    }
+    
+}
+ausor_shared_2_slot = {
+    slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = AS1
+			tag = AS0
+            tag = AS2
+		}
+	}
+    ausor_navy = {
+        icon =
+        position = 1
+        provinces_to_highlight = { }
+        trigger = {
+            navy_size_percentage = 1
+        }
+        effect = {
+
+        }
+    }
+    ausor_comoros_fortress = {
+        icon =
+        position = 2
+        required_missions = { ausor_navy }
+        provinces_to_highlight = { 4020 }
+        trigger = {
+            4020 = {
+                grown_by_development = 5
+                has_building = fort_14th
+                has_building = barracks
+                has_building = dock
+                has_building = marketplace
+                infantry_in_province = 5
+            }
+        }
+        effect = {
+            4020 = {
+                add_province_modifier = {
+                    name = "the_bridge_to_libya"
+                    duration = -1
+                }
+                center_of_trade = 1
+            }
+            every_province = {
+                limit = {
+                    OR = {
+                        east_africa_region
+                        south_africa_region
+                    }
+                    has_port = yes
+                }
+                add_permanent_claim = ROOT
+            }
+        }
+    }
+    ausor_colonial = {
+        icon = mission_colonial
+        position = 3
+        required_missions = { ausor_comoros_fortress}
+        provinces_to_highlight = {
+            province_group = madagascar_island_group
+        }
+        trigger = {
+            every_owned_province = {
+                province_group = madagascar_island_group
+                grown_by_development = 3
+            }
+            num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+                value = 5
+                province_group = madagascar_island_group
+                has_building = workshop
+            }
+        }
+        effect = {
+            add_country_modifier = {
+                name = "ausor_colonialism"
+                duration = -1
+            }
+        }
+    }
+}
+ausor_shared_3_slot = {
+    slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = AS1
+			tag = AS0
+            tag = AS2
+		}
+	}
+    ausor_army = {
+        icon = 
+        position = 1
+        provinces_to_highlight = { }
+        trigger = {
+            army_size_percentage = 1
+        }
+        effect = {
+            madagascar_island_group = {
+                add_permanent_claim = ROOT
+            }
+        }
+    }
+    ausor_military_buildup = {
+        icon = 
+        position = 2
+        required_missions = { ausor_army }
+        trigger = {
+            num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+                value = 5
+                province_group = madagascar_island_group
+                has_building = barrakcs
+            }
+            num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+                value = 5
+                province_group = madagascar_island_group
+                has_building = dock
+            }
+        }
+    }
+    ausor_libyan_landfall = {
+        icon = 
+        position = 3
+        required_missions = { ausor_military_buildup }
+        required_missions = { ausor_comoros_fortress }
+        provinces_to_highlight = {
+            every_province = {
+                limit = {
+                    OR = {
+                        east_africa_region
+                    }
+                    has_port = yes
+                }
+            }
+        }
+    }
+
+
+
+
+    ausor_africa_all = {
+        icon = 
+        position = 7
+        provinces_to_highlight = { continent = africa }
+        trigger = {
+            owns_all_provinces = {
+                continent = africa
+            }
+            has_mission =
+            has_mission =
+            has_mission =
+        }
+        effect = {
+            every_owned_province = {
+                limit = {
+                    continent = africa
+                }
+                add_core = ROOT
+                change_religion = ROOT
+                add_nationalism = -10
+                add_unrest = -5
+                add_province_modifier = {
+                    name = "ausor_continent_of_faithful"
+                    duration -1
+                }
+            }
+        }
+    }
+}
+ausor_shared_4_slot = {
+    slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = AS1
+			tag = AS0
+            tag = AS2
+		}
+	}
+}
+ausor_shared_5_slot = {
+    slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = {
+		OR = {
+			tag = AS1
+			tag = AS0
+            tag = AS2
+		}
+	}
+    
+}
