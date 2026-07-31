@@ -21,6 +21,7 @@ ausor_shared_1_slot = {
         }
         trigger = {
             madagascar_island_group = {
+                type = all
                 owned_by = ROOT
                 religion = coptic
                 grown_by_development = 3
@@ -95,11 +96,12 @@ ausor_shared_2_slot = {
         icon =
         position = 2
         required_missions = { ausor_navy }
-        provinces_to_highlight = { 4020 }
+        provinces_to_highlight = { province_id = 4020 }
         trigger = {
             4020 = {
+                owned_by = ROOT
                 grown_by_development = 5
-                has_building = fort_14th
+                has_building = fort_15th
                 has_building = barracks
                 has_building = dock
                 has_building = marketplace
@@ -117,8 +119,8 @@ ausor_shared_2_slot = {
             every_province = {
                 limit = {
                     OR = {
-                        east_africa_region
-                        south_africa_region
+                        region = east_africa_region
+                        region = south_africa_region
                     }
                     has_port = yes
                 }
@@ -129,12 +131,12 @@ ausor_shared_2_slot = {
     ausor_colonial = {
         icon = mission_colonial
         position = 3
-        required_missions = { ausor_comoros_fortress}
+        required_missions = { ausor_comoros_fortress }
         provinces_to_highlight = {
             province_group = madagascar_island_group
         }
         trigger = {
-            every_owned_province = {
+            all_owned_province = {
                 province_group = madagascar_island_group
                 grown_by_development = 3
             }
@@ -175,6 +177,10 @@ ausor_shared_3_slot = {
             madagascar_island_group = {
                 add_permanent_claim = ROOT
             }
+            add_country_modifier = {
+                name = ""
+                duration = 7300
+            }
         }
     }
     ausor_military_buildup = {
@@ -185,13 +191,16 @@ ausor_shared_3_slot = {
             num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
                 value = 5
                 province_group = madagascar_island_group
-                has_building = barrakcs
+                has_building = barracks
             }
             num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
                 value = 5
                 province_group = madagascar_island_group
                 has_building = dock
             }
+        }
+        effect = {
+
         }
     }
     ausor_libyan_landfall = {
@@ -200,13 +209,25 @@ ausor_shared_3_slot = {
         required_missions = { ausor_military_buildup }
         required_missions = { ausor_comoros_fortress }
         provinces_to_highlight = {
-            every_province = {
-                limit = {
-                    OR = {
-                        east_africa_region
-                    }
-                    has_port = yes
-                }
+            region = east_africa_region
+            has_port = yes
+            NOT = {
+                owned_by = ROOT
+            }
+        }
+        trigger = {
+            owns_all_provinces = {
+                region = east_africa_region
+                has_port = yes
+            }
+        }
+        effect = {
+            southern_africa_superregion = {
+                add_permanent_claim = ROOT
+            }
+            add_country_modifier = {
+                name = "ausor_southern_conquest"
+                duration = 10950
             }
         }
     }
