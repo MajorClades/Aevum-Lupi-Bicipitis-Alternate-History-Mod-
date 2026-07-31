@@ -10,64 +10,26 @@ ausor_shared_1_slot = {
             tag = AS2
 		}
 	}
-    ausor_southern_home = {
+    ausor_trade = {
         icon =
-        position = 1
-        provinces_to_highlight = {
-            province_group = madagascar_island_group
-            NOT = {
-                religion = coptic
-            }
-        }
+        position = 3
+        required_missions = { ausor_comoros_fortress }
+        provinces_to_highlight = {  }
         trigger = {
-            madagascar_island_group = {
-                type = all
-                owned_by = ROOT
-                religion = coptic
-                grown_by_development = 3
-            }
-            4020 = {
-                owned_by = ROOT
-                religion = coptic
+            num_of_light_ship = 30
+            num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+                value = 10
+                has_building = shipyard
             }
         }
         effect = {
-            madagascar_island_group = {
-                change_culture = ROOT
-                add_random_development = 1
-                add_province_modifier = {
-                    name = "ausor_southern_homes"
-                    duration = -1
-                }
-            }
-            4020 = {
-                change_culture = ROOT
+            add_years_of_income = 10
+            add_country_modifier = {
+                name = "ausor_trade_modifier"
+                duration = -1
             }
         }
     }
-    ausor_development = {
-        icon =
-        position = 2
-        required_missions = { ausor_southern_home }
-        provinces_to_highlight = {  } 
-		trigger = {
-			has_adm_advisor = yes
-			has_dip_advisor = yes
-			has_mil_advisor = yes
-            treasury = 200
-            capital_scope = { grown_by_development = 6 }
-		}
-        effect = {
-            add_treasury = -200
-            capital_scope = {
-				add_institution_embracement = {
-					which = renaissance
-					value = 100
-				}
-			}
-        }
-    }
-    
 }
 ausor_shared_2_slot = {
     slot = 2
@@ -89,7 +51,7 @@ ausor_shared_2_slot = {
             navy_size_percentage = 1
         }
         effect = {
-
+            add_yearly_sailors = 5
         }
     }
     ausor_comoros_fortress = {
@@ -100,7 +62,7 @@ ausor_shared_2_slot = {
         trigger = {
             4020 = {
                 owned_by = ROOT
-                grown_by_development = 5
+                development = 15
                 has_building = fort_15th
                 has_building = barracks
                 has_building = dock
@@ -116,16 +78,19 @@ ausor_shared_2_slot = {
                 }
                 center_of_trade = 1
             }
-            every_province = {
-                limit = {
-                    OR = {
-                        region = east_africa_region
-                        region = south_africa_region
+            hidden_effect = {
+                every_province = {
+                    limit = {
+                        OR = {
+                            region = east_africa_region
+                            region = south_africa_region
+                        }
+                        has_port = yes
                     }
-                    has_port = yes
+                    add_permanent_claim = ROOT
                 }
-                add_permanent_claim = ROOT
             }
+            custom_tooltip = AUSOR_CLAIM_TT
         }
     }
     ausor_colonial = {
@@ -187,20 +152,25 @@ ausor_shared_3_slot = {
         icon = 
         position = 2
         required_missions = { ausor_army }
+        required_missions = { ausor_navy }
+        required_missions = { ausor_consolidate_faith }
         trigger = {
             num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-                value = 5
+                value = 15
                 province_group = madagascar_island_group
                 has_building = barracks
             }
             num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-                value = 5
+                value = 11
                 province_group = madagascar_island_group
                 has_building = dock
             }
         }
         effect = {
-
+            add_country_modifier = {
+                name = "ausor_crusader_culture"
+                duration = -1
+            }
         }
     }
     ausor_libyan_landfall = {
@@ -243,9 +213,6 @@ ausor_shared_3_slot = {
             owns_all_provinces = {
                 continent = africa
             }
-            has_mission =
-            has_mission =
-            has_mission =
         }
         effect = {
             every_owned_province = {
@@ -276,6 +243,26 @@ ausor_shared_4_slot = {
             tag = AS2
 		}
 	}
+    ausor_consolidate_faith = {
+        icon = 
+        position = 1
+        provinces_to_highlight = { province_group = madagascar_island_group }
+        trigger = {
+            num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+                value = 15
+                province_group = madagascar_island_group
+                has_building = temple
+            }
+            madagascar_island_group = {
+                type = all
+                owned_by = ROOT
+                religion = coptic
+            }
+        }
+        effect = {
+            add_treasury = 750
+        }
+    }
 }
 ausor_shared_5_slot = {
     slot = 5
@@ -289,5 +276,85 @@ ausor_shared_5_slot = {
             tag = AS2
 		}
 	}
-    
+    ausor_southern_home = {
+        icon = australia_rhomania_2
+        position = 1
+        provinces_to_highlight = {
+            province_group = madagascar_island_group
+            NOT = {
+                religion = coptic
+            }
+        }
+        trigger = {
+            madagascar_island_group = {
+                type = all
+                owned_by = ROOT
+                religion = coptic
+                grown_by_development = 3
+            }
+            4020 = {
+                owned_by = ROOT
+                religion = coptic
+            }
+        }
+        effect = {
+            madagascar_island_group = {
+                add_province_modifier = {
+                    name = "ausor_southern_homes"
+                    duration = -1
+                }
+                add_random_development = 1
+                change_culture = ROOT
+            }
+            4020 = {
+                change_culture = ROOT
+            }
+        }
+    }
+    ausor_development = {
+        icon =
+        position = 2
+        required_missions = { ausor_southern_home }
+        provinces_to_highlight = {  } 
+		trigger = {
+			has_adm_advisor = yes
+			has_dip_advisor = yes
+			has_mil_advisor = yes
+            treasury = 200
+            capital_scope = { grown_by_development = 6 }
+		}
+        effect = {
+            add_treasury = -200
+            capital_scope = {
+				add_institution_embracement = {
+					which = renaissance
+					value = 100
+				}
+                add_province_modifier = {
+                    name = "ausor_institution"
+                    duration = -1
+                }
+			}
+        }
+    }
+    ausor_manufacturies = {
+        icon = 
+        position = 3
+        required_missions = { ausor_development }
+        provinces_to_highlight = {  }
+        trigger = {
+            num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+                value = 20
+                has_building = manufactory
+            }
+        }
+        effect = {
+            every_owned_province = {
+                limit = {
+                    has_building = manufactory
+                }
+                add_base_production = 1
+            }
+        }
+    }
 }
