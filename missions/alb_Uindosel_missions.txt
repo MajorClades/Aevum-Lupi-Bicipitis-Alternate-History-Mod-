@@ -54,7 +54,12 @@ ausor_shared_2_slot = {
 
 		trigger = { navy_size_percentage = 1 } 
 
-		effect = { add_yearly_sailors = 5 } 
+		effect = {
+			add_yearly_sailors = 5
+			4020 = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
 	ausor_comoros_fortress = {
@@ -82,6 +87,8 @@ ausor_shared_2_slot = {
 					duration = -1
 				}
 				center_of_trade = 1
+				change_culture = ROOT
+				change_religion = ROOT
 			}
 			hidden_effect = {
 				every_province = {
@@ -106,12 +113,8 @@ ausor_shared_2_slot = {
 		provinces_to_highlight = { province_group = madagascar_island_group } 
 
 		trigger = {
-			all_owned_province = {
-				province_group = madagascar_island_group
-				grown_by_development = 3
-			}
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-				value = 5
+				value = 15
 				province_group = madagascar_island_group
 				has_building = workshop
 			}
@@ -148,8 +151,8 @@ ausor_shared_3_slot = {
 		effect = {
 			madagascar_island_group = { add_permanent_claim = ROOT } 
 			add_country_modifier = {
-				name = ""
-				duration = 7300
+				name = "ausor_christian_resistance"
+				duration = 3650
 			}
 		}
 	}
@@ -267,11 +270,16 @@ ausor_shared_4_slot = {
 			madagascar_island_group = {
 				type = all
 				owned_by = ROOT
-				religion = coptic
 			}
 		}
 
-		effect = { add_treasury = 750 } 
+		effect = {
+			add_treasury = 750
+			add_country_modifier = {
+				name = "evangelise_australia"
+				duration = 3650
+			}
+		} 
 	}
 }
 ausor_shared_5_slot = {
@@ -300,11 +308,7 @@ ausor_shared_5_slot = {
 				type = all
 				owned_by = ROOT
 				religion = coptic
-				grown_by_development = 3
-			}
-			4020 = {
-				owned_by = ROOT
-				religion = coptic
+				grown_by_development = 1
 			}
 		}
 
@@ -317,14 +321,16 @@ ausor_shared_5_slot = {
 				add_random_development = 1
 				change_culture = ROOT
 			}
-			4020 = { change_culture = ROOT } 
 		}
 	}
 
 	ausor_development = {
 		icon = mlo_renaissance_city
 		position = 2
-		required_missions = { ausor_southern_home } 
+		required_missions = {
+			ausor_southern_home 
+			ausor_consolidate_faith
+		} 
 		provinces_to_highlight = {  } 
 
 		trigger = {
@@ -349,24 +355,59 @@ ausor_shared_5_slot = {
 			}
 		}
 	}
-
-	ausor_manufacturies = {
+	
+	ausor_faith_work = {
 		icon = mission_industrial_forging
 		position = 3
-		required_missions = { ausor_development } 
+		required_missions = { ausor_development }
+		provinces_to_highlight = {
+			madagascar_island_group = {
+				owned_by = ROOT
+				NOT = {
+					has_building = workshop
+				}
+			}
+		}
+
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 15
+				province_group = madagascar_island_group
+				has_building = workshop
+			}
+		}
+
+		effect = {
+			add_treasury = 1500
+			add_country_modifier = {
+				name = "ora_et_labora"
+				duration = -1
+			}
+		}
+	}
+
+	ausor_manufacturies = {
+		icon = mission_state_manufactories
+		position = 4
+		required_missions = { ausor_faith_work } 
 		provinces_to_highlight = {  } 
 
 		trigger = {
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
-				value = 20
-				has_building = manufactory
+				value = 100
+				has_manufactory_trigger = yes
 			}
 		}
 
 		effect = {
 			every_owned_province = {
-				limit = { has_building = manufactory } 
+				limit = { has_manufactory_trigger = yes } 
 				add_base_production = 1
+			}
+			remove_country_modifier = "ora_et_labora"
+			add_country_modifier = {
+				name = "crusader_industrial_complex"
+				duration = -1
 			}
 		}
 	}
