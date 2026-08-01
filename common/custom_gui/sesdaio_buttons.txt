@@ -1,0 +1,119 @@
+custom_button = {
+	name = sesdaio_raid_button
+	potential = {
+		FROM = {
+			has_government_mechanic = sesdaio_maxxing_mechanic
+		}
+		NOT = {
+			owned_by = FROM
+		}
+		is_neighbor_of = FROM
+	}
+	trigger = {
+		owner = {
+			OR = {
+				NOT = {
+					alliance_with = FROM
+				}
+				NOT = {
+					truce_with = FROM
+				}
+			}
+		}
+		NOT = {
+			fort_level = 2
+		}
+		FROM = {
+			years_of_manpower = 0.75
+		}
+	}
+	effect = {
+		add_devastation = 25
+		FROM = {
+			add_yearly_manpower = -0.75
+		}
+		if = {
+			limit = {
+				base_manpower = 1
+			}
+			add_government_power = {
+					mechanic_type = sesdaio_maxxing_mechanic
+					power_type = rx_num_slaves
+					value = 2
+				}
+		}else = {
+			if = {
+				limit = {
+					base_manpower = 3
+				}
+				add_government_power = {
+						mechanic_type = sesdaio_maxxing_mechanic
+						power_type = rx_num_slaves
+						value = 5
+					}
+			}else = {
+					if = {
+						limit = {
+							base_manpower = 6
+						}
+						add_government_power = {
+								mechanic_type = sesdaio_maxxing_mechanic
+								power_type = rx_num_slaves
+								value = 10
+							}
+					}
+				}
+		}
+		add_province_modifier = {
+			name = ses_raided
+			duration = 1825
+		}
+		owner = {
+			add_aggressive_expansion = {
+				who = FROM
+				value = 5
+				apply_calc = no
+			}
+		}
+	}
+	tooltip = sesdaio_raid_button_tt
+}
+
+custom_button = {
+	name = sesdaio_add_slaves_button
+	potential = {
+		FROM = {
+			has_government_mechanic = sesdaio_maxxing_mechanic
+		}
+		owned_by = FROM
+		NOT = {
+			trade_goods = slaves
+		}
+		NOT = {
+			has_province_modifier = ses_add_some_slaves
+		}
+	}
+	trigger = {
+		FROM = {
+			has_government_power = {
+					mechanic_type = sesdaio_maxxing_mechanic
+					power_type = rx_num_slaves
+					value = 5
+				}
+		}
+	}
+	effect = {
+		FROM = {
+			add_government_power = {
+					mechanic_type = sesdaio_maxxing_mechanic
+					power_type = rx_num_slaves
+					value = -5
+				}
+		}
+		add_province_modifier = {
+			name = ses_add_some_slaves
+			duration = 3650
+		}
+	}
+	tooltip = sesdaio_add_slaves_button_tt
+}

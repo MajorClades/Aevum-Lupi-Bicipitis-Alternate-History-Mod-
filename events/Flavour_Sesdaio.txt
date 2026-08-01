@@ -42,3 +42,197 @@ country_event = { #Sesdaio starting event
 			}
 	}
 }
+
+country_event = { #Sesdaio deal with some pirates
+	id = sesda.2
+	title = sesda.2.test
+	desc = sesda.2.desc
+	picture = muslimgfx_CITY_VIEW_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = sesda.2a
+		add_country_modifier = {
+			name = ses_pirate_yoke
+			duration = 10950
+		}
+		if = {
+			limit = {
+				RX0 = {
+					ai = yes
+					is_subject_of = RU0
+				}
+			}
+			RU0 = {
+				release = RX0
+			}
+			RX0 = {
+				add_country_modifier = {
+					name = ses_pirate_deal
+					duration = 3650
+				}
+			}
+		}
+		if = {
+			limit = {
+				RX3 = {
+					ai = yes
+				}
+			}
+			RX3 = {
+				add_country_modifier = {
+					name = ses_pirate_deal
+					duration = 3650
+				}
+			}
+			4028 = {
+				cede_province = ROOT
+				add_core = ROOT
+			}
+		}
+	}
+
+	option = {
+		name = sesda.2b
+		add_country_modifier = {
+			name = ses_pirate_good_deal
+			duration = 3650
+		}
+	}
+
+	option = {
+		name = sesda.2c
+		define_admiral = {
+			shock = 4
+			fire = 5
+			manuever = 3
+		}
+		capital_scope = {
+			light_ship = ROOT
+			light_ship = ROOT
+		}
+	}
+}
+
+country_event = { #Sesdaio uh oh, the slaves are not happy
+	id = sesda.3
+	title = sesda.3.test
+	desc = sesda.3.desc
+	picture = muslimgfx_CITY_VIEW_eventPicture
+	trigger = {
+		has_government_mechanic = sesdaio_maxxing_mechanic
+		has_government_power = {
+					mechanic_type = sesdaio_maxxing_mechanic
+					power_type = rx_slave_unrest
+					value = 15
+				}
+		NOT = {
+			has_government_power = {
+					mechanic_type = sesdaio_maxxing_mechanic
+					power_type = rx_slave_unrest
+					value = 90
+				}
+		}
+		manpower = 5
+	}
+	mean_time_to_happen = {
+		months = 600
+	}
+
+	option = {
+		name = sesda.3a
+		add_government_power = {
+					mechanic_type = sesdaio_maxxing_mechanic
+					power_type = rx_slave_unrest
+					value = 10
+				}
+	}
+
+	option = {
+		name = sesda.3b
+		add_manpower = -5
+		add_government_power = {
+					mechanic_type = sesdaio_maxxing_mechanic
+					power_type = rx_slave_unrest
+					value = 5
+				}
+	}
+
+
+}
+
+country_event = { #Sesdaio uh oh, the slaves are not happy
+	id = sesda.4
+	title = sesda.4.test
+	desc = sesda.4.desc
+	picture = muslimgfx_CITY_VIEW_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = sesda.4a
+		add_government_power = {
+				mechanic_type = sesdaio_maxxing_mechanic
+				power_type = rx_slave_unrest
+				value = -75
+			}
+		add_government_power = {
+			mechanic_type = sesdaio_maxxing_mechanic
+			power_type = rx_num_slaves
+			value = -50
+		}
+		random_owned_province = {
+			limit = {
+				is_core = ROOT
+			}
+			spawn_rebels = {
+				size = 2
+				type = sesdaio_slave_rebels
+			}
+		}
+		random_owned_province = {
+			limit = {
+				is_core = ROOT
+			}
+			spawn_rebels = {
+				size = 1
+				type = sesdaio_slave_rebels
+			}
+		}
+	}
+
+}
+
+country_event = { #Sesdaio uh oh, the slaves are happy
+	id = sesda.5
+	title = sesda.5.test
+	desc = sesda.5.desc
+	picture = muslimgfx_CITY_VIEW_eventPicture
+	is_triggered_only = yes
+
+	option = {
+		name = sesda.5a
+		add_prestige = 5
+			add_country_modifier = {
+				name = innovative_modifier
+				duration = 3650
+			}
+			add_country_modifier = {
+				name = "the_abolish_slavery_act"
+				duration = -1
+			}
+			custom_tooltip = abolished_slavery_act_tooltip
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						trade_goods = slaves
+					}
+					change_trade_goods = unknown
+					remove_building = tradecompany
+					if = {
+						limit = { has_province_modifier = slave_entrepot }
+						remove_province_modifier = slave_entrepot
+					}
+				}
+			}
+	}
+
+}
