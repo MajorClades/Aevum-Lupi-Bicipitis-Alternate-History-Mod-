@@ -23,6 +23,9 @@ custom_button = {
 		NOT = {
 			fort_level = 2
 		}
+		NOT = {
+			has_province_modifier = ses_raided
+		}
 		FROM = {
 			years_of_manpower = 0.75
 		}
@@ -34,33 +37,82 @@ custom_button = {
 		}
 		if = {
 			limit = {
-				base_manpower = 1
+				mission_completed = rx_raiding_wars
 			}
+			if = {
+			limit = {
+				base_tax = 1
+				NOT = {
+					base_tax = 3
+				}
+			}
+			FROM = {
+				add_treasury = 10
+			}
+		}else = {
+			if = {
+				limit = {
+					base_tax = 3
+					NOT = {
+						base_tax = 6
+					}
+				}
+				FROM = {
+					add_treasury = 50
+				}
+				
+			}else = {
+					if = {
+						limit = {
+							base_tax = 6
+						}
+						FROM = { add_treasury = 90}
+					}
+				}
+		}
+		}
+		if = {
+			limit = {
+				base_manpower = 1
+				NOT = {
+					base_manpower = 3
+				}
+			}
+			FROM = {
 			add_government_power = {
 					mechanic_type = sesdaio_maxxing_mechanic
 					power_type = rx_num_slaves
 					value = 2
 				}
+			}
+
 		}else = {
 			if = {
 				limit = {
 					base_manpower = 3
-				}
-				add_government_power = {
-						mechanic_type = sesdaio_maxxing_mechanic
-						power_type = rx_num_slaves
-						value = 5
+					NOT = {
+						base_manpower = 6
 					}
+				}
+				FROM = {
+			add_government_power = {
+					mechanic_type = sesdaio_maxxing_mechanic
+					power_type = rx_num_slaves
+					value = 5
+				}
+			}
 			}else = {
 					if = {
 						limit = {
 							base_manpower = 6
 						}
-						add_government_power = {
-								mechanic_type = sesdaio_maxxing_mechanic
-								power_type = rx_num_slaves
-								value = 10
-							}
+						FROM = {
+			add_government_power = {
+					mechanic_type = sesdaio_maxxing_mechanic
+					power_type = rx_num_slaves
+					value = 10
+				}
+			}
 					}
 				}
 		}
