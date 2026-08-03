@@ -33,7 +33,7 @@ Sesdaio_1_slot = {
 
 	rx_island_of_chains = {
 		icon = hornofafrica
-		position = 3
+		position = 4
 		required_missions = { rx_hope_for_the_best } 
 		provinces_to_highlight = {
 			province_group = madagascar_island_group
@@ -87,11 +87,12 @@ Sesdaio_2_slot = {
 		}
 
 		effect = {
+			custom_tooltip = SES_TT_2
 			add_navy_tradition = 10
 			west_indian_ocean_region = {
 				discover_country = ROOT
 			}
-			custom_tooltip = SES_TT_2
+			
 		}
 	}
 
@@ -142,6 +143,33 @@ Sesdaio_3_slot = {
 			custom_tooltip = SES_TT_1
 		}
 	}
+
+	
+	rx_raiding_worked = {
+		icon = hornofafrica
+		position = 4
+		required_missions = { rx_raiding_wars } 
+		provinces_to_highlight = { 
+			has_province_modifier = ses_raided
+		}
+
+		trigger = {
+			has_government_power = {
+					mechanic_type = sesdaio_maxxing_mechanic
+					power_type = rx_num_slaves
+					value = 50
+				}
+		}
+
+		effect = {
+			add_government_power = {
+					mechanic_type = sesdaio_maxxing_mechanic
+					power_type = rx_num_slaves
+					value = -25
+				}
+			custom_tooltip = SES_TT_3
+		}
+	}
 }
 Sesdaio_4_slot = {
 	slot = 4
@@ -174,7 +202,29 @@ Sesdaio_4_slot = {
 			}
 		}
 	}
+	rx_barracks = {
+		icon = hornofafrica
+		position = 3
+		required_missions = { rx_sesdaio_lot } 
+		provinces_to_highlight = { 
+			has_manpower_building_trigger = no
+			owned_by = ROOT
+		}
 
+		trigger = {
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 5
+				has_manpower_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = ses_new_police
+				duration = 10950
+			}
+		}
+	}
 }
 Sesdaio_5_slot = {
 	slot = 5
@@ -209,6 +259,32 @@ Sesdaio_5_slot = {
 					power_type = rx_slave_unrest
 					value = -5
 				}
+		}
+	}
+
+	rx_slave_churches = {
+		icon = hornofafrica
+		position = 3
+		required_missions = { rx_churches } 
+		provinces_to_highlight = { 
+			has_tax_building_trigger = no
+			owned_by = ROOT
+		}
+
+		trigger = {
+			theologian = 3
+			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
+				value = 5
+				has_tax_building_trigger = yes
+			}
+		}
+
+		effect = {
+			custom_tooltip = SES_TT_4
+			add_country_modifier = {
+				name = ses_good_advice
+				duration = -1
+			}
 		}
 	}
 }
