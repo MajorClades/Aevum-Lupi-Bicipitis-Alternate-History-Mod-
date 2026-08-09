@@ -5,9 +5,8 @@ Sesdaio_1_slot = {
 	has_country_shield = yes
 	potential = { tag = RX1 } 
 
-
 	rx_hope_for_the_best = {
-		icon = hornofafrica
+		icon = australia_rhomania_2
 		position = 2
 		required_missions = { rx_cry_for_help } 
 		provinces_to_highlight = {
@@ -24,15 +23,15 @@ Sesdaio_1_slot = {
 
 		effect = {
 			add_government_power = {
-					mechanic_type = sesdaio_maxxing_mechanic
-					power_type = rx_num_slaves
-					value = 15
-				}
+				mechanic_type = sesdaio_maxxing_mechanic
+				power_type = rx_num_slaves
+				value = 15
+			}
 		}
 	}
 
 	rx_island_of_chains = {
-		icon = hornofafrica
+		icon = mission_empire
 		position = 4
 		required_missions = { rx_hope_for_the_best } 
 		provinces_to_highlight = {
@@ -47,16 +46,13 @@ Sesdaio_1_slot = {
 			}
 		}
 
-		effect = {
-			country_event = {
-				id = sesda.6
-			}
-		}
+		effect = { country_event = { id = sesda.6 }  } 
 	}
 
 	rx_boats_boats = {
-		icon = hornofafrica
+		icon = mission_establish_high_seas_navy
 		position = 5
+		provinces_to_highlight = {  } 
 
 		trigger = {
 			navy_size = 25
@@ -65,18 +61,22 @@ Sesdaio_1_slot = {
 
 		effect = {
 			add_sailors = 3000
-			add_legitimacy_or_mil_power = { amount = 30 }
+			add_legitimacy_or_mil_power = { amount = 30 } 
 			add_country_modifier = {
-				name = ses_flagship
+				name = "ses_flagship"
 				duration = -1
 			}
 		}
 	}
 
 	rx_isitcargo = {
-		icon = hornofafrica
+		icon = mission_pirate_fleet
 		position = 6
-		required_missions = { rx_boats_boats rx_the_demand } 
+		required_missions = {
+			rx_boats_boats
+			rx_the_demand
+		}
+		provinces_to_highlight = {  } 
 
 		trigger = {
 			navy_size = 30
@@ -101,9 +101,9 @@ Sesdaio_1_slot = {
 	}
 
 	rx_terrible_people = {
-		icon = hornofafrica
+		icon = mission_indian_empire
 		position = 7
-		required_missions = { rx_isitcargo  } 
+		required_missions = { rx_isitcargo } 
 		provinces_to_highlight = {
 			superregion = india_superregion
 			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
@@ -132,9 +132,7 @@ Sesdaio_1_slot = {
 					change_trade_goods = slaves
 				}
 			}
-			india_superregion = {
-				add_permanent_claim = ROOT
-			}
+			india_superregion = { add_permanent_claim = ROOT } 
 		}
 	}
 }
@@ -146,37 +144,30 @@ Sesdaio_2_slot = {
 	potential = { tag = RX1 } 
 
 	rx_cry_for_help = {
-		icon = mission_arabian_fort
+		icon = mission_have_two_subjects
 		position = 1
+		provinces_to_highlight = {  } 
 
-		trigger = {
-			army_size_percentage = 1
-		}
+		trigger = { army_size_percentage = 1 } 
 
 		effect = {
 			madagascar_island_group = { add_permanent_claim = ROOT } 
-			country_event = {
-				id = sesda.2
-			}
+			country_event = { id = sesda.2 } 
 		}
 	}
 
 	rx_the_navy = {
-		icon = hornofafrica
+		icon = mission_pirate_flag
 		position = 2
 		required_missions = { rx_cry_for_help } 
+		provinces_to_highlight = {  } 
 
-		trigger = {
-			navy_size_percentage = 1
-		}
+		trigger = { navy_size_percentage = 1 } 
 
 		effect = {
 			custom_tooltip = SES_TT_2
 			add_navy_tradition = 10
-			west_indian_ocean_region = {
-				discover_country = ROOT
-			}
-			
+			west_indian_ocean_region = { discover_country = ROOT } 
 		}
 	}
 
@@ -184,9 +175,7 @@ Sesdaio_2_slot = {
 		icon = hornofafrica
 		position = 3
 		required_missions = { rx_hope_for_the_best } 
-		provinces_to_highlight = {
-			province_id = 4022
-		}
+		provinces_to_highlight = { province_id = 4022 } 
 
 		trigger = {
 			4022 = {
@@ -198,16 +187,17 @@ Sesdaio_2_slot = {
 
 		effect = {
 			remove_country_modifier = ses_pirate_yoke
-			east_africa_region = {
-				add_permanent_claim = ROOT
-			}
+			east_africa_region = { add_permanent_claim = ROOT } 
 		}
 	}
 
 	rx_the_demand = {
-		icon = hornofafrica
+		icon = mission_rb_monopolize_the_channel
 		position = 5
-		required_missions = { rx_the_supply rx_island_of_chains } 
+		required_missions = {
+			rx_the_supply
+			rx_island_of_chains
+		}
 		provinces_to_highlight = {
 			region = east_africa_region
 			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
@@ -222,16 +212,12 @@ Sesdaio_2_slot = {
 
 		effect = {
 			add_government_power = {
-					mechanic_type = sesdaio_maxxing_mechanic
-					power_type = rx_num_slaves
-					value = 30
-				}
-			horn_of_africa_region = {
-				add_permanent_claim = ROOT
+				mechanic_type = sesdaio_maxxing_mechanic
+				power_type = rx_num_slaves
+				value = 30
 			}
-			southern_africa_superregion = {
-				add_permanent_claim = ROOT
-			}
+			horn_of_africa_region = { add_permanent_claim = ROOT } 
+			southern_africa_superregion = { add_permanent_claim = ROOT } 
 		}
 	}
 }
@@ -243,9 +229,13 @@ Sesdaio_3_slot = {
 	potential = { tag = RX1 } 
 
 	rx_raiding_wars = {
-		icon = hornofafrica
+		icon = mission_raid_on_iceland
 		position = 2
-		required_missions = { rx_cry_for_help rx_sesdaio_lot } 
+		required_missions = {
+			rx_cry_for_help
+			rx_sesdaio_lot
+		}
+		provinces_to_highlight = {  } 
 
 		trigger = {
 			estate_loyalty = {
@@ -255,51 +245,42 @@ Sesdaio_3_slot = {
 			army_tradition = 25
 		}
 
-		effect = {
-			custom_tooltip = SES_TT_1
-		}
+		effect = { custom_tooltip = SES_TT_1 } 
 	}
 
-	
 	rx_raiding_worked = {
-		icon = hornofafrica
+		icon = mission_industrialize_bengal
 		position = 4
 		required_missions = { rx_raiding_wars } 
-		provinces_to_highlight = { 
-			has_province_modifier = ses_raided
-		}
+		provinces_to_highlight = { has_province_modifier = ses_raided } 
 
 		trigger = {
 			calc_true_if = {
 				amount = 5
-				all_province = {
-					has_province_modifier = ses_raided
-				}
+				all_province = { has_province_modifier = ses_raided } 
 			}
 			has_government_power = {
-					mechanic_type = sesdaio_maxxing_mechanic
-					power_type = rx_num_slaves
-					value = 50
-				}
+				mechanic_type = sesdaio_maxxing_mechanic
+				power_type = rx_num_slaves
+				value = 50
+			}
 		}
 
 		effect = {
 			add_government_power = {
-					mechanic_type = sesdaio_maxxing_mechanic
-					power_type = rx_num_slaves
-					value = -25
-				}
+				mechanic_type = sesdaio_maxxing_mechanic
+				power_type = rx_num_slaves
+				value = -25
+			}
 			custom_tooltip = SES_TT_3
 		}
 	}
 
 	rx_end_of_freedom = {
-		icon = hornofafrica
+		icon = mission_industrial_forging
 		position = 6
 		required_missions = { rx_raiding_worked } 
-		provinces_to_highlight = { 
-			has_province_modifier = ses_add_some_slaves
-		}
+		provinces_to_highlight = { has_province_modifier = ses_add_some_slaves } 
 
 		trigger = {
 			num_of_provinces_owned_or_owned_by_non_sovereign_subjects_with = {
@@ -307,10 +288,10 @@ Sesdaio_3_slot = {
 				has_province_modifier = ses_add_some_slaves
 			}
 			has_government_power = {
-					mechanic_type = sesdaio_maxxing_mechanic
-					power_type = rx_num_slaves
-					value = 100
-				}
+				mechanic_type = sesdaio_maxxing_mechanic
+				power_type = rx_num_slaves
+				value = 100
+			}
 		}
 
 		effect = {
@@ -318,18 +299,16 @@ Sesdaio_3_slot = {
 			tooltip = {
 				random_owned_province = {
 					add_province_modifier = {
-						name = ses_chains_forever
+						name = "ses_chains_forever"
 						duration = -1
 					}
 				}
 			}
 			hidden_effect = {
 				every_owned_province = {
-					limit = {
-						has_province_modifier = ses_add_some_slaves
-					}
+					limit = { has_province_modifier = ses_add_some_slaves } 
 					add_province_modifier = {
-						name = ses_chains_forever
+						name = "ses_chains_forever"
 						duration = -1
 					}
 				}
@@ -347,32 +326,25 @@ Sesdaio_4_slot = {
 	rx_sesdaio_lot = {
 		icon = mission_arabian_fort
 		position = 1
-		provinces_to_highlight = {
-			is_capital_of = ROOT
-		}
+		provinces_to_highlight = { is_capital_of = ROOT } 
 
 		trigger = {
-			capital_scope = {
-				grown_by_development = 3
-			}
+			capital_scope = { grown_by_development = 3 } 
 			has_government_power = {
-					mechanic_type = sesdaio_maxxing_mechanic
-					power_type = rx_num_slaves
-					value = 15
-				}
+				mechanic_type = sesdaio_maxxing_mechanic
+				power_type = rx_num_slaves
+				value = 15
+			}
 		}
 
-		effect = {
-			capital_scope = {
-				add_building = tradecompany
-			}
-		}
+		effect = { capital_scope = { add_building = tradecompany }  } 
 	}
+
 	rx_barracks = {
-		icon = hornofafrica
+		icon = mission_protect_jain_communities
 		position = 3
 		required_missions = { rx_sesdaio_lot } 
-		provinces_to_highlight = { 
+		provinces_to_highlight = {
 			has_manpower_building_trigger = no
 			owned_by = ROOT
 		}
@@ -386,16 +358,17 @@ Sesdaio_4_slot = {
 
 		effect = {
 			add_country_modifier = {
-				name = ses_new_police
+				name = "ses_new_police"
 				duration = 10950
 			}
 		}
 	}
+
 	rx_just_your_average_police = {
-		icon = hornofafrica
+		icon = mission_united_knight_order
 		position = 4
 		required_missions = { rx_barracks } 
-		provinces_to_highlight = { 
+		provinces_to_highlight = {
 			province_group = madagascar_island_group
 			has_manpower_building_trigger = no
 		}
@@ -415,23 +388,24 @@ Sesdaio_4_slot = {
 			}
 		}
 
-		effect = {
-			country_event = {
-				id = sesda.7
-			}
-		}
+		effect = { country_event = { id = sesda.7 }  } 
 	}
+
 	rx_some_more_buffs = {
-		icon = hornofafrica
+		icon = mission_entrepot_of_india
 		position = 5
-		required_missions = { rx_raiding_worked rx_just_your_average_police } 
+		required_missions = {
+			rx_raiding_worked
+			rx_just_your_average_police
+		}
+		provinces_to_highlight = {  } 
 
 		trigger = {
 			has_government_power = {
-					mechanic_type = sesdaio_maxxing_mechanic
-					power_type = rx_num_slaves
-					value = 80
-				}
+				mechanic_type = sesdaio_maxxing_mechanic
+				power_type = rx_num_slaves
+				value = 80
+			}
 			NOT = {
 				has_government_power = {
 					mechanic_type = sesdaio_maxxing_mechanic
@@ -441,9 +415,7 @@ Sesdaio_4_slot = {
 			}
 		}
 
-		effect = {
-			custom_tooltip = SES_TT_5
-		}
+		effect = { custom_tooltip = SES_TT_5 } 
 	}
 }
 Sesdaio_5_slot = {
@@ -454,10 +426,10 @@ Sesdaio_5_slot = {
 	potential = { tag = RX1 } 
 
 	rx_churches = {
-		icon = hornofafrica
+		icon = connect_further_austria
 		position = 2
 		required_missions = { rx_sesdaio_lot } 
-		provinces_to_highlight = { 
+		provinces_to_highlight = {
 			has_tax_building_trigger = no
 			owned_by = ROOT
 		}
@@ -475,18 +447,18 @@ Sesdaio_5_slot = {
 				loyalty = 5
 			}
 			add_government_power = {
-					mechanic_type = sesdaio_maxxing_mechanic
-					power_type = rx_slave_unrest
-					value = -5
-				}
+				mechanic_type = sesdaio_maxxing_mechanic
+				power_type = rx_slave_unrest
+				value = -5
+			}
 		}
 	}
 
 	rx_slave_churches = {
-		icon = hornofafrica
+		icon = mission_early_modern_university
 		position = 3
 		required_missions = { rx_churches } 
-		provinces_to_highlight = { 
+		provinces_to_highlight = {
 			has_tax_building_trigger = no
 			owned_by = ROOT
 		}
@@ -502,22 +474,21 @@ Sesdaio_5_slot = {
 		effect = {
 			custom_tooltip = SES_TT_4
 			add_country_modifier = {
-				name = ses_good_advice
+				name = "ses_good_advice"
 				duration = -1
 			}
 		}
 	}
 
 	rx_never_ending = {
-		icon = hornofafrica
+		icon = mission_the_triangle_trade
 		position = 5
 		required_missions = { rx_just_your_average_police } 
+		provinces_to_highlight = {  } 
 
 		trigger = {
 			theologian = 5
-			production_leader = {
-				trade_goods = slaves
-			}
+			production_leader = { trade_goods = slaves } 
 		}
 
 		effect = {
