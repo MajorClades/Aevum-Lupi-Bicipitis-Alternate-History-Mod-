@@ -1379,6 +1379,59 @@ christian = {
 			warscore_cost_vs_other_religion = -0.2
 			war_exhaustion_cost = -0.2
 		}
+
+		uses_judaism_power = yes
+		aspects_name = BAPTIST_ASPECTS
+			
+		aspects = {
+			the_journey_adm_aspect
+			the_journey_dip_aspect
+			the_journey_mil_aspect
+			unlockable_1_A_aspect
+			unlockable_1_B_aspect
+		}
+		
+		celebrate = {
+			cost = 50
+			potential = {
+			}
+			allow = {
+				stability = 1
+			}
+			effect = {		
+				if = {
+					limit = {
+						tag = BJ0
+					}
+					add_stability = -1
+						country_event = {
+							id = bapti.1
+							days = 1
+						}
+					hidden_effect = {
+						set_variable = {
+							which = baptist_voting_A
+							value = 0
+						}
+						set_variable = {
+							which = baptist_voting_B
+							value = 0
+						}
+						add_country_modifier = {
+							name = marc_hidden_timer
+							duration = 730
+							hidden = yes
+						}
+					}
+				}else = {
+					add_stability_or_adm_power = yes
+				}
+			}
+			ai_will_do = {
+				factor = 1
+			}
+		}
+		
 		
 		heretic = { ZAMIKAELITES   }
 	

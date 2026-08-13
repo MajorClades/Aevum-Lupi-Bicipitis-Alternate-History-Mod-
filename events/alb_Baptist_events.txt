@@ -1,0 +1,100 @@
+namespace = bapti
+
+country_event = { #celebration event council of the successors
+    id = bapti.1
+    title = bapti.1.t
+    desc = bapti.1.d
+    picture = BIG_ARABIAN_CITY_eventPicture
+    is_triggered_only = yes
+    option = {
+        name = bapti.1.a
+        change_variable = {
+					which = baptist_voting_A
+					value = 2
+				}
+        every_subject_country = {
+				limit = {
+					religion = baptistism
+				}
+				country_event = {
+					id = bapti.2
+					days = 1
+				}
+			}
+        country_event = { #event 1 aspect
+				id = bapti.3
+				days = 25
+			}
+
+    }
+     option = {
+        name = bapti.1.b
+        change_variable = {
+					which = baptist_voting_B
+					value = 2
+				}
+        every_subject_country = {
+				limit = {
+					religion = baptistism
+				}
+				country_event = {
+					id = bapti.2
+					days = 1
+				}
+			}
+        country_event = { #event 1 aspect
+				id = bapti.3
+				days = 25
+			}
+    }
+}
+
+country_event = { #voting booth
+    id = bapti.2
+    title = bapti.2.t
+    desc = bapti.2.d
+    picture = BIG_ARABIAN_CITY_eventPicture
+    is_triggered_only = yes
+    option = {
+        name = bapti.2.a
+        change_variable = {
+					which = baptist_voting_A
+					value = 1
+				}
+    }
+     option = {
+        name = bapti.2.b
+        change_variable = {
+					which = baptist_voting_B
+					value = 1
+				}
+    }
+}
+
+country_event = { #1 aspect
+    id = bapti.3
+    title = bapti.3.t
+    desc = bapti.3.d
+    picture = BIG_ARABIAN_CITY_eventPicture
+    is_triggered_only = yes
+    option = {
+        name = bapti.3.a
+        if = {
+            limit = {
+                check_variable = {
+                    which = baptist_voting_A
+                    which = baptist_voting_B
+                }
+            }
+            set_country_flag = unlocked_baptist_1_aspect_A
+            tooltip = {
+                add_church_aspect = unlockable_1_A_aspect
+            }
+        }else = {
+            set_country_flag = unlocked_baptist_1_aspect_B
+            tooltip = {
+                add_church_aspect = unlockable_1_B_aspect
+            }
+        }
+    }
+}
