@@ -1,13 +1,13 @@
 ######################################################################
 # Impotian rebels. Disgruntled fanatics.
 ######################################################################
-erinmwin_rebels = {
+osanobua_rebels = {
 
 	color = { 230 175 175 }
 
 	area = nation 					# Sticks to provinces of their nation
 	government = theocracy 			# Desires Theocracy
-	religion = erinmwin
+	religion = osanobua
 	defection = none				# Will not defect
 	defect_delay = 120				# Held provinces will auto-defect after 18 months, regardless of accept/enforce demands.
 	independence = none				# Does not strive for independence
@@ -45,7 +45,7 @@ erinmwin_rebels = {
 		}
 		modifier = {
 			factor = 0.0
-			NOT = { religion = erinmwin }
+			NOT = { religion = osanobua }
 		}
 		modifier = {
 			factor = 0.001
@@ -90,21 +90,21 @@ erinmwin_rebels = {
 		}
 		modifier = {
 			factor = 0.0
-			religion = erinmwin
-			owner = { religion = erinmwin }
+			religion = osanobua
+			owner = { religion = osanobua }
 		}
 		modifier = {
 			factor = 2.0
-			NOT = { religion = erinmwin }
+			NOT = { religion = osanobua }
 			any_neighbor_province = {
-	 			religion = erinmwin
+	 			religion = osanobua
 	 			NOT = { has_province_modifier = "forced_conversion" }
 	 		}
 	 	}
 		modifier = {
 			factor = 5
 			has_missionary = yes
-			religion = erinmwin
+			religion = osanobua
 		}
 		modifier = {
 			factor = 1.5
@@ -135,9 +135,9 @@ erinmwin_rebels = {
 			if = {
 				limit = {
 					OR = {
-						religion = erinmwin
+						religion = osanobua
 						is_reformation_center = yes
-						owner = { religion = erinmwin }
+						owner = { religion = osanobua }
 					}
 				}
 				add_province_modifier = {
@@ -147,11 +147,11 @@ erinmwin_rebels = {
 			}
 			if = {
 				limit = {
-					NOT = { religion = erinmwin }
+					NOT = { religion = osanobua }
 					is_reformation_center = no
-					NOT = { owner = { religion = erinmwin } }
+					NOT = { owner = { religion = osanobua } }
 				}
-				change_religion = erinmwin
+				change_religion = osanobua
 				add_province_modifier = {
 					name = "forced_conversion"
 					duration = 730
@@ -171,7 +171,7 @@ erinmwin_rebels = {
 	can_negotiate_trigger = {
 		OR = {
 			religion_group = african_pagan
-			dominant_religion = erinmwin
+			dominant_religion = osanobua
 		}
 	}
 	
@@ -181,7 +181,7 @@ erinmwin_rebels = {
 	}
 	
 	# Localisation for their demands
-	demands_description = "erinmwin_rebels_demand"
+	demands_description = "osanobua_rebels_demand"
 	
 	# Country Scope	
 	demands_enforced_effect = {
@@ -212,7 +212,7 @@ erinmwin_rebels = {
 		}
 		else_if = {
 			limit = {
-				religion = erinmwin
+				religion = osanobua
 			}
 			add_country_modifier = {
 				name = "religious_intolerance_enforced"
@@ -221,16 +221,16 @@ erinmwin_rebels = {
 		}
 		else_if = {
 			limit = {
-				NOT = { religion = erinmwin }
-				dominant_religion = erinmwin
+				NOT = { religion = osanobua }
+				dominant_religion = osanobua
 			}
-			change_religion = erinmwin
+			change_religion = osanobua
 			force_converted = yes
 		}
 		else_if = {
 			limit = {
-				NOT = { religion = erinmwin }
-				NOT = { dominant_religion = erinmwin }
+				NOT = { religion = osanobua }
+				NOT = { dominant_religion = osanobua }
 				alb_pagan_grouped_trigger = yes
 				NOT = { has_country_modifier = heretic_tolerance }
 			}
@@ -243,7 +243,7 @@ erinmwin_rebels = {
 		else = { add_stability = -1 } #Should probably never get here
 		if = {
 			limit = {
-				religion = erinmwin
+				religion = osanobua
 				has_estate = estate_church
 				NOT = {
 					has_estate_influence_modifier = {
