@@ -12,6 +12,7 @@ country_event = { #celebration event council of the successors
 					which = baptist_voting_A
 					value = 2
 				}
+        set_country_flag = bap_voted_A_flag
         every_subject_country = {
 				limit = {
 					religion = baptistism
@@ -33,6 +34,7 @@ country_event = { #celebration event council of the successors
 					which = baptist_voting_B
 					value = 2
 				}
+        set_country_flag = bap_voted_B_flag
         every_subject_country = {
 				limit = {
 					religion = baptistism
@@ -61,6 +63,41 @@ country_event = { #voting booth
 					which = baptist_voting_A
 					value = 1
 				}
+        ai_chance = {
+            factor = 1
+            modifier = {
+                factor = 0.5
+                overlord = {
+                    has_country_flag = baptist_voting_A
+                }
+                NOT = {
+                    has_opinion = {
+                        who = overlord
+                        value = 50
+                    }
+                }
+            }
+            modifier = {
+                factor = 1.33
+                overlord = {
+                    has_country_flag = baptist_voting_A
+                }
+                has_opinion = {
+                        who = overlord
+                        value = 100
+                    }
+            }
+            modifier = {
+                factor = 1.33
+                overlord = {
+                    has_country_flag = baptist_voting_A
+                }
+                has_opinion = {
+                        who = overlord
+                        value = 150
+                    }
+            }
+        }
     }
      option = {
         name = bapti.2.b
@@ -68,6 +105,41 @@ country_event = { #voting booth
 					which = baptist_voting_B
 					value = 1
 				}
+        ai_chance = {
+            factor = 1
+            modifier = {
+                factor = 0.5
+                overlord = {
+                    has_country_flag = baptist_voting_B
+                }
+                NOT = {
+                    has_opinion = {
+                        who = overlord
+                        value = 50
+                    }
+                }
+            }
+            modifier = {
+                factor = 1.33
+                overlord = {
+                    has_country_flag = baptist_voting_B
+                }
+                has_opinion = {
+                        who = overlord
+                        value = 100
+                    }
+            }
+            modifier = {
+                factor = 1.33
+                overlord = {
+                    has_country_flag = baptist_voting_B
+                }
+                has_opinion = {
+                        who = overlord
+                        value = 150
+                    }
+            }
+        }
     }
 }
 
@@ -77,6 +149,12 @@ country_event = { #1 aspect
     desc = bapti.3.d
     picture = BIG_ARABIAN_CITY_eventPicture
     is_triggered_only = yes
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = bap_voted_A_flag
+            clr_country_flag = bap_voted_B_flag
+        }
+    }
     option = {
         name = bapti.3.a
         if = {
