@@ -1106,3 +1106,54 @@ gift_religious_artifact = {
 		always = no
 	}
 }
+
+#Baptist stuff
+make_iyali_vassal = {
+	category = influence
+	
+	alert_index = 40
+	alert_tooltip = demand_dummy_alert_tooltip
+	require_acceptance = no # Whether the recipient gets an option to decline
+	is_visible = {
+		is_subject = no
+		FROM = {
+			is_subject_of_type = vassal
+			is_subject_of = ROOT	
+			NOT = {
+				religion = baptistism	
+			}	
+		}
+	}
+	is_allowed = {
+		hidden_trigger = {
+			is_subject = no
+			FROM = {
+				is_subject_of_type = vassal
+				is_subject_of = ROOT		
+			}
+		}
+		FROM = {
+			is_subject_of_type = vassal
+			is_subject_of = ROOT	
+			religion = baptistism	
+			NOT = {
+				liberty_desire = 50
+			}
+		}
+	}
+	on_accept = {
+		create_subject = {
+			subject_type = iyali_vassal
+			subject = FROM 
+		}
+		FROM = {
+			add_government_reform = iyali_baptist_reform
+		}
+	}
+	on_decline = 	{
+	}
+
+	ai_will_do = { # this is a trigger
+		always = no
+	}
+}
