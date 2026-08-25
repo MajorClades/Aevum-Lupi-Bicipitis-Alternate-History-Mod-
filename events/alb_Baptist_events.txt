@@ -44,10 +44,36 @@ country_event = { #celebration event council of the successors
 					days = 1
 				}
 			}
-        country_event = { #event 1 aspect
-				id = bapti.3
-				days = 25
-			}
+       if = {
+            limit = {
+                OR = {
+                    has_country_flag = banned_baptist_1_aspect_A
+                    has_country_flag = banned_baptist_1_aspect_B
+                }
+            }
+            if = {
+                limit = {
+                    OR = {
+                        has_country_flag = banned_baptist_2_aspect_A
+                        has_country_flag = banned_baptist_2_aspect_B
+                    }
+                }
+                country_event = { #event 3 aspect
+                    id = bapti.5
+                    days = 25
+                }
+            }else = {
+                country_event = { #event 2 aspect
+                    id = bapti.4
+                    days = 25
+                }
+            }
+       }else = {
+            country_event = { #event 1 aspect
+                    id = bapti.3
+                    days = 25
+                }
+       }
     }
 }
 
@@ -164,12 +190,12 @@ country_event = { #1 aspect
                     which = baptist_voting_B
                 }
             }
-            set_country_flag = unlocked_baptist_1_aspect_A
+            set_country_flag = banned_baptist_1_aspect_A
             tooltip = {
                 add_church_aspect = unlockable_1_A_aspect
             }
         }else = {
-            set_country_flag = unlocked_baptist_1_aspect_B
+            set_country_flag = banned_baptist_1_aspect_B
             tooltip = {
                 add_church_aspect = unlockable_1_B_aspect
             }
@@ -177,7 +203,73 @@ country_event = { #1 aspect
     }
 }
 
+country_event = { #2 aspect
+    id = bapti.4
+    title = bapti.4.t
+    desc = bapti.4.d
+    picture = BIG_ARABIAN_CITY_eventPicture
+    is_triggered_only = yes
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = bap_voted_A_flag
+            clr_country_flag = bap_voted_B_flag
+        }
+    }
+    option = {
+        name = bapti.4.a
+        if = {
+            limit = {
+                check_variable = {
+                    which = baptist_voting_A
+                    which = baptist_voting_B
+                }
+            }
+            set_country_flag = banned_baptist_2_aspect_A
+            tooltip = {
+                add_church_aspect = unlockable_2_A_aspect
+            }
+        }else = {
+            set_country_flag = banned_baptist_2_aspect_B
+            tooltip = {
+                add_church_aspect = unlockable_2_B_aspect
+            }
+        }
+    }
+}
 
+country_event = { #3 aspect
+    id = bapti.5
+    title = bapti.5.t
+    desc = bapti.5.d
+    picture = BIG_ARABIAN_CITY_eventPicture
+    is_triggered_only = yes
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = bap_voted_A_flag
+            clr_country_flag = bap_voted_B_flag
+        }
+    }
+    option = {
+        name = bapti.5.a
+        if = {
+            limit = {
+                check_variable = {
+                    which = baptist_voting_A
+                    which = baptist_voting_B
+                }
+            }
+            set_country_flag = banned_baptist_3_aspect_A
+            tooltip = {
+                add_church_aspect = unlockable_3_A_aspect
+            }
+        }else = {
+            set_country_flag = banned_baptist_3_aspect_B
+            tooltip = {
+                add_church_aspect = unlockable_3_B_aspect
+            }
+        }
+    }
+}
 
 country_event = {
     id = bapti.50
