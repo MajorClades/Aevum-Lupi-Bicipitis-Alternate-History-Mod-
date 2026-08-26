@@ -1390,12 +1390,21 @@ christian = {
 			missionary_less_adm_aspect
 			missionary_less_dip_aspect
 			missionary_less_mil_aspect
+			bap_word_adm_aspect
+			bap_word_dip_aspect
+			bap_word_mil_aspect
 			unlockable_1_A_aspect
 			unlockable_1_B_aspect
 			unlockable_2_A_aspect
 			unlockable_2_B_aspect
 			unlockable_3_A_aspect
 			unlockable_3_B_aspect
+			unlockable_4_A_aspect
+			unlockable_4_B_aspect
+			unlockable_5_A_aspect
+			unlockable_5_B_aspect
+			unlockable_6_A_aspect
+			unlockable_6_B_aspect
 		}
 		
 		celebrate = {
@@ -1403,18 +1412,56 @@ christian = {
 			potential = {
 			}
 			allow = {
-				stability = 1
+				custom_trigger_tooltip = {
+					tooltip = BROK_LEG_TT_0
+					NOT = {has_country_modifier = marc_hidden_timer}
+				}
+				if = {
+					limit = {
+						OR = {
+							has_country_flag = banned_baptist_6_aspect_A
+							has_country_flag = banned_baptist_6_aspect_B
+						}
+					}
+					stability = 2
+					dip_power = 100
+				}else = {
+					stability = 1
+				}
 			}
 			effect = {		
 				if = {
 					limit = {
 						tag = BJ0
 					}
-					add_stability = -1
+					if = {
+					limit = {
+						OR = {
+							has_country_flag = banned_baptist_6_aspect_A
+							has_country_flag = banned_baptist_6_aspect_B
+						}
+					}
+						add_stability = -2
+						add_dip_power = -100
+						 random_subject_country = {
+                                    limit = {
+                                        is_subject_of_type = iyali_vassal
+                                        NOT = {
+                                            liberty_desire = 40
+                                        }
+                                    }
+                                    overlord = {
+                                        inherit = PREV
+                                    }
+                                }
+					}else = {
+						add_stability = -1
 						country_event = {
 							id = bapti.1
 							days = 1
 						}
+					}
+					
 					hidden_effect = {
 						set_variable = {
 							which = baptist_voting_A
@@ -1424,14 +1471,16 @@ christian = {
 							which = baptist_voting_B
 							value = 0
 						}
-						add_country_modifier = {
+					}
+				}else = {
+					add_stability_or_adm_power = yes
+				}
+				hidden_effect = {
+					add_country_modifier = {
 							name = marc_hidden_timer
 							duration = 730
 							hidden = yes
 						}
-					}
-				}else = {
-					add_stability_or_adm_power = yes
 				}
 			}
 			ai_will_do = {
