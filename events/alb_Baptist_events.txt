@@ -8,43 +8,32 @@ country_event = { #celebration event council of the successors
     is_triggered_only = yes
     option = {
         name = bapti.1.a
-        change_variable = {
+        if = {
+            limit = {
+                OR = {
+                    has_country_flag = banned_baptist_6_aspect_A
+                    has_country_flag = banned_baptist_6_aspect_B
+                }
+            }
+        }else = {
+            change_variable = {
 					which = baptist_voting_A
 					value = 2
 				}
-        set_country_flag = bap_voted_A_flag
-        every_subject_country = {
-				limit = {
-					is_subject_of_type = iyali_vassal
-				}
-				country_event = {
-					id = bapti.2
-					days = 1
-				}
-			}
-        country_event = { #event 1 aspect
-				id = bapti.3
-				days = 25
-			}
-
-    }
-     option = {
-        name = bapti.1.b
-        change_variable = {
-					which = baptist_voting_B
-					value = 2
-				}
-        set_country_flag = bap_voted_B_flag
-        every_subject_country = {
-				limit = {
-					religion = baptistism
-				}
-				country_event = {
-					id = bapti.2
-					days = 1
-				}
-			}
-       if = {
+            set_country_flag = bap_voted_A_flag
+            hidden_effect = {
+                every_subject_country = {
+                    limit = {
+                        is_subject_of_type = iyali_vassal
+                    }
+                    country_event = {
+                        id = bapti.2
+                        days = 1
+                    }
+                }
+            }
+        }
+        if = {
             limit = {
                 OR = {
                     has_country_flag = banned_baptist_1_aspect_A
@@ -58,17 +47,251 @@ country_event = { #celebration event council of the successors
                         has_country_flag = banned_baptist_2_aspect_B
                     }
                 }
-                country_event = { #event 3 aspect
-                    id = bapti.5
-                    days = 25
+                if = {
+                    limit = {
+                        OR = {
+                            has_country_flag = banned_baptist_3_aspect_A
+                            has_country_flag = banned_baptist_3_aspect_B
+                        }
+                    }
+                    if = {
+                        limit = {
+                            OR = {
+                                has_country_flag = banned_baptist_4_aspect_A
+                                has_country_flag = banned_baptist_4_aspect_B
+                            }
+                        }
+                        if = {
+                            limit = {
+                                OR = {
+                                    has_country_flag = banned_baptist_5_aspect_A
+                                    has_country_flag = banned_baptist_5_aspect_B
+                                }
+                            }
+                            if = {
+                                limit = {
+                                    OR = {
+                                        has_country_flag = banned_baptist_6_aspect_A
+                                        has_country_flag = banned_baptist_6_aspect_B
+                                    }
+                                }
+                                random_subject_country = {
+                                    limit = {
+                                        is_subject_of_type = iyali_vassal
+                                        NOT = {
+                                            liberty_desire = 40
+                                        }
+                                    }
+                                    overlord = {
+                                        inherit = PREV
+                                    }
+                                }
+                                
+                            }else = {
+                                custom_tooltip = BAP_WILL_BAN
+                                tooltip = {
+                                    add_church_aspect = unlockable_6_A_aspect
+                                }
+                                country_event = { #event 6 aspect
+                                    id = bapti.8
+                                    days = 25
+                                }
+                            }
+                            
+                        }else = {
+                            custom_tooltip = BAP_WILL_BAN
+                                tooltip = {
+                                    add_church_aspect = unlockable_5_A_aspect
+                                }
+                            country_event = { #event 5 aspect
+                                id = bapti.7
+                                days = 25
+                            }
+                        }
+                    
+                    }else = {
+                        custom_tooltip = BAP_WILL_BAN
+                                tooltip = {
+                                    add_church_aspect = unlockable_4_A_aspect
+                                }
+                            country_event = { #event 4 aspect
+                                id = bapti.6
+                                days = 25
+                            }
+                    }
+                }else = {
+                    custom_tooltip = BAP_WILL_BAN
+                                tooltip = {
+                                    add_church_aspect = unlockable_3_A_aspect
+                                }
+                    country_event = { #event 3 aspect
+                        id = bapti.5
+                        days = 25
+                    }
                 }
+                
             }else = {
+                custom_tooltip = BAP_WILL_BAN
+                                tooltip = {
+                                    add_church_aspect = unlockable_2_A_aspect
+                                }
                 country_event = { #event 2 aspect
                     id = bapti.4
                     days = 25
                 }
             }
        }else = {
+        custom_tooltip = BAP_WILL_BAN
+                                tooltip = {
+                                    add_church_aspect = unlockable_1_A_aspect
+                                }
+            country_event = { #event 1 aspect
+                    id = bapti.3
+                    days = 25
+                }
+       }
+
+    }
+     option = {
+        name = bapti.1.b
+        if = {
+            limit = {
+                OR = {
+                    has_country_flag = banned_baptist_6_aspect_A
+                    has_country_flag = banned_baptist_6_aspect_B
+                }
+            }
+            add_dip_power = -100
+        }else = {
+            change_variable = {
+					which = baptist_voting_B
+					value = 2
+				}
+            set_country_flag = bap_voted_B_flag
+            hidden_effect = {
+                every_subject_country = {
+                    limit = {
+                        is_subject_of_type = iyali_vassal
+                    }
+                    country_event = {
+                        id = bapti.2
+                        days = 1
+                    }
+                }
+            }
+        }
+        if = {
+            limit = {
+                OR = {
+                    has_country_flag = banned_baptist_1_aspect_A
+                    has_country_flag = banned_baptist_1_aspect_B
+                }
+            }
+            if = {
+                limit = {
+                    OR = {
+                        has_country_flag = banned_baptist_2_aspect_A
+                        has_country_flag = banned_baptist_2_aspect_B
+                    }
+                }
+                if = {
+                    limit = {
+                        OR = {
+                            has_country_flag = banned_baptist_3_aspect_A
+                            has_country_flag = banned_baptist_3_aspect_B
+                        }
+                    }
+                    if = {
+                        limit = {
+                            OR = {
+                                has_country_flag = banned_baptist_4_aspect_A
+                                has_country_flag = banned_baptist_4_aspect_B
+                            }
+                        }
+                        if = {
+                            limit = {
+                                OR = {
+                                    has_country_flag = banned_baptist_5_aspect_A
+                                    has_country_flag = banned_baptist_5_aspect_B
+                                }
+                            }
+                            if = {
+                                limit = {
+                                    OR = {
+                                        has_country_flag = banned_baptist_6_aspect_A
+                                        has_country_flag = banned_baptist_6_aspect_B
+                                    }
+                                }
+                                random_subject_country = {
+                                    limit = {
+                                        is_subject_of_type = iyali_vassal
+                                        NOT = {
+                                            liberty_desire = 40
+                                        }
+                                    }
+                                    overlord = {
+                                        inherit = PREV
+                                    }
+                                }
+                                
+                            }else = {
+                                custom_tooltip = BAP_WILL_BAN
+                                tooltip = {
+                                    add_church_aspect = unlockable_6_B_aspect
+                                }
+                                country_event = { #event 6 aspect
+                                    id = bapti.8
+                                    days = 25
+                                }
+                            }
+                            
+                        }else = {
+                            custom_tooltip = BAP_WILL_BAN
+                                tooltip = {
+                                    add_church_aspect = unlockable_5_B_aspect
+                                }
+                            country_event = { #event 5 aspect
+                                id = bapti.7
+                                days = 25
+                            }
+                        }
+                    
+                    }else = {
+                        custom_tooltip = BAP_WILL_BAN
+                                tooltip = {
+                                    add_church_aspect = unlockable_4_B_aspect
+                                }
+                            country_event = { #event 4 aspect
+                                id = bapti.6
+                                days = 25
+                            }
+                    }
+                }else = {
+                    custom_tooltip = BAP_WILL_BAN
+                                tooltip = {
+                                    add_church_aspect = unlockable_3_B_aspect
+                                }
+                    country_event = { #event 3 aspect
+                        id = bapti.5
+                        days = 25
+                    }
+                }
+                
+            }else = {
+                custom_tooltip = BAP_WILL_BAN
+                                tooltip = {
+                                    add_church_aspect = unlockable_2_B_aspect
+                                }
+                country_event = { #event 2 aspect
+                    id = bapti.4
+                    days = 25
+                }
+            }
+       }else = {
+        custom_tooltip = BAP_WILL_BAN
+                                tooltip = {
+                                    add_church_aspect = unlockable_1_B_aspect
+                                }
             country_event = { #event 1 aspect
                     id = bapti.3
                     days = 25
@@ -89,6 +312,84 @@ country_event = { #voting booth
 					which = baptist_voting_A
 					value = 1
 				}
+        custom_tooltip = BAP_WILL_BAN
+         if = {
+            limit = {
+                OR = {
+                    has_country_flag = banned_baptist_1_aspect_A
+                    has_country_flag = banned_baptist_1_aspect_B
+                }
+            }
+            if = {
+                limit = {
+                    OR = {
+                        has_country_flag = banned_baptist_2_aspect_A
+                        has_country_flag = banned_baptist_2_aspect_B
+                    }
+                }
+                if = {
+                    limit = {
+                        OR = {
+                            has_country_flag = banned_baptist_3_aspect_A
+                            has_country_flag = banned_baptist_3_aspect_B
+                        }
+                    }
+                    if = {
+                        limit = {
+                            OR = {
+                                has_country_flag = banned_baptist_4_aspect_A
+                                has_country_flag = banned_baptist_4_aspect_B
+                            }
+                        }
+                        if = {
+                            limit = {
+                                OR = {
+                                    has_country_flag = banned_baptist_5_aspect_A
+                                    has_country_flag = banned_baptist_5_aspect_B
+                                }
+                            }
+                            if = {
+                                limit = {
+                                    OR = {
+                                        has_country_flag = banned_baptist_6_aspect_A
+                                        has_country_flag = banned_baptist_6_aspect_B
+                                    }
+                                }
+                                
+                                
+                            }else = {
+                                tooltip = {
+                                    add_church_aspect = unlockable_6_A_aspect
+                                }
+                            }
+                            
+                        }else = {
+                            tooltip = {
+                                    add_church_aspect = unlockable_5_A_aspect
+                                }
+                        }
+                    
+                    }else = {
+                            tooltip = {
+                                add_church_aspect = unlockable_4_A_aspect
+                            }
+                    }
+                }else = {
+                    tooltip = {
+                        add_church_aspect = unlockable_3_A_aspect
+                    }
+                }
+                
+            }else = {
+                tooltip = {
+                add_church_aspect = unlockable_2_A_aspect
+            }
+            }
+       }else = {
+            tooltip = {
+                add_church_aspect = unlockable_1_A_aspect
+            }
+       }
         ai_chance = {
             factor = 1
             modifier = {
@@ -131,6 +432,84 @@ country_event = { #voting booth
 					which = baptist_voting_B
 					value = 1
 				}
+         custom_tooltip = BAP_WILL_BAN
+         if = {
+            limit = {
+                OR = {
+                    has_country_flag = banned_baptist_1_aspect_A
+                    has_country_flag = banned_baptist_1_aspect_B
+                }
+            }
+            if = {
+                limit = {
+                    OR = {
+                        has_country_flag = banned_baptist_2_aspect_A
+                        has_country_flag = banned_baptist_2_aspect_B
+                    }
+                }
+                if = {
+                    limit = {
+                        OR = {
+                            has_country_flag = banned_baptist_3_aspect_A
+                            has_country_flag = banned_baptist_3_aspect_B
+                        }
+                    }
+                    if = {
+                        limit = {
+                            OR = {
+                                has_country_flag = banned_baptist_4_aspect_A
+                                has_country_flag = banned_baptist_4_aspect_B
+                            }
+                        }
+                        if = {
+                            limit = {
+                                OR = {
+                                    has_country_flag = banned_baptist_5_aspect_A
+                                    has_country_flag = banned_baptist_5_aspect_B
+                                }
+                            }
+                            if = {
+                                limit = {
+                                    OR = {
+                                        has_country_flag = banned_baptist_6_aspect_A
+                                        has_country_flag = banned_baptist_6_aspect_B
+                                    }
+                                }
+                                
+                                
+                            }else = {
+                                tooltip = {
+                                    add_church_aspect = unlockable_6_B_aspect
+                                }
+                            }
+                            
+                        }else = {
+                            tooltip = {
+                                    add_church_aspect = unlockable_5_B_aspect
+                                }
+                        }
+                    
+                    }else = {
+                            tooltip = {
+                                add_church_aspect = unlockable_4_B_aspect
+                            }
+                    }
+                }else = {
+                    tooltip = {
+                        add_church_aspect = unlockable_3_B_aspect
+                    }
+                }
+                
+            }else = {
+                tooltip = {
+                add_church_aspect = unlockable_2_B_aspect
+            }
+            }
+       }else = {
+            tooltip = {
+                add_church_aspect = unlockable_1_B_aspect
+            }
+       }
         ai_chance = {
             factor = 1
             modifier = {
@@ -183,6 +562,7 @@ country_event = { #1 aspect
     }
     option = {
         name = bapti.3.a
+        custom_tooltip = BAP_IS_BAN
         if = {
             limit = {
                 check_variable = {
@@ -198,6 +578,33 @@ country_event = { #1 aspect
             set_country_flag = banned_baptist_1_aspect_B
             tooltip = {
                 add_church_aspect = unlockable_1_B_aspect
+            }
+        }
+    }
+    option = {
+        name = bapti.3.b
+        custom_tooltip = BAP_IS_BAN
+        if = {
+            limit = {
+                check_variable = {
+                    which = baptist_voting_A
+                    which = baptist_voting_B
+                }
+            }
+            set_country_flag = banned_baptist_1_aspect_B
+            tooltip = {
+                add_church_aspect = unlockable_1_B_aspect
+            }
+            every_subject_country = {
+                add_liberty_desire = 15
+            }
+        }else = {
+            set_country_flag = banned_baptist_1_aspect_A
+            tooltip = {
+                add_church_aspect = unlockable_1_A_aspect
+            }
+            every_subject_country = {
+                add_liberty_desire = 15
             }
         }
     }
@@ -217,6 +624,7 @@ country_event = { #2 aspect
     }
     option = {
         name = bapti.4.a
+        custom_tooltip = BAP_IS_BAN
         if = {
             limit = {
                 check_variable = {
@@ -232,6 +640,33 @@ country_event = { #2 aspect
             set_country_flag = banned_baptist_2_aspect_B
             tooltip = {
                 add_church_aspect = unlockable_2_B_aspect
+            }
+        }
+    }
+    option = {
+        name = bapti.4.b
+        custom_tooltip = BAP_IS_BAN
+        if = {
+            limit = {
+                check_variable = {
+                    which = baptist_voting_A
+                    which = baptist_voting_B
+                }
+            }
+            set_country_flag = banned_baptist_2_aspect_B
+            tooltip = {
+                add_church_aspect = unlockable_2_B_aspect
+            }
+            every_subject_country = {
+                add_liberty_desire = 15
+            }
+        }else = {
+            set_country_flag = banned_baptist_2_aspect_A
+            tooltip = {
+                add_church_aspect = unlockable_2_A_aspect
+            }
+            every_subject_country = {
+                add_liberty_desire = 15
             }
         }
     }
@@ -251,6 +686,7 @@ country_event = { #3 aspect
     }
     option = {
         name = bapti.5.a
+        custom_tooltip = BAP_IS_BAN
         if = {
             limit = {
                 check_variable = {
@@ -269,6 +705,218 @@ country_event = { #3 aspect
             }
         }
     }
+    option = {
+        name = bapti.5.b
+        custom_tooltip = BAP_IS_BAN
+        if = {
+            limit = {
+                check_variable = {
+                    which = baptist_voting_A
+                    which = baptist_voting_B
+                }
+            }
+            set_country_flag = banned_baptist_3_aspect_B
+            tooltip = {
+                add_church_aspect = unlockable_3_B_aspect
+            }
+            every_subject_country = {
+                add_liberty_desire = 15
+            }
+        }else = {
+            set_country_flag = banned_baptist_3_aspect_A
+            tooltip = {
+                add_church_aspect = unlockable_3_A_aspect
+            }
+            every_subject_country = {
+                add_liberty_desire = 15
+            }
+        }
+    }
+}
+
+country_event = { #4 aspect
+    id = bapti.6
+    title = bapti.6.t
+    desc = bapti.6.d
+    picture = BIG_ARABIAN_CITY_eventPicture
+    is_triggered_only = yes
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = bap_voted_A_flag
+            clr_country_flag = bap_voted_B_flag
+        }
+    }
+    option = {
+        name = bapti.6.a
+        custom_tooltip = BAP_IS_BAN
+        if = {
+            limit = {
+                check_variable = {
+                    which = baptist_voting_A
+                    which = baptist_voting_B
+                }
+            }
+            set_country_flag = banned_baptist_4_aspect_A
+            tooltip = {
+                add_church_aspect = unlockable_4_A_aspect
+            }
+        }else = {
+            set_country_flag = banned_baptist_4_aspect_B
+            tooltip = {
+                add_church_aspect = unlockable_4_B_aspect
+            }
+        }
+    }
+    option = {
+        name = bapti.6.b
+        custom_tooltip = BAP_IS_BAN
+        if = {
+            limit = {
+                check_variable = {
+                    which = baptist_voting_A
+                    which = baptist_voting_B
+                }
+            }
+            set_country_flag = banned_baptist_4_aspect_B
+            tooltip = {
+                add_church_aspect = unlockable_4_B_aspect
+            }
+            every_subject_country = {
+                add_liberty_desire = 15
+            }
+        }else = {
+            set_country_flag = banned_baptist_4_aspect_A
+            tooltip = {
+                add_church_aspect = unlockable_4_A_aspect
+            }
+            every_subject_country = {
+                add_liberty_desire = 15
+            }
+        }
+    }
+}
+
+country_event = { #5 aspect
+    id = bapti.7
+    title = bapti.7.t
+    desc = bapti.7.d
+    picture = BIG_ARABIAN_CITY_eventPicture
+    is_triggered_only = yes
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = bap_voted_A_flag
+            clr_country_flag = bap_voted_B_flag
+        }
+    }
+    option = {
+        name = bapti.7.a
+        custom_tooltip = BAP_IS_BAN
+        if = {
+            limit = {
+                check_variable = {
+                    which = baptist_voting_A
+                    which = baptist_voting_B
+                }
+            }
+            set_country_flag = banned_baptist_5_aspect_A
+            tooltip = {
+                add_church_aspect = unlockable_5_A_aspect
+            }
+        }else = {
+            set_country_flag = banned_baptist_5_aspect_B
+            tooltip = {
+                add_church_aspect = unlockable_5_B_aspect
+            }
+        }
+    }
+    option = {
+        name = bapti.7.b
+        custom_tooltip = BAP_IS_BAN
+        if = {
+            limit = {
+                check_variable = {
+                    which = baptist_voting_A
+                    which = baptist_voting_B
+                }
+            }
+            set_country_flag = banned_baptist_5_aspect_B
+            tooltip = {
+                add_church_aspect = unlockable_5_B_aspect
+            }
+            every_subject_country = {
+                add_liberty_desire = 15
+            }
+        }else = {
+            set_country_flag = banned_baptist_5_aspect_A
+            tooltip = {
+                add_church_aspect = unlockable_5_A_aspect
+            }
+            every_subject_country = {
+                add_liberty_desire = 15
+            }
+        }
+    }
+}
+country_event = { #6 aspect
+    id = bapti.8
+    title = bapti.8.t
+    desc = bapti.8.d
+    picture = BIG_ARABIAN_CITY_eventPicture
+    is_triggered_only = yes
+    immediate = {
+        hidden_effect = {
+            clr_country_flag = bap_voted_A_flag
+            clr_country_flag = bap_voted_B_flag
+        }
+    }
+    option = {
+        name = bapti.8.a
+        custom_tooltip = BAP_IS_BAN
+        if = {
+            limit = {
+                check_variable = {
+                    which = baptist_voting_A
+                    which = baptist_voting_B
+                }
+            }
+            set_country_flag = banned_baptist_6_aspect_A
+            tooltip = {
+                add_church_aspect = unlockable_6_A_aspect
+            }
+        }else = {
+            set_country_flag = banned_baptist_6_aspect_B
+            tooltip = {
+                add_church_aspect = unlockable_6_B_aspect
+            }
+        }
+    }
+    option = {
+        name = bapti.8.b
+        custom_tooltip = BAP_IS_BAN
+        if = {
+            limit = {
+                check_variable = {
+                    which = baptist_voting_A
+                    which = baptist_voting_B
+                }
+            }
+            set_country_flag = banned_baptist_6_aspect_B
+            tooltip = {
+                add_church_aspect = unlockable_6_B_aspect
+            }
+            every_subject_country = {
+                add_liberty_desire = 15
+            }
+        }else = {
+            set_country_flag = banned_baptist_6_aspect_A
+            tooltip = {
+                add_church_aspect = unlockable_6_A_aspect
+            }
+            every_subject_country = {
+                add_liberty_desire = 15
+            }
+        }
+    }
 }
 
 country_event = {
@@ -283,6 +931,7 @@ country_event = {
             is_march = yes
         }
     }
+    fire_only_once = yes
     option = {
         name = bapti.50.a
         ING = {
