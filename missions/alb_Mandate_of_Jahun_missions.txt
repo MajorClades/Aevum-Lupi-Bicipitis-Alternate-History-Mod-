@@ -29,6 +29,54 @@ Mandate_1_slot = {
 			}
 		}
 	}
+	
+	mandate_true_master = {
+		icon = mission_moroccan_ports
+		position = 2
+		required_missions = { mandate_keep_them_together } 
+		trigger = {
+			calc_true_if = {
+				amount = 6
+				all_subject_country = {
+					has_opinion = {
+						who = ROOT
+						value = 190
+					}
+				}
+			}
+		}
+
+		effect = {
+			add_church_power = 15
+			every_subject_country = {
+				limit = {
+					is_subject_of_type = iyali_vassal
+				}
+				add_liberty_desire = -5
+			}
+		}
+	}
+
+	mandate_truest_masters = {
+		icon = mission_moroccan_ports
+		position = 3
+		required_missions = { mandate_true_master } 
+		trigger = {
+			all_subject_country = {
+					has_opinion = {
+						who = ROOT
+						value = 190
+					}
+				}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = bap_greatest_ruler
+				duration = 10950
+			}
+		}
+	}
 }
 
 Mandate_2_slot = {
@@ -41,13 +89,18 @@ Mandate_2_slot = {
 	mandate_true_faithful = {
 		icon = mission_moroccan_ports
 		position = 2
-
+		required_missions = { mandate_plan_ahead } 
 		trigger = {
-			
+			OR = {
+				army_size = 30
+				num_of_qizilbash = 5
+			}
 		}
 
 		effect = {
-			
+			country_event = {
+				id = bapti.10
+			}
 		}
 	}
 }
@@ -90,6 +143,52 @@ Mandate_4_slot = {
 	has_country_shield = yes
 	potential = { tag = BJ0 }
 
+	
+	mandate_nedd_for_money = {
+		icon = mission_moroccan_ports
+		position = 2
+		required_missions = { mandate_plan_ahead mandate_money_lenders } 
+		provinces_to_highlight = {
+			country_or_non_sovereign_subject_holds = ROOT
+			has_tax_building_trigger = no
+			owner = {
+				OR = {
+						tag = ROOT
+						is_subject_of_type = iyali_vassal
+					}
+			}
+		}
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 5
+				owner = {
+					OR = {
+						tag = ROOT
+						is_subject_of_type = iyali_vassal
+					}
+				}
+				has_tax_building_trigger = yes
+			}
+		}
+
+		effect = {
+			capital_scope = {
+				add_or_upgrade_tax_building = yes
+			}
+			custom_tooltip = BAP_TT_3
+			hidden_effect = {
+				every_subject_country = {
+					limit = {
+						is_subject_of_type = iyali_vassal
+						has_tax_building_trigger = yes
+					}
+					capital_scope = {
+						add_base_tax = 2
+					}
+				}
+			}
+		}
+	}
 }
 
 Mandate_5_slot = {
@@ -104,6 +203,7 @@ Mandate_5_slot = {
 		position = 1
 
 		trigger = {
+			is_in_deficit = no
 			OR = {
 				estate_loyalty = {
 					estate = estate_burghers
@@ -120,5 +220,52 @@ Mandate_5_slot = {
 			}
 		}
 	}
+	mandate_organization = {
+		icon = mission_moroccan_ports
+		position = 2
+		required_missions = {  mandate_money_lenders } 
 
+		trigger = {
+			stability = 2
+			has_adm_advisor_3 = yes
+			
+		}
+
+		effect = {
+			custom_tooltip = BAP_TT_4
+			set_country_flag = bap_tax_modifier_from_iyali_flag
+		}
+	}
+	mandate_plus_ultra = {
+		icon = mission_moroccan_ports
+		position = 3
+		required_missions = { mandate_nedd_for_money mandate_organization } 
+		provinces_to_highlight = {
+			country_or_non_sovereign_subject_holds = ROOT
+			has_tax_building_trigger = no
+			owner = {
+				is_subject_of_type = iyali_vassal
+			}
+		}
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 10
+				owner = {
+					is_subject_of_type = iyali_vassal
+				}
+				has_tax_building_trigger = yes
+			}			
+		}
+
+		effect = {
+			custom_tooltip = BAP_TT_5
+			set_country_flag = bap_tax_modifier_for_iyali_flag
+			tooltip = {
+				add_country_modifier = {
+					name = bap_tax_modifier_for_iyali
+					duration = 1
+				}
+			}
+		}
+	}
 }
