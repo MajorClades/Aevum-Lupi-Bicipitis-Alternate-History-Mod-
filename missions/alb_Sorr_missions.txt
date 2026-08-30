@@ -9,16 +9,33 @@ PreSorr1_slot = {
 			tag = SRR
 		}
 	}
-
-	srr_expel_seerer = {
-		icon = mission_expel_the_moriscos
+	srr_the_capital = {
+		icon = mission_into_africa
 		position = 4
-		required_missions = { srr_the_capital } 
-		provinces_to_highlight = {  } 
+		required_missions = { srr_expel_seerer } 
+		provinces_to_highlight = {  
+			province_id = 2287
+			NOT = {
+				owned_by = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			owns_core_province = 2287
+			2287 = {
+				religion = ROOT
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			2287 = {
+				add_base_manpower = 2
+				add_base_production = 2
+				add_base_tax = 2
+				add_or_upgrade_tax_building = yes
+				move_capital_effect = yes
+			}
+		} 
 	}
 }
 PreSorr2_slot = {
@@ -39,20 +56,72 @@ PreSorr2_slot = {
 		required_missions = { srr_legitimize_dehems_rule } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			if = {
+				limit = {
+					has_estate = estate_nobles
+				}
+				num_of_estate_privileges = {
+					estate = estate_nobles
+					value = 5
+				}
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			country_event = {
+				id = sorrean.2
+			}
+			bornu_area = {
+				add_permanent_claim = ROOT
+			}
+			beri_area = {
+				add_permanent_claim = ROOT
+			}
+		} 
 	}
 
-	srr_the_capital = {
-		icon = mission_into_africa
+	srr_expel_seerer = {
+		icon = mission_expel_the_moriscos
 		position = 3
 		required_missions = { srr_empower_the_council } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			area = bornu_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			bornu_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+			OR = {
+				has_won_war_against = {
+					who = BJ2
+				}
+				NOT = {
+					exists = BJ2
+				}
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_estate_loyalty = {
+				estate = estate_nobles
+				loyalty = 10
+			}
+			add_casus_belli = {
+				type = cb_vassalize_mission
+				target = MIR
+				months = 360
+			}
+			add_country_modifier = {
+				name = srr_kill_roogans
+				duration = 10950
+			}
+		} 
 	}
 }
 PreSorr3_slot = {
@@ -98,33 +167,133 @@ PreSorr3_slot = {
 					add_claim = ROOT
 				}
 			}
-			add_legitimacy = 20
+			country_event = {
+				id = sorrean.1
+			}
 		} 
 	}
 
-	srr_kill_kutem = {
+	srr_kill_beri = {
 		icon = mission_integrate_the_purbias
 		position = 4
 		required_missions = {
-			srr_the_capital
-			srr_expel_the_motherhood
+			srr_kill_the_kanuri
+			srr_expel_seerer
 		}
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			culture = zaghawa
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			OR = {
+				owns_all_provinces = {
+					culture = zaghawa
+				}
+				MIR = {
+					is_subject_of = ROOT
+				}
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			if = {
+				limit = {
+					MIR = {
+						is_subject_of = ROOT
+					}
+				}
+				custom_tooltip = SORR_2_TT_YES
+				add_country_modifier = {
+					name = srr_vassalplay
+					duration = 18250
+				}
+				MIR = {
+					add_liberty_desire = -50
+					add_country_modifier = {
+						name = srr_loyalest_subjects_of_sorr
+						duration = -1
+					}
+					hidden_effect = {
+						add_treasury = 200
+					}
+				}
+			}
+			else = {
+				custom_tooltip = SORR_2_TT_NO
+				tooltip = {
+					add_country_modifier = {
+						name = srr_vassalplay
+						duration = 18250
+					}
+					MIR = {
+						add_liberty_desire = -50
+						add_country_modifier = {
+							name = srr_loyalest_subjects_of_sorr
+							duration = -1
+						}
+					}
+				}
+			}
+			custom_tooltip = empty_line_tt
+			if = {
+				limit = {
+					owns_all_provinces = { culture = zaghawa }
+					NOT = {
+						MIR = {
+							is_subject_of = ROOT
+						}
+					}
+				}
+				custom_tooltip = SORR_3_TT_YES
+				add_estate_loyalty = {
+					estate = estate_burghers
+					loyalty = 15
+				}
+				add_country_modifier = {
+					name = srr_direct_conquest
+					duration = 18250
+				}
+			}
+			else_if = {
+				limit = {
+					OR = {
+						NOT = { owns_all_provinces = { culture = zaghawa } }
+						MIR = {
+							is_subject_of = ROOT
+						}
+					}
+				}
+				tooltip = {
+					custom_tooltip = SORR_3_TT_NO
+					add_estate_loyalty = {
+						estate = estate_burghers
+						loyalty = 15
+					}
+					add_country_modifier = {
+						name = srr_direct_conquest
+						duration = 18250
+					}
+				}
+			}
+		} 
 	}
 
 	srr_dawn_of_a_new_era = {
 		icon = mission_empire
 		position = 5
-		required_missions = { srr_kill_kutem } 
+		required_missions = { srr_kill_beri } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			tag = SRR
+		} 
 
-		effect = {  } 
+		effect = {  
+			#some event
+		} 
 	}
 }
 PreSorr4_slot = {
@@ -143,22 +312,52 @@ PreSorr4_slot = {
 		icon = mission_invade_kanem
 		position = 2
 		required_missions = { srr_legitimize_dehems_rule } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			province_id = 5125
+			NOT = {
+				owned_by = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			owns = 5125
+			NOT = {
+				exists = STE
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			5125 = {
+				change_province_name = "Mani"
+				rename_capital = "Mani"
+				change_religion = ROOT
+				add_devastation = 20
+			}
+			lake_chad_area = {
+				add_permanent_claim = ROOT
+			}
+			kanem_area = {
+				add_permanent_claim = ROOT
+			}
+			
+		} 
 	}
 
-	srr_expel_the_motherhood = {
+	srr_kill_the_kanuri = {
 		icon = mission_fire_of_london
 		position = 3
 		required_missions = { srr_finish_the_basin } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			
+		} 
 
-		effect = {  } 
+		effect = {  
+			
+		} 
 	}
 }
 PreSorr5_slot = {
@@ -179,15 +378,35 @@ PreSorr5_slot = {
 		required_missions = { } 
 		provinces_to_highlight = {  } 
 
-		trigger = {  } 
+		trigger = {  
+			employed_advisor = {
+				type = theologian
+				skill = 2
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			add_estate_loyalty = {
+				estate = estate_church
+				loyalty = 15
+			}
+			remove_advisor = theologian
+			hire_advisor = {
+				type = theologian
+				skill = 2
+				cost_multiplier = 0.5
+				name = "Matangi Kédju"
+				age = 45
+				#can_be_fired = no #it works but idk if it's thematically appropriate
+			}
+			#unlock the cult of the 10 mechanic for Sorrean
+		} 
 	}
 
 	srr_march_on_dakuya = {
 		icon = mission_conquer_kanem_bornu
 		position = 4
-		required_missions = { srr_expel_the_motherhood } 
+		required_missions = { srr_kill_the_kanuri } 
 		provinces_to_highlight = {  } 
 
 		trigger = {  } 
