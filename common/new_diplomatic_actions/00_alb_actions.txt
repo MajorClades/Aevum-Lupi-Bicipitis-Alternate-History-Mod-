@@ -1158,3 +1158,49 @@ make_iyali_vassal = {
 		always = no
 	}
 }
+diplomatic_conversion_action = {
+	category = influence
+	
+	alert_index = 40
+	alert_tooltip = demand_dummy_alert_tooltip
+	require_acceptance = no # Whether the recipient gets an option to decline
+	is_visible = {
+		has_country_flag = baptist_diplomatic_conversion_flag
+		FROM = {
+			capital_scope = {
+				continent = africa
+			}
+			NOT = {
+				religion_group = christian
+			}	
+			NOT = {
+				religion_group = muslim
+			}	
+			NOT = {
+				religion_group = zoroastrian_group
+			}	
+		}
+	}
+	is_allowed = {
+		years_of_income = 1
+		FROM = {
+			is_subject = no
+			has_opinion = {
+				who = ROOT
+				value = 190
+			}
+		}
+	}
+	on_accept = {
+		add_years_of_income = -1
+		FROM = {
+			change_religion = baptistism
+		}
+	}
+	on_decline = {
+	}
+
+	ai_will_do = { # this is a trigger
+		always = no
+	}
+}

@@ -1041,3 +1041,102 @@ country_event = {
     }
 }
 
+country_event = { 
+    id = bapti.11
+    title = bapti.11.t
+    desc = bapti.11.d
+    picture = BIG_ARABIAN_CITY_eventPicture
+    is_triggered_only = yes
+    option = {
+        name = bapti.11.a
+        niger_region = {
+				add_permanent_claim = ROOT
+			} 
+		sahel_region = {
+			add_permanent_claim = ROOT
+		}
+		guinea_region = {
+				add_permanent_claim = ROOT
+		}
+        create_general = {
+            tradition = 80
+        }
+    }
+    option = {
+        name = bapti.11.b
+        niger_region = {
+				add_permanent_claim = ROOT
+			} 
+        custom_tooltip = BAP_TT_6
+        set_country_flag = baptist_diplomatic_conversion_flag
+    }
+   
+}
+
+country_event = { 
+    id = bapti.12
+    title = bapti.12.t
+    desc = bapti.12.d
+    picture = BIG_ARABIAN_CITY_eventPicture
+    is_triggered_only = yes
+    option = {
+        name = bapti.12.a
+        add_yearly_manpower = 1
+        change_price = {
+            trade_goods = slaves
+            key = BAP_TT_SLAVES
+            value = 0.2
+            duration = 10950
+        }
+    }
+    option = {
+        name = bapti.12.b
+        add_prestige = 5
+		add_country_modifier = {
+			name = innovative_modifier
+			duration = 3650
+		}
+		add_country_modifier = {
+			name = "the_abolish_slavery_act"
+			duration = -1
+		}
+		custom_tooltip = abolished_slavery_act_tooltip
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						trade_goods = slaves
+					}
+					change_trade_goods = unknown
+					remove_building = tradecompany
+					if = {
+						limit = { has_province_modifier = slave_entrepot }
+						remove_province_modifier = slave_entrepot
+					}
+				}
+			}
+    }
+   
+}
+
+country_event = { 
+    id = bapti.13
+    title = bapti.13.t
+    desc = bapti.13.d
+    picture = BIG_ARABIAN_CITY_eventPicture
+    is_triggered_only = yes
+    option = {
+        name = bapti.13.a
+        add_country_modifier = {
+			name = bap_army_buff
+			duration = -1
+        }
+    }
+    option = {
+        name = bapti.13.b
+		add_country_modifier = {
+			name = bap_elite_buff
+			duration = -1
+        }
+    }
+   
+}

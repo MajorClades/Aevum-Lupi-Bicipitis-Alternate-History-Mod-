@@ -59,7 +59,7 @@ Mandate_1_slot = {
 
 	mandate_truest_masters = {
 		icon = mission_moroccan_ports
-		position = 3
+		position = 4
 		required_missions = { mandate_true_master } 
 		trigger = {
 			all_subject_country = {
@@ -74,6 +74,50 @@ Mandate_1_slot = {
 			add_country_modifier = {
 				name = bap_greatest_ruler
 				duration = 10950
+			}
+		}
+	}
+
+	mandate_word_bearers = {
+		icon = mission_moroccan_ports
+		position = 6
+		required_missions = { mandate_faith_warriors } 
+		trigger = {
+			num_of_qizilbash = 5
+			num_of_completed_idea_groups_mil = { amount = 1 }
+		}
+
+		effect = {
+			custom_tooltip = BAP_TT_7
+			set_country_flag = baptist_send_the_word_bearers_flag
+		}
+	}
+	mandate_war_bearers = {
+		icon = mission_moroccan_ports
+		position = 8
+		required_missions = { mandate_word_bearers } 
+		provinces_to_highlight = {
+			country_or_non_sovereign_subject_holds = ROOT
+			religion = baptistism
+			has_manpower_building_trigger = no
+			has_courthouse_building_trigger = no
+		}
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 20
+				religion = baptistism
+				has_manpower_building_trigger = yes
+				has_courthouse_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = bap_elite_buff_2
+				duration = -1
+			}
+			country_event = {
+				id = bapti.13
 			}
 		}
 	}
@@ -103,6 +147,88 @@ Mandate_2_slot = {
 			}
 		}
 	}
+
+	mandate_war_path = {
+		icon = mission_moroccan_ports
+		position = 3
+		required_missions = { mandate_true_master mandate_true_faithful } 
+		provinces_to_highlight = {
+			is_neighbor_of = ROOT
+			NOT = {
+				religion = baptistism
+			}
+		}
+		trigger = {
+			owns = 1145
+			calc_true_if = {
+				amount = 100
+				all_province = {
+					religion = baptistism
+				}
+			}
+		}
+
+		effect = {
+			1145 = {
+				add_great_project_tier = {
+					type = great_mosque_djenne
+					tier = 1
+				}
+			}
+		}
+	}
+
+	mandate_faith_warriors = {
+		icon = mission_moroccan_ports
+		position = 5
+		provinces_to_highlight = {
+			country_or_non_sovereign_subject_holds = ROOT
+			religion = baptistism
+			has_manpower_building_trigger = no
+		}
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 10
+				religion = baptistism
+				has_manpower_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = bap_warriors_of_faith
+				duration = 10950
+			}
+		}
+	}
+
+	mandate_kongo_conquest = {
+		icon = mission_moroccan_ports
+		position = 7
+		required_missions = { mandate_kongo_time } 
+		provinces_to_highlight = {
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			region = kongo_region
+		}
+		trigger = {
+			kongo_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			kongo_region = {
+				add_province_modifier = {
+					name = bap_conquest_of_kwadi
+					duration = 10950
+				}
+			}
+		}
+	}
+
 }
 
 Mandate_3_slot = {
@@ -122,18 +248,77 @@ Mandate_3_slot = {
 
 		effect = {
 			add_church_power = 15
-			niger_region = {
-				add_permanent_claim = ROOT
-			} 
-			sahel_region = {
-				add_permanent_claim = ROOT
+			country_event = {
+				id = bapti.11
 			}
-			guinea_region = {
-				add_permanent_claim = ROOT
+		}
+	}
+	mandate_hausa_house = {
+		icon = mission_moroccan_ports
+		position = 2
+		required_missions = { mandate_plan_ahead } 
+		provinces_to_highlight = {
+			culture = hausa
+		}
+		trigger = {
+			owns_all_provinces = {
+				culture = hausa
+			}
+		}
+
+		effect = {
+			add_adm_power = 150
+			add_dip_power = 150
+			add_mil_power = 150
+			add_stability = 1
+		}
+	}
+	mandate_the_chains_that_bind = {
+		icon = mission_moroccan_ports
+		position = 4
+		required_missions = { mandate_nedd_for_paper mandate_war_path } 
+		provinces_to_highlight = {
+			trade_goods = slaves
+			OR = {
+				region = niger_region
+				region = sahel_region
+				region = guinea_region
+			}
+		}
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 10
+				trade_goods = slaves
+			}
+		}
+
+		effect = {
+			country_event = {
+				id = bapti.12
 			}
 		}
 	}
 
+	mandate_kongo_time = {
+		icon = mission_moroccan_ports
+		position = 6
+		required_missions = { mandate_build_cities mandate_faith_warriors } 
+		trigger = {
+			army_size = 50
+			navy_size = 50
+		}
+
+		effect = {
+			kongo_region = {
+				discover_country = ROOT
+				add_permanent_claim = ROOT
+			}
+			add_country_modifier = {
+				name = bap_colonization
+				duration = 10950
+			}
+		}
+	}
 }
 
 Mandate_4_slot = {
@@ -186,6 +371,121 @@ Mandate_4_slot = {
 						add_base_tax = 2
 					}
 				}
+			}
+		}
+	}
+
+	mandate_nedd_for_paper = {
+		icon = mission_moroccan_ports
+		position = 3
+		required_missions = { mandate_nedd_for_money  } 
+		provinces_to_highlight = {
+			trade_goods = paper
+			OR = {
+				region = niger_region
+				region = sahel_region
+				region = guinea_region
+			}
+		}
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 1
+				trade_goods = paper
+				has_tax_building_trigger = yes
+				has_production_building_trigger = yes
+				religion = baptistism
+			}
+		}
+
+		effect = {
+			capital_scope = {
+				change_trade_goods = paper
+				add_province_modifier = {
+					name = bap_our_bible
+					duration = -1
+				}
+			}
+		}
+	}
+
+	mandate_build_cities = {
+		icon = mission_moroccan_ports
+		position = 5
+		provinces_to_highlight = {
+			country_or_non_sovereign_subject_holds = ROOT
+			religion = baptistism
+			NOT = {
+				development = 15
+			}
+		}
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 3
+				religion = baptistism
+				development = 15
+			}
+		}
+
+		effect = {
+			custom_tooltip = BAP_TT_8
+			set_country_flag = unlock_dev_aspects_baptist_flag
+		}
+	}
+	mandate_the_long_coast = {
+		icon = mission_moroccan_ports
+		position = 6
+		required_missions = { mandate_build_cities  } 
+		provinces_to_highlight = {
+			OR = {
+				province_id = 2258
+				province_id = 1139
+			}
+			
+		}
+		trigger = {
+			OR = {
+				num_of_colonists = 1
+				owns = 2258
+				owns = 1139
+			}
+		}
+
+		effect = {
+			define_explorer = {
+				shock = 2
+				fire = 3
+				manuever = 4
+			}
+			define_conquistador = {
+				shock = 5
+				fire = 2
+				manuever = 5
+				siege = 3
+			}
+		}
+	}
+	mandate_the_other_coast = {
+		icon = mission_moroccan_ports
+		position = 7
+		required_missions = { mandate_the_long_coast  } 
+		provinces_to_highlight = {
+			colonial_region = colonial_antartika
+		}
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 10
+				colonial_region = colonial_antartika
+			}
+			756 = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			756 = {
+				add_base_tax = 3
+				add_base_production = 3
+				add_base_manpower = 3
 			}
 		}
 	}
@@ -265,6 +565,53 @@ Mandate_5_slot = {
 					name = bap_tax_modifier_for_iyali
 					duration = 1
 				}
+			}
+		}
+	}
+	mandate_nedd_for_ivory = {
+		icon = mission_moroccan_ports
+		position = 4
+		required_missions = { mandate_nedd_for_paper  } 
+		provinces_to_highlight = {
+			trade_goods = ivory
+			OR = {
+				region = niger_region
+				region = sahel_region
+				region = guinea_region
+			}
+		}
+		trigger = {
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 10
+				trade_goods = ivory
+				religion = baptistism
+			}
+		}
+
+		effect = {
+			add_years_of_income = 2
+			change_price = {
+				trade_goods = ivory
+				key = BAP_TT_IVORY
+				value = 0.25
+				duration = 36500
+			}
+		}
+	}
+	mandate_great_capital = {
+		icon = mission_moroccan_ports
+		position = 6
+		required_missions = { mandate_build_cities  } 
+		trigger = {
+			capital_scope = {
+				grown_by_development = 20
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = bap_building_by_example
+				duration = -1
 			}
 		}
 	}
