@@ -1,21 +1,16 @@
 country_decisions = {
 
 	alb_igbo_rename = {
+		major = yes
 		potential = {
-			OR = {
-				primary_culture = igbo
-				primary_culture = izon
-			}
+			primary_culture = igbo
 			NOT = {
 				has_country_flag = igbo_formed
 			}
 		}
 		allow = {
 			owns_all_provinces = {
-				OR = {
-					culture = igbo
-					culture = izon
-				}
+				culture = igbo
 			}
 		}
 		effect = {
@@ -36,6 +31,7 @@ country_decisions = {
 		}
 	}
 	alb_yoruba_rename = {
+		major = yes
 		potential = {
 			primary_culture = yorumba
 			NOT = {
@@ -68,10 +64,26 @@ country_decisions = {
 		}
 	}
 	alb_aissabe_formable = {
+		major = yes
 		potential = {
 			primary_culture = kanuri
 			NOT = {
 				has_country_flag = kanuri_formed
+			}
+			NOT = { tag = AIS }
+			normal_or_historical_nations = yes
+			was_never_end_game_tag_trigger = yes
+			OR = {
+				is_free_or_tributary_trigger = yes
+				ai = no
+			}
+			is_colonial_nation = no
+			OR = {
+				is_former_colonial_nation = no
+				AND = {
+					is_former_colonial_nation = yes
+					ai = no
+				}
 			}
 		}
 		allow = {
@@ -97,16 +109,44 @@ country_decisions = {
 		}
 	}
 	alb_sorr_formable = {
+		major = yes
 		potential = {
-			primary_culture = so_c
+			tag = BER #only successors to Sorr
+			NOT = { tag = SRR }
 			NOT = {
 				has_country_flag = so_c_formed
 			}
+			normal_or_historical_nations = yes
+			was_never_end_game_tag_trigger = yes
+			OR = {
+				is_free_or_tributary_trigger = yes
+				ai = no
+			}
+			is_colonial_nation = no
+			OR = {
+				is_former_colonial_nation = no
+				AND = {
+					is_former_colonial_nation = yes
+					ai = no
+				}
+			}
+		}
+		provinces_to_highlight = {
+			OR = {
+				culture = so_c
+				province_id = 2287
+			}
+			NOT = {
+				owned_by = ROOT
+			}
 		}
 		allow = {
+			is_free_or_tributary_trigger = yes
+			is_at_war = no
 			owns_all_provinces = {
 				culture = so_c
 			}
+			owns_core_province = 2287
 		}
 		effect = {
 			add_prestige_or_monarch_power = { amount = 25 }
@@ -119,7 +159,21 @@ country_decisions = {
 				set_government_rank = 2
 			}
 			change_tag = SRR
+			restore_country_name = yes
+			on_change_tag_effect = yes
+			remove_non_electors_emperors_from_empire_effect = yes
+			swap_non_generic_missions = yes
+			if = {
+				limit = {
+					has_custom_ideas = no
+				}
+				country_event = { id = ideagroups.1 } #Swap Ideas
+			}
 			set_country_flag = so_c_formed	
+			add_country_modifier = {
+				name = "centralization_modifier"
+				duration = 7300
+			}
 		}
 		ai_will_do = {
 			factor = 1
@@ -130,6 +184,21 @@ country_decisions = {
 			primary_culture = samabaddl
 			NOT = {
 				has_country_flag = prusplumina_formed
+			}
+			NOT = { tag = PRP }
+			normal_or_historical_nations = yes
+			was_never_end_game_tag_trigger = yes
+			OR = {
+				is_free_or_tributary_trigger = yes
+				ai = no
+			}
+			is_colonial_nation = no
+			OR = {
+				is_former_colonial_nation = no
+				AND = {
+					is_former_colonial_nation = yes
+					ai = no
+				}
 			}
 		}
 		allow = {
