@@ -1,0 +1,230 @@
+country_event = {
+    id = alb_culture_colonial.1
+    title = "alb_culture_colonial.title"
+    desc = { #RAUSULIANO
+        trigger = {
+            culture_group = latin
+            NOT = { primary_culture = rausuliano }
+			NOT = { primary_culture = iocotanobo }
+            any_owned_province = {
+                NOT = { colonial_region = colonial_mexico }
+                NOT = { colonial_region = colonial_california }
+                NOT = { colonial_region = colonial_grosserio }
+                contrinent = north_america
+                culture_group = latin
+            }
+        }
+        desc = alb_culture_colonial.lat.rau.desc
+    }
+    desc = { #IOCOTANO
+        trigger = {
+            culture_group = latin
+            NOT = { primary_culture = rausuliano }
+			NOT = { primary_culture = iocotanobo }
+            any_owned_province = {
+                OR = {
+                    colonial_region = colonial_mexico
+                    colonial_region = colonial_california
+                    colonial_region = colonial_grosserio  
+                }
+                culture_group = latin
+            }
+        }
+        desc = alb_culture_colonial.lat.ioco.desc
+    }
+    picture = COLONIZATION_eventPicture
+    is_triggered_only = yes
+    trigger = {
+        capital_scope = {
+			OR = {
+				continent = north_america
+				continent = south_america
+			}
+		}
+		NOT = { has_country_flag = rejected_new_colonial_culture }
+        OR = {
+            #ELIGIBLE RAUSULIANO
+            AND = { 
+                culture_group = latin
+                NOT = { primary_culture = rausuliano }
+			    NOT = { primary_culture = iocotanobo }
+                any_owned_province = {
+                    NOT = { colonial_region = colonial_mexico }
+                    NOT = { colonial_region = colonial_california }
+                    NOT = { colonial_region = colonial_grosserio }
+                    contrinent = north_america
+                    culture_group = latin
+                }
+            }
+            #ELIGIBLE IOCOTANO
+            AND = { 
+                culture_group = latin
+                NOT = { primary_culture = rausuliano }
+			    NOT = { primary_culture = iocotanobo }
+                any_owned_province = {
+                    OR = {
+                        colonial_region = colonial_mexico
+                        colonial_region = colonial_california
+                        colonial_region = colonial_grosserio  
+                    }
+                    culture_group = latin
+                }
+            }
+        }
+    }
+    mean_time_to_happen = {
+		days = 1
+	}
+    immediate = {
+        hidden_effect = {
+            if = { #RAUSULIANO
+                limit = {
+                    culture_group = latin
+                    NOT = { primary_culture = rausuliano }
+			        NOT = { primary_culture = iocotanobo }
+                    any_owned_province = {
+                        NOT = { colonial_region = colonial_mexico }
+                        NOT = { colonial_region = colonial_california }
+                        NOT = { colonial_region = colonial_grosserio }
+                        contrinent = north_america
+                        culture_group = latin
+                    }
+                }
+                random_owned_province = {
+                    limit = {
+                        NOT = { colonial_region = colonial_mexico }
+                        NOT = { colonial_region = colonial_california }
+                        NOT = { colonial_region = colonial_grosserio }
+                        contrinent = north_america
+                        culture_group = latin
+                    }
+                    save_event_target_as = rausuliano_province
+                }
+            }
+            if = { #IOCOTANO
+                limit = {
+                    culture_group = latin
+                    NOT = { primary_culture = rausuliano }
+			        NOT = { primary_culture = iocotanobo }
+                    any_owned_province = {
+                        OR = {
+                            colonial_region = colonial_mexico
+                            colonial_region = colonial_california
+                            colonial_region = colonial_grosserio  
+                        }
+                        culture_group = latin
+                    }
+                }
+                random_owned_province = {
+                    limit = {
+                        colonial_region = colonial_mexico
+                        colonial_region = colonial_california
+                        colonial_region = colonial_grosserio
+                        culture_group = latin
+                    }
+                    save_event_target_as = iocotanobo_province
+                }
+            }
+        }
+    }
+    option = { #BECOME RAUSULIANO
+        trigger = {
+            culture_group = latin
+            any_owned_province = {
+                NOT = { colonial_region = colonial_mexico }
+                NOT = { colonial_region = colonial_california }
+                NOT = { colonial_region = colonial_grosserio }
+                contrinent = north_america
+                culture_group = latin
+            }
+        }
+        name = "alb_culture_colonial.lat.rau.a"
+        if = {
+            limit = {
+                NOT = {
+                    primary_culture = rausuliano
+                }
+            }
+            change_primary_culture = rausuliano
+        }
+        event_target:rausuliano_province = {
+            area = {
+                limit = {
+                    owned_by = ROOT
+                    culture_group = latin
+                }
+                change_culture = rausuliano
+            }
+        }
+        set_country_flag = embraced_new_colonial_culture
+    }
+    option = { #REJECT RAUSULIANO
+        trigger = {
+            culture_group = latin
+            any_owned_province = {
+                NOT = { colonial_region = colonial_mexico }
+                NOT = { colonial_region = colonial_california }
+                NOT = { colonial_region = colonial_grosserio }
+                contrinent = north_america
+                culture_group = latin
+            }
+            ai = no
+			NOT = { has_country_flag = embraced_new_colonial_culture }
+			NOT = { primary_culture = rausuliano }
+        }
+        name = "alb_culture_colonial.lat.rau.b
+    }
+    option = { #BECOME IOCOTANO
+        trigger = {
+            culture_group = latin
+            any_owned_province = {
+                OR = {
+                    colonial_region = colonial_mexico
+                    colonial_region = colonial_california
+                    colonial_region = colonial_grosserio  
+                }
+                culture_group = latin
+            }
+        }
+        name = "alb_culture_colonial.lat.ioco.a"
+        if = {
+            limit = {
+                NOT = {
+                    primary_culture = iocotanobo
+                }
+            }
+            change_primary_culture = iocotanobo
+        }
+        event_target:iocotanobo_province = {
+            area = {
+                limit = {
+                    owned_by = ROOT
+                    culture_group = latin
+                }
+                change_culture = iocotanobo
+            }
+        }
+        set_country_flag = embraced_new_colonial_culture
+    }
+    option = { # REJECT IOCOTANO
+        trigger = {
+            culture_group = latin
+            any_owned_province = {
+                OR = {
+                    colonial_region = colonial_mexico
+                    colonial_region = colonial_california
+                    colonial_region = colonial_grosserio  
+                }
+                culture_group = latin
+            }
+            ai = no
+			NOT = { has_country_flag = embraced_new_colonial_culture }
+			NOT = { primary_culture = iocotanobo }
+        }
+        name = "alb_culture_colonial.lat.ioco.b"
+        event_target:iocotanobo_province = {
+			change_culture = iocotanobo
+		}
+		set_country_flag = rejected_new_colonial_culture
+    }
+}
