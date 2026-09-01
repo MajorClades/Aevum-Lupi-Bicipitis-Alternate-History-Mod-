@@ -228,7 +228,6 @@ Mandate_2_slot = {
 			}
 		}
 	}
-
 }
 
 Mandate_3_slot = {
@@ -319,6 +318,33 @@ Mandate_3_slot = {
 			}
 		}
 	}
+	mandate_kongo_faith = {
+		icon = mission_moroccan_ports
+		position = 7
+		required_missions = { mandate_kongo_time } 
+		provinces_to_highlight = {
+			NOT = {
+				religion = baptistism
+			}
+			region = kongo_region
+		}
+		trigger = {
+			kongo_region = {
+				type = all
+				religion = baptistism
+			}
+		}
+
+		effect = {
+			add_stability_or_adm_power = yes
+			add_church_power = 100
+			central_africa_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+
 }
 
 Mandate_4_slot = {
@@ -598,10 +624,53 @@ Mandate_5_slot = {
 			}
 		}
 	}
-	mandate_great_capital = {
+	mandate_reinvigoration = {
+		icon = mission_moroccan_ports
+		position = 5
+		trigger = {
+			has_institution = feudalism
+		}
+
+		effect = {
+			capital_scope = {
+					add_institution_embracement = {
+						which = renaissance
+						value = 30
+					}
+				}
+			every_subject_country = {
+				limit = {
+					is_subject_of_type = iyali_vassal
+				}
+				capital_scope = {
+					add_institution_embracement = {
+						which = feudalism
+						value = 100
+					}
+				}
+			}
+		}
+	}
+	mandate_building_time = {
 		icon = mission_moroccan_ports
 		position = 6
-		required_missions = { mandate_build_cities  } 
+		required_missions = { mandate_build_cities  mandate_reinvigoration} 
+		trigger = {
+			capital_scope = {
+				num_of_buildings_in_province = 4
+			}
+		}
+
+		effect = {
+			capital_scope = {
+				center_of_trade = 3
+			}
+		}
+	}
+	mandate_great_capital = {
+		icon = mission_moroccan_ports
+		position = 8
+		required_missions = { mandate_building_time  mandate_the_other_coast} 
 		trigger = {
 			capital_scope = {
 				grown_by_development = 20

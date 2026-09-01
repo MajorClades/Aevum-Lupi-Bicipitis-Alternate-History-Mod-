@@ -1,0 +1,97 @@
+bonfire_of_the_baptist_disaster = {
+	potential = {
+		tag = BJ0
+		religion = baptistism
+	}
+	
+	can_start = {
+		num_of_provinces_owned_or_owned_by_subjects_with = {
+			value = 80
+		}
+		any_neighbor_country = {
+			tech_difference = 3
+			num_of_colonists = 1
+		}
+		NOT = {
+			religious_unity = 1
+		}
+	}
+	
+	can_stop = {
+		OR = {
+			has_any_disaster = yes
+			has_institution = global_trade
+		}
+	}
+	
+	progress = {
+		modifier = {
+			factor = 5
+			NOT = { stability = 1 }
+		}
+		modifier = {
+			factor = 5
+			NOT = { stability = 0 }
+		}
+		modifier = {
+			factor = 10
+			NOT = { stability = -1 }
+		}
+		modifier = {
+			factor = 5
+			NOT = { religious_unity = 0.9 }
+		}
+		modifier = {
+			factor = 10
+			NOT = { religious_unity = 0.5 }
+		}
+		modifier = {
+			factor = 10
+			NOT = { devotion = 80 }
+		}
+		modifier = {
+			factor = 10
+			NOT = { devotion = 50 }
+		}
+		modifier = {
+			factor = 10
+			NOT = { devotion = 30 }
+		}
+	}
+	
+	can_end = {
+		OR = {
+			AND = {
+				government = republic
+				has_reform = reformed_hausa_republic_reform
+			}
+			AND = {
+				has_institution = global_trade
+				stability = 3
+				is_great_power = yes
+			}
+			has_reform = word_bearers_crusade_reform
+		}
+	}
+	
+	modifier = {
+		global_unrest = 5
+		stability_cost_modifier = 0.5
+	}
+	
+	on_start = bapti.14
+	on_end = bapti.15
+	
+	on_monthly = {
+		events = {
+			bapti.21 #making the republic
+		}
+		random_events = {
+			2000 = 0
+			50 = bapti.17 # returning faiths
+			50 = bapti.18 # upset subjects
+			50 = bapti.19 # republican rebels
+			50 = bapti.20 # colonizers get claims on ports
+		}
+	}
+}

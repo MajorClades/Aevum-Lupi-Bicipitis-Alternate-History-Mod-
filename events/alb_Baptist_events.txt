@@ -1138,5 +1138,358 @@ country_event = {
 			duration = -1
         }
     }
-   
+}
+
+country_event = { #start of disaster
+    id = bapti.14
+    title = bapti.14.t
+    desc = bapti.14.d
+    picture = BIG_ARABIAN_CITY_eventPicture
+    is_triggered_only = yes
+    option = {
+        name = bapti.14.a
+        hidden_effect = {
+            set_variable = {
+                which = baptist_republic_value
+                value = 0
+            }
+        }
+        random_owned_province = {
+            limit = {
+                has_port = yes
+            }
+            spawn_rebels = {
+                size = 1
+                type = baptist_disaster_rebels
+            }
+        }
+    }
+}
+
+country_event = { #end of disaster
+    id = bapti.15
+    title = bapti.15.t
+    desc = bapti.15.d
+    picture = BIG_ARABIAN_CITY_eventPicture
+    is_triggered_only = yes
+    option = {
+        trigger = {
+			has_reform = reformed_hausa_republic_reform
+        }
+        name = bapti.15.a
+        
+    }
+    option = {
+        trigger = {
+            has_reform = word_bearers_crusade_reform
+        }
+        name = bapti.15.b
+        
+    }
+    option = {
+        trigger = {
+            NOT = { has_reform = word_bearers_crusade_reform }
+            NOT = { has_reform = reformed_hausa_republic_reform }
+        }
+        name = bapti.15.c
+        
+    }
+}
+
+province_event = { #return of old faith disaster
+    id = bapti.16
+    title = bapti.16.t
+    desc = bapti.16.d
+    picture = BIG_ARABIAN_CITY_eventPicture
+    is_triggered_only = yes
+    option = {
+        name = bapti.16.a
+        if = {
+            limit = {
+                culture = yorumba
+            }
+            change_religion = isese
+        }
+        if = {
+            limit = {
+                culture = izon
+            }
+            change_religion = ebura_tsitse 
+        }
+        if = {
+            limit = {
+                culture = igbo
+            }
+            change_religion = odinani 
+        }
+        if = {
+            limit = {
+                culture = edo_c
+            }
+            change_religion = osanobua 
+        }
+        if = {
+            limit = {
+                OR = {
+                    culture = tikar
+                    culture = bamileke
+                }
+            }
+            change_religion = nyuy_si 
+        }
+        if = {
+            limit = {
+                culture = dakuyan
+            }
+            change_religion = deketa 
+        }
+        if = {
+            limit = {
+                culture = seererian
+            }
+            change_religion = AfatRoog 
+        }
+        if = {
+            limit = {
+                culture_group = sahelian
+                region = sahel_region
+                NOT = {
+                    culture = dakuyan
+                }
+                NOT = {
+                    culture = seererian
+                }
+            }
+            change_religion = chadic 
+        }
+        if = {
+            limit = {
+                culture_group = mande
+            }
+            change_religion = shamanism 
+        }
+    }
+    option = {
+        name = bapti.16.b
+        owner = {
+            add_manpower = -5
+        }
+    }
+     option = {
+        trigger = {
+            base_manpower = 2
+        }
+        name = bapti.16.c
+        add_base_manpower = -1
+    }
+}
+
+country_event = { #return of old faith disaster
+    id = bapti.17
+    title = bapti.17.t
+    desc = bapti.17.d
+    picture = BIG_ARABIAN_CITY_eventPicture
+    hidden = yes
+    is_triggered_only = yes
+    option = {
+        name = bapti.17.a
+        random_owned_province = {
+            limit = {
+                OR = {
+                    culture = yorumba
+                    culture = izon
+                    culture = igbo
+                    culture = edo_c
+                    culture = tikar
+                    culture = bamileke
+                    culture = dakuyan
+                    culture = seererian
+                    AND = {
+                        culture_group = sahelian
+                        region = sahel_region
+                        NOT = {
+                            culture = dakuyan
+                        }
+                        NOT = {
+                            culture = seererian
+                        }
+                    }
+                    culture_group = mande
+                }
+            }
+            province_event = {
+                id = bapti.16
+            }
+        }
+        random_owned_province = {
+            limit = {
+                OR = {
+                    culture = yorumba
+                    culture = izon
+                    culture = igbo
+                    culture = edo_c
+                    culture = tikar
+                    culture = bamileke
+                    culture = dakuyan
+                    culture = seererian
+                    AND = {
+                        culture_group = sahelian
+                        region = sahel_region
+                        NOT = {
+                            culture = dakuyan
+                        }
+                        NOT = {
+                            culture = seererian
+                        }
+                    }
+                    culture_group = mande
+                }
+            }
+            province_event = {
+                id = bapti.16
+            }
+        }
+    }
+
+}
+
+country_event = { #subject is upset
+    id = bapti.18
+    title = bapti.18.t
+    desc = bapti.18.d
+    picture = BIG_ARABIAN_CITY_eventPicture
+    is_triggered_only = yes
+    option = {
+        name = bapti.18.a
+        random_subject_country = {
+            add_liberty_desire = 30
+        }
+    }
+    option = {
+        name = bapti.18.b
+        add_years_of_income = -0.75
+        random_subject_country = {
+            add_liberty_desire = 15
+        }
+    }
+    option = {
+        name = bapti.18.c
+        add_years_of_income = -0.5
+        random_subject_country = {
+            add_liberty_desire = 5
+        }
+    }
+}
+
+country_event = { #road to republic
+    id = bapti.19
+    title = bapti.19.t
+    desc = bapti.19.d
+    picture = BIG_ARABIAN_CITY_eventPicture
+    is_triggered_only = yes
+    option = {
+        name = bapti.19.a
+        random_owned_province = {
+            spawn_rebels = {
+                size = 1
+                type = baptist_disaster_rebels
+            }
+        }
+        random_owned_province = {
+            spawn_rebels = {
+                size = 1
+                type = baptist_disaster_rebels
+            }
+        }
+    }
+    option = {
+        name = bapti.19.b
+        add_church_power = -50
+        custom_tooltip = BAP_TO_REP
+        hidden_effect = {
+            change_variable = {
+                which = baptist_republic_value
+                value = 1
+            }
+        }
+    }
+}
+
+country_event = { #pesky colonizers
+    id = bapti.20
+    title = bapti.20.t
+    desc = bapti.20.d
+    picture = BIG_ARABIAN_CITY_eventPicture
+    is_triggered_only = yes
+    option = {
+        name = bapti.20.a
+        every_known_country = {
+            limit = {
+                full_idea_group = exploration_ideas
+            }
+            every_province = {
+                limit = {
+                    owned_by = BJ0
+                    has_port = yes
+                }
+                add_claim = ROOT
+            }
+        }
+    }
+    option = {
+        name = bapti.20.b
+        random_owned_province = {
+            limit = {
+                has_port = yes
+            }
+            add_base_production = 1
+        }
+        custom_tooltip = BAP_TO_REP
+        hidden_effect = {
+            change_variable = {
+                which = baptist_republic_value
+                value = 1
+            }
+        }
+    }
+}
+
+country_event = { # the way of tolerance
+    id = bapti.21
+    title = bapti.21.t
+    desc = bapti.21.d
+    picture = BIG_ARABIAN_CITY_eventPicture
+    is_triggered_only = yes
+    trigger = {
+        check_variable = {
+            which = baptist_republic_value
+            value = 5
+        }
+    }
+    option = {
+        name = bapti.21.a
+        override_country_name = BAPTIST_REPUBLIC
+        change_government = republic
+        add_government_reform = reformed_hausa_republic_reform
+        add_estate_loyalty = {
+            estate = estate_church
+            loyalty = -20
+        }
+    }
+    option = {
+        name = bapti.20.b
+        capital_scope = {
+            spawn_rebels = {
+                size = 1
+                type = baptist_disaster_rebels
+            }
+        }
+        custom_tooltip = BAP_TO_REP_NOT
+        hidden_effect = {
+            change_variable = {
+                which = baptist_republic_value
+                value = -3
+            }
+        }
+    }
 }
