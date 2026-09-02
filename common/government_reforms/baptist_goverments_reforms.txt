@@ -108,35 +108,38 @@ reformed_hausa_republic_reform = {
 }
 
 word_bearers_crusade_reform = {
+	icon = "fifth_monarchists"
+	allow_normal_conversion = yes
 	potential = {
 		has_reform = word_bearers_crusade_reform
 	}
-	allow_normal_conversion = no
-	legacy_equivalent = theocratic_government
-	icon = "religious_leader"
 	lock_level_when_selected = yes
-	valid_for_nation_designer = no
-	nation_designer_cost = 0
-	modifiers = {
-		manpower_in_true_faith_provinces = 0.33
-		technology_cost = 0.15
-		mil_tech_cost_modifier = -0.2
-		mil_advisor_cost = -0.25
-		land_morale = 0.2
-		land_forcelimit_modifier = 0.5
+	nation_designer_cost = 100
+	nation_designer_trigger = {
+		has_dlc = "Domination"
 	}
-	conditional = {
-		allow = {
-			has_dlc = "Common Sense"
-		}
-		custom_attributes = {
-			gain_devotion_from_conversions = yes
-		}
+	valid_for_nation_designer = yes
+	modifiers = {
+		cb_on_religious_enemies = yes
+		warscore_cost_vs_other_religion = -0.2
+		warscore_from_battles_modifier = 0.5
+		land_morale = 0.2
+		tolerance_heretic = -6
+		tolerance_heathen = -6
+	}
+	effect = {
+		custom_tooltip = world_crusade_tt
 	}
 	custom_attributes = {
-		disables_estate_burghers = yes
-		disables_estate_nobles = yes
-		disables_estate_church = yes
-		gain_monarch_power_from_force_converting = yes
+		has_upgraded_holy_wars = yes
+		locked_government_type = yes
+	}
+	government_abilities = {
+		baptist_word_ending_mechanic
+	}
+	removed_effect = {
+		country_event = {
+			id = bapti.22
+		}
 	}
 }

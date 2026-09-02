@@ -1172,6 +1172,11 @@ country_event = { #end of disaster
     desc = bapti.15.d
     picture = BIG_ARABIAN_CITY_eventPicture
     is_triggered_only = yes
+    immediate = {
+        hidden_effect = {
+            set_country_flag = bonfire_of_the_baptist_disaster_ended
+        }
+    }
     option = {
         trigger = {
 			has_reform = reformed_hausa_republic_reform
@@ -1492,4 +1497,64 @@ country_event = { # the way of tolerance
             }
         }
     }
+}
+
+# The Fifth Monarchists - The End of Madness
+country_event = { #failure
+    id = bapti.22
+    title = bapti.22.t
+    desc = bapti.22.d
+    picture = BIG_ARABIAN_CITY_eventPicture
+	is_triggered_only = yes
+	#The wheel has turned.
+	option = {
+		name = bapti.22.a
+		kill_ruler = yes
+		if = {
+			limit = { has_heir = yes }
+			kill_heir = {
+				allow_new_heir = no
+			}
+		}
+		change_government = monarchy
+		add_government_reform = feudalism_reform
+		release_all_possible_countries = yes
+		set_bankruptcy = ROOT
+		release_all_subjects = yes
+	}
+}
+
+country_event = { # another victory
+    id = bapti.23
+    title = bapti.23.t
+    desc = bapti.23.d
+    picture = BIG_ARABIAN_CITY_eventPicture
+	is_triggered_only = yes
+	#The wheel has turned.
+	option = {
+		name = bapti.23.a
+		set_government_power = {
+				mechanic_type = end_time_mechanic
+				power_type = fanatic_zeal
+				value = 100
+		}
+		freeze_government_power = {
+			mechanic_type = end_time_mechanic
+			power_type = fanatic_zeal
+		}
+	}
+}
+
+country_event = { #consolidation of cultures
+    id = bapti.24
+    title = bapti.24.t
+    desc = bapti.24.d
+    picture = BIG_ARABIAN_CITY_eventPicture
+    is_triggered_only = yes
+
+    option = {
+        name = bapti.24.a
+        
+    }
+
 }
