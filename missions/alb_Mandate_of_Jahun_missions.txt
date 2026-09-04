@@ -121,6 +121,34 @@ Mandate_1_slot = {
 			}
 		}
 	}
+
+	mandate_jerusalem = {
+		icon = mission_moroccan_ports
+		position = 10
+		required_missions = { mandate_africa_ours } 
+		provinces_to_highlight = {
+			NOT = {
+				religion = baptistism
+			}
+			area = palestine_area
+		}
+		trigger = {
+			palestine_area = {
+				type = all
+				owned_by = ROOT
+				religion = baptistism
+			}
+		}
+
+		effect = {
+			379 = {
+				add_great_project_tier = {
+					type = holy_city_jerusalem
+					tier = 3
+				}
+			}
+		}
+	}
 }
 
 Mandate_2_slot = {
@@ -225,6 +253,36 @@ Mandate_2_slot = {
 					name = bap_conquest_of_kwadi
 					duration = 10950
 				}
+			}
+		}
+	}
+	mandate_africa_ours = {
+		icon = mission_moroccan_ports
+		position = 9
+		required_missions = { mandate_the_revenge } 
+		provinces_to_highlight = {
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			region = maghreb_region
+		}
+		trigger = {
+			maghreb_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_years_of_income = 3
+			upper_andalucia_area = {
+				add_permanent_claim = ROOT
+			}
+			palestine_area = {
+				add_permanent_claim = ROOT
+			}
+			egypt_region = {
+				add_permanent_claim = ROOT
 			}
 		}
 	}
@@ -341,10 +399,131 @@ Mandate_3_slot = {
 			central_africa_region = {
 				add_permanent_claim = ROOT
 			}
+			east_africa_region = {
+				add_permanent_claim = ROOT
+			}
 		}
 	}
 
+	mandate_the_revenge = {
+		icon = mission_moroccan_ports
+		position = 8
+		provinces_to_highlight = {
+			OR = {
+				area = western_sahara_area
+				area = azbin_area
+				area = east_azbin_area
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+		trigger = {
+			western_sahara_area = {
+				type = all
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					is_empty = yes
+				}
+			}
+			azbin_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			east_azbin_area = {
+				type = all
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT
+					is_empty = yes
+				}
+			}
+		}
 
+		effect = {
+			maghreb_region = {
+				add_permanent_claim = ROOT
+			}
+			1127 = {
+				if = {
+					limit = { is_empty = yes }
+					cede_province = ROOT
+					add_core = ROOT
+					change_religion = baptistism
+				}else = {
+					add_core = ROOT
+				}
+			}
+			2475 = {
+				if = {
+					limit = { is_empty = yes }
+					cede_province = ROOT
+					add_core = ROOT
+					change_religion = baptistism
+				}else = {
+					add_core = ROOT
+				}
+			}
+		}
+	}
+	
+	mandate_aldabba_burning = {
+		icon = mission_moroccan_ports
+		position = 9
+		required_missions = { mandate_the_revenge } 
+		provinces_to_highlight = {
+			NOT = {
+				religion = baptistism
+			}
+			area = algiers_area
+		}
+		trigger = {
+			algiers_area = {
+				type = all
+				owned_by = ROOT
+				religion = baptistism
+			}
+		}
+
+		effect = {
+			336 = {
+				destroy_great_project = {
+					type = aldabba_palace
+				}
+			}
+			add_country_modifier = {
+				name = bap_jahun_we_have_made_it
+				duration = -1
+			}
+			118 = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	mandate_rome_burning = {
+		icon = mission_moroccan_ports
+		position = 10
+		required_missions = { mandate_aldabba_burning } 
+		provinces_to_highlight = {
+			NOT = {
+				religion = baptistism
+			}
+			province_id = 118
+		}
+		trigger = {
+			118 = {
+				owned_by = ROOT
+				religion = baptistism
+			}
+		}
+
+		effect = {
+			add_power_projection = {
+				type = ITA_no_more_holy_romans
+				amount = 100
+			}
+		}
+	}
 }
 
 Mandate_4_slot = {
@@ -515,6 +694,34 @@ Mandate_4_slot = {
 			}
 		}
 	}
+
+	mandate_the_east = {
+		icon = mission_moroccan_ports
+		position = 9
+		required_missions = { mandate_the_revenge } 
+		provinces_to_highlight = {
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			area = darfur_central_sahara_area
+		}
+		trigger = {
+			darfur_central_sahara_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = bap_armies_of_africa
+				duration = 10950
+			}
+			horn_of_africa_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
 }
 
 Mandate_5_slot = {
@@ -682,6 +889,33 @@ Mandate_5_slot = {
 				name = bap_building_by_example
 				duration = -1
 			}
+		}
+	}
+
+	mandate_the_first = {
+		icon = mission_moroccan_ports
+		position = 10
+		required_missions = { mandate_the_east } 
+		provinces_to_highlight = {
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			area = central_ethiopia_area
+		}
+		trigger = {
+			central_ethiopia_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			2769 = {
+				development = 15
+				religion = ROOT
+			}
+		}
+
+		effect = {
+			custom_tooltip = AE0_allow_rock_churches_access_tt
+			hidden_effect = { complete_mission = AE0_ethiopia } 
 		}
 	}
 }
