@@ -339,7 +339,9 @@ PreSorr4_slot = {
 			kanem_area = {
 				add_permanent_claim = ROOT
 			}
-			
+			south_kanem_area = {
+				add_permanent_claim = ROOT
+			}
 		} 
 	}
 
@@ -348,15 +350,40 @@ PreSorr4_slot = {
 		position = 3
 		required_missions = { srr_finish_the_basin } 
 		provinces_to_highlight = {  
-			
+			OR = {
+				is_capital_of = WAD
+				is_capital_of = KBO
+				is_capital_of = REG
+			}
 		} 
 
 		trigger = {  
-			
+			OR = {
+				has_won_war_against = {
+					who = WAD
+				}
+				NOT = { exists = WAD }
+			}
+			OR = {
+				has_won_war_against = {
+					who = KBO
+				}
+				NOT = { exists = KBO }
+			}
+			OR = {
+				has_won_war_against = {
+					who = REG
+				}
+				NOT = { exists = REG }
+			}
 		} 
 
 		effect = {  
-			
+			add_country_modifier = {
+				name = killed_aissabe_1
+				duration = -1
+			}
+			add_adm_power = 100
 		} 
 	}
 }
@@ -407,10 +434,22 @@ PreSorr5_slot = {
 		icon = mission_conquer_kanem_bornu
 		position = 4
 		required_missions = { srr_kill_the_kanuri } 
-		provinces_to_highlight = {  } 
+		provinces_to_highlight = {  
+			area = lake_chad_area
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
 
-		trigger = {  } 
+		trigger = {  
+			lake_chad_area = {
+				country_or_non_sovereign_subject_holds = ROOT
+				type = all
+			}
+		} 
 
-		effect = {  } 
+		effect = {  
+			#idk
+		} 
 	}
 }
