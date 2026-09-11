@@ -965,6 +965,9 @@ country_event = {
         is_year = 1445
         ING = {
             is_march = yes
+            NOT = {
+                is_subject_of_type = iyali_vassal
+            }
         }
     }
     fire_only_once = yes
@@ -1579,16 +1582,254 @@ country_event = { # another victory
 	}
 }
 
-country_event = { #consolidation of cultures
+country_event = { #consolidation of cultures renames
     id = bapti.24
     title = bapti.24.t
     desc = bapti.24.d
     picture = BIG_ARABIAN_CITY_eventPicture
     is_triggered_only = yes
+    trigger = {
+        all_province = {
+           culture = igbo
+           country_or_non_sovereign_subject_holds = ROOT
+        }
+    }
 
     option = {
         name = bapti.24.a
-        
+        if = {
+            limit = {
+                any_country = {
+                    primary_culture = igbo
+                }
+            }
+            random_country = {
+                limit = {
+                    primary_culture = igbo
+                }
+                every_province = {
+                    limit = {
+                        culture = igbo
+                    }
+                    add_core = PREV
+                    add_unrest = 5
+                }
+            }
+        }else = {
+            every_province = {
+                    limit = {
+                        culture = igbo
+                    }
+                    add_core = BJ7
+                    add_unrest = 5
+                }
+        }
+        if = {
+            limit = {
+                any_country = {
+                    primary_culture = yorumba
+                }
+            }
+            random_country = {
+                limit = {
+                    primary_culture = yorumba
+                }
+                every_province = {
+                    limit = {
+                        culture = yorumba
+                    }
+                    add_core = PREV
+                    add_unrest = 5
+                }
+            }
+        }else = {
+            every_province = {
+                    limit = {
+                        culture = yorumba
+                    }
+                    add_core = ING
+                    add_unrest = 5
+                }
+        }
+    }
+
+}
+
+country_event = { #consolidation of aisabbe
+    id = bapti.25
+    title = bapti.25.t
+    desc = bapti.25.d
+    picture = BIG_ARABIAN_CITY_eventPicture
+    is_triggered_only = yes
+    trigger = {
+        all_province = {
+           culture = kanuri
+           country_or_non_sovereign_subject_holds = ROOT
+        }
+    }
+
+    option = {
+        name = bapti.25.a
+        if = {
+            limit = {
+                any_country = {
+                    primary_culture = kanuri
+                }
+            }
+            random_country = {
+                limit = {
+                    primary_culture = kanuri
+                }
+                if = {
+                    limit = {
+                        is_subject = yes
+                    }
+                    add_liberty_desire = 20
+                }
+                change_tag = AIS
+			    set_country_flag = kanuri_formed	
+                every_province = {
+                    limit = {
+                        culture = kanuri
+                    }
+                    add_core = AIS
+                    if = {
+                        limit = {
+                            owned_by = AIS
+                        }
+                        add_unrest = -10
+                    }
+                }
+            }
+        }else = {
+            every_province = {
+                    limit = {
+                        culture = kanuri
+                    }
+                    add_core = AIS
+                    add_unrest = 10
+                }
+        }
+
+    }
+
+}
+
+country_event = { #consolidation of sorr
+    id = bapti.26
+    title = bapti.26.t
+    desc = bapti.26.d
+    picture = BIG_ARABIAN_CITY_eventPicture
+    is_triggered_only = yes
+    trigger = {
+        all_province = {
+           culture = so_c
+           country_or_non_sovereign_subject_holds = ROOT
+        }
+    }
+
+    option = {
+        name = bapti.26.a
+        if = {
+            limit = {
+                any_country = {
+                    primary_culture = so_c
+                }
+            }
+            random_country = {
+                limit = {
+                    primary_culture = so_c
+                }
+                if = {
+                    limit = {
+                        is_subject = yes
+                    }
+                    add_liberty_desire = 20
+                }
+                change_tag = SRR
+			    set_country_flag = so_c_formed	
+                every_province = {
+                    limit = {
+                        culture = so_c
+                    }
+                    add_core = SRR
+                    if = {
+                        limit = {
+                            owned_by = SRR
+                        }
+                        add_unrest = -10
+                    }
+                }
+            }
+        }else = {
+            every_province = {
+                    limit = {
+                        culture = so_c
+                    }
+                    add_core = SRR
+                    add_unrest = 10
+                }
+        }
+
+    }
+
+}
+
+country_event = { #consolidation of samabaddl
+    id = bapti.27
+    title = bapti.27.t
+    desc = bapti.27.d
+    picture = BIG_ARABIAN_CITY_eventPicture
+    is_triggered_only = yes
+    trigger = {
+        all_province = {
+           culture = samabaddl
+           country_or_non_sovereign_subject_holds = ROOT
+        }
+    }
+    option = {
+        name = bapti.27.a
+        if = {
+            limit = {
+                any_country = {
+                    primary_culture = samabaddl
+                }
+            }
+            random_country = {
+                limit = {
+                    primary_culture = samabaddl
+                }
+                if = {
+                    limit = {
+                        is_subject = yes
+                    }
+                    add_liberty_desire = 20
+                }
+                change_tag = PRP
+			    set_country_flag = prusplumina_formed	
+                every_province = {
+                    limit = {
+                        culture = samabaddl
+                    }
+                    add_core = PRP
+                    if = {
+                        limit = {
+                            owned_by = PRP
+                        }
+                        add_unrest = -10
+                    }
+                }
+            }
+        }else = {
+            every_province = {
+                    limit = {
+                        culture = samabaddl
+                    }
+                    add_core = PRP
+                    add_unrest = 10
+                }
+        }
+
     }
 
 }
