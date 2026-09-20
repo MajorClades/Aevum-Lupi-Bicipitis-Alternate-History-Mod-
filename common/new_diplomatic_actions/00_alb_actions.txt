@@ -3,6 +3,14 @@ mekh_addiction_action = {
 	require_acceptance = no
 	is_visible = {
 		has_country_flag = mekhanite_addiction_flag
+		if = {
+			limit = {
+				ai = yes
+			}
+			FROM = {
+				ai = yes
+			}
+		}
     }
 
 	is_allowed = {
@@ -44,6 +52,14 @@ valtea_event_action = {
 	require_acceptance = no
 	is_visible = {
 		has_government_mechanic = valtea_intel_mechanic
+		if = {
+			limit = {
+				ai = yes
+			}
+			FROM = {
+				ai = yes
+			}
+		}
     }
 
 	is_allowed = {
@@ -98,6 +114,14 @@ spy_estate_action = {
 	require_acceptance = no
 	is_visible = {
 		has_country_flag = spy_estate_flag
+		if = {
+			limit = {
+				ai = yes
+			}
+			FROM = {
+				ai = yes
+			}
+		}
     }
 
 	is_allowed = {
@@ -154,6 +178,14 @@ spy_collapse_country_action = {
 				has_country_flag = collapse_already_flag
 			}
 		}
+		if = {
+			limit = {
+				ai = yes
+			}
+			FROM = {
+				ai = yes
+			}
+		}
     }
 
 	is_allowed = {
@@ -190,6 +222,14 @@ friendship_action = {
 	is_visible = {
 		ROOT = {
 			has_country_flag = ellan_easy_expansion
+		}
+		if = {
+			limit = {
+				ai = yes
+			}
+			FROM = {
+				ai = yes
+			}
 		}
     }
 
@@ -1100,6 +1140,104 @@ gift_religious_artifact = {
 		
 	}
 	on_decline = 	{
+	}
+
+	ai_will_do = { # this is a trigger
+		always = no
+	}
+}
+
+#Baptist stuff
+make_iyali_vassal = {
+	category = influence
+	
+	alert_index = 40
+	alert_tooltip = demand_dummy_alert_tooltip
+	require_acceptance = no # Whether the recipient gets an option to decline
+	is_visible = {
+		tag = BJ0
+		is_subject = no
+		FROM = {
+			is_subject_of_type = vassal
+			is_subject_of = ROOT	
+			NOT = {
+				religion = baptistism	
+			}	
+		}
+	}
+	is_allowed = {
+		hidden_trigger = {
+			is_subject = no
+			FROM = {
+				is_subject_of_type = vassal
+				is_subject_of = ROOT		
+			}
+		}
+		FROM = {
+			is_subject_of_type = vassal
+			is_subject_of = ROOT	
+			religion = baptistism	
+			NOT = {
+				liberty_desire = 50
+			}
+		}
+	}
+	on_accept = {
+		create_subject = {
+			subject_type = iyali_vassal
+			subject = FROM 
+		}
+		FROM = {
+			add_government_reform = iyali_baptist_reform
+		}
+	}
+	on_decline = 	{
+	}
+
+	ai_will_do = { # this is a trigger
+		always = no
+	}
+}
+diplomatic_conversion_action = {
+	category = influence
+	
+	alert_index = 40
+	alert_tooltip = demand_dummy_alert_tooltip
+	require_acceptance = no # Whether the recipient gets an option to decline
+	is_visible = {
+		has_country_flag = baptist_diplomatic_conversion_flag
+		FROM = {
+			capital_scope = {
+				continent = africa
+			}
+			NOT = {
+				religion_group = christian
+			}	
+			NOT = {
+				religion_group = muslim
+			}	
+			NOT = {
+				religion_group = zoroastrian_group
+			}	
+		}
+	}
+	is_allowed = {
+		years_of_income = 1
+		FROM = {
+			is_subject = no
+			has_opinion = {
+				who = ROOT
+				value = 190
+			}
+		}
+	}
+	on_accept = {
+		add_years_of_income = -1
+		FROM = {
+			change_religion = baptistism
+		}
+	}
+	on_decline = {
 	}
 
 	ai_will_do = { # this is a trigger

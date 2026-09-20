@@ -212,7 +212,13 @@ Nubia_2_slot = {
 			}
 		}
 
-		effect = { capital_scope = { add_or_upgrade_tax_building = yes }  } 
+		effect = { 
+			capital_scope = { add_or_upgrade_tax_building = yes }  
+			add_country_modifier = {
+				name = nub_strengthen_coptic
+				duration = 10950
+			}
+		} 
 	}
 
 	nub_ancient_history = {
@@ -265,9 +271,14 @@ Nubia_2_slot = {
 		provinces_to_highlight = {  } 
 
 		trigger = {
-			has_won_war_against = {
-				who = RU0
-				max_years_since = 10
+			OR = {
+				has_won_war_against = {
+					who = RU0
+					max_years_since = 10
+				}
+				NOT = {
+					exists = RU0
+				}
 			}
 			num_of_completed_idea_groups_mil = { amount = 1 } 
 		}

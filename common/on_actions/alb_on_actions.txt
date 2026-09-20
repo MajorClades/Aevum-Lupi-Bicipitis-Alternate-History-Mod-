@@ -20,6 +20,7 @@ on_startup = {	#heads up this fires when you load a save too
 		light_emp.22
 		wuuevent.1
 		aust_rho.4
+		sesda.1
 	}
 	if = {
 		limit = {
@@ -430,6 +431,10 @@ on_main_war_won = {
 		}
 		remove_country_modifier = redleg_prepare_for_crusade
 		remove_country_modifier = redleg_prepare_for_crusade_AI
+		SDW = {
+			remove_country_modifier = sand_countercrusade
+			remove_country_modifier = sand_countercrusade_ai
+		}
 		MLO = {
 			country_event = {
 				id = mila.1
@@ -714,6 +719,15 @@ on_emperor_elected = {
 on_adm_development = {
 	if = {
 		limit = {
+			owner = { has_church_aspect = adm_dev_baptist_aspect }
+		}
+		random = { 
+			chance = 25 
+			add_base_tax = 1
+		}
+	}
+	if = {
+		limit = {
 			owner = {has_church_aspect = cladesian_adm_aspect}
 		}
 		random = { 
@@ -839,6 +853,15 @@ on_adm_development = {
 }
 
 on_dip_development = {
+	if = {
+		limit = {
+			owner = { has_church_aspect = dip_dev_baptist_aspect }
+		}
+		random = { 
+			chance = 25 
+			add_base_production = 1
+		}
+	}
 	if = {
 		limit = {
 			owner = {has_church_aspect = sanguinar_dip_aspect}
@@ -998,6 +1021,15 @@ on_dip_development = {
 }
 
 on_mil_development = {
+	if = {
+		limit = {
+			owner = { has_church_aspect = mil_dev_baptist_aspect }
+		}
+		random = { 
+			chance = 25 
+			add_base_manpower = 1
+		}
+	}
 	if = {
 		limit = {
 			has_province_modifier = solari_stronghold
@@ -1185,9 +1217,6 @@ on_mil_exploited = {
 			}
 		}
 	}
-}
-
-on_thri_yearly_pulse_2 = {
 }
 
 on_province_religion_converted = {
@@ -1635,6 +1664,22 @@ on_five_year_pulse = {
 		}
 		country_event = {
 			id = fjal.305
+		}
+	}
+	if = {
+		limit = {
+			tag = RX3
+			NOT = {
+				mission_completed = mekh_our_foundations
+			}
+		}
+		random_list = {
+			50 = {
+				country_event = {
+					id = aust_rho.10
+				}
+			}
+			50 = {}
 		}
 	}
 }

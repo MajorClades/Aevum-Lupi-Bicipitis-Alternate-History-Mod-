@@ -224,12 +224,27 @@ sox_occ_1_slot = {
 	}
 }
 
-sox_colonial_1_slot = {
+banrika_generic_1_slot = { #making generic because no more custom colonies
 	slot = 1
 	generic = no
 	ai = yes
 	has_country_shield = yes
-	potential = { OR = {	tag = A30 tag = A31 tag = A32 tag = A34 tag = A35 tag = A36 tag = A37 tag = A38 tag = A39	}} 
+	potential = { 
+		OR = {
+			AND = {
+				OR = {
+					is_former_colonial_nation = yes
+					is_colonial_nation = yes
+				}
+				capital_scope = {
+					colonial_region = colonial_the_carribean
+				}
+			}
+			tag = US0
+			tag = HAT
+			tag = CUB
+		}
+	} 
 
 	colonial_sox_starting = {
 		icon = mission_colonial
@@ -314,125 +329,6 @@ sox_colonial_1_slot = {
 					name = new_world_capital_colony
 					duration = -1
 				}
-			}
-		}
-	}
-}
-
-sox_cot_1_slot = {
-	slot = 1
-	generic = no
-	ai = yes
-	has_country_shield = yes
-	potential = { tag = A33 } 
-
-	cot_sox_adventure = {
-		icon = mission_iberian_conquistador
-		position = 1
-		required_missions = {  } 
-
-		trigger = {
-			num_of_owned_provinces_with = {
-				value = 10
-			}
-		}
-
-		effect = {
-			capital_scope = {
-				add_base_tax = 3
-			}
-		}
-	}
-	cot_sox_secret = {
-		icon = mission_european_church
-		position = 2
-		required_missions = {cot_sox_adventure  } 
-
-		trigger = {
-			overlord = {
-				num_of_owned_provinces_with = {
-					value = 10
-					OR = {
-						culture = goth_p
-						culture = soxon_goths
-					}
-				}
-			}
-			num_of_owned_provinces_with = {
-				value = 2
-				has_tax_building_trigger = yes
-			}
-		}
-
-		effect = {
-			overlord = {
-				country_event = {
-					id = soxony.11
-				}
-			}
-			capital_scope = {
-				add_base_production = 3
-			}
-		}
-	}
-	cot_sox_secret_power = {
-		icon = mission_mosque
-		position = 3
-		required_missions = { cot_sox_secret } 
-
-		trigger = {
-			num_of_owned_provinces_with = {
-				value = 15
-				religion = arian
-			}
-		}
-
-		effect = {
-			add_stability = 1
-			add_manpower = 5
-			capital_scope = {
-				add_base_manpower = 3
-			}
-		}
-	}
-	cot_sox_secret_powerhouse = {
-		icon = mission_japanese_samurai
-		position = 4
-		required_missions = { cot_sox_secret_power } 
-
-		trigger = {
-			is_at_war = no
-			army_size = 25
-		}
-
-		effect = {
-			capital_scope = {
-				change_trade_goods = wine
-			}
-			add_liberty_desire = 50
-		}
-	}
-	cot_sox_gothic_rebellion = {
-		icon = mission_unite_home_region
-		position = 5
-		required_missions = { cot_sox_secret_powerhouse } 
-
-		trigger = {
-			is_at_war = no
-			liberty_desire = 75
-		}
-
-		effect = {
-			define_general = {
-				name = "Georgios"
-				shock = 5
-				fire = 5
-				manuever = 5
-				siege = 1
-			}
-			declare_war_with_cb = {
-				casus_belli = cb_independence_war
-				who = overlord
 			}
 		}
 	}

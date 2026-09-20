@@ -1,0 +1,91 @@
+custom_button = {
+	name = baptist_send_the_word_bearers
+	potential = {
+		FROM = {
+			has_country_flag = baptist_send_the_word_bearers_flag
+		}
+		owned_by = FROM
+		local_autonomy = 1
+	}
+	trigger = {
+		FROM = {
+			devotion = 10
+			manpower = 5
+		}
+		if = {
+			limit = {
+				base_manpower = 10
+			}
+			num_of_units_in_province = {
+				who = ROOT
+				amount = 35
+				type = infantry
+			}
+		}else = {
+			if = {
+				limit = {
+					base_manpower = 5
+				}
+				num_of_units_in_province = {
+					who = ROOT
+					amount = 15
+					type = infantry
+				}
+			}else = {
+				if = {
+					limit = {
+						base_manpower = 3
+					}
+					num_of_units_in_province = {
+						who = ROOT
+						amount = 10
+						type = infantry
+					}
+				}else = {
+					num_of_units_in_province = {
+						who = ROOT
+						amount = 5
+						type = infantry
+					}
+				}
+			}
+		}
+	}
+	effect = {
+		if = {
+			limit = {
+				base_manpower = 10
+			}
+			FROM = {
+				add_manpower = -5
+			}
+		}else = {
+			if = {
+				limit = {
+					base_manpower = 5
+				}
+				FROM = {
+					add_manpower = -4
+				}
+			}else = {
+				if = {
+					limit = {
+						base_manpower = 3
+					}
+					FROM = {
+						add_manpower = -3
+					}
+				}else = {
+					FROM = {
+						add_manpower = -1
+					}
+				}
+			}
+		}
+		FROM = {
+			add_devotion = -10
+		}
+		add_local_autonomy = -15
+	}
+	tooltip = baptist_send_the_word_bearers_tt
+}

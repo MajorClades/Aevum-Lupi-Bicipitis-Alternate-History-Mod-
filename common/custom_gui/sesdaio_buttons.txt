@@ -1,0 +1,194 @@
+custom_button = {
+	name = sesdaio_raid_button
+	potential = {
+		FROM = {
+			has_government_mechanic = sesdaio_maxxing_mechanic
+		}
+		NOT = {
+			owned_by = FROM
+		}
+		is_neighbor_of = FROM
+	}
+	trigger = {
+		owner = {
+			OR = {
+				NOT = {
+					alliance_with = FROM
+				}
+				NOT = {
+					truce_with = FROM
+				}
+			}
+		}
+		NOT = {
+			fort_level = 2
+		}
+		NOT = {
+			has_province_modifier = ses_raided
+		}
+		FROM = {
+			years_of_manpower = 0.75
+		}
+	}
+	effect = {
+		add_devastation = 25
+		FROM = {
+			add_yearly_manpower = -0.75
+		}
+		if = {
+			limit = {
+				mission_completed = rx_raiding_wars
+			}
+			if = {
+			limit = {
+				base_tax = 1
+				NOT = {
+					base_tax = 3
+				}
+			}
+			FROM = {
+				add_treasury = 10
+			}
+		}else = {
+			if = {
+				limit = {
+					base_tax = 3
+					NOT = {
+						base_tax = 6
+					}
+				}
+				FROM = {
+					add_treasury = 50
+				}
+				
+			}else = {
+					if = {
+						limit = {
+							base_tax = 6
+						}
+						FROM = { add_treasury = 90}
+					}
+				}
+		}
+		}
+		if = {
+			limit = {
+				base_manpower = 1
+				NOT = {
+					base_manpower = 3
+				}
+			}
+			FROM = {
+			add_government_power = {
+					mechanic_type = sesdaio_maxxing_mechanic
+					power_type = rx_num_slaves
+					value = 2
+				}
+			}
+
+		}else = {
+			if = {
+				limit = {
+					base_manpower = 3
+					NOT = {
+						base_manpower = 6
+					}
+				}
+				FROM = {
+			add_government_power = {
+					mechanic_type = sesdaio_maxxing_mechanic
+					power_type = rx_num_slaves
+					value = 5
+				}
+			}
+			}else = {
+					if = {
+						limit = {
+							base_manpower = 6
+						}
+						FROM = {
+			add_government_power = {
+					mechanic_type = sesdaio_maxxing_mechanic
+					power_type = rx_num_slaves
+					value = 10
+				}
+			}
+					}
+				}
+		}
+		add_province_modifier = {
+			name = ses_raided
+			duration = 1825
+		}
+		owner = {
+			add_aggressive_expansion = {
+				who = FROM
+				value = 5
+				apply_calc = no
+			}
+		}
+	}
+	tooltip = sesdaio_raid_button_tt
+}
+
+custom_button = {
+	name = sesdaio_add_slaves_button
+	potential = {
+		FROM = {
+			has_government_mechanic = sesdaio_maxxing_mechanic
+		}
+		owned_by = FROM
+		NOT = {
+			trade_goods = slaves
+		}
+	}
+	trigger = {
+		FROM = {
+			has_government_power = {
+					mechanic_type = sesdaio_maxxing_mechanic
+					power_type = rx_num_slaves
+					value = 5
+				}
+		}
+		NOT = {
+			has_province_modifier = ses_add_some_slaves
+		}
+	}
+	effect = {
+		FROM = {
+			add_government_power = {
+					mechanic_type = sesdaio_maxxing_mechanic
+					power_type = rx_num_slaves
+					value = -5
+				}
+			if = {
+				limit = {
+					mission_completed = rx_raiding_worked
+				}
+				add_years_of_owned_provinces_production_income = {
+					years = 2
+					trigger = {
+						province_id = ROOT
+					}
+					custom_tooltip = THIS_PROVINCE_DESC
+				}
+			}
+		}
+		if = {
+			limit = {
+				owner = {
+					mission_completed = rx_end_of_freedom
+				}
+			}
+			add_province_modifier = {
+				name = ses_chains_forever
+				duration = -1
+			}
+		}
+		add_province_modifier = {
+				name = ses_add_some_slaves
+				duration = 3650
+			}
+	}
+	tooltip = sesdaio_add_slaves_button_tt
+}

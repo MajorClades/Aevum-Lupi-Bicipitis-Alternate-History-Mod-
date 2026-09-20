@@ -27,6 +27,9 @@ country_decisions = {
 				primary_culture = pannonian
 				is_or_was_tag = {tag = DA2}
 			}
+			NOT = {
+				has_country_flag = greater_pannonia_dec_flag
+			}
 		}
 		allow = {
 			NOT = {
@@ -49,6 +52,7 @@ country_decisions = {
 			add_dip_power = 300
 			add_stability_or_adm_power = yes
 			add_prestige_or_monarch_power = {amount = 50}
+			set_country_flag = greater_pannonia_dec_flag
 		}
 		ai_will_do = {
 			factor = 1
@@ -101,30 +105,32 @@ country_decisions = {
 			1 1 1
 		}
 		potential = {
+			if = {
+				limit = {
+					ai =  yes
+				}
+				exists = event_target:EmperorOfChina
+			}
 			is_or_was_tag = {tag = PAP}
 		}
 		provinces_to_highlight = {
 			superregion = china_superregion
 		}
 		allow = {
-			any_country = {
-				is_emperor_of_china = yes
-			}
+			tag = PAP
 			OR = {
 				any_province = {
 					superregion = china_superregion
 					country_or_non_sovereign_subject_holds = ROOT
 				}
-				any_country = {
-					capital_scope = {
-						superregion = china_superregion
-					}
+				event_target:EmperorOfChina = {
 					has_opinion = {
 						who = ROOT
 						value = 100
 					}
 				}
 			}
+			exists = event_target:EmperorOfChina
 		}
 		effect = {
 			country_event = {
