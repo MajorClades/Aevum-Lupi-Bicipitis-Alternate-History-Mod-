@@ -5,19 +5,69 @@ country_event = {
 	title = gao.1.test
 	desc = gao.1.desc
 	picture = CRUSADER_HORDE_eventPicture
-	trigger = {
-		tag = BJ6
-		BJ3 = {
-			ai = yes
-		}
-	}
-	mean_time_to_happen = {
-		months = 12
-	}
+	is_triggered_only = yes
 	fire_only_once = yes
 	option = {
 		name = gao.1a
+		ai_chance = {
+			factor = 1
+		}
+		BJ6 = {
+				country_event = {
+					id = gao.2
+				}
+			}
+	}
+	option = {
+		name = gao.1b
+		ai_chance = {
+			factor = 0
+		}
+		custom_tooltip = perma_claim_neighbor_area
+			hidden_effect = {
+				every_owned_province = {
+					every_neighbor_province = {
+						area = {
+							limit = {
+								NOT = { owned_by = ROOT }
+								NOT = { is_permanent_claim = ROOT    }
+								NOT = { is_core = ROOT    }
+							}
+							add_permanent_claim = ROOT
+						}
+					}
+				}
+			}
+	}
+}
+country_event = {
+	id = gao.2
+	title = gao.2.test
+	desc = gao.2.desc
+	picture = CRUSADER_HORDE_eventPicture
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = gao.2a
+		ai_chance = {
+			factor = 1
+		}
 		inherit = BJ3
-		change_technology_group = african_roman
+		add_army_professionalism = 0.15
+		5079 = {
+			change_culture = songhai
+		}
+	}
+	option = {
+		name = gao.2b
+		ai_chance = {
+			factor = 0
+		}
+		inherit = BJ3
+		add_army_professionalism = 0.15
+		change_religion = indictian
+		capital_scope = {
+			change_religion = indictian
+		}
 	}
 }
