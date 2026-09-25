@@ -5,6 +5,45 @@ Gao_1_slot = {
 	has_country_shield = yes
 	potential = { tag = BJ6 } 
 
+	gao_desert_war = {
+		icon = mission_impaled_soldies
+		position = 3
+		required_missions = { gao_growing_empire	}
+		provinces_to_highlight = { 
+			region = sahel_region
+			NOT = { country_or_non_sovereign_subject_holds = ROOT }
+		} 
+
+		trigger = {
+			sahel_region = {
+				type = all
+				OR = {
+					country_or_non_sovereign_subject_holds = ROOT 
+					is_empty = yes
+				}
+			}
+		}
+
+		effect = {
+			maghreb_region = { add_permanent_claim = ROOT } 
+			1127 = {
+				if = {
+					limit = { is_empty = yes } 
+					cede_province = ROOT
+					add_core = ROOT
+				}
+				else = { add_core = ROOT } 
+			}
+			2475 = {
+				if = {
+					limit = { is_empty = yes } 
+					cede_province = ROOT
+					add_core = ROOT
+				}
+				else = { add_core = ROOT } 
+			}
+		}
+	}
 } 
 Gao_2_slot = {
 	slot = 2
@@ -13,6 +52,56 @@ Gao_2_slot = {
 	has_country_shield = yes
 	potential = { tag = BJ6 } 
 
+	gao_growing_empire = {
+		icon = mission_impaled_soldies
+		position = 2
+		required_missions = { gao_the_legion_of_help	}
+		provinces_to_highlight = { is_claim = ROOT	} 
+
+		trigger = {
+			grown_by_states = 3
+		}
+
+		effect = {
+			capital_scope = {
+				add_or_upgrade_forcelimit_building = yes
+			}
+			sahel_region = {
+				add_permanent_claim = ROOT
+			}
+			niger_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+
+	gao_old_lord = {
+		icon = mission_impaled_soldies
+		position = 3
+		required_missions = { gao_growing_empire	}
+		provinces_to_highlight = { 
+			is_capital_of = JOL
+		} 
+
+		trigger = {
+			OR = {
+				has_won_war_against = {
+						who = JOL
+					}
+				JOL = {
+					is_subject_of = ROOT
+				}
+				JOL = {
+					exists = no
+				}
+			}
+		}
+
+		effect = {
+			set_government_rank = 3
+			guinea_region = { add_permanent_claim = ROOT } 
+		}
+	}
 } 
 Gao_3_slot = {
 	slot = 3
@@ -58,6 +147,32 @@ Gao_3_slot = {
 			}
 		}
 	}
+
+	gao_victorious_legio = {
+		icon = mission_impaled_soldies
+		position = 3
+		required_missions = { gao_the_legion_of_help	}
+		provinces_to_highlight = { 
+			has_manpower_building_trigger = no
+			owned_by = ROOT	
+		} 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 8
+				OR = {
+					has_manpower_building_trigger = yes
+					holy_order = gao_legio_castrum
+				}
+			}
+		}
+
+		effect = {
+			country_event = {
+				id = gao.3
+			}
+		}
+	}
 } 
 Gao_4_slot = {
 	slot = 4
@@ -66,6 +181,26 @@ Gao_4_slot = {
 	has_country_shield = yes
 	potential = { tag = BJ6 } 
 
+	gao_religion_standard = {
+		icon = mission_impaled_soldies
+		position = 2
+		required_missions = { gao_the_legion_of_help	}
+		provinces_to_highlight = { 
+			has_tax_building_trigger = no
+			owned_by = ROOT	
+		} 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 3
+				has_tax_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_stability_or_adm_power = yes
+		}
+	}
 } 
 Gao_5_slot = {
 	slot = 5
@@ -74,4 +209,39 @@ Gao_5_slot = {
 	has_country_shield = yes
 	potential = { tag = BJ6 } 
 
+	gao_religion_power = {
+		icon = mission_impaled_soldies
+		position = 1
+		trigger = {
+			stability = 1
+			OR = {
+				NOT = {
+					religious_unity = 0.5
+				}
+				religious_unity = 0.9
+			}
+		}
+
+		effect = {
+			simple_dynamic_effect = {
+				first_custom_tooltip = GAO_TT_1
+				first_limit = "religious_unity = 0.9"
+				first_effect = "
+					define_advisor = {
+						type = theologian
+						skill = 3
+						cost_multiplier = 0.75
+					}
+				"
+				second_limit = " NOT = { religious_unity = 0.9 }"
+				second_effect = "
+					define_advisor = {
+						type = inquisitor
+						skill = 3
+						cost_multiplier = 0.75
+					}
+				"
+			}
+		}
+	}
 } 
