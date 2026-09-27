@@ -181,20 +181,13 @@ Gao_4_slot = {
 	has_country_shield = yes
 	potential = { tag = BJ6 } 
 
-	gao_religion_standard = {
+	gao_feudalism = {
 		icon = mission_impaled_soldies
 		position = 2
 		required_missions = { gao_the_legion_of_help	}
-		provinces_to_highlight = { 
-			has_tax_building_trigger = no
-			owned_by = ROOT	
-		} 
 
 		trigger = {
-			num_of_owned_provinces_with = {
-				value = 3
-				has_tax_building_trigger = yes
-			}
+			has_institution = feudalism
 		}
 
 		effect = {
@@ -242,6 +235,44 @@ Gao_5_slot = {
 					}
 				"
 			}
+		}
+	}
+
+	gao_advisory = {
+		icon = mission_impaled_soldies
+		position = 2
+		required_missions = { gao_religion_power	}
+
+		trigger = {
+			has_adm_advisor_2 = yes
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = gao_age_of_construction
+				duration = 10950
+			}
+		}
+	}
+
+	gao_religion_standard = {
+		icon = mission_impaled_soldies
+		position = 3
+		required_missions = { gao_advisory gao_feudalism	}
+		provinces_to_highlight = { 
+			has_tax_building_trigger = no
+			owned_by = ROOT	
+		} 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 3
+				has_tax_building_trigger = yes
+			}
+		}
+
+		effect = {
+			add_years_of_income = 1
 		}
 	}
 } 

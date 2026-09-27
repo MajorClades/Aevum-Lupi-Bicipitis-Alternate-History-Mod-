@@ -149,16 +149,35 @@ gao_legio_castrum = {
     }
     cost = 50
     cost_type = mil_power
-    per_province_effect = {
-       add_local_autonomy = -20
+        per_province_effect = {
+        if = {
+            limit = {
+                FROM = {
+                    religion = indictian
+                }
+            }
+            add_base_manpower = 1
+        }
+        else = {
+            add_local_autonomy = -20
+        }
     }
     per_province_abandon_effect = {
-        
+        if = {
+            limit = {
+                FROM = {
+                    religion = indictian
+                }
+            }
+            add_base_manpower = -1
+        }
+        else = {
+        }
     }
     modifier = {
         local_defensiveness = 0.15
-        local_manpower = 0.5
         min_local_autonomy = 5
+        local_has_musketeers = yes
     }
     ai_priority = {
         factor = 1
