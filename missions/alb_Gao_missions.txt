@@ -102,6 +102,28 @@ Gao_2_slot = {
 			guinea_region = { add_permanent_claim = ROOT } 
 		}
 	}
+
+	gao_new_lords = {
+		icon = mission_impaled_soldies
+		position = 4
+		required_missions = { gao_old_lord	}
+		provinces_to_highlight = { 
+			is_claim = ROOT
+		} 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 80
+				is_core = ROOT
+			}
+		}
+
+		effect = {		
+			country_event = {
+				id = gao.4
+			}
+		}
+	}
 } 
 Gao_3_slot = {
 	slot = 3
@@ -173,6 +195,37 @@ Gao_3_slot = {
 			}
 		}
 	}
+
+	gao_warfare_tactics = {
+		icon = mission_impaled_soldies
+		position = 5
+		required_missions = { gao_slave_production gao_victorious_legio	}
+		provinces_to_highlight = { 
+			has_manpower_building_trigger = no
+			owned_by = ROOT	
+		} 
+
+		trigger = {
+			OR = {
+				army_size = 50
+				num_of_completed_idea_groups_mil = { amount = 1 }
+			}
+			num_of_owned_provinces_with = {
+				value = 18
+				has_manpower_building_trigger = yes
+			}
+		}
+
+		effect = { 
+			change_government_reform_progress = 50
+			tooltip = {
+				add_government_reform = gao_warfare_reform
+			}
+			tooltip = {
+				add_government_reform = gao_warfare_legio_reform
+			}
+		}
+	}
 } 
 Gao_4_slot = {
 	slot = 4
@@ -192,6 +245,30 @@ Gao_4_slot = {
 
 		effect = {
 			add_stability_or_adm_power = yes
+		}
+	}
+
+	gao_slave_production = {
+		icon = mission_impaled_soldies
+		position = 4
+		required_missions = { gao_religion_standard	}
+		provinces_to_highlight = { 
+			has_production_building_trigger = no
+			owned_by = ROOT	
+		} 
+
+		trigger = {
+			owns = 5079
+			num_of_owned_provinces_with = {
+				value = 8
+				has_production_building_trigger = yes
+			}
+		}
+
+		effect = { 
+			country_event = {
+				id = gao.5
+			}
 		}
 	}
 } 
@@ -273,6 +350,30 @@ Gao_5_slot = {
 
 		effect = {
 			add_years_of_income = 1
+		}
+	}
+
+	gao_state_controlled_faith = {
+		icon = mission_impaled_soldies
+		position = 4
+		required_missions = { gao_religion_standard	}
+		provinces_to_highlight = { 
+			has_tax_building_trigger = no
+			owned_by = ROOT	
+		} 
+
+		trigger = {
+			has_institution = renaissance
+			num_of_owned_provinces_with = {
+				value = 8
+				has_tax_building_trigger = yes
+			}
+		}
+
+		effect = {
+			capital_scope = {
+				add_or_upgrade_tax_building = yes
+			}
 		}
 	}
 } 
