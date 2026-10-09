@@ -188,3 +188,88 @@ country_event = {
 		}
 	}
 }
+
+country_event = {
+	id = gao.6
+	title = gao.6.test
+	desc = gao.6.desc
+	picture = CRUSADER_HORDE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = gao.6a
+		ai_chance = {
+			factor = 1
+			modifier = {
+				factor = 2
+				BJ6 = {
+					religion = indictian
+				}
+			}
+			modifier = {
+				factor = 2
+				BJ6 = {
+					has_country_modifier = gao_lingua_africana
+				}
+			}
+			modifier = {
+				factor = 0.5
+				BJ6 = {
+					religion = baptistism
+				}
+			}
+		}
+		BJ6 = {
+			create_union = ROOT
+		}
+		add_liberty_desire = -30
+	}
+	option = {
+		name = gao.6b
+		ai_chance = {
+			factor = 2
+		}
+		BJ6 = {
+			country_event = {
+				id = gao.7
+			}
+		}
+	}
+	option = {
+		name = gao.6c
+		ai_chance = {
+			factor = 1
+		}
+		BJ6 = {
+			add_casus_belli = {
+				type = cb_restore_personal_union
+				target = ROOT
+				months = 300
+			}
+		}
+	}
+
+}
+
+country_event = {
+	id = gao.7
+	title = gao.7.test
+	desc = gao.7.desc
+	picture = CRUSADER_HORDE_eventPicture
+	is_triggered_only = yes
+	option = {
+		name = gao.7a
+		change_religion = indictian
+		create_union = AF0
+		AF0 = {
+			add_liberty_desire = -40
+		}
+	}
+	option = {
+		name = gao.7b
+		add_casus_belli = {
+				type = cb_restore_personal_union
+				target = AF0
+				months = 300
+			}
+	}
+}

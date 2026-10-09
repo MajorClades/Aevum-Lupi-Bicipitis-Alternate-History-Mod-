@@ -15,11 +15,16 @@ Gao_1_slot = {
 		} 
 
 		trigger = {
-			sahel_region = {
-				type = all
+			num_of_provinces_owned_or_owned_by_subjects_with = {
+				value = 25
 				OR = {
-					country_or_non_sovereign_subject_holds = ROOT 
-					is_empty = yes
+					area = azbin_area
+					area = kurdufan_area
+					area = western_sahara_area
+					area = dendi_area
+					area = baghena_area
+					area = niger_bend_area
+					area = east_azbin_area
 				}
 			}
 		}
@@ -42,6 +47,52 @@ Gao_1_slot = {
 				}
 				else = { add_core = ROOT } 
 			}
+		}
+	}
+	gao_proposals = {
+		icon = mission_impaled_soldies
+		position = 5
+		required_missions = { gao_new_lords	gao_desert_war}
+		provinces_to_highlight = { 
+			is_capital_of = AF0
+		} 
+
+		trigger = {
+			OR = {
+				AF0 = {
+					alliance_with = ROOT
+					has_opinion = {
+						who = ROOT
+						value = 190
+					}
+				}
+				num_of_provinces_owned_or_owned_by_subjects_with = {
+					value = 50
+					region = maghreb_region
+				}
+			}
+		}
+
+		effect = {		
+			simple_dynamic_effect = {
+				first_custom_tooltip = GAO_TT_3
+				first_limit = " AF0 = { alliance_with = ROOT }"
+				first_effect = "
+					AF0 = {
+						country_event = {
+							id = gao.6
+						}
+					}
+				"
+				second_limit = " NOT = { AF0 = { alliance_with = ROOT } }"
+				second_effect = "
+					add_country_modifier = {
+						name = gao_restorer_of_empires
+						duration = -1
+					}
+				"
+			}
+			
 		}
 	}
 } 
@@ -218,11 +269,31 @@ Gao_3_slot = {
 
 		effect = { 
 			change_government_reform_progress = 50
+			custom_tooltip = GAO_TT_2
 			tooltip = {
 				add_government_reform = gao_warfare_reform
 			}
 			tooltip = {
 				add_government_reform = gao_warfare_legio_reform
+			}
+		}
+	}
+	gao_lords_of_War = {
+		icon = mission_impaled_soldies
+		position = 6
+		required_missions = { gao_warfare_tactics }
+
+		trigger = {
+			OR = {
+				army_size = 100
+				num_of_musketeer = 30
+			}
+		}
+
+		effect = { 
+			add_country_modifier = {
+				name = gao_good_generals
+				duration = -1
 			}
 		}
 	}
