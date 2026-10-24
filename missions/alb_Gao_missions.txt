@@ -95,6 +95,125 @@ Gao_1_slot = {
 			
 		}
 	}
+	gao_to_the_kongo = {
+		icon = mission_impaled_soldies
+		position = 6
+		provinces_to_highlight = { 
+			region = guinea_region
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {
+			guinea_region = {
+				type = all
+				OR = {
+					is_island = yes
+					country_or_non_sovereign_subject_holds = ROOT
+				}	
+			}	
+		}
+
+		effect = {		
+			if = {
+				limit = {
+					navy_size_percentage = 0.5
+				}
+				add_country_modifier = {
+					name = gao_more_ships
+					duration = 10950
+				}
+			}else = {
+				random_owned_province = {
+					limit = { has_port = yes}
+					build_to_forcelimit = {
+						heavy_ship = 0.15
+						light_ship = 0.35
+						transport = 0.5
+					}
+				}
+			}
+			kongo_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	gao_more_conquest = {
+		icon = mission_impaled_soldies
+		position = 7
+		required_missions = { gao_west_africa	gao_to_the_kongo}
+		provinces_to_highlight = { 
+			OR = {
+				region = kongo_region
+				region = horn_of_africa_region
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {
+			OR = {
+				horn_of_africa_region = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+				kongo_region = {
+					type = all
+					country_or_non_sovereign_subject_holds = ROOT
+				}
+			}
+		}
+
+		effect = {		
+			tooltip = {
+				random_owned_province = {
+					custom_tooltip = GAO_TT_7
+					add_unrest = -5
+					add_nationalism = -10
+					add_local_autonomy = -10
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						horn_of_africa_region = {
+							type = all
+							country_or_non_sovereign_subject_holds = ROOT
+						}
+					}
+					every_owned_province = {
+						limit = {
+							region = horn_of_africa_region
+						}
+						add_unrest = -5
+						add_nationalism = -10
+						add_local_autonomy = -10
+					}
+				}
+				if = {
+					limit = {
+						kongo_region = {
+							type = all
+							country_or_non_sovereign_subject_holds = ROOT
+						}
+					}
+					every_owned_province = {
+						limit = {
+							region = kongo_region
+						}
+						add_unrest = -5
+						add_nationalism = -10
+						add_local_autonomy = -10
+					}
+				}
+			}
+			southern_africa_superregion = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
 } 
 Gao_2_slot = {
 	slot = 2
@@ -175,6 +294,56 @@ Gao_2_slot = {
 			}
 		}
 	}
+	gao_west_africa = {
+		icon = mission_impaled_soldies
+		position = 6
+		required_missions = { gao_new_lords	}
+		provinces_to_highlight = { 
+			OR = {
+				region = niger_region
+				region = sahel_region
+			}
+			NOT = {
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		} 
+
+		trigger = {
+			niger_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			sahel_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		}
+
+		effect = {		
+			tooltip = {
+				random_owned_province = {
+					custom_tooltip = GAO_TT_6
+					add_unrest = -5
+					add_nationalism = -10
+					add_local_autonomy = -10
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						has_owner_accepted_culture = yes
+					}
+					add_unrest = -5
+					add_nationalism = -10
+					add_local_autonomy = -10
+				}
+			}
+			horn_of_africa_region = {
+				add_permanent_claim = ROOT
+			}
+		}
+	}
+	
 } 
 Gao_3_slot = {
 	slot = 3
@@ -294,6 +463,66 @@ Gao_3_slot = {
 			add_country_modifier = {
 				name = gao_good_generals
 				duration = -1
+			}
+		}
+	}
+	gao_cultural_victory = {
+		icon = mission_impaled_soldies
+		position = 7
+		required_missions = { gao_west_africa gao_lords_of_War }
+		provinces_to_highlight = {
+			OR = {
+				culture_group = mande
+				culture_group = sahelian
+				culture_group = west_african
+			}
+			country_or_non_sovereign_subject_holds = ROOT
+			OR = {
+				NOT = {
+					grown_by_development = 1
+				}
+				nationalism = 1
+			}
+		}
+
+		trigger = {
+			owns_all_provinces = {
+				OR = {
+					culture_group = mande
+					culture_group = sahelian
+					culture_group = west_african
+				}
+				OR = {
+					grown_by_development = 1
+					NOT = {
+						nationalism = 1
+					}
+				}
+			}
+		}
+
+		effect = { 
+			change_primary_culture = mande_aeg
+			custom_tooltip = GAO_AFRICAN_UNION_CULTURE
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						culture_group = mande
+					}
+					change_culture = mande_aeg
+				}
+				every_owned_province = {
+					limit = {
+						culture_group = sahelian
+					}
+					change_culture = sahelian_aeg
+				}
+				every_owned_province = {
+					limit = {
+						culture_group = west_african
+					}
+					change_culture = west_african_aeg
+				}
 			}
 		}
 	}
@@ -445,6 +674,52 @@ Gao_5_slot = {
 			capital_scope = {
 				add_or_upgrade_tax_building = yes
 			}
+		}
+	}
+	gao_empire_controlled_faith = {
+		icon = mission_impaled_soldies
+		position = 5
+		required_missions = { gao_state_controlled_faith }
+		provinces_to_highlight = { 
+			has_tax_building_trigger = no
+			owned_by = ROOT	
+		} 
+
+		trigger = {
+			num_of_owned_provinces_with = {
+				value = 20
+				has_tax_building_trigger = yes
+			}	
+		}
+
+		effect = {
+			tooltip = {
+				random_owned_province = {
+					custom_tooltip = GAO_TT_5
+					add_or_upgrade_forcelimit_building = yes
+				}
+			}
+			hidden_effect = {
+				every_owned_province = {
+					limit = {
+						has_tax_building_trigger = yes
+					}
+					add_or_upgrade_forcelimit_building = yes
+				}
+			}
+			simple_dynamic_effect = {
+				first_custom_tooltip = GAO_TT_4
+				first_limit = "religion_group = christian"
+				first_effect = "
+					add_yearly_manpower = 1
+					add_years_of_income = 1
+				"
+				second_limit = " NOT = { religion_group = christian }"
+				second_effect = "
+					add_yearly_manpower = 2
+				"
+			}
+			
 		}
 	}
 } 

@@ -149,7 +149,25 @@ gao_legio_castrum = {
     }
     cost = 50
     cost_type = mil_power
-        per_province_effect = {
+    per_province_effect = {
+        hidden_effect = {
+            FROM = {
+                if = { 
+                    limit = {
+                        NOT = {
+                            has_country_flag = gao_legio_castrum_better
+                        }
+                        num_of_owned_provinces_with = {
+                            value = 15
+                            holy_order = gao_legio_castrum
+                        }
+                    }
+                    country_event = {
+                        id = gao.8
+                    }
+                }
+            }
+        }
         if = {
             limit = {
                 FROM = {
