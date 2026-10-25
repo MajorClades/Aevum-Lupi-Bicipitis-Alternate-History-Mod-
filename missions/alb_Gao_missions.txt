@@ -6,13 +6,13 @@ Gao_1_slot = {
 	potential = { tag = BJ6 } 
 
 	gao_desert_war = {
-		icon = mission_impaled_soldies
+		icon = mission_bedouins
 		position = 3
-		required_missions = { gao_growing_empire	}
-		provinces_to_highlight = { 
+		required_missions = { gao_growing_empire } 
+		provinces_to_highlight = {
 			region = sahel_region
-			NOT = { country_or_non_sovereign_subject_holds = ROOT }
-		} 
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
 
 		trigger = {
 			num_of_provinces_owned_or_owned_by_subjects_with = {
@@ -49,13 +49,15 @@ Gao_1_slot = {
 			}
 		}
 	}
+
 	gao_proposals = {
-		icon = mission_impaled_soldies
+		icon = centralized_empire
 		position = 5
-		required_missions = { gao_new_lords	gao_desert_war}
-		provinces_to_highlight = { 
-			is_capital_of = AF0
-		} 
+		required_missions = {
+			gao_new_lords
+			gao_desert_war
+		}
+		provinces_to_highlight = { is_capital_of = AF0 } 
 
 		trigger = {
 			OR = {
@@ -95,15 +97,14 @@ Gao_1_slot = {
 			
 		}
 	}
+
 	gao_to_the_kongo = {
-		icon = mission_impaled_soldies
+		icon = mal_trade_with_europeans
 		position = 6
-		provinces_to_highlight = { 
+		provinces_to_highlight = {
 			region = guinea_region
-			NOT = {
-				country_or_non_sovereign_subject_holds = ROOT
-			}
-		} 
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
 
 		trigger = {
 			guinea_region = {
@@ -111,22 +112,21 @@ Gao_1_slot = {
 				OR = {
 					is_island = yes
 					country_or_non_sovereign_subject_holds = ROOT
-				}	
-			}	
+				}
+			}
 		}
 
-		effect = {		
+		effect = {
 			if = {
-				limit = {
-					navy_size_percentage = 0.5
-				}
+				limit = { navy_size_percentage = 0.5 } 
 				add_country_modifier = {
-					name = gao_more_ships
+					name = "gao_more_ships"
 					duration = 10950
 				}
-			}else = {
+			}
+			else = {
 				random_owned_province = {
-					limit = { has_port = yes}
+					limit = { has_port = yes } 
 					build_to_forcelimit = {
 						heavy_ship = 0.15
 						light_ship = 0.35
@@ -134,24 +134,24 @@ Gao_1_slot = {
 					}
 				}
 			}
-			kongo_region = {
-				add_permanent_claim = ROOT
-			}
+			kongo_region = { add_permanent_claim = ROOT } 
 		}
 	}
+
 	gao_more_conquest = {
-		icon = mission_impaled_soldies
+		icon = mission_kon_greatest_power_kongo
 		position = 7
-		required_missions = { gao_west_africa	gao_to_the_kongo}
-		provinces_to_highlight = { 
+		required_missions = {
+			gao_west_africa
+			gao_to_the_kongo
+		}
+		provinces_to_highlight = {
 			OR = {
 				region = kongo_region
 				region = horn_of_africa_region
 			}
-			NOT = {
-				country_or_non_sovereign_subject_holds = ROOT
-			}
-		} 
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
 
 		trigger = {
 			OR = {
@@ -166,7 +166,7 @@ Gao_1_slot = {
 			}
 		}
 
-		effect = {		
+		effect = {
 			tooltip = {
 				random_owned_province = {
 					custom_tooltip = GAO_TT_7
@@ -184,9 +184,7 @@ Gao_1_slot = {
 						}
 					}
 					every_owned_province = {
-						limit = {
-							region = horn_of_africa_region
-						}
+						limit = { region = horn_of_africa_region } 
 						add_unrest = -5
 						add_nationalism = -10
 						add_local_autonomy = -10
@@ -200,21 +198,17 @@ Gao_1_slot = {
 						}
 					}
 					every_owned_province = {
-						limit = {
-							region = kongo_region
-						}
+						limit = { region = kongo_region } 
 						add_unrest = -5
 						add_nationalism = -10
 						add_local_autonomy = -10
 					}
 				}
 			}
-			southern_africa_superregion = {
-				add_permanent_claim = ROOT
-			}
+			southern_africa_superregion = { add_permanent_claim = ROOT } 
 		}
 	}
-} 
+}
 Gao_2_slot = {
 	slot = 2
 	generic = no
@@ -223,47 +217,31 @@ Gao_2_slot = {
 	potential = { tag = BJ6 } 
 
 	gao_growing_empire = {
-		icon = mission_impaled_soldies
+		icon = mission_unite_home_region
 		position = 2
-		required_missions = { gao_the_legion_of_help	}
-		provinces_to_highlight = { is_claim = ROOT	} 
+		required_missions = { gao_the_legion_of_help } 
+		provinces_to_highlight = { is_claim = ROOT } 
 
-		trigger = {
-			grown_by_states = 3
-		}
+		trigger = { grown_by_states = 3 } 
 
 		effect = {
-			capital_scope = {
-				add_or_upgrade_forcelimit_building = yes
-			}
-			sahel_region = {
-				add_permanent_claim = ROOT
-			}
-			niger_region = {
-				add_permanent_claim = ROOT
-			}
+			capital_scope = { add_or_upgrade_forcelimit_building = yes } 
+			sahel_region = { add_permanent_claim = ROOT } 
+			niger_region = { add_permanent_claim = ROOT } 
 		}
 	}
 
 	gao_old_lord = {
-		icon = mission_impaled_soldies
+		icon = mission_invade_mali
 		position = 3
-		required_missions = { gao_growing_empire	}
-		provinces_to_highlight = { 
-			is_capital_of = JOL
-		} 
+		required_missions = { gao_growing_empire } 
+		provinces_to_highlight = { is_capital_of = JOL } 
 
 		trigger = {
 			OR = {
-				has_won_war_against = {
-						who = JOL
-					}
-				JOL = {
-					is_subject_of = ROOT
-				}
-				JOL = {
-					exists = no
-				}
+				has_won_war_against = { who = JOL } 
+				JOL = { is_subject_of = ROOT } 
+				JOL = { exists = no } 
 			}
 		}
 
@@ -274,12 +252,10 @@ Gao_2_slot = {
 	}
 
 	gao_new_lords = {
-		icon = mission_impaled_soldies
+		icon = mission_mal_restore_the_mali_empire
 		position = 4
-		required_missions = { gao_old_lord	}
-		provinces_to_highlight = { 
-			is_claim = ROOT
-		} 
+		required_missions = { gao_old_lord } 
+		provinces_to_highlight = { is_claim = ROOT } 
 
 		trigger = {
 			num_of_owned_provinces_with = {
@@ -288,25 +264,20 @@ Gao_2_slot = {
 			}
 		}
 
-		effect = {		
-			country_event = {
-				id = gao.4
-			}
-		}
+		effect = { country_event = { id = gao.4 }  } 
 	}
+
 	gao_west_africa = {
-		icon = mission_impaled_soldies
+		icon = mission_mal_west_african_great_power
 		position = 6
-		required_missions = { gao_new_lords	}
-		provinces_to_highlight = { 
+		required_missions = { gao_new_lords } 
+		provinces_to_highlight = {
 			OR = {
 				region = niger_region
 				region = sahel_region
 			}
-			NOT = {
-				country_or_non_sovereign_subject_holds = ROOT
-			}
-		} 
+			NOT = { country_or_non_sovereign_subject_holds = ROOT } 
+		}
 
 		trigger = {
 			niger_region = {
@@ -319,7 +290,7 @@ Gao_2_slot = {
 			}
 		}
 
-		effect = {		
+		effect = {
 			tooltip = {
 				random_owned_province = {
 					custom_tooltip = GAO_TT_6
@@ -330,21 +301,16 @@ Gao_2_slot = {
 			}
 			hidden_effect = {
 				every_owned_province = {
-					limit = {
-						has_owner_accepted_culture = yes
-					}
+					limit = { has_owner_accepted_culture = yes } 
 					add_unrest = -5
 					add_nationalism = -10
 					add_local_autonomy = -10
 				}
 			}
-			horn_of_africa_region = {
-				add_permanent_claim = ROOT
-			}
+			horn_of_africa_region = { add_permanent_claim = ROOT } 
 		}
 	}
-	
-} 
+}
 Gao_3_slot = {
 	slot = 3
 	generic = no
@@ -353,7 +319,7 @@ Gao_3_slot = {
 	potential = { tag = BJ6 } 
 
 	gao_the_legion_of_help = {
-		icon = mission_impaled_soldies
+		icon = mission_roman_legions
 		position = 1
 		provinces_to_highlight = { is_capital_of = BJ3 } 
 
@@ -367,20 +333,16 @@ Gao_3_slot = {
 		}
 
 		effect = {
-			BJ3 = {
-				country_event = {
-					id = gao.1
-				}
-			}
+			BJ3 = { country_event = { id = gao.1 }  } 
 			custom_tooltip = perma_claim_neighbor_area
 			hidden_effect = {
 				every_owned_province = {
 					every_neighbor_province = {
 						area = {
 							limit = {
-								NOT = { owned_by = ROOT }
-								NOT = { is_permanent_claim = ROOT    }
-								NOT = { is_core = ROOT    }
+								NOT = { owned_by = ROOT } 
+								NOT = { is_permanent_claim = ROOT } 
+								NOT = { is_core = ROOT } 
 							}
 							add_permanent_claim = ROOT
 						}
@@ -391,13 +353,13 @@ Gao_3_slot = {
 	}
 
 	gao_victorious_legio = {
-		icon = mission_impaled_soldies
+		icon = mission_mal_jihad_upon_own_population
 		position = 3
-		required_missions = { gao_the_legion_of_help	}
-		provinces_to_highlight = { 
+		required_missions = { gao_the_legion_of_help } 
+		provinces_to_highlight = {
 			has_manpower_building_trigger = no
-			owned_by = ROOT	
-		} 
+			owned_by = ROOT
+		}
 
 		trigger = {
 			num_of_owned_provinces_with = {
@@ -409,26 +371,25 @@ Gao_3_slot = {
 			}
 		}
 
-		effect = {
-			country_event = {
-				id = gao.3
-			}
-		}
+		effect = { country_event = { id = gao.3 }  } 
 	}
 
 	gao_warfare_tactics = {
 		icon = mission_impaled_soldies
 		position = 5
-		required_missions = { gao_slave_production gao_victorious_legio	}
-		provinces_to_highlight = { 
+		required_missions = {
+			gao_slave_production
+			gao_victorious_legio
+		}
+		provinces_to_highlight = {
 			has_manpower_building_trigger = no
-			owned_by = ROOT	
-		} 
+			owned_by = ROOT
+		}
 
 		trigger = {
 			OR = {
 				army_size = 50
-				num_of_completed_idea_groups_mil = { amount = 1 }
+				num_of_completed_idea_groups_mil = { amount = 1 } 
 			}
 			num_of_owned_provinces_with = {
 				value = 18
@@ -436,21 +397,20 @@ Gao_3_slot = {
 			}
 		}
 
-		effect = { 
+		effect = {
 			change_government_reform_progress = 50
 			custom_tooltip = GAO_TT_2
-			tooltip = {
-				add_government_reform = gao_warfare_reform
-			}
-			tooltip = {
-				add_government_reform = gao_warfare_legio_reform
-			}
+			tooltip = { add_government_reform = gao_warfare_reform } 
+			custom_tooltip = empty_line_tt
+			tooltip = { add_government_reform = gao_warfare_legio_reform } 
 		}
 	}
+
 	gao_lords_of_War = {
-		icon = mission_impaled_soldies
+		icon = Hausahorseman
 		position = 6
-		required_missions = { gao_warfare_tactics }
+		required_missions = { gao_warfare_tactics } 
+		provinces_to_highlight = {  } 
 
 		trigger = {
 			OR = {
@@ -459,17 +419,21 @@ Gao_3_slot = {
 			}
 		}
 
-		effect = { 
+		effect = {
 			add_country_modifier = {
-				name = gao_good_generals
+				name = "gao_good_generals"
 				duration = -1
 			}
 		}
 	}
+
 	gao_cultural_victory = {
-		icon = mission_impaled_soldies
+		icon = mission_mal_fighting_musa
 		position = 7
-		required_missions = { gao_west_africa gao_lords_of_War }
+		required_missions = {
+			gao_west_africa
+			gao_lords_of_War
+		}
 		provinces_to_highlight = {
 			OR = {
 				culture_group = mande
@@ -478,9 +442,7 @@ Gao_3_slot = {
 			}
 			country_or_non_sovereign_subject_holds = ROOT
 			OR = {
-				NOT = {
-					grown_by_development = 1
-				}
+				NOT = { grown_by_development = 1 } 
 				nationalism = 1
 			}
 		}
@@ -494,39 +456,31 @@ Gao_3_slot = {
 				}
 				OR = {
 					grown_by_development = 1
-					NOT = {
-						nationalism = 1
-					}
+					NOT = { nationalism = 1 } 
 				}
 			}
 		}
 
-		effect = { 
+		effect = {
 			change_primary_culture = mande_aeg
 			custom_tooltip = GAO_AFRICAN_UNION_CULTURE
 			hidden_effect = {
 				every_owned_province = {
-					limit = {
-						culture_group = mande
-					}
+					limit = { culture_group = mande } 
 					change_culture = mande_aeg
 				}
 				every_owned_province = {
-					limit = {
-						culture_group = sahelian
-					}
+					limit = { culture_group = sahelian } 
 					change_culture = sahelian_aeg
 				}
 				every_owned_province = {
-					limit = {
-						culture_group = west_african
-					}
+					limit = { culture_group = west_african } 
 					change_culture = west_african_aeg
 				}
 			}
 		}
 	}
-} 
+}
 Gao_4_slot = {
 	slot = 4
 	generic = no
@@ -535,27 +489,24 @@ Gao_4_slot = {
 	potential = { tag = BJ6 } 
 
 	gao_feudalism = {
-		icon = mission_impaled_soldies
+		icon = mission_court_education
 		position = 2
-		required_missions = { gao_the_legion_of_help	}
+		required_missions = { gao_the_legion_of_help } 
+		provinces_to_highlight = {  } 
 
-		trigger = {
-			has_institution = feudalism
-		}
+		trigger = { has_institution = feudalism } 
 
-		effect = {
-			add_stability_or_adm_power = yes
-		}
+		effect = { add_stability_or_adm_power = yes } 
 	}
 
 	gao_slave_production = {
-		icon = mission_impaled_soldies
+		icon = mission_mal_riches_of_trade
 		position = 4
-		required_missions = { gao_religion_standard	}
-		provinces_to_highlight = { 
+		required_missions = { gao_religion_standard } 
+		provinces_to_highlight = {
 			has_production_building_trigger = no
-			owned_by = ROOT	
-		} 
+			owned_by = ROOT
+		}
 
 		trigger = {
 			owns = 5079
@@ -565,13 +516,29 @@ Gao_4_slot = {
 			}
 		}
 
-		effect = { 
-			country_event = {
-				id = gao.5
+		effect = { country_event = { id = gao.5 }  } 
+	}
+
+	gao_strong_leader = {
+		icon = mission_african_soldier
+		position = 6
+		required_missions = { gao_warfare_tactics } 
+		provinces_to_highlight = {  } 
+
+		trigger = {
+			OR = {
+				monthly_mil = 12
+				army_tradition = 80
 			}
+			has_leader_with = { total_pips = 20 } 
+		}
+
+		effect = {
+			custom_tooltip = GAO_TT_8
+			set_country_flag = gain_manpower_when_general_recruited_flag
 		}
 	}
-} 
+}
 Gao_5_slot = {
 	slot = 5
 	generic = no
@@ -580,14 +547,14 @@ Gao_5_slot = {
 	potential = { tag = BJ6 } 
 
 	gao_religion_power = {
-		icon = mission_impaled_soldies
+		icon = mission_thebirds
 		position = 1
+		provinces_to_highlight = {  } 
+
 		trigger = {
 			stability = 1
 			OR = {
-				NOT = {
-					religious_unity = 0.5
-				}
+				NOT = { religious_unity = 0.5 } 
 				religious_unity = 0.9
 			}
 		}
@@ -616,30 +583,32 @@ Gao_5_slot = {
 	}
 
 	gao_advisory = {
-		icon = mission_impaled_soldies
+		icon = mission_alliances
 		position = 2
-		required_missions = { gao_religion_power	}
+		required_missions = { gao_religion_power } 
+		provinces_to_highlight = {  } 
 
-		trigger = {
-			has_adm_advisor_2 = yes
-		}
+		trigger = { has_adm_advisor_2 = yes } 
 
 		effect = {
 			add_country_modifier = {
-				name = gao_age_of_construction
+				name = "gao_age_of_construction"
 				duration = 10950
 			}
 		}
 	}
 
 	gao_religion_standard = {
-		icon = mission_impaled_soldies
+		icon = mission_mosque
 		position = 3
-		required_missions = { gao_advisory gao_feudalism	}
-		provinces_to_highlight = { 
+		required_missions = {
+			gao_advisory
+			gao_feudalism
+		}
+		provinces_to_highlight = {
 			has_tax_building_trigger = no
-			owned_by = ROOT	
-		} 
+			owned_by = ROOT
+		}
 
 		trigger = {
 			num_of_owned_provinces_with = {
@@ -648,19 +617,17 @@ Gao_5_slot = {
 			}
 		}
 
-		effect = {
-			add_years_of_income = 1
-		}
+		effect = { add_years_of_income = 1 } 
 	}
 
 	gao_state_controlled_faith = {
-		icon = mission_impaled_soldies
+		icon = mission_high_income
 		position = 4
-		required_missions = { gao_religion_standard	}
-		provinces_to_highlight = { 
+		required_missions = { gao_religion_standard } 
+		provinces_to_highlight = {
 			has_tax_building_trigger = no
-			owned_by = ROOT	
-		} 
+			owned_by = ROOT
+		}
 
 		trigger = {
 			has_institution = renaissance
@@ -670,26 +637,23 @@ Gao_5_slot = {
 			}
 		}
 
-		effect = {
-			capital_scope = {
-				add_or_upgrade_tax_building = yes
-			}
-		}
+		effect = { capital_scope = { add_or_upgrade_tax_building = yes }  } 
 	}
+
 	gao_empire_controlled_faith = {
-		icon = mission_impaled_soldies
+		icon = mission_war_chest
 		position = 5
-		required_missions = { gao_state_controlled_faith }
-		provinces_to_highlight = { 
+		required_missions = { gao_state_controlled_faith } 
+		provinces_to_highlight = {
 			has_tax_building_trigger = no
-			owned_by = ROOT	
-		} 
+			owned_by = ROOT
+		}
 
 		trigger = {
 			num_of_owned_provinces_with = {
 				value = 20
 				has_tax_building_trigger = yes
-			}	
+			}
 		}
 
 		effect = {
@@ -701,9 +665,7 @@ Gao_5_slot = {
 			}
 			hidden_effect = {
 				every_owned_province = {
-					limit = {
-						has_tax_building_trigger = yes
-					}
+					limit = { has_tax_building_trigger = yes } 
 					add_or_upgrade_forcelimit_building = yes
 				}
 			}
@@ -719,7 +681,17 @@ Gao_5_slot = {
 					add_yearly_manpower = 2
 				"
 			}
-			
 		}
 	}
-} 
+
+	gao_grandest_army = {
+		icon = mission_kon_protector_of_africa
+		position = 7
+		required_missions = { gao_strong_leader } 
+		provinces_to_highlight = {  } 
+
+		trigger = { is_hegemon_of_type = military_hegemon } 
+
+		effect = { custom_tooltip = GAO_TT_9 } 
+	}
+}
