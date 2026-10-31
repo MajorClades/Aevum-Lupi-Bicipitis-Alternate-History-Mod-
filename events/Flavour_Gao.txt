@@ -56,10 +56,6 @@ country_event = {
 		add_army_professionalism = 0.15
 		5079 = {
 			change_culture = songhai
-			add_province_modifier = {
-				name = gao_exp_legio_capital
-				duration = -1
-			}
 		}
 		custom_tooltip = UNLOCK_LEGIO_ORGANIZATION
 		set_country_flag = gao_legio_organization
@@ -78,7 +74,7 @@ country_event = {
 		5079 = {
 			add_province_modifier = {
 				name = gao_exp_legio_capital
-				duration = -1
+				duration = 36500
 			}
 		}
 		custom_tooltip = UNLOCK_LEGIO_ORGANIZATION_2
@@ -258,7 +254,14 @@ country_event = {
 	is_triggered_only = yes
 	option = {
 		name = gao.7a
-		change_religion = indictian
+		if = {
+			limit = {
+				religion = indictian
+			}
+			add_years_of_income = -2
+		}else = {
+			change_religion = indictian
+		}
 		create_union = AF0
 		AF0 = {
 			add_liberty_desire = -40
@@ -279,7 +282,16 @@ country_event = {
 	title = gao.8.test
 	desc = gao.8.desc
 	picture = CRUSADER_HORDE_eventPicture
-	is_triggered_only = yes
+	trigger = {
+		has_country_flag = gao_legio_organization
+		NOT = {
+			has_country_flag = gao_legio_castrum_better
+		}
+		num_of_owned_provinces_with = {
+        	value = 15
+            holy_order = gao_legio_castrum
+        }
+	}
 	fire_only_once = yes
 	option = {
 		name = gao.8a
