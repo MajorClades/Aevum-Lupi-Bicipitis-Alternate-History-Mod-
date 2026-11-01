@@ -194,6 +194,7 @@ country_event = { #Emperor has to respong
 				factor = 0.5
 				has_country_flag = easy_bias_eol
 			}
+			
 		}
 		hidden_effect = {
 			event_target:light_empire_challenger_target = {
@@ -610,7 +611,7 @@ country_event = { #calling all the vassals to war Offender
 			}
 	}
 	mean_time_to_happen = {
-		months = 6
+		months = 10
 	}
 
 	option = {
@@ -757,6 +758,12 @@ country_event = { #AI becoming Emperor of Light
 	
 	trigger = {
 		ai = yes
+		NOT = {
+			has_won_war_against = {
+				who = event_target:light_empire_shield_target
+				max_years_since = 15
+			}
+		}
 		is_subject_of = event_target:light_empire_shield_target
 		NOT = {
 			tag = event_target:light_empire_shield_target
@@ -880,6 +887,11 @@ country_event = { #break gupta
 			factor = 35
 		}
 		inherit = LE8 
+		LE8 = {
+			every_core_province = {
+				add_territorial_core = ROOT
+			}
+		}
 	}
 }
 

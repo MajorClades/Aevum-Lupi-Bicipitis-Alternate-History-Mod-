@@ -97,4 +97,45 @@ country_decisions = {
 		ai_importance = 400
 	}
 
+	alb_leo_colonial_restoration = {
+		major = yes
+		potential = {
+			NOT = {
+				has_country_flag = leo_colonial_restoration
+			}
+			tag = event_target:light_empire_shield_target
+			any_owned_province = {
+				has_port = yes
+			}
+		}
+		allow = {
+			is_at_war = no
+		}
+		effect = {
+			madagascar_island_group = {
+				discover_country = ROOT
+			}
+			if = {
+				limit = {
+					RX2 = {
+						exists = yes
+					}
+				}
+				vassalize = RX2
+			}else = {
+				4025 = {
+					add_core = ROOT
+				}
+			}
+			set_country_flag = leo_colonial_restoration
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				war_score = -10
+			}
+		}
+		ai_importance = 400
+	}
 }

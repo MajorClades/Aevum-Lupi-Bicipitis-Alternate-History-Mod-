@@ -1244,3 +1244,97 @@ diplomatic_conversion_action = {
 		always = no
 	}
 }
+make_enemy_of_darkness_action = {
+	category = influence
+	
+	alert_index = 40
+	alert_tooltip = demand_dummy_alert_tooltip
+	require_acceptance = no # Whether the recipient gets an option to decline
+	is_visible = {
+		government_rank = 3
+		FROM = {
+			NOT = {
+				religion = manich
+			}
+			NOT = {
+				religion = jyotisastra
+			}
+		}
+		
+	}
+	is_allowed = {
+		if = {
+			limit = {
+				has_government_mechanic = emp_of_light_point_mechanic
+			}
+			has_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = 30
+			}
+		}else = {
+			prestige = 50
+		}
+		if = {
+			limit = {
+				ai = yes
+			}
+			NOT = {
+					has_country_modifier = darkness_enemy_target_timer
+				}
+		}
+		FROM = {
+			NOT = {
+				religion = manich
+			}
+			NOT = {
+				religion = jyotisastra
+			}
+			calc_true_if = {
+					amount = 7
+					all_country = {
+						OR = {
+							religion = manich
+							religion = jyotisastra
+						}
+						NOT = {
+							has_opinion = {
+								who = ROOT
+								value = -5
+							}
+						}
+				}
+			}
+		}
+	}
+	on_accept = {
+		FROM = {
+			save_global_event_target_as = darkness_enemy_target
+		}
+		root = {
+			if = {
+				limit = {
+					has_government_mechanic = emp_of_light_point_mechanic
+				}
+				add_government_power = {
+				mechanic_type = emp_of_light_point_mechanic
+				power_type = enlightened_prestige_points
+				value = -30
+			}
+			}else = {
+				add_prestige = -50
+			}
+			add_country_modifier = {
+				name = darkness_enemy_target_timer
+				duration = 365
+				hidden = yes
+			}
+		}
+	}
+	on_decline = {
+	}
+
+	ai_will_do = { # this is a trigger
+		always = yes
+	}
+}
